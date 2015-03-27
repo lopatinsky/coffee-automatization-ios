@@ -1,0 +1,26 @@
+//
+//  IHMenu.h
+//  IIko Hackathon
+//
+//  Created by Ivan Oschepkov on 18.08.14.
+//  Copyright (c) 2014 Empatika. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@class Venue;
+
+@interface DBMenu : NSObject
+
++ (instancetype)sharedInstance;
+
+- (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
+- (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
+
+- (void)synchronizeWithResponseMenu:(NSArray *)responseMenu;
+
+- (void)saveMenuToDeviceMemory;
+
+- (NSInteger)getCount;
+
+@end

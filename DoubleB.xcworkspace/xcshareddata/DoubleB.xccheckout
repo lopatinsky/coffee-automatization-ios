@@ -12,6 +12,8 @@
 	<dict>
 		<key>A075F5235577D80DA39283B40B7B311EF95DC08B</key>
 		<string>https://bitbucket.org/empatika/doubleb-ios.git</string>
+		<key>ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451</key>
+		<string>https://bitbucket.org/empatika/coffee-automatization-ios.git</string>
 		<key>C4605D3E-A876-4F59-AA83-474F5BA6447B</key>
 		<string>ssh://bitbucket.org/empatika/doubleb-ios.git</string>
 	</dict>
@@ -20,18 +22,28 @@
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A075F5235577D80DA39283B40B7B311EF95DC08B</key>
+		<string>../../doubleb-ios</string>
+		<key>ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451</key>
 		<string>..</string>
 		<key>C4605D3E-A876-4F59-AA83-474F5BA6447B</key>
 		<string>../../DoubleB</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://bitbucket.org/empatika/doubleb-ios.git</string>
+	<string>https://bitbucket.org/empatika/coffee-automatization-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A075F5235577D80DA39283B40B7B311EF95DC08B</string>
+	<string>ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451</string>
+			<key>IDESourceControlWCCName</key>
+			<string>coffee-automatization-ios</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
