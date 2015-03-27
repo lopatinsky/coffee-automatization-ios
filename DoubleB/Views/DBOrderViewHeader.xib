@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBOrderViewController"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" verticalCompressionResistancePriority="500" id="iN0-l3-epB" customClass="DBOrderViewHeader">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wbw-0n-OdA">
+                    <rect key="frame" x="0.0" y="51" width="320" height="60"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axA-8l-fTN">
+                    <rect key="frame" x="0.0" y="51" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="Okl-JH-IWA"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PRm-JT-jRc">
+                    <rect key="frame" x="0.0" y="110" width="320" height="1"/>
+                    <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="2Zd-KG-Lpu"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pFA-tT-zkY">
+                    <rect key="frame" x="265" y="15" width="40" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="paid.png" translatesAutoresizingMaskIntoConstraints="NO" id="14a-OT-c6b">
+                    <rect key="frame" x="103" y="69" width="24" height="24"/>
+                </imageView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплачено" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJj-Kg-2zF">
+                    <rect key="frame" x="135" y="70" width="83" height="21"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" red="0.32549019607843138" green="0.81176470588235294" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsV-dA-tWH">
+                    <rect key="frame" x="20" y="14" width="46" height="22"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pFA-tT-zkY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="1X3-k6-qdc"/>
+                <constraint firstAttribute="trailing" secondItem="axA-8l-fTN" secondAttribute="trailing" id="6ZT-ZM-A9t"/>
+                <constraint firstItem="tsV-dA-tWH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="7Ze-sM-Tqb"/>
+                <constraint firstAttribute="trailing" secondItem="pFA-tT-zkY" secondAttribute="trailing" constant="15" id="AbQ-qI-hk9"/>
+                <constraint firstItem="14a-OT-c6b" firstAttribute="centerY" secondItem="nJj-Kg-2zF" secondAttribute="centerY" id="GH5-kI-VLW"/>
+                <constraint firstItem="wbw-0n-OdA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Kyk-QS-yp7"/>
+                <constraint firstAttribute="centerX" secondItem="nJj-Kg-2zF" secondAttribute="centerX" constant="-16" id="WrG-mS-bVn"/>
+                <constraint firstItem="axA-8l-fTN" firstAttribute="top" secondItem="tsV-dA-tWH" secondAttribute="bottom" constant="15" id="YrU-X2-xOJ"/>
+                <constraint firstItem="wbw-0n-OdA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="51" id="cOw-bY-Bxp"/>
+                <constraint firstItem="nJj-Kg-2zF" firstAttribute="top" secondItem="axA-8l-fTN" secondAttribute="bottom" constant="18" id="hBg-gI-d5x"/>
+                <constraint firstAttribute="trailing" secondItem="PRm-JT-jRc" secondAttribute="trailing" id="jSW-4d-KpN"/>
+                <constraint firstItem="nJj-Kg-2zF" firstAttribute="leading" secondItem="14a-OT-c6b" secondAttribute="trailing" constant="8" id="k2V-ZQ-UGt"/>
+                <constraint firstAttribute="bottom" secondItem="wbw-0n-OdA" secondAttribute="bottom" id="nLy-uK-yiH"/>
+                <constraint firstAttribute="bottom" secondItem="PRm-JT-jRc" secondAttribute="bottom" id="nms-zc-42u"/>
+                <constraint firstAttribute="trailing" secondItem="wbw-0n-OdA" secondAttribute="trailing" id="ptJ-cL-7wT"/>
+                <constraint firstItem="tsV-dA-tWH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="14" id="rha-CZ-vuG"/>
+                <constraint firstItem="PRm-JT-jRc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tF6-3W-Omr"/>
+                <constraint firstItem="axA-8l-fTN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vhT-yF-zv7"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageViewPaymentStatus" destination="14a-OT-c6b" id="qeJ-fx-z8V"/>
+                <outlet property="labelOrder" destination="tsV-dA-tWH" id="nX2-qo-kFf"/>
+                <outlet property="labelPaymentStatus" destination="nJj-Kg-2zF" id="5TY-mu-vpF"/>
+                <outlet property="labelStatus" destination="pFA-tT-zkY" id="Kpc-VJ-T1F"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="paid.png" width="24" height="24"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

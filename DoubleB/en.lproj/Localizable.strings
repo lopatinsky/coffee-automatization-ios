@@ -1,0 +1,141 @@
+/* 
+  Localizable.strings
+  DoubleB
+
+  Created by Ivan Oschepkov on 22.09.14.
+  Copyright (c) 2014 Empatika. All rights reserved.
+*/
+
+"Согласен с условиями политики конфиденциальности" = "Agree with terms of privacy policy";
+
+// Card binding errors
+"DefaultErrorMessage" = "Please try again";
+"WrongCardDataErrorMessage" = "Sorry, you request has been declined due to invalid card\'s credentials";
+"CardLimitExceededErrorMessage" = "Sorry, your card limit has been exceeded";
+"CardNotUniqueErrorMessage" = "Sorry, but card with the same number has already been added";
+"NoInternetConnectionErrorMessage" = "Sorry, check your internet connection and try again";
+
+"руб." = "rub.";
+"%.1f км" = "%.1f km";
+"%.0f м" = "%.0f m";
+"%@ минут" = "%@ minutes";
+"Сейчас" = "Now";
+"Через %@ минут" = "In %@ minutes";
+"Возьму с собой" = "Takeaway";
+"Буду пить в кафе" = "In the cafe";
+
+"Комментарий" = "Comment";
+"Сохранить" = "Save";
+"Кофейни" = "Cafes";
+
+"Пн-пт 8:00-20:00, сб-вс 11:00-18:00" = "Mon-Fri 8:00-20:00, Sat-Sun 11:00-18:00";
+
+"Заказ #%@" = "Order #%@";
+"Готов к %@" = "Ready at %@";
+"Итого: %ld %@" = "Total: %ld %@";
+"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
+"Скидка" = "Discount";
+
+"Выдан" = "Served out";
+"Готовится" = "Preparing";
+"Отменен" = "Canceled";
+"Оплачен" = "Paid";
+"Не оплачен" = "Not paid";
+"Отменить" = "Cancel";
+"Повторить" = "Repeat";
+
+"Ошибка" = "Error";
+"Успех" = "Success";
+
+"OK" = "OK";
+
+"Заказ отправлен. Мы вас ждем!" = "Order has been placed. We are waiting for you!";
+
+"Заказы" = "Orders";
+
+"У вас пока нет заказов.\nЗаказ можно сделать из раздела \"Меню\"" = "You don\'t have any orders yet.\nYou can place an order from \"Menu\"";
+"Для регистрации заказа вам необходимо выбрать хотя бы один напиток" = "You should choose at least one beverage to place an order";
+"Пожалуйста, добавьте новую карту или выберите одну из существующих" = "Please add new card or select one from already existed";
+"Произошла ошибка на этапе оплаты" = "Sorry,there was an error during payment.";
+"Нестабильное интернет-соединение. Возможно ваш заказ был успешно создан, пожалуйста, дождитесь подтверждения по смс и обновите историю" = "Bad internet-connection. Maybe your order has been created successfully, please wait for confirmation by SMS and update history";
+"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение" = "We can not place the order right now. Please check your Internet connection";
+"Произошла непредвиденная ошибка при регистрации заказа. Пожалуйста, попробуйте позднее" = "Unexpected error happened. Please try again later";
+
+"Настройки" = "Settings";
+"Профиль" = "Profile";
+"Личный счет" = "Personal account";
+"Карты" = "Cards";
+"Оплата" = "Payment";
+"Написать нам" = "Contact us";
+"О приложении" = "About app";
+"Об акции" = "About promo";
+"Политика конфиденциальности" = "Privacy policy";
+"Политика" = "Policy";
+"Присылать уведомления" = "Receive notificaions";
+
+"Для отправки сообщений необходима авторизация в Mail" = "Please authorize in Mail to send messages";
+
+"Кофе Хостел" = "Coffee Hostel";
+
+"Имя Фамилия" = "Full name";
+"Контактный номер телефона" = "Phone number";
+"Ваш e-mail для получения чеков" = "Your e-mail for receipt";
+
+"Ваш баланс:" = "Your balance:";
+
+"Заказ" = "Order";
+
+"Готово" = "Done";
+
+"Заказать" = "Place order";
+"Номер заказа: %@" = "Order number: %@";
+"Дополнить" = "Refill";
+
+"Укажите, пожалуйста, номер телефона" = "Please set your phone number";
+"Представьтесь, пожалуйста" = "Please fill your profile";
+
+"Добавить карту" = "Add card";
+
+"Выберите тип оплаты" = "Please select payment type";
+"Нет карт" = "No cards";
+"Наличные" = "Cash";
+"Бесплатные кружки" = "Free beverages";
+
+"Ошибка определения локации" = "Failed to fetch location";
+
+"Добавление карты" = "Card binding";
+
+"Меню" = "Menu";
+"Заказ | %lu" = "Order | %lu";
+
+"Принять" = "Accept";
+"Информация" = "Information";
+"Вам необходимо ознакомиться и принять политику конфиденциальности" = "You should read and accept privacy policy";
+
+
+"Спец. предложения" = "Special offers";
+"Хотите ли вы активировать контекстные уведомления, чтобы мы присылалали вам спец. предложения и полезную информацию в зависимости от вашего местоположения?" = "Would you like to activate context notifications, so we'll send special offers and useful info depending on your location?";
+"Нет, спасибо" = "No, thanks";
+"Да, пожалуйста" = "Yes";
+
+// Sharing
+
+"Рассказать друзьям" = "Recommend app to friends";
+"Рассказать" = "Share";
+"Ого! Поздравляю!\nНапиток в подарок от Mastercard!" = "Congratulations!\nFree beverage from Mastercard!";
+"Расскажи друзьям, если тебе нравится приложение Даблби.\nЕсть, что улучшить? Тогда напиши нам!" = "Share to your friends, if you like Doubleb. \nNeed to improve something? Then contact us!";
+
+// Mastercard promo
+
+"Привяжи карту Mastercard и получай " = "Add Mastercard and get ";
+"напитки в подарок" = "free beverage";
+
+"%d кофе в подарок" = "%d free beverage";
+
+"У вас %d %@." = "You have %d %@.";
+"балл" = "bonus";
+"балла" = "bonus";
+"баллов" = "bonus";
+"Вы накопили:" = "You have accumulated:";
+"Чтобы получить напиток в подарок, измените тип оплаты на экране заказа" = "To get free beverage change payment type on the order screen";
+"Копите баллы, оплачивая покупки картой Mastercard, и получайте каждый %d напиток в подарок." = "Accumulate points by paying with Mastercard and get every %dth beverage as a gift.";

@@ -1,0 +1,107 @@
+//
+//  OrderManager.h
+//  DoubleB
+//
+//  Created by Sergey Pronin on 7/31/14.
+//  Copyright (c) 2014 Empatika. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
+#import "Order.h"
+
+extern NSString* const kDBDefaultsPaymentType;
+
+@class Venue;
+@class OrderItem;
+@class Position;
+@class MenuPositionExtension;
+
+typedef NS_ENUM(NSUInteger, DBBeverageMode) {
+    DBBeverageModeTakeaway = 0,
+    DBBeverageModeInCafe
+};
+
+/**
+* Manages order
+* Only one order can be managed at a time
+*/
+@interface OrderManager : NSObject
+
+/**
+* All positions in order
+*/
+@property (nonatomic, strong) NSMutableArray *positions;
+
+/**
+* Selected venue for order
+*/
+@property (nonatomic, strong) Venue *venue;
+
+/**
+* Selected delivery time
+*/
+@property (nonatomic, strong) NSNumber *time;
+
+/**
+* Selected comment
+*/
+@property (nonatomic, strong) NSString *comment;
+
+/**
+* User's location
+*/
+@property (nonatomic, strong) CLLocation *location;
+
+/**
+* Current order's ID fetched from server
+*/
+@property (nonatomic, strong) NSString *orderId;
+
+/**
+* Selected payment type
+*/
+@property (nonatomic) PaymentType paymentType;
+
+/**
+* Check if current order satisfy all conditions
+*/
+@property (nonatomic, readonly) BOOL validOrder;
+
+@property (nonatomic, readonly) NSUInteger positionsCount;
+@property (nonatomic) NSUInteger totalPrice;
+@property (nonatomic) NSUInteger initialTotalPrice;
+@property (nonatomic, readonly) NSUInteger totalCount;
+@property (nonatomic, strong) NSArray *globalPromos;
+@property (nonatomic, strong) NSArray *globalErrors;
+
+@property (nonatomic) DBBeverageMode beverageMode;
+
++ (instancetype)sharedManager;
+
+/**
+* Register new order on server in order to get orderID
+*/
+- (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler;
+
+- (NSInteger)addPosition:(Position *)position;
+- (NSInteger)addPosition:(Position *)position withExt:(MenuPositionExtension *)ext;
+
+- (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
+- (NSInteger)decreaseOrderItemCount:(NSInteger)index;
+
+- (void)purgePositions; //clean
+- (void)overridePositions:(NSArray *)positions; //clean and add from array
+
+- (OrderItem *)itemAtIndex:(NSUInteger)index;
+- (OrderItem *)itemWithPositionId:(NSString *)positionId;
+- (void)removePositionAtIndex:(NSUInteger)index;
+- (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index;
+
+//- (BOOL)shouldGiveDiscount;
+//- (int)positionWithDiscount;
+- (void)selectIfPossibleDefaultPaymentType;
+
++ (NSUInteger)totalCountForItems:(NSArray *)items;
+
+@end

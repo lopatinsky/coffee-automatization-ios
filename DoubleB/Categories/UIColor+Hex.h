@@ -1,0 +1,12 @@
+//
+// Created by Sergey Pronin on 8/26/14.
+// Copyright (c) 2014 Empatika. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface UIColor (Hex)
+
++ (UIColor *)fromHex:(uint)hex;
+
+@end

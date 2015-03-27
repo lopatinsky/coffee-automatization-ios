@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+"CFBundleDisplayName" = "Coffee Hostel";
+"NSLocationUsageDescription" = "We need your location in order to load nearest cafes";
+"NSLocationWhenInUseUsageDescription" = "We need your location in order to load nearest cafes";
+"NSLocationAlwaysUsageDescription" = "We need your location in order to load nearest cafes";
