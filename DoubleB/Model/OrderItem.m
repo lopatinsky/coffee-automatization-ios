@@ -7,26 +7,14 @@
 //
 
 #import "OrderItem.h"
-#import "Position.h"
-#import "MenuPositionExtension.h"
-#import "DBMenuCategory.h"
-#import "MenuHelper.h"
+#import "DBMenuPosition.h"
+#import "DBMenu.h"
 
 @implementation OrderItem
 
-- (instancetype)initWithPosition:(Position *)position{
+- (instancetype)initWithPosition:(DBMenuPosition *)position{
     self = [super init];
     self.position = position;
-    self.selectedExt = nil;
-    
-    [self commonInit];
-    
-    return self;
-}
-
-- (instancetype)initWithPosition:(Position *)position extension:(MenuPositionExtension *)ext{
-    self = [self initWithPosition:position];
-    self.selectedExt = ext;
     
     [self commonInit];
     
@@ -36,19 +24,8 @@
 + (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem{
     OrderItem *item = [[OrderItem alloc] init];
     
-    NSString *itemName = historyItem[@"title"];
-    NSDictionary *nameAndApp = [[MenuHelper sharedHelper] fetchNameAndExtFromPositionName:itemName price:historyItem[@"price"]];
-    //Position *position = [[MenuHelper sharedHelper] findPositionWithName:nameAndApp[@"title"]];
-    Position *position = nil;
+    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:@"id"];
     item.position = position;
-    
-    if(nameAndApp[@"ext"]){
-        NSArray *exts = position.exts;
-        NSString *extId = [NSString stringWithFormat:@"%@", historyItem[@"id"]];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"extId == %@", extId];
-        MenuPositionExtension *ext = [[exts filteredArrayUsingPredicate:predicate] firstObject];
-        item.selectedExt = ext;
-    }
     
     item.count = [historyItem[@"quantity"] integerValue];
     
@@ -88,9 +65,7 @@
 }
 
 - (double)totalPrice{
-    double total = self.selectedExt ? [self.selectedExt.extPrice doubleValue] : [self.position.price doubleValue];
-    
-    return total * self.count;
+    return self.position.price * self.count;
 }
 
 
@@ -100,7 +75,6 @@
     self = [[OrderItem alloc] init];
     if(self != nil){
         self.position = [aDecoder decodeObjectForKey:@"position"];
-        self.selectedExt = [aDecoder decodeObjectForKey:@"selectedExt"];
         self.count = [[aDecoder decodeObjectForKey:@"count"] integerValue];
     }
     
@@ -109,7 +83,6 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.position forKey:@"position"];
-    [aCoder encodeObject:self.selectedExt forKey:@"selectedExt"];
     [aCoder encodeObject:@(self.count) forKey:@"count"];
 }
 
@@ -117,7 +90,6 @@
     OrderItem *orderItem = [[[self class] allocWithZone:zone] init];
     
     orderItem.position = self.position;
-    orderItem.selectedExt = self.selectedExt;
     orderItem.count = self.count;
     
     return orderItem;

@@ -33,7 +33,7 @@
     self.walletDescriptionLabel.text = [DBMastercardPromo sharedInstance].walletBalanceScreenText;
     
     self.balanceTitleLabel.text = NSLocalizedString(@"Ваш баланс:", nil);
-    self.balanceTitleLabel.textColor = [UIColor db_blueColor];
+    self.balanceTitleLabel.textColor = [UIColor db_defaultColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

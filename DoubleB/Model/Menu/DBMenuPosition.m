@@ -8,9 +8,12 @@
 
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
+#import "Venue.h"
 
 @interface DBMenuPosition ()<NSCoding>
 @property(strong, nonatomic) NSMutableArray *groupModifiers;
+
+@property(strong, nonatomic) NSArray *venuesRestrictions;
 @end
 
 @implementation DBMenuPosition
@@ -68,6 +71,9 @@
     }
 }
 
+- (BOOL)availableInVenue:(Venue *)venue{
+    return venue && ![_venuesRestrictions containsObject:venue.venueId];
+}
 
 #pragma mark - NSCoding methods
 

@@ -68,7 +68,7 @@
 
 
 - (void)awakeFromNib{
-    [self.confirmButton setTitleColor:[UIColor db_blueColor] forState:UIControlStateNormal];
+    [self.confirmButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
     [self.confirmButton addTarget:self action:@selector(confirmButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -111,7 +111,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(i * (progressItemWidth + separatorWidth), (contentHeight - progressItemHeight) / 2, progressItemWidth, progressItemHeight)];
         
         if(i < count)
-            view.backgroundColor = [UIColor db_blueColor];
+            view.backgroundColor = [UIColor db_defaultColor];
         else
             view.backgroundColor = [UIColor db_backgroundColor];
         

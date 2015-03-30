@@ -36,12 +36,32 @@
     return self;
 }
 
-//+ (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(NSArray *categories))remoteMenuCallback{
-//    
-//}
+- (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+    if(!self.categories){
+        [self loadMenuFromDeviceMemory];
+    }
+    
+    [self updateMenuForVenue:venue remoteMenu:remoteMenuCallback];
+    
+    return [self filterMenuForVenue:venue];
+}
 
 - (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [[DBAPIClient sharedClient] GET:@""
+    [self fetchMenu:^(BOOL success, NSArray *categories) {
+        NSArray *filteredCategories;
+        
+        if(success){
+            filteredCategories = [self filterMenuForVenue:venue];
+        }
+        
+        if(remoteMenuCallback){
+            remoteMenuCallback(success, filteredCategories);
+        }
+    }];
+}
+
+- (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+    [[DBAPIClient sharedClient] GET:@"http://mycompany.1.doubleb-automation.appspot.com/api/menu.php"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);
@@ -58,11 +78,27 @@
                             }];
 }
 
+- (NSArray *)filterMenuForVenue:(Venue *)venue{
+    NSMutableArray *categories = [NSMutableArray new];
+    
+    for(DBMenuCategory *category in self.categories){
+        if([category availableInVenue:venue]){
+            DBMenuCategory *newCategory = [category makeCopy];
+            newCategory.positions = [newCategory filterPositionsForVenue:venue];
+            if([newCategory.positions count] > 0){
+                [categories addObject:newCategory];
+            }
+        }
+    }
+    
+    return categories;
+}
+
 - (void)synchronizeWithResponseMenu:(NSArray *)responseMenu{
     NSMutableArray *newCategories = [[NSMutableArray alloc] init];
     
     for(NSDictionary *categoryDictionary in responseMenu){
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", categoryDictionary[@"id"]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", categoryDictionary[@"info"][@"category_id"]];
         DBMenuCategory *sameCategory = [[self.categories filteredArrayUsingPredicate:predicate] firstObject];
         if(sameCategory){
             [sameCategory synchronizeWithResponseDictionary:categoryDictionary];
@@ -76,6 +112,21 @@
     
     [self saveMenuToDeviceMemory];
 }
+
+- (DBMenuPosition *)findPositionWithId:(NSString *)positionId{
+    DBMenuPosition *resultPosition;
+    
+    for(DBMenuCategory *category in self.categories){
+        DBMenuPosition *position = [category findPositionWithId:positionId];
+        if(position){
+            resultPosition = position;
+            break;
+        }
+    }
+    
+    return resultPosition;
+}
+
 
 - (void)saveMenuToDeviceMemory{
     if(self.categories){
@@ -95,10 +146,6 @@
     
     NSData *data = [NSData dataWithContentsOfFile:path];
     self.categories = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-}
-
-- (NSInteger)getCount{
-    return [self.categories count];
 }
 
 @end

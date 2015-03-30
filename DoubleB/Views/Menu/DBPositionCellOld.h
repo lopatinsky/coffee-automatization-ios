@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class Position;
+@class DBMenuPosition;
 
-@interface DBPositionCell : UITableViewCell
+@interface DBPositionCellOld : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *positionCellContentView;
 @property (weak, nonatomic) IBOutlet UILabel *positionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *plusLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *plusImageView;
-@property (strong, nonatomic) Position *position;
+@property (strong, nonatomic) DBMenuPosition *position;
 @end

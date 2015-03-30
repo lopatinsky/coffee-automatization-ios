@@ -238,7 +238,7 @@
     switch (order.status) {
         case OrderStatusNew:
             [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 6)];
-            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_blueColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
             [imageViewVenue templateImageWithName:@"venue"];
             switch (order.paymentType) {
                 case PaymentTypeCash:

@@ -13,9 +13,8 @@
 #import "DBVenueCell.h"
 #import "DBVenueViewController.h"
 #import "MBProgressHUD/MBProgressHUD.h"
-#import "MenuHelper.h"
 #import "OrderManager.h"
-
+ 
 @interface DBVenuesTableViewController ()
 
 @property (nonatomic, strong) UIPickerView *picker;
@@ -118,7 +117,7 @@
     cell.venue = venue;
     double dist = venue.distance;
     if (dist && dist > 0) {
-        [cell.venueDistanceLabel setBackgroundColor:[UIColor db_blueColor]];
+        [cell.venueDistanceLabel setBackgroundColor:[UIColor db_defaultColor]];
         if (dist > 1) {
             cell.venueDistanceLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%.1f км", nil), dist];
             if (dist > 3) {
@@ -173,7 +172,6 @@
         return;
     }
     [self.delegate venuesController:self didChooseVenue:self.venues[indexPath.row]];
-    [[MenuHelper sharedHelper] getMenuForVenue:[OrderManager sharedManager].venue.venueId completionHandler:^(id response){}];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

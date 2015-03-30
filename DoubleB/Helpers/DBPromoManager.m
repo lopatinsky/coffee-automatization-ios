@@ -9,8 +9,7 @@
 #import "DBPromoManager.h"
 #import "OrderManager.h"
 #import "OrderItem.h"
-#import "Position.h"
-#import "MenuPositionExtension.h"
+#import "DBMenuPosition.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
@@ -60,15 +59,10 @@
     NSMutableArray *items = [NSMutableArray new];
     for (int i = 0; i < [OrderManager sharedManager].positionsCount; ++i) {
         OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
-        Position *position = item.position;
+        DBMenuPosition *position = item.position;
         
         NSMutableDictionary *dict = [NSMutableDictionary new];
-        if(item.selectedExt){
-            dict[@"id"] = item.selectedExt.extId;
-        } else {
-            dict[@"id"] = position.positionId;
-        }
-        
+        dict[@"id"] = position.positionId;
         dict[@"quantity"] = @(item.count);
         [items addObject:dict];
     }

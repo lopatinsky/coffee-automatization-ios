@@ -8,8 +8,7 @@
 
 #import "OrderManager.h"
 #import "OrderItem.h"
-#import "Position.h"
-#import "MenuPositionExtension.h"
+#import "DBMenuPosition.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
@@ -133,16 +132,12 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
                             }];
 }
 
-- (NSInteger)addPosition:(Position *)position {
-    return [self addPosition:position withExt:nil];
-}
-
-- (NSInteger)addPosition:(Position *)position withExt:(MenuPositionExtension *)ext {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(position.positionId == %@) AND (selectedExt.extId == %@)", position.positionId, ext.extId];
+- (NSInteger)addPosition:(DBMenuPosition *)position {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"position.positionId == %@", position.positionId];
     OrderItem *itemWithSamePosition = [[self.positions filteredArrayUsingPredicate:predicate] firstObject];
     
     if (!itemWithSamePosition) {
-        itemWithSamePosition = [[OrderItem alloc] initWithPosition:position extension:ext];
+        itemWithSamePosition = [[OrderItem alloc] initWithPosition:position];
         itemWithSamePosition.count = 1;
         [self.positions addObject:itemWithSamePosition];
         return 1;

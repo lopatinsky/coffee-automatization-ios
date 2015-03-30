@@ -30,7 +30,7 @@
     
     NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
-    [attributed setAttributes:@{NSForegroundColorAttributeName: [UIColor db_blueColor],
+    [attributed setAttributes:@{NSForegroundColorAttributeName: [UIColor db_defaultColor],
                                 NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16]}
                         range:NSMakeRange(0, attributed.string.length)];
     [attributed setAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor],

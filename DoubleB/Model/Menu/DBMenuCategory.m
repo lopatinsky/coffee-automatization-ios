@@ -8,12 +8,12 @@
 
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
+#import "Venue.h"
 
 @interface DBMenuCategory ()<NSCoding>
 @property(strong, nonatomic) NSString *categoryId;
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *imageUrl;
-@property(strong, nonatomic) NSMutableArray *positions;
 @property(strong, nonatomic) NSDictionary *categoryDictionary;
 @end
 
@@ -22,7 +22,7 @@
 + (instancetype)categoryFromResponseDictionary:(NSDictionary *)categoryDictionary{
     DBMenuCategory *category = [DBMenuCategory new];
     
-    [category copyFromResponseDictionary:categoryDictionary];
+    [category copyFromResponseDictionary:categoryDictionary[@"info"]];
     
     NSArray *positions = categoryDictionary[@"items"];
     category.positions = [[NSMutableArray alloc] init];
@@ -33,7 +33,7 @@
 }
 
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)categoryDictionary{
-    [self copyFromResponseDictionary:categoryDictionary];
+    [self copyFromResponseDictionary:categoryDictionary[@"info"]];
     
     NSMutableArray *positions = [[NSMutableArray alloc] init];
     
@@ -52,9 +52,9 @@
 }
 
 - (void)copyFromResponseDictionary:(NSDictionary *)categoryDictionary{
-    _categoryId = [categoryDictionary getValueForKey:@"id"] ?: @"";
-    _name = [categoryDictionary getValueForKey:@"name"] ?: @"";
-    _imageUrl = [categoryDictionary getValueForKey:@"image"] ?: @"";
+    _categoryId = [categoryDictionary getValueForKey:@"category_id"] ?: @"";
+    _name = [categoryDictionary getValueForKey:@"title"] ?: @"";
+    _imageUrl = [categoryDictionary getValueForKey:@"pic"] ?: @"";
     _venuesRestrictions = [categoryDictionary[@"restrictions"] getValueForKey:@"venues"] ?: @[];
     _categoryDictionary = categoryDictionary;
 }
@@ -64,6 +64,26 @@
     [array sortUsingDescriptors:@[sortDescriptor]];
 }
 
+
+- (BOOL)availableInVenue:(Venue *)venue{
+    return venue && ![_venuesRestrictions containsObject:venue.venueId];
+}
+
+- (NSMutableArray *)filterPositionsForVenue:(Venue *)venue{
+    NSMutableArray *venuePositions = [NSMutableArray new];
+    
+    for(DBMenuPosition *position in _positions){
+        if([position availableInVenue:venue])
+            [venuePositions addObject:position];
+    }
+    
+    return venuePositions;
+}
+
+- (DBMenuPosition *)findPositionWithId:(NSString *)positionId{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", positionId];
+    return [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+}
 
 #pragma mark - NSCoding methods
 
@@ -86,6 +106,19 @@
     [aCoder encodeObject:_imageUrl forKey:@"imageUrl"];
     [aCoder encodeObject:_positions forKey:@"positions"];
     [aCoder encodeObject:self.categoryDictionary forKey:@"categoryDictionary"];
+}
+
+#pragma mark - NSCopying
+
+- (id)makeCopy{
+    DBMenuCategory *copyCategory = [DBMenuCategory new];
+    copyCategory.categoryId = self.categoryId;
+    copyCategory.name = self.name;
+    copyCategory.imageUrl = self.imageUrl;
+    copyCategory.positions = self.positions;
+    copyCategory.categoryDictionary = self.categoryDictionary;
+    
+    return copyCategory;
 }
 
 @end

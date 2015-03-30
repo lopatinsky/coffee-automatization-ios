@@ -8,21 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class Position;
-@class MenuPositionExtension;
+@class DBMenuPosition;
 
 @interface OrderItem : NSObject <NSCoding, NSCopying>
 
-@property (strong, nonatomic) Position *position;
-@property (strong, nonatomic) MenuPositionExtension *selectedExt;
+@property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic, readonly) double totalPrice;
 @property (nonatomic) NSInteger count;
 
 @property (strong, nonatomic) NSArray *notes;
 @property (strong, nonatomic) NSArray *errors;
 
-- (instancetype)initWithPosition:(Position *)position;
-- (instancetype)initWithPosition:(Position *)position extension:(MenuPositionExtension *)ext;
+- (instancetype)initWithPosition:(DBMenuPosition *)position;
 
 + (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
 

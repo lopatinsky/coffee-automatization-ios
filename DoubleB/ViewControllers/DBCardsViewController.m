@@ -223,7 +223,7 @@
                 cell = [[[NSBundle mainBundle] loadNibNamed:@"DBCardAddCell" owner:self options:nil] firstObject];
             }
             UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:1];
-            titleLabel.textColor = [UIColor db_blueColor];
+            titleLabel.textColor = [UIColor db_defaultColor];
             titleLabel.text = NSLocalizedString(@"Добавить карту", nil);
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;

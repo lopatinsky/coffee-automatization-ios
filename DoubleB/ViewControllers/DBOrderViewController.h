@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Order.h"
-#import "Position.h"
 
 @interface DBOrderViewController : UITableViewController
 

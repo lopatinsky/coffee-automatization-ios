@@ -175,7 +175,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if([settingsItemInfo[@"name"] isEqualToString:@"notification"]){
         switcher.hidden = NO;
-        switcher.onTintColor = [UIColor db_blueColor];
+        switcher.onTintColor = [UIColor db_defaultColor];
         if (![switcher bk_hasEventHandlersForControlEvents:UIControlEventValueChanged]) {
             [switcher bk_addEventHandler:^(id sender) {
                 UISwitch *s = sender;

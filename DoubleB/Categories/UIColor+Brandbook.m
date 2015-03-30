@@ -15,7 +15,7 @@
     return [[UIColor alloc] initWithWhite:0.96 alpha:1];
 }
 
-+ (UIColor *)db_blueColor {
++ (UIColor *)db_defaultColor {
     return [UIColor colorWithRed:0 green:95/255.0 blue:78/255.0 alpha:1];
 }
 

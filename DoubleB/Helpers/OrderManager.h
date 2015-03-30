@@ -14,8 +14,7 @@ extern NSString* const kDBDefaultsPaymentType;
 
 @class Venue;
 @class OrderItem;
-@class Position;
-@class MenuPositionExtension;
+@class DBMenuPosition;
 
 typedef NS_ENUM(NSUInteger, DBBeverageMode) {
     DBBeverageModeTakeaway = 0,
@@ -84,8 +83,7 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 */
 - (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler;
 
-- (NSInteger)addPosition:(Position *)position;
-- (NSInteger)addPosition:(Position *)position withExt:(MenuPositionExtension *)ext;
+- (NSInteger)addPosition:(DBMenuPosition *)position;
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
 - (NSInteger)decreaseOrderItemCount:(NSInteger)index;

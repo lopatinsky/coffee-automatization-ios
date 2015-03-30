@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Empatika. All rights reserved.
 //
 
-#import "DBPositionCell.h"
+#import "DBPositionCellOld.h"
 #import "IHSecureStore.h"
 #import "UIImageView+Extension.h"
 
-@interface DBPositionCell () <UIGestureRecognizerDelegate>
+@interface DBPositionCellOld () <UIGestureRecognizerDelegate>
 
 @end
 
-@implementation DBPositionCell
+@implementation DBPositionCellOld
 
 - (void)awakeFromNib {
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];

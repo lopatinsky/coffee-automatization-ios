@@ -58,7 +58,7 @@
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(i * (progressItemWidth + separatorWidth), (contentHeight - progressItemHeight) / 2, progressItemWidth, progressItemHeight)];
         
         if(i < promo.promoCurrentPointsCount)
-            view.backgroundColor = [UIColor db_blueColor];
+            view.backgroundColor = [UIColor db_defaultColor];
         else
             view.backgroundColor = [UIColor db_backgroundColor];
         

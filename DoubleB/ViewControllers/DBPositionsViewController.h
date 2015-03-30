@@ -13,10 +13,4 @@
 */
 @interface DBPositionsViewController : UIViewController
 
-/**
-* Categories array with positions array
-*/
-@property (nonatomic, strong) NSMutableArray *positions; //@[ @[] ... ]
-@property (nonatomic, strong) NSMutableArray *categories;
-
 @end

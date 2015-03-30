@@ -10,7 +10,7 @@
 
 @implementation UIImageView (Extension)
 - (void)templateImageWithName:(NSString *)name {
-    self.tintColor = [UIColor db_blueColor];
+    self.tintColor = [UIColor db_defaultColor];
     self.image = [[UIImage imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 - (void)templateImageWithName:(NSString *)name tintColor:(UIColor *)color {

@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class Venue;
+@class DBMenuPosition;
+
 @interface DBMenuCategory : NSObject
 
 @property(strong, nonatomic, readonly) NSString *categoryId;
 @property(strong, nonatomic, readonly) NSString *name;
 @property(strong, nonatomic, readonly) NSString *imageUrl;
-@property(strong, nonatomic, readonly) NSMutableArray *positions;
+@property(strong, nonatomic) NSMutableArray *positions;
 
 @property(strong, nonatomic, readonly) NSArray *venuesRestrictions;
 
@@ -21,4 +24,10 @@
 
 + (instancetype)categoryFromResponseDictionary:(NSDictionary *)categoryDictionary;
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)categoryDictionary;
+
+- (BOOL)availableInVenue:(Venue *)venue;
+- (NSMutableArray *)filterPositionsForVenue:(Venue *)venue;
+- (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
+
+- (id)makeCopy;
 @end

@@ -31,7 +31,7 @@
 
 - (void)configure{
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Итого: %ld %@", nil), (long)self.order.total.integerValue, [Compatibility currencySymbol]]];
-    [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_blueColor] range:NSMakeRange(0, 6)];
+    [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, 6)];
     self.labelTotal.attributedText = string;
     
     NSDateFormatter *formatter = [NSDateFormatter new];

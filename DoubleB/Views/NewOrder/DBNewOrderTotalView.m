@@ -13,7 +13,7 @@
 @implementation DBNewOrderTotalView
 
 - (void)awakeFromNib{
-    self.labelTotal.textColor = [UIColor db_blueColor];
+    self.labelTotal.textColor = [UIColor db_defaultColor];
     
     [[OrderManager sharedManager] addObserver:self
                                    forKeyPath:@"totalPrice"

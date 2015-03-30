@@ -24,7 +24,7 @@
 - (void)awakeFromNib{
     self.pickerView.backgroundColor = [UIColor clearColor];
     
-    self.typeSegmentedControl.tintColor = [UIColor db_blueColor];
+    self.typeSegmentedControl.tintColor = [UIColor db_defaultColor];
     [self.typeSegmentedControl addTarget:self
                                   action:@selector(segmentedControlValueChanged:)
                         forControlEvents:UIControlEventValueChanged];

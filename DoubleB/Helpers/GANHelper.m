@@ -10,7 +10,7 @@
 #import "IHSecureStore.h"
 #import "Order.h"
 #import "Venue.h"
-#import "Position.h"
+#import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "DBClientInfo.h"
 
@@ -56,7 +56,7 @@
     NSUInteger total = 0;
     int index = 0;
     for (OrderItem *item in order.items) {
-        total += [item.position.price integerValue] * item.count;
+        total += item.position.price * item.count;
         index++;
     }
 
@@ -66,8 +66,8 @@
         int price = 0;
         int index = 0;
         for (OrderItem *item in order.items) {
-            if([item.position.price intValue] > price){
-                price = [item.position.price intValue];
+            if(item.position.price > price){
+                price = item.position.price;
                 mostExpensivePositionIndex = index;
             }
             index++;
@@ -81,10 +81,10 @@
     for(OrderItem *item in order.items){
         NSString *category = [order.items indexOfObject:item] == mostExpensivePositionIndex ? @"discount" : categoryForAll;
         [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createItemWithTransactionId:order.orderId
-                                                                                                  name:item.position.title
+                                                                                                  name:item.position.name
                                                                                                    sku:item.position.positionId
                                                                                               category:category
-                                                                                                 price:item.position.price
+                                                                                                 price:@(item.position.price)
                                                                                               quantity:@(item.count)
                                                                                           currencyCode:@"RUB"] build]];
      }

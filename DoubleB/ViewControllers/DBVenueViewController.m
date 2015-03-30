@@ -47,7 +47,7 @@
     self.labelWorkHours.text = self.venue.workingTime ?: NSLocalizedString(@"Пн-пт 8:00-20:00, сб-вс 11:00-18:00", nil);
     double dist = self.venue.distance;
     if (dist && dist > 0) {
-        self.labelDistance.backgroundColor = [UIColor db_blueColor];
+        self.labelDistance.backgroundColor = [UIColor db_defaultColor];
         if (dist > 1) {
             self.labelDistance.text = [NSString stringWithFormat:NSLocalizedString(@"%.1f км", nil), dist];
             if (dist > 3) {

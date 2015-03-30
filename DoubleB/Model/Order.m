@@ -9,8 +9,6 @@
 #import "Order.h"
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
-#import "Position.h"
-#import "MenuHelper.h"
 
 @implementation Order {
     NSArray *_items;
@@ -19,17 +17,7 @@
 
 - (NSArray *)items {
     if (!_items) {
-        NSArray *array = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataItems];
-        /*NSMutableArray *pos = [NSMutableArray array];
-        for (NSDictionary *obj in array) {
-            //[pos addObject:[Position positionWithDictionary:obj]];
-            Position *position = [[MenuHelper sharedHelper] findPositionWithId:obj[@"item_id"]];
-            if(position && obj[@"quantity"]){
-                [pos addObject: @{@"position": position,
-                                  @"count": obj[@"quantity"]}];
-            }
-        }*/
-        _items = array;
+        _items = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataItems];
     }
     
     return _items;

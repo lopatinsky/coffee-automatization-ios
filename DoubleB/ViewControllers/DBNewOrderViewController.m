@@ -17,9 +17,7 @@
 #import "MBProgressHUD.h"
 #import "OrderManager.h"
 #import "Order.h"
-#import "MenuHelper.h"
-#import "Position.h"
-#import "MenuPositionExtension.h"
+#import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "Venue.h"
 #import "Compatibility.h"
@@ -42,7 +40,6 @@
 #import "DBTimePickerView.h"
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"
-#import "ErrorHelper.h"
 #import "DBPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
@@ -319,7 +316,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.continueButton.layer.cornerRadius = 5;
     [self.continueButton addTarget:self action:@selector(clickContinue:) forControlEvents:UIControlEventTouchUpInside];
     [self.continueButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
-    self.continueButton.backgroundColor = [UIColor db_blueColor];
+    self.continueButton.backgroundColor = [UIColor db_defaultColor];
 }
 
 #pragma mark - reload content
@@ -489,7 +486,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         self.continueButton.backgroundColor = [UIColor db_grayColor];
         self.continueButton.alpha = 0.5;
     } else {
-        self.continueButton.backgroundColor = [UIColor db_blueColor];
+        self.continueButton.backgroundColor = [UIColor db_defaultColor];
         self.continueButton.alpha = 1;
     }
 }
@@ -893,212 +890,212 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Salt
 
 - (void)sendOrderWithCard:(NSDictionary *)card {
-    NSMutableArray *items = [NSMutableArray new];
-    for (int i = 0; i < [OrderManager sharedManager].positionsCount; ++i) {
-        OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
-        Position *position = item.position;
-        
-        NSMutableDictionary *dict = [NSMutableDictionary new];
-        if(item.selectedExt){
-            dict[@"item_id"] = item.selectedExt.extId;
-            dict[@"name"] = [NSString stringWithFormat:@"%@ (%@)", position.title, item.selectedExt.extName];
-        } else {
-            dict[@"item_id"] = position.positionId;
-            dict[@"name"] = position.title;
-        }
-        
-        dict[@"quantity"] = @(item.count);
-        dict[@"price"] = position.price;
-        [items addObject:dict];
-    }
-
-    if (![[OrderManager sharedManager] orderId]) {
-        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                       message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
-                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        return;
-    }
-    
-    NSMutableDictionary *order = [NSMutableDictionary new];
-    order[@"device_type"] = @(0);
-    order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
-    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice]);
-    order[@"items"] = items;
-    order[@"order_id"] = [[OrderManager sharedManager] orderId];
-    order[@"delivery_time"] = [OrderManager sharedManager].time;
-    order[@"takeout"] = @([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway);
-    
-    NSString *comment = [OrderManager sharedManager].comment ?: @"";
-    if([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway){
-        comment = [NSString stringWithFormat:@"С собой\n%@", comment];
-    } else {
-        comment = [NSString stringWithFormat:@"Буду пить в кафе\n%@", comment];
-    }
-    order[@"comment"] = comment;
-    
-    static BOOL hasOrderErrorInSession = NO;
-    order[@"after_error"] = @(hasOrderErrorInSession);
-    
-    NSMutableDictionary *client = [NSMutableDictionary new];
-    client[@"id"] = [[IHSecureStore sharedInstance] clientId];
-    client[@"name"] =  [DBClientInfo sharedInstance].clientName;
-    client[@"phone"] = [DBClientInfo sharedInstance].clientPhone;
-    client[@"email"] = [DBClientInfo sharedInstance].clientMail;
-    order[@"client"] = client;
-    
-    NSMutableDictionary *payment = [NSMutableDictionary new];
-    switch ([OrderManager sharedManager].paymentType) {
-        case PaymentTypeCard:{
-            payment[@"type_id"] = @1;
-            if(card[@"cardToken"]){
-                payment[@"binding_id"] = card[@"cardToken"];
-                
-                BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
-                payment[@"mastercard"] = @(mcardOrMaestro);
-                
-                NSString *cardPan = card[@"cardPan"];
-                if(cardPan.length > 4){
-                    cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
-                }
-                payment[@"card_pan"] = cardPan ?: @"";
-            }
-            payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
-            payment[@"return_url"] = @"alpha-payment://return-page";
-        }
-            break;
-            
-        case PaymentTypeCash:
-            payment[@"type_id"] = @0;
-            break;
-            
-        case PaymentTypeExtraType:
-            payment[@"type_id"] = @2;
-            break;
-            
-        case PaymentTypePersonalAccount:
-            payment[@"type_id"] = @3;
-            break;
-            
-        default:
-            break;
-    }
-    order[@"payment"] = payment;
-    
-    if ([OrderManager sharedManager].location) {
-        CLLocation *location = [OrderManager sharedManager].location;
-        order[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-    }
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:order
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:nil];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    //NSLog(@"%@", order);
-    NSDate *start = [NSDate date];
-    
-    // Check if network connection is reachable
-    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if(networkStatus == NotReachable){
-        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                       message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
-                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-        return;
-    }
-    // Check if network connection is reachable
-    
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DBAPIClient sharedClient] POST:@"order.php"
-                          parameters:@{@"order": jsonString}
-                             timeout:30
-                            success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-                                //NSLog(@"%@", responseObject);
-                                [self reloadFavourites:items];
-                                
-                                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                
-                                Order *ord = [[Order alloc] init:YES];
-                                ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
-                                ord.total = @([[OrderManager sharedManager] totalPrice]);
-                                ord.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:[OrderManager sharedManager].time.doubleValue*60];
-                                ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].positions];
-                                ord.paymentType = [[OrderManager sharedManager] paymentType];
-                                ord.status = OrderStatusNew;
-                                ord.venue = [OrderManager sharedManager].venue;
-                                
-                                [[CoreDataHelper sharedHelper] save];
-                                [self confirmOrderSuccess:ord.orderId];
-                                
-                                [[OrderManager sharedManager] purgePositions];
-                                [self.preferedHeightsForTableView removeAllObjects];
-                                [self reloadTableViewHeight:NO];
-                                [self.additionalInfoView hide:^{
-                                    [self.scrollView layoutIfNeeded];
-                                } completion:nil];
-                                
-                                if(ord.paymentType == PaymentTypeExtraType){
-                                    [[DBMastercardPromo sharedInstance] doneOrderWithMugCount:[OrderManager sharedManager].totalCount];
-                                } else {
-                                    [[DBMastercardPromo sharedInstance] doneOrder];
-                                }
-                                
-                                hasOrderErrorInSession = NO;
-     
-                                [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
-                                [[NSUserDefaults standardUserDefaults] synchronize];
-                                
-                                [Compatibility registerForNotifications];
-                                [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
-                                
-                                [GANHelper trackNewOrderInfo:ord];
-                                
-                                //[GANHelper analyzeEvent:@"order_payment_status" label:@"success" category:@"Order_screen"];
-                                long interval = (long)-[start timeIntervalSinceNow];
-                                [GANHelper analyzeEvent:@"order_payment_time"
-                                                  label:[NSString stringWithFormat:@"%ld", interval]
-                                               category:@"Order_screen"];
-                                [GANHelper analyzeEvent:@"order_submit_success" label:ord.orderId category:@"Order_screen"];
-                                
-                                [self.delegate newOrderViewController:self didFinishOrder:ord];
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                                NSString *eventLabel = [NSString stringWithFormat:@"%@,\n %@", [[OrderManager sharedManager] orderId], error.description];
-                                [GANHelper analyzeEvent:@"order_submit_failure"
-                                                  label:eventLabel
-                                               category:@"Order_screen"];
-                                /*[GANHelper analyzeEvent:@"order_payment_status"
-                                                  label:[NSString stringWithFormat:@"error %@", error.description]
-                                               category:@"Order_screen"];*/
-
-                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                
-                                [OrderManager sharedManager].orderId = nil;
-                                [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
-                                [self startUpdatingPromoInfo];
-
-                                if (error.code == NSURLErrorTimedOut || operation.response.statusCode == 0){
-                                    hasOrderErrorInSession = YES;
-                                    
-                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                                                   message:NSLocalizedString(@"Нестабильное интернет-соединение. Возможно ваш заказ был успешно создан, пожалуйста, дождитесь подтверждения по смс и обновите историю", nil)
-                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-                                }/* else if (operation.response.statusCode == 0) {
-                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                                                   message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
-                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-                                }*/ else if (operation.response.statusCode == 400) {
-                                    NSString *title = operation.responseObject[@"title"] ?: NSLocalizedString(@"Ошибка", nil);
-                                    [UIAlertView bk_showAlertViewWithTitle:title
-                                                                   message:operation.responseObject[@"description"]
-                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-                                } else {
-                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                                                   message:NSLocalizedString(@"Произошла непредвиденная ошибка при регистрации заказа. Пожалуйста, попробуйте позднее", nil)
-                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-                                }
-                            }];
+//    NSMutableArray *items = [NSMutableArray new];
+//    for (int i = 0; i < [OrderManager sharedManager].positionsCount; ++i) {
+//        OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
+//        Position *position = item.position;
+//        
+//        NSMutableDictionary *dict = [NSMutableDictionary new];
+//        if(item.selectedExt){
+//            dict[@"item_id"] = item.selectedExt.extId;
+//            dict[@"name"] = [NSString stringWithFormat:@"%@ (%@)", position.title, item.selectedExt.extName];
+//        } else {
+//            dict[@"item_id"] = position.positionId;
+//            dict[@"name"] = position.title;
+//        }
+//        
+//        dict[@"quantity"] = @(item.count);
+//        dict[@"price"] = position.price;
+//        [items addObject:dict];
+//    }
+//
+//    if (![[OrderManager sharedManager] orderId]) {
+//        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+//                                       message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
+//                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//        return;
+//    }
+//    
+//    NSMutableDictionary *order = [NSMutableDictionary new];
+//    order[@"device_type"] = @(0);
+//    order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
+//    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice]);
+//    order[@"items"] = items;
+//    order[@"order_id"] = [[OrderManager sharedManager] orderId];
+//    order[@"delivery_time"] = [OrderManager sharedManager].time;
+//    order[@"takeout"] = @([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway);
+//    
+//    NSString *comment = [OrderManager sharedManager].comment ?: @"";
+//    if([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway){
+//        comment = [NSString stringWithFormat:@"С собой\n%@", comment];
+//    } else {
+//        comment = [NSString stringWithFormat:@"Буду пить в кафе\n%@", comment];
+//    }
+//    order[@"comment"] = comment;
+//    
+//    static BOOL hasOrderErrorInSession = NO;
+//    order[@"after_error"] = @(hasOrderErrorInSession);
+//    
+//    NSMutableDictionary *client = [NSMutableDictionary new];
+//    client[@"id"] = [[IHSecureStore sharedInstance] clientId];
+//    client[@"name"] =  [DBClientInfo sharedInstance].clientName;
+//    client[@"phone"] = [DBClientInfo sharedInstance].clientPhone;
+//    client[@"email"] = [DBClientInfo sharedInstance].clientMail;
+//    order[@"client"] = client;
+//    
+//    NSMutableDictionary *payment = [NSMutableDictionary new];
+//    switch ([OrderManager sharedManager].paymentType) {
+//        case PaymentTypeCard:{
+//            payment[@"type_id"] = @1;
+//            if(card[@"cardToken"]){
+//                payment[@"binding_id"] = card[@"cardToken"];
+//                
+//                BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
+//                payment[@"mastercard"] = @(mcardOrMaestro);
+//                
+//                NSString *cardPan = card[@"cardPan"];
+//                if(cardPan.length > 4){
+//                    cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
+//                }
+//                payment[@"card_pan"] = cardPan ?: @"";
+//            }
+//            payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+//            payment[@"return_url"] = @"alpha-payment://return-page";
+//        }
+//            break;
+//            
+//        case PaymentTypeCash:
+//            payment[@"type_id"] = @0;
+//            break;
+//            
+//        case PaymentTypeExtraType:
+//            payment[@"type_id"] = @2;
+//            break;
+//            
+//        case PaymentTypePersonalAccount:
+//            payment[@"type_id"] = @3;
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//    order[@"payment"] = payment;
+//    
+//    if ([OrderManager sharedManager].location) {
+//        CLLocation *location = [OrderManager sharedManager].location;
+//        order[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+//    }
+//    
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:order
+//                                                       options:NSJSONWritingPrettyPrinted
+//                                                         error:nil];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    //NSLog(@"%@", order);
+//    NSDate *start = [NSDate date];
+//    
+//    // Check if network connection is reachable
+//    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+//    if(networkStatus == NotReachable){
+//        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+//                                       message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
+//                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+//        return;
+//    }
+//    // Check if network connection is reachable
+//    
+//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//    [[DBAPIClient sharedClient] POST:@"order.php"
+//                          parameters:@{@"order": jsonString}
+//                             timeout:30
+//                            success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+//                                //NSLog(@"%@", responseObject);
+//                                [self reloadFavourites:items];
+//                                
+//                                [MBProgressHUD hideHUDForView:self.view animated:YES];
+//                                
+//                                Order *ord = [[Order alloc] init:YES];
+//                                ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
+//                                ord.total = @([[OrderManager sharedManager] totalPrice]);
+//                                ord.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:[OrderManager sharedManager].time.doubleValue*60];
+//                                ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].positions];
+//                                ord.paymentType = [[OrderManager sharedManager] paymentType];
+//                                ord.status = OrderStatusNew;
+//                                ord.venue = [OrderManager sharedManager].venue;
+//                                
+//                                [[CoreDataHelper sharedHelper] save];
+//                                [self confirmOrderSuccess:ord.orderId];
+//                                
+//                                [[OrderManager sharedManager] purgePositions];
+//                                [self.preferedHeightsForTableView removeAllObjects];
+//                                [self reloadTableViewHeight:NO];
+//                                [self.additionalInfoView hide:^{
+//                                    [self.scrollView layoutIfNeeded];
+//                                } completion:nil];
+//                                
+//                                if(ord.paymentType == PaymentTypeExtraType){
+//                                    [[DBMastercardPromo sharedInstance] doneOrderWithMugCount:[OrderManager sharedManager].totalCount];
+//                                } else {
+//                                    [[DBMastercardPromo sharedInstance] doneOrder];
+//                                }
+//                                
+//                                hasOrderErrorInSession = NO;
+//     
+//                                [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
+//                                [[NSUserDefaults standardUserDefaults] synchronize];
+//                                
+//                                [Compatibility registerForNotifications];
+//                                [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
+//                                
+//                                [GANHelper trackNewOrderInfo:ord];
+//                                
+//                                //[GANHelper analyzeEvent:@"order_payment_status" label:@"success" category:@"Order_screen"];
+//                                long interval = (long)-[start timeIntervalSinceNow];
+//                                [GANHelper analyzeEvent:@"order_payment_time"
+//                                                  label:[NSString stringWithFormat:@"%ld", interval]
+//                                               category:@"Order_screen"];
+//                                [GANHelper analyzeEvent:@"order_submit_success" label:ord.orderId category:@"Order_screen"];
+//                                
+//                                [self.delegate newOrderViewController:self didFinishOrder:ord];
+//                            }
+//                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                NSLog(@"%@", error);
+//                                
+//                                NSString *eventLabel = [NSString stringWithFormat:@"%@,\n %@", [[OrderManager sharedManager] orderId], error.description];
+//                                [GANHelper analyzeEvent:@"order_submit_failure"
+//                                                  label:eventLabel
+//                                               category:@"Order_screen"];
+//                                /*[GANHelper analyzeEvent:@"order_payment_status"
+//                                                  label:[NSString stringWithFormat:@"error %@", error.description]
+//                                               category:@"Order_screen"];*/
+//
+//                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                                
+//                                [OrderManager sharedManager].orderId = nil;
+//                                [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
+//                                [self startUpdatingPromoInfo];
+//
+//                                if (error.code == NSURLErrorTimedOut || operation.response.statusCode == 0){
+//                                    hasOrderErrorInSession = YES;
+//                                    
+//                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+//                                                                   message:NSLocalizedString(@"Нестабильное интернет-соединение. Возможно ваш заказ был успешно создан, пожалуйста, дождитесь подтверждения по смс и обновите историю", nil)
+//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+//                                }/* else if (operation.response.statusCode == 0) {
+//                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+//                                                                   message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
+//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+//                                }*/ else if (operation.response.statusCode == 400) {
+//                                    NSString *title = operation.responseObject[@"title"] ?: NSLocalizedString(@"Ошибка", nil);
+//                                    [UIAlertView bk_showAlertViewWithTitle:title
+//                                                                   message:operation.responseObject[@"description"]
+//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+//                                } else {
+//                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+//                                                                   message:NSLocalizedString(@"Произошла непредвиденная ошибка при регистрации заказа. Пожалуйста, попробуйте позднее", nil)
+//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+//                                }
+//                            }];
 }
 
 - (void)confirmOrderSuccess:(NSString *)orderId{
@@ -1272,7 +1269,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-    Position *position = item.position;
+    DBMenuPosition *position = item.position;
     NSInteger count = item.count;
     
     ((DBOrderItemCell *)cell).delegate = self;
@@ -1292,12 +1289,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     UILabel *labelTitle = ((DBOrderItemCell *)cell).itemTitleLabel;
     UILabel *labelCount = ((DBOrderItemCell *)cell).itemQuantityLabel;
-    labelCount.textColor = [UIColor db_blueColor];
-    if(item.selectedExt){
-        labelTitle.text = [NSString stringWithFormat:@"%@ (%@)", position.title, item.selectedExt.extName];
-    } else {
-        labelTitle.text = position.title;
-    }
+    labelCount.textColor = [UIColor db_defaultColor];
+    labelTitle.text = position.name;
+    
     labelCount.text = [NSString stringWithFormat:@"%ld", (long)count];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

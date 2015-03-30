@@ -13,7 +13,7 @@
 #import "DBOrderViewHeader.h"
 #import "Venue.h"
 #import "OrderItem.h"
-#import "MenuPositionExtension.h"
+#import "DBMenuPosition.h"
 #import "MBProgressHUD.h"
 #import "DBAPIClient.h"
 #import "DBNewOrderViewController.h"
@@ -22,7 +22,6 @@
 #import "UIAlertView+BlocksKit.h"
 #import "UIGestureRecognizer+BlocksKit.h"
 #import "UIImageView+Extension.h"
-#import "MenuHelper.h"
 #import "OrderManager.h"
 
 #import <GoogleMaps/GoogleMaps.h>
@@ -146,7 +145,7 @@
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"canceled"];
     } else if (self.order.paymentType == PaymentTypeCard || self.order.paymentType == PaymentTypeExtraType ||
                status == OrderStatusDone) {
-        self.viewHeader.labelPaymentStatus.textColor = [UIColor db_blueColor];
+        self.viewHeader.labelPaymentStatus.textColor = [UIColor db_defaultColor];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Оплачен", nil);
         [self.viewHeader.imageViewPaymentStatus templateImageWithName:@"paid"];
     } else {
@@ -238,18 +237,13 @@
     cell.panGestureRecognizer.delegate = self;
     
     OrderItem *item = self.items[indexPath.row];
-    Position *position = item.position;
+    DBMenuPosition *position = item.position;
     NSInteger count = item.count;
     
     UILabel *labelTitle = cell.itemTitleLabel;
     UILabel *labelCount = cell.itemQuantityLabel;
-    labelCount.textColor = [UIColor db_blueColor];
-    
-    if(item.selectedExt){
-        labelTitle.text = [NSString stringWithFormat:@"%@ (%@)", position.title, item.selectedExt.extName];
-    } else {
-        labelTitle.text = position.title;
-    }
+    labelCount.textColor = [UIColor db_defaultColor];
+    labelTitle.text = position.name;
     labelCount.text = [NSString stringWithFormat:@"%ld", (long)count];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

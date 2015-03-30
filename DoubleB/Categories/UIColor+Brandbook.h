@@ -10,7 +10,7 @@
 
 @interface UIColor (Brandbook)
 
-+ (UIColor *)db_blueColor;
++ (UIColor *)db_defaultColor;
 + (UIColor *)db_backgroundColor;
 + (UIColor *)db_separatorColor;
 + (UIColor *)db_grayColor;

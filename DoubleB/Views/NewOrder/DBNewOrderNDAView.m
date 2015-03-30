@@ -22,7 +22,7 @@
 - (void)awakeFromNib{
     self.labelNda.text = NSLocalizedString(@"Согласен с условиями политики конфиденциальности", nil);
     [self reload];
-    self.ndaAcceptSwitch.onTintColor = [UIColor db_blueColor];
+    self.ndaAcceptSwitch.onTintColor = [UIColor db_defaultColor];
     
     @weakify(self)
     [self.ndaAcceptSwitch bk_addEventHandler:^(id sender) {

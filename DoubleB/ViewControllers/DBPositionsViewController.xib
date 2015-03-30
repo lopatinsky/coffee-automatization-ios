@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBPositionsViewController">
             <connections>
-                <outlet property="constraintSegmentedControlTopSpace" destination="d73-ZS-8Qz" id="zwa-Nl-JoW"/>
-                <outlet property="segmentedControl" destination="zds-I2-s7U" id="z0F-aM-K64"/>
                 <outlet property="tableView" destination="fWr-UB-ALG" id="v01-m5-b7l"/>
                 <outlet property="view" destination="iN0-l3-epB" id="g8v-Gd-o1M"/>
             </connections>
@@ -19,35 +17,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fWr-UB-ALG">
-                    <rect key="frame" x="0.0" y="39" width="320" height="529"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Txx-O3-7pz"/>
                         <outlet property="delegate" destination="-1" id="yin-Pb-3os"/>
                     </connections>
                 </tableView>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zds-I2-s7U">
-                    <rect key="frame" x="3" y="8" width="314" height="29"/>
-                    <segments>
-                        <segment title="First"/>
-                        <segment title="Second"/>
-                    </segments>
-                    <color key="tintColor" red="0.0" green="0.37254901960784315" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="changeCategory:" destination="-1" eventType="valueChanged" id="buu-tg-md2"/>
-                    </connections>
-                </segmentedControl>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="fWr-UB-ALG" firstAttribute="top" secondItem="zds-I2-s7U" secondAttribute="bottom" constant="3" id="1Jr-i4-myz"/>
                 <constraint firstAttribute="trailing" secondItem="fWr-UB-ALG" secondAttribute="trailing" id="3SK-Mq-ZXN"/>
                 <constraint firstItem="fWr-UB-ALG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="49q-Sv-Sng"/>
+                <constraint firstItem="fWr-UB-ALG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8db-5k-EVN"/>
                 <constraint firstAttribute="bottom" secondItem="fWr-UB-ALG" secondAttribute="bottom" id="NC5-OS-7MS"/>
-                <constraint firstItem="zds-I2-s7U" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="d73-ZS-8Qz"/>
-                <constraint firstAttribute="trailing" secondItem="zds-I2-s7U" secondAttribute="trailing" constant="3" id="jH2-cB-NB3"/>
                 <constraint firstItem="fWr-UB-ALG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l6D-eM-8GL"/>
-                <constraint firstItem="zds-I2-s7U" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="3" id="oLJ-ls-sc9"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

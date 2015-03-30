@@ -9,18 +9,19 @@
 #import <Foundation/Foundation.h>
 
 @class Venue;
+@class DBMenuPosition;
 
 @interface DBMenu : NSObject
 
 + (instancetype)sharedInstance;
 
-- (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
+- (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
 - (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
 
 - (void)synchronizeWithResponseMenu:(NSArray *)responseMenu;
 
 - (void)saveMenuToDeviceMemory;
 
-- (NSInteger)getCount;
+- (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
 
 @end

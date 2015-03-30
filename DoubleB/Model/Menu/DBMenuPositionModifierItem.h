@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSString *itemId;
 @property (strong, nonatomic) NSString *itemName;
 @property (nonatomic) double itemPrice;
-@property (strong, nonatomic) DBMenuPositionModifier *modifier;
+@property (weak, nonatomic) DBMenuPositionModifier *modifier;
 @property (strong, nonatomic) NSDictionary *itemDictionary;
 
 + (DBMenuPositionModifierItem *)itemFromDictionary:(NSDictionary *)itemDictionary

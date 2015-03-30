@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class Venue;
+
 @interface DBMenuPosition : NSObject
 
 @property(strong, nonatomic, readonly) NSString *positionId;
@@ -22,11 +24,11 @@
 @property(strong, nonatomic, readonly) NSMutableArray *groupModifiers;
 @property(strong, nonatomic, readonly) NSMutableArray *singleModifiers;
 
-@property(strong, nonatomic, readonly) NSArray *venuesRestrictions;
-
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
 
 + (instancetype)positionFromResponseDictionary:(NSDictionary *)positionDictionary;
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary;
+
+- (BOOL)availableInVenue:(Venue *)venue;
 
 @end

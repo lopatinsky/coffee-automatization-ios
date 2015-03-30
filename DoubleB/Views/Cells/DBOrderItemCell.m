@@ -45,7 +45,7 @@
     self.additionalInfoMarkView.hidden = YES;
     self.itemCellContentViewOffset = 0;
     
-    self.additionalInfoMarkView.backgroundColor = [UIColor db_blueColor];
+    self.additionalInfoMarkView.backgroundColor = [UIColor db_defaultColor];
 
     self.notesTableView = [[UITableView alloc] initWithFrame:CGRectZero];
     self.notesTableView.scrollEnabled = NO;
@@ -103,7 +103,7 @@
         self.infoImageView.image = [UIImage imageNamed:@"exclamation.png"];
         [self.additionalInfoMarkView db_startObservingAnimationNotification];
     } else {
-        self.additionalInfoMarkView.backgroundColor = [UIColor db_blueColor];
+        self.additionalInfoMarkView.backgroundColor = [UIColor db_defaultColor];
         self.infoImageView.image = [UIImage imageNamed:@"star.png"];
         [self.additionalInfoMarkView db_stopObservingAnimationNotification];
     }

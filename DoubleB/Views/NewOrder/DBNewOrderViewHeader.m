@@ -64,7 +64,7 @@
     
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:
                                          [NSString stringWithFormat:NSLocalizedString(@"Номер заказа: %@", nil), orderId]];
-    [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_blueColor] range:NSMakeRange(0, 13)];
+    [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, 13)];
     self.titleLabel.attributedText = string;
 }
 

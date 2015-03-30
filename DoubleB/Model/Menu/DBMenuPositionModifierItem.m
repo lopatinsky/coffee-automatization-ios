@@ -45,7 +45,7 @@
         self.itemId = [aDecoder decodeObjectForKey:@"itemId"];
         self.itemName = [aDecoder decodeObjectForKey:@"itemName"];
         self.itemPrice = [[aDecoder decodeObjectForKey:@"itemPrice"] doubleValue];
-        self.modifier = [aDecoder decodeObjectForKey:@"modifier"];
+        //self.modifier = [aDecoder decodeObjectForKey:@"modifier"];
         self.itemDictionary = [aDecoder decodeObjectForKey:@"itemDictionary"];
     }
     
@@ -56,7 +56,7 @@
     [aCoder encodeObject:self.itemId forKey:@"itemId"];
     [aCoder encodeObject:self.itemName forKey:@"itemName"];
     [aCoder encodeObject:@(self.itemPrice) forKey:@"itemPrice"];
-    [aCoder encodeObject:self.modifier forKey:@"modifier"];
+    //[aCoder encodeObject:self.modifier forKey:@"modifier"];
     [aCoder encodeObject:self.itemDictionary forKey:@"itemDictionary"];
 }
 

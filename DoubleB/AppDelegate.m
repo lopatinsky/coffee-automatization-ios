@@ -20,7 +20,7 @@
 //#import "DBShareHelper.h"
 #import "DBPreviewViewController.h"
 #import "DBMastercardPromo.h"
-#import "MenuHelper.h"
+#import "DBMenu.h"
 
 @implementation AppDelegate
 
@@ -51,12 +51,14 @@
         [self saveContext];
     }];
     
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
     //styling
-    [[UINavigationBar appearance] setBarTintColor:[UIColor db_blueColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
         NSForegroundColorAttributeName: [UIColor whiteColor],
@@ -73,7 +75,6 @@
     self.window.rootViewController = [DBTabBarController sharedInstance];
 
     [self.window makeKeyAndVisible];
-    [[MenuHelper sharedHelper] fetchMenuWithCompletionHandler:nil];
     return YES;
 }
 

@@ -120,7 +120,7 @@
     cell.messageLabel.text = self.messages[indexPath.row];
     
     if (self.currentlyShowPromos) {
-        cell.messageLabel.textColor = [UIColor db_blueColor];
+        cell.messageLabel.textColor = [UIColor db_defaultColor];
     } else {
         cell.messageLabel.textColor = [UIColor orangeColor];
         [cell.messageLabel db_startObservingAnimationNotification];
