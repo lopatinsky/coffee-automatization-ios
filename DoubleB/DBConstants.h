@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BASE_URL @"http://empatika-coffeehostel.appspot.com/api/"
+//#define BASE_URL @"http://empatika-coffeehostel.appspot.com/api/"
 
 extern NSString *const kDBDefaultsName;
 extern NSString *const kDBDefaultsPhone;

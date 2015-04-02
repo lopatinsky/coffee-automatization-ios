@@ -16,7 +16,9 @@
     static DBAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
+        
+        
+        _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:[DBAPIClient baseUrl]]];
     });
 
     return _sharedClient;
@@ -37,6 +39,13 @@
     [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
 
     return self;
+}
+
++ (NSString *)baseUrl{
+    NSDictionary *organizationInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
+    NSString *baseUrl = [organizationInfo objectForKey:@"BaseUrl"];
+    
+    return baseUrl;
 }
 
 @end

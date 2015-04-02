@@ -7,6 +7,7 @@
 //
 
 #import "IHPaymentClient.h"
+#import "DBAPIClient.h"
 
 @implementation IHPaymentClient
 
@@ -14,7 +15,7 @@
     static IHPaymentClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURL *baseUrl = [NSURL URLWithString:[BASE_URL stringByAppendingString:@"payment/"]];
+        NSURL *baseUrl = [NSURL URLWithString:[[DBAPIClient baseUrl] stringByAppendingString:@"payment/"]];
         _sharedClient = [[IHPaymentClient alloc] initWithBaseURL:baseUrl];
     });
     

@@ -40,24 +40,24 @@
         // Track clientId with crashes
         [Crashlytics setUserIdentifier:clientId];
         
-        if([BASE_URL isEqualToString:@"http://empatika-doubleb-test.appspot.com/api/"]){
-            [self.secureStore setString:clientId forKey:@"clientId_test"];
-            [self.secureStore synchronize];
-        } else {
+//        if([BASE_URL isEqualToString:@"http://empatika-doubleb-test.appspot.com/api/"]){
+//            [self.secureStore setString:clientId forKey:@"clientId_test"];
+//            [self.secureStore synchronize];
+//        } else {
             [self.secureStore setString:clientId forKey:@"clientId"];
             [self.secureStore synchronize];
-        }
+//        }
     }
 }
 
 - (NSString *)clientId {
     NSString *clientId;
-    
-    if([BASE_URL isEqualToString:@"http://empatika-doubleb-test.appspot.com/api/"]){
-        clientId = self.secureStore[@"clientId_test"];
-    } else {
+//    
+//    if([BASE_URL isEqualToString:@"http://empatika-doubleb-test.appspot.com/api/"]){
+//        clientId = self.secureStore[@"clientId_test"];
+//    } else {
         clientId = self.secureStore[@"clientId"];
-    }
+//    }
     
     if ([clientId isEqualToString:@"0"]) {
         return nil;

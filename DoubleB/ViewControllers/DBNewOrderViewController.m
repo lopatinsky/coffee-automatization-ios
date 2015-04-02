@@ -76,6 +76,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
+@property (strong, nonatomic) DBPositionsViewController *positionsViewController;
+
 @property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) NSDictionary *currentCard;
 
@@ -615,9 +617,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)clickAddProductButton{
-    DBPositionsViewController *positionsController = [DBPositionsViewController new];
-    positionsController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:positionsController animated:YES];
+    if(!self.positionsViewController){
+        self.positionsViewController = [DBPositionsViewController new];
+        self.positionsViewController.hidesBottomBarWhenPushed = YES;
+    }
+    [self.navigationController pushViewController:self.positionsViewController animated:YES];
 }
 
 - (void)clickContinue:(id)sender {

@@ -24,7 +24,6 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.positionImageView.image = [UIImage imageNamed:@"noimage_icon.png"];
     self.positionImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
     self.positionDefaultImageView.hidden = NO;
     
@@ -52,7 +51,7 @@
     }
     
     if(position.imageUrl){
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:@"http://teplich35.ru/wp-content/uploads/2014/08/kapusta1.jpg"]
+        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                                 if(!error){
                                                     self.positionImageView.backgroundColor = [UIColor clearColor];

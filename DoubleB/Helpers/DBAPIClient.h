@@ -14,4 +14,6 @@
 
 + (instancetype)sharedClient;
 
++ (NSString *)baseUrl;
+
 @end

@@ -61,7 +61,7 @@
 }
 
 - (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [[DBAPIClient sharedClient] GET:@"http://mycompany.1.doubleb-automation.appspot.com/api/menu.php"
+    [[DBAPIClient sharedClient] GET:@"http://pastadeli.1.doubleb-automation-production.appspot.com/api/menu.php"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);

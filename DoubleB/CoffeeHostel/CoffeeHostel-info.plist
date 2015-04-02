@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CompanyInfo</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://pastadeli.1.doubleb-automation-production.appspot.com/api/</string>
+		<key>AppIconUrl</key>
+		<string>${TARGET_NAME}_icon.png</string>
+		<key>OrganizationColor</key>
+		<integer>4288661069</integer>
+		<key>OrganizationId</key>
+		<string>5725202142986240</string>
+		<key>OrganizationsGAKey</key>
+		<string>UA-57935469-3</string>
+	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>
