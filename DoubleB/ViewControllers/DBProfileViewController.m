@@ -15,7 +15,6 @@
 #import "IHSecureStore.h"
 #import "DBProfileCell.h"
 #import "DBClientInfo.h"
-#import "UIImageView+Extension.h"
 
 
 @interface DBProfileViewController () <UITextFieldDelegate>

@@ -21,7 +21,6 @@
 #import "IHSecureStore.h"
 #import "DBMastercardPromo.h"
 #import "DBSharePermissionViewController.h"
-#import "UIImageView+Extension.h"
 
 #import <Parse/Parse.h>
 

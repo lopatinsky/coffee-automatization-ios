@@ -7,7 +7,6 @@
 //
 
 #import "PersonalAccountViewController.h"
-#import "UIImageView+Extension.h"
 #import "DBMastercardPromo.h"
 #import "OrderManager.h"
 #import "Compatibility.h"

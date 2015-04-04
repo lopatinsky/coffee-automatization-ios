@@ -19,7 +19,6 @@
 #import "DBMastercardPromo.h"
 #import "DBClientInfo.h"
 #import "Compatibility.h"
-#import "UIImageView+Extension.h"
 
 @interface DBCardsViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

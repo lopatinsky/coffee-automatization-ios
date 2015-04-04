@@ -29,5 +29,4 @@
 - (NSMutableArray *)filterPositionsForVenue:(Venue *)venue;
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
 
-- (id)makeCopy;
 @end

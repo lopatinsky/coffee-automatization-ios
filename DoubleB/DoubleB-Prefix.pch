@@ -25,6 +25,7 @@
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+DBErrorAnimation.h"
 #import "UIImage+ImageEffects.h"
+#import "UIImageView+Extension.h"
 #import "NSString+Path.h"
 #import "NSString+DoubleB.h"
 #import "UIColor+Brandbook.h"

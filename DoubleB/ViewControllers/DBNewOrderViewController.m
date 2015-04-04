@@ -43,7 +43,6 @@
 #import "DBPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
-#import "UIImageView+Extension.h"
 #import "UIView+FLKAutoLayout.h"
 
 #import <Parse/Parse.h>

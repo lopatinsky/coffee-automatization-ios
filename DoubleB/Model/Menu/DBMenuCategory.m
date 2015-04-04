@@ -10,7 +10,7 @@
 #import "DBMenuPosition.h"
 #import "Venue.h"
 
-@interface DBMenuCategory ()<NSCoding>
+@interface DBMenuCategory ()<NSCoding, NSCopying>
 @property(strong, nonatomic) NSString *categoryId;
 @property(strong, nonatomic) NSString *name;
 @property(strong, nonatomic) NSString *imageUrl;
@@ -110,13 +110,17 @@
 
 #pragma mark - NSCopying
 
-- (id)makeCopy{
-    DBMenuCategory *copyCategory = [DBMenuCategory new];
-    copyCategory.categoryId = self.categoryId;
-    copyCategory.name = self.name;
-    copyCategory.imageUrl = self.imageUrl;
-    copyCategory.positions = self.positions;
-    copyCategory.categoryDictionary = self.categoryDictionary;
+- (id)copyWithZone:(NSZone *)zone{
+    DBMenuCategory *copyCategory = [[[self class] allocWithZone:zone] init];
+    copyCategory.categoryId = [self.categoryId copy];
+    copyCategory.name = [self.name copy];
+    copyCategory.imageUrl = [self.imageUrl copy];
+    
+    copyCategory.positions = [NSMutableArray new];
+    for(DBMenuPosition *position in self.positions)
+        [copyCategory.positions addObject:[position copyWithZone:zone]];
+    
+    copyCategory.categoryDictionary = [self.categoryDictionary copy];
     
     return copyCategory;
 }

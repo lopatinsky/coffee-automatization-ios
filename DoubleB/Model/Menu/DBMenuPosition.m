@@ -11,7 +11,20 @@
 #import "Venue.h"
 
 @interface DBMenuPosition ()<NSCoding>
+@property(strong, nonatomic) NSString *positionId;
+@property(strong, nonatomic) NSString *name;
+@property(nonatomic) double price;
+@property(strong, nonatomic) NSString *imageUrl;
+@property(strong, nonatomic) NSString *positionDescription;
+@property(nonatomic) double energyAmount;
+@property(nonatomic) double weight;
+@property(nonatomic) double volume;
+
 @property(strong, nonatomic) NSMutableArray *groupModifiers;
+@property(strong, nonatomic) NSMutableArray *singleModifiers;
+
+@property(strong, nonatomic) NSDictionary *productDictionary;
+
 
 @property(strong, nonatomic) NSArray *venuesRestrictions;
 @end
@@ -110,6 +123,32 @@
     [aCoder encodeObject:self.singleModifiers forKey:@"singleModifiers"];
     [aCoder encodeObject:self.venuesRestrictions forKey:@"venuesRestrictions"];
     [aCoder encodeObject:self.productDictionary forKey:@"productDictionary"];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone{
+    DBMenuPosition *copyPosition = [[[self class] allocWithZone:zone] init];
+    copyPosition.positionId = [self.positionId copy];
+    copyPosition.name = [self.name copy];
+    copyPosition.price = self.price;
+    copyPosition.imageUrl = [self.imageUrl copy];
+    copyPosition.positionDescription = [self.positionDescription copy];
+    copyPosition.energyAmount = self.energyAmount;
+    copyPosition.weight = self.weight;
+    copyPosition.volume = self.volume;
+    
+    copyPosition.groupModifiers = [NSMutableArray new];
+    for(DBMenuPositionModifier *modifier in self.groupModifiers)
+        [copyPosition.groupModifiers addObject:[modifier copyWithZone:zone]];
+    
+    copyPosition.singleModifiers = [NSMutableArray new];
+    for(DBMenuPositionModifier *modifier in self.singleModifiers)
+        [copyPosition.singleModifiers addObject:[modifier copyWithZone:zone]];
+    
+    copyPosition.productDictionary = [self.productDictionary copy];
+    
+    return copyPosition;
 }
 
 @end

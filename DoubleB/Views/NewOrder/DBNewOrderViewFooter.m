@@ -10,7 +10,6 @@
 #import "OrderManager.h"
 #import "Compatibility.h"
 #import "DBMastercardPromo.h"
-#import "UIImageView+Extension.h"
 #import "DBDiscountMessageCell.h"
 
 #import "UIView+FLKAutoLayout.h"

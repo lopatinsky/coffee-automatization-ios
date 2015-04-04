@@ -13,6 +13,16 @@
 		C775B7944021476A46A94ABE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C775BC53668E33883715A91E /* InfoPlist.strings */; };
 		C775BC7962447B1C95D52B05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		C775BD77AC66384E5D7C6D98 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
+		CB0C990F1ACEDAC300B1AE2F /* DBPositionModifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990A1ACEDAC300B1AE2F /* DBPositionModifierCell.m */; };
+		CB0C99101ACEDAC300B1AE2F /* DBPositionModifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C990B1ACEDAC300B1AE2F /* DBPositionModifierCell.xib */; };
+		CB0C99111ACEDAC300B1AE2F /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
+		CB0C99121ACEDAC300B1AE2F /* DBPositionModifierPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C990E1ACEDAC300B1AE2F /* DBPositionModifierPicker.xib */; };
+		CB0C99141ACEDB3600B1AE2F /* modifier_arrow_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0C99131ACEDB3600B1AE2F /* modifier_arrow_icon.png */; };
+		CB43E7A31ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */; };
+		CB43E7A41ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */; };
+		CB43E7A81ACEEF9C0003D5B2 /* modifier_minus_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7A51ACEEF9C0003D5B2 /* modifier_minus_icon.png */; };
+		CB43E7A91ACEEF9C0003D5B2 /* modifier_plus_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7A61ACEEF9C0003D5B2 /* modifier_plus_icon.png */; };
+		CB43E7AA1ACEEF9C0003D5B2 /* modifier_tick_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7A71ACEEF9C0003D5B2 /* modifier_tick_icon.png */; };
 		CB60C0A61AC5AD2600D5E962 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB60C0A71AC5AD2600D5E962 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB60C0A81AC5AD2600D5E962 /* DBNewOrderAdditionalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D391ABC3CAE00BD4E81 /* DBNewOrderAdditionalInfoView.m */; };
@@ -268,6 +278,12 @@
 		CB715ADD1ACD581300EA84FC /* DBCategoryPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715ADC1ACD581300EA84FC /* DBCategoryPicker.xib */; };
 		CB715AE11ACD5C9A00EA84FC /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB715AE21ACD5C9A00EA84FC /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
+		CB715AE71ACEA40C00EA84FC /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
+		CB715AE81ACEA40C00EA84FC /* DBPositionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE61ACEA40C00EA84FC /* DBPositionViewController.xib */; };
+		CB715AEC1ACEB21100EA84FC /* DBBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AEB1ACEB21100EA84FC /* DBBarButtonItem.m */; };
+		CB715AEE1ACEB74100EA84FC /* order.png in Resources */ = {isa = PBXBuildFile; fileRef = CB715AED1ACEB74100EA84FC /* order.png */; };
+		CB715AF11ACEB9F900EA84FC /* UIViewController+DBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AF01ACEB9F900EA84FC /* UIViewController+DBAnimation.m */; };
+		CB715AF41ACECACD00EA84FC /* UINavigationController+DBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */; };
 		CBD417DD1AC9872700CA78EE /* DoubleB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CBD417D81AC9872700CA78EE /* DoubleB.xcdatamodeld */; };
 		CBE559551AC9A94600A166B9 /* DBPositionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE559531AC9A94600A166B9 /* DBPositionCell.m */; };
 		CBE559561AC9A94600A166B9 /* DBPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559541AC9A94600A166B9 /* DBPositionCell.xib */; };
@@ -407,6 +423,13 @@
 		CB05B7961A6D321D006224BB /* mcard_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mcard_logo@2x.png"; sourceTree = "<group>"; };
 		CB05B79B1A6D369C006224BB /* DBShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBShareHelper.h; sourceTree = "<group>"; };
 		CB05B79C1A6D369C006224BB /* DBShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBShareHelper.m; sourceTree = "<group>"; };
+		CB0C99091ACEDAC300B1AE2F /* DBPositionModifierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionModifierCell.h; sourceTree = "<group>"; };
+		CB0C990A1ACEDAC300B1AE2F /* DBPositionModifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionModifierCell.m; sourceTree = "<group>"; };
+		CB0C990B1ACEDAC300B1AE2F /* DBPositionModifierCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionModifierCell.xib; sourceTree = "<group>"; };
+		CB0C990C1ACEDAC300B1AE2F /* DBPositionModifierPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionModifierPicker.h; sourceTree = "<group>"; };
+		CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionModifierPicker.m; sourceTree = "<group>"; };
+		CB0C990E1ACEDAC300B1AE2F /* DBPositionModifierPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionModifierPicker.xib; sourceTree = "<group>"; };
+		CB0C99131ACEDB3600B1AE2F /* modifier_arrow_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modifier_arrow_icon.png; sourceTree = "<group>"; };
 		CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBNewOrderViewController.xib; sourceTree = "<group>"; };
 		CB1B6CDD1A49E6C70034774C /* add_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_position.png; sourceTree = "<group>"; };
 		CB1B6CDF1A4B3CE40034774C /* DBBeaconObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBBeaconObserver.h; sourceTree = "<group>"; };
@@ -419,7 +442,7 @@
 		CB1B6CF21A4C6B480034774C /* JRSwizzleMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JRSwizzleMethods.m; path = JRSwizzle/JRSwizzleMethods.m; sourceTree = "<group>"; };
 		CB2FD83319F55A580065285B /* mug_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug_gray@2x.png"; sourceTree = "<group>"; };
 		CB2FD83419F55A580065285B /* mug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug@2x.png"; sourceTree = "<group>"; };
-		CB34A01619E2A3C700011E2A /* DBPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionsViewController.xib; sourceTree = "<group>"; };
+		CB34A01619E2A3C700011E2A /* DBPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DBPositionsViewController.xib; path = ../DBPositionsViewController.xib; sourceTree = "<group>"; };
 		CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCardsViewController.xib; sourceTree = "<group>"; };
 		CB37BC4019CB14110034B325 /* DBConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBConstants.h; sourceTree = "<group>"; };
 		CB37BC4119CB14110034B325 /* DBConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBConstants.m; sourceTree = "<group>"; };
@@ -434,6 +457,12 @@
 		CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOrderViewFooter.m; sourceTree = "<group>"; };
 		CB3E6B8C1A866D0800640791 /* DBOrderViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBOrderViewHeader.h; sourceTree = "<group>"; };
 		CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOrderViewHeader.m; sourceTree = "<group>"; };
+		CB43E7A01ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionSingleModifierCell.h; sourceTree = "<group>"; };
+		CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionSingleModifierCell.m; sourceTree = "<group>"; };
+		CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionSingleModifierCell.xib; sourceTree = "<group>"; };
+		CB43E7A51ACEEF9C0003D5B2 /* modifier_minus_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modifier_minus_icon.png; sourceTree = "<group>"; };
+		CB43E7A61ACEEF9C0003D5B2 /* modifier_plus_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modifier_plus_icon.png; sourceTree = "<group>"; };
+		CB43E7A71ACEEF9C0003D5B2 /* modifier_tick_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modifier_tick_icon.png; sourceTree = "<group>"; };
 		CB491D8C19DEF45600D3FEF7 /* mcard_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mcard_logo.png; sourceTree = "<group>"; };
 		CB60C0911AC5666100D5E962 /* DBMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMenu.h; sourceTree = "<group>"; };
 		CB60C0921AC5666100D5E962 /* DBMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMenu.m; sourceTree = "<group>"; };
@@ -501,6 +530,16 @@
 		CB715ADE1ACD5C9A00EA84FC /* DBCategoryPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCategoryPickerCell.h; sourceTree = "<group>"; };
 		CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCategoryPickerCell.m; sourceTree = "<group>"; };
 		CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCategoryPickerCell.xib; sourceTree = "<group>"; };
+		CB715AE41ACEA40C00EA84FC /* DBPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionViewController.h; sourceTree = "<group>"; };
+		CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionViewController.m; sourceTree = "<group>"; tabWidth = 5; };
+		CB715AE61ACEA40C00EA84FC /* DBPositionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionViewController.xib; sourceTree = "<group>"; };
+		CB715AEA1ACEB21100EA84FC /* DBBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBBarButtonItem.h; sourceTree = "<group>"; };
+		CB715AEB1ACEB21100EA84FC /* DBBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBBarButtonItem.m; sourceTree = "<group>"; };
+		CB715AED1ACEB74100EA84FC /* order.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = order.png; sourceTree = "<group>"; };
+		CB715AEF1ACEB9F900EA84FC /* UIViewController+DBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DBAnimation.h"; sourceTree = "<group>"; };
+		CB715AF01ACEB9F900EA84FC /* UIViewController+DBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DBAnimation.m"; sourceTree = "<group>"; };
+		CB715AF21ACECACD00EA84FC /* UINavigationController+DBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+DBAnimation.h"; sourceTree = "<group>"; };
+		CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+DBAnimation.m"; sourceTree = "<group>"; };
 		CB73306219FE8210001B4B6D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CB73306819FF72A8001B4B6D /* menu_icon_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon_grey.png; sourceTree = "<group>"; };
 		CB73306919FF72A8001B4B6D /* menu_icon_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_icon_grey@2x.png"; sourceTree = "<group>"; };
@@ -593,8 +632,8 @@
 		D55629B1198A8C1F000F8D82 /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
 		D55629B3198A902E000F8D82 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
 		D55629B4198A902E000F8D82 /* Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Compatibility.m; sourceTree = "<group>"; };
-		D55629B6198A9112000F8D82 /* DBPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionsViewController.h; sourceTree = "<group>"; };
-		D55629B7198A9112000F8D82 /* DBPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionsViewController.m; sourceTree = "<group>"; };
+		D55629B6198A9112000F8D82 /* DBPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBPositionsViewController.h; path = ../DBPositionsViewController.h; sourceTree = "<group>"; };
+		D55629B7198A9112000F8D82 /* DBPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBPositionsViewController.m; path = ../DBPositionsViewController.m; sourceTree = "<group>"; };
 		D55629B9198A98C2000F8D82 /* DBHTMLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHTMLViewController.h; sourceTree = "<group>"; };
 		D55629BA198A98C2000F8D82 /* DBHTMLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBHTMLViewController.m; sourceTree = "<group>"; };
 		D55629BC198B8B02000F8D82 /* DBCardsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCardsViewController.h; sourceTree = "<group>"; };
@@ -767,6 +806,7 @@
 		C775B1154DBD501B5D3549F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CB715AE31ACEA3EB00EA84FC /* Menu */,
 				CBA24A461A6570E500103699 /* DBTabBarController.h */,
 				CBA24A471A6570E500103699 /* DBTabBarController.m */,
 				7E55544E198A77A5008A4684 /* DBCommentViewController.h */,
@@ -775,6 +815,7 @@
 				7EFF2734198A84580095ADED /* DBVenuesTableViewController.m */,
 				7E1E093D198B7ADC0024D8B8 /* DBVenueViewController.h */,
 				7E1E093E198B7ADC0024D8B8 /* DBVenueViewController.m */,
+				D516FA4E1986E0FC0077FC17 /* VenueViewController.xib */,
 				7E1E0943198B7D960024D8B8 /* DBOrderViewController.h */,
 				7E1E0944198B7D960024D8B8 /* DBOrderViewController.m */,
 				7E00C3E5198B8D37005A0889 /* DBOrdersTableViewController.h */,
@@ -788,17 +829,13 @@
 				CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */,
 				C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */,
 				C775B3E52AAEE0E32F47DC75 /* IHWebPageViewController.h */,
-				D55629B6198A9112000F8D82 /* DBPositionsViewController.h */,
-				D55629B7198A9112000F8D82 /* DBPositionsViewController.m */,
 				D55629B9198A98C2000F8D82 /* DBHTMLViewController.h */,
 				D55629BA198A98C2000F8D82 /* DBHTMLViewController.m */,
 				D55629BC198B8B02000F8D82 /* DBCardsViewController.h */,
 				D55629BD198B8B02000F8D82 /* DBCardsViewController.m */,
+				CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */,
 				CB6EB6F419E3FF480050DF90 /* DBAdvertViewController.h */,
 				CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */,
-				D516FA4E1986E0FC0077FC17 /* VenueViewController.xib */,
-				CB34A01619E2A3C700011E2A /* DBPositionsViewController.xib */,
-				CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */,
 				CB6EB6F619E3FF480050DF90 /* DBAdvertViewController.xib */,
 				CB8C91281A3053E200E58DC6 /* DBAboutPromoViewController.h */,
 				CB8C91291A3053E200E58DC6 /* DBAboutPromoViewController.m */,
@@ -914,6 +951,10 @@
 				5EF6A6CA1AA3084C00EED5A6 /* UIImageView+Extension.m */,
 				5EA44DFF1AAF1CB9003AAE9F /* UIView+Extension.h */,
 				5EA44E001AAF1CB9003AAE9F /* UIView+Extension.m */,
+				CB715AEF1ACEB9F900EA84FC /* UIViewController+DBAnimation.h */,
+				CB715AF01ACEB9F900EA84FC /* UIViewController+DBAnimation.m */,
+				CB715AF21ACECACD00EA84FC /* UINavigationController+DBAnimation.h */,
+				CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1023,6 +1064,22 @@
 			path = DoubleBTests;
 			sourceTree = "<group>";
 		};
+		CB0C99081ACEDA8500B1AE2F /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				CB0C99091ACEDAC300B1AE2F /* DBPositionModifierCell.h */,
+				CB0C990A1ACEDAC300B1AE2F /* DBPositionModifierCell.m */,
+				CB0C990B1ACEDAC300B1AE2F /* DBPositionModifierCell.xib */,
+				CB0C990C1ACEDAC300B1AE2F /* DBPositionModifierPicker.h */,
+				CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */,
+				CB0C990E1ACEDAC300B1AE2F /* DBPositionModifierPicker.xib */,
+				CB43E7A01ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.h */,
+				CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */,
+				CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		CB1B6CE81A4C63A70034774C /* jRSwizzle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,6 +1119,7 @@
 		CB60C1C51AC9676900D5E962 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CB0C99081ACEDA8500B1AE2F /* Modifiers */,
 				CBE559571AC9A9F000A166B9 /* DBPositionCellOld.h */,
 				CBE559581AC9A9F000A166B9 /* DBPositionCellOld.m */,
 				CBE559591AC9A9F000A166B9 /* DBPositionCellOld.xib */,
@@ -1084,6 +1142,7 @@
 		CB6EB71D19E7DC0E0050DF90 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CB715AE91ACEB21100EA84FC /* CustomControls */,
 				CB60C1C51AC9676900D5E962 /* Menu */,
 				CBD29D271ABC3B0A00BD4E81 /* NewOrder */,
 				CB6EB71E19E7DC0E0050DF90 /* Cells */,
@@ -1137,6 +1196,28 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		CB715AE31ACEA3EB00EA84FC /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				D55629B6198A9112000F8D82 /* DBPositionsViewController.h */,
+				D55629B7198A9112000F8D82 /* DBPositionsViewController.m */,
+				CB34A01619E2A3C700011E2A /* DBPositionsViewController.xib */,
+				CB715AE41ACEA40C00EA84FC /* DBPositionViewController.h */,
+				CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */,
+				CB715AE61ACEA40C00EA84FC /* DBPositionViewController.xib */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		CB715AE91ACEB21100EA84FC /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				CB715AEA1ACEB21100EA84FC /* DBBarButtonItem.h */,
+				CB715AEB1ACEB21100EA84FC /* DBBarButtonItem.m */,
+			);
+			path = CustomControls;
+			sourceTree = "<group>";
+		};
 		CBD29D271ABC3B0A00BD4E81 /* NewOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1160,6 +1241,11 @@
 		D57703DB1969F7A80010D1B1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB43E7A51ACEEF9C0003D5B2 /* modifier_minus_icon.png */,
+				CB43E7A61ACEEF9C0003D5B2 /* modifier_plus_icon.png */,
+				CB43E7A71ACEEF9C0003D5B2 /* modifier_tick_icon.png */,
+				CB0C99131ACEDB3600B1AE2F /* modifier_arrow_icon.png */,
+				CB715AED1ACEB74100EA84FC /* order.png */,
 				CB715AD71ACD568500EA84FC /* category_selection_icon.png */,
 				CBE5595C1AC9AED800A166B9 /* noimage_icon@2x.png */,
 				CBE5595D1AC9AED800A166B9 /* noimage_icon@3x.png */,
@@ -1374,6 +1460,7 @@
 				CB60C1231AC5AD2600D5E962 /* DBMastercardAdView.xib in Resources */,
 				CB60C1241AC5AD2600D5E962 /* menu_icon@3x.png in Resources */,
 				CB715ADD1ACD581300EA84FC /* DBCategoryPicker.xib in Resources */,
+				CB715AEE1ACEB74100EA84FC /* order.png in Resources */,
 				CB60C1251AC5AD2600D5E962 /* preview_5@2x.png in Resources */,
 				CB60C1261AC5AD2600D5E962 /* preview_4@2x.png in Resources */,
 				CB60C1271AC5AD2600D5E962 /* preview_1@2x.png in Resources */,
@@ -1435,6 +1522,7 @@
 				CB60C15C1AC5AD2600D5E962 /* promo_pic.png in Resources */,
 				CB60C15D1AC5AD2600D5E962 /* DBAdvertViewController.xib in Resources */,
 				CB60C15E1AC5AD2600D5E962 /* feedback@2x.png in Resources */,
+				CB43E7A81ACEEF9C0003D5B2 /* modifier_minus_icon.png in Resources */,
 				CB60C15F1AC5AD2600D5E962 /* percent_icon@2x.png in Resources */,
 				CB60C1601AC5AD2600D5E962 /* DBMastercardAdvertPopup.xib in Resources */,
 				CB60C1611AC5AD2600D5E962 /* menu_icon_grey.png in Resources */,
@@ -1446,6 +1534,7 @@
 				CB60C1671AC5AD2600D5E962 /* mug_gray@2x.png in Resources */,
 				CB60C1681AC5AD2600D5E962 /* preview_2@2x.png in Resources */,
 				CB60C1691AC5AD2600D5E962 /* paid.png in Resources */,
+				CB0C99121ACEDAC300B1AE2F /* DBPositionModifierPicker.xib in Resources */,
 				CB60C16A1AC5AD2600D5E962 /* exclamation.png in Resources */,
 				CB60C16B1AC5AD2600D5E962 /* orders.png in Resources */,
 				CB60C16C1AC5AD2600D5E962 /* mug_gray.png in Resources */,
@@ -1467,9 +1556,11 @@
 				CB60C17B1AC5AD2600D5E962 /* about_promo@2x.png in Resources */,
 				CB60C17C1AC5AD2600D5E962 /* settings@2x.png in Resources */,
 				CB60C1CF1AC967D600D5E962 /* DBCategoryHeaderView.xib in Resources */,
+				CB0C99141ACEDB3600B1AE2F /* modifier_arrow_icon.png in Resources */,
 				CB60C17D1AC5AD2600D5E962 /* e-mail.png in Resources */,
 				CB60C17E1AC5AD2600D5E962 /* visa_icon@3x.png in Resources */,
 				CB60C17F1AC5AD2600D5E962 /* orders_icon_grey@3x.png in Resources */,
+				CB715AE81ACEA40C00EA84FC /* DBPositionViewController.xib in Resources */,
 				CB60C1801AC5AD2600D5E962 /* add_position.png in Resources */,
 				CB60C1811AC5AD2600D5E962 /* DBOrderItemCell.xib in Resources */,
 				CB60C1821AC5AD2600D5E962 /* about@2x.png in Resources */,
@@ -1479,6 +1570,7 @@
 				CB60C1861AC5AD2600D5E962 /* 150@2x.png in Resources */,
 				CB60C1871AC5AD2600D5E962 /* confidence@2x.png in Resources */,
 				CB60C1881AC5AD2600D5E962 /* feedback.png in Resources */,
+				CB0C99101ACEDAC300B1AE2F /* DBPositionModifierCell.xib in Resources */,
 				CB60C1891AC5AD2600D5E962 /* tick.png in Resources */,
 				CB60C18A1AC5AD2600D5E962 /* 250.png in Resources */,
 				CB60C18B1AC5AD2600D5E962 /* plus.png in Resources */,
@@ -1492,6 +1584,7 @@
 				CB715AD81ACD568500EA84FC /* category_selection_icon.png in Resources */,
 				CB60C1931AC5AD2600D5E962 /* not_paid.png in Resources */,
 				CB60C1941AC5AD2600D5E962 /* close_white@2x.png in Resources */,
+				CB43E7A41ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib in Resources */,
 				CB60C1951AC5AD2600D5E962 /* heart.png in Resources */,
 				CB60C1961AC5AD2600D5E962 /* star.png in Resources */,
 				CB60C1971AC5AD2600D5E962 /* card.png in Resources */,
@@ -1501,11 +1594,13 @@
 				CB60C19B1AC5AD2600D5E962 /* profile@2x.png in Resources */,
 				CB60C19C1AC5AD2600D5E962 /* settings.png in Resources */,
 				CB60C19D1AC5AD2600D5E962 /* clock@2x.png in Resources */,
+				CB43E7AA1ACEEF9C0003D5B2 /* modifier_tick_icon.png in Resources */,
 				CB60C19E1AC5AD2600D5E962 /* menu_icon.png in Resources */,
 				CBE559561AC9A94600A166B9 /* DBPositionCell.xib in Resources */,
 				CB60C19F1AC5AD2600D5E962 /* venues_icon_grey.png in Resources */,
 				CB60C1A01AC5AD2600D5E962 /* SettingCell.xib in Resources */,
 				CB60C1A11AC5AD2600D5E962 /* not_paid@2x.png in Resources */,
+				CB43E7A91ACEEF9C0003D5B2 /* modifier_plus_icon.png in Resources */,
 				CB60C1A21AC5AD2600D5E962 /* canceled.png in Resources */,
 				CB60C1A31AC5AD2600D5E962 /* canceled@2x.png in Resources */,
 			);
@@ -1591,10 +1686,12 @@
 				CB60C0B81AC5AD2600D5E962 /* DBTimePickerView.m in Sources */,
 				CB60C0B91AC5AD2600D5E962 /* AppDelegate.m in Sources */,
 				CB60C0BB1AC5AD2600D5E962 /* DBOrderViewController.m in Sources */,
+				CB715AF41ACECACD00EA84FC /* UINavigationController+DBAnimation.m in Sources */,
 				CB60C0BC1AC5AD2600D5E962 /* DBNewOrderTotalView.m in Sources */,
 				CB60C0BD1AC5AD2600D5E962 /* EXTADT.m in Sources */,
 				CB60C0BE1AC5AD2600D5E962 /* DBNewOrderViewFooter.m in Sources */,
 				CB60C0BF1AC5AD2600D5E962 /* EXTSafeCategory.m in Sources */,
+				CB715AF11ACEB9F900EA84FC /* UIViewController+DBAnimation.m in Sources */,
 				CB60C0C01AC5AD2600D5E962 /* EXTRuntimeExtensions.m in Sources */,
 				CB60C0C11AC5AD2600D5E962 /* DBCommentViewController.m in Sources */,
 				CB60C0C21AC5AD2600D5E962 /* Order.m in Sources */,
@@ -1617,6 +1714,7 @@
 				CB715AE11ACD5C9A00EA84FC /* DBCategoryPickerCell.m in Sources */,
 				CB60C0D31AC5AD2600D5E962 /* DBNewOrderNDAView.m in Sources */,
 				CBD417DD1AC9872700CA78EE /* DoubleB.xcdatamodeld in Sources */,
+				CB715AEC1ACEB21100EA84FC /* DBBarButtonItem.m in Sources */,
 				CB60C0D41AC5AD2600D5E962 /* DBProfileViewController.m in Sources */,
 				CB60C0D51AC5AD2600D5E962 /* DBOrderItemCell.m in Sources */,
 				CB60C0D61AC5AD2600D5E962 /* DBCardCell.m in Sources */,
@@ -1629,6 +1727,7 @@
 				CB60C0DC1AC5AD2600D5E962 /* DBMastercardAdvertPopup.m in Sources */,
 				CB60C0DD1AC5AD2600D5E962 /* IHPaymentClient.m in Sources */,
 				CB60C0DF1AC5AD2600D5E962 /* IHPaymentManager.m in Sources */,
+				CB715AE71ACEA40C00EA84FC /* DBPositionViewController.m in Sources */,
 				CB60C0E01AC5AD2600D5E962 /* NSMethodSignature+EXT.m in Sources */,
 				CB60C0E11AC5AD2600D5E962 /* UIImage+ImageEffects.m in Sources */,
 				CB60C0E21AC5AD2600D5E962 /* DBSettingsTableViewController.m in Sources */,
@@ -1639,12 +1738,15 @@
 				CB715ADB1ACD57F200EA84FC /* DBCategoryPicker.m in Sources */,
 				CB60C0E71AC5AD2600D5E962 /* OrderItem.m in Sources */,
 				CB60C0E81AC5AD2600D5E962 /* OrderManager.m in Sources */,
+				CB0C99111ACEDAC300B1AE2F /* DBPositionModifierPicker.m in Sources */,
 				CB60C0E91AC5AD2600D5E962 /* CoreDataHelper.m in Sources */,
 				CB60C0EA1AC5AD2600D5E962 /* Compatibility.m in Sources */,
 				CB60C0EB1AC5AD2600D5E962 /* DBDiscountAdvertView.m in Sources */,
 				CB60C0EC1AC5AD2600D5E962 /* DBOrderViewFooter.m in Sources */,
+				CB0C990F1ACEDAC300B1AE2F /* DBPositionModifierCell.m in Sources */,
 				CB60C0ED1AC5AD2600D5E962 /* UIView+Extension.m in Sources */,
 				CB60C0EE1AC5AD2600D5E962 /* EXTConcreteProtocol.m in Sources */,
+				CB43E7A31ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m in Sources */,
 				CB60C0EF1AC5AD2600D5E962 /* CacheHelper.m in Sources */,
 				CBE559551AC9A94600A166B9 /* DBPositionCell.m in Sources */,
 				CB60C0F01AC5AD2600D5E962 /* DBVenuesTableViewController.m in Sources */,

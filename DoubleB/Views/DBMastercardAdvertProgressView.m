@@ -9,7 +9,6 @@
 #import "DBMastercardAdvertProgressView.h"
 #import "UIColor+Brandbook.h"
 #import "DBMastercardPromo.h"
-#import "UIImageView+Extension.h"
 
 @implementation DBMastercardAdvertProgressView
 

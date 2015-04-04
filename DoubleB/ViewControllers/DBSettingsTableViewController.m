@@ -17,7 +17,6 @@
 #import "DBClientInfo.h"
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
-#import "UIImageView+Extension.h"
 #import "PersonalAccountViewController.h"
 
 #import <MessageUI/MessageUI.h>

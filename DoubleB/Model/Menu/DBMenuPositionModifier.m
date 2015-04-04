@@ -56,7 +56,7 @@
     if([modifier.items count] < 1)
         modifier = nil;
     
-    modifier.lastSelectedItem = [modifier.items firstObject];
+    modifier.selectedItem = [modifier.items firstObject];
     
     modifier.modifierDictionary = modifierDictionary;
     
@@ -76,7 +76,7 @@
         return NO;
     
     if(![self.modifierDictionary[@"choices"] isEqualToArray:modifierDictionary[@"choices"]]){
-        self.lastSelectedItem = [self.items firstObject];
+        self.selectedItem = [self.items firstObject];
     }
     
     self.modifierDictionary = modifierDictionary;
@@ -110,7 +110,7 @@
         self.minAmount = [[aDecoder decodeObjectForKey:@"minAmount"] integerValue];
         self.maxAmount = [[aDecoder decodeObjectForKey:@"maxAmount"] integerValue];
         self.items = [aDecoder decodeObjectForKey:@"items"];
-        self.lastSelectedItem = [aDecoder decodeObjectForKey:@"lastSelectedItem"];
+        self.selectedItem = [aDecoder decodeObjectForKey:@"selectedItem"];
         self.modifierPrice = [[aDecoder decodeObjectForKey:@"modifierPrice"] doubleValue];
         self.modifierDictionary = [aDecoder decodeObjectForKey:@"modifierDictionary"];
     }
@@ -125,9 +125,32 @@
     [aCoder encodeObject:@(self.minAmount) forKey:@"minAmount"];
     [aCoder encodeObject:@(self.maxAmount) forKey:@"maxAmount"];
     [aCoder encodeObject:self.items forKey:@"items"];
-    [aCoder encodeObject:self.lastSelectedItem forKey:@"lastSelectedItem"];
+    [aCoder encodeObject:self.selectedItem forKey:@"selectedItem"];
     [aCoder encodeObject:@(self.modifierPrice) forKey:@"modifierPrice"];
     [aCoder encodeObject:self.modifierDictionary forKey:@"modifierDictionary"];
+}
+
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone{
+    DBMenuPositionModifier *copyModifier = [[[self class] allocWithZone:zone] init];
+    copyModifier.modifierType = self.modifierType;
+    copyModifier.modifierId = [self.modifierId copy];
+    copyModifier.modifierName = [self.modifierName copy];
+    copyModifier.modifierDictionary = [self.modifierDictionary copy];
+    
+    copyModifier.modifierPrice = self.modifierPrice;
+    copyModifier.maxAmount = self.maxAmount;
+    copyModifier.minAmount = self.minAmount;
+    copyModifier.selectedCount = self.selectedCount;
+    
+    copyModifier.items = [NSMutableArray new];
+    for(DBMenuPositionModifierItem *item in self.items)
+        [copyModifier.items addObject:[item copyWithZone:zone]];
+    
+    copyModifier.selectedItem = [self.selectedItem copyWithZone:zone];
+    
+    return copyModifier;
 }
 
 @end

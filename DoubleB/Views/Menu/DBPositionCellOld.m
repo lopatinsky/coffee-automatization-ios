@@ -8,7 +8,6 @@
 
 #import "DBPositionCellOld.h"
 #import "IHSecureStore.h"
-#import "UIImageView+Extension.h"
 
 @interface DBPositionCellOld () <UIGestureRecognizerDelegate>
 

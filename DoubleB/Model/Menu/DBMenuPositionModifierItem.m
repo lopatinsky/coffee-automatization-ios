@@ -72,4 +72,16 @@
     return [self.itemDictionary hash];
 }
 
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone{
+    DBMenuPositionModifierItem *copyItem = [[[self class] allocWithZone:zone] init];
+    copyItem.itemId = [self.itemId copy];
+    copyItem.itemName = [self.itemName copy];
+    copyItem.itemPrice = self.itemPrice;
+    copyItem.itemDictionary = [self.itemDictionary copy];
+    
+    return copyItem;
+}
+
 @end

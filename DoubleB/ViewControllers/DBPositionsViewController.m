@@ -7,6 +7,7 @@
 //
 
 #import "DBPositionsViewController.h"
+#import "DBPositionViewController.h"
 #import "MBProgressHUD.h"
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
@@ -29,6 +30,7 @@
 
 @interface DBPositionsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, UIPickerViewDelegate, UIPickerViewDataSource, DBPositionCellDelegate, DBCatecoryHeaderViewDelegate, DBCategoryPickerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewTopSpace;
 
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
@@ -50,13 +52,16 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Меню", nil);
-
+    
     //styling
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController.tabBar.frame.size.height, 0);
     self.tableView.rowHeight = 120;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
+    
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    CGFloat topInset = [UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height;
+    self.constraintTableViewTopSpace.constant = topInset;
     
     self.tableView.delegate = self;
     
@@ -256,15 +261,18 @@
     
     [headerView changeState:DBCategoryHeaderViewStateCompact animated:YES];
     
+    // Animate
     [self.tableView beginUpdates];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
     
-    // Scroll to selected section
+    // Animate Scroll to selected section
     // Dispatch helps not to get crash
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self scrollTableViewToSection:section];
     });
+    [self.tableView endUpdates];
+    
+    [self configureTableHeaders];
 }
 
 - (void)closeTableViewSection:(NSInteger)section{
@@ -281,6 +289,8 @@
     [self.tableView beginUpdates];
     [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
+    
+    [self configureTableHeaders];
 }
 
 - (void)scrollTableViewToSection:(NSInteger)section{
@@ -356,7 +366,8 @@
                    category:@"Menu_screen"];
     
     
-    [self cartAddPositionFromCell:cell];
+    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position];
+    [self.navigationController pushViewController:positionVC animated:YES];
 }
 
 #pragma mark - DBPositionCellDelegate

@@ -9,7 +9,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import "DBVenueViewController.h"
 #import "LocationHelper.h"
-#import "UIImageView+Extension.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 

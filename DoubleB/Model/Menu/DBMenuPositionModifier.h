@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, ModifierType) {
     ModifierTypeSingle = 1
 };
 
-@interface DBMenuPositionModifier : NSObject
+@interface DBMenuPositionModifier : NSObject<NSCopying>
 
 @property (nonatomic, readonly) ModifierType modifierType;
 @property (strong, nonatomic, readonly) NSString *modifierId;
@@ -26,10 +26,11 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 @property (nonatomic, readonly) double modifierPrice;
 @property (nonatomic, readonly) NSInteger maxAmount;
 @property (nonatomic, readonly) NSInteger minAmount;
+@property (nonatomic) int selectedCount;
 
 //Only for Group modifiers
 @property (strong, nonatomic, readonly) NSMutableArray *items;
-@property (strong, nonatomic) DBMenuPositionModifierItem *lastSelectedItem;
+@property (strong, nonatomic) DBMenuPositionModifierItem *selectedItem;
 
 + (DBMenuPositionModifier *)groupModifierFromDictionary:(NSDictionary *)modifierDictionary;
 - (BOOL)synchronizeGroupModifierWithDictionary:(NSDictionary *)modifierDictionary;

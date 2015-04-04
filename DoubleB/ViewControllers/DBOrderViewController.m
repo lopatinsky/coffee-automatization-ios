@@ -21,7 +21,6 @@
 #import "LocationHelper.h"
 #import "UIAlertView+BlocksKit.h"
 #import "UIGestureRecognizer+BlocksKit.h"
-#import "UIImageView+Extension.h"
 #import "OrderManager.h"
 
 #import <GoogleMaps/GoogleMaps.h>

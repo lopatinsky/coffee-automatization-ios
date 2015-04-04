@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBPositionsViewController">
             <connections>
+                <outlet property="constraintTableViewTopSpace" destination="8db-5k-EVN" id="HjA-73-VV1"/>
                 <outlet property="tableView" destination="fWr-UB-ALG" id="v01-m5-b7l"/>
                 <outlet property="view" destination="iN0-l3-epB" id="g8v-Gd-o1M"/>
             </connections>
@@ -28,7 +29,6 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="fWr-UB-ALG" secondAttribute="trailing" id="3SK-Mq-ZXN"/>
-                <constraint firstItem="fWr-UB-ALG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="49q-Sv-Sng"/>
                 <constraint firstItem="fWr-UB-ALG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8db-5k-EVN"/>
                 <constraint firstAttribute="bottom" secondItem="fWr-UB-ALG" secondAttribute="bottom" id="NC5-OS-7MS"/>
                 <constraint firstItem="fWr-UB-ALG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="l6D-eM-8GL"/>
@@ -36,11 +36,12 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="49q-Sv-Sng"/>
-                </mask>
-            </variation>
+            <point key="canvasLocation" x="341" y="334"/>
         </view>
     </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

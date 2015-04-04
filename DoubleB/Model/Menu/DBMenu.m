@@ -83,7 +83,7 @@
     
     for(DBMenuCategory *category in self.categories){
         if([category availableInVenue:venue]){
-            DBMenuCategory *newCategory = [category makeCopy];
+            DBMenuCategory *newCategory = [category copy];
             newCategory.positions = [newCategory filterPositionsForVenue:venue];
             if([newCategory.positions count] > 0){
                 [categories addObject:newCategory];
