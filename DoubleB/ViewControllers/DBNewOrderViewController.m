@@ -321,6 +321,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.continueButton.backgroundColor = [UIColor db_defaultColor];
 }
 
+- (void)setupAddProductButton{
+    [self.addProductImageView templateImageWithName:@"plus"];
+    [self.addProductButton addTarget:self action:@selector(clickAddProductButton) forControlEvents:UIControlEventTouchUpInside];
+}
+
 #pragma mark - reload content
 
 - (void)reloadTableViewHeight:(BOOL)animated{
@@ -346,11 +351,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 //    [self reloadTableViewHeight:YES];
 //    [self.tableView endUpdates];
 //}
-
-- (void)setupAddProductButton{
-    [self.addProductImageView templateImageWithName:@"plus"];
-    [self.addProductButton addTarget:self action:@selector(clickAddProductButton) forControlEvents:UIControlEventTouchUpInside];
-}
 
 - (void)reloadComment {
     if ([OrderManager sharedManager].comment.length > 0) {

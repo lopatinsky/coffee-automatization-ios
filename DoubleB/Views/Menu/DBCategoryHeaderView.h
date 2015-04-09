@@ -18,7 +18,6 @@ typedef NS_ENUM(NSUInteger, DBCategoryHeaderViewState) {
 
 @protocol DBCatecoryHeaderViewDelegate <NSObject>
 - (void) db_categoryHeaderViewDidSelect:(DBCategoryHeaderView *)headerView;
-- (void) db_categoryHeaderViewDidSelectCategoryChoice:(DBCategoryHeaderView *)headerView;
 @end
 
 @interface DBCategoryHeaderView : UIView
@@ -31,7 +30,5 @@ typedef NS_ENUM(NSUInteger, DBCategoryHeaderViewState) {
 - (instancetype)initWithMenuCategory:(DBMenuCategory *)category state:(DBCategoryHeaderViewState)state;
 
 - (void)changeState:(DBCategoryHeaderViewState)state animated:(BOOL)animated;
-- (void)showAccessoryView:(BOOL)animated;
-- (void)hideAccessoryView:(BOOL)animated;
 
 @end
