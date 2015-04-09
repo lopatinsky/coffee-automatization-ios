@@ -55,7 +55,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     self = [super init];
     if (self) {
         [DBPromoManager sharedManager].updateTotalDelegate = self;
-        self.positions = [NSMutableArray array];
+        self.items = [NSMutableArray array];
         _totalPrice = 0;
         
         _beverageMode = (DBBeverageMode)[[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastSelectedBeverageMode] intValue];
@@ -83,8 +83,8 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     
     result = result && self.venue;
     result = result && !(self.paymentType == PaymentTypeNotSet);
-    result = result && [[DBClientInfo sharedInstance] validName];
-    result = result && [[DBClientInfo sharedInstance] validPhone];
+    result = result && [[DBClientInfo sharedInstance] validClientName];
+    result = result && [[DBClientInfo sharedInstance] validClientPhone];
     result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
     result = result && self.totalCount != 0;
     result = result && [DBPromoManager sharedManager].validOrder;
@@ -96,7 +96,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 }
 
 - (void)purgePositions {
-    self.positions = [NSMutableArray array];
+    self.items = [NSMutableArray array];
     self.venue = nil;
     self.comment = @"";
     self.location = nil;
@@ -108,7 +108,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 - (void)overridePositions:(NSArray *)items {
     for (OrderItem *item in items) {
         OrderItem *newItem = [item copy];
-        [self.positions addObject:newItem];
+        [self.items addObject:newItem];
     }
 }
 
@@ -133,13 +133,20 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 }
 
 - (NSInteger)addPosition:(DBMenuPosition *)position {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"position.positionId == %@", position.positionId];
-    OrderItem *itemWithSamePosition = [[self.positions filteredArrayUsingPredicate:predicate] firstObject];
+    DBMenuPosition *copyPosition = [position copy];
+    OrderItem *itemWithSamePosition;
+    
+    for(OrderItem *item in self.items){
+        if([item.position isEqual:copyPosition]){
+            itemWithSamePosition = item;
+            break;
+        }
+    }
     
     if (!itemWithSamePosition) {
-        itemWithSamePosition = [[OrderItem alloc] initWithPosition:position];
+        itemWithSamePosition = [[OrderItem alloc] initWithPosition:copyPosition];
         itemWithSamePosition.count = 1;
-        [self.positions addObject:itemWithSamePosition];
+        [self.items addObject:itemWithSamePosition];
         return 1;
     } else {
         itemWithSamePosition.count ++;
@@ -148,59 +155,55 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 }
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index{
-    if(index < 0 || index >= [self.positions count])
+    if(index < 0 || index >= [self.items count])
         return 0;
     
-    OrderItem *orderItem = self.positions[index];
+    OrderItem *orderItem = self.items[index];
     orderItem.count++;
     return orderItem.count;
 
 }
 
 - (NSInteger)decreaseOrderItemCount:(NSInteger)index {
-    if(index < 0 || index >= [self.positions count])
+    if(index < 0 || index >= [self.items count])
         return 0;
     
-    OrderItem *orderItem = self.positions[index];
+    OrderItem *orderItem = self.items[index];
     orderItem.count--;
     if(orderItem.count < 1){
-        [self.positions removeObject:orderItem];
+        [self.items removeObject:orderItem];
     }
     
     return orderItem.count;
 }
 
 - (NSUInteger)positionsCount {
-    return [self.positions count];
+    return [self.items count];
 }
 
 - (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index{
-    if(index < 0 || index >= [self.positions count])
+    if(index < 0 || index >= [self.items count])
         return 0;
     
-    return ((OrderItem *)self.positions[index]).count;
+    return ((OrderItem *)self.items[index]).count;
 }
 
 - (OrderItem *)itemAtIndex:(NSUInteger)index {
-    return self.positions[index];
+    return self.items[index];
 }
 
 - (OrderItem *)itemWithPositionId:(NSString *)positionId{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selectedExt.extId == %@", positionId];
-    OrderItem *item =[[self.positions filteredArrayUsingPredicate:predicate] firstObject];
-    if(!item){
-        predicate = [NSPredicate predicateWithFormat:@"position.positionId == %@", positionId];
-        item =[[self.positions filteredArrayUsingPredicate:predicate] firstObject];
-    }
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"position.positionId == %@", positionId];
+    OrderItem *item =[[self.items filteredArrayUsingPredicate:predicate] firstObject];
     
     return item;
 }
 
 - (void)removePositionAtIndex:(NSUInteger)index {
-    [self.positions removeObjectAtIndex:index];
+    [self.items removeObjectAtIndex:index];
 }
 
-- (NSUInteger)totalPrice {
+- (double)totalPrice {
     if(_totalPrice == 0){
         return self.initialTotalPrice;
     } else {
@@ -208,10 +211,10 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     }
 }
 
-- (NSUInteger)initialTotalPrice{
-    NSUInteger total = 0;
+- (double)initialTotalPrice{
+    double total = 0;
     int index = 0;
-    for (OrderItem *item in self.positions) {
+    for (OrderItem *item in self.items) {
         total += item.totalPrice;
         index++;
     }
@@ -220,7 +223,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 
 - (NSUInteger)totalCount {
     NSUInteger count = 0;
-    for (OrderItem *item in self.positions) {
+    for (OrderItem *item in self.items) {
         count += item.count;
     }
     return count;

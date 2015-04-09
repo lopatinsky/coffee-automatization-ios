@@ -20,11 +20,16 @@
 - (BOOL)setClientPhone:(NSString *)clientPhone;
 - (BOOL)setClientMail:(NSString *)clientMail;
 
-- (BOOL)validPhone;
-- (BOOL)validName;
-- (BOOL)validMail;
+- (BOOL)validClientPhone;
+- (BOOL)validClientName;
+- (BOOL)validClientMail;
+
+- (BOOL)validPhone:(NSString *)phone;
+- (BOOL)validName:(NSString *)name;
+- (BOOL)validMail:(NSString *)mail;
 
 - (BOOL)validPhoneCharacters:(NSString *)phoneCharacters;
 - (BOOL)validNameCharacters:(NSString *)nameCharacters;
 - (BOOL)validMailCharacters:(NSString *)mailCharacters;
+
 @end

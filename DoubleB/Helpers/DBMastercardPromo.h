@@ -36,7 +36,4 @@ extern NSString *const kDBMastercardPromoUpdatedNotification;
 - (void)doneOrder;
 - (void)doneOrderWithMugCount:(NSInteger)count;
 
-+ (void)checkLocalNotificationExpirationDate;
-+ (void)clearAllLocalNotifications;
-
 @end

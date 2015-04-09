@@ -8,21 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@class DBOrderItemCell;
+@class DBOrderItemCellOld;
 @class OrderItem;
 
 @protocol DBPOrderItemTableCellDelegate <NSObject>
 @required
-- (BOOL)orderItemCellCanEdit:(DBOrderItemCell *)cell;
-- (void)orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell;
-- (void)orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell;
-- (void)orderItemCellSwipe:(DBOrderItemCell *)cell;
+- (BOOL)orderItemCellCanEdit:(DBOrderItemCellOld *)cell;
+- (void)orderItemCellIncreaseItemCount:(DBOrderItemCellOld *)cell;
+- (void)orderItemCellDecreaseItemCount:(DBOrderItemCellOld *)cell;
+- (void)orderItemCellSwipe:(DBOrderItemCellOld *)cell;
 @optional
-- (void)orderItemCell:(DBOrderItemCell *)cell newPreferedHeight:(NSInteger)height;
-- (void)orderItemCellReloadHeight:(DBOrderItemCell *)cell;
+- (void)orderItemCell:(DBOrderItemCellOld *)cell newPreferedHeight:(NSInteger)height;
+- (void)orderItemCellReloadHeight:(DBOrderItemCellOld *)cell;
 @end
 
-@interface DBOrderItemCell : UITableViewCell
+@interface DBOrderItemCellOld : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *itemCellContentView;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemQuantityLabel;

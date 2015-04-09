@@ -12,8 +12,6 @@
 #import "DBMastercardPromo.h"
 #import "DBDiscountMessageCell.h"
 
-#import "UIView+FLKAutoLayout.h"
-
 
 @interface DBNewOrderViewFooter ()<UIGestureRecognizerDelegate>
 @end

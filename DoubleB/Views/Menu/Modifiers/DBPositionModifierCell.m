@@ -10,6 +10,7 @@
 
 @interface DBPositionModifierCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @end
 
@@ -17,6 +18,7 @@
 
 - (void)awakeFromNib {
     [self.arrowImageView templateImageWithName:@"modifier_arrow_icon"];
+    self.separatorView.backgroundColor = [UIColor db_separatorColor];
 }
 
 @end

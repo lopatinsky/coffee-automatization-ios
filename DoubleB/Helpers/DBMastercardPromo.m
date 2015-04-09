@@ -68,7 +68,7 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
 }
 
 - (void)synchronisePromoInfoForClient:(NSString *)clientId{
-    [self synchronisePromoInfoForClient:clientId withCompletionBlock:nil];
+//    [self synchronisePromoInfoForClient:clientId withCompletionBlock:nil];
 }
 
 - (void)synchronisePromoInfoForClient:(NSString *)clientId
@@ -176,50 +176,6 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
-//#pragma mark - Fucking code about geocode local notifications
-//
-//- (void)setLocalNotification:(NSDictionary *)notificationDict{
-//    NSDictionary *lastScheduledNotification = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastScheduledLocalNotification];
-//    NSString *notificationId = notificationDict[@"id"];
-//    
-//    if(![notificationId isEqualToString:lastScheduledNotification[@"id"]]){
-//        [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//        int rad = [notificationDict[@"radius"] intValue];
-//        
-//        NSArray *venues = [Venue storedVenues];
-//        for(Venue *venue in venues){
-//            UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-//            localNotification.region = [[CLCircularRegion alloc] initWithCenter:venue.location radius:rad identifier:venue.venueId];
-//            localNotification.alertBody = notificationDict[@"text"];
-//            [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-//        }
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:notificationDict forKey:kDBDefaultsLastScheduledLocalNotification];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        
-//        /*UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-//        localNotification.region = [[CLCircularRegion alloc] initWithCenter:CLLocationCoordinate2DMake(55.775376, 37.590221)  radius:500 identifier:@"ssdgsgsdg"];
-//        localNotification.alertBody = notificationDict[@"text"];
-//        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];*/
-//    } else {
-//        [DBMastercardPromo checkLocalNotificationExpirationDate];
-//    }
-//}
-//
-//+ (void)checkLocalNotificationExpirationDate{
-//    NSDictionary *lastScheduledNotification = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastScheduledLocalNotification];
-//    
-//    int timestamp = [lastScheduledNotification[@"expires"] intValue];
-//    NSDate *expiredDate = [NSDate dateWithTimeIntervalSince1970:timestamp];
-//    if(![[NSDate date] compare:expiredDate] == NSOrderedAscending){
-//        [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//    }
-//}
-//
-//+ (void)clearAllLocalNotifications{
-//    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-//}
 
 
 @end

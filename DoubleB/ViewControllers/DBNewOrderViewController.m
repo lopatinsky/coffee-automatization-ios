@@ -12,6 +12,7 @@
 #import "DBNewOrderAdditionalInfoView.h"
 #import "DBNewOrderNDAView.h"
 #import "DBNewOrderViewFooter.h"
+#import "DBServerAPI.h"
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
@@ -43,7 +44,7 @@
 #import "DBPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
-#import "UIView+FLKAutoLayout.h"
+#import "DBPositionViewController.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -54,7 +55,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBPOrderItemTableCellDelegate, DBPromoManagerUpdateInfoDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBPromoManagerUpdateInfoDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 
@@ -163,10 +164,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.itemCells = [NSMutableArray new];
     self.preferedHeightsForTableView = [[NSMutableArray alloc] init];
     
-    UINib *nib =[UINib nibWithNibName:@"DBOrderItemCell" bundle:[NSBundle mainBundle]];
-    [self.tableView registerNib:nib forCellReuseIdentifier:@"DBOrderItemCell"];
-    
-    nib =[UINib nibWithNibName:@"DBOrderItemNotesCell" bundle:[NSBundle mainBundle]];
+//    UINib *nib =[UINib nibWithNibName:@"DBOrderItemCell" bundle:[NSBundle mainBundle]];
+//    [self.tableView registerNib:nib forCellReuseIdentifier:@"DBOrderItemCell"];
+//    
+//    nib =[UINib nibWithNibName:@"DBOrderItemNotesCell" bundle:[NSBundle mainBundle]];
 // ========= Configure TableView =========
     
     
@@ -340,11 +341,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void)reloadTableViewCellsHeight{
-    [self.tableView beginUpdates];
-    [self reloadTableViewHeight:YES];
-    [self.tableView endUpdates];
-}
+//- (void)reloadTableViewCellsHeight{
+//    [self.tableView beginUpdates];
+//    [self reloadTableViewHeight:YES];
+//    [self.tableView endUpdates];
+//}
 
 - (void)setupAddProductButton{
     [self.addProductImageView templateImageWithName:@"plus"];
@@ -389,8 +390,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadProfile {
-    if ([[DBClientInfo sharedInstance] validName]) {
-        if (![[DBClientInfo sharedInstance] validPhone]) {
+    if ([[DBClientInfo sharedInstance] validClientName]) {
+        if (![[DBClientInfo sharedInstance] validClientPhone]) {
             self.orderFooter.labelProfile.text = NSLocalizedString(@"Укажите, пожалуйста, номер телефона", nil);
             self.orderFooter.labelProfile.textColor = [UIColor orangeColor];
             [self.orderFooter.labelProfile db_startObservingAnimationNotification];
@@ -681,42 +682,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         
         return;
     }
-    
-    if ([OrderManager sharedManager].positionsCount == 0) {
-        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                       message:NSLocalizedString(@"Для регистрации заказа вам необходимо выбрать хотя бы один напиток", nil)
-                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        return;
-    }
 
     [GANHelper analyzeEvent:@"order_submit" label:[OrderManager sharedManager].orderId category:@"Order_screen"];
     
-    switch ([OrderManager sharedManager].paymentType) {
-        case PaymentTypeCard:
-            if (!self.currentCard) {
-                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                               message:NSLocalizedString(@"Пожалуйста, добавьте новую карту или выберите одну из существующих", nil)
-                                     cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-            } else {
-                [self sendOrderWithCard:self.currentCard];
-            }
-            break;
-            
-        case PaymentTypePersonalAccount:
-            [self sendOrderWithCard:nil];
-            break;
-            
-        case PaymentTypeCash:
-            [self sendOrderWithCard:nil];
-            break;
-            
-        case PaymentTypeExtraType:
-            [self sendOrderWithCard:nil];
-            break;
-            
-        default:
-            break;
+    if([OrderManager sharedManager].paymentType == PaymentTypeCard && !self.currentCard){
+        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+                                       message:NSLocalizedString(@"Пожалуйста, добавьте новую карту или выберите одну из существующих", nil)
+                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+    } else {
+        [self sendOrder];
     }
 }
 
@@ -779,7 +753,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (IBAction)clickProfile:(id)sender {
     NSString *eventLabel;
-    if([[DBClientInfo sharedInstance] validName] || [[DBClientInfo sharedInstance] validPhone]){
+    if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
          eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];
     } else {
         eventLabel = @"null";
@@ -892,223 +866,30 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Salt
 
-- (void)sendOrderWithCard:(NSDictionary *)card {
-//    NSMutableArray *items = [NSMutableArray new];
-//    for (int i = 0; i < [OrderManager sharedManager].positionsCount; ++i) {
-//        OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
-//        Position *position = item.position;
-//        
-//        NSMutableDictionary *dict = [NSMutableDictionary new];
-//        if(item.selectedExt){
-//            dict[@"item_id"] = item.selectedExt.extId;
-//            dict[@"name"] = [NSString stringWithFormat:@"%@ (%@)", position.title, item.selectedExt.extName];
-//        } else {
-//            dict[@"item_id"] = position.positionId;
-//            dict[@"name"] = position.title;
-//        }
-//        
-//        dict[@"quantity"] = @(item.count);
-//        dict[@"price"] = position.price;
-//        [items addObject:dict];
-//    }
-//
-//    if (![[OrderManager sharedManager] orderId]) {
-//        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-//                                       message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
-//                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-//        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//        return;
-//    }
-//    
-//    NSMutableDictionary *order = [NSMutableDictionary new];
-//    order[@"device_type"] = @(0);
-//    order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
-//    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice]);
-//    order[@"items"] = items;
-//    order[@"order_id"] = [[OrderManager sharedManager] orderId];
-//    order[@"delivery_time"] = [OrderManager sharedManager].time;
-//    order[@"takeout"] = @([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway);
-//    
-//    NSString *comment = [OrderManager sharedManager].comment ?: @"";
-//    if([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway){
-//        comment = [NSString stringWithFormat:@"С собой\n%@", comment];
-//    } else {
-//        comment = [NSString stringWithFormat:@"Буду пить в кафе\n%@", comment];
-//    }
-//    order[@"comment"] = comment;
-//    
-//    static BOOL hasOrderErrorInSession = NO;
-//    order[@"after_error"] = @(hasOrderErrorInSession);
-//    
-//    NSMutableDictionary *client = [NSMutableDictionary new];
-//    client[@"id"] = [[IHSecureStore sharedInstance] clientId];
-//    client[@"name"] =  [DBClientInfo sharedInstance].clientName;
-//    client[@"phone"] = [DBClientInfo sharedInstance].clientPhone;
-//    client[@"email"] = [DBClientInfo sharedInstance].clientMail;
-//    order[@"client"] = client;
-//    
-//    NSMutableDictionary *payment = [NSMutableDictionary new];
-//    switch ([OrderManager sharedManager].paymentType) {
-//        case PaymentTypeCard:{
-//            payment[@"type_id"] = @1;
-//            if(card[@"cardToken"]){
-//                payment[@"binding_id"] = card[@"cardToken"];
-//                
-//                BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
-//                payment[@"mastercard"] = @(mcardOrMaestro);
-//                
-//                NSString *cardPan = card[@"cardPan"];
-//                if(cardPan.length > 4){
-//                    cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
-//                }
-//                payment[@"card_pan"] = cardPan ?: @"";
-//            }
-//            payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
-//            payment[@"return_url"] = @"alpha-payment://return-page";
-//        }
-//            break;
-//            
-//        case PaymentTypeCash:
-//            payment[@"type_id"] = @0;
-//            break;
-//            
-//        case PaymentTypeExtraType:
-//            payment[@"type_id"] = @2;
-//            break;
-//            
-//        case PaymentTypePersonalAccount:
-//            payment[@"type_id"] = @3;
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//    order[@"payment"] = payment;
-//    
-//    if ([OrderManager sharedManager].location) {
-//        CLLocation *location = [OrderManager sharedManager].location;
-//        order[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-//    }
-//    
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:order
-//                                                       options:NSJSONWritingPrettyPrinted
-//                                                         error:nil];
-//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    //NSLog(@"%@", order);
-//    NSDate *start = [NSDate date];
-//    
-//    // Check if network connection is reachable
-//    NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-//    if(networkStatus == NotReachable){
-//        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-//                                       message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
-//                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-//        return;
-//    }
-//    // Check if network connection is reachable
-//    
-//    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//    [[DBAPIClient sharedClient] POST:@"order.php"
-//                          parameters:@{@"order": jsonString}
-//                             timeout:30
-//                            success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-//                                //NSLog(@"%@", responseObject);
-//                                [self reloadFavourites:items];
-//                                
-//                                [MBProgressHUD hideHUDForView:self.view animated:YES];
-//                                
-//                                Order *ord = [[Order alloc] init:YES];
-//                                ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
-//                                ord.total = @([[OrderManager sharedManager] totalPrice]);
-//                                ord.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:[OrderManager sharedManager].time.doubleValue*60];
-//                                ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].positions];
-//                                ord.paymentType = [[OrderManager sharedManager] paymentType];
-//                                ord.status = OrderStatusNew;
-//                                ord.venue = [OrderManager sharedManager].venue;
-//                                
-//                                [[CoreDataHelper sharedHelper] save];
-//                                [self confirmOrderSuccess:ord.orderId];
-//                                
-//                                [[OrderManager sharedManager] purgePositions];
-//                                [self.preferedHeightsForTableView removeAllObjects];
-//                                [self reloadTableViewHeight:NO];
-//                                [self.additionalInfoView hide:^{
-//                                    [self.scrollView layoutIfNeeded];
-//                                } completion:nil];
-//                                
-//                                if(ord.paymentType == PaymentTypeExtraType){
-//                                    [[DBMastercardPromo sharedInstance] doneOrderWithMugCount:[OrderManager sharedManager].totalCount];
-//                                } else {
-//                                    [[DBMastercardPromo sharedInstance] doneOrder];
-//                                }
-//                                
-//                                hasOrderErrorInSession = NO;
-//     
-//                                [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
-//                                [[NSUserDefaults standardUserDefaults] synchronize];
-//                                
-//                                [Compatibility registerForNotifications];
-//                                [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
-//                                
-//                                [GANHelper trackNewOrderInfo:ord];
-//                                
-//                                //[GANHelper analyzeEvent:@"order_payment_status" label:@"success" category:@"Order_screen"];
-//                                long interval = (long)-[start timeIntervalSinceNow];
-//                                [GANHelper analyzeEvent:@"order_payment_time"
-//                                                  label:[NSString stringWithFormat:@"%ld", interval]
-//                                               category:@"Order_screen"];
-//                                [GANHelper analyzeEvent:@"order_submit_success" label:ord.orderId category:@"Order_screen"];
-//                                
-//                                [self.delegate newOrderViewController:self didFinishOrder:ord];
-//                            }
-//                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//                                NSLog(@"%@", error);
-//                                
-//                                NSString *eventLabel = [NSString stringWithFormat:@"%@,\n %@", [[OrderManager sharedManager] orderId], error.description];
-//                                [GANHelper analyzeEvent:@"order_submit_failure"
-//                                                  label:eventLabel
-//                                               category:@"Order_screen"];
-//                                /*[GANHelper analyzeEvent:@"order_payment_status"
-//                                                  label:[NSString stringWithFormat:@"error %@", error.description]
-//                                               category:@"Order_screen"];*/
-//
-//                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-//                                
-//                                [OrderManager sharedManager].orderId = nil;
-//                                [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
-//                                [self startUpdatingPromoInfo];
-//
-//                                if (error.code == NSURLErrorTimedOut || operation.response.statusCode == 0){
-//                                    hasOrderErrorInSession = YES;
-//                                    
-//                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-//                                                                   message:NSLocalizedString(@"Нестабильное интернет-соединение. Возможно ваш заказ был успешно создан, пожалуйста, дождитесь подтверждения по смс и обновите историю", nil)
-//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-//                                }/* else if (operation.response.statusCode == 0) {
-//                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-//                                                                   message:NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil)
-//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-//                                }*/ else if (operation.response.statusCode == 400) {
-//                                    NSString *title = operation.responseObject[@"title"] ?: NSLocalizedString(@"Ошибка", nil);
-//                                    [UIAlertView bk_showAlertViewWithTitle:title
-//                                                                   message:operation.responseObject[@"description"]
-//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-//                                } else {
-//                                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-//                                                                   message:NSLocalizedString(@"Произошла непредвиденная ошибка при регистрации заказа. Пожалуйста, попробуйте позднее", nil)
-//                                                         cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-//                                }
-//                            }];
-}
-
-- (void)confirmOrderSuccess:(NSString *)orderId{
-    [[DBAPIClient sharedClient] POST:@"set_order_success"
-                          parameters:@{@"order_id": orderId}
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                            }
-                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                 NSLog(@"%@", error);
-                             }];
+- (void)sendOrder{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [DBServerAPI createNewOrder:^(Order *order) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        [self.preferedHeightsForTableView removeAllObjects];
+        [self reloadTableViewHeight:NO];
+        [self.additionalInfoView hide:^{
+            [self.scrollView layoutIfNeeded];
+        } completion:nil];
+        
+        [self.delegate newOrderViewController:self didFinishOrder:order];
+    } failure:^(NSString *errorTitle, NSString *errorMessage) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        [self startUpdatingPromoInfo];
+        
+        if(!errorTitle) errorTitle = NSLocalizedString(@"Ошибка", nil);
+        [UIAlertView bk_showAlertViewWithTitle:errorTitle
+                                       message:errorMessage
+                             cancelButtonTitle:NSLocalizedString(@"ОК", nil)
+                             otherButtonTitles:nil
+                                       handler:nil];
+    }];
 }
 
 #pragma mark - helper methods
@@ -1134,10 +915,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Promo methods
 
 - (void)startUpdatingPromoInfo{
-    [self.totalView startUpdating];
-    
-    [self reloadContinueButton];
-    [[DBPromoManager sharedManager] updateInfo];
+    if([OrderManager sharedManager].positionsCount > 0){
+        [self.totalView startUpdating];
+        
+        [self reloadContinueButton];
+        [[DBPromoManager sharedManager] updateInfo];
+    }
 }
 
 - (void)endUpdatingPromoInfo{
@@ -1162,7 +945,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         item.notes = itemInfo[@"promos"];
         item.errors = itemInfo[@"errors"];
         
-        NSInteger index = [[OrderManager sharedManager].positions indexOfObject:item];
+        NSInteger index = [[OrderManager sharedManager].items indexOfObject:item];
         DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
         [cell itemInfoChanged:YES];
     }
@@ -1173,29 +956,26 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)promoManager:(DBPromoManager *)manager
        didUpdateInfo:(NSArray *)itemsInfo
-          withPromos:(NSArray *)promos{
+          promos:(NSArray *)promos{
     [self applyItemsInfo:itemsInfo];
     [self showOrHideAdditionalInfoViewWithErrors:nil promos:promos];
     
     [self endUpdatingPromoInfo];
-    [self reloadTableViewCellsHeight];
 }
 
 - (void)promoManager:(DBPromoManager *)manager
        didUpdateInfo:(NSArray *)itemsInfo
-          withErrors:(NSArray *)errors
-          withPromos:(NSArray *)promos{
+          errors:(NSArray *)errors
+          promos:(NSArray *)promos{
     [self applyItemsInfo:itemsInfo];
     [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
     
     [self endUpdatingPromoInfo];
-    [self reloadTableViewCellsHeight];
 }
 
 - (void)promoManager:(DBPromoManager *)mamager didFailUpdateInfoWithError:(NSError *)error{
     [self applyItemsInfo:nil];
     [self endUpdatingPromoInfo];
-    [self reloadTableViewCellsHeight];
     
     [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
                                animation:^{
@@ -1214,7 +994,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Cards Controller Delegate
 
 - (void)cardsControllerDidChoosePaymentItem:(DBCardsViewController *)controller{
-    //[self startUpdatingPromoInfo];
+    [self startUpdatingPromoInfo];
 }
 
 
@@ -1264,39 +1044,29 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [UITableViewCell new];
+    DBOrderItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
     
-    cell = (DBOrderItemCell *)[tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderItemCell" owner:self options:nil] firstObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-    DBMenuPosition *position = item.position;
-    NSInteger count = item.count;
     
-    ((DBOrderItemCell *)cell).delegate = self;
-    ((DBOrderItemCell *)cell).orderItem = item;
-    ((DBOrderItemCell *)cell).panGestureRecognizer.delegate = self;
+    [cell configureWithOrderItem:item];
+    cell.delegate = self;
+    cell.panGestureRecognizer.delegate = self;
     
-    BOOL isTheSame = false;
-    for (DBOrderItemCell *oldCell in self.itemCells) {
-        if (oldCell == cell) {
-            isTheSame = true;
-            break;
-        }
-    }
-    if (!isTheSame) {
-        [self.itemCells addObject:cell];
-    }
-    
-    UILabel *labelTitle = ((DBOrderItemCell *)cell).itemTitleLabel;
-    UILabel *labelCount = ((DBOrderItemCell *)cell).itemQuantityLabel;
-    labelCount.textColor = [UIColor db_defaultColor];
-    labelTitle.text = position.name;
-    
-    labelCount.text = [NSString stringWithFormat:@"%ld", (long)count];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    BOOL isTheSame = false;
+//    for (DBOrderItemCell *oldCell in self.itemCells) {
+//        if (oldCell == cell) {
+//            isTheSame = true;
+//            break;
+//        }
+//    }
+//    if (!isTheSame) {
+//        [self.itemCells addObject:cell];
+//    }
     
     return cell;
 }
@@ -1305,19 +1075,23 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row >= [self.preferedHeightsForTableView count]){
-        [self.preferedHeightsForTableView addObject:@(55)];
-        return 55;
+        [self.preferedHeightsForTableView addObject:@(80)];
+        return 80;
     } else {
         return [self.preferedHeightsForTableView[indexPath.row] floatValue];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [GANHelper analyzeEvent:@"item_title_click" category:@"Order_screen"];
+//    [GANHelper analyzeEvent:@"item_title_click" category:@"Order_screen"];
+//    
+//    DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+//    [cell showOrHideAdditionalInfo];
+//    [self reloadTableViewCellsHeight];
     
-    DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    [cell showOrHideAdditionalInfo];
-    [self reloadTableViewCellsHeight];
+//    OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
+//    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position];
+//    [self.navigationController pushViewController:positionVC animated:YES];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
@@ -1328,7 +1102,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - DBOrderItemCellDelegate
 
-- (BOOL)orderItemCellCanEdit:(DBOrderItemCell *)cell{
+- (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
     return YES;
 }
 
@@ -1349,11 +1123,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void)orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell{
+- (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
-    NSInteger count = [[OrderManager sharedManager] increaseOrderItemCountAtIndex:index];
+    [[OrderManager sharedManager] increaseOrderItemCountAtIndex:index];
     
-    cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%ld", (long)count];
+    [cell reloadCount];
     [self startUpdatingPromoInfo];
     [self reloadCard];
     [self reloadContinueButton];
@@ -1363,7 +1137,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                    category:@"item_count_increase"];
 }
 
-- (void)orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{
+- (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
     NSInteger count = [[OrderManager sharedManager] decreaseOrderItemCount:index];
     
@@ -1374,7 +1148,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                           label:cell.orderItem.position.positionId
                        category:@"item_delete"];
     } else {
-        cell.itemQuantityLabel.text = [NSString stringWithFormat:@"%ld", (long)count];
+        [cell reloadCount];
         
         [GANHelper analyzeEvent:@"Order_screen"
                           label:cell.orderItem.position.positionId
@@ -1386,23 +1160,23 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadCard];
 }
 
-- (void)orderItemCellSwipe:(DBOrderItemCell *)cell{
+- (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
     [GANHelper analyzeEvent:@"Order_screen"
                       label:cell.orderItem.position.positionId
                    category:@"item_swipe"];
 }
 
-- (void)orderItemCell:(DBOrderItemCell *)cell newPreferedHeight:(NSInteger)height{
-    NSInteger index = [self.tableView indexPathForCell:cell].row;
-    
-    if(index < [self.preferedHeightsForTableView count]){
-        self.preferedHeightsForTableView[index] = @(height);
-    }
-}
-
-- (void)orderItemCellReloadHeight:(DBOrderItemCell *)cell{
-    [self reloadTableViewCellsHeight];
-}
+//- (void)orderItemCell:(DBOrderItemCell *)cell newPreferedHeight:(NSInteger)height{
+//    NSInteger index = [self.tableView indexPathForCell:cell].row;
+//    
+//    if(index < [self.preferedHeightsForTableView count]){
+//        self.preferedHeightsForTableView[index] = @(height);
+//    }
+//}
+//
+//- (void)orderItemCellReloadHeight:(DBOrderItemCell *)cell{
+//    [self reloadTableViewCellsHeight];
+//}
 
 #pragma mark - CommentViewController
 

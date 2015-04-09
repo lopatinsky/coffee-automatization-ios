@@ -237,8 +237,8 @@
 
 - (BOOL)dataIsValid {
     BOOL result = self.fillingMode == ProfileFillingModeFillToContinue;
-    result = result && [[DBClientInfo sharedInstance] validName];
-    result = result && [[DBClientInfo sharedInstance] validPhone];
+    result = result && [[DBClientInfo sharedInstance] validClientName];
+    result = result && [[DBClientInfo sharedInstance] validClientPhone];
     
     return result;
 }

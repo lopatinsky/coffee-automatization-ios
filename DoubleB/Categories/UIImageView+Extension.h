@@ -11,4 +11,7 @@
 @interface UIImageView (Extension)
 - (void)templateImageWithName:(NSString *)name;
 - (void)templateImageWithName:(NSString *)name tintColor:(UIColor *)color;
+
+- (void)db_showDefaultImage;
+- (void)db_hideDefaultImage;
 @end

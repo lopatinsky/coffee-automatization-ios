@@ -15,8 +15,8 @@
 
 @protocol DBPromoManagerUpdateInfoDelegate <NSObject>
 @required
-- (void)promoManager:(DBPromoManager *)manager didUpdateInfo:(NSArray *)itemsInfo withPromos:(NSArray *)promos;
-- (void)promoManager:(DBPromoManager *)manager didUpdateInfo:(NSArray *)itemsInfo withErrors:(NSArray *)errors withPromos:(NSArray *)promos;
+- (void)promoManager:(DBPromoManager *)manager didUpdateInfo:(NSArray *)itemsInfo promos:(NSArray *)promos;
+- (void)promoManager:(DBPromoManager *)manager didUpdateInfo:(NSArray *)itemsInfo errors:(NSArray *)errors promos:(NSArray *)promos;
 - (void)promoManager:(DBPromoManager *)mamager didFailUpdateInfoWithError:(NSError *)error;
 @end
 

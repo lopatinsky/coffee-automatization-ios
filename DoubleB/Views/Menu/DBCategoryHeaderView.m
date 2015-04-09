@@ -17,11 +17,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCategoryImageContainerWidth;
 
 @property (weak, nonatomic) IBOutlet UIImageView *categoryImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *defaultCategoryImageView;
 @property (weak, nonatomic) IBOutlet UILabel *categoryTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @property (weak, nonatomic) IBOutlet UIView *categorySelectionView;
+@property (weak, nonatomic) IBOutlet UIImageView *categorySelectionImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCategorySelectionViewWidth;
 
 @property(nonatomic) CGFloat initialHeight;
@@ -51,8 +51,7 @@
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    self.categoryImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
-    self.defaultCategoryImageView.hidden = NO;
+    [self.categoryImageView db_showDefaultImage];
     
     self.categoryTitleLabel.textColor = [UIColor blackColor];
     self.categoryTitleLabel.text = self.category.name;
@@ -61,8 +60,7 @@
         [self.categoryImageView sd_setImageWithURL:[NSURL URLWithString:self.category.imageUrl]
                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                              if(!error){
-                                                 self.categoryImageView.backgroundColor = [UIColor clearColor];
-                                                 self.defaultCategoryImageView.hidden = YES;
+                                                 [self.categoryImageView db_hideDefaultImage];
                                              }
                                          }];
     }
@@ -93,6 +91,16 @@
             CGRect rect = self.frame;
             rect.size.height = state == DBCategoryHeaderViewStateFull ? self.initialHeight : 40.f;
             self.frame = rect;
+            
+            if(state == DBCategoryHeaderViewStateCompact){
+                self.backgroundColor = [UIColor db_defaultColorWithAlpha:0.9];
+                self.categoryTitleLabel.textColor = [UIColor whiteColor];
+                [self.categorySelectionImageView templateImageWithName:@"category_selection_icon.png" tintColor:[UIColor whiteColor]];
+            } else {
+                self.backgroundColor = [UIColor whiteColor];
+                self.categoryTitleLabel.textColor = [UIColor blackColor];
+                self.categorySelectionImageView.image = [UIImage imageNamed:@"category_selection_icon.png"];
+            }
         };
         
         if(animated){

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BF-Sh-JCj">
-                        <rect key="frame" x="15" y="9.5" width="272" height="21"/>
+                        <rect key="frame" x="15" y="9" width="272" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Fdc-y9-WuH"/>
                         </constraints>
@@ -24,16 +24,26 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modifier_arrow_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6XU-zE-T3x">
-                        <rect key="frame" x="292" y="7.5" width="20" height="25"/>
+                        <rect key="frame" x="292" y="10" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="J2d-2c-5vB"/>
+                            <constraint firstAttribute="height" constant="20" id="J2d-2c-5vB"/>
                             <constraint firstAttribute="width" constant="20" id="vnE-yB-7q7"/>
                         </constraints>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYx-7h-knC">
+                        <rect key="frame" x="0.0" y="38.5" width="320" height="0.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="vBp-Gy-h1v"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="3BF-Sh-JCj" secondAttribute="centerY" id="2JI-zm-51P"/>
+                    <constraint firstItem="pYx-7h-knC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5Va-yp-DBe"/>
+                    <constraint firstAttribute="bottom" secondItem="pYx-7h-knC" secondAttribute="bottom" id="T3h-r4-PtO"/>
                     <constraint firstAttribute="trailing" secondItem="6XU-zE-T3x" secondAttribute="trailing" constant="8" id="Tzi-HR-ykD"/>
+                    <constraint firstAttribute="trailing" secondItem="pYx-7h-knC" secondAttribute="trailing" id="VE5-92-TQI"/>
                     <constraint firstItem="3BF-Sh-JCj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="XA6-M9-MiK"/>
                     <constraint firstAttribute="centerY" secondItem="6XU-zE-T3x" secondAttribute="centerY" id="gvB-s2-oJB"/>
                     <constraint firstItem="6XU-zE-T3x" firstAttribute="leading" secondItem="3BF-Sh-JCj" secondAttribute="trailing" constant="5" id="iRY-sY-XlV"/>
@@ -42,6 +52,7 @@
             <connections>
                 <outlet property="arrowImageView" destination="6XU-zE-T3x" id="Qsy-h7-lKG"/>
                 <outlet property="modifierTitleLabel" destination="3BF-Sh-JCj" id="bmG-Rb-0Au"/>
+                <outlet property="separatorView" destination="pYx-7h-knC" id="QK6-in-gJe"/>
             </connections>
             <point key="canvasLocation" x="294" y="217"/>
         </tableViewCell>
@@ -49,4 +60,9 @@
     <resources>
         <image name="modifier_arrow_icon.png" width="63" height="126"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>

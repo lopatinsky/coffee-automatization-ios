@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Empatika. All rights reserved.
 //
 
-#import "DBOrderItemCell.h"
+#import "DBOrderItemCellOld.h"
 #import "IHSecureStore.h"
 #import "OrderItem.h"
 #import "DBOrderItemNotesCell.h"
 #import "UIView+DBErrorAnimation.h"
 
 
-@interface DBOrderItemCell () <UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface DBOrderItemCellOld () <UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *additonalInfoButton;
 @property (weak, nonatomic) IBOutlet UIView *additionalInfoMarkView;
@@ -28,7 +28,7 @@
 @property (nonatomic) BOOL notesOpened;
 @end
 
-@implementation DBOrderItemCell
+@implementation DBOrderItemCellOld
 
 - (void)awakeFromNib {
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];

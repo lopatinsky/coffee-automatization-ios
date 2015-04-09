@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 
 @class DBMenuPositionModifier;
+@class DBPositionSingleModifierCell;
+
+@protocol DBPositionSingleModifierCellDelegate <NSObject>
+- (void)db_singleModifierCellDidIncreaseModifierItemCount:(DBMenuPositionModifier *)modifier;
+- (void)db_singleModifierCellDidDecreaseModifierItemCount:(DBMenuPositionModifier *)modifier;
+@end
 
 @interface DBPositionSingleModifierCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 
-- (void)configureWithModifier:(DBMenuPositionModifier *)modifier;
+@property (weak, nonatomic) id<DBPositionSingleModifierCellDelegate> delegate;
+@property (nonatomic) BOOL havePrice;
+
+- (void)configureWithModifier:(DBMenuPositionModifier *)modifier
+                    havePrice:(BOOL)havePrice
+                     delegate:(id<DBPositionSingleModifierCellDelegate>)delegate;
 
 @end

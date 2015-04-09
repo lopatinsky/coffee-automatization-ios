@@ -14,15 +14,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Paq-JO-Tnr">
-                        <rect key="frame" x="15" y="0.0" width="305" height="39.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Paq-JO-Tnr">
+                        <rect key="frame" x="15" y="0.0" width="290" height="39.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Paq-JO-Tnr" secondAttribute="trailing" id="8lZ-vj-qb2"/>
+                    <constraint firstAttribute="trailing" secondItem="Paq-JO-Tnr" secondAttribute="trailing" constant="15" id="8lZ-vj-qb2"/>
                     <constraint firstItem="Paq-JO-Tnr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="fJE-bv-fGG"/>
                     <constraint firstItem="Paq-JO-Tnr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="oIQ-v8-y5H"/>
                     <constraint firstAttribute="bottom" secondItem="Paq-JO-Tnr" secondAttribute="bottom" id="pqs-Xu-ju2"/>

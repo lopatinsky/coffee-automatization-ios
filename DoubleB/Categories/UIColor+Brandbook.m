@@ -19,6 +19,10 @@
     return [UIColor colorWithRed:0 green:95/255.0 blue:78/255.0 alpha:1];
 }
 
++ (UIColor *)db_defaultColorWithAlpha:(CGFloat)alpha{
+    return [UIColor colorWithRed:0 green:95/255.0 blue:78/255.0 alpha:alpha];
+}
+
 + (UIColor *)db_separatorColor{
     return [UIColor colorWithRed:224./255 green:224./255 blue:224./255 alpha:0.5f];
 }

@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 
 @interface DBMenuPositionModifier : NSObject<NSCopying>
 
+@property (nonatomic, readonly) double actualPrice;
+
 @property (nonatomic, readonly) ModifierType modifierType;
 @property (strong, nonatomic, readonly) NSString *modifierId;
 @property (strong, nonatomic, readonly) NSString *modifierName;
@@ -32,10 +34,19 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 @property (strong, nonatomic, readonly) NSMutableArray *items;
 @property (strong, nonatomic) DBMenuPositionModifierItem *selectedItem;
 
+// Single
++ (DBMenuPositionModifier *)singleModifierFromDictionary:(NSDictionary *)modifierDictionary;
+
+// Group
 + (DBMenuPositionModifier *)groupModifierFromDictionary:(NSDictionary *)modifierDictionary;
 - (BOOL)synchronizeGroupModifierWithDictionary:(NSDictionary *)modifierDictionary;
+- (void)selectItemAtIndex:(NSInteger)index;
+- (void)selectItemById:(NSString *)itemId;
 
+// Both
 
-+ (DBMenuPositionModifier *)singleModifierFromDictionary:(NSDictionary *)modifierDictionary;
+// Returns equality of initial data
+// For full equality use isEqual:
+- (BOOL)isSameModifier:(DBMenuPositionModifier *)object;
 
 @end

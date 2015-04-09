@@ -18,6 +18,10 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
 };
 
 @interface DBPositionSingleModifierCell ()
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPriceViewWidth;
+@property (nonatomic) CGFloat initialPriceViewWidth;
+
 @property (weak, nonatomic) IBOutlet UIView *plusView;
 @property (weak, nonatomic) IBOutlet UIView *plusViewSeparator;
 @property (weak, nonatomic) IBOutlet UIImageView *plusImageView;
@@ -49,29 +53,42 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     self.minusSeparator.backgroundColor = [UIColor db_separatorColor];
     self.countSeparator.backgroundColor = [UIColor db_separatorColor];
     
+    self.initialPriceViewWidth = self.constraintPriceViewWidth.constant;
     self.initialPlusViewWidth = self.constraintPlusViewWidth.constant;
     
     self.state = SingleModifierCellStateEmpty;
     
     self.plusView.userInteractionEnabled = YES;
     [self.plusView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        self.modifier.selectedCount++;
-        
-        [self reload];
-        [self setState:SingleModifierCellStateOpened animated:YES];
-        [self registerTouch];
+        if(self.modifier.maxAmount > self.modifier.selectedCount){
+            self.modifier.selectedCount++;
+            
+            [self reload];
+            [self setState:SingleModifierCellStateOpened animated:YES];
+            [self registerTouch];
+            
+            if([self.delegate respondsToSelector:@selector(db_singleModifierCellDidIncreaseModifierItemCount:)]){
+                [self.delegate db_singleModifierCellDidIncreaseModifierItemCount:self.modifier];
+            }
+        }
     }]];
     
     self.minusView.userInteractionEnabled = YES;
     [self.minusView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        self.modifier.selectedCount--;
-        if(self.modifier.selectedCount < 0) self.modifier.selectedCount = 0;
-        
-        [self reload];
-        if(self.modifier.selectedCount == 0){
-            [self setState:SingleModifierCellStateClosed animated:YES];
+        if(self.modifier.selectedCount > self.modifier.minAmount){
+            self.modifier.selectedCount--;
+            if(self.modifier.selectedCount < 0) self.modifier.selectedCount = 0;
+            
+            [self reload];
+            if(self.modifier.selectedCount == 0){
+                [self setState:SingleModifierCellStateEmpty animated:YES];
+            }
+            [self registerTouch];
+            
+            if([self.delegate respondsToSelector:@selector(db_singleModifierCellDidDecreaseModifierItemCount:)]){
+                [self.delegate db_singleModifierCellDidDecreaseModifierItemCount:self.modifier];
+            }
         }
-        [self registerTouch];
     }]];
     
     self.countView.userInteractionEnabled = YES;
@@ -83,8 +100,12 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     }]];
 }
 
-- (void)configureWithModifier:(DBMenuPositionModifier *)modifier{
+- (void)configureWithModifier:(DBMenuPositionModifier *)modifier
+                    havePrice:(BOOL)havePrice
+                     delegate:(id<DBPositionSingleModifierCellDelegate>)delegate;{
     self.modifier = modifier;
+    self.delegate = delegate;
+    self.havePrice = havePrice;
     
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", self.modifier.modifierPrice];
     self.itemTitleLabel.text = self.modifier.modifierName;
@@ -114,6 +135,15 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
         [self showMinusView:animated];
         [self showPlusView:animated];
         [self showCountView:animated];
+    }
+}
+
+- (void)setHavePrice:(BOOL)havePrice{
+    _havePrice = havePrice;
+    if(!havePrice){
+        self.constraintPriceViewWidth.constant = 0.f;
+    } else {
+        self.constraintPriceViewWidth.constant = self.initialPriceViewWidth;
     }
 }
 

@@ -20,7 +20,6 @@
 #import "DBNewOrderViewController.h"
 #import "DBMenuCategory.h"
 
-#import "UIView+FLKAutoLayout.h"
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+DBCardManagement.h"
 #import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
@@ -388,6 +387,8 @@
             [self closeTableViewSection:section];
         }
     }
+    
+    [self hideCategoryPicker];
 }
 
 - (void)db_categoryHeaderViewDidSelectCategoryChoice:(DBCategoryHeaderView *)headerView{

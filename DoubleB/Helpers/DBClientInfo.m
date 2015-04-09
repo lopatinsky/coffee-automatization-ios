@@ -61,28 +61,41 @@
     return YES;
 }
 
-- (BOOL)validPhone{
-    BOOL result = [self validPhoneCharacters:_clientPhone];
-    result = _clientPhone.length > 0;
+- (BOOL)validClientPhone{
+    return [self validPhone:_clientPhone];
+}
+
+- (BOOL)validClientName{
+    return [self validName:_clientName];
+}
+
+- (BOOL)validClientMail{
+    return [self validMail:_clientMail];
+}
+
+
+- (BOOL)validPhone:(NSString *)phone{
+    BOOL result = [self validPhoneCharacters:phone];
+    result = phone.length > 0;
     
-    NSString *onlyDecimal = [_clientPhone stringContainingOnlyDecimalDigits];
+    NSString *onlyDecimal = [phone stringContainingOnlyDecimalDigits];
     result = result && onlyDecimal.length > 0;
     
     return result;
 }
 
-- (BOOL)validName{
-    BOOL result = [self validNameCharacters:_clientName];
-    result = result && _clientName.length > 0;
+- (BOOL)validName:(NSString *)name{
+    BOOL result = [self validNameCharacters:name];
+    result = result && name.length > 0;
     
-    NSString *withoutSpaces = [_clientName stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *withoutSpaces = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
     result = result && withoutSpaces.length > 0;
     
     return result;
 }
 
-- (BOOL)validMail{
-    return [self validMailCharacters:_clientMail];
+- (BOOL)validMail:(NSString *)mail{
+    return [self validMailCharacters:mail];
 }
 
 - (BOOL)validPhoneCharacters:(NSString *)phoneCharacters{

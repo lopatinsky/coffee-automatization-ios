@@ -12,7 +12,6 @@
 #import "UIColor+Hex.h"
 #import "DBTabBarController.h"
 #import "AppDelegate.h"
-#import "UIView+FLKAutoLayout.h"
 #import "CAGradientLayer+Helper.h"
 
 @interface DBPreviewViewController ()<UIScrollViewDelegate, DBPreviewItemDelegate>

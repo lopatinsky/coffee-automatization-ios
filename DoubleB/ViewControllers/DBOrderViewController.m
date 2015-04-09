@@ -44,7 +44,7 @@
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.rowHeight = 50;
+    self.tableView.rowHeight = 80;
     
     self.items = [NSMutableArray arrayWithArray:self.order.items];
     NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
@@ -233,17 +233,9 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderItemCell" owner:self options:nil] firstObject];
     }
     
-    cell.panGestureRecognizer.delegate = self;
-    
     OrderItem *item = self.items[indexPath.row];
-    DBMenuPosition *position = item.position;
-    NSInteger count = item.count;
-    
-    UILabel *labelTitle = cell.itemTitleLabel;
-    UILabel *labelCount = cell.itemQuantityLabel;
-    labelCount.textColor = [UIColor db_defaultColor];
-    labelTitle.text = position.name;
-    labelCount.text = [NSString stringWithFormat:@"%ld", (long)count];
+    [cell configureWithOrderItem:item];
+    cell.panGestureRecognizer.delegate = self;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

@@ -7,20 +7,20 @@
 //
 
 #import "AppDelegate.h"
-#import "IHSecureStore.h"
-#import "UICKeyChainStore.h"
 #import "Venue.h"
 #import "Order.h"
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
-#import <GoogleMaps/GoogleMaps.h>
+#import "DBServerAPI.h"
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
 //#import "DBShareHelper.h"
 #import "DBPreviewViewController.h"
 #import "DBMastercardPromo.h"
 #import "DBMenu.h"
+
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <Parse/Parse.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
@@ -31,21 +31,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //==================== Frameworks initialization ====================
     [Parse setApplicationId:@"byicnKnVhYEbKs7c9IV0zhzeqSVOsRRadsRSrGem"
                   clientKey:@"LjoeKu93HRYvJCuzgv1NCqZknag6FpmO078k1QIP"];
     
     [Fabric with:@[CrashlyticsKit]];
     
     [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
+    //==================== Framework initialization ====================
     
+    
+    // Any significant preloadings/initializations
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
     }
-
-    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     
-    [JRSwizzleMethods swizzleUIViewDealloc];
-    //[DBShareHelper sharedInstance];
+    [DBServerAPI registerUser:nil];
     
     [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
         [self saveContext];
@@ -53,11 +54,19 @@
     
     [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
     
+    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
+    
+    [JRSwizzleMethods swizzleUIViewDealloc];
+    //[DBShareHelper sharedInstance];
+    
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
+    }
+    
+    //styling
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
-    //styling
     [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -66,11 +75,6 @@
     }];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
-    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
-    }
-    
 
     self.window.rootViewController = [DBTabBarController sharedInstance];
 
@@ -101,7 +105,6 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     //[[DBShareHelper sharedInstance] updateShareInfo];
-    //[DBMastercardPromo checkLocalNotificationExpirationDate];
     
 }
 

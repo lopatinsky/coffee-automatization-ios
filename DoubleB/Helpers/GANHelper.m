@@ -99,12 +99,12 @@
                                              value:[IHSecureStore sharedInstance].clientId];
     }
     
-    if([[DBClientInfo sharedInstance] validName]){
+    if([[DBClientInfo sharedInstance] validClientName]){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:2]
                                              value:[DBClientInfo sharedInstance].clientName];
     }
     
-    if([[DBClientInfo sharedInstance] validPhone]){
+    if([[DBClientInfo sharedInstance] validClientPhone]){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:4]
                                              value:[DBClientInfo sharedInstance].clientPhone];
     }

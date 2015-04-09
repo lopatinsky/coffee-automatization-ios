@@ -1,30 +1,26 @@
 //
-//  IHProductTableViewCell.m
-//  IIko Hackathon
+//  DBPositionCell.m
+//  DoubleB
 //
-//  Created by Balaban Alexander on 04/04/14.
+//  Created by Ivan Oschepkov on 07.12.14.
 //  Copyright (c) 2014 Empatika. All rights reserved.
 //
 
-#import "DBPositionCell.h"
+#import "DBPositionCompactCell.h"
 #import "DBMenuPosition.h"
 
-#import "UIImageView+WebCache.h"
-
-@interface DBPositionCell()
+@interface DBPositionCompactCell () 
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @end
 
-@implementation DBPositionCell
+@implementation DBPositionCompactCell
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.backgroundColor = [UIColor whiteColor];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    [self.positionImageView db_showDefaultImage];
     
     self.priceLabel.backgroundColor = [UIColor db_defaultColor];
     self.priceLabel.layer.cornerRadius = self.priceLabel.frame.size.height / 2;
@@ -38,25 +34,8 @@
     self.position = position;
     
     self.titleLabel.text = position.name;
-    self.descriptionLabel.text = position.positionDescription;
     
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", position.price];
-    
-    if(position.weight == 0){
-        self.weightLabel.hidden = YES;
-    } else {
-        self.weightLabel.text = [NSString stringWithFormat:@"%.0f г", position.weight];
-        self.weightLabel.hidden = NO;
-    }
-    
-    if(position.imageUrl){
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
-                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                if(!error){
-                                                    [self.positionImageView db_hideDefaultImage];
-                                                }
-                                            }];
-    }
 }
 
 - (IBAction)orderButtonPressed:(id)sender {
@@ -82,7 +61,7 @@
                           delay:0
                         options:UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         view.transform = CGAffineTransformMakeScale(1.7, 1.7);
+                         view.transform = CGAffineTransformMakeScale(1.5, 1.5);
                      }
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];

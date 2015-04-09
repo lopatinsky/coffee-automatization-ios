@@ -18,7 +18,7 @@ extern NSString* const kDBDefaultsPaymentType;
 
 typedef NS_ENUM(NSUInteger, DBBeverageMode) {
     DBBeverageModeTakeaway = 0,
-    DBBeverageModeInCafe
+    DBBeverageModeInCafe = 1
 };
 
 /**
@@ -30,7 +30,7 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 /**
 * All positions in order
 */
-@property (nonatomic, strong) NSMutableArray *positions;
+@property (nonatomic, strong) NSMutableArray *items;
 
 /**
 * Selected venue for order
@@ -68,8 +68,8 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 @property (nonatomic, readonly) BOOL validOrder;
 
 @property (nonatomic, readonly) NSUInteger positionsCount;
-@property (nonatomic) NSUInteger totalPrice;
-@property (nonatomic) NSUInteger initialTotalPrice;
+@property (nonatomic) double totalPrice;
+@property (nonatomic) double initialTotalPrice;
 @property (nonatomic, readonly) NSUInteger totalCount;
 @property (nonatomic, strong) NSArray *globalPromos;
 @property (nonatomic, strong) NSArray *globalErrors;
@@ -89,7 +89,7 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 - (NSInteger)decreaseOrderItemCount:(NSInteger)index;
 
 - (void)purgePositions; //clean
-- (void)overridePositions:(NSArray *)positions; //clean and add from array
+- (void)overridePositions:(NSArray *)items; //clean and add from array
 
 - (OrderItem *)itemAtIndex:(NSUInteger)index;
 - (OrderItem *)itemWithPositionId:(NSString *)positionId;

@@ -24,8 +24,20 @@
 + (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem{
     OrderItem *item = [[OrderItem alloc] init];
     
-    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:@"id"];
-    item.position = position;
+    DBMenuPosition *menuPosition = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
+    if(menuPosition){
+        DBMenuPosition *position = [menuPosition copy];
+        
+        for(NSDictionary *modifier in historyItem[@"group_modifiers"]){
+            [position selectItem:modifier[@"choice"] forGroupModifier:modifier[@"id"]];
+        }
+        
+        for(NSDictionary *modifier in historyItem[@"single_modifiers"]){
+            [position addSingleModifier:modifier[@"id"] count:[modifier[@"quantity"] integerValue]];
+        }
+        
+        item.position = position;
+    }
     
     item.count = [historyItem[@"quantity"] integerValue];
     
@@ -89,7 +101,7 @@
 - (id)copyWithZone:(NSZone *)zone{
     OrderItem *orderItem = [[[self class] allocWithZone:zone] init];
     
-    orderItem.position = self.position;
+    orderItem.position = [self.position copy];
     orderItem.count = self.count;
     
     return orderItem;

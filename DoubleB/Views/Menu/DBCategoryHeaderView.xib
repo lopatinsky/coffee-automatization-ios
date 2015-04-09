@@ -24,13 +24,6 @@
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pcy-LO-Vts">
                             <rect key="frame" x="0.0" y="0.0" width="150" height="69"/>
                         </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noimage_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="pLV-Q9-arD">
-                            <rect key="frame" x="60" y="19" width="30" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="Wnq-x5-7SD"/>
-                                <constraint firstAttribute="width" constant="30" id="Z6P-tu-hp5"/>
-                            </constraints>
-                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -39,8 +32,6 @@
                         <constraint firstAttribute="bottom" secondItem="pcy-LO-Vts" secondAttribute="bottom" id="EuZ-BR-x30"/>
                         <constraint firstAttribute="width" constant="150" id="O5E-qV-y4p"/>
                         <constraint firstItem="pcy-LO-Vts" firstAttribute="top" secondItem="m3C-kk-frb" secondAttribute="top" id="W54-4c-hgT"/>
-                        <constraint firstAttribute="centerY" secondItem="pLV-Q9-arD" secondAttribute="centerY" id="aNu-J5-szN"/>
-                        <constraint firstAttribute="centerX" secondItem="pLV-Q9-arD" secondAttribute="centerX" id="hwm-Ef-juV"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iyr-cY-9td">
@@ -59,7 +50,7 @@
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="centerX" secondItem="vtr-8Y-T8T" secondAttribute="centerX" id="RTB-9Q-rFj"/>
                         <constraint firstAttribute="centerY" secondItem="vtr-8Y-T8T" secondAttribute="centerY" id="dd4-oX-xbL"/>
@@ -88,11 +79,11 @@
             <connections>
                 <outlet property="categoryImageContainer" destination="m3C-kk-frb" id="xZ9-c2-tX1"/>
                 <outlet property="categoryImageView" destination="pcy-LO-Vts" id="RMy-CZ-KJj"/>
+                <outlet property="categorySelectionImageView" destination="vtr-8Y-T8T" id="94B-pV-7KR"/>
                 <outlet property="categorySelectionView" destination="zCH-lH-7RE" id="Wmd-4M-SGd"/>
                 <outlet property="categoryTitleLabel" destination="iyr-cY-9td" id="T9x-29-GnT"/>
                 <outlet property="constraintCategoryImageContainerWidth" destination="O5E-qV-y4p" id="Sk1-BV-sWn"/>
                 <outlet property="constraintCategorySelectionViewWidth" destination="ejO-ta-jcn" id="2m1-ho-HQx"/>
-                <outlet property="defaultCategoryImageView" destination="pLV-Q9-arD" id="xC0-Wo-Q3r"/>
                 <outlet property="separatorView" destination="9Vr-0W-DMW" id="Txa-f4-uO8"/>
             </connections>
             <point key="canvasLocation" x="339" y="114"/>
@@ -100,7 +91,6 @@
     </objects>
     <resources>
         <image name="category_selection_icon.png" width="132" height="39"/>
-        <image name="noimage_icon.png" width="23" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

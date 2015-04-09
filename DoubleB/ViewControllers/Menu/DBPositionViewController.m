@@ -9,6 +9,7 @@
 #import "DBPositionViewController.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
+#import "DBMenuPositionModifierItem.h"
 #import "OrderManager.h"
 #import "DBBarButtonItem.h"
 #import "DBPositionModifierCell.h"
@@ -16,12 +17,13 @@
 
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
-#import "UIView+FLKAutoLayout.h"
 
-@interface DBPositionViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface DBPositionViewController ()<UITableViewDataSource, UITableViewDelegate, DBPositionModifierPickerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *defaultPositionImageView;
 @property (weak, nonatomic) IBOutlet UILabel *positionTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *positionModifiersLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *positionDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightVolumeLabel;
@@ -33,7 +35,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageSeparator;
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
-@property (weak, nonatomic) IBOutlet UIView *tableBottomSeparator;
 
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
 
@@ -71,13 +72,15 @@
     }
     
     self.positionTitleLabel.text = self.position.name;
+    self.positionModifiersLabel.textColor = [UIColor db_defaultColor];
+    [self reloadSelectedModifiers];
     self.positionDescriptionLabel.text = self.position.positionDescription;
     
     self.priceLabel.backgroundColor = [UIColor db_defaultColor];
     self.priceLabel.layer.cornerRadius = self.priceLabel.frame.size.height / 2;
     self.priceLabel.layer.masksToBounds = YES;
     self.priceLabel.textColor = [UIColor whiteColor];
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", self.position.price];
+    [self reloadPrice];
     
     self.weightVolumeLabel.text = @"";
     
@@ -96,7 +99,6 @@
     
     self.imageSeparator.backgroundColor = [UIColor db_separatorColor];
     self.tableTopSeparator.backgroundColor = [UIColor db_separatorColor];
-    self.tableBottomSeparator.backgroundColor = [UIColor db_separatorColor];
     
     self.modifiersTableView.dataSource = self;
     self.modifiersTableView.delegate = self;
@@ -106,6 +108,40 @@
     [self.scrollView layoutIfNeeded];
     
     self.modifierPicker = [DBPositionModifierPicker new];
+    self.modifierPicker.delegate = self;
+}
+
+- (void)reloadSelectedModifiers{
+    NSMutableString *modifiersString =[[NSMutableString alloc] init];
+    
+    for(DBMenuPositionModifier *modifier in self.position.groupModifiers){
+        if(modifier.selectedItem){
+            if(modifier.actualPrice > 0){
+                [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (%@)\n", modifier.actualPrice, modifier.selectedItem.itemName, modifier.modifierName]];
+            } else {
+                [modifiersString appendString:[NSString stringWithFormat:@"%@ (%@)\n", modifier.selectedItem.itemName, modifier.modifierName]];
+            }
+        }
+    }
+    
+    for(DBMenuPositionModifier *modifier in self.position.singleModifiers){
+        if(modifier.selectedCount > 0){
+            if(modifier.actualPrice > 0){
+                [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (x%ld)\n", modifier.actualPrice, modifier.modifierName, (long)modifier.selectedCount]];
+            } else {
+                [modifiersString appendString:[NSString stringWithFormat:@"%@ (x%ld)\n", modifier.modifierName, (long)modifier.selectedCount]];
+            }
+        }
+    }
+    while (modifiersString.length > 0 && [modifiersString characterAtIndex:modifiersString.length - 1] == '\n')
+        [modifiersString deleteCharactersInRange:NSMakeRange(modifiersString.length - 1, 1)];
+    
+    self.positionModifiersLabel.text = modifiersString;
+    [self reloadPrice];
+}
+
+- (void)reloadPrice{
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", self.position.actualPrice];
 }
 
 - (IBAction)orderButtonClick:(id)sender {
@@ -154,11 +190,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
-        
+        [self.modifierPicker configureWithGroupModifier:self.position.groupModifiers[indexPath.row]];
     } else {
         [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
-        [self.modifierPicker showOnView:self.navigationController.view];
     }
+    
+    [self.modifierPicker showOnView:self.navigationController.view];
+}
+
+#pragma mark - DBPositionModifierPickerDelegate
+
+- (void)db_positionModifierPickerDidChangeItemCount:(DBPositionModifierPicker *)picker{
+    [self reloadSelectedModifiers];
+}
+
+- (void)db_positionModifierPicker:(DBPositionModifierPicker *)picker didSelectNewItem:(DBMenuPositionModifierItem *)item{
+    [self reloadSelectedModifiers];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.modifierPicker hide];
+    });
 }
 
 @end

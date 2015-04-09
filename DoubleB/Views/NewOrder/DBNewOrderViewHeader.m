@@ -8,7 +8,6 @@
 
 #import "DBNewOrderViewHeader.h"
 #import "OrderManager.h"
-#import "UIView+FLKAutoLayout.h"
 #import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 
 @interface DBNewOrderViewHeader ()

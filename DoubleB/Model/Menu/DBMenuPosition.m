@@ -8,6 +8,7 @@
 
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
+#import "DBMenuPositionModifierItem.h"
 #import "Venue.h"
 
 @interface DBMenuPosition ()<NSCoding>
@@ -57,7 +58,7 @@
     } else {
         for(int i = 0; i < [_groupModifiers count]; i++){
             DBMenuPositionModifier *modifier = _groupModifiers[i];
-            if(![modifier synchronizeGroupModifierWithDictionary:positionDictionary[@"group_modifiers"][0]]){
+            if(![modifier synchronizeGroupModifierWithDictionary:positionDictionary[@"group_modifiers"][i]]){
                 [_groupModifiers removeObject:modifier];
             }
         }
@@ -84,8 +85,69 @@
     }
 }
 
+- (void)selectItem:(NSString *)itemId forGroupModifier:(NSString *)modifierId{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifierId];
+    DBMenuPositionModifier *modifier = [[self.groupModifiers filteredArrayUsingPredicate:predicate] firstObject];
+    if(modifier){
+        [modifier selectItemById:itemId];
+    }
+}
+
+- (void)addSingleModifier:(NSString *)modifierId count:(NSInteger)count{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifierId];
+    DBMenuPositionModifier *modifier = [[self.singleModifiers filteredArrayUsingPredicate:predicate] firstObject];
+    if(modifier){
+        modifier.selectedCount = count;
+    }
+}
+
 - (BOOL)availableInVenue:(Venue *)venue{
     return venue && ![_venuesRestrictions containsObject:venue.venueId];
+}
+
+- (double)actualPrice{
+    double price = self.price;
+    for(DBMenuPositionModifier *modifier in self.groupModifiers){
+        price += modifier.actualPrice;
+    }
+    
+    for(DBMenuPositionModifier *modifier in self.singleModifiers){
+        price += modifier.actualPrice;
+    }
+    
+    return price;
+}
+
+- (BOOL)isSamePosition:(DBMenuPosition *)object{
+    if(![object isKindOfClass:[DBMenuPosition class]]){
+        return NO;
+    }
+    
+    return [self.productDictionary isEqualToDictionary:object.productDictionary];
+}
+
+- (BOOL)isEqual:(DBMenuPosition *)object{
+    BOOL result = [self isSamePosition:object];
+    
+    result = result && ([object.groupModifiers count] == [self.groupModifiers count]);
+    if(result){
+        for(int i = 0; i < [self.groupModifiers count]; i++){
+            result = result && [self.groupModifiers[i] isEqual:object.groupModifiers[i]];
+        }
+    }
+    
+    result = result && ([object.singleModifiers count] == [self.singleModifiers count]);
+    if(result){
+        for(int i = 0; i < [self.singleModifiers count]; i++){
+            result = result && [self.singleModifiers[i] isEqual:object.singleModifiers[i]];
+        }
+    }
+    
+    return result;
+}
+
+- (NSUInteger)hash{
+    return [self.productDictionary hash];
 }
 
 #pragma mark - NSCoding methods

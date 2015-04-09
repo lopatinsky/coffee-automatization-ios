@@ -30,13 +30,15 @@
 }
 
 - (void)commonInit{
+    self.backgroundColor = [UIColor whiteColor];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = 40.f;
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    self.separatorView.backgroundColor = [UIColor db_separatorColor];
+    self.separatorView.backgroundColor = [UIColor db_defaultColor];
 }
 
 - (void)configureWithCurrentCategory:(DBMenuCategory *)category categories:(NSArray *)categories{
@@ -45,8 +47,19 @@
     
     [self.tableView reloadData];
     
+    [self configureSize];
+}
+
+- (void)configureSize{
     CGRect rect = self.frame;
     rect.size.height = self.tableView.contentSize.height;
+    
+    if(rect.size.height > 300){
+        rect.size.height = 300;
+        self.tableView.scrollEnabled = YES;
+    } else {
+        self.tableView.scrollEnabled = NO;
+    }
     
     self.frame = rect;
 }

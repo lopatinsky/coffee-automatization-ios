@@ -21,7 +21,7 @@ static NSString *screenIdentifier;
 
 - (void)db_cardManagementBindNewCardOnScreen:(NSString *)screen
                                     callback:(void(^)(BOOL success))completionHandler{
-    if([[DBClientInfo sharedInstance] validName] && [[DBClientInfo sharedInstance] validPhone]){
+    if([[DBClientInfo sharedInstance] validClientName] && [[DBClientInfo sharedInstance] validClientPhone]){
         [self bindNewCard:completionHandler];
     } else {
         screenIdentifier = screen;

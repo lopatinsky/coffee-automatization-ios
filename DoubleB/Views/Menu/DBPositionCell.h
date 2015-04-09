@@ -20,7 +20,6 @@
 
 @interface DBPositionCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *positionDefaultImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
@@ -31,7 +30,6 @@
 @property (strong, nonatomic) DBMenuPosition *position;
 
 @property (nonatomic, weak) id<DBPositionCellDelegate> delegate;
-@property (weak, nonatomic) UITableView *tableView;
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
 

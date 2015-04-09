@@ -50,7 +50,7 @@
     modifier.modifierName = modifierDictionary[@"title"];
     
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
-        [modifier.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict modifier:modifier]];
+        [modifier.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
     }
     // If no variants to choose, not create modifier
     if([modifier.items count] < 1)
@@ -68,8 +68,9 @@
     self.modifierId = modifierDictionary[@"modifier_id"];
     self.modifierName = modifierDictionary[@"title"];
     
+    self.items = [NSMutableArray new];
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
-        [self.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict modifier:self]];
+        [self.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
     }
     // If no variants to choose, return fail of synchronization
     if([self.items count] < 1)
@@ -82,6 +83,13 @@
     self.modifierDictionary = modifierDictionary;
     
     return YES;
+}
+
+- (void)selectItemAtIndex:(NSInteger)index{
+    if(index >= 0 && index < [self.items count]){
+        DBMenuPositionModifierItem *selectedItem = self.items[index];
+        self.selectedItem = selectedItem;
+    }
 }
 
 
@@ -99,6 +107,49 @@
     return modifier;
 }
 
+- (void)selectItemById:(NSString *)itemId{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", itemId];
+    DBMenuPositionModifierItem *item = [[self.items filteredArrayUsingPredicate:predicate] firstObject];
+    if(item){
+        self.selectedItem = item;
+    }
+}
+
+- (double)actualPrice{
+    if(self.modifierType == ModifierTypeGroup){
+        return self.selectedItem.itemPrice;
+    } else {
+        return self.selectedCount * self.modifierPrice;
+    }
+}
+
+- (BOOL)isSameModifier:(DBMenuPositionModifier *)object{
+    if(![object isKindOfClass:[DBMenuPositionModifier class]]){
+        return NO;
+    }
+    
+    return [self.modifierDictionary isEqualToDictionary:((DBMenuPositionModifier *)object).modifierDictionary];
+}
+
+- (BOOL)isEqual:(DBMenuPositionModifier *)object{
+    BOOL result = [self isSameModifier:object];
+    
+    if(result){
+        if(self.modifierType == ModifierTypeGroup){
+            result = result && [self.selectedItem isEqual:object.selectedItem];
+        } else {
+            result = result && (self.selectedCount == object.selectedCount);
+        }
+    }
+    
+    return result;
+}
+
+- (NSUInteger)hash{
+    return [self.modifierDictionary hash];
+}
+
+
 #pragma mark - NSCoding methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -107,12 +158,15 @@
         self.modifierType = [[aDecoder decodeObjectForKey:@"modifierType"] intValue];
         self.modifierId = [aDecoder decodeObjectForKey:@"modifierId"];
         self.modifierName = [aDecoder decodeObjectForKey:@"modifierName"];
+        self.modifierDictionary = [aDecoder decodeObjectForKey:@"modifierDictionary"];
+        
         self.minAmount = [[aDecoder decodeObjectForKey:@"minAmount"] integerValue];
         self.maxAmount = [[aDecoder decodeObjectForKey:@"maxAmount"] integerValue];
+        self.modifierPrice = [[aDecoder decodeObjectForKey:@"modifierPrice"] doubleValue];
+        self.selectedCount = [[aDecoder decodeObjectForKey:@"selectedCount"] intValue];
+        
         self.items = [aDecoder decodeObjectForKey:@"items"];
         self.selectedItem = [aDecoder decodeObjectForKey:@"selectedItem"];
-        self.modifierPrice = [[aDecoder decodeObjectForKey:@"modifierPrice"] doubleValue];
-        self.modifierDictionary = [aDecoder decodeObjectForKey:@"modifierDictionary"];
     }
     
     return self;
@@ -122,12 +176,15 @@
     [aCoder encodeObject:@(self.modifierType) forKey:@"modifierType"];
     [aCoder encodeObject:self.modifierId forKey:@"modifierId"];
     [aCoder encodeObject:self.modifierName forKey:@"modifierName"];
+    [aCoder encodeObject:self.modifierDictionary forKey:@"modifierDictionary"];
+    
     [aCoder encodeObject:@(self.minAmount) forKey:@"minAmount"];
     [aCoder encodeObject:@(self.maxAmount) forKey:@"maxAmount"];
+    [aCoder encodeObject:@(self.modifierPrice) forKey:@"modifierPrice"];
+    [aCoder encodeObject:@(self.selectedCount) forKey:@"selectedCount"];
+    
     [aCoder encodeObject:self.items forKey:@"items"];
     [aCoder encodeObject:self.selectedItem forKey:@"selectedItem"];
-    [aCoder encodeObject:@(self.modifierPrice) forKey:@"modifierPrice"];
-    [aCoder encodeObject:self.modifierDictionary forKey:@"modifierDictionary"];
 }
 
 #pragma mark - NSCopying

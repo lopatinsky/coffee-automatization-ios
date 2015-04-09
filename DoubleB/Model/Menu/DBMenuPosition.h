@@ -15,6 +15,7 @@
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;
 @property(nonatomic, readonly) double price;
+@property(nonatomic, readonly) double actualPrice;
 @property(strong, nonatomic, readonly) NSString *imageUrl;
 @property(strong, nonatomic, readonly) NSString *positionDescription;
 @property(nonatomic, readonly) double energyAmount;
@@ -30,5 +31,12 @@
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary;
 
 - (BOOL)availableInVenue:(Venue *)venue;
+
+- (void)selectItem:(NSString *)itemId forGroupModifier:(NSString *)modifierId;
+- (void)addSingleModifier:(NSString *)modifierId count:(NSInteger)count;
+
+// Returns equality of initial data
+// For full equality use isEqual:
+- (BOOL)isSamePosition:(DBMenuPosition *)object;
 
 @end
