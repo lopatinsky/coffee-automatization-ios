@@ -67,9 +67,22 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 */
 @property (nonatomic, readonly) BOOL validOrder;
 
-@property (nonatomic, readonly) NSUInteger positionsCount;
+/**
+ * Total price for order according to promo info from server
+ */
 @property (nonatomic) double totalPrice;
+
+/**
+ * Total price according only stored prices
+ */
 @property (nonatomic) double initialTotalPrice;
+
+/**
+ * Total price according to promo info(last updated) + price of positions not verified by server
+ */
+@property (nonatomic) double mixedTotalPrice;
+
+@property (nonatomic, readonly) NSUInteger positionsCount;
 @property (nonatomic, readonly) NSUInteger totalCount;
 @property (nonatomic, strong) NSArray *globalPromos;
 @property (nonatomic, strong) NSArray *globalErrors;

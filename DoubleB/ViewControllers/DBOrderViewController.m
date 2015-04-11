@@ -39,11 +39,11 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBar.topItem.title = @"";
+    self.edgesForExtendedLayout = UIRectEdgeTop;
     
     self.items = [NSMutableArray new];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
-    self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.rowHeight = 80;
     
     self.items = [NSMutableArray arrayWithArray:self.order.items];
@@ -68,8 +68,9 @@
     
     self.viewHeader = [[DBOrderViewHeader alloc] initWithOrder:self.order];
     
-    int footerHeight = self.tableView.frame.size.height - self.viewHeader.frame.size.height - self.navigationController.navigationBar.frame.size.height;
-    self.viewFooter = [[DBOrderViewFooter alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, footerHeight) order:self.order];
+//    int footerHeight = self.tableView.frame.size.height - self.viewHeader.frame.size.height - self.navigationController.navigationBar.frame.size.height;
+//    self.viewFooter = [[DBOrderViewFooter alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, footerHeight) order:self.order];
+    self.viewFooter = [[DBOrderViewFooter alloc] initWithOrder:self.order];
     self.tableView.tableFooterView = self.viewFooter;
 
     [self reloadStatusInfo:nil];
@@ -87,16 +88,10 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    //self.navigationController.delegate = nil;
-    
     if(self.scrollContentToBottom){
         [UIView animateWithDuration:1 animations:^{
             [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height)];
-        } completion:^(BOOL finished) {
-            [self updateMapView];
         }];
-    } else {
-        [self updateMapView];
     }
 }
 
@@ -104,14 +99,6 @@
     if (!parent) {
         [GANHelper analyzeEvent:@"back_arrow" label:self.order.orderId category:@"Order_info_screen"];
     }
-}
-
-- (void)updateMapView{
-    [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-        GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:location.coordinate coordinate:self.order.venue.location];
-        
-        [self.viewFooter.mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds]];
-    }];
 }
 
 - (void)reloadStatusInfo:(NSNotification *)notification {

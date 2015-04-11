@@ -29,6 +29,15 @@
     return self;
 }
 
+- (instancetype)initWithOrder:(Order *)order{
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderViewFooter" owner:self options:nil] firstObject];
+    
+    self.order = order;
+    [self configure];
+    
+    return self;
+}
+
 - (void)configure{
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Итого: %ld %@", nil), (long)self.order.total.integerValue, [Compatibility currencySymbol]]];
     [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, 6)];
@@ -39,13 +48,6 @@
     formatter.timeStyle = NSDateFormatterShortStyle;
     self.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), [formatter stringFromDate: self.order.createdAt]];
     self.labelAddress.text = [self.order.venue address];
-    
-    self.mapView.myLocationEnabled = YES;
-    [self.mapView setCamera:[GMSCameraPosition cameraWithLatitude:self.order.venue.location.latitude longitude:self.order.venue.location.longitude zoom:16]];
-    GMSMarker *marker = [GMSMarker markerWithPosition:self.order.venue.location];
-    marker.icon = [UIImage imageNamed:@"venue.png"];
-    marker.map = self.mapView;
-    
     
     self.labelTotal.userInteractionEnabled = YES;
     [self.labelTotal addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {

@@ -8,6 +8,7 @@
 
 #import "DBPositionGroupModifierItemCell.h"
 #import "DBMenuPositionModifierItem.h"
+#import "Compatibility.h"
 
 @interface DBPositionGroupModifierItemCell ()
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
@@ -39,7 +40,7 @@
     self.havePrice = havePrice;
     
     self.titleLabel.text = item.itemName;
-    self.priceLabel.text = [NSString stringWithFormat:@"%0.f р.", item.itemPrice];
+    self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
 }
 
 - (void)setHavePrice:(BOOL)havePrice{

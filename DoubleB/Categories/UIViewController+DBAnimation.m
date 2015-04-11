@@ -34,6 +34,8 @@
                      }
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];
+                         if(completion)
+                             completion();
                      }];
     
     [UIView animateWithDuration:0.2
@@ -45,9 +47,6 @@
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];
                      }];
-    
-    if(completion)
-        completion();
 }
 
 @end

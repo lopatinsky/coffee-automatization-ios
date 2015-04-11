@@ -15,6 +15,8 @@
 
 + (instancetype)sharedInstance;
 
+- (NSArray *)getMenuForVenue:(Venue *)venue;
+
 - (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
 - (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback;
 

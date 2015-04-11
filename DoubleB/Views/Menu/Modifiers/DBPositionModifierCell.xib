@@ -58,7 +58,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="modifier_arrow_icon.png" width="63" height="126"/>
+        <image name="modifier_arrow_icon.png" width="10" height="20"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

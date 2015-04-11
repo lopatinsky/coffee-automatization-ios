@@ -22,6 +22,10 @@
 
 @property(strong, nonatomic, readonly) NSDictionary *categoryDictionary;
 
+// Not stored data
+@property(nonatomic, readonly) BOOL hasImage;
+@property(nonatomic, readonly) BOOL categoryWithImages;
+
 + (instancetype)categoryFromResponseDictionary:(NSDictionary *)categoryDictionary;
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)categoryDictionary;
 

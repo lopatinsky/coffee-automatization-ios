@@ -8,6 +8,7 @@
 
 #import "DBPositionSingleModifierCell.h"
 #import "DBMenuPositionModifier.h"
+#import "Compatibility.h"
 
 #import "UIGestureRecognizer+BlocksKit.h"
 
@@ -107,7 +108,7 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     self.delegate = delegate;
     self.havePrice = havePrice;
     
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", self.modifier.modifierPrice];
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.modifier.modifierPrice, [Compatibility currencySymbol]];
     self.itemTitleLabel.text = self.modifier.modifierName;
     
     [self reload];

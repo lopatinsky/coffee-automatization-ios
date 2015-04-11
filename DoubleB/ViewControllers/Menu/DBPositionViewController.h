@@ -10,8 +10,14 @@
 
 @class DBMenuPosition;
 
+typedef NS_ENUM(NSUInteger, DBPositionViewControllerMode) {
+    DBPositionViewControllerModeMenuPosition = 0,
+    DBPositionViewControllerModeOrderPosition
+};
+
 @interface DBPositionViewController : UIViewController
 @property (strong, nonatomic) DBMenuPosition *position;
+@property (nonatomic) DBPositionViewControllerMode mode;
 
-- (instancetype)initWithPosition:(DBMenuPosition *)position;
+- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode;
 @end

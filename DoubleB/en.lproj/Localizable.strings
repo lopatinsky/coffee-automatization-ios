@@ -15,7 +15,11 @@
 "CardNotUniqueErrorMessage" = "Sorry, but card with the same number has already been added";
 "NoInternetConnectionErrorMessage" = "Sorry, check your internet connection and try again";
 
-"руб." = "rub.";
+"р." = "rub.";
+"г." = "g.";
+"ккал." = "kcal.";
+"мл." = "ml.";
+
 "%.1f км" = "%.1f km";
 "%.0f м" = "%.0f m";
 "%@ минут" = "%@ minutes";
@@ -27,6 +31,10 @@
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
 "Кофейни" = "Cafes";
+
+"Можно выбрать один вариант" = "You can select one option";
+"Можно выбрать несколько" = "You can select multiple options";
+"Добавки" = "Extra";
 
 "Пн-пт 8:00-20:00, сб-вс 11:00-18:00" = "Mon-Fri 8:00-20:00, Sat-Sun 11:00-18:00";
 

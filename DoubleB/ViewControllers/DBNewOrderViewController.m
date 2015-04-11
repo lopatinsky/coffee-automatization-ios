@@ -157,12 +157,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
 // ========= Configure TableView =========
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
-    self.tableView.separatorInset = UIEdgeInsetsZero;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     self.itemCells = [NSMutableArray new];
-    self.preferedHeightsForTableView = [[NSMutableArray alloc] init];
+    self.preferedHeightsForTableView = [NSMutableArray new];
     
 //    UINib *nib =[UINib nibWithNibName:@"DBOrderItemCell" bundle:[NSBundle mainBundle]];
 //    [self.tableView registerNib:nib forCellReuseIdentifier:@"DBOrderItemCell"];
@@ -1044,14 +1044,22 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBOrderItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
-    
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderItemCell" owner:self options:nil] firstObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    DBOrderItemCell *cell;
     
     OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
+    if(item.position.hasImage){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
+        
+        if (!cell) {
+            cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeFull];
+        }
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCompactCell"];
+        
+        if (!cell) {
+            cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeCompact];
+        }
+    }
     
     [cell configureWithOrderItem:item];
     cell.delegate = self;
@@ -1075,24 +1083,28 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row >= [self.preferedHeightsForTableView count]){
-        [self.preferedHeightsForTableView addObject:@(80)];
-        return 80;
+        CGFloat height;
+        OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
+        if(item.position.hasImage){
+            height = 100;
+        } else {
+            height = 60;
+        }
+        
+        [self.preferedHeightsForTableView addObject:@(height)];
+        return height;
     } else {
         return [self.preferedHeightsForTableView[indexPath.row] floatValue];
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 //    [GANHelper analyzeEvent:@"item_title_click" category:@"Order_screen"];
 //    
 //    DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 //    [cell showOrHideAdditionalInfo];
 //    [self reloadTableViewCellsHeight];
-    
-//    OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-//    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position];
-//    [self.navigationController pushViewController:positionVC animated:YES];
-}
+//}
 
 #pragma mark - UIGestureRecognizerDelegate
 
@@ -1177,6 +1189,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 //- (void)orderItemCellReloadHeight:(DBOrderItemCell *)cell{
 //    [self reloadTableViewCellsHeight];
 //}
+
+- (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
+    OrderItem *item = cell.orderItem;
+    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+    [self.navigationController pushViewController:positionVC animated:YES];
+}
 
 #pragma mark - CommentViewController
 

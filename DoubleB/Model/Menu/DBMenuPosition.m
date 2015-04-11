@@ -85,6 +85,14 @@
     }
 }
 
+- (BOOL)hasImage{
+    BOOL result = self.imageUrl != nil;
+    if(result){
+        result = result && self.imageUrl.length > 0;
+    }
+    return result;
+}
+
 - (void)selectItem:(NSString *)itemId forGroupModifier:(NSString *)modifierId{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifierId];
     DBMenuPositionModifier *modifier = [[self.groupModifiers filteredArrayUsingPredicate:predicate] firstObject];

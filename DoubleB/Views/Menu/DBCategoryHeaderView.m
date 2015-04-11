@@ -20,9 +20,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *categoryTitleLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
+@property (weak, nonatomic) IBOutlet UIView *arrowContainerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintArrowContainerViewWidth;
+
+
 @property(nonatomic) CGFloat initialHeight;
 @property(nonatomic) CGFloat initialCategoryImageContainerWidth;
-@property(nonatomic) CGFloat initialSelectionViewWidth;
+@property(nonatomic) CGFloat initialArrowContainerViewWidth;
 @end
 
 @implementation DBCategoryHeaderView
@@ -31,9 +35,11 @@
     self = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryHeaderView" owner:self options:nil] firstObject];
     self.initialHeight = self.frame.size.height;
     self.initialCategoryImageContainerWidth = self.constraintCategoryImageContainerWidth.constant;
+    self.initialArrowContainerViewWidth = self.constraintArrowContainerViewWidth.constant;
     
     self.category = category;
     [self changeState:state animated:NO];
+    [self setCategoryOpened:NO animated:NO];
     
     [self commonInit];
     
@@ -66,6 +72,8 @@
             [self.delegate db_categoryHeaderViewDidSelect:self];
         }
     }]];
+    
+    self.arrowContainerView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)changeState:(DBCategoryHeaderViewState)state animated:(BOOL)animated{
@@ -83,9 +91,11 @@
             if(state == DBCategoryHeaderViewStateCompact){
                 self.backgroundColor = [UIColor db_defaultColorWithAlpha:0.9];
                 self.categoryTitleLabel.textColor = [UIColor whiteColor];
+                self.categoryTitleLabel.textAlignment = NSTextAlignmentCenter;
             } else {
                 self.backgroundColor = [UIColor whiteColor];
                 self.categoryTitleLabel.textColor = [UIColor blackColor];
+                self.categoryTitleLabel.textAlignment = NSTextAlignmentLeft;
             }
         };
         
@@ -97,6 +107,25 @@
         } else {
             viewConfig(state);
         }
+    }
+}
+
+- (void)setCategoryOpened:(BOOL)categoryOpened animated:(BOOL)animated{
+    void (^viewConfig)() = ^void(){
+        if(categoryOpened){
+            self.constraintArrowContainerViewWidth.constant = 0;
+        } else {
+            self.constraintArrowContainerViewWidth.constant = self.initialArrowContainerViewWidth;
+        }
+    };
+    
+    if(animated){
+        [UIView animateWithDuration:0.3 animations:^{
+            viewConfig();
+            [self layoutIfNeeded];
+        }];
+    } else {
+        viewConfig();
     }
 }
 

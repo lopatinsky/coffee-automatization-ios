@@ -59,6 +59,23 @@
     _categoryDictionary = categoryDictionary;
 }
 
+- (BOOL)hasImage{
+    BOOL result = self.imageUrl != nil;
+    if(result){
+        result = result && self.imageUrl.length > 0;
+    }
+    return result;
+}
+
+- (BOOL)categoryWithImages{
+    BOOL result = NO;
+    for(DBMenuPosition *position in self.positions){
+        result = result || position.hasImage;
+    }
+    
+    return result;
+}
+
 - (void)sortArray:(NSMutableArray *)array byField:(NSString *)field{
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:field ascending:YES];
     [array sortUsingDescriptors:@[sortDescriptor]];

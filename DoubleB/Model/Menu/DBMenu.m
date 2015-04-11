@@ -36,14 +36,17 @@
     return self;
 }
 
-- (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+- (NSArray *)getMenuForVenue:(Venue *)venue{
     if(!self.categories){
         [self loadMenuFromDeviceMemory];
     }
     
-    [self updateMenuForVenue:venue remoteMenu:remoteMenuCallback];
-    
     return [self filterMenuForVenue:venue];
+}
+
+- (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+    [self updateMenuForVenue:venue remoteMenu:remoteMenuCallback];
+    return [self getMenuForVenue:venue];
 }
 
 - (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{

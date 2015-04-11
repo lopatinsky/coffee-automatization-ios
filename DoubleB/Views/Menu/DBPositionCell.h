@@ -11,6 +11,11 @@
 @class DBPositionCell;
 @class DBMenuPosition;
 
+typedef NS_ENUM(NSUInteger, DBPositionCellType) {
+    DBPositionCellTypeCompact = 0,
+    DBPositionCellTypeFull
+};
+
 @protocol DBPositionCellDelegate <NSObject>
 -(void)positionCellDidOrder:(DBPositionCell *)cell;
 
@@ -27,9 +32,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
-@property (strong, nonatomic) DBMenuPosition *position;
+@property (nonatomic, readonly) DBPositionCellType type;
+@property (strong, nonatomic, readonly) DBMenuPosition *position;
 
 @property (nonatomic, weak) id<DBPositionCellDelegate> delegate;
+
+- (instancetype)initWithType:(DBPositionCellType)type;
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
 

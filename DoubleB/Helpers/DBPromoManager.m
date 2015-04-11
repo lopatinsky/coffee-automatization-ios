@@ -37,8 +37,8 @@
 }
 
 - (void)notifyTotalSumObserver:(double)total{
-    if([self.updateTotalDelegate respondsToSelector:@selector(promoManager:didUpdateTotal:)]){
-        [self.updateTotalDelegate promoManager:self didUpdateTotal:total];
+    if([self.updateTotalDelegate respondsToSelector:@selector(promoManager:didUpdateInfoWithTotal:)]){
+        [self.updateTotalDelegate promoManager:self didUpdateInfoWithTotal:total];
     }
 }
 

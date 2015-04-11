@@ -67,7 +67,7 @@
     }
     
     self.modifierTitleLabel.text = self.modifier.modifierName;
-    self.additionalInfoLabel.text = @"(Можно выбрать один вариант)";
+    self.additionalInfoLabel.text = [NSString stringWithFormat:@"(%@)", NSLocalizedString(@"Можно выбрать один вариант", nil)];
     
     [self.tableView reloadData];
     [self adoptFrame];
@@ -82,8 +82,8 @@
         self.havePrice = self.havePrice || singModifier.modifierPrice > 0;
     }
     
-    self.modifierTitleLabel.text = @"Добавки";
-    self.additionalInfoLabel.text = @"(Можно выбрать несколько)";
+    self.modifierTitleLabel.text = NSLocalizedString(@"Добавки", nil);
+    self.additionalInfoLabel.text = [NSString stringWithFormat:@"(%@)", NSLocalizedString(@"Можно выбрать несколько", nil)];
     
     [self.tableView reloadData];
     [self adoptFrame];

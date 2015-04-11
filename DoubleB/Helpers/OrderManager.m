@@ -23,6 +23,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedBeverageMode";
 
 @interface OrderManager ()<DBPromoManagerUpdateTotalDelegate>
+// Items added after last promo update and not verified by server;
+@property (strong, nonatomic) NSMutableArray *itemsAddedAfterPromoUpdate;
 @end
 
 @implementation OrderManager
@@ -56,6 +58,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     if (self) {
         [DBPromoManager sharedManager].updateTotalDelegate = self;
         self.items = [NSMutableArray array];
+        self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
         _totalPrice = 0;
         
         _beverageMode = (DBBeverageMode)[[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastSelectedBeverageMode] intValue];
@@ -97,6 +100,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 
 - (void)purgePositions {
     self.items = [NSMutableArray array];
+    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
     self.venue = nil;
     self.comment = @"";
     self.location = nil;
@@ -106,6 +110,9 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 }
 
 - (void)overridePositions:(NSArray *)items {
+    self.items = [NSMutableArray array];
+    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
+    
     for (OrderItem *item in items) {
         OrderItem *newItem = [item copy];
         [self.items addObject:newItem];
@@ -133,6 +140,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 }
 
 - (NSInteger)addPosition:(DBMenuPosition *)position {
+    // Main logic
     DBMenuPosition *copyPosition = [position copy];
     OrderItem *itemWithSamePosition;
     
@@ -143,15 +151,22 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         }
     }
     
+    NSInteger currentCount;
     if (!itemWithSamePosition) {
         itemWithSamePosition = [[OrderItem alloc] initWithPosition:copyPosition];
         itemWithSamePosition.count = 1;
         [self.items addObject:itemWithSamePosition];
-        return 1;
+        currentCount = 1;
     } else {
         itemWithSamePosition.count ++;
-        return itemWithSamePosition.count;
+        currentCount = itemWithSamePosition.count;
     }
+    
+    // Maintain actual total
+    [self.itemsAddedAfterPromoUpdate addObject:copyPosition];
+    [self reloadMixedTotalPrice];
+    
+    return currentCount;
 }
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index{
@@ -221,6 +236,16 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     return total;
 }
 
+- (void)reloadMixedTotalPrice{
+    double total = _totalPrice;
+    
+    for(DBMenuPosition *position in self.itemsAddedAfterPromoUpdate){
+        total += position.actualPrice;
+    }
+    
+    self.mixedTotalPrice = total;
+}
+
 - (NSUInteger)totalCount {
     NSUInteger count = 0;
     for (OrderItem *item in self.items) {
@@ -266,10 +291,14 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 
 #pragma mark - DBPromoManagerDelegate
 
-- (void)promoManager:(DBPromoManager *)manager didUpdateTotal:(double)totalSum{
+- (void)promoManager:(DBPromoManager *)manager didUpdateInfoWithTotal:(double)totalSum{
     [self willChangeValueForKey:@"totalPrice"];
     _totalPrice = totalSum;
     [self didChangeValueForKey:@"totalPrice"];
+    
+    // clear items added after previous update
+    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
+    [self reloadMixedTotalPrice];
 }
 
 @end

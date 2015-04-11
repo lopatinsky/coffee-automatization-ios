@@ -38,11 +38,11 @@
 
 - (void)reloadTotal{
     double actualTotal = [OrderManager sharedManager].totalPrice;
-    NSString *actualTotalString = [NSString stringWithFormat:@"%ld %@", (long)actualTotal, [Compatibility currencySymbol]];
+    NSString *actualTotalString = [NSString stringWithFormat:@"%.0f %@", actualTotal, [Compatibility currencySymbol]];
     
     NSString *oldTotalString;
     if([OrderManager sharedManager].initialTotalPrice != actualTotal){
-        oldTotalString= [NSString stringWithFormat:@"%ld ", (long)[OrderManager sharedManager].initialTotalPrice];
+        oldTotalString= [NSString stringWithFormat:@"%.0f ", [OrderManager sharedManager].initialTotalPrice];
     } else {
         oldTotalString = @"";
     }

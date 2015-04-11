@@ -14,6 +14,7 @@
 #import "DBBarButtonItem.h"
 #import "DBPositionModifierCell.h"
 #import "DBPositionModifierPicker.h"
+#import "Compatibility.h"
 
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
@@ -25,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *positionModifiersLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *positionDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *priceButton;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightVolumeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *energyAmountLabel;
@@ -42,10 +44,11 @@
 
 @implementation DBPositionViewController
 
-- (instancetype)initWithPosition:(DBMenuPosition *)position{
+- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode{
     self = [super init];
     
     self.position = position;
+    self.mode = mode;
     
     return self;
 }
@@ -76,26 +79,35 @@
     [self reloadSelectedModifiers];
     self.positionDescriptionLabel.text = self.position.positionDescription;
     
-    self.priceLabel.backgroundColor = [UIColor db_defaultColor];
-    self.priceLabel.layer.cornerRadius = self.priceLabel.frame.size.height / 2;
-    self.priceLabel.layer.masksToBounds = YES;
-    self.priceLabel.textColor = [UIColor whiteColor];
-    [self reloadPrice];
-    
     self.weightVolumeLabel.text = @"";
     
     if(self.position.weight > 0){
-        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f г.", self.position.weight];
+        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.weight, NSLocalizedString(@"г.", nil)];
     }
     
     if(self.position.volume > 0){
-        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f мл.", self.position.volume];
+        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.volume, NSLocalizedString(@"мл.", nil)];
     }
     
     self.energyAmountLabel.text = @"";
     if(self.position.energyAmount > 0){
-        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f ккал.", self.position.energyAmount];
+        self.energyAmountLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.energyAmount, NSLocalizedString(@"ккал.", nil)];
     }
+    
+    if(self.mode == DBPositionViewControllerModeMenuPosition){
+        self.priceLabel.layer.cornerRadius = self.priceLabel.frame.size.height / 2;
+        self.priceLabel.layer.masksToBounds = YES;
+        self.priceLabel.backgroundColor = [UIColor db_defaultColor];
+        self.priceLabel.textColor = [UIColor whiteColor];
+        
+        self.priceButton.enabled = YES;
+    } else {
+        self.priceLabel.backgroundColor = [UIColor clearColor];
+        self.priceLabel.textColor = [UIColor db_defaultColor];
+        
+        self.priceButton.enabled = NO;
+    }
+    [self reloadPrice];
     
     self.imageSeparator.backgroundColor = [UIColor db_separatorColor];
     self.tableTopSeparator.backgroundColor = [UIColor db_separatorColor];
@@ -117,7 +129,7 @@
     for(DBMenuPositionModifier *modifier in self.position.groupModifiers){
         if(modifier.selectedItem){
             if(modifier.actualPrice > 0){
-                [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (%@)\n", modifier.actualPrice, modifier.selectedItem.itemName, modifier.modifierName]];
+                [modifiersString appendString:[NSString stringWithFormat:@"+%.0f %@ - %@ (%@)\n", modifier.actualPrice, [Compatibility currencySymbol], modifier.selectedItem.itemName, modifier.modifierName]];
             } else {
                 [modifiersString appendString:[NSString stringWithFormat:@"%@ (%@)\n", modifier.selectedItem.itemName, modifier.modifierName]];
             }
@@ -127,7 +139,7 @@
     for(DBMenuPositionModifier *modifier in self.position.singleModifiers){
         if(modifier.selectedCount > 0){
             if(modifier.actualPrice > 0){
-                [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (x%ld)\n", modifier.actualPrice, modifier.modifierName, (long)modifier.selectedCount]];
+                [modifiersString appendString:[NSString stringWithFormat:@"+%.0f %@ - %@ (x%ld)\n", modifier.actualPrice, [Compatibility currencySymbol], modifier.modifierName, (long)modifier.selectedCount]];
             } else {
                 [modifiersString appendString:[NSString stringWithFormat:@"%@ (x%ld)\n", modifier.modifierName, (long)modifier.selectedCount]];
             }
@@ -141,10 +153,10 @@
 }
 
 - (void)reloadPrice{
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", self.position.actualPrice];
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
 }
 
-- (IBAction)orderButtonClick:(id)sender {
+- (IBAction)priceButtonClick:(id)sender {
     [self.navigationController animateAddProductFromView:self.priceLabel completion:^{
         [[OrderManager sharedManager] addPosition:self.position];
     }];

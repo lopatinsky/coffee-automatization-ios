@@ -8,14 +8,25 @@
 
 #import <UIKit/UIKit.h>
 @class OrderItem;
-
 @class DBOrderItemCell;
+
+typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
+    DBOrderItemCellTypeCompact = 0,
+    DBOrderItemCellTypeFull
+};
+
 @protocol DBOrderItemCellDelegate <NSObject>
 @required
 - (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell;
 - (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell;
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell;
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell;
+
+- (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell;
+
+//- (void)db_orderItemCellDidStartSwipe:(DBOrderItemCell *)cell;
+//- (void)db_orderItemCellDidEndSwipe:(DBOrderItemCell *)cell;
+
 //@optional
 //- (void)orderItemCell:(DBOrderItemCellOld *)cell newPreferedHeight:(NSInteger)height;
 //- (void)orderItemCellReloadHeight:(DBOrderItemCellOld *)cell;
@@ -32,9 +43,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *modifiersLabel;
 
 @property (strong, nonatomic) OrderItem *orderItem;
+@property (nonatomic, readonly) DBOrderItemCellType type;
 @property (weak, nonatomic) id<DBOrderItemCellDelegate> delegate;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
+- (instancetype)initWithType:(DBOrderItemCellType)type;
 - (void)configureWithOrderItem:(OrderItem *)item;
 - (void)itemInfoChanged:(BOOL)animated;
 - (void)reloadCount;

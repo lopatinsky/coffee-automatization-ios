@@ -15,8 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTotal;
 @property (weak, nonatomic) IBOutlet UILabel *labelDate;
 @property (weak, nonatomic) IBOutlet UILabel *labelAddress;
-@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
 - (instancetype)initWithFrame:(CGRect)rect order:(Order *)order;
+- (instancetype)initWithOrder:(Order *)order;
 
 @end

@@ -26,7 +26,7 @@
     
     int imageSize = 16;
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (buttonOrder.frame.size.height - imageSize) / 2, imageSize, imageSize)];
-    self.imageView.image = [UIImage imageNamed:@"order.png"];
+    [self.imageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor whiteColor]];
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imageView.frame.size.width, 0, 1, buttonOrder.frame.size.height)];
@@ -40,7 +40,7 @@
     self = [super initWithCustomView:buttonOrder];
     
     self.orderManager = [OrderManager sharedManager];
-    [self.orderManager addObserver:self forKeyPath:@"totalPrice"
+    [self.orderManager addObserver:self forKeyPath:@"mixedTotalPrice"
                            options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                            context:nil];
     
@@ -49,7 +49,7 @@
 }
 
 -(void)dealloc{
-    [self.orderManager removeObserver:self forKeyPath:@"totalPrice"];
+    [self.orderManager removeObserver:self forKeyPath:@"mixedTotalPrice"];
 }
 
 -(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
@@ -65,7 +65,7 @@
 -(void)update{
     UIButton *button = (UIButton *)self.customView;
     NSAttributedString *string = [self attributedStringWithCount:self.orderManager.positionsCount
-                                                  withTotalPrice:self.orderManager.totalPrice];
+                                                  withTotalPrice:self.orderManager.mixedTotalPrice];
     [self.titleLabel setAttributedText:string];
     
     CGRect newTitleRect = self.titleLabel.frame;
@@ -81,7 +81,7 @@
                      ofObject:(id)object
                        change:(NSDictionary *)change
                       context:(void *)context{
-    if([keyPath isEqualToString:@"totalPrice"]){
+    if([keyPath isEqualToString:@"mixedTotalPrice"]){
         [self update];
     }
 }

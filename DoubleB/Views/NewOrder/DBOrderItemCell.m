@@ -21,7 +21,11 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leadingSpaceContentViewConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trailingSpaceContentViewConstraint;
-@property (nonatomic) CGFloat itemCellContentViewOffset;
+
+@property (nonatomic) CGFloat rightOriginBound;
+@property (nonatomic) CGFloat leftOriginBound;
+
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
@@ -30,22 +34,38 @@
 
 @implementation DBOrderItemCell
 
+- (instancetype)initWithType:(DBOrderItemCellType)type{
+    NSString *nibIdentifier;
+    if (type == DBOrderItemCellTypeCompact) {
+        nibIdentifier = @"DBOrderItemCompactCell";
+    } else {
+        nibIdentifier = @"DBOrderItemCell";
+    }
+    
+    self = [[[NSBundle mainBundle] loadNibNamed:nibIdentifier owner:self options:nil] firstObject];
+    _type = type;
+    
+    return self;
+}
+
 - (void)awakeFromNib
 {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.orderCellContentView.backgroundColor = [UIColor whiteColor];
+    
+    self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
     self.countLabel.textColor = [UIColor db_defaultColor];
     self.modifiersLabel.textColor = [UIColor db_defaultColor];
+    self.priceLabel.textColor = [UIColor db_defaultColor];
+    
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    self.tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.orderCellContentView addGestureRecognizer:self.tapGestureRecognizer];
     
     self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     self.panGestureRecognizer.cancelsTouchesInView = NO;
     [self.orderCellContentView addGestureRecognizer:self.panGestureRecognizer];
-    
-    [self.contentView bringSubviewToFront:self.orderCellContentView];
-    
-    self.itemCellContentViewOffset = 0;
-    
-    [self.positionImageView db_showDefaultImage];
     
     [self addEditButtons];
     
@@ -54,6 +74,13 @@
     self.inactivityView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.inactivityView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.orderCellContentView];
     self.inactivityView.hidden = YES;
+    
+    self.rightOriginBound = self.leadingSpaceContentViewConstraint.constant;
+    self.leftOriginBound = self.rightOriginBound - (self.lessButton.frame.size.width + self.moreButton.frame.size.width);
+    
+    if(self.type == DBOrderItemCellTypeFull){
+        [self.positionImageView db_showDefaultImage];
+    }
 }
 
 - (void)addEditButtons{
@@ -67,20 +94,14 @@
 }
 
 - (void)configureWithOrderItem:(OrderItem *)item{
+    self.leadingSpaceContentViewConstraint.constant = 0;
+    self.trailingSpaceContentViewConstraint.constant = 0;
+    
     self.orderItem = item;
     
     self.titleLabel.text = item.position.name;
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", item.position.actualPrice];
     [self reloadCount];
-    
-    if(item.position.imageUrl){
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:item.position.imageUrl]
-                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                             if(!error){
-                                                 [self.positionImageView db_hideDefaultImage];
-                                             }
-                                         }];
-    }
     
     NSMutableString *modifiersString =[[NSMutableString alloc] init];
     
@@ -107,6 +128,17 @@
         [modifiersString deleteCharactersInRange:NSMakeRange(modifiersString.length - 1, 1)];
     
     self.modifiersLabel.text = modifiersString;
+    
+    if(self.type == DBOrderItemCellTypeFull){
+        if(item.position.imageUrl){
+            [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:item.position.imageUrl]
+                                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                 if(!error){
+                                                     [self.positionImageView db_hideDefaultImage];
+                                                 }
+                                             }];
+        }
+    }
 }
 
 // Called after every update of promos
@@ -142,12 +174,12 @@
 }
 
 - (void)reloadCount{
-    self.countLabel.text = [NSString stringWithFormat:@"x%ld", self.orderItem.count];
+    self.countLabel.text = [NSString stringWithFormat:@"x%ld", (long)self.orderItem.count];
 }
 
 - (void)moveContentToOriginal{
-    self.leadingSpaceContentViewConstraint.constant = self.itemCellContentViewOffset;
-    self.trailingSpaceContentViewConstraint.constant = 0;
+    self.leadingSpaceContentViewConstraint.constant = self.rightOriginBound;
+    self.trailingSpaceContentViewConstraint.constant = -self.rightOriginBound;
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -158,8 +190,8 @@
 }
 
 - (void)moveContentToLeft{
-    self.leadingSpaceContentViewConstraint.constant = -(self.lessButton.frame.size.width + self.moreButton.frame.size.width);
-    self.trailingSpaceContentViewConstraint.constant = (self.lessButton.frame.size.width + self.moreButton.frame.size.width);
+    self.leadingSpaceContentViewConstraint.constant = self.leftOriginBound;
+    self.trailingSpaceContentViewConstraint.constant = -self.leftOriginBound;
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionCurveEaseOut
@@ -171,35 +203,47 @@
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
     if([self.delegate db_orderItemCellCanEdit:self]){
         CGPoint translation = [recognizer translationInView:self.contentView];
+
+        CGPoint velocity = [recognizer velocityInView:self.contentView];
+//        if(fabs(velocity.x) > fabs(velocity.y) && fabs(velocity.x) > 50){
+//            if([self.delegate respondsToSelector:@selector(db_orderItemCellDidStartSwipe:)]){
+//                [self.delegate db_orderItemCellDidStartSwipe:self];
+//            }
+//        } else {
+//            if(recognizer.state != UIGestureRecognizerStateEnded && recognizer.state != UIGestureRecognizerStateCancelled && recognizer.state != UIGestureRecognizerStateFailed ){
+//                return;
+//            }
+//        }
         
         double leftPositionX = recognizer.view.frame.origin.x + translation.x;
-        if(leftPositionX > self.itemCellContentViewOffset)
-            leftPositionX = self.itemCellContentViewOffset;
-        if(leftPositionX < self.itemCellContentViewOffset - (self.lessButton.frame.size.width + self.moreButton.frame.size.width))
-            leftPositionX = self.itemCellContentViewOffset - (self.lessButton.frame.size.width + self.moreButton.frame.size.width);
+
+        if(leftPositionX > self.rightOriginBound)
+            leftPositionX = self.rightOriginBound;
+        if(leftPositionX < self.leftOriginBound)
+            leftPositionX = self.leftOriginBound;
         
         self.leadingSpaceContentViewConstraint.constant = leftPositionX;
-        self.trailingSpaceContentViewConstraint.constant = self.itemCellContentViewOffset - leftPositionX;
+        self.trailingSpaceContentViewConstraint.constant = self.rightOriginBound - leftPositionX;
         [recognizer setTranslation:CGPointMake(0, 0) inView:self.contentView];
+
         [recognizer.view layoutIfNeeded];
         
-        if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled
-            || recognizer.state == UIGestureRecognizerStateFailed) {
-            CGPoint velocity = [recognizer velocityInView:self.contentView];
-            if(velocity.x < 0)
-                leftPositionX = self.itemCellContentViewOffset - (self.lessButton.frame.size.width + self.moreButton.frame.size.width);
-            else
-                leftPositionX = self.itemCellContentViewOffset;
+        if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled || recognizer.state == UIGestureRecognizerStateFailed) {
+            //            CGPoint velocity = [recognizer velocityInView:self.contentView];
             
-            self.leadingSpaceContentViewConstraint.constant = leftPositionX;
-            self.trailingSpaceContentViewConstraint.constant = self.itemCellContentViewOffset - leftPositionX;
-            [UIView animateWithDuration:0.25 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-                [recognizer.view layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                if(leftPositionX == self.itemCellContentViewOffset - (self.lessButton.frame.size.width + self.moreButton.frame.size.width))
-                    [self.delegate db_orderItemCellSwipe:self];
-            }];
+            if(velocity.x < 0){
+                [self moveContentToLeft];
+                [self.delegate db_orderItemCellSwipe:self];
+            } else {
+                [self moveContentToOriginal];
+            }
         }
+    }
+}
+
+- (IBAction)handleTap:(UITapGestureRecognizer *)recognizer{
+    if([self.delegate respondsToSelector:@selector(db_orderItemCellDidSelect:)]){
+        [self.delegate db_orderItemCellDidSelect:self];
     }
 }
 

@@ -27,6 +27,9 @@
 
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
 
+// Not stored data
+@property(nonatomic, readonly) BOOL hasImage;
+
 + (instancetype)positionFromResponseDictionary:(NSDictionary *)positionDictionary;
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary;
 

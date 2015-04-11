@@ -11,7 +11,7 @@
 @implementation Compatibility
 
 + (NSString *)currencySymbol {
-    return NSLocalizedString(@"руб.", nil);
+    return NSLocalizedString(@"р.", nil);
 }
 
 + (void)registerForNotifications {

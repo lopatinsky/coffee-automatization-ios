@@ -8,6 +8,7 @@
 
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
+#import "Compatibility.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -17,6 +18,20 @@
 
 @implementation DBPositionCell
 
+- (instancetype)initWithType:(DBPositionCellType)type{
+    NSString *nibIdentifier;
+    if (type == DBPositionCellTypeCompact) {
+        nibIdentifier = @"DBPositionCompactCell";
+    } else {
+        nibIdentifier = @"DBPositionCell";
+    }
+    
+    self = [[[NSBundle mainBundle] loadNibNamed:nibIdentifier owner:self options:nil] firstObject];
+    _type = type;
+    
+    return self;
+}
+
 - (void)awakeFromNib
 {
     self.contentView.backgroundColor = [UIColor whiteColor];
@@ -24,7 +39,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [self.positionImageView db_showDefaultImage];
+    [self.orderButton addTarget:self action:@selector(orderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     self.priceLabel.backgroundColor = [UIColor db_defaultColor];
     self.priceLabel.layer.cornerRadius = self.priceLabel.frame.size.height / 2;
@@ -32,30 +47,35 @@
     self.priceLabel.textColor = [UIColor whiteColor];
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
+    
+    if(self.type == DBPositionCellTypeFull){
+        [self.positionImageView db_showDefaultImage];
+    }
 }
 
 - (void)configureWithPosition:(DBMenuPosition *)position{
-    self.position = position;
+    _position = position;
     
     self.titleLabel.text = position.name;
-    self.descriptionLabel.text = position.positionDescription;
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", position.price, [Compatibility currencySymbol]];
     
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", position.price];
-    
-    if(position.weight == 0){
-        self.weightLabel.hidden = YES;
-    } else {
-        self.weightLabel.text = [NSString stringWithFormat:@"%.0f г", position.weight];
-        self.weightLabel.hidden = NO;
-    }
-    
-    if(position.imageUrl){
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
-                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                if(!error){
-                                                    [self.positionImageView db_hideDefaultImage];
-                                                }
-                                            }];
+    if(self.type == DBPositionCellTypeFull){
+        self.descriptionLabel.text = position.positionDescription;
+        if(position.weight == 0){
+            self.weightLabel.hidden = YES;
+        } else {
+            self.weightLabel.text = [NSString stringWithFormat:@"%.0f %@", position.weight, NSLocalizedString(@"г.", nil)];
+            self.weightLabel.hidden = NO;
+        }
+        
+        if(position.imageUrl){
+            [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
+                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                    if(!error){
+                                                        [self.positionImageView db_hideDefaultImage];
+                                                    }
+                                                }];
+        }
     }
 }
 

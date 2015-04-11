@@ -22,7 +22,7 @@
 
 @protocol DBPromoManagerUpdateTotalDelegate <NSObject>
 @required
-- (void)promoManager:(DBPromoManager *)manager didUpdateTotal:(double)totalSum;
+- (void)promoManager:(DBPromoManager *)manager didUpdateInfoWithTotal:(double)totalSum;
 @end
 
 @interface DBPromoManager : NSObject

@@ -39,10 +39,6 @@
 @property (strong, nonatomic) NSMutableArray *rowsPerSection;
 
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
-
-//@property (nonatomic, strong) UIPickerView *pickerView;
-//@property (nonatomic, strong) UIView *viewHolderPicker;
-//@property (nonatomic, strong) DBPositionCellOld *currentlyModifyingPositionCell;
 @end
 
 @implementation DBPositionsViewController
@@ -55,7 +51,6 @@
     
     //styling
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView.rowHeight = 120;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
     
@@ -88,26 +83,35 @@
 }
 
 - (void)loadMenu:(UIRefreshControl *)refreshControl{
-    if(!self.lastVenueId || ![self.lastVenueId isEqualToString:[OrderManager sharedManager].venue.venueId]){
-        self.lastVenueId = [OrderManager sharedManager].venue.venueId;
+    void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        [refreshControl endRefreshing];
         
-        self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue
-                                                        remoteMenu:^(BOOL success, NSArray *categories) {
-                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                            [refreshControl endRefreshing];
-                                                            
-                                                            if (success) {
-                                                                self.categories = categories;
-                                                                
-                                                                [self reloadTableView];
-                                                            }
-                                                            
-                                                            [self.tableView reloadData];
-                                                        }];
-        if (self.categories && [self.categories count] > 0){
+        if (success) {
+            self.categories = categories;
+            
             [self reloadTableView];
-        } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        }
+        
+        [self.tableView reloadData];
+    };
+    
+    if(refreshControl){
+        [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
+                                         remoteMenu:menuUpdateHandler];
+    } else {
+        if(!self.lastVenueId || ![self.lastVenueId isEqualToString:[OrderManager sharedManager].venue.venueId]){
+            self.lastVenueId = [OrderManager sharedManager].venue.venueId;
+            
+            self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue];
+            
+            if (self.categories && [self.categories count] > 0){
+                [self reloadTableView];
+            } else {
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
+                                                 remoteMenu:menuUpdateHandler];
+            }
         }
     }
 }
@@ -127,7 +131,7 @@
 }
 
 - (void)setupCategorySelectionBarButton{
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 20)];
     button.backgroundColor = [UIColor clearColor];
     [button setTitle:@"" forState:UIControlStateNormal];
     
@@ -159,55 +163,60 @@
         DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:category state:DBCategoryHeaderViewStateFull];
         headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
         headerView.delegate = self;
+        [headerView changeState:DBCategoryHeaderViewStateCompact animated:NO];
+        [headerView setCategoryOpened:YES animated:NO];
+        
         [headers addObject:headerView];
     }
     self.categoryHeaders = headers;
     
     self.rowsPerSection = [NSMutableArray new];
     for(DBMenuCategory *category in self.categories)
-        [self.rowsPerSection addObject:@(0)];
+        [self.rowsPerSection addObject:@([category.positions count])];
     
     [self.tableView reloadData];
 }
 
-- (void)openTableSection:(NSInteger)section{
-    DBCategoryHeaderView *headerView = self.categoryHeaders[section];
-    
-    NSMutableArray *indexPaths = [NSMutableArray new];
-    for(int i = 0; i < [headerView.category.positions count]; i++)
-        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:section]];
-    
-    self.rowsPerSection[section] = @([headerView.category.positions count]);
-    
-    [headerView changeState:DBCategoryHeaderViewStateCompact animated:YES];
-    
-    // Animate
-    [self.tableView beginUpdates];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-    
-    // Animate Scroll to selected section
-    // Dispatch helps not to get crash
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self scrollTableViewToSection:section];
-    });
-    [self.tableView endUpdates];
-}
-
-- (void)closeTableViewSection:(NSInteger)section{
-    DBCategoryHeaderView *headerView = self.categoryHeaders[section];
-    
-    NSMutableArray *indexPaths = [NSMutableArray new];
-    for(int i = 0; i < [headerView.category.positions count]; i++)
-        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:section]];
-    
-    self.rowsPerSection[section] = @0;
-    
-    [headerView changeState:DBCategoryHeaderViewStateFull animated:YES];
-    
-    [self.tableView beginUpdates];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
-}
+//- (void)openTableSection:(NSInteger)section{
+//    DBCategoryHeaderView *headerView = self.categoryHeaders[section];
+//    
+//    NSMutableArray *indexPaths = [NSMutableArray new];
+//    for(int i = 0; i < [headerView.category.positions count]; i++)
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+//    
+//    self.rowsPerSection[section] = @([headerView.category.positions count]);
+//    
+//    [headerView changeState:DBCategoryHeaderViewStateCompact animated:YES];
+//    [headerView setCategoryOpened:YES animated:YES];
+//    
+//    // Animate
+//    [self.tableView beginUpdates];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+//    
+//    // Animate Scroll to selected section
+//    // Dispatch helps not to get crash
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [self scrollTableViewToSection:section];
+//    });
+//    [self.tableView endUpdates];
+//}
+//
+//- (void)closeTableViewSection:(NSInteger)section{
+//    DBCategoryHeaderView *headerView = self.categoryHeaders[section];
+//    
+//    NSMutableArray *indexPaths = [NSMutableArray new];
+//    for(int i = 0; i < [headerView.category.positions count]; i++)
+//        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+//    
+//    self.rowsPerSection[section] = @0;
+//    
+//    [headerView changeState:DBCategoryHeaderViewStateFull animated:YES];
+//    [headerView setCategoryOpened:NO animated:YES];
+//    
+//    [self.tableView beginUpdates];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
+//    [self.tableView endUpdates];
+//}
 
 - (void)scrollTableViewToSection:(NSInteger)section{
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] atScrollPosition:UITableViewScrollPositionTop animated:YES];
@@ -225,15 +234,35 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBPositionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
-    if (!cell) {
-        cell = [[NSBundle mainBundle] loadNibNamed:@"DBPositionCell" owner:self options:nil][0];
-        cell.delegate = self;
+    DBPositionCell *cell;
+    
+    DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
+    if(category.categoryWithImages){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
+        if (!cell) {
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellTypeFull];
+        }
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
+        if (!cell) {
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellTypeCompact];
+        }
     }
+    
     DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
     [cell configureWithPosition:position];
+    cell.delegate = self;
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
+    if(category.categoryWithImages){
+        return 120;
+    } else {
+        return 44;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -265,7 +294,7 @@
                    category:@"Menu_screen"];
     
     
-    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position];
+    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
     [self.navigationController pushViewController:positionVC animated:YES];
 }
 
@@ -275,21 +304,21 @@
     [self cartAddPositionFromCell:cell];
 }
 
-#pragma mark - DBCatecoryHeaderViewDelegate
-
-- (void)db_categoryHeaderViewDidSelect:(DBCategoryHeaderView *)headerView{
-    NSUInteger section = [self.categories indexOfObject:headerView.category];
-    
-    if(section != NSNotFound && section < [self.categories count]){
-        if([self.rowsPerSection[section] intValue] == 0){
-            [self openTableSection:section];
-        } else {
-            [self closeTableViewSection:section];
-        }
-    }
-    
-    [self hideCategoryPicker];
-}
+//#pragma mark - DBCatecoryHeaderViewDelegate
+//
+//- (void)db_categoryHeaderViewDidSelect:(DBCategoryHeaderView *)headerView{
+//    NSUInteger section = [self.categories indexOfObject:headerView.category];
+//    
+//    if(section != NSNotFound && section < [self.categories count]){
+//        if([self.rowsPerSection[section] intValue] == 0){
+//            [self openTableSection:section];
+//        } else {
+//            [self closeTableViewSection:section];
+//        }
+//    }
+//    
+//    [self hideCategoryPicker];
+//}
 
 #pragma mark - DBCategoryPicker methods
 
@@ -347,7 +376,8 @@
     NSUInteger section = [self.categories indexOfObject:category];
     
     if(section != NSNotFound && section < [self.categories count]){
-        [self openTableSection:section];
+//        [self openTableSection:section];
+        [self scrollTableViewToSection:section];
         [self hideCategoryPicker];
     }
 }
