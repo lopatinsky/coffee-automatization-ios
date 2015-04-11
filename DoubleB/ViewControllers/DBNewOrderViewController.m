@@ -790,6 +790,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     CGRect rect = self.pickerHolder.frame;
     rect.origin.y = self.tabBarController.view.bounds.size.height;
+    rect.size.width = self.tabBarController.view.bounds.size.width;
     self.pickerHolder.frame = rect;
     
     [self.tabBarController.view addSubview:self.pickerHolder];

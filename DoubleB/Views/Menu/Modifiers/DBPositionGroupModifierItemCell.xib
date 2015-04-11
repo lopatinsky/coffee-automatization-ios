@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сыр пармезан" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="305-Bt-sqd">
-                        <rect key="frame" x="65" y="0.0" width="92.5" height="49.5"/>
+                        <rect key="frame" x="70" y="0.0" width="92.5" height="49.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -45,10 +45,10 @@
                         </variation>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-1r-mcI">
-                        <rect key="frame" x="15" y="0.0" width="50" height="49.5"/>
+                        <rect key="frame" x="15" y="0.0" width="55" height="49.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 р." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eny-q6-w5L">
-                                <rect key="frame" x="0.0" y="0.0" width="45" height="49.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 р." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eny-q6-w5L">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="49.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="TYh-HP-uGf"/>
                                 </constraints>
@@ -67,7 +67,7 @@
                             <constraint firstAttribute="bottom" secondItem="Eny-q6-w5L" secondAttribute="bottom" id="Tr7-CH-DlE"/>
                             <constraint firstItem="Eny-q6-w5L" firstAttribute="leading" secondItem="Xjv-1r-mcI" secondAttribute="leading" id="Txq-vh-A2d"/>
                             <constraint firstAttribute="trailing" secondItem="Eny-q6-w5L" secondAttribute="trailing" priority="500" constant="5" id="Zrb-sk-HTj"/>
-                            <constraint firstAttribute="width" constant="50" id="dtW-4k-n8Z"/>
+                            <constraint firstAttribute="width" constant="55" id="dtW-4k-n8Z"/>
                             <constraint firstItem="Eny-q6-w5L" firstAttribute="top" secondItem="Xjv-1r-mcI" secondAttribute="top" id="j4r-UI-6bm"/>
                         </constraints>
                     </view>

@@ -44,7 +44,7 @@
     self.items = [NSMutableArray new];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
-    self.tableView.rowHeight = 80;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.items = [NSMutableArray arrayWithArray:self.order.items];
     NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
@@ -215,18 +215,38 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBOrderItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
-    if (!cell) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderItemCell" owner:self options:nil] firstObject];
-    }
+    DBOrderItemCell *cell;
     
     OrderItem *item = self.items[indexPath.row];
+    if(item.position.hasImage){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
+        
+        if (!cell) {
+            cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeFull];
+        }
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCompactCell"];
+        
+        if (!cell) {
+            cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeCompact];
+        }
+    }
+    
     [cell configureWithOrderItem:item];
     cell.panGestureRecognizer.delegate = self;
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    OrderItem *item = self.items[indexPath.row];
+    if(item.position.hasImage){
+        return 100;
+    } else {
+        return  60;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -237,8 +257,6 @@
     UIView *header = self.viewHeader;
     return header;
 }
-
-#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [GANHelper analyzeEvent:@"order_item_title_click" label:self.order.orderId category:@"Order_info_screen"];

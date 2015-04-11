@@ -100,16 +100,16 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сыр пармезан" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl3-WI-pPR">
-                        <rect key="frame" x="65" y="0.0" width="130" height="49.5"/>
+                        <rect key="frame" x="70" y="0.0" width="125" height="49.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="czT-a9-9Dd">
-                        <rect key="frame" x="15" y="0.0" width="50" height="49.5"/>
+                        <rect key="frame" x="15" y="0.0" width="55" height="49.5"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 р." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aW-r6-Ddd">
-                                <rect key="frame" x="0.0" y="0.0" width="45" height="49.5"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 р." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aW-r6-Ddd">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="49.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="OzJ-AY-Lk6"/>
                                 </constraints>
@@ -128,7 +128,7 @@
                             <constraint firstAttribute="trailing" secondItem="9aW-r6-Ddd" secondAttribute="trailing" priority="500" constant="5" id="AWy-1F-HYH"/>
                             <constraint firstItem="9aW-r6-Ddd" firstAttribute="top" secondItem="czT-a9-9Dd" secondAttribute="top" id="Zu3-Qa-Iqa"/>
                             <constraint firstAttribute="bottom" secondItem="9aW-r6-Ddd" secondAttribute="bottom" id="emQ-M0-nDJ"/>
-                            <constraint firstAttribute="width" constant="50" id="kA1-Fd-eed"/>
+                            <constraint firstAttribute="width" constant="55" id="kA1-Fd-eed"/>
                             <constraint firstItem="9aW-r6-Ddd" firstAttribute="leading" secondItem="czT-a9-9Dd" secondAttribute="leading" id="ydj-44-exe"/>
                         </constraints>
                     </view>
