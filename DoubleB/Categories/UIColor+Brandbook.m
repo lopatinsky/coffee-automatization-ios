@@ -16,11 +16,12 @@
 }
 
 + (UIColor *)db_defaultColor {
-    return [UIColor colorWithRed:0 green:95/255.0 blue:78/255.0 alpha:1];
+    NSNumber *hex = [[DBCompanyInfo sharedInstance] db_companyDefaultColor];
+    return [UIColor fromHex:[hex intValue]];
 }
 
 + (UIColor *)db_defaultColorWithAlpha:(CGFloat)alpha{
-    return [UIColor colorWithRed:0 green:95/255.0 blue:78/255.0 alpha:alpha];
+    return [[self db_defaultColor] colorWithAlphaComponent:alpha];
 }
 
 + (UIColor *)db_separatorColor{

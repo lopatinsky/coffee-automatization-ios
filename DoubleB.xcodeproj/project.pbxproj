@@ -292,6 +292,7 @@
 		CB715AF41ACECACD00EA84FC /* UINavigationController+DBAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */; };
 		CB79E9801AD8AD10001693FE /* DBPositionCompactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559591AC9A9F000A166B9 /* DBPositionCompactCell.xib */; };
 		CB79E9821AD8AECC001693FE /* DBOrderItemCompactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB79E9811AD8AECC001693FE /* DBOrderItemCompactCell.xib */; };
+		CB79E9D51ADBD3A9001693FE /* DBCompanyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */; };
 		CBD2B3861AD69CB500D0FCF1 /* DBServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD2B3851AD69CB500D0FCF1 /* DBServerAPI.m */; };
 		CBD2B3891AD6BF9F00D0FCF1 /* DBOrderItemInactivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD2B3881AD6BF9F00D0FCF1 /* DBOrderItemInactivityView.m */; };
 		CBD2B38B1AD6BFAE00D0FCF1 /* DBOrderItemInactivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38A1AD6BFAE00D0FCF1 /* DBOrderItemInactivityView.xib */; };
@@ -581,6 +582,8 @@
 		CB73307E19FF72E0001B4B6D /* venues_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "venues_icon@2x.png"; sourceTree = "<group>"; };
 		CB73307F19FF72E0001B4B6D /* venues_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "venues_icon@3x.png"; sourceTree = "<group>"; };
 		CB79E9811AD8AECC001693FE /* DBOrderItemCompactCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBOrderItemCompactCell.xib; sourceTree = "<group>"; };
+		CB79E9D31ADBD3A9001693FE /* DBCompanyInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCompanyInfo.h; sourceTree = "<group>"; };
+		CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCompanyInfo.m; sourceTree = "<group>"; };
 		CB8675211A40A30C000923CA /* e-mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "e-mail.png"; sourceTree = "<group>"; };
 		CB8C91281A3053E200E58DC6 /* DBAboutPromoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAboutPromoViewController.h; sourceTree = "<group>"; };
 		CB8C91291A3053E200E58DC6 /* DBAboutPromoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAboutPromoViewController.m; sourceTree = "<group>"; };
@@ -1065,6 +1068,8 @@
 				CB05B79C1A6D369C006224BB /* DBShareHelper.m */,
 				CBD2B3841AD69CB500D0FCF1 /* DBServerAPI.h */,
 				CBD2B3851AD69CB500D0FCF1 /* DBServerAPI.m */,
+				CB79E9D31ADBD3A9001693FE /* DBCompanyInfo.h */,
+				CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1446,6 +1451,7 @@
 		C775B57B62F43E1ED63B3A30 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = Empatika;
 			};
 			buildConfigurationList = C775B3C498A4D49E708F8EAE /* Build configuration list for PBXProject "DoubleB" */;
@@ -1767,6 +1773,7 @@
 				CB60C0D71AC5AD2600D5E962 /* DBMastercardPromo.m in Sources */,
 				CBD2B3891AD6BF9F00D0FCF1 /* DBOrderItemInactivityView.m in Sources */,
 				CB60C1CD1AC967C300D5E962 /* DBCategoryHeaderView.m in Sources */,
+				CB79E9D51ADBD3A9001693FE /* DBCompanyInfo.m in Sources */,
 				CB60C0D81AC5AD2600D5E962 /* LocationHelper.m in Sources */,
 				CB60C0D91AC5AD2600D5E962 /* DBTabBarController.m in Sources */,
 				CB60C0DA1AC5AD2600D5E962 /* IHSecureStore.m in Sources */,
@@ -1954,8 +1961,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D6A7DA05256361BA8E34200C /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-CoffeeHostel";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-CoffeeHostel";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
@@ -1987,8 +1994,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1DF35059AA6127E742BBFFBA /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-CoffeeHostel";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-CoffeeHostel";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
@@ -2019,8 +2026,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BACB2123584A492265720E4D /* Pods.app store.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-CoffeeHostel";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-CoffeeHostel";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";

@@ -10,10 +10,4 @@
 
 @implementation UIView (Extension)
 
-// TODO: - end up
--(void)drawRect:(CGRect)rect {
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    
-}
-
 @end

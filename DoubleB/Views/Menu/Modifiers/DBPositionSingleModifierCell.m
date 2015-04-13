@@ -59,8 +59,10 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     
     self.state = SingleModifierCellStateEmpty;
     
+    @weakify(self)
     self.plusView.userInteractionEnabled = YES;
     [self.plusView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
         if(self.modifier.maxAmount > self.modifier.selectedCount){
             self.modifier.selectedCount++;
             
@@ -76,6 +78,7 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     
     self.minusView.userInteractionEnabled = YES;
     [self.minusView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
         if(self.modifier.selectedCount > self.modifier.minAmount){
             self.modifier.selectedCount--;
             if(self.modifier.selectedCount < 0) self.modifier.selectedCount = 0;
@@ -94,6 +97,7 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     
     self.countView.userInteractionEnabled = YES;
     [self.countView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
         if(self.state == SingleModifierCellStateClosed){
             [self setState:SingleModifierCellStateOpened animated:YES];
         }

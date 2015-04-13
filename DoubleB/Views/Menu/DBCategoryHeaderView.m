@@ -67,7 +67,9 @@
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
+    @weakify(self)
     [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
         if([self.delegate respondsToSelector:@selector(db_categoryHeaderViewDidSelect:)]){
             [self.delegate db_categoryHeaderViewDidSelect:self];
         }

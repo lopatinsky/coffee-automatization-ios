@@ -21,6 +21,7 @@
 
     #import "GANHelper.h"
     #import "DBConstants.h"
+    #import "DBCompanyInfo.h"
 
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+DBErrorAnimation.h"

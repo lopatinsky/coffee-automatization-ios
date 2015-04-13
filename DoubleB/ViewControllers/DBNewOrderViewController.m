@@ -383,7 +383,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
     } else {
-        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Буду пить в кафе", nil)];
+        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
     }
     
     self.orderFooter.labelTime.text = timeString;

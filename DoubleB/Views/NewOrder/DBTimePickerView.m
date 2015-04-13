@@ -29,6 +29,9 @@
                                   action:@selector(segmentedControlValueChanged:)
                         forControlEvents:UIControlEventValueChanged];
     
+    [self.typeSegmentedControl setTitle:NSLocalizedString(@"С собой", nil) forSegmentAtIndex:0];
+    [self.typeSegmentedControl setTitle:NSLocalizedString(@"На месте", nil) forSegmentAtIndex:1];
+    
     @weakify(self)
     UITapGestureRecognizer *tapGestureRecognizer = [UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         @strongify(self)

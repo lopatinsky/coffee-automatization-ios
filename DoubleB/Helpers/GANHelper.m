@@ -20,7 +20,7 @@
 }
 
 + (void)initialize {
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:@"UA-60202822-2"];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[[DBCompanyInfo sharedInstance] db_companyGoogleAnalyticsKey]];
     [[GAI sharedInstance] setDefaultTracker:tracker];
 }
 
