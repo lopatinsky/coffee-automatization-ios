@@ -18,7 +18,6 @@
 NSString *const kDBMastercardPromoUpdatedNotification = @"kDBMastercardPromoUpdatedNotification";
 
 NSString *const kDBDefaultsMastercardPromoInfo = @"kDBDefaultsMastercardPromoInfo";
-NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo";
 
 @interface DBMastercardPromo ()
 
@@ -55,13 +54,6 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
         } else {
             _expiredNews = [[NSMutableSet alloc] init];
         }
-        
-        NSDictionary *personalWalletInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsMastercardPromoInfo];
-        if(personalWalletInfo){
-            _walletBalance = [personalWalletInfo[@"walletBalance"] intValue];
-            _walletBalanceTitleText = personalWalletInfo[@"walletBalanceTitleText"];
-            _walletBalanceScreenText = personalWalletInfo[@"walletBalanceScreenText"];
-        }
     }
     
     return self;
@@ -77,11 +69,6 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
         [[DBAPIClient sharedClient] GET:@"promo_info"
                              parameters:@{@"client_id": @(clientId.intValue)}
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    // Use this endpoint for personal wallet
-                                    _walletBalanceTitleText = responseObject[@"wallet_screen_head"];
-                                    _walletBalanceScreenText = responseObject[@"wallet_screen_text"];
-                                    _walletBalance = [responseObject[@"wallet_balance"] intValue];
-                                    
                                     // Mastercard promo
                                     _isPromoAvailable = [responseObject[@"promo_enabled"] boolValue];
                                     _promoEndDate = [NSDate dateWithTimeIntervalSince1970:[responseObject[@"promo_end_date"] intValue]];
@@ -167,12 +154,6 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
                                 @"currentMugCount": @(_promoCurrentMugCount),
                                 @"expiredNews": _expiredNews ? [_expiredNews allObjects] : [NSArray array]};
     [[NSUserDefaults standardUserDefaults] setObject:promoInfo forKey:kDBDefaultsMastercardPromoInfo];
-    
-    // Save personal wallet info
-    NSDictionary *walletInfo = @{@"walletBalance": @(_walletBalance),
-                                @"walletBalanceTitleText": _walletBalanceTitleText,
-                                @"walletBalanceScreenText": _walletBalanceScreenText};
-    [[NSUserDefaults standardUserDefaults] setObject:walletInfo forKey:kDBDefaultsPersonalWalletInfo];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

@@ -7,12 +7,11 @@
 //
 
 #import "PersonalAccountViewController.h"
-#import "DBMastercardPromo.h"
+#import "DBPromoManager.h"
 #import "OrderManager.h"
 #import "Compatibility.h"
 
 @interface PersonalAccountViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *walletTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *walletDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *balanceTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
@@ -25,18 +24,27 @@
     [super viewDidLoad];
     self.title = NSLocalizedString(@"Личный счет", nil);
     
-    self.walletTitleLabel.text = @"Ваш личный счет";
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     self.walletDescriptionLabel.text = @"Это ваш личный счет, который пополняется на 5% от суммы заказа каждый раз, когда вы оплачиваете заказ картой. Накопленные баллы вы можете использовать для оплаты новых заказов.";
     
-    self.walletTitleLabel.text = [DBMastercardPromo sharedInstance].walletBalanceTitleText;
-    self.walletDescriptionLabel.text = [DBMastercardPromo sharedInstance].walletBalanceScreenText;
+//    self.walletTitleLabel.text = [DBMastercardPromo sharedInstance].walletBalanceTitleText;
+//    self.walletDescriptionLabel.text = [DBMastercardPromo sharedInstance].walletBalanceScreenText;
     
     self.balanceTitleLabel.text = NSLocalizedString(@"Ваш баланс:", nil);
     self.balanceTitleLabel.textColor = [UIColor db_defaultColor];
+    
+    [self reloadBalance];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.balanceLabel.text = [NSString stringWithFormat:@"%ld %@", (long)[DBMastercardPromo sharedInstance].walletBalance, [Compatibility currencySymbol]];
+    [[DBPromoManager sharedManager] synchronizeWalletInfo:^(int balance) {
+        [self reloadBalance];
+    }];
+}
+
+- (void)reloadBalance{
+    self.balanceLabel.text = [NSString stringWithFormat:@"%ld %@", (long)[DBPromoManager sharedManager].walletBalance, [Compatibility currencySymbol]];
 }
 
 @end

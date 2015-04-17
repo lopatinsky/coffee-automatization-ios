@@ -162,9 +162,8 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         currentCount = itemWithSamePosition.count;
     }
     
-    // Maintain actual total
     [self.itemsAddedAfterPromoUpdate addObject:copyPosition];
-    [self reloadMixedTotalPrice];
+    [self reloadTotal];
     
     return currentCount;
 }
@@ -175,6 +174,9 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     
     OrderItem *orderItem = self.items[index];
     orderItem.count++;
+    
+    [self reloadTotal];
+    
     return orderItem.count;
 
 }
@@ -188,6 +190,8 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     if(orderItem.count < 1){
         [self.items removeObject:orderItem];
     }
+    
+    [self reloadTotal];
     
     return orderItem.count;
 }
@@ -214,36 +218,57 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     return item;
 }
 
+- (OrderItem *)itemWithTemplatePosition:(DBMenuPosition *)templatePosition{
+    OrderItem *result;
+    for(OrderItem *item in self.items){
+        if([item.position isEqual:templatePosition]){
+            result = item;
+            break;
+        }
+    }
+    
+    return result;
+}
+
 - (void)removePositionAtIndex:(NSUInteger)index {
     [self.items removeObjectAtIndex:index];
 }
 
+- (void)reloadTotal{
+    // Reload initial total
+    double initialTotal = 0;
+    for (OrderItem *item in self.items) {
+        initialTotal += item.totalPrice;
+    }
+    self.initialTotalPrice = initialTotal;
+    
+    // Reload mixed total
+    double mixedTotal = _totalPrice;
+    for(DBMenuPosition *position in self.itemsAddedAfterPromoUpdate){
+        mixedTotal += position.actualPrice;
+    }
+    self.mixedTotalPrice = mixedTotal;
+    
+    // Check if order is empty
+    if(_initialTotalPrice == 0 && (_totalPrice != 0 || _mixedTotalPrice != 0)){
+        [self updateTotalPrice:0];
+    }
+}
+
 - (double)totalPrice {
     if(_totalPrice == 0){
-        return self.initialTotalPrice;
+        return _initialTotalPrice;
     } else {
         return _totalPrice;
     }
 }
 
-- (double)initialTotalPrice{
-    double total = 0;
-    int index = 0;
-    for (OrderItem *item in self.items) {
-        total += item.totalPrice;
-        index++;
-    }
-    return total;
-}
-
-- (void)reloadMixedTotalPrice{
-    double total = _totalPrice;
+- (void)updateTotalPrice:(double)totalPrice{
+    self.totalPrice = totalPrice;
+    [self didChangeValueForKey:@"totalPrice"];
     
-    for(DBMenuPosition *position in self.itemsAddedAfterPromoUpdate){
-        total += position.actualPrice;
-    }
-    
-    self.mixedTotalPrice = total;
+    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
+    [self reloadTotal];
 }
 
 - (NSUInteger)totalCount {
@@ -273,7 +298,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     }
     
     if (self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypePersonalAccount)]) {
-        if ([DBMastercardPromo sharedInstance].walletBalance >= self.totalPrice) {
+        if ([DBPromoManager sharedManager].walletBalance >= self.totalPrice) {
             self.paymentType = PaymentTypePersonalAccount;
         }
     }
@@ -292,13 +317,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 #pragma mark - DBPromoManagerDelegate
 
 - (void)promoManager:(DBPromoManager *)manager didUpdateInfoWithTotal:(double)totalSum{
-    [self willChangeValueForKey:@"totalPrice"];
-    _totalPrice = totalSum;
-    [self didChangeValueForKey:@"totalPrice"];
-    
-    // clear items added after previous update
-    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
-    [self reloadMixedTotalPrice];
+    [self updateTotalPrice:totalSum];
 }
 
 @end

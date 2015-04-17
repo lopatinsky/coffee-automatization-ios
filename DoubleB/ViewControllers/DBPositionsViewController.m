@@ -100,18 +100,25 @@
         [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if(!self.lastVenueId || ![self.lastVenueId isEqualToString:[OrderManager sharedManager].venue.venueId]){
-            self.lastVenueId = [OrderManager sharedManager].venue.venueId;
-            
-            self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue];
-            
-            if (self.categories && [self.categories count] > 0){
-                [self reloadTableView];
-            } else {
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
-                                                 remoteMenu:menuUpdateHandler];
+        if([OrderManager sharedManager].venue.venueId){
+            // Load menu for current Venue
+            if(!self.lastVenueId || ![self.lastVenueId isEqualToString:[OrderManager sharedManager].venue.venueId]){
+                self.lastVenueId = [OrderManager sharedManager].venue.venueId;
+                
+                self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue];
             }
+        } else {
+            // Load whole menu
+            self.categories = [[DBMenu sharedInstance] getMenu];
+        }
+        
+            
+        if (self.categories && [self.categories count] > 0){
+            [self reloadTableView];
+        } else {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
+                                             remoteMenu:menuUpdateHandler];
         }
     }
 }

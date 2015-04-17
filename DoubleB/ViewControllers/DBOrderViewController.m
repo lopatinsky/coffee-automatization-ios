@@ -19,17 +19,22 @@
 #import "DBNewOrderViewController.h"
 #import "Compatibility.h"
 #import "LocationHelper.h"
+#import "OrderManager.h"
+#import "DBOrderReturnView.h"
+
 #import "UIAlertView+BlocksKit.h"
 #import "UIGestureRecognizer+BlocksKit.h"
-#import "OrderManager.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface DBOrderViewController ()<UIGestureRecognizerDelegate>
+@interface DBOrderViewController ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBOrderReturnViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) DBOrderViewHeader *viewHeader;
 @property (strong, nonatomic) DBOrderViewFooter *viewFooter;
 
 @property (nonatomic, strong) NSMutableArray *items;
+
+@property (strong, nonatomic) DBOrderReturnView *returnCauseView;
 
 @end
 
@@ -43,6 +48,9 @@
     
     self.items = [NSMutableArray new];
     self.view.backgroundColor = [UIColor db_backgroundColor];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -68,8 +76,6 @@
     
     self.viewHeader = [[DBOrderViewHeader alloc] initWithOrder:self.order];
     
-//    int footerHeight = self.tableView.frame.size.height - self.viewHeader.frame.size.height - self.navigationController.navigationBar.frame.size.height;
-//    self.viewFooter = [[DBOrderViewFooter alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, footerHeight) order:self.order];
     self.viewFooter = [[DBOrderViewFooter alloc] initWithOrder:self.order];
     self.tableView.tableFooterView = self.viewFooter;
 
@@ -77,6 +83,8 @@
     
     NSString *notificationName = [kDBNotificationUpdatedOrder stringByAppendingFormat:@"_%@", self.order.orderId];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadStatusInfo:) name:notificationName object:nil];
+    
+    [self.tableView reloadData];
 }         
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -90,7 +98,10 @@
     
     if(self.scrollContentToBottom){
         [UIView animateWithDuration:1 animations:^{
-            [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height)];
+            double contentOffset = self.tableView.contentSize.height - self.tableView.frame.size.height;
+            if(contentOffset > self.tableView.contentOffset.y){
+                [self.tableView setContentOffset:CGPointMake(0, contentOffset)];
+            }
         }];
     }
 }
@@ -147,61 +158,69 @@
     self.viewFooter.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), [formatter stringFromDate: self.order.createdAt]];
 }
 
+- (void)cancelOrder{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DBAPIClient sharedClient] POST:@"return.php" parameters:@{@"order_id": self.order.orderId}
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 //NSLog(@"%@", responseObject);
+                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                 self.order.status = OrderStatusCanceled;
+                                 [[CoreDataHelper sharedHelper] save];
+                                 [self reloadCancelRepeatButton];
+                                 [self reloadStatusInfo:nil];
+                                 [GANHelper analyzeEvent:@"order_cancel_success"
+                                                   label:self.order.orderId
+                                                category:@"Order_info_screen"];
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 [GANHelper analyzeEvent:@"order_cancel_failure"
+                                                   label:[NSString stringWithFormat:@"%@,%@", self.order.orderId, error.localizedFailureReason]
+                                                category:@"Order_info_screen"];
+                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                 if (operation.response.statusCode == 412) {
+                                     [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+                                                                    message:operation.responseObject[@"description"]
+                                                          cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil handler:nil];
+                                 }
+                             }];
+    
+    [GANHelper analyzeEvent:@"order_cancel_click" label:self.order.orderId category:@"Order_info_screen"];
+}
+
 - (void)reloadCancelRepeatButton {
+    UIButton *button = [UIButton new];
+    button.contentEdgeInsets = UIEdgeInsetsMake(3, 0, 0, 0);
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
+    
     NSString *orderString = @"";
     if (self.order.status == OrderStatusNew) {
         orderString = NSLocalizedString(@"Отменить", nil);
+        [button addTarget:self action:@selector(clickCancel:) forControlEvents:UIControlEventTouchUpInside];
     } else {
         orderString = NSLocalizedString(@"Повторить", nil);
+        [button addTarget:self action:@selector(clickRepeat:) forControlEvents:UIControlEventTouchUpInside];
     }
-    CGSize size = [orderString sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:14]}];
-    UIButton *button = [UIButton new];
-    button.frame = CGRectMake(0, 0, size.width, 35);
-    button.contentEdgeInsets = UIEdgeInsetsMake(3, 0, 0, 0);
     [button setTitle:orderString forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
-    [button addTarget:self action:@selector(clickRepeat:) forControlEvents:UIControlEventTouchUpInside];
+    CGSize size = [orderString sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:14]}];
+    button.frame = CGRectMake(0, 0, size.width, 35);
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
-//click Repeat or Cancel
-- (void)clickRepeat:(UIButton *)sender {
-    if (self.order.status == OrderStatusNew) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBAPIClient sharedClient] POST:@"return.php" parameters:@{@"order_id": self.order.orderId}
-                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    //NSLog(@"%@", responseObject);
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    self.order.status = OrderStatusCanceled;
-                    [[CoreDataHelper sharedHelper] save];
-                    [self reloadCancelRepeatButton];
-                    [self reloadStatusInfo:nil];
-                    [GANHelper analyzeEvent:@"order_cancel_success"
-                                      label:self.order.orderId
-                                   category:@"Order_info_screen"];
-                }
-                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                    NSLog(@"%@", error);
-                    [GANHelper analyzeEvent:@"order_cancel_failure"
-                                      label:[NSString stringWithFormat:@"%@,%@", self.order.orderId, error.localizedFailureReason]
-                                   category:@"Order_info_screen"];
-                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                    if (operation.response.statusCode == 412) {
-                        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                                       message:operation.responseObject[@"description"]
-                                             cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil handler:nil];
-                    }
-                }];
+- (void)clickCancel:(UIButton *)sender{
+    self.returnCauseView = [DBOrderReturnView new];
+    self.returnCauseView.delegate = self;
+    [self.returnCauseView showOnView:self.navigationController.view];
+}
 
-        [GANHelper analyzeEvent:@"order_cancel_click" label:self.order.orderId category:@"Order_info_screen"];
-    } else {
-        DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
-        newOrderController.repeatedOrder = self.order;
-        [self.navigationController pushViewController:newOrderController animated:YES];
-        
-        [GANHelper analyzeEvent:@"order_repeat_click" label:self.order.orderId category:@"Order_info_screen"];
-    }
+- (void)clickRepeat:(UIButton *)sender {
+    DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
+    newOrderController.repeatedOrder = self.order;
+    [self.navigationController pushViewController:newOrderController animated:YES];
+    
+    [GANHelper analyzeEvent:@"order_repeat_click" label:self.order.orderId category:@"Order_info_screen"];
 }
 
 #pragma mark - Table view data source
@@ -266,6 +285,22 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
+}
+
+#pragma mark - DBOrderReturnViewDelegate
+
+- (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectCause:(DBOrderReturnCause)cause{
+    [self cancelOrder];
+    [self.returnCauseView hide];
+}
+
+- (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectOtherCause:(NSString *)cause{
+    [self cancelOrder];
+    [self.returnCauseView hide];
+}
+
+- (void)db_orderReturnViewDidCancel:(DBOrderReturnView *)view{
+    [self.returnCauseView hide];
 }
 
 @end

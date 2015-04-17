@@ -302,6 +302,30 @@
 }
 
 
+#pragma mark - Wallet
+
++ (void)getWalletInfo:(void(^)(BOOL success, NSDictionary *response))callback{
+    NSString *clientId = [IHSecureStore sharedInstance].clientId;
+    if(!clientId){
+        if(callback)
+            callback(NO, nil);
+        return;
+    }
+    
+    [[DBAPIClient sharedClient] GET:@"wallet/balance"
+                         parameters:@{@"client_id": clientId}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if(callback)
+                                    callback(YES, responseObject);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
+
 #pragma mark - Order assembly helpers
 
 + (NSArray *)assembleOrderItems{

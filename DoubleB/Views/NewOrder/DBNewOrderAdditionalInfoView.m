@@ -56,7 +56,7 @@
 }
 
 - (void)show:(void(^)())animation completion:(void(^)())completion{
-    int errorViewHeight = 40 * [self.messages count];
+    int errorViewHeight = 44 * [self.messages count];
     
     self.hidden = NO;
     if(animation){
@@ -98,7 +98,7 @@
 #pragma mark UITableViewDelegate
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 40.0;
+    return 44.0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

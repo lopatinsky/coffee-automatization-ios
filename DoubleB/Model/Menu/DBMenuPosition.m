@@ -26,7 +26,6 @@
 
 @property(strong, nonatomic) NSDictionary *productDictionary;
 
-
 @property(strong, nonatomic) NSArray *venuesRestrictions;
 @end
 
@@ -74,7 +73,6 @@
     _energyAmount = [[positionDictionary getValueForKey:@"kal"] doubleValue];
     _weight = [[positionDictionary getValueForKey:@"weight"] doubleValue];
     _volume = [[positionDictionary getValueForKey:@"volume"] doubleValue];
-    
     _venuesRestrictions = [positionDictionary[@"restrictions"] getValueForKey:@"venues"] ?: @[];
     
     _productDictionary = positionDictionary;
@@ -217,6 +215,7 @@
         [copyPosition.singleModifiers addObject:[modifier copyWithZone:zone]];
     
     copyPosition.productDictionary = [self.productDictionary copy];
+    copyPosition.venuesRestrictions = [self.venuesRestrictions copy];
     
     return copyPosition;
 }

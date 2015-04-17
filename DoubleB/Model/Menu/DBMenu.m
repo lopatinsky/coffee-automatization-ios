@@ -36,6 +36,14 @@
     return self;
 }
 
+- (NSArray *)getMenu{
+    if(!self.categories){
+        [self loadMenuFromDeviceMemory];
+    }
+    
+    return self.categories;
+}
+
 - (NSArray *)getMenuForVenue:(Venue *)venue{
     if(!self.categories){
         [self loadMenuFromDeviceMemory];
@@ -64,7 +72,7 @@
 }
 
 - (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [[DBAPIClient sharedClient] GET:@"http://pastadeli.1.doubleb-automation-production.appspot.com/api/menu.php"
+    [[DBAPIClient sharedClient] GET:@"menu.php"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);

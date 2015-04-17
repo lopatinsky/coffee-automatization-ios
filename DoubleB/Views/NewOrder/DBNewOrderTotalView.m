@@ -19,19 +19,24 @@
                                    forKeyPath:@"totalPrice"
                                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                                       context:nil];
+    [[OrderManager sharedManager] addObserver:self
+                                   forKeyPath:@"initialTotalPrice"
+                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                                      context:nil];
     
     [self reloadTotal];
 }
 
 - (void)dealloc{
     [[OrderManager sharedManager] removeObserver:self forKeyPath:@"totalPrice"];
+    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"initialTotalPrice"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context{
-    if([keyPath isEqualToString:@"totalPrice"]){
+    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"initialTotalPrice"]){
         [self reloadTotal];
     }
 }

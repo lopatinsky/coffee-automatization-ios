@@ -31,8 +31,14 @@
 @property (weak, nonatomic) id<DBPromoManagerUpdateTotalDelegate> updateTotalDelegate;
 @property (nonatomic) BOOL validOrder;
 
+//@property(nonatomic, strong, readonly) NSString *walletBalanceTitleText;
+//@property(nonatomic, strong, readonly) NSString *walletBalanceScreenText;
+@property(nonatomic, readonly) NSInteger walletBalance;
+
 + (instancetype)sharedManager;
 
 - (void)updateInfo;
+
+- (void)synchronizeWalletInfo:(void(^)(int balance))callback;
 
 @end

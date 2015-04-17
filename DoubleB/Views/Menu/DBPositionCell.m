@@ -57,7 +57,7 @@
     _position = position;
     
     self.titleLabel.text = position.name;
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", position.price, [Compatibility currencySymbol]];
+    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", position.actualPrice, [Compatibility currencySymbol]];
     
     if(self.type == DBPositionCellTypeFull){
         self.descriptionLabel.text = position.positionDescription;
@@ -102,7 +102,7 @@
                           delay:0
                         options:UIViewAnimationOptionAllowUserInteraction
                      animations:^{
-                         view.transform = CGAffineTransformMakeScale(1.7, 1.7);
+                         view.transform = CGAffineTransformMakeScale(1.5, 1.5);
                      }
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];

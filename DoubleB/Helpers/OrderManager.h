@@ -106,6 +106,7 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 
 - (OrderItem *)itemAtIndex:(NSUInteger)index;
 - (OrderItem *)itemWithPositionId:(NSString *)positionId;
+- (OrderItem *)itemWithTemplatePosition:(DBMenuPosition *)templatePosition;
 - (void)removePositionAtIndex:(NSUInteger)index;
 - (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index;
 

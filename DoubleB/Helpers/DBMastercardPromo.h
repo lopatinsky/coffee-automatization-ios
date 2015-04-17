@@ -20,10 +20,6 @@ extern NSString *const kDBMastercardPromoUpdatedNotification;
 @property(nonatomic, readonly) BOOL onlyForMastercard;
 @property(nonatomic) NSDictionary *lastNews;
 
-@property(nonatomic, strong, readonly) NSString *walletBalanceTitleText;
-@property(nonatomic, strong, readonly) NSString *walletBalanceScreenText;
-@property(nonatomic, readonly) NSInteger walletBalance;
-
 + (instancetype)sharedInstance;
 
 - (BOOL)promoIsAvailable;

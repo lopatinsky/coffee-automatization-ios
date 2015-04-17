@@ -17,6 +17,7 @@
 #import "DBAPIClient.h"
 #import "DBCardCell.h"
 #import "DBMastercardPromo.h"
+#import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "Compatibility.h"
 
@@ -183,9 +184,9 @@
     
     // Personal account payment type
     if (indexPath.section == 1) {
-        cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@: %ld %@", NSLocalizedString(@"Личный счет", nil), (long)[DBMastercardPromo sharedInstance].walletBalance, [Compatibility currencySymbol]];
+        cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@: %ld %@", NSLocalizedString(@"Личный счет", nil), (long)[DBPromoManager sharedManager].walletBalance, [Compatibility currencySymbol]];
         
-        if([DBMastercardPromo sharedInstance].walletBalance >= [OrderManager sharedManager].totalPrice){
+        if([DBPromoManager sharedManager].walletBalance >= [OrderManager sharedManager].totalPrice && [OrderManager sharedManager].totalPrice > 0){
             [cell.cardIconImageView templateImageWithName:@"payment"];
             cell.cardTitleLabel.textColor = [UIColor blackColor];
             if ([OrderManager sharedManager].paymentType == PaymentTypePersonalAccount) {

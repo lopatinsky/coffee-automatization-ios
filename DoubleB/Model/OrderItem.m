@@ -77,7 +77,7 @@
 }
 
 - (double)totalPrice{
-    return self.position.price * self.count;
+    return self.position.actualPrice * self.count;
 }
 
 

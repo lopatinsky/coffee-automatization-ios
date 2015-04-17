@@ -10,6 +10,10 @@
 #import "DBServerAPI.h"
 #import "IHSecureStore.h"
 #import "OrderManager.h"
+#import "DBMenu.h"
+#import "DBMenuPosition.h"
+
+NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo";
 
 @interface DBPromoManager ()
 @property (strong, nonatomic) NSNumber *targetTime;
@@ -70,7 +74,18 @@
                     [itemPromos addObject:itemPromo[@"text"]];
                 }
                 
-                [itemsInfo addObject:@{@"id": item[@"id"],
+                DBMenuPosition *templatePosition = [[[DBMenu sharedInstance] findPositionWithId:item[@"id"]] copy];
+                
+                for(NSDictionary *groupModifierItem in item[@"group_modifiers"]){
+                    [templatePosition selectItem:groupModifierItem[@"choice"]
+                                forGroupModifier:groupModifierItem[@"id"]];
+                }
+                
+                for(NSDictionary *singleModifier in item[@"single_modifiers"]){
+                    [templatePosition addSingleModifier:singleModifier[@"id"] count:[singleModifier[@"quantity"] intValue]];
+                }
+                
+                [itemsInfo addObject:@{@"item": templatePosition,
                                        @"promos": itemPromos,
                                        @"errors": item[@"errors"]}];
             }
@@ -118,6 +133,36 @@
             }
         }
     });*/
+}
+
+
+#pragma mark - Wallet
+
+- (void)synchronizeWalletInfo:(void(^)(int balance))callback{
+    [DBServerAPI getWalletInfo:^(BOOL success, NSDictionary *response) {
+        if(success){
+            double walletBalance = [response[@"balance"] doubleValue];
+            
+            NSMutableDictionary *walletInfo = [NSMutableDictionary new];
+            walletInfo[@"balance"] = @(walletBalance);
+            
+            [self saveWalletInfo:walletInfo];
+            
+            if(callback)
+                callback(walletBalance);
+        }
+    }];
+}
+
+- (NSInteger)walletBalance{
+    NSDictionary *walletInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsPersonalWalletInfo];
+    
+    return [walletInfo[@"balance"] doubleValue];
+}
+
+- (void)saveWalletInfo:(NSDictionary *)info{
+    [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsPersonalWalletInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

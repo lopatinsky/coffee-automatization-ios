@@ -19,4 +19,6 @@
 
 + (void)createNewOrder:(void(^)(Order *order))success
                failure:(void(^)(NSString *errorTitle, NSString *errorMessage))failure;
+
++ (void)getWalletInfo:(void(^)(BOOL success, NSDictionary *response))callback;
 @end

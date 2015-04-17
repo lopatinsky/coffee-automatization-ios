@@ -70,6 +70,7 @@
     [self addEditButtons];
     
     self.inactivityView = [DBOrderItemInactivityView new];
+    self.inactivityView.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.7f];
     [self.orderCellContentView addSubview:self.inactivityView];
     self.inactivityView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.inactivityView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.orderCellContentView];

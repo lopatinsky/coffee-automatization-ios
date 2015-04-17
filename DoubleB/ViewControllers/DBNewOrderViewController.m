@@ -258,6 +258,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     });
     
     [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
+    [[DBPromoManager sharedManager] synchronizeWalletInfo:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -453,7 +454,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             break;
             
         case PaymentTypePersonalAccount:
-            if ([OrderManager sharedManager].totalPrice > [DBMastercardPromo sharedInstance].walletBalance) {
+            if ([OrderManager sharedManager].totalPrice > [DBPromoManager sharedManager].walletBalance) {
                 [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
                 [self reloadCard];
             } else {
@@ -941,8 +942,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     for(NSDictionary *itemInfo in itemsInfo){
-        NSString *itemId = itemInfo[@"id"];
-        OrderItem *item = [[OrderManager sharedManager] itemWithPositionId:itemId];
+        DBMenuPosition *templatePosition = itemInfo[@"item"];
+        OrderItem *item = [[OrderManager sharedManager] itemWithTemplatePosition:templatePosition];
         item.notes = itemInfo[@"promos"];
         item.errors = itemInfo[@"errors"];
         

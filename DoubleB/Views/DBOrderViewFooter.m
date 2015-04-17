@@ -33,6 +33,9 @@
     self = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderViewFooter" owner:self options:nil] firstObject];
     
     self.order = order;
+//    CGRect rect = self.frame;
+//    rect.size.height = 100;
+//    self.frame = rect;
     [self configure];
     
     return self;
@@ -49,18 +52,22 @@
     self.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), [formatter stringFromDate: self.order.createdAt]];
     self.labelAddress.text = [self.order.venue address];
     
+    @weakify(self);
     self.labelTotal.userInteractionEnabled = YES;
     [self.labelTotal addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self);
         [GANHelper analyzeEvent:@"order_price_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
     
     self.labelAddress.userInteractionEnabled = YES;
     [self.labelAddress addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self);
         [GANHelper analyzeEvent:@"order_delivery_cafe_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
     
     self.labelDate.userInteractionEnabled = YES;
     [self.labelDate addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self);
         [GANHelper analyzeEvent:@"order_delivery_time_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
 }

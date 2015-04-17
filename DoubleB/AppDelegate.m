@@ -32,8 +32,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     //==================== Frameworks initialization ====================
-    [Parse setApplicationId:@"byicnKnVhYEbKs7c9IV0zhzeqSVOsRRadsRSrGem"
-                  clientKey:@"LjoeKu93HRYvJCuzgv1NCqZknag6FpmO078k1QIP"];
+    [Parse setApplicationId:@"sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe"
+                  clientKey:@"KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w"];
     
     [Fabric with:@[CrashlyticsKit]];
     

@@ -26,7 +26,7 @@
 
 @property (nonatomic) BOOL havePrice;
 
-@property (strong, nonatomic) UIView *parentView;
+@property (weak, nonatomic) UIView *parentView;
 @property (strong, nonatomic) UIImageView *overlayView;
 
 @end
