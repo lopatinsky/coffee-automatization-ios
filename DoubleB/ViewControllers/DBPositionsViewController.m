@@ -7,6 +7,7 @@
 //
 
 #import "DBPositionsViewController.h"
+#import "DBBarButtonItem.h"
 #import "DBPositionViewController.h"
 #import "MBProgressHUD.h"
 #import "DBMenu.h"
@@ -48,6 +49,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Меню", nil);
+    self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveBack)];
     
     //styling
     self.view.backgroundColor = [UIColor whiteColor];
@@ -123,14 +125,8 @@
     }
 }
 
-- (void)clickOrder:(id)sender {
-    [GANHelper analyzeEvent:@"order_basket_click"
-                      label:[NSString stringWithFormat:@"%lu", (unsigned long) [OrderManager sharedManager].positionsCount]
-                   category:@"Menu_screen"];
-
-    DBNewOrderViewController *newOrderViewController = [DBNewOrderViewController new];
-    newOrderViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:newOrderViewController animated:YES];
+- (void)moveBack {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cartAddPositionFromCell:(DBPositionCell *)cell{

@@ -9,8 +9,6 @@
 #import "DBOrderReturnView.h"
 #import "DBPopupTextView.h"
 
-#import "UIView+FLKAutolayout.h"
-
 @interface DBOrderReturnView ()<UITextViewDelegate, DBPopupTextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 

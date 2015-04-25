@@ -99,14 +99,19 @@
                                              value:[IHSecureStore sharedInstance].clientId];
     }
     
-    if([[DBClientInfo sharedInstance] validClientName]){
+    if([[DBClientInfo sharedInstance] validClientPhone]){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:2]
+                                             value:[DBClientInfo sharedInstance].clientPhone];
+    }
+    
+    if([[DBClientInfo sharedInstance] validClientName]){
+        [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:3]
                                              value:[DBClientInfo sharedInstance].clientName];
     }
     
-    if([[DBClientInfo sharedInstance] validClientPhone]){
+    if([[DBClientInfo sharedInstance] validClientMail]){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:4]
-                                             value:[DBClientInfo sharedInstance].clientPhone];
+                                             value:[DBClientInfo sharedInstance].clientMail];
     }
 #endif
 }

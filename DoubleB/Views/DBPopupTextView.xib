@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,57 +12,66 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzm-05-gcb">
-                    <rect key="frame" x="15" y="41" width="290" height="166"/>
+                    <rect key="frame" x="15" y="40" width="290" height="167"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zs-0f-aNz">
-                    <rect key="frame" x="40" y="10" width="240" height="21"/>
+                    <rect key="frame" x="35" y="10" width="245" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="yOy-UZ-5Sx"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ysp-u3-p9l">
-                    <rect key="frame" x="10" y="10" width="20" height="20"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="back_arrow_icon@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ysp-u3-p9l">
+                    <rect key="frame" x="10" y="9.5" width="15" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="0nx-Da-KGs"/>
-                        <constraint firstAttribute="width" constant="20" id="Nj2-s9-Yoj"/>
+                        <constraint firstAttribute="width" constant="15" id="Nj2-s9-Yoj"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vp4-iY-gYk">
-                    <rect key="frame" x="290" y="10" width="20" height="20"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OK" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FI7-rH-zNT">
+                    <rect key="frame" x="280" y="11" width="30" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="7oM-cX-wRy"/>
-                        <constraint firstAttribute="width" constant="20" id="rHG-iw-e3q"/>
+                        <constraint firstAttribute="width" constant="30" id="2tq-Yy-1iB"/>
+                        <constraint firstAttribute="height" constant="20" id="GSm-Dv-XWA"/>
                     </constraints>
-                </imageView>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="0Zs-0f-aNz" firstAttribute="centerY" secondItem="FI7-rH-zNT" secondAttribute="centerY" constant="-1" id="8iG-1x-38R"/>
                 <constraint firstItem="uzm-05-gcb" firstAttribute="leading" secondItem="sx3-U3-IxA" secondAttribute="leading" constant="15" id="9dY-4u-2Ht"/>
                 <constraint firstItem="uzm-05-gcb" firstAttribute="top" secondItem="0Zs-0f-aNz" secondAttribute="bottom" constant="10" id="CBa-P6-GdK"/>
-                <constraint firstAttribute="trailing" secondItem="Vp4-iY-gYk" secondAttribute="trailing" constant="10" id="CXB-jR-4c0"/>
-                <constraint firstItem="Vp4-iY-gYk" firstAttribute="leading" secondItem="0Zs-0f-aNz" secondAttribute="trailing" constant="10" id="KBJ-UC-HUb"/>
                 <constraint firstItem="Ysp-u3-p9l" firstAttribute="leading" secondItem="sx3-U3-IxA" secondAttribute="leading" constant="10" id="OwN-6D-Bwq"/>
-                <constraint firstItem="Vp4-iY-gYk" firstAttribute="top" secondItem="sx3-U3-IxA" secondAttribute="top" constant="10" id="QCW-3S-MfU"/>
+                <constraint firstItem="Ysp-u3-p9l" firstAttribute="centerY" secondItem="0Zs-0f-aNz" secondAttribute="centerY" id="Qjt-HF-Vuk"/>
+                <constraint firstAttribute="trailing" secondItem="FI7-rH-zNT" secondAttribute="trailing" constant="10" id="TsD-lK-cmL"/>
                 <constraint firstItem="0Zs-0f-aNz" firstAttribute="leading" secondItem="Ysp-u3-p9l" secondAttribute="trailing" constant="10" id="XS6-4q-Wu7"/>
                 <constraint firstAttribute="bottom" secondItem="uzm-05-gcb" secondAttribute="bottom" constant="15" id="fM8-mL-JfP"/>
                 <constraint firstAttribute="trailing" secondItem="uzm-05-gcb" secondAttribute="trailing" constant="15" id="moe-2T-wbL"/>
-                <constraint firstItem="Ysp-u3-p9l" firstAttribute="top" secondItem="sx3-U3-IxA" secondAttribute="top" constant="10" id="svx-By-kRS"/>
                 <constraint firstItem="0Zs-0f-aNz" firstAttribute="top" secondItem="sx3-U3-IxA" secondAttribute="top" constant="10" id="xNx-Cn-Up7"/>
+                <constraint firstItem="FI7-rH-zNT" firstAttribute="leading" secondItem="0Zs-0f-aNz" secondAttribute="trailing" id="zGN-Li-zVz"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="backImageView" destination="Ysp-u3-p9l" id="fgg-Iv-JAy"/>
-                <outlet property="doneImageView" destination="Vp4-iY-gYk" id="fzl-PK-bGz"/>
+                <outlet property="doneLabel" destination="FI7-rH-zNT" id="zjH-oH-FN9"/>
                 <outlet property="textView" destination="uzm-05-gcb" id="6lX-t2-h3b"/>
                 <outlet property="titleLabel" destination="0Zs-0f-aNz" id="YP0-eZ-PzB"/>
             </connections>
             <point key="canvasLocation" x="326" y="20"/>
         </view>
     </objects>
+    <resources>
+        <image name="back_arrow_icon@3x.png" width="81" height="132"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

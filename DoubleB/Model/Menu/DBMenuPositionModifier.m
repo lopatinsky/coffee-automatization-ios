@@ -52,6 +52,8 @@
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
         [modifier.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
     }
+    [modifier sortItems];
+    
     // If no variants to choose, not create modifier
     if([modifier.items count] < 1)
         modifier = nil;
@@ -72,6 +74,8 @@
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
         [self.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
     }
+    [self sortItems];
+    
     // If no variants to choose, return fail of synchronization
     if([self.items count] < 1)
         return NO;
@@ -83,6 +87,12 @@
     self.modifierDictionary = modifierDictionary;
     
     return YES;
+}
+
+- (void)sortItems{
+    [self.items sortUsingComparator:^NSComparisonResult(DBMenuPositionModifierItem *obj1, DBMenuPositionModifierItem *obj2) {
+        return [@(obj1.itemPrice) compare:@(obj2.itemPrice)];
+    }];
 }
 
 - (void)selectItemAtIndex:(NSInteger)index{

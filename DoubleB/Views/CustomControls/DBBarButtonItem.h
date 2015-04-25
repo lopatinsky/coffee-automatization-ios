@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DBBarButtonItem : UIBarButtonItem
-
 -(instancetype)initWithViewController:(UIViewController *)viewController action:(SEL)action;
 
 @end

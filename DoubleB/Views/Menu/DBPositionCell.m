@@ -68,14 +68,13 @@
             self.weightLabel.hidden = NO;
         }
         
-        if(position.imageUrl){
-            [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
-                                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                    if(!error){
-                                                        [self.positionImageView db_hideDefaultImage];
-                                                    }
-                                                }];
-        }
+        [self.positionImageView db_showDefaultImage];
+        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
+                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                if(!error){
+                                                    [self.positionImageView db_hideDefaultImage];
+                                                }
+                                            }];
     }
 }
 

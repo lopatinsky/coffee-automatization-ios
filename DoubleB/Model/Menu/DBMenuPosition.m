@@ -14,6 +14,7 @@
 @interface DBMenuPosition ()<NSCoding>
 @property(strong, nonatomic) NSString *positionId;
 @property(strong, nonatomic) NSString *name;
+@property(nonatomic) NSInteger order;
 @property(nonatomic) double price;
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *positionDescription;
@@ -52,7 +53,9 @@
     if([_groupModifiers count] != [positionDictionary[@"group_modifiers"] count]){
         _groupModifiers = [NSMutableArray new];
         for(NSDictionary *modifierDictionary in positionDictionary[@"group_modifiers"]){
-            [_groupModifiers addObject:[DBMenuPositionModifier groupModifierFromDictionary:modifierDictionary]];
+            DBMenuPositionModifier *modifier = [DBMenuPositionModifier groupModifierFromDictionary:modifierDictionary];
+            if(modifier)
+                [_groupModifiers addObject:modifier];
         }
     } else {
         for(int i = 0; i < [_groupModifiers count]; i++){
@@ -67,6 +70,7 @@
 - (void)copyFromResponseDictionary:(NSDictionary *)positionDictionary{
     _positionId = [positionDictionary getValueForKey:@"id"] ?: @"";
     _name = [positionDictionary getValueForKey:@"title"] ?: @"0";
+    _order = [[positionDictionary getValueForKey:@"order"] integerValue];
     _price = [[positionDictionary getValueForKey:@"price"] doubleValue];
     _imageUrl = [positionDictionary getValueForKey:@"pic"];
     _positionDescription = [positionDictionary getValueForKey:@"description"];
@@ -103,7 +107,7 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifierId];
     DBMenuPositionModifier *modifier = [[self.singleModifiers filteredArrayUsingPredicate:predicate] firstObject];
     if(modifier){
-        modifier.selectedCount = count;
+        modifier.selectedCount = (int)count;
     }
 }
 
@@ -163,6 +167,7 @@
     if(self != nil){
         _positionId = [aDecoder decodeObjectForKey:@"positionId"];
         _name = [aDecoder decodeObjectForKey:@"name"];
+        _order = [[aDecoder decodeObjectForKey:@"order"] integerValue];
         _price = [[aDecoder decodeObjectForKey:@"price"] doubleValue];
         _imageUrl = [aDecoder decodeObjectForKey:@"imageUrl"];
         _positionDescription = [aDecoder decodeObjectForKey:@"positionDescription"];
@@ -181,6 +186,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.positionId forKey:@"positionId"];
     [aCoder encodeObject:self.name forKey:@"name"];
+    [aCoder encodeObject:@(self.order) forKey:@"order"];
     [aCoder encodeObject:@(self.price) forKey:@"price"];
     [aCoder encodeObject:self.imageUrl forKey:@"imageUrl"];
     [aCoder encodeObject:self.positionDescription forKey:@"positionDescription"];
@@ -199,6 +205,7 @@
     DBMenuPosition *copyPosition = [[[self class] allocWithZone:zone] init];
     copyPosition.positionId = [self.positionId copy];
     copyPosition.name = [self.name copy];
+    copyPosition.order = self.order;
     copyPosition.price = self.price;
     copyPosition.imageUrl = [self.imageUrl copy];
     copyPosition.positionDescription = [self.positionDescription copy];

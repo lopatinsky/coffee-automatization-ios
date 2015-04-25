@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *doneImageView;
+@property (weak, nonatomic) IBOutlet UILabel *doneLabel;
 
 @end
 
@@ -29,13 +29,12 @@
 - (void)awakeFromNib{
     self.backgroundColor = [UIColor whiteColor];
     
-    [self.doneImageView templateImageWithName:@"white_tick_icon"];
+    self.doneLabel.textColor = [UIColor db_defaultColor];
     [self.backImageView templateImageWithName:@"back_arrow_icon"];
     
     @weakify(self);
-    
-    self.doneImageView.userInteractionEnabled = YES;
-    [self.doneImageView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+    self.doneLabel.userInteractionEnabled = YES;
+    [self.doneLabel addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         @strongify(self);
         [self.delegate db_popupTextViewDidSelectDone:self text:self.textView.text];
     }]];

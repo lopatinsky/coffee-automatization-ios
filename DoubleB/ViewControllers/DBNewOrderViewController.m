@@ -107,7 +107,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.edgesForExtendedLayout = UIRectEdgeTop;
     self.title = NSLocalizedString(@"Заказ", nil);
     
-    
 // ========= Configure Logic =========
     [DBPromoManager sharedManager].updateInfoDelegate = self;
     self.delegate = [DBTabBarController sharedInstance];

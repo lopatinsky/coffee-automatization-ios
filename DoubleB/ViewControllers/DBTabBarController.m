@@ -30,15 +30,16 @@
     self = [super init];
     if (self) {
         DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
-        newOrderController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Меню", nil)
-                                                              image:[UIImage imageNamed:@"menu_icon_grey.png"]
-                                                      selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
+    
+        newOrderController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Заказ", nil)
+                                                                      image:[UIImage imageNamed:@"orders_icon_grey.png"]
+                                                              selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
         [newOrderController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         
         DBOrdersTableViewController *ordersController = [DBOrdersTableViewController new];
-        ordersController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Заказы", nil)
-                                                                    image:[UIImage imageNamed:@"orders_icon_grey.png"]
-                                                            selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
+        ordersController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"История", nil)
+                                                                    image:[UIImage imageNamed:@"menu_icon_grey.png"]
+                                                            selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
         [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         
         DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];

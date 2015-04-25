@@ -7,36 +7,32 @@
 //
 
 #import "DBBarButtonItem.h"
+#import "DBOrderBarButtonView.h"
 #import "OrderManager.h"
 
 @interface DBBarButtonItem ()
 @property (strong, nonatomic) OrderManager *orderManager;
 
-@property (strong, nonatomic) UIImageView *imageView;
-@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) DBOrderBarButtonView *orderView;
 @end
 
 @implementation DBBarButtonItem
 
--(instancetype)initWithViewController:(UIViewController *)viewController action:(SEL)action{
+-(instancetype)initWithViewController:(UIViewController *)viewController
+                     action:(SEL)action{
     UIButton *buttonOrder = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonOrder setTitleColor:[UIColor db_defaultColor]
                       forState:UIControlStateNormal];
     buttonOrder.frame = CGRectMake(0, 0, 1, 26);
-    
-    int imageSize = 16;
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, (buttonOrder.frame.size.height - imageSize) / 2, imageSize, imageSize)];
-    [self.imageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor whiteColor]];
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.imageView.frame.size.width, 0, 1, buttonOrder.frame.size.height)];
-    self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.f];
-    
-    [buttonOrder addSubview:self.imageView];
-    [buttonOrder addSubview:self.titleLabel];
     [buttonOrder addTarget:viewController action:action forControlEvents:UIControlEventTouchUpInside];
-
+    
+    self.orderView = [DBOrderBarButtonView new];
+    self.orderView.userInteractionEnabled = NO;
+    self.orderView.exclusiveTouch = NO;
+    [buttonOrder addSubview:self.orderView];
+    self.orderView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.orderView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:buttonOrder];
+    
     self = [super initWithCustomView:buttonOrder];
     
     self.orderManager = [OrderManager sharedManager];
@@ -66,14 +62,13 @@
     UIButton *button = (UIButton *)self.customView;
     NSAttributedString *string = [self attributedStringWithCount:self.orderManager.positionsCount
                                                   withTotalPrice:self.orderManager.mixedTotalPrice];
-    [self.titleLabel setAttributedText:string];
+    [self.orderView.totalLabel setAttributedText:string];
     
-    CGRect newTitleRect = self.titleLabel.frame;
+    CGRect newTitleRect = self.orderView.totalLabel.frame;
     newTitleRect.size.width = string.size.width + 5;
-    self.titleLabel.frame = newTitleRect;
     
     CGRect newButtonRect = button.frame;
-    newButtonRect.size.width = self.imageView.frame.size.width + self.titleLabel.frame.size.width;
+    newButtonRect.size.width = self.orderView.orderImageView.frame.size.width + newTitleRect.size.width;
     button.frame = newButtonRect;
 }
 

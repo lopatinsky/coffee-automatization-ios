@@ -14,6 +14,7 @@
 
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;
+@property(nonatomic, readonly) NSInteger order;
 @property(nonatomic, readonly) double price;
 @property(nonatomic, readonly) double actualPrice;
 @property(strong, nonatomic, readonly) NSString *imageUrl;

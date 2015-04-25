@@ -29,6 +29,7 @@
     for(NSDictionary *position in positions)
         [category.positions addObject:[DBMenuPosition positionFromResponseDictionary:position]];
     
+    [category sortPositions];
     return category;
 }
 
@@ -49,6 +50,7 @@
     }
     
     _positions = positions;
+    [self sortPositions];
 }
 
 - (void)copyFromResponseDictionary:(NSDictionary *)categoryDictionary{
@@ -57,6 +59,12 @@
     _imageUrl = [categoryDictionary getValueForKey:@"pic"] ?: @"";
     _venuesRestrictions = [categoryDictionary[@"restrictions"] getValueForKey:@"venues"] ?: @[];
     _categoryDictionary = categoryDictionary;
+}
+
+- (void)sortPositions{
+    [self.positions sortUsingComparator:^NSComparisonResult(DBMenuPosition *obj1, DBMenuPosition *obj2) {
+        return [@(obj1.order) compare:@(obj2.order)];
+    }];
 }
 
 - (BOOL)hasImage{
