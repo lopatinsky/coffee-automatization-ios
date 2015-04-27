@@ -1896,10 +1896,17 @@
 				ORGANIZATIONNAME = Empatika;
 				TargetAttributes = {
 					CB1AF7681AE10E6900FA3224 = {
+<<<<<<< HEAD
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
 					CB60C0A31AC5AD2600D5E962 = {
 						DevelopmentTeam = WDRAVGQ9R2;
+=======
+						DevelopmentTeam = QG9L73J29H;
+					};
+					CB60C0A31AC5AD2600D5E962 = {
+						DevelopmentTeam = QG9L73J29H;
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 					};
 				};
 			};
@@ -1952,8 +1959,11 @@
 				CB1AF7F51AE10E6900FA3224 /* mug_orders_gray.png in Resources */,
 				CB1AF7F61AE10E6900FA3224 /* DBMastercardAdView.xib in Resources */,
 				CB1AF7F71AE10E6900FA3224 /* menu_icon@3x.png in Resources */,
+<<<<<<< HEAD
+=======
 				CB1AF7F81AE10E6900FA3224 /* return_cause_venue_icon.png in Resources */,
 				5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */,
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				CB1AF7F91AE10E6900FA3224 /* DBCategoryPicker.xib in Resources */,
 				CB1AF7FA1AE10E6900FA3224 /* DBPositionCompactCell.xib in Resources */,
 				CB1AF7FB1AE10E6900FA3224 /* preview_5@2x.png in Resources */,
@@ -2137,8 +2147,11 @@
 				CB60C1221AC5AD2600D5E962 /* mug_orders_gray.png in Resources */,
 				CB60C1231AC5AD2600D5E962 /* DBMastercardAdView.xib in Resources */,
 				CB60C1241AC5AD2600D5E962 /* menu_icon@3x.png in Resources */,
+<<<<<<< HEAD
+=======
 				CB215E251ADC046A00EF9EEC /* return_cause_venue_icon.png in Resources */,
 				5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */,
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				CB715ADD1ACD581300EA84FC /* DBCategoryPicker.xib in Resources */,
 				CB79E9801AD8AD10001693FE /* DBPositionCompactCell.xib in Resources */,
 				CB60C1251AC5AD2600D5E962 /* preview_5@2x.png in Resources */,
@@ -2170,7 +2183,11 @@
 				CB60C13C1AC5AD2600D5E962 /* maestro_icon@3x.png in Resources */,
 				CB60C13D1AC5AD2600D5E962 /* mcard_logo.png in Resources */,
 				CB0B5BE11AD80CF90094D534 /* modifier_plus_icon@3x.png in Resources */,
+<<<<<<< HEAD
+				CB1AF8BD1AE12BBE00FA3224 /* DBOrderBarButtonView.xib in Resources */,
+=======
 				5E4E60F71AE61E28005D78A8 /* email@2x.png in Resources */,
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				CB60C13E1AC5AD2600D5E962 /* agreement.html in Resources */,
 				CB60C13F1AC5AD2600D5E962 /* about.png in Resources */,
 				CB60C1401AC5AD2600D5E962 /* PersonalAccountViewController.xib in Resources */,
@@ -2786,7 +2803,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+=======
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2801,7 +2822,11 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "2e0f8bdc-ff2d-495c-bd8b-6b2bbb840169";
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2819,7 +2844,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+=======
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2834,7 +2863,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "925dc5fe-6d90-4aca-9be2-a798e381736b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -2851,7 +2880,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+<<<<<<< HEAD
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+=======
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2866,7 +2899,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "4e87e76f-bb9c-4559-b6da-d2e37802bbc6";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -2882,8 +2915,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-CoffeeHostel";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
+<<<<<<< HEAD
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+=======
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2898,7 +2936,11 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeHostel;
+<<<<<<< HEAD
 				PROVISIONING_PROFILE = "925dc5fe-6d90-4aca-9be2-a798e381736b";
+=======
+				PROVISIONING_PROFILE = "";
+>>>>>>> b786ceb4687d2a6f2ddfd2cc19267718dd9b4d57
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
