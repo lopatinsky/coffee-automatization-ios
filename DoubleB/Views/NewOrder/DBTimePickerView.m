@@ -11,6 +11,7 @@
 
 @interface DBTimePickerView ()<UIGestureRecognizerDelegate>
 @property(weak, nonatomic) id<DBTimePickerViewDelegate> delegate;
+@property (weak, nonatomic) NSString *selectedModeName;
 @end
 
 @implementation DBTimePickerView
@@ -57,14 +58,19 @@
     switch (sender.selectedSegmentIndex) {
         case 0:
             selectedMode = DBBeverageModeTakeaway;
+            self.selectedModeName = @"takeaway";
             break;
         case 1:
             selectedMode = DBBeverageModeInCafe;
+            self.selectedModeName = @"in_cafe";
             break;
         default:
             selectedMode = DBBeverageModeTakeaway;
+            self.selectedModeName = @"takeaway";
             break;
     }
+    
+    [GANHelper analyzeEvent:@"takeaway_switch_click" label:_selectedModeName category:ORDER_SCREEN];
     
     if([self.delegate respondsToSelector:@selector(db_timePickerView:didChangeMode:)]){
         [self.delegate db_timePickerView:self didChangeMode:selectedMode];

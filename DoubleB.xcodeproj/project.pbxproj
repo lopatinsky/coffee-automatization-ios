@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E12EB861AEE57DF00D833F7 /* DBOrderBarButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */; };
 		5E4E60F71AE61E28005D78A8 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F51AE61E28005D78A8 /* email@2x.png */; };
 		5E4E60F81AE61E28005D78A8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5E4E60FB1AE658B9005D78A8 /* DBContactUsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E60FA1AE658B9005D78A8 /* DBContactUsView.m */; };
@@ -338,7 +339,6 @@
 		CB1AF8B91AE116A800FA3224 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB1AF8B11AE113A600FA3224 /* InfoPlist.strings */; };
 		CB1AF8BA1AE116B100FA3224 /* CoffeeHostel-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB1AF8A71AE1134C00FA3224 /* CoffeeHostel-info.plist */; };
 		CB1AF8BB1AE116B600FA3224 /* Pastadeli-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB1AF8A51AE1134700FA3224 /* Pastadeli-info.plist */; };
-		CB1AF8BD1AE12BBE00FA3224 /* DBOrderBarButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */; };
 		CB215E281ADC1B8700EF9EEC /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB215E2A1ADC1B9B00EF9EEC /* DBPopupTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB215E291ADC1B9B00EF9EEC /* DBPopupTextView.xib */; };
 		CB215E2C1ADC1EEB00EF9EEC /* back_arrow_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB215E2B1ADC1EEB00EF9EEC /* back_arrow_icon@3x.png */; };
@@ -1899,7 +1899,7 @@
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
 					CB60C0A31AC5AD2600D5E962 = {
-						DevelopmentTeam = WDRAVGQ9R2;
+						DevelopmentTeam = QG9L73J29H;
 					};
 				};
 			};
@@ -1952,7 +1952,6 @@
 				CB1AF7F51AE10E6900FA3224 /* mug_orders_gray.png in Resources */,
 				CB1AF7F61AE10E6900FA3224 /* DBMastercardAdView.xib in Resources */,
 				CB1AF7F71AE10E6900FA3224 /* menu_icon@3x.png in Resources */,
-				CB1AF7F81AE10E6900FA3224 /* return_cause_venue_icon.png in Resources */,
 				5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */,
 				CB1AF7F91AE10E6900FA3224 /* DBCategoryPicker.xib in Resources */,
 				CB1AF7FA1AE10E6900FA3224 /* DBPositionCompactCell.xib in Resources */,
@@ -2137,7 +2136,6 @@
 				CB60C1221AC5AD2600D5E962 /* mug_orders_gray.png in Resources */,
 				CB60C1231AC5AD2600D5E962 /* DBMastercardAdView.xib in Resources */,
 				CB60C1241AC5AD2600D5E962 /* menu_icon@3x.png in Resources */,
-				CB215E251ADC046A00EF9EEC /* return_cause_venue_icon.png in Resources */,
 				5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */,
 				CB715ADD1ACD581300EA84FC /* DBCategoryPicker.xib in Resources */,
 				CB79E9801AD8AD10001693FE /* DBPositionCompactCell.xib in Resources */,
@@ -2224,6 +2222,7 @@
 				CB60C1641AC5AD2600D5E962 /* DBOrderItemNotesCell.xib in Resources */,
 				CB60C1651AC5AD2600D5E962 /* tick_gray.png in Resources */,
 				5ED458A71AEA4EE400DB8B64 /* DBCompanyInfoViewController.xib in Resources */,
+				5E12EB861AEE57DF00D833F7 /* DBOrderBarButtonView.xib in Resources */,
 				CB60C1661AC5AD2600D5E962 /* menu_icon@2x.png in Resources */,
 				CB60C1671AC5AD2600D5E962 /* mug_gray@2x.png in Resources */,
 				CB60C1681AC5AD2600D5E962 /* preview_2@2x.png in Resources */,
@@ -2882,8 +2881,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-CoffeeHostel";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2898,7 +2897,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeHostel;
-				PROVISIONING_PROFILE = "925dc5fe-6d90-4aca-9be2-a798e381736b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

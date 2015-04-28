@@ -31,6 +31,8 @@
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
 @property (strong, nonatomic) DBMastercardPromo *mastercardPromo;
+
+@property (nonatomic, strong) NSString *screen;
  
 @end
 
