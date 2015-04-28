@@ -62,20 +62,16 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
-        NSString *eventLabel = [NSString stringWithFormat:@"%@,%@,%@",
-                                [DBClientInfo sharedInstance].clientName,
-                                [DBClientInfo sharedInstance].clientPhone,
-                                [DBClientInfo sharedInstance].clientMail];
+//        NSString *eventLabel = [NSString stringWithFormat:@"%@,%@,%@",
+//                                [DBClientInfo sharedInstance].clientName,
+//                                [DBClientInfo sharedInstance].clientPhone,
+//                                [DBClientInfo sharedInstance].clientMail];
         
-        if([self.screen isEqualToString:@"Profile_screen"]){
-            [GANHelper analyzeEvent:@"back_settings_click"
-                              label:eventLabel
-                           category:self.screen];
-        } else {
-            [GANHelper analyzeEvent:@"back_order_click"
-                              label:eventLabel
-                           category:self.screen];
-        }
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:PROFILE_SCREEN];
+//        if([self.screen isEqualToString:@"Profile_screen"]){
+//            
+//        } else {
+//        }
     }
 }
 
@@ -158,17 +154,14 @@
     int index = [self indexPathRowForTextField:textField];
     
     if(index == 0){
-        [GANHelper analyzeEvent:@"start_typing" label:@"name" category:self.screen];
     }
     
     if(index == 1){
         if([textField.text isEqualToString:@""])
             textField.text = @"+7";
-        [GANHelper analyzeEvent:@"start_typing" label:@"phone" category:self.screen];
     }
     
     if(index == 2){
-        [GANHelper analyzeEvent:@"start_typing" label:@"mail" category:self.screen];
     }
 }
 
@@ -179,15 +172,15 @@
     int index = [self indexPathRowForTextField:textField];
     
     if(index == 0){
-        [GANHelper analyzeEvent:@"name_entered" label:eventLabel category:self.screen];
+        [GANHelper analyzeEvent:@"name_typing" label:eventLabel category:PROFILE_SCREEN];
     }
     
     if(index == 1) {
-        [GANHelper analyzeEvent:@"phone_entered" label:eventLabel category:self.screen];
+        [GANHelper analyzeEvent:@"phone_typing" label:eventLabel category:PROFILE_SCREEN];
     }
     
     if(index == 2) {
-        [GANHelper analyzeEvent:@"mail_entered" label:eventLabel category:self.screen];
+        [GANHelper analyzeEvent:@"mail_typing" label:eventLabel category:PROFILE_SCREEN];
     }
     
     return YES;

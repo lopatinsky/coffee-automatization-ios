@@ -135,31 +135,24 @@
 
 - (IBAction)confirmButtonClick:(id)sender{
     self.completionHandler();
-    
-    [GANHelper analyzeEvent:@"confirm_button_click" category:@"Promo_info_popup"];
 }
 
 - (IBAction)handleTap:(UITapGestureRecognizer *)recognizer{
     CGPoint touch = [recognizer locationInView:self];
     
     if(CGRectContainsPoint(self.totalCountLabel.frame, touch)){
-        [GANHelper analyzeEvent:@"points_count_click" category:@"Promo_info_popup"];
     }
     
     if(CGRectContainsPoint(self.progressContentView.frame, touch)){
-        [GANHelper analyzeEvent:@"progress_click" category:@"Promo_info_popup"];
     }
     
     if((CGRectContainsPoint(self.mugImageView.frame, touch) || CGRectContainsPoint(self.mugCountLabel.frame, touch)) && self.accumulatedMugCount > 0){
-        [GANHelper analyzeEvent:@"mug_count_click" category:@"Promo_info_popup"];
     }
     
     if(CGRectContainsPoint(self.hintLabel.frame, touch) && !self.hintLabel.hidden){
-        [GANHelper analyzeEvent:@"free_beverage_hint_click" category:@"Promo_info_popup"];
     }
     
     if(CGRectContainsPoint(self.advertLabel.frame, touch) && !self.advertLabel.hidden){
-        [GANHelper analyzeEvent:@"promo_description_click" category:@"Promo_info_popup"];
     }
 }
 

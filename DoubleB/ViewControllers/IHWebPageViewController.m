@@ -62,7 +62,6 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
-        [GANHelper analyzeEvent:@"back_click" category:self.screenName];
     }
 }
 
@@ -81,9 +80,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     long interval = (long)-[start timeIntervalSinceNow];
-    [GANHelper analyzeEvent:@"page_view_loading_time"
-                      label:[NSString stringWithFormat:@"%ld", interval]
-                   category:self.screenName];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

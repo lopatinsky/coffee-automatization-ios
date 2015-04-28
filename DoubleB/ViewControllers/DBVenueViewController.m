@@ -90,7 +90,7 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent{
     if(!parent){
-        [GANHelper analyzeEvent:@"back_to_coffee_houses" category:@"Coffe_houses_item_screen"];
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:VENUE_INFO_SCREEN];
     }
 }
 
@@ -98,15 +98,12 @@
     CGPoint point = [touch locationInView:self.view];
     
     if(CGRectContainsPoint(self.labelName.frame, point)){
-        [GANHelper analyzeEvent:@"cofee_house_details_click" label:@"name" category:@"Coffe_houses_item_screen"];
     }
     
     if(CGRectContainsPoint(self.labelAddress.frame, point)){
-        [GANHelper analyzeEvent:@"cofee_house_details_click" label:@"address" category:@"Coffe_houses_item_screen"];
     }
     
     if(CGRectContainsPoint(self.labelWorkHours.frame, point)){
-        [GANHelper analyzeEvent:@"cofee_house_details_click" label:@"working_hours" category:@"Coffe_houses_item_screen"];
     }
     
     return YES;

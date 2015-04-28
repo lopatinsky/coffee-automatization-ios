@@ -129,9 +129,8 @@
         default:
             break;
     }
-    
-    [GANHelper analyzeEvent:event category:category];
-    
+    [GANHelper analyzeEvent:event category:VENUES_SCREEN];
+        
     return YES;
 }
 

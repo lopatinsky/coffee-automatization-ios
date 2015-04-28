@@ -103,14 +103,10 @@
 
 - (IBAction)closeButtonClick:(id)sender{
     [self.delegate dbAdvertViewControllerUserDidClose:self];
-    
-    [GANHelper analyzeEvent:@"promo_x_close" category:@"Promo_screen"];
 }
 
 - (IBAction)confirmButtonClick:(id)sender{
     [self.delegate dbAdvertViewControllerUserDidClose:self];
-    
-    [GANHelper analyzeEvent:@"promo_ok_close" category:@"Promo_screen"];
 }
 
 @end

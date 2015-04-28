@@ -55,15 +55,12 @@
         if([self.advertDelegate respondsToSelector:@selector(db_mastercardAdvertViewPlusClick:)])
             [self.advertDelegate db_mastercardAdvertViewPlusClick:self];
         
-        [GANHelper analyzeEvent:@"mastercard_promo_plus_click" category:self.screen];
     } else {
         if([self.advertDelegate respondsToSelector:@selector(db_mastercardAdvertViewClick:)])
             [self.advertDelegate db_mastercardAdvertViewClick:self];
         
         if(CGRectContainsPoint(self.mastercardIconImageView.frame, touch)){
-            [GANHelper analyzeEvent:@"mastercard_promo_icon_click" category:self.screen];
         } else {
-            [GANHelper analyzeEvent:@"mastercard_promo_title_click" category:self.screen];
         }
     }
 }

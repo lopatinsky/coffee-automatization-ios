@@ -35,7 +35,6 @@
     
     self.titleLabel.userInteractionEnabled = YES;
     [self.titleLabel addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        [GANHelper analyzeEvent:@"order_number_click" category:@"Order_screen"];
     }]];
     
     [[OrderManager sharedManager] addObserver:self

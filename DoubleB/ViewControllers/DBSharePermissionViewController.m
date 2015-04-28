@@ -68,13 +68,9 @@
 
 - (IBAction)closeButtonClick:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    [GANHelper analyzeEvent:@"share_cancelled" category:self.screen];
 }
 
 - (IBAction)shareButtonClick:(id)sender{
-    [GANHelper analyzeEvent:@"share_click" category:self.screen];
-    
     [self shareSuccessfulOrder:^(BOOL completed) {
         if(completed){
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -82,9 +78,7 @@
     }];
 }
 
-- (IBAction)contactUsButtonClick:(id)sender{
-    [GANHelper analyzeEvent:@"mail_click" category:self.screen];
-    
+- (IBAction)contactUsButtonClick:(id)sender{    
     [self presentMailViewControllerWithRecipients:nil callback:^(BOOL completed) {
         if(completed)
             [self dismissViewControllerAnimated:YES completion:nil];

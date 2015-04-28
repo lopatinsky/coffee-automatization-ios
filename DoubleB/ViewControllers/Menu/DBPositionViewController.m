@@ -157,6 +157,7 @@
 }
 
 - (IBAction)priceButtonClick:(id)sender {
+    [GANHelper analyzeEvent:@"" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.navigationController animateAddProductFromView:self.priceLabel completion:^{
         [[OrderManager sharedManager] addPosition:self.position];
     }];
@@ -164,6 +165,7 @@
 
 - (void)goToOrderViewController{
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [GANHelper analyzeEvent:@"back_arrow_pressed" category:PRODUCT_SCREEN];
 }
 
 
@@ -203,6 +205,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
         [self.modifierPicker configureWithGroupModifier:self.position.groupModifiers[indexPath.row]];
+        [GANHelper analyzeEvent:@"group_modifier_show"
+                          label:((DBMenuPositionModifier *)self.position.groupModifiers[indexPath.row]).modifierId
+                       category:PRODUCT_SCREEN];
     } else {
         [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
     }

@@ -41,12 +41,11 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
-        [GANHelper analyzeEvent:@"back_click" category:self.screen];
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:CONFIDENCE_SCREEN];
     }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [GANHelper analyzeEvent:@"scroll" category:self.screen];
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

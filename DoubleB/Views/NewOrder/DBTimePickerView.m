@@ -69,8 +69,7 @@
             self.selectedModeName = @"takeaway";
             break;
     }
-    
-    [GANHelper analyzeEvent:@"takeaway_switch_click" label:_selectedModeName category:ORDER_SCREEN];
+    [GANHelper analyzeEvent:@"takeaway_switch_click" label:self.selectedModeName category:ORDER_SCREEN];
     
     if([self.delegate respondsToSelector:@selector(db_timePickerView:didChangeMode:)]){
         [self.delegate db_timePickerView:self didChangeMode:selectedMode];

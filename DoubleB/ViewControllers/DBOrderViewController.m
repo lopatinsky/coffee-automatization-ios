@@ -21,6 +21,7 @@
 #import "LocationHelper.h"
 #import "OrderManager.h"
 #import "DBOrderReturnView.h"
+#import "IHSecureStore.h"
 
 #import "UIAlertView+BlocksKit.h"
 #import "UIGestureRecognizer+BlocksKit.h"
@@ -108,7 +109,7 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
-        [GANHelper analyzeEvent:@"back_arrow" label:self.order.orderId category:@"Order_info_screen"];
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:ORDER_HISTORY_SCREEN];
     }
 }
 
@@ -159,24 +160,25 @@
 }
 
 - (void)cancelOrder{
+    NSString *clientId = [IHSecureStore sharedInstance].clientId;
+    NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", self.order.orderId, clientId];
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DBAPIClient sharedClient] POST:@"return.php" parameters:@{@"order_id": self.order.orderId}
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 [GANHelper analyzeEvent:@"cancel_success" label:eventLabel category:ORDER_HISTORY_SCREEN];
                                  //NSLog(@"%@", responseObject);
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                  self.order.status = OrderStatusCanceled;
                                  [[CoreDataHelper sharedHelper] save];
                                  [self reloadCancelRepeatButton];
                                  [self reloadStatusInfo:nil];
-                                 [GANHelper analyzeEvent:@"order_cancel_success"
-                                                   label:self.order.orderId
-                                                category:@"Order_info_screen"];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSString *errorEventLabel = [eventLabel stringByAppendingString:[NSString stringWithFormat:@";%@", error.localizedDescription]];
+                                 [GANHelper analyzeEvent:@"cancel_failed" label:errorEventLabel category:ORDER_HISTORY_SCREEN];
+                                 
                                  NSLog(@"%@", error);
-                                 [GANHelper analyzeEvent:@"order_cancel_failure"
-                                                   label:[NSString stringWithFormat:@"%@,%@", self.order.orderId, error.localizedFailureReason]
-                                                category:@"Order_info_screen"];
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                  if (operation.response.statusCode == 412) {
                                      [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
@@ -185,7 +187,6 @@
                                  }
                              }];
     
-    [GANHelper analyzeEvent:@"order_cancel_click" label:self.order.orderId category:@"Order_info_screen"];
 }
 
 - (void)reloadCancelRepeatButton {
@@ -210,17 +211,20 @@
 }
 
 - (void)clickCancel:(UIButton *)sender{
+    NSString *clientId = [IHSecureStore sharedInstance].clientId;
+    NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", self.order.orderId, clientId];
+    [GANHelper analyzeEvent:@"cancel_button_pressed" label:eventLabel category:ORDER_HISTORY_SCREEN];
+    
     self.returnCauseView = [DBOrderReturnView new];
     self.returnCauseView.delegate = self;
     [self.returnCauseView showOnView:self.navigationController.view];
 }
 
 - (void)clickRepeat:(UIButton *)sender {
+    [GANHelper analyzeEvent:@"repeat_button_pressed" category:ORDER_HISTORY_SCREEN];
     DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
     newOrderController.repeatedOrder = self.order;
     [self.navigationController pushViewController:newOrderController animated:YES];
-    
-    [GANHelper analyzeEvent:@"order_repeat_click" label:self.order.orderId category:@"Order_info_screen"];
 }
 
 #pragma mark - Table view data source
@@ -278,7 +282,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [GANHelper analyzeEvent:@"order_item_title_click" label:self.order.orderId category:@"Order_info_screen"];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

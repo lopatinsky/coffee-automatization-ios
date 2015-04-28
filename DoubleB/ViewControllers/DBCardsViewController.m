@@ -31,8 +31,6 @@
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
 @property (strong, nonatomic) DBMastercardPromo *mastercardPromo;
-
-@property (nonatomic, strong) NSString *screen;
  
 @end
 
@@ -89,12 +87,8 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         if([self.screen isEqualToString:@"Cards_payment_screen"]){
-            [GANHelper analyzeEvent:@"back_order_click"
-                              label:[self getCurrentSelectedPaymentType]
-                           category:self.screen];
-        } else {
-            [GANHelper analyzeEvent:@"back_settings_click" category:self.screen];
         }
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:PAYMENT_SCREEN];
     }
 }
 
@@ -261,8 +255,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [GANHelper analyzeEvent:@"card_delete" category:self.screen];
-
     [tableView beginUpdates];
 
     NSUInteger k = indexPath.row - (NSUInteger)self.mode;
@@ -283,8 +275,10 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *eventLabel;
     // Extra payment type
     if(indexPath.section == 0){
+        eventLabel = @"extra";
         [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
         [self.tableView reloadData];
         
@@ -294,6 +288,7 @@
     
     // Personal account payment type
     if (indexPath.section == 1) {
+        eventLabel = @"wallet";
         [OrderManager sharedManager].paymentType = PaymentTypePersonalAccount;
         [self.tableView reloadData];
         
@@ -303,6 +298,7 @@
     
     // Cash payment type
     if(indexPath.section == 2){
+        eventLabel = @"cash";
         [OrderManager sharedManager].paymentType = PaymentTypeCash;
         [self.tableView reloadData];
         
@@ -314,7 +310,7 @@
     if(indexPath.section == 3){
         // add card button
         if(indexPath.row == [self.cards count]){
-            [GANHelper analyzeEvent:@"card_add" label:[NSString stringWithFormat:@"%ld", (long)[self.cards count]] category:self.screen];
+            [GANHelper analyzeEvent:@"add_card_pressed" category:PAYMENT_SCREEN];
             [self db_cardManagementBindNewCardOnScreen:self.screen callback:^(BOOL success) {
                 if(success){
                     [self reloadCards];
@@ -325,20 +321,18 @@
                 [OrderManager sharedManager].paymentType = PaymentTypeCard;
             }
             
-            if (self.mode == CardsViewControllerModeManageCards){
-                [GANHelper analyzeEvent:@"check_card"
-                                  label:[NSString stringWithFormat:@"%d", (int)[self.cards count]]
-                               category:self.screen];
-            }
-            
             NSDictionary *card = self.cards[indexPath.row];
             [[IHSecureStore sharedInstance] setDefaultCardWithBindingId:card[@"cardToken"]];
             [self reloadCards];
+            
+            eventLabel = [[card[@"cardPan"] db_cardIssuer] stringByAppendingString:@"_card"];
             
             [self.delegate cardsControllerDidChoosePaymentItem:self];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
+    
+    [GANHelper analyzeEvent:@"payment_selected" label:eventLabel category:PAYMENT_SCREEN];
 }
 
 

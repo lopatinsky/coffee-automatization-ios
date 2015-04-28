@@ -102,11 +102,13 @@
 #pragma mark - orders update
 
 - (void)updateHistory:(id)sender{
+    [GANHelper analyzeEvent:@"history_update" category:HISTORY_SCREEN];
     NSString *clientId = [[IHSecureStore sharedInstance] clientId];
     if(clientId){
         [[DBAPIClient sharedClient] GET:@"history"
                              parameters:@{@"client_id": clientId}
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                    [GANHelper analyzeEvent:@"history_update_success" category:HISTORY_SCREEN];
                                     //NSLog(@"%@", responseObject);
                                     
                                     for(NSDictionary *orderDict in responseObject[@"orders"]){
@@ -121,6 +123,7 @@
                                     }
                                 }
                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    [GANHelper analyzeEvent:@"history_update_failed" label:error.localizedDescription category:HISTORY_SCREEN];
                                     NSLog(@"%@", error);
                                     
                                     if ([sender isKindOfClass:[UIRefreshControl class]]) {
@@ -333,9 +336,11 @@
     DBOrderViewController *orderViewController = [DBOrderViewController new];
     orderViewController.order = order;
     orderViewController.hidesBottomBarWhenPushed = YES;
+    
+    NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", order.orderId, [IHSecureStore sharedInstance].clientId];
+    [GANHelper analyzeEvent:@"order_selected" label:eventLabel category:HISTORY_SCREEN];
+    
     [self.navigationController pushViewController:orderViewController animated:YES];
-
-    [GANHelper analyzeEvent:@"item_click" label:order.orderId category:@"Orders_screen"];
 }
 
 /*- (void)newOrderViewController:(DBNewOrderViewController *)controller didFinishOrder:(Order *)order{

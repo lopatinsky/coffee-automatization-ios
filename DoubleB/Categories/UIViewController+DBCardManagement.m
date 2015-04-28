@@ -44,11 +44,22 @@ static NSString *screenIdentifier;
                                               if (success) {
                                                   [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
                                                   
+                                                  /***** analytics *****/
+                                                  
+                                                  NSUInteger cardsCount = [IHSecureStore sharedInstance].cardCount;
+                                                  NSArray *cards = [IHSecureStore sharedInstance].cards;
+                                                  NSString *cardType = [cards[cardsCount - 1][@"cardPan"] db_cardIssuer];
+                                                  
+                                                  NSString *eventLabel = [NSString stringWithFormat:@"%@;%d", cardType, cardsCount - 1];
+                                                  
+                                                  [GANHelper analyzeEvent:@"add_card_success" label:eventLabel category:PAYMENT_SCREEN];
+                                                  
+                                                  /*********************/
+                                                  
                                                   if(completionHandler){
                                                       completionHandler(YES);
                                                   }
                                                   
-                                                  [GANHelper analyzeEvent:@"card_add_success" category:screenIdentifier];
                                               } else {
                                                   NSString *error;
                                                   
@@ -71,6 +82,7 @@ static NSString *screenIdentifier;
                                                       error = message;
                                                   }
                                                   
+                                                  [GANHelper analyzeEvent:@"add_card_failed" label:error category:PAYMENT_SCREEN];
                                                   
                                                   [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
                                                                                  message:error
@@ -85,9 +97,7 @@ static NSString *screenIdentifier;
                                                   if(items){
                                                       [eventLabel appendString:items[@"alfaResponse"]];
                                                   }
-                                                  
-                                                  [GANHelper analyzeEvent:@"card_add_failure" label:eventLabel category:screenIdentifier];
-                                                  
+                                                                                                    
                                                   if(completionHandler){
                                                       completionHandler(NO);
                                                   }

@@ -126,14 +126,12 @@ NSString *const kLocationChangedNotification = @"kLocationChanged";
             
         case kCLAuthorizationStatusDenied:
         case kCLAuthorizationStatusRestricted:
-            [GANHelper analyzeEvent:@"location" label:@"fail" category:@"Notification"];
             if (self.callback) {
                 self.callback(nil);
                 self.callback = nil;
             }
             break;
         default:
-            [GANHelper analyzeEvent:@"location" label:@"success" category:@"Notification"];
             [self.locationManager startUpdatingLocation];
             break;
     }

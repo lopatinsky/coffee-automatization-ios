@@ -23,4 +23,6 @@ typedef NS_ENUM(NSUInteger, CardsViewControllerMode) {
 @property (nonatomic) CardsViewControllerMode mode;
 @property (weak, nonatomic) id<DBCardsViewControllerDelegate> delegate;
 
+@property (nonatomic, strong) NSString *screen;
+
 @end

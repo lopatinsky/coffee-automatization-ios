@@ -76,18 +76,12 @@
     CGPoint point = [touch locationInView:self];
     
     if([self point:point insideView:self.disclosureIndicatorAddress]){
-        [GANHelper analyzeEvent:@"locaton_arrow_click"
-                       category:@"Order_screen"];
     }
     
     if([self point:point insideView:self.disclosureIndicatorTime]){
-        [GANHelper analyzeEvent:@"delivery_time_arrow_click"
-                       category:@"Order_screen"];
     }
     
     if([self point:point insideView:self.disclosureIndicatorProfile]){
-        [GANHelper analyzeEvent:@"user_profile_arrow_click"
-                       category:@"Order_screen"];
     }
     return YES;
 }

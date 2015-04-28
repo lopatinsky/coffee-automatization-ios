@@ -252,12 +252,14 @@
 }
 
 - (IBAction)moreButtonTouchUpInside:(id)sender{
+    [GANHelper analyzeEvent:@"position_add_click" category:ORDER_SCREEN];
     if([self.delegate respondsToSelector:@selector(db_orderItemCellIncreaseItemCount:)]){
         [self.delegate db_orderItemCellIncreaseItemCount:self];
     }
 }
 
 - (IBAction)lessButtonTouchUpInside:(id)sender{
+    [GANHelper analyzeEvent:@"position_minus_click" category:ORDER_SCREEN];
     if([self.delegate respondsToSelector:@selector(db_orderItemCellDecreaseItemCount:)]){
         [self.delegate db_orderItemCellDecreaseItemCount:self];
     }

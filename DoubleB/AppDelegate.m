@@ -43,7 +43,7 @@
     
     // Any significant preloadings/initializations
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
+//        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
     }
     
     [DBServerAPI registerUser:nil];
@@ -117,7 +117,7 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
+//    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
 
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
@@ -131,7 +131,6 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"%s -> %@", __PRETTY_FUNCTION__, error);
-    [GANHelper analyzeEvent:@"push" label:@"fail" category:@"Notification"];
 }
 
 //- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
@@ -163,7 +162,7 @@
              // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
-        } 
+        }
     }
 }
 
