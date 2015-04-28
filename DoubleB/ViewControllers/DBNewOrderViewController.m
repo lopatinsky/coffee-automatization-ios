@@ -58,6 +58,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 @interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBPromoManagerUpdateInfoDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -132,8 +133,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
                                                                                 action:@selector(clickSettings:)];
-        // Inset for tabBar
-        //        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, self.tabBarController.tabBar.frame.size.height, 0);
     }
 // ========= Configure Logic =========
     
@@ -146,10 +145,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
 //    [self.view layoutIfNeeded];
     
-    DBDiscountAdvertView *discountAdView = [DBDiscountAdvertView new];
-    [discountAdView.advertImageView templateImageWithName:@"percent_icon"];
-    self.advertView.hidden = NO;
-    [self.advertView addSubview:discountAdView];
+//    DBDiscountAdvertView *discountAdView = [DBDiscountAdvertView new];
+//    [discountAdView.advertImageView templateImageWithName:@"percent_icon"];
+//    self.advertView.hidden = NO;
+//    [self.advertView addSubview:discountAdView];
+    self.constraintAdvertViewHeight.constant = 0;
 // ========= Configure DBDiscountAdvertView =========
     
     

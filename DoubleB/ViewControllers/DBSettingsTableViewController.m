@@ -75,11 +75,12 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"title": NSLocalizedString(@"Написать нам", nil),
                                     @"image": @"feedback"}];
     
-    DBCompanyInfoViewController *companyInfoVC = [DBCompanyInfoViewController new];
-    [self.settingsItems addObject:@{@"name": @"companyInfoVC",
-                                   @"title": NSLocalizedString(@"О компании", nil),
-                                   @"image": @"",
-                                   @"viewController": companyInfoVC}];
+    // Company info
+//    DBCompanyInfoViewController *companyInfoVC = [DBCompanyInfoViewController new];
+//    [self.settingsItems addObject:@{@"name": @"companyInfoVC",
+//                                   @"title": NSLocalizedString(@"О компании", nil),
+//                                   @"image": @"",
+//                                   @"viewController": companyInfoVC}];
     
 //    // Share friends item
 //    [self.settingsItems addObject:@{@"name": @"shareVC",
