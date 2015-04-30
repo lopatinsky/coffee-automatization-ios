@@ -97,13 +97,8 @@
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     CGPoint point = [touch locationInView:self.view];
     
-    if(CGRectContainsPoint(self.labelName.frame, point)){
-    }
-    
-    if(CGRectContainsPoint(self.labelAddress.frame, point)){
-    }
-    
-    if(CGRectContainsPoint(self.labelWorkHours.frame, point)){
+    if (CGRectContainsPoint(self.mapView.frame, point)) {
+        [GANHelper analyzeEvent:@"map_scrolled" category:VENUE_INFO_SCREEN];
     }
     
     return YES;
