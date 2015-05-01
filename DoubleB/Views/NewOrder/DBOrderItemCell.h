@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class OrderItem;
+@class DBPromoItem;
 @class DBOrderItemCell;
 
 typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
@@ -49,7 +50,7 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 
 - (instancetype)initWithType:(DBOrderItemCellType)type;
 - (void)configureWithOrderItem:(OrderItem *)item;
-- (void)itemInfoChanged:(BOOL)animated;
+- (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated;
 - (void)reloadCount;
 
 - (void)moveContentToOriginal;

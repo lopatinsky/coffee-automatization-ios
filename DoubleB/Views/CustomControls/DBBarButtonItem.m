@@ -8,10 +8,10 @@
 
 #import "DBBarButtonItem.h"
 #import "DBOrderBarButtonView.h"
+#import "DBPromoManager.h"
 #import "OrderManager.h"
 
 @interface DBBarButtonItem ()
-@property (strong, nonatomic) OrderManager *orderManager;
 
 @property (strong, nonatomic) DBOrderBarButtonView *orderView;
 @end
@@ -35,17 +35,22 @@
     
     self = [super initWithCustomView:buttonOrder];
     
-    self.orderManager = [OrderManager sharedManager];
-    [self.orderManager addObserver:self forKeyPath:@"mixedTotalPrice"
-                           options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                           context:nil];
+    [[OrderManager sharedManager] addObserver:self
+                                   forKeyPath:@"totalPrice"
+                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                                      context:nil];
+    [[DBPromoManager sharedManager] addObserver:self
+                                     forKeyPath:@"totalDiscount"
+                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                                        context:nil];
     
     [self update];
     return self;
 }
 
 -(void)dealloc{
-    [self.orderManager removeObserver:self forKeyPath:@"mixedTotalPrice"];
+    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"totalPrice"];
+    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"totalDiscount"];
 }
 
 -(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
@@ -60,8 +65,8 @@
 
 -(void)update{
     UIButton *button = (UIButton *)self.customView;
-    NSAttributedString *string = [self attributedStringWithCount:self.orderManager.positionsCount
-                                                  withTotalPrice:self.orderManager.mixedTotalPrice];
+    NSAttributedString *string = [self attributedStringWithCount:[OrderManager sharedManager].positionsCount
+                                                  withTotalPrice:[OrderManager sharedManager].totalPrice - [DBPromoManager sharedManager].totalDiscount];
     [self.orderView.totalLabel setAttributedText:string];
     
     CGRect newTitleRect = self.orderView.totalLabel.frame;
@@ -72,11 +77,11 @@
     button.frame = newButtonRect;
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath
-                     ofObject:(id)object
-                       change:(NSDictionary *)change
-                      context:(void *)context{
-    if([keyPath isEqualToString:@"mixedTotalPrice"]){
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context{
+    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"totalDiscount"]){
         [self update];
     }
 }

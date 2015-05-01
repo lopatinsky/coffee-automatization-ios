@@ -249,9 +249,6 @@
                 case PaymentTypeExtraType:
                     [imageViewPayment templateImageWithName:@"mug_orders"];
                     break;
-                case PaymentTypePersonalAccount:
-                    [imageViewPayment templateImageWithName:@"payment"];
-                    break;
                 default:
                     break;
             }
@@ -275,9 +272,6 @@
                 case PaymentTypeExtraType:
                     [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
                     break;
-                case PaymentTypePersonalAccount:
-                    [imageViewPayment templateImageWithName:@"payment" tintColor:[UIColor db_grayColor]];
-                    break;
                 default:
                     break;
             }
@@ -298,9 +292,6 @@
                     break;
                 case PaymentTypeExtraType:
                     [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
-                    break;
-                case PaymentTypePersonalAccount:
-                    [imageViewPayment templateImageWithName:@"payment" tintColor:[UIColor db_grayColor]];
                     break;
                 default:
                     break;

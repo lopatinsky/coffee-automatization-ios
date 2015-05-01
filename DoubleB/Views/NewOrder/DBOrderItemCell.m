@@ -8,6 +8,7 @@
 
 #import "DBOrderItemCell.h"
 #import "OrderItem.h"
+#import "DBPromoManager.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
@@ -141,10 +142,9 @@
     }
 }
 
-// Called after every update of promos
-- (void)itemInfoChanged:(BOOL)animated {
-    if([_orderItem.errors count] > 0){
-        [self.inactivityView setErrors:_orderItem.errors];
+- (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated{
+    if([promoItem.errors count] > 0){
+        [self.inactivityView setErrors:promoItem.errors];
         
         if(self.inactivityView.hidden){
             self.inactivityView.alpha = 0;
@@ -172,6 +172,7 @@
         }
     }
 }
+
 
 - (void)reloadCount{
     self.countLabel.text = [NSString stringWithFormat:@"x%ld", (long)self.orderItem.count];

@@ -651,6 +651,9 @@
 		CB517C7F1AEFB6FF00A50F5C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB517C7A1AEFB6FF00A50F5C /* InfoPlist.strings */; };
 		CB517C801AEFB6FF00A50F5C /* Images-MeatMe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB517C7C1AEFB6FF00A50F5C /* Images-MeatMe.xcassets */; };
 		CB517C811AEFB6FF00A50F5C /* MeatMe-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB517C7D1AEFB6FF00A50F5C /* MeatMe-info.plist */; };
+		CB517EA61AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB517EA51AEFC51800A50F5C /* DBNewOrderBonusesView.m */; };
+		CB517EA71AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB517EA51AEFC51800A50F5C /* DBNewOrderBonusesView.m */; };
+		CB517EA81AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB517EA51AEFC51800A50F5C /* DBNewOrderBonusesView.m */; };
 		CB60C0A61AC5AD2600D5E962 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB60C0A71AC5AD2600D5E962 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB60C0A81AC5AD2600D5E962 /* DBNewOrderAdditionalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D391ABC3CAE00BD4E81 /* DBNewOrderAdditionalInfoView.m */; };
@@ -1145,6 +1148,8 @@
 		CB517C7C1AEFB6FF00A50F5C /* Images-MeatMe.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-MeatMe.xcassets"; sourceTree = "<group>"; };
 		CB517C7D1AEFB6FF00A50F5C /* MeatMe-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MeatMe-info.plist"; sourceTree = "<group>"; };
 		CB517C7E1AEFB6FF00A50F5C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB517EA41AEFC51800A50F5C /* DBNewOrderBonusesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBNewOrderBonusesView.h; sourceTree = "<group>"; };
+		CB517EA51AEFC51800A50F5C /* DBNewOrderBonusesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBNewOrderBonusesView.m; sourceTree = "<group>"; };
 		CB60C0911AC5666100D5E962 /* DBMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMenu.h; sourceTree = "<group>"; };
 		CB60C0921AC5666100D5E962 /* DBMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMenu.m; sourceTree = "<group>"; };
 		CB60C0931AC5666100D5E962 /* DBMenuCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMenuCategory.h; sourceTree = "<group>"; };
@@ -2030,6 +2035,8 @@
 				CBD2B3871AD6BF9F00D0FCF1 /* DBOrderItemInactivityView.h */,
 				CBD2B3881AD6BF9F00D0FCF1 /* DBOrderItemInactivityView.m */,
 				CBD2B38A1AD6BFAE00D0FCF1 /* DBOrderItemInactivityView.xib */,
+				CB517EA41AEFC51800A50F5C /* DBNewOrderBonusesView.h */,
+				CB517EA51AEFC51800A50F5C /* DBNewOrderBonusesView.m */,
 			);
 			path = NewOrder;
 			sourceTree = "<group>";
@@ -3021,6 +3028,7 @@
 				CB1AF7761AE10E6900FA3224 /* DBOrderItemNotesCell.m in Sources */,
 				CB1AF7771AE10E6900FA3224 /* DBDiscountMessageCell.m in Sources */,
 				CB1AF7781AE10E6900FA3224 /* DBMastercardAdvertProgressView.m in Sources */,
+				CB517EA71AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
 				CB1AF7791AE10E6900FA3224 /* DBMastercardAdView.m in Sources */,
 				CB1AF77A1AE10E6900FA3224 /* EXTScope.m in Sources */,
 				CB1AF77B1AE10E6900FA3224 /* DBTimePickerView.m in Sources */,
@@ -3133,6 +3141,7 @@
 				CB517B4D1AEFB6B500A50F5C /* DBOrderItemNotesCell.m in Sources */,
 				CB517B4E1AEFB6B500A50F5C /* DBDiscountMessageCell.m in Sources */,
 				CB517B4F1AEFB6B500A50F5C /* DBMastercardAdvertProgressView.m in Sources */,
+				CB517EA81AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
 				CB517B501AEFB6B500A50F5C /* DBMastercardAdView.m in Sources */,
 				CB517B511AEFB6B500A50F5C /* EXTScope.m in Sources */,
 				CB517B521AEFB6B500A50F5C /* DBTimePickerView.m in Sources */,
@@ -3245,6 +3254,7 @@
 				CB60C0B31AC5AD2600D5E962 /* DBOrderItemNotesCell.m in Sources */,
 				CB60C0B41AC5AD2600D5E962 /* DBDiscountMessageCell.m in Sources */,
 				CB60C0B51AC5AD2600D5E962 /* DBMastercardAdvertProgressView.m in Sources */,
+				CB517EA61AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
 				CB60C0B61AC5AD2600D5E962 /* DBMastercardAdView.m in Sources */,
 				CB60C0B71AC5AD2600D5E962 /* EXTScope.m in Sources */,
 				CB60C0B81AC5AD2600D5E962 /* DBTimePickerView.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "DBNewOrderViewController.h"
+#import "DBNewOrderBonusesView.h"
 #import "DBNewOrderTotalView.h"
 #import "DBNewOrderViewHeader.h"
 #import "DBNewOrderAdditionalInfoView.h"
@@ -55,7 +56,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBPromoManagerUpdateInfoDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
@@ -64,6 +65,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
+@property (weak, nonatomic) IBOutlet DBNewOrderBonusesView *bonusView;
 @property (weak, nonatomic) IBOutlet DBNewOrderTotalView *totalView;
 @property (weak, nonatomic) IBOutlet UIButton *addProductButton;
 @property (weak, nonatomic) IBOutlet UIImageView *addProductImageView;
@@ -109,7 +111,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.title = NSLocalizedString(@"Заказ", nil);
     
 // ========= Configure Logic =========
-    [DBPromoManager sharedManager].updateInfoDelegate = self;
     self.delegate = [DBTabBarController sharedInstance];
     self.currentCard = [NSDictionary new];
     self.pickerHolder = [[DBTimePickerView alloc] initWithDelegate:self];
@@ -199,6 +200,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self setupFooterView];
     [self setupContinueButton];
     
+    self.bonusView.delegate = self;
     self.ndaView.delegate = self;
     [self startUpdatingPromoInfo];
 }
@@ -212,6 +214,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadProfile];
     [self reloadContinueButton];
     [self reloadComment];
+    [self reloadBonusesView:NO];
     
     [self.itemCells removeAllObjects];
     
@@ -352,6 +355,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 //    [self.tableView endUpdates];
 //}
 
+- (void)reloadBonusesView:(BOOL)animated{
+    if([DBPromoManager sharedManager].bonuses > 0){
+        self.bonusView.bonusSwitchActive = [DBPromoManager sharedManager].bonusesActive;
+        [self.bonusView show:animated completion:^{
+            [self.scrollView layoutIfNeeded];
+        }];
+    } else {
+        [self.bonusView hide:animated completion:^{
+            [self.scrollView layoutIfNeeded];
+        }];
+    }
+}
+
 - (void)reloadComment {
     if ([OrderManager sharedManager].comment.length > 0) {
         if ([OrderManager sharedManager].comment.length > 10) {
@@ -449,16 +465,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             } else {
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];
                 self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
-            }
-            break;
-            
-        case PaymentTypePersonalAccount:
-            if ([OrderManager sharedManager].totalPrice > [DBPromoManager sharedManager].walletBalance) {
-                [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
-                [self reloadCard];
-            } else {
-                self.orderFooter.labelCard.textColor = [UIColor blackColor];
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Личный счет", nil);
             }
             break;
             
@@ -726,9 +732,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         case PaymentTypeExtraType:
             label = @"extra_type";
             break;
-        case PaymentTypePersonalAccount:
-            label = @"personal_account";
-            break;
     }
 
     [GANHelper analyzeEvent:@"payment_click"
@@ -920,7 +923,29 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         [self.totalView startUpdating];
         
         [self reloadContinueButton];
-        [[DBPromoManager sharedManager] updateInfo];
+        [[DBPromoManager sharedManager] updateInfo:^(BOOL success) {
+            [self endUpdatingPromoInfo];
+            
+            if(success){
+                // Show order promos & errors
+                NSArray *promos = [DBPromoManager sharedManager].promos;
+                NSArray *errors = [DBPromoManager sharedManager].errors;
+                if([promos count] > 0 || [errors count] > 0){
+                    [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
+                }
+                
+                [self.tableView reloadData];
+            } else {
+                [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
+                                          animation:^{
+                                              [self.scrollView layoutIfNeeded];
+                                          } completion:nil];
+            }
+            
+            [self reloadBonusesView:YES];
+        }];
+    } else {
+        
     }
 }
 
@@ -930,58 +955,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadContinueButton];
 }
 
-- (void)applyItemsInfo:(NSArray *)itemsInfo{
-    if(!itemsInfo){
-        for(int i = 0; i < [OrderManager sharedManager].positionsCount; i++){
-            DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            [cell.orderItem clearAdditionalInfo];
-            [cell itemInfoChanged:YES];
-        }
-        return;
-    }
-    
-    for(NSDictionary *itemInfo in itemsInfo){
-        DBMenuPosition *templatePosition = itemInfo[@"item"];
-        OrderItem *item = [[OrderManager sharedManager] itemWithTemplatePosition:templatePosition];
-        item.notes = itemInfo[@"promos"];
-        item.errors = itemInfo[@"errors"];
-        
-        NSInteger index = [[OrderManager sharedManager].items indexOfObject:item];
-        DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-        [cell itemInfoChanged:YES];
-    }
-}
 
+#pragma mark - DBNewOrderBonusesViewDelegate
 
-#pragma mark - DBPromoManagerDelegate
-
-- (void)promoManager:(DBPromoManager *)manager
-       didUpdateInfo:(NSArray *)itemsInfo
-          promos:(NSArray *)promos{
-    [self applyItemsInfo:itemsInfo];
-    [self showOrHideAdditionalInfoViewWithErrors:nil promos:promos];
-    
-    [self endUpdatingPromoInfo];
-}
-
-- (void)promoManager:(DBPromoManager *)manager
-       didUpdateInfo:(NSArray *)itemsInfo
-          errors:(NSArray *)errors
-          promos:(NSArray *)promos{
-    [self applyItemsInfo:itemsInfo];
-    [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
-    
-    [self endUpdatingPromoInfo];
-}
-
-- (void)promoManager:(DBPromoManager *)mamager didFailUpdateInfoWithError:(NSError *)error{
-    [self applyItemsInfo:nil];
-    [self endUpdatingPromoInfo];
-    
-    [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
-                               animation:^{
-                                   [self.scrollView layoutIfNeeded];
-                               } completion:nil];
+- (void)db_newOrderBonusesView:(DBNewOrderBonusesView *)view didSelectBonuses:(BOOL)select{
+    [DBPromoManager sharedManager].bonusesActive = select;
+    [self reloadBonusesView:NO];
 }
 
 
@@ -1066,16 +1045,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     cell.delegate = self;
     cell.panGestureRecognizer.delegate = self;
     
-//    BOOL isTheSame = false;
-//    for (DBOrderItemCell *oldCell in self.itemCells) {
-//        if (oldCell == cell) {
-//            isTheSame = true;
-//            break;
-//        }
-//    }
-//    if (!isTheSame) {
-//        [self.itemCells addObject:cell];
-//    }
+    DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
+    if(promoItem){
+        [cell configureWithPromoItem:promoItem animated:YES];
+    }
     
     return cell;
 }

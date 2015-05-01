@@ -9,6 +9,7 @@
 #import "DBServerAPI.h"
 #import "DBAPIClient.h"
 #import "OrderManager.h"
+#import "DBPromoManager.h"
 #import "OrderItem.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
@@ -187,7 +188,7 @@
     order[@"order_id"] = [[OrderManager sharedManager] orderId];
     order[@"device_type"] = @(0);
     order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
-    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice]);
+    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].totalDiscount);
     order[@"items"] = [DBServerAPI assembleOrderItems];
     order[@"client"] = [DBServerAPI assembleClientInfo];
     order[@"delivery_time"] = [OrderManager sharedManager].time;
@@ -400,13 +401,10 @@
             payment[@"type_id"] = @2;
             break;
             
-        case PaymentTypePersonalAccount:
-            payment[@"type_id"] = @3;
-            break;
-            
         default:
             break;
     }
+    payment[@"wallet_payment"] = [DBPromoManager sharedManager].bonusesActive ? @([DBPromoManager sharedManager].bonuses) : @(0);
     
     return payment;
 }

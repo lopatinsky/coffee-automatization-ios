@@ -121,8 +121,10 @@
     
     if (self.currentlyShowPromos) {
         cell.messageLabel.textColor = [UIColor db_defaultColor];
+        cell.messageLabel.textAlignment = NSTextAlignmentRight;
     } else {
         cell.messageLabel.textColor = [UIColor orangeColor];
+        cell.messageLabel.textAlignment = NSTextAlignmentLeft;
         [cell.messageLabel db_startObservingAnimationNotification];
     }
     

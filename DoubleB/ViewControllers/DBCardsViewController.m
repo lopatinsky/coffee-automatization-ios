@@ -115,7 +115,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 4;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -134,18 +134,13 @@
         result += self.mastercardPromo.promoCurrentMugCount > 0 ? 1 : 0;
     }
     
-    // Personal account type
-    if (section == 1) {
-        result += [self.availablePaymentTypes containsObject:@(PaymentTypePersonalAccount)] ? 1 : 0;
-    }
-    
     // Cash payment type
-    if(section == 2){
+    if(section == 1){
         result += [self.availablePaymentTypes containsObject:@(PaymentTypeCash)] ? 1 : 0;
     }
     
     // Cards payment type
-    if(section == 3){
+    if(section == 2){
         result += [self.cards count] + 1;
     }
     
@@ -182,28 +177,8 @@
         }
     }
     
-    // Personal account payment type
-    if (indexPath.section == 1) {
-        cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@: %ld %@", NSLocalizedString(@"Личный счет", nil), (long)[DBPromoManager sharedManager].walletBalance, [Compatibility currencySymbol]];
-        
-        if([DBPromoManager sharedManager].walletBalance >= [OrderManager sharedManager].totalPrice && [OrderManager sharedManager].totalPrice > 0){
-            [cell.cardIconImageView templateImageWithName:@"payment"];
-            cell.cardTitleLabel.textColor = [UIColor blackColor];
-            if ([OrderManager sharedManager].paymentType == PaymentTypePersonalAccount) {
-                [cell.cardActiveIndicator templateImageWithName:@"tick"];
-            } else {
-                cell.cardActiveIndicator.hidden = YES;
-            }
-        } else {
-            [cell.cardIconImageView templateImageWithName:@"payment" tintColor:[UIColor grayColor]];
-            cell.cardActiveIndicator.hidden = YES;
-            cell.cardTitleLabel.textColor = [UIColor grayColor];
-            cell.userInteractionEnabled = NO;
-        }
-    }
-    
     // Cash payment type
-    if(indexPath.section == 2){
+    if(indexPath.section == 1){
         cell.cardTitleLabel.text = NSLocalizedString(@"Наличные", nil);
         [cell.cardIconImageView templateImageWithName:@"cash"];
         cell.cardTitleLabel.textColor = [UIColor blackColor];
@@ -215,7 +190,7 @@
     }
     
     // Cards payment type
-    if(indexPath.section == 3){
+    if(indexPath.section == 2){
         // add card button
         if(indexPath.row == [self.cards count]){
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBCardAddCell"];
@@ -251,11 +226,11 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.mode == CardsViewControllerModeManageCards && indexPath.section == 3 && indexPath.row < [self.cards count];
+    return self.mode == CardsViewControllerModeManageCards && indexPath.section == 2 && indexPath.row < [self.cards count];
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (indexPath.section == 3) ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+    return (indexPath.section == 2) ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -290,17 +265,8 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    // Personal account payment type
-    if (indexPath.section == 1) {
-        [OrderManager sharedManager].paymentType = PaymentTypePersonalAccount;
-        [self.tableView reloadData];
-        
-        [self.delegate cardsControllerDidChoosePaymentItem:self];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
     // Cash payment type
-    if(indexPath.section == 2){
+    if(indexPath.section == 1){
         [OrderManager sharedManager].paymentType = PaymentTypeCash;
         [self.tableView reloadData];
         
@@ -309,7 +275,7 @@
     }
     
     // Cards payment type
-    if(indexPath.section == 3){
+    if(indexPath.section == 2){
         // add card button
         if(indexPath.row == [self.cards count]){
             [GANHelper analyzeEvent:@"card_add" label:[NSString stringWithFormat:@"%ld", (long)[self.cards count]] category:self.screen];
@@ -350,16 +316,13 @@
             result = @"0";
             break;
         case PaymentTypeCash:
-            result = @"2";
+            result = @"1";
             break;
         case PaymentTypeCard:
-            result = @"3";
+            result = @"2";
             break;
         case PaymentTypeExtraType:
-            result = @"4";
-            break;
-        case PaymentTypePersonalAccount:
-            result = @"1";
+            result = @"3";
             break;
     }
     

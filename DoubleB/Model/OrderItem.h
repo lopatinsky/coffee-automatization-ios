@@ -16,15 +16,8 @@
 @property (nonatomic, readonly) double totalPrice;
 @property (nonatomic) NSInteger count;
 
-@property (strong, nonatomic) NSArray *notes;
-@property (strong, nonatomic) NSArray *errors;
-
 - (instancetype)initWithPosition:(DBMenuPosition *)position;
 
 + (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
-
-- (void)clearAdditionalInfo;
-- (BOOL)shouldShowAdditionalInfo;
-- (NSArray *)messages;
 
 @end

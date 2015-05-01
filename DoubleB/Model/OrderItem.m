@@ -16,8 +16,6 @@
     self = [super init];
     self.position = position;
     
-    [self commonInit];
-    
     return self;
 }
 
@@ -41,39 +39,7 @@
     
     item.count = [historyItem[@"quantity"] integerValue];
     
-    [item commonInit];
-    
     return item;
-}
-
-- (void)commonInit{
-    [self clearAdditionalInfo];
-}
-
-- (void)setNotes:(NSArray *)notes{
-    _notes = notes;
-    _errors = @[];
-}
-
-- (void)setErrors:(NSArray *)errors{
-    _errors = errors;
-}
-
-- (void)clearAdditionalInfo{
-    _notes = @[];
-    _errors = @[];
-}
-
-- (BOOL)shouldShowAdditionalInfo{
-    return [_notes count] > 0 || [_errors count] > 0;
-}
-
-- (NSArray *)messages{
-    if([_errors count] > 0){
-        return _errors;
-    } else {
-        return _notes;
-    }
 }
 
 - (double)totalPrice{

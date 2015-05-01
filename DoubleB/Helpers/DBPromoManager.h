@@ -7,38 +7,63 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Order.h"
 
-@class Venue;
+@class OrderItem;
 
-@class DBPromoManager;
+/**
+ * Class for manage all info about item promo
+ */
+@interface DBPromoItem : NSObject
+@property (strong, nonatomic) OrderItem *orderItem;
 
-@protocol DBPromoManagerUpdateInfoDelegate <NSObject>
-@required
-- (void)promoManager:(DBPromoManager *)manager didUpdateInfo:(NSArray *)itemsInfo promos:(NSArray *)promos;
-- (void)promoManager:(DBPromoManager *)manager didUpdateInfo:(NSArray *)itemsInfo errors:(NSArray *)errors promos:(NSArray *)promos;
-- (void)promoManager:(DBPromoManager *)mamager didFailUpdateInfoWithError:(NSError *)error;
+@property (strong, nonatomic) NSArray *errors;
+@property (strong, nonatomic) NSArray *promos;
 @end
 
-@protocol DBPromoManagerUpdateTotalDelegate <NSObject>
-@required
-- (void)promoManager:(DBPromoManager *)manager didUpdateInfoWithTotal:(double)totalSum;
-@end
+
 
 @interface DBPromoManager : NSObject
+/**
+ * Discount for order synchronized with server
+ */
+@property (nonatomic, readonly) double discount;
 
-@property (weak, nonatomic) id<DBPromoManagerUpdateInfoDelegate> updateInfoDelegate;
-@property (weak, nonatomic) id<DBPromoManagerUpdateTotalDelegate> updateTotalDelegate;
-@property (nonatomic) BOOL validOrder;
+/**
+ * Bonuses available for order payment
+ */
+@property (nonatomic, readonly) double bonuses;
+@property (nonatomic) BOOL bonusesActive;
 
-//@property(nonatomic, strong, readonly) NSString *walletBalanceTitleText;
-//@property(nonatomic, strong, readonly) NSString *walletBalanceScreenText;
-@property(nonatomic, readonly) NSInteger walletBalance;
+
+/**
+ * Total discount for order (discount + bonuses(if active))
+ */
+@property (nonatomic, readonly) double totalDiscount;
+
+/**
+ * Mark of order validity synchronized with server
+ */
+@property (nonatomic, readonly) BOOL validOrder;
+
+/**
+ * Order errors & promos from server
+ */
+@property (strong, nonatomic, readonly) NSArray *errors;
+@property (strong, nonatomic, readonly) NSArray *promos;
+
 
 + (instancetype)sharedManager;
 
-- (void)updateInfo;
 
+- (void)updateInfo:(void(^)(BOOL success))callback;
+- (void)clear;
+
+- (DBPromoItem *)promosForOrderItem:(OrderItem *)item;
+
+
+
+// Logic of personal wallet
+@property(nonatomic, readonly) NSInteger walletBalance;
 - (void)synchronizeWalletInfo:(void(^)(int balance))callback;
 
 @end

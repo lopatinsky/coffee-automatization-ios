@@ -74,9 +74,6 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                                         case 2:
                                             [array addObject:@(PaymentTypeExtraType)];
                                             break;
-                                        case 3:
-                                            [array addObject:@(PaymentTypePersonalAccount)];
-                                            break;
                                         default:
                                             break;
                                     }

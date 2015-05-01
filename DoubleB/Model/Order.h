@@ -19,8 +19,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
     PaymentTypeNotSet = 0,
     PaymentTypeCash,
     PaymentTypeCard,
-    PaymentTypeExtraType,
-    PaymentTypePersonalAccount
+    PaymentTypeExtraType
 };
 
 @class Venue;

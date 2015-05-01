@@ -15,11 +15,19 @@
 
 NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo";
 
+@implementation DBPromoItem
+
+@end
+
+
 @interface DBPromoManager ()
-@property (strong, nonatomic) NSNumber *targetTime;
+@property (nonatomic) double discount;
+@property (nonatomic) double bonuses;
+@property (nonatomic) double totalDiscount;
+
+@property (strong, nonatomic) NSMutableArray *promoItems;
 
 @property (nonatomic) NSInteger lastUpdateNumber;
-
 @end
 
 @implementation DBPromoManager
@@ -35,104 +43,117 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
     self = [super init];
     if (self) {
         self.lastUpdateNumber = 0;
-        self.validOrder = YES;
+        _validOrder = YES;
     }
     return self;
 }
 
-- (void)notifyTotalSumObserver:(double)total{
-    if([self.updateTotalDelegate respondsToSelector:@selector(promoManager:didUpdateInfoWithTotal:)]){
-        [self.updateTotalDelegate promoManager:self didUpdateInfoWithTotal:total];
-    }
+- (double)totalDiscount{
+    return _discount + (_bonusesActive ? _bonuses : 0);
 }
 
-- (void)updateInfo{
+- (void)changeTotalDiscount{
+    [self willChangeValueForKey:@"totalDiscount"];
+    [self didChangeValueForKey:@"totalDiscount"];
+}
+
+- (void)setBonusesActive:(BOOL)bonusesActive{
+    _bonusesActive = bonusesActive;
+    [self changeTotalDiscount];
+}
+
+- (void)updateInfo:(void(^)(BOOL success))callback {
+    if (![IHSecureStore sharedInstance].clientId) {
+        if(callback)
+            callback(NO);
+        return;
+    }
+    
     NSInteger currentUpdateNumber = self.lastUpdateNumber + 1;
     self.lastUpdateNumber = currentUpdateNumber;
-    if ([IHSecureStore sharedInstance].clientId) {
-        [DBServerAPI checkNewOrder:^(NSDictionary *response) {
-            double total = [response[@"total_sum"] doubleValue];
+    
+
+    double currentTotal = [OrderManager sharedManager].totalPrice;
+    [DBServerAPI checkNewOrder:^(NSDictionary *response) {
+        // Calculate discount
+        double newTotal = [response[@"total_sum"] doubleValue];
+        self.discount = currentTotal - newTotal;
+        
+        // Calculate bonuses
+        self.bonuses = [response[@"max_wallet_payment"] doubleValue];
+        
+        [self changeTotalDiscount];
+        
+        // Assemble global promos & errors
+        NSMutableArray *globalPromoMessages = [NSMutableArray new];
+        NSMutableArray *globalErrorsMessages = [NSMutableArray new];
+        
+        for(NSString *error in response[@"errors"]){
+            [globalErrorsMessages addObject:error];
+        }
+        
+        for (NSDictionary *promo in response[@"promos"]) {
+            [globalPromoMessages addObject:promo[@"text"]];
+        }
+        _promos = globalPromoMessages;
+        _errors = globalErrorsMessages;
+        
+        
+        // Assemble items promos & errors
+        [self.promoItems removeAllObjects];
+        for(NSDictionary *item in response[@"items"]){
+            DBMenuPosition *templatePosition = [[[DBMenu sharedInstance] findPositionWithId:item[@"id"]] copy];
             
-            NSMutableArray *globalPromoMessages = [NSMutableArray new];
-            NSMutableArray *globalErrorsMessages = [NSMutableArray new];
-            
-            for(NSString *error in response[@"errors"]){
-                [globalErrorsMessages addObject:error];
+            for(NSDictionary *groupModifierItem in item[@"group_modifiers"]){
+                [templatePosition selectItem:groupModifierItem[@"choice"]
+                            forGroupModifier:groupModifierItem[@"id"]];
             }
             
-            for (NSDictionary *promo in response[@"promos"]) {
-                [globalPromoMessages addObject:promo[@"text"]];
+            for(NSDictionary *singleModifier in item[@"single_modifiers"]){
+                [templatePosition addSingleModifier:singleModifier[@"id"] count:[singleModifier[@"quantity"] intValue]];
             }
-            [OrderManager sharedManager].globalPromos = globalPromoMessages;
-            [OrderManager sharedManager].globalErrors = globalErrorsMessages;
             
+            OrderItem *orderItem = [[OrderManager sharedManager] itemWithTemplatePosition:templatePosition];
+            if(item){
+                DBPromoItem *promoItem = [DBPromoItem new];
+                promoItem.orderItem = orderItem;
             
-            NSMutableArray *itemsInfo = [[NSMutableArray alloc] init];
-            for(NSDictionary *item in response[@"items"]){
                 NSMutableArray *itemPromos = [NSMutableArray new];
                 for(NSDictionary *itemPromo in item[@"promos"]){
                     [itemPromos addObject:itemPromo[@"text"]];
                 }
+                promoItem.promos = itemPromos;
                 
-                DBMenuPosition *templatePosition = [[[DBMenu sharedInstance] findPositionWithId:item[@"id"]] copy];
+                promoItem.errors = item[@"errors"];
                 
-                for(NSDictionary *groupModifierItem in item[@"group_modifiers"]){
-                    [templatePosition selectItem:groupModifierItem[@"choice"]
-                                forGroupModifier:groupModifierItem[@"id"]];
-                }
-                
-                for(NSDictionary *singleModifier in item[@"single_modifiers"]){
-                    [templatePosition addSingleModifier:singleModifier[@"id"] count:[singleModifier[@"quantity"] intValue]];
-                }
-                
-                [itemsInfo addObject:@{@"item": templatePosition,
-                                       @"promos": itemPromos,
-                                       @"errors": item[@"errors"]}];
-            }
-            
-            if(self.lastUpdateNumber == currentUpdateNumber){
-                [self notifyTotalSumObserver:total];
-                
-                if([response[@"valid"] boolValue]){
-                    self.validOrder = YES;
-                    
-                    if([self.updateInfoDelegate respondsToSelector:@selector(promoManager:didUpdateInfo:promos:)]){
-                        [self.updateInfoDelegate promoManager:self
-                                                didUpdateInfo:itemsInfo
-                                                   promos:globalPromoMessages];
-                    }
-                } else {
-                    self.validOrder = NO;
-                    
-                    if([self.updateInfoDelegate respondsToSelector:@selector(promoManager:didUpdateInfo:errors:promos:)]){
-                        [self.updateInfoDelegate promoManager:self
-                                                didUpdateInfo:itemsInfo
-                                                   errors:response[@"errors"]
-                                                   promos:globalPromoMessages];
-                    }
-                }
-            }
-        } failure:^(NSError *error) {
-            self.validOrder = NO;
-            
-            if(self.lastUpdateNumber == currentUpdateNumber){
-                if([self.updateInfoDelegate respondsToSelector:@selector(promoManager:didFailUpdateInfoWithError:)]){
-                    [self.updateInfoDelegate promoManager:self didFailUpdateInfoWithError:error];
-                }
-            }
-        }];
-    };
-    
-    /*dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        double total = 134;
-        NSArray *itemsInfo = @[@{@"id": @"10", @"promos":@[@"Сегодня до 15:00 в кофейне Милютинский, 3 скидка на Аэропресс 20%", @"secondDescription"]}];
-        
-        for(id observer in self.updateObservers){
-            if([observer respondsToSelector:@selector(promoManager:didUpdateInfo:withTotal:)]){
-                [observer promoManager:self didUpdateInfo:itemsInfo withTotal:total];
+                [self.promoItems addObject:promoItem];
             }
         }
-    });*/
+        
+        _validOrder = [response[@"valid"] boolValue];
+        if(self.lastUpdateNumber == currentUpdateNumber && callback){
+            callback(YES);
+        }
+    } failure:^(NSError *error) {
+        _validOrder = NO;
+        
+        if(self.lastUpdateNumber == currentUpdateNumber && callback){
+            callback(NO);
+        }
+    }];
+}
+
+- (void)clear{
+    self.discount = 0;
+    self.bonuses = 0;
+    [self changeTotalDiscount];
+}
+
+- (DBPromoItem *)promosForOrderItem:(OrderItem *)item {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderItem == %@", item];
+    DBPromoItem *promoItem = [[self.promoItems filteredArrayUsingPredicate:predicate] firstObject];
+    
+    return promoItem;
 }
 
 

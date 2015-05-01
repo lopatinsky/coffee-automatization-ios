@@ -22,11 +22,6 @@
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedBeverageMode";
 
-@interface OrderManager ()<DBPromoManagerUpdateTotalDelegate>
-// Items added after last promo update and not verified by server;
-@property (strong, nonatomic) NSMutableArray *itemsAddedAfterPromoUpdate;
-@end
-
 @implementation OrderManager
 
 /**
@@ -56,10 +51,8 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 - (instancetype)init {
     self = [super init];
     if (self) {
-        [DBPromoManager sharedManager].updateTotalDelegate = self;
         self.items = [NSMutableArray array];
-        self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
-        _totalPrice = 0;
+        self.totalPrice = 0;
         
         _beverageMode = (DBBeverageMode)[[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastSelectedBeverageMode] intValue];
     }
@@ -91,16 +84,12 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
     result = result && self.totalCount != 0;
     result = result && [DBPromoManager sharedManager].validOrder;
-//    if ([OrderManager sharedManager].paymentType == PaymentTypePersonalAccount) {
-//        result = result && [OrderManager sharedManager].totalPrice < [DBMastercardPromo sharedInstance].walletBalans;
-//    }
     
     return result;
 }
 
 - (void)purgePositions {
     self.items = [NSMutableArray array];
-    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
     self.venue = nil;
     self.comment = @"";
     self.location = nil;
@@ -111,7 +100,6 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 
 - (void)overridePositions:(NSArray *)items {
     self.items = [NSMutableArray array];
-    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
     
     for (OrderItem *item in items) {
         OrderItem *newItem = [item copy];
@@ -162,7 +150,6 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         currentCount = itemWithSamePosition.count;
     }
     
-    [self.itemsAddedAfterPromoUpdate addObject:copyPosition];
     [self reloadTotal];
     
     return currentCount;
@@ -236,39 +223,11 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 
 - (void)reloadTotal{
     // Reload initial total
-    double initialTotal = 0;
+    double total = 0;
     for (OrderItem *item in self.items) {
-        initialTotal += item.totalPrice;
+        total += item.totalPrice;
     }
-    self.initialTotalPrice = initialTotal;
-    
-    // Reload mixed total
-    double mixedTotal = _totalPrice;
-    for(DBMenuPosition *position in self.itemsAddedAfterPromoUpdate){
-        mixedTotal += position.actualPrice;
-    }
-    self.mixedTotalPrice = mixedTotal;
-    
-    // Check if order is empty
-    if(_initialTotalPrice == 0 && (_totalPrice != 0 || _mixedTotalPrice != 0)){
-        [self updateTotalPrice:0];
-    }
-}
-
-- (double)totalPrice {
-    if(_totalPrice == 0){
-        return _initialTotalPrice;
-    } else {
-        return _totalPrice;
-    }
-}
-
-- (void)updateTotalPrice:(double)totalPrice{
-    self.totalPrice = totalPrice;
-    [self didChangeValueForKey:@"totalPrice"];
-    
-    self.itemsAddedAfterPromoUpdate = [NSMutableArray new];
-    [self reloadTotal];
+    self.totalPrice = total;
 }
 
 - (NSUInteger)totalCount {
@@ -297,12 +256,6 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         }
     }
     
-    if (self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypePersonalAccount)]) {
-        if ([DBPromoManager sharedManager].walletBalance >= self.totalPrice) {
-            self.paymentType = PaymentTypePersonalAccount;
-        }
-    }
-    
     if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeCash)]){
         self.paymentType = PaymentTypeCash;
     }
@@ -312,12 +265,6 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
             self.paymentType = PaymentTypeExtraType;
         }
     }
-}
-
-#pragma mark - DBPromoManagerDelegate
-
-- (void)promoManager:(DBPromoManager *)manager didUpdateInfoWithTotal:(double)totalSum{
-    [self updateTotalPrice:totalSum];
 }
 
 @end

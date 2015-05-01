@@ -8,6 +8,7 @@
 
 #import "DBNewOrderTotalView.h"
 #import "OrderManager.h"
+#import "DBPromoManager.h"
 #import "Compatibility.h"
 
 @implementation DBNewOrderTotalView
@@ -19,35 +20,35 @@
                                    forKeyPath:@"totalPrice"
                                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                                       context:nil];
-    [[OrderManager sharedManager] addObserver:self
-                                   forKeyPath:@"initialTotalPrice"
-                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                      context:nil];
+    [[DBPromoManager sharedManager] addObserver:self
+                                     forKeyPath:@"totalDiscount"
+                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                                        context:nil];
     
     [self reloadTotal];
 }
 
 - (void)dealloc{
     [[OrderManager sharedManager] removeObserver:self forKeyPath:@"totalPrice"];
-    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"initialTotalPrice"];
+    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"totalDiscount"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context{
-    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"initialTotalPrice"]){
+    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"totalDiscount"]){
         [self reloadTotal];
     }
 }
 
 - (void)reloadTotal{
-    double actualTotal = [OrderManager sharedManager].totalPrice;
+    double actualTotal = [OrderManager sharedManager].totalPrice - [DBPromoManager sharedManager].totalDiscount;
     NSString *actualTotalString = [NSString stringWithFormat:@"%.0f %@", actualTotal, [Compatibility currencySymbol]];
     
     NSString *oldTotalString;
-    if([OrderManager sharedManager].initialTotalPrice != actualTotal){
-        oldTotalString= [NSString stringWithFormat:@"%.0f ", [OrderManager sharedManager].initialTotalPrice];
+    if([DBPromoManager sharedManager].totalDiscount > 0){
+        oldTotalString= [NSString stringWithFormat:@"%.0f ", [OrderManager sharedManager].totalPrice];
     } else {
         oldTotalString = @"";
     }
