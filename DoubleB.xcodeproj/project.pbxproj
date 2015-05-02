@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E03A4D01AF2744C00653052 /* DBPositionScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E03A4CE1AF2744C00653052 /* DBPositionScrollViewController.m */; };
+		5E03A4D11AF2744C00653052 /* DBPositionScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E03A4CE1AF2744C00653052 /* DBPositionScrollViewController.m */; };
+		5E03A4E41AF38E0900653052 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E03A4E31AF38E0900653052 /* DBInfiniteScrollView.m */; };
+		5E03A4E51AF38E0900653052 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E03A4E31AF38E0900653052 /* DBInfiniteScrollView.m */; };
 		5E12EB861AEE57DF00D833F7 /* DBOrderBarButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */; };
 		5E4E60F71AE61E28005D78A8 /* email@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F51AE61E28005D78A8 /* email@2x.png */; };
 		5E4E60F81AE61E28005D78A8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
@@ -630,6 +634,10 @@
 
 /* Begin PBXFileReference section */
 		1DF35059AA6127E742BBFFBA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5E03A4CD1AF2744C00653052 /* DBPositionScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionScrollViewController.h; sourceTree = "<group>"; };
+		5E03A4CE1AF2744C00653052 /* DBPositionScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionScrollViewController.m; sourceTree = "<group>"; };
+		5E03A4E21AF38E0900653052 /* DBInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBInfiniteScrollView.h; sourceTree = "<group>"; };
+		5E03A4E31AF38E0900653052 /* DBInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBInfiniteScrollView.m; sourceTree = "<group>"; };
 		5E30B6161AAF3D71001F66E2 /* DBDiscountMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDiscountMessageCell.h; sourceTree = "<group>"; };
 		5E30B6171AAF3D71001F66E2 /* DBDiscountMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDiscountMessageCell.m; sourceTree = "<group>"; };
 		5E30B6181AAF3D71001F66E2 /* DBDiscountMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBDiscountMessageCell.xib; sourceTree = "<group>"; };
@@ -1265,6 +1273,8 @@
 				5ED458A21AEA4EE400DB8B64 /* DBCompanyInfoViewController.h */,
 				5ED458A31AEA4EE400DB8B64 /* DBCompanyInfoViewController.m */,
 				5ED458A41AEA4EE400DB8B64 /* DBCompanyInfoViewController.xib */,
+				5E03A4CD1AF2744C00653052 /* DBPositionScrollViewController.h */,
+				5E03A4CE1AF2744C00653052 /* DBPositionScrollViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1603,6 +1613,8 @@
 				5E4E60F91AE658B9005D78A8 /* DBContactUsView.h */,
 				5E4E60FA1AE658B9005D78A8 /* DBContactUsView.m */,
 				5E4E60FC1AE658D2005D78A8 /* DBContactUsView.xib */,
+				5E03A4E21AF38E0900653052 /* DBInfiniteScrollView.h */,
+				5E03A4E31AF38E0900653052 /* DBInfiniteScrollView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2503,6 +2515,7 @@
 				CB1AF7C11AE10E6900FA3224 /* DBPositionCell.m in Sources */,
 				CB1AF7C21AE10E6900FA3224 /* DBVenuesTableViewController.m in Sources */,
 				CB1AF7C31AE10E6900FA3224 /* DBNewOrderViewHeader.m in Sources */,
+				5E03A4D11AF2744C00653052 /* DBPositionScrollViewController.m in Sources */,
 				CB1AF7C41AE10E6900FA3224 /* DBPromoManager.m in Sources */,
 				CB1AF7C51AE10E6900FA3224 /* DBProfileCell.m in Sources */,
 				CB1AF7C61AE10E6900FA3224 /* DBOrdersTableViewController.m in Sources */,
@@ -2512,6 +2525,7 @@
 				CB1AF7CA1AE10E6900FA3224 /* DBHTMLViewController.m in Sources */,
 				CB1AF7CB1AE10E6900FA3224 /* GANHelper.m in Sources */,
 				CB1AF7CC1AE10E6900FA3224 /* EXTNil.m in Sources */,
+				5E03A4E51AF38E0900653052 /* DBInfiniteScrollView.m in Sources */,
 				CB1AF7CD1AE10E6900FA3224 /* DBClientInfo.m in Sources */,
 				CB1AF7CE1AE10E6900FA3224 /* UIColor+Hex.m in Sources */,
 				CB1AF7CF1AE10E6900FA3224 /* DBAdvertViewController.m in Sources */,
@@ -2615,6 +2629,7 @@
 				CBE559551AC9A94600A166B9 /* DBPositionCell.m in Sources */,
 				CB60C0F01AC5AD2600D5E962 /* DBVenuesTableViewController.m in Sources */,
 				CB60C0F11AC5AD2600D5E962 /* DBNewOrderViewHeader.m in Sources */,
+				5E03A4D01AF2744C00653052 /* DBPositionScrollViewController.m in Sources */,
 				CB60C0F21AC5AD2600D5E962 /* DBPromoManager.m in Sources */,
 				CB60C0F31AC5AD2600D5E962 /* DBProfileCell.m in Sources */,
 				CB60C0F41AC5AD2600D5E962 /* DBOrdersTableViewController.m in Sources */,
@@ -2624,6 +2639,7 @@
 				CB60C0F81AC5AD2600D5E962 /* DBHTMLViewController.m in Sources */,
 				CB60C0F91AC5AD2600D5E962 /* GANHelper.m in Sources */,
 				CB60C0FA1AC5AD2600D5E962 /* EXTNil.m in Sources */,
+				5E03A4E41AF38E0900653052 /* DBInfiniteScrollView.m in Sources */,
 				CB60C0FB1AC5AD2600D5E962 /* DBClientInfo.m in Sources */,
 				CB60C0FC1AC5AD2600D5E962 /* UIColor+Hex.m in Sources */,
 				CB60C0FD1AC5AD2600D5E962 /* DBAdvertViewController.m in Sources */,

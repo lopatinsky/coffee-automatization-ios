@@ -157,7 +157,7 @@
 }
 
 - (IBAction)priceButtonClick:(id)sender {
-    [GANHelper analyzeEvent:@"" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
+    [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.navigationController animateAddProductFromView:self.priceLabel completion:^{
         [[OrderManager sharedManager] addPosition:self.position];
     }];
