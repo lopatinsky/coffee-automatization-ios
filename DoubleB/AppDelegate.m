@@ -66,7 +66,7 @@
     //styling
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-
+    
     [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{

@@ -10,6 +10,9 @@
 
 //#define BASE_URL @"http://empatika-coffeehostel.appspot.com/api/"
 
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+
 /* Google analytics */
 
 #define ORDER_SCREEN @"Order_screen"

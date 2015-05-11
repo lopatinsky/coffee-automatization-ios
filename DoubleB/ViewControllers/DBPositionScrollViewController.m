@@ -9,6 +9,9 @@
 #import "DBPositionScrollViewController.h"
 #import "DBPositionViewController.h"
 #import "DBInfiniteScrollView.h"
+#import "DBBarButtonItem.h"
+
+#import "UINavigationController+DBAnimation.h"
 
 @interface DBPositionScrollViewController () <UIScrollViewDelegate ,DBInfiniteScrollViewDelegate, DBInfiniteScrollViewDataSource>
 @property (strong, nonatomic) NSMutableArray *positions;
@@ -41,6 +44,8 @@
     [self.scrollView setControllers];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     [self.view addSubview:_scrollView];
+    
+    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +88,11 @@
     return [_positions objectAtIndex:index];
 }
 
+- (void)goToOrderViewController{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [GANHelper analyzeEvent:@"back_arrow_pressed" category:PRODUCT_SCREEN];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -103,6 +113,9 @@
     }
 }
 
+- (void)didSetViewWithController:(UIViewController *)controller {
+    [self addChildViewController:controller];
+}
 
 #pragma mark - DBInfiniteScrollViewControllerDataSource
 

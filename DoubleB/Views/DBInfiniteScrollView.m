@@ -8,9 +8,14 @@
 
 #import "DBInfiniteScrollView.h"
 
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define PAGES_AMOUNT 3
+
+
+typedef NS_ENUM(NSUInteger, ViewPosition) {
+    Previous = 0,
+    Current,
+    Next
+};
 
 @interface DBInfiniteScrollView () <UIScrollViewDelegate>
 @property (nonatomic, weak) id<DBInfiniteScrollViewDelegate> __delegate;
@@ -40,16 +45,9 @@
 - (void)setControllers {
     [self createControllers];
     
-    UIView *previousView = self.previousController.view;
-    previousView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    UIView *currentView = self.currentController.view;
-    currentView.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    UIView *nextView = self.nextController.view;
-    nextView.frame = CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    [self addSubview:previousView];
-    [self addSubview:currentView];
-    [self addSubview:nextView];
+    [self setViewWithController:_previousController withPosition:Previous];
+    [self setViewWithController:_currentController withPosition:Current];
+    [self setViewWithController:_nextController withPosition:Next];
 }
 
 - (void)createControllers {
@@ -108,6 +106,22 @@
 
 - (void)scrolledViewWithDirection:(ScrollDirection)direction {
     [self.__delegate scrolledViewController:direction];
+}
+
+- (void)setViewWithController:(UIViewController *)controller withPosition:(ViewPosition)position {
+    switch (position) {
+        case Previous:
+            controller.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            break;
+        case Current:
+            controller.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            break;
+        case Next:
+            controller.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+            break;
+    }
+    [self addSubview:controller.view];
+    [self.__delegate didSetViewWithController:controller];
 }
 
 #pragma mark - DBInfiniteScrollViewDataSource

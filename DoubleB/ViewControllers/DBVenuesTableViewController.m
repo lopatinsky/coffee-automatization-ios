@@ -38,6 +38,7 @@
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

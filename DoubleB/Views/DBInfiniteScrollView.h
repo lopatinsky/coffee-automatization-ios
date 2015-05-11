@@ -19,8 +19,7 @@ typedef NS_ENUM(NSUInteger, ScrollDirection) {
 
 @protocol DBInfiniteScrollViewDelegate <NSObject>
 - (void)scrolledViewController:(ScrollDirection)direction;
-//- (void)scrolledViewController:(UIViewController *)viewController;
-
+- (void)didSetViewWithController:(UIViewController *)controller;
 @end
 
 @protocol DBInfiniteScrollViewDataSource <NSObject>
@@ -34,7 +33,6 @@ typedef NS_ENUM(NSUInteger, ScrollDirection) {
 - (void)addToDataSource:(id<DBInfiniteScrollViewDataSource>)__dataSource;
 - (void)initScrollView;
 - (void)setControllers;
-//- (instancetype)initWithViewController:(UIViewController *)viewController;
 
 @property (nonatomic, readonly) UIViewController *currentController;
 @property (nonatomic, readonly) UIViewController *nextController;

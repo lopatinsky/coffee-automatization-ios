@@ -46,6 +46,8 @@
 #import "DBDiscountAdvertView.h"
 #import "DBPositionViewController.h"
 #import "DBConstants.h"
+#import "DBAddressViewController.h"
+#import "DBDeliveryViewController.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -692,7 +694,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     venuesController.venues = self.venues;
     venuesController.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:venuesController animated:YES];
+    DBDeliveryViewController *deliveryController = [DBDeliveryViewController new];
+    
+    NSArray *controllers = [NSArray arrayWithObjects:venuesController, deliveryController, nil];
+    
+    DBAddressViewController *deliveryVC = [[DBAddressViewController alloc] initWithControllers:controllers];
+    deliveryVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:deliveryVC animated:YES];
+    
+//    [self.navigationController pushViewController:venuesController animated:YES];
 }
 
 - (IBAction)clickTime:(id)sender {

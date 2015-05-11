@@ -16,6 +16,14 @@
 		5E4E60F81AE61E28005D78A8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5E4E60FB1AE658B9005D78A8 /* DBContactUsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E4E60FA1AE658B9005D78A8 /* DBContactUsView.m */; };
 		5E4E60FD1AE658D2005D78A8 /* DBContactUsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60FC1AE658D2005D78A8 /* DBContactUsView.xib */; };
+		5E8EA7C31AF91FB000A8D630 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8EA7C11AF91FB000A8D630 /* DBAddressViewController.m */; };
+		5E8EA7C41AF91FB000A8D630 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8EA7C11AF91FB000A8D630 /* DBAddressViewController.m */; };
+		5E8EA7C51AF91FB000A8D630 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8EA7C21AF91FB000A8D630 /* DBAddressViewController.xib */; };
+		5E8EA7C61AF91FB000A8D630 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8EA7C21AF91FB000A8D630 /* DBAddressViewController.xib */; };
+		5E8EA7CE1AFF860400A8D630 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8EA7CC1AFF860400A8D630 /* DBDeliveryViewController.m */; };
+		5E8EA7CF1AFF860400A8D630 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E8EA7CC1AFF860400A8D630 /* DBDeliveryViewController.m */; };
+		5E8EA7D01AFF860400A8D630 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8EA7CD1AFF860400A8D630 /* DBDeliveryViewController.xib */; };
+		5E8EA7D11AFF860400A8D630 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E8EA7CD1AFF860400A8D630 /* DBDeliveryViewController.xib */; };
 		5ED4589A1AEA481200DB8B64 /* bg2208.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458961AEA481200DB8B64 /* bg2208.jpg */; };
 		5ED4589B1AEA481200DB8B64 /* bg2208.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458961AEA481200DB8B64 /* bg2208.jpg */; };
 		5ED4589C1AEA481200DB8B64 /* bg1334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458971AEA481200DB8B64 /* bg1334.jpg */; };
@@ -646,6 +654,12 @@
 		5E4E60F91AE658B9005D78A8 /* DBContactUsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBContactUsView.h; sourceTree = "<group>"; };
 		5E4E60FA1AE658B9005D78A8 /* DBContactUsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBContactUsView.m; sourceTree = "<group>"; };
 		5E4E60FC1AE658D2005D78A8 /* DBContactUsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBContactUsView.xib; sourceTree = "<group>"; };
+		5E8EA7C01AF91FB000A8D630 /* DBAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAddressViewController.h; sourceTree = "<group>"; };
+		5E8EA7C11AF91FB000A8D630 /* DBAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAddressViewController.m; sourceTree = "<group>"; };
+		5E8EA7C21AF91FB000A8D630 /* DBAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBAddressViewController.xib; sourceTree = "<group>"; };
+		5E8EA7CB1AFF860400A8D630 /* DBDeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDeliveryViewController.h; sourceTree = "<group>"; };
+		5E8EA7CC1AFF860400A8D630 /* DBDeliveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDeliveryViewController.m; sourceTree = "<group>"; };
+		5E8EA7CD1AFF860400A8D630 /* DBDeliveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBDeliveryViewController.xib; sourceTree = "<group>"; };
 		5EA44DFF1AAF1CB9003AAE9F /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		5EA44E001AAF1CB9003AAE9F /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		5ED458961AEA481200DB8B64 /* bg2208.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg2208.jpg; sourceTree = "<group>"; };
@@ -1275,6 +1289,12 @@
 				5ED458A41AEA4EE400DB8B64 /* DBCompanyInfoViewController.xib */,
 				5E03A4CD1AF2744C00653052 /* DBPositionScrollViewController.h */,
 				5E03A4CE1AF2744C00653052 /* DBPositionScrollViewController.m */,
+				5E8EA7C01AF91FB000A8D630 /* DBAddressViewController.h */,
+				5E8EA7C11AF91FB000A8D630 /* DBAddressViewController.m */,
+				5E8EA7C21AF91FB000A8D630 /* DBAddressViewController.xib */,
+				5E8EA7CB1AFF860400A8D630 /* DBDeliveryViewController.h */,
+				5E8EA7CC1AFF860400A8D630 /* DBDeliveryViewController.m */,
+				5E8EA7CD1AFF860400A8D630 /* DBDeliveryViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1908,7 +1928,7 @@
 				ORGANIZATIONNAME = Empatika;
 				TargetAttributes = {
 					CB1AF7681AE10E6900FA3224 = {
-						DevelopmentTeam = WDRAVGQ9R2;
+						DevelopmentTeam = 64MFKAND86;
 					};
 					CB60C0A31AC5AD2600D5E962 = {
 						DevelopmentTeam = QG9L73J29H;
@@ -1990,6 +2010,7 @@
 				CB1AF80F1AE10E6900FA3224 /* SDK-Database.bundle in Resources */,
 				CB1AF8B91AE116A800FA3224 /* InfoPlist.strings in Resources */,
 				CB1AF8101AE10E6900FA3224 /* venue.png in Resources */,
+				5E8EA7D11AFF860400A8D630 /* DBDeliveryViewController.xib in Resources */,
 				CB1AF8111AE10E6900FA3224 /* modifier_minus_icon@2x.png in Resources */,
 				CB1AF8121AE10E6900FA3224 /* noimage_icon@2x.png in Resources */,
 				CB1AF8131AE10E6900FA3224 /* alerts@2x.png in Resources */,
@@ -2089,6 +2110,7 @@
 				CB1AF86E1AE10E6900FA3224 /* confidence@2x.png in Resources */,
 				CB1AF86F1AE10E6900FA3224 /* feedback.png in Resources */,
 				CB1AF8701AE10E6900FA3224 /* DBPositionModifierCell.xib in Resources */,
+				5E8EA7C61AF91FB000A8D630 /* DBAddressViewController.xib in Resources */,
 				CB1AF8711AE10E6900FA3224 /* tick.png in Resources */,
 				CB1AF8721AE10E6900FA3224 /* modifier_minus_icon@3x.png in Resources */,
 				CB1AF8731AE10E6900FA3224 /* 250.png in Resources */,
@@ -2149,6 +2171,7 @@
 				CB60C1231AC5AD2600D5E962 /* DBMastercardAdView.xib in Resources */,
 				CB60C1241AC5AD2600D5E962 /* menu_icon@3x.png in Resources */,
 				5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */,
+				5E8EA7C51AF91FB000A8D630 /* DBAddressViewController.xib in Resources */,
 				CB715ADD1ACD581300EA84FC /* DBCategoryPicker.xib in Resources */,
 				CB79E9801AD8AD10001693FE /* DBPositionCompactCell.xib in Resources */,
 				CB60C1251AC5AD2600D5E962 /* preview_5@2x.png in Resources */,
@@ -2158,6 +2181,7 @@
 				CB60C1291AC5AD2600D5E962 /* DBVenueCell.xib in Resources */,
 				5ED458A01AEA481200DB8B64 /* bg960.jpg in Resources */,
 				CB60C12A1AC5AD2600D5E962 /* venues_icon_grey@2x.png in Resources */,
+				5E8EA7D01AFF860400A8D630 /* DBDeliveryViewController.xib in Resources */,
 				CB60C12C1AC5AD2600D5E962 /* mug.png in Resources */,
 				CBCCCFFF1AE16D3C007027A6 /* return_cause_time_icon@3x.png in Resources */,
 				CB0B5BE01AD80CF90094D534 /* modifier_plus_icon@2x.png in Resources */,
@@ -2517,6 +2541,8 @@
 				CB1AF7C31AE10E6900FA3224 /* DBNewOrderViewHeader.m in Sources */,
 				5E03A4D11AF2744C00653052 /* DBPositionScrollViewController.m in Sources */,
 				CB1AF7C41AE10E6900FA3224 /* DBPromoManager.m in Sources */,
+				5E8EA7CF1AFF860400A8D630 /* DBDeliveryViewController.m in Sources */,
+				5E8EA7C41AF91FB000A8D630 /* DBAddressViewController.m in Sources */,
 				CB1AF7C51AE10E6900FA3224 /* DBProfileCell.m in Sources */,
 				CB1AF7C61AE10E6900FA3224 /* DBOrdersTableViewController.m in Sources */,
 				CB1AF7C71AE10E6900FA3224 /* JRSwizzle.m in Sources */,
@@ -2631,6 +2657,8 @@
 				CB60C0F11AC5AD2600D5E962 /* DBNewOrderViewHeader.m in Sources */,
 				5E03A4D01AF2744C00653052 /* DBPositionScrollViewController.m in Sources */,
 				CB60C0F21AC5AD2600D5E962 /* DBPromoManager.m in Sources */,
+				5E8EA7CE1AFF860400A8D630 /* DBDeliveryViewController.m in Sources */,
+				5E8EA7C31AF91FB000A8D630 /* DBAddressViewController.m in Sources */,
 				CB60C0F31AC5AD2600D5E962 /* DBProfileCell.m in Sources */,
 				CB60C0F41AC5AD2600D5E962 /* DBOrdersTableViewController.m in Sources */,
 				CB60C0F51AC5AD2600D5E962 /* JRSwizzle.m in Sources */,
@@ -2801,7 +2829,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2816,7 +2844,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "2e0f8bdc-ff2d-495c-bd8b-6b2bbb840169";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2834,7 +2862,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2849,7 +2877,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "925dc5fe-6d90-4aca-9be2-a798e381736b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -2866,7 +2894,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -2881,7 +2909,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "4e87e76f-bb9c-4559-b6da-d2e37802bbc6";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
