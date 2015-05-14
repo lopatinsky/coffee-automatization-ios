@@ -67,7 +67,7 @@ static NSMutableArray *storedVenues;
     if (location) {
         params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
     }
-    [[DBAPIClient sharedClient] GET:@"venues.php"
+    [[DBAPIClient sharedClient] GET:@"venues"
                          parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 //NSLog(@"%@", responseObject);

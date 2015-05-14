@@ -160,7 +160,7 @@
 
 - (void)cancelOrder{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DBAPIClient sharedClient] POST:@"return.php" parameters:@{@"order_id": self.order.orderId}
+    [[DBAPIClient sharedClient] POST:@"return" parameters:@{@"order_id": self.order.orderId}
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  //NSLog(@"%@", responseObject);
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

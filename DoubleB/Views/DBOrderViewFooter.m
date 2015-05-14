@@ -70,6 +70,8 @@
         @strongify(self);
         [GANHelper analyzeEvent:@"order_delivery_time_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
+    
+    [self.venueImageView templateImageWithName:@"venue.png"];
 }
 
 @end

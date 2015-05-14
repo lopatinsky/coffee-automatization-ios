@@ -71,7 +71,7 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:@{@"orders": orderIds}
                                                        options:0 error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    [[DBAPIClient sharedClient] POST:@"status.php"
+    [[DBAPIClient sharedClient] POST:@"status"
                           parameters:@{
                                        @"orders": jsonString
                              }

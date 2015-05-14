@@ -15,13 +15,13 @@
 #import "Order.h"
 #import "DBClientInfo.h"
 
-#define PAYMENT_TYPES_URL @"payment/payment_types.php"
-#define PAYMENT_REGISTRATION_URL @"register.php"
-#define CHECK_ORDER_STATUS_URL @"status.php"
+#define PAYMENT_TYPES_URL @"payment/payment_types"
+#define PAYMENT_REGISTRATION_URL @"register"
+#define CHECK_ORDER_STATUS_URL @"status"
 #define CHECK_EXTENDET_ORDER_STATUS_URL @"extended_status"
-#define LOCK_PAYMENT_URL @"payment_binding.php"
-#define UNLOCK_PAYMENT_URL @"reverse.php"
-#define UNBIND_CARD_URL @"unbind.php"
+#define LOCK_PAYMENT_URL @"payment_binding"
+#define UNLOCK_PAYMENT_URL @"reverse"
+#define UNBIND_CARD_URL @"unbind"
 
 NSString *const kDBDefaultsAvailablePaymentTypes = @"kDBDefaultsAvailablePaymentTypes";
 

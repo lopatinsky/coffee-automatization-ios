@@ -12,7 +12,6 @@
 #import "DBServerAPI.h"
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
-//#import "DBShareHelper.h"
 #import "DBPreviewViewController.h"
 #import "DBMastercardPromo.h"
 #import "DBMenu.h"
@@ -36,6 +35,7 @@
                   clientKey:@"KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w"];
     
     [Fabric with:@[CrashlyticsKit]];
+//    [[Crashlytics sharedInstance] setDebugMode:YES];
     
     [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
     //==================== Framework initialization ====================

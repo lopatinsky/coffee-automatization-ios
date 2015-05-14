@@ -72,7 +72,7 @@
 }
 
 - (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [[DBAPIClient sharedClient] GET:@"menu.php"
+    [[DBAPIClient sharedClient] GET:@"menu"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);
@@ -119,7 +119,8 @@
         }
     }
     
-    self.categories = newCategories;
+    
+    self.categories = [self sortCategories:newCategories];
     
     [self saveMenuToDeviceMemory];
 }
@@ -136,6 +137,15 @@
     }
     
     return resultPosition;
+}
+
+- (NSArray *)sortCategories:(NSArray *)categories{
+    NSMutableArray *mutableCategories = [[NSMutableArray alloc] initWithArray:categories];
+    [mutableCategories sortUsingComparator:^NSComparisonResult(DBMenuCategory *obj1, DBMenuCategory *obj2) {
+        return [@(obj1.order) compare:@(obj2.order)];
+    }];
+    
+    return mutableCategories;
 }
 
 
@@ -156,7 +166,8 @@
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/menu.txt"];
     
     NSData *data = [NSData dataWithContentsOfFile:path];
-    self.categories = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    self.categories = [self sortCategories:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
 }
 
 @end

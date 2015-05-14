@@ -188,7 +188,7 @@
     order[@"order_id"] = [[OrderManager sharedManager] orderId];
     order[@"device_type"] = @(0);
     order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
-    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].totalDiscount);
+    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
     order[@"items"] = [DBServerAPI assembleOrderItems];
     order[@"client"] = [DBServerAPI assembleClientInfo];
     order[@"delivery_time"] = [OrderManager sharedManager].time;
@@ -217,7 +217,7 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
     NSDate *start = [NSDate date];
-    [[DBAPIClient sharedClient] POST:@"order.php"
+    [[DBAPIClient sharedClient] POST:@"order"
                           parameters:@{@"order": jsonString}
                              timeout:30
                              success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
@@ -240,8 +240,8 @@
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];
                                  
-                                 // Clear orderManager
-                                 [[OrderManager sharedManager] purgePositions];
+                                 // Notify all about success order
+                                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:nil]];
                                  
                                  // Notify Mastercard promo manager
                                  if(ord.paymentType == PaymentTypeExtraType){

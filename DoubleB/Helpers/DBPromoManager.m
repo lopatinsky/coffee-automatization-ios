@@ -44,8 +44,14 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
     if (self) {
         self.lastUpdateNumber = 0;
         _validOrder = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clear) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (double)totalDiscount{

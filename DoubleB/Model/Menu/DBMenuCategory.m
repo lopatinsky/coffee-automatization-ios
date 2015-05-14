@@ -13,6 +13,7 @@
 @interface DBMenuCategory ()<NSCoding, NSCopying>
 @property(strong, nonatomic) NSString *categoryId;
 @property(strong, nonatomic) NSString *name;
+@property(nonatomic) NSInteger order;
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSDictionary *categoryDictionary;
 @end
@@ -56,6 +57,7 @@
 - (void)copyFromResponseDictionary:(NSDictionary *)categoryDictionary{
     _categoryId = [categoryDictionary getValueForKey:@"category_id"] ?: @"";
     _name = [categoryDictionary getValueForKey:@"title"] ?: @"";
+    _order = [[categoryDictionary getValueForKey:@"order"] integerValue];
     _imageUrl = [categoryDictionary getValueForKey:@"pic"] ?: @"";
     _venuesRestrictions = [categoryDictionary[@"restrictions"] getValueForKey:@"venues"] ?: @[];
     _categoryDictionary = categoryDictionary;
@@ -117,6 +119,7 @@
     if(self != nil){
         _categoryId = [aDecoder decodeObjectForKey:@"categoryId"];
         _name = [aDecoder decodeObjectForKey:@"name"];
+        _order = [[aDecoder decodeObjectForKey:@"order"] integerValue];
         _imageUrl = [aDecoder decodeObjectForKey:@"imageUrl"];
         _positions = [aDecoder decodeObjectForKey:@"positions"];
         _categoryDictionary = [aDecoder decodeObjectForKey:@"categoryDictionary"];
@@ -128,6 +131,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:_categoryId forKey:@"categoryId"];
     [aCoder encodeObject:_name forKey:@"name"];
+    [aCoder encodeObject:@(_order) forKey:@"order"];
     [aCoder encodeObject:_imageUrl forKey:@"imageUrl"];
     [aCoder encodeObject:_positions forKey:@"positions"];
     [aCoder encodeObject:self.categoryDictionary forKey:@"categoryDictionary"];
@@ -139,6 +143,7 @@
     DBMenuCategory *copyCategory = [[[self class] allocWithZone:zone] init];
     copyCategory.categoryId = [self.categoryId copy];
     copyCategory.name = [self.name copy];
+    copyCategory.order = self.order;
     copyCategory.imageUrl = [self.imageUrl copy];
     
     copyCategory.positions = [NSMutableArray new];

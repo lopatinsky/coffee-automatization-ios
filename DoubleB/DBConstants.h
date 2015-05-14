@@ -25,6 +25,7 @@ extern NSString *const kDBDefaultsLastScheduledLocalNotification;
 extern NSString *const kDBStatusUpdatedNotification;
 extern NSString *const kDBNotificationUpdatedOrder;
 extern NSString *const kDBRepeateOrderNotification;
+extern NSString *const kDBNewOrderCreatedNotification;
 extern NSString *const kDBNewOrderAnimateAllErrorElementsNotification;
 
 extern NSString *const kDBBindingNecessaryForAuthorization;

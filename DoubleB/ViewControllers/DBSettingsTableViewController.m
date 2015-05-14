@@ -19,6 +19,8 @@
 #import "UIViewController+DBMessage.h"
 #import "PersonalAccountViewController.h"
 #import "DBCompanyInfoViewController.h"
+#import "IHPaymentManager.h"
+#import "Order.h"
 
 #import <MessageUI/MessageUI.h>
 #import <BlocksKit/UIControl+BlocksKit.h>
@@ -56,12 +58,15 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"viewController": profileVC}];
     
     // Cards item
-    DBCardsViewController *cardsVC = [DBCardsViewController new];
-    cardsVC.screen = @"Cards_screen";
-    [self.settingsItems addObject:@{@"name": @"cardsVC",
-                                    @"title": NSLocalizedString(@"Карты", nil),
-                                    @"image": @"card",
-                                    @"viewController": cardsVC}];
+    NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
+    if([availablePaymentTypes containsObject:@(PaymentTypeCard)]){
+        DBCardsViewController *cardsVC = [DBCardsViewController new];
+        cardsVC.screen = @"Cards_screen";
+        [self.settingsItems addObject:@{@"name": @"cardsVC",
+                                        @"title": NSLocalizedString(@"Карты", nil),
+                                        @"image": @"card",
+                                        @"viewController": cardsVC}];
+    }
     
     // Personal account item
     PersonalAccountViewController *personalAccountVC = [PersonalAccountViewController new];

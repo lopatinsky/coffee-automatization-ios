@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelWorkHours;
 
 @property (weak, nonatomic) IBOutlet UIImageView *clockImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *venueImageView;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
 
@@ -63,11 +64,13 @@
         self.constrainSpaceLabelDistance_labelName.constant = 0;
     }
     self.labelDistance.layer.cornerRadius = 5;
+    
+    [self.clockImageView templateImageWithName:@"clock.png"];
+    [self.venueImageView templateImageWithName:@"venue.png"];
 
     self.mapView.myLocationEnabled = YES;
     [self.mapView setCamera:[GMSCameraPosition cameraWithLatitude:self.venue.location.latitude longitude:self.venue.location.longitude zoom:16]];
     GMSMarker *marker = [GMSMarker markerWithPosition:self.venue.location];
-    [self.clockImageView templateImageWithName:@"clock"];
     marker.icon = [UIImage imageNamed:@"venue.png"];
     marker.map = self.mapView;
     

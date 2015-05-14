@@ -8,7 +8,7 @@
 
 #import "IHSecureStore.h"
 #import "UICKeyChainStore.h"
-#import <Crashlytics/Crashlytics.h>
+//#import <Crashlytics/Crashlytics.h>
 
 @interface IHSecureStore ()
 @property(strong, nonatomic) UICKeyChainStore *secureStore;
@@ -38,7 +38,7 @@
 - (void)setClientId:(NSString *)clientId{
     if(clientId && ![clientId isEqualToString:@"0"] && ![clientId isEqualToString:@""]){
         // Track clientId with crashes
-        [Crashlytics setUserIdentifier:clientId];
+//        [Crashlytics setUserIdentifier:clientId];
         
 //        if([BASE_URL isEqualToString:@"http://empatika-doubleb-test.appspot.com/api/"]){
 //            [self.secureStore setString:clientId forKey:@"clientId_test"];

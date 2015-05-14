@@ -221,7 +221,7 @@
     NSString *clientId = [[IHSecureStore sharedInstance] clientId];
     
     if(clientId){
-    [[DBAPIClient sharedClient] POST:@"client.php"
+    [[DBAPIClient sharedClient] POST:@"client"
                           parameters:@{@"client_id": clientId,
                                        @"client_name": [DBClientInfo sharedInstance].clientName,
                                        @"client_phone": [DBClientInfo sharedInstance].clientPhone,

@@ -17,7 +17,7 @@
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 
-#import <Crashlytics/Crashlytics.h>
+//#import <Crashlytics/Crashlytics.h>
 
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedBeverageMode";
@@ -55,6 +55,8 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         self.totalPrice = 0;
         
         _beverageMode = (DBBeverageMode)[[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastSelectedBeverageMode] intValue];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purgePositions) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
 }
@@ -108,13 +110,13 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 }
 
 - (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler {
-    [[DBAPIClient sharedClient] GET:@"order_register.php"
+    [[DBAPIClient sharedClient] GET:@"order_register"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 //NSLog(@"%s %@", __PRETTY_FUNCTION__, responseObject);
                                 self.orderId = [NSString stringWithFormat:@"%ld", (long)[responseObject[@"order_id"] integerValue]];
                                 
-                                [Crashlytics setObjectValue:self.orderId forKey:@"lastRegisteredOrderId"];
+//                                [Crashlytics setObjectValue:self.orderId forKey:@"lastRegisteredOrderId"];
                                 
                                 if (completionHandler) {
                                     completionHandler(YES, self.orderId);

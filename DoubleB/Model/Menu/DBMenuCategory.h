@@ -15,6 +15,7 @@
 
 @property(strong, nonatomic, readonly) NSString *categoryId;
 @property(strong, nonatomic, readonly) NSString *name;
+@property(nonatomic, readonly) NSInteger order;
 @property(strong, nonatomic, readonly) NSString *imageUrl;
 @property(strong, nonatomic) NSMutableArray *positions;
 
