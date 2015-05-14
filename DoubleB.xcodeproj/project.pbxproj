@@ -42,6 +42,8 @@
 		5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
 		5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
+		7E40A8181B04F0CE00890016 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E40A8171B04F0CE00890016 /* UIViewController+NavigationBarFix.m */; };
+		7E40A8191B04F0CE00890016 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E40A8171B04F0CE00890016 /* UIViewController+NavigationBarFix.m */; };
 		C775B2EED28E9EC2F0B04E49 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		C775B3A2B77B87C0484F4DB5 /* DoubleBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B4B4E9132F29C5F4E7B8 /* DoubleBTests.m */; };
 		C775B5CAEB2DC37102202B9E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B63F98FC60EE380D09BA /* XCTest.framework */; };
@@ -691,6 +693,8 @@
 		7E1E093E198B7ADC0024D8B8 /* DBVenueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBVenueViewController.m; sourceTree = "<group>"; };
 		7E1E0943198B7D960024D8B8 /* DBOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBOrderViewController.h; sourceTree = "<group>"; };
 		7E1E0944198B7D960024D8B8 /* DBOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOrderViewController.m; sourceTree = "<group>"; };
+		7E40A8161B04F0CE00890016 /* UIViewController+NavigationBarFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarFix.h"; sourceTree = "<group>"; };
+		7E40A8171B04F0CE00890016 /* UIViewController+NavigationBarFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarFix.m"; sourceTree = "<group>"; };
 		7E55544E198A77A5008A4684 /* DBCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCommentViewController.h; sourceTree = "<group>"; };
 		7E55544F198A77A5008A4684 /* DBCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCommentViewController.m; sourceTree = "<group>"; };
 		7E555451198A799A008A4684 /* UIColor+Brandbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Brandbook.h"; sourceTree = "<group>"; };
@@ -1400,6 +1404,8 @@
 				CB715AF01ACEB9F900EA84FC /* UIViewController+DBAnimation.m */,
 				CB715AF21ACECACD00EA84FC /* UINavigationController+DBAnimation.h */,
 				CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */,
+				7E40A8161B04F0CE00890016 /* UIViewController+NavigationBarFix.h */,
+				7E40A8171B04F0CE00890016 /* UIViewController+NavigationBarFix.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2505,6 +2511,7 @@
 				CB1AF7A01AE10E6900FA3224 /* DBOrderItemInactivityView.m in Sources */,
 				CB1AF7A11AE10E6900FA3224 /* DBCategoryHeaderView.m in Sources */,
 				CB1AF7A21AE10E6900FA3224 /* DBCompanyInfo.m in Sources */,
+				7E40A8191B04F0CE00890016 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB1AF7A31AE10E6900FA3224 /* LocationHelper.m in Sources */,
 				CB1AF7A41AE10E6900FA3224 /* DBTabBarController.m in Sources */,
 				CB1AF7A51AE10E6900FA3224 /* IHSecureStore.m in Sources */,
@@ -2621,6 +2628,7 @@
 				CBD2B3891AD6BF9F00D0FCF1 /* DBOrderItemInactivityView.m in Sources */,
 				CB60C1CD1AC967C300D5E962 /* DBCategoryHeaderView.m in Sources */,
 				CB79E9D51ADBD3A9001693FE /* DBCompanyInfo.m in Sources */,
+				7E40A8181B04F0CE00890016 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB60C0D81AC5AD2600D5E962 /* LocationHelper.m in Sources */,
 				CB60C0D91AC5AD2600D5E962 /* DBTabBarController.m in Sources */,
 				CB60C0DA1AC5AD2600D5E962 /* IHSecureStore.m in Sources */,

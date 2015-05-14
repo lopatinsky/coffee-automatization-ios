@@ -9,6 +9,7 @@
 #import "DBAddressViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBDeliveryViewController.h"
+#import "UIViewController+NavigationBarFix.h"
 
 @interface DBAddressViewController ()
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
@@ -64,10 +65,12 @@ NSMutableArray *controllersInfo;
     [super viewWillAppear:animated];
     self.backgroundView.backgroundColor = [UIColor db_defaultColor];
     self.backgroundView.alpha = 0.885;
+    [self hideNavigationBarShadow];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self showNavigationBarShadow];
 }
 
 - (void)segmentedControlClick:(UISegmentedControl *)segmentedControl {

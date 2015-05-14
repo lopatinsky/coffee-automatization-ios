@@ -59,6 +59,7 @@
     [JRSwizzleMethods swizzleUIViewDealloc];
     //[DBShareHelper sharedInstance];
     
+    
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
