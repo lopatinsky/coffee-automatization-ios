@@ -1170,7 +1170,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition navigationController:self.navigationController];
     [self.navigationController pushViewController:positionVC animated:YES];
 }
 

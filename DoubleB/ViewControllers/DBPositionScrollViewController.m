@@ -114,28 +114,35 @@
 }
 
 - (void)didSetViewWithController:(UIViewController *)controller {
-    [self addChildViewController:controller];
+//    [self addChildViewController:controller];
+//    NSLog(@"child controllers count: %d", [[self childViewControllers] count]);
+//    if ([[self childViewControllers] count] > 3) {
+//        [[[self childViewControllers] firstObject] removeFromParentViewController];
+//    }
 }
 
 #pragma mark - DBInfiniteScrollViewControllerDataSource
 
 - (UIViewController *)currentViewController {
     DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:_position
-                                                                                         mode:DBPositionViewControllerModeMenuPosition];
+                                                                                         mode:DBPositionViewControllerModeMenuPosition
+                                                                         navigationController:self.navigationController];
     NSLog(@"current position name: %@ VC: %@", _position.name, positionVC);
     return positionVC;
 }
 
 - (UIViewController *)nextViewController {
     DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:[self nextPosition]
-                                                                                         mode:DBPositionViewControllerModeMenuPosition];
+                                                                                         mode:DBPositionViewControllerModeMenuPosition
+                                                                         navigationController:self.navigationController];
     NSLog(@"next position name: %@ VC: %@", [self nextPosition].name, positionVC);
     return positionVC;
 }
 
 - (UIViewController *)previousViewController {
     DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:[self previousPosition]
-                                                                                         mode:DBPositionViewControllerModeMenuPosition];
+                                                                                         mode:DBPositionViewControllerModeMenuPosition
+                                                                         navigationController:self.navigationController];
     NSLog(@"previous position name: %@ VC: %@", [self previousPosition].name, positionVC);
     return positionVC;
 }

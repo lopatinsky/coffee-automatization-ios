@@ -42,6 +42,14 @@
 		5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
 		5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
+		5EE63FCE1B04C0170037CFE1 /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FCC1B04C0170037CFE1 /* AddressCell.m */; };
+		5EE63FCF1B04C0170037CFE1 /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FCC1B04C0170037CFE1 /* AddressCell.m */; };
+		5EE63FD01B04C0170037CFE1 /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE63FCD1B04C0170037CFE1 /* AddressCell.xib */; };
+		5EE63FD11B04C0170037CFE1 /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE63FCD1B04C0170037CFE1 /* AddressCell.xib */; };
+		5EE63FD51B04C0420037CFE1 /* AppartmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FD31B04C0420037CFE1 /* AppartmentCell.m */; };
+		5EE63FD61B04C0420037CFE1 /* AppartmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FD31B04C0420037CFE1 /* AppartmentCell.m */; };
+		5EE63FD71B04C0420037CFE1 /* AppartmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */; };
+		5EE63FD81B04C0420037CFE1 /* AppartmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */; };
 		C775B2EED28E9EC2F0B04E49 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		C775B3A2B77B87C0484F4DB5 /* DoubleBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B4B4E9132F29C5F4E7B8 /* DoubleBTests.m */; };
 		C775B5CAEB2DC37102202B9E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B63F98FC60EE380D09BA /* XCTest.framework */; };
@@ -675,6 +683,12 @@
 		5EDBF81A1AA9FF3D00C3250D /* PersonalAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalAccountViewController.h; sourceTree = "<group>"; };
 		5EDBF81B1AA9FF3D00C3250D /* PersonalAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalAccountViewController.m; sourceTree = "<group>"; };
 		5EDBF81C1AA9FF3D00C3250D /* PersonalAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PersonalAccountViewController.xib; sourceTree = "<group>"; };
+		5EE63FCB1B04C0170037CFE1 /* AddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressCell.h; sourceTree = "<group>"; };
+		5EE63FCC1B04C0170037CFE1 /* AddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressCell.m; sourceTree = "<group>"; };
+		5EE63FCD1B04C0170037CFE1 /* AddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressCell.xib; sourceTree = "<group>"; };
+		5EE63FD21B04C0420037CFE1 /* AppartmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppartmentCell.h; sourceTree = "<group>"; };
+		5EE63FD31B04C0420037CFE1 /* AppartmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppartmentCell.m; sourceTree = "<group>"; };
+		5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppartmentCell.xib; sourceTree = "<group>"; };
 		5EF6A6C91AA3084C00EED5A6 /* UIImageView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Extension.h"; sourceTree = "<group>"; };
 		5EF6A6CA1AA3084C00EED5A6 /* UIImageView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Extension.m"; sourceTree = "<group>"; };
 		5EF6A6D41AA3108200EED5A6 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItem.h; sourceTree = "<group>"; };
@@ -1660,6 +1674,12 @@
 				5E30B6161AAF3D71001F66E2 /* DBDiscountMessageCell.h */,
 				5E30B6171AAF3D71001F66E2 /* DBDiscountMessageCell.m */,
 				5E30B6181AAF3D71001F66E2 /* DBDiscountMessageCell.xib */,
+				5EE63FCB1B04C0170037CFE1 /* AddressCell.h */,
+				5EE63FCC1B04C0170037CFE1 /* AddressCell.m */,
+				5EE63FCD1B04C0170037CFE1 /* AddressCell.xib */,
+				5EE63FD21B04C0420037CFE1 /* AppartmentCell.h */,
+				5EE63FD31B04C0420037CFE1 /* AppartmentCell.m */,
+				5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2018,6 +2038,7 @@
 				CB1AF8161AE10E6900FA3224 /* maestro_icon@3x.png in Resources */,
 				CB1AF8171AE10E6900FA3224 /* mcard_logo.png in Resources */,
 				CB1AF8181AE10E6900FA3224 /* modifier_plus_icon@3x.png in Resources */,
+				5EE63FD11B04C0170037CFE1 /* AddressCell.xib in Resources */,
 				CB1AF8191AE10E6900FA3224 /* agreement.html in Resources */,
 				CB1AF81B1AE10E6900FA3224 /* about.png in Resources */,
 				CB1AF81C1AE10E6900FA3224 /* PersonalAccountViewController.xib in Resources */,
@@ -2058,6 +2079,7 @@
 				CB1AF83C1AE10E6900FA3224 /* phone@2x.png in Resources */,
 				CB1AF83D1AE10E6900FA3224 /* DBOrderItemCell.xib in Resources */,
 				CB1AF83E1AE10E6900FA3224 /* promo_pic.png in Resources */,
+				5EE63FD81B04C0420037CFE1 /* AppartmentCell.xib in Resources */,
 				CB1AF83F1AE10E6900FA3224 /* DBAdvertViewController.xib in Resources */,
 				CB1AF8401AE10E6900FA3224 /* feedback@2x.png in Resources */,
 				CB1AF8411AE10E6900FA3224 /* percent_icon@2x.png in Resources */,
@@ -2211,6 +2233,7 @@
 				CB60C1411AC5AD2600D5E962 /* orders_icon@2x.png in Resources */,
 				CB60C1421AC5AD2600D5E962 /* confidence.png in Resources */,
 				CB60C1431AC5AD2600D5E962 /* 300.png in Resources */,
+				5EE63FD01B04C0170037CFE1 /* AddressCell.xib in Resources */,
 				CB60C1441AC5AD2600D5E962 /* DBPositionsViewController.xib in Resources */,
 				CB60C1451AC5AD2600D5E962 /* cash@2x.png in Resources */,
 				CB60C1461AC5AD2600D5E962 /* ProfileCell.xib in Resources */,
@@ -2333,6 +2356,7 @@
 				CB60C19D1AC5AD2600D5E962 /* clock@2x.png in Resources */,
 				CBCCCFFB1AE16D3C007027A6 /* return_cause_change_icon@3x.png in Resources */,
 				CB60C19E1AC5AD2600D5E962 /* menu_icon.png in Resources */,
+				5EE63FD71B04C0420037CFE1 /* AppartmentCell.xib in Resources */,
 				CBE559561AC9A94600A166B9 /* DBPositionCell.xib in Resources */,
 				CB60C19F1AC5AD2600D5E962 /* venues_icon_grey.png in Resources */,
 				5E4E60F81AE61E28005D78A8 /* call@2x.png in Resources */,
@@ -2469,10 +2493,12 @@
 				CB1AF77E1AE10E6900FA3224 /* UINavigationController+DBAnimation.m in Sources */,
 				CB1AF77F1AE10E6900FA3224 /* DBNewOrderTotalView.m in Sources */,
 				CB1AF7801AE10E6900FA3224 /* EXTADT.m in Sources */,
+				5EE63FCF1B04C0170037CFE1 /* AddressCell.m in Sources */,
 				5ED715B81AE8B3FA00E25EA8 /* DBContactUsView.m in Sources */,
 				CB1AF7811AE10E6900FA3224 /* DBNewOrderViewFooter.m in Sources */,
 				CB1AF7821AE10E6900FA3224 /* EXTSafeCategory.m in Sources */,
 				CB1AF7831AE10E6900FA3224 /* UIViewController+DBAnimation.m in Sources */,
+				5EE63FD61B04C0420037CFE1 /* AppartmentCell.m in Sources */,
 				CB1AF7841AE10E6900FA3224 /* EXTRuntimeExtensions.m in Sources */,
 				CB1AF7851AE10E6900FA3224 /* DBCommentViewController.m in Sources */,
 				CB1AF7861AE10E6900FA3224 /* Order.m in Sources */,
@@ -2585,10 +2611,12 @@
 				CB715AF41ACECACD00EA84FC /* UINavigationController+DBAnimation.m in Sources */,
 				CB60C0BC1AC5AD2600D5E962 /* DBNewOrderTotalView.m in Sources */,
 				CB60C0BD1AC5AD2600D5E962 /* EXTADT.m in Sources */,
+				5EE63FCE1B04C0170037CFE1 /* AddressCell.m in Sources */,
 				5E4E60FB1AE658B9005D78A8 /* DBContactUsView.m in Sources */,
 				CB60C0BE1AC5AD2600D5E962 /* DBNewOrderViewFooter.m in Sources */,
 				CB60C0BF1AC5AD2600D5E962 /* EXTSafeCategory.m in Sources */,
 				CB715AF11ACEB9F900EA84FC /* UIViewController+DBAnimation.m in Sources */,
+				5EE63FD51B04C0420037CFE1 /* AppartmentCell.m in Sources */,
 				CB60C0C01AC5AD2600D5E962 /* EXTRuntimeExtensions.m in Sources */,
 				CB60C0C11AC5AD2600D5E962 /* DBCommentViewController.m in Sources */,
 				CB60C0C21AC5AD2600D5E962 /* Order.m in Sources */,

@@ -45,9 +45,22 @@ typedef NS_ENUM(NSUInteger, ViewPosition) {
 - (void)setControllers {
     [self createControllers];
     
+//    for (UIView *subview in self.subviews) {
+//        [subview removeFromSuperview];
+//    }
+    
     [self setViewWithController:_previousController withPosition:Previous];
     [self setViewWithController:_currentController withPosition:Current];
     [self setViewWithController:_nextController withPosition:Next];
+    
+//    int viewsNumber = [[self subviews] count];
+//    int index = 0;
+//    
+//    while(viewsNumber > 3) {
+//        [[self subviews][index] removeFromSuperview];
+//        ++index;
+//        viewsNumber = [[self subviews] count];
+//    }
 }
 
 - (void)createControllers {
@@ -93,13 +106,41 @@ typedef NS_ENUM(NSUInteger, ViewPosition) {
     }
 }
 
+- (ScrollDirection)recenterIfNeeded {
+    CGPoint currentOffset = [self contentOffset];
+    CGFloat contentWidth = [self contentSize].width;
+    CGFloat centerOffsetX = (contentWidth - [self bounds].size.width) / 2.0;
+    CGFloat offsetDelta = currentOffset.x - centerOffsetX;
+    ScrollDirection dir;
+    
+    if (offsetDelta > 0) {
+        dir = Left;
+    } else if (offsetDelta < 0) {
+        dir = Right;
+    } else {
+        dir = None;
+    }
+    
+    CGFloat distanceFromCenter = fabs(offsetDelta);
+    if ((int)(distanceFromCenter + SCREEN_WIDTH / 2) >= (int)(contentWidth / 2)) {
+        self.contentOffset = CGPointMake(centerOffsetX, currentOffset.y);
+    }
+    
+    return dir;
+}
+
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [self recenterIfNeededWithCompletionHandler:^(ScrollDirection direction) {
-        [self scrolledViewWithDirection: direction];
-        [self setControllers];
-    }];
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    [self recenterIfNeededWithCompletionHandler:^(ScrollDirection direction) {
+//        [self scrolledViewWithDirection: direction];
+//        [self setControllers];
+//    }];
+//}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    [self scrolledViewWithDirection: [self recenterIfNeeded]];
+    [self setControllers];
 }
 
 #pragma mark - DBInfiniteScrollViewDelegate
@@ -122,6 +163,10 @@ typedef NS_ENUM(NSUInteger, ViewPosition) {
     }
     [self addSubview:controller.view];
     [self.__delegate didSetViewWithController:controller];
+    
+    if ([[self subviews] count] > PAGES_AMOUNT) {
+        [[[self subviews] firstObject] removeFromSuperview];
+    }
 }
 
 #pragma mark - DBInfiniteScrollViewDataSource

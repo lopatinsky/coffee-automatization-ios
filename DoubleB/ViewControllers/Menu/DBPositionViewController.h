@@ -19,5 +19,6 @@ typedef NS_ENUM(NSUInteger, DBPositionViewControllerMode) {
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic) DBPositionViewControllerMode mode;
 
-- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode;
+//- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode;
+- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode navigationController:(UINavigationController *)navigationController;
 @end

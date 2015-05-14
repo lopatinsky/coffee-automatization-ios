@@ -76,15 +76,18 @@ NSMutableArray *controllersInfo;
 
 #pragma mark - FIXME DEBUG VIEW HIERARHY
 - (void)changeContentViewWithViewController:(UIViewController *)controller {
-    if (self.childViewControllers) {
-        for (UIViewController *controller in self.childViewControllers) {
-            [controller removeFromParentViewController];
-        }
-//        [self.contentView.subviews respondsToSelector:@selector(removeFromSuperview)];
-    }
+//    if (self.childViewControllers) {
+//        for (UIViewController *controller in self.childViewControllers) {
+//            [controller removeFromParentViewController];
+//        }
+////        [self.contentView.subviews respondsToSelector:@selector(removeFromSuperview)];
+//    }
     controller.view.frame = CGRectMake(0, 0, _contentView.frame.size.width, _contentView.frame.size.height);
+    for (UIView *view in self.contentView.subviews) {
+        [view removeFromSuperview];
+    }
     [self.contentView addSubview:controller.view];
-    [self addChildViewController:controller];
+//    [self addChildViewController:controller];
 }
 
 - (void)didReceiveMemoryWarning {
