@@ -62,7 +62,11 @@
         NSArray *filteredCategories;
         
         if(success){
-            filteredCategories = [self filterMenuForVenue:venue];
+            if(venue){
+                filteredCategories = [self filterMenuForVenue:venue];
+            } else {
+                filteredCategories = categories;
+            }
         }
         
         if(remoteMenuCallback){

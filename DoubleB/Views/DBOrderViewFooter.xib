@@ -82,6 +82,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="JYN-C9-NRG" firstAttribute="leading" secondItem="oDW-Sg-gyh" secondAttribute="leading" id="1pi-Rq-K1p"/>
+                        <constraint firstAttribute="height" constant="104" id="9mB-UZ-ZRT"/>
                         <constraint firstItem="Gdv-RL-zqL" firstAttribute="top" secondItem="oDW-Sg-gyh" secondAttribute="top" constant="10" id="Fgl-rA-FMK"/>
                         <constraint firstItem="Gdv-RL-zqL" firstAttribute="leading" secondItem="oDW-Sg-gyh" secondAttribute="leading" constant="20" id="JAq-66-fxI"/>
                         <constraint firstAttribute="trailing" secondItem="4ei-Yf-sdq" secondAttribute="trailing" id="LsU-UF-AQ7"/>
@@ -110,7 +111,6 @@
                 <constraint firstItem="uve-CR-T6o" firstAttribute="leading" secondItem="tsS-6l-tC8" secondAttribute="leading" id="2j2-fO-q5w"/>
                 <constraint firstAttribute="trailing" secondItem="oDW-Sg-gyh" secondAttribute="trailing" id="5a7-o0-b8L"/>
                 <constraint firstItem="oDW-Sg-gyh" firstAttribute="top" secondItem="uve-CR-T6o" secondAttribute="bottom" id="Jkw-Gy-WoC"/>
-                <constraint firstAttribute="bottom" secondItem="oDW-Sg-gyh" secondAttribute="bottom" id="QRT-oi-WnX"/>
                 <constraint firstAttribute="trailing" secondItem="uve-CR-T6o" secondAttribute="trailing" id="R5G-FY-tks"/>
                 <constraint firstItem="g7Q-Z0-uko" firstAttribute="top" secondItem="uve-CR-T6o" secondAttribute="bottom" id="Ul3-lL-P1Q"/>
                 <constraint firstItem="oDW-Sg-gyh" firstAttribute="leading" secondItem="tsS-6l-tC8" secondAttribute="leading" id="Z5g-Y7-ySp"/>
