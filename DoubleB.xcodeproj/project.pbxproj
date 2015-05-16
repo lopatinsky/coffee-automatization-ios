@@ -50,6 +50,8 @@
 		5EE63FD61B04C0420037CFE1 /* AppartmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FD31B04C0420037CFE1 /* AppartmentCell.m */; };
 		5EE63FD71B04C0420037CFE1 /* AppartmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */; };
 		5EE63FD81B04C0420037CFE1 /* AppartmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */; };
+		5EE63FDF1B04F7020037CFE1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FDE1B04F7020037CFE1 /* UIViewController+NavigationBarFix.m */; };
+		5EE63FE01B04F7020037CFE1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EE63FDE1B04F7020037CFE1 /* UIViewController+NavigationBarFix.m */; };
 		C775B2EED28E9EC2F0B04E49 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		C775B3A2B77B87C0484F4DB5 /* DoubleBTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B4B4E9132F29C5F4E7B8 /* DoubleBTests.m */; };
 		C775B5CAEB2DC37102202B9E /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B63F98FC60EE380D09BA /* XCTest.framework */; };
@@ -689,6 +691,8 @@
 		5EE63FD21B04C0420037CFE1 /* AppartmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppartmentCell.h; sourceTree = "<group>"; };
 		5EE63FD31B04C0420037CFE1 /* AppartmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppartmentCell.m; sourceTree = "<group>"; };
 		5EE63FD41B04C0420037CFE1 /* AppartmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppartmentCell.xib; sourceTree = "<group>"; };
+		5EE63FDD1B04F7020037CFE1 /* UIViewController+NavigationBarFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarFix.h"; sourceTree = "<group>"; };
+		5EE63FDE1B04F7020037CFE1 /* UIViewController+NavigationBarFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarFix.m"; sourceTree = "<group>"; };
 		5EF6A6C91AA3084C00EED5A6 /* UIImageView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Extension.h"; sourceTree = "<group>"; };
 		5EF6A6CA1AA3084C00EED5A6 /* UIImageView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Extension.m"; sourceTree = "<group>"; };
 		5EF6A6D41AA3108200EED5A6 /* OrderItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderItem.h; sourceTree = "<group>"; };
@@ -1414,6 +1418,8 @@
 				CB715AF01ACEB9F900EA84FC /* UIViewController+DBAnimation.m */,
 				CB715AF21ACECACD00EA84FC /* UINavigationController+DBAnimation.h */,
 				CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */,
+				5EE63FDD1B04F7020037CFE1 /* UIViewController+NavigationBarFix.h */,
+				5EE63FDE1B04F7020037CFE1 /* UIViewController+NavigationBarFix.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -2569,6 +2575,7 @@
 				CB1AF7C41AE10E6900FA3224 /* DBPromoManager.m in Sources */,
 				5E8EA7CF1AFF860400A8D630 /* DBDeliveryViewController.m in Sources */,
 				5E8EA7C41AF91FB000A8D630 /* DBAddressViewController.m in Sources */,
+				5EE63FE01B04F7020037CFE1 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB1AF7C51AE10E6900FA3224 /* DBProfileCell.m in Sources */,
 				CB1AF7C61AE10E6900FA3224 /* DBOrdersTableViewController.m in Sources */,
 				CB1AF7C71AE10E6900FA3224 /* JRSwizzle.m in Sources */,
@@ -2687,6 +2694,7 @@
 				CB60C0F21AC5AD2600D5E962 /* DBPromoManager.m in Sources */,
 				5E8EA7CE1AFF860400A8D630 /* DBDeliveryViewController.m in Sources */,
 				5E8EA7C31AF91FB000A8D630 /* DBAddressViewController.m in Sources */,
+				5EE63FDF1B04F7020037CFE1 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB60C0F31AC5AD2600D5E962 /* DBProfileCell.m in Sources */,
 				CB60C0F41AC5AD2600D5E962 /* DBOrdersTableViewController.m in Sources */,
 				CB60C0F51AC5AD2600D5E962 /* JRSwizzle.m in Sources */,

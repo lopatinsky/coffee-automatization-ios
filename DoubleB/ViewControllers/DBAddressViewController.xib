@@ -29,7 +29,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2J-7h-x6d">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                             <subviews>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-x0-PMg">
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-x0-PMg">
                                     <rect key="frame" x="8" y="11" width="304" height="29"/>
                                     <segments>
                                         <segment title="First"/>
@@ -39,19 +39,22 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="YdH-x0-PMg" secondAttribute="trailing" constant="8" id="1hK-vB-i2C"/>
                                 <constraint firstAttribute="height" constant="50" id="8ao-U6-8l7"/>
+                                <constraint firstItem="YdH-x0-PMg" firstAttribute="top" secondItem="v2J-7h-x6d" secondAttribute="top" constant="11" id="nON-9Z-kA7"/>
+                                <constraint firstItem="YdH-x0-PMg" firstAttribute="leading" secondItem="v2J-7h-x6d" secondAttribute="leading" constant="8" id="za5-sx-8P5"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="ig0-Mi-wKS" secondAttribute="bottom" id="8Vj-8C-LpZ"/>
-                        <constraint firstAttribute="trailing" secondItem="ig0-Mi-wKS" secondAttribute="trailing" id="E3A-kc-214"/>
-                        <constraint firstItem="ig0-Mi-wKS" firstAttribute="leading" secondItem="smy-D0-Tmu" secondAttribute="leading" id="LAx-zf-CTA"/>
-                        <constraint firstItem="v2J-7h-x6d" firstAttribute="leading" secondItem="smy-D0-Tmu" secondAttribute="leading" id="OUf-PH-DEN"/>
-                        <constraint firstAttribute="trailing" secondItem="v2J-7h-x6d" secondAttribute="trailing" id="OiO-49-Ioc"/>
-                        <constraint firstItem="ig0-Mi-wKS" firstAttribute="top" secondItem="v2J-7h-x6d" secondAttribute="bottom" id="XGg-NF-Xci"/>
-                        <constraint firstItem="v2J-7h-x6d" firstAttribute="top" secondItem="smy-D0-Tmu" secondAttribute="top" id="jW7-Mb-Jlk"/>
+                        <constraint firstAttribute="trailing" secondItem="ig0-Mi-wKS" secondAttribute="trailing" id="8nc-JJ-fm7"/>
+                        <constraint firstAttribute="bottom" secondItem="ig0-Mi-wKS" secondAttribute="bottom" id="CGa-rf-BBz"/>
+                        <constraint firstItem="ig0-Mi-wKS" firstAttribute="top" secondItem="v2J-7h-x6d" secondAttribute="bottom" id="F6i-5P-Y20"/>
+                        <constraint firstItem="v2J-7h-x6d" firstAttribute="top" secondItem="smy-D0-Tmu" secondAttribute="top" id="Gaa-u0-739"/>
+                        <constraint firstAttribute="trailing" secondItem="v2J-7h-x6d" secondAttribute="trailing" id="X9v-lq-jEr"/>
+                        <constraint firstItem="v2J-7h-x6d" firstAttribute="leading" secondItem="smy-D0-Tmu" secondAttribute="leading" id="Zi7-IZ-dsT"/>
+                        <constraint firstItem="ig0-Mi-wKS" firstAttribute="leading" secondItem="smy-D0-Tmu" secondAttribute="leading" id="gjD-uc-zAf"/>
                     </constraints>
                 </view>
             </subviews>

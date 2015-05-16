@@ -9,8 +9,9 @@
 #import "DBAddressViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBDeliveryViewController.h"
+#import "UIViewController+NavigationBarFix.h"
 
-@interface DBAddressViewController ()
+@interface DBAddressViewController () <DBDeliveryViewControllerDataSource>
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *segmentsHolderView;
@@ -47,6 +48,7 @@ NSMutableArray *controllersInfo;
         } else if ([controller isKindOfClass:[DBDeliveryViewController class]]) {
             /* Delivery */
             [controllersInfo addObject: @{@"name": @"Доставка", @"controller": controller}];
+            [((DBDeliveryViewController *)controller) addToDataSource:self];
         }
     }
     
@@ -64,10 +66,12 @@ NSMutableArray *controllersInfo;
     [super viewWillAppear:animated];
     self.backgroundView.backgroundColor = [UIColor db_defaultColor];
     self.backgroundView.alpha = 0.885;
+    [self hideNavigationBarShadow];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [self showNavigationBarShadow];
 }
 
 - (void)segmentedControlClick:(UISegmentedControl *)segmentedControl {
@@ -93,6 +97,12 @@ NSMutableArray *controllersInfo;
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - DBDeliveryViewControllerDataSource
+
+- (UIView *)superView {
+    return self.contentView;
 }
 
 @end

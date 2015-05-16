@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBDeliveryViewController : UIViewController
+@protocol DBDeliveryViewControllerDataSource <NSObject>
 
+- (UIView *)superView;
+
+@end
+
+@interface DBDeliveryViewController : UIViewController
+- (void)addToDataSource:(id<DBDeliveryViewControllerDataSource>)dataSource;
 @end
