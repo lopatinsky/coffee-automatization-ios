@@ -16,9 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomToLineConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressWidthConstraint;
-
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cityWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopToFirstHorizSeparatorViewContstraint;
 
 @property (weak, nonatomic) IBOutlet UITextField *cityTextField;
 @property (weak, nonatomic) IBOutlet UITextField *streetTextField;
@@ -26,7 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *firstHorizSeparatorView;
 @property (weak, nonatomic) IBOutlet UIView *secondHorizSeparatorView;
-@property (weak, nonatomic) IBOutlet UIView *thirdHorizSeparatorView;
 @property (weak, nonatomic) IBOutlet UIView *verticalSeparatorView;
 
 @property (weak, nonatomic) IBOutlet UIView *streetIndicatorView;
@@ -48,13 +46,12 @@ CGSize keyboardSize;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getSuperView];
-    self.view.backgroundColor = [UIColor db_backgroundColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.addressWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width;
-    self.bottomToLineConstraint.constant = _superLayer.frame.size.height - _thirdHorizSeparatorView.frame.origin.y - 1;
+    self.cityWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width - 24.f;
+    self.bottomToLineConstraint.constant = _superLayer.frame.size.height - _secondHorizSeparatorView.frame.origin.y - 1;
     [self registerForKeyboardNotifications];
     
-    [self initLabels];
     [self initTextFields];
     [self initIndicatorsViews];
     [self initSeparatorsViews];
@@ -94,9 +91,13 @@ CGSize keyboardSize;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
     self.scrollView.contentInset = contentInsets;
     self.scrollView.scrollIndicatorInsets = contentInsets;
-    
     if (currentTextField == _streetTextField) {
-        CGPoint scrollPoint = CGPointMake(0.0, currentTextField.frame.origin.y);
+        CGPoint scrollPoint = CGPointMake(0.0, _firstHorizSeparatorView.frame.origin.y + 1.f);
+        [self.scrollView setContentOffset:scrollPoint animated:NO];
+        
+        return;
+    } else if (currentTextField == _cityTextField) {
+        CGPoint scrollPoint = CGPointMake(0.0, 0.0);
         [self.scrollView setContentOffset:scrollPoint animated:NO];
         
         return;
@@ -143,16 +144,20 @@ CGSize keyboardSize;
 }
 
 - (void)hideTableViewIfNeeded {
-    if (currentTextField == _streetTextField || currentTextField == _appartmentTextField) {
+    if (currentTextField) {
         [self hideTableView:NO];
         UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
         self.scrollView.contentInset = contentInsets;
         self.scrollView.scrollIndicatorInsets = contentInsets;
-        
-//        if (currentTextField == _streetTextField) {
-            CGPoint scrollPoint = CGPointMake(0.0, currentTextField.frame.origin.y);
-            [self.scrollView setContentOffset:scrollPoint animated:NO];
-//        }
+        CGPoint scrollPoint;
+        if (currentTextField == _cityTextField) {
+            self.tableViewTopToFirstHorizSeparatorViewContstraint.constant = 0;
+            scrollPoint = CGPointMake(0.0, 0.0);
+        } else if (currentTextField == _streetTextField || currentTextField == _appartmentTextField) {
+            self.tableViewTopToFirstHorizSeparatorViewContstraint.constant = 51;
+            scrollPoint = CGPointMake(0.0, _firstHorizSeparatorView.frame.origin.y + 1.f);
+        }
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
     } else {
         [self hideTableView:YES];
         [self keyboardWillBeHidden:nil];
@@ -177,6 +182,7 @@ CGSize keyboardSize;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
+    currentTextField = nil;
     [self hideIndicatorsIfNeeded];
     [self hideTableView:YES];
 }
@@ -206,16 +212,12 @@ CGSize keyboardSize;
 
 #pragma mark - initiallizations
 
-- (void)initLabels {
-    self.addressLabel.font = [UIFont boldSystemFontOfSize:17.f];
-}
-
 - (void)initTextFields {
     self.cityTextField.delegate = self;
     self.streetTextField.delegate = self;
     self.appartmentTextField.delegate = self;
     
-    self.cityTextField.font = [UIFont boldSystemFontOfSize:17.f];
+//    self.cityTextField.font = [UIFont boldSystemFontOfSize:17.f];
     
     currentTextField = _cityTextField;
 }
@@ -230,14 +232,14 @@ CGSize keyboardSize;
 }
 
 - (void)initSeparatorsViews {
-    NSArray *separators = [NSArray arrayWithObjects:_firstHorizSeparatorView, _secondHorizSeparatorView, _thirdHorizSeparatorView, _verticalSeparatorView, nil];
+    NSArray *separators = [NSArray arrayWithObjects:_firstHorizSeparatorView, _secondHorizSeparatorView, _verticalSeparatorView, nil];
     for (UIView *separator in separators) {
         separator.backgroundColor = [UIColor db_defaultColor];
     }
 }
 
 - (void)initTableView {
-    self.tableView.backgroundColor = [UIColor db_backgroundColor];
+    self.tableView.backgroundColor = [UIColor whiteColor];
 }
 
 @end

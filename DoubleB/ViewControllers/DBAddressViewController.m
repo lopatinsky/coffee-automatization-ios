@@ -16,7 +16,13 @@
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *segmentsHolderView;
+@property (weak, nonatomic) IBOutlet UIView *titleHolderView;
+@property (weak, nonatomic) IBOutlet UIView *horizSeparatorView;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 @property (strong, nonatomic) NSArray *controllers;
 @end
 
@@ -45,11 +51,11 @@ NSMutableArray *controllersInfo;
     for (UIViewController *controller in self.controllers) {
         if ([controller isKindOfClass:[DBVenuesTableViewController class]]) {
             /* Self-service */
-            [controllersInfo addObject: @{@"name": @"Самовывоз", @"controller": controller}];
+            [controllersInfo addObject: @{@"name": @"Самовывоз", @"controller": controller, @"title": @"Точки самовывоза"}];
             ((DBVenuesTableViewController *)controller).delegate = self;
         } else if ([controller isKindOfClass:[DBDeliveryViewController class]]) {
             /* Delivery */
-            [controllersInfo addObject: @{@"name": @"Доставка", @"controller": controller}];
+            [controllersInfo addObject: @{@"name": @"Доставка", @"controller": controller, @"title": @"Адрес доставки"}];
             [((DBDeliveryViewController *)controller) addToDataSource:self];
         }
     }
@@ -58,10 +64,13 @@ NSMutableArray *controllersInfo;
     for (int i = 0; i < [_controllers count]; ++i) {
         [self.segmentedControl insertSegmentWithTitle:controllersInfo[i][@"name"] atIndex:i animated:NO];
     }
-    
     self.segmentedControl.selectedSegmentIndex = 0;
+    [self setContentForIndex:_segmentedControl.selectedSegmentIndex];
     
-    [self changeContentViewWithViewController:controllersInfo[_segmentedControl.selectedSegmentIndex][@"controller"]];
+    self.segmentsHolderView.backgroundColor = [UIColor db_defaultColor];
+    self.horizSeparatorView.backgroundColor = [UIColor db_defaultColor];
+    self.titleHolderView.backgroundColor = [UIColor whiteColor];
+    self.titleLabel.font = [UIFont boldSystemFontOfSize:17.f];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,23 +86,25 @@ NSMutableArray *controllersInfo;
 }
 
 - (void)segmentedControlClick:(UISegmentedControl *)segmentedControl {
-    [self changeContentViewWithViewController:controllersInfo[_segmentedControl.selectedSegmentIndex][@"controller"]];
+    [self setContentForIndex:_segmentedControl.selectedSegmentIndex];
+}
+
+- (void)setContentForIndex:(NSUInteger)index {
+    [self changeContentViewWithViewController:controllersInfo[index][@"controller"]];
+    [self changeTitleLabelWithText:controllersInfo[index][@"title"]];
+}
+
+- (void)changeTitleLabelWithText:(NSString *)text {
+    self.titleLabel.text = text;
 }
 
 #pragma mark - FIXME DEBUG VIEW HIERARHY
 - (void)changeContentViewWithViewController:(UIViewController *)controller {
-//    if (self.childViewControllers) {
-//        for (UIViewController *controller in self.childViewControllers) {
-//            [controller removeFromParentViewController];
-//        }
-////        [self.contentView.subviews respondsToSelector:@selector(removeFromSuperview)];
-//    }
     controller.view.frame = CGRectMake(0, 0, _contentView.frame.size.width, _contentView.frame.size.height);
     for (UIView *view in self.contentView.subviews) {
         [view removeFromSuperview];
     }
     [self.contentView addSubview:controller.view];
-//    [self addChildViewController:controller];
 }
 
 - (void)didReceiveMemoryWarning {
