@@ -10,8 +10,9 @@
 #import "DBVenuesTableViewController.h"
 #import "DBDeliveryViewController.h"
 #import "UIViewController+NavigationBarFix.h"
+#import "OrderManager.h"
 
-@interface DBAddressViewController () <DBDeliveryViewControllerDataSource>
+@interface DBAddressViewController () <DBDeliveryViewControllerDataSource, DBVenuesTableViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIView *segmentsHolderView;
@@ -45,6 +46,7 @@ NSMutableArray *controllersInfo;
         if ([controller isKindOfClass:[DBVenuesTableViewController class]]) {
             /* Self-service */
             [controllersInfo addObject: @{@"name": @"Самовывоз", @"controller": controller}];
+            ((DBVenuesTableViewController *)controller).delegate = self;
         } else if ([controller isKindOfClass:[DBDeliveryViewController class]]) {
             /* Delivery */
             [controllersInfo addObject: @{@"name": @"Доставка", @"controller": controller}];
@@ -103,6 +105,15 @@ NSMutableArray *controllersInfo;
 
 - (UIView *)superView {
     return self.contentView;
+}
+
+#pragma mark - DBVenuesTableViewControllerDelegate
+
+- (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
+    if(venue){
+        [OrderManager sharedManager].venue = venue;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

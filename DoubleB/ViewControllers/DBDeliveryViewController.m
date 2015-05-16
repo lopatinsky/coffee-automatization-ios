@@ -174,10 +174,11 @@ CGSize keyboardSize;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     currentTextField = textField;
     [self hideTableViewIfNeeded];
-    
-    if ([[[UIDevice currentDevice] systemVersion] doubleValue] <= 4.1) {
-        
-    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self hideIndicatorsIfNeeded];
+    [self hideTableView:YES];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -185,11 +186,6 @@ CGSize keyboardSize;
     [self hideTableView:YES];
     
     return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    [self hideIndicatorsIfNeeded];
-    [self hideTableView:YES];
 }
 
 //- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
