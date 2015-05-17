@@ -2585,6 +2585,9 @@
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = Empatika;
 				TargetAttributes = {
+					7E3DAAE11B06153E00A7FFD1 = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
 					CB1AF7681AE10E6900FA3224 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
@@ -4066,7 +4069,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "7bcfce2c-80d7-4de7-9e68-c4d1b28370b4";
+				PROVISIONING_PROFILE = "56cc0f6c-4791-4abf-a1df-bb9d787df853";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4099,7 +4102,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "f196cd1b-86b8-4bd8-abde-ca614ac773ae";
+				PROVISIONING_PROFILE = "da37981d-acd1-4b77-b9a4-14483b0f4c5c";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -4131,7 +4134,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ac663f92-aacc-4ea7-946b-35eb928176c5";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
