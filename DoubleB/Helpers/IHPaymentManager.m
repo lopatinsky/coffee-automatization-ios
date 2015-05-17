@@ -272,6 +272,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                                      //NSLog(@"%@", responseObject);
                                  } failure:^(AFHTTPRequestOperation *task, NSError *error) {
                                      NSLog(@"%@", error);
+                                     [GANHelper analyzeEvent:@"remove_card_failed" label:@"" category:PAYMENT_SCREEN];
                                  }];
 }
 

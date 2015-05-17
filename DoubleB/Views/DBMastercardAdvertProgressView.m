@@ -88,10 +88,8 @@
     
     CGPoint touch = [recognizer locationInView:self];
     if(CGRectContainsPoint(self.progressContentView.frame, touch)){
-        [GANHelper analyzeEvent:@"mastercard_promo_progress_click" category:@"Menu_screen"];
     }
     if(CGRectContainsPoint(self.mugImageView.frame, touch)){
-        [GANHelper analyzeEvent:@"mastercard_promo_mug_click" category:@"Menu_screen"];
     }
 }
 

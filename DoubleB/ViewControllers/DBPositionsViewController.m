@@ -20,6 +20,7 @@
 #import "Compatibility.h"
 #import "DBNewOrderViewController.h"
 #import "DBMenuCategory.h"
+#import "DBPositionScrollViewController.h"
 
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+DBCardManagement.h"
@@ -85,6 +86,7 @@
 }
 
 - (void)loadMenu:(UIRefreshControl *)refreshControl{
+    [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
     void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         [refreshControl endRefreshing];
@@ -127,6 +129,7 @@
 
 - (void)moveBack {
     [self.navigationController popViewControllerAnimated:YES];
+    [GANHelper analyzeEvent:@"move_arrow_pressed" category:MENU_SCREEN];
 }
 
 - (void)cartAddPositionFromCell:(DBPositionCell *)cell{
@@ -291,14 +294,14 @@
     
     DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     DBMenuPosition *position = cell.position;
+
+    DBPositionScrollViewController *positionDescriptionScrollVC = [[DBPositionScrollViewController alloc] initWithPosition:position categories:self.categories];
+    [self.navigationController pushViewController:positionDescriptionScrollVC animated:YES];
     
-    [GANHelper analyzeEvent:@"item_click"
-                      label:position.name
-                   category:@"Menu_screen"];
+//    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
+//    [self.navigationController pushViewController:positionVC animated:YES];
     
-    
-    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
-    [self.navigationController pushViewController:positionVC animated:YES];
+    [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
 }
 
 #pragma mark - DBPositionCellDelegate
@@ -326,6 +329,7 @@
 #pragma mark - DBCategoryPicker methods
 
 - (void)showCatecoryPickerFromRect:(CGRect)fromRect onView:(UIView *)onView{
+    [GANHelper analyzeEvent:@"category_selection_click" category:MENU_SCREEN];
     if(!self.categoryPicker.isOpened){
         UITableViewCell *firstVisibleCell = [[self.tableView visibleCells] firstObject];
         DBMenuCategory *topCategory;
@@ -359,6 +363,7 @@
 }
 
 - (void)hideCategoryPicker{
+    [GANHelper analyzeEvent:@"category_selection_close" category:MENU_SCREEN];
     if(self.categoryPicker.isOpened){
         [self.categoryPicker closed];
         
@@ -383,6 +388,8 @@
         [self scrollTableViewToSection:section];
         [self hideCategoryPicker];
     }
+    
+    [GANHelper analyzeEvent:@"category_selection_selected" label:category.categoryId category:MENU_SCREEN];
 }
 
 
@@ -396,8 +403,6 @@
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [GANHelper analyzeEvent:@"scroll" category:@"Menu_screen"];
-    
     [self hideCategoryPicker];
 }
 

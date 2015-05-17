@@ -152,7 +152,6 @@
                                                                                             options:NSJSONWritingPrettyPrinted
                                                                                               error:nil];
                                      NSString *eventLabel = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-                                     [GANHelper analyzeEvent:@"promos_update_success" label:eventLabel category:@"Promos"];
                                  }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -163,7 +162,6 @@
                                  
                                  // Analitics
                                  NSString *eventLabel = [NSString stringWithFormat:@"%ld", (long)error.code];
-                                 [GANHelper analyzeEvent:@"promos_update_failure" label:eventLabel category:@"Promos"];
                              }];
 }
 
@@ -261,18 +259,11 @@
                                  [GANHelper trackNewOrderInfo:ord];
                                  
                                  long interval = (long)-[start timeIntervalSinceNow];
-                                 [GANHelper analyzeEvent:@"order_payment_time"
-                                                   label:[NSString stringWithFormat:@"%ld", interval]
-                                                category:@"Order_screen"];
-                                 [GANHelper analyzeEvent:@"order_submit_success" label:ord.orderId category:@"Order_screen"];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
                                  NSString *eventLabel = [NSString stringWithFormat:@"%@,\n %@", [[OrderManager sharedManager] orderId], error.description];
-                                 [GANHelper analyzeEvent:@"order_submit_failure"
-                                                   label:eventLabel
-                                                category:@"Order_screen"];
                                  
                                  [OrderManager sharedManager].orderId = nil;
                                  [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];

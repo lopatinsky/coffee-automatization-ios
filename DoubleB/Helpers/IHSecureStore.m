@@ -150,6 +150,7 @@
 }
 
 - (void)removeCardAtIndex:(NSInteger)index{
+    [GANHelper analyzeEvent:@"remove_card" category:PAYMENT_SCREEN];
     NSMutableArray *cards = [self mutableCards];
     
     if(cards == nil || [cards count] <= index)

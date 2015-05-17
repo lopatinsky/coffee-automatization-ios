@@ -29,19 +29,15 @@
         NSString *eventLabel = [NSString stringWithFormat:@"%@;%f;%f,%f", self.venue.title, self.venue.distance, location.coordinate.latitude, location.coordinate.longitude];
         
         if(CGRectContainsPoint(self.venueDistanceLabel.frame, point)){
-            [GANHelper analyzeEvent:@"item_click_distance" label:eventLabel category:@"Coffee_houses_screen"];
         }
         
         if(CGRectContainsPoint(self.venueNameLabel.frame, point)){
-            [GANHelper analyzeEvent:@"item_click_title" label:eventLabel category:@"Coffee_houses_screen"];
         }
         
         if(CGRectContainsPoint(self.venueAddressLabel.frame, point)){
-            [GANHelper analyzeEvent:@"item_click_address" label:eventLabel category:@"Coffee_houses_screen"];
         }
         
         if(CGRectContainsPoint(self.venueWorkTimeLabel.frame, point)){
-            [GANHelper analyzeEvent:@"item_click_work_time" label:eventLabel category:@"Coffee_houses_screen"];
         }
     }];
     

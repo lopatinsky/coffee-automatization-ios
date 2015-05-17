@@ -81,12 +81,16 @@
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);
                                 
+                                [GANHelper analyzeEvent:@"menu_update_success" category:MENU_SCREEN];
+                                
                                 [self synchronizeWithResponseMenu:responseObject[@"menu"]];
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(YES, self.categories);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
+                                
+                                [GANHelper analyzeEvent:@"manu_update_failed" label:error.localizedDescription category:MENU_SCREEN];
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(NO, nil);

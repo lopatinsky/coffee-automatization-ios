@@ -39,14 +39,16 @@
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
 
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
+@property (weak, nonatomic) UINavigationController *parentNavigationController;
 
 @end
 
 @implementation DBPositionViewController
 
-- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode{
+- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode navigationController:(UINavigationController *)navigationController {
     self = [super init];
     
+    self.parentNavigationController = navigationController;
     self.position = position;
     self.mode = mode;
     
@@ -59,7 +61,7 @@
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.positionImageView alignLeading:@"0" trailing:@"0" toView:self.view];
     
-    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
+//    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
     
     // Configure position image
     self.positionImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
@@ -157,13 +159,15 @@
 }
 
 - (IBAction)priceButtonClick:(id)sender {
-    [self.navigationController animateAddProductFromView:self.priceLabel completion:^{
+    [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
+    [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
         [[OrderManager sharedManager] addPosition:self.position];
     }];
 }
 
 - (void)goToOrderViewController{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.parentNavigationController popToRootViewControllerAnimated:YES];
+    [GANHelper analyzeEvent:@"back_arrow_pressed" category:PRODUCT_SCREEN];
 }
 
 
@@ -203,11 +207,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
         [self.modifierPicker configureWithGroupModifier:self.position.groupModifiers[indexPath.row]];
+        [GANHelper analyzeEvent:@"group_modifier_show"
+                          label:((DBMenuPositionModifier *)self.position.groupModifiers[indexPath.row]).modifierId
+                       category:PRODUCT_SCREEN];
     } else {
         [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
     }
     
-    [self.modifierPicker showOnView:self.navigationController.view];
+    [self.modifierPicker showOnView:self.parentNavigationController.view];
 }
 
 #pragma mark - DBPositionModifierPickerDelegate

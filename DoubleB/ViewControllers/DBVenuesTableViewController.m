@@ -38,6 +38,7 @@
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -48,6 +49,9 @@
     [self reloadVenues:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [GANHelper analyzeEvent:@"back_click" category:VENUES_SCREEN];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -58,9 +62,8 @@
     if ([self.venues count] && !refreshControl) {
         return;
     }
-
-    [GANHelper analyzeEvent:@"update" category:@"Coffee_houses_screen"];
-
+    [GANHelper analyzeEvent:@"update" category:VENUES_SCREEN];
+    
     self.venues = [Venue storedVenues];
 
     /*if (!refreshControl) {
@@ -83,7 +86,6 @@
             [self.tableView reloadData];
         }
         long interval = -(long)[start timeIntervalSinceNow];
-        [GANHelper analyzeEvent:@"loading_time" label:[NSString stringWithFormat:@"%ld", interval] category:@"Coffee_houses_screen"];
         //[MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.refreshControl endRefreshing];
     };
@@ -157,14 +159,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (!self.delegate) {
-        Venue *venue = self.venues[indexPath.row];
         DBVenueViewController *controller = [DBVenueViewController new];
+        Venue *venue = _venues[indexPath.row];
         controller.venue = venue;
         controller.hidesBottomBarWhenPushed = YES;
         [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
             NSString *eventLabel = [NSString stringWithFormat:@"%@;%f;%f,%f",
                                     venue.venueId, venue.distance, location.coordinate.latitude, location.coordinate.longitude];
-            [GANHelper analyzeEvent:@"item_click" label:eventLabel category:@"Coffee_houses_screen"];
+            [GANHelper analyzeEvent:@"venue_click" label:eventLabel category:VENUES_SCREEN];
         }];
         
         

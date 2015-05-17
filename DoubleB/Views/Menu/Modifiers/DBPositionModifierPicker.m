@@ -123,6 +123,7 @@
 }
 
 - (void)hide:(UITapGestureRecognizer *)sender{
+    [GANHelper analyzeEvent:@"popup_closed" category:GROUP_MODIFIER_PICKER];
     CGPoint touch = [sender locationInView:nil];
     
     if(!CGRectContainsPoint(self.frame, touch)){
@@ -193,11 +194,12 @@
                 [cell select:NO animated:YES];
             }
         }
-        
         DBMenuPositionModifierItem *item = [self.modifier.items objectAtIndex:indexPath.row];
         if([self.delegate respondsToSelector:@selector(db_positionModifierPicker:didSelectNewItem:)]){
             [self.delegate db_positionModifierPicker:self didSelectNewItem:item];
         }
+        
+        [GANHelper analyzeEvent:@"modifier_selected" label:item.itemId category:GROUP_MODIFIER_PICKER];
     }
 }
 

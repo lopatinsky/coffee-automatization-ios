@@ -235,20 +235,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 [defaults setBool:YES forKey:@"ibeacon_question"];
                 [defaults synchronize];
                 
-                [GANHelper analyzeEvent:@"ibeacon_alert" category:@"Notification"];
                 [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Спец. предложения", nil)
                                                message:NSLocalizedString(@"Хотите ли вы активировать контекстные уведомления, чтобы мы присылалали вам спец. предложения и полезную информацию в зависимости от вашего местоположения?", nil)
                                      cancelButtonTitle:NSLocalizedString(@"Нет, спасибо", nil)
                                      otherButtonTitles:@[NSLocalizedString(@"Да, пожалуйста", nil)]
                                                handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                                    if (buttonIndex == 1) {
-                                                       [GANHelper analyzeEvent:@"ibeacon_alert_yes" category:@"Notification"];
                                                        [defaults setBool:YES forKey:kDBSettingsNotificationsEnabled];
                                                        [defaults synchronize];
                                                        
                                                        [DBBeaconObserver createBeaconObserver];
                                                    } else {
-                                                       [GANHelper analyzeEvent:@"ibeacon_alert_no" category:@"Notification"];
                                                    }
                                                }];
             } else {
@@ -266,7 +263,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-    [GANHelper analyzeScreen:@"Order_screen"];
+    [GANHelper analyzeScreen:ORDER_SCREEN];
     
 //    CGRect rect = [self.tableView convertRect:self.viewFooter.continueButton.frame fromView:self.viewFooter];
 //    int visibleTableHeight = [UIScreen mainScreen].bounds.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
@@ -296,8 +293,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Setup
 
 - (void)clickSettings:(id)sender {
-    [GANHelper analyzeEvent:@"settings_click" category:@"Menu_screen"];
-    
     DBSettingsTableViewController *settingsController = [DBSettingsTableViewController new];
     settingsController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:settingsController animated:YES];
@@ -571,12 +566,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             [OrderManager sharedManager].location = location;
             
             if (location) {
-                [GANHelper analyzeEvent:@"location_found" category:@"Order_screen"];
                 
                 [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
 
                     long interval = (long)-[start timeIntervalSinceNow];
-                    [GANHelper analyzeEvent:@"location_loading_time" label:[NSString stringWithFormat:@"%ld", interval] category:@"Order_screen"];
 
                     if(![OrderManager sharedManager].venue){
                         if (venues) {
@@ -603,7 +596,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 } else {
                     [self setNearestVenue:self.venues[1]];
                 }
-                [GANHelper analyzeEvent:@"location_not_found" category:@"Order_screen"];
                 [self.orderFooter.activityIndicator stopAnimating];
             }
         }];
@@ -617,7 +609,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Events
 
 - (void)clickRefill:(id)sender {
-    [GANHelper analyzeEvent:@"back_add_click" category:@"Order_screen"];
 
     [self moveBack];
 }
@@ -627,6 +618,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         self.positionsViewController = [DBPositionsViewController new];
         self.positionsViewController.hidesBottomBarWhenPushed = YES;
     }
+    
+    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
+    
     [self.navigationController pushViewController:self.positionsViewController animated:YES];
 }
 
@@ -636,12 +630,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         return;
     }
     
+    [GANHelper analyzeEvent:@"order_button_click" label:[OrderManager sharedManager].orderId category:ORDER_SCREEN];
+    
     if(![OrderManager sharedManager].validOrder){
         [self startUpdatingPromoInfo];
-        
-        [GANHelper analyzeEvent:@"order_submit_disable"
-                          label:[OrderManager sharedManager].orderId
-                       category:@"Order_screen"];
         
         // Nice animation for all error elements
         void (^animationBlock)(UIView*) = ^void(UIView *targetView){
@@ -688,8 +680,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         
         return;
     }
-
-    [GANHelper analyzeEvent:@"order_submit" label:[OrderManager sharedManager].orderId category:@"Order_screen"];
     
     if([OrderManager sharedManager].paymentType == PaymentTypeCard && !self.currentCard){
         [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
@@ -701,8 +691,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (IBAction)clickAddress:(id)sender {
-    [GANHelper analyzeEvent:@"location_text_click" category:@"Order_screen"];
-
+    [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
     DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
     venuesController.delegate = self;
     venuesController.venues = self.venues;
@@ -712,8 +701,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (IBAction)clickTime:(id)sender {
-    [GANHelper analyzeEvent:@"delivery_time_text" category:@"Order_screen"];
-
+    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
     [self showPicker];
 }
 
@@ -733,10 +721,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             label = @"extra_type";
             break;
     }
-
-    [GANHelper analyzeEvent:@"payment_click"
-                      label:label
-                   category:@"Order_screen"];
+    
+    [GANHelper analyzeEvent:@"payment_click" label:label category:ORDER_SCREEN];
 
     DBCardsViewController *cardsController = [DBCardsViewController new];
     cardsController.mode = CardsViewControllerModeChoosePayment;
@@ -746,8 +732,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (IBAction)clickComment:(id)sender {
-    [GANHelper analyzeEvent:@"comment_click" category:@"Order_screen"];
-
+    [GANHelper analyzeEvent:@"comment_screen" category:ORDER_SCREEN];
     DBCommentViewController *commentController = [DBCommentViewController new];
     commentController.delegate = self;
     commentController.comment = [OrderManager sharedManager].comment;
@@ -755,22 +740,20 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (IBAction)clickProfile:(id)sender {
+    [GANHelper analyzeEvent:@"profile_click" category:ORDER_SCREEN];
     NSString *eventLabel;
     if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
          eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];
     } else {
         eventLabel = @"null";
     }
-    [GANHelper analyzeEvent:@"user_profile_click"
-                      label:eventLabel
-                   category:@"Order_screen"];
-
     DBProfileViewController *profileViewController = [DBProfileViewController new];
     profileViewController.screen = @"Profile_order_screen";
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
 - (IBAction)clickPickerDone:(id)sender {
+    [GANHelper analyzeEvent:@"time_spinner_closed" category:ORDER_SCREEN];
     [self hidePicker:nil];
 }
 
@@ -816,9 +799,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     } else {
         eventLabel = [NSString stringWithFormat:@"done;%@;%@", self.lastSelectedTime, [OrderManager sharedManager].time];
     }
-    [GANHelper analyzeEvent:@"ready_click " label:eventLabel category:@"Delivery_time_screen"];
-    [GANHelper analyzeEvent:@"back_screen_click" category:@"Delivery_time_screen"];
-    
 
     UIView *overlay = [self.tabBarController.view viewWithTag:TAG_OVERLAY];
     
@@ -880,6 +860,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
         } completion:nil];
+        [GANHelper analyzeEvent:@"order_placed"
+                          label:[NSString stringWithFormat:@"%@, %@", [OrderManager sharedManager].orderId, [IHSecureStore sharedInstance].clientId]
+                       category:ORDER_SCREEN];
         
         [self.delegate newOrderViewController:self didFinishOrder:order];
     } failure:^(NSString *errorTitle, NSString *errorMessage) {
@@ -893,6 +876,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                              cancelButtonTitle:NSLocalizedString(@"ОК", nil)
                              otherButtonTitles:nil
                                        handler:nil];
+        [GANHelper analyzeEvent:@"order_failed" label:errorMessage category:ORDER_SCREEN];
     }];
 }
 
@@ -1000,10 +984,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - UIPickerViewDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    [GANHelper analyzeEvent:@"time_spinner_selected" category:ORDER_SCREEN];
     [OrderManager sharedManager].time = self.timeOptions[row];
     [self reloadTime];
-
-    [GANHelper analyzeEvent:@"list_scroll" category:@"Delivery_time_screen"];
 }
 
 #pragma mark - DBTimePickerViewDelegate
@@ -1073,7 +1056,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [GANHelper analyzeEvent:@"item_title_click" category:@"Order_screen"];
+//    [GANHelper analyzeEvent:@"item_title_click" category:ORDER_SCREEN];
 //    
 //    DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
 //    [cell showOrHideAdditionalInfo];
@@ -1093,8 +1076,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)removeRowAtIndex:(NSInteger)index{
-    [GANHelper analyzeEvent:@"item_delete" category:@"Order_screen"];
-    
     [self.preferedHeightsForTableView removeObjectAtIndex:index];
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
@@ -1117,10 +1098,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
     [self reloadCard];
     [self reloadContinueButton];
-    
-    [GANHelper analyzeEvent:@"Order_screen"
-                      label:cell.orderItem.position.positionId
-                   category:@"item_count_increase"];
 }
 
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{
@@ -1129,16 +1106,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     if(count == 0){
         [self removeRowAtIndex:index];
-        
-        [GANHelper analyzeEvent:@"Order_screen"
-                          label:cell.orderItem.position.positionId
-                       category:@"item_delete"];
     } else {
         [cell reloadCount];
-        
-        [GANHelper analyzeEvent:@"Order_screen"
-                          label:cell.orderItem.position.positionId
-                       category:@"item_count_decrease"];
     }
     
     [self startUpdatingPromoInfo];
@@ -1147,9 +1116,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
-    [GANHelper analyzeEvent:@"Order_screen"
-                      label:cell.orderItem.position.positionId
-                   category:@"item_swipe"];
 }
 
 //- (void)orderItemCell:(DBOrderItemCell *)cell newPreferedHeight:(NSInteger)height{
@@ -1186,11 +1152,18 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     ndaController.url = [NSURL URLWithString:@"http://empatika-doubleb.appspot.com/docs/nda.html"];
     ndaController.screen = @"NDA_screen";
     
+    [GANHelper analyzeEvent:@"confidece_show" category:ORDER_SCREEN];
+    
     [self.navigationController pushViewController:ndaController animated:YES];
 }
 
 - (void)db_newOrderNDAView:(DBNewOrderNDAView *)ndaView didSelectSwitchState:(BOOL)on{
     [self reloadContinueButton];
+    if (on) {
+        [GANHelper analyzeEvent:@"accept_policy" category:ORDER_SCREEN];
+    } else {
+        [GANHelper analyzeEvent:@"decline_policy" category:ORDER_SCREEN];
+    }
 }
 
 #pragma mark - UINavigationControllerDelegate

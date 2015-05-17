@@ -81,10 +81,6 @@
 - (IBAction)orderButtonPressed:(id)sender {
     [self animateAdditionWithCompletion:^{
         [self.delegate positionCellDidOrder:self];
-        
-        [GANHelper analyzeEvent:@"item_product_add_to_order"
-                          label:self.position.positionId
-                       category:@"Menu_screen"];
     }];
 }
 

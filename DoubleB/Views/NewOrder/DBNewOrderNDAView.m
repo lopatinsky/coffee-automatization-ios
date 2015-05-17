@@ -34,9 +34,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         if(ndaSigned){
-            [GANHelper analyzeEvent:@"accept_policy" category:@"Order_screen"];
         } else {
-            [GANHelper analyzeEvent:@"decline_policy" category:@"Order_screen"];
         }
         
         [self reload];
@@ -49,7 +47,6 @@
     [self.labelNda addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         @strongify(self)
         
-        [GANHelper analyzeEvent:@"policy_click" category:@"Order_screen"];
         
         if([self.delegate respondsToSelector:@selector(db_newOrderNDAViewDidTapNDALabel:)])
             [self.delegate db_newOrderNDAViewDidTapNDALabel:self];

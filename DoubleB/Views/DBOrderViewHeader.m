@@ -44,12 +44,10 @@
     
     self.labelOrder.userInteractionEnabled = YES;
     [self.labelOrder addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        [GANHelper analyzeEvent:@"order_number_screen_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
     
     self.labelStatus.userInteractionEnabled = YES;
     [self.labelStatus addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        [GANHelper analyzeEvent:@"order_status_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
 }
 @end

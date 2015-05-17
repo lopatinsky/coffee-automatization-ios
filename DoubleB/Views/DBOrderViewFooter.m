@@ -56,19 +56,16 @@
     self.labelTotal.userInteractionEnabled = YES;
     [self.labelTotal addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         @strongify(self);
-        [GANHelper analyzeEvent:@"order_price_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
     
     self.labelAddress.userInteractionEnabled = YES;
     [self.labelAddress addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         @strongify(self);
-        [GANHelper analyzeEvent:@"order_delivery_cafe_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
     
     self.labelDate.userInteractionEnabled = YES;
     [self.labelDate addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
         @strongify(self);
-        [GANHelper analyzeEvent:@"order_delivery_time_click" label:self.order.orderId category:@"Order_info_screen"];
     }]];
     
     [self.venueImageView templateImageWithName:@"venue.png"];

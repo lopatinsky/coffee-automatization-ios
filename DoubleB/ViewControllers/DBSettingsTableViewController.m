@@ -142,8 +142,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
-        [GANHelper analyzeEvent:@"back_menu_click"
-                       category:@"Settings_screen"];
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:SETTINGS_SCREEN];
     }
 }
 
@@ -191,7 +190,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         if (![switcher bk_hasEventHandlersForControlEvents:UIControlEventValueChanged]) {
             [switcher bk_addEventHandler:^(id sender) {
                 UISwitch *s = sender;
-                [GANHelper analyzeEvent:@"send_notifications" label:s.on?@"on":@"off" category:@"Settings_screen"];
+                [GANHelper analyzeEvent:@"notification_switched" label:(s.on ? @"YES":@"NO") category:SETTINGS_SCREEN];
                 BOOL enabled = ![[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
                 [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kDBSettingsNotificationsEnabled];
                 [[NSUserDefaults standardUserDefaults] synchronize];
@@ -217,72 +216,62 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSDictionary *settingsItemInfo = self.settingsItems[indexPath.row];
     
+    NSString *event;
+    
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
-        [GANHelper analyzeEvent:@"profile_click"
-                          label:[NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone]
-                       category:@"Settings_screen"];
+        event = @"profile_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"cardsVC"]){
-        [GANHelper analyzeEvent:@"card_click"
-                          label:[NSString stringWithFormat:@"%lu", (unsigned long) [IHSecureStore sharedInstance].cardCount]
-                       category:@"Settings_screen"];
+        event = @"cards_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"mailer"]){
-        [GANHelper analyzeEvent:@"review_click"
-                       category:@"Settings_screen"];
+        event = @"contact_us_click";
         [self presentMailViewControllerWithRecipients:nil callback:nil];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]){
-        [GANHelper analyzeEvent:@"share_click"
-                       category:@"Settings_screen"];
         [self shareAppPermission:nil];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"aboutPromoVC"]){
-        [GANHelper analyzeEvent:@"about_promo_click"
-                       category:@"Settings_screen"];
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"aboutVC"]){
-        [GANHelper analyzeEvent:@"about_app_click"
-                       category:@"Settings_screen"];
+        
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"privacyPolicyVC"]){
-        [GANHelper analyzeEvent:@"nda_click"
-                       category:@"Settings_screen"];
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if ([settingsItemInfo[@"name"] isEqualToString:@"personalAccountVC"]) {
+        event = @"wallet_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if ([settingsItemInfo[@"name"] isEqualToString: @"companyInfoVC"]) {
+        event = @"about_app_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
+    [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];
 }
 
 #pragma mark - MFMailComposer
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     if(result == MFMailComposeResultSent){
-        [GANHelper analyzeEvent:@"review_send" category:@"Review_screen"];
     }
 
     if(result == MFMailComposeResultCancelled || result == MFMailComposeResultSaved){
-        [GANHelper analyzeEvent:@"review_cancel" category:@"Review_screen"];
     }
 
     if(result == MFMailComposeResultFailed){
-        [GANHelper analyzeEvent:@"review_failed" category:@"Review_screen"];
     }
     
     [self.navigationController dismissViewControllerAnimated:YES completion:NULL];

@@ -50,19 +50,13 @@
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
-    if (!parent) {
-        [GANHelper analyzeEvent:@"back_order_click" label:self.textView.text category:@"Comments_screen"];
-    }
 }
 
 - (void)clickSave:(UIBarButtonItem *)sender {
-    [GANHelper analyzeEvent:@"save" label:self.textView.text category:@"Comments_screen"];
-
     [self.delegate commentViewController:self didFinishWithText:self.textView.text];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView{
-    [GANHelper analyzeEvent:@"start_typing" category:@"Comments_screen"];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -84,7 +78,6 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 
         if ([text isEqualToString:@"\n"]) {
-            [GANHelper analyzeEvent:@"return_pressed" category:@"Comments_screen"];
         }
     }
     return YES;
