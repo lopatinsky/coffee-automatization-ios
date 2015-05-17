@@ -39,16 +39,14 @@
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
 
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
-@property (weak, nonatomic) UINavigationController *parentNavigationController;
 
 @end
 
 @implementation DBPositionViewController
 
-- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode navigationController:(UINavigationController *)navigationController {
+- (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode {
     self = [super init];
     
-    self.parentNavigationController = navigationController;
     self.position = position;
     self.mode = mode;
     
@@ -61,7 +59,9 @@
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.positionImageView alignLeading:@"0" trailing:@"0" toView:self.view];
     
-//    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
+    if(self.mode == DBPositionViewControllerModeMenuPosition){
+        self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
+    }
     
     // Configure position image
     self.positionImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];

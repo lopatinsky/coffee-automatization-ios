@@ -295,8 +295,9 @@
     DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     DBMenuPosition *position = cell.position;
 
-    DBPositionScrollViewController *positionDescriptionScrollVC = [[DBPositionScrollViewController alloc] initWithPosition:position categories:self.categories];
-    [self.navigationController pushViewController:positionDescriptionScrollVC animated:YES];
+    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
+    positionVC.parentNavigationController = self.navigationController;
+    [self.navigationController pushViewController:positionVC animated:YES];
     
 //    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
 //    [self.navigationController pushViewController:positionVC animated:YES];

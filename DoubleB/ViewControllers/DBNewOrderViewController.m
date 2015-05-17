@@ -1133,6 +1133,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
     DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+    positionVC.parentNavigationController = self.navigationController;
     positionVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:positionVC animated:YES];
 }
@@ -1152,7 +1153,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     ndaController.url = [NSURL URLWithString:@"http://empatika-doubleb.appspot.com/docs/nda.html"];
     ndaController.screen = @"NDA_screen";
     
-    [GANHelper analyzeEvent:@"confidece_show" category:ORDER_SCREEN];
+    [GANHelper analyzeEvent:@"confidence_show" category:ORDER_SCREEN];
     
     [self.navigationController pushViewController:ndaController animated:YES];
 }

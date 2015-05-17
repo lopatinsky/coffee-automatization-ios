@@ -263,6 +263,7 @@
     
     // Cash payment type
     if(indexPath.section == 1){
+        eventLabel = @"cash";
         [OrderManager sharedManager].paymentType = PaymentTypeCash;
         [self.tableView reloadData];
         
@@ -272,6 +273,7 @@
     
     // Cards payment type
     if(indexPath.section == 2){
+        eventLabel = @"card";
         // add card button
         if(indexPath.row == [self.cards count]){
             [GANHelper analyzeEvent:@"add_card_pressed" category:PAYMENT_SCREEN];
