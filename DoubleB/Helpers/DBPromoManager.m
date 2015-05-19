@@ -45,6 +45,8 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
         self.lastUpdateNumber = 0;
         _validOrder = YES;
         
+        self.promoItems = [NSMutableArray new];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clear) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;

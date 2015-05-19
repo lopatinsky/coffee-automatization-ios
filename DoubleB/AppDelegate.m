@@ -35,9 +35,9 @@
                   clientKey:@"KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w"];
     
     [Fabric with:@[CrashlyticsKit]];
-//    [[Crashlytics sharedInstance] setDebugMode:YES];
     
-    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
+//    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
+    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     //==================== Framework initialization ====================
     
     

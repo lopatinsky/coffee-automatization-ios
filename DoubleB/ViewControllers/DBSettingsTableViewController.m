@@ -69,11 +69,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     // Personal account item
-    PersonalAccountViewController *personalAccountVC = [PersonalAccountViewController new];
-    [self.settingsItems addObject:@{@"name": @"personalAccountVC",
-                                    @"title": NSLocalizedString(@"Личный счет", nil),
-                                    @"image": @"payment",
-                                    @"viewController": personalAccountVC}];
+//    PersonalAccountViewController *personalAccountVC = [PersonalAccountViewController new];
+//    [self.settingsItems addObject:@{@"name": @"personalAccountVC",
+//                                    @"title": NSLocalizedString(@"Личный счет", nil),
+//                                    @"image": @"payment",
+//                                    @"viewController": personalAccountVC}];
     
     // Contact us item
     [self.settingsItems addObject:@{@"name": @"mailer",

@@ -14,6 +14,8 @@
 
 @interface DBOrderViewFooter ()
 @property(strong, nonatomic) Order *order;
+
+@property (nonatomic) double initialHeight;
 @end
 
 @implementation DBOrderViewFooter
@@ -33,12 +35,13 @@
     self = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderViewFooter" owner:self options:nil] firstObject];
     
     self.order = order;
-//    CGRect rect = self.frame;
-//    rect.size.height = 100;
-//    self.frame = rect;
     [self configure];
     
     return self;
+}
+
+- (void)awakeFromNib{
+    self.initialHeight = self.frame.size.height;
 }
 
 - (void)configure{
@@ -69,6 +72,12 @@
     }]];
     
     [self.venueImageView templateImageWithName:@"venue.png"];
+}
+
+- (void)layoutSubviews{
+    CGRect rect = self.frame;
+    rect.size.height = self.initialHeight;
+    self.frame = rect;
 }
 
 @end

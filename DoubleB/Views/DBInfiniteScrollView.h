@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+//TODO: ScrollDirectionLeft
 typedef NS_ENUM(NSUInteger, ScrollDirection) {
     Left = 0,
     Right,

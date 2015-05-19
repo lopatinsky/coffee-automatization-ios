@@ -914,11 +914,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 // Show order promos & errors
                 NSArray *promos = [DBPromoManager sharedManager].promos;
                 NSArray *errors = [DBPromoManager sharedManager].errors;
-                if([promos count] > 0 || [errors count] > 0){
-                    [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
-                }
                 
-                [self.tableView reloadData];
+                [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
+                
+                NSMutableArray *cellsForReload = [NSMutableArray new];
+                for(int i = 0; i < [OrderManager sharedManager].items.count; i++){
+                    OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
+                    DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
+                    if([promoItem.errors count] > 0){
+                        [cellsForReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                    }
+                }
+                [self.tableView reloadRowsAtIndexPaths:cellsForReload withRowAnimation:UITableViewRowAnimationAutomatic];
+//                [self.tableView reloadData];
             } else {
                 [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
                                           animation:^{
@@ -1029,7 +1037,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     cell.panGestureRecognizer.delegate = self;
     
     DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
-    if(promoItem){
+    if([promoItem.errors count] > 0){
         [cell configureWithPromoItem:promoItem animated:YES];
     }
     
@@ -1084,6 +1092,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.tableView endUpdates];
     
     if ([OrderManager sharedManager].totalCount == 0) {
+        [[DBPromoManager sharedManager] clear];
+        [self reloadBonusesView:YES];
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
         } completion:nil];

@@ -118,7 +118,7 @@
     int result = 0;
     
     if(self.mode == CardsViewControllerModeManageCards){
-        if(section == 3) {
+        if(section == 2) {
             return [self.cards count] + 1;
         } else {
             return 0;
