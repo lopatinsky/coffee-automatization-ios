@@ -7,7 +7,6 @@
 //
 
 #import "DBOrderViewFooter.h"
-#import "UIGestureRecognizer+BlocksKit.h"
 #import "Order.h"
 #import "Venue.h"
 #import "Compatibility.h"

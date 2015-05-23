@@ -8,6 +8,7 @@
 
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
+#import "DBMenuBonusPosition.h"
 #import "Compatibility.h"
 
 #import "UIImageView+WebCache.h"
@@ -18,16 +19,16 @@
 
 @implementation DBPositionCell
 
-- (instancetype)initWithType:(DBPositionCellType)type{
+- (instancetype)initWithType:(DBPositionCellAppearanceType)type{
     NSString *nibIdentifier;
-    if (type == DBPositionCellTypeCompact) {
+    if (type == DBPositionCellAppearanceTypeCompact) {
         nibIdentifier = @"DBPositionCompactCell";
     } else {
         nibIdentifier = @"DBPositionCell";
     }
     
     self = [[[NSBundle mainBundle] loadNibNamed:nibIdentifier owner:self options:nil] firstObject];
-    _type = type;
+    _appearanceType = type;
     
     return self;
 }
@@ -48,7 +49,7 @@
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
-    if(self.type == DBPositionCellTypeFull){
+    if(_appearanceType == DBPositionCellAppearanceTypeFull){
         [self.positionImageView db_showDefaultImage];
     }
 }
@@ -57,9 +58,9 @@
     _position = position;
     
     self.titleLabel.text = position.name;
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", position.actualPrice, [Compatibility currencySymbol]];
+    [self reloadPriceLabel];
     
-    if(self.type == DBPositionCellTypeFull){
+    if(_appearanceType == DBPositionCellAppearanceTypeFull){
         self.descriptionLabel.text = position.positionDescription;
         if(position.weight == 0){
             self.weightLabel.hidden = YES;
@@ -75,6 +76,14 @@
                                                     [self.positionImageView db_hideDefaultImage];
                                                 }
                                             }];
+    }
+}
+
+- (void)reloadPriceLabel{
+    if([self.position isKindOfClass:[DBMenuBonusPosition class]]){
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", ((DBMenuBonusPosition *)self.position).pointsPrice];
+    } else {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
     }
 }
 

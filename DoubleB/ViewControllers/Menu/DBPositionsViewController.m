@@ -24,7 +24,6 @@
 
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+DBCardManagement.h"
-#import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 #import <BlocksKit/UIControl+BlocksKit.h>
 
 #define TAG_POPUP_OVERLAY 333
@@ -246,12 +245,12 @@
     if(category.categoryWithImages){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
         if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellTypeFull];
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
         }
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
         if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellTypeCompact];
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
         }
     }
     

@@ -10,7 +10,6 @@
 #import "DBMenuPositionModifier.h"
 #import "Compatibility.h"
 
-#import "UIGestureRecognizer+BlocksKit.h"
 
 typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     SingleModifierCellStateEmpty = 0,

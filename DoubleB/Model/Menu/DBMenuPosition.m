@@ -32,20 +32,21 @@
 
 @implementation DBMenuPosition
 
-+ (instancetype)positionFromResponseDictionary:(NSDictionary *)positionDictionary;{
-    DBMenuPosition *product = [DBMenuPosition new];
+- (instancetype)initWithResponseDictionary:(NSDictionary *)positionDictionary{
+    self = [super init];
     
-    [product copyFromResponseDictionary:positionDictionary];
+    [self copyFromResponseDictionary:positionDictionary];
     
-    product.groupModifiers = [NSMutableArray new];
+    self.groupModifiers = [NSMutableArray new];
     for(NSDictionary *modifierDictionary in positionDictionary[@"group_modifiers"]){
         DBMenuPositionModifier *modifier = [DBMenuPositionModifier groupModifierFromDictionary:modifierDictionary];
         if(modifier)
-            [product.groupModifiers addObject:modifier];
+            [self.groupModifiers addObject:modifier];
     }
     
-    return product;
+    return self;
 }
+
 
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary{
     [self copyFromResponseDictionary:positionDictionary];

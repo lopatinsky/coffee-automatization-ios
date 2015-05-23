@@ -8,7 +8,6 @@
 
 #import "DBNewOrderViewHeader.h"
 #import "OrderManager.h"
-#import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 
 @interface DBNewOrderViewHeader ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;

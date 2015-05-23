@@ -7,7 +7,6 @@
 //
 
 #import "DBTimePickerView.h"
-#import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 
 @interface DBTimePickerView ()<UIGestureRecognizerDelegate>
 @property(weak, nonatomic) id<DBTimePickerViewDelegate> delegate;

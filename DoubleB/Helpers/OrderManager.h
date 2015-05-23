@@ -15,6 +15,7 @@ extern NSString* const kDBDefaultsPaymentType;
 @class Venue;
 @class OrderItem;
 @class DBMenuPosition;
+@class DBMenuBonusPosition;
 
 typedef NS_ENUM(NSUInteger, DBBeverageMode) {
     DBBeverageModeTakeaway = 0,
@@ -26,11 +27,6 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 * Only one order can be managed at a time
 */
 @interface OrderManager : NSObject
-
-/**
-* All positions in order
-*/
-@property (nonatomic, strong) NSMutableArray *items;
 
 /**
 * Selected venue for order
@@ -67,6 +63,13 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 */
 @property (nonatomic, readonly) BOOL validOrder;
 
+@property (nonatomic) DBBeverageMode beverageMode;
+
+/**
+ * All positions in order
+ */
+@property (nonatomic, strong) NSMutableArray *items;
+
 /**
  * Total price for order according to promo info from server
  */
@@ -75,7 +78,14 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 @property (nonatomic, readonly) NSUInteger positionsCount;
 @property (nonatomic, readonly) NSUInteger totalCount;
 
-@property (nonatomic) DBBeverageMode beverageMode;
+
+/**
+ * Gifts in order
+ */
+@property (nonatomic, strong) NSMutableArray *bonusPositions;
+
+@property (nonatomic, readonly) NSUInteger bonusPositionsCount;
+@property (nonatomic, readonly) double totalBonusPositionsPrice;
 
 + (instancetype)sharedManager;
 
@@ -91,6 +101,10 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 
 - (void)purgePositions; //clean
 - (void)overridePositions:(NSArray *)items; //clean and add from array
+
+- (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition;
+- (void)removeBonusPosition:(DBMenuBonusPosition *)bonusPosition;
+- (void)removeBonusPositionAtIndex:(NSUInteger)index;
 
 - (OrderItem *)itemAtIndex:(NSUInteger)index;
 - (OrderItem *)itemWithPositionId:(NSString *)positionId;

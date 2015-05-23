@@ -8,7 +8,6 @@
 
 #import "DBOrderViewHeader.h"
 #import "Order.h"
-#import "UIGestureRecognizer+BlocksKit.h"
 
 @interface DBOrderViewHeader ()
 @property(strong, nonatomic) Order *order;

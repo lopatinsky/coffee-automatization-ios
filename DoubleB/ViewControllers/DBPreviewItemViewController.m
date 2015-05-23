@@ -9,7 +9,6 @@
 #import "DBPreviewItemViewController.h"
 
 #import <BlocksKit/UIControl+BlocksKit.h>
-#import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 #import "MenuHelper.h"
 
 @interface DBPreviewItemViewController ()

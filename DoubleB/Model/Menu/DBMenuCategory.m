@@ -28,7 +28,7 @@
     NSArray *positions = categoryDictionary[@"items"];
     category.positions = [[NSMutableArray alloc] init];
     for(NSDictionary *position in positions)
-        [category.positions addObject:[DBMenuPosition positionFromResponseDictionary:position]];
+        [category.positions addObject:[[DBMenuPosition alloc] initWithResponseDictionary:position]];
     
     [category sortPositions];
     return category;
@@ -46,7 +46,7 @@
             [samePosition synchronizeWithResponseDictionary:remotePosition];
             [positions addObject:samePosition];
         } else {
-            [positions addObject:[DBMenuPosition positionFromResponseDictionary:remotePosition]];
+            [positions addObject:[[DBMenuPosition alloc] initWithResponseDictionary:remotePosition]];
         }
     }
     

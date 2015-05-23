@@ -20,6 +20,7 @@
 #import "OrderManager.h"
 #import "Order.h"
 #import "DBMenuPosition.h"
+#import "DBMenuBonusPosition.h"
 #import "OrderItem.h"
 #import "Venue.h"
 #import "Compatibility.h"
@@ -43,20 +44,21 @@
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"
 #import "DBPositionsViewController.h"
+#import "DBBonusPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
 #import "DBPositionViewController.h"
+#import "DBNewOrderItemAdditionView.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
-#import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 #import <BlocksKit/UIControl+BlocksKit.h>
 
 NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
@@ -67,8 +69,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet DBNewOrderBonusesView *bonusView;
 @property (weak, nonatomic) IBOutlet DBNewOrderTotalView *totalView;
-@property (weak, nonatomic) IBOutlet UIButton *addProductButton;
-@property (weak, nonatomic) IBOutlet UIImageView *addProductImageView;
+@property (weak, nonatomic) IBOutlet DBNewOrderItemAdditionView *itemAdditionView;
 
 @property (weak, nonatomic) IBOutlet DBNewOrderAdditionalInfoView *additionalInfoView;
 
@@ -83,8 +84,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) NSDictionary *currentCard;
-
-@property (nonatomic, strong) NSMutableArray *preferedHeightsForTableView;
 
 @property (nonatomic, strong) DBTimePickerView *pickerHolder;
 @property (nonatomic, strong) NSArray *timeOptions;
@@ -162,7 +161,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.tableView.dataSource = self;
     
     self.itemCells = [NSMutableArray new];
-    self.preferedHeightsForTableView = [NSMutableArray new];
     
 //    UINib *nib =[UINib nibWithNibName:@"DBOrderItemCell" bundle:[NSBundle mainBundle]];
 //    [self.tableView registerNib:nib forCellReuseIdentifier:@"DBOrderItemCell"];
@@ -192,11 +190,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.tableView alignLeading:@"0" trailing:@"0" toView:self.view];
 // ========= Configure Autolayout =========r
     
+    self.itemAdditionView.delegate = self;
+    self.itemAdditionView.showBonusPositionsView = NO;
     
     [self.additionalInfoView hide:nil completion:^{
         [self.scrollView layoutIfNeeded];
     }];
-    [self setupAddProductButton];
     [self setupFooterView];
     [self setupContinueButton];
     
@@ -257,7 +256,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     });
     
     [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
-    [[DBPromoManager sharedManager] synchronizeWalletInfo:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -293,7 +291,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Setup
 
 - (void)clickSettings:(id)sender {
-    DBSettingsTableViewController *settingsController = [DBSettingsTableViewController new];
+    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
     settingsController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:settingsController animated:YES];
 }
@@ -319,17 +317,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.continueButton.backgroundColor = [UIColor db_defaultColor];
 }
 
-- (void)setupAddProductButton{
-    [self.addProductImageView templateImageWithName:@"plus"];
-    [self.addProductButton addTarget:self action:@selector(clickAddProductButton) forControlEvents:UIControlEventTouchUpInside];
-}
 
 #pragma mark - reload content
 
 - (void)reloadTableViewHeight:(BOOL)animated{
     int height = 0;
-    for(NSNumber *cellHeight in self.preferedHeightsForTableView)
-        height += [cellHeight intValue];
+    
+    NSArray *items = [[OrderManager sharedManager].items arrayByAddingObjectsFromArray:[OrderManager sharedManager].bonusPositions];
+    for(OrderItem *item in items)
+        if(item.position.hasImage){
+            height += 100;
+        } else {
+            height += 60;
+    }
     
     if(animated){
         [UIView animateWithDuration:0.3 animations:^{
@@ -351,8 +351,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 //}
 
 - (void)reloadBonusesView:(BOOL)animated{
-    if([DBPromoManager sharedManager].bonuses > 0){
-        self.bonusView.bonusSwitchActive = [DBPromoManager sharedManager].bonusesActive;
+    if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
+        self.bonusView.bonusSwitchActive = [DBPromoManager sharedManager].walletActiveForOrder;
         [self.bonusView show:animated completion:^{
             [self.scrollView layoutIfNeeded];
         }];
@@ -573,12 +573,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
                     if(![OrderManager sharedManager].venue){
                         if (venues) {
-                            [self setNearestVenue:venues[0]];
+                            [self setNearestVenue:[venues firstObject]];
                             self.venues = venues;
                         } else {
                             venues = [Venue storedVenues];
                             if(venues && [venues count] > 0)
-                                [self setNearestVenue:venues[0]];
+                                [self setNearestVenue:[venues firstObject]];
                             else
                                 [self setNearestVenue:nil];
                         }
@@ -611,17 +611,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)clickRefill:(id)sender {
 
     [self moveBack];
-}
-
-- (void)clickAddProductButton{
-    if(!self.positionsViewController){
-        self.positionsViewController = [DBPositionsViewController new];
-        self.positionsViewController.hidesBottomBarWhenPushed = YES;
-    }
-    
-    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
-    
-    [self.navigationController pushViewController:self.positionsViewController animated:YES];
 }
 
 - (void)clickContinue:(id)sender {
@@ -757,6 +746,26 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self hidePicker:nil];
 }
 
+#pragma mark - DBNewOrderItemAdditionViewDelegate
+
+- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
+    if(!self.positionsViewController){
+        self.positionsViewController = [DBPositionsViewController new];
+        self.positionsViewController.hidesBottomBarWhenPushed = YES;
+    }
+    
+    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
+    
+    [self.navigationController pushViewController:self.positionsViewController animated:YES];
+}
+
+- (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{
+    DBBonusPositionsViewController *bonusPositionsVC = [DBBonusPositionsViewController new];
+    bonusPositionsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:bonusPositionsVC animated:YES];
+}
+
+
 
 #pragma mark - Some methods
 
@@ -855,7 +864,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [DBServerAPI createNewOrder:^(Order *order) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         
-        [self.preferedHeightsForTableView removeAllObjects];
         [self reloadTableViewHeight:NO];
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
@@ -903,41 +911,42 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Promo methods
 
 - (void)startUpdatingPromoInfo{
-    if([OrderManager sharedManager].positionsCount > 0){
-        [self.totalView startUpdating];
+    BOOL startUpdating = [[DBPromoManager sharedManager] checkCurrentOrder:^(BOOL success) {
+        [self endUpdatingPromoInfo];
         
-        [self reloadContinueButton];
-        [[DBPromoManager sharedManager] updateInfo:^(BOOL success) {
-            [self endUpdatingPromoInfo];
+        if(success){
+            // Show order promos & errors
+            NSArray *promos = [DBPromoManager sharedManager].promos;
+            NSArray *errors = [DBPromoManager sharedManager].errors;
             
-            if(success){
-                // Show order promos & errors
-                NSArray *promos = [DBPromoManager sharedManager].promos;
-                NSArray *errors = [DBPromoManager sharedManager].errors;
-                
-                [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
-                
-                NSMutableArray *cellsForReload = [NSMutableArray new];
-                for(int i = 0; i < [OrderManager sharedManager].items.count; i++){
-                    OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
-                    DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
-                    if([promoItem.errors count] > 0){
-                        [cellsForReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-                    }
+            [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
+            
+            NSMutableArray *cellsForReload = [NSMutableArray new];
+            for(int i = 0; i < [OrderManager sharedManager].items.count; i++){
+                OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
+                DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
+                if([promoItem.errors count] > 0){
+                    [cellsForReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
                 }
-                [self.tableView reloadRowsAtIndexPaths:cellsForReload withRowAnimation:UITableViewRowAnimationAutomatic];
-//                [self.tableView reloadData];
-            } else {
-                [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
-                                          animation:^{
-                                              [self.scrollView layoutIfNeeded];
-                                          } completion:nil];
             }
-            
-            [self reloadBonusesView:YES];
-        }];
-    } else {
+            [self.tableView reloadRowsAtIndexPaths:cellsForReload withRowAnimation:UITableViewRowAnimationAutomatic];
+
+            // Gifts logic
+            [self.itemAdditionView showBonusPositionsView:[DBPromoManager sharedManager].bonusPositionsAvailable animated:YES];
+
+        } else {
+            [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
+                                      animation:^{
+                                          [self.scrollView layoutIfNeeded];
+                                      } completion:nil];
+        }
         
+        [self reloadBonusesView:YES];
+    }];
+    
+    if(startUpdating){
+        [self.totalView startUpdating];
+        [self reloadContinueButton];
     }
 }
 
@@ -951,7 +960,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - DBNewOrderBonusesViewDelegate
 
 - (void)db_newOrderBonusesView:(DBNewOrderBonusesView *)view didSelectBonuses:(BOOL)select{
-    [DBPromoManager sharedManager].bonusesActive = select;
+    [DBPromoManager sharedManager].walletActiveForOrder = select;
     [self reloadBonusesView:NO];
 }
 
@@ -1010,14 +1019,28 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - UITableViewDataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 2;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[OrderManager sharedManager] positionsCount];
+    if(section == 0){
+        return [[OrderManager sharedManager] positionsCount];
+    } else {
+        return [[OrderManager sharedManager] bonusPositionsCount];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBOrderItemCell *cell;
     
-    OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
+    OrderItem *item;
+    if(indexPath.section == 0){
+        item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
+    } else {
+        item = [OrderManager sharedManager].bonusPositions[indexPath.row];
+    }
+    
     if(item.position.hasImage){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
         
@@ -1036,9 +1059,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     cell.delegate = self;
     cell.panGestureRecognizer.delegate = self;
     
-    DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
-    if([promoItem.errors count] > 0){
-        [cell configureWithPromoItem:promoItem animated:YES];
+    if(indexPath.section == 0){
+        DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
+        if([promoItem.errors count] > 0){
+            [cell configureWithPromoItem:promoItem animated:YES];
+        }
     }
     
     return cell;
@@ -1047,20 +1072,37 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row >= [self.preferedHeightsForTableView count]){
-        CGFloat height;
-        OrderItem *item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-        if(item.position.hasImage){
-            height = 100;
-        } else {
-            height = 60;
-        }
-        
-        [self.preferedHeightsForTableView addObject:@(height)];
-        return height;
+    OrderItem *item;
+    
+    if(indexPath.section == 0){
+        item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
     } else {
-        return [self.preferedHeightsForTableView[indexPath.row] floatValue];
+        item = [OrderManager sharedManager].bonusPositions[indexPath.row];
     }
+    
+    if(item.position.hasImage){
+        return 100;
+    } else {
+        return 60;
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return indexPath.section == 1;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return (indexPath.section == 1) ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [[OrderManager sharedManager] removeBonusPositionAtIndex:indexPath.row];
+    
+    [self.tableView beginUpdates];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath]
+                          withRowAnimation:UITableViewRowAnimationLeft];
+    [self reloadTableViewHeight:YES];
+    [self.tableView endUpdates];
 }
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1080,11 +1122,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - DBOrderItemCellDelegate
 
 - (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
-    return YES;
+    return ![cell.orderItem.position isKindOfClass:[DBMenuBonusPosition class]];
 }
 
 - (void)removeRowAtIndex:(NSInteger)index{
-    [self.preferedHeightsForTableView removeObjectAtIndex:index];
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                            withRowAnimation:UITableViewRowAnimationLeft];

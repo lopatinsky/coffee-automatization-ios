@@ -19,6 +19,8 @@ NSString *const kDBDefaultsNDASigned = @"kDBDefaultsNDASigned";
 
 NSString *const kDBDefaultsSharingInfo = @"kDBDefaultsSharingInfo";
 
+NSString *const kDBDefaultsPromoInfo = @"kDBDefaultsPromoInfo";
+
 NSString *const kDBDefaultsLastScheduledLocalNotification = @"kDBDefaultsLastScheduledLocalNotification";
 
 NSString* const kDBStatusUpdatedNotification = @"kDBStatusUpdatedNotification";

@@ -9,6 +9,7 @@
 #import "OrderManager.h"
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
+#import "DBMenuBonusPosition.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
@@ -51,8 +52,10 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.items = [NSMutableArray array];
+        self.items = [NSMutableArray new];
         self.totalPrice = 0;
+        
+        self.bonusPositions = [NSMutableArray new];
         
         _beverageMode = (DBBeverageMode)[[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastSelectedBeverageMode] intValue];
         
@@ -88,6 +91,56 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     result = result && [DBPromoManager sharedManager].validOrder;
     
     return result;
+}
+
+- (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition{
+    OrderItem *itemWithSamePosition;
+    
+    for(OrderItem *item in self.bonusPositions){
+        if([item.position isEqual:bonusPosition]){
+            itemWithSamePosition = item;
+            break;
+        }
+    }
+    
+    if (!itemWithSamePosition) {
+        itemWithSamePosition = [[OrderItem alloc] initWithPosition:[bonusPosition copy]];
+        itemWithSamePosition.count = 1;
+        [self.bonusPositions addObject:itemWithSamePosition];
+    } else {
+        itemWithSamePosition.count ++;
+    }
+}
+
+- (void)removeBonusPosition:(DBMenuBonusPosition *)bonusPosition{
+    OrderItem *item;
+    
+    for(OrderItem *orderItem in self.bonusPositions){
+        if([orderItem.position isEqual:bonusPosition]){
+            item = orderItem;
+            break;
+        }
+    }
+    [self.bonusPositions removeObject:item];
+}
+
+- (void)removeBonusPositionAtIndex:(NSUInteger)index{
+    if(index < self.bonusPositionsCount){
+        [self.bonusPositions removeObjectAtIndex:index];
+    }
+}
+
+- (NSUInteger)bonusPositionsCount{
+    return [self.bonusPositions count];
+}
+
+- (double)totalBonusPositionsPrice{
+    double total;
+    for(DBMenuBonusPosition *bonusPosition in self.bonusPositions){
+        total += bonusPosition.pointsPrice;
+    }
+    
+    return total;
 }
 
 - (void)purgePositions {

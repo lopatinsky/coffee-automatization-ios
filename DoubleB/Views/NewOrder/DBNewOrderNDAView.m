@@ -9,7 +9,6 @@
 #import "DBNewOrderNDAView.h"
 
 #import <BlocksKit/UIControl+BlocksKit.h>
-#import <BlocksKit/UIGestureRecognizer+BlocksKit.h>
 
 @interface DBNewOrderNDAView ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;

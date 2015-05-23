@@ -28,27 +28,27 @@
     [self.bonusSwitch addTarget:self action:@selector(bonusSwitchChangedValue:) forControlEvents:UIControlEventValueChanged];
     
     [[DBPromoManager sharedManager] addObserver:self
-                                     forKeyPath:@"bonuses"
+                                     forKeyPath:@"walletPointsAvailableForOrder"
                                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                                         context:nil];
 }
 
 - (void)dealloc{
-    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"bonuses"];
+    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"walletPointsAvailableForOrder"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context{
-    if([keyPath isEqualToString:@"bonuses"]){
+    if([keyPath isEqualToString:@"walletPointsAvailableForOrder"]){
         [self reloadTitle];
     }
 }
 
 - (void)reloadTitle{
-    if([DBPromoManager sharedManager].bonuses > 0){
-        self.titleLabel.text = [NSString stringWithFormat:@"Оплатить бонусами %.0f %@", [DBPromoManager sharedManager].bonuses, [Compatibility currencySymbol]];
+    if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
+        self.titleLabel.text = [NSString stringWithFormat:@"Оплатить бонусами %.0f %@", [DBPromoManager sharedManager].walletPointsAvailableForOrder, [Compatibility currencySymbol]];
     }
 }
 

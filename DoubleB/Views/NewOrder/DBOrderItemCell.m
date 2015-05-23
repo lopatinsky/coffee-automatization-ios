@@ -9,6 +9,7 @@
 #import "DBOrderItemCell.h"
 #import "OrderItem.h"
 #import "DBPromoManager.h"
+#import "DBMenuBonusPosition.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
@@ -102,7 +103,13 @@
     self.orderItem = item;
     
     self.titleLabel.text = item.position.name;
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", item.position.actualPrice];
+    
+    if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
+        self.priceLabel.text = @"Бонус";
+    } else {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", item.position.actualPrice];
+    }
+    
     [self reloadCount];
     
     NSMutableString *modifiersString =[[NSMutableString alloc] init];

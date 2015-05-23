@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aboutAppUrlString</key>
+	<string></string>
+	<key>NDALicenseUrlString</key>
+	<string></string>
+	<key>CompanyGAKey</key>
+	<string>UA-62529990-5</string>
+	<key>CompanyColor</key>
+	<integer>4281753680</integer>
+	<key>BaseUrl</key>
+	<string>http://coffeehostel.1.doubleb-automation-production.appspot.com/api/</string>
+</dict>
+</plist>

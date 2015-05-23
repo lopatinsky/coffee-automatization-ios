@@ -38,9 +38,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [[DBPromoManager sharedManager] synchronizeWalletInfo:^(int balance) {
-        [self reloadBalance];
-    }];
+//    [[DBPromoManager sharedManager] synchronizeWalletInfo:^(int balance) {
+//        [self reloadBalance];
+//    }];
 }
 
 - (void)reloadBalance{

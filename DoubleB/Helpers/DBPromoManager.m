@@ -12,18 +12,15 @@
 #import "OrderManager.h"
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
+#import "DBMenuBonusPosition.h"
 
-NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo";
 
 @implementation DBPromoItem
-
 @end
 
 
 @interface DBPromoManager ()
-@property (nonatomic) double discount;
-@property (nonatomic) double bonuses;
-@property (nonatomic) double totalDiscount;
+@property (nonatomic) double walletBalance;
 
 @property (strong, nonatomic) NSMutableArray *promoItems;
 
@@ -45,6 +42,7 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
         self.lastUpdateNumber = 0;
         _validOrder = YES;
         
+        [self loadFromMemory];
         self.promoItems = [NSMutableArray new];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clear) name:kDBNewOrderCreatedNotification object:nil];
@@ -56,8 +54,42 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - Static info for promos
+
+- (void)updateInfo{
+    [DBServerAPI updatePromoInfo:^(NSDictionary *response) {
+        // Bonus Positions promo
+        NSDictionary *bonusPositionsPromo = response[@"bonuses"];
+        
+        NSMutableArray *bonusPositions = [NSMutableArray new];
+        for(NSDictionary *bonusPositionDict in bonusPositionsPromo[@"items"]){
+            DBMenuBonusPosition *bonusPosition = [[DBMenuBonusPosition alloc] initWithResponseDictionary:bonusPositionDict];
+            
+            if(bonusPosition){
+                bonusPosition.pointsPrice = [bonusPositionDict[@"points"] doubleValue];
+                [bonusPositions addObject:bonusPosition];
+            }
+        }
+        _positionsAvailableAsBonuses = bonusPositions;
+        
+        _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
+        
+        // Personal wallet promo
+        NSDictionary *personalWalletPromo = response[@"wallet"];
+        _walletEnabled = personalWalletPromo[@"enabled"];
+        _walletTextDescription = personalWalletPromo[@"text"];
+        
+        [self synchronize];
+    } failure:^(NSError *error) {
+    }];
+}
+
+
+#pragma mark - Check of Current Order
+
 - (double)totalDiscount{
-    return _discount + (_bonusesActive ? _bonuses : 0);
+    return _discount + (_walletActiveForOrder ? _walletPointsAvailableForOrder : 0);
 }
 
 - (void)changeTotalDiscount{
@@ -65,30 +97,30 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
     [self didChangeValueForKey:@"totalDiscount"];
 }
 
-- (void)setBonusesActive:(BOOL)bonusesActive{
-    _bonusesActive = bonusesActive;
-    [self changeTotalDiscount];
-}
-
-- (void)updateInfo:(void(^)(BOOL success))callback {
+- (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback {
     if (![IHSecureStore sharedInstance].clientId) {
-        if(callback)
-            callback(NO);
-        return;
+        return NO;
+    }
+    
+    if(![OrderManager sharedManager].venue){
+        return NO;
     }
     
     NSInteger currentUpdateNumber = self.lastUpdateNumber + 1;
     self.lastUpdateNumber = currentUpdateNumber;
-    
 
     double currentTotal = [OrderManager sharedManager].totalPrice;
     [DBServerAPI checkNewOrder:^(NSDictionary *response) {
+        // bonus points balance
+        _bonusPointsBalance = [response[@"rest_points"] doubleValue];
+        _bonusPositionsAvailable = [response[@"more_gift"] boolValue];
+        
         // Calculate discount
         double newTotal = [response[@"total_sum"] doubleValue];
-        self.discount = currentTotal - newTotal;
+        _discount = currentTotal - newTotal;
         
-        // Calculate bonuses
-        self.bonuses = [response[@"max_wallet_payment"] doubleValue];
+        // Calculate wallet points available for order
+        _walletPointsAvailableForOrder = [response[@"max_wallet_payment"] doubleValue];
         
         [self changeTotalDiscount];
         
@@ -149,11 +181,13 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
             callback(NO);
         }
     }];
+    
+    return YES;
 }
 
 - (void)clear{
-    self.discount = 0;
-    self.bonuses = 0;
+    _discount = 0;
+    _walletPointsAvailableForOrder = 0;
     [self changeTotalDiscount];
 }
 
@@ -165,34 +199,57 @@ NSString *const kDBDefaultsPersonalWalletInfo = @"kDBDefaultsPersonalWalletInfo"
 }
 
 
-#pragma mark - Wallet
+#pragma mark - Personal Wallet promo
 
-- (void)synchronizeWalletInfo:(void(^)(int balance))callback{
+- (void)updatePersonalWalletBalance:(void(^)(double balance))callback{
     [DBServerAPI getWalletInfo:^(BOOL success, NSDictionary *response) {
         if(success){
-            double walletBalance = [response[@"balance"] doubleValue];
+            self.walletBalance = [response[@"balance"] doubleValue];
             
-            NSMutableDictionary *walletInfo = [NSMutableDictionary new];
-            walletInfo[@"balance"] = @(walletBalance);
-            
-            [self saveWalletInfo:walletInfo];
+            [self synchronize];
             
             if(callback)
-                callback(walletBalance);
+                callback(self.walletBalance);
         }
     }];
 }
 
-- (NSInteger)walletBalance{
-    NSDictionary *walletInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsPersonalWalletInfo];
-    
-    return [walletInfo[@"balance"] doubleValue];
+- (void)setWalletActiveForOrder:(BOOL)walletActiveForOrder{
+    _walletActiveForOrder = walletActiveForOrder;
+    [self changeTotalDiscount];
 }
 
-- (void)saveWalletInfo:(NSDictionary *)info{
-    [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsPersonalWalletInfo];
+
+#pragma mark - Helper methods
+
+- (void)loadFromMemory{
+    NSDictionary *promoInfo = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsPromoInfo];
+    
+    NSDictionary *bonusPositionsPromo = promoInfo[@"bonusPositionsPromo"];
+    NSData *positionsAvailableAsBonuses = bonusPositionsPromo[@"positionsAvailableAsBonuses"];
+    _positionsAvailableAsBonuses = [NSKeyedUnarchiver unarchiveObjectWithData:positionsAvailableAsBonuses] ?: @[];
+    _bonusPositionsTextDescription = bonusPositionsPromo[@"bonusPositionsTextDescription"] ?: @"";
+    
+    NSDictionary *personalWalletPromo = promoInfo[@"personalWalletPromo"];
+    _walletEnabled = [personalWalletPromo[@"walletEnabled"] boolValue];
+    _walletBalance = [personalWalletPromo[@"walletBalance"] boolValue];
+    _walletTextDescription = personalWalletPromo[@"walletTextDescription"] ?: @"";
+}
+
+- (void)synchronize{
+    NSData *positionsAvailableAsBonuses = [NSKeyedArchiver archivedDataWithRootObject:_positionsAvailableAsBonuses];
+    NSDictionary *bonusPositionsPromo = @{@"positionsAvailableAsBonuses": positionsAvailableAsBonuses,
+                                          @"bonusPositionsTextDescription": _bonusPositionsTextDescription};
+    
+    NSDictionary *personalWalletPromo = @{@"walletEnabled": @(_walletEnabled),
+                                          @"walletBalance": @(_walletBalance),
+                                          @"walletTextDescription": _walletTextDescription};
+    
+    NSDictionary *promoInfo = @{@"bonusPositionsPromo": bonusPositionsPromo,
+                                @"personalWalletPromo": personalWalletPromo};
+    
+    [[NSUserDefaults standardUserDefaults] setObject:promoInfo forKey:kDBDefaultsPromoInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-
 
 @end

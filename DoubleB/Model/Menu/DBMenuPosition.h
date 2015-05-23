@@ -31,7 +31,7 @@
 // Not stored data
 @property(nonatomic, readonly) BOOL hasImage;
 
-+ (instancetype)positionFromResponseDictionary:(NSDictionary *)positionDictionary;
+- (instancetype)initWithResponseDictionary:(NSDictionary *)positionDictionary;
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary;
 
 - (BOOL)availableInVenue:(Venue *)venue;

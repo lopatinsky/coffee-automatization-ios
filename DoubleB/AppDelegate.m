@@ -13,7 +13,7 @@
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
 #import "DBPreviewViewController.h"
-#import "DBMastercardPromo.h"
+#import "DBPromoManager.h"
 #import "DBMenu.h"
 
 #import <Fabric/Fabric.h>
@@ -46,6 +46,8 @@
 //        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
     }
     
+    [self copyPlist];
+    
     [DBServerAPI registerUser:nil];
     
     [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
@@ -58,6 +60,7 @@
     
     [JRSwizzleMethods swizzleUIViewDealloc];
     //[DBShareHelper sharedInstance];
+    [[DBPromoManager sharedManager] updateInfo];
     
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
@@ -256,6 +259,20 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void)copyPlist{
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths firstObject];
+    NSString *path = [documentDirectory stringByAppendingString:@"CompanyInfo.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if(![fileManager fileExistsAtPath:path]){
+        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:pathToCompanyInfo];
+        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+    }
 }
 
 @end

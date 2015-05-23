@@ -7,6 +7,7 @@
 //
 
 #import "DBCompanyInfo.h"
+#import "DBServerAPI.h"
 
 @implementation DBCompanyInfo
 
@@ -17,9 +18,20 @@
     return instance;
 }
 
+- (void)updateInfo{
+    [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
+        if(success){
+            
+        }
+    }];
+}
+
 
 - (id)objectFromPropertyListByName:(NSString *)name{
-    NSDictionary *companyInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingString:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    
     return [companyInfo objectForKey:name];
 }
 
@@ -43,6 +55,22 @@
 - (NSURL *)db_aboutAppUrl{
     NSString *ndaLicenseUrl = [self objectFromPropertyListByName:@"AboutAppUrlString"];
     return [NSURL URLWithString:ndaLicenseUrl];
+}
+
+@end
+
+
+@implementation DBDeliveryType
+
+- (instancetype)initWithResponseDict:(NSDictionary *)responseDict{
+    self = [super init];
+    
+    _typeId = [responseDict[@"id"] intValue];
+    _typeName = responseDict[@"name"];
+    
+    _minOrderSum = [responseDict[@"min_sum"] doubleValue];
+    
+    return self;
 }
 
 @end

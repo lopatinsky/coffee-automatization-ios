@@ -8,8 +8,6 @@
 
 #import "DBPopupTextView.h"
 
-#import "UIGestureRecognizer+BlocksKit.h"
-
 @interface DBPopupTextView ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *textView;

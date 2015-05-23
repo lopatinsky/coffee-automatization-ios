@@ -29,6 +29,8 @@
 
 @implementation DBServerAPI
 
+#pragma mark - User
+
 + (void)registerUser:(void(^)(BOOL success))callback{
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
 }
@@ -100,6 +102,53 @@
                                  if(callback)
                                      callback(NO);
                              }];
+}
+
+#pragma mark - Company
+
++ (void)updateCompanyInfo:(void(^)(BOOL success, NSDictionary *response))callback{
+    [[DBAPIClient sharedClient] GET:@"company/info"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSMutableDictionary *response = [NSMutableDictionary new];
+                                
+                                response[@"appName"] = [responseObject getValueForKey:@"app_name"] ?: @"";
+                                response[@"webSite"] = [responseObject getValueForKey:@"site"] ?: @"";
+                                response[@"deliveryTypes"] = [responseObject getValueForKey:@"delivery_types"] ?: [NSArray new];
+                                response[@"phone"] = [responseObject getValueForKey:@"phone"] ?: @"";
+                                response[@"cities"] = [responseObject getValueForKey:@"cities"] ?: [NSArray new];
+                                response[@"support_emails"] = [responseObject getValueForKey:@"emails"] ?: [NSArray new];
+                                response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
+                                
+                                if(callback)
+                                    callback(YES, response);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
+
+#pragma mark - Promo Info
+
++ (void)updatePromoInfo:(void(^)(NSDictionary *response))success
+                failure:(void(^)(NSError *error))failure{
+    
+    [[DBAPIClient sharedClient] GET:@"promo/list"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSLog(@"%@", responseObject);
+                                
+                                if(success)
+                                    success(responseObject);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(failure)
+                                    failure(error);
+                            }];
 }
 
 
@@ -395,7 +444,7 @@
         default:
             break;
     }
-    payment[@"wallet_payment"] = [DBPromoManager sharedManager].bonusesActive ? @([DBPromoManager sharedManager].bonuses) : @(0);
+    payment[@"wallet_payment"] = [DBPromoManager sharedManager].walletActiveForOrder ? @([DBPromoManager sharedManager].walletPointsAvailableForOrder) : @(0);
     
     return payment;
 }

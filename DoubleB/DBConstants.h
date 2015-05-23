@@ -41,6 +41,8 @@ extern NSString *const kDBDefaultsNDASigned;
 
 extern NSString *const kDBDefaultsSharingInfo;
 
+extern NSString *const kDBDefaultsPromoInfo;
+
 extern NSString *const kDBDefaultsLastScheduledLocalNotification;
 
 extern NSString *const kDBStatusUpdatedNotification;

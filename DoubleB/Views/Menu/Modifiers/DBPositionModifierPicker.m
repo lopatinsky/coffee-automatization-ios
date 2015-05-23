@@ -52,6 +52,11 @@
 - (void)adoptFrame{
     CGRect rect = self.frame;
     rect.size.height = self.titleView.frame.size.height + self.tableView.contentSize.height + 5;
+    
+    if(rect.size.height > [UIScreen mainScreen].bounds.size.height - 64){
+        rect.size.height = [UIScreen mainScreen].bounds.size.height - 64;
+    }
+    
     self.frame = rect;
     
     [self layoutIfNeeded];

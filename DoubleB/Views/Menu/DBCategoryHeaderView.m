@@ -10,7 +10,6 @@
 #import "DBMenuCategory.h"
 
 #import "UIImageView+WebCache.h"
-#import "UIGestureRecognizer+BlocksKit.h"
 
 @interface DBCategoryHeaderView ()
 @property (weak, nonatomic) IBOutlet UIView *categoryImageContainer;

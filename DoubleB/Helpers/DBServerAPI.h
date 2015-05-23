@@ -14,6 +14,11 @@
 
 + (void)registerUserWithBranchParams:(NSDictionary *)branchParams callback:(void(^)(BOOL success))callback;
 
++ (void)updateCompanyInfo:(void(^)(BOOL success, NSDictionary *response))callback;
+
++ (void)updatePromoInfo:(void(^)(NSDictionary *response))success
+                failure:(void(^)(NSError *error))failure;
+
 + (void)checkNewOrder:(void(^)(NSDictionary *response))success
               failure:(void(^)(NSError *error))failure;
 

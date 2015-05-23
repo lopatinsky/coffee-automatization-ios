@@ -24,7 +24,6 @@
 #import "IHSecureStore.h"
 
 #import "UIAlertView+BlocksKit.h"
-#import "UIGestureRecognizer+BlocksKit.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 

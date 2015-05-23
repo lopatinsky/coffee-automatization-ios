@@ -23,17 +23,17 @@
 
 
 @interface DBPromoManager : NSObject
+
++ (instancetype)sharedManager;
+- (void)updateInfo;
+
+
+//=========== Check of Current Order ===========
+
 /**
  * Discount for order synchronized with server
  */
 @property (nonatomic, readonly) double discount;
-
-/**
- * Bonuses available for order payment
- */
-@property (nonatomic, readonly) double bonuses;
-@property (nonatomic) BOOL bonusesActive;
-
 
 /**
  * Total discount for order (discount + bonuses(if active))
@@ -51,19 +51,69 @@
 @property (strong, nonatomic, readonly) NSArray *errors;
 @property (strong, nonatomic, readonly) NSArray *promos;
 
-
-+ (instancetype)sharedManager;
-
-
-- (void)updateInfo:(void(^)(BOOL success))callback;
+- (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback;
 - (void)clear;
 
 - (DBPromoItem *)promosForOrderItem:(OrderItem *)item;
 
+//=========== Check of Current Order ===========
 
 
-// Logic of personal wallet
-@property(nonatomic, readonly) NSInteger walletBalance;
-- (void)synchronizeWalletInfo:(void(^)(int balance))callback;
+
+//=========== Bonus Positions promo ===========
+/**
+ * Availability of bonus positions selection
+ */
+@property (nonatomic, readonly) BOOL bonusPositionsAvailable;
+
+/**
+ * Points available for selection of bonus positions
+ */
+@property (nonatomic, readonly) double bonusPointsBalance;
+
+/**
+ * Items which user can add to order using giftPoints
+ */
+@property (strong, nonatomic, readonly) NSArray *positionsAvailableAsBonuses;
+
+/**
+ * Text description for this promo
+ */
+@property(strong, nonatomic, readonly) NSString *bonusPositionsTextDescription;
+
+
+//=========== Bonus Positions promo ===========
+
+
+
+//=========== Personal Wallet promo ===========
+/**
+ * Define if personal wallet enabled
+ */
+@property(nonatomic, readonly) BOOL walletEnabled;
+
+/**
+ * Bonuses available for order payment
+ */
+@property (nonatomic, readonly) double walletPointsAvailableForOrder;
+
+/**
+ * Define if user use bonuses for order payment
+ */
+@property (nonatomic) BOOL walletActiveForOrder;
+
+/**
+ * Currently accumulated personal wallet balance
+ */
+@property(nonatomic, readonly) double walletBalance;
+
+/**
+ * Text description for this promo
+ */
+@property(strong, nonatomic, readonly) NSString *walletTextDescription;
+
+- (void)updatePersonalWalletBalance:(void(^)(double balance))callback;
+
+//=========== Personal Wallet promo ===========
 
 @end

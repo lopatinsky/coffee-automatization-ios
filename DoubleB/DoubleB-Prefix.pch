@@ -22,6 +22,7 @@
     #import "GANHelper.h"
     #import "DBConstants.h"
     #import "DBCompanyInfo.h"
+    #import "DBClassLoader.h"
 
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+DBErrorAnimation.h"
@@ -34,4 +35,6 @@
 #import "UIColor+Hex.h"
 #import "NSDictionary+NSNullRepresentation.h"
 #import "EXTScope.h"
+
+#import "UIGestureRecognizer+BlocksKit.h"
 #endif
