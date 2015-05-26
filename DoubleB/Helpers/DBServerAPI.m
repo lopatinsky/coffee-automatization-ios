@@ -162,12 +162,21 @@
         params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
     }
     
+    // Items
     NSArray *items = [DBServerAPI assembleOrderItems];
     NSData *itemsData = [NSJSONSerialization dataWithJSONObject:items
                                                         options:NSJSONWritingPrettyPrinted
                                                           error:nil];
     NSString *itemsString = [[NSString alloc] initWithData:itemsData encoding:NSUTF8StringEncoding];
     params[@"items"] = itemsString;
+    
+    // Bonus items
+    NSArray *bonusItems = [DBServerAPI assembleBonusItems];
+    NSData *bonusItemsData = [NSJSONSerialization dataWithJSONObject:bonusItems
+                                                        options:NSJSONWritingPrettyPrinted
+                                                          error:nil];
+    NSString *bonusItemsString = [[NSString alloc] initWithData:bonusItemsData encoding:NSUTF8StringEncoding];
+    params[@"gifts"] = bonusItemsString;
     
     
     // Venue
@@ -176,11 +185,15 @@
     }
     
     // Time
-    if([OrderManager sharedManager].time){
-        params[@"delivery_time"] = [OrderManager sharedManager].time;
+    if([OrderManager sharedManager].selectedTimeSlot){
+        NSData *timeSlotData = [NSJSONSerialization dataWithJSONObject:[OrderManager sharedManager].selectedTimeSlot.slotDict
+                                                               options:NSJSONWritingPrettyPrinted
+                                                                 error:nil];
+        NSString *timeSlotString = [[NSString alloc] initWithData:timeSlotData encoding:NSUTF8StringEncoding];
+        params[@"delivery_slot"] = timeSlotString;
     }
     
-    params[@"delivery_type"] = @([OrderManager sharedManager].beverageMode);
+    params[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
     
     // Payment
     if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
@@ -237,18 +250,12 @@
     order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
     order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
     order[@"items"] = [DBServerAPI assembleOrderItems];
+    order[@"gifts"] = [DBServerAPI assembleBonusItems];
     order[@"client"] = [DBServerAPI assembleClientInfo];
-    order[@"delivery_time"] = [OrderManager sharedManager].time;
-    order[@"delivery_type"] = @([OrderManager sharedManager].beverageMode);
+    order[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
+    order[@"delivery_time"] = [OrderManager sharedManager].selectedTimeSlot.slotDict;
     order[@"payment"] = [DBServerAPI assemblyPaymentInfo];
-    
-    NSString *comment = [OrderManager sharedManager].comment ?: @"";
-    if([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway){
-        comment = [NSString stringWithFormat:@"С собой\n%@", comment];
-    } else {
-        comment = [NSString stringWithFormat:@"Буду пить в кафе\n%@", comment];
-    }
-    order[@"comment"] = comment;
+    order[@"comment"] = [OrderManager sharedManager].comment;
     
     static BOOL hasOrderErrorInSession = NO;
     order[@"after_error"] = @(hasOrderErrorInSession);
@@ -274,7 +281,7 @@
                                  Order *ord = [[Order alloc] init:YES];
                                  ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
                                  ord.total = @([[OrderManager sharedManager] totalPrice]);
-                                 ord.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:[OrderManager sharedManager].time.doubleValue*60];
+//                                 ord.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:[OrderManager sharedManager].time.doubleValue*60];
                                  ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
                                  ord.paymentType = [[OrderManager sharedManager] paymentType];
                                  ord.status = OrderStatusNew;
@@ -372,31 +379,44 @@
 + (NSArray *)assembleOrderItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderManager sharedManager].items) {
-        NSMutableDictionary *itemDict = [NSMutableDictionary new];
-        
-        itemDict[@"item_id"] = item.position.positionId;
-        itemDict[@"quantity"] = @(item.count);
-        
-        NSMutableArray *singleModifiers = [NSMutableArray new];
-        for(DBMenuPositionModifier *modifier in item.position.singleModifiers){
-            [singleModifiers addObject:@{@"single_modifier_id": modifier.modifierId,
-                                         @"quantity": @(modifier.selectedCount)}];
-        }
-        
-        NSMutableArray *groupModifiers = [NSMutableArray new];
-        for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
-            [groupModifiers addObject:@{@"group_modifier_id": modifier.modifierId,
-                                        @"choice": modifier.selectedItem.itemId,
-                                        @"quantity": @1}];
-        }
-        
-        itemDict[@"single_modifiers"] = singleModifiers;
-        itemDict[@"group_modifiers"] = groupModifiers;
-        
-        [items addObject:itemDict];
+        [items addObject:[self assembleItem:item]];
     }
     
     return items;
+}
+
++ (NSArray *)assembleBonusItems{
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in [OrderManager sharedManager].bonusPositions) {
+        [items addObject:[self assembleItem:item]];
+    }
+    
+    return items;
+}
+
++ (NSDictionary *)assembleItem:(OrderItem *)item {
+    NSMutableDictionary *itemDict = [NSMutableDictionary new];
+    
+    itemDict[@"item_id"] = item.position.positionId;
+    itemDict[@"quantity"] = @(item.count);
+    
+    NSMutableArray *singleModifiers = [NSMutableArray new];
+    for(DBMenuPositionModifier *modifier in item.position.singleModifiers){
+        [singleModifiers addObject:@{@"single_modifier_id": modifier.modifierId,
+                                     @"quantity": @(modifier.selectedCount)}];
+    }
+    
+    NSMutableArray *groupModifiers = [NSMutableArray new];
+    for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
+        [groupModifiers addObject:@{@"group_modifier_id": modifier.modifierId,
+                                    @"choice": modifier.selectedItem.itemId,
+                                    @"quantity": @1}];
+    }
+    
+    itemDict[@"single_modifiers"] = singleModifiers;
+    itemDict[@"group_modifiers"] = groupModifiers;
+    
+    return itemDict;
 }
 
 + (NSDictionary *)assembleClientInfo{

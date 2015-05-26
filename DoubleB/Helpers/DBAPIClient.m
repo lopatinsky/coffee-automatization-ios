@@ -7,6 +7,7 @@
 
 
 #import "DBAPIClient.h"
+#import "DBCompanyInfo.h"
 
 @implementation DBAPIClient {
 
@@ -18,7 +19,7 @@
     dispatch_once(&onceToken, ^{
         
         
-        _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:[DBAPIClient baseUrl]]];
+        _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:[DBCompanyInfo db_companyBaseUrl]]];
     });
 
     return _sharedClient;
@@ -39,13 +40,6 @@
     [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
 
     return self;
-}
-
-+ (NSString *)baseUrl{
-    NSDictionary *organizationInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
-    NSString *baseUrl = [organizationInfo objectForKey:@"BaseUrl"];
-    
-    return baseUrl;
 }
 
 @end

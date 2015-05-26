@@ -16,7 +16,7 @@
 }
 
 + (UIColor *)db_defaultColor {
-    NSNumber *hex = [[DBCompanyInfo sharedInstance] db_companyDefaultColor];
+    NSNumber *hex = [DBCompanyInfo db_companyDefaultColor];
     return [UIColor fromHex:[hex intValue]];
 }
 

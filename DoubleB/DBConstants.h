@@ -45,6 +45,7 @@ extern NSString *const kDBDefaultsPromoInfo;
 
 extern NSString *const kDBDefaultsLastScheduledLocalNotification;
 
+extern NSString *const kDBFirstLaunchNecessaryInfoLoadedNotification;
 extern NSString *const kDBStatusUpdatedNotification;
 extern NSString *const kDBNotificationUpdatedOrder;
 extern NSString *const kDBRepeateOrderNotification;

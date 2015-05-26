@@ -58,7 +58,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
@@ -82,12 +82,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (strong, nonatomic) DBPositionsViewController *positionsViewController;
 
+@property (strong, nonatomic) OrderManager *orderManager;
+
 @property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) NSDictionary *currentCard;
 
-@property (nonatomic, strong) DBTimePickerView *pickerHolder;
-@property (nonatomic, strong) NSArray *timeOptions;
-@property (nonatomic, strong) NSNumber *lastSelectedTime;
+@property (nonatomic, strong) DBTimePickerView *pickerView;
 
 @property (nonatomic, strong) UIView *freeBeverageTipView;
 
@@ -110,13 +110,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.title = NSLocalizedString(@"Заказ", nil);
     
 // ========= Configure Logic =========
+    self.orderManager = [OrderManager sharedManager];
     self.delegate = [DBTabBarController sharedInstance];
     self.currentCard = [NSDictionary new];
-    self.pickerHolder = [[DBTimePickerView alloc] initWithDelegate:self];
-    self.timeOptions = @[@0, @5, @10, @15, @20, @25, @30];
-    if(![OrderManager sharedManager].time){
-        [OrderManager sharedManager].time = @10;
-    }
     
     if (self.repeatedOrder) {
         [[OrderManager sharedManager] purgePositions];
@@ -171,17 +167,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
  
 // ========= Configure TimePickerView =========
-    self.pickerHolder.backgroundColor = [UIColor db_backgroundColor];
-    self.pickerHolder.pickerView.delegate = self;
-    self.pickerHolder.pickerView.dataSource = self;
-    
-    [self.pickerHolder selectMode:[OrderManager sharedManager].beverageMode];
-    
-    NSUInteger k = [self.timeOptions indexOfObject:[OrderManager sharedManager].time];
-    if (k != NSNotFound) {
-        [self.pickerHolder.pickerView selectRow:k inComponent:0 animated:NO];
-        [self pickerView:self.pickerHolder.pickerView didSelectRow:k inComponent:0];
-    }
+    self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
+    self.pickerView.backgroundColor = [UIColor db_backgroundColor];
 // ========= Configure TimePickerView =========
 
     
@@ -361,43 +348,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             [self.scrollView layoutIfNeeded];
         }];
     }
-}
-
-- (void)reloadComment {
-    if ([OrderManager sharedManager].comment.length > 0) {
-        if ([OrderManager sharedManager].comment.length > 10) {
-            self.orderFooter.labelComment.text = [NSString stringWithFormat:@"%@...", [[OrderManager sharedManager].comment substringToIndex:10]];
-        } else {
-            self.orderFooter.labelComment.text = [OrderManager sharedManager].comment;
-        }
-    } else {
-        self.orderFooter.labelComment.text = NSLocalizedString(@"Комментарий", nil);
-    }
-}
-
-- (void)reloadTime{
-    NSString *timeString;
-    if ([[OrderManager sharedManager].time intValue] > 0) {
-        timeString = [NSString stringWithFormat:NSLocalizedString(@"Через %@ минут", nil), [OrderManager sharedManager].time];
-    } else {
-        timeString = NSLocalizedString(@"Сейчас", nil);
-    }
-    
-    if(![[OrderManager sharedManager].venue.hasTablesInside boolValue]){
-        [OrderManager sharedManager].beverageMode = DBBeverageModeTakeaway;
-        [self.pickerHolder selectMode:DBBeverageModeTakeaway];
-        self.pickerHolder.typeSegmentedControl.enabled = NO;
-    } else {
-        self.pickerHolder.typeSegmentedControl.enabled = YES;
-    }
-    
-    if([OrderManager sharedManager].beverageMode == DBBeverageModeTakeaway){
-        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
-    } else {
-        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
-    }
-    
-    self.orderFooter.labelTime.text = timeString;
 }
 
 - (void)reloadProfile {
@@ -602,10 +552,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void)newTimeWasSelected{
-    [self startUpdatingPromoInfo];
-}
-
 #pragma mark - Events
 
 - (void)clickRefill:(id)sender {
@@ -689,11 +635,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController pushViewController:venuesController animated:YES];
 }
 
-- (IBAction)clickTime:(id)sender {
-    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
-    [self showPicker];
-}
-
 - (IBAction)clickPaymentType:(id)sender {
     NSString *label = @"";
     switch ([OrderManager sharedManager].paymentType) {
@@ -741,11 +682,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
-- (IBAction)clickPickerDone:(id)sender {
-    [GANHelper analyzeEvent:@"time_spinner_closed" category:ORDER_SCREEN];
-    [self hidePicker:nil];
-}
-
 #pragma mark - DBNewOrderItemAdditionViewDelegate
 
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
@@ -773,56 +709,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)showPicker {
-    UIImage *snapshot = [self.tabBarController.view snapshotImage];
-    UIImageView *overlay = [[UIImageView alloc] initWithFrame:self.tabBarController.view.bounds];
-    overlay.image = [snapshot applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.3 alpha:0.6] saturationDeltaFactor:1.5 maskImage:nil];
-    overlay.alpha = 0;
-    overlay.tag = TAG_OVERLAY;
-    overlay.userInteractionEnabled = YES;
-    [overlay addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hidePicker:)]];
-    [self.tabBarController.view addSubview:overlay];
-    
-    CGRect rect = self.pickerHolder.frame;
-    rect.origin.y = self.tabBarController.view.bounds.size.height;
-    rect.size.width = self.tabBarController.view.bounds.size.width;
-    self.pickerHolder.frame = rect;
-    
-    [self.tabBarController.view addSubview:self.pickerHolder];
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        CGRect frame = self.pickerHolder.frame;
-        frame.origin.y -= self.pickerHolder.bounds.size.height;
-        self.pickerHolder.frame = frame;
-        
-        overlay.alpha = 1;
-    }];
-    
-    self.lastSelectedTime = [OrderManager sharedManager].time;
-}
-
-- (void)hidePicker:(id)sender {
-    NSString *eventLabel;
-    if(sender){
-        eventLabel = [NSString stringWithFormat:@"blur;%@;%@", self.lastSelectedTime, [OrderManager sharedManager].time];
-    } else {
-        eventLabel = [NSString stringWithFormat:@"done;%@;%@", self.lastSelectedTime, [OrderManager sharedManager].time];
-    }
-
-    UIView *overlay = [self.tabBarController.view viewWithTag:TAG_OVERLAY];
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        overlay.alpha = 0;
-        CGRect rect = self.pickerHolder.frame;
-        rect.origin.y = self.tabBarController.view.bounds.size.height;
-        self.pickerHolder.frame = rect;
-    } completion:^(BOOL f){
-        [overlay removeFromSuperview];
-        [self.pickerHolder removeFromSuperview];
-    }];
-    
-    [self newTimeWasSelected];
-}
 
 - (void)showHintForUser{
     int numberOfHintsUsed = [[[NSUserDefaults standardUserDefaults] objectForKey:@"NumberOfPositionCellHintForUser"] intValue];
@@ -978,44 +864,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
 }
 
-
-#pragma mark - UIPickerViewDataSource
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.timeOptions.count;
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    NSNumber *option = self.timeOptions[row];
-    if (option.integerValue) {
-        return [NSString stringWithFormat:NSLocalizedString(@"%@ минут", nil), option];
-    } else {
-        return NSLocalizedString(@"Сейчас", nil);
-    }
-}
-
-#pragma mark - UIPickerViewDelegate
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    [GANHelper analyzeEvent:@"time_spinner_selected" category:ORDER_SCREEN];
-    [OrderManager sharedManager].time = self.timeOptions[row];
-    [self reloadTime];
-}
-
-#pragma mark - DBTimePickerViewDelegate
-
-- (void)db_timePickerView:(DBTimePickerView *)view didChangeMode:(DBBeverageMode)mode{
-    [OrderManager sharedManager].beverageMode = mode;
-    [self reloadTime];
-}
-
-- (void)db_timePickerViewDidChooseTimeOption:(DBTimePickerView *)view{
-    [self hidePicker:nil];
-}
 
 #pragma mark - UITableViewDataSource
 
@@ -1189,7 +1037,88 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController pushViewController:positionVC animated:YES];
 }
 
-#pragma mark - CommentViewController
+#pragma mark - Time
+
+- (void)reloadTime{
+    NSString *timeString = _orderManager.selectedTimeSlot.slotTitle;
+    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdTakeaway){
+        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
+    }
+    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdTakeaway){
+        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
+    }
+    
+    self.orderFooter.labelTime.text = timeString;
+}
+
+- (IBAction)clickTime:(id)sender {
+    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
+    
+    self.pickerView.selectedSegmentIndex = _orderManager.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
+    self.pickerView.selectedRow = [_orderManager.deliveryType.timeSlots indexOfObject:_orderManager.selectedTimeSlot];
+    
+    [self.pickerView showOnView:self.tabBarController.view];
+}
+
+- (NSInteger)db_numberOfSegmentsInTimePickerView:(DBTimePickerView *)view{
+    return 2;
+}
+
+- (NSString *)db_timePickerView:(DBTimePickerView *)view titleForSegmentAtIndex:(NSUInteger)index{
+    if(index == 0){
+        return NSLocalizedString(@"С собой", nil);
+    } else {
+        return NSLocalizedString(@"На месте", nil);
+    }
+}
+
+- (NSInteger)db_numberOfRowsInTimePickerView:(DBTimePickerView *)view{
+    return [_orderManager.deliveryType.timeSlots count];
+}
+
+- (NSString *)db_timePickerView:(DBTimePickerView *)view titleForRowAtIndex:(NSUInteger)index{
+    DBTimeSlot *timeSlot = _orderManager.deliveryType.timeSlots[index];
+    
+    return timeSlot.slotTitle;
+}
+
+- (void)db_timePickerView:(DBTimePickerView *)view didSelectSegmentAtIndex:(NSInteger)index{
+    DeliveryTypeId deliveryTypeId;
+    if (index == 0){
+        deliveryTypeId = DeliveryTypeIdTakeaway;
+    } else {
+        deliveryTypeId = DeliveryTypeIdInRestaurant;
+    }
+    
+    _orderManager.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId];
+}
+
+- (void)db_timePickerViewDidSelectRowAtIndex:(NSInteger)index{
+    DBTimeSlot *timeSlot = _orderManager.deliveryType.timeSlots[index];
+    _orderManager.selectedTimeSlot = timeSlot;
+}
+
+- (BOOL)db_shouldHideTimePickerView{
+    [self reloadTime];
+    [self startUpdatingPromoInfo];
+    
+    return YES;
+}
+
+
+#pragma mark - Comment
+
+- (void)reloadComment {
+    if ([OrderManager sharedManager].comment.length > 0) {
+        if ([OrderManager sharedManager].comment.length > 10) {
+            self.orderFooter.labelComment.text = [NSString stringWithFormat:@"%@...", [[OrderManager sharedManager].comment substringToIndex:10]];
+        } else {
+            self.orderFooter.labelComment.text = [OrderManager sharedManager].comment;
+        }
+    } else {
+        self.orderFooter.labelComment.text = NSLocalizedString(@"Комментарий", nil);
+    }
+}
 
 - (void)commentViewController:(DBCommentViewController *)controller didFinishWithText:(NSString *)text {
     [OrderManager sharedManager].comment = text;

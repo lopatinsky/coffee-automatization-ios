@@ -14,14 +14,13 @@
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
 #import "IHPaymentManager.h"
-#import "DBMastercardPromo.h"
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
+#import "DBCompanyInfo.h"
 
 //#import <Crashlytics/Crashlytics.h>
 
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
-NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedBeverageMode";
 
 @implementation OrderManager
 
@@ -57,7 +56,7 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         
         self.bonusPositions = [NSMutableArray new];
         
-        _beverageMode = (DBBeverageMode)[[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLastSelectedBeverageMode] intValue];
+        _deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purgePositions) name:kDBNewOrderCreatedNotification object:nil];
     }
@@ -70,13 +69,6 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
         [[NSUserDefaults standardUserDefaults] setObject:venue.venueId forKey:kDBDefaultsLastSelectedVenue];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-}
-
-- (void)setBeverageMode:(DBBeverageMode)beverageMode{
-    _beverageMode = beverageMode;
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@(_beverageMode) forKey:kDBDefaultsLastSelectedBeverageMode];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)validOrder{
@@ -313,12 +305,6 @@ NSString* const kDBDefaultsLastSelectedBeverageMode = @"kFBDefaultsLastSelectedB
     
     if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeCash)]){
         self.paymentType = PaymentTypeCash;
-    }
-    
-    if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeExtraType)]){
-        if([DBMastercardPromo sharedInstance].promoCurrentMugCount >= self.positionsCount){
-            self.paymentType = PaymentTypeExtraType;
-        }
     }
 }
 

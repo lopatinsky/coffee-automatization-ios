@@ -12,9 +12,11 @@
 #import "DBServerAPI.h"
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
-#import "DBPreviewViewController.h"
+#import "DBCompanyInfo.h"
 #import "DBPromoManager.h"
 #import "DBMenu.h"
+
+#import "DBLaunchEmulationViewController.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -30,7 +32,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //==================== Frameworks initialization ====================
+//==================== Frameworks initialization ====================
     [Parse setApplicationId:@"sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe"
                   clientKey:@"KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w"];
     
@@ -38,14 +40,10 @@
     
 //    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    //==================== Framework initialization ====================
+//==================== Framework initialization =====================
     
     
-    // Any significant preloadings/initializations
-    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-//        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
-    }
-    
+//================ significant preloadings/initializations =================
     [self copyPlist];
     
     [DBServerAPI registerUser:nil];
@@ -61,10 +59,20 @@
     [JRSwizzleMethods swizzleUIViewDealloc];
     //[DBShareHelper sharedInstance];
     [[DBPromoManager sharedManager] updateInfo];
+//================ significant preloadings/initializations =================
+
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
+    }
     
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(firstLaunchNecessaryInfoLoadedNotification:)
+                                                 name:kDBFirstLaunchNecessaryInfoLoadedNotification
+                                               object:nil];
     
     //styling
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -79,7 +87,11 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    self.window.rootViewController = [DBTabBarController sharedInstance];
+    if(![DBCompanyInfo sharedInstance].deliveryTypes){
+        self.window.rootViewController = [DBLaunchEmulationViewController new];
+    } else {
+        self.window.rootViewController = [DBTabBarController sharedInstance];
+    }
 
     [self.window makeKeyAndVisible];
     return YES;
@@ -265,13 +277,21 @@
     NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths firstObject];
-    NSString *path = [documentDirectory stringByAppendingString:@"CompanyInfo.plist"];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if(![fileManager fileExistsAtPath:path]){
         NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:pathToCompanyInfo];
         [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+    }
+}
+
+#pragma mark - Helper methods
+
+- (void)firstLaunchNecessaryInfoLoadedNotification:(NSNotification *)notification{
+    if([self.window.rootViewController isKindOfClass:[DBLaunchEmulationViewController class]]){
+        self.window.rootViewController = [DBTabBarController sharedInstance];
     }
 }
 

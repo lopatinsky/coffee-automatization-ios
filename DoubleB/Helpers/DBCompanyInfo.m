@@ -18,59 +18,99 @@
     return instance;
 }
 
+- (instancetype)init{
+    self = [super init];
+    
+    [self updateInfo];
+    
+    return self;
+}
+
 - (void)updateInfo{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
+            NSMutableArray *deliveryTypes = [NSMutableArray new];
+            for(NSDictionary *typeDict in response[@"deliveryTypes"]){
+                [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];
+            }
+            _deliveryTypes = deliveryTypes;
             
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadedNotification object:nil]];
         }
     }];
 }
 
 
-- (id)objectFromPropertyListByName:(NSString *)name{
++ (id)objectFromPropertyListByName:(NSString *)name{
+//    NSDictionary *companyInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
+
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *path = [documentDirectory stringByAppendingString:@"CompanyInfo.plist"];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
     NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
     
     return [companyInfo objectForKey:name];
 }
 
-- (NSNumber *)db_companyDefaultColor{
++ (NSString *)db_companyBaseUrl{
+    NSString *baseUrl = [self objectFromPropertyListByName:@"BaseUrl"];
+    
+    return baseUrl;
+}
+
++ (NSNumber *)db_companyDefaultColor{
     NSNumber *colorHex = [self objectFromPropertyListByName:@"CompanyColor"];
     
     return colorHex;
 }
 
-- (NSString *)db_companyGoogleAnalyticsKey{
++ (NSString *)db_companyGoogleAnalyticsKey{
     NSString *GAKeyString = [self objectFromPropertyListByName:@"CompanyGAKey"];
     
     return GAKeyString ?: @"";
 }
 
-- (NSURL *)db_ndaLicenseUrl{
++ (NSURL *)db_ndaLicenseUrl{
     NSString *ndaLicenseUrl = [self objectFromPropertyListByName:@"NDALicenseUrlString"];
     return [NSURL URLWithString:ndaLicenseUrl];
 }
 
-- (NSURL *)db_aboutAppUrl{
++ (NSURL *)db_aboutAppUrl{
     NSString *ndaLicenseUrl = [self objectFromPropertyListByName:@"AboutAppUrlString"];
     return [NSURL URLWithString:ndaLicenseUrl];
 }
 
-@end
+#pragma mark - Delivery
+
+- (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"typeId == %@", typeId];
+    
+    DBDeliveryType *type = [[_deliveryTypes filteredArrayUsingPredicate:predicate] firstObject];
+    return type;
+}
+
+- (NSArray *)deliveryTypeIdList{
+    NSMutableArray *typesId = [NSMutableArray new];
+    
+    for(DBDeliveryType *type in _deliveryTypes){
+        [typesId addObject:@(type.typeId)];
+    }
+    
+    return typesId;
+}
+
+- (BOOL)idDeliveryTypeEnabled:(DeliveryTypeId)typeId{
+    return [self deliveryTypeById:typeId] != nil;
+}
 
 
-@implementation DBDeliveryType
+#pragma mark - Helper methods
 
-- (instancetype)initWithResponseDict:(NSDictionary *)responseDict{
-    self = [super init];
+- (void)loadFromMemory{
     
-    _typeId = [responseDict[@"id"] intValue];
-    _typeName = responseDict[@"name"];
+}
+
+- (void)synchronize{
     
-    _minOrderSum = [responseDict[@"min_sum"] doubleValue];
-    
-    return self;
 }
 
 @end

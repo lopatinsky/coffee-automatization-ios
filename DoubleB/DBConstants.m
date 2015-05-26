@@ -23,6 +23,7 @@ NSString *const kDBDefaultsPromoInfo = @"kDBDefaultsPromoInfo";
 
 NSString *const kDBDefaultsLastScheduledLocalNotification = @"kDBDefaultsLastScheduledLocalNotification";
 
+NSString *const kDBFirstLaunchNecessaryInfoLoadedNotification = @"kDBFirstLaunchNecessaryInfoLoadedNotification";
 NSString* const kDBStatusUpdatedNotification = @"kDBStatusUpdatedNotification";
 NSString *const kDBNotificationUpdatedOrder = @"kDBNotificationUpdatedOrder";
 NSString *const kDBRepeateOrderNotification = @"kDBRepeateOrderNotification";

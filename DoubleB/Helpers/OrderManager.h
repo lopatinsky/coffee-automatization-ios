@@ -17,10 +17,10 @@ extern NSString* const kDBDefaultsPaymentType;
 @class DBMenuPosition;
 @class DBMenuBonusPosition;
 
-typedef NS_ENUM(NSUInteger, DBBeverageMode) {
-    DBBeverageModeTakeaway = 0,
-    DBBeverageModeInCafe = 1
-};
+//typedef NS_ENUM(NSUInteger, DBBeverageMode) {
+//    DBBeverageModeTakeaway = 0,
+//    DBBeverageModeInCafe = 1
+//};
 
 /**
 * Manages order
@@ -29,14 +29,23 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 @interface OrderManager : NSObject
 
 /**
-* Selected venue for order
+ * Selected type of delivery
+ */
+@property (nonatomic, strong) DBDeliveryType *deliveryType;
+/**
+* Selected venue for order(if not shipping)
 */
 @property (nonatomic, strong) Venue *venue;
 
+
 /**
-* Selected delivery time
-*/
-@property (nonatomic, strong) NSNumber *time;
+ * Selected time
+ */
+@property (nonatomic, strong) DBTimeSlot *selectedTimeSlot;
+///**
+//* Selected delivery time
+//*/
+//@property (nonatomic, strong) NSNumber *time;
 
 /**
 * Selected comment
@@ -63,7 +72,7 @@ typedef NS_ENUM(NSUInteger, DBBeverageMode) {
 */
 @property (nonatomic, readonly) BOOL validOrder;
 
-@property (nonatomic) DBBeverageMode beverageMode;
+//@property (nonatomic) DBBeverageMode beverageMode;
 
 /**
  * All positions in order
