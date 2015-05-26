@@ -102,7 +102,7 @@
                 <outlet property="descriptionLabel" destination="FeX-LP-Pad" id="KyA-kw-00Y"/>
                 <outlet property="orderButton" destination="uKp-QE-Ebq" id="HKb-TC-nYu"/>
                 <outlet property="positionImageView" destination="aWQ-cs-soz" id="Hbz-hu-xfV"/>
-                <outlet property="priceLabel" destination="aeD-ES-8JZ" id="cOh-hX-Zy9"/>
+                <outlet property="priceLabel" destination="aeD-ES-8JZ" id="7uc-ET-1E2"/>
                 <outlet property="separatorView" destination="hEz-wM-6bW" id="PlK-aO-ctm"/>
                 <outlet property="titleLabel" destination="Ent-L4-7MF" id="Rsl-Re-2VA"/>
                 <outlet property="weightLabel" destination="3Sn-ae-ayy" id="8RL-sx-6HD"/>

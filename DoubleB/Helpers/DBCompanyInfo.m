@@ -21,6 +21,7 @@
 - (instancetype)init{
     self = [super init];
     
+    [self loadFromMemory];
     [self updateInfo];
     
     return self;
@@ -36,6 +37,8 @@
             _deliveryTypes = deliveryTypes;
             
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadedNotification object:nil]];
+            
+            [self synchronize];
         }
     }];
 }
@@ -82,7 +85,7 @@
 #pragma mark - Delivery
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"typeId == %@", typeId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"typeId == %d", typeId];
     
     DBDeliveryType *type = [[_deliveryTypes filteredArrayUsingPredicate:predicate] firstObject];
     return type;
@@ -106,11 +109,20 @@
 #pragma mark - Helper methods
 
 - (void)loadFromMemory{
+    NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyInfo];
     
+    NSData *deliveryTypesData = info[@"deliveryTypes"];
+    if(deliveryTypesData){
+        _deliveryTypes = [NSKeyedUnarchiver unarchiveObjectWithData:deliveryTypesData] ?: @[];
+    }
 }
 
 - (void)synchronize{
+    NSData *deliveryTypesData = [NSKeyedArchiver archivedDataWithRootObject:_deliveryTypes];
+    NSDictionary *info = @{@"deliveryTypes": deliveryTypesData};
     
+    [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

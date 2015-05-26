@@ -15,7 +15,7 @@ typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
 };
 
 
-@interface DBDeliveryType : NSObject
+@interface DBDeliveryType : NSObject<NSCoding>
 @property (nonatomic) DeliveryTypeId typeId;
 @property (strong, nonatomic) NSString *typeName;
 
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
 @end
 
 
-@interface DBTimeSlot : NSObject
+@interface DBTimeSlot : NSObject<NSCoding>
 @property (strong, nonatomic) NSString *slotId;
 @property (strong, nonatomic) NSString *slotTitle;
 @property (strong, nonatomic) NSDictionary *slotDict;

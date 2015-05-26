@@ -112,15 +112,17 @@
     double currentTotal = [OrderManager sharedManager].totalPrice;
     [DBServerAPI checkNewOrder:^(NSDictionary *response) {
         // bonus points balance
-        _bonusPointsBalance = [response[@"rest_points"] doubleValue];
-        _bonusPositionsAvailable = [response[@"more_gift"] boolValue];
+        _bonusPointsBalance = [[response getValueForKey:@"rest_points"] doubleValue];
+        _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];
         
         // Calculate discount
         double newTotal = [response[@"total_sum"] doubleValue];
         _discount = currentTotal - newTotal;
         
         // Calculate wallet points available for order
+        [self willChangeValueForKey:@"walletPointsAvailableForOrder"];
         _walletPointsAvailableForOrder = [response[@"max_wallet_payment"] doubleValue];
+        [self didChangeValueForKey:@"walletPointsAvailableForOrder"];
         
         [self changeTotalDiscount];
         

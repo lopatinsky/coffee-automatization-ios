@@ -951,6 +951,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                           withRowAnimation:UITableViewRowAnimationLeft];
     [self reloadTableViewHeight:YES];
     [self.tableView endUpdates];
+    
+    [self startUpdatingPromoInfo];
 }
 
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1044,7 +1046,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdTakeaway){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
     }
-    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdTakeaway){
+    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdInRestaurant){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
     }
     

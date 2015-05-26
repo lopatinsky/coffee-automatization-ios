@@ -15,5 +15,13 @@
     
     return self;
 }
+#pragma mark - NSCopying
+
+- (id)copyWithZone:(NSZone *)zone{
+    DBMenuBonusPosition *copyPosition = [super copyWithZone:zone];
+    copyPosition.pointsPrice = self.pointsPrice;
+    
+    return self;
+}
 
 @end

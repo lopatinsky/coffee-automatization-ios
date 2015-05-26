@@ -18,9 +18,9 @@
     
     _minOrderSum = [responseDict[@"min_sum"] doubleValue];
     
-    _useTimeSelection = responseDict[@"time_picker"];
-    _minTimeInterval = [responseDict[@"time_picker_min"] intValue];
-    _maxTimeInterval = [responseDict[@"time_picker_max"] intValue];
+    _useTimeSelection = [[responseDict getValueForKey:@"time_picker"] boolValue];
+    _minTimeInterval = [[responseDict getValueForKey:@"time_picker_min"] intValue];
+    _maxTimeInterval = [[responseDict getValueForKey:@"time_picker_max"] intValue];
     
     NSMutableArray *timeSlots = [NSMutableArray new];
     for(NSDictionary *slotDict in responseDict[@"slots"]){
@@ -29,6 +29,39 @@
     _timeSlots = timeSlots;
     
     return self;
+}
+
+#pragma mark - NSCoding methods
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [[DBDeliveryType alloc] init];
+    if(self != nil){
+        _typeId = [[aDecoder decodeObjectForKey:@"_typeId"] intValue];
+        _typeName = [aDecoder decodeObjectForKey:@"_typeName"];
+        
+        _minOrderSum = [[aDecoder decodeObjectForKey:@"_minOrderSum"] doubleValue];
+        
+        _useTimeSelection = [[aDecoder decodeObjectForKey:@"_useTimeSelection"] boolValue];
+        _minTimeInterval = [[aDecoder decodeObjectForKey:@"_minTimeInterval"] doubleValue];
+        _maxTimeInterval = [[aDecoder decodeObjectForKey:@"_maxTimeInterval"] doubleValue];
+        
+        _timeSlots = [aDecoder decodeObjectForKey:@"_timeSlots"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:@(_typeId) forKey:@"_typeId"];
+    [aCoder encodeObject:_typeName forKey:@"_typeName"];
+    
+    [aCoder encodeObject:@(_minOrderSum) forKey:@"_minOrderSum"];
+    
+    [aCoder encodeObject:@(_useTimeSelection) forKey:@"_useTimeSelection"];
+    [aCoder encodeObject:@(_minTimeInterval) forKey:@"_minTimeInterval"];
+    [aCoder encodeObject:@(_maxTimeInterval) forKey:@"_maxTimeInterval"];
+    
+    [aCoder encodeObject:_timeSlots forKey:@"volume"];
 }
 
 @end
@@ -44,6 +77,25 @@
     _slotDict = responseDict;
     
     return self;
+}
+
+#pragma mark - NSCoding methods
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [[DBTimeSlot alloc] init];
+    if(self != nil){
+        _slotId = [aDecoder decodeObjectForKey:@"_slotId"];
+        _slotTitle = [aDecoder decodeObjectForKey:@"_slotTitle"];
+        _slotDict = [aDecoder decodeObjectForKey:@"_slotDict"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:_slotId forKey:@"_slotId"];
+    [aCoder encodeObject:_slotTitle forKey:@"_slotTitle"];
+    [aCoder encodeObject:_slotDict forKey:@"_slotDict"];
 }
 
 @end

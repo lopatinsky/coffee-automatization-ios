@@ -253,9 +253,9 @@
     order[@"gifts"] = [DBServerAPI assembleBonusItems];
     order[@"client"] = [DBServerAPI assembleClientInfo];
     order[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
-    order[@"delivery_time"] = [OrderManager sharedManager].selectedTimeSlot.slotDict;
+    order[@"delivery_slot"] = [OrderManager sharedManager].selectedTimeSlot.slotDict;
     order[@"payment"] = [DBServerAPI assemblyPaymentInfo];
-    order[@"comment"] = [OrderManager sharedManager].comment;
+    order[@"comment"] = [OrderManager sharedManager].comment ?: @"";
     
     static BOOL hasOrderErrorInSession = NO;
     order[@"after_error"] = @(hasOrderErrorInSession);

@@ -8,12 +8,19 @@
 
 #import "DBBonusPositionsViewController.h"
 #import "DBPositionCell.h"
-#import "DBBonusPositionDescriptionCell.h"
 #import "DBMenuPosition.h"
 #import "DBPromoManager.h"
 #import "OrderManager.h"
+#import "DBMenuBonusPosition.h"
 
 @interface DBBonusPositionsViewController ()<UITableViewDelegate, UITableViewDataSource, DBPositionCellDelegate>
+@property (weak, nonatomic) IBOutlet UIView *promoDescriptionView;
+@property (weak, nonatomic) IBOutlet UILabel *promoDescriptionTitle;
+@property (weak, nonatomic) IBOutlet UILabel *promoBalanceTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *promoBalanceLabel;
+@property (weak, nonatomic) IBOutlet UIView *promoDescriptionSeparatorView;
+
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic) BOOL withImages;
@@ -27,6 +34,13 @@
     self.navigationItem.title = NSLocalizedString(@"Бонусы", nil);
     self.navigationItem.leftBarButtonItem.title = @"";
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    self.promoDescriptionTitle.text = [DBPromoManager sharedManager].bonusPositionsTextDescription;
+    self.promoBalanceTitleLabel.text = NSLocalizedString(@"Баланс:", nil);
+    [self reloadBalance];
+    self.promoDescriptionSeparatorView.backgroundColor = [UIColor db_separatorColor];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -38,72 +52,68 @@
     }
 }
 
+- (double)totalPoints{
+    return [DBPromoManager sharedManager].bonusPointsBalance - [OrderManager sharedManager].totalBonusPositionsPrice;
+}
+
+- (void)reloadBalance{
+    double totalPoints = [self totalPoints];
+    
+    self.promoBalanceLabel.text = [NSString stringWithFormat:@"%.0f %@", totalPoints, [NSString db_localizedFormOfWordBall:totalPoints]];
+}
+
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0){
-        return 1;
-    } else {
-        return [[DBPromoManager sharedManager].positionsAvailableAsBonuses count];
-    }
+    return [[DBPromoManager sharedManager].positionsAvailableAsBonuses count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0){
-        DBBonusPositionDescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBBonusPositionDescriptionCell"];
-        if(!cell){
-            cell = [DBBonusPositionDescriptionCell new];
+    DBPositionCell *cell;
+    
+    if(self.withImages){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
+        if (!cell) {
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
         }
-        
-        cell.balance = [DBPromoManager sharedManager].bonusPointsBalance;
-        
-        return cell;
     } else {
-        DBPositionCell *cell;
-        
-        if(self.withImages){
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
-            if (!cell) {
-                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
-            }
-        } else {
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
-            if (!cell) {
-                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
-            }
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
+        if (!cell) {
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
         }
-        
-        DBMenuPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
-        [cell configureWithPosition:position];
-        cell.delegate = self;
-        
-        return cell;
     }
+    
+    DBMenuPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
+    [cell configureWithPosition:position];
+    cell.delegate = self;
+    
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section == 0){
-        return 80.f;
+    if(self.withImages){
+        return 120;
     } else {
-        if(self.withImages){
-            return 120;
-        } else {
-            return 44;
-        }
+        return 44;
     }
 }
 
 #pragma mark - DBPositionCellDelegate
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
-    [[OrderManager sharedManager] addBonusPosition:(DBMenuBonusPosition *)cell.position];
+    DBMenuBonusPosition *position = (DBMenuBonusPosition *)cell.position;
     
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
+    if(position.pointsPrice <= [self totalPoints]){
+        [[OrderManager sharedManager] addBonusPosition:(DBMenuBonusPosition *)cell.position];
+        
+        [self reloadBalance];
+        [self.tableView reloadData];
+    }
 }
 
 @end

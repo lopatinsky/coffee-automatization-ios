@@ -57,6 +57,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         self.bonusPositions = [NSMutableArray new];
         
         _deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+        _selectedTimeSlot = [_deliveryType.timeSlots firstObject];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purgePositions) name:kDBNewOrderCreatedNotification object:nil];
     }
@@ -127,9 +128,10 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (double)totalBonusPositionsPrice{
-    double total;
-    for(DBMenuBonusPosition *bonusPosition in self.bonusPositions){
-        total += bonusPosition.pointsPrice;
+    double total = 0;
+    for(OrderItem *bonusItem in self.bonusPositions){
+        DBMenuBonusPosition *bonusPosition = (DBMenuBonusPosition *)bonusItem.position;
+        total += bonusPosition.pointsPrice * bonusItem.count;;
     }
     
     return total;
