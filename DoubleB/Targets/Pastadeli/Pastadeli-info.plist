@@ -26,19 +26,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.0.3</string>
-	<key>CompanyInfo</key>
-	<dict>
-		<key>BaseUrl</key>
-		<string>http://pastadeli.1.doubleb-automation-production.appspot.com/api/</string>
-		<key>CompanyColor</key>
-		<integer>4288956456</integer>
-		<key>CompanyGAKey</key>
-		<string>UA-62529990-7</string>
-		<key>NDALicenseUrlString</key>
-		<string></string>
-		<key>aboutAppUrlString</key>
-		<string></string>
-	</dict>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
