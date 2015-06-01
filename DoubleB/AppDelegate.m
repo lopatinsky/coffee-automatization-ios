@@ -15,6 +15,7 @@
 #import "DBCompanyInfo.h"
 #import "DBPromoManager.h"
 #import "DBMenu.h"
+#import "IHSecureStore.h"
 
 #import "DBLaunchEmulationViewController.h"
 
@@ -59,6 +60,8 @@
     [JRSwizzleMethods swizzleUIViewDealloc];
     //[DBShareHelper sharedInstance];
     [[DBPromoManager sharedManager] updateInfo];
+    
+    [GANHelper trackClientInfo];
 //================ significant preloadings/initializations =================
 
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
@@ -119,8 +122,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    //[[DBShareHelper sharedInstance] updateShareInfo];
-    
+//    NSString *clientId = [IHSecureStore sharedInstance].clientId;
+//    if(clientId){
+//        [GANHelper analyzeEvent:@"app_started" label:clientId category:@"Start_application"];
+//    } else {
+//        [GANHelper analyzeEvent:@"app_started" category:@"Start_application"];
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -222,6 +229,9 @@
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"DoubleB.sqlite"];
     
     NSError *error = nil;
+    
+//    [[NSFileManager defaultManager] removeItemAtURL:storeURL error:&error];
+    
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                    configuration:nil

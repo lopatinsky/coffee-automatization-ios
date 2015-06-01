@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBTimeSlot;
+
 typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
     DeliveryTypeIdShipping = 2,
     DeliveryTypeIdInRestaurant = 1,
@@ -21,13 +23,20 @@ typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
 
 @property (nonatomic) double minOrderSum;
 
-@property (nonatomic) BOOL useTimeSelection;
+@property (nonatomic, readonly) BOOL useTimePicker;
 @property (nonatomic) int minTimeInterval;
 @property (nonatomic) int maxTimeInterval;
 
+@property (strong, nonatomic, readonly) NSDate *minDate;
+@property (strong, nonatomic, readonly) NSDate *maxDate;
+@property (nonatomic, readonly) BOOL onlyTime;
+
 @property (strong, nonatomic) NSArray *timeSlots;
+@property (strong, nonatomic) NSArray *timeSlotsNames;
 
 - (instancetype)initWithResponseDict:(NSDictionary *)responseDict;
+
+- (DBTimeSlot *)timeSlotWithName:(NSString *)name;
 @end
 
 

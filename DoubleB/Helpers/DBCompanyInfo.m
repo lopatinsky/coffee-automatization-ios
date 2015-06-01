@@ -101,7 +101,7 @@
     return typesId;
 }
 
-- (BOOL)idDeliveryTypeEnabled:(DeliveryTypeId)typeId{
+- (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId{
     return [self deliveryTypeById:typeId] != nil;
 }
 

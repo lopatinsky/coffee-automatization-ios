@@ -166,10 +166,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     
  
-// ========= Configure TimePickerView =========
+// ========= Configure Time =========
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
-    self.pickerView.backgroundColor = [UIColor db_backgroundColor];
-// ========= Configure TimePickerView =========
+    [_orderManager addObserver:self
+                    forKeyPath:@"selectedTime"
+                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                       context:nil];
+// ========= Configure Time =========
 
     
 // ========= Configure Autolayout =========
@@ -273,15 +276,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)dealloc{
     NSLog(@"dealloc");
+    
+    [_orderManager removeObserver:self forKeyPath:@"selectedTime"];
 }
 
-#pragma mark - Setup
-
-- (void)clickSettings:(id)sender {
-    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
-    settingsController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:settingsController animated:YES];
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context{
+    if([keyPath isEqualToString:@"selectedTime"]){
+        [self reloadTime];
+    }
 }
+
 
 - (void)setupFooterView {
     // Configure all buttons and some other elements
@@ -295,13 +302,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if([[NSUserDefaults standardUserDefaults] boolForKey:kDBDefaultsNDASigned] && [orders count] > 0){
         [self.ndaView hide];
     }
-}
-
-- (void)setupContinueButton {
-    self.continueButton.layer.cornerRadius = 5;
-    [self.continueButton addTarget:self action:@selector(clickContinue:) forControlEvents:UIControlEventTouchUpInside];
-    [self.continueButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
-    self.continueButton.backgroundColor = [UIColor db_defaultColor];
 }
 
 
@@ -331,384 +331,18 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-//- (void)reloadTableViewCellsHeight{
-//    [self.tableView beginUpdates];
-//    [self reloadTableViewHeight:YES];
-//    [self.tableView endUpdates];
-//}
 
-- (void)reloadBonusesView:(BOOL)animated{
-    if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
-        self.bonusView.bonusSwitchActive = [DBPromoManager sharedManager].walletActiveForOrder;
-        [self.bonusView show:animated completion:^{
-            [self.scrollView layoutIfNeeded];
-        }];
-    } else {
-        [self.bonusView hide:animated completion:^{
-            [self.scrollView layoutIfNeeded];
-        }];
-    }
-}
-
-- (void)reloadProfile {
-    if ([[DBClientInfo sharedInstance] validClientName]) {
-        if (![[DBClientInfo sharedInstance] validClientPhone]) {
-            self.orderFooter.labelProfile.text = NSLocalizedString(@"Укажите, пожалуйста, номер телефона", nil);
-            self.orderFooter.labelProfile.textColor = [UIColor orangeColor];
-            [self.orderFooter.labelProfile db_startObservingAnimationNotification];
-        } else {
-            self.orderFooter.labelProfile.text = [DBClientInfo sharedInstance].clientName;
-            self.orderFooter.labelProfile.textColor = [UIColor blackColor];
-            [self.orderFooter.labelProfile db_stopObservingAnimationNotification];
-        }
-    } else {
-        self.orderFooter.labelProfile.text = NSLocalizedString(@"Представьтесь, пожалуйста", nil);
-        self.orderFooter.labelProfile.textColor = [UIColor orangeColor];
-        [self.orderFooter.labelProfile db_startObservingAnimationNotification];
-    }
-}
-
-- (void)reloadCard {
-    [self.orderFooter.labelCard db_stopObservingAnimationNotification];
-    
-    switch ([OrderManager sharedManager].paymentType) {
-        case PaymentTypeNotSet:
-            [[OrderManager sharedManager] selectIfPossibleDefaultPaymentType];
-            if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
-                [self reloadCard];
-            } else {
-                self.orderFooter.labelCard.textColor = [UIColor orangeColor];
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Выберите тип оплаты", nil);
-                [self.orderFooter.labelCard db_startObservingAnimationNotification];
-            }
-            break;
-            
-        case PaymentTypeCard:
-            self.currentCard = [[IHSecureStore sharedInstance] defaultCard];
-            
-            if (self.currentCard) {
-                NSString *cardNumber = self.currentCard[@"cardPan"];
-                NSString *pan = [cardNumber substringFromIndex:cardNumber.length-4];
-                self.orderFooter.labelCard.text = [NSString stringWithFormat:@"%@ ....%@", [cardNumber db_cardIssuer], pan];
-                self.orderFooter.labelCard.textColor = [UIColor blackColor];
-            } else {
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Нет карт", nil);
-                self.orderFooter.labelCard.textColor = [UIColor orangeColor];
-                [self.orderFooter.labelCard db_startObservingAnimationNotification];
-            }
-            break;
-            
-        case PaymentTypeCash:
-            self.orderFooter.labelCard.textColor = [UIColor blackColor];
-            self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
-            break;
-            
-        case PaymentTypeExtraType:
-            if([OrderManager sharedManager].totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
-                [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
-                [self reloadCard];
-            } else {
-                self.orderFooter.labelCard.textColor = [UIColor blackColor];
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
-            }
-            break;
-            
-    }
-
-    if([OrderManager sharedManager].totalCount <= [DBMastercardPromo sharedInstance].promoCurrentMugCount && [OrderManager sharedManager].paymentType != PaymentTypeExtraType){
-        if(!self.freeBeverageTipView){
-            self.freeBeverageTipView = self.orderFooter.freeBeverageTipView;
-            self.freeBeverageTipView.userInteractionEnabled = YES;
-            [self.freeBeverageTipView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-                [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
-                [self reloadCard];
-            }]];
-        
-            //[self.viewFooter showFreeBeverageTip];
-        }
-    } else {
-        if(self.freeBeverageTipView){
-            //[self.viewFooter hideFreeBeverageTip];
-            self.freeBeverageTipView = nil;
-        }
-    }
-}
-
-- (void)reloadContinueButton {
-    if (![OrderManager sharedManager].validOrder) {
-        self.continueButton.backgroundColor = [UIColor db_grayColor];
-        self.continueButton.alpha = 0.5;
-    } else {
-        self.continueButton.backgroundColor = [UIColor db_defaultColor];
-        self.continueButton.alpha = 1;
-    }
-}
-
-- (void)reloadFavourites:(NSArray *)items {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *faves = [defaults objectForKey:kDBDefaultsFaves];
-
-    if(!faves)
-        faves = [[NSMutableArray alloc] init];
-    
-    NSMutableArray *array = [[NSMutableArray alloc] init];
-    for(NSDictionary *fave in faves){
-        [array addObject:[[NSMutableDictionary alloc] initWithDictionary:fave]];
-    }
-    
-    for (NSDictionary *item in items) {
-        BOOL found = NO;
-        for (NSMutableDictionary *a in array) {
-            if ([a[@"id"] isEqualToString:item[@"item_id"]]) {
-                a[@"count"] = @([a[@"count"] intValue] + 1);
-                found = YES;
-                break;
-            }
-        }
-        if (!found) {
-            [array addObject:[[NSMutableDictionary alloc] initWithDictionary:@{@"id": item[@"item_id"],
-                                                                              @"count": @(1)}]];
-        }
-    }
-    
-    [array sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-        return [obj1[@"count"] intValue] > [obj2[@"count"] intValue] ? NSOrderedAscending : NSOrderedDescending;
-    }];
-    
-    faves = [[NSMutableArray alloc] init];
-    for(NSDictionary *a in array){
-        [faves addObject:a];
-    }
-    
-    [defaults setObject:faves forKey:kDBDefaultsFaves];
-    [defaults synchronize];
-}
-
-
-- (void)setNearestVenue:(Venue *)nearestVenue{
-    if(nearestVenue){
-        [OrderManager sharedManager].venue = nearestVenue;
-        
-        //self.viewFooter.labelAddress.text = [self addressWithoutCity:nearestVenue.address];
-        self.orderFooter.labelAddress.text = nearestVenue.title;
-        self.orderFooter.labelAddress.textColor = [UIColor blackColor];
-        [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
-        
-        [self startUpdatingPromoInfo];
-    } else {
-        self.orderFooter.labelAddress.textColor = [UIColor orangeColor];
-        self.orderFooter.labelAddress.text = NSLocalizedString(@"Ошибка определения локации", nil);
-        [self.orderFooter.labelAddress db_startObservingAnimationNotification];
-    }
-    
-    [self reloadTime];
-    
-    [self.orderFooter.activityIndicator stopAnimating];
-}
-
-- (void)updateNearestCafe {
-    if ([OrderManager sharedManager].venue) {
-        [self setNearestVenue:[OrderManager sharedManager].venue];
-    } else {
-        [self.orderFooter.activityIndicator startAnimating];
-        NSDate *start = [NSDate date];
-        [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-            [OrderManager sharedManager].location = location;
-            
-            if (location) {
-                
-                [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
-
-                    long interval = (long)-[start timeIntervalSinceNow];
-
-                    if(![OrderManager sharedManager].venue){
-                        if (venues) {
-                            [self setNearestVenue:[venues firstObject]];
-                            self.venues = venues;
-                        } else {
-                            venues = [Venue storedVenues];
-                            if(venues && [venues count] > 0)
-                                [self setNearestVenue:[venues firstObject]];
-                            else
-                                [self setNearestVenue:nil];
-                        }
-                    }
-                    
-                    [self.orderFooter.activityIndicator stopAnimating];
-                    [self reloadContinueButton];
-                }];
-            } else {
-                NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
-                Venue *venue = [Venue venueById:lastVenueId];
-                
-                if(venue){
-                    [self setNearestVenue:venue];
-                } else {
-                    [self setNearestVenue:self.venues[1]];
-                }
-                [self.orderFooter.activityIndicator stopAnimating];
-            }
-        }];
-    }
-}
 
 #pragma mark - Events
 
-- (void)clickRefill:(id)sender {
-
-    [self moveBack];
+- (void)clickSettings:(id)sender {
+    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
+    settingsController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
-
-- (void)clickContinue:(id)sender {
-    if(![OrderManager sharedManager].orderId){
-        [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
-        return;
-    }
-    
-    [GANHelper analyzeEvent:@"order_button_click" label:[OrderManager sharedManager].orderId category:ORDER_SCREEN];
-    
-    if(![OrderManager sharedManager].validOrder){
-        [self startUpdatingPromoInfo];
-        
-        // Nice animation for all error elements
-        void (^animationBlock)(UIView*) = ^void(UIView *targetView){
-            if([targetView isKindOfClass:[UILabel class]]){
-                UILabel *label = (UILabel *)targetView;
-                [UIView animateWithDuration:0.2 animations:^{
-                    label.alpha = 0;
-                    label.textColor = [UIColor redColor];
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.2 animations:^{
-                        label.alpha = 1;
-                    } completion:^(BOOL finished) {
-                        [UIView animateWithDuration:0.2 animations:^{
-                            label.alpha = 0;
-                        } completion:^(BOOL finished) {
-                            [UIView animateWithDuration:0.2 animations:^{
-                                label.alpha = 1;
-                                label.textColor = [UIColor orangeColor];
-                            }];
-                        }];
-                    }];
-                }];
-            } else {
-                [UIView animateWithDuration:0.2 animations:^{
-                    targetView.alpha = 0;
-                } completion:^(BOOL finished) {
-                    [UIView animateWithDuration:0.2 animations:^{
-                        targetView.alpha = 1;
-                    } completion:^(BOOL finished) {
-                        [UIView animateWithDuration:0.2 animations:^{
-                            targetView.alpha = 0;
-                        } completion:^(BOOL finished) {
-                            [UIView animateWithDuration:0.2 animations:^{
-                                targetView.alpha = 1;
-                            }];
-                        }];
-                    }];
-                }];
-            }
-        };
-        
-        NSNotification *notification = [NSNotification notificationWithName:kDBNewOrderAnimateAllErrorElementsNotification object:animationBlock];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-        return;
-    }
-    
-    if([OrderManager sharedManager].paymentType == PaymentTypeCard && !self.currentCard){
-        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
-                                       message:NSLocalizedString(@"Пожалуйста, добавьте новую карту или выберите одну из существующих", nil)
-                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
-    } else {
-        [self sendOrder];
-    }
-}
-
-- (IBAction)clickAddress:(id)sender {
-    [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
-    DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
-    venuesController.delegate = self;
-    venuesController.venues = self.venues;
-    venuesController.hidesBottomBarWhenPushed = YES;
-    
-    [self.navigationController pushViewController:venuesController animated:YES];
-}
-
-- (IBAction)clickPaymentType:(id)sender {
-    NSString *label = @"";
-    switch ([OrderManager sharedManager].paymentType) {
-        case PaymentTypeNotSet:
-            label = @"not_set";
-            break;
-        case PaymentTypeCash:
-            label = @"cash";
-            break;
-        case PaymentTypeCard:
-            label = @"card";
-            break;
-        case PaymentTypeExtraType:
-            label = @"extra_type";
-            break;
-    }
-    
-    [GANHelper analyzeEvent:@"payment_click" label:label category:ORDER_SCREEN];
-
-    DBCardsViewController *cardsController = [DBCardsViewController new];
-    cardsController.mode = CardsViewControllerModeChoosePayment;
-    cardsController.delegate = self;
-    cardsController.screen = @"Cards_payment_screen";
-    [self.navigationController pushViewController:cardsController animated:YES];
-}
-
-- (IBAction)clickComment:(id)sender {
-    [GANHelper analyzeEvent:@"comment_screen" category:ORDER_SCREEN];
-    DBCommentViewController *commentController = [DBCommentViewController new];
-    commentController.delegate = self;
-    commentController.comment = [OrderManager sharedManager].comment;
-    [self.navigationController pushViewController:commentController animated:YES];
-}
-
-- (IBAction)clickProfile:(id)sender {
-    [GANHelper analyzeEvent:@"profile_click" category:ORDER_SCREEN];
-    NSString *eventLabel;
-    if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
-         eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];
-    } else {
-        eventLabel = @"null";
-    }
-    DBProfileViewController *profileViewController = [DBProfileViewController new];
-    profileViewController.screen = @"Profile_order_screen";
-    [self.navigationController pushViewController:profileViewController animated:YES];
-}
-
-#pragma mark - DBNewOrderItemAdditionViewDelegate
-
-- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
-    if(!self.positionsViewController){
-        self.positionsViewController = [DBPositionsViewController new];
-        self.positionsViewController.hidesBottomBarWhenPushed = YES;
-    }
-    
-    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
-    
-    [self.navigationController pushViewController:self.positionsViewController animated:YES];
-}
-
-- (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{
-    DBBonusPositionsViewController *bonusPositionsVC = [DBBonusPositionsViewController new];
-    bonusPositionsVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:bonusPositionsVC animated:YES];
-}
-
 
 
 #pragma mark - Some methods
-
-- (void)moveBack{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 
 - (void)showHintForUser{
     int numberOfHintsUsed = [[[NSUserDefaults standardUserDefaults] objectForKey:@"NumberOfPositionCellHintForUser"] intValue];
@@ -724,55 +358,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void) showOrHideAdditionalInfoViewWithErrors:(NSArray *)errors promos:(NSArray *)promos {
-    if ((!errors || [errors count] == 0) && (!promos || [promos count] == 0)) {
-        [self.additionalInfoView hide:^{
-            [self.scrollView layoutIfNeeded];
-        } completion:nil];
-    } else {
-        if ([errors count] != 0) {
-            [self.additionalInfoView showErrors:errors animation:^{
-                [self.scrollView layoutIfNeeded];
-            } completion:nil];
-        } else {
-            [self.additionalInfoView showPromos:promos animation:^{
-                [self.scrollView layoutIfNeeded];
-            } completion:nil];
-        }
-    }
-}
-
-
-#pragma mark - Salt
-
-- (void)sendOrder{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [DBServerAPI createNewOrder:^(Order *order) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        [self reloadTableViewHeight:NO];
-        [self.additionalInfoView hide:^{
-            [self.scrollView layoutIfNeeded];
-        } completion:nil];
-        [GANHelper analyzeEvent:@"order_placed"
-                          label:[NSString stringWithFormat:@"%@, %@", [OrderManager sharedManager].orderId, [IHSecureStore sharedInstance].clientId]
-                       category:ORDER_SCREEN];
-        
-        [self.delegate newOrderViewController:self didFinishOrder:order];
-    } failure:^(NSString *errorTitle, NSString *errorMessage) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        
-        [self startUpdatingPromoInfo];
-        
-        if(!errorTitle) errorTitle = NSLocalizedString(@"Ошибка", nil);
-        [UIAlertView bk_showAlertViewWithTitle:errorTitle
-                                       message:errorMessage
-                             cancelButtonTitle:NSLocalizedString(@"ОК", nil)
-                             otherButtonTitles:nil
-                                       handler:nil];
-        [GANHelper analyzeEvent:@"order_failed" label:errorMessage category:ORDER_SCREEN];
-    }];
-}
 
 #pragma mark - helper methods
 
@@ -794,7 +379,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     return result;
 }
 
-#pragma mark - Promo methods
+#pragma mark - Promo
 
 - (void)startUpdatingPromoInfo{
     BOOL startUpdating = [[DBPromoManager sharedManager] checkCurrentOrder:^(BOOL success) {
@@ -842,26 +427,43 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadContinueButton];
 }
 
+- (void) showOrHideAdditionalInfoViewWithErrors:(NSArray *)errors promos:(NSArray *)promos {
+    if ((!errors || [errors count] == 0) && (!promos || [promos count] == 0)) {
+        [self.additionalInfoView hide:^{
+            [self.scrollView layoutIfNeeded];
+        } completion:nil];
+    } else {
+        if ([errors count] != 0) {
+            [self.additionalInfoView showErrors:errors animation:^{
+                [self.scrollView layoutIfNeeded];
+            } completion:nil];
+        } else {
+            [self.additionalInfoView showPromos:promos animation:^{
+                [self.scrollView layoutIfNeeded];
+            } completion:nil];
+        }
+    }
+}
 
-#pragma mark - DBNewOrderBonusesViewDelegate
+
+#pragma mark - Personal wallet
+
+- (void)reloadBonusesView:(BOOL)animated{
+    if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
+        self.bonusView.bonusSwitchActive = [DBPromoManager sharedManager].walletActiveForOrder;
+        [self.bonusView show:animated completion:^{
+            [self.scrollView layoutIfNeeded];
+        }];
+    } else {
+        [self.bonusView hide:animated completion:^{
+            [self.scrollView layoutIfNeeded];
+        }];
+    }
+}
 
 - (void)db_newOrderBonusesView:(DBNewOrderBonusesView *)view didSelectBonuses:(BOOL)select{
     [DBPromoManager sharedManager].walletActiveForOrder = select;
     [self reloadBonusesView:NO];
-}
-
-
-#pragma mark - Venues Controller Delegate
-
-- (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
-    [self setNearestVenue:venue];
-    [self.orderFooter.activityIndicator stopAnimating];
-}
-
-#pragma mark - Cards Controller Delegate
-
-- (void)cardsControllerDidChoosePaymentItem:(DBCardsViewController *)controller{
-    [self startUpdatingPromoInfo];
 }
 
 
@@ -955,20 +557,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    [GANHelper analyzeEvent:@"item_title_click" category:ORDER_SCREEN];
-//    
-//    DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-//    [cell showOrHideAdditionalInfo];
-//    [self reloadTableViewCellsHeight];
-//}
-
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
-    return YES;
-}
-
 #pragma mark - DBOrderItemCellDelegate
 
 - (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
@@ -1039,10 +627,119 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController pushViewController:positionVC animated:YES];
 }
 
+
+#pragma mark - DBNewOrderItemAdditionViewDelegate
+
+- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
+    if(!self.positionsViewController){
+        self.positionsViewController = [DBPositionsViewController new];
+        self.positionsViewController.hidesBottomBarWhenPushed = YES;
+    }
+    
+    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
+    
+    [self.navigationController pushViewController:self.positionsViewController animated:YES];
+}
+
+- (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{
+    DBBonusPositionsViewController *bonusPositionsVC = [DBBonusPositionsViewController new];
+    bonusPositionsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:bonusPositionsVC animated:YES];
+}
+
+
+#pragma mark - Delivery/Venue
+
+- (void)setNearestVenue:(Venue *)nearestVenue{
+    if(nearestVenue){
+        [OrderManager sharedManager].venue = nearestVenue;
+        
+        //self.viewFooter.labelAddress.text = [self addressWithoutCity:nearestVenue.address];
+        self.orderFooter.labelAddress.text = nearestVenue.title;
+        self.orderFooter.labelAddress.textColor = [UIColor blackColor];
+        [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
+        
+        [self startUpdatingPromoInfo];
+    } else {
+        self.orderFooter.labelAddress.textColor = [UIColor orangeColor];
+        self.orderFooter.labelAddress.text = NSLocalizedString(@"Ошибка определения локации", nil);
+        [self.orderFooter.labelAddress db_startObservingAnimationNotification];
+    }
+    
+    [self reloadTime];
+    
+    [self.orderFooter.activityIndicator stopAnimating];
+}
+
+- (void)updateNearestCafe {
+    if ([OrderManager sharedManager].venue) {
+        [self setNearestVenue:[OrderManager sharedManager].venue];
+    } else {
+        [self.orderFooter.activityIndicator startAnimating];
+        NSDate *start = [NSDate date];
+        [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
+            [OrderManager sharedManager].location = location;
+            
+            if (location) {
+                
+                [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
+                    
+                    long interval = (long)-[start timeIntervalSinceNow];
+                    
+                    if(![OrderManager sharedManager].venue){
+                        if (venues) {
+                            [self setNearestVenue:[venues firstObject]];
+                            self.venues = venues;
+                        } else {
+                            venues = [Venue storedVenues];
+                            if(venues && [venues count] > 0)
+                                [self setNearestVenue:[venues firstObject]];
+                            else
+                                [self setNearestVenue:nil];
+                        }
+                    }
+                    
+                    [self.orderFooter.activityIndicator stopAnimating];
+                    [self reloadContinueButton];
+                }];
+            } else {
+                NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
+                Venue *venue = [Venue venueById:lastVenueId];
+                
+                if(venue){
+                    [self setNearestVenue:venue];
+                } else {
+                    [self setNearestVenue:self.venues[1]];
+                }
+                [self.orderFooter.activityIndicator stopAnimating];
+            }
+        }];
+    }
+}
+
+- (IBAction)clickAddress:(id)sender {
+    [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
+    DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+    venuesController.delegate = self;
+    venuesController.venues = self.venues;
+    venuesController.hidesBottomBarWhenPushed = YES;
+    
+    [self.navigationController pushViewController:venuesController animated:YES];
+}
+
+- (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
+    [self setNearestVenue:venue];
+    [self.orderFooter.activityIndicator stopAnimating];
+}
+
+
 #pragma mark - Time
 
 - (void)reloadTime{
-    NSString *timeString = _orderManager.selectedTimeSlot.slotTitle;
+    NSString *timeString = [self selectedTimeString];
+    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdShipping){
+        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Доставка", nil)];
+    }
     if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdTakeaway){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
     }
@@ -1056,32 +753,56 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (IBAction)clickTime:(id)sender {
     [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
     
+    if(_orderManager.deliveryType.useTimePicker){
+        self.pickerView.type = _orderManager.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
+        
+        self.pickerView.selectedDate = _orderManager.selectedTime;
+    } else {
+        self.pickerView.type = DBTimePickerTypeItems;
+        
+        self.pickerView.items = _orderManager.deliveryType.timeSlotsNames;
+        self.pickerView.selectedItem = [_orderManager.deliveryType.timeSlots indexOfObject:_orderManager.selectedTimeSlot];
+    }
+    
+    NSMutableArray *titles = [NSMutableArray new];
+    if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
+        [titles addObject:NSLocalizedString(@"С собой", nil)];
+    }
+    if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]){
+        [titles addObject:NSLocalizedString(@"На месте", nil)];
+    }
+    self.pickerView.segments = titles;
     self.pickerView.selectedSegmentIndex = _orderManager.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
-    self.pickerView.selectedRow = [_orderManager.deliveryType.timeSlots indexOfObject:_orderManager.selectedTimeSlot];
     
     [self.pickerView showOnView:self.tabBarController.view];
 }
 
-- (NSInteger)db_numberOfSegmentsInTimePickerView:(DBTimePickerView *)view{
-    return 2;
-}
-
-- (NSString *)db_timePickerView:(DBTimePickerView *)view titleForSegmentAtIndex:(NSUInteger)index{
-    if(index == 0){
-        return NSLocalizedString(@"С собой", nil);
+- (NSString *)selectedTimeString{
+    NSString *timeString;
+    if(_orderManager.deliveryType.useTimePicker){
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        if(_orderManager.deliveryType.onlyTime){
+            formatter.dateFormat = @"HH:mm";
+        } else {
+            formatter.dateFormat = @"dd/MM/yy HH:mm";
+        }
+        timeString = [formatter stringFromDate:_orderManager.selectedTime];
     } else {
-        return NSLocalizedString(@"На месте", nil);
+        timeString = _orderManager.selectedTimeSlot.slotTitle;
     }
-}
-
-- (NSInteger)db_numberOfRowsInTimePickerView:(DBTimePickerView *)view{
-    return [_orderManager.deliveryType.timeSlots count];
-}
-
-- (NSString *)db_timePickerView:(DBTimePickerView *)view titleForRowAtIndex:(NSUInteger)index{
-    DBTimeSlot *timeSlot = _orderManager.deliveryType.timeSlots[index];
     
-    return timeSlot.slotTitle;
+    return timeString;
+}
+
+- (NSString *)stringFromTime:(NSDate *)date{
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    if(_orderManager.deliveryType.onlyTime){
+        formatter.dateFormat = @"HH:mm";
+    } else {
+        formatter.dateFormat = @"dd/MM/yy HH:mm";
+    }
+    
+    return [formatter stringFromDate:date];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectSegmentAtIndex:(NSInteger)index{
@@ -1093,11 +814,33 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     _orderManager.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId];
+    
+    [self.pickerView configure];
 }
 
-- (void)db_timePickerViewDidSelectRowAtIndex:(NSInteger)index{
+- (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
     DBTimeSlot *timeSlot = _orderManager.deliveryType.timeSlots[index];
     _orderManager.selectedTimeSlot = timeSlot;
+    [self reloadTime];
+}
+
+- (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
+    NSInteger comparisonResult = [_orderManager setNewSelectedTime:date];
+    
+    NSString *message;
+    if(comparisonResult == NSOrderedAscending){
+        message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_orderManager.deliveryType.minDate]];
+        [self showAlert:message];
+    }
+    
+    if(comparisonResult == NSOrderedDescending){
+        message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_orderManager.deliveryType.maxDate]];
+        [self showAlert:message];
+    }
+    
+//    if(comparisonResult == NSOrderedSame){
+//        [self reloadTime];
+//    }
 }
 
 - (BOOL)db_shouldHideTimePickerView{
@@ -1105,6 +848,139 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
     
     return YES;
+}
+
+
+#pragma mark - Profile
+
+- (void)reloadProfile {
+    if ([[DBClientInfo sharedInstance] validClientName]) {
+        if (![[DBClientInfo sharedInstance] validClientPhone]) {
+            self.orderFooter.labelProfile.text = NSLocalizedString(@"Укажите, пожалуйста, номер телефона", nil);
+            self.orderFooter.labelProfile.textColor = [UIColor orangeColor];
+            [self.orderFooter.labelProfile db_startObservingAnimationNotification];
+        } else {
+            self.orderFooter.labelProfile.text = [DBClientInfo sharedInstance].clientName;
+            self.orderFooter.labelProfile.textColor = [UIColor blackColor];
+            [self.orderFooter.labelProfile db_stopObservingAnimationNotification];
+        }
+    } else {
+        self.orderFooter.labelProfile.text = NSLocalizedString(@"Представьтесь, пожалуйста", nil);
+        self.orderFooter.labelProfile.textColor = [UIColor orangeColor];
+        [self.orderFooter.labelProfile db_startObservingAnimationNotification];
+    }
+}
+
+- (IBAction)clickProfile:(id)sender {
+    [GANHelper analyzeEvent:@"profile_click" category:ORDER_SCREEN];
+    NSString *eventLabel;
+    if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
+        eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];
+    } else {
+        eventLabel = @"null";
+    }
+    DBProfileViewController *profileViewController = [DBProfileViewController new];
+    profileViewController.screen = @"Profile_order_screen";
+    [self.navigationController pushViewController:profileViewController animated:YES];
+}
+
+
+#pragma mark - Payment
+
+- (void)reloadCard {
+    [self.orderFooter.labelCard db_stopObservingAnimationNotification];
+    
+    switch ([OrderManager sharedManager].paymentType) {
+        case PaymentTypeNotSet:
+            [[OrderManager sharedManager] selectIfPossibleDefaultPaymentType];
+            if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+                [self reloadCard];
+            } else {
+                self.orderFooter.labelCard.textColor = [UIColor orangeColor];
+                self.orderFooter.labelCard.text = NSLocalizedString(@"Выберите тип оплаты", nil);
+                [self.orderFooter.labelCard db_startObservingAnimationNotification];
+            }
+            break;
+            
+        case PaymentTypeCard:
+            self.currentCard = [[IHSecureStore sharedInstance] defaultCard];
+            
+            if (self.currentCard) {
+                NSString *cardNumber = self.currentCard[@"cardPan"];
+                NSString *pan = [cardNumber substringFromIndex:cardNumber.length-4];
+                self.orderFooter.labelCard.text = [NSString stringWithFormat:@"%@ ....%@", [cardNumber db_cardIssuer], pan];
+                self.orderFooter.labelCard.textColor = [UIColor blackColor];
+            } else {
+                self.orderFooter.labelCard.text = NSLocalizedString(@"Нет карт", nil);
+                self.orderFooter.labelCard.textColor = [UIColor orangeColor];
+                [self.orderFooter.labelCard db_startObservingAnimationNotification];
+            }
+            break;
+            
+        case PaymentTypeCash:
+            self.orderFooter.labelCard.textColor = [UIColor blackColor];
+            self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
+            break;
+            
+        case PaymentTypeExtraType:
+            if([OrderManager sharedManager].totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
+                [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
+                [self reloadCard];
+            } else {
+                self.orderFooter.labelCard.textColor = [UIColor blackColor];
+                self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
+            }
+            break;
+            
+    }
+    
+    if([OrderManager sharedManager].totalCount <= [DBMastercardPromo sharedInstance].promoCurrentMugCount && [OrderManager sharedManager].paymentType != PaymentTypeExtraType){
+        if(!self.freeBeverageTipView){
+            self.freeBeverageTipView = self.orderFooter.freeBeverageTipView;
+            self.freeBeverageTipView.userInteractionEnabled = YES;
+            [self.freeBeverageTipView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+                [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
+                [self reloadCard];
+            }]];
+            
+            //[self.viewFooter showFreeBeverageTip];
+        }
+    } else {
+        if(self.freeBeverageTipView){
+            //[self.viewFooter hideFreeBeverageTip];
+            self.freeBeverageTipView = nil;
+        }
+    }
+}
+
+- (IBAction)clickPaymentType:(id)sender {
+    NSString *label = @"";
+    switch ([OrderManager sharedManager].paymentType) {
+        case PaymentTypeNotSet:
+            label = @"not_set";
+            break;
+        case PaymentTypeCash:
+            label = @"cash";
+            break;
+        case PaymentTypeCard:
+            label = @"card";
+            break;
+        case PaymentTypeExtraType:
+            label = @"extra_type";
+            break;
+    }
+    
+    [GANHelper analyzeEvent:@"payment_click" label:label category:ORDER_SCREEN];
+    
+    DBCardsViewController *cardsController = [DBCardsViewController new];
+    cardsController.mode = CardsViewControllerModeChoosePayment;
+    cardsController.delegate = self;
+    cardsController.screen = @"Cards_payment_screen";
+    [self.navigationController pushViewController:cardsController animated:YES];
+}
+
+- (void)cardsControllerDidChoosePaymentItem:(DBCardsViewController *)controller{
+    [self startUpdatingPromoInfo];
 }
 
 
@@ -1120,6 +996,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     } else {
         self.orderFooter.labelComment.text = NSLocalizedString(@"Комментарий", nil);
     }
+}
+
+- (IBAction)clickComment:(id)sender {
+    [GANHelper analyzeEvent:@"comment_screen" category:ORDER_SCREEN];
+    DBCommentViewController *commentController = [DBCommentViewController new];
+    commentController.delegate = self;
+    commentController.comment = [OrderManager sharedManager].comment;
+    [self.navigationController pushViewController:commentController animated:YES];
 }
 
 - (void)commentViewController:(DBCommentViewController *)controller didFinishWithText:(NSString *)text {
@@ -1149,12 +1033,134 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
+
+#pragma mark - Continue
+
+- (void)setupContinueButton {
+    self.continueButton.layer.cornerRadius = 5;
+    [self.continueButton addTarget:self action:@selector(clickContinue:) forControlEvents:UIControlEventTouchUpInside];
+    [self.continueButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
+    self.continueButton.backgroundColor = [UIColor db_defaultColor];
+}
+
+- (void)reloadContinueButton {
+    if (![OrderManager sharedManager].validOrder) {
+        self.continueButton.backgroundColor = [UIColor db_grayColor];
+        self.continueButton.alpha = 0.5;
+    } else {
+        self.continueButton.backgroundColor = [UIColor db_defaultColor];
+        self.continueButton.alpha = 1;
+    }
+}
+
+- (void)clickContinue:(id)sender {
+    if(![OrderManager sharedManager].orderId){
+        [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
+        return;
+    }
+    
+    [GANHelper analyzeEvent:@"order_button_click" label:[OrderManager sharedManager].orderId category:ORDER_SCREEN];
+    
+    if(![OrderManager sharedManager].validOrder){
+        [self startUpdatingPromoInfo];
+        
+        // Nice animation for all error elements
+        void (^animationBlock)(UIView*) = ^void(UIView *targetView){
+            if([targetView isKindOfClass:[UILabel class]]){
+                UILabel *label = (UILabel *)targetView;
+                [UIView animateWithDuration:0.2 animations:^{
+                    label.alpha = 0;
+                    label.textColor = [UIColor redColor];
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.2 animations:^{
+                        label.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.2 animations:^{
+                            label.alpha = 0;
+                        } completion:^(BOOL finished) {
+                            [UIView animateWithDuration:0.2 animations:^{
+                                label.alpha = 1;
+                                label.textColor = [UIColor orangeColor];
+                            }];
+                        }];
+                    }];
+                }];
+            } else {
+                [UIView animateWithDuration:0.2 animations:^{
+                    targetView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    [UIView animateWithDuration:0.2 animations:^{
+                        targetView.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:0.2 animations:^{
+                            targetView.alpha = 0;
+                        } completion:^(BOOL finished) {
+                            [UIView animateWithDuration:0.2 animations:^{
+                                targetView.alpha = 1;
+                            }];
+                        }];
+                    }];
+                }];
+            }
+        };
+        
+        NSNotification *notification = [NSNotification notificationWithName:kDBNewOrderAnimateAllErrorElementsNotification object:animationBlock];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        return;
+    }
+    
+    if([OrderManager sharedManager].paymentType == PaymentTypeCard && !self.currentCard){
+        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
+                                       message:NSLocalizedString(@"Пожалуйста, добавьте новую карту или выберите одну из существующих", nil)
+                             cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
+    } else {
+        [self sendOrder];
+    }
+}
+
+- (void)sendOrder{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [DBServerAPI createNewOrder:^(Order *order) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+        
+        [self reloadTableViewHeight:NO];
+        [self.additionalInfoView hide:^{
+            [self.scrollView layoutIfNeeded];
+        } completion:nil];
+        [GANHelper analyzeEvent:@"order_placed"
+                          label:[NSString stringWithFormat:@"%@, %@", [OrderManager sharedManager].orderId, [IHSecureStore sharedInstance].clientId]
+                       category:ORDER_SCREEN];
+        
+        [self.delegate newOrderViewController:self didFinishOrder:order];
+    } failure:^(NSString *errorTitle, NSString *errorMessage) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        [self startUpdatingPromoInfo];
+        
+        if(!errorTitle) errorTitle = NSLocalizedString(@"Ошибка", nil);
+        [UIAlertView bk_showAlertViewWithTitle:errorTitle
+                                       message:errorMessage
+                             cancelButtonTitle:NSLocalizedString(@"ОК", nil)
+                             otherButtonTitles:nil
+                                       handler:nil];
+        [GANHelper analyzeEvent:@"order_failed" label:errorMessage category:ORDER_SCREEN];
+    }];
+}
+
+
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([viewController class] == [DBOrdersTableViewController class]) {
         [[OrderManager sharedManager] purgePositions];
     }
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
+    return YES;
 }
 
 @end

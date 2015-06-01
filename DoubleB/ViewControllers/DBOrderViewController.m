@@ -152,11 +152,8 @@
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"not_paid"];
     }
     
-    // Update time
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    self.viewFooter.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), [formatter stringFromDate: self.order.createdAt]];
+
+    self.viewFooter.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
 }
 
 - (void)cancelOrder{

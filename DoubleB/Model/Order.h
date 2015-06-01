@@ -29,7 +29,8 @@ typedef NS_ENUM(int16_t, PaymentType) {
 //stored
 @property (nonatomic, strong) NSString *orderId;
 @property (nonatomic, strong) NSNumber *total;
-@property (nonatomic, strong) NSDate *createdAt;
+@property (nonatomic, strong) NSDate *time;
+@property (nonatomic, strong) NSString *timeString;
 @property (nonatomic, strong) NSData *dataItems; //array of JSON-encoded positions
 @property (nonatomic) OrderStatus status;
 @property (nonatomic, strong) Venue *venue;
@@ -37,6 +38,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 
 //not stored
 @property (nonatomic, readonly) NSArray *items;
+@property (nonatomic, readonly) NSString *formattedTimeString;
 
 - (instancetype)init:(BOOL)stored;
 

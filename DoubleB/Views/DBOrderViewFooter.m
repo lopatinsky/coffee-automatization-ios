@@ -51,24 +51,8 @@
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
-    self.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), [formatter stringFromDate: self.order.createdAt]];
+    self.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
     self.labelAddress.text = [self.order.venue address];
-    
-    @weakify(self);
-    self.labelTotal.userInteractionEnabled = YES;
-    [self.labelTotal addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self);
-    }]];
-    
-    self.labelAddress.userInteractionEnabled = YES;
-    [self.labelAddress addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self);
-    }]];
-    
-    self.labelDate.userInteractionEnabled = YES;
-    [self.labelDate addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self);
-    }]];
     
     [self.venueImageView templateImageWithName:@"venue.png"];
 }

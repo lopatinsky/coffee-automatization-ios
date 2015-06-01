@@ -18,7 +18,6 @@
     
     _minOrderSum = [responseDict[@"min_sum"] doubleValue];
     
-    _useTimeSelection = [[responseDict getValueForKey:@"time_picker"] boolValue];
     _minTimeInterval = [[responseDict getValueForKey:@"time_picker_min"] intValue];
     _maxTimeInterval = [[responseDict getValueForKey:@"time_picker_max"] intValue];
     
@@ -31,6 +30,44 @@
     return self;
 }
 
+- (BOOL)useTimePicker{
+    return [_timeSlots count] == 0;
+}
+
+- (NSArray *)timeSlotsNames{
+    NSMutableArray *names = [NSMutableArray new];
+    
+    for(DBTimeSlot *timeSlot in _timeSlots){
+        [names addObject:timeSlot.slotTitle];
+    }
+    
+    return names;
+}
+
+- (NSDate *)minDate{
+    long long seconds = [[NSDate date] timeIntervalSince1970];
+    seconds = seconds - seconds % 60 + _minTimeInterval;
+    
+    return [NSDate dateWithTimeIntervalSince1970:seconds];
+}
+
+- (NSDate *)maxDate{
+    long long seconds = [[NSDate date] timeIntervalSince1970];
+    seconds = seconds - seconds % (60*60*24) + _maxTimeInterval;
+    
+    return [NSDate dateWithTimeIntervalSince1970:seconds];
+}
+
+- (BOOL)onlyTime{
+    return self.maxTimeInterval <= 60*60*24;
+}
+
+- (DBTimeSlot *)timeSlotWithName:(NSString *)name{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"slotTitle == %@", name];
+    
+    return [[_timeSlots filteredArrayUsingPredicate:predicate] firstObject];
+}
+
 #pragma mark - NSCoding methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -41,7 +78,6 @@
         
         _minOrderSum = [[aDecoder decodeObjectForKey:@"_minOrderSum"] doubleValue];
         
-        _useTimeSelection = [[aDecoder decodeObjectForKey:@"_useTimeSelection"] boolValue];
         _minTimeInterval = [[aDecoder decodeObjectForKey:@"_minTimeInterval"] doubleValue];
         _maxTimeInterval = [[aDecoder decodeObjectForKey:@"_maxTimeInterval"] doubleValue];
         
@@ -57,11 +93,10 @@
     
     [aCoder encodeObject:@(_minOrderSum) forKey:@"_minOrderSum"];
     
-    [aCoder encodeObject:@(_useTimeSelection) forKey:@"_useTimeSelection"];
     [aCoder encodeObject:@(_minTimeInterval) forKey:@"_minTimeInterval"];
     [aCoder encodeObject:@(_maxTimeInterval) forKey:@"_maxTimeInterval"];
     
-    [aCoder encodeObject:_timeSlots forKey:@"volume"];
+    [aCoder encodeObject:_timeSlots forKey:@"_timeSlots"];
 }
 
 @end

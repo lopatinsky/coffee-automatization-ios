@@ -13,7 +13,7 @@
 @implementation Order {
     NSArray *_items;
 }
-@dynamic orderId, total, createdAt, dataItems, status, venue, paymentType;
+@dynamic orderId, total, time, timeString, dataItems, status, venue, paymentType;
 
 - (NSArray *)items {
     if (!_items) {
@@ -21,6 +21,20 @@
     }
     
     return _items;
+}
+
+- (NSString *)formattedTimeString{
+    if(self.timeString){
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"dd.MM.yy";
+        
+        return [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:self.time], self.timeString];
+    } else {
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"dd.MM.yy, HH:mm";
+        
+        return [formatter stringFromDate: self.time];
+    }
 }
 
 - (instancetype)init:(BOOL)stored {
@@ -56,7 +70,7 @@
 + (NSArray *)allOrders {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Order"];
     request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:YES],
-            [NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO]];
+            [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO]];
     
     NSArray *orders = [[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil];
     

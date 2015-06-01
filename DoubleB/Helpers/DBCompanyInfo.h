@@ -30,7 +30,7 @@
 + (NSURL *)db_aboutAppUrl;
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId;
-- (BOOL)idDeliveryTypeEnabled:(DeliveryTypeId)typeId;
+- (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId;
 
 @end
 

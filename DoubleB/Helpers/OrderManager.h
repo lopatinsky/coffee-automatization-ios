@@ -32,20 +32,12 @@ extern NSString* const kDBDefaultsPaymentType;
  * Selected type of delivery
  */
 @property (nonatomic, strong) DBDeliveryType *deliveryType;
+
 /**
 * Selected venue for order(if not shipping)
 */
 @property (nonatomic, strong) Venue *venue;
 
-
-/**
- * Selected time
- */
-@property (nonatomic, strong) DBTimeSlot *selectedTimeSlot;
-///**
-//* Selected delivery time
-//*/
-//@property (nonatomic, strong) NSNumber *time;
 
 /**
 * Selected comment
@@ -124,5 +116,24 @@ extern NSString* const kDBDefaultsPaymentType;
 - (void)selectIfPossibleDefaultPaymentType;
 
 + (NSUInteger)totalCountForItems:(NSArray *)items;
+
+
+#pragma mark - Time management
+
+/**
+ * Selected time variant from slots
+ */
+@property (nonatomic, strong) DBTimeSlot *selectedTimeSlot;
+
+/**
+ * Selected delivery time
+ */
+@property (nonatomic, strong) NSDate *selectedTime;
+- (NSInteger)setNewSelectedTime:(NSDate *)date;
+
+/**
+ * Minimum time for new order
+ */
+@property (nonatomic, strong) NSDate *minimumTime;
 
 @end

@@ -22,6 +22,12 @@
 
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
+@interface OrderManager ()
+
+// Time management
+@property (strong, nonatomic) NSTimer *timer;
+@end
+
 @implementation OrderManager
 
 /**
@@ -56,12 +62,23 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         
         self.bonusPositions = [NSMutableArray new];
         
-        _deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
-        _selectedTimeSlot = [_deliveryType.timeSlots firstObject];
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purgePositions) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
+}
+
+- (void)setDeliveryType:(DBDeliveryType *)deliveryType{
+    _deliveryType = deliveryType;
+    
+    if(_deliveryType.useTimePicker){
+        [self launchTimer];
+    } else {
+        [self stopTimer];
+    }
+    
+    [self updateTimeAccordingToDeliveryType];
 }
 
 - (void)setVenue:(Venue *)venue{
@@ -308,6 +325,72 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeCash)]){
         self.paymentType = PaymentTypeCash;
     }
+}
+
+#pragma mark - Time management
+
+- (void)launchTimer{
+    if(!self.timer){
+        long long seconds = [[NSDate date] timeIntervalSince1970];
+        seconds = seconds - seconds % 60 + 60 + 1;
+        self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:60.f
+                                                target:self
+                                                selector:@selector(timerTick:)
+                                                userInfo:nil
+                                                repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+        [self timerTick:self.timer];
+    }
+}
+
+- (void)stopTimer{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
+- (void)updateTimeAccordingToDeliveryType{
+    if(self.deliveryType.useTimePicker){
+        if(!self.selectedTime || [self.selectedTime compare:self.deliveryType.minDate] == NSOrderedAscending){
+            self.selectedTime = self.deliveryType.minDate;
+        }
+        
+        if([self.selectedTime compare:self.deliveryType.maxDate] == NSOrderedDescending){
+            self.selectedTime = self.deliveryType.maxDate;
+        }
+    } else {
+        DBTimeSlot *timeSlot = [self.deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
+        if(!timeSlot)
+            timeSlot = [self.deliveryType.timeSlots firstObject];
+        
+        self.selectedTimeSlot = timeSlot;
+    }
+}
+
+- (void)timerTick:(NSTimer *)timer{
+    self.minimumTime = [[NSDate date] dateByAddingTimeInterval:self.deliveryType.minTimeInterval];
+    [self reloadTime];
+}
+
+- (void)reloadTime{
+    if(!self.selectedTime || [self.selectedTime compare:self.minimumTime] != NSOrderedDescending){
+        self.selectedTime = self.minimumTime;
+    }
+}
+
+- (NSInteger)setNewSelectedTime:(NSDate *)date{
+    NSInteger result;
+    
+    result = [date compare:self.deliveryType.minDate];
+    
+    if(result != NSOrderedAscending){
+        result = [date compare:self.deliveryType.maxDate];
+        if(result != NSOrderedDescending){
+            _selectedTime = date;
+            result = NSOrderedSame;
+        }
+    }
+    
+    return result;
 }
 
 @end

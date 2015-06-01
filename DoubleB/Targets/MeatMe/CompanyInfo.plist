@@ -33,6 +33,6 @@
 	<key>CompanyColor</key>
 	<integer>4287628613</integer>
 	<key>BaseUrl</key>
-	<string>http://meatme.1.doubleb-automation-production.appspot.com/api/</string>
+	<string>http://meatme.test.doubleb-automation-production.appspot.com/api/</string>
 </dict>
 </plist>

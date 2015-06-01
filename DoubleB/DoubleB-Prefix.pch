@@ -35,6 +35,7 @@
 #import "UIColor+Hex.h"
 #import "NSDictionary+NSNullRepresentation.h"
 #import "NSString+LanguageFeature.h"
+#import "UIViewController+AlertView.h"
 #import "EXTScope.h"
 
 #import "UIGestureRecognizer+BlocksKit.h"

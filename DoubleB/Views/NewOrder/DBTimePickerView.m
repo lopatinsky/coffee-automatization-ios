@@ -9,11 +9,15 @@
 #import "DBTimePickerView.h"
 
 @interface DBTimePickerView ()<UIGestureRecognizerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *segmentsViewHolder;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintSegmentsViewHolderHeight;
+@property (nonatomic) double initialSegmentsViewHolderHeight;
+
 @property (weak, nonatomic) id<DBTimePickerViewDelegate> delegate;
-@property (weak, nonatomic) NSString *selectedModeName;
 
 @property (strong, nonatomic) UIImageView *overlay;
 @property (weak, nonatomic) UIView *viewHolder;
+
 @end
 
 @implementation DBTimePickerView
@@ -25,8 +29,12 @@
 }
 
 - (void)awakeFromNib{
+    self.backgroundColor = [UIColor whiteColor];
+    
     self.pickerView.backgroundColor = [UIColor clearColor];
     self.pickerView.delegate = self;
+    
+    self.datePickerView.backgroundColor = [UIColor clearColor];
     
     self.typeSegmentedControl.tintColor = [UIColor db_defaultColor];
     [self.typeSegmentedControl addTarget:self
@@ -49,6 +57,73 @@
     tapGestureRecognizer.delegate = self;
     [self.pickerView addGestureRecognizer:tapGestureRecognizer];
     self.pickerView.userInteractionEnabled = YES;
+    
+    self.initialSegmentsViewHolderHeight = self.constraintSegmentsViewHolderHeight.constant;
+}
+
+- (void)configure{
+    if(_type == DBTimePickerTypeDate || _type == DBTimePickerTypeTime){
+        self.datePickerView.hidden = NO;
+        self.pickerView.hidden = YES;
+    }
+    
+    if(_type == DBTimePickerTypeItems){
+        self.datePickerView.hidden = YES;
+        self.pickerView.hidden = NO;
+        
+        [self.pickerView reloadAllComponents];
+    }
+    
+    if(_segments.count < 2){
+        self.constraintSegmentsViewHolderHeight.constant = 0;
+    } else {
+        self.constraintSegmentsViewHolderHeight.constant = self.initialSegmentsViewHolderHeight;
+    }
+    
+    CGRect rect = self.frame;
+    rect.size.height = self.constraintSegmentsViewHolderHeight.constant + self.datePickerView.frame.size.height;
+    self.frame = rect;
+}
+
+- (void)setType:(DBTimePickerType)type{
+    _type = type;
+}
+
+- (void)setSegments:(NSArray *)segments{
+    _segments = segments;
+    
+    [self.typeSegmentedControl removeAllSegments];
+    for(int i = 0; i < [_segments count]; i++){
+        [self.typeSegmentedControl insertSegmentWithTitle:_segments[i] atIndex:i animated:NO];
+    }
+}
+
+- (void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex{
+    _selectedSegmentIndex = selectedSegmentIndex;
+    if(selectedSegmentIndex < 0 || selectedSegmentIndex >= self.typeSegmentedControl.numberOfSegments){
+        _selectedSegmentIndex = 0;
+    }
+    
+    self.typeSegmentedControl.selectedSegmentIndex = _selectedSegmentIndex;
+}
+
+- (void)setItems:(NSArray *)items{
+    _items = items;
+    
+    [self.pickerView reloadAllComponents];
+}
+
+- (void)setSelectedItem:(NSInteger)selectedItem{
+    _selectedItem = selectedItem;
+    if(_selectedItem < 0 || _selectedItem  >=[self.pickerView numberOfRowsInComponent:0]){
+        _selectedItem = 0;
+    }
+    [self.pickerView selectRow:_selectedItem inComponent:0 animated:YES];
+}
+
+- (void)setSelectedDate:(NSDate *)selectedDate{
+    _selectedDate = selectedDate;
+    self.datePickerView.date = _selectedDate;
 }
 
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender{
@@ -57,35 +132,14 @@
     }
 }
 
-- (void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex{
-    _selectedSegmentIndex = selectedSegmentIndex;
-    if(selectedSegmentIndex >= 0 && selectedSegmentIndex < self.typeSegmentedControl.numberOfSegments){
-        self.typeSegmentedControl.selectedSegmentIndex = _selectedSegmentIndex;
-    }
-}
-
-- (void)setSelectedRow:(NSInteger)selectedRow{
-    _selectedRow = selectedRow;
-    if(selectedRow >= 0 && selectedRow < [self.pickerView numberOfRowsInComponent:0]){
-        [self.pickerView selectRow:_selectedRow inComponent:0 animated:YES];
-    }
+- (IBAction)datePickerValueChanged:(id)sender {
+    self.selectedDate = self.datePickerView.date;
 }
 
 - (void)showOnView:(UIView *)view{
     self.viewHolder = view;
     
-    NSInteger numberOfSegments = [self.delegate db_numberOfSegmentsInTimePickerView:self];
-    
-    [self.typeSegmentedControl removeAllSegments];
-    for(int i = 0; i < numberOfSegments; i++){
-        [self.typeSegmentedControl insertSegmentWithTitle:[self.delegate db_timePickerView:self titleForSegmentAtIndex:i] atIndex:i animated:NO];
-    }
-    
-    [self.pickerView reloadAllComponents];
-    
-    [self setSelectedSegmentIndex:self.selectedSegmentIndex];
-    [self setSelectedRow:self.selectedRow];
-    
+    [self configure];
     [self show];
 }
 
@@ -94,6 +148,16 @@
 }
 
 - (void)hideInternal{
+    if(_type == DBTimePickerTypeItems){
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
+            [self.delegate db_timePickerView:self didSelectRowAtIndex:self.selectedItem];
+        }
+    } else {
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
+            [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
+        }
+    }
+    
     if([self.delegate respondsToSelector:@selector(db_shouldHideTimePickerView)]){
         if([self.delegate db_shouldHideTimePickerView]){
             [self dismiss];
@@ -146,25 +210,17 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if([self.delegate respondsToSelector:@selector(db_numberOfRowsInTimePickerView:)]){
-        return [self.delegate db_numberOfRowsInTimePickerView:self];
-    }
-    return 0;
+    return [_items count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if([self.delegate respondsToSelector:@selector(db_timePickerView:titleForRowAtIndex:)]){
-        return [self.delegate db_timePickerView:self titleForRowAtIndex:row];
-    }
-    return 0;
+    return _items[row];
 }
 
 #pragma mark - UIPickerViewDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    if([self.delegate respondsToSelector:@selector(db_timePickerViewDidSelectRowAtIndex:)]){
-        return [self.delegate db_timePickerViewDidSelectRowAtIndex:row];
-    }
+    self.selectedItem = row;
 }
 
 #pragma mark - UIGestureRecognizerDelegate

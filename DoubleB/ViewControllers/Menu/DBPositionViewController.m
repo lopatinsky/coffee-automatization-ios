@@ -16,6 +16,7 @@
 #import "DBPositionModifierPicker.h"
 #import "Compatibility.h"
 
+#import "UIView+RoundedCorners.h"
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
 
@@ -97,8 +98,7 @@
     }
     
     if(self.mode == DBPositionViewControllerModeMenuPosition){
-        self.priceLabel.layer.cornerRadius = self.priceLabel.frame.size.height / 2;
-        self.priceLabel.layer.masksToBounds = YES;
+        [self.priceLabel setRoundedCorners];
         self.priceLabel.backgroundColor = [UIColor db_defaultColor];
         self.priceLabel.textColor = [UIColor whiteColor];
         

@@ -139,22 +139,17 @@
     Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
     if(sameOrder){
         sameOrder.status = [orderDictionary[@"status"] intValue];
-        sameOrder.createdAt = [NSDate dateWithTimeIntervalSince1970:[orderDictionary[@"delivery_time"] intValue]];
+//        sameOrder.createdAt = [NSDate dateWithTimeIntervalSince1970:[orderDictionary[@"delivery_time"] intValue]];
     } else {
         Order *ord = [[Order alloc] init:YES];
         ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
         ord.total = orderDictionary[@"total"];
-        ord.createdAt = [[NSDate alloc] initWithTimeIntervalSince1970:[orderDictionary[@"delivery_time"] intValue]];
+//        ord.createdAt = [[NSDate alloc] initWithTimeIntervalSince1970:[orderDictionary[@"delivery_time"] intValue]];
         
         NSMutableArray *items = [[NSMutableArray alloc] init];
         for (NSDictionary *itemDict in orderDictionary[@"items"]) {
-            /*[items addObject:@{@"item_id": itemDict[@"id"],
-                               @"quantity": itemDict[@"quantity"],
-                               @"name": itemDict[@"title"],
-                               @"price": itemDict[@"price"]}];*/
             [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
         }
-        //ord.dataItems = [NSJSONSerialization dataWithJSONObject:items options:0 error:nil];
         ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
         ord.paymentType = [orderDictionary[@"payment_type_id"] intValue] + 1;
         ord.status = [orderDictionary[@"status"] intValue];
@@ -194,7 +189,7 @@
                 order.status = (OrderStatus)[notification.userInfo[@"order_status"] intValue];
                 
                 long long timestamp = [notification.userInfo[@"timestamp"] longLongValue];
-                order.createdAt = [NSDate dateWithTimeIntervalSince1970:timestamp];
+//                order.createdAt = [NSDate dateWithTimeIntervalSince1970:timestamp];
                 
                 [[CoreDataHelper sharedHelper] save];
                 
@@ -313,7 +308,7 @@
     labelAddress.textColor = textColor;
     
     labelOrder.attributedText = orderString;
-    labelDate.text = [self.dateFormatter stringFromDate:order.createdAt];
+    labelDate.text = order.formattedTimeString;
     labelAddress.text = order.venue.address;
     labelTotal.text = [NSString stringWithFormat:@"%ld %@", (long)order.total.integerValue, [Compatibility currencySymbol]];
     

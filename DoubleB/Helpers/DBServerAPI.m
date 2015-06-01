@@ -185,13 +185,7 @@
     }
     
     // Time
-    if([OrderManager sharedManager].selectedTimeSlot){
-        NSData *timeSlotData = [NSJSONSerialization dataWithJSONObject:[OrderManager sharedManager].selectedTimeSlot.slotDict
-                                                               options:NSJSONWritingPrettyPrinted
-                                                                 error:nil];
-        NSString *timeSlotString = [[NSString alloc] initWithData:timeSlotData encoding:NSUTF8StringEncoding];
-        params[@"delivery_slot"] = timeSlotString;
-    }
+    [self assembleTimeIntoParams:params];
     
     params[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
     
@@ -253,9 +247,11 @@
     order[@"gifts"] = [DBServerAPI assembleBonusItems];
     order[@"client"] = [DBServerAPI assembleClientInfo];
     order[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
-    order[@"delivery_slot"] = [OrderManager sharedManager].selectedTimeSlot.slotDict;
     order[@"payment"] = [DBServerAPI assemblyPaymentInfo];
     order[@"comment"] = [OrderManager sharedManager].comment ?: @"";
+    
+    // Time
+    [self assembleTimeIntoParams:order];
     
     static BOOL hasOrderErrorInSession = NO;
     order[@"after_error"] = @(hasOrderErrorInSession);
@@ -281,11 +277,27 @@
                                  Order *ord = [[Order alloc] init:YES];
                                  ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
                                  ord.total = @([[OrderManager sharedManager] totalPrice]);
-//                                 ord.createdAt = [[NSDate alloc] initWithTimeIntervalSinceNow:[OrderManager sharedManager].time.doubleValue*60];
                                  ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
                                  ord.paymentType = [[OrderManager sharedManager] paymentType];
                                  ord.status = OrderStatusNew;
                                  ord.venue = [OrderManager sharedManager].venue;
+                                 
+                                 // Time
+                                 if([OrderManager sharedManager].deliveryType.useTimePicker){
+                                     ord.time = [OrderManager sharedManager].selectedTime;
+                                 } else {
+                                     NSString *dateString = [responseObject getValueForKey:@"delivery_time"];
+                                     NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
+                                     
+                                     NSDateFormatter *formatter = [NSDateFormatter new];
+                                     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+                                     NSDate *date = [formatter dateFromString:dateString];
+                                     ord.time = date;
+                                     
+                                     if(timeSlot){
+                                         ord.timeString = timeSlot;
+                                     }
+                                 }
                                  
                                  [[CoreDataHelper sharedHelper] save];
                                  if(success)
@@ -467,6 +479,20 @@
     payment[@"wallet_payment"] = [DBPromoManager sharedManager].walletActiveForOrder ? @([DBPromoManager sharedManager].walletPointsAvailableForOrder) : @(0);
     
     return payment;
+}
+
++ (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
+    if([OrderManager sharedManager].deliveryType.useTimePicker){
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        params[@"time_picker_value"] = [formatter stringFromDate:[OrderManager sharedManager].selectedTime];
+    } else {
+        params[@"delivery_slot_id"] = @([[OrderManager sharedManager].selectedTimeSlot.slotId integerValue]);
+        
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        params[@"time_picker_value"] = [formatter stringFromDate:[NSDate date]];
+    }
 }
             
             

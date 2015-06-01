@@ -11,28 +11,38 @@
 
 @class DBTimePickerView;
 
-@protocol DBTimePickerViewDelegate <NSObject>
-- (NSInteger)db_numberOfSegmentsInTimePickerView:(DBTimePickerView *)view;
-- (NSString *)db_timePickerView:(DBTimePickerView *)view titleForSegmentAtIndex:(NSUInteger)index;
+typedef NS_ENUM(NSUInteger, DBTimePickerType) {
+    DBTimePickerTypeItems = 0,
+    DBTimePickerTypeDate,
+    DBTimePickerTypeTime
+};
 
+@protocol DBTimePickerViewDelegate <NSObject>
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectSegmentAtIndex:(NSInteger)index;
 
-- (NSInteger)db_numberOfRowsInTimePickerView:(DBTimePickerView *)view;
-- (NSString *)db_timePickerView:(DBTimePickerView *)view titleForRowAtIndex:(NSUInteger)index;
-
-- (void)db_timePickerViewDidSelectRowAtIndex:(NSInteger)index;
+- (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index;
+- (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date;
 
 - (BOOL)db_shouldHideTimePickerView;
 @end
 
 @interface DBTimePickerView : UIView
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *typeSegmentedControl;
 
+@property (nonatomic) DBTimePickerType type;
+
+@property (strong, nonatomic) NSArray *segments;
+@property (strong, nonatomic) NSArray *items;
+
 @property (nonatomic) NSInteger selectedSegmentIndex;
-@property (nonatomic) NSInteger selectedRow;
+@property (nonatomic) NSInteger selectedItem;
+@property (strong, nonatomic) NSDate *selectedDate;
 
 - (instancetype)initWithDelegate:(id<DBTimePickerViewDelegate>)delegate;
+
+- (void)configure;
 
 - (void)showOnView:(UIView *)view;
 - (void)dismiss;
