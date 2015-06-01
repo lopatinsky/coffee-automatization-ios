@@ -71,13 +71,17 @@
                 [bonusPositions addObject:bonusPosition];
             }
         }
+        [bonusPositions sortUsingComparator:^NSComparisonResult(DBMenuBonusPosition *obj1, DBMenuBonusPosition *obj2) {
+            return [@(obj1.pointsPrice) compare:@(obj2.pointsPrice)];
+        }];
         _positionsAvailableAsBonuses = bonusPositions;
+        
         
         _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
         
         // Personal wallet promo
         NSDictionary *personalWalletPromo = response[@"wallet"];
-        _walletEnabled = personalWalletPromo[@"enabled"];
+        _walletEnabled = [personalWalletPromo[@"enabled"] boolValue];
         _walletTextDescription = personalWalletPromo[@"text"];
         
         [self synchronize];

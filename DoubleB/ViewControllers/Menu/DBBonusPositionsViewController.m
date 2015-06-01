@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *promoBalanceLabel;
 @property (weak, nonatomic) IBOutlet UIView *promoDescriptionSeparatorView;
 
-
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic) BOOL withImages;
@@ -59,7 +58,7 @@
 - (void)reloadBalance{
     double totalPoints = [self totalPoints];
     
-    self.promoBalanceLabel.text = [NSString stringWithFormat:@"%.0f %@", totalPoints, [NSString db_localizedFormOfWordBall:totalPoints]];
+    self.promoBalanceLabel.text = [NSString stringWithFormat:@"%.0f", totalPoints];
 }
 
 
@@ -88,8 +87,15 @@
         }
     }
     
-    DBMenuPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
+    DBMenuBonusPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
     [cell configureWithPosition:position];
+    
+    if(position.pointsPrice <= [self totalPoints]){
+        [cell enable];
+    } else {
+        [cell disable];
+    }
+    
     cell.delegate = self;
     
     return cell;

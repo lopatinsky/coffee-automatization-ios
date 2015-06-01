@@ -6,23 +6,23 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DBOrderItemInactivityView.h"
+#import "DBTableItemInactivityView.h"
 
-@interface DBOrderItemInactivityView ()
+@interface DBTableItemInactivityView ()
 @property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
 
 @end
 
-@implementation DBOrderItemInactivityView
+@implementation DBTableItemInactivityView
 
 - (instancetype)init{
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBOrderItemInactivityView" owner:self options:nil] firstObject];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBTableItemInactivityView" owner:self options:nil] firstObject];
     
     return self;
 }
 
 - (void)awakeFromNib{
-    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
+    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.8];
     self.errorMessageLabel.textColor = [UIColor orangeColor];
 }
 
@@ -31,6 +31,8 @@
     
     if(error){
         self.errorMessageLabel.text = error;
+    } else {
+        self.errorMessageLabel.text = @"";
     }
 }
 

@@ -42,4 +42,7 @@ typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
 
+- (void)disable;
+- (void)enable;
+
 @end

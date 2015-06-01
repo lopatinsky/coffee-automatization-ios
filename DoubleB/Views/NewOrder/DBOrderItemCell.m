@@ -13,7 +13,7 @@
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
-#import "DBOrderItemInactivityView.h"
+#import "DBTableItemInactivityView.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -31,7 +31,7 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
-@property (strong, nonatomic) DBOrderItemInactivityView *inactivityView;
+@property (strong, nonatomic) DBTableItemInactivityView *inactivityView;
 @end
 
 @implementation DBOrderItemCell
@@ -71,7 +71,7 @@
     
     [self addEditButtons];
     
-    self.inactivityView = [DBOrderItemInactivityView new];
+    self.inactivityView = [DBTableItemInactivityView new];
     self.inactivityView.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.7f];
     [self.orderCellContentView addSubview:self.inactivityView];
     self.inactivityView.translatesAutoresizingMaskIntoConstraints = NO;

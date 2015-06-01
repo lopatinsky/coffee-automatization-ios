@@ -22,11 +22,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="B7N-SC-KBh">
-                    <rect key="frame" x="0.0" y="85" width="320" height="483"/>
+                    <rect key="frame" x="0.0" y="95" width="320" height="473"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pO-ky-zU7">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Добавляй позиции в заказ, используя накопленные баллы" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xWn-za-VdP">
                             <rect key="frame" x="15" y="8" width="297" height="36"/>
@@ -35,21 +35,21 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Баланс:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bq-QP-L8M">
-                            <rect key="frame" x="15" y="54" width="59" height="18"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                            <rect key="frame" x="15" y="57" width="78" height="24"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H7A-2N-JMJ">
-                            <rect key="frame" x="0.0" y="79" width="320" height="1"/>
+                            <rect key="frame" x="0.0" y="89" width="320" height="1"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="Kyv-WV-dyG"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 баллов" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQa-vZ-HGV">
-                            <rect key="frame" x="79" y="52" width="75" height="21"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                            <rect key="frame" x="98" y="55" width="97" height="27"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -60,9 +60,10 @@
                         <constraint firstAttribute="trailing" secondItem="H7A-2N-JMJ" secondAttribute="trailing" id="6MJ-i0-s1f"/>
                         <constraint firstItem="9bq-QP-L8M" firstAttribute="centerY" secondItem="gQa-vZ-HGV" secondAttribute="centerY" constant="1" id="ALq-ZU-kTK"/>
                         <constraint firstAttribute="bottom" secondItem="H7A-2N-JMJ" secondAttribute="bottom" id="HLV-Sz-m0Y"/>
-                        <constraint firstAttribute="height" constant="80" id="ITg-AY-VrP"/>
+                        <constraint firstAttribute="height" constant="90" id="ITg-AY-VrP"/>
+                        <constraint firstItem="H7A-2N-JMJ" firstAttribute="top" secondItem="9bq-QP-L8M" secondAttribute="bottom" constant="8" id="MFL-qN-0Cz"/>
                         <constraint firstItem="gQa-vZ-HGV" firstAttribute="leading" secondItem="9bq-QP-L8M" secondAttribute="trailing" constant="5" id="MUn-3d-pIJ"/>
-                        <constraint firstItem="9bq-QP-L8M" firstAttribute="top" secondItem="xWn-za-VdP" secondAttribute="bottom" constant="10" id="PdH-X8-U7Z"/>
+                        <constraint firstItem="9bq-QP-L8M" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xWn-za-VdP" secondAttribute="bottom" constant="10" id="PdH-X8-U7Z"/>
                         <constraint firstAttribute="trailing" secondItem="xWn-za-VdP" secondAttribute="trailing" constant="8" id="WiC-4n-shF"/>
                         <constraint firstItem="9bq-QP-L8M" firstAttribute="leading" secondItem="xWn-za-VdP" secondAttribute="leading" id="YzZ-C6-lyl"/>
                         <constraint firstItem="H7A-2N-JMJ" firstAttribute="leading" secondItem="8pO-ky-zU7" secondAttribute="leading" id="ea2-LJ-hxO"/>

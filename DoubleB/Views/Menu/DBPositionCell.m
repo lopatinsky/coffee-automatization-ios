@@ -10,12 +10,13 @@
 #import "DBMenuPosition.h"
 #import "DBMenuBonusPosition.h"
 #import "Compatibility.h"
+#import "DBTableItemInactivityView.h"
 
 #import "UIView+RoundedCorners.h"
 #import "UIImageView+WebCache.h"
 
 @interface DBPositionCell()
-
+@property (strong, nonatomic) DBTableItemInactivityView *inactivityView;
 @end
 
 @implementation DBPositionCell
@@ -52,6 +53,8 @@
     if(_appearanceType == DBPositionCellAppearanceTypeFull){
         [self.positionImageView db_showDefaultImage];
     }
+    
+    self.inactivityView = [DBTableItemInactivityView new];
 }
 
 - (void)configureWithPosition:(DBMenuPosition *)position{
@@ -125,6 +128,17 @@
                      completion:^(BOOL finished) {
                          [view removeFromSuperview];
                      }];
+}
+
+- (void)disable{
+    self.inactivityView.frame = self.contentView.bounds;
+    [self.inactivityView setErrors:nil];
+    
+    [self.contentView addSubview:self.inactivityView];
+}
+
+- (void)enable{
+    [self.inactivityView removeFromSuperview];
 }
 
 @end

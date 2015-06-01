@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBOrderItemInactivityView : UIView
+@interface DBTableItemInactivityView : UIView
 - (void)setErrors:(NSArray *)errors;
 @end
