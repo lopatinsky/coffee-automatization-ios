@@ -137,14 +137,29 @@
     NSString *newOrderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderId == %@", newOrderId];
     Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
+    
+    // Time
+    NSString *dateString = [orderDictionary getValueForKey:@"delivery_time_str"];
+    NSString *timeSlot = [orderDictionary[@"delivery_slot"] getValueForKey:@"name"];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = [formatter dateFromString:dateString];
+    
     if(sameOrder){
         sameOrder.status = [orderDictionary[@"status"] intValue];
-//        sameOrder.createdAt = [NSDate dateWithTimeIntervalSince1970:[orderDictionary[@"delivery_time"] intValue]];
+
+        sameOrder.time = date;
+//        if(timeSlot)
+//            sameOrder.timeString = timeSlot;
     } else {
         Order *ord = [[Order alloc] init:YES];
         ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
         ord.total = orderDictionary[@"total"];
-//        ord.createdAt = [[NSDate alloc] initWithTimeIntervalSince1970:[orderDictionary[@"delivery_time"] intValue]];
+
+        ord.time = date;
+//        if(timeSlot)
+//            ord.timeString = timeSlot;
         
         NSMutableArray *items = [[NSMutableArray alloc] init];
         for (NSDictionary *itemDict in orderDictionary[@"items"]) {

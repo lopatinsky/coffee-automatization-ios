@@ -319,7 +319,7 @@
 		7E3DAC0E1B06153E00A7FFD1 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306B19FF72A8001B4B6D /* menu_icon.png */; };
 		7E3DAC0F1B06153E00A7FFD1 /* DBPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559541AC9A94600A166B9 /* DBPositionCell.xib */; };
 		7E3DAC101B06153E00A7FFD1 /* venues_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307A19FF72E0001B4B6D /* venues_icon_grey.png */; };
-		7E3DAC111B06153E00A7FFD1 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */; };
+		7E3DAC111B06153E00A7FFD1 /* DBSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */; };
 		7E3DAC121B06153E00A7FFD1 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		7E3DAC131B06153E00A7FFD1 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		7E3DAC141B06153E00A7FFD1 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
@@ -649,7 +649,7 @@
 		CB1432261B0E371A00DD50C7 /* DBPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559541AC9A94600A166B9 /* DBPositionCell.xib */; };
 		CB1432271B0E371A00DD50C7 /* venues_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307A19FF72E0001B4B6D /* venues_icon_grey.png */; };
 		CB1432281B0E371A00DD50C7 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
-		CB1432291B0E371A00DD50C7 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */; };
+		CB1432291B0E371A00DD50C7 /* DBSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */; };
 		CB14322A1B0E371A00DD50C7 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		CB14322B1B0E371A00DD50C7 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		CB14322C1B0E371A00DD50C7 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
@@ -967,7 +967,7 @@
 		CB14338A1B0F1BBB00DD50C7 /* DBPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559541AC9A94600A166B9 /* DBPositionCell.xib */; };
 		CB14338B1B0F1BBB00DD50C7 /* venues_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307A19FF72E0001B4B6D /* venues_icon_grey.png */; };
 		CB14338C1B0F1BBB00DD50C7 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
-		CB14338D1B0F1BBB00DD50C7 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */; };
+		CB14338D1B0F1BBB00DD50C7 /* DBSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */; };
 		CB14338E1B0F1BBB00DD50C7 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		CB14338F1B0F1BBB00DD50C7 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		CB1433901B0F1BBB00DD50C7 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
@@ -1262,7 +1262,7 @@
 		CB1AF88B1AE10E6900FA3224 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306B19FF72A8001B4B6D /* menu_icon.png */; };
 		CB1AF88C1AE10E6900FA3224 /* DBPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559541AC9A94600A166B9 /* DBPositionCell.xib */; };
 		CB1AF88D1AE10E6900FA3224 /* venues_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307A19FF72E0001B4B6D /* venues_icon_grey.png */; };
-		CB1AF88E1AE10E6900FA3224 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */; };
+		CB1AF88E1AE10E6900FA3224 /* DBSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */; };
 		CB1AF88F1AE10E6900FA3224 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		CB1AF8901AE10E6900FA3224 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		CB1AF8911AE10E6900FA3224 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
@@ -1571,7 +1571,7 @@
 		CB517C6B1AEFB6B500A50F5C /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306B19FF72A8001B4B6D /* menu_icon.png */; };
 		CB517C6C1AEFB6B500A50F5C /* DBPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE559541AC9A94600A166B9 /* DBPositionCell.xib */; };
 		CB517C6D1AEFB6B500A50F5C /* venues_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307A19FF72E0001B4B6D /* venues_icon_grey.png */; };
-		CB517C6E1AEFB6B500A50F5C /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */; };
+		CB517C6E1AEFB6B500A50F5C /* DBSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */; };
 		CB517C6F1AEFB6B500A50F5C /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		CB517C701AEFB6B500A50F5C /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		CB517C711AEFB6B500A50F5C /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
@@ -1804,7 +1804,7 @@
 		CB60C19D1AC5AD2600D5E962 /* clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770422196A18640010D1B1 /* clock@2x.png */; };
 		CB60C19E1AC5AD2600D5E962 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306B19FF72A8001B4B6D /* menu_icon.png */; };
 		CB60C19F1AC5AD2600D5E962 /* venues_icon_grey.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307A19FF72E0001B4B6D /* venues_icon_grey.png */; };
-		CB60C1A01AC5AD2600D5E962 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */; };
+		CB60C1A01AC5AD2600D5E962 /* DBSettingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */; };
 		CB60C1A11AC5AD2600D5E962 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		CB60C1A21AC5AD2600D5E962 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		CB60C1A31AC5AD2600D5E962 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
@@ -1846,6 +1846,26 @@
 		CB9105031B1C7DB000506235 /* UIView+RoundedCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9104FF1B1C7DA900506235 /* UIView+RoundedCorners.m */; };
 		CB9105041B1C7DB100506235 /* UIView+RoundedCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9104FF1B1C7DA900506235 /* UIView+RoundedCorners.m */; };
 		CB9105051B1C7DB100506235 /* UIView+RoundedCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9104FF1B1C7DA900506235 /* UIView+RoundedCorners.m */; };
+		CB91050A1B1CAA4F00506235 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9105061B1CAA4F00506235 /* launch_480.png */; };
+		CB91050B1B1CAA4F00506235 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9105071B1CAA4F00506235 /* launch_568.png */; };
+		CB91050C1B1CAA4F00506235 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9105081B1CAA4F00506235 /* launch_667.png */; };
+		CB91050D1B1CAA4F00506235 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9105091B1CAA4F00506235 /* launch_736.png */; };
+		CB9105121B1CAA6100506235 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB91050E1B1CAA6100506235 /* launch_480.png */; };
+		CB9105131B1CAA6100506235 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB91050F1B1CAA6100506235 /* launch_568.png */; };
+		CB9105141B1CAA6100506235 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9105101B1CAA6100506235 /* launch_667.png */; };
+		CB9105151B1CAA6100506235 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB9105111B1CAA6100506235 /* launch_736.png */; };
+		CB9782891B1DE28D000B5625 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
+		CB97828A1B1DE5EB000B5625 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
+		CB97828B1B1DE5EC000B5625 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
+		CB97828C1B1DE5ED000B5625 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
+		CB97828D1B1DE5ED000B5625 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
+		CB97828E1B1DE5ED000B5625 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
+		CB9782911B1DE9A6000B5625 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
+		CB9782921B1DF415000B5625 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
+		CB9782931B1DF415000B5625 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
+		CB9782941B1DF416000B5625 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
+		CB9782951B1DF416000B5625 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
+		CB9782961B1DF417000B5625 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
 		CBB042DA1B0CAE2B00901173 /* gift_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B81B0C97660032B59B /* gift_icon@2x.png */; };
 		CBB042DB1B0CAE2C00901173 /* gift_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B81B0C97660032B59B /* gift_icon@2x.png */; };
 		CBB042DC1B0CAE2C00901173 /* gift_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B81B0C97660032B59B /* gift_icon@2x.png */; };
@@ -2241,7 +2261,7 @@
 		CB6EB72319E7DC0E0050DF90 /* DBProfileCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBProfileCell.m; sourceTree = "<group>"; };
 		CB6EB72419E7DC0E0050DF90 /* OrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		CB6EB72619E7DC0E0050DF90 /* ProfileCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileCell.xib; sourceTree = "<group>"; };
-		CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBSettingsCell.xib; sourceTree = "<group>"; };
 		CB6EB72819E7DC0E0050DF90 /* DBVenueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBVenueCell.xib; sourceTree = "<group>"; };
 		CB6EB72919E7DC0E0050DF90 /* DBMastercardAdvertPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMastercardAdvertPopup.h; sourceTree = "<group>"; };
 		CB6EB72A19E7DC0E0050DF90 /* DBMastercardAdvertPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMastercardAdvertPopup.m; sourceTree = "<group>"; };
@@ -2308,6 +2328,18 @@
 		CB9104F71B1B187F00506235 /* DoubleB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DoubleB.xcdatamodel; sourceTree = "<group>"; };
 		CB9104FE1B1C7DA900506235 /* UIView+RoundedCorners.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedCorners.h"; sourceTree = "<group>"; };
 		CB9104FF1B1C7DA900506235 /* UIView+RoundedCorners.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedCorners.m"; sourceTree = "<group>"; };
+		CB9105061B1CAA4F00506235 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
+		CB9105071B1CAA4F00506235 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
+		CB9105081B1CAA4F00506235 /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
+		CB9105091B1CAA4F00506235 /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
+		CB91050E1B1CAA6100506235 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
+		CB91050F1B1CAA6100506235 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
+		CB9105101B1CAA6100506235 /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
+		CB9105111B1CAA6100506235 /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
+		CB9782871B1DE28D000B5625 /* DBDocumentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDocumentsViewController.h; sourceTree = "<group>"; };
+		CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDocumentsViewController.m; sourceTree = "<group>"; };
+		CB97828F1B1DE9A6000B5625 /* DBSettingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBSettingsCell.h; sourceTree = "<group>"; };
+		CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSettingsCell.m; sourceTree = "<group>"; };
 		CBA24A421A642F2700103699 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
 		CBA24A441A64300600103699 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		CBA24A461A6570E500103699 /* DBTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTabBarController.h; sourceTree = "<group>"; };
@@ -2754,6 +2786,8 @@
 				7E00C3E6198B8D37005A0889 /* DBOrdersTableViewController.m */,
 				7E00C3E8198B988E005A0889 /* DBSettingsTableViewController.h */,
 				7E00C3E9198B988E005A0889 /* DBSettingsTableViewController.m */,
+				CB9782871B1DE28D000B5625 /* DBDocumentsViewController.h */,
+				CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */,
 				7E00C3EB198B9D16005A0889 /* DBProfileViewController.h */,
 				7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */,
 				7EFF2736198A8DC40095ADED /* DBNewOrderViewController.h */,
@@ -3121,7 +3155,9 @@
 				CB6EB72319E7DC0E0050DF90 /* DBProfileCell.m */,
 				CB6EB72619E7DC0E0050DF90 /* ProfileCell.xib */,
 				CB6EB72419E7DC0E0050DF90 /* OrderCell.xib */,
-				CB6EB72719E7DC0E0050DF90 /* SettingCell.xib */,
+				CB97828F1B1DE9A6000B5625 /* DBSettingsCell.h */,
+				CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */,
+				CB6EB72719E7DC0E0050DF90 /* DBSettingsCell.xib */,
 				CB6EB72819E7DC0E0050DF90 /* DBVenueCell.xib */,
 				CBE442DC19EC2009008DFA58 /* DBVenueCell.h */,
 				CBE442DD19EC2009008DFA58 /* DBVenueCell.m */,
@@ -3260,6 +3296,10 @@
 		CBB719161B14AC8100C47A33 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB91050E1B1CAA6100506235 /* launch_480.png */,
+				CB91050F1B1CAA6100506235 /* launch_568.png */,
+				CB9105101B1CAA6100506235 /* launch_667.png */,
+				CB9105111B1CAA6100506235 /* launch_736.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3287,6 +3327,10 @@
 		CBB719231B14AC9300C47A33 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB9105061B1CAA4F00506235 /* launch_480.png */,
+				CB9105071B1CAA4F00506235 /* launch_568.png */,
+				CB9105081B1CAA4F00506235 /* launch_667.png */,
+				CB9105091B1CAA4F00506235 /* launch_736.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -3744,6 +3788,7 @@
 				7E3DAB7E1B06153E00A7FFD1 /* venues_icon_grey@2x.png in Resources */,
 				7E3DAB7F1B06153E00A7FFD1 /* mug.png in Resources */,
 				CBB7191D1B14AC8100C47A33 /* CompanyInfo.plist in Resources */,
+				CB9105141B1CAA6100506235 /* launch_667.png in Resources */,
 				7E3DAB801B06153E00A7FFD1 /* modifier_plus_icon@2x.png in Resources */,
 				7E3DAB811B06153E00A7FFD1 /* DBDiscountAdvertView.xib in Resources */,
 				7E3DAB821B06153E00A7FFD1 /* arrow.png in Resources */,
@@ -3765,6 +3810,7 @@
 				7E3DAB921B06153E00A7FFD1 /* maestro_icon@3x.png in Resources */,
 				7E3DAB931B06153E00A7FFD1 /* mcard_logo.png in Resources */,
 				7E3DAB941B06153E00A7FFD1 /* modifier_plus_icon@3x.png in Resources */,
+				CB9105121B1CAA6100506235 /* launch_480.png in Resources */,
 				7E3DAB951B06153E00A7FFD1 /* agreement.html in Resources */,
 				7E3DAB961B06153E00A7FFD1 /* about.png in Resources */,
 				7E3DAB971B06153E00A7FFD1 /* PersonalAccountViewController.xib in Resources */,
@@ -3871,6 +3917,7 @@
 				7E3DABF81B06153E00A7FFD1 /* DBOrderViewController.xib in Resources */,
 				7E3DABF91B06153E00A7FFD1 /* venue_gray.png in Resources */,
 				7E3DABFA1B06153E00A7FFD1 /* paid@2x.png in Resources */,
+				CB9105131B1CAA6100506235 /* launch_568.png in Resources */,
 				7E3DABFB1B06153E00A7FFD1 /* tick_gray@2x.png in Resources */,
 				7E3DABFC1B06153E00A7FFD1 /* call@2x.png in Resources */,
 				7E3DABFD1B06153E00A7FFD1 /* arrow@2x.png in Resources */,
@@ -3887,13 +3934,14 @@
 				7E3DAC081B06153E00A7FFD1 /* email@2x.png in Resources */,
 				7E3DAC091B06153E00A7FFD1 /* about_promo.png in Resources */,
 				7E3DAC0A1B06153E00A7FFD1 /* mug_orders.png in Resources */,
+				CB9105151B1CAA6100506235 /* launch_736.png in Resources */,
 				7E3DAC0B1B06153E00A7FFD1 /* profile@2x.png in Resources */,
 				7E3DAC0C1B06153E00A7FFD1 /* settings.png in Resources */,
 				7E3DAC0D1B06153E00A7FFD1 /* clock@2x.png in Resources */,
 				7E3DAC0E1B06153E00A7FFD1 /* menu_icon.png in Resources */,
 				7E3DAC0F1B06153E00A7FFD1 /* DBPositionCell.xib in Resources */,
 				7E3DAC101B06153E00A7FFD1 /* venues_icon_grey.png in Resources */,
-				7E3DAC111B06153E00A7FFD1 /* SettingCell.xib in Resources */,
+				7E3DAC111B06153E00A7FFD1 /* DBSettingsCell.xib in Resources */,
 				7E3DAC121B06153E00A7FFD1 /* not_paid@2x.png in Resources */,
 				7E3DAC131B06153E00A7FFD1 /* canceled.png in Resources */,
 				7E3DAC141B06153E00A7FFD1 /* canceled@2x.png in Resources */,
@@ -4091,7 +4139,7 @@
 				CB1432261B0E371A00DD50C7 /* DBPositionCell.xib in Resources */,
 				CB1432271B0E371A00DD50C7 /* venues_icon_grey.png in Resources */,
 				CB1432281B0E371A00DD50C7 /* call@2x.png in Resources */,
-				CB1432291B0E371A00DD50C7 /* SettingCell.xib in Resources */,
+				CB1432291B0E371A00DD50C7 /* DBSettingsCell.xib in Resources */,
 				CB14322A1B0E371A00DD50C7 /* not_paid@2x.png in Resources */,
 				CB14322B1B0E371A00DD50C7 /* canceled.png in Resources */,
 				CB14322C1B0E371A00DD50C7 /* canceled@2x.png in Resources */,
@@ -4289,7 +4337,7 @@
 				CB14338A1B0F1BBB00DD50C7 /* DBPositionCell.xib in Resources */,
 				CB14338B1B0F1BBB00DD50C7 /* venues_icon_grey.png in Resources */,
 				CB14338C1B0F1BBB00DD50C7 /* call@2x.png in Resources */,
-				CB14338D1B0F1BBB00DD50C7 /* SettingCell.xib in Resources */,
+				CB14338D1B0F1BBB00DD50C7 /* DBSettingsCell.xib in Resources */,
 				CB14338E1B0F1BBB00DD50C7 /* not_paid@2x.png in Resources */,
 				CB14338F1B0F1BBB00DD50C7 /* canceled.png in Resources */,
 				CB1433901B0F1BBB00DD50C7 /* canceled@2x.png in Resources */,
@@ -4334,6 +4382,7 @@
 				CBB042F11B0CAE3C00901173 /* return_cause_venue_icon@2x.png in Resources */,
 				CBB7192A1B14AC9300C47A33 /* CompanyInfo.plist in Resources */,
 				CB1AF8041AE10E6900FA3224 /* DBDiscountAdvertView.xib in Resources */,
+				CB91050C1B1CAA4F00506235 /* launch_667.png in Resources */,
 				CB1AF8051AE10E6900FA3224 /* arrow.png in Resources */,
 				CB1AF8071AE10E6900FA3224 /* close_gray@2x.png in Resources */,
 				CB1AF8081AE10E6900FA3224 /* percent_icon@3x.png in Resources */,
@@ -4355,6 +4404,7 @@
 				CB1AF8181AE10E6900FA3224 /* modifier_plus_icon@3x.png in Resources */,
 				CB1AF8191AE10E6900FA3224 /* agreement.html in Resources */,
 				CBB042EA1B0CAE3C00901173 /* back_arrow_icon@3x.png in Resources */,
+				CB91050A1B1CAA4F00506235 /* launch_480.png in Resources */,
 				CB1AF81B1AE10E6900FA3224 /* about.png in Resources */,
 				CB1AF81C1AE10E6900FA3224 /* PersonalAccountViewController.xib in Resources */,
 				CB1AF81D1AE10E6900FA3224 /* orders_icon@2x.png in Resources */,
@@ -4461,6 +4511,7 @@
 				CB1AF8771AE10E6900FA3224 /* DBOrderViewController.xib in Resources */,
 				CB1AF8781AE10E6900FA3224 /* venue_gray.png in Resources */,
 				CB1AF8791AE10E6900FA3224 /* paid@2x.png in Resources */,
+				CB91050B1B1CAA4F00506235 /* launch_568.png in Resources */,
 				CB1AF87A1AE10E6900FA3224 /* tick_gray@2x.png in Resources */,
 				5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */,
 				CB1AF87B1AE10E6900FA3224 /* arrow@2x.png in Resources */,
@@ -4477,13 +4528,14 @@
 				5ED715BC1AE8B4AB00E25EA8 /* email@2x.png in Resources */,
 				CB1AF8861AE10E6900FA3224 /* about_promo.png in Resources */,
 				CB1AF8871AE10E6900FA3224 /* mug_orders.png in Resources */,
+				CB91050D1B1CAA4F00506235 /* launch_736.png in Resources */,
 				CB1AF8881AE10E6900FA3224 /* profile@2x.png in Resources */,
 				CB1AF8891AE10E6900FA3224 /* settings.png in Resources */,
 				CB1AF88A1AE10E6900FA3224 /* clock@2x.png in Resources */,
 				CB1AF88B1AE10E6900FA3224 /* menu_icon.png in Resources */,
 				CB1AF88C1AE10E6900FA3224 /* DBPositionCell.xib in Resources */,
 				CB1AF88D1AE10E6900FA3224 /* venues_icon_grey.png in Resources */,
-				CB1AF88E1AE10E6900FA3224 /* SettingCell.xib in Resources */,
+				CB1AF88E1AE10E6900FA3224 /* DBSettingsCell.xib in Resources */,
 				CB1AF88F1AE10E6900FA3224 /* not_paid@2x.png in Resources */,
 				CB1AF8901AE10E6900FA3224 /* canceled.png in Resources */,
 				CB1AF8911AE10E6900FA3224 /* canceled@2x.png in Resources */,
@@ -4680,7 +4732,7 @@
 				CB517C6B1AEFB6B500A50F5C /* menu_icon.png in Resources */,
 				CB517C6C1AEFB6B500A50F5C /* DBPositionCell.xib in Resources */,
 				CB517C6D1AEFB6B500A50F5C /* venues_icon_grey.png in Resources */,
-				CB517C6E1AEFB6B500A50F5C /* SettingCell.xib in Resources */,
+				CB517C6E1AEFB6B500A50F5C /* DBSettingsCell.xib in Resources */,
 				CB517C6F1AEFB6B500A50F5C /* not_paid@2x.png in Resources */,
 				CBB718E61B14A3EE00C47A33 /* MeatMe-info.plist in Resources */,
 				CB517C701AEFB6B500A50F5C /* canceled.png in Resources */,
@@ -4879,7 +4931,7 @@
 				CBE559561AC9A94600A166B9 /* DBPositionCell.xib in Resources */,
 				CB60C19F1AC5AD2600D5E962 /* venues_icon_grey.png in Resources */,
 				5E4E60F81AE61E28005D78A8 /* call@2x.png in Resources */,
-				CB60C1A01AC5AD2600D5E962 /* SettingCell.xib in Resources */,
+				CB60C1A01AC5AD2600D5E962 /* DBSettingsCell.xib in Resources */,
 				CB60C1A11AC5AD2600D5E962 /* not_paid@2x.png in Resources */,
 				CB60C1A21AC5AD2600D5E962 /* canceled.png in Resources */,
 				CB60C1A31AC5AD2600D5E962 /* canceled@2x.png in Resources */,
@@ -5194,6 +5246,7 @@
 				7E3DAB031B06153E00A7FFD1 /* UIView+DBErrorAnimation.m in Sources */,
 				7E3DAB041B06153E00A7FFD1 /* DBAPIClient.m in Sources */,
 				7E3DAB051B06153E00A7FFD1 /* DBVenueCell.m in Sources */,
+				CB9782951B1DF416000B5625 /* DBSettingsCell.m in Sources */,
 				7E3DAB061B06153E00A7FFD1 /* DBMenuCategory.m in Sources */,
 				7E3DAB071B06153E00A7FFD1 /* JRSwizzleMethods.m in Sources */,
 				7E3DAB081B06153E00A7FFD1 /* DBOrderItemCell.m in Sources */,
@@ -5259,6 +5312,7 @@
 				7E3DAB411B06153E00A7FFD1 /* DBPromoManager.m in Sources */,
 				7E3DAB421B06153E00A7FFD1 /* DBProfileCell.m in Sources */,
 				7E3DAB431B06153E00A7FFD1 /* DBOrdersTableViewController.m in Sources */,
+				CB97828D1B1DE5ED000B5625 /* DBDocumentsViewController.m in Sources */,
 				7E3DAB441B06153E00A7FFD1 /* JRSwizzle.m in Sources */,
 				7E3DAB451B06153E00A7FFD1 /* CAGradientLayer+Helper.m in Sources */,
 				7E3DAB461B06153E00A7FFD1 /* NSString+Path.m in Sources */,
@@ -5323,6 +5377,7 @@
 				CB1431151B0E371A00DD50C7 /* UIColor+Brandbook.m in Sources */,
 				CB1431161B0E371A00DD50C7 /* DBCompanyInfoViewController.m in Sources */,
 				CB1431171B0E371A00DD50C7 /* NSDictionary+NSNullRepresentation.m in Sources */,
+				CB9782891B1DE28D000B5625 /* DBDocumentsViewController.m in Sources */,
 				CB1431181B0E371A00DD50C7 /* UIViewController+DBMessage.m in Sources */,
 				CB1431191B0E371A00DD50C7 /* DBMenu.m in Sources */,
 				CB14311A1B0E371A00DD50C7 /* DBNewOrderItemAdditionView.m in Sources */,
@@ -5333,6 +5388,7 @@
 				CB14311F1B0E371A00DD50C7 /* DBCategoryPickerCell.m in Sources */,
 				CB1431201B0E371A00DD50C7 /* DBNewOrderNDAView.m in Sources */,
 				CB1431211B0E371A00DD50C7 /* DBServerAPI.m in Sources */,
+				CB9782911B1DE9A6000B5625 /* DBSettingsCell.m in Sources */,
 				CB1431231B0E371A00DD50C7 /* DBBarButtonItem.m in Sources */,
 				CB1431241B0E371A00DD50C7 /* DBProfileViewController.m in Sources */,
 				CB1431251B0E371A00DD50C7 /* DBCardCell.m in Sources */,
@@ -5403,6 +5459,7 @@
 			files = (
 				CB1432501B0F1BBB00DD50C7 /* DBMenuPositionModifier.m in Sources */,
 				CB1432511B0F1BBB00DD50C7 /* main.m in Sources */,
+				CB9782961B1DF417000B5625 /* DBSettingsCell.m in Sources */,
 				CB1432521B0F1BBB00DD50C7 /* DBNewOrderAdditionalInfoView.m in Sources */,
 				CB1432531B0F1BBB00DD50C7 /* NSString+DoubleB.m in Sources */,
 				CB1432541B0F1BBB00DD50C7 /* DBMenuBonusPosition.m in Sources */,
@@ -5458,6 +5515,7 @@
 				CB1432821B0F1BBB00DD50C7 /* DBNewOrderViewController.m in Sources */,
 				CB1432831B0F1BBB00DD50C7 /* DBCategoryPickerCell.m in Sources */,
 				CB1432841B0F1BBB00DD50C7 /* DBNewOrderNDAView.m in Sources */,
+				CB97828E1B1DE5ED000B5625 /* DBDocumentsViewController.m in Sources */,
 				CB1432851B0F1BBB00DD50C7 /* DBServerAPI.m in Sources */,
 				CB1432871B0F1BBB00DD50C7 /* DBBarButtonItem.m in Sources */,
 				CB1432881B0F1BBB00DD50C7 /* DBProfileViewController.m in Sources */,
@@ -5564,6 +5622,7 @@
 				CB1AF7881AE10E6900FA3224 /* UIView+DBErrorAnimation.m in Sources */,
 				CB1AF7891AE10E6900FA3224 /* DBAPIClient.m in Sources */,
 				CB1AF78A1AE10E6900FA3224 /* DBVenueCell.m in Sources */,
+				CB9782931B1DF415000B5625 /* DBSettingsCell.m in Sources */,
 				CB1AF78B1AE10E6900FA3224 /* DBMenuCategory.m in Sources */,
 				CB1AF78C1AE10E6900FA3224 /* JRSwizzleMethods.m in Sources */,
 				CB1AF78D1AE10E6900FA3224 /* DBOrderItemCell.m in Sources */,
@@ -5629,6 +5688,7 @@
 				CB1AF7C41AE10E6900FA3224 /* DBPromoManager.m in Sources */,
 				CB1AF7C51AE10E6900FA3224 /* DBProfileCell.m in Sources */,
 				CB1AF7C61AE10E6900FA3224 /* DBOrdersTableViewController.m in Sources */,
+				CB97828B1B1DE5EC000B5625 /* DBDocumentsViewController.m in Sources */,
 				CB1AF7C71AE10E6900FA3224 /* JRSwizzle.m in Sources */,
 				CB1AF7C81AE10E6900FA3224 /* CAGradientLayer+Helper.m in Sources */,
 				CB1AF7C91AE10E6900FA3224 /* NSString+Path.m in Sources */,
@@ -5686,6 +5746,7 @@
 				CB517B601AEFB6B500A50F5C /* UIView+DBErrorAnimation.m in Sources */,
 				CB517B611AEFB6B500A50F5C /* DBAPIClient.m in Sources */,
 				CB517B621AEFB6B500A50F5C /* DBVenueCell.m in Sources */,
+				CB9782941B1DF416000B5625 /* DBSettingsCell.m in Sources */,
 				CB517B631AEFB6B500A50F5C /* DBMenuCategory.m in Sources */,
 				CB517B641AEFB6B500A50F5C /* JRSwizzleMethods.m in Sources */,
 				CB517B651AEFB6B500A50F5C /* DBOrderItemCell.m in Sources */,
@@ -5751,6 +5812,7 @@
 				CB517B9E1AEFB6B500A50F5C /* DBPromoManager.m in Sources */,
 				CB517B9F1AEFB6B500A50F5C /* DBProfileCell.m in Sources */,
 				CB517BA01AEFB6B500A50F5C /* DBOrdersTableViewController.m in Sources */,
+				CB97828C1B1DE5ED000B5625 /* DBDocumentsViewController.m in Sources */,
 				CB517BA11AEFB6B500A50F5C /* JRSwizzle.m in Sources */,
 				CB517BA21AEFB6B500A50F5C /* CAGradientLayer+Helper.m in Sources */,
 				CB517BA31AEFB6B500A50F5C /* NSString+Path.m in Sources */,
@@ -5770,6 +5832,7 @@
 			files = (
 				CB60C0A61AC5AD2600D5E962 /* DBMenuPositionModifier.m in Sources */,
 				CB60C0A71AC5AD2600D5E962 /* main.m in Sources */,
+				CB9782921B1DF415000B5625 /* DBSettingsCell.m in Sources */,
 				CB60C0A81AC5AD2600D5E962 /* DBNewOrderAdditionalInfoView.m in Sources */,
 				CB60C0A91AC5AD2600D5E962 /* NSString+DoubleB.m in Sources */,
 				CB1430DA1B0DD76000DD50C7 /* DBMenuBonusPosition.m in Sources */,
@@ -5825,6 +5888,7 @@
 				CB60C0D21AC5AD2600D5E962 /* DBNewOrderViewController.m in Sources */,
 				CB715AE11ACD5C9A00EA84FC /* DBCategoryPickerCell.m in Sources */,
 				CB60C0D31AC5AD2600D5E962 /* DBNewOrderNDAView.m in Sources */,
+				CB97828A1B1DE5EB000B5625 /* DBDocumentsViewController.m in Sources */,
 				CBD2B3861AD69CB500D0FCF1 /* DBServerAPI.m in Sources */,
 				CB715AEC1ACEB21100EA84FC /* DBBarButtonItem.m in Sources */,
 				CB60C0D41AC5AD2600D5E962 /* DBProfileViewController.m in Sources */,
@@ -6378,7 +6442,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "f196cd1b-86b8-4bd8-abde-ca614ac773ae";
+				PROVISIONING_PROFILE = "bba267ec-e9a5-4aba-b10f-5058fef1bc3d";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

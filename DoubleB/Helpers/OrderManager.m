@@ -171,6 +171,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         OrderItem *newItem = [item copy];
         [self.items addObject:newItem];
     }
+    
+    [self reloadTotal];
 }
 
 - (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler {

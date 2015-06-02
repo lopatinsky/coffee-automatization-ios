@@ -7,7 +7,8 @@
 //
 
 #import "DBSettingsTableViewController.h"
-#import "DBHTMLViewController.h"
+#import "DBSettingsCell.h"
+#import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
 #import "DBCardsViewController.h"
 #import "DBAboutPromoViewController.h"
@@ -29,9 +30,7 @@
 
 NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnabled";
 
-@interface DBSettingsTableViewController () <MFMailComposeViewControllerDelegate>
-
-@property (weak, nonatomic) IBOutlet UITableViewCell *tableCell;
+@interface DBSettingsTableViewController () <MFMailComposeViewControllerDelegate, DBSettingsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *settingsItems;
 
 @end
@@ -101,25 +100,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //                                        @"viewController": aboutPromoVC}];
 //    }
     
-//    // About app item
-//    DBHTMLViewController *aboutVC = [DBHTMLViewController new];
-//    aboutVC.title = NSLocalizedString(@"О приложении", nil);
-//    aboutVC.screen = @"About_app_screen";
-//    aboutVC.url = [NSURL URLWithString:@"http://empatika-doubleb.appspot.com/docs/about.html"];
-//    [self.settingsItems addObject:@{@"name": @"aboutVC",
-//                                    @"title": NSLocalizedString(@"О приложении", nil),
-//                                    @"image": @"about",
-//                                    @"viewController": aboutVC}];
+    // Privacy policy item
+    DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];
+    [self.settingsItems addObject:@{@"name": @"documentsVC",
+                                    @"title": NSLocalizedString(@"Справка", nil),
+                                    @"image": @"about",
+                                    @"viewController": documentsVC}];
     
-//    // Privacy policy item
-//    DBHTMLViewController *privacyPolicyVC = [DBHTMLViewController new];
-//    privacyPolicyVC.title = NSLocalizedString(@"Политика конфиденциальности", nil);
-//    privacyPolicyVC.url = [NSURL URLWithString:@"http://empatika-doubleb.appspot.com/docs/nda.html"];
-//    privacyPolicyVC.screen = @"NDA_screen";
-//    [self.settingsItems addObject:@{@"name": @"privacyPolicyVC",
-//                                    @"title": NSLocalizedString(@"Политика конфиденциальности", nil),
-//                                    @"image": @"confidence",
-//                                    @"viewController": privacyPolicyVC}];
     
     // Notifications item
     [self.settingsItems addObject:@{@"name": @"notification",
@@ -133,11 +120,6 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     [GANHelper analyzeScreen:@"Settings_screen"];
     
     [self.tableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -158,57 +140,31 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SettingCell"];
+    DBSettingsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBSettingsCell"];
     
     if (!cell) {
-        [[NSBundle mainBundle] loadNibNamed:@"SettingCell" owner:self options:nil];
-        cell = self.tableCell;
-        self.tableCell = nil;
+        cell = [DBSettingsCell new];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.hasIcon = YES;
     }
-    
-    UIImageView *imageViewIcon = (UIImageView *)[cell viewWithTag:1];
-    UILabel *labelTitle = (UILabel *)[cell viewWithTag:2];
-    UISwitch *switcher = (UISwitch *)[cell viewWithTag:3];
-    UIImageView *imageViewArrow = (UIImageView *)[cell viewWithTag:4];
-    [imageViewArrow templateImageWithName:@"arrow"];
     
     NSDictionary *settingsItemInfo = self.settingsItems[indexPath.row];
     
-//    imageViewIcon.image = [UIImage imageNamed:settingsItemInfo[@"image"]];
-    [imageViewIcon templateImageWithName:settingsItemInfo[@"image"]];
+    [cell.settingsImageView templateImageWithName:settingsItemInfo[@"image"]];
     
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
         NSString *profileText = [DBClientInfo sharedInstance].clientName;
-        labelTitle.text = profileText && profileText.length ? profileText : NSLocalizedString(@"Профиль", nil);
+        cell.titleLabel.text = profileText && profileText.length ? profileText : NSLocalizedString(@"Профиль", nil);
     } else {
-        labelTitle.text = settingsItemInfo[@"title"];
+        cell.titleLabel.text = settingsItemInfo[@"title"];
     }
     
+    cell.hasSwitch = NO;
     if([settingsItemInfo[@"name"] isEqualToString:@"notification"]){
-        switcher.hidden = NO;
-        switcher.onTintColor = [UIColor db_defaultColor];
-        if (![switcher bk_hasEventHandlersForControlEvents:UIControlEventValueChanged]) {
-            [switcher bk_addEventHandler:^(id sender) {
-                UISwitch *s = sender;
-                [GANHelper analyzeEvent:@"notification_switched" label:(s.on ? @"YES":@"NO") category:SETTINGS_SCREEN];
-                BOOL enabled = ![[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
-                [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kDBSettingsNotificationsEnabled];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                if (enabled) {
-                    [DBBeaconObserver createBeaconObserver];
-                } else {
-                    [DBBeaconObserver stopMonitoringRegions];
-                }
-            } forControlEvents:UIControlEventValueChanged];
-        }
-        switcher.on = [[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
-    } else {
-        switcher.hidden = YES;
+        cell.hasSwitch = YES;
+        cell.delegate = self;
     }
-    
-    imageViewArrow.hidden = !switcher.hidden;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
 }
@@ -241,12 +197,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"aboutVC"]){
-        
-        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
-    }
-    
-    if([settingsItemInfo[@"name"] isEqualToString:@"privacyPolicyVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"documentsVC"]){
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
@@ -275,6 +226,21 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     [self.navigationController dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - DBSettingsCellDelegate
+
+- (void)db_settingsCell:(DBSettingsCell *)cell didChangeSwitchValue:(BOOL)switchValue{
+    [GANHelper analyzeEvent:@"notification_switched" label:(switchValue ? @"YES" : @"NO") category:SETTINGS_SCREEN];
+    BOOL enabled = ![[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
+    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kDBSettingsNotificationsEnabled];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if (enabled) {
+        [DBBeaconObserver createBeaconObserver];
+    } else {
+        [DBBeaconObserver stopMonitoringRegions];
+    }
 }
 
 @end

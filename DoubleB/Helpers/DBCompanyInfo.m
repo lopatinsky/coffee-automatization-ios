@@ -72,14 +72,28 @@
     return GAKeyString ?: @"";
 }
 
-+ (NSURL *)db_ndaLicenseUrl{
-    NSString *ndaLicenseUrl = [self objectFromPropertyListByName:@"NDALicenseUrlString"];
-    return [NSURL URLWithString:ndaLicenseUrl];
++ (NSURL *)db_aboutAppUrl{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/about.html"];
+    
+    return [NSURL URLWithString:urlString];
 }
 
-+ (NSURL *)db_aboutAppUrl{
-    NSString *ndaLicenseUrl = [self objectFromPropertyListByName:@"AboutAppUrlString"];
-    return [NSURL URLWithString:ndaLicenseUrl];
++ (NSURL *)db_ndaUrl{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/nda.html"];
+    
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL *)db_licenceUrl{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/licence_agreement.html"];
+    
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL *)db_paymentRulesUrl{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/payment_rules.html"];
+    
+    return [NSURL URLWithString:urlString];
 }
 
 #pragma mark - Delivery

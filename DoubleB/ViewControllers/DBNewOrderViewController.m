@@ -1015,8 +1015,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_newOrderNDAViewDidTapNDALabel:(DBNewOrderNDAView *)ndaView{
     DBHTMLViewController *ndaController = [DBHTMLViewController new];
-    ndaController.title = NSLocalizedString(@"Политика", nil);
-    ndaController.url = [NSURL URLWithString:@"http://empatika-doubleb.appspot.com/docs/nda.html"];
+    ndaController.title = NSLocalizedString(@"Политика конфиденциальности", nil);
+    ndaController.url = [DBCompanyInfo db_ndaUrl];
     ndaController.screen = @"NDA_screen";
     
     [GANHelper analyzeEvent:@"confidence_show" category:ORDER_SCREEN];

@@ -136,19 +136,10 @@
         cell.constraintDistanceLabelWidth.constant = 0;
         cell.constraintDistanceLabelAndVenueNameLabelSpace.constant = 0;
     }
-
-    /*CGRect labelAddressFrame = cell.venueAddressLabel.frame;
-    [cell.venueAddressLabel setFrame:CGRectMake(x, labelAddressFrame.origin.y, width, labelAddressFrame.size.height)];
-
-    CGRect labelNameFrame = cell.venueNameLabel.frame;
-    [cell.venueNameLabel setFrame:CGRectMake(x, labelNameFrame.origin.y, width, labelNameFrame.size.height)];
-    CGRect labelWorkFrame = cell.venueWorkTimeLabel.frame;
-    [cell.venueWorkTimeLabel setFrame:CGRectMake(x, labelWorkFrame.origin.y, width, labelWorkFrame.size.height)];*/
     cell.venueNameLabel.text = venue.title;
     cell.venueAddressLabel.text = venue.address;
     cell.venueWorkTimeLabel.text = venue.workingTime ?: NSLocalizedString(@"Пн-пт 8:00-20:00, сб-вс 11:00-18:00", nil);
     
-    //cell.venueDistanceLabel.text = @"100 000 км";
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

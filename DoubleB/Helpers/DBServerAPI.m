@@ -487,7 +487,7 @@
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         params[@"time_picker_value"] = [formatter stringFromDate:[OrderManager sharedManager].selectedTime];
     } else {
-        params[@"delivery_slot_id"] = @([[OrderManager sharedManager].selectedTimeSlot.slotId integerValue]);
+        params[@"delivery_slot_id"] = [OrderManager sharedManager].selectedTimeSlot.slotId;
         
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";

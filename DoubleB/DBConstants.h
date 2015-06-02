@@ -29,6 +29,12 @@
 #define PRODUCT_SCREEN @"Product_screen"
 #define GROUP_MODIFIER_PICKER @"Group_modifier_popup"
 
+#define DOCS_SCREEN @"Documents_screen"
+#define NDA_SCREEN @"NDA_Screen"
+#define LICENCE_AGREEMENT_SCREEN @"Licence_agreement_screen"
+#define PAYMENT_RULES_SCREEN @"Payment_rules_screen"
+#define ABOUT_APP_SCREEN @"About_application_screen"
+
 /********************/
 
 extern NSString *const kDBDefaultsName;

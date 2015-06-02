@@ -43,7 +43,7 @@
 }
 
 - (void)dealloc{
-//    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"orderId"];
+    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"orderId"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

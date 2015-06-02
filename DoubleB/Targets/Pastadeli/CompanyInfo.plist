@@ -2,37 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>DeliveryTypes</key>
-	<array>
-		<dict>
-			<key>time_picker</key>
-			<string></string>
-			<key>time_picker_max</key>
-			<string></string>
-			<key>time_picker_min</key>
-			<string></string>
-			<key>name</key>
-			<string></string>
-			<key>min_sum</key>
-			<string></string>
-			<key>slots</key>
-			<array>
-				<dict>
-					<key>New item</key>
-					<string></string>
-				</dict>
-			</array>
-		</dict>
-	</array>
-	<key>aboutAppUrlString</key>
-	<string></string>
-	<key>NDALicenseUrlString</key>
-	<string></string>
 	<key>CompanyGAKey</key>
 	<string>UA-62529990-7</string>
 	<key>CompanyColor</key>
 	<integer>4288956456</integer>
 	<key>BaseUrl</key>
-	<string>http://pastadeli.1.doubleb-automation-production.appspot.com/api/</string>
+	<string>http://pastadeli.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>
