@@ -40,8 +40,10 @@
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     
+    BOOL analytics = YES;
     if(clientId){
         params[@"client_id"] = clientId;
+        analytics = NO;
     }
     
     if(branchParams && [branchParams count] != 0){
@@ -93,11 +95,23 @@
 //                                 
 //                                 [[NSUserDefaults standardUserDefaults] synchronize];
                                  
+                                 if(analytics){
+                                     [GANHelper analyzeEvent:@"user_register_success"
+                                                       label:[IHSecureStore sharedInstance].clientId
+                                                    category:APPLICATION_START];
+                                 }
+                                 
                                  if(callback)
                                      callback(YES);
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
+                                 
+                                 if(analytics){
+                                     [GANHelper analyzeEvent:@"user_register_failed"
+                                                       label:error.description
+                                                    category:APPLICATION_START];
+                                 }
                                  
                                  if(callback)
                                      callback(NO);

@@ -72,11 +72,6 @@
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadedNotification:)
-                                                 name:kDBFirstLaunchNecessaryInfoLoadedNotification
-                                               object:nil];
-    
     //styling
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -122,12 +117,12 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//    NSString *clientId = [IHSecureStore sharedInstance].clientId;
-//    if(clientId){
-//        [GANHelper analyzeEvent:@"app_started" label:clientId category:@"Start_application"];
-//    } else {
-//        [GANHelper analyzeEvent:@"app_started" category:@"Start_application"];
-//    }
+    NSString *clientId = [IHSecureStore sharedInstance].clientId;
+    if(clientId){
+        [GANHelper analyzeEvent:@"app_started" label:clientId category:@"Start_application"];
+    } else {
+        [GANHelper analyzeEvent:@"app_started" category:@"Start_application"];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -279,14 +274,6 @@
         NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
         NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:pathToCompanyInfo];
         [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
-    }
-}
-
-#pragma mark - Helper methods
-
-- (void)firstLaunchNecessaryInfoLoadedNotification:(NSNotification *)notification{
-    if([self.window.rootViewController isKindOfClass:[DBLaunchEmulationViewController class]]){
-        self.window.rootViewController = [DBTabBarController sharedInstance];
     }
 }
 

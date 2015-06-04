@@ -15,6 +15,9 @@
 #import "DBMenuBonusPosition.h"
 
 
+@implementation DBPromotion
+@end
+
 @implementation DBPromoItem
 @end
 
@@ -59,6 +62,17 @@
 
 - (void)updateInfo{
     [DBServerAPI updatePromoInfo:^(NSDictionary *response) {
+        // List of promos
+        NSMutableArray *promotionList = [NSMutableArray new];
+        for(NSDictionary *promotionDict in response[@"promos"]){
+            DBPromotion *promotion = [DBPromotion new];
+            promotion.promotionName = [promotionDict getValueForKey:@"title"] ?: @"";
+            promotion.promotionDescription = [promotionDict getValueForKey:@"description"] ?: @"";
+            
+            [promotionList addObject:promotion];
+        }
+        _promotionList = promotionList;
+        
         // Bonus Positions promo
         NSDictionary *bonusPositionsPromo = response[@"bonuses"];
         
@@ -76,13 +90,13 @@
         }];
         _positionsAvailableAsBonuses = bonusPositions;
         
-        
         _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
         
         // Personal wallet promo
         NSDictionary *personalWalletPromo = response[@"wallet"];
-        _walletEnabled = [personalWalletPromo[@"enabled"] boolValue];
+        _walletEnabled = [personalWalletPromo[@"enable"] boolValue];
         _walletTextDescription = personalWalletPromo[@"text"];
+        [self updatePersonalWalletBalance:nil];
         
         [self synchronize];
     } failure:^(NSError *error) {

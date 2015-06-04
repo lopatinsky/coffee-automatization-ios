@@ -28,7 +28,7 @@
     
     self.picker = [UIPickerView new];
     
-    self.navigationItem.title = NSLocalizedString(@"Кофейни", nil);
+    self.navigationItem.title = NSLocalizedString(@"Точки", nil);
     
     self.tableView.rowHeight = 73;
     self.tableView.tableFooterView = [UIView new];

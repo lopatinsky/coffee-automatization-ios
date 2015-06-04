@@ -16,6 +16,7 @@
 
 + (void)analyzeEvent:(NSString *)eventName category:(NSString *)category;
 + (void)analyzeEvent:(NSString *)eventName label:(NSString *)label category:(NSString *)category;
++ (void)analyzeEvent:(NSString *)eventName number:(NSNumber *)number category:(NSString *)category;
 
 + (void)trackNewOrderInfo:(Order *)order;
 

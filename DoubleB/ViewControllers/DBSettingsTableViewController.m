@@ -12,16 +12,20 @@
 #import "DBProfileViewController.h"
 #import "DBCardsViewController.h"
 #import "DBAboutPromoViewController.h"
+#import "DBPromosListViewController.h"
 #import "DBMastercardPromo.h"
 #import "IHSecureStore.h"
 #import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
-#import "UIViewController+ShareExtension.h"
-#import "UIViewController+DBMessage.h"
-#import "PersonalAccountViewController.h"
 #import "DBCompanyInfoViewController.h"
 #import "IHPaymentManager.h"
+#import "DBPromoManager.h"
 #import "Order.h"
+#import "Compatibility.h"
+#import "DBPersonalWalletView.h"
+
+#import "UIViewController+ShareExtension.h"
+#import "UIViewController+DBMessage.h"
 
 #import <MessageUI/MessageUI.h>
 #import <BlocksKit/UIControl+BlocksKit.h>
@@ -30,7 +34,7 @@
 
 NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnabled";
 
-@interface DBSettingsTableViewController () <MFMailComposeViewControllerDelegate, DBSettingsCellDelegate>
+@interface DBSettingsTableViewController () <MFMailComposeViewControllerDelegate, DBSettingsCellDelegate, DBPersonalWalletViewDelegate>
 @property (strong, nonatomic) NSMutableArray *settingsItems;
 
 @end
@@ -42,6 +46,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     self.title = NSLocalizedString(@"Настройки", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
+    self.navigationController.navigationBar.topItem.title = @"";
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
@@ -67,12 +72,18 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"viewController": cardsVC}];
     }
     
-    // Personal account item
-//    PersonalAccountViewController *personalAccountVC = [PersonalAccountViewController new];
-//    [self.settingsItems addObject:@{@"name": @"personalAccountVC",
-//                                    @"title": NSLocalizedString(@"Личный счет", nil),
-//                                    @"image": @"payment",
-//                                    @"viewController": personalAccountVC}];
+    // Promotion list item
+    DBPromosListViewController *promosVC = [DBPromosListViewController new];
+    [self.settingsItems addObject:@{@"name": @"promosVC",
+                                    @"title": NSLocalizedString(@"Список акций", nil),
+                                    @"image": @"menu_icon",
+                                    @"viewController": promosVC}];
+    
+    // Personal wallet item
+    if([DBPromoManager sharedManager].walletEnabled){
+        [self.settingsItems addObject:@{@"name": @"personalWalletVC",
+                                        @"image": @"payment"}];
+    }
     
     // Contact us item
     [self.settingsItems addObject:@{@"name": @"mailer",
@@ -100,7 +111,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //                                        @"viewController": aboutPromoVC}];
 //    }
     
-    // Privacy policy item
+    // Documents item
     DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];
     [self.settingsItems addObject:@{@"name": @"documentsVC",
                                     @"title": NSLocalizedString(@"Справка", nil),
@@ -153,16 +164,30 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     [cell.settingsImageView templateImageWithName:settingsItemInfo[@"image"]];
     
+    cell.titleLabel.text = settingsItemInfo[@"title"];
+    
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
         NSString *profileText = [DBClientInfo sharedInstance].clientName;
         cell.titleLabel.text = profileText && profileText.length ? profileText : NSLocalizedString(@"Профиль", nil);
-    } else {
-        cell.titleLabel.text = settingsItemInfo[@"title"];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"personalWalletVC"]){
+        NSString *profileText;
+        if([DBPromoManager sharedManager].walletBalance > 0){
+            profileText = [NSString stringWithFormat:@"%@: %.1f %@", NSLocalizedString(@"Личный счет", nil), [DBPromoManager sharedManager].walletBalance, [Compatibility currencySymbol]];
+        } else {
+            profileText = NSLocalizedString(@"Личный счет", nil);
+        }
+        
+        cell.titleLabel.text = profileText;
     }
     
     cell.hasSwitch = NO;
     if([settingsItemInfo[@"name"] isEqualToString:@"notification"]){
         cell.hasSwitch = YES;
+        cell.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
+
+        
         cell.delegate = self;
     }
     
@@ -191,6 +216,15 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]){
         [self shareAppPermission:nil];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]){
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"personalWalletVC"]){
+        DBPersonalWalletView *view = [DBPersonalWalletView new];
+        [view showOnView:self.navigationController.view];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"aboutPromoVC"]){
@@ -241,6 +275,12 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     } else {
         [DBBeaconObserver stopMonitoringRegions];
     }
+}
+
+#pragma mark - DBPersonalWalletViewDelegate
+
+- (void)db_personalWalletView:(DBPersonalWalletView *)view didUpdateBalance:(double)balance{
+    [self.tableView reloadData];
 }
 
 @end

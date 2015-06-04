@@ -65,6 +65,13 @@
     if(_type == DBTimePickerTypeDate || _type == DBTimePickerTypeTime){
         self.datePickerView.hidden = NO;
         self.pickerView.hidden = YES;
+        
+        if(_type == DBTimePickerTypeDate){
+            self.datePickerView.datePickerMode = UIDatePickerModeDateAndTime;
+        }
+        if(_type == DBTimePickerTypeTime){
+            self.datePickerView.datePickerMode = UIDatePickerModeTime;
+        }
     }
     
     if(_type == DBTimePickerTypeItems){

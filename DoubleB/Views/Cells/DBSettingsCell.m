@@ -10,7 +10,6 @@
 
 @interface DBSettingsCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *disclosureIndicator;
-@property (weak, nonatomic) IBOutlet UISwitch *switchView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintImageViewWidth;
 @property (nonatomic) NSInteger initialImageViewWidth;

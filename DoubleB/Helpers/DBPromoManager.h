@@ -11,6 +11,14 @@
 @class OrderItem;
 
 /**
+ * Class for holding info about each promotion
+ */
+@interface DBPromotion : NSObject
+@property (strong, nonatomic) NSString *promotionName;
+@property (strong, nonatomic) NSString *promotionDescription;
+@end
+
+/**
  * Class for manage all info about item promo
  */
 @interface DBPromoItem : NSObject
@@ -27,6 +35,8 @@
 + (instancetype)sharedManager;
 - (void)updateInfo;
 
+
+@property (strong, nonatomic) NSArray *promotionList;
 
 //=========== Check of Current Order ===========
 

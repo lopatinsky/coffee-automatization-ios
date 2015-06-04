@@ -17,6 +17,7 @@
 @interface DBSettingsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *settingsImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *switchView;
 
 @property (weak, nonatomic) id<DBSettingsCellDelegate> delegate;
 @property (nonatomic) BOOL hasIcon;

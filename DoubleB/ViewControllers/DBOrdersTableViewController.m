@@ -140,7 +140,7 @@
     
     // Time
     NSString *dateString = [orderDictionary getValueForKey:@"delivery_time_str"];
-    NSString *timeSlot = [orderDictionary[@"delivery_slot"] getValueForKey:@"name"];
+    NSString *timeSlot = [orderDictionary getValueForKey:@"delivery_slot_str"];
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
@@ -150,16 +150,16 @@
         sameOrder.status = [orderDictionary[@"status"] intValue];
 
         sameOrder.time = date;
-//        if(timeSlot)
-//            sameOrder.timeString = timeSlot;
+        if(timeSlot)
+            sameOrder.timeString = timeSlot;
     } else {
         Order *ord = [[Order alloc] init:YES];
         ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
         ord.total = orderDictionary[@"total"];
 
         ord.time = date;
-//        if(timeSlot)
-//            ord.timeString = timeSlot;
+        if(timeSlot)
+            ord.timeString = timeSlot;
         
         NSMutableArray *items = [[NSMutableArray alloc] init];
         for (NSDictionary *itemDict in orderDictionary[@"items"]) {
@@ -204,7 +204,7 @@
                 order.status = (OrderStatus)[notification.userInfo[@"order_status"] intValue];
                 
                 long long timestamp = [notification.userInfo[@"timestamp"] longLongValue];
-//                order.createdAt = [NSDate dateWithTimeIntervalSince1970:timestamp];
+                order.time = [NSDate dateWithTimeIntervalSince1970:timestamp];
                 
                 [[CoreDataHelper sharedHelper] save];
                 

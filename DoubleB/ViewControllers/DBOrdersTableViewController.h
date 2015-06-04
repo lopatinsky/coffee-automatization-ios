@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString* const kDBStatusUpdatedNotification;
-
 @interface DBOrdersTableViewController : UITableViewController
 
 @end

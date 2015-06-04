@@ -67,6 +67,8 @@ static NSMutableArray *storedVenues;
     if (location) {
         params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
     }
+    
+    NSDate *startTime = [NSDate date];
     [[DBAPIClient sharedClient] GET:@"venues"
                          parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -83,11 +85,21 @@ static NSMutableArray *storedVenues;
                                     [storedVenues addObject:venue];
                                 }
                                 [[CoreDataHelper sharedHelper] save];
-                                completionHandler(storedVenues);
+                                
+                                NSDate *endTime = [NSDate date];
+                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                [GANHelper analyzeEvent:@"venues_load_success" number:@(interval) category:APPLICATION_START];
+                                
+                                if(completionHandler)
+                                    completionHandler(storedVenues);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
-                                completionHandler(nil);
+                                
+                                [GANHelper analyzeEvent:@"venues_load_failed" label:error.description category:APPLICATION_START];
+                                
+                                if(completionHandler)
+                                    completionHandler(nil);
                             }];
 }
 

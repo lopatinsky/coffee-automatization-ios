@@ -104,6 +104,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.topItem.title = @"";
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeTop;
@@ -204,6 +205,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadContinueButton];
     [self reloadComment];
     [self reloadBonusesView:NO];
+    [self reloadNDAView];
     
     [self.itemCells removeAllObjects];
     
@@ -630,6 +632,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - DBNewOrderItemAdditionViewDelegate
 
+- (void)reloadNDAView{
+    if([Order allOrders].count > 0){
+        [self.ndaView hide];
+    } else {
+        [self.ndaView show];
+    }
+}
+
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
     if(!self.positionsViewController){
         self.positionsViewController = [DBPositionsViewController new];
@@ -750,9 +760,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.orderFooter.labelTime.text = timeString;
 }
 
-- (IBAction)clickTime:(id)sender {
-    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
-    
+- (void)reloadTimePicker{
     if(_orderManager.deliveryType.useTimePicker){
         self.pickerView.type = _orderManager.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
         
@@ -774,6 +782,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.pickerView.segments = titles;
     self.pickerView.selectedSegmentIndex = _orderManager.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     
+    [self.pickerView configure];
+}
+
+- (IBAction)clickTime:(id)sender {
+    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
+    
+    [self reloadTimePicker];
     [self.pickerView showOnView:self.tabBarController.view];
 }
 
@@ -815,7 +830,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     _orderManager.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId];
     
-    [self.pickerView configure];
+    [self reloadTimePicker];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
@@ -1014,14 +1029,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - DBNewOrderNDAViewDelegate
 
 - (void)db_newOrderNDAViewDidTapNDALabel:(DBNewOrderNDAView *)ndaView{
-    DBHTMLViewController *ndaController = [DBHTMLViewController new];
-    ndaController.title = NSLocalizedString(@"Политика конфиденциальности", nil);
-    ndaController.url = [DBCompanyInfo db_ndaUrl];
-    ndaController.screen = @"NDA_screen";
+    DBHTMLViewController *paymentVC = [DBHTMLViewController new];
+    paymentVC.title = NSLocalizedString(@"Правила оплаты", nil);
+    paymentVC.url = [DBCompanyInfo db_paymentRulesUrl];
+    paymentVC.screen = PAYMENT_RULES_SCREEN;
     
     [GANHelper analyzeEvent:@"confidence_show" category:ORDER_SCREEN];
     
-    [self.navigationController pushViewController:ndaController animated:YES];
+    paymentVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:paymentVC animated:YES];
 }
 
 - (void)db_newOrderNDAView:(DBNewOrderNDAView *)ndaView didSelectSwitchState:(BOOL)on{

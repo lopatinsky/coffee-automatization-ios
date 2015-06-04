@@ -22,13 +22,14 @@
 @property(strong, nonatomic, readonly) NSArray *deliveryTypeIdList;
 @property(strong, nonatomic, readonly) NSArray *deliveryCities;
 
+- (void)updateInfo;
+
 + (id)objectFromPropertyListByName:(NSString *)name;
 + (NSString *)db_companyBaseUrl;
 + (NSNumber *)db_companyDefaultColor;
 + (NSString *)db_companyGoogleAnalyticsKey;
 
 + (NSURL *)db_aboutAppUrl;
-+ (NSURL *)db_ndaUrl;
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;
 

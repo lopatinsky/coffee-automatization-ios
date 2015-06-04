@@ -151,17 +151,22 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     currentEditingTextField = textField;
     
+    NSString *eventLabel = textField.text;
     int index = [self indexPathRowForTextField:textField];
     
     if(index == 0){
+        [GANHelper analyzeEvent:@"name_typing" label:eventLabel category:PROFILE_SCREEN];
     }
     
     if(index == 1){
         if([textField.text isEqualToString:@""])
             textField.text = @"+7";
+        
+        [GANHelper analyzeEvent:@"phone_typing" label:eventLabel category:PROFILE_SCREEN];
     }
     
     if(index == 2){
+        [GANHelper analyzeEvent:@"mail_typing" label:eventLabel category:PROFILE_SCREEN];
     }
 }
 
@@ -172,15 +177,15 @@
     int index = [self indexPathRowForTextField:textField];
     
     if(index == 0){
-        [GANHelper analyzeEvent:@"name_typing" label:eventLabel category:PROFILE_SCREEN];
+        [GANHelper analyzeEvent:@"name_entered" label:eventLabel category:PROFILE_SCREEN];
     }
     
     if(index == 1) {
-        [GANHelper analyzeEvent:@"phone_typing" label:eventLabel category:PROFILE_SCREEN];
+        [GANHelper analyzeEvent:@"phone_entered" label:eventLabel category:PROFILE_SCREEN];
     }
     
     if(index == 2) {
-        [GANHelper analyzeEvent:@"mail_typing" label:eventLabel category:PROFILE_SCREEN];
+        [GANHelper analyzeEvent:@"mail_entered" label:eventLabel category:PROFILE_SCREEN];
     }
     
     return YES;

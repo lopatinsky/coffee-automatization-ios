@@ -21,6 +21,7 @@
     
     self.title = NSLocalizedString(@"Справка", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
+    self.navigationController.navigationBar.topItem.title = @"";
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
@@ -35,14 +36,6 @@
     aboutAppVC.screen = ABOUT_APP_SCREEN;
     [self.items addObject:@{@"title": NSLocalizedString(@"О приложении", nil),
                             @"viewController": aboutAppVC}];
-    
-    // NDA
-    DBHTMLViewController *privacyPolicyVC = [DBHTMLViewController new];
-    privacyPolicyVC.title = NSLocalizedString(@"Политика конфиденциальности", nil);
-    privacyPolicyVC.url = [DBCompanyInfo db_ndaUrl];
-    privacyPolicyVC.screen = NDA_SCREEN;
-    [self.items addObject:@{@"title": NSLocalizedString(@"Политика конфиденциальности", nil),
-                            @"viewController": privacyPolicyVC}];
     
     // Licence Agreement
     DBHTMLViewController *licenceVC = [DBHTMLViewController new];

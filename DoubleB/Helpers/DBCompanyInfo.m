@@ -36,9 +36,11 @@
             }
             _deliveryTypes = deliveryTypes;
             
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadedNotification object:nil]];
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
             
             [self synchronize];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
         }
     }];
 }
@@ -74,12 +76,6 @@
 
 + (NSURL *)db_aboutAppUrl{
     NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/about.html"];
-    
-    return [NSURL URLWithString:urlString];
-}
-
-+ (NSURL *)db_ndaUrl{
-    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/nda.html"];
     
     return [NSURL URLWithString:urlString];
 }
