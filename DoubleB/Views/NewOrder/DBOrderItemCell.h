@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class OrderItem;
 @class DBPromoItem;
 @class DBOrderItemCell;
@@ -25,12 +26,8 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell;
 
-//- (void)db_orderItemCellDidStartSwipe:(DBOrderItemCell *)cell;
-//- (void)db_orderItemCellDidEndSwipe:(DBOrderItemCell *)cell;
-
-//@optional
-//- (void)orderItemCell:(DBOrderItemCellOld *)cell newPreferedHeight:(NSInteger)height;
-//- (void)orderItemCellReloadHeight:(DBOrderItemCellOld *)cell;
+- (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell;
+- (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell;
 @end
 
 @interface DBOrderItemCell : UITableViewCell

@@ -223,6 +223,20 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return currentCount;
 }
 
+- (void)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position{
+    DBMenuPosition *copyPosition = [position copy];
+    item.position = copyPosition;
+    
+    for(OrderItem *orderItem in self.items){
+        if(orderItem != item && [orderItem.position isEqual:copyPosition]){
+            item.count += orderItem.count;
+            [self.items removeObject:orderItem];
+            
+            break;
+        }
+    }
+}
+
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index{
     if(index < 0 || index >= [self.items count])
         return 0;
@@ -236,7 +250,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 }
 
-- (NSInteger)decreaseOrderItemCount:(NSInteger)index {
+- (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index {
     if(index < 0 || index >= [self.items count])
         return 0;
     
@@ -249,6 +263,10 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     [self reloadTotal];
     
     return orderItem.count;
+}
+
+- (void)removeOrderItemAtIndex:(NSInteger)index{
+    [self.items removeObjectAtIndex:index];
 }
 
 - (NSUInteger)positionsCount {
@@ -285,9 +303,6 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return result;
 }
 
-- (void)removePositionAtIndex:(NSUInteger)index {
-    [self.items removeObjectAtIndex:index];
-}
 
 - (void)reloadTotal{
     // Reload initial total
@@ -335,7 +350,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     if(!self.timer){
         long long seconds = [[NSDate date] timeIntervalSince1970];
         seconds = seconds - seconds % 60 + 60 + 1;
-        self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:60.f
+        self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:15.f
                                                 target:self
                                                 selector:@selector(timerTick:)
                                                 userInfo:nil

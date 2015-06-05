@@ -27,7 +27,7 @@
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.rowHeight = 80;
+    self.tableView.rowHeight = 100;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

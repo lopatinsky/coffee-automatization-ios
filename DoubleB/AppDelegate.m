@@ -23,6 +23,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <PayPal-iOS-SDK/PayPalMobile.h>
 
 @implementation AppDelegate
 
@@ -41,6 +42,8 @@
     
 //    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
+    
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentSandbox:@"Aedvczd_fDZnfkriC94V1gr46UqlpqnAcO7VDIL9nRjK50N_chA15XyeE96j4hORw5nz1Fstxi6Mzmin"}];
 //==================== Framework initialization =====================
     
     

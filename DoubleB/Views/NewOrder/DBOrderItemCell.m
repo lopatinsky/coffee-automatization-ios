@@ -13,11 +13,11 @@
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
-#import "DBTableItemInactivityView.h"
+#import "DBNewOrderItemErrorView.h"
 
 #import "UIImageView+WebCache.h"
 
-@interface DBOrderItemCell () <UIGestureRecognizerDelegate>
+@interface DBOrderItemCell () <UIGestureRecognizerDelegate, DBNewOrderItemErorViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIButton *lessButton;
 
@@ -31,7 +31,7 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
-@property (strong, nonatomic) DBTableItemInactivityView *inactivityView;
+@property (strong, nonatomic) DBNewOrderItemErrorView *errorView;
 @end
 
 @implementation DBOrderItemCell
@@ -71,12 +71,8 @@
     
     [self addEditButtons];
     
-    self.inactivityView = [DBTableItemInactivityView new];
-    self.inactivityView.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.7f];
-    [self.orderCellContentView addSubview:self.inactivityView];
-    self.inactivityView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.inactivityView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.orderCellContentView];
-    self.inactivityView.hidden = YES;
+    self.errorView = [DBNewOrderItemErrorView new];
+    self.errorView.delegate = self;
     
     self.rightOriginBound = self.leadingSpaceContentViewConstraint.constant;
     self.leftOriginBound = self.rightOriginBound - (self.lessButton.frame.size.width + self.moreButton.frame.size.width);
@@ -105,7 +101,7 @@
     self.titleLabel.text = item.position.name;
     
     if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
-        self.priceLabel.text = @"Бонус";
+        self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     } else {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", item.position.actualPrice];
     }
@@ -151,32 +147,12 @@
 
 - (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated{
     if([promoItem.errors count] > 0){
-        [self.inactivityView setErrors:promoItem.errors];
+        self.errorView.mode = promoItem.substitute ? DBNewOrderItemErrorViewModeReplace : DBNewOrderItemErrorViewModeDelete;
+        self.errorView.message = [promoItem.errors firstObject];
         
-        if(self.inactivityView.hidden){
-            self.inactivityView.alpha = 0;
-            self.inactivityView.hidden = NO;
-            if(animated){
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.inactivityView.alpha = 1;
-                }];
-            } else {
-                self.inactivityView.alpha = 1;
-            }
-        }
+        [self.errorView showOnView:self.contentView inFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - self.separatorView.frame.size.height)];
     } else {
-        if(!self.inactivityView.hidden){
-            if(animated){
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.inactivityView.alpha = 0;
-                } completion:^(BOOL finished) {
-                    self.inactivityView.hidden = YES;
-                }];
-            } else {
-                self.inactivityView.alpha = 0;
-                self.inactivityView.hidden = YES;
-            }
-        }
+        [self.errorView hide];
     }
 }
 
@@ -270,6 +246,28 @@
     [GANHelper analyzeEvent:@"position_minus_click" category:ORDER_SCREEN];
     if([self.delegate respondsToSelector:@selector(db_orderItemCellDecreaseItemCount:)]){
         [self.delegate db_orderItemCellDecreaseItemCount:self];
+    }
+}
+
+#pragma mark - DBNewOrderItemErorViewDelegate
+
+- (void)db_newOrderItemErrorViewDidTap:(DBNewOrderItemErrorView *)view{
+    if(view.isOpen){
+        [view moveContentRight];
+    } else {
+        [view moveContentLeft];
+    }
+}
+
+- (void)db_newOrderItemErrorView:(DBNewOrderItemErrorView *)view didSelectAction:(DBNewOrderItemErrorViewMode)actionMode{
+    if(actionMode == DBNewOrderItemErrorViewModeDelete){
+        if([self.delegate respondsToSelector:@selector(db_orderItemCellDidSelectDelete:)]){
+            [self.delegate db_orderItemCellDidSelectDelete:self];
+        }
+    } else {
+        if([self.delegate respondsToSelector:@selector(db_orderItemCellDidSelectReplace:)]){
+            [self.delegate db_orderItemCellDidSelectReplace:self];
+        }
     }
 }
 

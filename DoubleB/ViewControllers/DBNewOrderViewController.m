@@ -299,11 +299,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.orderFooter.profileButton addTarget:self action:@selector(clickProfile:) forControlEvents:UIControlEventTouchUpInside];
     [self.orderFooter.paymentButton addTarget:self action:@selector(clickPaymentType:) forControlEvents:UIControlEventTouchUpInside];
     [self.orderFooter.commentButton addTarget:self action:@selector(clickComment:) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSArray *orders = [Order allOrders];
-    if([[NSUserDefaults standardUserDefaults] boolForKey:kDBDefaultsNDASigned] && [orders count] > 0){
-        [self.ndaView hide];
-    }
 }
 
 
@@ -398,7 +393,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             for(int i = 0; i < [OrderManager sharedManager].items.count; i++){
                 OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
                 DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
-                if([promoItem.errors count] > 0){
+                if([promoItem.errors count] > 0 && i < [self.tableView numberOfRowsInSection:0]){
                     [cellsForReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
                 }
             }
@@ -593,7 +588,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
-    NSInteger count = [[OrderManager sharedManager] decreaseOrderItemCount:index];
+    NSInteger count = [[OrderManager sharedManager] decreaseOrderItemCountAtIndex:index];
     
     if(count == 0){
         [self removeRowAtIndex:index];
@@ -609,36 +604,32 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
 }
 
-//- (void)orderItemCell:(DBOrderItemCell *)cell newPreferedHeight:(NSInteger)height{
-//    NSInteger index = [self.tableView indexPathForCell:cell].row;
-//    
-//    if(index < [self.preferedHeightsForTableView count]){
-//        self.preferedHeightsForTableView[index] = @(height);
-//    }
-//}
-//
-//- (void)orderItemCellReloadHeight:(DBOrderItemCell *)cell{
-//    [self reloadTableViewCellsHeight];
-//}
-
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
-    positionVC.parentNavigationController = self.navigationController;
-    positionVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:positionVC animated:YES];
+    if(![item.position isKindOfClass:[DBMenuBonusPosition class]]){
+        DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+        positionVC.parentNavigationController = self.navigationController;
+        positionVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:positionVC animated:YES];
+    }
+}
+
+- (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell{
+    int index = [self.tableView indexPathForCell:cell].row;
+    [_orderManager removeOrderItemAtIndex:index];
+    [self removeRowAtIndex:index];
+}
+
+- (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell{
+    DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:cell.orderItem];
+    if(promoItem.substitute){
+        [_orderManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+        [self.tableView reloadData];
+    }
 }
 
 
 #pragma mark - DBNewOrderItemAdditionViewDelegate
-
-- (void)reloadNDAView{
-    if([Order allOrders].count > 0){
-        [self.ndaView hide];
-    } else {
-        [self.ndaView show];
-    }
-}
 
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
     if(!self.positionsViewController){
@@ -1026,7 +1017,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - DBNewOrderNDAViewDelegate
+#pragma mark - NDA
+
+- (void)reloadNDAView{
+    BOOL showNDA = ![[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
+    showNDA = showNDA || !([Order allOrders].count > 0);
+    if(showNDA){
+        [self.ndaView show];
+    } else {
+        [self.ndaView hide];
+    }
+}
 
 - (void)db_newOrderNDAViewDidTapNDALabel:(DBNewOrderNDAView *)ndaView{
     DBHTMLViewController *paymentVC = [DBHTMLViewController new];

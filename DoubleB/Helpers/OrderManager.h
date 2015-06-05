@@ -96,9 +96,11 @@ extern NSString* const kDBDefaultsPaymentType;
 - (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler;
 
 - (NSInteger)addPosition:(DBMenuPosition *)position;
+- (void)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
-- (NSInteger)decreaseOrderItemCount:(NSInteger)index;
+- (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index;
+- (void)removeOrderItemAtIndex:(NSInteger)index;
 
 - (void)purgePositions; //clean
 - (void)overridePositions:(NSArray *)items; //clean and add from array
@@ -110,7 +112,6 @@ extern NSString* const kDBDefaultsPaymentType;
 - (OrderItem *)itemAtIndex:(NSUInteger)index;
 - (OrderItem *)itemWithPositionId:(NSString *)positionId;
 - (OrderItem *)itemWithTemplatePosition:(DBMenuPosition *)templatePosition;
-- (void)removePositionAtIndex:(NSUInteger)index;
 - (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index;
 
 - (void)selectIfPossibleDefaultPaymentType;

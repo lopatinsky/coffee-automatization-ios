@@ -20,8 +20,9 @@
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "Compatibility.h"
+#import "DBPayPalManager.h"
 
-@interface DBCardsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface DBCardsViewController () <UITableViewDataSource, UITableViewDelegate, DBPayPalManagerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 
@@ -307,6 +308,12 @@
     [GANHelper analyzeEvent:@"payment_selected" label:eventLabel category:PAYMENT_SCREEN];
 }
 
+
+#pragma mark - DBPayPalManagerDelegate
+
+- (void)payPalManager:(DBPayPalManager *)manager shouldPresentViewController:(UIViewController *)controller{
+    [self presentViewController:controller animated:YES completion:nil];
+}
 
 #pragma mark - other methods
 

@@ -18,7 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *modifierTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *additionalInfoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) DBMenuPositionModifier *modifier;
@@ -47,6 +49,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 45.f;
+    
+    [self.doneButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
+    [self.doneButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)adoptFrame{

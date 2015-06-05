@@ -205,7 +205,11 @@
     
     // Payment
     if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
-        params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
+        NSData *paymentData = [NSJSONSerialization dataWithJSONObject:[DBServerAPI assemblyPaymentInfo]
+                                                              options:NSJSONWritingPrettyPrinted
+                                                                error:nil];
+        NSString *paymentString = [[NSString alloc] initWithData:paymentData encoding:NSUTF8StringEncoding];
+        params[@"payment"] = paymentString;
     }
 
     [[DBAPIClient sharedClient] POST:@"check_order"

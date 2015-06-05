@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class OrderItem;
+@class DBMenuPosition;
 
 /**
  * Class for holding info about each promotion
@@ -26,6 +27,8 @@
 
 @property (strong, nonatomic) NSArray *errors;
 @property (strong, nonatomic) NSArray *promos;
+
+@property (strong, nonatomic) DBMenuPosition *substitute;
 @end
 
 

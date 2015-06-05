@@ -146,6 +146,9 @@
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     NSDate *date = [formatter dateFromString:dateString];
     
+    if([sameOrder.orderId isEqualToString:@"549"]){
+        NSLog(@"");
+    }
     if(sameOrder){
         sameOrder.status = [orderDictionary[@"status"] intValue];
 
