@@ -41,16 +41,17 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 @property (weak, nonatomic) IBOutlet UILabel *modifiersLabel;
 
 @property (strong, nonatomic) OrderItem *orderItem;
+@property (strong, nonatomic) DBPromoItem *promoItem;
 @property (nonatomic, readonly) DBOrderItemCellType type;
 @property (weak, nonatomic) id<DBOrderItemCellDelegate> delegate;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 - (instancetype)initWithType:(DBOrderItemCellType)type;
-- (void)configureWithOrderItem:(OrderItem *)item;
-- (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated;
+- (void)configure;
+- (void)reload;
 - (void)reloadCount;
 
-- (void)moveContentToOriginal;
-- (void)moveContentToLeft;
+- (void)moveContentToOriginal:(BOOL)animated;
+- (void)moveContentToLeft:(BOOL)animated;
 
 @end

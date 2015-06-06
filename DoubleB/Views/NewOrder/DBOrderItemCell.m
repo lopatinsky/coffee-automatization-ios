@@ -92,25 +92,25 @@
     [self.moreButton setTitle:@"+" forState:UIControlStateNormal];
 }
 
-- (void)configureWithOrderItem:(OrderItem *)item{
-    self.leadingSpaceContentViewConstraint.constant = 0;
-    self.trailingSpaceContentViewConstraint.constant = 0;
-    
-    self.orderItem = item;
-    
-    self.titleLabel.text = item.position.name;
+- (void)configure{
+    [self reload];
+    [self moveContentToOriginal:NO];
+}
+
+- (void)reload{
+    self.titleLabel.text = _orderItem.position.name;
     
     if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
         self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     } else {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", item.position.actualPrice];
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", _orderItem.position.actualPrice];
     }
     
     [self reloadCount];
     
     NSMutableString *modifiersString =[[NSMutableString alloc] init];
     
-    for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
+    for(DBMenuPositionModifier *modifier in _orderItem.position.groupModifiers){
         if(modifier.selectedItem){
             if(modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (%@)\n", modifier.actualPrice, modifier.selectedItem.itemName, modifier.modifierName]];
@@ -120,7 +120,7 @@
         }
     }
     
-    for(DBMenuPositionModifier *modifier in item.position.singleModifiers){
+    for(DBMenuPositionModifier *modifier in _orderItem.position.singleModifiers){
         if(modifier.selectedCount > 0){
             if(modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (x%ld)\n", modifier.actualPrice, modifier.modifierName, (long)modifier.selectedCount]];
@@ -136,52 +136,63 @@
     
     if(self.type == DBOrderItemCellTypeFull){
         [self.positionImageView db_showDefaultImage];
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:item.position.imageUrl]
+        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:_orderItem.position.imageUrl]
                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                              if(!error){
                                                  [self.positionImageView db_hideDefaultImage];
                                              }
                                          }];
     }
-}
-
-- (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated{
-    if([promoItem.errors count] > 0){
-        self.errorView.mode = promoItem.substitute ? DBNewOrderItemErrorViewModeReplace : DBNewOrderItemErrorViewModeDelete;
-        self.errorView.message = [promoItem.errors firstObject];
+    
+    
+    if([_promoItem.errors count] > 0){
+        self.errorView.mode = _promoItem.substitute ? DBNewOrderItemErrorViewModeReplace : DBNewOrderItemErrorViewModeDelete;
+        self.errorView.message = [_promoItem.errors firstObject];
         
         [self.errorView showOnView:self.contentView inFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - self.separatorView.frame.size.height)];
     } else {
         [self.errorView hide];
     }
+    
+    [self layoutIfNeeded];
 }
-
 
 - (void)reloadCount{
     self.countLabel.text = [NSString stringWithFormat:@"x%ld", (long)self.orderItem.count];
 }
 
-- (void)moveContentToOriginal{
+- (void)moveContentToOriginal:(BOOL)animated{
     self.leadingSpaceContentViewConstraint.constant = self.rightOriginBound;
     self.trailingSpaceContentViewConstraint.constant = -self.rightOriginBound;
-    [UIView animateWithDuration:0.25
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [self.orderCellContentView layoutIfNeeded];
-                     }
-                     completion:nil];
+    
+    if(animated){
+        [UIView animateWithDuration:0.25
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             [self.orderCellContentView layoutIfNeeded];
+                         }
+                         completion:nil];
+    } else {
+        [self.orderCellContentView layoutIfNeeded];
+    }
 }
 
-- (void)moveContentToLeft{
+- (void)moveContentToLeft:(BOOL)animated{
     self.leadingSpaceContentViewConstraint.constant = self.leftOriginBound;
     self.trailingSpaceContentViewConstraint.constant = -self.leftOriginBound;
-    [UIView animateWithDuration:0.25
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [self.orderCellContentView layoutIfNeeded];
-                     } completion:nil];
+    
+    if(animated){
+        [UIView animateWithDuration:0.25
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             [self.orderCellContentView layoutIfNeeded];
+                         }
+                         completion:nil];
+    } else {
+        [self.orderCellContentView layoutIfNeeded];
+    }
 }
 
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
@@ -216,10 +227,10 @@
             //            CGPoint velocity = [recognizer velocityInView:self.contentView];
             
             if(velocity.x < 0){
-                [self moveContentToLeft];
+                [self moveContentToLeft:YES];
                 [self.delegate db_orderItemCellSwipe:self];
             } else {
-                [self moveContentToOriginal];
+                [self moveContentToOriginal:YES];
             }
         }
     }

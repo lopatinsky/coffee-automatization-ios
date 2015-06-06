@@ -28,7 +28,10 @@
 @property (strong, nonatomic) NSArray *errors;
 @property (strong, nonatomic) NSArray *promos;
 
+@property (nonatomic) BOOL replaceToSubstituteAutomatic;
 @property (strong, nonatomic) DBMenuPosition *substitute;
+
+- (void)clear;
 @end
 
 

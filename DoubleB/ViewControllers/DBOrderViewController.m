@@ -252,7 +252,8 @@
         }
     }
     
-    [cell configureWithOrderItem:item];
+    cell.orderItem = item;
+    [cell configure];
     cell.panGestureRecognizer.delegate = self;
     
     return cell;

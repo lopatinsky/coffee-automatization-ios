@@ -90,13 +90,17 @@ extern NSString* const kDBDefaultsPaymentType;
 
 + (instancetype)sharedManager;
 
+- (void)reloadTotal;
+
 /**
 * Register new order on server in order to get orderID
 */
 - (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler;
 
 - (NSInteger)addPosition:(DBMenuPosition *)position;
-- (void)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
+
+// Return index of items that was merged into current item
+- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
 - (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index;

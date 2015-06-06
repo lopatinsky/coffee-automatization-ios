@@ -20,5 +20,6 @@
 
 @property (nonatomic) BOOL showBonusPositionsView;
 
+- (void)reload;
 - (void)showBonusPositionsView:(BOOL)showBonusPositionsView animated:(BOOL)animated;
 @end

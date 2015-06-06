@@ -60,6 +60,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         self.items = [NSMutableArray new];
         self.totalPrice = 0;
         
+        NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
+        _venue = [Venue venueById:lastVenueId];
+        
         self.bonusPositions = [NSMutableArray new];
         
         self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
@@ -223,18 +226,24 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return currentCount;
 }
 
-- (void)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position{
+- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position{
     DBMenuPosition *copyPosition = [position copy];
     item.position = copyPosition;
     
+    NSInteger index = -1;
     for(OrderItem *orderItem in self.items){
         if(orderItem != item && [orderItem.position isEqual:copyPosition]){
             item.count += orderItem.count;
+            index = [self.items indexOfObject:orderItem];
             [self.items removeObject:orderItem];
             
             break;
         }
     }
+    
+    [self reloadTotal];
+    
+    return index;
 }
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index{
@@ -267,6 +276,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 - (void)removeOrderItemAtIndex:(NSInteger)index{
     [self.items removeObjectAtIndex:index];
+    
+    [self reloadTotal];
 }
 
 - (NSUInteger)positionsCount {

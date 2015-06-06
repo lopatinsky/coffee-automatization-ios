@@ -19,6 +19,12 @@
 @end
 
 @implementation DBPromoItem
+- (void)clear{
+    self.orderItem = nil;
+    self.errors = @[];
+    self.promos = @[];
+    self.substitute = nil;
+}
 @end
 
 
@@ -206,6 +212,7 @@
                         DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:positionId];
                         if(position){
                             promoItem.substitute = position;
+                            promoItem.replaceToSubstituteAutomatic = [substitute[@"auto_replace"] boolValue];
                             promoItem.errors = @[substitute[@"description"]];
                         }
                     }

@@ -98,11 +98,13 @@
         self.backImageView.image = backImage;
         
         self.frame = rect;
+        [self moveContentRight];
         [view addSubview:self];
     }
 }
 
 - (void)hide{
+    [self moveContentRight];
     [self removeFromSuperview];
 }
 
