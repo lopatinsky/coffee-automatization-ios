@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DBVenuesTableViewController.h"
+
 @interface DBAddressViewController : UIViewController
-- (instancetype)initWithControllers:(NSArray *)controllers;
+
+@property (strong, nonatomic) id<DBVenuesTableViewControllerDelegate> delegate;
+
 @end

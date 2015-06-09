@@ -49,6 +49,7 @@
 #import "DBDiscountAdvertView.h"
 #import "DBPositionViewController.h"
 #import "DBNewOrderItemAdditionView.h"
+#import "DBAddressViewController.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -719,12 +720,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (IBAction)clickAddress:(id)sender {
     [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
-    DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
-    venuesController.delegate = self;
-    venuesController.venues = self.venues;
-    venuesController.hidesBottomBarWhenPushed = YES;
     
-    [self.navigationController pushViewController:venuesController animated:YES];
+    DBAddressViewController *addressController = [DBAddressViewController new];
+    addressController.view.frame = [[UIScreen mainScreen] bounds];
+    addressController.delegate = self;
+    
+    [self.navigationController pushViewController:addressController animated:YES];
 }
 
 - (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {

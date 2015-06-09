@@ -33,12 +33,12 @@
     self.tableView.rowHeight = 73;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
+    [self.tableView setSeparatorColor:[UIColor db_defaultColor]];
     
     self.view.backgroundColor = [UIColor db_backgroundColor];
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

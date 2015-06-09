@@ -9,107 +9,113 @@
 #import "DBAddressViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBDeliveryViewController.h"
-#import "UIViewController+NavigationBarFix.h"
+
 #import "OrderManager.h"
+#import "DBCompanyInfo.h"
 
-@interface DBAddressViewController () <DBDeliveryViewControllerDataSource, DBVenuesTableViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (weak, nonatomic) IBOutlet UIView *segmentsHolderView;
-@property (weak, nonatomic) IBOutlet UIView *titleHolderView;
-@property (weak, nonatomic) IBOutlet UIView *horizSeparatorView;
+#import "UIViewController+NavigationBarFix.h"
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@interface DBAddressViewController () <DBDeliveryViewControllerDataSource>
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UIView *placeholderView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet UILabel *deliveryTypeNameLabel;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
-@property (strong, nonatomic) NSArray *controllers;
+@property (strong, nonatomic) IBOutlet UIView *fakeSeparatorView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorHeightConstraint;
+
+@property (strong, nonatomic) NSMutableDictionary *controllers;
+@property (strong, nonatomic) NSArray *deliveryTypeNames;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *segmentHolderHeightConstraint;
+
+
 @end
 
 @implementation DBAddressViewController
-NSMutableArray *controllersInfo;
 
-- (instancetype)initWithControllers:(NSArray *)controllers {
-    self = [super init];
-    if (self) {
-        self.controllers = [NSArray arrayWithArray:controllers];
-    }
-    
-    return self;
-}
+#define DEBUG true
+
+#pragma mark - Life-Cycle methods
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.segmentedControl.tintColor = [UIColor whiteColor];
-    [self.segmentedControl addTarget:self
-                              action:@selector(segmentedControlClick:)
-                    forControlEvents:UIControlEventValueChanged];
     
-    controllersInfo = [NSMutableArray new];
+    self.controllers = [NSMutableDictionary new];
     
-    for (UIViewController *controller in self.controllers) {
-        if ([controller isKindOfClass:[DBVenuesTableViewController class]]) {
-            /* Self-service */
-            [controllersInfo addObject: @{@"name": @"Самовывоз", @"controller": controller, @"title": @"Точки самовывоза"}];
-            ((DBVenuesTableViewController *)controller).delegate = self;
-        } else if ([controller isKindOfClass:[DBDeliveryViewController class]]) {
-            /* Delivery */
-            [controllersInfo addObject: @{@"name": @"Доставка", @"controller": controller, @"title": @"Адрес доставки"}];
-            [((DBDeliveryViewController *)controller) addToDataSource:self];
-        }
-    }
-    
-    [self.segmentedControl removeAllSegments];
-    for (int i = 0; i < [_controllers count]; ++i) {
-        [self.segmentedControl insertSegmentWithTitle:controllersInfo[i][@"name"] atIndex:i animated:NO];
-    }
-    self.segmentedControl.selectedSegmentIndex = 0;
-    [self setContentForIndex:_segmentedControl.selectedSegmentIndex];
-    
-    self.segmentsHolderView.backgroundColor = [UIColor db_defaultColor];
-    self.horizSeparatorView.backgroundColor = [UIColor db_defaultColor];
-    self.titleHolderView.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:17.f];
+    [self initializeViews];
+    [self initializeControllers];
+    [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.backgroundView.backgroundColor = [UIColor db_defaultColor];
-    self.backgroundView.alpha = 0.885;
     [self hideNavigationBarShadow];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated {
     [self showNavigationBarShadow];
 }
 
-- (void)segmentedControlClick:(UISegmentedControl *)segmentedControl {
-    [self setContentForIndex:_segmentedControl.selectedSegmentIndex];
+#pragma mark - Other methods
+- (void)initializeViews {
+    [self setTitle:@"Адрес"];
+    self.placeholderView.backgroundColor = [UIColor db_defaultColor];
+    self.placeholderView.alpha = 0.885;
+    
+    self.segmentedControl.tintColor = [UIColor whiteColor];
+    self.segmentedControl.selectedSegmentIndex = 0;
+    
+    self.fakeSeparatorView.backgroundColor = [UIColor db_defaultColor];
+    self.fakeSeparatorHeightConstraint.constant = 1. / [UIScreen mainScreen].scale;
 }
 
-- (void)setContentForIndex:(NSUInteger)index {
-    [self changeContentViewWithViewController:controllersInfo[index][@"controller"]];
-    [self changeTitleLabelWithText:controllersInfo[index][@"title"]];
-}
-
-- (void)changeTitleLabelWithText:(NSString *)text {
-    self.titleLabel.text = text;
-}
-
-#pragma mark - FIXME DEBUG VIEW HIERARHY
-- (void)changeContentViewWithViewController:(UIViewController *)controller {
-    controller.view.frame = CGRectMake(0, 0, _contentView.frame.size.width, _contentView.frame.size.height);
-    for (UIView *view in self.contentView.subviews) {
-        [view removeFromSuperview];
+- (void)initializeControllers {
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] ||
+        [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway] || DEBUG) {
+        DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
+        newController.delegate = self.delegate;
+        self.controllers[@"Самовывоз"] = @{
+                                            @"controller": newController,
+                                            @"deliveryTypeName": @"Точки самовывоза"
+                                           };
     }
-    [self.contentView addSubview:controller.view];
+    
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping] || DEBUG) {
+        self.controllers[@"Доставка"] = @{
+                                           @"controller": [DBDeliveryViewController new],
+                                           @"deliveryTypeName": @"Адрес доставки"
+                                           };
+    }
+    
+    self.deliveryTypeNames = [self.controllers.allKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+    }];
+    
+    if ([self.deliveryTypeNames count] > 1) {
+        [self.segmentedControl removeAllSegments];
+        [self.deliveryTypeNames enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [self.segmentedControl insertSegmentWithTitle:obj atIndex:idx animated:NO];
+        }];
+        
+        self.segmentedControl.selectedSegmentIndex = 0;
+    } else {
+        self.segmentHolderHeightConstraint.constant = 0.0f;
+        [self.view layoutIfNeeded];
+    }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)deliveryTypeChanged:(id)sender {
+    [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
+}
+
+- (void)displayContentControllerWithTitle:(NSString *)title {
+    UIViewController *controller = self.controllers[title][@"controller"];
+    self.deliveryTypeNameLabel.text = self.controllers[title][@"deliveryTypeName"];
+    [self addChildViewController:controller];
+    controller.view.frame = [self.contentView bounds];
+    [self.contentView addSubview:controller.view];
+    [controller didMoveToParentViewController:self];
 }
 
 #pragma mark - DBDeliveryViewControllerDataSource
