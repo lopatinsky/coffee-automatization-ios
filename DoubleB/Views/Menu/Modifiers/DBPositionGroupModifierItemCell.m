@@ -21,8 +21,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintSelectionViewWidth;
 @property (nonatomic) CGFloat initialSelectionViewWidth;
 
-@property (strong, nonatomic) DBMenuPositionModifierItem *item;
-
 @end
 
 @implementation DBPositionGroupModifierItemCell
@@ -36,11 +34,16 @@
 
 - (void)configureWithModifierItem:(DBMenuPositionModifierItem *)item
                         havePrice:(BOOL)havePrice{
-    self.item = item;
+    _item = item;
     self.havePrice = havePrice;
     
-    self.titleLabel.text = item.itemName;
-    self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
+    if(item){
+        self.titleLabel.text = item.itemName;
+        self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
+    } else {
+        self.titleLabel.text = NSLocalizedString(@"Не выбирать ничего", nil);
+        self.priceLabel.text = @"";
+    }
 }
 
 - (void)setHavePrice:(BOOL)havePrice{

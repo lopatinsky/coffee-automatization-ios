@@ -268,6 +268,10 @@
     } else {
         [view moveContentLeft];
     }
+    
+    [GANHelper analyzeEvent:@"position_inactivity_view_click"
+                      label:_orderItem.position.positionId
+                   category:ORDER_SCREEN];
 }
 
 - (void)db_newOrderItemErrorView:(DBNewOrderItemErrorView *)view didSelectAction:(DBNewOrderItemErrorViewMode)actionMode{

@@ -134,7 +134,7 @@
 
 - (void)moveBack {
     [self.navigationController popViewControllerAnimated:YES];
-    [GANHelper analyzeEvent:@"move_arrow_pressed" category:MENU_SCREEN];
+    [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 
 - (void)cartAddPositionFromCell:(DBPositionCell *)cell{
@@ -410,6 +410,10 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self hideCategoryPicker];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    [GANHelper analyzeEvent:@"menu_scroll" category:MENU_SCREEN];
 }
 
 

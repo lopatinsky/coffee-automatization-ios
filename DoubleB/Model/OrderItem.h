@@ -21,3 +21,8 @@
 + (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
 
 @end
+
+
+@interface OrderItemGift : OrderItem
+@property (nonatomic) BOOL enabled;
+@end

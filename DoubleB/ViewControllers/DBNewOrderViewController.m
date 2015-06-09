@@ -367,6 +367,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                     [_orderManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
                     [promoItem clear];
                     shouldReloadAgain = YES;
+                    
+                    [GANHelper analyzeEvent:@"position_autoreplace"
+                                      label:item.position.positionId
+                                   category:ORDER_SCREEN];
                 }
             }
 
@@ -631,6 +635,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self removeRowAtIndex:index];
     
     [self startUpdatingPromoInfo];
+    
+    [GANHelper analyzeEvent:@"position_inactivity_view_delete_click"
+                      label:cell.orderItem.position.positionId
+                   category:ORDER_SCREEN];
 }
 
 - (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell{
@@ -648,6 +656,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     [self startUpdatingPromoInfo];
+    
+    [GANHelper analyzeEvent:@"position_inactivity_view_replace_click"
+                      label:cell.orderItem.position.positionId
+                   category:ORDER_SCREEN];
 }
 
 
@@ -1149,9 +1161,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
         } completion:nil];
-        [GANHelper analyzeEvent:@"order_placed"
-                          label:[NSString stringWithFormat:@"%@, %@", [OrderManager sharedManager].orderId, [IHSecureStore sharedInstance].clientId]
-                       category:ORDER_SCREEN];
         
         [self.delegate newOrderViewController:self didFinishOrder:order];
     } failure:^(NSString *errorTitle, NSString *errorMessage) {
@@ -1165,7 +1174,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                              cancelButtonTitle:NSLocalizedString(@"ОК", nil)
                              otherButtonTitles:nil
                                        handler:nil];
-        [GANHelper analyzeEvent:@"order_failed" label:errorMessage category:ORDER_SCREEN];
     }];
 }
 

@@ -222,6 +222,8 @@
             }
         }
         
+        // Assemble gift positions for order
+        
         _validOrder = [response[@"valid"] boolValue];
         if(self.lastUpdateNumber == currentUpdateNumber && callback){
             callback(YES);

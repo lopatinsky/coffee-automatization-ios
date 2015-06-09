@@ -284,12 +284,15 @@
                                                          error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 
-    NSDate *start = [NSDate date];
     [[DBAPIClient sharedClient] POST:@"order"
                           parameters:@{@"order": jsonString}
                              timeout:30
                              success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                  //NSLog(@"%@", responseObject);
+                                 
+                                 [GANHelper analyzeEvent:@"order_placed"
+                                                   label:[NSString stringWithFormat:@"%@, %@", [OrderManager sharedManager].orderId, [IHSecureStore sharedInstance].clientId]
+                                                category:ORDER_SCREEN];
                                  
                                  // Save order
                                  Order *ord = [[Order alloc] init:YES];
@@ -343,13 +346,13 @@
                                  [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
                                  
                                  [GANHelper trackNewOrderInfo:ord];
-                                 
-                                 long interval = (long)-[start timeIntervalSinceNow];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
                                  NSString *eventLabel = [NSString stringWithFormat:@"%@,\n %@", [[OrderManager sharedManager] orderId], error.description];
+                                 
+                                 [GANHelper analyzeEvent:@"order_failed" label:eventLabel category:ORDER_SCREEN];
                                  
                                  [OrderManager sharedManager].orderId = nil;
                                  [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
@@ -438,6 +441,9 @@
     
     NSMutableArray *groupModifiers = [NSMutableArray new];
     for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
+        if(!modifier.selectedItem)
+            continue;
+        
         [groupModifiers addObject:@{@"group_modifier_id": modifier.modifierId,
                                     @"choice": modifier.selectedItem.itemId,
                                     @"quantity": @1}];

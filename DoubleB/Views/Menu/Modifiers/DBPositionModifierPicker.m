@@ -153,7 +153,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(self.type == DBPositionModifierPickerTypeGroup){
-        return [self.modifier.items count];
+        NSInteger shift = self.modifier.required ? 0 : 1;
+        return [self.modifier.items count] + shift;
     } else {
         return [self.singleModifiers count];
     }
@@ -167,13 +168,14 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        DBMenuPositionModifierItem *item = self.modifier.items[indexPath.row];
-        [cell configureWithModifierItem:item havePrice:self.havePrice];
-        
-        if([self.modifier.selectedItem isEqual:item]){
-            [cell select:YES animated:NO];
+        NSInteger shift = self.modifier.required ? 0 : 1;
+        if(indexPath.row == 0 && shift == 1){
+            [cell configureWithModifierItem:nil havePrice:NO];
+            [cell select:(self.modifier.selectedItem == nil) animated:NO];
         } else {
-            [cell select:NO animated:NO];
+            DBMenuPositionModifierItem *item = self.modifier.items[indexPath.row - shift];
+            [cell configureWithModifierItem:item havePrice:self.havePrice];
+            [cell select:[self.modifier.selectedItem isEqual:item] animated:NO];
         }
         
         return cell;
@@ -194,22 +196,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(self.type == DBPositionModifierPickerTypeGroup){
-        [self.modifier selectItemAtIndex:indexPath.row];
-        
-        for(int i = 0; i < [self.modifier.items count]; i++){
-            DBPositionGroupModifierItemCell *cell = (DBPositionGroupModifierItemCell*)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            if(i == indexPath.row){
-                [cell select:YES animated:YES];
-            } else {
-                [cell select:NO animated:YES];
-            }
+        NSInteger shift = self.modifier.required ? 0 : 1;
+        if(indexPath.row == 0 && shift == 1){
+            [self.modifier clearSelectedItem];
+        } else {
+            [self.modifier selectItemAtIndex:indexPath.row - shift];
         }
-        DBMenuPositionModifierItem *item = [self.modifier.items objectAtIndex:indexPath.row];
+        
+        for(int i = 0; i < [tableView numberOfRowsInSection:indexPath.section]; i++){
+            DBPositionGroupModifierItemCell *cell = (DBPositionGroupModifierItemCell*)[tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:indexPath.section]];
+            BOOL select = [cell.item isEqual:self.modifier.selectedItem] || (!self.modifier.selectedItem && !cell.item);
+            [cell select:select animated:YES];
+        }
+        
         if([self.delegate respondsToSelector:@selector(db_positionModifierPicker:didSelectNewItem:)]){
-            [self.delegate db_positionModifierPicker:self didSelectNewItem:item];
+            [self.delegate db_positionModifierPicker:self didSelectNewItem:self.modifier.selectedItem];
         }
         
-        [GANHelper analyzeEvent:@"modifier_selected" label:item.itemId category:GROUP_MODIFIER_PICKER];
+        [GANHelper analyzeEvent:@"modifier_selected"
+                          label:self.modifier.selectedItem.itemId
+                       category:GROUP_MODIFIER_PICKER];
     }
 }
 

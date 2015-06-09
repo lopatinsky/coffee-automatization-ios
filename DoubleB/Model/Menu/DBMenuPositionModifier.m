@@ -49,10 +49,17 @@
     modifier.modifierId = modifierDictionary[@"modifier_id"];
     modifier.modifierName = modifierDictionary[@"title"];
     
+    modifier.required = NO;
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
         [modifier.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
+        
+        modifier.required = modifier.required || itemDict[@"default"];
     }
     [modifier sortItems];
+    
+    if(modifier.items.count > 0 && modifier.required){
+        modifier.selectedItem = [modifier.items firstObject];
+    }
     
     // If no variants to choose, not create modifier
     if([modifier.items count] < 1)
@@ -70,19 +77,22 @@
     self.modifierId = modifierDictionary[@"modifier_id"];
     self.modifierName = modifierDictionary[@"title"];
     
+    self.required = NO;
     self.items = [NSMutableArray new];
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
         [self.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
+        
+        self.required = self.required || itemDict[@"default"];
     }
     [self sortItems];
+    
+    if(self.items.count > 0 && self.required){
+        self.selectedItem = [self.items firstObject];
+    }
     
     // If no variants to choose, return fail of synchronization
     if([self.items count] < 1)
         return NO;
-    
-    if(![self.modifierDictionary[@"choices"] isEqualToArray:modifierDictionary[@"choices"]]){
-        self.selectedItem = [self.items firstObject];
-    }
     
     self.modifierDictionary = modifierDictionary;
     

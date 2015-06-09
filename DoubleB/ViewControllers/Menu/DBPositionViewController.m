@@ -167,7 +167,7 @@
 
 - (void)goToOrderViewController{
     [self.parentNavigationController popToRootViewControllerAnimated:YES];
-    [GANHelper analyzeEvent:@"back_arrow_pressed" category:PRODUCT_SCREEN];
+    [GANHelper analyzeEvent:@"order_pressed" category:PRODUCT_SCREEN];
 }
 
 

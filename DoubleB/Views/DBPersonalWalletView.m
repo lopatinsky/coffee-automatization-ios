@@ -57,7 +57,7 @@
 }
 
 - (void)reloadAppearance{
-    self.balanceLabel.text = [NSString stringWithFormat:@"%.1f %@", [DBPromoManager sharedManager].walletBalance, [Compatibility currencySymbol]];
+    self.balanceLabel.text = [NSString stringWithFormat:@"%.1f", [DBPromoManager sharedManager].walletBalance];
     
     if([DBPromoManager sharedManager].walletTextDescription.length > 0){
         self.titleLabel.text = [DBPromoManager sharedManager].walletTextDescription;
