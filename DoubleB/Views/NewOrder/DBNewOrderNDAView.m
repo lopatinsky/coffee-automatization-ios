@@ -19,7 +19,7 @@
 @implementation DBNewOrderNDAView
 
 - (void)awakeFromNib{
-    self.labelNda.text = NSLocalizedString(@"Согласен с условиями политики конфиденциальности", nil);
+    self.labelNda.text = NSLocalizedString(@"Согласен с Правилами оплаты", nil);
     [self reload];
     self.ndaAcceptSwitch.onTintColor = [UIColor db_defaultColor];
     

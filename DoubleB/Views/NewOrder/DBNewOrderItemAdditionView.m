@@ -7,10 +7,11 @@
 //
 
 #import "DBNewOrderItemAdditionView.h"
+#import "OrderManager.h"
 
 @interface DBNewOrderItemAdditionView ()
 @property (weak, nonatomic) IBOutlet UIView *positionAdditionView;
-@property (weak, nonatomic) IBOutlet UIImageView *positionAdditionImageView;
+@property (weak, nonatomic) IBOutlet UILabel *positionAdditionLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *giftAdditionView;
 @property (weak, nonatomic) IBOutlet UIImageView *giftAdditionImageView;
@@ -22,7 +23,8 @@
 @implementation DBNewOrderItemAdditionView
 
 - (void)awakeFromNib{
-    [self.positionAdditionImageView templateImageWithName:@"plus_icon.png"];
+    self.positionAdditionLabel.textColor = [UIColor db_defaultColor];
+    
     [self.giftAdditionImageView templateImageWithName:@"gift_icon.png"];
     
     self.initialGiftAdditionViewWidth = self.constraintGiftAdditionViewWidth.constant;
@@ -43,6 +45,13 @@
             [self.delegate db_newOrderItemAdditionViewDidSelectBonusPositions:self];
         }
     }]];
+    
+    [self reload];
+}
+
+- (void)reload{
+    NSString *text = [OrderManager sharedManager].totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
+    self.positionAdditionLabel.text = text;
 }
 
 - (void)setShowBonusPositionsView:(BOOL)showBonusPositionsView{

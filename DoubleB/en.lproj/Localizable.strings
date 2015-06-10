@@ -6,7 +6,7 @@
   Copyright (c) 2014 Empatika. All rights reserved.
 */
 
-"Согласен с условиями политики конфиденциальности" = "Agree with terms of privacy policy";
+"Согласен с Правилами оплаты" = "Agree with Payment rules";
 
 // Card binding errors
 "DefaultErrorMessage" = "Please try again";
@@ -32,7 +32,7 @@
 
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
-"Кофейни" = "Cafes";
+"Точки" = "Venues";
 
 "Можно выбрать один вариант" = "You can select one option";
 "Можно выбрать несколько" = "You can select multiple options";
@@ -42,7 +42,7 @@
 
 "Заказ #%@" = "Order #%@";
 "Готов к %@" = "Ready at %@";
-"Итого: %ld %@" = "Total: %ld %@";
+"Итого" = "Total";
 "Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
 "Скидка" = "Discount";
 
@@ -77,12 +77,17 @@
 "Карты" = "Cards";
 "Оплата" = "Payment";
 "Написать нам" = "Contact us";
-"О приложении" = "About app";
 "Об акции" = "About promo";
-"Политика конфиденциальности" = "Privacy policy";
+"Справка" = "Documents";
 "Политика" = "Policy";
 "Присылать уведомления" = "Receive notificaions";
+"Список акций" = "Promos";
 "О компании" = "About company";
+
+"О приложении" = "About application";
+"Политика конфиденциальности" = "Privacy policy";
+"Лицензионное соглашение" = "Licence Agreement";
+"Правила оплаты" = "Payment Rules";
 
 "Для отправки сообщений необходима авторизация в Mail" = "Please authorize in Mail to send messages";
 
@@ -121,13 +126,23 @@
 
 "Принять" = "Accept";
 "Информация" = "Information";
-"Вам необходимо ознакомиться и принять политику конфиденциальности" = "You should read and accept privacy policy";
 
 
 "Спец. предложения" = "Special offers";
 "Хотите ли вы активировать контекстные уведомления, чтобы мы присылалали вам спец. предложения и полезную информацию в зависимости от вашего местоположения?" = "Would you like to activate context notifications, so we'll send special offers and useful info depending on your location?";
 "Нет, спасибо" = "No, thanks";
 "Да, пожалуйста" = "Yes";
+
+// Order errors
+"Удалить" = "Delete";
+"Заменить" = "Replace";
+
+
+// Bonus Positions promo
+
+"Бонусы" = "Bonuses";
+"Бонус" = "Bonus";
+"Баланс" = "Balance";
 
 // Sharing
 

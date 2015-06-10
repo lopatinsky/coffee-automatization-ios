@@ -85,7 +85,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (strong, nonatomic) OrderManager *orderManager;
 
-@property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) NSDictionary *currentCard;
 
 @property (nonatomic, strong) DBTimePickerView *pickerView;
@@ -105,6 +104,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.topItem.title = @"";
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeTop;
@@ -198,13 +198,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self updateNearestCafe];
+    [_orderManager reloadTotal];
+    
+    [self reloadItemAdditionView];
+    [self reloadVenue];
     [self reloadTime];
     [self reloadCard];
     [self reloadProfile];
     [self reloadContinueButton];
     [self reloadComment];
     [self reloadBonusesView:NO];
+    [self reloadNDAView];
     
     [self.itemCells removeAllObjects];
     
@@ -253,22 +257,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [super viewDidAppear:animated];
     
     [GANHelper analyzeScreen:ORDER_SCREEN];
-    
-//    CGRect rect = [self.tableView convertRect:self.viewFooter.continueButton.frame fromView:self.viewFooter];
-//    int visibleTableHeight = [UIScreen mainScreen].bounds.size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
-//    if(rect.origin.y + rect.size.height + 5 > visibleTableHeight){
-//        static dispatch_once_t onceToken;
-//        dispatch_once(&onceToken, ^{
-//                [UIView animateWithDuration:0.3f animations:^{
-//                    [self.tableView setContentOffset:CGPointMake(0, rect.origin.y + rect.size.height + 5 - self.tableView.bounds.size.height + self.tabBarController.tabBar.frame.size.height)];
-//                }];
-//        });
-//    }
   
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        [self showHintForUser];
-    });
+    if([OrderManager sharedManager].positionsCount > 0){
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            [self showHintForUser];
+        });
+    }
 
     if ([OrderManager sharedManager].totalCount == 0) {
         [self endUpdatingPromoInfo];
@@ -298,40 +293,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.orderFooter.profileButton addTarget:self action:@selector(clickProfile:) forControlEvents:UIControlEventTouchUpInside];
     [self.orderFooter.paymentButton addTarget:self action:@selector(clickPaymentType:) forControlEvents:UIControlEventTouchUpInside];
     [self.orderFooter.commentButton addTarget:self action:@selector(clickComment:) forControlEvents:UIControlEventTouchUpInside];
-    
-    NSArray *orders = [Order allOrders];
-    if([[NSUserDefaults standardUserDefaults] boolForKey:kDBDefaultsNDASigned] && [orders count] > 0){
-        [self.ndaView hide];
-    }
 }
-
-
-#pragma mark - reload content
-
-- (void)reloadTableViewHeight:(BOOL)animated{
-    int height = 0;
-    
-    NSArray *items = [[OrderManager sharedManager].items arrayByAddingObjectsFromArray:[OrderManager sharedManager].bonusPositions];
-    for(OrderItem *item in items)
-        if(item.position.hasImage){
-            height += 100;
-        } else {
-            height += 60;
-    }
-    
-    if(animated){
-        [UIView animateWithDuration:0.3 animations:^{
-            self.tableViewHeightConstraint.constant = height;
-            [self.tableView layoutIfNeeded];
-            [self.scrollView layoutIfNeeded];
-        }];
-    } else {
-        self.tableViewHeightConstraint.constant = height;
-        [self.tableView layoutIfNeeded];
-        [self.scrollView layoutIfNeeded];
-    }
-}
-
 
 
 #pragma mark - Events
@@ -347,11 +309,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)showHintForUser{
     int numberOfHintsUsed = [[[NSUserDefaults standardUserDefaults] objectForKey:@"NumberOfPositionCellHintForUser"] intValue];
+    
     if(numberOfHintsUsed < 3){
         NSUInteger count = [[OrderManager sharedManager] positionsCount];
         DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:count - 1 inSection:0]];
         
-        [cell moveContentToLeft];
+        [cell moveContentToLeft:YES];
         
         numberOfHintsUsed ++;
         [[NSUserDefaults standardUserDefaults] setObject:@(numberOfHintsUsed)
@@ -393,16 +356,26 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             
             [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
             
-            NSMutableArray *cellsForReload = [NSMutableArray new];
+            BOOL shouldReloadAgain = NO;
             for(int i = 0; i < [OrderManager sharedManager].items.count; i++){
                 OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
                 DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
-                if([promoItem.errors count] > 0){
-                    [cellsForReload addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+                
+                DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                cell.promoItem = promoItem;
+                
+                if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
+                    [_orderManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+                    [promoItem clear];
+                    shouldReloadAgain = YES;
                 }
             }
-            [self.tableView reloadRowsAtIndexPaths:cellsForReload withRowAnimation:UITableViewRowAnimationAutomatic];
 
+            if(shouldReloadAgain){
+                [self startUpdatingPromoInfo];
+            }
+            [self reloadVisibleCells];
+            
             // Gifts logic
             [self.itemAdditionView showBonusPositionsView:[DBPromoManager sharedManager].bonusPositionsAvailable animated:YES];
 
@@ -468,6 +441,40 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 
+#pragma mark - Order Items
+
+- (void)reloadTableViewHeight:(BOOL)animated{
+    int height = 0;
+    
+    NSArray *items = [[OrderManager sharedManager].items arrayByAddingObjectsFromArray:[OrderManager sharedManager].bonusPositions];
+    for(OrderItem *item in items)
+        if(item.position.hasImage){
+            height += 100;
+        } else {
+            height += 60;
+        }
+    
+    if(animated){
+        [UIView animateWithDuration:0.3 animations:^{
+            self.tableViewHeightConstraint.constant = height;
+            [self.tableView layoutIfNeeded];
+            [self.scrollView layoutIfNeeded];
+        }];
+    } else {
+        self.tableViewHeightConstraint.constant = height;
+        [self.tableView layoutIfNeeded];
+        [self.scrollView layoutIfNeeded];
+    }
+}
+
+- (void)reloadVisibleCells{
+    NSArray *cells = [self.tableView visibleCells];
+    for(DBOrderItemCell *cell in cells){
+        [cell reload];
+    }
+}
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -506,16 +513,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         }
     }
     
-    [cell configureWithOrderItem:item];
     cell.delegate = self;
     cell.panGestureRecognizer.delegate = self;
     
+    cell.orderItem = item;
+    
     if(indexPath.section == 0){
         DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
-        if([promoItem.errors count] > 0){
-            [cell configureWithPromoItem:promoItem animated:YES];
-        }
+        cell.promoItem = promoItem;
     }
+    
+    [cell configure];
     
     return cell;
 }
@@ -592,7 +600,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
-    NSInteger count = [[OrderManager sharedManager] decreaseOrderItemCount:index];
+    NSInteger count = [[OrderManager sharedManager] decreaseOrderItemCountAtIndex:index];
     
     if(count == 0){
         [self removeRowAtIndex:index];
@@ -608,28 +616,47 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
 }
 
-//- (void)orderItemCell:(DBOrderItemCell *)cell newPreferedHeight:(NSInteger)height{
-//    NSInteger index = [self.tableView indexPathForCell:cell].row;
-//    
-//    if(index < [self.preferedHeightsForTableView count]){
-//        self.preferedHeightsForTableView[index] = @(height);
-//    }
-//}
-//
-//- (void)orderItemCellReloadHeight:(DBOrderItemCell *)cell{
-//    [self reloadTableViewCellsHeight];
-//}
-
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
-    positionVC.parentNavigationController = self.navigationController;
-    positionVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:positionVC animated:YES];
+    if(![item.position isKindOfClass:[DBMenuBonusPosition class]]){
+        DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+        positionVC.parentNavigationController = self.navigationController;
+        positionVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:positionVC animated:YES];
+    }
+}
+
+- (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell{
+    NSInteger index = [self.tableView indexPathForCell:cell].row;
+    [_orderManager removeOrderItemAtIndex:index];
+    [self removeRowAtIndex:index];
+    
+    [self startUpdatingPromoInfo];
+}
+
+- (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell{
+    if(cell.promoItem.substitute){
+        NSInteger index = [_orderManager replaceOrderItem:cell.orderItem withPosition:cell.promoItem.substitute];
+        [cell.promoItem clear];
+        
+        if(index != -1){
+            [self.tableView beginUpdates];
+            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.tableView endUpdates];
+        }
+        [cell reload];
+        [self reloadTableViewHeight:YES];
+    }
+    
+    [self startUpdatingPromoInfo];
 }
 
 
-#pragma mark - DBNewOrderItemAdditionViewDelegate
+#pragma mark - DBNewOrderItemAdditionView
+
+- (void)reloadItemAdditionView{
+    [self.itemAdditionView reload];
+}
 
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
     if(!self.positionsViewController){
@@ -651,12 +678,36 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Delivery/Venue
 
-- (void)setNearestVenue:(Venue *)nearestVenue{
-    if(nearestVenue){
-        [OrderManager sharedManager].venue = nearestVenue;
+- (void)reloadVenue{
+    if (_orderManager.venue) {
+        [self setVenue:_orderManager.venue];
+    } else {
+        [self.orderFooter.activityIndicator startAnimating];
+        [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
+            [OrderManager sharedManager].location = location;
+            
+            if (location) {
+                [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
+                    if(!venues)
+                        venues = [Venue storedVenues];
+                    
+                    [self setVenue:[venues firstObject]];
+                }];
+            } else {
+                [self setVenue:[[Venue storedVenues] firstObject]];
+            }
+            
+            [self.orderFooter.activityIndicator stopAnimating];
+            [self reloadContinueButton];
+        }];
+    }
+}
+
+- (void)setVenue:(Venue *)venue{
+    if(venue){
+        [OrderManager sharedManager].venue = venue;
         
-        //self.viewFooter.labelAddress.text = [self addressWithoutCity:nearestVenue.address];
-        self.orderFooter.labelAddress.text = nearestVenue.title;
+        self.orderFooter.labelAddress.text = venue.title;
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
         [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
         
@@ -672,54 +723,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.orderFooter.activityIndicator stopAnimating];
 }
 
-- (void)updateNearestCafe {
-    if ([OrderManager sharedManager].venue) {
-        [self setNearestVenue:[OrderManager sharedManager].venue];
-    } else {
-        [self.orderFooter.activityIndicator startAnimating];
-        NSDate *start = [NSDate date];
-        [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-            [OrderManager sharedManager].location = location;
-            
-            if (location) {
-                
-                [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
-                    
-                    long interval = (long)-[start timeIntervalSinceNow];
-                    
-                    if(![OrderManager sharedManager].venue){
-                        if (venues) {
-                            [self setNearestVenue:[venues firstObject]];
-                            self.venues = venues;
-                        } else {
-                            venues = [Venue storedVenues];
-                            if(venues && [venues count] > 0)
-                                [self setNearestVenue:[venues firstObject]];
-                            else
-                                [self setNearestVenue:nil];
-                        }
-                    }
-                    
-                    [self.orderFooter.activityIndicator stopAnimating];
-                    [self reloadContinueButton];
-                }];
-            } else {
-                NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
-                Venue *venue = [Venue venueById:lastVenueId];
-                
-                if(venue){
-                    [self setNearestVenue:venue];
-                } else {
-                    [self setNearestVenue:self.venues[1]];
-                }
-                [self.orderFooter.activityIndicator stopAnimating];
-            }
-        }];
-    }
-}
-
 - (IBAction)clickAddress:(id)sender {
     [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
+    
+    DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+    venuesController.delegate = self;
+    venuesController.venues = [Venue storedVenues];
+    venuesController.hidesBottomBarWhenPushed = YES;
     
     DBAddressViewController *addressController = [DBAddressViewController new];
     addressController.view.frame = [[UIScreen mainScreen] bounds];
@@ -729,7 +739,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
-    [self setNearestVenue:venue];
+    [self setVenue:venue];
     [self.orderFooter.activityIndicator stopAnimating];
 }
 
@@ -751,9 +761,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.orderFooter.labelTime.text = timeString;
 }
 
-- (IBAction)clickTime:(id)sender {
-    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
-    
+- (void)reloadTimePicker{
     if(_orderManager.deliveryType.useTimePicker){
         self.pickerView.type = _orderManager.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
         
@@ -775,6 +783,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.pickerView.segments = titles;
     self.pickerView.selectedSegmentIndex = _orderManager.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     
+    [self.pickerView configure];
+}
+
+- (IBAction)clickTime:(id)sender {
+    [GANHelper analyzeEvent:@"time_click" category:ORDER_SCREEN];
+    
+    [self reloadTimePicker];
     [self.pickerView showOnView:self.tabBarController.view];
 }
 
@@ -816,7 +831,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     _orderManager.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId];
     
-    [self.pickerView configure];
+    [self reloadTimePicker];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
@@ -1012,17 +1027,28 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - DBNewOrderNDAViewDelegate
+#pragma mark - NDA
+
+- (void)reloadNDAView{
+    BOOL showNDA = ![[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
+    showNDA = showNDA || !([Order allOrders].count > 0);
+    if(showNDA){
+        [self.ndaView show];
+    } else {
+        [self.ndaView hide];
+    }
+}
 
 - (void)db_newOrderNDAViewDidTapNDALabel:(DBNewOrderNDAView *)ndaView{
-    DBHTMLViewController *ndaController = [DBHTMLViewController new];
-    ndaController.title = NSLocalizedString(@"Политика", nil);
-    ndaController.url = [NSURL URLWithString:@"http://empatika-doubleb.appspot.com/docs/nda.html"];
-    ndaController.screen = @"NDA_screen";
+    DBHTMLViewController *paymentVC = [DBHTMLViewController new];
+    paymentVC.title = NSLocalizedString(@"Правила оплаты", nil);
+    paymentVC.url = [DBCompanyInfo db_paymentRulesUrl];
+    paymentVC.screen = PAYMENT_RULES_SCREEN;
     
     [GANHelper analyzeEvent:@"confidence_show" category:ORDER_SCREEN];
     
-    [self.navigationController pushViewController:ndaController animated:YES];
+    paymentVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:paymentVC animated:YES];
 }
 
 - (void)db_newOrderNDAView:(DBNewOrderNDAView *)ndaView didSelectSwitchState:(BOOL)on{

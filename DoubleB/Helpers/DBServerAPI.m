@@ -40,8 +40,10 @@
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     
+    BOOL analytics = YES;
     if(clientId){
         params[@"client_id"] = clientId;
+        analytics = NO;
     }
     
     if(branchParams && [branchParams count] != 0){
@@ -93,11 +95,23 @@
 //                                 
 //                                 [[NSUserDefaults standardUserDefaults] synchronize];
                                  
+                                 if(analytics){
+                                     [GANHelper analyzeEvent:@"user_register_success"
+                                                       label:[IHSecureStore sharedInstance].clientId
+                                                    category:APPLICATION_START];
+                                 }
+                                 
                                  if(callback)
                                      callback(YES);
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
+                                 
+                                 if(analytics){
+                                     [GANHelper analyzeEvent:@"user_register_failed"
+                                                       label:error.description
+                                                    category:APPLICATION_START];
+                                 }
                                  
                                  if(callback)
                                      callback(NO);
@@ -191,7 +205,11 @@
     
     // Payment
     if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
-        params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
+        NSData *paymentData = [NSJSONSerialization dataWithJSONObject:[DBServerAPI assemblyPaymentInfo]
+                                                              options:NSJSONWritingPrettyPrinted
+                                                                error:nil];
+        NSString *paymentString = [[NSString alloc] initWithData:paymentData encoding:NSUTF8StringEncoding];
+        params[@"payment"] = paymentString;
     }
 
     [[DBAPIClient sharedClient] POST:@"check_order"
@@ -385,6 +403,19 @@
                             }];
 }
 
++ (void)requestAddressSuggestions:(NSDictionary *)params callback:(void(^)(BOOL success, NSArray *response))callback {
+    [[DBAPIClient sharedClient] GET:@"address/by_street"
+                         parameters:@{@"city": params[@"city"], @"street": params[@"street"]}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if(callback)
+                                    callback(YES, responseObject);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
 
 #pragma mark - Order assembly helpers
 
@@ -487,7 +518,7 @@
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         params[@"time_picker_value"] = [formatter stringFromDate:[OrderManager sharedManager].selectedTime];
     } else {
-        params[@"delivery_slot_id"] = @([[OrderManager sharedManager].selectedTimeSlot.slotId integerValue]);
+        params[@"delivery_slot_id"] = [OrderManager sharedManager].selectedTimeSlot.slotId;
         
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";

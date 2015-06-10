@@ -10,6 +10,7 @@
 
 @interface UIView (SnapshotAdditions)
 
--(UIImage *)snapshotImage;
+- (UIImage *)snapshotImage;
+- (UIImage *)snapshotImageOfFrame:(CGRect)rect;
 
 @end

@@ -7,20 +7,20 @@
 //
 
 #import "DBCompanyInfo.h"
+#import "DBServerAPI.h"
 
 #import "DeliveryManager.h"
 
-#define kDeliveryCity @"kDeliveryCity"
-#define kDeliveryStreet @"kDeliveryStreet"
-#define kDeliveryHouse @"kDeliveryHouse"
-#define kDeliveryCorpus @"kDeliveryCorpus"
+#define kDeliveryAddress @"kDeliveryAddress"
 #define kDeliveryApartment @"kDeliveryApartment"
+#define kDeliveryCity @"kDeliveryCity"
 
 NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDidRecieveSuggestionsNotification";
 
 @interface DeliveryManager()
 
 @property (nonatomic, strong) NSArray *addressSuggestions;
+@property (nonatomic, strong) NSTimer *requestSeggestionsTimer;
 
 @end
 
@@ -31,48 +31,61 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
-        instance.city = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryCity] ?: @"";
-        instance.street = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryStreet] ?: @"";
-        instance.house = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryHouse] ?: @"";
-        instance.corpus = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryCorpus] ?: @"";
+        instance.address = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryAddress] ?: @"";
         instance.apartment = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryApartment] ?: @"";
+        instance.city = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryCity] ?: @"";
         instance.addressSuggestions = @[];
     });
     return instance;
 }
 
-- (nonnull NSArray *)listOfCities {
+- (nonnull NSArray *)arrayOfCities {
     return [[DBCompanyInfo sharedInstance] deliveryCities];
 }
 
 - (void)requestSuggestions {
     // request suggestions from backend and push notification about it
-    NSLog(@"request suggestions for city %@ and street %@", self.city, self.street);
+    [self.requestSeggestionsTimer invalidate];
+    self.requestSeggestionsTimer = nil;
+    NSLog(@"request suggestions for address %@, %@", self.city, self.address);
+    [DBServerAPI requestAddressSuggestions:@{@"city": self.city, @"street": self.address}
+                                  callback:^(BOOL success, NSArray *response) {
+                                      self.addressSuggestions = response;
+                                      [[NSNotificationCenter defaultCenter] postNotificationName:DeliveryManagerDidRecieveSuggestionsNotification object:nil];
+                                  }];
 }
 
 - (nonnull NSArray *)addressSuggestions {
-    return self.addressSuggestions;
+    return _addressSuggestions;
 }
 
 #pragma mark - Setter overrides
-- (void)setCity:(NSString * __nonnull)city {
-    [self saveToUserDefaultsValue:city withKey:kDeliveryCity];
-}
-
-- (void)setStreet:(NSString * __nonnull)street {
-    [self saveToUserDefaultsValue:street withKey:kDeliveryStreet];
-}
-
-- (void)setHouse:(NSString * __nonnull)house {
-    [self saveToUserDefaultsValue:house withKey:kDeliveryHouse];
-}
-
-- (void)setCorpus:(NSString * __nonnull)corpus {
-    [self saveToUserDefaultsValue:corpus withKey:kDeliveryCorpus];
+- (void)setAddress:(NSString * __nonnull)address {
+    if (_address == nil) {
+        _address = address;
+        return;
+    }
+    
+    if (![_address isEqualToString:address]) {
+        _address = address;
+        if (self.requestSeggestionsTimer) {
+            [self.requestSeggestionsTimer invalidate];
+            self.requestSeggestionsTimer = nil;
+        }
+        self.requestSeggestionsTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(requestSuggestions) userInfo:nil repeats:NO];
+        [self saveToUserDefaultsValue:address withKey:kDeliveryAddress];
+    }
 }
 
 - (void)setApartment:(NSString * __nonnull)apartment {
+    _apartment = apartment;
+    
     [self saveToUserDefaultsValue:apartment withKey:kDeliveryApartment];
+}
+
+- (void)setCity:(NSString * __nonnull)city {
+    _city = city;
+    [self saveToUserDefaultsValue:city withKey:kDeliveryCity];
 }
 
 - (void)saveToUserDefaultsValue:(NSString *)value withKey:(NSString *)key {

@@ -20,8 +20,8 @@
 }
 
 + (void)initialize {
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
-    [[GAI sharedInstance] setDefaultTracker:tracker];
+//    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
+//    [[GAI sharedInstance] setDefaultTracker:tracker];
 }
 
 + (void)analyzeScreen:(NSString *)screen {
@@ -42,6 +42,10 @@
                                                                                          label:label
                                                                                          value:nil] build]];
 #endif
+}
+
++ (void)analyzeEvent:(NSString *)eventName number:(NSNumber *)number category:(NSString *)category{
+    [self analyzeEvent:eventName label:[number stringValue] category:category];
 }
 
 

@@ -90,6 +90,8 @@ extern NSString* const kDBDefaultsPaymentType;
 
 + (instancetype)sharedManager;
 
+- (void)reloadTotal;
+
 /**
 * Register new order on server in order to get orderID
 */
@@ -97,8 +99,12 @@ extern NSString* const kDBDefaultsPaymentType;
 
 - (NSInteger)addPosition:(DBMenuPosition *)position;
 
+// Return index of items that was merged into current item
+- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
+
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
-- (NSInteger)decreaseOrderItemCount:(NSInteger)index;
+- (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index;
+- (void)removeOrderItemAtIndex:(NSInteger)index;
 
 - (void)purgePositions; //clean
 - (void)overridePositions:(NSArray *)items; //clean and add from array
@@ -110,7 +116,6 @@ extern NSString* const kDBDefaultsPaymentType;
 - (OrderItem *)itemAtIndex:(NSUInteger)index;
 - (OrderItem *)itemWithPositionId:(NSString *)positionId;
 - (OrderItem *)itemWithTemplatePosition:(DBMenuPosition *)templatePosition;
-- (void)removePositionAtIndex:(NSUInteger)index;
 - (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index;
 
 - (void)selectIfPossibleDefaultPaymentType;

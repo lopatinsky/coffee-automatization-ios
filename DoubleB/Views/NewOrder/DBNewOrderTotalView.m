@@ -59,7 +59,7 @@
                         value:@(NSUnderlineStyleSingle)
                         range:NSMakeRange(0, oldTotalString.length)];
     
-    self.labelTotal.text = NSLocalizedString(@"Итого: ", nil);
+    self.labelTotal.text = [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Итого", nil)];
     self.labelOldTotal.attributedText = totalString;
     self.labelActualTotal.text = actualTotalString;
 }

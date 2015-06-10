@@ -15,7 +15,16 @@
 #import "DBMenuBonusPosition.h"
 
 
+@implementation DBPromotion
+@end
+
 @implementation DBPromoItem
+- (void)clear{
+    self.orderItem = nil;
+    self.errors = @[];
+    self.promos = @[];
+    self.substitute = nil;
+}
 @end
 
 
@@ -59,6 +68,17 @@
 
 - (void)updateInfo{
     [DBServerAPI updatePromoInfo:^(NSDictionary *response) {
+        // List of promos
+        NSMutableArray *promotionList = [NSMutableArray new];
+        for(NSDictionary *promotionDict in response[@"promos"]){
+            DBPromotion *promotion = [DBPromotion new];
+            promotion.promotionName = [promotionDict getValueForKey:@"title"] ?: @"";
+            promotion.promotionDescription = [promotionDict getValueForKey:@"description"] ?: @"";
+            
+            [promotionList addObject:promotion];
+        }
+        _promotionList = promotionList;
+        
         // Bonus Positions promo
         NSDictionary *bonusPositionsPromo = response[@"bonuses"];
         
@@ -76,13 +96,22 @@
         }];
         _positionsAvailableAsBonuses = bonusPositions;
         
+//        DBMenuPosition *position1 = [[DBMenu sharedInstance] findPositionWithId:@"4855880898052096"];
+//        DBMenuBonusPosition *bonusPosition1 = [[DBMenuBonusPosition alloc] initWithResponseDictionary:position1.productDictionary];
+//        bonusPosition1.pointsPrice = 3;
+//        
+//        DBMenuPosition *position2 = [[DBMenu sharedInstance] findPositionWithId:@"6020882187157504"];
+//        DBMenuBonusPosition *bonusPosition2 = [[DBMenuBonusPosition alloc] initWithResponseDictionary:position2.productDictionary];
+//        bonusPosition2.pointsPrice = 4;
+//        _positionsAvailableAsBonuses = @[bonusPosition1, bonusPosition2];
         
         _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
         
         // Personal wallet promo
         NSDictionary *personalWalletPromo = response[@"wallet"];
-        _walletEnabled = [personalWalletPromo[@"enabled"] boolValue];
+        _walletEnabled = [personalWalletPromo[@"enable"] boolValue];
         _walletTextDescription = personalWalletPromo[@"text"];
+        [self updatePersonalWalletBalance:nil];
         
         [self synchronize];
     } failure:^(NSError *error) {
@@ -116,7 +145,7 @@
     double currentTotal = [OrderManager sharedManager].totalPrice;
     [DBServerAPI checkNewOrder:^(NSDictionary *response) {
         // bonus points balance
-        _bonusPointsBalance = [[response getValueForKey:@"rest_points"] doubleValue];
+        _bonusPointsBalance = [[response getValueForKey:@"full_points"] doubleValue];
         _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];
         
         // Calculate discount
@@ -164,13 +193,30 @@
                 DBPromoItem *promoItem = [DBPromoItem new];
                 promoItem.orderItem = orderItem;
             
+                // Promos
                 NSMutableArray *itemPromos = [NSMutableArray new];
                 for(NSDictionary *itemPromo in item[@"promos"]){
                     [itemPromos addObject:itemPromo[@"text"]];
                 }
                 promoItem.promos = itemPromos;
                 
+                // Errors
                 promoItem.errors = item[@"errors"];
+                
+                // Substitutes
+                NSArray *substitutes = item[@"substitutes"];
+                if(substitutes && substitutes.count > 0){
+                    NSDictionary *substitute = [substitutes firstObject];
+                    if(substitute){
+                        NSString *positionId = substitute[@"item_id"];
+                        DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:positionId];
+                        if(position){
+                            promoItem.substitute = position;
+                            promoItem.replaceToSubstituteAutomatic = [substitute[@"auto_replace"] boolValue];
+                            promoItem.errors = @[substitute[@"description"]];
+                        }
+                    }
+                }
                 
                 [self.promoItems addObject:promoItem];
             }

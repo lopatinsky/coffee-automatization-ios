@@ -561,18 +561,19 @@
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpr-PN-LP2">
                                     <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="EOk-QG-kb6">
-                                            <rect key="frame" x="115" y="15" width="20" height="20"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="20" id="TAn-jU-o37"/>
-                                                <constraint firstAttribute="width" constant="20" id="dPY-Yi-0Uf"/>
-                                            </constraints>
-                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Меню" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ap-8G-3tV">
+                                            <rect key="frame" x="8" y="8" width="234" height="34"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="centerY" secondItem="EOk-QG-kb6" secondAttribute="centerY" id="Bf3-vx-zKw"/>
-                                        <constraint firstAttribute="centerX" secondItem="EOk-QG-kb6" secondAttribute="centerX" id="Hw9-O7-SUB"/>
+                                        <constraint firstAttribute="trailing" secondItem="1Ap-8G-3tV" secondAttribute="trailing" constant="8" id="36F-c2-vaK"/>
+                                        <constraint firstItem="1Ap-8G-3tV" firstAttribute="top" secondItem="cpr-PN-LP2" secondAttribute="top" constant="8" id="5uc-Y1-4QX"/>
+                                        <constraint firstAttribute="bottom" secondItem="1Ap-8G-3tV" secondAttribute="bottom" constant="8" id="ExA-WN-feh"/>
+                                        <constraint firstItem="1Ap-8G-3tV" firstAttribute="leading" secondItem="cpr-PN-LP2" secondAttribute="leading" constant="8" id="Rga-28-TA1"/>
                                     </constraints>
                                 </view>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fmw-Gh-0Xf">
@@ -620,7 +621,7 @@
                                 <outlet property="giftAdditionImageView" destination="Lmc-cJ-yF1" id="ZCb-3J-8ko"/>
                                 <outlet property="giftAdditionSeparatorView" destination="NZ1-K4-uJQ" id="5NE-GF-H10"/>
                                 <outlet property="giftAdditionView" destination="Fmw-Gh-0Xf" id="Che-Q5-pa9"/>
-                                <outlet property="positionAdditionImageView" destination="EOk-QG-kb6" id="7ST-iT-ifj"/>
+                                <outlet property="positionAdditionLabel" destination="1Ap-8G-3tV" id="Xup-xa-42C"/>
                                 <outlet property="positionAdditionView" destination="cpr-PN-LP2" id="d6c-US-dxb"/>
                             </connections>
                         </view>
@@ -686,7 +687,6 @@
         <image name="gift_icon.png" width="60" height="64"/>
         <image name="mug.png" width="29" height="27"/>
         <image name="payment.png" width="21" height="17"/>
-        <image name="plus_icon.png" width="60" height="60"/>
         <image name="profile.png" width="16" height="19"/>
         <image name="venue.png" width="16" height="22"/>
     </resources>

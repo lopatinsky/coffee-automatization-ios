@@ -76,12 +76,15 @@
 }
 
 - (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+    NSDate *startTime = [NSDate date];
     [[DBAPIClient sharedClient] GET:@"menu"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);
                                 
-                                [GANHelper analyzeEvent:@"menu_update_success" category:MENU_SCREEN];
+                                NSDate *endTime = [NSDate date];
+                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                [GANHelper analyzeEvent:@"menu_load_success" number:@(interval) category:APPLICATION_START];
                                 
                                 [self synchronizeWithResponseMenu:responseObject[@"menu"]];
                                 
@@ -90,7 +93,7 @@
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
-                                [GANHelper analyzeEvent:@"manu_update_failed" label:error.localizedDescription category:MENU_SCREEN];
+                                [GANHelper analyzeEvent:@"manu_load_failed" label:error.description category:APPLICATION_START];
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(NO, nil);

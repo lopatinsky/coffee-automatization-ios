@@ -13,11 +13,11 @@
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
-#import "DBTableItemInactivityView.h"
+#import "DBNewOrderItemErrorView.h"
 
 #import "UIImageView+WebCache.h"
 
-@interface DBOrderItemCell () <UIGestureRecognizerDelegate>
+@interface DBOrderItemCell () <UIGestureRecognizerDelegate, DBNewOrderItemErorViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *moreButton;
 @property (weak, nonatomic) IBOutlet UIButton *lessButton;
 
@@ -31,7 +31,7 @@
 
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 
-@property (strong, nonatomic) DBTableItemInactivityView *inactivityView;
+@property (strong, nonatomic) DBNewOrderItemErrorView *errorView;
 @end
 
 @implementation DBOrderItemCell
@@ -71,12 +71,8 @@
     
     [self addEditButtons];
     
-    self.inactivityView = [DBTableItemInactivityView new];
-    self.inactivityView.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.7f];
-    [self.orderCellContentView addSubview:self.inactivityView];
-    self.inactivityView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.inactivityView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.orderCellContentView];
-    self.inactivityView.hidden = YES;
+    self.errorView = [DBNewOrderItemErrorView new];
+    self.errorView.delegate = self;
     
     self.rightOriginBound = self.leadingSpaceContentViewConstraint.constant;
     self.leftOriginBound = self.rightOriginBound - (self.lessButton.frame.size.width + self.moreButton.frame.size.width);
@@ -96,25 +92,25 @@
     [self.moreButton setTitle:@"+" forState:UIControlStateNormal];
 }
 
-- (void)configureWithOrderItem:(OrderItem *)item{
-    self.leadingSpaceContentViewConstraint.constant = 0;
-    self.trailingSpaceContentViewConstraint.constant = 0;
-    
-    self.orderItem = item;
-    
-    self.titleLabel.text = item.position.name;
+- (void)configure{
+    [self reload];
+    [self moveContentToOriginal:NO];
+}
+
+- (void)reload{
+    self.titleLabel.text = _orderItem.position.name;
     
     if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
-        self.priceLabel.text = @"Бонус";
+        self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     } else {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", item.position.actualPrice];
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", _orderItem.position.actualPrice];
     }
     
     [self reloadCount];
     
     NSMutableString *modifiersString =[[NSMutableString alloc] init];
     
-    for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
+    for(DBMenuPositionModifier *modifier in _orderItem.position.groupModifiers){
         if(modifier.selectedItem){
             if(modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (%@)\n", modifier.actualPrice, modifier.selectedItem.itemName, modifier.modifierName]];
@@ -124,7 +120,7 @@
         }
     }
     
-    for(DBMenuPositionModifier *modifier in item.position.singleModifiers){
+    for(DBMenuPositionModifier *modifier in _orderItem.position.singleModifiers){
         if(modifier.selectedCount > 0){
             if(modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (x%ld)\n", modifier.actualPrice, modifier.modifierName, (long)modifier.selectedCount]];
@@ -140,72 +136,63 @@
     
     if(self.type == DBOrderItemCellTypeFull){
         [self.positionImageView db_showDefaultImage];
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:item.position.imageUrl]
+        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:_orderItem.position.imageUrl]
                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                                              if(!error){
                                                  [self.positionImageView db_hideDefaultImage];
                                              }
                                          }];
     }
-}
-
-- (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated{
-    if([promoItem.errors count] > 0){
-        [self.inactivityView setErrors:promoItem.errors];
+    
+    
+    if([_promoItem.errors count] > 0){
+        self.errorView.mode = _promoItem.substitute ? DBNewOrderItemErrorViewModeReplace : DBNewOrderItemErrorViewModeDelete;
+        self.errorView.message = [_promoItem.errors firstObject];
         
-        if(self.inactivityView.hidden){
-            self.inactivityView.alpha = 0;
-            self.inactivityView.hidden = NO;
-            if(animated){
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.inactivityView.alpha = 1;
-                }];
-            } else {
-                self.inactivityView.alpha = 1;
-            }
-        }
+        [self.errorView showOnView:self.contentView inFrame:CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - self.separatorView.frame.size.height)];
     } else {
-        if(!self.inactivityView.hidden){
-            if(animated){
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.inactivityView.alpha = 0;
-                } completion:^(BOOL finished) {
-                    self.inactivityView.hidden = YES;
-                }];
-            } else {
-                self.inactivityView.alpha = 0;
-                self.inactivityView.hidden = YES;
-            }
-        }
+        [self.errorView hide];
     }
+    
+    [self layoutIfNeeded];
 }
-
 
 - (void)reloadCount{
     self.countLabel.text = [NSString stringWithFormat:@"x%ld", (long)self.orderItem.count];
 }
 
-- (void)moveContentToOriginal{
+- (void)moveContentToOriginal:(BOOL)animated{
     self.leadingSpaceContentViewConstraint.constant = self.rightOriginBound;
     self.trailingSpaceContentViewConstraint.constant = -self.rightOriginBound;
-    [UIView animateWithDuration:0.25
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [self.orderCellContentView layoutIfNeeded];
-                     }
-                     completion:nil];
+    
+    if(animated){
+        [UIView animateWithDuration:0.25
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             [self.orderCellContentView layoutIfNeeded];
+                         }
+                         completion:nil];
+    } else {
+        [self.orderCellContentView layoutIfNeeded];
+    }
 }
 
-- (void)moveContentToLeft{
+- (void)moveContentToLeft:(BOOL)animated{
     self.leadingSpaceContentViewConstraint.constant = self.leftOriginBound;
     self.trailingSpaceContentViewConstraint.constant = -self.leftOriginBound;
-    [UIView animateWithDuration:0.25
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [self.orderCellContentView layoutIfNeeded];
-                     } completion:nil];
+    
+    if(animated){
+        [UIView animateWithDuration:0.25
+                              delay:0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             [self.orderCellContentView layoutIfNeeded];
+                         }
+                         completion:nil];
+    } else {
+        [self.orderCellContentView layoutIfNeeded];
+    }
 }
 
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
@@ -240,10 +227,10 @@
             //            CGPoint velocity = [recognizer velocityInView:self.contentView];
             
             if(velocity.x < 0){
-                [self moveContentToLeft];
+                [self moveContentToLeft:YES];
                 [self.delegate db_orderItemCellSwipe:self];
             } else {
-                [self moveContentToOriginal];
+                [self moveContentToOriginal:YES];
             }
         }
     }
@@ -270,6 +257,28 @@
     [GANHelper analyzeEvent:@"position_minus_click" category:ORDER_SCREEN];
     if([self.delegate respondsToSelector:@selector(db_orderItemCellDecreaseItemCount:)]){
         [self.delegate db_orderItemCellDecreaseItemCount:self];
+    }
+}
+
+#pragma mark - DBNewOrderItemErorViewDelegate
+
+- (void)db_newOrderItemErrorViewDidTap:(DBNewOrderItemErrorView *)view{
+    if(view.isOpen){
+        [view moveContentRight];
+    } else {
+        [view moveContentLeft];
+    }
+}
+
+- (void)db_newOrderItemErrorView:(DBNewOrderItemErrorView *)view didSelectAction:(DBNewOrderItemErrorViewMode)actionMode{
+    if(actionMode == DBNewOrderItemErrorViewModeDelete){
+        if([self.delegate respondsToSelector:@selector(db_orderItemCellDidSelectDelete:)]){
+            [self.delegate db_orderItemCellDidSelectDelete:self];
+        }
+    } else {
+        if([self.delegate respondsToSelector:@selector(db_orderItemCellDidSelectReplace:)]){
+            [self.delegate db_orderItemCellDidSelectReplace:self];
+        }
     }
 }
 

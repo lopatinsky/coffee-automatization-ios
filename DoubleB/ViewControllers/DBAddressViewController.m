@@ -15,27 +15,20 @@
 
 #import "UIViewController+NavigationBarFix.h"
 
-@interface DBAddressViewController () <DBDeliveryViewControllerDataSource>
+@interface DBAddressViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView *placeholderView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
-@property (strong, nonatomic) IBOutlet UILabel *deliveryTypeNameLabel;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
-
-@property (strong, nonatomic) IBOutlet UIView *fakeSeparatorView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorHeightConstraint;
 
 @property (strong, nonatomic) NSMutableDictionary *controllers;
 @property (strong, nonatomic) NSArray *deliveryTypeNames;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *segmentHolderHeightConstraint;
 
-
 @end
 
 @implementation DBAddressViewController
-
-#define DEBUG true
 
 #pragma mark - Life-Cycle methods
 
@@ -59,20 +52,16 @@
 
 #pragma mark - Other methods
 - (void)initializeViews {
-    [self setTitle:@"Адрес"];
     self.placeholderView.backgroundColor = [UIColor db_defaultColor];
     self.placeholderView.alpha = 0.885;
     
     self.segmentedControl.tintColor = [UIColor whiteColor];
     self.segmentedControl.selectedSegmentIndex = 0;
-    
-    self.fakeSeparatorView.backgroundColor = [UIColor db_defaultColor];
-    self.fakeSeparatorHeightConstraint.constant = 1. / [UIScreen mainScreen].scale;
 }
 
 - (void)initializeControllers {
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] ||
-        [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway] || DEBUG) {
+        [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
         DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
         newController.delegate = self.delegate;
         self.controllers[@"Самовывоз"] = @{
@@ -81,9 +70,11 @@
                                            };
     }
     
-    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping] || DEBUG) {
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]) {
+        DBDeliveryViewController *deliveryViewController = [DBDeliveryViewController new];
+        deliveryViewController.delegate = self;
         self.controllers[@"Доставка"] = @{
-                                           @"controller": [DBDeliveryViewController new],
+                                           @"controller": deliveryViewController,
                                            @"deliveryTypeName": @"Адрес доставки"
                                            };
     }
@@ -111,11 +102,20 @@
 
 - (void)displayContentControllerWithTitle:(NSString *)title {
     UIViewController *controller = self.controllers[title][@"controller"];
-    self.deliveryTypeNameLabel.text = self.controllers[title][@"deliveryTypeName"];
+    [self setTitle:self.controllers[title][@"deliveryTypeName"]];
     [self addChildViewController:controller];
     controller.view.frame = [self.contentView bounds];
     [self.contentView addSubview:controller.view];
     [controller didMoveToParentViewController:self];
+}
+
+#pragma mark - KeyboardAppearance protocol FIX IT
+- (void)keyboardWillAppear {
+    self.segmentedControl.userInteractionEnabled = NO;
+}
+
+- (void)keyboardWillDisappear {
+    self.segmentedControl.userInteractionEnabled = YES;
 }
 
 #pragma mark - DBDeliveryViewControllerDataSource

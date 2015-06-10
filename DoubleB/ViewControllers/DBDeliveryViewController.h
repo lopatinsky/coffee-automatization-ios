@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol DBDeliveryViewControllerDataSource <NSObject>
+/**
+ *  Dirty way of solving the problem with segmented control, that responds on 
+ *  taps.
+ *
+ *  TODO: fix it
+ */
+@protocol KeyboardAppearance <NSObject>
 
-- (UIView *)superView;
+- (void)keyboardWillAppear;
+- (void)keyboardWillDisappear;
 
 @end
 
 @interface DBDeliveryViewController : UIViewController
-- (void)addToDataSource:(id<DBDeliveryViewControllerDataSource>)dataSource;
+
+@property (nonatomic, weak) id<KeyboardAppearance> delegate;
+
 @end

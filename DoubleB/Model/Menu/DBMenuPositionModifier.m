@@ -102,6 +102,10 @@
     }
 }
 
+- (void)clearSelectedItem{
+    self.selectedItem = nil;
+}
+
 
 + (DBMenuPositionModifier *)singleModifierFromDictionary:(NSDictionary *)modifierDictionary{
     DBMenuPositionModifier *modifier = [[DBMenuPositionModifier alloc] init];
@@ -175,6 +179,7 @@
         self.modifierPrice = [[aDecoder decodeObjectForKey:@"modifierPrice"] doubleValue];
         self.selectedCount = [[aDecoder decodeObjectForKey:@"selectedCount"] intValue];
         
+        self.required = [[aDecoder decodeObjectForKey:@"required"] boolValue];
         self.items = [aDecoder decodeObjectForKey:@"items"];
         self.selectedItem = [aDecoder decodeObjectForKey:@"selectedItem"];
     }
@@ -193,6 +198,7 @@
     [aCoder encodeObject:@(self.modifierPrice) forKey:@"modifierPrice"];
     [aCoder encodeObject:@(self.selectedCount) forKey:@"selectedCount"];
     
+    [aCoder encodeObject:@(self.required) forKey:@"required"];
     [aCoder encodeObject:self.items forKey:@"items"];
     [aCoder encodeObject:self.selectedItem forKey:@"selectedItem"];
 }
@@ -211,6 +217,7 @@
     copyModifier.minAmount = self.minAmount;
     copyModifier.selectedCount = self.selectedCount;
     
+    copyModifier.required = self.required;
     copyModifier.items = [NSMutableArray new];
     for(DBMenuPositionModifierItem *item in self.items)
         [copyModifier.items addObject:[item copyWithZone:zone]];

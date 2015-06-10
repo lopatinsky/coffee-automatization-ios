@@ -24,7 +24,9 @@ NSString *const kDBDefaultsCompanyInfo = @"kDBDefaultsCompanyInfo";
 
 NSString *const kDBDefaultsLastScheduledLocalNotification = @"kDBDefaultsLastScheduledLocalNotification";
 
-NSString *const kDBFirstLaunchNecessaryInfoLoadedNotification = @"kDBFirstLaunchNecessaryInfoLoadedNotification";
+NSString *const kDBFirstLaunchNecessaryInfoLoadSuccessNotification = @"kDBFirstLaunchNecessaryInfoLoadSuccessNotification";
+NSString *const kDBFirstLaunchNecessaryInfoLoadFailureNotification = @"kDBFirstLaunchNecessaryInfoLoadFailureNotification";
+
 NSString* const kDBStatusUpdatedNotification = @"kDBStatusUpdatedNotification";
 NSString *const kDBNotificationUpdatedOrder = @"kDBNotificationUpdatedOrder";
 NSString *const kDBRepeateOrderNotification = @"kDBRepeateOrderNotification";

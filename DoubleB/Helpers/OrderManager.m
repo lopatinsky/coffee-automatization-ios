@@ -60,6 +60,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         self.items = [NSMutableArray new];
         self.totalPrice = 0;
         
+        NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
+        _venue = [Venue venueById:lastVenueId];
+        
         self.bonusPositions = [NSMutableArray new];
         
         self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
@@ -171,6 +174,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         OrderItem *newItem = [item copy];
         [self.items addObject:newItem];
     }
+    
+    [self reloadTotal];
 }
 
 - (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler {
@@ -221,6 +226,26 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return currentCount;
 }
 
+- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position{
+    DBMenuPosition *copyPosition = [position copy];
+    item.position = copyPosition;
+    
+    NSInteger index = -1;
+    for(OrderItem *orderItem in self.items){
+        if(orderItem != item && [orderItem.position isEqual:copyPosition]){
+            item.count += orderItem.count;
+            index = [self.items indexOfObject:orderItem];
+            [self.items removeObject:orderItem];
+            
+            break;
+        }
+    }
+    
+    [self reloadTotal];
+    
+    return index;
+}
+
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index{
     if(index < 0 || index >= [self.items count])
         return 0;
@@ -234,7 +259,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 }
 
-- (NSInteger)decreaseOrderItemCount:(NSInteger)index {
+- (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index {
     if(index < 0 || index >= [self.items count])
         return 0;
     
@@ -247,6 +272,12 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     [self reloadTotal];
     
     return orderItem.count;
+}
+
+- (void)removeOrderItemAtIndex:(NSInteger)index{
+    [self.items removeObjectAtIndex:index];
+    
+    [self reloadTotal];
 }
 
 - (NSUInteger)positionsCount {
@@ -283,9 +314,6 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return result;
 }
 
-- (void)removePositionAtIndex:(NSUInteger)index {
-    [self.items removeObjectAtIndex:index];
-}
 
 - (void)reloadTotal{
     // Reload initial total
@@ -333,7 +361,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     if(!self.timer){
         long long seconds = [[NSDate date] timeIntervalSince1970];
         seconds = seconds - seconds % 60 + 60 + 1;
-        self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:60.f
+        self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:15.f
                                                 target:self
                                                 selector:@selector(timerTick:)
                                                 userInfo:nil

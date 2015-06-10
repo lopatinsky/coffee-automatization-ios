@@ -8,9 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBAddressViewController">
             <connections>
                 <outlet property="contentView" destination="3he-dJ-O65" id="cUD-Gz-u1z"/>
-                <outlet property="deliveryTypeNameLabel" destination="GmU-BC-DbV" id="q5M-UV-2WO"/>
-                <outlet property="fakeSeparatorHeightConstraint" destination="oYg-G5-w93" id="1eO-Wh-ETV"/>
-                <outlet property="fakeSeparatorView" destination="2GR-3H-cLL" id="FE0-sz-Z3A"/>
                 <outlet property="placeholderView" destination="ia4-md-pNl" id="laj-gg-wmh"/>
                 <outlet property="segmentHolderHeightConstraint" destination="P9y-Um-mvZ" id="4NK-vG-RsR"/>
                 <outlet property="segmentedControl" destination="jQV-4y-Mph" id="4SE-Pz-hWJ"/>
@@ -46,47 +43,8 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3he-dJ-O65" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="159" width="600" height="432"/>
+                    <rect key="frame" x="0.0" y="108" width="600" height="492"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LgH-FQ-rcb" userLabel="Title Holder">
-                    <rect key="frame" x="0.0" y="109" width="600" height="50"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2GR-3H-cLL" userLabel="Fake Separator">
-                            <rect key="frame" x="15" y="49" width="585" height="1"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="1" id="oYg-G5-w93"/>
-                            </constraints>
-                        </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Точки самовывоза" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GmU-BC-DbV">
-                            <rect key="frame" x="192" y="14" width="217" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="sfN-Np-oph"/>
-                                <constraint firstAttribute="width" constant="217" id="t9N-V8-obE"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="centerX" secondItem="GmU-BC-DbV" secondAttribute="centerX" id="0p8-yb-9bm"/>
-                        <constraint firstAttribute="centerY" secondItem="GmU-BC-DbV" secondAttribute="centerY" constant="5.5" id="8XS-MV-61I"/>
-                        <constraint firstAttribute="centerX" secondItem="GmU-BC-DbV" secondAttribute="centerX" id="Thf-Ch-I9i"/>
-                        <constraint firstAttribute="height" constant="50" id="W9h-1P-GF5"/>
-                        <constraint firstItem="2GR-3H-cLL" firstAttribute="leading" secondItem="LgH-FQ-rcb" secondAttribute="leading" constant="15" id="d4o-Wm-N0s"/>
-                        <constraint firstAttribute="bottom" secondItem="2GR-3H-cLL" secondAttribute="bottom" id="drf-9F-pnE"/>
-                        <constraint firstAttribute="trailing" secondItem="2GR-3H-cLL" secondAttribute="trailing" id="erb-6c-GWu"/>
-                        <constraint firstAttribute="centerY" secondItem="GmU-BC-DbV" secondAttribute="centerY" id="f1S-iu-jeT"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="8XS-MV-61I"/>
-                            <exclude reference="Thf-Ch-I9i"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -94,11 +52,8 @@
                 <constraint firstItem="ia4-md-pNl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="03x-4v-wwh"/>
                 <constraint firstAttribute="trailing" secondItem="3he-dJ-O65" secondAttribute="trailing" id="3km-fH-jal"/>
                 <constraint firstItem="3he-dJ-O65" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4En-cf-8C6"/>
-                <constraint firstAttribute="trailing" secondItem="LgH-FQ-rcb" secondAttribute="trailing" id="4wt-lx-hj4"/>
-                <constraint firstAttribute="bottom" secondItem="3he-dJ-O65" secondAttribute="bottom" constant="9" id="Fsi-Jm-8La"/>
-                <constraint firstItem="LgH-FQ-rcb" firstAttribute="top" secondItem="ia4-md-pNl" secondAttribute="bottom" constant="1" id="ZEs-E2-zcE"/>
-                <constraint firstItem="3he-dJ-O65" firstAttribute="top" secondItem="LgH-FQ-rcb" secondAttribute="bottom" id="cFt-BY-g5y"/>
-                <constraint firstItem="LgH-FQ-rcb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dOF-FT-upH"/>
+                <constraint firstAttribute="bottom" secondItem="3he-dJ-O65" secondAttribute="bottom" id="Fsi-Jm-8La"/>
+                <constraint firstItem="3he-dJ-O65" firstAttribute="top" secondItem="ia4-md-pNl" secondAttribute="bottom" id="dpO-DT-lO9"/>
                 <constraint firstItem="ia4-md-pNl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kPX-CL-aA5"/>
                 <constraint firstAttribute="trailing" secondItem="ia4-md-pNl" secondAttribute="trailing" id="sWj-gh-u1l"/>
             </constraints>

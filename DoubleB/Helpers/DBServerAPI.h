@@ -26,4 +26,7 @@
                failure:(void(^)(NSString *errorTitle, NSString *errorMessage))failure;
 
 + (void)getWalletInfo:(void(^)(BOOL success, NSDictionary *response))callback;
+
++ (void)requestAddressSuggestions:(NSDictionary *)params callback:(void(^)(BOOL success, NSArray *response))callback;
+
 @end

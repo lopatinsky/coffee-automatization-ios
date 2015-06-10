@@ -24,4 +24,17 @@
     }
 }
 
+- (UIImage *)snapshotImageOfFrame:(CGRect)rect{
+    if ([self respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+        UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.f);
+        [self drawViewHierarchyInRect:rect afterScreenUpdates:YES];
+        UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return snapshot;
+    } else {
+        return nil;
+    }
+}
+
 @end

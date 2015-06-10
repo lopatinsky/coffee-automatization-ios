@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class OrderItem;
 @class DBPromoItem;
 @class DBOrderItemCell;
@@ -25,12 +26,8 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell;
 
-//- (void)db_orderItemCellDidStartSwipe:(DBOrderItemCell *)cell;
-//- (void)db_orderItemCellDidEndSwipe:(DBOrderItemCell *)cell;
-
-//@optional
-//- (void)orderItemCell:(DBOrderItemCellOld *)cell newPreferedHeight:(NSInteger)height;
-//- (void)orderItemCellReloadHeight:(DBOrderItemCellOld *)cell;
+- (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell;
+- (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell;
 @end
 
 @interface DBOrderItemCell : UITableViewCell
@@ -44,16 +41,17 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 @property (weak, nonatomic) IBOutlet UILabel *modifiersLabel;
 
 @property (strong, nonatomic) OrderItem *orderItem;
+@property (strong, nonatomic) DBPromoItem *promoItem;
 @property (nonatomic, readonly) DBOrderItemCellType type;
 @property (weak, nonatomic) id<DBOrderItemCellDelegate> delegate;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 - (instancetype)initWithType:(DBOrderItemCellType)type;
-- (void)configureWithOrderItem:(OrderItem *)item;
-- (void)configureWithPromoItem:(DBPromoItem *)promoItem animated:(BOOL)animated;
+- (void)configure;
+- (void)reload;
 - (void)reloadCount;
 
-- (void)moveContentToOriginal;
-- (void)moveContentToLeft;
+- (void)moveContentToOriginal:(BOOL)animated;
+- (void)moveContentToLeft:(BOOL)animated;
 
 @end

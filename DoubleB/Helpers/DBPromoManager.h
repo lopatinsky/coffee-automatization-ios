@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class OrderItem;
+@class DBMenuPosition;
+
+/**
+ * Class for holding info about each promotion
+ */
+@interface DBPromotion : NSObject
+@property (strong, nonatomic) NSString *promotionName;
+@property (strong, nonatomic) NSString *promotionDescription;
+@end
 
 /**
  * Class for manage all info about item promo
@@ -18,6 +27,11 @@
 
 @property (strong, nonatomic) NSArray *errors;
 @property (strong, nonatomic) NSArray *promos;
+
+@property (nonatomic) BOOL replaceToSubstituteAutomatic;
+@property (strong, nonatomic) DBMenuPosition *substitute;
+
+- (void)clear;
 @end
 
 
@@ -27,6 +41,8 @@
 + (instancetype)sharedManager;
 - (void)updateInfo;
 
+
+@property (strong, nonatomic) NSArray *promotionList;
 
 //=========== Check of Current Order ===========
 

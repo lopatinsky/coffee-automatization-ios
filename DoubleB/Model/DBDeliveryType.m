@@ -52,10 +52,16 @@
 }
 
 - (NSDate *)maxDate{
-    long long seconds = [[NSDate date] timeIntervalSince1970];
-    seconds = seconds - seconds % (60*60*24) + _maxTimeInterval;
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:currentDate];
     
-    return [NSDate dateWithTimeIntervalSince1970:seconds];
+    long seconds = components.hour * (60 * 60) + components.minute * 60 + components.second;
+    long interval = [currentDate timeIntervalSince1970];
+    interval -= seconds;
+    interval += _maxTimeInterval;
+    
+    
+    return [NSDate dateWithTimeIntervalSince1970:interval];
 }
 
 - (BOOL)onlyTime{

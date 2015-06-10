@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 #import "DBVenuesTableViewController.h"
+#import "DBDeliveryViewController.h"
 
-@interface DBAddressViewController : UIViewController
+@interface DBAddressViewController : UIViewController<KeyboardAppearance>
 
 @property (strong, nonatomic) id<DBVenuesTableViewControllerDelegate> delegate;
 

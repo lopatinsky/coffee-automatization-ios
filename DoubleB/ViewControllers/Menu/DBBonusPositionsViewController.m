@@ -36,7 +36,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.promoDescriptionTitle.text = [DBPromoManager sharedManager].bonusPositionsTextDescription;
-    self.promoBalanceTitleLabel.text = NSLocalizedString(@"Баланс:", nil);
+    self.promoBalanceTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Баланс", nil) ];
     [self reloadBalance];
     self.promoDescriptionSeparatorView.backgroundColor = [UIColor db_separatorColor];
     
