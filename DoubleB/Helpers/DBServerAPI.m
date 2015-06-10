@@ -24,6 +24,7 @@
 #import "DBMastercardPromo.h"
 #import "Compatibility.h"
 #import "DBClientInfo.h"
+#import "DBPayPalManager.h"
 
 #import <Parse/Parse.h>
 
@@ -467,39 +468,31 @@
 
 + (NSDictionary *)assemblyPaymentInfo{
     NSMutableDictionary *payment = [NSMutableDictionary new];
-    switch ([OrderManager sharedManager].paymentType) {
-        case PaymentTypeCard:{
-            payment[@"type_id"] = @1;
+    
+    payment[@"type_id"] = @([OrderManager sharedManager].paymentType);
+    
+    if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+        NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
+        if(card[@"cardToken"]){
+            payment[@"binding_id"] = card[@"cardToken"];
             
-            NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
-            if(card[@"cardToken"]){
-                payment[@"binding_id"] = card[@"cardToken"];
-                
-                BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
-                payment[@"mastercard"] = @(mcardOrMaestro);
-                
-                NSString *cardPan = card[@"cardPan"];
-                if(cardPan.length > 4){
-                    cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
-                }
-                payment[@"card_pan"] = cardPan ?: @"";
+            BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
+            payment[@"mastercard"] = @(mcardOrMaestro);
+            
+            NSString *cardPan = card[@"cardPan"];
+            if(cardPan.length > 4){
+                cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
             }
-            payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
-            payment[@"return_url"] = @"alpha-payment://return-page";
+            payment[@"card_pan"] = cardPan ?: @"";
         }
-            break;
-            
-        case PaymentTypeCash:
-            payment[@"type_id"] = @0;
-            break;
-            
-        case PaymentTypeExtraType:
-            payment[@"type_id"] = @2;
-            break;
-            
-        default:
-            break;
+        payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+        payment[@"return_url"] = @"alpha-payment://return-page";
     }
+    
+    if([OrderManager sharedManager].paymentType == PaymentTypePayPal){
+        payment[@"correlation_id"] = [DBPayPalManager sharedInstance].paymentMetadata ?: @"";
+    }
+    
     payment[@"wallet_payment"] = [DBPromoManager sharedManager].walletActiveForOrder ? @([DBPromoManager sharedManager].walletPointsAvailableForOrder) : @(0);
     
     return payment;

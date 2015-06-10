@@ -169,7 +169,7 @@
             [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
         }
         ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
-        ord.paymentType = [orderDictionary[@"payment_type_id"] intValue] + 1;
+        ord.paymentType = [orderDictionary[@"payment_type_id"] intValue];
         ord.status = [orderDictionary[@"status"] intValue];
         ord.venue = [Venue venueById:orderDictionary[@"venue_id"]];
         

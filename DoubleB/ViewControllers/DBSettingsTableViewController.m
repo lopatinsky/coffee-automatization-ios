@@ -22,6 +22,7 @@
 #import "DBPromoManager.h"
 #import "Order.h"
 #import "Compatibility.h"
+#import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 
 #import "UIViewController+ShareExtension.h"
@@ -61,16 +62,26 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"profile",
                                     @"viewController": profileVC}];
     
+    // Payment item
     // Cards item
     NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
-    if([availablePaymentTypes containsObject:@(PaymentTypeCard)]){
+    if([availablePaymentTypes containsObject:@(PaymentTypeCard)] || [availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
         DBCardsViewController *cardsVC = [DBCardsViewController new];
         cardsVC.screen = @"Cards_screen";
+        
+        NSString *title = NSLocalizedString(@"Карты", nil);
+        
+        // PayPal item
+        if([availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
+            title = NSLocalizedString(@"Электронные платежи", nil);
+        }
+        
         [self.settingsItems addObject:@{@"name": @"cardsVC",
-                                        @"title": NSLocalizedString(@"Карты", nil),
+                                        @"title": title,
                                         @"image": @"card",
                                         @"viewController": cardsVC}];
     }
+
     
     // Promotion list item
     DBPromosListViewController *promosVC = [DBPromosListViewController new];
@@ -244,6 +255,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         event = @"about_app_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
+    
     [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];
 }
 

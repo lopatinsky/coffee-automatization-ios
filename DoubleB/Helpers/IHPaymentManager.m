@@ -53,7 +53,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *paymentTypes = [defaults objectForKey:kDBDefaultsAvailablePaymentTypes];
     if (!paymentTypes) {
-        paymentTypes = @[@(PaymentTypeCard), @(PaymentTypeCash) ];
+        paymentTypes = @[@(PaymentTypeCash) ];
         [defaults setObject:paymentTypes forKey:kDBDefaultsAvailablePaymentTypes];
         [defaults synchronize];
     }
@@ -64,19 +64,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                                 //NSLog(@"%@", responseObject);
                                 NSMutableArray *array = [NSMutableArray array];
                                 for (NSDictionary *paymentType in responseObject[@"payment_types"]) {
-                                    switch ([paymentType[@"id"] integerValue]) {
-                                        case 0:
-                                            [array addObject:@(PaymentTypeCash)];
-                                            break;
-                                        case 1:
-                                            [array addObject:@(PaymentTypeCard)];
-                                            break;
-                                        case 2:
-                                            [array addObject:@(PaymentTypeExtraType)];
-                                            break;
-                                        default:
-                                            break;
-                                    }
+                                    [array addObject:@([paymentType[@"id"] intValue])];
                                 }
                                 [defaults setObject:array forKey:kDBDefaultsAvailablePaymentTypes];
                                 [defaults synchronize];

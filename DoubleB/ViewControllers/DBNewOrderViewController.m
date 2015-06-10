@@ -49,6 +49,7 @@
 #import "DBDiscountAdvertView.h"
 #import "DBPositionViewController.h"
 #import "DBNewOrderItemAdditionView.h"
+#import "DBPayPalManager.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -202,7 +203,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadItemAdditionView];
     [self reloadVenue];
     [self reloadTime];
-    [self reloadCard];
+    [self reloadPaymentType];
     [self reloadProfile];
     [self reloadContinueButton];
     [self reloadComment];
@@ -597,7 +598,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [cell reloadCount];
     [self startUpdatingPromoInfo];
-    [self reloadCard];
+    [self reloadPaymentType];
     [self reloadContinueButton];
 }
 
@@ -613,7 +614,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self startUpdatingPromoInfo];
     [self reloadContinueButton];
-    [self reloadCard];
+    [self reloadPaymentType];
 }
 
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
@@ -909,14 +910,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Payment
 
-- (void)reloadCard {
+- (void)reloadPaymentType {
     [self.orderFooter.labelCard db_stopObservingAnimationNotification];
     
-    switch ([OrderManager sharedManager].paymentType) {
+    switch (_orderManager.paymentType) {
         case PaymentTypeNotSet:
-            [[OrderManager sharedManager] selectIfPossibleDefaultPaymentType];
-            if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
-                [self reloadCard];
+            [_orderManager selectIfPossibleDefaultPaymentType];
+            if(_orderManager.paymentType != PaymentTypeNotSet){
+                [self reloadPaymentType];
             } else {
                 self.orderFooter.labelCard.textColor = [UIColor orangeColor];
                 self.orderFooter.labelCard.text = NSLocalizedString(@"Выберите тип оплаты", nil);
@@ -945,12 +946,21 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             break;
             
         case PaymentTypeExtraType:
-            if([OrderManager sharedManager].totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
-                [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
-                [self reloadCard];
+            if(_orderManager.totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
+                _orderManager.paymentType = PaymentTypeNotSet;
+                [self reloadPaymentType];
             } else {
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];
                 self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
+            }
+            break;
+        case PaymentTypePayPal:
+            if([DBPayPalManager sharedInstance].loggedIn){
+                self.orderFooter.labelCard.textColor = [UIColor blackColor];
+                self.orderFooter.labelCard.text = @"PayPal";
+            } else {
+                _orderManager.paymentType = PaymentTypeNotSet;
+                [self reloadPaymentType];
             }
             break;
             
@@ -962,7 +972,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.freeBeverageTipView.userInteractionEnabled = YES;
             [self.freeBeverageTipView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
                 [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
-                [self reloadCard];
+                [self reloadPaymentType];
             }]];
             
             //[self.viewFooter showFreeBeverageTip];

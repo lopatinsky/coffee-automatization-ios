@@ -19,7 +19,12 @@
 @interface DBPayPalManager : NSObject
 @property (weak, nonatomic) id<DBPayPalManagerDelegate> delegate;
 
+@property (nonatomic, readonly) BOOL loggedIn;
+@property (strong, nonatomic, readonly) NSString *paymentMetadata;
+
 + (instancetype)sharedInstance;
 
-- (void)authorize;
+- (void)bindPayPal:(void(^)(BOOL success, NSString *message))callback;
+- (void)unbindPayPal:(void(^)())callback;
+
 @end

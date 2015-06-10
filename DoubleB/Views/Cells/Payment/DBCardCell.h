@@ -13,4 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *cardTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cardActiveIndicator;
 
+@property (nonatomic) BOOL checked;
+
 @end

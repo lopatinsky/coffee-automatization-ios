@@ -7,11 +7,17 @@
 //
 
 #import "DBPayPalManager.h"
+#import "IHSecureStore.h"
+#import "DBAPIClient.h"
 
 #import "PayPalMobile.h"
 
+NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
+
 @interface DBPayPalManager ()<PayPalFuturePaymentDelegate>
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
+
+@property (copy, nonatomic) void(^successBlock)(BOOL, NSString*);
 @end
 
 @implementation DBPayPalManager
@@ -32,13 +38,50 @@
     _payPalConfiguration.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://www.omega.supreme.example/privacy"];
     _payPalConfiguration.merchantUserAgreementURL = [NSURL URLWithString:@"https://www.omega.supreme.example/user_agreement"];
     
-    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentNoNetwork];
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
     
     return self;
 }
 
-- (void)authorize{
+- (BOOL)loggedIn{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLoggedInPayPal] boolValue];
+}
+
+- (void)setLoggedIn:(BOOL)loggedIn{
+    [[NSUserDefaults standardUserDefaults] setObject:@(loggedIn) forKey:kDBDefaultsLoggedInPayPal];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)paymentMetadata{
+    return [PayPalMobile clientMetadataID];
+}
+
+- (void)bindPayPal:(void(^)(BOOL success, NSString *message))callback{
+    self.successBlock = callback;
     [self obtainConsent];
+}
+
+- (void)unbindPayPal:(void(^)())callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    if([IHSecureStore sharedInstance].clientId){
+        params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
+    }
+    
+    [[DBAPIClient sharedClient] POST:@"payment/paypal/unbind"
+                          parameters:params
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 self.loggedIn = NO;
+                                 
+                                 if(callback)
+                                     callback();
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 
+                                 self.loggedIn = NO;
+                                 
+                                 if(callback)
+                                     callback();
+                             }];
 }
 
 
@@ -53,9 +96,36 @@
 }
 
 - (void)sendAuthorizationToServer:(NSDictionary *)authorization {
-    NSData *consentJSONData = [NSJSONSerialization dataWithJSONObject:authorization
-                                                              options:0
-                                                                error:nil];
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if([IHSecureStore sharedInstance].clientId){
+        params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
+    }
+    
+    NSString *auth_code = authorization[@"response"][@"code"];
+    if(auth_code){
+        params[@"auth_code"] = auth_code;
+    }
+    
+    [[DBAPIClient sharedClient] POST:@"payment/paypal/bind"
+                          parameters:params
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 self.loggedIn = YES;
+                                 
+                                 if(_successBlock)
+                                     _successBlock(YES, nil);
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 
+                                 NSString *message;
+                                 
+                                 if (operation.response.statusCode == 400) {
+                                     message = operation.responseObject[@"description"];
+                                 }
+                                 
+                                 if(_successBlock)
+                                     _successBlock(NO, message);
+                             }];
 }
 
 #pragma mark - PayPalFuturePaymentDelegate methods
