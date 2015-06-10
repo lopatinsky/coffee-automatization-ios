@@ -164,6 +164,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     self.location = nil;
     self.orderId = nil;
     
+    self.bonusPositions = [NSMutableArray new];
+    
     self.totalPrice = 0;
 }
 

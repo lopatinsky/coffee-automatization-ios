@@ -7776,7 +7776,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "56cc0f6c-4791-4abf-a1df-bb9d787df853";
+				PROVISIONING_PROFILE = "df40d4d7-395e-449b-a9b1-40bdd5e0917b";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -7809,7 +7809,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "da37981d-acd1-4b77-b9a4-14483b0f4c5c";
+				PROVISIONING_PROFILE = "81a283a9-2508-4197-a9e2-84963c671cfd";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
