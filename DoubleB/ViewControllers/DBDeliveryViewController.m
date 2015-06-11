@@ -8,12 +8,13 @@
 
 #import "DeliveryManager.h"
 #import "DBDeliveryViewController.h"
+#import "SimplePickerView.h"
 #import "UIColor+Brandbook.h"
 
 #import "QuartzCore/QuartzCore.h"
 
 
-@interface DBDeliveryViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SimplePickerViewDelegate>
 
 #pragma mark - Fake Separators
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint;
@@ -34,6 +35,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
+@property (strong, nonatomic) SimplePickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
 @property (strong, nonatomic) DeliveryManager *deliveryManager;
 @property (nonatomic) BOOL keyboardIsHidden;
@@ -59,8 +61,6 @@
     
     if (![self.deliveryManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
-        self.deliveryManager.city = @"Санкт-Петербург";
-        self.cityTextLabel.text = @"Санкт-Петербург";
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestAddressSuggestions) name:DeliveryManagerDidRecieveSuggestionsNotification object:nil];
@@ -81,7 +81,8 @@
 }
 
 - (IBAction)showPickerWithCities:(id)sender {
-
+    self.cityPickerView.items = [self.deliveryManager arrayOfCities];
+    [self.navigationController.view addSubview:self.cityPickerView];
 }
 
 #pragma mark - Other functions
@@ -121,9 +122,8 @@
         [[self.deliveryManager arrayOfCities] containsObject:self.deliveryManager.city]) {
         self.cityTextLabel.text = self.deliveryManager.city;
     } else {
-        // TODO: test with backend and uncomment
-//        self.cityTextLabel.text = [[self.deliveryManager arrayOfCities] firstObject];
-        self.cityTextLabel.text = @"Санкт-Петербург";
+        self.cityTextLabel.text = [[self.deliveryManager arrayOfCities] firstObject];
+        self.deliveryManager.city = self.cityTextLabel.text;
     }
     
     if (![self.deliveryManager.address isEqualToString:@""]) {
@@ -141,6 +141,8 @@
         self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
     }
     self.apartmentTextField.enablesReturnKeyAutomatically = NO;
+    
+    self.cityPickerView = [[SimplePickerView alloc] initWithDelegate:self];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -218,6 +220,23 @@
     self.addressSuggestionsTableView.hidden = YES;
     [self.delegate keyboardWillDisappear];
     
+    return YES;
+}
+
+#pragma mark - SimplePickerViewDelegate
+- (void)db_simplePickerView:(nonnull SimplePickerView *)view didSelectSegmentAtIndex:(NSInteger)index {
+    
+}
+
+- (void)db_simplePickerView:(nonnull SimplePickerView *)view didSelectRowAtIndex:(NSInteger)index {
+    
+}
+
+- (void)db_simplePickerView:(nonnull SimplePickerView *)view didSelectItem:(nonnull NSString *)item {
+    
+}
+
+- (BOOL)db_shouldHideSimplePickerView {
     return YES;
 }
 

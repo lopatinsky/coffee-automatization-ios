@@ -734,6 +734,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     DBAddressViewController *addressController = [DBAddressViewController new];
     addressController.view.frame = [[UIScreen mainScreen] bounds];
     addressController.delegate = self;
+    addressController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:addressController animated:YES];
 }

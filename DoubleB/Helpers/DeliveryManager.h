@@ -15,6 +15,7 @@ extern NSString * __nonnull DeliveryManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, strong) NSString * __nonnull address;
 @property (nonatomic, strong) NSString * __nonnull apartment;
 @property (nonatomic, strong) NSString * __nonnull city;
+@property (nonatomic, strong) NSDictionary * __nonnull selectedAddress;
 
 + (nonnull instancetype)sharedManager;
 

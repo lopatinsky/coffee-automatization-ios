@@ -38,7 +38,7 @@
                                 <constraint firstAttribute="height" constant="1" id="2B9-hx-Mev"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gln-hc-5Rz" userLabel="City Text Label">
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gln-hc-5Rz" userLabel="City Text Label">
                             <rect key="frame" x="16" y="10" width="576" height="30"/>
                             <gestureRecognizers/>
                             <constraints>
@@ -48,7 +48,7 @@
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                             <connections>
-                                <outletCollection property="gestureRecognizers" destination="wNs-We-4MM" appends="YES" id="Zjt-Yu-3A2"/>
+                                <outletCollection property="gestureRecognizers" destination="wNs-We-4MM" appends="YES" id="Wnv-TZ-YeT"/>
                             </connections>
                         </label>
                     </subviews>
@@ -130,18 +130,8 @@
                         <constraint firstItem="WoT-pd-4qz" firstAttribute="top" secondItem="ecL-HN-cff" secondAttribute="top" id="ulR-JI-cBU"/>
                     </constraints>
                 </view>
-                <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="txv-yq-5XK" userLabel="City Picker View">
-                    <rect key="frame" x="0.0" y="438" width="600" height="162"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="162" id="eKf-wS-W9F"/>
-                    </constraints>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="PeD-yD-2ed"/>
-                        <outlet property="delegate" destination="-1" id="uvo-do-Ggd"/>
-                    </connections>
-                </pickerView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZsI-pR-S2d" userLabel="Address Suggestions Table View">
-                    <rect key="frame" x="0.0" y="100" width="600" height="440"/>
+                    <rect key="frame" x="0.0" y="100" width="600" height="500"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="eg5-BR-lBi"/>
@@ -153,20 +143,17 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ZsI-pR-S2d" secondAttribute="trailing" id="6gA-BS-6wY"/>
                 <constraint firstAttribute="trailing" secondItem="xWG-lT-Fi1" secondAttribute="trailing" id="Apl-l8-nJD"/>
-                <constraint firstItem="txv-yq-5XK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Fqx-e3-LwF"/>
-                <constraint firstAttribute="trailing" secondItem="txv-yq-5XK" secondAttribute="trailing" id="NLQ-FY-nVf"/>
                 <constraint firstAttribute="trailing" secondItem="ecL-HN-cff" secondAttribute="trailing" id="Pis-5G-uvj"/>
                 <constraint firstItem="xWG-lT-Fi1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SuK-15-IAa"/>
                 <constraint firstItem="ecL-HN-cff" firstAttribute="top" secondItem="xWG-lT-Fi1" secondAttribute="bottom" id="ZPX-yD-7YS"/>
                 <constraint firstItem="ecL-HN-cff" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hTc-tI-wZE"/>
-                <constraint firstAttribute="bottom" secondItem="txv-yq-5XK" secondAttribute="bottom" id="hWn-nJ-E38"/>
                 <constraint firstItem="ZsI-pR-S2d" firstAttribute="top" secondItem="ecL-HN-cff" secondAttribute="bottom" id="jZo-vm-sG5"/>
                 <constraint firstItem="xWG-lT-Fi1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="l7a-Iz-OcN"/>
-                <constraint firstAttribute="bottom" secondItem="ZsI-pR-S2d" secondAttribute="bottom" constant="60" id="my1-z9-0S5"/>
+                <constraint firstAttribute="bottom" secondItem="ZsI-pR-S2d" secondAttribute="bottom" id="my1-z9-0S5"/>
                 <constraint firstItem="ZsI-pR-S2d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="y66-Ik-ykg"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
-            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <point key="canvasLocation" x="615" y="154"/>
         </view>
         <tapGestureRecognizer id="wNs-We-4MM">

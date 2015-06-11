@@ -35,6 +35,9 @@
                 [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];
             }
             _deliveryTypes = deliveryTypes;
+//            _deliveryCities = response[@"cities"] ?: @[];
+            // Warning: testt
+            _deliveryCities = @[@"Санкт-Петербург", @"Москва"];
             
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
             

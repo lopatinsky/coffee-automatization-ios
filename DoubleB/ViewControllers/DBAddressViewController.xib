@@ -58,7 +58,7 @@
                 <constraint firstAttribute="trailing" secondItem="ia4-md-pNl" secondAttribute="trailing" id="sWj-gh-u1l"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <point key="canvasLocation" x="558" y="365"/>
         </view>
     </objects>

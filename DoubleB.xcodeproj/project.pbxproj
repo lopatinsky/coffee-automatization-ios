@@ -29,6 +29,20 @@
 		5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
 		5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
+		7E0940131B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E0940141B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E0940151B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E0940161B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E0940171B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E0940181B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E0940191B299337003F5D22 /* SimplePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0940121B299337003F5D22 /* SimplePickerView.m */; };
+		7E09401B1B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
+		7E09401C1B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
+		7E09401D1B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
+		7E09401E1B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
+		7E09401F1B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
+		7E0940201B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
+		7E0940211B29935A003F5D22 /* SimplePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E09401A1B29935A003F5D22 /* SimplePickerView.xib */; };
 		7E1AEA3F1B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
 		7E1AEA401B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
 		7E1AEA411B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
@@ -2440,6 +2454,9 @@
 		7E00C3E9198B988E005A0889 /* DBSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSettingsTableViewController.m; sourceTree = "<group>"; };
 		7E00C3EB198B9D16005A0889 /* DBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBProfileViewController.h; sourceTree = "<group>"; };
 		7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBProfileViewController.m; sourceTree = "<group>"; };
+		7E0940111B299337003F5D22 /* SimplePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimplePickerView.h; sourceTree = "<group>"; };
+		7E0940121B299337003F5D22 /* SimplePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimplePickerView.m; sourceTree = "<group>"; };
+		7E09401A1B29935A003F5D22 /* SimplePickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimplePickerView.xib; sourceTree = "<group>"; };
 		7E1AEA3D1B2734F50090FB6C /* DeliveryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryManager.h; sourceTree = "<group>"; };
 		7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryManager.m; sourceTree = "<group>"; };
 		7E1E093D198B7ADC0024D8B8 /* DBVenueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBVenueViewController.h; sourceTree = "<group>"; };
@@ -3463,6 +3480,8 @@
 			children = (
 				7E1AEA3D1B2734F50090FB6C /* DeliveryManager.h */,
 				7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */,
+				D55629B0198A8C1F000F8D82 /* OrderManager.h */,
+				D55629B1198A8C1F000F8D82 /* OrderManager.m */,
 				CB1B6CE81A4C63A70034774C /* jRSwizzle */,
 				CB1432441B0E3D0400DD50C7 /* DBClassLoader.h */,
 				CB1432451B0E3D0400DD50C7 /* DBClassLoader.m */,
@@ -3482,8 +3501,6 @@
 				C775BC2549C7022C507705CC /* IHPaymentManager.h */,
 				C775B7BD79EC02E017B0857F /* CacheHelper.m */,
 				C775B125F97D57CF9FA41414 /* CacheHelper.h */,
-				D55629B0198A8C1F000F8D82 /* OrderManager.h */,
-				D55629B1198A8C1F000F8D82 /* OrderManager.m */,
 				D55629B3198A902E000F8D82 /* Compatibility.h */,
 				D55629B4198A902E000F8D82 /* Compatibility.m */,
 				C775BB57197B17E68A80E854 /* GANHelper.m */,
@@ -3617,6 +3634,9 @@
 		CB6EB71D19E7DC0E0050DF90 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7E0940111B299337003F5D22 /* SimplePickerView.h */,
+				7E0940121B299337003F5D22 /* SimplePickerView.m */,
+				7E09401A1B29935A003F5D22 /* SimplePickerView.xib */,
 				CB136A9C1B0A1E0F00B93178 /* DBInfiniteScrollView.h */,
 				CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */,
 				CB715AE91ACEB21100EA84FC /* CustomControls */,
@@ -4380,6 +4400,7 @@
 				7E3DABA51B06153E00A7FFD1 /* preview_3@2x.png in Resources */,
 				7E3DABA61B06153E00A7FFD1 /* orders_icon_grey@2x.png in Resources */,
 				7E3DABA71B06153E00A7FFD1 /* OrderCell.xib in Resources */,
+				7E09401F1B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				7E3DABA81B06153E00A7FFD1 /* noimage_icon@3x.png in Resources */,
 				7E3DABA91B06153E00A7FFD1 /* DBTableItemInactivityView.xib in Resources */,
 				CBB043011B0CAE3D00901173 /* return_cause_time_icon@2x.png in Resources */,
@@ -4584,6 +4605,7 @@
 				CB1431BB1B0E371A00DD50C7 /* plus_icon@2x.png in Resources */,
 				CB1431BC1B0E371A00DD50C7 /* DBOrderViewHeader.xib in Resources */,
 				CB1431BD1B0E371A00DD50C7 /* share_icon@3x.png in Resources */,
+				7E09401B1B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				CB1431BE1B0E371A00DD50C7 /* cash.png in Resources */,
 				CB1431BF1B0E371A00DD50C7 /* DBOrderItemCompactCell.xib in Resources */,
 				CB1431C01B0E371A00DD50C7 /* return_cause_other_icon@2x.png in Resources */,
@@ -4800,6 +4822,7 @@
 				CB1433301B0F1BBB00DD50C7 /* DBOrderItemCell.xib in Resources */,
 				CB1433311B0F1BBB00DD50C7 /* back_arrow_icon@2x.png in Resources */,
 				CB1433321B0F1BBB00DD50C7 /* promo_pic.png in Resources */,
+				7E0940201B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				CB1433331B0F1BBB00DD50C7 /* DBAdvertViewController.xib in Resources */,
 				CB1433341B0F1BBB00DD50C7 /* feedback@2x.png in Resources */,
 				CB59CE0E1B2200A900E9DD30 /* DBNewOrderItemErrorView.xib in Resources */,
@@ -4989,6 +5012,7 @@
 				CB1AF82B1AE10E6900FA3224 /* OrderCell.xib in Resources */,
 				CB1AF82C1AE10E6900FA3224 /* noimage_icon@3x.png in Resources */,
 				CBB042EF1B0CAE3C00901173 /* return_cause_time_icon@2x.png in Resources */,
+				7E09401D1B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				CB1AF82D1AE10E6900FA3224 /* DBTableItemInactivityView.xib in Resources */,
 				CB1AF82E1AE10E6900FA3224 /* comment.png in Resources */,
 				CB1AF82F1AE10E6900FA3224 /* visa_icon@2x.png in Resources */,
@@ -5193,6 +5217,7 @@
 				CB3BA3B21B20589300F320CA /* bg1334.jpg in Resources */,
 				CB3BA3B31B20589300F320CA /* plus_icon@2x.png in Resources */,
 				CB3BA3B41B20589300F320CA /* DBOrderViewHeader.xib in Resources */,
+				7E0940211B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				CB3BA3B51B20589300F320CA /* share_icon@3x.png in Resources */,
 				CB3BA3B61B20589300F320CA /* cash.png in Resources */,
 				CB3BA3B71B20589300F320CA /* DBOrderItemCompactCell.xib in Resources */,
@@ -5397,6 +5422,7 @@
 				CB517C071AEFB6B500A50F5C /* noimage_icon@3x.png in Resources */,
 				CB517C081AEFB6B500A50F5C /* DBTableItemInactivityView.xib in Resources */,
 				CB517C091AEFB6B500A50F5C /* comment.png in Resources */,
+				7E09401E1B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				CBB042F81B0CAE3D00901173 /* return_cause_time_icon@2x.png in Resources */,
 				CB517C0A1AEFB6B500A50F5C /* visa_icon@2x.png in Resources */,
 				CB517C0B1AEFB6B500A50F5C /* bg1334.jpg in Resources */,
@@ -5601,6 +5627,7 @@
 				CB6DF3BB1B0C97660032B59B /* plus_icon@2x.png in Resources */,
 				CB60C1531AC5AD2600D5E962 /* DBOrderViewHeader.xib in Resources */,
 				CB60C1541AC5AD2600D5E962 /* share_icon@3x.png in Resources */,
+				7E09401C1B29935A003F5D22 /* SimplePickerView.xib in Resources */,
 				CB60C1551AC5AD2600D5E962 /* cash.png in Resources */,
 				CB79E9821AD8AECC001693FE /* DBOrderItemCompactCell.xib in Resources */,
 				CBCCCFFC1AE16D3C007027A6 /* return_cause_other_icon@2x.png in Resources */,
@@ -6046,6 +6073,7 @@
 				CBB0430E1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
 				7E3DAAEF1B06153E00A7FFD1 /* DBOrderItemNotesCell.m in Sources */,
 				CB1430DC1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */,
+				7E0940171B299337003F5D22 /* SimplePickerView.m in Sources */,
 				7E3DAAF01B06153E00A7FFD1 /* DBDiscountMessageCell.m in Sources */,
 				7E3DAAF11B06153E00A7FFD1 /* DBMastercardAdvertProgressView.m in Sources */,
 				7E3DAAF21B06153E00A7FFD1 /* DBNewOrderBonusesView.m in Sources */,
@@ -6179,6 +6207,7 @@
 				CB1430FA1B0E371A00DD50C7 /* DBMastercardAdvertProgressView.m in Sources */,
 				CB1430FB1B0E371A00DD50C7 /* DBNewOrderBonusesView.m in Sources */,
 				CBD14B7C1B148ED3005AEAFE /* DBCoffeeAutomationSettingsViewController.m in Sources */,
+				7E0940131B299337003F5D22 /* SimplePickerView.m in Sources */,
 				CB97829D1B1DF80B000B5625 /* DBPromoCell.m in Sources */,
 				CB1430FC1B0E371A00DD50C7 /* DBMastercardAdView.m in Sources */,
 				CB1430FD1B0E371A00DD50C7 /* EXTScope.m in Sources */,
@@ -6321,6 +6350,7 @@
 				CBB719471B14B74200C47A33 /* NSString+LanguageFeature.m in Sources */,
 				CB1432621B0F1BBB00DD50C7 /* AppDelegate.m in Sources */,
 				CB1432631B0F1BBB00DD50C7 /* DBOrderViewController.m in Sources */,
+				7E0940181B299337003F5D22 /* SimplePickerView.m in Sources */,
 				CB1432641B0F1BBB00DD50C7 /* UINavigationController+DBAnimation.m in Sources */,
 				CB1432651B0F1BBB00DD50C7 /* DBNewOrderTotalView.m in Sources */,
 				CB1432661B0F1BBB00DD50C7 /* EXTADT.m in Sources */,
@@ -6443,6 +6473,7 @@
 				CBB0430C1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
 				CB1AF7761AE10E6900FA3224 /* DBOrderItemNotesCell.m in Sources */,
 				CB1430DB1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */,
+				7E0940151B299337003F5D22 /* SimplePickerView.m in Sources */,
 				CB1AF7771AE10E6900FA3224 /* DBDiscountMessageCell.m in Sources */,
 				CB1AF7781AE10E6900FA3224 /* DBMastercardAdvertProgressView.m in Sources */,
 				CB517EA71AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
@@ -6584,6 +6615,7 @@
 				CB3BA2ED1B20589300F320CA /* DBTimePickerView.m in Sources */,
 				CB3BA2EE1B20589300F320CA /* NSString+LanguageFeature.m in Sources */,
 				CB3BA2EF1B20589300F320CA /* AppDelegate.m in Sources */,
+				7E0940191B299337003F5D22 /* SimplePickerView.m in Sources */,
 				CB3BA2F01B20589300F320CA /* DBOrderViewController.m in Sources */,
 				CB3BA2F11B20589300F320CA /* UINavigationController+DBAnimation.m in Sources */,
 				CB3BA2F21B20589300F320CA /* DBNewOrderTotalView.m in Sources */,
@@ -6706,6 +6738,7 @@
 				CBB0430D1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
 				CB517B4D1AEFB6B500A50F5C /* DBOrderItemNotesCell.m in Sources */,
 				CB1430DD1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */,
+				7E0940161B299337003F5D22 /* SimplePickerView.m in Sources */,
 				CB517B4E1AEFB6B500A50F5C /* DBDiscountMessageCell.m in Sources */,
 				CB517B4F1AEFB6B500A50F5C /* DBMastercardAdvertProgressView.m in Sources */,
 				CB517EA81AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
@@ -6944,6 +6977,7 @@
 				CB60C0F91AC5AD2600D5E962 /* GANHelper.m in Sources */,
 				CB60C0FA1AC5AD2600D5E962 /* EXTNil.m in Sources */,
 				CB60C0FB1AC5AD2600D5E962 /* DBClientInfo.m in Sources */,
+				7E0940141B299337003F5D22 /* SimplePickerView.m in Sources */,
 				CBB043131B0CAEFF00901173 /* DBPositionsViewController.m in Sources */,
 				CB60C0FC1AC5AD2600D5E962 /* UIColor+Hex.m in Sources */,
 				CB60C0FD1AC5AD2600D5E962 /* DBAdvertViewController.m in Sources */,
