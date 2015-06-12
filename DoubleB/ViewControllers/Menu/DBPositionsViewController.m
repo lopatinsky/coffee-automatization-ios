@@ -314,6 +314,8 @@
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
     [self cartAddPositionFromCell:cell];
+    
+    [GANHelper analyzeEvent:@"price_pressed" label:cell.position.positionId category:MENU_SCREEN];
 }
 
 //#pragma mark - DBCatecoryHeaderViewDelegate

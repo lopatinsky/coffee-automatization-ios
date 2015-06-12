@@ -29,6 +29,9 @@
 + (NSNumber *)db_companyDefaultColor;
 + (NSString *)db_companyGoogleAnalyticsKey;
 
++ (NSString *)db_companyParseApplicationKey;
++ (NSString *)db_companyParseClientKey;
+
 + (NSURL *)db_aboutAppUrl;
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;

@@ -34,9 +34,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self copyPlist];
+    
 //==================== Frameworks initialization ====================
-    [Parse setApplicationId:@"sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe"
-                  clientKey:@"KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w"];
+    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
     
     [Fabric with:@[CrashlyticsKit]];
     
@@ -48,8 +50,6 @@
     
     
 //================ significant preloadings/initializations =================
-    [self copyPlist];
-    
     [DBServerAPI registerUser:nil];
     
     [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
