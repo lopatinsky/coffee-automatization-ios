@@ -49,10 +49,6 @@
     [self reloadVenues:nil];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [GANHelper analyzeEvent:@"back_click" category:VENUES_SCREEN];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

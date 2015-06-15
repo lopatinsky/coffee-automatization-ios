@@ -32,6 +32,12 @@
 
 #pragma mark - Life-Cycle methods
 
+- (instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate {
+    self = [DBAddressViewController new];
+    self.delegate = delegate;
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -97,6 +103,12 @@
 }
 
 - (IBAction)deliveryTypeChanged:(id)sender {
+    if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Самовывоз"]) {
+        [OrderManager sharedManager].deliveryTypeId = [OrderManager sharedManager].deliveryType.typeId;
+    }
+    if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Доставка"]) {
+        [OrderManager sharedManager].deliveryTypeId = DeliveryTypeIdShipping;
+    }
     [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
 }
 
@@ -119,13 +131,11 @@
 }
 
 #pragma mark - DBDeliveryViewControllerDataSource
-
 - (UIView *)superView {
     return self.contentView;
 }
 
 #pragma mark - DBVenuesTableViewControllerDelegate
-
 - (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
     if(venue){
         [OrderManager sharedManager].venue = venue;

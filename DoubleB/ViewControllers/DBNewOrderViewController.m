@@ -726,14 +726,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (IBAction)clickAddress:(id)sender {
     [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
     
-    DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
-    venuesController.delegate = self;
-    venuesController.venues = [Venue storedVenues];
-    venuesController.hidesBottomBarWhenPushed = YES;
-    
-    DBAddressViewController *addressController = [DBAddressViewController new];
+    DBAddressViewController *addressController = [[DBAddressViewController alloc] initWithDelegate:self];
     addressController.view.frame = [[UIScreen mainScreen] bounds];
-    addressController.delegate = self;
     addressController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:addressController animated:YES];
@@ -1147,7 +1141,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void)sendOrder{
+- (void)sendOrder {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [DBServerAPI createNewOrder:^(Order *order) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];

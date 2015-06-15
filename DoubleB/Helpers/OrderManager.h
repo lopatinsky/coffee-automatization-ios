@@ -32,6 +32,7 @@ extern NSString* const kDBDefaultsPaymentType;
  * Selected type of delivery
  */
 @property (nonatomic, strong) DBDeliveryType *deliveryType;
+@property (nonatomic) DeliveryTypeId deliveryTypeId;
 
 /**
 * Selected venue for order(if not shipping)

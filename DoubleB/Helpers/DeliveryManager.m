@@ -35,6 +35,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
         instance.apartment = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryApartment] ?: @"";
         instance.city = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryCity] ?: @"";
         instance.addressSuggestions = @[];
+        instance.selectedAddress = [NSMutableDictionary dictionaryWithDictionary:@{@"address": [NSMutableDictionary new], @"coordinates": [NSMutableDictionary new]}];
     });
     return instance;
 }
@@ -59,8 +60,13 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     return _addressSuggestions;
 }
 
+- (nonnull NSString *)addressRepresentation {
+    return [NSString stringWithFormat:@"%@, %@", self.city, self.address];
+}
+
 #pragma mark - Setter overrides
 - (void)setAddress:(NSString * __nonnull)address {
+    NSLog(@"DeliveryManager Address: %@", address);
     if (_address == nil) {
         _address = address;
         return;
@@ -78,12 +84,14 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 }
 
 - (void)setApartment:(NSString * __nonnull)apartment {
+    NSLog(@"DeliveryManager Apartment: %@", apartment);
     _apartment = apartment;
     
     [self saveToUserDefaultsValue:apartment withKey:kDeliveryApartment];
 }
 
 - (void)setCity:(NSString * __nonnull)city {
+    NSLog(@"DeliveryManager City: %@", city);
     _city = city;
     [self saveToUserDefaultsValue:city withKey:kDeliveryCity];
 }

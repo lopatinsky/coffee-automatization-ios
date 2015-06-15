@@ -15,4 +15,6 @@
 
 @property (strong, nonatomic) id<DBVenuesTableViewControllerDelegate> delegate;
 
+- (instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate;
+
 @end

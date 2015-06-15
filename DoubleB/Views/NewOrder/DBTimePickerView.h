@@ -18,6 +18,7 @@ typedef NS_ENUM(NSUInteger, DBTimePickerType) {
 };
 
 @protocol DBTimePickerViewDelegate <NSObject>
+@optional
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectSegmentAtIndex:(NSInteger)index;
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index;

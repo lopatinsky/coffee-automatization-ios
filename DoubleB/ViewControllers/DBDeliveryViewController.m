@@ -8,13 +8,13 @@
 
 #import "DeliveryManager.h"
 #import "DBDeliveryViewController.h"
-#import "SimplePickerView.h"
+#import "DBTimePickerView.h"
 #import "UIColor+Brandbook.h"
 
 #import "QuartzCore/QuartzCore.h"
 
 
-@interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, SimplePickerViewDelegate>
+@interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DBTimePickerViewDelegate>
 
 #pragma mark - Fake Separators
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint;
@@ -35,7 +35,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
-@property (strong, nonatomic) SimplePickerView *cityPickerView;
+@property (strong, nonatomic) DBTimePickerView *acityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
 @property (strong, nonatomic) DeliveryManager *deliveryManager;
 @property (nonatomic) BOOL keyboardIsHidden;
@@ -75,14 +75,24 @@
     [self initializeViews];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    self.deliveryManager.selectedAddress[@"address"][@"city"] = self.deliveryManager.city;
+    self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.deliveryManager.apartment;
+    self.deliveryManager.selectedAddress[@"address"][@"street"] = self.deliveryManager.address;
+    
+    // TODO: Country variable is static
+    self.deliveryManager.selectedAddress[@"address"][@"country"] = @"Россия";
+    NSLog(@"SELECTED ADDRESS:\n%@", self.deliveryManager.selectedAddress);
+}
+
 #pragma mark - Life-cycle
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (IBAction)showPickerWithCities:(id)sender {
-    self.cityPickerView.items = [self.deliveryManager arrayOfCities];
-    [self.navigationController.view addSubview:self.cityPickerView];
+    self.acityPickerView.items = [self.deliveryManager arrayOfCities];
+    [self.acityPickerView showOnView:self.navigationController.view];
 }
 
 #pragma mark - Other functions
@@ -142,7 +152,8 @@
     }
     self.apartmentTextField.enablesReturnKeyAutomatically = NO;
     
-    self.cityPickerView = [[SimplePickerView alloc] initWithDelegate:self];
+    self.acityPickerView = [[DBTimePickerView alloc] initWithDelegate:self];
+    self.acityPickerView.type = DBTimePickerTypeItems;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -186,6 +197,7 @@
             self.deliveryManager.address = self.streetTextField.text;
             self.streetIndicatorView.hidden = YES;
         }
+        self.deliveryManager.selectedAddress[@"address"][@"street"] = self.streetTextField.text;
     }
     if (textField == self.apartmentTextField) {
         if ([textField.text isEqualToString:@""]) {
@@ -193,6 +205,7 @@
         } else {
             self.deliveryManager.apartment = self.apartmentTextField.text;
         }
+        self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.apartmentTextField.text;
     }
 }
 
@@ -205,6 +218,7 @@
             self.streetIndicatorView.hidden = YES;
         }
         self.deliveryManager.address = self.streetTextField.text;
+        self.deliveryManager.selectedAddress[@"coordinates"] = [NSMutableDictionary new];
     }
     if (sender == self.apartmentTextField) {
         if ([self.apartmentTextField.text isEqualToString:@""]) {
@@ -223,20 +237,18 @@
     return YES;
 }
 
-#pragma mark - SimplePickerViewDelegate
-- (void)db_simplePickerView:(nonnull SimplePickerView *)view didSelectSegmentAtIndex:(NSInteger)index {
-    
+#pragma mark - DBTimePickerViewDelegate
+- (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index {
+    self.deliveryManager.city = [self.deliveryManager arrayOfCities][index];
+    self.deliveryManager.selectedAddress[@"address"][@"city"] = self.deliveryManager.city;
 }
 
-- (void)db_simplePickerView:(nonnull SimplePickerView *)view didSelectRowAtIndex:(NSInteger)index {
-    
+- (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectItem:(nonnull NSString *)item {
+    self.deliveryManager.city = item;
 }
 
-- (void)db_simplePickerView:(nonnull SimplePickerView *)view didSelectItem:(nonnull NSString *)item {
-    
-}
-
-- (BOOL)db_shouldHideSimplePickerView {
+- (BOOL)db_shouldHideTimePickerView {
+    self.cityTextLabel.text = self.deliveryManager.city;
     return YES;
 }
 
@@ -284,7 +296,8 @@
                                         self.deliveryManager.address, self.addressSuggestions[indexPath.row][@"address"][@"home"]];
     }
     self.streetTextField.text = self.deliveryManager.address;
-    
+    self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.deliveryManager.apartment;
+    self.deliveryManager.selectedAddress[@"coordinates"] = self.addressSuggestions[indexPath.row][@"coordinates"];
     if (self.keyboardIsHidden) {
         self.addressSuggestionsTableView.hidden = YES;
     }
