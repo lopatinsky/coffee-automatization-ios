@@ -75,6 +75,22 @@
     return GAKeyString ?: @"";
 }
 
+
++ (NSString *)db_companyParseApplicationKey{
+    NSDictionary *parseInfo = [self objectFromPropertyListByName:@"Parse"];
+    
+    NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"";
+    return appId;
+}
+
++ (NSString *)db_companyParseClientKey{
+    NSDictionary *parseInfo = [self objectFromPropertyListByName:@"Parse"];
+    
+    NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"";
+    return clientKey;
+}
+
+
 + (NSURL *)db_aboutAppUrl{
     NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/about.html"];
     

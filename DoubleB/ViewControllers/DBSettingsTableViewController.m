@@ -174,7 +174,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     if([settingsItemInfo[@"name"] isEqualToString:@"personalWalletVC"]){
         NSString *profileText;
         if([DBPromoManager sharedManager].walletBalance > 0){
-            profileText = [NSString stringWithFormat:@"%@: %.1f %@", NSLocalizedString(@"Личный счет", nil), [DBPromoManager sharedManager].walletBalance, [Compatibility currencySymbol]];
+            profileText = [NSString stringWithFormat:@"%@: %.1f", NSLocalizedString(@"Личный счет", nil), [DBPromoManager sharedManager].walletBalance];
         } else {
             profileText = NSLocalizedString(@"Личный счет", nil);
         }

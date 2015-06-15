@@ -11,6 +11,7 @@
 @class DBMenuPositionModifierItem;
 
 @interface DBPositionGroupModifierItemCell : UITableViewCell
+@property (nonatomic, strong, readonly) DBMenuPositionModifierItem *item;
 @property (nonatomic) BOOL havePrice;
 @property (nonatomic, readonly) BOOL stateSelected;
 

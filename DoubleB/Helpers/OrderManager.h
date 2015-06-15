@@ -82,7 +82,7 @@ extern NSString* const kDBDefaultsPaymentType;
 
 
 /**
- * Gifts in order
+ * Bonus positions in order
  */
 @property (nonatomic, strong) NSMutableArray *bonusPositions;
 

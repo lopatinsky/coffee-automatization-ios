@@ -67,6 +67,11 @@
 @property (strong, nonatomic, readonly) NSArray *errors;
 @property (strong, nonatomic, readonly) NSArray *promos;
 
+/**
+ * Gift positions available for order
+ */
+@property (strong, nonatomic, readonly) NSArray *orderGifts;
+
 - (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback;
 - (void)clear;
 

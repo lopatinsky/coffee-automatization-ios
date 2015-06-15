@@ -37,6 +37,7 @@
 "Можно выбрать один вариант" = "You can select one option";
 "Можно выбрать несколько" = "You can select multiple options";
 "Добавки" = "Extra";
+"Не выбирать ничего" = "Nothing";
 
 "Пн-пт 8:00-20:00, сб-вс 11:00-18:00" = "Mon-Fri 8:00-20:00, Sat-Sun 11:00-18:00";
 
@@ -98,6 +99,7 @@
 "Ваш e-mail для получения чеков" = "Your e-mail for receipt";
 
 "Ваш баланс:" = "Your balance:";
+"Оплатить бонусами" = "Pay with bonuses";
 
 "Готово" = "Done";
 

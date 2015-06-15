@@ -48,7 +48,7 @@
 
 - (void)reloadTitle{
     if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
-        self.titleLabel.text = [NSString stringWithFormat:@"Оплатить бонусами %.0f %@", [DBPromoManager sharedManager].walletPointsAvailableForOrder, [Compatibility currencySymbol]];
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [DBPromoManager sharedManager].walletPointsAvailableForOrder, [Compatibility currencySymbol]];
     }
 }
 

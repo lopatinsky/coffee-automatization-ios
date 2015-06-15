@@ -61,6 +61,8 @@
     CGRect rect = self.frame;
     rect.size.height = self.initialHeight;
     self.frame = rect;
+    
+    [super layoutSubviews];
 }
 
 @end

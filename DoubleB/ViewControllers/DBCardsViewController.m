@@ -138,7 +138,7 @@
     
     // Cards payment type
     if(section == 2){
-        result += [self.cards count] + 1;
+        result += [self.availablePaymentTypes containsObject:@(PaymentTypeCard)] ?[self.cards count] + 1 : 0;
     }
     
     return result;
