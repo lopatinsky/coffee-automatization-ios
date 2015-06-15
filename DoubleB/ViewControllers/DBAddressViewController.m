@@ -42,10 +42,28 @@
     [super viewDidLoad];
     
     self.controllers = [NSMutableDictionary new];
-    
     [self initializeViews];
     [self initializeControllers];
-    [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
+    
+    if ([self.deliveryTypeNames count] > 1) {
+        if ([OrderManager sharedManager].deliveryTypeId == DeliveryTypeIdShipping) {
+            if ([[self.segmentedControl titleForSegmentAtIndex:0] isEqualToString:@"Доставка"]) {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
+                self.segmentedControl.selectedSegmentIndex = 0;
+            } else {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[1]];
+                self.segmentedControl.selectedSegmentIndex = 1;
+            }
+        } else {
+            if ([[self.segmentedControl titleForSegmentAtIndex:0] isEqualToString:@"Доставка"]) {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[1]];
+                self.segmentedControl.selectedSegmentIndex = 1;
+            } else {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
+                self.segmentedControl.selectedSegmentIndex = 0;
+            }
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -113,6 +131,13 @@
 }
 
 - (void)displayContentControllerWithTitle:(NSString *)title {
+    if ([title isEqualToString:@"Самовывоз"]) {
+        [OrderManager sharedManager].deliveryTypeId = [OrderManager sharedManager].deliveryType.typeId;
+    }
+    if ([title isEqualToString:@"Доставка"]) {
+        [OrderManager sharedManager].deliveryTypeId = DeliveryTypeIdShipping;
+    }
+    
     UIViewController *controller = self.controllers[title][@"controller"];
     [self setTitle:self.controllers[title][@"deliveryTypeName"]];
     [self addChildViewController:controller];

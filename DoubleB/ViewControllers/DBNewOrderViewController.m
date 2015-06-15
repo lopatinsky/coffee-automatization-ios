@@ -17,6 +17,7 @@
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
+#import "DeliveryManager.h"
 #import "OrderManager.h"
 #import "Order.h"
 #import "DBMenuPosition.h"
@@ -691,27 +692,32 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Delivery/Venue
 
 - (void)reloadVenue{
-    if (_orderManager.venue) {
-        [self setVenue:_orderManager.venue];
+    if (_orderManager.deliveryTypeId == DeliveryTypeIdShipping) {
+        self.orderFooter.labelAddress.text = [[DeliveryManager sharedManager] address];
+        self.orderFooter.labelAddress.textColor = [UIColor blackColor];
     } else {
-        [self.orderFooter.activityIndicator startAnimating];
-        [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-            [OrderManager sharedManager].location = location;
-            
-            if (location) {
-                [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
-                    if(!venues)
-                        venues = [Venue storedVenues];
-                    
-                    [self setVenue:[venues firstObject]];
-                }];
-            } else {
-                [self setVenue:[[Venue storedVenues] firstObject]];
-            }
-            
-            [self.orderFooter.activityIndicator stopAnimating];
-            [self reloadContinueButton];
-        }];
+        if (_orderManager.venue) {
+            [self setVenue:_orderManager.venue];
+        } else {
+            [self.orderFooter.activityIndicator startAnimating];
+            [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
+                [OrderManager sharedManager].location = location;
+                
+                if (location) {
+                    [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
+                        if(!venues)
+                            venues = [Venue storedVenues];
+                        
+                        [self setVenue:[venues firstObject]];
+                    }];
+                } else {
+                    [self setVenue:[[Venue storedVenues] firstObject]];
+                }
+                
+                [self.orderFooter.activityIndicator stopAnimating];
+                [self reloadContinueButton];
+            }];
+        }
     }
 }
 
