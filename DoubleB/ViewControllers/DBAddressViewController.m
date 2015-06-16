@@ -117,6 +117,10 @@
         
         self.segmentedControl.selectedSegmentIndex = 0;
     } else {
+        self.placeholderView.hidden = YES;
+        NSMutableArray *placeholderConstraints = [NSMutableArray arrayWithArray:self.placeholderView.constraints];
+        [placeholderConstraints removeObject:self.segmentHolderHeightConstraint];
+        [self.placeholderView removeConstraints:placeholderConstraints];
         self.segmentHolderHeightConstraint.constant = 0.0f;
         [self.view layoutIfNeeded];
     }
