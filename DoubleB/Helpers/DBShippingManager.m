@@ -44,6 +44,15 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     return [[DBCompanyInfo sharedInstance] deliveryCities];
 }
 
+- (BOOL)validAddress{
+    BOOL valid = YES;
+    valid = valid && self.city && self.city.length > 0;
+    valid = valid && self.address && self.address.length > 0;
+    valid = valid && self.apartment && self.apartment.length > 0;
+    
+    return valid;
+}
+
 - (void)requestSuggestions {
     // request suggestions from backend and push notification about it
     [self.requestSuggestionsTimer invalidate];

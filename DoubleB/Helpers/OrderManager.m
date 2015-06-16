@@ -17,6 +17,7 @@
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfo.h"
+#import "DBShippingManager.h"
 
 //#import <Crashlytics/Crashlytics.h>
 
@@ -78,7 +79,11 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 - (BOOL)validOrder{
     BOOL result = true;
     
-    result = result && self.venue;
+    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
+        result = result && [DBShippingManager sharedManager].validAddress;
+    } else {
+        result = result && self.venue;
+    }
     result = result && !(self.paymentType == PaymentTypeNotSet);
     result = result && [[DBClientInfo sharedInstance] validClientName];
     result = result && [[DBClientInfo sharedInstance] validClientPhone];
@@ -385,7 +390,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)selectTakeout{
-    self.deliveryType = self.lastNotShippingDeliveryType;
+    if(self.lastNotShippingDeliveryType)
+        self.deliveryType = self.lastNotShippingDeliveryType;
 }
 
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{

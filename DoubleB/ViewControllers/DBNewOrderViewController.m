@@ -696,8 +696,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)reloadAddress{
     if (_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
-        self.orderFooter.labelAddress.text = [[DBShippingManager sharedManager] address];
-        self.orderFooter.labelAddress.textColor = [UIColor blackColor];
+        NSString *address = [[DBShippingManager sharedManager] address];
+        if(address && address.length > 0){
+            self.orderFooter.labelAddress.text = address;
+            self.orderFooter.labelAddress.textColor = [UIColor blackColor];
+        } else {
+            self.orderFooter.labelAddress.text = NSLocalizedString(@"Введите адрес доставки", nil);
+            self.orderFooter.labelAddress.textColor = [UIColor orangeColor];
+        }
     } else {
         if (_orderManager.venue) {
             [self setVenue:_orderManager.venue];

@@ -20,6 +20,7 @@
 
 @property(strong, nonatomic, readonly) NSArray *deliveryTypes;
 @property(strong, nonatomic, readonly) NSArray *deliveryTypeIdList;
+
 @property(strong, nonatomic, readonly) NSArray *deliveryCities;
 
 - (void)updateInfo;

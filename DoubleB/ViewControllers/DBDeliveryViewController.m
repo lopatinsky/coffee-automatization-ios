@@ -76,7 +76,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    self.deliveryManager.selectedAddress[@"address"][@"city"] = self.deliveryManager.city;
+    self.deliveryManager.selectedAddress[@"address"][@"city"] = self.deliveryManager.city ?: @"";
     self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.deliveryManager.apartment;
     self.deliveryManager.selectedAddress[@"address"][@"street"] = self.deliveryManager.address;
     
@@ -112,13 +112,15 @@
 }
 
 - (void)initializePlaceholders {
-    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Улица, дом (не указаны)", nil)];
-    [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, 23)];
-    [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 10)];
+    NSString *localizedString = NSLocalizedString(@"Улица, дом (не указаны)", nil);
+    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
+    [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
+    [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, [localizedString length])];
     
-    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Кв/Офис", nil)];
-    [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, 7)];
-    [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 7)];
+    localizedString = NSLocalizedString(@"Кв/Офис", nil);
+    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
+    [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
+    [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, [localizedString length])];
 }
 
 - (void)initializeViews {

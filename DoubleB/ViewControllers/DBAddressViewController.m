@@ -63,6 +63,8 @@
                 self.segmentedControl.selectedSegmentIndex = 0;
             }
         }
+    } else if ([self.deliveryTypeNames count]) {
+        [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
     }
 }
 

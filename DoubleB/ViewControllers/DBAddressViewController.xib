@@ -38,8 +38,8 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="jQV-4y-Mph" firstAttribute="top" secondItem="ia4-md-pNl" secondAttribute="top" constant="8" id="61I-n8-G4P"/>
-                        <constraint firstAttribute="bottom" secondItem="jQV-4y-Mph" secondAttribute="bottom" constant="8" id="Eze-qP-hpj"/>
                         <constraint firstAttribute="height" constant="44" id="P9y-Um-mvZ"/>
+                        <constraint firstAttribute="bottom" secondItem="jQV-4y-Mph" secondAttribute="bottom" constant="8" id="jB4-G5-cIO"/>
                         <constraint firstItem="jQV-4y-Mph" firstAttribute="leading" secondItem="ia4-md-pNl" secondAttribute="leading" constant="8" id="vh1-fa-Q9Y"/>
                         <constraint firstAttribute="trailing" secondItem="jQV-4y-Mph" secondAttribute="trailing" constant="8" id="xG1-2f-XNs"/>
                     </constraints>
