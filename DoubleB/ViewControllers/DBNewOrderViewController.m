@@ -173,7 +173,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
  
 // ========= Configure Time =========
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
-    [_orderManager addObserver:self
+    [_deliverySettings addObserver:self
                     forKeyPath:@"selectedTime"
                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                        context:nil];
@@ -277,7 +277,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)dealloc{
     NSLog(@"dealloc");
     
-    [_orderManager removeObserver:self forKeyPath:@"selectedTime"];
+    [_deliverySettings removeObserver:self forKeyPath:@"selectedTime"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
