@@ -46,7 +46,7 @@
     [self initializeControllers];
     
     if ([self.deliveryTypeNames count] > 1) {
-        if ([OrderManager sharedManager].deliveryTypeId == DeliveryTypeIdShipping) {
+        if ([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping) {
             if ([[self.segmentedControl titleForSegmentAtIndex:0] isEqualToString:@"Доставка"]) {
                 [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
                 self.segmentedControl.selectedSegmentIndex = 0;
@@ -90,7 +90,7 @@
         newController.delegate = self.delegate;
         self.controllers[@"Самовывоз"] = @{
                                             @"controller": newController,
-                                            @"deliveryTypeName": @"Точки самовывоза"
+                                            @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)
                                            };
     }
     
@@ -99,7 +99,7 @@
         deliveryViewController.delegate = self;
         self.controllers[@"Доставка"] = @{
                                            @"controller": deliveryViewController,
-                                           @"deliveryTypeName": @"Адрес доставки"
+                                           @"deliveryTypeName": NSLocalizedString(@"Адрес доставки", nil)
                                            };
     }
     
@@ -122,20 +122,20 @@
 
 - (IBAction)deliveryTypeChanged:(id)sender {
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Самовывоз"]) {
-        [OrderManager sharedManager].deliveryTypeId = [OrderManager sharedManager].deliveryType.typeId;
+        [[DBDeliverySettings sharedInstance] selectTakeout];
     }
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Доставка"]) {
-        [OrderManager sharedManager].deliveryTypeId = DeliveryTypeIdShipping;
+        [[DBDeliverySettings sharedInstance] selectShipping];
     }
     [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
 }
 
 - (void)displayContentControllerWithTitle:(NSString *)title {
     if ([title isEqualToString:@"Самовывоз"]) {
-        [OrderManager sharedManager].deliveryTypeId = [OrderManager sharedManager].deliveryType.typeId;
+        [[DBDeliverySettings sharedInstance] selectTakeout];
     }
     if ([title isEqualToString:@"Доставка"]) {
-        [OrderManager sharedManager].deliveryTypeId = DeliveryTypeIdShipping;
+        [[DBDeliverySettings sharedInstance] selectShipping];
     }
     
     UIViewController *controller = self.controllers[title][@"controller"];

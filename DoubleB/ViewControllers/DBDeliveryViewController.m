@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DeliveryManager.h"
+#import "DBShippingManager.h"
 #import "DBDeliveryViewController.h"
 #import "DBTimePickerView.h"
 #import "UIColor+Brandbook.h"
@@ -37,7 +37,7 @@
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
 @property (strong, nonatomic) DBTimePickerView *acityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
-@property (strong, nonatomic) DeliveryManager *deliveryManager;
+@property (strong, nonatomic) DBShippingManager *deliveryManager;
 @property (nonatomic) BOOL keyboardIsHidden;
 
 #pragma mark - Placeholders
@@ -51,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.deliveryManager = [DeliveryManager sharedManager];
+    self.deliveryManager = [DBShippingManager sharedManager];
     
     if ([[self.deliveryManager arrayOfCities] count] == 1) {
         self.tapOnCityLabelRecognizer.enabled = NO;
@@ -112,11 +112,11 @@
 }
 
 - (void)initializePlaceholders {
-    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:@"Улица, дом (не указаны)"];
+    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Улица, дом (не указаны)", nil)];
     [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, 23)];
     [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 10)];
     
-    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:@"Кв/Офис"];
+    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:NSLocalizedString(@"Кв/Офис", nil)];
     [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, 7)];
     [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 7)];
 }

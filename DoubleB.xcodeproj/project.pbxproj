@@ -29,12 +29,12 @@
 		5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
 		5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
-		7E1AEA3F1B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
-		7E1AEA401B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
-		7E1AEA411B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
-		7E1AEA421B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
-		7E1AEA431B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
-		7E1AEA441B2734F50090FB6C /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
+		7E1AEA3F1B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
+		7E1AEA401B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
+		7E1AEA411B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
+		7E1AEA421B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
+		7E1AEA431B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
+		7E1AEA441B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E21EBFE1B28542B00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EBFF1B28542C00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC001B28542C00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
@@ -42,7 +42,7 @@
 		7E21EC021B28542D00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC031B28542E00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC041B28543100AF7859 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
-		7E21EC061B28548900AF7859 /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
+		7E21EC061B28548900AF7859 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E21EC081B285FB900AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
 		7E21EC091B285FBA00AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
 		7E21EC0A1B285FBB00AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
@@ -366,8 +366,8 @@
 		7E85BD741B2F0B11000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD751B2F0B1E000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
 		7E85BD761B2F0B20000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
-		7E85BD771B2F0B33000BC2E1 /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
-		7E85BD781B2F0B34000BC2E1 /* DeliveryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */; };
+		7E85BD771B2F0B33000BC2E1 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
+		7E85BD781B2F0B34000BC2E1 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E85BD791B2F0BAD000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		7E85BD7A1B2F0BAE000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		7E85BD7B1B2F0BAF000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
@@ -3126,8 +3126,8 @@
 		7E00C3E9198B988E005A0889 /* DBSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSettingsTableViewController.m; sourceTree = "<group>"; };
 		7E00C3EB198B9D16005A0889 /* DBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBProfileViewController.h; sourceTree = "<group>"; };
 		7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBProfileViewController.m; sourceTree = "<group>"; };
-		7E1AEA3D1B2734F50090FB6C /* DeliveryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliveryManager.h; sourceTree = "<group>"; };
-		7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeliveryManager.m; sourceTree = "<group>"; };
+		7E1AEA3D1B2734F50090FB6C /* DBShippingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBShippingManager.h; sourceTree = "<group>"; };
+		7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBShippingManager.m; sourceTree = "<group>"; };
 		7E1E093D198B7ADC0024D8B8 /* DBVenueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBVenueViewController.h; sourceTree = "<group>"; };
 		7E1E093E198B7ADC0024D8B8 /* DBVenueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBVenueViewController.m; sourceTree = "<group>"; };
 		7E1E0943198B7D960024D8B8 /* DBOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBOrderViewController.h; sourceTree = "<group>"; };
@@ -3943,8 +3943,8 @@
 		7EB75BF81B2F3DB2006ADEE3 /* Delivery */ = {
 			isa = PBXGroup;
 			children = (
-				7E1AEA3D1B2734F50090FB6C /* DeliveryManager.h */,
-				7E1AEA3E1B2734F50090FB6C /* DeliveryManager.m */,
+				7E1AEA3D1B2734F50090FB6C /* DBShippingManager.h */,
+				7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */,
 			);
 			name = Delivery;
 			sourceTree = "<group>";
@@ -7509,7 +7509,7 @@
 				7E3DAB391B06153E00A7FFD1 /* DBPositionModifierCell.m in Sources */,
 				7E3DAB3A1B06153E00A7FFD1 /* UIView+Extension.m in Sources */,
 				7E3DAB3B1B06153E00A7FFD1 /* EXTConcreteProtocol.m in Sources */,
-				7E1AEA431B2734F50090FB6C /* DeliveryManager.m in Sources */,
+				7E1AEA431B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				7E3DAB3C1B06153E00A7FFD1 /* DBPositionSingleModifierCell.m in Sources */,
 				7E3DAB3D1B06153E00A7FFD1 /* CacheHelper.m in Sources */,
 				7E3DAB3E1B06153E00A7FFD1 /* DBPositionCell.m in Sources */,
@@ -7585,7 +7585,7 @@
 				CB1431151B0E371A00DD50C7 /* UIColor+Brandbook.m in Sources */,
 				CB1431161B0E371A00DD50C7 /* DBCompanyInfoViewController.m in Sources */,
 				CB1431171B0E371A00DD50C7 /* NSDictionary+NSNullRepresentation.m in Sources */,
-				7E1AEA3F1B2734F50090FB6C /* DeliveryManager.m in Sources */,
+				7E1AEA3F1B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB9782891B1DE28D000B5625 /* DBDocumentsViewController.m in Sources */,
 				CB1431181B0E371A00DD50C7 /* UIViewController+DBMessage.m in Sources */,
 				CB1431191B0E371A00DD50C7 /* DBMenu.m in Sources */,
@@ -7706,7 +7706,7 @@
 				CB14326B1B0F1BBB00DD50C7 /* EXTRuntimeExtensions.m in Sources */,
 				CB14326C1B0F1BBB00DD50C7 /* DBCommentViewController.m in Sources */,
 				CB14326D1B0F1BBB00DD50C7 /* DBClassLoader.m in Sources */,
-				7E1AEA441B2734F50090FB6C /* DeliveryManager.m in Sources */,
+				7E1AEA441B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB14326E1B0F1BBB00DD50C7 /* Order.m in Sources */,
 				CB14326F1B0F1BBB00DD50C7 /* UIImageView+Extension.m in Sources */,
 				CB1432701B0F1BBB00DD50C7 /* UIView+DBErrorAnimation.m in Sources */,
@@ -7906,7 +7906,7 @@
 				CB1AF7BC1AE10E6900FA3224 /* DBPositionModifierCell.m in Sources */,
 				CB1AF7BD1AE10E6900FA3224 /* UIView+Extension.m in Sources */,
 				CB1AF7BE1AE10E6900FA3224 /* EXTConcreteProtocol.m in Sources */,
-				7E1AEA411B2734F50090FB6C /* DeliveryManager.m in Sources */,
+				7E1AEA411B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB1AF7BF1AE10E6900FA3224 /* DBPositionSingleModifierCell.m in Sources */,
 				CB1AF7C01AE10E6900FA3224 /* CacheHelper.m in Sources */,
 				CB1AF7C11AE10E6900FA3224 /* DBPositionCell.m in Sources */,
@@ -8059,7 +8059,7 @@
 				CB3BA34E1B20589300F320CA /* UIColor+Hex.m in Sources */,
 				CB3BA34F1B20589300F320CA /* DBAdvertViewController.m in Sources */,
 				CB3BA3501B20589300F320CA /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E21EC061B28548900AF7859 /* DeliveryManager.m in Sources */,
+				7E21EC061B28548900AF7859 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8169,7 +8169,7 @@
 				CB517B961AEFB6B500A50F5C /* DBPositionModifierCell.m in Sources */,
 				CB517B971AEFB6B500A50F5C /* UIView+Extension.m in Sources */,
 				CB517B981AEFB6B500A50F5C /* EXTConcreteProtocol.m in Sources */,
-				7E1AEA421B2734F50090FB6C /* DeliveryManager.m in Sources */,
+				7E1AEA421B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB517B991AEFB6B500A50F5C /* DBPositionSingleModifierCell.m in Sources */,
 				CB517B9A1AEFB6B500A50F5C /* CacheHelper.m in Sources */,
 				CB517B9B1AEFB6B500A50F5C /* DBPositionCell.m in Sources */,
@@ -8322,7 +8322,7 @@
 				CB5AFC981B27209A00904BF7 /* UIColor+Hex.m in Sources */,
 				CB5AFC991B27209A00904BF7 /* DBAdvertViewController.m in Sources */,
 				CB5AFC9A1B27209A00904BF7 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E85BD771B2F0B33000BC2E1 /* DeliveryManager.m in Sources */,
+				7E85BD771B2F0B33000BC2E1 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8365,7 +8365,7 @@
 				CB60C0C01AC5AD2600D5E962 /* EXTRuntimeExtensions.m in Sources */,
 				CB60C0C11AC5AD2600D5E962 /* DBCommentViewController.m in Sources */,
 				CB1432471B0E3D0400DD50C7 /* DBClassLoader.m in Sources */,
-				7E1AEA401B2734F50090FB6C /* DeliveryManager.m in Sources */,
+				7E1AEA401B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB60C0C21AC5AD2600D5E962 /* Order.m in Sources */,
 				CB60C0C31AC5AD2600D5E962 /* UIImageView+Extension.m in Sources */,
 				CB60C0C41AC5AD2600D5E962 /* UIView+DBErrorAnimation.m in Sources */,
@@ -8587,7 +8587,7 @@
 				CBD2EB2C1B2A07D000E4AAA1 /* UIColor+Hex.m in Sources */,
 				CBD2EB2D1B2A07D000E4AAA1 /* DBAdvertViewController.m in Sources */,
 				CBD2EB2E1B2A07D000E4AAA1 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E85BD781B2F0B34000BC2E1 /* DeliveryManager.m in Sources */,
+				7E85BD781B2F0B34000BC2E1 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

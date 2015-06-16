@@ -9,7 +9,7 @@
 #import "DBCompanyInfo.h"
 #import "DBServerAPI.h"
 
-#import "DeliveryManager.h"
+#import "DBShippingManager.h"
 
 #define kDeliveryAddress @"kDeliveryAddress"
 #define kDeliveryApartment @"kDeliveryApartment"
@@ -17,17 +17,17 @@
 
 NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDidRecieveSuggestionsNotification";
 
-@interface DeliveryManager()
+@interface DBShippingManager()
 
 @property (nonatomic, strong) NSArray *addressSuggestions;
-@property (nonatomic, strong) NSTimer *requestSeggestionsTimer;
+@property (nonatomic, strong) NSTimer *requestSuggestionsTimer;
 
 @end
 
-@implementation DeliveryManager
+@implementation DBShippingManager
 
 + (instancetype)sharedManager {
-    static DeliveryManager *instance = nil;
+    static DBShippingManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [[self alloc] init];
@@ -46,8 +46,8 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 
 - (void)requestSuggestions {
     // request suggestions from backend and push notification about it
-    [self.requestSeggestionsTimer invalidate];
-    self.requestSeggestionsTimer = nil;
+    [self.requestSuggestionsTimer invalidate];
+    self.requestSuggestionsTimer = nil;
     NSLog(@"request suggestions for address %@, %@", self.city, self.address);
     [DBServerAPI requestAddressSuggestions:@{@"city": self.city, @"street": self.address}
                                   callback:^(BOOL success, NSArray *response) {
@@ -74,11 +74,11 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     
     if (![_address isEqualToString:address]) {
         _address = address;
-        if (self.requestSeggestionsTimer) {
-            [self.requestSeggestionsTimer invalidate];
-            self.requestSeggestionsTimer = nil;
+        if (self.requestSuggestionsTimer) {
+            [self.requestSuggestionsTimer invalidate];
+            self.requestSuggestionsTimer = nil;
         }
-        self.requestSeggestionsTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(requestSuggestions) userInfo:nil repeats:NO];
+        self.requestSuggestionsTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(requestSuggestions) userInfo:nil repeats:NO];
         [self saveToUserDefaultsValue:address withKey:kDeliveryAddress];
     }
 }

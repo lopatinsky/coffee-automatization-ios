@@ -17,7 +17,7 @@
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
-#import "DeliveryManager.h"
+#import "DBShippingManager.h"
 #import "OrderManager.h"
 #import "Order.h"
 #import "DBMenuPosition.h"
@@ -85,6 +85,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 @property (strong, nonatomic) DBPositionsViewController *positionsViewController;
 
 @property (strong, nonatomic) OrderManager *orderManager;
+@property (strong, nonatomic) DBDeliverySettings *deliverySettings;
 
 @property (nonatomic, strong) NSDictionary *currentCard;
 
@@ -113,6 +114,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
 // ========= Configure Logic =========
     self.orderManager = [OrderManager sharedManager];
+    self.deliverySettings = [DBDeliverySettings sharedInstance];
+    
     self.delegate = [DBTabBarController sharedInstance];
     self.currentCard = [NSDictionary new];
     
@@ -202,7 +205,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [_orderManager reloadTotal];
     
     [self reloadItemAdditionView];
-    [self reloadVenue];
+    [self reloadAddress];
     [self reloadTime];
     [self reloadCard];
     [self reloadProfile];
@@ -691,9 +694,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Delivery/Venue
 
-- (void)reloadVenue{
-    if (_orderManager.deliveryTypeId == DeliveryTypeIdShipping) {
-        self.orderFooter.labelAddress.text = [[DeliveryManager sharedManager] address];
+- (void)reloadAddress{
+    if (_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
+        self.orderFooter.labelAddress.text = [[DBShippingManager sharedManager] address];
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
     } else {
         if (_orderManager.venue) {
@@ -761,13 +764,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)reloadTime{
     NSString *timeString = [self selectedTimeString];
-    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdShipping){
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Доставка", nil)];
     }
-    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdTakeaway){
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
     }
-    if([OrderManager sharedManager].deliveryType.typeId == DeliveryTypeIdInRestaurant){
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdInRestaurant){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
     }
     
@@ -775,15 +778,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadTimePicker{
-    if(_orderManager.deliveryType.useTimePicker){
-        self.pickerView.type = _orderManager.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
+    if(_deliverySettings.deliveryType.useTimePicker){
+        self.pickerView.type = _deliverySettings.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
         
-        self.pickerView.selectedDate = _orderManager.selectedTime;
+        self.pickerView.selectedDate = _deliverySettings.selectedTime;
     } else {
         self.pickerView.type = DBTimePickerTypeItems;
         
-        self.pickerView.items = _orderManager.deliveryType.timeSlotsNames;
-        self.pickerView.selectedItem = [_orderManager.deliveryType.timeSlots indexOfObject:_orderManager.selectedTimeSlot];
+        self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
+        self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
     }
     
     NSMutableArray *titles = [NSMutableArray new];
@@ -794,7 +797,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         [titles addObject:NSLocalizedString(@"На месте", nil)];
     }
     self.pickerView.segments = titles;
-    self.pickerView.selectedSegmentIndex = _orderManager.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
+    self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     
     [self.pickerView configure];
 }
@@ -808,16 +811,16 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)selectedTimeString{
     NSString *timeString;
-    if(_orderManager.deliveryType.useTimePicker){
+    if(_deliverySettings.deliveryType.useTimePicker){
         NSDateFormatter *formatter = [NSDateFormatter new];
-        if(_orderManager.deliveryType.onlyTime){
+        if(_deliverySettings.deliveryType.onlyTime){
             formatter.dateFormat = @"HH:mm";
         } else {
             formatter.dateFormat = @"dd/MM/yy HH:mm";
         }
-        timeString = [formatter stringFromDate:_orderManager.selectedTime];
+        timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
     } else {
-        timeString = _orderManager.selectedTimeSlot.slotTitle;
+        timeString = _deliverySettings.selectedTimeSlot.slotTitle;
     }
     
     return timeString;
@@ -825,7 +828,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)stringFromTime:(NSDate *)date{
     NSDateFormatter *formatter = [NSDateFormatter new];
-    if(_orderManager.deliveryType.onlyTime){
+    if(_deliverySettings.deliveryType.onlyTime){
         formatter.dateFormat = @"HH:mm";
     } else {
         formatter.dateFormat = @"dd/MM/yy HH:mm";
@@ -842,28 +845,28 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         deliveryTypeId = DeliveryTypeIdInRestaurant;
     }
     
-    _orderManager.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId];
+    [_deliverySettings selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId]];
     
     [self reloadTimePicker];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
-    DBTimeSlot *timeSlot = _orderManager.deliveryType.timeSlots[index];
-    _orderManager.selectedTimeSlot = timeSlot;
+    DBTimeSlot *timeSlot = _deliverySettings.deliveryType.timeSlots[index];
+    _deliverySettings.selectedTimeSlot = timeSlot;
     [self reloadTime];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
-    NSInteger comparisonResult = [_orderManager setNewSelectedTime:date];
+    NSInteger comparisonResult = [_deliverySettings setNewSelectedTime:date];
     
     NSString *message;
     if(comparisonResult == NSOrderedAscending){
-        message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_orderManager.deliveryType.minDate]];
+        message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.minDate]];
         [self showAlert:message];
     }
     
     if(comparisonResult == NSOrderedDescending){
-        message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_orderManager.deliveryType.maxDate]];
+        message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
         [self showAlert:message];
     }
     

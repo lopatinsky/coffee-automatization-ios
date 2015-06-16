@@ -10,7 +10,7 @@
 
 extern NSString * __nonnull DeliveryManagerDidRecieveSuggestionsNotification;
 
-@interface DeliveryManager : NSObject
+@interface DBShippingManager : NSObject
 
 @property (nonatomic, strong) NSString * __nonnull address;
 @property (nonatomic, strong) NSString * __nonnull apartment;

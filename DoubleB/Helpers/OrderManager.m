@@ -23,9 +23,6 @@
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 @interface OrderManager ()
-
-// Time management
-@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation OrderManager
@@ -65,23 +62,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         
         self.bonusPositions = [NSMutableArray new];
         
-        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purgePositions) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
-}
-
-- (void)setDeliveryType:(DBDeliveryType *)deliveryType{
-    _deliveryType = deliveryType;
-    
-    if(_deliveryType.useTimePicker){
-        [self launchTimer];
-    } else {
-        [self stopTimer];
-    }
-    
-    [self updateTimeAccordingToDeliveryType];
 }
 
 - (void)setVenue:(Venue *)venue{
@@ -357,6 +340,67 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
 }
 
+@end
+
+
+
+@interface DBDeliverySettings ()
+@property (strong, nonatomic) DBDeliveryType *lastNotShippingDeliveryType;
+
+// Time management
+@property (strong, nonatomic) NSTimer *timer;
+@end
+
+@implementation DBDeliverySettings
+
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static DBDeliverySettings *instance = nil;
+    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    return instance;
+}
+
+- (instancetype)init{
+    self = [super init];
+    
+    self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+    
+    return self;
+}
+
+#pragma mark - Delivery type
+
+- (void)selectDeliveryType:(DBDeliveryType *)type{
+    if(type.typeId == DeliveryTypeIdShipping){
+        self.lastNotShippingDeliveryType = self.deliveryType;
+    }
+    
+    self.deliveryType = type;
+}
+
+- (void)selectShipping{
+    self.lastNotShippingDeliveryType = self.deliveryType;
+    
+    self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping];
+}
+
+- (void)selectTakeout{
+    self.deliveryType = self.lastNotShippingDeliveryType;
+}
+
+- (void)setDeliveryType:(DBDeliveryType *)deliveryType{
+    _deliveryType = deliveryType;
+    
+    if(_deliveryType.useTimePicker){
+        [self launchTimer];
+    } else {
+        [self stopTimer];
+    }
+    
+    [self updateTimeAccordingToDeliveryType];
+}
+
+
 #pragma mark - Time management
 
 - (void)launchTimer{
@@ -365,9 +409,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         seconds = seconds - seconds % 60 + 60 + 1;
         self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:15.f
                                                 target:self
-                                                selector:@selector(timerTick:)
-                                                userInfo:nil
-                                                repeats:YES];
+                                              selector:@selector(timerTick:)
+                                              userInfo:nil
+                                               repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
         [self timerTick:self.timer];
     }

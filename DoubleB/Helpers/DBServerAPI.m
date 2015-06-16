@@ -201,7 +201,7 @@
     // Time
     [self assembleTimeIntoParams:params];
     
-    params[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
+    params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
     
     // Payment
     if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
@@ -264,7 +264,7 @@
     order[@"items"] = [DBServerAPI assembleOrderItems];
     order[@"gifts"] = [DBServerAPI assembleBonusItems];
     order[@"client"] = [DBServerAPI assembleClientInfo];
-    order[@"delivery_type"] = @([OrderManager sharedManager].deliveryType.typeId);
+    order[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
     order[@"payment"] = [DBServerAPI assemblyPaymentInfo];
     order[@"comment"] = [OrderManager sharedManager].comment ?: @"";
     
@@ -304,8 +304,8 @@
                                  ord.venue = [OrderManager sharedManager].venue;
                                  
                                  // Time
-                                 if([OrderManager sharedManager].deliveryType.useTimePicker){
-                                     ord.time = [OrderManager sharedManager].selectedTime;
+                                 if([DBDeliverySettings sharedInstance].deliveryType.useTimePicker){
+                                     ord.time = [DBDeliverySettings sharedInstance].selectedTime;
                                  } else {
                                      NSString *dateString = [responseObject getValueForKey:@"delivery_time"];
                                      NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
@@ -519,12 +519,12 @@
 }
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
-    if([OrderManager sharedManager].deliveryType.useTimePicker){
+    if([DBDeliverySettings sharedInstance].deliveryType.useTimePicker){
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        params[@"time_picker_value"] = [formatter stringFromDate:[OrderManager sharedManager].selectedTime];
+        params[@"time_picker_value"] = [formatter stringFromDate:[DBDeliverySettings sharedInstance].selectedTime];
     } else {
-        params[@"delivery_slot_id"] = [OrderManager sharedManager].selectedTimeSlot.slotId;
+        params[@"delivery_slot_id"] = [DBDeliverySettings sharedInstance].selectedTimeSlot.slotId;
         
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
