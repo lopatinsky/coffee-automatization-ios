@@ -381,12 +381,23 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
     
     self.deliveryType = type;
+    switch (self.deliveryType.typeId) {
+        case DeliveryTypeIdInRestaurant:
+            [GANHelper analyzeEvent:@"delivery_type_selected" label:@"InRestaurant" category:ADDRESS_SCREEN];
+            break;
+        case DeliveryTypeIdTakeaway:
+            [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Takeaway" category:ADDRESS_SCREEN];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)selectShipping{
     self.lastNotShippingDeliveryType = self.deliveryType;
     
     self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping];
+    [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Shipping" category:ADDRESS_SCREEN];
 }
 
 - (void)selectTakeout{

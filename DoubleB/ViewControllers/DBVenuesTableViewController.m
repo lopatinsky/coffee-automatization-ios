@@ -45,6 +45,7 @@
     [super viewWillAppear:animated];
 
     [GANHelper analyzeScreen:@"Coffee_houses_screen"];
+    [GANHelper analyzeEvent:@"all_venues_show" category:VENUES_SCREEN];
 
     [self reloadVenues:nil];
 }

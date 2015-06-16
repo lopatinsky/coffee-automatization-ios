@@ -15,6 +15,9 @@
 
 #import "UIViewController+NavigationBarFix.h"
 
+// TODO: check event category for venues table view controller
+// TODO: chech delivery_type_selected event
+
 @interface DBAddressViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView *placeholderView;
@@ -77,6 +80,8 @@
     
     if ([[[DBDeliverySettings sharedInstance] deliveryType] typeId] == DeliveryTypeIdShipping) {
         [GANHelper analyzeEvent:@"back_pressed" category:ADDRESS_SCREEN];
+    } else {
+        [GANHelper analyzeEvent:@"back_click" category:VENUES_SCREEN];
     }
 }
 
