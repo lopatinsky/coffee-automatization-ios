@@ -93,7 +93,7 @@
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
-                                [GANHelper analyzeEvent:@"manu_load_failed" label:error.description category:APPLICATION_START];
+                                [GANHelper analyzeEvent:@"menu_load_failed" label:error.description category:APPLICATION_START];
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(NO, nil);

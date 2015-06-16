@@ -74,6 +74,10 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [self showNavigationBarShadow];
+    
+    if ([[[DBDeliverySettings sharedInstance] deliveryType] typeId] == DeliveryTypeIdShipping) {
+        [GANHelper analyzeEvent:@"back_pressed" category:ADDRESS_SCREEN];
+    }
 }
 
 #pragma mark - Other methods

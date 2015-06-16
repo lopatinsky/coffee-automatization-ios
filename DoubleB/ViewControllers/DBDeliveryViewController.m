@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
+#import "GANHelper.h"
+
 #import "DBShippingManager.h"
 #import "DBDeliveryViewController.h"
 #import "DBTimePickerView.h"
@@ -93,12 +95,15 @@
 - (IBAction)showPickerWithCities:(id)sender {
     self.acityPickerView.items = [self.deliveryManager arrayOfCities];
     [self.acityPickerView showOnView:self.navigationController.view];
+    [GANHelper analyzeEvent:@"city_spinner_show" category:ADDRESS_SCREEN];
 }
 
 #pragma mark - Other functions
 - (void)requestAddressSuggestions {
     self.addressSuggestions = [self.deliveryManager addressSuggestions];
     [self.addressSuggestionsTableView reloadData];
+    
+    [GANHelper analyzeEvent:@"autocomplete_list_show" number:@([self.addressSuggestions count]) category:ADDRESS_SCREEN];
 }
 
 - (void)initializeFakeSeparators {
@@ -221,12 +226,16 @@
         }
         self.deliveryManager.address = self.streetTextField.text;
         self.deliveryManager.selectedAddress[@"coordinates"] = [NSMutableDictionary new];
+        
+        [GANHelper analyzeEvent:@"street_text_changed" label:self.streetTextField.text category:ADDRESS_SCREEN];
     }
     if (sender == self.apartmentTextField) {
         if ([self.apartmentTextField.text isEqualToString:@""]) {
             self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
         }
         self.deliveryManager.apartment = self.apartmentTextField.text;
+        
+        [GANHelper analyzeEvent:@"apartment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
     }
 }
 
@@ -235,6 +244,8 @@
     
     self.addressSuggestionsTableView.hidden = YES;
     [self.delegate keyboardWillDisappear];
+    
+    [GANHelper analyzeEvent:@"confirm_pressed" label:self.deliveryManager.addressRepresentation category:ADDRESS_SCREEN];
     
     return YES;
 }
@@ -247,10 +258,15 @@
 
 - (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectItem:(nonnull NSString *)item {
     self.deliveryManager.city = item;
+    
+    [GANHelper analyzeEvent:@"city_spinner_selected" label:item category:ADDRESS_SCREEN];
 }
 
 - (BOOL)db_shouldHideTimePickerView {
     self.cityTextLabel.text = self.deliveryManager.city;
+    
+    [GANHelper analyzeEvent:@"city_spinner_closed" category:ADDRESS_SCREEN];
+    
     return YES;
 }
 
@@ -303,6 +319,8 @@
     if (self.keyboardIsHidden) {
         self.addressSuggestionsTableView.hidden = YES;
     }
+    
+    [GANHelper analyzeEvent:@"autocomplete_list_selected" label:self.deliveryManager.addressRepresentation category:ADDRESS_SCREEN];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
