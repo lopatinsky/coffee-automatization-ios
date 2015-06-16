@@ -145,7 +145,7 @@
     
     NSNumber *lastOrderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastOrderId"];
     if (lastOrderId) {
-        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", lastOrderId]];
+        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
     }
 }
 

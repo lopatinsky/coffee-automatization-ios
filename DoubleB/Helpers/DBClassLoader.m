@@ -20,4 +20,14 @@
     return [[settingsVCClass alloc] init];
 }
 
++ (DBNewOrderViewController *)loadNewOrderViewController{
+    Class newOrderVCClass = NSClassFromString(@"DBCatNewOrderViewController");
+    
+    if(!newOrderVCClass){
+        newOrderVCClass = NSClassFromString(@"DBNewOrderViewController");
+    }
+    
+    return [[newOrderVCClass alloc] initWithNibName:@"DBNewOrderViewController" bundle:[NSBundle mainBundle]];
+}
+
 @end

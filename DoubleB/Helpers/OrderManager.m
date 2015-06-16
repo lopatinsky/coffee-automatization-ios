@@ -88,7 +88,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     result = result && [[DBClientInfo sharedInstance] validClientName];
     result = result && [[DBClientInfo sharedInstance] validClientPhone];
     result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
-    result = result && self.totalCount != 0;
+    result = result && (self.totalCount + [self.bonusPositions count]) > 0;
     result = result && [DBPromoManager sharedManager].validOrder;
     
     return result;

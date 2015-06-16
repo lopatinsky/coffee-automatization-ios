@@ -133,6 +133,7 @@
                                 response[@"cities"] = [responseObject getValueForKey:@"cities"] ?: [NSArray new];
                                 response[@"support_emails"] = [responseObject getValueForKey:@"emails"] ?: [NSArray new];
                                 response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
+                                response[@"pushChannels"] = [responseObject getValueForKey:@"push_channels"] ?: @{};
                                 
                                 if(callback)
                                     callback(YES, response);
@@ -343,7 +344,7 @@
                                  [[NSUserDefaults standardUserDefaults] synchronize];
                                  
                                  [Compatibility registerForNotifications];
-                                 [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
+                                 [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
                                  
                                  [GANHelper trackNewOrderInfo:ord];
                              }

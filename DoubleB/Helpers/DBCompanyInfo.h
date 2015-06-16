@@ -23,6 +23,11 @@
 
 @property(strong, nonatomic, readonly) NSArray *deliveryCities;
 
+@property(strong, nonatomic, readonly) NSString *companyPushChannel;
+@property(strong, nonatomic, readonly) NSString *clientPushChannel;
+@property(strong, nonatomic, readonly) NSString *venuePushChannel;
+@property(strong, nonatomic, readonly) NSString *orderPushChannel;
+
 - (void)updateInfo;
 
 + (id)objectFromPropertyListByName:(NSString *)name;

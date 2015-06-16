@@ -130,10 +130,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         // Hides bar if order repeated
         self.tabBarController.tabBar.hidden = YES;
     } else {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:self
-                                                                                action:@selector(clickSettings:)];
+        [self setupSettingsNavigationItem];
     }
 // ========= Configure Logic =========
     
@@ -287,6 +284,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if([keyPath isEqualToString:@"selectedTime"]){
         [self reloadTime];
     }
+}
+
+- (void)setupSettingsNavigationItem{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(clickSettings:)];
 }
 
 
