@@ -15,6 +15,9 @@
 
 #import "UIViewController+NavigationBarFix.h"
 
+// TODO: check event category for venues table view controller
+// TODO: chech delivery_type_selected event
+
 @interface DBAddressViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView *placeholderView;
@@ -74,6 +77,12 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [self showNavigationBarShadow];
+    
+    if ([[[DBDeliverySettings sharedInstance] deliveryType] typeId] == DeliveryTypeIdShipping) {
+        [GANHelper analyzeEvent:@"back_pressed" category:ADDRESS_SCREEN];
+    } else {
+        [GANHelper analyzeEvent:@"back_click" category:VENUES_SCREEN];
+    }
 }
 
 #pragma mark - Other methods
@@ -117,6 +126,10 @@
         
         self.segmentedControl.selectedSegmentIndex = 0;
     } else {
+        self.placeholderView.hidden = YES;
+        NSMutableArray *placeholderConstraints = [NSMutableArray arrayWithArray:self.placeholderView.constraints];
+        [placeholderConstraints removeObject:self.segmentHolderHeightConstraint];
+        [self.placeholderView removeConstraints:placeholderConstraints];
         self.segmentHolderHeightConstraint.constant = 0.0f;
         [self.view layoutIfNeeded];
     }

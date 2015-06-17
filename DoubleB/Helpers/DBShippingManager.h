@@ -15,6 +15,8 @@ extern NSString * __nonnull DeliveryManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, strong) NSString * __nonnull address;
 @property (nonatomic, strong) NSString * __nonnull apartment;
 @property (nonatomic, strong) NSString * __nonnull city;
+@property (nonatomic, strong) NSMutableDictionary * __nonnull coordinates;
+@property (nonatomic, strong) NSString * __nonnull country;
 @property (nonatomic, strong) NSMutableDictionary * __nonnull selectedAddress;
 
 @property (nonatomic, readonly) BOOL validAddress;

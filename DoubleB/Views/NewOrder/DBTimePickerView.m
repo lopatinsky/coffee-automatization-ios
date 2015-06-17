@@ -9,8 +9,10 @@
 #import "DBTimePickerView.h"
 
 @interface DBTimePickerView ()<UIGestureRecognizerDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIView *segmentsViewHolder;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintSegmentsViewHolderHeight;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (nonatomic) double initialSegmentsViewHolderHeight;
 
 @property (weak, nonatomic) id<DBTimePickerViewDelegate> delegate;
@@ -59,9 +61,10 @@
     self.pickerView.userInteractionEnabled = YES;
     
     self.initialSegmentsViewHolderHeight = self.constraintSegmentsViewHolderHeight.constant;
+    [self.doneButton setTitle:NSLocalizedString(@"Готово", nil) forState:UIControlStateNormal];
 }
 
-- (void)configure{
+- (void)configure {
     if(_type == DBTimePickerTypeDate || _type == DBTimePickerTypeTime){
         self.datePickerView.hidden = NO;
         self.pickerView.hidden = YES;
@@ -74,7 +77,7 @@
         }
     }
     
-    if(_type == DBTimePickerTypeItems){
+    if(_type == DBTimePickerTypeItems) {
         self.datePickerView.hidden = YES;
         self.pickerView.hidden = NO;
         
@@ -82,14 +85,26 @@
     }
     
     if(_segments.count < 2){
-        self.constraintSegmentsViewHolderHeight.constant = 0;
+        self.typeSegmentedControl.hidden = YES;
+        self.doneButton.enabled = YES;
+        self.doneButton.hidden = NO;
+//        self.constraintSegmentsViewHolderHeight.constant = 0;
     } else {
+        
+        self.typeSegmentedControl.hidden = NO;
+        self.doneButton.enabled = NO;
+        self.doneButton.hidden = YES;
         self.constraintSegmentsViewHolderHeight.constant = self.initialSegmentsViewHolderHeight;
     }
     
     CGRect rect = self.frame;
     rect.size.height = self.constraintSegmentsViewHolderHeight.constant + self.datePickerView.frame.size.height;
     self.frame = rect;
+}
+
+- (IBAction)doneButtonClicked {
+    self.selectedItem = [self.pickerView selectedRowInComponent:0];
+    [self hideInternal];
 }
 
 - (void)setType:(DBTimePickerType)type{
@@ -154,7 +169,7 @@
     [self dismiss];
 }
 
-- (void)hideInternal{
+- (void)hideInternal {
     if(_type == DBTimePickerTypeItems){
         if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
             [self.delegate db_timePickerView:self didSelectRowAtIndex:self.selectedItem];

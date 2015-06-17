@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14E17e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15A178w" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,6 +13,7 @@
             <subviews>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Rc-Cv-1QO">
                     <rect key="frame" x="0.0" y="40" width="320" height="162"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="162" id="sB8-ky-l1D"/>
                     </constraints>
@@ -22,6 +23,7 @@
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aT5-rt-GzJ">
                             <rect key="frame" x="8" y="8" width="304" height="29"/>
+                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="DWD-A6-dvD"/>
                             </constraints>
@@ -30,9 +32,27 @@
                                 <segment title="В кофейне"/>
                             </segments>
                         </segmentedControl>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qZ-7R-hfg">
+                            <rect key="frame" x="266" y="7" width="46" height="30"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="DJ3-sd-Skz"/>
+                                <constraint firstAttribute="width" constant="46" id="bKR-1e-EHA"/>
+                            </constraints>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="doneButtonClicked" destination="hPk-qb-5oP" eventType="touchUpInside" id="xvt-3B-9HV"/>
+                            </connections>
+                        </button>
                     </subviews>
+                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="2qZ-7R-hfg" secondAttribute="trailing" constant="8" id="Gop-VY-R59"/>
+                        <constraint firstAttribute="bottom" secondItem="2qZ-7R-hfg" secondAttribute="bottom" constant="3" id="YSC-lr-oOb"/>
                         <constraint firstAttribute="trailing" secondItem="aT5-rt-GzJ" secondAttribute="trailing" constant="8" id="YYa-Le-nKe"/>
                         <constraint firstItem="aT5-rt-GzJ" firstAttribute="top" secondItem="owY-gq-9nq" secondAttribute="top" constant="8" id="dBW-AE-z6h"/>
                         <constraint firstAttribute="height" constant="40" id="gc8-qc-Kky"/>
@@ -41,6 +61,7 @@
                 </view>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="4IR-sW-nMh">
                     <rect key="frame" x="0.0" y="40" width="320" height="162"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="162" id="sRI-fX-d2F"/>
                     </constraints>
@@ -52,6 +73,7 @@
                     </connections>
                 </datePicker>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="4IR-sW-nMh" secondAttribute="trailing" id="0Ip-wj-fz8"/>
@@ -69,6 +91,7 @@
             <connections>
                 <outlet property="constraintSegmentsViewHolderHeight" destination="gc8-qc-Kky" id="1me-1N-BXq"/>
                 <outlet property="datePickerView" destination="4IR-sW-nMh" id="AjS-aa-ubL"/>
+                <outlet property="doneButton" destination="2qZ-7R-hfg" id="IX9-b5-Jqt"/>
                 <outlet property="pickerView" destination="3Rc-Cv-1QO" id="RfD-EL-KH0"/>
                 <outlet property="segmentsViewHolder" destination="owY-gq-9nq" id="WCL-lh-NeX"/>
                 <outlet property="typeSegmentedControl" destination="aT5-rt-GzJ" id="lrY-HS-heS"/>
