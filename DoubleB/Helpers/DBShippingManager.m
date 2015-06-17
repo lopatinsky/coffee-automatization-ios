@@ -98,7 +98,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 
 - (void)setApartment:(NSString * __nonnull)apartment {
     _apartment = apartment ?: @"";
-    _selectedAddress[@"address"][@"apartment"] = _apartment;
+    _selectedAddress[@"address"][@"flat"] = _apartment;
     [self saveToUserDefaultsValue:_apartment withKey:kDeliveryApartment];
 }
 

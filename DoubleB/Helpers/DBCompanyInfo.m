@@ -160,6 +160,8 @@
     _clientPushChannel = pushChannels[@"_clientPushChannel"];
     _venuePushChannel = pushChannels[@"_venuePushChannel"];
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
+    
+    _deliveryCities = info[@"_deliveryCities"];
 }
 
 - (void)synchronize{
@@ -171,7 +173,8 @@
                                    @"_orderPushChannel":_orderPushChannel};
     
     NSDictionary *info = @{@"deliveryTypes": deliveryTypesData,
-                           @"pushChannels": pushChannels};
+                           @"pushChannels": pushChannels,
+                           @"_deliveryCities": _deliveryCities};
     
     
     
