@@ -79,12 +79,12 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 
 #pragma mark - Setter overrides
 - (void)setAddress:(NSString * __nonnull)address {
-    _selectedAddress[@"address"][@"street"] = address;
     if (_address == nil) {
         _address = address;
         return;
     }
     
+    _selectedAddress[@"address"][@"street"] = _address;
     if (![_address isEqualToString:address]) {
         _address = address;
         if (self.requestSuggestionsTimer) {
@@ -97,31 +97,31 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 }
 
 - (void)setApartment:(NSString * __nonnull)apartment {
-    _apartment = apartment;
-    _selectedAddress[@"address"][@"apartment"] = apartment;
-    [self saveToUserDefaultsValue:apartment withKey:kDeliveryApartment];
+    _apartment = apartment ?: @"";
+    _selectedAddress[@"address"][@"apartment"] = _apartment;
+    [self saveToUserDefaultsValue:_apartment withKey:kDeliveryApartment];
 }
 
 - (void)setCity:(NSString * __nonnull)city {
-    _city = city;
-    _selectedAddress[@"address"][@"city"] = city;
-    [self saveToUserDefaultsValue:city withKey:kDeliveryCity];
+    _city = city ?: @"";
+    _selectedAddress[@"address"][@"city"] = _city;
+    [self saveToUserDefaultsValue:_city withKey:kDeliveryCity];
 }
 
 - (void)setCountry:(NSString * __nonnull)country {
-    _country = country;
-    _selectedAddress[@"address"][@"country"] = country;
+    _country = country ?: @"";
+    _selectedAddress[@"address"][@"country"] = _country;
 }
 
 - (void)setCoordinates:(NSMutableDictionary * __nonnull)coordinates {
-    _coordinates = coordinates;
+    _coordinates = coordinates ?: [NSMutableDictionary new];
     _selectedAddress[@"coordinates"] = _coordinates;
     [self saveToUserDefaultsValue:[_coordinates copy] withKey:kDeliveryCoordinates];
 }
 
 - (void)setHome:(NSString * __nonnull)home {
-    _home = home;
-    _selectedAddress[@"address"][@"home"] = home;
+    _home = home ?: @"";
+    _selectedAddress[@"address"][@"home"] = _home;
     [self saveToUserDefaultsValue:_home withKey:kDeliveryHome];
 }
 
