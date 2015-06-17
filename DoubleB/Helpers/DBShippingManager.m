@@ -14,6 +14,7 @@
 #define kDeliveryAddress @"kDeliveryAddress"
 #define kDeliveryApartment @"kDeliveryApartment"
 #define kDeliveryCity @"kDeliveryCity"
+#define kDeliveryCoordinates @"kDeliveryCoordinates"
 
 NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDidRecieveSuggestionsNotification";
 
@@ -112,6 +113,11 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 - (void)setCoordinates:(NSMutableDictionary * __nonnull)coordinates {
     _coordinates = coordinates;
     _selectedAddress[@"coordinates"] = _coordinates;
+    [self saveToUserDefaultsValue:[_coordinates copy] withKey:kDeliveryCoordinates];
+}
+
+- (void)updateCoordinates {
+    _selectedAddress[@"coordinates"] = [[NSUserDefaults standardUserDefaults] objectForKey:kDeliveryCoordinates] ?: [NSDictionary new];
 }
 
 - (void)saveToUserDefaultsValue:(NSString *)value withKey:(NSString *)key {
