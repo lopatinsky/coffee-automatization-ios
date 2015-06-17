@@ -792,6 +792,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
     }
     
+    ///vfvdf
+    self.pickerView.type = DBTimePickerTypeDateTime;
+    self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
+    self.pickerView.minDate = [NSDate date];
+    self.pickerView.maxDate = [NSDate dateWithTimeIntervalSinceNow:1123123];
+    ///
+    
+    
     NSMutableArray *titles = [NSMutableArray new];
     if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
         [titles addObject:NSLocalizedString(@"С собой", nil)];

@@ -14,7 +14,8 @@
 typedef NS_ENUM(NSUInteger, DBTimePickerType) {
     DBTimePickerTypeItems = 0,
     DBTimePickerTypeDate,
-    DBTimePickerTypeTime
+    DBTimePickerTypeTime,
+    DBTimePickerTypeDateTime
 };
 
 @protocol DBTimePickerViewDelegate <NSObject>
@@ -33,6 +34,9 @@ typedef NS_ENUM(NSUInteger, DBTimePickerType) {
 @property (weak, nonatomic) IBOutlet UISegmentedControl *typeSegmentedControl;
 
 @property (nonatomic) DBTimePickerType type;
+@property (strong, nonatomic) NSDate *minDate;
+@property (strong, nonatomic) NSDate *maxDate;
+
 
 @property (strong, nonatomic) NSArray *segments;
 @property (strong, nonatomic) NSArray *items;

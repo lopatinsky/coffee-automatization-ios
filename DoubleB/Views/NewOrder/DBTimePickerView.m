@@ -20,17 +20,21 @@
 @property (strong, nonatomic) UIImageView *overlay;
 @property (weak, nonatomic) UIView *viewHolder;
 
+@property (strong, nonatomic) NSDateFormatter *dateFormatter;
+
 @end
 
 @implementation DBTimePickerView
 
-- (instancetype)initWithDelegate:(id<DBTimePickerViewDelegate>)delegate{
+- (instancetype)initWithDelegate:(id<DBTimePickerViewDelegate>)delegate {
     DBTimePickerView *timePickerView = [[[NSBundle mainBundle] loadNibNamed:@"DBTimePickerView" owner:self options:nil] firstObject];
     timePickerView.delegate = delegate;
+    timePickerView.dateFormatter = [NSDateFormatter new];
+    timePickerView.dateFormatter.dateFormat = @"ccc d MMM";
     return timePickerView;
 }
 
-- (void)awakeFromNib{
+- (void)awakeFromNib {
     self.backgroundColor = [UIColor whiteColor];
     
     self.pickerView.backgroundColor = [UIColor clearColor];
@@ -77,11 +81,15 @@
         }
     }
     
-    if(_type == DBTimePickerTypeItems) {
+    if (_type == DBTimePickerTypeItems) {
         self.datePickerView.hidden = YES;
         self.pickerView.hidden = NO;
         
         [self.pickerView reloadAllComponents];
+    }
+    
+    if (_type == DBTimePickerTypeDateTime) {
+        self.datePickerView.hidden = YES;
     }
     
     if(_segments.count < 2){
@@ -170,13 +178,22 @@
 }
 
 - (void)hideInternal {
-    if(_type == DBTimePickerTypeItems){
-        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
+    if(_type == DBTimePickerTypeItems) {
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]) {
             [self.delegate db_timePickerView:self didSelectRowAtIndex:self.selectedItem];
         }
     } else {
         if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
             [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
+        }
+    }
+    
+    if (_type == DBTimePickerTypeDateTime) {
+        if ([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]) {
+            [self.delegate db_timePickerView:self didSelectRowAtIndex:[self.pickerView selectedRowInComponent:1]];
+        }
+        if ([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]) {
+            [self.delegate db_timePickerView:self didSelectDate:[self dateForRow:[self.pickerView selectedRowInComponent:0]]];
         }
     }
     
@@ -225,23 +242,109 @@
     }];
 }
 
+#pragma mark – Date time picker
+- (BOOL)isDate:(NSDate *)date1 sameDayAsDate:(NSDate *)date2 {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    unsigned unitFlags = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
+    NSDateComponents* comp1 = [calendar components:unitFlags fromDate:date1];
+    NSDateComponents* comp2 = [calendar components:unitFlags fromDate:date2];
+    
+    return [comp1 day]   == [comp2 day] &&
+    [comp1 month] == [comp2 month] &&
+    [comp1 year]  == [comp2 year];
+}
+
+- (NSDate *)dateForRow:(NSInteger)row {
+    NSDate *date = [NSDate dateWithTimeInterval:60 * 60 * 24 * row sinceDate:self.minDate];
+    return [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:date options:0];
+}
+
+- (NSString *)stringDateForRow:(NSUInteger)row {
+    NSDate *date = [self dateForRow:row];
+    if ([self isDate:date sameDayAsDate:[NSDate date]]) {
+        return NSLocalizedString(@"Сегодня", nil);
+    }
+    return [self.dateFormatter stringFromDate:date];
+}
+
+- (NSInteger)daysBetweenDate:(NSDate *)fromDateTime andDate:(NSDate *)toDateTime
+{
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate
+                 interval:NULL forDate:fromDateTime];
+    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate
+                 interval:NULL forDate:toDateTime];
+    NSDateComponents *difference = [calendar components:NSCalendarUnitDay
+                                               fromDate:fromDate toDate:toDate options:0];
+    return [difference day];
+}
+
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
+    switch (_type) {
+        case DBTimePickerTypeDateTime:
+            return 2;
+            break;
+        case DBTimePickerTypeDate:
+        case DBTimePickerTypeItems:
+        case DBTimePickerTypeTime:
+            return 1;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [_items count];
+    switch (_type) {
+        case DBTimePickerTypeDateTime:
+            if (component == 0) {
+                return [self daysBetweenDate:self.minDate andDate:self.maxDate];
+            } else {
+                return [_items count];
+            }
+            break;
+        case DBTimePickerTypeDate:
+        case DBTimePickerTypeItems:
+        case DBTimePickerTypeTime:
+            return [_items count];
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    switch (_type) {
+        case DBTimePickerTypeDateTime:
+            if (component == 0) {
+                return [self stringDateForRow:row];
+            } else {
+                return _items[row];
+            }
+            break;
+        case DBTimePickerTypeDate:
+        case DBTimePickerTypeItems:
+        case DBTimePickerTypeTime:
+            return _items[row];
+            break;
+        default:
+            return 0;
+            break;
+    }
     return _items[row];
 }
 
 #pragma mark - UIPickerViewDelegate
 
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.selectedItem = row;
 }
 
