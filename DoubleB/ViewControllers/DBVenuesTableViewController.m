@@ -45,7 +45,7 @@
     [super viewWillAppear:animated];
 
     [GANHelper analyzeScreen:@"Coffee_houses_screen"];
-    [GANHelper analyzeEvent:@"all_venues_show" category:VENUES_SCREEN];
+    [GANHelper analyzeEvent:@"all_venues_show" category:self.eventsCategory];
 
     [self reloadVenues:nil];
 }
@@ -59,7 +59,7 @@
     if ([self.venues count] && !refreshControl) {
         return;
     }
-    [GANHelper analyzeEvent:@"update" category:VENUES_SCREEN];
+    [GANHelper analyzeEvent:@"update" category:self.eventsCategory];
     
     self.venues = [Venue storedVenues];
 
@@ -154,7 +154,7 @@
         [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
             NSString *eventLabel = [NSString stringWithFormat:@"%@;%f;%f,%f",
                                     venue.venueId, venue.distance, location.coordinate.latitude, location.coordinate.longitude];
-            [GANHelper analyzeEvent:@"venue_click" label:eventLabel category:VENUES_SCREEN];
+            [GANHelper analyzeEvent:@"venue_click" label:eventLabel category:self.eventsCategory];
         }];
         
         
