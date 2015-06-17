@@ -27,6 +27,7 @@ extern NSString * __nonnull DeliveryManagerDidRecieveSuggestionsNotification;
 - (nonnull NSArray *)addressSuggestions;
 - (nonnull NSArray *)arrayOfCities;
 - (nonnull NSString *)addressRepresentation;
+- (void)updateCoordinates;
 
 @end
 
