@@ -43,6 +43,7 @@
         [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         
         DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+        venuesController.eventsCategory = VENUES_SCREEN;
         venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Точки", nil)
                                                                     image:[UIImage imageNamed:@"venues_icon_grey.png"]
                                                             selectedImage:[UIImage imageNamed:@"venues_icon.png"]];

@@ -99,6 +99,7 @@
         [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
         DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
         newController.delegate = self.delegate;
+        newController.eventsCategory = VENUES_ORDER_SCREEN;
         self.controllers[@"Самовывоз"] = @{
                                             @"controller": newController,
                                             @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)
