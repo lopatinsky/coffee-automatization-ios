@@ -83,6 +83,7 @@
     self.deliveryManager.apartment = self.apartmentTextField.text;
     self.deliveryManager.city = self.cityTextLabel.text;
     self.deliveryManager.country = @"Россия";
+    self.deliveryManager.home = @"";
     [self.deliveryManager updateCoordinates];
     
     NSLog(@"%@", self.deliveryManager.selectedAddress);
