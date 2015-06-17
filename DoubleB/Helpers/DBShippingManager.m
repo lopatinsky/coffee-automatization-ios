@@ -70,12 +70,12 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 }
 
 - (nonnull NSString *)addressRepresentation {
-    return [NSString stringWithFormat:@"%@, %@", self.city, self.address];
+    return [NSString stringWithFormat:@"%@, %@", self.city ?: @"", self.address];
 }
 
 #pragma mark - Setter overrides
 - (void)setAddress:(NSString * __nonnull)address {
-    NSLog(@"DeliveryManager Address: %@", address);
+    _selectedAddress[@"address"][@"street"] = address;
     if (_address == nil) {
         _address = address;
         return;
@@ -93,16 +93,25 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 }
 
 - (void)setApartment:(NSString * __nonnull)apartment {
-    NSLog(@"DeliveryManager Apartment: %@", apartment);
     _apartment = apartment;
-    
+    _selectedAddress[@"address"][@"apartment"] = apartment;
     [self saveToUserDefaultsValue:apartment withKey:kDeliveryApartment];
 }
 
 - (void)setCity:(NSString * __nonnull)city {
-    NSLog(@"DeliveryManager City: %@", city);
     _city = city;
+    _selectedAddress[@"address"][@"city"] = city;
     [self saveToUserDefaultsValue:city withKey:kDeliveryCity];
+}
+
+- (void)setCountry:(NSString * __nonnull)country {
+    _country = country;
+    _selectedAddress[@"address"][@"country"] = country;
+}
+
+- (void)setCoordinates:(NSMutableDictionary * __nonnull)coordinates {
+    _coordinates = coordinates;
+    _selectedAddress[@"coordinates"] = _coordinates;
 }
 
 - (void)saveToUserDefaultsValue:(NSString *)value withKey:(NSString *)key {

@@ -57,7 +57,7 @@
     
     if ([[self.deliveryManager arrayOfCities] count] == 1) {
         self.tapOnCityLabelRecognizer.enabled = NO;
-        self.deliveryManager.city = [self.deliveryManager arrayOfCities][0];
+        self.deliveryManager.city = [self.deliveryManager arrayOfCities][0] ?: @"";
         self.cityTextLabel.text = [self.deliveryManager arrayOfCities][0];
     }
     
@@ -78,13 +78,13 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    self.deliveryManager.selectedAddress[@"address"][@"city"] = self.deliveryManager.city ?: @"";
-    self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.deliveryManager.apartment;
-    self.deliveryManager.selectedAddress[@"address"][@"street"] = self.deliveryManager.address;
-    
     // TODO: Country variable is static
-    self.deliveryManager.selectedAddress[@"address"][@"country"] = @"Россия";
-    NSLog(@"SELECTED ADDRESS:\n%@", self.deliveryManager.selectedAddress);
+    self.deliveryManager.address = self.streetTextField.text;
+    self.deliveryManager.apartment = self.apartmentTextField.text;
+    self.deliveryManager.city = self.cityTextLabel.text;
+    self.deliveryManager.country = @"Россия";
+    
+    NSLog(@"%@", self.deliveryManager.selectedAddress);
 }
 
 #pragma mark - Life-cycle
@@ -140,7 +140,6 @@
         self.cityTextLabel.text = self.deliveryManager.city;
     } else {
         self.cityTextLabel.text = [[self.deliveryManager arrayOfCities] firstObject];
-        self.deliveryManager.city = self.cityTextLabel.text;
     }
     
     if (![self.deliveryManager.address isEqualToString:@""]) {
@@ -197,22 +196,19 @@
     }];
     
     if (textField == self.streetTextField) {
+        self.deliveryManager.address = self.streetTextField.text;
         if ([textField.text isEqualToString:@""]) {
             textField.attributedPlaceholder = self.streetPlaceholder;
             self.streetIndicatorView.hidden = NO;
         } else {
-            self.deliveryManager.address = self.streetTextField.text;
             self.streetIndicatorView.hidden = YES;
         }
-        self.deliveryManager.selectedAddress[@"address"][@"street"] = self.streetTextField.text;
     }
     if (textField == self.apartmentTextField) {
+        self.deliveryManager.apartment = self.apartmentTextField.text;
         if ([textField.text isEqualToString:@""]) {
             textField.attributedPlaceholder = self.apartmentPlaceholder;
-        } else {
-            self.deliveryManager.apartment = self.apartmentTextField.text;
         }
-        self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.apartmentTextField.text;
     }
 }
 
@@ -225,16 +221,14 @@
             self.streetIndicatorView.hidden = YES;
         }
         self.deliveryManager.address = self.streetTextField.text;
-        self.deliveryManager.selectedAddress[@"coordinates"] = [NSMutableDictionary new];
-        
+        self.deliveryManager.coordinates = [NSMutableDictionary new];
         [GANHelper analyzeEvent:@"street_text_changed" label:self.streetTextField.text category:ADDRESS_SCREEN];
     }
     if (sender == self.apartmentTextField) {
+        self.deliveryManager.apartment = self.apartmentTextField.text;
         if ([self.apartmentTextField.text isEqualToString:@""]) {
             self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
         }
-        self.deliveryManager.apartment = self.apartmentTextField.text;
-        
         [GANHelper analyzeEvent:@"apartment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
     }
 }
@@ -253,7 +247,6 @@
 #pragma mark - DBTimePickerViewDelegate
 - (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index {
     self.deliveryManager.city = [self.deliveryManager arrayOfCities][index];
-    self.deliveryManager.selectedAddress[@"address"][@"city"] = self.deliveryManager.city;
 }
 
 - (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectItem:(nonnull NSString *)item {
@@ -310,15 +303,15 @@
     
     self.deliveryManager.address = self.addressSuggestions[indexPath.row][@"address"][@"street"];
     if (![self.addressSuggestions[indexPath.row][@"address"][@"home"] isKindOfClass:[NSNull class]]) {
-        self.deliveryManager.address = [NSString stringWithFormat:@"%@, %@",
-                                        self.deliveryManager.address, self.addressSuggestions[indexPath.row][@"address"][@"home"]];
+        self.deliveryManager.address = [NSString stringWithFormat:@"%@, %@",  self.deliveryManager.address, self.addressSuggestions[indexPath.row][@"address"][@"home"]];
     }
-    self.streetTextField.text = self.deliveryManager.address;
-    self.deliveryManager.selectedAddress[@"address"][@"apartment"] = self.deliveryManager.apartment;
-    self.deliveryManager.selectedAddress[@"coordinates"] = self.addressSuggestions[indexPath.row][@"coordinates"];
+    self.deliveryManager.coordinates = self.addressSuggestions[indexPath.row][@"coordinates"];
+    self.deliveryManager.apartment = self.apartmentTextField.text;
+    
     if (self.keyboardIsHidden) {
         self.addressSuggestionsTableView.hidden = YES;
     }
+    self.streetTextField.text = self.deliveryManager.address;
     
     [GANHelper analyzeEvent:@"autocomplete_list_selected" label:self.deliveryManager.addressRepresentation category:ADDRESS_SCREEN];
 }

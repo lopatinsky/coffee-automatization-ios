@@ -34,7 +34,7 @@
     }
 }
 
-- (void)uiview_dealloc{
+- (void)uiview_dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self uiview_dealloc];
 }
