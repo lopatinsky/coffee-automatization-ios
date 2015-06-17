@@ -42,11 +42,6 @@ extern NSString* const kDBDefaultsPaymentType;
 @property (nonatomic, strong) CLLocation *location;
 
 /**
-* Current order's ID fetched from server
-*/
-@property (nonatomic, strong) NSString *orderId;
-
-/**
 * Selected payment type
 */
 @property (nonatomic) PaymentType paymentType;
@@ -83,11 +78,6 @@ extern NSString* const kDBDefaultsPaymentType;
 + (instancetype)sharedManager;
 
 - (void)reloadTotal;
-
-/**
-* Register new order on server in order to get orderID
-*/
-- (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler;
 
 - (NSInteger)addPosition:(DBMenuPosition *)position;
 

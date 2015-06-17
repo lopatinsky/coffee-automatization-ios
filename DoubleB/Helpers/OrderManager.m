@@ -150,7 +150,6 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     self.venue = nil;
     self.comment = @"";
     self.location = nil;
-    self.orderId = nil;
     
     self.bonusPositions = [NSMutableArray new];
     
@@ -166,26 +165,6 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
     
     [self reloadTotal];
-}
-
-- (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler {
-    [[DBAPIClient sharedClient] GET:@"order_register"
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%s %@", __PRETTY_FUNCTION__, responseObject);
-                                self.orderId = [NSString stringWithFormat:@"%ld", (long)[responseObject[@"order_id"] integerValue]];
-                                
-//                                [Crashlytics setObjectValue:self.orderId forKey:@"lastRegisteredOrderId"];
-                                
-                                if (completionHandler) {
-                                    completionHandler(YES, self.orderId);
-                                }
-                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
-                                if (completionHandler) {
-                                    completionHandler(NO, nil);
-                                }
-                            }];
 }
 
 - (NSInteger)addPosition:(DBMenuPosition *)position {
