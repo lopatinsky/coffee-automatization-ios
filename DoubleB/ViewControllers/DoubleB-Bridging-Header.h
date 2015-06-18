@@ -2,7 +2,6 @@
 //  Use this file to import your target's public headers that you would like to expose to Swift.
 //
 
-#import "MenuHelper.h"
 #import "MBProgressHUD.h"
 #import "UIControl+BlocksKit.h"
 #import "UIImageView+WebCache.h"
@@ -13,7 +12,6 @@
 #import "IHPaymentManager.h"
 #import "UIAlertView+BlocksKit.h"
 #import "UIImage+ImageEffects.h"
-#import "UIView+ShapshotAdditions.h"
 #import "UITextField+AKNumericFormatter.h"
 #import "AKNumericFormatter.h"
 

@@ -31,6 +31,7 @@
     
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     //compression
     [requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     [self setRequestSerializer:requestSerializer];

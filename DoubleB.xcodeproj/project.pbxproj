@@ -362,6 +362,26 @@
 		7E47E41B1B1DEBB2001432D9 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
 		7E47E41C1B1DEBB3001432D9 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
 		7E47E41D1B1DEBB4001432D9 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
+		7E69DC641B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC651B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC661B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC671B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC681B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC691B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC6A1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC6B1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC6C1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC6D1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */; };
+		7E69DC6E1B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC6F1B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC701B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC711B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC721B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC731B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC741B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC751B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC761B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
+		7E69DC771B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
 		7E85BD731B2F0B10000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD741B2F0B11000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD751B2F0B1E000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
@@ -3482,6 +3502,8 @@
 		7E55544F198A77A5008A4684 /* DBCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCommentViewController.m; sourceTree = "<group>"; };
 		7E555451198A799A008A4684 /* UIColor+Brandbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Brandbook.h"; sourceTree = "<group>"; };
 		7E555452198A799A008A4684 /* UIColor+Brandbook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Brandbook.m"; sourceTree = "<group>"; };
+		7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBCompaniesViewController.swift; sourceTree = "<group>"; };
+		7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCompaniesViewController.xib; sourceTree = "<group>"; };
 		7EFF2733198A84580095ADED /* DBVenuesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBVenuesTableViewController.h; sourceTree = "<group>"; };
 		7EFF2734198A84580095ADED /* DBVenuesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBVenuesTableViewController.m; sourceTree = "<group>"; };
 		7EFF2736198A8DC40095ADED /* DBNewOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBNewOrderViewController.h; sourceTree = "<group>"; };
@@ -4386,6 +4408,8 @@
 		C775B1154DBD501B5D3549F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7E69DC621B32F18700CCCB31 /* DBCompaniesViewController.swift */,
+				7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */,
 				CB136A801B0A1D8300B93178 /* DBAddressViewController.h */,
 				CB136A811B0A1D8300B93178 /* DBAddressViewController.m */,
 				CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */,
@@ -5582,6 +5606,9 @@
 					CB60C0A31AC5AD2600D5E962 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
+					CBD0C4CF1B30724300DAD042 = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
 					CBD2EAB31B2A07D000E4AAA1 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
@@ -5621,6 +5648,7 @@
 			files = (
 				CBB719201B14AC8100C47A33 /* Images-Farsh.xcassets in Resources */,
 				7E3DAB651B06153E00A7FFD1 /* orders_icon_grey.png in Resources */,
+				7E69DC721B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CBB7191E1B14AC8100C47A33 /* InfoPlist.strings in Resources */,
 				7E3DAB661B06153E00A7FFD1 /* Localizable.strings in Resources */,
 				7E3DAB671B06153E00A7FFD1 /* tick@2x.png in Resources */,
@@ -5825,6 +5853,7 @@
 			files = (
 				CB1431731B0E371A00DD50C7 /* return_cause_venue_icon@3x.png in Resources */,
 				CB1431741B0E371A00DD50C7 /* orders_icon_grey.png in Resources */,
+				7E69DC6E1B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB1431751B0E371A00DD50C7 /* Localizable.strings in Resources */,
 				CB1431761B0E371A00DD50C7 /* tick@2x.png in Resources */,
 				CB1431771B0E371A00DD50C7 /* menu_icon_grey@2x.png in Resources */,
@@ -6092,6 +6121,7 @@
 				CB1433141B0F1BBB00DD50C7 /* venues_icon@2x.png in Resources */,
 				CB1433151B0F1BBB00DD50C7 /* mug@2x.png in Resources */,
 				CB1433161B0F1BBB00DD50C7 /* preview_3@2x.png in Resources */,
+				7E69DC731B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB1433171B0F1BBB00DD50C7 /* orders_icon_grey@2x.png in Resources */,
 				CB1433181B0F1BBB00DD50C7 /* OrderCell.xib in Resources */,
 				CB1433191B0F1BBB00DD50C7 /* noimage_icon@3x.png in Resources */,
@@ -6230,6 +6260,7 @@
 			files = (
 				CB1AF7E91AE10E6900FA3224 /* orders_icon_grey.png in Resources */,
 				CBB7192B1B14AC9300C47A33 /* InfoPlist.strings in Resources */,
+				7E69DC701B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB1AF7EA1AE10E6900FA3224 /* Localizable.strings in Resources */,
 				CB1AF7EB1AE10E6900FA3224 /* tick@2x.png in Resources */,
 				CB1AF7EC1AE10E6900FA3224 /* menu_icon_grey@2x.png in Resources */,
@@ -6434,6 +6465,7 @@
 			files = (
 				CB3BA3681B20589300F320CA /* return_cause_venue_icon@3x.png in Resources */,
 				CB3BA3691B20589300F320CA /* orders_icon_grey.png in Resources */,
+				7E69DC741B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB3BA36A1B20589300F320CA /* Localizable.strings in Resources */,
 				CB3BA36B1B20589300F320CA /* tick@2x.png in Resources */,
 				CB3BA36C1B20589300F320CA /* menu_icon_grey@2x.png in Resources */,
@@ -6638,6 +6670,7 @@
 			files = (
 				CB517BC21AEFB6B500A50F5C /* orders_icon_grey.png in Resources */,
 				CB517BC31AEFB6B500A50F5C /* Localizable.strings in Resources */,
+				7E69DC711B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB517BC41AEFB6B500A50F5C /* tick@2x.png in Resources */,
 				CB517BC51AEFB6B500A50F5C /* menu_icon_grey@2x.png in Resources */,
 				CBB043111B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */,
@@ -6842,6 +6875,7 @@
 			files = (
 				CB5AFCB21B27209A00904BF7 /* return_cause_venue_icon@3x.png in Resources */,
 				CB5AFCB31B27209A00904BF7 /* orders_icon_grey.png in Resources */,
+				7E69DC751B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB5AFCB41B27209A00904BF7 /* Localizable.strings in Resources */,
 				CB5AFCB51B27209A00904BF7 /* tick@2x.png in Resources */,
 				CB5AFCB61B27209A00904BF7 /* menu_icon_grey@2x.png in Resources */,
@@ -7046,6 +7080,7 @@
 			files = (
 				CBCCD0011AE16D3C007027A6 /* return_cause_venue_icon@3x.png in Resources */,
 				CB60C1161AC5AD2600D5E962 /* orders_icon_grey.png in Resources */,
+				7E69DC6F1B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CB60C1171AC5AD2600D5E962 /* Localizable.strings in Resources */,
 				CB60C1181AC5AD2600D5E962 /* tick@2x.png in Resources */,
 				CB60C1191AC5AD2600D5E962 /* menu_icon_grey@2x.png in Resources */,
@@ -7250,6 +7285,7 @@
 			files = (
 				CBD0C5661B30724300DAD042 /* return_cause_venue_icon@3x.png in Resources */,
 				CBD0C5671B30724300DAD042 /* orders_icon_grey.png in Resources */,
+				7E69DC771B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CBD0C5681B30724300DAD042 /* Localizable.strings in Resources */,
 				CBD0C5691B30724300DAD042 /* tick@2x.png in Resources */,
 				CBD0C56A1B30724300DAD042 /* menu_icon_grey@2x.png in Resources */,
@@ -7454,6 +7490,7 @@
 			files = (
 				CBD2EB461B2A07D000E4AAA1 /* return_cause_venue_icon@3x.png in Resources */,
 				CBD2EB471B2A07D000E4AAA1 /* orders_icon_grey.png in Resources */,
+				7E69DC761B32F18700CCCB31 /* DBCompaniesViewController.xib in Resources */,
 				CBD2EB481B2A07D000E4AAA1 /* Localizable.strings in Resources */,
 				CBD2EB491B2A07D000E4AAA1 /* tick@2x.png in Resources */,
 				CBD2EB4A1B2A07D000E4AAA1 /* menu_icon_grey@2x.png in Resources */,
@@ -8213,6 +8250,7 @@
 				7E3DAB491B06153E00A7FFD1 /* EXTNil.m in Sources */,
 				7E3DAB4A1B06153E00A7FFD1 /* DBClientInfo.m in Sources */,
 				CB59CE121B22045600E9DD30 /* DBNewOrderItemErrorView.m in Sources */,
+				7E69DC681B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				7E3DAB4B1B06153E00A7FFD1 /* UIColor+Hex.m in Sources */,
 				7E3DAB4C1B06153E00A7FFD1 /* DBAdvertViewController.m in Sources */,
 				7E3DAB4D1B06153E00A7FFD1 /* DBPositionGroupModifierItemCell.m in Sources */,
@@ -8317,6 +8355,7 @@
 				CB14313E1B0E371A00DD50C7 /* OrderManager.m in Sources */,
 				CB14313F1B0E371A00DD50C7 /* DBPositionModifierPicker.m in Sources */,
 				CB1431401B0E371A00DD50C7 /* DBPopupTextView.m in Sources */,
+				7E69DC641B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB1431411B0E371A00DD50C7 /* CoreDataHelper.m in Sources */,
 				CB59CE021B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m in Sources */,
 				CB1431421B0E371A00DD50C7 /* Compatibility.m in Sources */,
@@ -8455,6 +8494,7 @@
 				CB1432A41B0F1BBB00DD50C7 /* DBPopupTextView.m in Sources */,
 				7E47E4171B1DEBAB001432D9 /* DBDeliveryViewController.m in Sources */,
 				CB1432A51B0F1BBB00DD50C7 /* CoreDataHelper.m in Sources */,
+				7E69DC691B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB1432A61B0F1BBB00DD50C7 /* Compatibility.m in Sources */,
 				CB1432A71B0F1BBB00DD50C7 /* DBDiscountAdvertView.m in Sources */,
 				CB1432A81B0F1BBB00DD50C7 /* DBOrderViewFooter.m in Sources */,
@@ -8610,6 +8650,7 @@
 				CB1AF7CC1AE10E6900FA3224 /* EXTNil.m in Sources */,
 				CB1AF7CD1AE10E6900FA3224 /* DBClientInfo.m in Sources */,
 				CB59CE101B22045500E9DD30 /* DBNewOrderItemErrorView.m in Sources */,
+				7E69DC661B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB1AF7CE1AE10E6900FA3224 /* UIColor+Hex.m in Sources */,
 				CB1AF7CF1AE10E6900FA3224 /* DBAdvertViewController.m in Sources */,
 				CB1AF7D01AE10E6900FA3224 /* DBPositionGroupModifierItemCell.m in Sources */,
@@ -8718,6 +8759,7 @@
 				CB3BA3351B20589300F320CA /* CoreDataHelper.m in Sources */,
 				CB3BA3361B20589300F320CA /* Compatibility.m in Sources */,
 				7E21EC031B28542E00AF7859 /* DBAddressViewController.m in Sources */,
+				7E69DC6A1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB3BA3371B20589300F320CA /* DBDiscountAdvertView.m in Sources */,
 				CB3BA3381B20589300F320CA /* DBOrderViewFooter.m in Sources */,
 				CB3BA3391B20589300F320CA /* DBPositionModifierCell.m in Sources */,
@@ -8873,6 +8915,7 @@
 				CB517BA61AEFB6B500A50F5C /* EXTNil.m in Sources */,
 				CB517BA71AEFB6B500A50F5C /* DBClientInfo.m in Sources */,
 				CB59CE111B22045600E9DD30 /* DBNewOrderItemErrorView.m in Sources */,
+				7E69DC671B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB517BA81AEFB6B500A50F5C /* UIColor+Hex.m in Sources */,
 				CB517BA91AEFB6B500A50F5C /* DBAdvertViewController.m in Sources */,
 				CB517BAA1AEFB6B500A50F5C /* DBPositionGroupModifierItemCell.m in Sources */,
@@ -8981,6 +9024,7 @@
 				CB5AFC7F1B27209A00904BF7 /* CoreDataHelper.m in Sources */,
 				CB5AFC801B27209A00904BF7 /* Compatibility.m in Sources */,
 				7E85BD731B2F0B10000BC2E1 /* DBAddressViewController.m in Sources */,
+				7E69DC6B1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB5AFC811B27209A00904BF7 /* DBDiscountAdvertView.m in Sources */,
 				CB5AFC821B27209A00904BF7 /* DBOrderViewFooter.m in Sources */,
 				CB5AFC831B27209A00904BF7 /* DBPositionModifierCell.m in Sources */,
@@ -9065,6 +9109,7 @@
 				CB60C0CC1AC5AD2600D5E962 /* UIColor+Brandbook.m in Sources */,
 				5ED458A51AEA4EE400DB8B64 /* DBCompanyInfoViewController.m in Sources */,
 				CB6DBF5B1B1F00F1008D177E /* DBPersonalWalletView.m in Sources */,
+				7E69DC651B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CB60C0CD1AC5AD2600D5E962 /* NSDictionary+NSNullRepresentation.m in Sources */,
 				CB60C0CE1AC5AD2600D5E962 /* UIViewController+DBMessage.m in Sources */,
 				7E47E40D1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
@@ -9246,6 +9291,7 @@
 				CBD0C5311B30724300DAD042 /* CoreDataHelper.m in Sources */,
 				CBD0C5321B30724300DAD042 /* Compatibility.m in Sources */,
 				CBD0C5331B30724300DAD042 /* DBAddressViewController.m in Sources */,
+				7E69DC6D1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CBD0C5341B30724300DAD042 /* DBDiscountAdvertView.m in Sources */,
 				CBD0C5351B30724300DAD042 /* DBOrderViewFooter.m in Sources */,
 				CBD0C5361B30724300DAD042 /* DBPositionModifierCell.m in Sources */,
@@ -9378,6 +9424,7 @@
 				CBD2EB131B2A07D000E4AAA1 /* CoreDataHelper.m in Sources */,
 				CBD2EB141B2A07D000E4AAA1 /* Compatibility.m in Sources */,
 				7E85BD741B2F0B11000BC2E1 /* DBAddressViewController.m in Sources */,
+				7E69DC6C1B32F18700CCCB31 /* DBCompaniesViewController.swift in Sources */,
 				CBD2EB151B2A07D000E4AAA1 /* DBDiscountAdvertView.m in Sources */,
 				CBD2EB161B2A07D000E4AAA1 /* DBOrderViewFooter.m in Sources */,
 				CBD2EB171B2A07D000E4AAA1 /* DBPositionModifierCell.m in Sources */,
@@ -9540,6 +9587,7 @@
 				PROVISIONING_PROFILE = "df40d4d7-395e-449b-a9b1-40bdd5e0917b";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -9573,6 +9621,7 @@
 				PROVISIONING_PROFILE = "81a283a9-2508-4197-a9e2-84963c671cfd";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9605,6 +9654,7 @@
 				PROVISIONING_PROFILE = "ac663f92-aacc-4ea7-946b-35eb928176c5";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9711,6 +9761,7 @@
 				PROVISIONING_PROFILE = "40f7d9ce-cd91-4573-a112-faae05bca8e5";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -9744,6 +9795,7 @@
 				PROVISIONING_PROFILE = "52af52f3-f48c-461c-8c01-060c39195c30";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9776,6 +9828,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9808,6 +9861,7 @@
 				PROVISIONING_PROFILE = "cd272edd-0996-47aa-8b8f-c3a33c2faa0e";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -9841,6 +9895,7 @@
 				PROVISIONING_PROFILE = "36f5247a-9c3c-4e16-a271-61f006bc9891";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9873,6 +9928,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9905,6 +9961,7 @@
 				PROVISIONING_PROFILE = "2e0f8bdc-ff2d-495c-bd8b-6b2bbb840169";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -9938,6 +9995,7 @@
 				PROVISIONING_PROFILE = "bba267ec-e9a5-4aba-b10f-5058fef1bc3d";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -9970,6 +10028,7 @@
 				PROVISIONING_PROFILE = "56032a5e-dc4e-44ca-aac3-12d4375b733a";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10002,6 +10061,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -10035,6 +10095,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10067,6 +10128,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10099,6 +10161,7 @@
 				PROVISIONING_PROFILE = "3915df3e-b528-460c-88a4-f9b9d67df2e5";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -10132,6 +10195,7 @@
 				PROVISIONING_PROFILE = "7889e990-7101-44a0-bedf-ca5dbe9ed522";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10164,6 +10228,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10196,6 +10261,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -10229,6 +10295,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10261,6 +10328,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10293,6 +10361,7 @@
 				PROVISIONING_PROFILE = "5c955e0d-6ff6-4edf-8867-bfe6a8bd7808";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -10326,6 +10395,7 @@
 				PROVISIONING_PROFILE = "925dc5fe-6d90-4aca-9be2-a798e381736b";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10358,6 +10428,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10372,7 +10443,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -10387,9 +10458,10 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Cat;
-				PROVISIONING_PROFILE = "7fe44645-9a1d-407f-8ce6-6c03142cc852";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -10405,7 +10477,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -10420,9 +10492,10 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Cat;
-				PROVISIONING_PROFILE = "e351be3f-93f8-4788-aa08-3418947c45e4";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10455,6 +10528,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10487,6 +10561,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -10520,6 +10595,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -10552,6 +10628,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};

@@ -39,4 +39,5 @@
 #import "EXTScope.h"
 
 #import "UIGestureRecognizer+BlocksKit.h"
+#import "DoubleB-Swift.h"
 #endif
