@@ -110,6 +110,7 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
     [[DBAPIClient sharedClient] POST:@"payment/paypal/bind"
                           parameters:params
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 NSLog(@"%@", responseObject);
                                  self.loggedIn = YES;
                                  
                                  if(_successBlock)

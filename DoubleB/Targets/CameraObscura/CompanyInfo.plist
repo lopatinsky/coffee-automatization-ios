@@ -7,6 +7,6 @@
 	<key>CompanyColor</key>
 	<integer>4286598201</integer>
 	<key>BaseUrl</key>
-	<string>http://cameraobscura.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://cameraobscura.test.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>
