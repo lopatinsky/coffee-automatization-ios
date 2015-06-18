@@ -781,25 +781,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadTimePicker{
-    if(_deliverySettings.deliveryType.useTimePicker){
-        self.pickerView.type = _deliverySettings.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
-        
-        self.pickerView.selectedDate = _deliverySettings.selectedTime;
-    } else {
-        self.pickerView.type = DBTimePickerTypeItems;
-        
-        self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
-        self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
-    }
-    
-    ///vfvdf
-    self.pickerView.type = DBTimePickerTypeDateTime;
-    self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
-    self.pickerView.minDate = [NSDate date];
-    self.pickerView.maxDate = [NSDate dateWithTimeIntervalSinceNow:1123123];
-    ///
-    
-    
     NSMutableArray *titles = [NSMutableArray new];
     if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
         [titles addObject:NSLocalizedString(@"С собой", nil)];
@@ -809,6 +790,34 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     self.pickerView.segments = titles;
     self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
+    
+    switch (_deliverySettings.deliveryType.timeMode) {
+        case TimeModeTime:{
+            self.pickerView.type = DBTimePickerTypeTime;
+            self.pickerView.selectedDate = _deliverySettings.selectedTime;
+        }
+            break;
+        case TimeModeDateTime:{
+            self.pickerView.type = DBTimePickerTypeDateTime;
+            self.pickerView.selectedDate = _deliverySettings.selectedTime;
+        }
+            break;
+        case TimeModeSlots:{
+            self.pickerView.type = DBTimePickerTypeItems;
+            self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
+        }
+            break;
+        case TimeModeDateSlots:{
+            self.pickerView.type = DBTimePickerTypeDateAndItems;
+            self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.minDate = _deliverySettings.deliveryType.minDate;
+            self.pickerView.maxDate = _deliverySettings.deliveryType.maxDate;
+        }
+            
+        default:
+            break;
+    }
     
     [self.pickerView configure];
 }
@@ -822,16 +831,31 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)selectedTimeString{
     NSString *timeString;
-    if(_deliverySettings.deliveryType.useTimePicker){
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        if(_deliverySettings.deliveryType.onlyTime){
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    switch (_deliverySettings.deliveryType.timeMode) {
+        case TimeModeTime:{
             formatter.dateFormat = @"HH:mm";
-        } else {
-            formatter.dateFormat = @"dd/MM/yy HH:mm";
+            timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
         }
-        timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
-    } else {
-        timeString = _deliverySettings.selectedTimeSlot.slotTitle;
+            break;
+        case TimeModeDateTime:{
+            formatter.dateFormat = @"dd/MM/yy HH:mm";
+            timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
+        }
+            break;
+        case TimeModeSlots:{
+            timeString = _deliverySettings.selectedTimeSlot.slotTitle;
+        }
+            break;
+        case TimeModeDateSlots:{
+            formatter.dateFormat = @"ccc d";
+            timeString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromDate:_deliverySettings.selectedTime], _deliverySettings.selectedTimeSlot.slotTitle];
+        }
+            break;
+            
+        default:
+            break;
     }
     
     return timeString;
@@ -839,7 +863,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)stringFromTime:(NSDate *)date{
     NSDateFormatter *formatter = [NSDateFormatter new];
-    if(_deliverySettings.deliveryType.onlyTime){
+    if(_deliverySettings.deliveryType.timeMode == TimeModeTime){
         formatter.dateFormat = @"HH:mm";
     } else {
         formatter.dateFormat = @"dd/MM/yy HH:mm";
@@ -880,10 +904,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
         [self showAlert:message];
     }
-    
-//    if(comparisonResult == NSOrderedSame){
-//        [self reloadTime];
-//    }
 }
 
 - (BOOL)db_shouldHideTimePickerView{

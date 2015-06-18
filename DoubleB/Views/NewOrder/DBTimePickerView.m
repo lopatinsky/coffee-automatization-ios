@@ -30,7 +30,7 @@
     DBTimePickerView *timePickerView = [[[NSBundle mainBundle] loadNibNamed:@"DBTimePickerView" owner:self options:nil] firstObject];
     timePickerView.delegate = delegate;
     timePickerView.dateFormatter = [NSDateFormatter new];
-    timePickerView.dateFormatter.dateFormat = @"ccc d MMM";
+    timePickerView.dateFormatter.dateFormat = @"cccc d";
     return timePickerView;
 }
 
@@ -69,11 +69,11 @@
 }
 
 - (void)configure {
-    if(_type == DBTimePickerTypeDate || _type == DBTimePickerTypeTime){
+    if(_type == DBTimePickerTypeDateTime || _type == DBTimePickerTypeTime){
         self.datePickerView.hidden = NO;
         self.pickerView.hidden = YES;
         
-        if(_type == DBTimePickerTypeDate){
+        if(_type == DBTimePickerTypeDateTime){
             self.datePickerView.datePickerMode = UIDatePickerModeDateAndTime;
         }
         if(_type == DBTimePickerTypeTime){
@@ -88,7 +88,7 @@
         [self.pickerView reloadAllComponents];
     }
     
-    if (_type == DBTimePickerTypeDateTime) {
+    if (_type == DBTimePickerTypeDateAndItems) {
         self.datePickerView.hidden = YES;
     }
     
@@ -148,7 +148,11 @@
     if(_selectedItem < 0 || _selectedItem  >=[self.pickerView numberOfRowsInComponent:0]){
         _selectedItem = 0;
     }
-    [self.pickerView selectRow:_selectedItem inComponent:0 animated:YES];
+//    [self.pickerView selectRow:_selectedItem inComponent:0 animated:YES];
+}
+
+- (NSInteger)selectedItem{
+    return [self.pickerView selectedRowInComponent:1];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate{
@@ -180,15 +184,15 @@
 - (void)hideInternal {
     if(_type == DBTimePickerTypeItems) {
         if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]) {
-            [self.delegate db_timePickerView:self didSelectRowAtIndex:self.selectedItem];
+            [self.delegate db_timePickerView:self didSelectRowAtIndex:[self.pickerView selectedRowInComponent:1]];
         }
     } else {
         if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
-            [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
+            [self.delegate db_timePickerView:self didSelectDate:[self dateForRow:[self.pickerView selectedRowInComponent:0]]];
         }
     }
     
-    if (_type == DBTimePickerTypeDateTime) {
+    if (_type == DBTimePickerTypeDateAndItems) {
         if ([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]) {
             [self.delegate db_timePickerView:self didSelectRowAtIndex:[self.pickerView selectedRowInComponent:1]];
         }
@@ -287,10 +291,10 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     switch (_type) {
-        case DBTimePickerTypeDateTime:
+        case DBTimePickerTypeDateAndItems:
             return 2;
             break;
-        case DBTimePickerTypeDate:
+        case DBTimePickerTypeDateTime:
         case DBTimePickerTypeItems:
         case DBTimePickerTypeTime:
             return 1;
@@ -303,14 +307,14 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     switch (_type) {
-        case DBTimePickerTypeDateTime:
+        case DBTimePickerTypeDateAndItems:
             if (component == 0) {
                 return [self daysBetweenDate:self.minDate andDate:self.maxDate];
             } else {
                 return [_items count];
             }
             break;
-        case DBTimePickerTypeDate:
+        case DBTimePickerTypeDateTime:
         case DBTimePickerTypeItems:
         case DBTimePickerTypeTime:
             return [_items count];
@@ -323,14 +327,14 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     switch (_type) {
-        case DBTimePickerTypeDateTime:
+        case DBTimePickerTypeDateAndItems:
             if (component == 0) {
                 return [self stringDateForRow:row];
             } else {
                 return _items[row];
             }
             break;
-        case DBTimePickerTypeDate:
+        case DBTimePickerTypeDateTime:
         case DBTimePickerTypeItems:
         case DBTimePickerTypeTime:
             return _items[row];
@@ -345,7 +349,9 @@
 #pragma mark - UIPickerViewDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    self.selectedItem = row;
+    if(_type != DBTimePickerTypeDateAndItems){
+        self.selectedItem = row;
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate

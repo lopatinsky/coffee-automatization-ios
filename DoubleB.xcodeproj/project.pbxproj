@@ -386,7 +386,6 @@
 		CB0C99101ACEDAC300B1AE2F /* DBPositionModifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C990B1ACEDAC300B1AE2F /* DBPositionModifierCell.xib */; };
 		CB0C99111ACEDAC300B1AE2F /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB0C99121ACEDAC300B1AE2F /* DBPositionModifierPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0C990E1ACEDAC300B1AE2F /* DBPositionModifierPicker.xib */; };
-		CB136A9F1B0A3B8800B93178 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CB1430DA1B0DD76000DD50C7 /* DBMenuBonusPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1430D91B0DD76000DD50C7 /* DBMenuBonusPosition.m */; };
 		CB1430DB1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1430D91B0DD76000DD50C7 /* DBMenuBonusPosition.m */; };
 		CB1430DC1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1430D91B0DD76000DD50C7 /* DBMenuBonusPosition.m */; };
@@ -439,7 +438,6 @@
 		CB14311A1B0E371A00DD50C7 /* DBNewOrderItemAdditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6DF3B61B0C8FD20032B59B /* DBNewOrderItemAdditionView.m */; };
 		CB14311B1B0E371A00DD50C7 /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CB14311C1B0E371A00DD50C7 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CB14311D1B0E371A00DD50C7 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CB14311E1B0E371A00DD50C7 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CB14311F1B0E371A00DD50C7 /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB1431201B0E371A00DD50C7 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -754,7 +752,6 @@
 		CB14327E1B0F1BBB00DD50C7 /* DBNewOrderItemAdditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6DF3B61B0C8FD20032B59B /* DBNewOrderItemAdditionView.m */; };
 		CB14327F1B0F1BBB00DD50C7 /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CB1432801B0F1BBB00DD50C7 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CB1432811B0F1BBB00DD50C7 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CB1432821B0F1BBB00DD50C7 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CB1432831B0F1BBB00DD50C7 /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB1432841B0F1BBB00DD50C7 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -1366,7 +1363,6 @@
 		CB3BA30C1B20589300F320CA /* DBNewOrderItemAdditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6DF3B61B0C8FD20032B59B /* DBNewOrderItemAdditionView.m */; };
 		CB3BA30D1B20589300F320CA /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CB3BA30E1B20589300F320CA /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CB3BA30F1B20589300F320CA /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CB3BA3101B20589300F320CA /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CB3BA3111B20589300F320CA /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB3BA3121B20589300F320CA /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -2037,7 +2033,6 @@
 		CB5AFC551B27209A00904BF7 /* DBNewOrderItemAdditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6DF3B61B0C8FD20032B59B /* DBNewOrderItemAdditionView.m */; };
 		CB5AFC561B27209A00904BF7 /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CB5AFC571B27209A00904BF7 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CB5AFC581B27209A00904BF7 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CB5AFC591B27209A00904BF7 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CB5AFC5A1B27209A00904BF7 /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB5AFC5B1B27209A00904BF7 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -2607,7 +2602,6 @@
 		CB64FE341B317F760011CEEC /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		CB64FE351B317F760011CEEC /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CB64FE361B317F760011CEEC /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CB64FE371B317F760011CEEC /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CB64FE381B317F760011CEEC /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CB64FE391B317F760011CEEC /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB64FE3A1B317F760011CEEC /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -3134,7 +3128,6 @@
 		CBD0C5071B30724300DAD042 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		CBD0C5081B30724300DAD042 /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CBD0C5091B30724300DAD042 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CBD0C50A1B30724300DAD042 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CBD0C50B1B30724300DAD042 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CBD0C50C1B30724300DAD042 /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CBD0C50D1B30724300DAD042 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -3493,7 +3486,6 @@
 		CBD2EAE91B2A07D000E4AAA1 /* DBNewOrderItemAdditionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6DF3B61B0C8FD20032B59B /* DBNewOrderItemAdditionView.m */; };
 		CBD2EAEA1B2A07D000E4AAA1 /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CBD2EAEB1B2A07D000E4AAA1 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CBD2EAEC1B2A07D000E4AAA1 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
 		CBD2EAED1B2A07D000E4AAA1 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CBD2EAEE1B2A07D000E4AAA1 /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CBD2EAEF1B2A07D000E4AAA1 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -3948,8 +3940,6 @@
 		CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBDeliveryViewController.xib; sourceTree = "<group>"; };
 		CB136A861B0A1D8300B93178 /* DBPositionScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionScrollViewController.h; sourceTree = "<group>"; };
 		CB136A871B0A1D8300B93178 /* DBPositionScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionScrollViewController.m; sourceTree = "<group>"; };
-		CB136A9C1B0A1E0F00B93178 /* DBInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBInfiniteScrollView.h; sourceTree = "<group>"; };
-		CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBInfiniteScrollView.m; sourceTree = "<group>"; };
 		CB1430D81B0DD76000DD50C7 /* DBMenuBonusPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMenuBonusPosition.h; sourceTree = "<group>"; };
 		CB1430D91B0DD76000DD50C7 /* DBMenuBonusPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMenuBonusPosition.m; sourceTree = "<group>"; };
 		CB1432331B0E371A00DD50C7 /* CoffeeAutomation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeAutomation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -5236,8 +5226,6 @@
 		CB6EB71D19E7DC0E0050DF90 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CB136A9C1B0A1E0F00B93178 /* DBInfiniteScrollView.h */,
-				CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */,
 				CB715AE91ACEB21100EA84FC /* CustomControls */,
 				CB60C1C51AC9676900D5E962 /* Menu */,
 				CBD29D271ABC3B0A00BD4E81 /* NewOrder */,
@@ -8996,7 +8984,6 @@
 				CB14311A1B0E371A00DD50C7 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB14311B1B0E371A00DD50C7 /* DBCardsViewController.m in Sources */,
 				CB14311C1B0E371A00DD50C7 /* UIViewController+DBCardManagement.m in Sources */,
-				CB14311D1B0E371A00DD50C7 /* DBInfiniteScrollView.m in Sources */,
 				CB14311E1B0E371A00DD50C7 /* DBNewOrderViewController.m in Sources */,
 				CB14311F1B0E371A00DD50C7 /* DBCategoryPickerCell.m in Sources */,
 				CB1431201B0E371A00DD50C7 /* DBNewOrderNDAView.m in Sources */,
@@ -9132,7 +9119,6 @@
 				CB14327E1B0F1BBB00DD50C7 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB14327F1B0F1BBB00DD50C7 /* DBCardsViewController.m in Sources */,
 				CB1432801B0F1BBB00DD50C7 /* UIViewController+DBCardManagement.m in Sources */,
-				CB1432811B0F1BBB00DD50C7 /* DBInfiniteScrollView.m in Sources */,
 				CB1432821B0F1BBB00DD50C7 /* DBNewOrderViewController.m in Sources */,
 				CB1432831B0F1BBB00DD50C7 /* DBCategoryPickerCell.m in Sources */,
 				CB1432841B0F1BBB00DD50C7 /* DBNewOrderNDAView.m in Sources */,
@@ -9395,7 +9381,6 @@
 				7E85BD7A1B2F0BAE000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB3BA30D1B20589300F320CA /* DBCardsViewController.m in Sources */,
 				CB3BA30E1B20589300F320CA /* UIViewController+DBCardManagement.m in Sources */,
-				CB3BA30F1B20589300F320CA /* DBInfiniteScrollView.m in Sources */,
 				CB3BA3101B20589300F320CA /* DBNewOrderViewController.m in Sources */,
 				CB3BA3111B20589300F320CA /* DBCategoryPickerCell.m in Sources */,
 				CB3BA3121B20589300F320CA /* DBNewOrderNDAView.m in Sources */,
@@ -9658,7 +9643,6 @@
 				7E85BD791B2F0BAD000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB5AFC561B27209A00904BF7 /* DBCardsViewController.m in Sources */,
 				CB5AFC571B27209A00904BF7 /* UIViewController+DBCardManagement.m in Sources */,
-				CB5AFC581B27209A00904BF7 /* DBInfiniteScrollView.m in Sources */,
 				CB5AFC591B27209A00904BF7 /* DBNewOrderViewController.m in Sources */,
 				CB5AFC5A1B27209A00904BF7 /* DBCategoryPickerCell.m in Sources */,
 				CB5AFC5B1B27209A00904BF7 /* DBNewOrderNDAView.m in Sources */,
@@ -9792,7 +9776,6 @@
 				CB6DF3B71B0C8FD20032B59B /* DBNewOrderItemAdditionView.m in Sources */,
 				CB60C0D01AC5AD2600D5E962 /* DBCardsViewController.m in Sources */,
 				CB60C0D11AC5AD2600D5E962 /* UIViewController+DBCardManagement.m in Sources */,
-				CB136A9F1B0A3B8800B93178 /* DBInfiniteScrollView.m in Sources */,
 				CB60C0D21AC5AD2600D5E962 /* DBNewOrderViewController.m in Sources */,
 				CB715AE11ACD5C9A00EA84FC /* DBCategoryPickerCell.m in Sources */,
 				CB60C0D31AC5AD2600D5E962 /* DBNewOrderNDAView.m in Sources */,
@@ -9923,7 +9906,6 @@
 				CB64FE341B317F760011CEEC /* UIViewController+NavigationBarFix.m in Sources */,
 				CB64FE351B317F760011CEEC /* DBCardsViewController.m in Sources */,
 				CB64FE361B317F760011CEEC /* UIViewController+DBCardManagement.m in Sources */,
-				CB64FE371B317F760011CEEC /* DBInfiniteScrollView.m in Sources */,
 				CB64FE381B317F760011CEEC /* DBNewOrderViewController.m in Sources */,
 				CB64FE391B317F760011CEEC /* DBCategoryPickerCell.m in Sources */,
 				CB64FE3A1B317F760011CEEC /* DBNewOrderNDAView.m in Sources */,
@@ -10056,7 +10038,6 @@
 				CBD0C5071B30724300DAD042 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBD0C5081B30724300DAD042 /* DBCardsViewController.m in Sources */,
 				CBD0C5091B30724300DAD042 /* UIViewController+DBCardManagement.m in Sources */,
-				CBD0C50A1B30724300DAD042 /* DBInfiniteScrollView.m in Sources */,
 				CBD0C50B1B30724300DAD042 /* DBNewOrderViewController.m in Sources */,
 				CBD0C50C1B30724300DAD042 /* DBCategoryPickerCell.m in Sources */,
 				CBD0C50D1B30724300DAD042 /* DBNewOrderNDAView.m in Sources */,
@@ -10188,7 +10169,6 @@
 				7E85BD7B1B2F0BAF000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBD2EAEA1B2A07D000E4AAA1 /* DBCardsViewController.m in Sources */,
 				CBD2EAEB1B2A07D000E4AAA1 /* UIViewController+DBCardManagement.m in Sources */,
-				CBD2EAEC1B2A07D000E4AAA1 /* DBInfiniteScrollView.m in Sources */,
 				CBD2EAED1B2A07D000E4AAA1 /* DBNewOrderViewController.m in Sources */,
 				CBD2EAEE1B2A07D000E4AAA1 /* DBCategoryPickerCell.m in Sources */,
 				CBD2EAEF1B2A07D000E4AAA1 /* DBNewOrderNDAView.m in Sources */,

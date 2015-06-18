@@ -13,9 +13,9 @@
 
 typedef NS_ENUM(NSUInteger, DBTimePickerType) {
     DBTimePickerTypeItems = 0,
-    DBTimePickerTypeDate,
+    DBTimePickerTypeDateTime,
     DBTimePickerTypeTime,
-    DBTimePickerTypeDateTime
+    DBTimePickerTypeDateAndItems
 };
 
 @protocol DBTimePickerViewDelegate <NSObject>
@@ -24,6 +24,8 @@ typedef NS_ENUM(NSUInteger, DBTimePickerType) {
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index;
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date;
+
+- (NSInteger)db_timePickerView:(DBTimePickerType *)view selectedRowForComponent:(NSInteger)selectedRow;
 
 - (BOOL)db_shouldHideTimePickerView;
 @end

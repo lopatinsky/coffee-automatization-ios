@@ -253,22 +253,27 @@
                                  ord.status = OrderStatusNew;
                                  ord.venue = [OrderManager sharedManager].venue;
                                  
-                                 // Time
-                                 if([DBDeliverySettings sharedInstance].deliveryType.useTimePicker){
+                                 // Save Time
+                                 if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
                                      ord.time = [DBDeliverySettings sharedInstance].selectedTime;
-                                 } else {
-                                     NSString *dateString = [responseObject getValueForKey:@"delivery_time"];
+                                 }
+                                 
+                                 if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
                                      NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
+                                     if(timeSlot){
+                                         ord.timeString = timeSlot;
+                                     }
+                                 }
+                                 
+                                 if([DBDeliverySettings sharedInstance].deliveryType.timeMode == TimeModeDateSlots){
+                                     NSString *dateString = [responseObject getValueForKey:@"delivery_time"];
                                      
                                      NSDateFormatter *formatter = [NSDateFormatter new];
                                      formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
                                      NSDate *date = [formatter dateFromString:dateString];
                                      ord.time = date;
-                                     
-                                     if(timeSlot){
-                                         ord.timeString = timeSlot;
-                                     }
                                  }
+                                 
                                  
                                  [[CoreDataHelper sharedHelper] save];
                                  if(success)
@@ -526,16 +531,14 @@
 }
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
-    if([DBDeliverySettings sharedInstance].deliveryType.useTimePicker){
+    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         params[@"time_picker_value"] = [formatter stringFromDate:[DBDeliverySettings sharedInstance].selectedTime];
-    } else {
+    }
+    
+    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
         params[@"delivery_slot_id"] = [DBDeliverySettings sharedInstance].selectedTimeSlot.slotId;
-        
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        params[@"time_picker_value"] = [formatter stringFromDate:[NSDate date]];
     }
 }
 

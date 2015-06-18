@@ -387,7 +387,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{
     _deliveryType = deliveryType;
     
-    if(_deliveryType.useTimePicker){
+    if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
         [self launchTimer];
     } else {
         [self stopTimer];
@@ -419,7 +419,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)updateTimeAccordingToDeliveryType{
-    if(self.deliveryType.useTimePicker){
+    if(self.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         if(!self.selectedTime || [self.selectedTime compare:self.deliveryType.minDate] == NSOrderedAscending){
             self.selectedTime = self.deliveryType.minDate;
         }
@@ -427,7 +427,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         if([self.selectedTime compare:self.deliveryType.maxDate] == NSOrderedDescending){
             self.selectedTime = self.deliveryType.maxDate;
         }
-    } else {
+    }
+    
+    if(self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
         DBTimeSlot *timeSlot = [self.deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
         if(!timeSlot)
             timeSlot = [self.deliveryType.timeSlots firstObject];
