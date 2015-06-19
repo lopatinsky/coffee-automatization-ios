@@ -373,7 +373,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)selectShipping{
-    self.lastNotShippingDeliveryType = self.deliveryType;
+    if(self.deliveryType && self.deliveryType.typeId != DeliveryTypeIdShipping)
+        self.lastNotShippingDeliveryType = self.deliveryType;
     
     self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping];
     [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Shipping" category:ADDRESS_SCREEN];
@@ -387,7 +388,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{
     _deliveryType = deliveryType;
     
-    if(_deliveryType.useTimePicker){
+    if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
         [self launchTimer];
     } else {
         [self stopTimer];
@@ -419,18 +420,20 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)updateTimeAccordingToDeliveryType{
-    if(self.deliveryType.useTimePicker){
-        if(!self.selectedTime || [self.selectedTime compare:self.deliveryType.minDate] == NSOrderedAscending){
-            self.selectedTime = self.deliveryType.minDate;
+    if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
+        if(!self.selectedTime || [self.selectedTime compare:_deliveryType.minDate] == NSOrderedAscending){
+            self.selectedTime = _deliveryType.minDate;
         }
         
-        if([self.selectedTime compare:self.deliveryType.maxDate] == NSOrderedDescending){
-            self.selectedTime = self.deliveryType.maxDate;
+        if([self.selectedTime compare:_deliveryType.maxDate] == NSOrderedDescending){
+            self.selectedTime = _deliveryType.maxDate;
         }
-    } else {
-        DBTimeSlot *timeSlot = [self.deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
+    }
+    
+    if(self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+        DBTimeSlot *timeSlot = [_deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
         if(!timeSlot)
-            timeSlot = [self.deliveryType.timeSlots firstObject];
+            timeSlot = [_deliveryType.timeSlots firstObject];
         
         self.selectedTimeSlot = timeSlot;
     }
@@ -457,7 +460,11 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         if(result != NSOrderedDescending){
             _selectedTime = date;
             result = NSOrderedSame;
+        } else {
+            _selectedTime = self.deliveryType.maxDate;
         }
+    } else {
+        _selectedTime = self.deliveryType.minDate;
     }
     
     return result;

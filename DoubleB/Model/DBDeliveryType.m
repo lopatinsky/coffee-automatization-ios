@@ -27,11 +27,18 @@
     }
     _timeSlots = timeSlots;
     
+    // Define time mode
+    if(![[responseDict getValueForKey:@"time_required"] boolValue]){
+        _timeMode = TimeModeSlots;
+    } else {
+        if([_timeSlots count] > 0){
+            _timeMode = TimeModeDateSlots;
+        } else {
+            _timeMode = self.maxTimeInterval <= 60*60*24 ? TimeModeTime : TimeModeDateTime;
+        }
+    }
+    
     return self;
-}
-
-- (BOOL)useTimePicker{
-    return [_timeSlots count] == 0;
 }
 
 - (NSArray *)timeSlotsNames{
@@ -64,10 +71,6 @@
     return [NSDate dateWithTimeIntervalSince1970:interval];
 }
 
-- (BOOL)onlyTime{
-    return self.maxTimeInterval <= 60*60*24;
-}
-
 - (DBTimeSlot *)timeSlotWithName:(NSString *)name{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"slotTitle == %@", name];
     
@@ -84,6 +87,8 @@
         
         _minOrderSum = [[aDecoder decodeObjectForKey:@"_minOrderSum"] doubleValue];
         
+        _timeMode = [[aDecoder decodeObjectForKey:@"_timeMode"] intValue];
+        
         _minTimeInterval = [[aDecoder decodeObjectForKey:@"_minTimeInterval"] doubleValue];
         _maxTimeInterval = [[aDecoder decodeObjectForKey:@"_maxTimeInterval"] doubleValue];
         
@@ -98,6 +103,8 @@
     [aCoder encodeObject:_typeName forKey:@"_typeName"];
     
     [aCoder encodeObject:@(_minOrderSum) forKey:@"_minOrderSum"];
+    
+    [aCoder encodeObject:@(_timeMode) forKey:@"_timeMode"];
     
     [aCoder encodeObject:@(_minTimeInterval) forKey:@"_minTimeInterval"];
     [aCoder encodeObject:@(_maxTimeInterval) forKey:@"_maxTimeInterval"];

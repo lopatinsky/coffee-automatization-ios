@@ -42,9 +42,9 @@
 @property (strong, nonatomic) DBShippingManager *deliveryManager;
 @property (nonatomic) BOOL keyboardIsHidden;
 
-#pragma mark - Placeholders
-@property (strong, nonatomic) NSMutableAttributedString *streetPlaceholder;
-@property (strong, nonatomic) NSMutableAttributedString *apartmentPlaceholder;
+//#pragma mark - Placeholders
+//@property (strong, nonatomic) NSMutableAttributedString *streetPlaceholder;
+//@property (strong, nonatomic) NSMutableAttributedString *apartmentPlaceholder;
 
 @end
 
@@ -119,15 +119,18 @@
 }
 
 - (void)initializePlaceholders {
-    NSString *localizedString = NSLocalizedString(@"Улица, дом (не указаны)", nil);
-    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
-    [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
-    [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, [localizedString length])];
+//    NSString *localizedString = NSLocalizedString(@"Улица, дом", nil);
+//    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
+//    [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
+//    [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, [localizedString length])];
+//    
+//    localizedString = NSLocalizedString(@"Кв/Офис", nil);
+//    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
+//    [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
+//    [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, [localizedString length])];
     
-    localizedString = NSLocalizedString(@"Кв/Офис", nil);
-    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
-    [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
-    [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, [localizedString length])];
+    self.streetTextField.placeholder = NSLocalizedString(@"Улица, дом", nil);
+    self.apartmentTextField.placeholder = NSLocalizedString(@"Кв/Офис", nil);
 }
 
 - (void)initializeViews {
@@ -148,7 +151,7 @@
         self.streetTextField.text = self.deliveryManager.address;
         self.streetIndicatorView.hidden = YES;
     } else {
-        self.streetTextField.attributedPlaceholder = self.streetPlaceholder;
+//        self.streetTextField.attributedPlaceholder = self.streetPlaceholder;
         self.streetIndicatorView.hidden = NO;
     }
     self.streetTextField.enablesReturnKeyAutomatically = NO;
@@ -156,7 +159,7 @@
     if (![self.deliveryManager.apartment isEqualToString:@""]) {
         self.apartmentTextField.text = self.deliveryManager.apartment;
     } else {
-        self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
+//        self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
     }
     self.apartmentTextField.enablesReturnKeyAutomatically = NO;
     
@@ -200,7 +203,7 @@
     if (textField == self.streetTextField) {
         self.deliveryManager.address = self.streetTextField.text;
         if ([textField.text isEqualToString:@""]) {
-            textField.attributedPlaceholder = self.streetPlaceholder;
+//            textField.attributedPlaceholder = self.streetPlaceholder;
             self.streetIndicatorView.hidden = NO;
         } else {
             self.streetIndicatorView.hidden = YES;
@@ -209,7 +212,7 @@
     if (textField == self.apartmentTextField) {
         self.deliveryManager.apartment = self.apartmentTextField.text;
         if ([textField.text isEqualToString:@""]) {
-            textField.attributedPlaceholder = self.apartmentPlaceholder;
+//            textField.attributedPlaceholder = self.apartmentPlaceholder;
         }
     }
 }
@@ -217,7 +220,7 @@
 - (void)textFieldDidChange:(UITextField *)sender {
     if (sender == self.streetTextField) {
         if ([self.streetTextField.text isEqualToString:@""]) {
-            self.streetTextField.attributedPlaceholder = self.streetPlaceholder;
+//            self.streetTextField.attributedPlaceholder = self.streetPlaceholder;
             self.streetIndicatorView.hidden = NO;
         } else {
             self.streetIndicatorView.hidden = YES;
@@ -229,7 +232,7 @@
     if (sender == self.apartmentTextField) {
         self.deliveryManager.apartment = self.apartmentTextField.text;
         if ([self.apartmentTextField.text isEqualToString:@""]) {
-            self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
+//            self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
         }
         [GANHelper analyzeEvent:@"apartment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
     }

@@ -22,7 +22,7 @@
 
 "Точки самовывоза" = "Venues";
 "Адрес доставки" = "Shipping address";
-"Улица, дом (не указаны)" = "Street, house (empty)";
+"Улица, дом" = "Street, house";
 "Кв/Офис" = "apartment";
 
 
@@ -108,6 +108,7 @@
 "Оплатить бонусами" = "Pay with bonuses";
 
 "Готово" = "Done";
+"Сегодня" = "Today";
 
 "Заказать" = "Place order";
 "Номер заказа: %@" = "Order number: %@";
