@@ -12688,7 +12688,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = MeatMe;
-				PROVISIONING_PROFILE = "3915df3e-b528-460c-88a4-f9b9d67df2e5";
+				PROVISIONING_PROFILE = "5bba5f7c-a697-456e-8eab-1f937b8a7435";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -12721,7 +12721,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = MeatMe;
-				PROVISIONING_PROFILE = "7889e990-7101-44a0-bedf-ca5dbe9ed522";
+				PROVISIONING_PROFILE = "3b71507f-138a-4a55-97b0-b17ffb309e27";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
