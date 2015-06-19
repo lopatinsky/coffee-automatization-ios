@@ -22,6 +22,9 @@
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
+// Only for DBTimePickerTypeDateAndItems
+@property (strong, nonatomic) NSArray *dateItems;
+
 @end
 
 @implementation DBTimePickerView
@@ -30,7 +33,7 @@
     DBTimePickerView *timePickerView = [[[NSBundle mainBundle] loadNibNamed:@"DBTimePickerView" owner:self options:nil] firstObject];
     timePickerView.delegate = delegate;
     timePickerView.dateFormatter = [NSDateFormatter new];
-    timePickerView.dateFormatter.dateFormat = @"cccc d";
+    timePickerView.dateFormatter.dateFormat = @"ccc d";
     return timePickerView;
 }
 
@@ -66,6 +69,7 @@
     
     self.initialSegmentsViewHolderHeight = self.constraintSegmentsViewHolderHeight.constant;
     [self.doneButton setTitle:NSLocalizedString(@"Готово", nil) forState:UIControlStateNormal];
+    [self.doneButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
 }
 
 - (void)configure {
@@ -90,6 +94,9 @@
     
     if (_type == DBTimePickerTypeDateAndItems) {
         self.datePickerView.hidden = YES;
+        
+        [self setupDates];
+        [self.pickerView reloadAllComponents];
     }
     
     if(_segments.count < 2){
@@ -111,7 +118,6 @@
 }
 
 - (IBAction)doneButtonClicked {
-    self.selectedItem = [self.pickerView selectedRowInComponent:0];
     [self hideInternal];
 }
 
@@ -144,11 +150,12 @@
 }
 
 - (void)setSelectedItem:(NSInteger)selectedItem{
-    _selectedItem = selectedItem;
-    if(_selectedItem < 0 || _selectedItem  >=[self.pickerView numberOfRowsInComponent:0]){
-        _selectedItem = 0;
+    if(selectedItem < 0 || selectedItem  >= [self.pickerView numberOfRowsInComponent:0]){
+        selectedItem = 0;
     }
-//    [self.pickerView selectRow:_selectedItem inComponent:0 animated:YES];
+    
+    int component = self.type == DBTimePickerTypeDateAndItems ? 1 : 0;
+    [self.pickerView selectRow:selectedItem inComponent:component animated:YES];
 }
 
 - (NSInteger)selectedItem{
@@ -157,7 +164,12 @@
 
 - (void)setSelectedDate:(NSDate *)selectedDate{
     _selectedDate = selectedDate;
-    self.datePickerView.date = _selectedDate;
+    
+    if(self.type == DBTimePickerTypeDateAndItems){
+        [self.pickerView selectRow:[self rowForDate:_selectedDate] inComponent:0 animated:YES];
+    } else {
+        self.datePickerView.date = _selectedDate;
+    }
 }
 
 - (IBAction)segmentedControlValueChanged:(UISegmentedControl *)sender{
@@ -182,22 +194,10 @@
 }
 
 - (void)hideInternal {
-    if(_type == DBTimePickerTypeItems) {
-        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]) {
-            [self.delegate db_timePickerView:self didSelectRowAtIndex:[self.pickerView selectedRowInComponent:1]];
-        }
-    } else {
+    // Call Delegate only when view will dismiss(cause delegate vc show alert after handling)
+    if(self.type == DBTimePickerTypeTime || self.type == DBTimePickerTypeDateTime){
         if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
-            [self.delegate db_timePickerView:self didSelectDate:[self dateForRow:[self.pickerView selectedRowInComponent:0]]];
-        }
-    }
-    
-    if (_type == DBTimePickerTypeDateAndItems) {
-        if ([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]) {
-            [self.delegate db_timePickerView:self didSelectRowAtIndex:[self.pickerView selectedRowInComponent:1]];
-        }
-        if ([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]) {
-            [self.delegate db_timePickerView:self didSelectDate:[self dateForRow:[self.pickerView selectedRowInComponent:0]]];
+            [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
         }
     }
     
@@ -246,7 +246,46 @@
     }];
 }
 
-#pragma mark – Date time picker
+#pragma mark - Date(items) helper methods
+
+- (void)setupDates{
+    NSMutableArray *dayItems = [NSMutableArray new];
+    for(int i = 0; i < [self daysBetweenDate:self.minDate andDate:self.maxDate]; i++){
+        NSDate *date = [self dateForRow:i];
+        
+        NSString *dayString = [self stringOfDate:date];
+        [dayItems addObject:dayString];
+    }
+    
+    self.dateItems = dayItems;
+}
+
+- (NSDate *)dateForRow:(NSInteger)row{
+    NSDate *date = [NSDate dateWithTimeInterval:60 * 60 * 24 * row sinceDate:self.minDate];
+    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+    
+    return [[NSCalendar currentCalendar] dateFromComponents:components];
+}
+
+- (NSInteger)rowForDate:(NSDate *)date{
+    NSString *dayString = [self stringOfDate:date];
+    
+    NSInteger index = [self.dateItems indexOfObject:dayString];
+    if(index == NSNotFound){
+        index = 0;
+    }
+    
+    return index;
+}
+
+- (NSString *)stringOfDate:(NSDate *)date{
+    if ([self isDate:date sameDayAsDate:[NSDate date]]) {
+        return NSLocalizedString(@"Сегодня", nil);
+    }
+    return [self.dateFormatter stringFromDate:date];
+}
+
 - (BOOL)isDate:(NSDate *)date1 sameDayAsDate:(NSDate *)date2 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
@@ -257,19 +296,6 @@
     return [comp1 day]   == [comp2 day] &&
     [comp1 month] == [comp2 month] &&
     [comp1 year]  == [comp2 year];
-}
-
-- (NSDate *)dateForRow:(NSInteger)row {
-    NSDate *date = [NSDate dateWithTimeInterval:60 * 60 * 24 * row sinceDate:self.minDate];
-    return [[NSCalendar currentCalendar] dateBySettingHour:0 minute:0 second:0 ofDate:date options:0];
-}
-
-- (NSString *)stringDateForRow:(NSUInteger)row {
-    NSDate *date = [self dateForRow:row];
-    if ([self isDate:date sameDayAsDate:[NSDate date]]) {
-        return NSLocalizedString(@"Сегодня", nil);
-    }
-    return [self.dateFormatter stringFromDate:date];
 }
 
 - (NSInteger)daysBetweenDate:(NSDate *)fromDateTime andDate:(NSDate *)toDateTime
@@ -329,7 +355,7 @@
     switch (_type) {
         case DBTimePickerTypeDateAndItems:
             if (component == 0) {
-                return [self stringDateForRow:row];
+                return self.dateItems[row];
             } else {
                 return _items[row];
             }
@@ -349,8 +375,23 @@
 #pragma mark - UIPickerViewDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if(_type != DBTimePickerTypeDateAndItems){
+    if(_type == DBTimePickerTypeDateAndItems){
+        if(component == 0){
+            self.selectedDate = [self dateForRow:row];
+            if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
+                [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
+            }
+        } else {
+            self.selectedItem = row;
+            if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
+                [self.delegate db_timePickerView:self didSelectRowAtIndex:row];
+            }
+        }
+    } else {
         self.selectedItem = row;
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
+            [self.delegate db_timePickerView:self didSelectRowAtIndex:row];
+        }
     }
 }
 

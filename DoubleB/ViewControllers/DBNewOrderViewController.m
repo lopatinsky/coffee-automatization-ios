@@ -781,15 +781,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadTimePicker{
-    NSMutableArray *titles = [NSMutableArray new];
-    if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
-        [titles addObject:NSLocalizedString(@"С собой", nil)];
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+        self.pickerView.segments = @[];
+    } else {
+        NSMutableArray *titles = [NSMutableArray new];
+        if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
+            [titles addObject:NSLocalizedString(@"С собой", nil)];
+        }
+        if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]){
+            [titles addObject:NSLocalizedString(@"На месте", nil)];
+        }
+        self.pickerView.segments = titles;
+        self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     }
-    if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]){
-        [titles addObject:NSLocalizedString(@"На месте", nil)];
-    }
-    self.pickerView.segments = titles;
-    self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     
     switch (_deliverySettings.deliveryType.timeMode) {
         case TimeModeTime:{
@@ -850,7 +854,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             break;
         case TimeModeDateSlots:{
             formatter.dateFormat = @"ccc d";
-            timeString = [NSString stringWithFormat:@"%@ %@", [formatter stringFromDate:_deliverySettings.selectedTime], _deliverySettings.selectedTimeSlot.slotTitle];
+            timeString = [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:_deliverySettings.selectedTime], _deliverySettings.selectedTimeSlot.slotTitle];
         }
             break;
             
@@ -894,15 +898,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
     NSInteger comparisonResult = [_deliverySettings setNewSelectedTime:date];
     
-    NSString *message;
-    if(comparisonResult == NSOrderedAscending){
-        message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.minDate]];
-        [self showAlert:message];
-    }
-    
-    if(comparisonResult == NSOrderedDescending){
-        message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
-        [self showAlert:message];
+    if(_deliverySettings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
+        NSString *message;
+        if(comparisonResult == NSOrderedAscending){
+            message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.minDate]];
+            [self showAlert:message];
+        }
+        
+        if(comparisonResult == NSOrderedDescending){
+            message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
+            [self showAlert:message];
+        }
     }
 }
 

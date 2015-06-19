@@ -17,10 +17,10 @@ typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
 };
 
 typedef NS_ENUM(NSUInteger, TimeMode) {
-    TimeModeTime = 1,
-    TimeModeDateTime,
-    TimeModeSlots,
-    TimeModeDateSlots
+    TimeModeTime = 1 << 0,
+    TimeModeDateTime = 1 << 1,
+    TimeModeSlots = 1 << 2,
+    TimeModeDateSlots = 1 << 3
 };
 
 
