@@ -47,7 +47,7 @@
                                 <constraint firstAttribute="height" constant="30" id="Y0Y-Ax-PeG"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                             <connections>
                                 <outletCollection property="gestureRecognizers" destination="wNs-We-4MM" appends="YES" id="Wnv-TZ-YeT"/>
@@ -99,7 +99,7 @@
                             </connections>
                         </textField>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WoT-pd-4qz" userLabel="Fake Vertical Separator">
-                            <rect key="frame" x="241" y="0.0" width="1" height="50"/>
+                            <rect key="frame" x="231" y="0.0" width="1" height="50"/>
                             <animations/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -108,7 +108,7 @@
                             </constraints>
                         </view>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jdw-Iz-Srv" userLabel="Apartment Text Field">
-                            <rect key="frame" x="242" y="8" width="78" height="34"/>
+                            <rect key="frame" x="237" y="8" width="78" height="34"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="N6N-RL-zdk"/>
@@ -124,12 +124,12 @@
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="jdw-Iz-Srv" firstAttribute="leading" secondItem="WoT-pd-4qz" secondAttribute="trailing" id="2Oz-5l-STh"/>
+                        <constraint firstItem="jdw-Iz-Srv" firstAttribute="leading" secondItem="WoT-pd-4qz" secondAttribute="trailing" constant="5" id="2Oz-5l-STh"/>
                         <constraint firstItem="eaT-a9-qwv" firstAttribute="leading" secondItem="ecL-HN-cff" secondAttribute="leading" constant="16" id="5UP-kL-er9"/>
                         <constraint firstItem="jdw-Iz-Srv" firstAttribute="top" secondItem="ecL-HN-cff" secondAttribute="top" constant="8" id="CmJ-NE-Ju4"/>
                         <constraint firstAttribute="bottom" secondItem="pYd-to-aYm" secondAttribute="bottom" id="Gsl-0B-eXJ"/>
                         <constraint firstItem="eaT-a9-qwv" firstAttribute="top" secondItem="ecL-HN-cff" secondAttribute="top" constant="8" id="Kkp-c8-eji"/>
-                        <constraint firstAttribute="trailing" secondItem="jdw-Iz-Srv" secondAttribute="trailing" id="NQt-Ea-c64"/>
+                        <constraint firstAttribute="trailing" secondItem="jdw-Iz-Srv" secondAttribute="trailing" constant="5" id="NQt-Ea-c64"/>
                         <constraint firstAttribute="trailing" secondItem="eaT-a9-qwv" secondAttribute="trailing" constant="86" id="RRL-gf-sNh"/>
                         <constraint firstAttribute="trailing" secondItem="pYd-to-aYm" secondAttribute="trailing" id="VG5-ns-qiC"/>
                         <constraint firstItem="pYd-to-aYm" firstAttribute="leading" secondItem="ecL-HN-cff" secondAttribute="leading" constant="15" id="fws-9T-GQc"/>

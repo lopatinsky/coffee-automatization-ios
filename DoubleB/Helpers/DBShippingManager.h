@@ -7,28 +7,46 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
-extern NSString * __nonnull DeliveryManagerDidRecieveSuggestionsNotification;
+extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
+
+@interface DBShippingAddress : NSObject
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *apartment;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSString *home;
+
+@property (nonatomic) BOOL valid;
+@property (nonatomic, strong) NSString * formattedFullAddressString;
+@property (nonatomic, strong) NSString * formattedShortAddressString;
+@property (nonatomic, strong) NSDictionary *jsonRepresentation;
+
+- (instancetype)initWithDict:(NSDictionary *)dict;
+- (void)clear;
+@end;
 
 @interface DBShippingManager : NSObject
 
-@property (nonatomic, strong) NSString * __nonnull address;
-@property (nonatomic, strong) NSString * __nonnull apartment;
-@property (nonatomic, strong) NSString * __nonnull city;
-@property (nonatomic, strong) NSMutableDictionary * __nonnull coordinates;
-@property (nonatomic, strong) NSString * __nonnull country;
-@property (nonatomic, strong) NSString * __nonnull home;
-@property (nonatomic, strong) NSMutableDictionary * __nonnull selectedAddress;
+
+@property (nonatomic, strong, readonly) DBShippingAddress *selectedAddress;
+- (void)setAddress:(NSString *)address;
+- (void)setApartment:(NSString *)apartment;
+- (void)setCity:(NSString *)city;
 
 @property (nonatomic, readonly) BOOL validAddress;
 
-+ (nonnull instancetype)sharedManager;
++ (instancetype)sharedManager;
 
 - (void)requestSuggestions;
-- (nonnull NSArray *)addressSuggestions;
-- (nonnull NSArray *)arrayOfCities;
-- (nonnull NSString *)addressRepresentation;
-- (void)updateCoordinates;
+- (NSArray *)addressSuggestions;
+- (void)selectSuggestion:(DBShippingAddress *)suggestion;
+
+- (NSArray *)arrayOfCities;
+
+- (BOOL)hasCity:(NSString *)city;
 
 @end
 

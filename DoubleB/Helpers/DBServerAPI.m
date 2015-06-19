@@ -254,24 +254,17 @@
                                  ord.venue = [OrderManager sharedManager].venue;
                                  
                                  // Save Time
-                                 if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
-                                     ord.time = [DBDeliverySettings sharedInstance].selectedTime;
-                                 }
-                                 
-                                 if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
-                                     NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
-                                     if(timeSlot){
-                                         ord.timeString = timeSlot;
-                                     }
-                                 }
-                                 
-                                 if([DBDeliverySettings sharedInstance].deliveryType.timeMode == TimeModeDateSlots){
-                                     NSString *dateString = [responseObject getValueForKey:@"delivery_time"];
-                                     
+                                 NSString *timeString = [responseObject getValueForKey:@"delivery_time"];
+                                 if(timeString){
                                      NSDateFormatter *formatter = [NSDateFormatter new];
                                      formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-                                     NSDate *date = [formatter dateFromString:dateString];
+                                     NSDate *date = [formatter dateFromString:timeString];
                                      ord.time = date;
+                                 }
+                                 
+                                 NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
+                                 if(timeSlot){
+                                     ord.timeString = timeSlot;
                                  }
                                  
                                  
@@ -531,7 +524,7 @@
 }
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
-    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
+    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         params[@"time_picker_value"] = [formatter stringFromDate:[DBDeliverySettings sharedInstance].selectedTime];
@@ -545,7 +538,7 @@
 + (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
     params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
     if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress;
+        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress.jsonRepresentation;
         if(address){
             if(encode){
                 params[@"address"] = [address encodedString];

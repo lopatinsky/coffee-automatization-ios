@@ -33,13 +33,12 @@
                             </segments>
                         </segmentedControl>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2qZ-7R-hfg">
-                            <rect key="frame" x="266" y="7" width="46" height="30"/>
+                            <rect key="frame" x="275" y="7" width="37" height="30"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="DJ3-sd-Skz"/>
-                                <constraint firstAttribute="width" constant="46" id="bKR-1e-EHA"/>
                             </constraints>
-                            <state key="normal" title="Button">
+                            <state key="normal" title="Done">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>

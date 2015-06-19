@@ -430,7 +430,7 @@
 		7EDB59271B32F70400723DF9 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		7EDB59281B32F70400723DF9 /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		7EDB59291B32F70400723DF9 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		7EDB592A1B32F70400723DF9 /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
+		7EDB592A1B32F70400723DF9 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		7EDB592B1B32F70400723DF9 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		7EDB592C1B32F70400723DF9 /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		7EDB592D1B32F70400723DF9 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -3557,7 +3557,7 @@
 		CB64FFE21B31B7CF0011CEEC /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		CB64FFE31B31B7CF0011CEEC /* DBCardsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629BD198B8B02000F8D82 /* DBCardsViewController.m */; };
 		CB64FFE41B31B7CF0011CEEC /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
-		CB64FFE51B31B7CF0011CEEC /* DBInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A9D1B0A1E0F00B93178 /* DBInfiniteScrollView.m */; };
+		CB64FFE51B31B7CF0011CEEC /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CB64FFE61B31B7CF0011CEEC /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
 		CB64FFE71B31B7CF0011CEEC /* DBCategoryPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADF1ACD5C9A00EA84FC /* DBCategoryPickerCell.m */; };
 		CB64FFE81B31B7CF0011CEEC /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
@@ -10358,7 +10358,7 @@
 				7EDB59271B32F70400723DF9 /* UIViewController+NavigationBarFix.m in Sources */,
 				7EDB59281B32F70400723DF9 /* DBCardsViewController.m in Sources */,
 				7EDB59291B32F70400723DF9 /* UIViewController+DBCardManagement.m in Sources */,
-				7EDB592A1B32F70400723DF9 /* DBInfiniteScrollView.m in Sources */,
+				7EDB592A1B32F70400723DF9 /* (null) in Sources */,
 				7EDB592B1B32F70400723DF9 /* DBNewOrderViewController.m in Sources */,
 				7EDB592C1B32F70400723DF9 /* DBCategoryPickerCell.m in Sources */,
 				7EDB592D1B32F70400723DF9 /* DBNewOrderNDAView.m in Sources */,
@@ -11541,7 +11541,7 @@
 				CB64FFE21B31B7CF0011CEEC /* UIViewController+NavigationBarFix.m in Sources */,
 				CB64FFE31B31B7CF0011CEEC /* DBCardsViewController.m in Sources */,
 				CB64FFE41B31B7CF0011CEEC /* UIViewController+DBCardManagement.m in Sources */,
-				CB64FFE51B31B7CF0011CEEC /* DBInfiniteScrollView.m in Sources */,
+				CB64FFE51B31B7CF0011CEEC /* (null) in Sources */,
 				CB64FFE61B31B7CF0011CEEC /* DBNewOrderViewController.m in Sources */,
 				CB64FFE71B31B7CF0011CEEC /* DBCategoryPickerCell.m in Sources */,
 				CB64FFE81B31B7CF0011CEEC /* DBNewOrderNDAView.m in Sources */,
@@ -13254,8 +13254,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -13270,7 +13270,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Voda;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "75b7e2e6-1257-4d25-ae8d-2e3562d8ae46";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -13287,8 +13287,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -13303,7 +13303,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Voda;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "617a97c5-69f6-4716-80ba-df56edab7877";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

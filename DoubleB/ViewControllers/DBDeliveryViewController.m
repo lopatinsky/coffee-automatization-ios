@@ -37,14 +37,10 @@
 @property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
-@property (strong, nonatomic) DBTimePickerView *acityPickerView;
+@property (strong, nonatomic) DBTimePickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
-@property (strong, nonatomic) DBShippingManager *deliveryManager;
+@property (strong, nonatomic) DBShippingManager *shippingManager;
 @property (nonatomic) BOOL keyboardIsHidden;
-
-//#pragma mark - Placeholders
-//@property (strong, nonatomic) NSMutableAttributedString *streetPlaceholder;
-//@property (strong, nonatomic) NSMutableAttributedString *apartmentPlaceholder;
 
 @end
 
@@ -53,15 +49,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.deliveryManager = [DBShippingManager sharedManager];
+    self.shippingManager = [DBShippingManager sharedManager];
     
-    if ([[self.deliveryManager arrayOfCities] count] == 1) {
-        self.tapOnCityLabelRecognizer.enabled = NO;
-        self.deliveryManager.city = [self.deliveryManager arrayOfCities][0] ?: @"";
-        self.cityTextLabel.text = [self.deliveryManager arrayOfCities][0];
-    }
-    
-    if (![self.deliveryManager arrayOfCities]) {
+    if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
     }
     
@@ -77,16 +67,10 @@
     [self initializeViews];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    // TODO: Country variable is static
-    self.deliveryManager.address = self.streetTextField.text;
-    self.deliveryManager.apartment = self.apartmentTextField.text;
-    self.deliveryManager.city = self.cityTextLabel.text;
-    self.deliveryManager.country = @"Россия";
-    self.deliveryManager.home = @"";
-    [self.deliveryManager updateCoordinates];
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
-    NSLog(@"%@", self.deliveryManager.selectedAddress);
+    [self reload];
 }
 
 #pragma mark - Life-cycle
@@ -95,14 +79,27 @@
 }
 
 - (IBAction)showPickerWithCities:(id)sender {
-    self.acityPickerView.items = [self.deliveryManager arrayOfCities];
-    [self.acityPickerView showOnView:self.navigationController.view];
+    self.cityPickerView.items = [self.shippingManager arrayOfCities];
+    [self.cityPickerView showOnView:self.navigationController.view];
     [GANHelper analyzeEvent:@"city_spinner_show" category:ADDRESS_SCREEN];
 }
 
 #pragma mark - Other functions
+
+- (void)reload{
+    self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
+    self.streetTextField.text = self.shippingManager.selectedAddress.formattedShortAddressString;
+    if(self.streetTextField.text.length > 0){
+        self.streetIndicatorView.hidden = YES;
+    } else {
+        self.streetTextField.hidden = NO;
+    }
+    
+    self.apartmentTextField.text = self.shippingManager.selectedAddress.apartment;
+}
+
 - (void)requestAddressSuggestions {
-    self.addressSuggestions = [self.deliveryManager addressSuggestions];
+    self.addressSuggestions = [self.shippingManager addressSuggestions];
     [self.addressSuggestionsTableView reloadData];
     
     [GANHelper analyzeEvent:@"autocomplete_list_show" number:@([self.addressSuggestions count]) category:ADDRESS_SCREEN];
@@ -140,31 +137,11 @@
     self.streetIndicatorView.clipsToBounds = YES;
     self.streetIndicatorView.backgroundColor = [UIColor db_defaultColor];
     
-    if (![self.deliveryManager.city isEqualToString:@""] &&
-        [[self.deliveryManager arrayOfCities] containsObject:self.deliveryManager.city]) {
-        self.cityTextLabel.text = self.deliveryManager.city;
-    } else {
-        self.cityTextLabel.text = [[self.deliveryManager arrayOfCities] firstObject];
-    }
-    
-    if (![self.deliveryManager.address isEqualToString:@""]) {
-        self.streetTextField.text = self.deliveryManager.address;
-        self.streetIndicatorView.hidden = YES;
-    } else {
-//        self.streetTextField.attributedPlaceholder = self.streetPlaceholder;
-        self.streetIndicatorView.hidden = NO;
-    }
     self.streetTextField.enablesReturnKeyAutomatically = NO;
-    
-    if (![self.deliveryManager.apartment isEqualToString:@""]) {
-        self.apartmentTextField.text = self.deliveryManager.apartment;
-    } else {
-//        self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
-    }
     self.apartmentTextField.enablesReturnKeyAutomatically = NO;
     
-    self.acityPickerView = [[DBTimePickerView alloc] initWithDelegate:self];
-    self.acityPickerView.type = DBTimePickerTypeItems;
+    self.cityPickerView = [[DBTimePickerView alloc] initWithDelegate:self];
+    self.cityPickerView.type = DBTimePickerTypeItems;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -181,59 +158,51 @@
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    [self.delegate keyboardWillAppear];
-    
-    [UIView animateWithDuration:0.1 animations:^{
-        [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-    }];
-    if ([textField.text isEqualToString:@""]) {
-        textField.placeholder = @"";
+    if(textField == self.streetTextField){
+        [self.delegate keyboardWillAppear];
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+        }];
+        
+        self.addressSuggestions = @[];
+        [self.addressSuggestionsTableView reloadData];
+        self.addressSuggestionsTableView.hidden = NO;
     }
-    
-    self.addressSuggestions = @[];
-    [self.addressSuggestionsTableView reloadData];
-    self.addressSuggestionsTableView.hidden = NO;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    [UIView animateWithDuration:0.1 animations:^{
-        [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-    }];
-    
     if (textField == self.streetTextField) {
-        self.deliveryManager.address = self.streetTextField.text;
+        [UIView animateWithDuration:0.1 animations:^{
+            [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+        }];
+        
         if ([textField.text isEqualToString:@""]) {
-//            textField.attributedPlaceholder = self.streetPlaceholder;
             self.streetIndicatorView.hidden = NO;
         } else {
             self.streetIndicatorView.hidden = YES;
         }
     }
     if (textField == self.apartmentTextField) {
-        self.deliveryManager.apartment = self.apartmentTextField.text;
-        if ([textField.text isEqualToString:@""]) {
-//            textField.attributedPlaceholder = self.apartmentPlaceholder;
-        }
+        [self.shippingManager setApartment:self.apartmentTextField.text];
     }
 }
 
 - (void)textFieldDidChange:(UITextField *)sender {
     if (sender == self.streetTextField) {
         if ([self.streetTextField.text isEqualToString:@""]) {
-//            self.streetTextField.attributedPlaceholder = self.streetPlaceholder;
             self.streetIndicatorView.hidden = NO;
         } else {
             self.streetIndicatorView.hidden = YES;
         }
-        self.deliveryManager.address = self.streetTextField.text;
-        self.deliveryManager.coordinates = [NSMutableDictionary new];
+        [self.shippingManager setAddress:self.streetTextField.text];
+        [self.shippingManager requestSuggestions];
+        
         [GANHelper analyzeEvent:@"street_text_changed" label:self.streetTextField.text category:ADDRESS_SCREEN];
     }
+    
     if (sender == self.apartmentTextField) {
-        self.deliveryManager.apartment = self.apartmentTextField.text;
-        if ([self.apartmentTextField.text isEqualToString:@""]) {
-//            self.apartmentTextField.attributedPlaceholder = self.apartmentPlaceholder;
-        }
+        [self.shippingManager setApartment:self.apartmentTextField.text];
         [GANHelper analyzeEvent:@"apartment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
     }
 }
@@ -244,24 +213,22 @@
     self.addressSuggestionsTableView.hidden = YES;
     [self.delegate keyboardWillDisappear];
     
-    [GANHelper analyzeEvent:@"confirm_pressed" label:self.deliveryManager.addressRepresentation category:ADDRESS_SCREEN];
+    [GANHelper analyzeEvent:@"confirm_pressed" label:self.shippingManager.selectedAddress.formattedFullAddressString category:ADDRESS_SCREEN];
     
     return YES;
 }
 
 #pragma mark - DBTimePickerViewDelegate
 - (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index {
-    self.deliveryManager.city = [self.deliveryManager arrayOfCities][index];
-}
-
-- (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectItem:(nonnull NSString *)item {
-    self.deliveryManager.city = item;
+    NSString *city = [self.shippingManager arrayOfCities][index];
+    [self.shippingManager setCity:city];
+    [self reload];
     
-    [GANHelper analyzeEvent:@"city_spinner_selected" label:item category:ADDRESS_SCREEN];
+    [GANHelper analyzeEvent:@"city_spinner_selected" label:city category:ADDRESS_SCREEN];
 }
 
 - (BOOL)db_shouldHideTimePickerView {
-    self.cityTextLabel.text = self.deliveryManager.city;
+    self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
     
     [GANHelper analyzeEvent:@"city_spinner_closed" category:ADDRESS_SCREEN];
     
@@ -274,12 +241,12 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [[self.deliveryManager arrayOfCities] count];
+    return [[self.shippingManager arrayOfCities] count];
 }
 
 #pragma mark - UIPickerViewDelegate
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.deliveryManager arrayOfCities][row];
+    return [self.shippingManager arrayOfCities][row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -292,13 +259,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [UITableViewCell new];
-    cell.textLabel.text = self.addressSuggestions[indexPath.row][@"address"][@"street"];
-    [cell.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:15.0]];
-    
-    if (![self.addressSuggestions[indexPath.row][@"address"][@"home"] isKindOfClass:[NSNull class]]) {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", cell.textLabel.text, self.addressSuggestions[indexPath.row][@"address"][@"home"]];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SuggestionCell"];
+    if(!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SuggestionCell"];
+        [cell.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:15.0]];
     }
+    
+    DBShippingAddress *suggestion = self.addressSuggestions[indexPath.row];
+    cell.textLabel.text = suggestion.formattedShortAddressString;
+   
     return cell;
 }
 
@@ -306,19 +275,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.addressSuggestionsTableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.deliveryManager.address = self.addressSuggestions[indexPath.row][@"address"][@"street"];
-    if (![self.addressSuggestions[indexPath.row][@"address"][@"home"] isKindOfClass:[NSNull class]]) {
-        self.deliveryManager.address = [NSString stringWithFormat:@"%@, %@",  self.deliveryManager.address, self.addressSuggestions[indexPath.row][@"address"][@"home"]];
-    }
-    self.deliveryManager.coordinates = self.addressSuggestions[indexPath.row][@"coordinates"];
-    self.deliveryManager.apartment = self.apartmentTextField.text;
+    [self.shippingManager selectSuggestion:self.addressSuggestions[indexPath.row]];
+    [self reload];
     
     if (self.keyboardIsHidden) {
         self.addressSuggestionsTableView.hidden = YES;
     }
-    self.streetTextField.text = self.deliveryManager.address;
     
-    [GANHelper analyzeEvent:@"autocomplete_list_selected" label:self.deliveryManager.addressRepresentation category:ADDRESS_SCREEN];
+    [GANHelper analyzeEvent:@"autocomplete_list_selected" label:self.shippingManager.selectedAddress.formattedFullAddressString category:ADDRESS_SCREEN];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

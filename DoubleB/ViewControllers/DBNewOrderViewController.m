@@ -693,7 +693,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)reloadAddress{
     if (_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
-        NSString *address = [[DBShippingManager sharedManager] address];
+        NSString *address = [DBShippingManager sharedManager].selectedAddress.formattedFullAddressString;
         if(address && address.length > 0){
             self.orderFooter.labelAddress.text = address;
             self.orderFooter.labelAddress.textColor = [UIColor blackColor];
