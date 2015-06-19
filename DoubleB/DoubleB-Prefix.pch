@@ -34,6 +34,7 @@
 #import "UIColor+Brandbook.h"
 #import "UIColor+Hex.h"
 #import "NSDictionary+NSNullRepresentation.h"
+#import "NSObject+Encode.h"
 #import "NSString+LanguageFeature.h"
 #import "UIViewController+AlertView.h"
 #import "EXTScope.h"

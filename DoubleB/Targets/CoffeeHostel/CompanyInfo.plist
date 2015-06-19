@@ -9,6 +9,8 @@
 		<key>clientKey</key>
 		<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
 	</dict>
+	<key>CompanyChoiceEnabled</key>
+	<false/>
 	<key>CompanyGAKey</key>
 	<string>UA-62529990-5</string>
 	<key>CompanyColor</key>

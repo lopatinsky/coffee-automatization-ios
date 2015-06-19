@@ -24,12 +24,24 @@
 #import "DBMastercardPromo.h"
 #import "Compatibility.h"
 #import "DBClientInfo.h"
+#import "DBShippingManager.h"
 
 #import <Parse/Parse.h>
 
 @implementation DBServerAPI
 
 #pragma mark - User
+
++ (void)requestCompanies:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
+    [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
+                         parameters:@{}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                success(responseObject);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"FAIL");
+                            }];
+}
 
 + (void)registerUser:(void(^)(BOOL success))callback{
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
@@ -133,9 +145,27 @@
                                 response[@"cities"] = [responseObject getValueForKey:@"cities"] ?: [NSArray new];
                                 response[@"support_emails"] = [responseObject getValueForKey:@"emails"] ?: [NSArray new];
                                 response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
+                                response[@"pushChannels"] = [responseObject getValueForKey:@"push_channels"] ?: @{};
                                 
                                 if(callback)
                                     callback(YES, response);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
+
+#pragma mark - Shipping Address
+
++ (void)requestAddressSuggestions:(NSDictionary *)params callback:(void(^)(BOOL success, NSArray *response))callback {
+    [[DBAPIClient sharedClient] GET:@"address/by_street"
+                         parameters:@{@"city": params[@"city"], @"street": params[@"street"]}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if(callback)
+                                    callback(YES, responseObject);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
@@ -170,50 +200,9 @@
 
 + (void)checkNewOrder:(void(^)(NSDictionary *response))success
               failure:(void(^)(NSError *error))failure{
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     
-    if([IHSecureStore sharedInstance].clientId){
-        params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
-    }
-    
-    // Items
-    NSArray *items = [DBServerAPI assembleOrderItems];
-    NSData *itemsData = [NSJSONSerialization dataWithJSONObject:items
-                                                        options:NSJSONWritingPrettyPrinted
-                                                          error:nil];
-    NSString *itemsString = [[NSString alloc] initWithData:itemsData encoding:NSUTF8StringEncoding];
-    params[@"items"] = itemsString;
-    
-    // Bonus items
-    NSArray *bonusItems = [DBServerAPI assembleBonusItems];
-    NSData *bonusItemsData = [NSJSONSerialization dataWithJSONObject:bonusItems
-                                                        options:NSJSONWritingPrettyPrinted
-                                                          error:nil];
-    NSString *bonusItemsString = [[NSString alloc] initWithData:bonusItemsData encoding:NSUTF8StringEncoding];
-    params[@"gifts"] = bonusItemsString;
-    
-    
-    // Venue
-    if([OrderManager sharedManager].venue.venueId){
-        params[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
-    }
-    
-    // Time
-    [self assembleTimeIntoParams:params];
-    
-    params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
-    
-    // Payment
-    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
-        NSData *paymentData = [NSJSONSerialization dataWithJSONObject:[DBServerAPI assemblyPaymentInfo]
-                                                              options:NSJSONWritingPrettyPrinted
-                                                                error:nil];
-        NSString *paymentString = [[NSString alloc] initWithData:paymentData encoding:NSUTF8StringEncoding];
-        params[@"payment"] = paymentString;
-    }
-
     [[DBAPIClient sharedClient] POST:@"check_order"
-                          parameters:params
+                          parameters:[self assembleCheckOrderParams]
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  //NSLog(@"%@", responseObject);
                                  
@@ -241,13 +230,7 @@
 
 + (void)createNewOrder:(void(^)(Order *order))success
                failure:(void(^)(NSString *errorTitle, NSString *errorMessage))failure {
-    // Check if order has orderId
-    if (![[OrderManager sharedManager] orderId]) {
-        if(failure)
-            failure(nil, NSLocalizedString(@"Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение", nil));
-        return;
-    }
-    
+
     // Check if network connection is reachable
     NetworkStatus networkStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
     if(networkStatus == NotReachable){
@@ -256,28 +239,10 @@
         return;
     }
     
-    NSMutableDictionary *order = [NSMutableDictionary new];
-    order[@"order_id"] = [[OrderManager sharedManager] orderId];
-    order[@"device_type"] = @(0);
-    order[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
-    order[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
-    order[@"items"] = [DBServerAPI assembleOrderItems];
-    order[@"gifts"] = [DBServerAPI assembleBonusItems];
-    order[@"client"] = [DBServerAPI assembleClientInfo];
-    order[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
-    order[@"payment"] = [DBServerAPI assemblyPaymentInfo];
-    order[@"comment"] = [OrderManager sharedManager].comment ?: @"";
-    
-    // Time
-    [self assembleTimeIntoParams:order];
+    NSMutableDictionary *order = [self assembleNewOrderParams];
     
     static BOOL hasOrderErrorInSession = NO;
     order[@"after_error"] = @(hasOrderErrorInSession);
-    
-    if ([OrderManager sharedManager].location) {
-        CLLocation *location = [OrderManager sharedManager].location;
-        order[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-    }
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:order
                                                        options:NSJSONWritingPrettyPrinted
@@ -289,10 +254,6 @@
                              timeout:30
                              success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                  //NSLog(@"%@", responseObject);
-                                 
-                                 [GANHelper analyzeEvent:@"order_placed"
-                                                   label:[NSString stringWithFormat:@"%@, %@", [OrderManager sharedManager].orderId, [IHSecureStore sharedInstance].clientId]
-                                                category:ORDER_SCREEN];
                                  
                                  // Save order
                                  Order *ord = [[Order alloc] init:YES];
@@ -343,19 +304,18 @@
                                  [[NSUserDefaults standardUserDefaults] synchronize];
                                  
                                  [Compatibility registerForNotifications];
-                                 [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
+                                 [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                 
+                                 [GANHelper analyzeEvent:@"order_placed"
+                                                   label:[NSString stringWithFormat:@"%@, %@", ord.orderId, [IHSecureStore sharedInstance].clientId]
+                                                category:ORDER_SCREEN];
                                  
                                  [GANHelper trackNewOrderInfo:ord];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
-                                 NSString *eventLabel = [NSString stringWithFormat:@"%@,\n %@", [[OrderManager sharedManager] orderId], error.description];
-                                 
-                                 [GANHelper analyzeEvent:@"order_failed" label:eventLabel category:ORDER_SCREEN];
-                                 
-                                 [OrderManager sharedManager].orderId = nil;
-                                 [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
+                                 [GANHelper analyzeEvent:@"order_failed" category:ORDER_SCREEN];
                                  
                                  if(failure){
                                      if (error.code == NSURLErrorTimedOut || operation.response.statusCode == 0){
@@ -406,21 +366,79 @@
                             }];
 }
 
-+ (void)requestAddressSuggestions:(NSDictionary *)params callback:(void(^)(BOOL success, NSArray *response))callback {
-    [[DBAPIClient sharedClient] GET:@"address/by_street"
-                         parameters:@{@"city": params[@"city"], @"street": params[@"street"]}
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                if(callback)
-                                    callback(YES, responseObject);
-                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                                if(callback)
-                                    callback(NO, nil);
-                            }];
+#pragma mark - Order assembly helpers
+
++ (NSMutableDictionary *)assembleNewOrderParams{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    // Client
+    params[@"client"] = [DBServerAPI assembleClientInfo];
+    
+    // Items
+    params[@"items"] = [DBServerAPI assembleOrderItems];
+    
+    // Bonus items
+    params[@"gifts"] = [DBServerAPI assembleBonusItems];
+    
+    // Total
+    params[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
+    
+    // Payment
+    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+        params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
+    }
+    
+    // Time
+    [self assembleTimeIntoParams:params];
+    
+    // Delivery Type
+    [self assembleDeliveryInfoIntoParams:params encode:NO];
+    
+    // Comment
+    params[@"comment"] = [OrderManager sharedManager].comment ?: @"";
+    
+    // Location
+    if ([OrderManager sharedManager].location) {
+        CLLocation *location = [OrderManager sharedManager].location;
+        params[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+    }
+    
+    // Device type
+    params[@"device_type"] = @(0);
+    
+    return params;
 }
 
-#pragma mark - Order assembly helpers
++ (NSDictionary *)assembleCheckOrderParams{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    // Client
+    if([IHSecureStore sharedInstance].clientId){
+        params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
+    }
+    
+    // Items
+    params[@"items"] = [[DBServerAPI assembleOrderItems] encodedString];
+    
+    // Bonus items
+    params[@"gifts"] = [[DBServerAPI assembleBonusItems] encodedString];
+    
+    // Payment
+    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+        params[@"payment"] = [[DBServerAPI assemblyPaymentInfo] encodedString];
+    }
+    
+    // Time
+    [self assembleTimeIntoParams:params];
+    
+    // Delivery Type
+    [self assembleDeliveryInfoIntoParams:params encode:NO];
+    
+    // Device type
+    params[@"device_type"] = @(0);
+    
+    return params;
+}
 
 + (NSArray *)assembleOrderItems{
     NSMutableArray *items = [NSMutableArray new];
@@ -531,7 +549,24 @@
         params[@"time_picker_value"] = [formatter stringFromDate:[NSDate date]];
     }
 }
-            
+
++ (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
+    params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
+    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
+        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress;
+        if(address){
+            if(encode){
+                params[@"address"] = [address encodedString];
+            } else {
+                params[@"address"] = address;
+            }
+        }
+    } else {
+        if([OrderManager sharedManager].venue.venueId){
+            params[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
+        }
+    }
+}
             
 
 @end

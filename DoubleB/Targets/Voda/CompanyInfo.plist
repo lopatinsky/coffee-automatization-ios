@@ -9,11 +9,13 @@
 		<key>clientKey</key>
 		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
 	</dict>
+	<key>CompanyChoiceEnabled</key>
+	<false/>
 	<key>CompanyGAKey</key>
 	<string>UA-62529990-11</string>
 	<key>CompanyColor</key>
 	<integer>4279846277</integer>
 	<key>BaseUrl</key>
-	<string>http://vodaonline.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://vodaonline.test.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

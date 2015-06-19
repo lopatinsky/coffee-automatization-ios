@@ -88,13 +88,15 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-//    if(![DBCompanyInfo sharedInstance].deliveryTypes){
-//        self.window.rootViewController = [DBLaunchEmulationViewController new];
-//    } else {
-//        self.window.rootViewController = [DBTabBarController sharedInstance];
-//    }
-    self.window.rootViewController = [DBCompaniesViewController new];
-    
+    if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompanyInfo sharedInstance].currentCompanyName isEqualToString:@""]) {
+        self.window.rootViewController = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
+    } else {
+        if (![DBCompanyInfo sharedInstance].deliveryTypes) {
+            self.window.rootViewController = [DBLaunchEmulationViewController new];
+        } else {
+            self.window.rootViewController = [DBTabBarController sharedInstance];
+        }
+    }
     
     [self.window makeKeyAndVisible];
     return YES;
@@ -147,7 +149,7 @@
     
     NSNumber *lastOrderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastOrderId"];
     if (lastOrderId) {
-        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", lastOrderId]];
+        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
     }
 }
 

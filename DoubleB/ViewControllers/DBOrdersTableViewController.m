@@ -184,7 +184,7 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [Compatibility registerForNotifications];
-        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:@"order_%@", ord.orderId]];
+        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
         
         [GANHelper trackNewOrderInfo:ord];
     }

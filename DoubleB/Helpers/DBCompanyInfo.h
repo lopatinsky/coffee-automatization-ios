@@ -23,6 +23,13 @@
 
 @property(strong, nonatomic, readonly) NSArray *deliveryCities;
 
+@property(strong, nonatomic, readonly) NSString *companyPushChannel;
+@property(strong, nonatomic, readonly) NSString *clientPushChannel;
+@property(strong, nonatomic, readonly) NSString *venuePushChannel;
+@property(strong, nonatomic, readonly) NSString *orderPushChannel;
+
+@property(strong, nonatomic, readonly) NSString *currentCompanyName;  
+
 - (void)updateInfo;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
@@ -36,6 +43,8 @@
 + (NSURL *)db_aboutAppUrl;
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;
+
++ (BOOL)db_companyChoiceEnabled;
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId;
 - (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId;

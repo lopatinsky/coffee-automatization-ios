@@ -29,7 +29,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
+        DBNewOrderViewController *newOrderController = [DBClassLoader loadNewOrderViewController];
     
         newOrderController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Заказ", nil)
                                                                       image:[UIImage imageNamed:@"orders_icon_grey.png"]

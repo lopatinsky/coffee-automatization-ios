@@ -37,6 +37,18 @@
             _deliveryTypes = deliveryTypes;
             _deliveryCities = response[@"cities"] ?: @[];
             
+            
+            _companyPushChannel = [response[@"pushChannels"] getValueForKey:@"company"] ?: @"";
+            
+            NSString *clientPushChannel = [response[@"pushChannels"] getValueForKey:@"client"] ?: @"";
+            _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+            
+            NSString *venuePushChannel = [response[@"pushChannels"] getValueForKey:@"venue"]  ?: @"";
+            _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+            
+            NSString *orderPushChannel = [response[@"pushChannels"] getValueForKey:@"order"]  ?: @"";
+            _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+            
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
             
             [self synchronize];
@@ -73,6 +85,10 @@
     NSString *GAKeyString = [self objectFromPropertyListByName:@"CompanyGAKey"];
     
     return GAKeyString ?: @"";
+}
+
++ (BOOL)db_companyChoiceEnabled {
+    return [[self objectFromPropertyListByName:@"CompanyChoiceEnabled"] boolValue];
 }
 
 
@@ -142,11 +158,30 @@
     if(deliveryTypesData){
         _deliveryTypes = [NSKeyedUnarchiver unarchiveObjectWithData:deliveryTypesData] ?: @[];
     }
+    
+    NSDictionary *pushChannels = info[@"pushChannels"];
+    _companyPushChannel = pushChannels[@"_companyPushChannel"];
+    _clientPushChannel = pushChannels[@"_clientPushChannel"];
+    _venuePushChannel = pushChannels[@"_venuePushChannel"];
+    _orderPushChannel = pushChannels[@"_orderPushChannel"];
+    
+    _deliveryCities = info[@"_deliveryCities"];
+    
+    _currentCompanyName = info[@"_currentCompanyName"] ?: @"";
 }
 
 - (void)synchronize{
     NSData *deliveryTypesData = [NSKeyedArchiver archivedDataWithRootObject:_deliveryTypes];
-    NSDictionary *info = @{@"deliveryTypes": deliveryTypesData};
+    
+    NSDictionary *pushChannels = @{@"_companyPushChannel":_companyPushChannel,
+                                   @"_clientPushChannel":_clientPushChannel,
+                                   @"_venuePushChannel":_venuePushChannel,
+                                   @"_orderPushChannel":_orderPushChannel};
+    
+    NSDictionary *info = @{@"deliveryTypes": deliveryTypesData,
+                           @"pushChannels": pushChannels,
+                           @"_deliveryCities": _deliveryCities,
+                           @"_currentCompanyName": _currentCompanyName ?: @""};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];

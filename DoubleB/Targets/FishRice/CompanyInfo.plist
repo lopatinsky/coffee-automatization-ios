@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Parse</key>
+	<dict>
+		<key>applicationId</key>
+		<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
+		<key>clientKey</key>
+		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+	</dict>
+	<key>CompanyGAKey</key>
+	<string></string>
+	<key>CompanyColor</key>
+	<integer>4289732252</integer>
+	<key>BaseUrl</key>
+	<string>http://proxy-perchini.1.doubleb-automation-production.appspot.com/</string>
+	<key>CompanyChoiceEnabled</key>
+	<true/>
+</dict>
+</plist>

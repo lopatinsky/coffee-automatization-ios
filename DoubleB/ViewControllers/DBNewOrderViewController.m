@@ -9,7 +9,6 @@
 #import "DBNewOrderViewController.h"
 #import "DBNewOrderBonusesView.h"
 #import "DBNewOrderTotalView.h"
-#import "DBNewOrderViewHeader.h"
 #import "DBNewOrderAdditionalInfoView.h"
 #import "DBNewOrderNDAView.h"
 #import "DBNewOrderViewFooter.h"
@@ -28,7 +27,6 @@
 #import "LocationHelper.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"
-#import "DBNewOrderViewHeader.h"
 #import "DBVenuesTableViewController.h"
 #import "DBCardsViewController.h"
 #import "DBCommentViewController.h"
@@ -75,7 +73,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet DBNewOrderAdditionalInfoView *additionalInfoView;
 
-@property (weak, nonatomic) IBOutlet DBNewOrderViewHeader *orderHeader;
 @property (weak, nonatomic) IBOutlet DBNewOrderViewFooter *orderFooter;
 
 @property (weak, nonatomic) IBOutlet DBNewOrderNDAView *ndaView;
@@ -130,10 +127,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         // Hides bar if order repeated
         self.tabBarController.tabBar.hidden = YES;
     } else {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
-                                                                                 style:UIBarButtonItemStylePlain
-                                                                                target:self
-                                                                                action:@selector(clickSettings:)];
+        [self setupSettingsNavigationItem];
     }
 // ========= Configure Logic =========
     
@@ -221,10 +215,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     
-    if (![OrderManager sharedManager].orderId) {
-        [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
-    }
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         if(self == self.navigationController.visibleViewController){
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -287,6 +277,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if([keyPath isEqualToString:@"selectedTime"]){
         [self reloadTime];
     }
+}
+
+- (void)setupSettingsNavigationItem{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(clickSettings:)];
 }
 
 
@@ -1011,6 +1008,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [GANHelper analyzeEvent:@"payment_click" label:label category:ORDER_SCREEN];
     
     DBCardsViewController *cardsController = [DBCardsViewController new];
+    cardsController.hidesBottomBarWhenPushed = YES;
     cardsController.mode = CardsViewControllerModeChoosePayment;
     cardsController.delegate = self;
     cardsController.screen = @"Cards_payment_screen";
@@ -1103,12 +1101,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)clickContinue:(id)sender {
-    if(![OrderManager sharedManager].orderId){
-        [[OrderManager sharedManager] registerNewOrderWithCompletionHandler:nil];
-        return;
-    }
-    
-    [GANHelper analyzeEvent:@"order_button_click" label:[OrderManager sharedManager].orderId category:ORDER_SCREEN];
+    [GANHelper analyzeEvent:@"order_button_click" category:ORDER_SCREEN];
     
     if(![OrderManager sharedManager].validOrder){
         [self startUpdatingPromoInfo];

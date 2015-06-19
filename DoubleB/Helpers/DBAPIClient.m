@@ -9,9 +9,13 @@
 #import "DBAPIClient.h"
 #import "DBCompanyInfo.h"
 
-@implementation DBAPIClient {
+@interface DBAPIClient()
 
-}
+@property (strong, nonatomic) AFHTTPRequestSerializer *reqSerializer;
+
+@end
+
+@implementation DBAPIClient
 
 + (instancetype)sharedClient {
     static DBAPIClient *_sharedClient = nil;
@@ -24,25 +28,24 @@
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
+    if (self = [super initWithBaseURL:url]) {
+        self.reqSerializer = [AFHTTPRequestSerializer serializer];
+        [self.reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [self.reqSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+        [self setRequestSerializer:self.reqSerializer];
+        [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
     }
-    
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-//    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    //compression
-    [requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    [self setRequestSerializer:requestSerializer];
-    
-    [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-
     return self;
 }
 
-+ (NSString *)baseUrl{
++ (nullable NSString *)baseUrl {
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+}
+
+- (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:value forHTTPHeaderField:header];
+    }
 }
 
 @end

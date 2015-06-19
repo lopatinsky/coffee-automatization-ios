@@ -10,11 +10,14 @@ import UIKit
 
 @objc
 public class DBCompaniesViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
+    var companies = [NSDictionary]()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        requestCompanies()
     }
 
     override public func didReceiveMemoryWarning() {
@@ -22,6 +25,14 @@ public class DBCompaniesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func requestCompanies() {
+        DBServerAPI.requestCompanies({ (response) -> Void in
+            self.companies = response["companies"] as! [NSDictionary]
+            self.tableView.reloadData()
+        }, failure: { (error) -> Void in
+            
+        })
+    }
 
     /*
     // MARK: - Navigation
@@ -33,4 +44,30 @@ public class DBCompaniesViewController: UIViewController {
     }
     */
 
+}
+
+extension DBCompaniesViewController: UITableViewDataSource {
+    public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.companies.count
+    }
+    
+    public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = UITableViewCell()
+        cell.textLabel!.text = self.companies[indexPath.row].objectForKey("name") as? String
+        return cell
+    }
+}
+
+extension DBCompaniesViewController: UITableViewDelegate {
+    public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let namespace = self.companies[indexPath.row].objectForKey("namespace") as! String
+        DBAPIClient.sharedClient()!.setValue(namespace, forHeader: "namespace")
+        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
+            delegate.window.rootViewController = DBLaunchEmulationViewController()
+        } else {
+            delegate.window.rootViewController = DBTabBarController.sharedInstance()
+        }
+    }
 }
