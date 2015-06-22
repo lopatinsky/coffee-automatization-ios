@@ -19,7 +19,6 @@
 #import "OrderManager.h"
 #import "DBAPIClient.h"
 #import "IHSecureStore.h"
-#import "DBMastercardPromo.h"
 #import "DBSharePermissionViewController.h"
 
 #import <Parse/Parse.h>
@@ -51,7 +50,7 @@
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.rowHeight = 110;
+    self.tableView.rowHeight = 120;
     
     self.refreshControl = [UIRefreshControl new];
     [self.refreshControl addTarget:self action:@selector(updateHistory:) forControlEvents:UIControlEventValueChanged];
@@ -138,47 +137,41 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderId == %@", newOrderId];
     Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
     
-    // Time
-    NSString *dateString = [orderDictionary getValueForKey:@"delivery_time_str"];
-    NSString *timeSlot = [orderDictionary getValueForKey:@"delivery_slot_str"];
+//    // Time
+//    NSString *dateString = [orderDictionary getValueForKey:@"delivery_time_str"];
+//    NSString *timeSlot = [orderDictionary getValueForKey:@"delivery_slot_str"];
+//    
+//    NSDateFormatter *formatter = [NSDateFormatter new];
+//    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//    NSDate *date = [formatter dateFromString:dateString];
     
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSDate *date = [formatter dateFromString:dateString];
-    
-    if([sameOrder.orderId isEqualToString:@"549"]){
-        NSLog(@"");
-    }
     if(sameOrder){
-        sameOrder.status = [orderDictionary[@"status"] intValue];
-
-        sameOrder.time = date;
-        if(timeSlot)
-            sameOrder.timeString = timeSlot;
+//        sameOrder.status = [orderDictionary[@"status"] intValue];
+//
+//        sameOrder.time = date;
+//        if(timeSlot)
+//            sameOrder.timeString = timeSlot;
+        [sameOrder synchronizeWithResponseDict:orderDictionary];
     } else {
-        Order *ord = [[Order alloc] init:YES];
-        ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
-        ord.total = orderDictionary[@"total"];
-
-        ord.time = date;
-        if(timeSlot)
-            ord.timeString = timeSlot;
+//        Order *ord = [[Order alloc] initWithResponseDict:responseObject];
+//        Order *ord = [[Order alloc] init:YES];
+//        ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
+//        ord.total = orderDictionary[@"total"];
+//
+//        ord.time = date;
+//        if(timeSlot)
+//            ord.timeString = timeSlot;
+//        
+//        NSMutableArray *items = [[NSMutableArray alloc] init];
+//        for (NSDictionary *itemDict in orderDictionary[@"items"]) {
+//            [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
+//        }
+//        ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
+//        ord.paymentType = [orderDictionary[@"payment_type_id"] intValue] + 1;
+//        ord.status = [orderDictionary[@"status"] intValue];
+//        ord.venue = [Venue venueById:orderDictionary[@"venue_id"]];
         
-        NSMutableArray *items = [[NSMutableArray alloc] init];
-        for (NSDictionary *itemDict in orderDictionary[@"items"]) {
-            [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
-        }
-        ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
-        ord.paymentType = [orderDictionary[@"payment_type_id"] intValue] + 1;
-        ord.status = [orderDictionary[@"status"] intValue];
-        ord.venue = [Venue venueById:orderDictionary[@"venue_id"]];
-        
-        if(ord.paymentType == PaymentTypeExtraType){
-            NSInteger totalCount = [OrderManager totalCountForItems:items];
-            [[DBMastercardPromo sharedInstance] doneOrderWithMugCount:totalCount];
-        } else {
-            [[DBMastercardPromo sharedInstance] doneOrder];
-        }
+        Order *ord = [[Order alloc] initWithResponseDict:orderDictionary];
         
         [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -250,75 +243,87 @@
     UIColor *textColor;
     NSMutableAttributedString *orderString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), [order orderId]]];
     
-    switch (order.status) {
-        case OrderStatusNew:
-            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 6)];
-            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
-            [imageViewVenue templateImageWithName:@"venue"];
-            switch (order.paymentType) {
-                case PaymentTypeCash:
-                    [imageViewPayment templateImageWithName:@"cash"];
-                    break;
-                case PaymentTypeCard:
-                    [imageViewPayment templateImageWithName:@"card"];
-                    break;
-                case PaymentTypeExtraType:
-                    [imageViewPayment templateImageWithName:@"mug_orders"];
-                    break;
-                default:
-                    break;
-            }
-            textColor = [UIColor blackColor];
-            labelStatus.text = NSLocalizedString(@"Готовится", nil);
-            labelStatus.textColor = [UIColor blackColor];
-            labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            break;
-        case OrderStatusCanceledServer:
-        case OrderStatusCanceled:
-            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
-            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor fromHex:0xffe16941] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
-            imageViewVenue.image = [UIImage imageNamed:@"venue_gray"];
-            switch (order.paymentType) {
-                case PaymentTypeCash:
-                    [imageViewPayment templateImageWithName:@"cash" tintColor:[UIColor db_grayColor]];
-                    break;
-                case PaymentTypeCard:
-                    [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
-                    break;
-                case PaymentTypeExtraType:
-                    [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
-                    break;
-                default:
-                    break;
-            }
-            textColor = [UIColor grayColor];
-            labelStatus.text = NSLocalizedString(@"Отменен", nil);
-            labelStatus.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
-            labelStatus.textColor = [UIColor fromHex:0xffe16941];
-            break;
-        case OrderStatusDone:
-            [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, orderString.string.length)];
-            imageViewVenue.image = [UIImage imageNamed:@"venue_gray"];
-            switch (order.paymentType) {
-                case PaymentTypeCash:
-                    [imageViewPayment templateImageWithName:@"cash" tintColor:[UIColor db_grayColor]];
-                    break;
-                case PaymentTypeCard:
-                    [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
-                    break;
-                case PaymentTypeExtraType:
-                    [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
-                    break;
-                default:
-                    break;
-            }
-            textColor = [UIColor grayColor];
-            labelStatus.text = NSLocalizedString(@"Выдан", nil);
-            labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            labelStatus.textColor = [UIColor grayColor];
-            break;
-        default:
-            break;
+    if(order.status == OrderStatusNew || order.status == OrderStatusConfirmed || order.status == OrderStatusOnWay){
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 6)];
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+        [imageViewVenue templateImageWithName:@"venue"];
+        switch (order.paymentType) {
+            case PaymentTypeCash:
+                [imageViewPayment templateImageWithName:@"cash"];
+                break;
+            case PaymentTypeCard:
+                [imageViewPayment templateImageWithName:@"card"];
+                break;
+            case PaymentTypeExtraType:
+                [imageViewPayment templateImageWithName:@"mug_orders"];
+                break;
+            default:
+                break;
+        }
+        
+        textColor = [UIColor blackColor];
+        labelStatus.textColor = [UIColor blackColor];
+        labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+        
+        switch (order.status) {
+            case OrderStatusNew:
+                labelStatus.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? NSLocalizedString(@"Ожидает подтверждения", nil) : NSLocalizedString(@"Готовится", nil);
+                break;
+            case OrderStatusConfirmed:
+                labelStatus.text = NSLocalizedString(@"Подтвержден", nil);
+                break;
+            case OrderStatusOnWay:
+                labelStatus.text = NSLocalizedString(@"В пути", nil);
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    if(order.status == OrderStatusCanceledBarista || order.status == OrderStatusCanceled){
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor fromHex:0xffe16941] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+        [imageViewVenue templateImageWithName:@"venue" tintColor:[UIColor db_grayColor]];
+        switch (order.paymentType) {
+            case PaymentTypeCash:
+                [imageViewPayment templateImageWithName:@"cash" tintColor:[UIColor db_grayColor]];
+                break;
+            case PaymentTypeCard:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
+            case PaymentTypeExtraType:
+                [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
+                break;
+            default:
+                break;
+        }
+        textColor = [UIColor grayColor];
+        labelStatus.text = NSLocalizedString(@"Отменен", nil);
+        labelStatus.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
+        labelStatus.textColor = [UIColor fromHex:0xffe16941];
+    }
+    
+    if(order.status == OrderStatusDone){
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, orderString.string.length)];
+        [imageViewVenue templateImageWithName:@"venue" tintColor:[UIColor db_grayColor]];
+        switch (order.paymentType) {
+            case PaymentTypeCash:
+                [imageViewPayment templateImageWithName:@"cash" tintColor:[UIColor db_grayColor]];
+                break;
+            case PaymentTypeCard:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
+            case PaymentTypeExtraType:
+                [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
+                break;
+            default:
+                break;
+        }
+        textColor = [UIColor grayColor];
+        labelStatus.text = NSLocalizedString(@"Выдан", nil);
+        labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+        labelStatus.textColor = [UIColor grayColor];
     }
     
     labelDate.textColor = textColor;
@@ -327,7 +332,7 @@
     
     labelOrder.attributedText = orderString;
     labelDate.text = order.formattedTimeString;
-    labelAddress.text = order.venue.address;
+    labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venue.address;
     labelTotal.text = [NSString stringWithFormat:@"%ld %@", (long)order.total.integerValue, [Compatibility currencySymbol]];
     
     return cell;

@@ -20,6 +20,7 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, strong) NSString *home;
 
 @property (nonatomic) BOOL valid;
+@property (nonatomic, strong) NSString * formattedWholeAddressString;
 @property (nonatomic, strong) NSString * formattedFullAddressString;
 @property (nonatomic, strong) NSString * formattedShortAddressString;
 @property (nonatomic, strong) NSDictionary *jsonRepresentation;

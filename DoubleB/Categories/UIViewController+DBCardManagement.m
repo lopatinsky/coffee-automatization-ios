@@ -9,7 +9,6 @@
 #import "UIViewController+DBCardManagement.h"
 #import "IHPaymentManager.h"
 #import "IHSecureStore.h"
-#import "DBMastercardPromo.h"
 #import "DBClientInfo.h"
 
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -42,7 +41,6 @@ static NSString *screenIdentifier;
     [[IHPaymentManager sharedInstance] bindNewCardForClient:[IHSecureStore sharedInstance].clientId
                                           completionHandler:^(BOOL success, NSString *message, NSDictionary *items) {
                                               if (success) {
-                                                  [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
                                                   
                                                   /***** analytics *****/
                                                   

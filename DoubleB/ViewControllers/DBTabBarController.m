@@ -11,6 +11,7 @@
 #import "DBOrdersTableViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"
+#import "DBCompanyInfo.h"
 //#import "DBSharePermissionViewController.h"
 
 #import "UIAlertView+BlocksKit.h"
@@ -29,30 +30,38 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        NSMutableArray *tabBarControllers = [NSMutableArray new];
+        // New order vc
         DBNewOrderViewController *newOrderController = [DBClassLoader loadNewOrderViewController];
     
         newOrderController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Заказ", nil)
                                                                       image:[UIImage imageNamed:@"orders_icon_grey.png"]
                                                               selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
         [newOrderController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+        [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:newOrderController]];
         
+        // History vc
         DBOrdersTableViewController *ordersController = [DBOrdersTableViewController new];
         ordersController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"История", nil)
                                                                     image:[UIImage imageNamed:@"menu_icon_grey.png"]
                                                             selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
         [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+        [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:ordersController]];
         
-        DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
-        venuesController.eventsCategory = VENUES_SCREEN;
-        venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Точки", nil)
-                                                                    image:[UIImage imageNamed:@"venues_icon_grey.png"]
-                                                            selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
-        [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+        // Venues vc
+        if(![[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
+           [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]){
+            DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+            venuesController.eventsCategory = VENUES_SCREEN;
+            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Точки", nil)
+                                                                        image:[UIImage imageNamed:@"venues_icon_grey.png"]
+                                                                selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
+            [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+            [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:venuesController]];
+        }
         
         self.tabBar.tintColor = [UIColor blackColor];
-        self.viewControllers = @[[[UINavigationController alloc] initWithRootViewController:newOrderController],
-                                 [[UINavigationController alloc] initWithRootViewController:ordersController],
-                                 [[UINavigationController alloc] initWithRootViewController:venuesController]];
+        self.viewControllers = tabBarControllers;
         
         self.delegate = self;
     }

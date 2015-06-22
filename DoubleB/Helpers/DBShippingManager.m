@@ -228,6 +228,26 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     return result;
 }
 
+- (NSString *)formattedWholeAddressString{
+    NSString *result = @"";
+    if(_city.length > 0){
+        result = [result stringByAppendingString:_city];
+        if(_address.length > 0){
+            result = [result stringByAppendingString:[NSString stringWithFormat:@", %@", _address]];
+            
+            if(_home.length > 0){
+                result = [result stringByAppendingString:[NSString stringWithFormat:@", %@", _home]];
+                
+                if(_apartment.length > 0){
+                    result = [result stringByAppendingString:[NSString stringWithFormat:@" - %@", _apartment]];
+                }
+            }
+        }
+    }
+    
+    return result;
+}
+
 - (BOOL)valid{
     BOOL valid = YES;
     valid = valid && _city && _city.length > 0;

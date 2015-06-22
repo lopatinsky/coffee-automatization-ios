@@ -12,11 +12,9 @@
 #import "IHSecureStore.h"
 #import "OrderManager.h"
 #import "IHPaymentManager.h"
-#import "DBMastercardAdView.h"
 #import "DBProfileViewController.h"
 #import "DBAPIClient.h"
 #import "DBCardCell.h"
-#import "DBMastercardPromo.h"
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "Compatibility.h"
@@ -31,7 +29,6 @@
 
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
-@property (strong, nonatomic) DBMastercardPromo *mastercardPromo;
  
 @end
 
@@ -61,7 +58,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.constraintAdvertViewTopSpace.constant = topY;
 
-    self.mastercardPromo = [DBMastercardPromo sharedInstance];
     
     [self reloadCards];
 }
@@ -71,18 +67,8 @@
 
     [GANHelper analyzeScreen:self.screen];
     
-    // Configure Mastercard promo
-    if([self.mastercardPromo promoIsAvailable] && ![self.mastercardPromo userIntoPromo]){
-        DBMastercardAdView *mcAdView = [[DBMastercardAdView alloc] initWithDelegate:nil onScreen:self.screen];
-        mcAdView.backgroundColor = [UIColor db_backgroundColor];
-        mcAdView.plusImageView.hidden = YES;
-        self.constraintAdvertViewHeight.constant = mcAdView.frame.size.height;
-        self.advertView.hidden = NO;
-        [self.advertView addSubview:mcAdView];
-    } else {
-        self.constraintAdvertViewHeight.constant = 0;
-        self.advertView.hidden = YES;
-    }
+    self.constraintAdvertViewHeight.constant = 0;
+    self.advertView.hidden = YES;
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -128,7 +114,7 @@
     
     // Extra payment type
     if(section == 0){
-        result += self.mastercardPromo.promoCurrentMugCount > 0 ? 1 : 0;
+        result += 0;
     }
     
     // Cash payment type
@@ -153,25 +139,6 @@
     
     if (!cell) {
         cell = (DBCardCell *)[[[NSBundle mainBundle] loadNibNamed:@"DBCardCell" owner:self options:nil] firstObject];
-    }
-    
-    // Extra payment type
-    if(indexPath.section == 0){
-        cell.cardTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d кофе в подарок", nil), (int)[DBMastercardPromo sharedInstance].promoCurrentMugCount];
-        if([DBMastercardPromo sharedInstance].promoCurrentMugCount >= [OrderManager sharedManager].totalCount){
-            [cell.cardIconImageView templateImageWithName:@"mug"];
-            cell.cardTitleLabel.textColor = [UIColor blackColor];
-            if ([OrderManager sharedManager].paymentType == PaymentTypeExtraType) {
-                [cell.cardActiveIndicator templateImageWithName:@"tick"];
-            } else {
-                cell.cardActiveIndicator.hidden = YES;
-            }
-        } else {
-            [cell.cardIconImageView templateImageWithName:@"mug_gray"];
-            cell.cardActiveIndicator.hidden = YES;
-            cell.cardTitleLabel.textColor = [UIColor grayColor];
-            cell.userInteractionEnabled = NO;
-        }
     }
     
     // Cash payment type
@@ -313,6 +280,10 @@
 
 - (void)payPalManager:(DBPayPalManager *)manager shouldPresentViewController:(UIViewController *)controller{
     [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)payPalManager:(DBPayPalManager *)manager shouldDismissViewController:(UIViewController *)controller{
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - other methods

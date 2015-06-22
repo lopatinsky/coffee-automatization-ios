@@ -39,6 +39,7 @@
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
 "Точки" = "Venues";
+"Кофейни" = "Venues";
 
 "Можно выбрать один вариант" = "You can select one option";
 "Можно выбрать несколько" = "You can select multiple options";
@@ -53,8 +54,11 @@
 "Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
 "Скидка" = "Discount";
 
+"Ожидает подтверждения" = "Waiting";
+"Подтвержден" = "Approved";
 "Выдан" = "Served out";
 "Готовится" = "Preparing";
+"В пути" = "In delivery";
 "Отменен" = "Canceled";
 "Оплачен" = "Paid";
 "Не оплачен" = "Not paid";

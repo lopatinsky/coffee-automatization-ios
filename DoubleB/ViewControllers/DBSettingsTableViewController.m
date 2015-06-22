@@ -11,9 +11,7 @@
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
 #import "DBCardsViewController.h"
-#import "DBAboutPromoViewController.h"
 #import "DBPromosListViewController.h"
-#import "DBMastercardPromo.h"
 #import "IHSecureStore.h"
 #import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
@@ -101,15 +99,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //    [self.settingsItems addObject:@{@"name": @"shareVC",
 //                                    @"title": NSLocalizedString(@"Рассказать друзьям", nil),
 //                                    @"image": @"share_icon"}];
-    
-//    if([[DBMastercardPromo sharedInstance] promoIsAvailable]){
-//        // About promo item
-//        DBAboutPromoViewController *aboutPromoVC = [DBAboutPromoViewController new];
-//        [self.settingsItems addObject:@{@"name": @"aboutPromoVC",
-//                                        @"title": NSLocalizedString(@"Об акции", nil),
-//                                        @"image": @"about_promo",
-//                                        @"viewController": aboutPromoVC}];
-//    }
+
     
     // Documents item
     DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];

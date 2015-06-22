@@ -7,35 +7,18 @@
 //
 
 #import "Order.h"
+#import "Venue.h"
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
+#import "OrderManager.h"
+#import "DBShippingManager.h"
+#import "OrderItem.h"
 
 @implementation Order {
     NSArray *_items;
+    NSArray *_bonusItems;
 }
-@dynamic orderId, total, time, timeString, dataItems, status, venue, paymentType;
-
-- (NSArray *)items {
-    if (!_items) {
-        _items = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataItems];
-    }
-    
-    return _items;
-}
-
-- (NSString *)formattedTimeString{
-    if(self.timeString){
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"dd.MM.yy";
-        
-        return [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:self.time], self.timeString];
-    } else {
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"dd.MM.yy, HH:mm";
-        
-        return [formatter stringFromDate: self.time];
-    }
-}
+@dynamic orderId, total, time, timeString, dataItems, dataGifts, status, deliveryType, venue, shippingAddress, paymentType;
 
 - (instancetype)init:(BOOL)stored {
     if (stored) {
@@ -43,6 +26,89 @@
     } else {
         return [self initWithEntity:[NSEntityDescription entityForName:@"Order" inManagedObjectContext:nil] insertIntoManagedObjectContext:nil];
     }
+}
+
+- (instancetype)initNewOrderWithDict:(NSDictionary *)dict{
+    self = [self init:YES];
+    
+    self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
+    self.total = @([[OrderManager sharedManager] totalPrice]);
+    self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
+    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].bonusPositions];
+    self.paymentType = [[OrderManager sharedManager] paymentType];
+    self.status = OrderStatusNew;
+    
+    // Delivery
+    self.deliveryType = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
+    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
+        self.shippingAddress = [DBShippingManager sharedManager].selectedAddress.formattedWholeAddressString;
+    } else {
+        self.venue = [OrderManager sharedManager].venue;
+    }
+    
+    [self setTimeFromResponseDict:dict];
+    
+    [[CoreDataHelper sharedHelper] save];
+    
+    return self;
+}
+
+- (instancetype)initWithResponseDict:(NSDictionary *)dict{
+    self = [self init:YES];
+    
+    self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
+    self.total = dict[@"total"];
+    
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    for (NSDictionary *itemDict in dict[@"items"]) {
+        [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
+    }
+    self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
+    
+    NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
+    for (NSDictionary *itemDict in dict[@"gifts"]) {
+        [bonusItems addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
+    }
+    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
+    
+    self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
+    self.status = [dict[@"status"] intValue];
+    
+    // Delivery
+    self.deliveryType = dict[@"delivery_type"];
+    if([self.deliveryType intValue] == DeliveryTypeIdShipping){
+        DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
+        self.shippingAddress = address.formattedWholeAddressString;
+    } else {
+        self.venue = [Venue venueById:dict[@"venue_id"]];
+    }
+    
+    [self setTimeFromResponseDict:dict];
+    
+    [[CoreDataHelper sharedHelper] save];
+    
+    return self;
+}
+
+- (void)synchronizeWithResponseDict:(NSDictionary *)dict{
+    self.status = [dict[@"status"] intValue];
+    [self setTimeFromResponseDict:dict];
+    
+    [[CoreDataHelper sharedHelper] save];
+}
+
+- (void)setTimeFromResponseDict:(NSDictionary *)dict{
+    // Time
+    NSString *dateString = [dict getValueForKey:@"delivery_time_str"];
+    NSString *timeSlot = [dict getValueForKey:@"delivery_slot_str"];
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSDate *date = [formatter dateFromString:dateString];
+    
+    self.time = date;
+    if(timeSlot)
+        self.timeString = timeSlot;
 }
 
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions{
@@ -109,6 +175,36 @@
                                      completionHandler(NO, nil);
                                  }
                              }];
+}
+
+- (NSArray *)items {
+    if (!_items) {
+        _items = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataItems];
+    }
+    
+    return _items;
+}
+
+- (NSArray *)bonusItems{
+    if (!_bonusItems) {
+        _bonusItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataGifts];
+    }
+    
+    return _bonusItems;
+}
+
+- (NSString *)formattedTimeString{
+    if(self.timeString){
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"dd.MM.yy";
+        
+        return [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:self.time], self.timeString];
+    } else {
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"dd.MM.yy, HH:mm";
+        
+        return [formatter stringFromDate: self.time];
+    }
 }
 
 

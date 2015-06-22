@@ -118,31 +118,37 @@
         self.order = (Order *)notification.object;
     }
     
-    OrderStatus status = self.order.status;
-    switch (status) {
-        case OrderStatusCanceledServer:
+    self.viewHeader.labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+    self.viewHeader.labelStatus.textColor = [UIColor blackColor];
+    
+    switch (self.order.status) {
+        case OrderStatusNew:
+            self.viewHeader.labelStatus.text = [self.order.deliveryType intValue] == DeliveryTypeIdShipping ? NSLocalizedString(@"Ожидает подтверждения", nil) : NSLocalizedString(@"Готовится", nil);
+            break;
+        case OrderStatusConfirmed:
+            self.viewHeader.labelStatus.text =  NSLocalizedString(@"Подтвержден", nil);
+            break;
+        case OrderStatusOnWay:
+            self.viewHeader.labelStatus.text =  NSLocalizedString(@"В пути", nil);
+            break;
+        case OrderStatusCanceledBarista:
         case OrderStatusCanceled:
-            self.viewHeader.labelStatus.text = @"";
+            self.viewHeader.labelStatus.text =  @"";
             break;
         case OrderStatusDone:
-            self.viewHeader.labelStatus.text = NSLocalizedString(@"Выдан", nil);
-            self.viewHeader.labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            self.viewHeader.labelStatus.textColor = [UIColor blackColor];
+            self.viewHeader.labelStatus.text =  NSLocalizedString(@"Выдан", nil);
             break;
-        case OrderStatusNew:
-            self.viewHeader.labelStatus.text = NSLocalizedString(@"Готовится", nil);
-            self.viewHeader.labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            self.viewHeader.labelStatus.textColor = [UIColor blackColor];
+            
         default:
             break;
     }
 
-    if (status == OrderStatusCanceled || status == OrderStatusCanceledServer) {
+    if (self.order.status == OrderStatusCanceled || self.order.status == OrderStatusCanceledBarista) {
         self.viewHeader.labelPaymentStatus.textColor = [UIColor fromHex:0xffe16941];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Отменен", nil);
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"canceled"];
     } else if (self.order.paymentType == PaymentTypeCard || self.order.paymentType == PaymentTypeExtraType ||
-               status == OrderStatusDone) {
+               self.order.status == OrderStatusDone) {
         self.viewHeader.labelPaymentStatus.textColor = [UIColor db_defaultColor];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Оплачен", nil);
         [self.viewHeader.imageViewPaymentStatus templateImageWithName:@"paid"];

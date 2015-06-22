@@ -34,7 +34,6 @@
 #import "DBProfileViewController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBHTMLViewController.h"
-#import "DBMastercardPromo.h"
 #import "DBOrderItemCell.h"
 #import "DBOrderItemNotesCell.h"
 #import "Reachability.h"
@@ -243,8 +242,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             }
         }
     });
-    
-    [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -990,35 +987,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelCard.textColor = [UIColor blackColor];
             self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
             break;
+       
             
-        case PaymentTypeExtraType:
-            if([OrderManager sharedManager].totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
-                [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
-                [self reloadCard];
-            } else {
-                self.orderFooter.labelCard.textColor = [UIColor blackColor];
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
-            }
-            break;
-            
-    }
-    
-    if([OrderManager sharedManager].totalCount <= [DBMastercardPromo sharedInstance].promoCurrentMugCount && [OrderManager sharedManager].paymentType != PaymentTypeExtraType){
-        if(!self.freeBeverageTipView){
-            self.freeBeverageTipView = self.orderFooter.freeBeverageTipView;
-            self.freeBeverageTipView.userInteractionEnabled = YES;
-            [self.freeBeverageTipView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-                [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
-                [self reloadCard];
-            }]];
-            
-            //[self.viewFooter showFreeBeverageTip];
-        }
-    } else {
-        if(self.freeBeverageTipView){
-            //[self.viewFooter hideFreeBeverageTip];
-            self.freeBeverageTipView = nil;
-        }
     }
 }
 
