@@ -15,6 +15,11 @@
 
 #import "QuartzCore/QuartzCore.h"
 
+typedef enum : NSUInteger {
+    StreetKeyboard,
+    Commentkeyboard,
+    NoKeyboard,
+} KeyboardStatus;
 
 @interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DBTimePickerViewDelegate>
 
@@ -22,18 +27,22 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint2;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint4;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint8;
 
 @property (strong, nonatomic) IBOutlet UIView *fakeSeparator;
 @property (strong, nonatomic) IBOutlet UIView *fakeSeparator2;
 @property (strong, nonatomic) IBOutlet UIView *fakeSeparator4;
+@property (strong, nonatomic) IBOutlet UIView *fakeSeparator8;
 
 #pragma mark - Text Fields
 @property (strong, nonatomic) IBOutlet UILabel *cityTextLabel;
 @property (strong, nonatomic) IBOutlet UITextField *streetTextField;
 @property (strong, nonatomic) IBOutlet UITextField *apartmentTextField;
+@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
 
 #pragma mark - Useful variables
 @property (strong, nonatomic) IBOutlet UIView *streetIndicatorView;
+@property (strong, nonatomic) IBOutlet UIView *commentIndicatorView;
 @property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
@@ -41,6 +50,7 @@
 @property (strong, nonatomic) NSArray *addressSuggestions;
 @property (strong, nonatomic) DBShippingManager *shippingManager;
 @property (nonatomic) BOOL keyboardIsHidden;
+@property (nonatomic) KeyboardStatus keyboardStatus;
 
 @end
 
@@ -50,6 +60,7 @@
     [super viewDidLoad];
     
     self.shippingManager = [DBShippingManager sharedManager];
+    self.keyboardStatus = NoKeyboard;
     
     if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
@@ -109,10 +120,12 @@
     self.fakeSeparatorConstraint.constant = 1. / [[UIScreen mainScreen] scale];
     self.fakeSeparatorConstraint2.constant = 1. / [[UIScreen mainScreen] scale];
     self.fakeSeparatorConstraint4.constant = 1. / [[UIScreen mainScreen] scale];
+    self.fakeSeparatorConstraint8.constant = 1. / [[UIScreen mainScreen] scale];
     
     self.fakeSeparator.backgroundColor = [UIColor db_defaultColor];
     self.fakeSeparator2.backgroundColor = [UIColor db_defaultColor];
     self.fakeSeparator4.backgroundColor = [UIColor db_defaultColor];
+    self.fakeSeparator8.backgroundColor = [UIColor db_defaultColor];
 }
 
 - (void)initializePlaceholders {
@@ -128,6 +141,7 @@
     
     self.streetTextField.placeholder = NSLocalizedString(@"Улица, дом", nil);
     self.apartmentTextField.placeholder = NSLocalizedString(@"Кв/Офис", nil);
+    self.commentTextField.placeholder = NSLocalizedString(@"Подъезд, этаж", nil);
 }
 
 - (void)initializeViews {
@@ -137,8 +151,13 @@
     self.streetIndicatorView.clipsToBounds = YES;
     self.streetIndicatorView.backgroundColor = [UIColor db_defaultColor];
     
+    self.commentIndicatorView.layer.cornerRadius = 4.0;
+    self.commentIndicatorView.clipsToBounds = YES;
+    self.commentIndicatorView.backgroundColor = [UIColor db_defaultColor];
+    
     self.streetTextField.enablesReturnKeyAutomatically = NO;
     self.apartmentTextField.enablesReturnKeyAutomatically = NO;
+    self.commentTextField.enablesReturnKeyAutomatically = NO;
     
     self.cityPickerView = [[DBTimePickerView alloc] initWithDelegate:self];
     self.cityPickerView.type = DBTimePickerTypeItems;
@@ -158,34 +177,103 @@
 
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if(textField == self.streetTextField){
-        [self.delegate keyboardWillAppear];
-        
-        [UIView animateWithDuration:0.1 animations:^{
-            [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-        }];
-        
-        self.addressSuggestions = @[];
-        [self.addressSuggestionsTableView reloadData];
-        self.addressSuggestionsTableView.hidden = NO;
+    switch (self.keyboardStatus) {
+        case NoKeyboard:
+            [self.delegate keyboardWillAppear];
+            if (textField == self.streetTextField) {
+                self.keyboardStatus = StreetKeyboard;
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+                
+                self.addressSuggestions = @[];
+                [self.addressSuggestionsTableView reloadData];
+                self.addressSuggestionsTableView.hidden = NO;
+            } else if (textField == self.apartmentTextField) {
+                self.keyboardStatus = StreetKeyboard;
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+            } else if (textField == self.commentTextField) {
+                self.keyboardStatus = Commentkeyboard;
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 88, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+            }
+            break;
+        case StreetKeyboard:
+            if (textField == self.streetTextField) {
+                self.addressSuggestions = @[];
+                [self.addressSuggestionsTableView reloadData];
+                self.addressSuggestionsTableView.hidden = NO;
+            } else if (textField == self.commentTextField) {
+                self.keyboardStatus = Commentkeyboard;
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+            }
+            break;
+        case Commentkeyboard:
+            if (textField == self.streetTextField) {
+                self.keyboardStatus = StreetKeyboard;
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+                
+                self.addressSuggestions = @[];
+                [self.addressSuggestionsTableView reloadData];
+                self.addressSuggestionsTableView.hidden = NO;
+            } else if (textField == self.apartmentTextField) {
+                self.keyboardStatus = StreetKeyboard;
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+            }
+            break;
+        default:
+            break;
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    if (textField == self.streetTextField) {
-        [UIView animateWithDuration:0.1 animations:^{
-            [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-        }];
-        
-        if ([textField.text isEqualToString:@""]) {
-            self.streetIndicatorView.hidden = NO;
-        } else {
-            self.streetIndicatorView.hidden = YES;
+    switch (self.keyboardStatus) {
+        case NoKeyboard:
+            break;
+        case StreetKeyboard:
+            [self.delegate keyboardWillDisappear];
+            if (textField == self.streetTextField) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+                
+                if ([textField.text isEqualToString:@""]) {
+                    self.streetIndicatorView.hidden = NO;
+                } else {
+                    self.streetIndicatorView.hidden = YES;
+                }
+            } else if (textField == self.apartmentTextField) {
+                [UIView animateWithDuration:0.1 animations:^{
+                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                }];
+                [self.shippingManager setApartment:self.apartmentTextField.text];
+            }
+            break;
+        case Commentkeyboard: {
+            [UIView animateWithDuration:0.1 animations:^{
+                [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 88, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+            }];
+            
+            if ([textField.text isEqualToString:@""]) {
+                self.commentIndicatorView.hidden = NO;
+            } else {
+                self.commentIndicatorView.hidden = YES;
+            }
+            break;
         }
+        default:
+            break;
     }
-    if (textField == self.apartmentTextField) {
-        [self.shippingManager setApartment:self.apartmentTextField.text];
-    }
+    self.keyboardStatus = NoKeyboard;
 }
 
 - (void)textFieldDidChange:(UITextField *)sender {
@@ -204,6 +292,15 @@
     if (sender == self.apartmentTextField) {
         [self.shippingManager setApartment:self.apartmentTextField.text];
         [GANHelper analyzeEvent:@"apartment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
+    }
+    
+    if (sender == self.commentTextField) {
+        if ([self.commentTextField.text isEqualToString:@""]) {
+            self.commentIndicatorView.hidden = NO;
+        } else {
+            self.commentIndicatorView.hidden = YES;
+        }
+        [GANHelper analyzeEvent:@"comment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
     }
 }
 
@@ -288,6 +385,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.streetTextField resignFirstResponder];
     [self.apartmentTextField resignFirstResponder];
+    [self.commentTextField resignFirstResponder];
     [self.delegate keyboardWillDisappear];
 }
 

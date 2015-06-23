@@ -18,6 +18,7 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSString *home;
+@property (nonatomic, strong) NSString *comment;
 
 @property (nonatomic) BOOL valid;
 @property (nonatomic, strong) NSString * formattedWholeAddressString;

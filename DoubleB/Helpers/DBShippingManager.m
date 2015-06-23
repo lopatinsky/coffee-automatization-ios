@@ -130,6 +130,12 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     [self synchronize];
 }
 
+- (void)setComment:(NSString *)comment {
+    _selectedAddress.comment = comment ?: @"";
+    
+    [self synchronize];
+}
+
 - (void)synchronize {
     if(self.selectedAddress){
         [[NSUserDefaults standardUserDefaults] setObject:_selectedAddress.jsonRepresentation forKey:kDBDefaultsShippingAddress];
@@ -192,7 +198,8 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
                               @"city": _city ?: @"",
                               @"street": _address ?: @"",
                               @"home": _home ?: @"",
-                              @"flat": _apartment ?: @""};
+                              @"flat": _apartment ?: @"",
+                              @"comment": _comment ?: @""};
     
     return @{@"address": address, @"coordinates": coordinates};
 }
