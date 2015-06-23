@@ -5630,6 +5630,7 @@
 		C775BDC38482B305FE0446AD /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				CB1B6CE81A4C63A70034774C /* jRSwizzle */,
 				B3B09FDD1A97761C008DC988 /* extobjc */,
 				CB3DADD11A25392B003A836B /* EBTBeacon.h */,
 				CB3DADD21A25392B003A836B /* EBTBeaconsTracker.h */,
@@ -5680,7 +5681,6 @@
 				7EB75BF81B2F3DB2006ADEE3 /* Delivery */,
 				D55629B0198A8C1F000F8D82 /* OrderManager.h */,
 				D55629B1198A8C1F000F8D82 /* OrderManager.m */,
-				CB1B6CE81A4C63A70034774C /* jRSwizzle */,
 				CB1432441B0E3D0400DD50C7 /* DBClassLoader.h */,
 				CB1432451B0E3D0400DD50C7 /* DBClassLoader.m */,
 				CB1B6CDF1A4B3CE40034774C /* DBBeaconObserver.h */,
@@ -5756,6 +5756,7 @@
 				CB1B6CF21A4C6B480034774C /* JRSwizzleMethods.m */,
 			);
 			name = jRSwizzle;
+			path = ../Helpers;
 			sourceTree = "<group>";
 		};
 		CB3BA42F1B205A2400F320CA /* Korjov */ = {
@@ -6781,6 +6782,9 @@
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
 					CB60C0A31AC5AD2600D5E962 = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
+					CB64FFAA1B31B7CF0011CEEC = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
 					CBD2EAB31B2A07D000E4AAA1 = {
@@ -12729,8 +12733,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -12745,7 +12749,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = PaffPoint;
-				PROVISIONING_PROFILE = "d62d1b9d-e450-499d-9626-3d38901a2a27";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -12762,8 +12766,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -12778,7 +12782,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = PaffPoint;
-				PROVISIONING_PROFILE = "043c9e98-c3f6-46b8-9f24-3ddbbda45004";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -13020,8 +13024,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -13036,7 +13040,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Voda;
-				PROVISIONING_PROFILE = "75b7e2e6-1257-4d25-ae8d-2e3562d8ae46";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -13053,8 +13057,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -13069,7 +13073,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Voda;
-				PROVISIONING_PROFILE = "617a97c5-69f6-4716-80ba-df56edab7877";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

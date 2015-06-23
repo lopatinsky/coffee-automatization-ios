@@ -210,6 +210,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemCells removeAllObjects];
     
     [self.tableView reloadData];
+    if ([[OrderManager sharedManager] positionsCount] == 1) {
+        self.tableView.alwaysBounceVertical = NO;
+    } else {
+        self.tableView.alwaysBounceVertical = YES;
+    }
+    
     [self reloadTableViewHeight:NO];
     
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
@@ -613,6 +619,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
     [self reloadContinueButton];
     [self reloadCard];
+
+    if ([[OrderManager sharedManager] positionsCount] == 1) {
+        self.tableView.alwaysBounceVertical = NO;
+    } else {
+        self.tableView.alwaysBounceVertical = YES;
+    }
 }
 
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
