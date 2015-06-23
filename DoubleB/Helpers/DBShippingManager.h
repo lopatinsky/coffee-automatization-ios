@@ -37,6 +37,7 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 - (void)setAddress:(NSString *)address;
 - (void)setApartment:(NSString *)apartment;
 - (void)setCity:(NSString *)city;
+- (void)setComment:(NSString *)comment;
 
 @property (nonatomic, readonly) BOOL validAddress;
 

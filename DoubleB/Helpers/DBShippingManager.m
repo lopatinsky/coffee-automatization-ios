@@ -165,6 +165,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     _address = @"";
     _home = @"";
     _apartment = @"";
+    _comment = @"";
     
     _location = nil;
     
@@ -179,6 +180,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     _address = [dict[@"address"] getValueForKey:@"street"] ?: @"";
     _home = [dict[@"address"] getValueForKey:@"home"] ?: @"";
     _apartment = [dict[@"address"] getValueForKey:@"flat"] ?: @"";
+    _comment = [dict[@"address"] getValueForKey:@"comment"] ?: @"";
     
     double lat = [dict[@"coordinates"][@"lat"] doubleValue];
     double lon = [dict[@"coordinates"][@"lon"] doubleValue];

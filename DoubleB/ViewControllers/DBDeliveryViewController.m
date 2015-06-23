@@ -72,6 +72,7 @@ typedef enum : NSUInteger {
     
     [self.streetTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.apartmentTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.commentTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
     [self initializeFakeSeparators];
     [self initializePlaceholders];
@@ -107,6 +108,12 @@ typedef enum : NSUInteger {
     }
     
     self.apartmentTextField.text = self.shippingManager.selectedAddress.apartment;
+    self.commentTextField.text = self.shippingManager.selectedAddress.comment;
+    if (self.commentTextField.text.length > 0){
+        self.commentIndicatorView.hidden = YES;
+    } else {
+        self.commentIndicatorView.hidden = NO;
+    }
 }
 
 - (void)requestAddressSuggestions {
@@ -300,6 +307,7 @@ typedef enum : NSUInteger {
         } else {
             self.commentIndicatorView.hidden = YES;
         }
+        [self.shippingManager setComment:self.commentTextField.text];
         [GANHelper analyzeEvent:@"comment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
     }
 }
