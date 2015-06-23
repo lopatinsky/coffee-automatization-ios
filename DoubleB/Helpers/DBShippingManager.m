@@ -180,7 +180,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     _address = [dict[@"address"] getValueForKey:@"street"] ?: @"";
     _home = [dict[@"address"] getValueForKey:@"home"] ?: @"";
     _apartment = [dict[@"address"] getValueForKey:@"flat"] ?: @"";
-    _comment = [dict[@"address"] getValueForKey:@"comment"] ?: @"";
+//    _comment = [dict[@"address"] getValueForKey:@"comment"] ?: @"";
     
     double lat = [dict[@"coordinates"][@"lat"] doubleValue];
     double lon = [dict[@"coordinates"][@"lon"] doubleValue];
@@ -201,7 +201,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
                               @"street": _address ?: @"",
                               @"home": _home ?: @"",
                               @"flat": _apartment ?: @"",
-                              @"comment": _comment ?: @""};
+                              /*@"comment": _comment ?: @""*/};
     
     return @{@"address": address, @"coordinates": coordinates};
 }

@@ -9,12 +9,12 @@
 #import <CoreData/CoreData.h>
 
 typedef NS_ENUM(int16_t, OrderStatus) {
-    OrderStatusNew,
-    OrderStatusConfirmed,
-    OrderStatusOnWay,
-    OrderStatusDone,
-    OrderStatusCanceled,
-    OrderStatusCanceledBarista
+    OrderStatusNew = 0,
+    OrderStatusConfirmed = 5,
+    OrderStatusOnWay = 6,
+    OrderStatusDone = 1,
+    OrderStatusCanceled = 2,
+    OrderStatusCanceledBarista = 3
 };
 
 typedef NS_ENUM(int16_t, PaymentType) {

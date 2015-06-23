@@ -98,9 +98,15 @@
 }
 
 - (void)setTimeFromResponseDict:(NSDictionary *)dict{
-    // Time
     NSString *dateString = [dict getValueForKey:@"delivery_time_str"];
-    NSString *timeSlot = [dict getValueForKey:@"delivery_slot_str"];
+    if(!dateString){
+        dateString = [dict getValueForKey:@"delivery_time"];
+    }
+    
+    NSString *timeSlot = [dict getValueForKey:@"delivery_slot_name"];
+    if(!timeSlot){
+        timeSlot = [dict getValueForKey:@"delivery_slot_str"];
+    }
     
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
