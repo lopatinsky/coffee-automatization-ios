@@ -375,6 +375,10 @@ typedef enum : NSUInteger {
     [self.shippingManager selectSuggestion:self.addressSuggestions[indexPath.row]];
     [self reload];
     
+    self.addressSuggestions = @[];
+    [self.addressSuggestionsTableView reloadData];
+    self.addressSuggestionsTableView.hidden = NO;
+    
     if (self.keyboardIsHidden) {
         self.addressSuggestionsTableView.hidden = YES;
     }
