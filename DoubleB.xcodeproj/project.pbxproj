@@ -9484,7 +9484,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CameraObscura;
-				PROVISIONING_PROFILE = "772d510b-77c7-4570-872e-7c0848502a64";
+				PROVISIONING_PROFILE = "124a4117-ca12-4443-bc57-f0e9ae5a25ae";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

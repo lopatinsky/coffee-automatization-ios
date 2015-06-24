@@ -38,7 +38,7 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
     _payPalConfiguration.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://www.omega.supreme.example/privacy"];
     _payPalConfiguration.merchantUserAgreementURL = [NSURL URLWithString:@"https://www.omega.supreme.example/user_agreement"];
     
-    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentSandbox];
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
     
     return self;
 }

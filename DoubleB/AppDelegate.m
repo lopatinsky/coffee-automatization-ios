@@ -43,7 +43,7 @@
 //    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentSandbox:@"Aedvczd_fDZnfkriC94V1gr46UqlpqnAcO7VDIL9nRjK50N_chA15XyeE96j4hORw5nz1Fstxi6Mzmin"}];
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 //==================== Framework initialization =====================
     
     
