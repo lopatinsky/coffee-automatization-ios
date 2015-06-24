@@ -11,18 +11,32 @@ import UIKit
 @objc
 public class DBCompaniesViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    var companies = [NSDictionary]()
+    
+    @IBOutlet var titleView: UIView!
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var titleViewHeightConstraint: NSLayoutConstraint!
+    
+    public var firstLaunch = true
+    private var companies = [NSDictionary]()
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        self.setNeedsStatusBarAppearanceUpdate()
+        initializeViews()
         requestCompanies()
     }
-
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func initializeViews() {
+        if firstLaunch {
+            self.titleView.hidden = false
+            self.titleView.backgroundColor = UIColor.db_defaultColor()
+        } else {
+            self.titleView.hidden = true
+            titleViewHeightConstraint.constant = 0
+            self.view.layoutIfNeeded()
+        }
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     func requestCompanies() {
@@ -33,17 +47,10 @@ public class DBCompaniesViewController: UIViewController {
             
         })
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    public override func prefersStatusBarHidden() -> Bool {
+        return true
     }
-    */
-
 }
 
 extension DBCompaniesViewController: UITableViewDataSource {
@@ -65,9 +72,22 @@ extension DBCompaniesViewController: UITableViewDelegate {
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
+            self.preloadData()
             delegate.window.rootViewController = DBLaunchEmulationViewController()
         } else {
             delegate.window.rootViewController = DBTabBarController.sharedInstance()
         }
+    }
+    
+    func preloadData() {
+        DBServerAPI.registerUser(nil)
+        Venue.fetchAllVenuesWithCompletionHandler { (venues) -> Void in
+            let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            delegate.saveContext()
+        }
+        DBMenu.sharedInstance().updateMenuForVenue(nil, remoteMenu: nil)
+        Order.dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions()
+        DBPromoManager.sharedManager().updateInfo()
+        DBCompanyInfo.sharedInstance().updateInfo()
     }
 }
