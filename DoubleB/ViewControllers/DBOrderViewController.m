@@ -33,6 +33,7 @@
 @property (strong, nonatomic) DBOrderViewFooter *viewFooter;
 
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) NSMutableArray *bonusItems;
 
 @property (strong, nonatomic) DBOrderReturnView *returnCauseView;
 
@@ -46,7 +47,6 @@
     self.navigationController.navigationBar.topItem.title = @"";
     self.edgesForExtendedLayout = UIRectEdgeTop;
     
-    self.items = [NSMutableArray new];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     
     self.tableView.delegate = self;
@@ -55,6 +55,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.items = [NSMutableArray arrayWithArray:self.order.items];
+    self.bonusItems = [NSMutableArray arrayWithArray:self.order.bonusItems];
+    
     NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
     [attributed setAttributes:@{
@@ -233,17 +235,27 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.items.count;
+    if(section == 0){
+        return self.items.count;
+    } else {
+        return self.bonusItems.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBOrderItemCell *cell;
     
-    OrderItem *item = self.items[indexPath.row];
+    OrderItem *item;
+    if(indexPath.section == 0){
+        item = self.items[indexPath.row];
+    } else {
+        item = self.bonusItems[indexPath.row];
+    }
+    
     if(item.position.hasImage){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
         
@@ -259,6 +271,7 @@
     }
     
     cell.orderItem = item;
+    
     [cell configure];
     cell.panGestureRecognizer.delegate = self;
     
@@ -268,7 +281,13 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OrderItem *item = self.items[indexPath.row];
+    OrderItem *item;
+    if(indexPath.section == 0){
+        item = self.items[indexPath.row];
+    } else {
+        item = self.bonusItems[indexPath.row];
+    }
+    
     if(item.position.hasImage){
         return 100;
     } else {
@@ -277,15 +296,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 111.f;
+    if(section == 0){
+        return 111.f;
+    } else {
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *header = self.viewHeader;
-    return header;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(section == 0){
+        UIView *header = self.viewHeader;
+        return header;
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate

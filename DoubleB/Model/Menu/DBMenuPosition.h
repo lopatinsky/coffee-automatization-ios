@@ -10,7 +10,7 @@
 
 @class Venue;
 
-@interface DBMenuPosition : NSObject<NSCopying>
+@interface DBMenuPosition : NSObject<NSCopying, NSCoding>
 
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;

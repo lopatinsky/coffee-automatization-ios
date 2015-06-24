@@ -12264,7 +12264,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "2e0f8bdc-ff2d-495c-bd8b-6b2bbb840169";
+				PROVISIONING_PROFILE = "cfd3df58-2c8a-4e64-b118-77796da1ac29";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -12297,7 +12297,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "bba267ec-e9a5-4aba-b10f-5058fef1bc3d";
+				PROVISIONING_PROFILE = "e509e2e4-d878-44e4-83ff-f3e52e5dcb2a";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

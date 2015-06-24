@@ -121,6 +121,9 @@
             cell.profileCellTextField.keyboardType = UIKeyboardTypePhonePad;
             cell.profileCellTextField.returnKeyType = UIReturnKeyNext;
             cell.profileCellTextField.text = [DBClientInfo sharedInstance].clientPhone;
+            
+            cell.profileCellTextField.numericFormatter = [AKNumericFormatter formatterWithMask:@"+* (***) ***-**-**" placeholderCharacter:'*'];
+            
             break;
         }
         case 2: {
@@ -159,7 +162,7 @@
     }
     
     if(index == 1){
-        if([textField.text isEqualToString:@""])
+        if([textField.text isEqualToString:@""] || [textField.text isEqualToString:@"+"])
             textField.text = @"+7";
         
         [GANHelper analyzeEvent:@"phone_typing" label:eventLabel category:PROFILE_SCREEN];

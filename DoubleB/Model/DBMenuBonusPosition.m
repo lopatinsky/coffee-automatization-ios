@@ -15,6 +15,7 @@
     
     return self;
 }
+
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone{
@@ -22,6 +23,22 @@
     copyPosition.pointsPrice = self.pointsPrice;
     
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    
+    if(self){
+        _pointsPrice = [[aDecoder decodeObjectForKey:@"pointsPrice"] doubleValue];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [super encodeWithCoder:aCoder];
+    
+    [aCoder encodeObject:@(self.pointsPrice) forKey:@"pointsPrice"];
 }
 
 @end

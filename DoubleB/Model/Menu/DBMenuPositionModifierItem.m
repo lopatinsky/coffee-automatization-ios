@@ -9,7 +9,7 @@
 #import "DBMenuPositionModifierItem.h"
 #import "DBMenuPositionModifier.h"
 
-@interface DBMenuPositionModifierItem ()<NSCoding>
+@interface DBMenuPositionModifierItem ()
 @end
 
 @implementation DBMenuPositionModifierItem

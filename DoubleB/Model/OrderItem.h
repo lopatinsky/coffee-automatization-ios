@@ -18,7 +18,7 @@
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position;
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
++ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus;
 
 @end
 
