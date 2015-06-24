@@ -91,7 +91,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GANHelper analyzeScreen:@"Order_info_screen"];
+    [GANHelper analyzeScreen:ORDER_HISTORY_SCREEN];
     [self reloadCancelRepeatButton];
 }
 
@@ -171,7 +171,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DBAPIClient sharedClient] POST:@"return" parameters:@{@"order_id": self.order.orderId}
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 [GANHelper analyzeEvent:@"cancel_success" label:eventLabel category:ORDER_HISTORY_SCREEN];
+                                 [GANHelper analyzeEvent:@"cancel_order_success" label:eventLabel category:ORDER_HISTORY_SCREEN];
                                  //NSLog(@"%@", responseObject);
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                  self.order.status = OrderStatusCanceled;
@@ -181,7 +181,7 @@
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSString *errorEventLabel = [eventLabel stringByAppendingString:[NSString stringWithFormat:@";%@", error.localizedDescription]];
-                                 [GANHelper analyzeEvent:@"cancel_failed" label:errorEventLabel category:ORDER_HISTORY_SCREEN];
+                                 [GANHelper analyzeEvent:@"cancel_order_failed" label:errorEventLabel category:ORDER_HISTORY_SCREEN];
                                  
                                  NSLog(@"%@", error);
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -218,7 +218,7 @@
 - (void)clickCancel:(UIButton *)sender{
     NSString *clientId = [IHSecureStore sharedInstance].clientId;
     NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", self.order.orderId, clientId];
-    [GANHelper analyzeEvent:@"cancel_button_pressed" label:eventLabel category:ORDER_HISTORY_SCREEN];
+    [GANHelper analyzeEvent:@"cancel_order_button_pressed" label:eventLabel category:ORDER_HISTORY_SCREEN];
     
     self.returnCauseView = [DBOrderReturnView new];
     self.returnCauseView.delegate = self;
@@ -226,7 +226,7 @@
 }
 
 - (void)clickRepeat:(UIButton *)sender {
-    [GANHelper analyzeEvent:@"repeat_button_pressed" category:ORDER_HISTORY_SCREEN];
+    [GANHelper analyzeEvent:@"repeat_order_button_pressed" category:ORDER_HISTORY_SCREEN];
     DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
     newOrderController.repeatedOrder = self.order;
     [self.navigationController pushViewController:newOrderController animated:YES];

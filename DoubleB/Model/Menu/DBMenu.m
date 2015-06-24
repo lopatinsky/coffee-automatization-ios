@@ -84,7 +84,10 @@
                                 
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                                [GANHelper analyzeEvent:@"menu_load_success" number:@(interval) category:APPLICATION_START];
+                                
+                                [GANHelper analyzeEvent:@"menu_load_success"
+                                                 number:@(interval)
+                                               category:APPLICATION_START];
                                 
                                 [self synchronizeWithResponseMenu:responseObject[@"menu"]];
                                 
@@ -93,7 +96,9 @@
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
-                                [GANHelper analyzeEvent:@"menu_load_failed" label:error.description category:APPLICATION_START];
+                                [GANHelper analyzeEvent:@"menu_load_failed"
+                                                  label:error.description
+                                               category:APPLICATION_START];
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(NO, nil);

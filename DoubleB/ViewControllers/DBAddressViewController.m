@@ -139,9 +139,11 @@
 - (IBAction)deliveryTypeChanged:(id)sender {
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Самовывоз"]) {
         [[DBDeliverySettings sharedInstance] selectTakeout];
+        [GANHelper analyzeEvent:@"takeaway_selected" category:ORDER_SCREEN];
     }
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Доставка"]) {
         [[DBDeliverySettings sharedInstance] selectShipping];
+        [GANHelper analyzeEvent:@"shipping_selected" category:ORDER_SCREEN];
     }
     [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
 }

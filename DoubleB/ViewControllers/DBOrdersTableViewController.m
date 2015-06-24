@@ -77,7 +77,7 @@
     [self reloadContent];
     [self updateHistory:nil];
 
-    [GANHelper analyzeScreen:@"Orders_screen"];
+    [GANHelper analyzeScreen:HISTORY_SCREEN];
     
     self.tabBarController.tabBar.hidden = NO;
 }

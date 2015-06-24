@@ -236,6 +236,8 @@
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [GANHelper analyzeEvent:@"order_submit" category:ORDER_SCREEN];
 
     [[DBAPIClient sharedClient] POST:@"order"
                           parameters:@{@"order": jsonString}
@@ -287,7 +289,13 @@
                                  [Compatibility registerForNotifications];
                                  [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
                                  
-                                 [GANHelper analyzeEvent:@"order_placed"
+                                 NSString *event;
+                                 if(ord.paymentType == PaymentTypeCard){
+                                     event = @"order_card_success";
+                                 } else {
+                                     event = @"order_success";
+                                 }
+                                 [GANHelper analyzeEvent:event
                                                    label:[NSString stringWithFormat:@"%@, %@", ord.orderId, [IHSecureStore sharedInstance].clientId]
                                                 category:ORDER_SCREEN];
                                  
@@ -296,7 +304,13 @@
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
-                                 [GANHelper analyzeEvent:@"order_failed" category:ORDER_SCREEN];
+                                 NSString *event;
+                                 if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+                                     event = @"order_card_failed";
+                                 } else {
+                                     event = @"order_failed";
+                                 }
+                                 [GANHelper analyzeEvent:event category:ORDER_SCREEN];
                                  
                                  if(failure){
                                      if (error.code == NSURLErrorTimedOut || operation.response.statusCode == 0){

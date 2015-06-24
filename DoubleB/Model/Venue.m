@@ -88,7 +88,10 @@ static NSMutableArray *storedVenues;
                                 
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                                [GANHelper analyzeEvent:@"venues_load_success" number:@(interval) category:APPLICATION_START];
+                                
+                                [GANHelper analyzeEvent:@"venues_load_success"
+                                                 number:@(interval)
+                                               category:APPLICATION_START];
                                 
                                 if(completionHandler)
                                     completionHandler(storedVenues);
@@ -96,7 +99,9 @@ static NSMutableArray *storedVenues;
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
-                                [GANHelper analyzeEvent:@"venues_load_failed" label:error.description category:APPLICATION_START];
+                                [GANHelper analyzeEvent:@"venues_load_failed"
+                                                  label:error.description
+                                               category:APPLICATION_START];
                                 
                                 if(completionHandler)
                                     completionHandler(nil);

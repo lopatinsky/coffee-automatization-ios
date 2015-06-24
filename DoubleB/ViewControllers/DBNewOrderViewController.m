@@ -893,6 +893,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         deliveryTypeId = DeliveryTypeIdInRestaurant;
     }
     
+    [GANHelper analyzeEvent:@"delivery_type_selected" number:@(deliveryTypeId) category:ORDER_SCREEN];
+    
     [_deliverySettings selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId]];
     
     [self reloadTimePicker];
@@ -902,6 +904,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     DBTimeSlot *timeSlot = _deliverySettings.deliveryType.timeSlots[index];
     _deliverySettings.selectedTimeSlot = timeSlot;
     [self reloadTime];
+    
+    [GANHelper analyzeEvent:@"delivery_slot_selected" label:timeSlot.slotTitle category:ORDER_SCREEN];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
@@ -919,11 +923,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             [self showAlert:message];
         }
     }
+    
+    [GANHelper analyzeEvent:@"delivery_time_selected" number:@([date timeIntervalSince1970]) category:ORDER_SCREEN];
 }
 
 - (BOOL)db_shouldHideTimePickerView{
     [self reloadTime];
     [self startUpdatingPromoInfo];
+    
+    [GANHelper analyzeEvent:@"time_spinner_closed" category:ORDER_SCREEN];
     
     return YES;
 }
@@ -951,6 +959,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (IBAction)clickProfile:(id)sender {
     [GANHelper analyzeEvent:@"profile_click" category:ORDER_SCREEN];
+    
     NSString *eventLabel;
     if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
         eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];

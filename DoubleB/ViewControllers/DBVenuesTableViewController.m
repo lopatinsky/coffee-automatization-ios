@@ -59,13 +59,10 @@
     if ([self.venues count] && !refreshControl) {
         return;
     }
-    [GANHelper analyzeEvent:@"update" category:self.eventsCategory];
+    [GANHelper analyzeEvent:@"venue_update" category:self.eventsCategory];
     
     self.venues = [Venue storedVenues];
 
-    /*if (!refreshControl) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    }*/
     if ([[LocationHelper sharedInstance] isDenied]) {
         [self fetchVenues:nil];
     } else {

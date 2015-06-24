@@ -139,6 +139,8 @@
 
 - (void)cartAddPositionFromCell:(DBPositionCell *)cell{
     [[OrderManager sharedManager] addPosition:cell.position];
+    
+    [GANHelper analyzeEvent:@"product_added" label:cell.position.positionId category:MENU_SCREEN];
 }
 
 - (void)setupCategorySelectionBarButton{
@@ -160,6 +162,8 @@
         } else {
             [self showCatecoryPickerFromRect:self.navigationController.navigationBar.frame onView:self.navigationController.view];
         }
+        
+        [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
     } forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
@@ -337,7 +341,7 @@
 #pragma mark - DBCategoryPicker methods
 
 - (void)showCatecoryPickerFromRect:(CGRect)fromRect onView:(UIView *)onView{
-    [GANHelper analyzeEvent:@"category_selection_click" category:MENU_SCREEN];
+    [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
     if(!self.categoryPicker.isOpened){
         UITableViewCell *firstVisibleCell = [[self.tableView visibleCells] firstObject];
         DBMenuCategory *topCategory;
@@ -371,7 +375,7 @@
 }
 
 - (void)hideCategoryPicker{
-    [GANHelper analyzeEvent:@"category_selection_close" category:MENU_SCREEN];
+    [GANHelper analyzeEvent:@"category_spinner_closed" category:MENU_SCREEN];
     if(self.categoryPicker.isOpened){
         [self.categoryPicker closed];
         
@@ -397,7 +401,7 @@
         [self hideCategoryPicker];
     }
     
-    [GANHelper analyzeEvent:@"category_selection_selected" label:category.categoryId category:MENU_SCREEN];
+    [GANHelper analyzeEvent:@"category_spinner_selected" label:category.categoryId category:MENU_SCREEN];
 }
 
 

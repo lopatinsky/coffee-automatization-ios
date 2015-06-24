@@ -212,6 +212,8 @@
     [[IHPaymentManager sharedInstance] unbindCard:card[@"cardToken"]];
     
     [tableView endUpdates];
+    
+    [GANHelper analyzeEvent:@"remove_card_success" category:self.screen];
 }
 
 

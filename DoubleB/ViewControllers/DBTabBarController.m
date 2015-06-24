@@ -113,13 +113,13 @@
     NSString *category = @"";
     switch (tabBarController.selectedIndex) {
         case 0:
-            category = @"Menu_screen";
+            category = MENU_SCREEN;
             break;
         case 1:
-            category = @"Orders_screen";
+            category = HISTORY_SCREEN;
             break;
         case 2:
-            category = @"Coffee_houses_screen";
+            category = VENUES_SCREEN;
             break;
         default:
             break;
@@ -128,18 +128,19 @@
     NSString *event = @"";
     switch ([tabBarController.viewControllers indexOfObject:viewController]) {
         case 0:
-            event = @"footer_menu_click";
+            event = @"footer_order_click";
             break;
         case 1:
-            event = @"footer_orders_click";
+            event = @"footer_history_click";
             break;
         case 2:
-            event = @"footer_coffee_houses_click";
+            event = @"footer_venues_click";
             break;
         default:
             break;
     }
-    [GANHelper analyzeEvent:event category:VENUES_SCREEN];
+    
+    [GANHelper analyzeEvent:event category:category];
         
     return YES;
 }

@@ -120,9 +120,12 @@
             cell.profileCellTextField.placeholder = NSLocalizedString(@"Контактный номер телефона", nil);
             cell.profileCellTextField.keyboardType = UIKeyboardTypePhonePad;
             cell.profileCellTextField.returnKeyType = UIReturnKeyNext;
-            cell.profileCellTextField.text = [DBClientInfo sharedInstance].clientPhone;
             
-            cell.profileCellTextField.numericFormatter = [AKNumericFormatter formatterWithMask:@"+* (***) ***-**-**" placeholderCharacter:'*'];
+            NSString *mask = @"+* (***) ***-**-**";
+            
+            cell.profileCellTextField.text = [AKNumericFormatter formatString:[DBClientInfo sharedInstance].clientPhone usingMask:mask placeholderCharacter:'*'];
+            
+            cell.profileCellTextField.numericFormatter = [AKNumericFormatter formatterWithMask:mask placeholderCharacter:'*'];
             
             break;
         }
@@ -294,9 +297,13 @@
         case 0:
             [DBClientInfo sharedInstance].clientName = string;
             break;
-        case 1:
-            [DBClientInfo sharedInstance].clientPhone = string;
+        case 1:{
+            NSString *newString = [[string componentsSeparatedByCharactersInSet:
+                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                   componentsJoinedByString:@""];
+            [DBClientInfo sharedInstance].clientPhone = newString;
             break;
+        }
         case 2:
             [DBClientInfo sharedInstance].clientMail = string;
             break;
