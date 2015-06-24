@@ -631,7 +631,6 @@
 		7EDB5A061B32F70400723DF9 /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		7EDB5A071B32F70400723DF9 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		7EDB5A081B32F70400723DF9 /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		7EDB5A0A1B32F70400723DF9 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		7EDB5A0C1B32F70400723DF9 /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		7EDB5A0D1B32F70400723DF9 /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		7EDB5A0E1B32F70400723DF9 /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -958,7 +957,6 @@
 		CB1431ED1B0E371A00DD50C7 /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CB1431EE1B0E371A00DD50C7 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CB1431EF1B0E371A00DD50C7 /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CB1431F01B0E371A00DD50C7 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CB1431F11B0E371A00DD50C7 /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CB1431F21B0E371A00DD50C7 /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CB1431F31B0E371A00DD50C7 /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -1264,7 +1262,6 @@
 		CB1433511B0F1BBB00DD50C7 /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CB1433521B0F1BBB00DD50C7 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CB1433531B0F1BBB00DD50C7 /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CB1433541B0F1BBB00DD50C7 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CB1433551B0F1BBB00DD50C7 /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CB1433561B0F1BBB00DD50C7 /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CB1433571B0F1BBB00DD50C7 /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -1866,7 +1863,6 @@
 		CB3BA3E51B20589300F320CA /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CB3BA3E61B20589300F320CA /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CB3BA3E71B20589300F320CA /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CB3BA3E81B20589300F320CA /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CB3BA3E91B20589300F320CA /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CB3BA3EA1B20589300F320CA /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CB3BA3EB1B20589300F320CA /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -2523,7 +2519,6 @@
 		CB5AFD311B27209A00904BF7 /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CB5AFD321B27209A00904BF7 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CB5AFD331B27209A00904BF7 /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CB5AFD341B27209A00904BF7 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CB5AFD351B27209A00904BF7 /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CB5AFD361B27209A00904BF7 /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CB5AFD371B27209A00904BF7 /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -3004,7 +2999,6 @@
 		CB6400C21B31B7CF0011CEEC /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CB6400C31B31B7CF0011CEEC /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CB6400C41B31B7CF0011CEEC /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CB6400C51B31B7CF0011CEEC /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CB6400C61B31B7CF0011CEEC /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CB6400C71B31B7CF0011CEEC /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CB6400C81B31B7CF0011CEEC /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -3337,7 +3331,6 @@
 		CB64FF171B317F760011CEEC /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CB64FF181B317F760011CEEC /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CB64FF191B317F760011CEEC /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CB64FF1B1B317F760011CEEC /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CB64FF1D1B317F760011CEEC /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CB64FF1E1B317F760011CEEC /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CB64FF1F1B317F760011CEEC /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -3625,10 +3618,6 @@
 		CBB043141B0CAEFF00901173 /* DBPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043091B0CAEFF00901173 /* DBPositionsViewController.m */; };
 		CBB043151B0CAEFF00901173 /* DBPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043091B0CAEFF00901173 /* DBPositionsViewController.m */; };
 		CBB043161B0CAEFF00901173 /* DBPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043091B0CAEFF00901173 /* DBPositionsViewController.m */; };
-		CBB043171B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
-		CBB043181B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
-		CBB043191B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
-		CBB0431A1B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CBB718E31B14A3EE00C47A33 /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB718D91B14A3EE00C47A33 /* CompanyInfo.plist */; };
 		CBB718E41B14A3EE00C47A33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBB718DA1B14A3EE00C47A33 /* InfoPlist.strings */; };
 		CBB718E51B14A3EE00C47A33 /* Images-MeatMe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBB718DC1B14A3EE00C47A33 /* Images-MeatMe.xcassets */; };
@@ -3933,7 +3922,6 @@
 		CBD0C5E61B30724300DAD042 /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CBD0C5E71B30724300DAD042 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CBD0C5E81B30724300DAD042 /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CBD0C5E91B30724300DAD042 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CBD0C5EA1B30724300DAD042 /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CBD0C5EB1B30724300DAD042 /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CBD0C5EC1B30724300DAD042 /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -4279,7 +4267,6 @@
 		CBD2EBC81B2A07D000E4AAA1 /* payment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D522277E1972FB6B0098E429 /* payment@2x.png */; };
 		CBD2EBC91B2A07D000E4AAA1 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE2196E8F74002A7AF3 /* phone.png */; };
 		CBD2EBCA1B2A07D000E4AAA1 /* menu_icon_grey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */; };
-		CBD2EBCB1B2A07D000E4AAA1 /* DBPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */; };
 		CBD2EBCC1B2A07D000E4AAA1 /* DBTimePickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD29D2F1ABC3B3500BD4E81 /* DBTimePickerView.xib */; };
 		CBD2EBCD1B2A07D000E4AAA1 /* arrow_horizontal_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = CBD2B38C1AD7E08000D0FCF1 /* arrow_horizontal_icon.png */; };
 		CBD2EBCE1B2A07D000E4AAA1 /* DBCategoryPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB715AE01ACD5C9A00EA84FC /* DBCategoryPickerCell.xib */; };
@@ -4772,7 +4759,6 @@
 		CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBBonusPositionsViewController.xib; sourceTree = "<group>"; };
 		CBB043081B0CAEFF00901173 /* DBPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionsViewController.h; sourceTree = "<group>"; };
 		CBB043091B0CAEFF00901173 /* DBPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionsViewController.m; sourceTree = "<group>"; };
-		CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionsViewController.xib; sourceTree = "<group>"; };
 		CBB718D91B14A3EE00C47A33 /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
 		CBB718DB1B14A3EE00C47A33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBB718DC1B14A3EE00C47A33 /* Images-MeatMe.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-MeatMe.xcassets"; sourceTree = "<group>"; };
@@ -6007,7 +5993,6 @@
 				CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */,
 				CBB043081B0CAEFF00901173 /* DBPositionsViewController.h */,
 				CBB043091B0CAEFF00901173 /* DBPositionsViewController.m */,
-				CBB0430A1B0CAEFF00901173 /* DBPositionsViewController.xib */,
 				CB715AE41ACEA40C00EA84FC /* DBPositionViewController.h */,
 				CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */,
 				CB715AE61ACEA40C00EA84FC /* DBPositionViewController.xib */,
@@ -6918,7 +6903,6 @@
 				7E3DABB11B06153E00A7FFD1 /* cash.png in Resources */,
 				7E3DABB21B06153E00A7FFD1 /* DBOrderItemCompactCell.xib in Resources */,
 				7E3DABB31B06153E00A7FFD1 /* payment.png in Resources */,
-				CBB0431A1B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */,
 				7E3DABB41B06153E00A7FFD1 /* modifier_arrow_icon@2x.png in Resources */,
 				7E3DABB51B06153E00A7FFD1 /* maestro_icon@2x.png in Resources */,
 				7E3DABB61B06153E00A7FFD1 /* profile.png in Resources */,
@@ -7156,7 +7140,6 @@
 				7EDB5A071B32F70400723DF9 /* phone.png in Resources */,
 				7EDB5A081B32F70400723DF9 /* menu_icon_grey@3x.png in Resources */,
 				7EDB5A631B32F79D00723DF9 /* launch_568.png in Resources */,
-				7EDB5A0A1B32F70400723DF9 /* DBPositionsViewController.xib in Resources */,
 				7EDB5A661B32F79D00723DF9 /* CompanyInfo.plist in Resources */,
 				7EDB5A681B32F79D00723DF9 /* FishRice-info.plist in Resources */,
 				7EDB5A0C1B32F70400723DF9 /* DBTimePickerView.xib in Resources */,
@@ -7357,7 +7340,6 @@
 				CB1431EE1B0E371A00DD50C7 /* phone.png in Resources */,
 				CB1431EF1B0E371A00DD50C7 /* menu_icon_grey@3x.png in Resources */,
 				CBD14B8C1B14933B005AEAFE /* launch_736.jpg in Resources */,
-				CB1431F01B0E371A00DD50C7 /* DBPositionsViewController.xib in Resources */,
 				CB1431F11B0E371A00DD50C7 /* DBTimePickerView.xib in Resources */,
 				CB1431F21B0E371A00DD50C7 /* arrow_horizontal_icon.png in Resources */,
 				CB1431F31B0E371A00DD50C7 /* DBCategoryPickerCell.xib in Resources */,
@@ -7553,7 +7535,6 @@
 				CB1433511B0F1BBB00DD50C7 /* payment@2x.png in Resources */,
 				CB1433521B0F1BBB00DD50C7 /* phone.png in Resources */,
 				CB1433531B0F1BBB00DD50C7 /* menu_icon_grey@3x.png in Resources */,
-				CB1433541B0F1BBB00DD50C7 /* DBPositionsViewController.xib in Resources */,
 				CB1433551B0F1BBB00DD50C7 /* DBTimePickerView.xib in Resources */,
 				CB1433561B0F1BBB00DD50C7 /* arrow_horizontal_icon.png in Resources */,
 				CB1433571B0F1BBB00DD50C7 /* DBCategoryPickerCell.xib in Resources */,
@@ -7716,7 +7697,6 @@
 				CB1AF8321AE10E6900FA3224 /* share_icon@3x.png in Resources */,
 				CB1AF8331AE10E6900FA3224 /* cash.png in Resources */,
 				CB1AF8341AE10E6900FA3224 /* DBOrderItemCompactCell.xib in Resources */,
-				CBB043181B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */,
 				CB1AF8351AE10E6900FA3224 /* payment.png in Resources */,
 				CB1AF8361AE10E6900FA3224 /* modifier_arrow_icon@2x.png in Resources */,
 				CB1AF8371AE10E6900FA3224 /* maestro_icon@2x.png in Resources */,
@@ -7958,7 +7938,6 @@
 				CB3BA3E51B20589300F320CA /* payment@2x.png in Resources */,
 				CB3BA3E61B20589300F320CA /* phone.png in Resources */,
 				CB3BA3E71B20589300F320CA /* menu_icon_grey@3x.png in Resources */,
-				CB3BA3E81B20589300F320CA /* DBPositionsViewController.xib in Resources */,
 				CB3BA3E91B20589300F320CA /* DBTimePickerView.xib in Resources */,
 				CB3BA3EA1B20589300F320CA /* arrow_horizontal_icon.png in Resources */,
 				CB3BA3EB1B20589300F320CA /* DBCategoryPickerCell.xib in Resources */,
@@ -8118,7 +8097,6 @@
 				CB517C0F1AEFB6B500A50F5C /* cash.png in Resources */,
 				CB517C101AEFB6B500A50F5C /* DBOrderItemCompactCell.xib in Resources */,
 				CB517C111AEFB6B500A50F5C /* payment.png in Resources */,
-				CBB043191B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */,
 				CB517C121AEFB6B500A50F5C /* modifier_arrow_icon@2x.png in Resources */,
 				CB517C131AEFB6B500A50F5C /* maestro_icon@2x.png in Resources */,
 				CB517C141AEFB6B500A50F5C /* profile.png in Resources */,
@@ -8363,7 +8341,6 @@
 				CB5AFD311B27209A00904BF7 /* payment@2x.png in Resources */,
 				CB5AFD321B27209A00904BF7 /* phone.png in Resources */,
 				CB5AFD331B27209A00904BF7 /* menu_icon_grey@3x.png in Resources */,
-				CB5AFD341B27209A00904BF7 /* DBPositionsViewController.xib in Resources */,
 				CB5AFD351B27209A00904BF7 /* DBTimePickerView.xib in Resources */,
 				CB5AFD361B27209A00904BF7 /* arrow_horizontal_icon.png in Resources */,
 				CB5AFD371B27209A00904BF7 /* DBCategoryPickerCell.xib in Resources */,
@@ -8560,7 +8537,6 @@
 				7E21EC081B285FB900AF7859 /* DBAddressViewController.xib in Resources */,
 				CB60C1781AC5AD2600D5E962 /* phone.png in Resources */,
 				CB60C1791AC5AD2600D5E962 /* menu_icon_grey@3x.png in Resources */,
-				CBB043171B0CAEFF00901173 /* DBPositionsViewController.xib in Resources */,
 				CB60C17A1AC5AD2600D5E962 /* DBTimePickerView.xib in Resources */,
 				CB1433B81B137E6000DD50C7 /* DBLaunchEmulationViewController.xib in Resources */,
 				CBD2B38D1AD7E08000D0FCF1 /* arrow_horizontal_icon.png in Resources */,
@@ -8762,7 +8738,6 @@
 				CB6400C31B31B7CF0011CEEC /* phone.png in Resources */,
 				CB6400C41B31B7CF0011CEEC /* menu_icon_grey@3x.png in Resources */,
 				CB6401321B31B8630011CEEC /* launch_568.png in Resources */,
-				CB6400C51B31B7CF0011CEEC /* DBPositionsViewController.xib in Resources */,
 				CB6401351B31B8630011CEEC /* CompanyInfo.plist in Resources */,
 				CB6400C61B31B7CF0011CEEC /* DBTimePickerView.xib in Resources */,
 				CB6400C71B31B7CF0011CEEC /* arrow_horizontal_icon.png in Resources */,
@@ -8963,7 +8938,6 @@
 				CB64FF171B317F760011CEEC /* payment@2x.png in Resources */,
 				CB64FF181B317F760011CEEC /* phone.png in Resources */,
 				CB64FF191B317F760011CEEC /* menu_icon_grey@3x.png in Resources */,
-				CB64FF1B1B317F760011CEEC /* DBPositionsViewController.xib in Resources */,
 				CB64FF1D1B317F760011CEEC /* DBTimePickerView.xib in Resources */,
 				CB64FF1E1B317F760011CEEC /* arrow_horizontal_icon.png in Resources */,
 				CB64FF1F1B317F760011CEEC /* DBCategoryPickerCell.xib in Resources */,
@@ -9168,7 +9142,6 @@
 				CBD0C5E71B30724300DAD042 /* phone.png in Resources */,
 				CBD0C5E81B30724300DAD042 /* menu_icon_grey@3x.png in Resources */,
 				CBD0C6861B30A68600DAD042 /* burger_icon@3x.png in Resources */,
-				CBD0C5E91B30724300DAD042 /* DBPositionsViewController.xib in Resources */,
 				CBD0C6401B3074FB00DAD042 /* launch_568.png in Resources */,
 				CBD0C5EA1B30724300DAD042 /* DBTimePickerView.xib in Resources */,
 				CBD0C5EB1B30724300DAD042 /* arrow_horizontal_icon.png in Resources */,
@@ -9368,7 +9341,6 @@
 				CBD2EBC81B2A07D000E4AAA1 /* payment@2x.png in Resources */,
 				CBD2EBC91B2A07D000E4AAA1 /* phone.png in Resources */,
 				CBD2EBCA1B2A07D000E4AAA1 /* menu_icon_grey@3x.png in Resources */,
-				CBD2EBCB1B2A07D000E4AAA1 /* DBPositionsViewController.xib in Resources */,
 				CBD2EBCC1B2A07D000E4AAA1 /* DBTimePickerView.xib in Resources */,
 				CBD2EBCD1B2A07D000E4AAA1 /* arrow_horizontal_icon.png in Resources */,
 				CBD2EBCE1B2A07D000E4AAA1 /* DBCategoryPickerCell.xib in Resources */,
@@ -12070,7 +12042,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeAutomation;
-				PROVISIONING_PROFILE = "40f7d9ce-cd91-4573-a112-faae05bca8e5";
+				PROVISIONING_PROFILE = "b8b8d8c1-5dae-4a5f-8c64-ca87c2658b5b";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -12103,7 +12075,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeAutomation;
-				PROVISIONING_PROFILE = "52af52f3-f48c-461c-8c01-060c39195c30";
+				PROVISIONING_PROFILE = "4440f1bb-5bf0-483a-993d-1d5d410299a6";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -12652,7 +12624,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeHostel;
-				PROVISIONING_PROFILE = "5c955e0d-6ff6-4edf-8867-bfe6a8bd7808";
+				PROVISIONING_PROFILE = "b8b8d8c1-5dae-4a5f-8c64-ca87c2658b5b";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -12685,7 +12657,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeHostel;
-				PROVISIONING_PROFILE = "925dc5fe-6d90-4aca-9be2-a798e381736b";
+				PROVISIONING_PROFILE = "4440f1bb-5bf0-483a-993d-1d5d410299a6";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

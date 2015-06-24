@@ -49,8 +49,8 @@
         [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:ordersController]];
         
         // Venues vc
-        if(![[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
-           [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]){
+        if(!([[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
+           [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping])){
             DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
             venuesController.eventsCategory = VENUES_SCREEN;
             venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Точки", nil)

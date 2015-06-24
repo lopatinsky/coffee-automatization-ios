@@ -23,6 +23,15 @@ typedef enum : NSUInteger {
 
 @interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DBTimePickerViewDelegate>
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCityViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintStreetViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCommentViewHeight;
+
+@property (nonatomic) double initialCityViewHeight;
+@property (nonatomic) double initialStreetViewHeight;
+@property (nonatomic) double initialCommentViewHeight;
+
 #pragma mark - Fake Separators
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint2;
@@ -73,6 +82,10 @@ typedef enum : NSUInteger {
     [self.streetTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.apartmentTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.commentTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.initialCityViewHeight = self.constraintCityViewHeight.constant;
+    self.initialStreetViewHeight = self.constraintStreetViewHeight.constant;
+    self.initialCommentViewHeight = self.constraintCommentViewHeight.constant;
     
     [self initializeFakeSeparators];
     [self initializePlaceholders];
@@ -148,7 +161,7 @@ typedef enum : NSUInteger {
     
     self.streetTextField.placeholder = NSLocalizedString(@"Улица, дом", nil);
     self.apartmentTextField.placeholder = NSLocalizedString(@"Кв/Офис", nil);
-    self.commentTextField.placeholder = NSLocalizedString(@"Подъезд, этаж", nil);
+    self.commentTextField.placeholder = NSLocalizedString(@"Комментарий", nil);
 }
 
 - (void)initializeViews {
@@ -189,23 +202,26 @@ typedef enum : NSUInteger {
             [self.delegate keyboardWillAppear];
             if (textField == self.streetTextField) {
                 self.keyboardStatus = StreetKeyboard;
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
                 
                 self.addressSuggestions = @[];
                 [self.addressSuggestionsTableView reloadData];
                 self.addressSuggestionsTableView.hidden = NO;
+                
+                [UIView animateWithDuration:0.1 animations:^{
+                    self.constraintCityViewHeight.constant = 0.f;
+                    self.constraintCommentViewHeight.constant = 0.f;
+                    [self.view layoutIfNeeded];
+                }];
             } else if (textField == self.apartmentTextField) {
                 self.keyboardStatus = StreetKeyboard;
+                
                 [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
+                    self.constraintCityViewHeight.constant = self.initialCityViewHeight;
+                    self.constraintCommentViewHeight.constant = self.initialCommentViewHeight;
+                    [self.view layoutIfNeeded];
                 }];
             } else if (textField == self.commentTextField) {
                 self.keyboardStatus = Commentkeyboard;
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 88, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
             }
             break;
         case StreetKeyboard:

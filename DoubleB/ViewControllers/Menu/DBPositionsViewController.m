@@ -30,9 +30,6 @@
 #define TAG_PICKER_OVERLAY 444
 
 @interface DBPositionsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCatecoryHeaderViewDelegate, DBCategoryPickerDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewTopSpace;
-
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
@@ -56,15 +53,11 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    CGFloat topInset = [UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height;
-    self.constraintTableViewTopSpace.constant = topInset;
-    
-    self.tableView.delegate = self;
+    self.automaticallyAdjustsScrollViewInsets = YES;
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:refreshControl];
+    self.refreshControl = refreshControl;
     
     self.categoryPicker = [DBCategoryPicker new];
     self.categoryPicker.delegate = self;
