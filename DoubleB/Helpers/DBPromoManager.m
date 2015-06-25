@@ -135,97 +135,98 @@
         return NO;
     }
     
-    if(![OrderManager sharedManager].venue){
-        return NO;
-    }
-    
     NSInteger currentUpdateNumber = self.lastUpdateNumber + 1;
     self.lastUpdateNumber = currentUpdateNumber;
 
     double currentTotal = [OrderManager sharedManager].totalPrice;
     [DBServerAPI checkNewOrder:^(NSDictionary *response) {
-        // bonus points balance
-        _bonusPointsBalance = [[response getValueForKey:@"full_points"] doubleValue];
-        _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];
-        
-        // Calculate discount
-        double newTotal = [response[@"total_sum"] doubleValue];
-        _discount = currentTotal - newTotal;
-        
-        // Calculate wallet points available for order
-        [self willChangeValueForKey:@"walletPointsAvailableForOrder"];
-        _walletPointsAvailableForOrder = [response[@"max_wallet_payment"] doubleValue];
-        [self didChangeValueForKey:@"walletPointsAvailableForOrder"];
-        
-        [self changeTotalDiscount];
-        
-        // Assemble global promos & errors
-        NSMutableArray *globalPromoMessages = [NSMutableArray new];
-        NSMutableArray *globalErrorsMessages = [NSMutableArray new];
-        
-        for(NSString *error in response[@"errors"]){
-            [globalErrorsMessages addObject:error];
-        }
-        
-        for (NSDictionary *promo in response[@"promos"]) {
-            [globalPromoMessages addObject:promo[@"text"]];
-        }
-        _promos = globalPromoMessages;
-        _errors = globalErrorsMessages;
-        
-        
-        // Assemble items promos & errors
-        [self.promoItems removeAllObjects];
-        for(NSDictionary *item in response[@"items"]){
-            DBMenuPosition *templatePosition = [[[DBMenu sharedInstance] findPositionWithId:item[@"id"]] copy];
+        if(self.lastUpdateNumber == currentUpdateNumber && callback){
+            // bonus points balance
+            _bonusPointsBalance = [[response getValueForKey:@"full_points"] doubleValue];
+            _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];
             
-            for(NSDictionary *groupModifierItem in item[@"group_modifiers"]){
-                [templatePosition selectItem:groupModifierItem[@"choice"]
-                            forGroupModifier:groupModifierItem[@"id"]];
+            // Calculate discount
+            double newTotal = [response[@"total_sum"] doubleValue];
+            _discount = currentTotal - newTotal;
+            
+            // Calculate wallet points available for order
+            [self willChangeValueForKey:@"walletPointsAvailableForOrder"];
+            _walletPointsAvailableForOrder = [response[@"max_wallet_payment"] doubleValue];
+            [self didChangeValueForKey:@"walletPointsAvailableForOrder"];
+            
+            [self changeTotalDiscount];
+            
+            // Assemble global promos & errors
+            NSMutableArray *globalPromoMessages = [NSMutableArray new];
+            NSMutableArray *globalErrorsMessages = [NSMutableArray new];
+            
+            for(NSString *error in response[@"errors"]){
+                [globalErrorsMessages addObject:error];
             }
             
-            for(NSDictionary *singleModifier in item[@"single_modifiers"]){
-                [templatePosition addSingleModifier:singleModifier[@"id"] count:[singleModifier[@"quantity"] intValue]];
+            for (NSDictionary *promo in response[@"promos"]) {
+                [globalPromoMessages addObject:promo[@"text"]];
             }
             
-            OrderItem *orderItem = [[OrderManager sharedManager] itemWithTemplatePosition:templatePosition];
-            if(item){
-                DBPromoItem *promoItem = [DBPromoItem new];
-                promoItem.orderItem = orderItem;
+            // Show shipping total in promos list
+            self.shippingPrice = [[response getValueForKey:@"delivery_sum"] doubleValue];
             
-                // Promos
-                NSMutableArray *itemPromos = [NSMutableArray new];
-                for(NSDictionary *itemPromo in item[@"promos"]){
-                    [itemPromos addObject:itemPromo[@"text"]];
+            _promos = globalPromoMessages;
+            _errors = globalErrorsMessages;
+            
+            
+            // Assemble items promos & errors
+            [self.promoItems removeAllObjects];
+            for(NSDictionary *item in response[@"items"]){
+                DBMenuPosition *templatePosition = [[[DBMenu sharedInstance] findPositionWithId:item[@"id"]] copy];
+                
+                for(NSDictionary *groupModifierItem in item[@"group_modifiers"]){
+                    [templatePosition selectItem:groupModifierItem[@"choice"]
+                                forGroupModifier:groupModifierItem[@"id"]];
                 }
-                promoItem.promos = itemPromos;
                 
-                // Errors
-                promoItem.errors = item[@"errors"];
+                for(NSDictionary *singleModifier in item[@"single_modifiers"]){
+                    [templatePosition addSingleModifier:singleModifier[@"id"] count:[singleModifier[@"quantity"] intValue]];
+                }
                 
-                // Substitutes
-                NSArray *substitutes = item[@"substitutes"];
-                if(substitutes && substitutes.count > 0){
-                    NSDictionary *substitute = [substitutes firstObject];
-                    if(substitute){
-                        NSString *positionId = substitute[@"item_id"];
-                        DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:positionId];
-                        if(position){
-                            promoItem.substitute = position;
-                            promoItem.replaceToSubstituteAutomatic = [substitute[@"auto_replace"] boolValue];
-                            promoItem.errors = @[substitute[@"description"]];
+                OrderItem *orderItem = [[OrderManager sharedManager] itemWithTemplatePosition:templatePosition];
+                if(item){
+                    DBPromoItem *promoItem = [DBPromoItem new];
+                    promoItem.orderItem = orderItem;
+                
+                    // Promos
+                    NSMutableArray *itemPromos = [NSMutableArray new];
+                    for(NSDictionary *itemPromo in item[@"promos"]){
+                        [itemPromos addObject:itemPromo[@"text"]];
+                    }
+                    promoItem.promos = itemPromos;
+                    
+                    // Errors
+                    promoItem.errors = item[@"errors"];
+                    
+                    // Substitutes
+                    NSArray *substitutes = item[@"substitutes"];
+                    if(substitutes && substitutes.count > 0){
+                        NSDictionary *substitute = [substitutes firstObject];
+                        if(substitute){
+                            NSString *positionId = substitute[@"item_id"];
+                            DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:positionId];
+                            if(position){
+                                promoItem.substitute = position;
+                                promoItem.replaceToSubstituteAutomatic = [substitute[@"auto_replace"] boolValue];
+                                promoItem.errors = @[substitute[@"description"]];
+                            }
                         }
                     }
+                    
+                    [self.promoItems addObject:promoItem];
                 }
-                
-                [self.promoItems addObject:promoItem];
             }
-        }
+            
+            // Assemble gift positions for order
+            
+            _validOrder = [response[@"valid"] boolValue];
         
-        // Assemble gift positions for order
-        
-        _validOrder = [response[@"valid"] boolValue];
-        if(self.lastUpdateNumber == currentUpdateNumber && callback){
             callback(YES);
         }
     } failure:^(NSError *error) {
@@ -240,6 +241,7 @@
 }
 
 - (void)clear{
+    _shippingPrice = 0;
     _discount = 0;
     _walletPointsAvailableForOrder = 0;
     [self changeTotalDiscount];

@@ -146,8 +146,7 @@
 
 + (NSArray *)allOrders {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Order"];
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"status" ascending:YES],
-            [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO]];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO]];
     
     NSArray *orders = [[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil];
     

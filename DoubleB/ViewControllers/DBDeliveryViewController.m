@@ -103,6 +103,7 @@ typedef enum : NSUInteger {
 
 - (IBAction)showPickerWithCities:(id)sender {
     self.cityPickerView.items = [self.shippingManager arrayOfCities];
+    self.cityPickerView.selectedItem = [[self.shippingManager arrayOfCities] indexOfObject:self.shippingManager.selectedAddress.city];
     [self.cityPickerView showOnView:self.navigationController.view];
     [GANHelper analyzeEvent:@"city_spinner_show" category:ADDRESS_SCREEN];
 }
@@ -111,7 +112,7 @@ typedef enum : NSUInteger {
 
 - (void)reload{
     self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
-    self.streetTextField.text = [self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeShort];
+    self.streetTextField.text = [self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeAutocomplete];
     if(self.streetTextField.text.length > 0){
         self.streetIndicatorView.hidden = YES;
     } else {

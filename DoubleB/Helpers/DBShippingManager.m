@@ -180,11 +180,12 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     _address = [dict[@"address"] getValueForKey:@"street"] ?: @"";
     _home = [dict[@"address"] getValueForKey:@"home"] ?: @"";
     _apartment = [dict[@"address"] getValueForKey:@"flat"] ?: @"";
-//    _comment = [dict[@"address"] getValueForKey:@"comment"] ?: @"";
     
     double lat = [dict[@"coordinates"][@"lat"] doubleValue];
     double lon = [dict[@"coordinates"][@"lon"] doubleValue];
     _location = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+    
+    _comment = [dict getValueForKey:@"comment"] ?: @"";
     
     return self;
 }
@@ -200,21 +201,34 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
                               @"city": _city ?: @"",
                               @"street": _address ?: @"",
                               @"home": _home ?: @"",
-                              @"flat": _apartment ?: @"",
-                              /*@"comment": _comment ?: @""*/};
+                              @"flat": _apartment ?: @""};
     
-    return @{@"address": address, @"coordinates": coordinates};
+    return @{@"address": address, @"coordinates": coordinates, @"comment": _comment ?: @""};
 }
 
 - (NSString *)formattedAddressString:(DBAddressStringMode)mode{
     NSString *result = @"";
     
-    if(mode >= DBAddressStringModeShort){
+    if(mode == DBAddressStringModeAutocomplete){
         if(_address.length > 0){
-            result = [NSString stringWithFormat:@"%@, ", _address];
+            result = _address;
+            
+            if([result rangeOfString:@","].location == NSNotFound){
+                result = [NSString stringWithFormat:@"%@, ", result];
+            }
             
             if(_home.length > 0){
                 result = [NSString stringWithFormat:@"%@%@",result, _home];
+            }
+        }
+    }
+        
+    if(mode >= DBAddressStringModeShort){
+        if(_address.length > 0){
+            result =  _address;
+            
+            if(_home.length > 0){
+                result = [NSString stringWithFormat:@"%@, %@",result, _home];
             }
         }
     }

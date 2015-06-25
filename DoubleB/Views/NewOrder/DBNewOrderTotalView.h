@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelActualTotal;
 @property (weak, nonatomic) IBOutlet UILabel *labelOldTotal;
 
+@property (weak, nonatomic) IBOutlet UILabel *labelShippingTotal;
+
 - (void)startUpdating;
 - (void)endUpdating;
 
