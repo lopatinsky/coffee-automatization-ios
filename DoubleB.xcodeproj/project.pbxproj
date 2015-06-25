@@ -1017,6 +1017,10 @@
 		7E79280C1B3C24E200CA740D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E7927FF1B3C24C400CA740D /* InfoPlist.strings */; };
 		7E79280D1B3C24E700CA740D /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E7927FE1B3C24C400CA740D /* CompanyInfo.plist */; };
 		7E79280E1B3C24EB00CA740D /* HulkMarket-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E7927FD1B3C24C400CA740D /* HulkMarket-info.plist */; };
+		7E79281D1B3C279400CA740D /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928111B3C278A00CA740D /* launch_480.png */; };
+		7E79281E1B3C279400CA740D /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928121B3C278A00CA740D /* launch_568.png */; };
+		7E79281F1B3C279400CA740D /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928131B3C278A00CA740D /* launch_667.png */; };
+		7E7928201B3C279400CA740D /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928141B3C278A00CA740D /* launch_736.png */; };
 		7E85BD731B2F0B10000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD741B2F0B11000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD751B2F0B1E000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
@@ -5068,6 +5072,10 @@
 		7E7928001B3C24C400CA740D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E7928011B3C24C400CA740D /* Images-HulkMarket.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-HulkMarket.xcassets"; sourceTree = "<group>"; };
 		7E7928021B3C24C400CA740D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7E7928111B3C278A00CA740D /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
+		7E7928121B3C278A00CA740D /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
+		7E7928131B3C278A00CA740D /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
+		7E7928141B3C278A00CA740D /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
 		7EDB5A511B32F70400723DF9 /* FishRice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishRice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDB5A581B32F79D00723DF9 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7EDB5A591B32F79D00723DF9 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -6121,6 +6129,25 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		7E79280F1B3C278A00CA740D /* AdditionalResources */ = {
+			isa = PBXGroup;
+			children = (
+				7E7928101B3C278A00CA740D /* Resources */,
+			);
+			path = AdditionalResources;
+			sourceTree = "<group>";
+		};
+		7E7928101B3C278A00CA740D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E7928111B3C278A00CA740D /* launch_480.png */,
+				7E7928121B3C278A00CA740D /* launch_568.png */,
+				7E7928131B3C278A00CA740D /* launch_667.png */,
+				7E7928141B3C278A00CA740D /* launch_736.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		7EB75BF81B2F3DB2006ADEE3 /* Delivery */ = {
 			isa = PBXGroup;
 			children = (
@@ -6569,6 +6596,7 @@
 		CB5AFD7C1B27212C00904BF7 /* ElephantBoutique */ = {
 			isa = PBXGroup;
 			children = (
+				7E79280F1B3C278A00CA740D /* AdditionalResources */,
 				CB5AFD831B27212C00904BF7 /* CompanyInfo.plist */,
 				CB5AFD841B27212C00904BF7 /* ElephantBoutique-info.plist */,
 				CB5AFD851B27212C00904BF7 /* InfoPlist.strings */,
@@ -9448,6 +9476,7 @@
 				CB5AFCCE1B27209A00904BF7 /* DBVenueCell.xib in Resources */,
 				CB5AFCCF1B27209A00904BF7 /* bg960.jpg in Resources */,
 				CB5AFCD01B27209A00904BF7 /* venues_icon_grey@2x.png in Resources */,
+				7E79281D1B3C279400CA740D /* launch_480.png in Resources */,
 				CB5AFCD11B27209A00904BF7 /* mug.png in Resources */,
 				CB5AFCD21B27209A00904BF7 /* return_cause_time_icon@3x.png in Resources */,
 				CB5AFCD31B27209A00904BF7 /* modifier_plus_icon@2x.png in Resources */,
@@ -9562,6 +9591,7 @@
 				CB5AFD411B27209A00904BF7 /* add_position.png in Resources */,
 				CB5AFD421B27209A00904BF7 /* about@2x.png in Resources */,
 				CB5AFD431B27209A00904BF7 /* category_selection_icon@2x.png in Resources */,
+				7E7928201B3C279400CA740D /* launch_736.png in Resources */,
 				CB5AFD441B27209A00904BF7 /* venues_icon_grey@3x.png in Resources */,
 				CB5AFD451B27209A00904BF7 /* DBPromoCell.xib in Resources */,
 				CB5AFD461B27209A00904BF7 /* DBOrderReturnView.xib in Resources */,
@@ -9585,6 +9615,7 @@
 				CB5AFD5A1B27209A00904BF7 /* heart@2x.png in Resources */,
 				CB5AFD5B1B27209A00904BF7 /* share@2x.png in Resources */,
 				CB5AFD5C1B27209A00904BF7 /* not_paid.png in Resources */,
+				7E79281E1B3C279400CA740D /* launch_568.png in Resources */,
 				CB5AFD5D1B27209A00904BF7 /* return_cause_venue_icon@2x.png in Resources */,
 				CB5AFD5E1B27209A00904BF7 /* close_white@2x.png in Resources */,
 				CB5AFD5F1B27209A00904BF7 /* DBPositionSingleModifierCell.xib in Resources */,
@@ -9607,6 +9638,7 @@
 				CB5AFD711B27209A00904BF7 /* DBSettingsCell.xib in Resources */,
 				CB5AFD721B27209A00904BF7 /* not_paid@2x.png in Resources */,
 				CB5AFD731B27209A00904BF7 /* canceled.png in Resources */,
+				7E79281F1B3C279400CA740D /* launch_667.png in Resources */,
 				CB5AFD741B27209A00904BF7 /* canceled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
