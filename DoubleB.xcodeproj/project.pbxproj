@@ -1013,14 +1013,14 @@
 		7E7927EA1B3C247D00CA740D /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		7E7927EB1B3C247D00CA740D /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		7E7927ED1B3C247D00CA740D /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
-		7E79280B1B3C24DE00CA740D /* Images-HulkMarket.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928011B3C24C400CA740D /* Images-HulkMarket.xcassets */; };
-		7E79280C1B3C24E200CA740D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E7927FF1B3C24C400CA740D /* InfoPlist.strings */; };
-		7E79280D1B3C24E700CA740D /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E7927FE1B3C24C400CA740D /* CompanyInfo.plist */; };
-		7E79280E1B3C24EB00CA740D /* HulkMarket-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E7927FD1B3C24C400CA740D /* HulkMarket-info.plist */; };
 		7E79281D1B3C279400CA740D /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928111B3C278A00CA740D /* launch_480.png */; };
 		7E79281E1B3C279400CA740D /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928121B3C278A00CA740D /* launch_568.png */; };
 		7E79281F1B3C279400CA740D /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928131B3C278A00CA740D /* launch_667.png */; };
 		7E7928201B3C279400CA740D /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928141B3C278A00CA740D /* launch_736.png */; };
+		7E79282D1B3C340F00CA740D /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928231B3C340500CA740D /* CompanyInfo.plist */; };
+		7E79282E1B3C341400CA740D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928241B3C340500CA740D /* InfoPlist.strings */; };
+		7E79282F1B3C341800CA740D /* HulkMarket-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928261B3C340500CA740D /* HulkMarket-info.plist */; };
+		7E7928301B3C341B00CA740D /* Images-HulkMarket.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E7928271B3C340500CA740D /* Images-HulkMarket.xcassets */; };
 		7E85BD731B2F0B10000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD741B2F0B11000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD751B2F0B1E000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
@@ -5067,15 +5067,15 @@
 		7E7926911B3C209B00CA740D /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
 		7E7927F41B3C247D00CA740D /* HalkMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HalkMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E7927F51B3C247E00CA740D /* CoffeeSnack copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "CoffeeSnack copy-Info.plist"; path = "/Users/balaban/Documents/Work/rubeacon/ios/coffee-automatization-ios/CoffeeSnack copy-Info.plist"; sourceTree = "<absolute>"; };
-		7E7927FD1B3C24C400CA740D /* HulkMarket-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HulkMarket-info.plist"; sourceTree = "<group>"; };
-		7E7927FE1B3C24C400CA740D /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
-		7E7928001B3C24C400CA740D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7E7928011B3C24C400CA740D /* Images-HulkMarket.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-HulkMarket.xcassets"; sourceTree = "<group>"; };
-		7E7928021B3C24C400CA740D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7E7928111B3C278A00CA740D /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7E7928121B3C278A00CA740D /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
 		7E7928131B3C278A00CA740D /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
 		7E7928141B3C278A00CA740D /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
+		7E7928231B3C340500CA740D /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
+		7E7928251B3C340500CA740D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7E7928261B3C340500CA740D /* HulkMarket-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HulkMarket-info.plist"; sourceTree = "<group>"; };
+		7E7928271B3C340500CA740D /* Images-HulkMarket.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-HulkMarket.xcassets"; sourceTree = "<group>"; };
+		7E7928281B3C340500CA740D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EDB5A511B32F70400723DF9 /* FishRice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishRice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDB5A581B32F79D00723DF9 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7EDB5A591B32F79D00723DF9 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -5377,7 +5377,6 @@
 		CB715AF01ACEB9F900EA84FC /* UIViewController+DBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DBAnimation.m"; sourceTree = "<group>"; };
 		CB715AF21ACECACD00EA84FC /* UINavigationController+DBAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+DBAnimation.h"; sourceTree = "<group>"; };
 		CB715AF31ACECACD00EA84FC /* UINavigationController+DBAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+DBAnimation.m"; sourceTree = "<group>"; };
-		CB73306219FE8210001B4B6D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CB73306819FF72A8001B4B6D /* menu_icon_grey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon_grey.png; sourceTree = "<group>"; };
 		CB73306919FF72A8001B4B6D /* menu_icon_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_icon_grey@2x.png"; sourceTree = "<group>"; };
 		CB73306A19FF72A8001B4B6D /* menu_icon_grey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_icon_grey@3x.png"; sourceTree = "<group>"; };
@@ -6102,33 +6101,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		7E7927F61B3C24C400CA740D /* HalkMarket */ = {
-			isa = PBXGroup;
-			children = (
-				7E7927F71B3C24C400CA740D /* AdditionalResources */,
-				7E7927FD1B3C24C400CA740D /* HulkMarket-info.plist */,
-				7E7927FE1B3C24C400CA740D /* CompanyInfo.plist */,
-				7E7927FF1B3C24C400CA740D /* InfoPlist.strings */,
-				7E7928011B3C24C400CA740D /* Images-HulkMarket.xcassets */,
-			);
-			path = HalkMarket;
-			sourceTree = "<group>";
-		};
-		7E7927F71B3C24C400CA740D /* AdditionalResources */ = {
-			isa = PBXGroup;
-			children = (
-				7E7927F81B3C24C400CA740D /* Resources */,
-			);
-			path = AdditionalResources;
-			sourceTree = "<group>";
-		};
-		7E7927F81B3C24C400CA740D /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		7E79280F1B3C278A00CA740D /* AdditionalResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -6146,6 +6118,25 @@
 				7E7928141B3C278A00CA740D /* launch_736.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7E7928211B3C340500CA740D /* HulkMarket */ = {
+			isa = PBXGroup;
+			children = (
+				7E7928221B3C340500CA740D /* AdditionalResources */,
+				7E7928231B3C340500CA740D /* CompanyInfo.plist */,
+				7E7928241B3C340500CA740D /* InfoPlist.strings */,
+				7E7928261B3C340500CA740D /* HulkMarket-info.plist */,
+				7E7928271B3C340500CA740D /* Images-HulkMarket.xcassets */,
+			);
+			path = HulkMarket;
+			sourceTree = "<group>";
+		};
+		7E7928221B3C340500CA740D /* AdditionalResources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AdditionalResources;
 			sourceTree = "<group>";
 		};
 		7EB75BF81B2F3DB2006ADEE3 /* Delivery */ = {
@@ -6459,7 +6450,6 @@
 			isa = PBXGroup;
 			children = (
 				CBD14B691B148ED3005AEAFE /* Targets */,
-				CB73306219FE8210001B4B6D /* Images.xcassets */,
 				D54F042A196D68B700E46221 /* DoubleB.entitlements */,
 				D57703DB1969F7A80010D1B1 /* Resources */,
 				C775BDEC4816BCD3FC9E3ACB /* Supporting Files */,
@@ -7013,7 +7003,7 @@
 		CBD14B691B148ED3005AEAFE /* Targets */ = {
 			isa = PBXGroup;
 			children = (
-				7E7927F61B3C24C400CA740D /* HalkMarket */,
+				7E7928211B3C340500CA740D /* HulkMarket */,
 				7E7926731B3C1C0C00CA740D /* CoffeeSnack */,
 				7EDB5A551B32F79D00723DF9 /* FishRice */,
 				CB6401231B31B8630011CEEC /* PaffPoint */,
@@ -8074,6 +8064,7 @@
 				7E79273E1B3C247D00CA740D /* bg.jpg in Resources */,
 				7E79273F1B3C247D00CA740D /* DBCategoryPicker.xib in Resources */,
 				7E7927401B3C247D00CA740D /* DBPositionCompactCell.xib in Resources */,
+				7E79282F1B3C341800CA740D /* HulkMarket-info.plist in Resources */,
 				7E7927411B3C247D00CA740D /* preview_5@2x.png in Resources */,
 				7E7927421B3C247D00CA740D /* preview_4@2x.png in Resources */,
 				7E7927431B3C247D00CA740D /* preview_1@2x.png in Resources */,
@@ -8082,6 +8073,7 @@
 				7E7927461B3C247D00CA740D /* DBVenueCell.xib in Resources */,
 				7E7927471B3C247D00CA740D /* bg960.jpg in Resources */,
 				7E7927481B3C247D00CA740D /* venues_icon_grey@2x.png in Resources */,
+				7E79282D1B3C340F00CA740D /* CompanyInfo.plist in Resources */,
 				7E7927491B3C247D00CA740D /* mug.png in Resources */,
 				7E79274B1B3C247D00CA740D /* return_cause_time_icon@3x.png in Resources */,
 				7E79274C1B3C247D00CA740D /* modifier_plus_icon@2x.png in Resources */,
@@ -8092,7 +8084,6 @@
 				7E7927511B3C247D00CA740D /* white_tick_icon@3x.png in Resources */,
 				7E7927521B3C247D00CA740D /* card_gray@2x.png in Resources */,
 				7E7927531B3C247D00CA740D /* DBCardCell.xib in Resources */,
-				7E79280B1B3C24DE00CA740D /* Images-HulkMarket.xcassets in Resources */,
 				7E7927541B3C247D00CA740D /* mug_orders@2x.png in Resources */,
 				7E7927551B3C247D00CA740D /* card_gray.png in Resources */,
 				7E7927561B3C247D00CA740D /* mug_orders_gray@2x.png in Resources */,
@@ -8127,7 +8118,6 @@
 				7E7927731B3C247D00CA740D /* noimage_icon@3x.png in Resources */,
 				7E7927741B3C247D00CA740D /* DBTableItemInactivityView.xib in Resources */,
 				7E7927751B3C247D00CA740D /* comment.png in Resources */,
-				7E79280D1B3C24E700CA740D /* CompanyInfo.plist in Resources */,
 				7E7927761B3C247D00CA740D /* visa_icon@2x.png in Resources */,
 				7E7927771B3C247D00CA740D /* alerts.png in Resources */,
 				7E7927781B3C247D00CA740D /* bg1334.jpg in Resources */,
@@ -8147,7 +8137,6 @@
 				7E7927861B3C247D00CA740D /* nda.html in Resources */,
 				7E7927871B3C247D00CA740D /* DBPositionGroupModifierItemCell.xib in Resources */,
 				7E7927881B3C247D00CA740D /* phone@2x.png in Resources */,
-				7E79280C1B3C24E200CA740D /* InfoPlist.strings in Resources */,
 				7E79278A1B3C247D00CA740D /* DBOrderItemCell.xib in Resources */,
 				7E79278B1B3C247D00CA740D /* back_arrow_icon@2x.png in Resources */,
 				7E79278C1B3C247D00CA740D /* promo_pic.png in Resources */,
@@ -8162,7 +8151,6 @@
 				7E7927951B3C247D00CA740D /* DBCompanyInfoViewController.xib in Resources */,
 				7E7927961B3C247D00CA740D /* menu_icon@2x.png in Resources */,
 				7E7927971B3C247D00CA740D /* DBOrderBarButtonView.xib in Resources */,
-				7E79280E1B3C24EB00CA740D /* HulkMarket-info.plist in Resources */,
 				7E7927981B3C247D00CA740D /* mug_gray@2x.png in Resources */,
 				7E7927991B3C247D00CA740D /* preview_2@2x.png in Resources */,
 				7E79279A1B3C247D00CA740D /* paid.png in Resources */,
@@ -8171,6 +8159,7 @@
 				7E79279D1B3C247D00CA740D /* bg1136.jpg in Resources */,
 				7E79279E1B3C247D00CA740D /* mug_gray.png in Resources */,
 				7E79279F1B3C247D00CA740D /* 250@2x.png in Resources */,
+				7E7928301B3C341B00CA740D /* Images-HulkMarket.xcassets in Resources */,
 				7E7927A01B3C247D00CA740D /* orders_icon.png in Resources */,
 				7E7927A11B3C247D00CA740D /* mcard_logo@2x.png in Resources */,
 				7E7927A21B3C247D00CA740D /* comment@2x.png in Resources */,
@@ -8198,6 +8187,7 @@
 				7E7927BA1B3C247D00CA740D /* about@2x.png in Resources */,
 				7E7927BB1B3C247D00CA740D /* category_selection_icon@2x.png in Resources */,
 				7E7927BC1B3C247D00CA740D /* venues_icon_grey@3x.png in Resources */,
+				7E79282E1B3C341400CA740D /* InfoPlist.strings in Resources */,
 				7E7927BE1B3C247D00CA740D /* DBPromoCell.xib in Resources */,
 				7E7927BF1B3C247D00CA740D /* DBOrderReturnView.xib in Resources */,
 				7E7927C01B3C247D00CA740D /* rules.html in Resources */,
@@ -13208,11 +13198,11 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7E7927FF1B3C24C400CA740D /* InfoPlist.strings */ = {
+		7E7928241B3C340500CA740D /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7E7928001B3C24C400CA740D /* en */,
-				7E7928021B3C24C400CA740D /* ru */,
+				7E7928251B3C340500CA740D /* en */,
+				7E7928281B3C340500CA740D /* ru */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -13467,7 +13457,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "e84a56ba-612b-4b34-9e9c-05127626367d";
+				PROVISIONING_PROFILE = "126ba170-2f93-4e2d-9524-266ee9a6f3ea";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -13500,7 +13490,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "4ce4df6b-23b8-46db-8645-592feedef37a";
+				PROVISIONING_PROFILE = "7662a362-13a1-4cf5-b731-d19777636d76";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -13532,7 +13522,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "285fa27c-0e38-4725-992e-2927ca8986b0";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -13564,7 +13554,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = HalkMarket;
-				PROVISIONING_PROFILE = "e84a56ba-612b-4b34-9e9c-05127626367d";
+				PROVISIONING_PROFILE = "1028675f-12f6-4107-942f-0079315a0034";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -13597,7 +13587,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = HalkMarket;
-				PROVISIONING_PROFILE = "4ce4df6b-23b8-46db-8645-592feedef37a";
+				PROVISIONING_PROFILE = "2162552a-9a18-4784-bde5-e507880c1cd1";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -13629,7 +13619,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = HalkMarket;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9b5b641f-b10c-496e-a6d3-bcd0cb1a8500";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
