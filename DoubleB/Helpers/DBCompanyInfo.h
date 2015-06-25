@@ -12,6 +12,8 @@
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
+@property(strong, nonatomic, readonly) NSString *bundleName;
+
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
 @property(strong, nonatomic, readonly) NSString *webSiteUrl;

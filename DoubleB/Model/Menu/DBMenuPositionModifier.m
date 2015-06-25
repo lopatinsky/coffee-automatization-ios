@@ -19,6 +19,7 @@
 @property (nonatomic) double modifierPrice;
 @property (nonatomic) NSInteger maxAmount;
 @property (nonatomic) NSInteger minAmount;
+@property (nonatomic) NSInteger order;
 
 //Only for Group modifiers
 @property (strong, nonatomic) NSMutableArray *items;
@@ -126,6 +127,7 @@
     modifier.modifierPrice = [[modifierDictionary getValueForKey:@"price"] doubleValue];
     modifier.minAmount = [[modifierDictionary getValueForKey:@"min"] integerValue];
     modifier.maxAmount = [[modifierDictionary getValueForKey:@"max"] integerValue];
+    modifier.order = [[modifierDictionary getValueForKey:@"order"] integerValue];
     modifier.modifierDictionary = modifierDictionary; 
     
     return modifier;
@@ -187,6 +189,7 @@
         self.minAmount = [[aDecoder decodeObjectForKey:@"minAmount"] integerValue];
         self.maxAmount = [[aDecoder decodeObjectForKey:@"maxAmount"] integerValue];
         self.modifierPrice = [[aDecoder decodeObjectForKey:@"modifierPrice"] doubleValue];
+        self.order = [[aDecoder decodeObjectForKey:@"order"] integerValue];
         self.selectedCount = [[aDecoder decodeObjectForKey:@"selectedCount"] intValue];
         
         self.required = [[aDecoder decodeObjectForKey:@"required"] boolValue];
@@ -206,6 +209,7 @@
     [aCoder encodeObject:@(self.minAmount) forKey:@"minAmount"];
     [aCoder encodeObject:@(self.maxAmount) forKey:@"maxAmount"];
     [aCoder encodeObject:@(self.modifierPrice) forKey:@"modifierPrice"];
+    [aCoder encodeObject:@(self.order) forKey:@"order"];
     [aCoder encodeObject:@(self.selectedCount) forKey:@"selectedCount"];
     
     [aCoder encodeObject:@(self.required) forKey:@"required"];
@@ -226,6 +230,7 @@
     copyModifier.maxAmount = self.maxAmount;
     copyModifier.minAmount = self.minAmount;
     copyModifier.selectedCount = self.selectedCount;
+    copyModifier.order = self.order;
     
     copyModifier.required = self.required;
     copyModifier.items = [NSMutableArray new];

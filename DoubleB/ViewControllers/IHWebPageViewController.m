@@ -32,7 +32,7 @@
     [self.view addSubview:self.webView];
     
     [self setTitle:NSLocalizedString(@"Добавление карты", nil)];
-    self.navigationController.navigationBar.topItem.title = @"";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.webView.scrollView.scrollEnabled = YES;
     

@@ -98,23 +98,28 @@
 }
 
 - (void)setTimeFromResponseDict:(NSDictionary *)dict{
-    NSString *dateString = [dict getValueForKey:@"delivery_time_str"];
-    if(!dateString){
-        dateString = [dict getValueForKey:@"delivery_time"];
+    // Using this if we lose some history order information on backend
+    @try {
+        NSString *dateString = [dict getValueForKey:@"delivery_time_str"];
+        if(!dateString){
+            dateString = [dict getValueForKey:@"delivery_time"];
+        }
+        
+        NSString *timeSlot = [dict getValueForKey:@"delivery_slot_name"];
+        if(!timeSlot){
+            timeSlot = [dict getValueForKey:@"delivery_slot_str"];
+        }
+        
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        NSDate *date = [formatter dateFromString:dateString];
+        
+        self.time = date;
+        if(timeSlot)
+            self.timeString = timeSlot;
     }
-    
-    NSString *timeSlot = [dict getValueForKey:@"delivery_slot_name"];
-    if(!timeSlot){
-        timeSlot = [dict getValueForKey:@"delivery_slot_str"];
+    @catch (NSException *exception) {
     }
-    
-    NSDateFormatter *formatter = [NSDateFormatter new];
-    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSDate *date = [formatter dateFromString:dateString];
-    
-    self.time = date;
-    if(timeSlot)
-        self.timeString = timeSlot;
 }
 
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions{

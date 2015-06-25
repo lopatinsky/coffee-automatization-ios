@@ -86,6 +86,9 @@
     for(NSDictionary *modifierDictionary in positionDictionary[@"single_modifiers"]){
         [self.singleModifiers addObject:[DBMenuPositionModifier singleModifierFromDictionary:modifierDictionary]];
     }
+    [self.singleModifiers sortUsingComparator:^NSComparisonResult(DBMenuPositionModifier *obj1, DBMenuPositionModifier *obj2) {
+        return [@(obj1.order) compare:@(obj2.order)];
+    }];
 }
 
 - (BOOL)hasImage{

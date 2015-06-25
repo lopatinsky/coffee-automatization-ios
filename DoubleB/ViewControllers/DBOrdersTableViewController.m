@@ -38,6 +38,8 @@
 - (instancetype)init {
     self = [super initWithNibName:nil bundle:nil];
     self.title = NSLocalizedString(@"Заказы", nil);
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     return self;
 }
 
