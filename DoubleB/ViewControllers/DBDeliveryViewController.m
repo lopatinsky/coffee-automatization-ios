@@ -59,7 +59,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) NSArray *addressSuggestions;
 @property (strong, nonatomic) DBShippingManager *shippingManager;
 @property (nonatomic) BOOL keyboardIsHidden;
-@property (nonatomic) KeyboardStatus keyboardStatus;
 
 @end
 
@@ -69,7 +68,6 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     
     self.shippingManager = [DBShippingManager sharedManager];
-    self.keyboardStatus = NoKeyboard;
     
     if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
@@ -113,7 +111,7 @@ typedef enum : NSUInteger {
 
 - (void)reload{
     self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
-    self.streetTextField.text = self.shippingManager.selectedAddress.formattedShortAddressString;
+    self.streetTextField.text = [self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeShort];
     if(self.streetTextField.text.length > 0){
         self.streetIndicatorView.hidden = YES;
     } else {
@@ -195,108 +193,57 @@ typedef enum : NSUInteger {
     self.keyboardIsHidden = YES;
 }
 
+- (void)switchToCompactMode{
+    [UIView animateWithDuration:0.1 animations:^{
+        self.constraintCityViewHeight.constant = 0.f;
+        self.constraintCommentViewHeight.constant = 0.f;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)switchToFullMode{
+    [UIView animateWithDuration:0.1 animations:^{
+        self.constraintCityViewHeight.constant = self.initialCityViewHeight;
+        self.constraintCommentViewHeight.constant = self.initialCommentViewHeight;
+        [self.view layoutIfNeeded];
+    }];
+}
+
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    switch (self.keyboardStatus) {
-        case NoKeyboard:
-            [self.delegate keyboardWillAppear];
-            if (textField == self.streetTextField) {
-                self.keyboardStatus = StreetKeyboard;
-                
-                self.addressSuggestions = @[];
-                [self.addressSuggestionsTableView reloadData];
-                self.addressSuggestionsTableView.hidden = NO;
-                
-                [UIView animateWithDuration:0.1 animations:^{
-                    self.constraintCityViewHeight.constant = 0.f;
-                    self.constraintCommentViewHeight.constant = 0.f;
-                    [self.view layoutIfNeeded];
-                }];
-            } else if (textField == self.apartmentTextField) {
-                self.keyboardStatus = StreetKeyboard;
-                
-                [UIView animateWithDuration:0.1 animations:^{
-                    self.constraintCityViewHeight.constant = self.initialCityViewHeight;
-                    self.constraintCommentViewHeight.constant = self.initialCommentViewHeight;
-                    [self.view layoutIfNeeded];
-                }];
-            } else if (textField == self.commentTextField) {
-                self.keyboardStatus = Commentkeyboard;
-            }
-            break;
-        case StreetKeyboard:
-            if (textField == self.streetTextField) {
-                self.addressSuggestions = @[];
-                [self.addressSuggestionsTableView reloadData];
-                self.addressSuggestionsTableView.hidden = NO;
-            } else if (textField == self.commentTextField) {
-                self.keyboardStatus = Commentkeyboard;
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y - 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
-            }
-            break;
-        case Commentkeyboard:
-            if (textField == self.streetTextField) {
-                self.keyboardStatus = StreetKeyboard;
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
-                
-                self.addressSuggestions = @[];
-                [self.addressSuggestionsTableView reloadData];
-                self.addressSuggestionsTableView.hidden = NO;
-            } else if (textField == self.apartmentTextField) {
-                self.keyboardStatus = StreetKeyboard;
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
-            }
-            break;
-        default:
-            break;
+    [self.delegate keyboardWillAppear];
+    if (textField == self.streetTextField) {
+        self.addressSuggestions = @[];
+        [self.addressSuggestionsTableView reloadData];
+        self.addressSuggestionsTableView.hidden = NO;
+        
+        [self switchToCompactMode];
     }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    switch (self.keyboardStatus) {
-        case NoKeyboard:
-            break;
-        case StreetKeyboard:
-            [self.delegate keyboardWillDisappear];
-            if (textField == self.streetTextField) {
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
-                
-                if ([textField.text isEqualToString:@""]) {
-                    self.streetIndicatorView.hidden = NO;
-                } else {
-                    self.streetIndicatorView.hidden = YES;
-                }
-            } else if (textField == self.apartmentTextField) {
-                [UIView animateWithDuration:0.1 animations:^{
-                    [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 44, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-                }];
-                [self.shippingManager setApartment:self.apartmentTextField.text];
-            }
-            break;
-        case Commentkeyboard: {
-            [UIView animateWithDuration:0.1 animations:^{
-                [self.deliveryView setFrame:CGRectMake(self.deliveryView.frame.origin.x, self.deliveryView.frame.origin.y + 88, self.deliveryView.frame.size.width, self.deliveryView.frame.size.height)];
-            }];
-            
-            if ([textField.text isEqualToString:@""]) {
-                self.commentIndicatorView.hidden = NO;
-            } else {
-                self.commentIndicatorView.hidden = YES;
-            }
-            break;
+    [self switchToFullMode];
+    
+    [self.delegate keyboardWillDisappear];
+    if(textField == self.streetTextField){
+        if ([textField.text isEqualToString:@""]) {
+            self.streetIndicatorView.hidden = NO;
+        } else {
+            self.streetIndicatorView.hidden = YES;
         }
-        default:
-            break;
     }
-    self.keyboardStatus = NoKeyboard;
+    
+    if (textField == self.apartmentTextField) {
+        [self.shippingManager setApartment:self.apartmentTextField.text];
+    }
+    
+    if(textField == self.commentTextField){
+        if ([textField.text isEqualToString:@""]) {
+            self.commentIndicatorView.hidden = NO;
+        } else {
+            self.commentIndicatorView.hidden = YES;
+        }
+    }
 }
 
 - (void)textFieldDidChange:(UITextField *)sender {
@@ -334,7 +281,7 @@ typedef enum : NSUInteger {
     self.addressSuggestionsTableView.hidden = YES;
     [self.delegate keyboardWillDisappear];
     
-    [GANHelper analyzeEvent:@"confirm_pressed" label:self.shippingManager.selectedAddress.formattedFullAddressString category:ADDRESS_SCREEN];
+    [GANHelper analyzeEvent:@"confirm_pressed" label:[self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull] category:ADDRESS_SCREEN];
     
     return YES;
 }
@@ -387,7 +334,7 @@ typedef enum : NSUInteger {
     }
     
     DBShippingAddress *suggestion = self.addressSuggestions[indexPath.row];
-    cell.textLabel.text = suggestion.formattedShortAddressString;
+    cell.textLabel.text = [suggestion formattedAddressString:DBAddressStringModeShort];
    
     return cell;
 }
@@ -407,7 +354,7 @@ typedef enum : NSUInteger {
         self.addressSuggestionsTableView.hidden = YES;
     }
     
-    [GANHelper analyzeEvent:@"autocomplete_list_selected" label:self.shippingManager.selectedAddress.formattedFullAddressString category:ADDRESS_SCREEN];
+    [GANHelper analyzeEvent:@"autocomplete_list_selected" label:[self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull] category:ADDRESS_SCREEN];
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {

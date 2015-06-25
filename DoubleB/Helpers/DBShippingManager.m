@@ -206,51 +206,28 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     return @{@"address": address, @"coordinates": coordinates};
 }
 
-- (NSString *)formattedShortAddressString{
+- (NSString *)formattedAddressString:(DBAddressStringMode)mode{
     NSString *result = @"";
     
-    if(_address.length > 0){
-        result = [result stringByAppendingString:_address];
-        
-        if(_home.length > 0){
-            result = [result stringByAppendingString:[NSString stringWithFormat:@", %@", _home]];
-        }
-    }
-    
-    return result;
-}
-
-- (NSString *)formattedFullAddressString{
-    NSString *result = @"";
-    if(_address.length > 0){
-        result = [result stringByAppendingString:_address];
-        
-        if(_home.length > 0){
-            result = [result stringByAppendingString:[NSString stringWithFormat:@", %@", _home]];
-            
-            if(_apartment.length > 0){
-                result = [result stringByAppendingString:[NSString stringWithFormat:@" - %@", _apartment]];
-            }
-        }
-    }
-    
-    return result;
-}
-
-- (NSString *)formattedWholeAddressString{
-    NSString *result = @"";
-    if(_city.length > 0){
-        result = [result stringByAppendingString:_city];
+    if(mode >= DBAddressStringModeShort){
         if(_address.length > 0){
-            result = [result stringByAppendingString:[NSString stringWithFormat:@", %@", _address]];
+            result = [NSString stringWithFormat:@"%@, ", _address];
             
             if(_home.length > 0){
-                result = [result stringByAppendingString:[NSString stringWithFormat:@", %@", _home]];
-                
-                if(_apartment.length > 0){
-                    result = [result stringByAppendingString:[NSString stringWithFormat:@" - %@", _apartment]];
-                }
+                result = [NSString stringWithFormat:@"%@%@",result, _home];
             }
+        }
+    }
+    
+    if(mode >= DBAddressStringModeNormal){
+        if(_home.length > 0 && _apartment.length > 0){
+            result = [NSString stringWithFormat:@"%@ - %@", result, _apartment];
+        }
+    }
+    
+    if(mode >= DBAddressStringModeFull){
+        if(_city.length > 0){
+            result = [NSString stringWithFormat:@"%@, %@", _city, result];
         }
     }
     

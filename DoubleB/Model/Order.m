@@ -41,7 +41,7 @@
     // Delivery
     self.deliveryType = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
     if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        self.shippingAddress = [DBShippingManager sharedManager].selectedAddress.formattedWholeAddressString;
+        self.shippingAddress = [[DBShippingManager sharedManager].selectedAddress formattedAddressString:DBAddressStringModeFull];
     } else {
         self.venue = [OrderManager sharedManager].venue;
     }
@@ -78,7 +78,7 @@
     self.deliveryType = dict[@"delivery_type"];
     if([self.deliveryType intValue] == DeliveryTypeIdShipping){
         DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
-        self.shippingAddress = address.formattedWholeAddressString;
+        self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
     } else {
         self.venue = [Venue venueById:dict[@"venue_id"]];
     }

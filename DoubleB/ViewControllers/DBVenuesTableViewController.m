@@ -26,16 +26,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.picker = [UIPickerView new];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Точки", nil);
+    
+    self.picker = [UIPickerView new];
     
     self.tableView.rowHeight = 73;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
     [self.tableView setSeparatorColor:[UIColor db_defaultColor]];
     
-    self.view.backgroundColor = [UIColor db_backgroundColor];
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];

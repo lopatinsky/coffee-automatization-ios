@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
+    DBAddressStringModeShort = 0,
+    DBAddressStringModeNormal,
+    DBAddressStringModeFull
+};
+
 extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 
 @interface DBShippingAddress : NSObject
@@ -21,13 +27,12 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, strong) NSString *comment;
 
 @property (nonatomic) BOOL valid;
-@property (nonatomic, strong) NSString * formattedWholeAddressString;
-@property (nonatomic, strong) NSString * formattedFullAddressString;
-@property (nonatomic, strong) NSString * formattedShortAddressString;
 @property (nonatomic, strong) NSDictionary *jsonRepresentation;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 - (void)clear;
+
+- (NSString *)formattedAddressString:(DBAddressStringMode)mode;
 @end;
 
 @interface DBShippingManager : NSObject
