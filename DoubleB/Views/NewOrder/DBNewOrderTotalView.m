@@ -24,6 +24,10 @@
                                      forKeyPath:@"totalDiscount"
                                         options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
                                         context:nil];
+    [[DBPromoManager sharedManager] addObserver:self
+                                     forKeyPath:@"shippingPrice"
+                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
+                                        context:nil];
     
     [self reloadTotal];
 }
@@ -31,19 +35,20 @@
 - (void)dealloc{
     [[OrderManager sharedManager] removeObserver:self forKeyPath:@"totalPrice"];
     [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"totalDiscount"];
+    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"shippingPrice"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context{
-    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"totalDiscount"]){
+    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"totalDiscount"] || [keyPath isEqualToString:@"shippingPrice"]){
         [self reloadTotal];
     }
 }
 
 - (void)reloadTotal{
-    double actualTotal = [OrderManager sharedManager].totalPrice - [DBPromoManager sharedManager].totalDiscount;
+    double actualTotal = [OrderManager sharedManager].totalPrice - [DBPromoManager sharedManager].totalDiscount + [DBPromoManager sharedManager].shippingPrice;
     NSString *actualTotalString = [NSString stringWithFormat:@"%.0f %@", actualTotal, [Compatibility currencySymbol]];
     
     NSString *oldTotalString;

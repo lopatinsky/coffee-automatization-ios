@@ -16,9 +16,9 @@
 "NoInternetConnectionErrorMessage" = "Sorry, check your internet connection and try again";
 
 "р." = "rub.";
-"г." = "g.";
-"ккал." = "kcal.";
-"мл." = "ml.";
+"г" = "g";
+"ккал" = "kcal";
+"мл" = "ml";
 
 "Точки самовывоза" = "Venues";
 "Адрес доставки" = "Shipping address";

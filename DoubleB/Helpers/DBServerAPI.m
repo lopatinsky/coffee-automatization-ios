@@ -378,6 +378,9 @@
     // Total
     params[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
     
+    // Shipping price
+    params[@"delivery_sum"] = @([DBPromoManager sharedManager].shippingPrice);
+    
     // Payment
     if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
         params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
@@ -427,7 +430,7 @@
     [self assembleTimeIntoParams:params];
     
     // Delivery Type
-    [self assembleDeliveryInfoIntoParams:params encode:NO];
+    [self assembleDeliveryInfoIntoParams:params encode:YES];
     
     // Device type
     params[@"device_type"] = @(0);

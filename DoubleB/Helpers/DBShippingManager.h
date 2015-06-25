@@ -10,7 +10,8 @@
 #import <CoreLocation/CoreLocation.h>
 
 typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
-    DBAddressStringModeShort = 0,
+    DBAddressStringModeAutocomplete = 0,
+    DBAddressStringModeShort,
     DBAddressStringModeNormal,
     DBAddressStringModeFull
 };

@@ -57,7 +57,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
@@ -189,11 +189,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
-    [self startUpdatingPromoInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self startUpdatingPromoInfo];
     
     [_orderManager reloadTotal];
     
@@ -743,8 +744,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         self.orderFooter.labelAddress.text = venue.title;
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
         [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
-        
-        [self startUpdatingPromoInfo];
     } else {
         self.orderFooter.labelAddress.textColor = [UIColor orangeColor];
         self.orderFooter.labelAddress.text = NSLocalizedString(@"Ошибка определения локации", nil);
@@ -759,16 +758,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (IBAction)clickAddress:(id)sender {
     [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
     
-    DBAddressViewController *addressController = [[DBAddressViewController alloc] initWithDelegate:self];
+    DBAddressViewController *addressController = [DBAddressViewController new];
     addressController.view.frame = [[UIScreen mainScreen] bounds];
     addressController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:addressController animated:YES];
-}
-
-- (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
-    [self setVenue:venue];
-    [self.orderFooter.activityIndicator stopAnimating];
 }
 
 
@@ -1041,7 +1035,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)cardsControllerDidChoosePaymentItem:(DBCardsViewController *)controller{
-    [self startUpdatingPromoInfo];
 }
 
 

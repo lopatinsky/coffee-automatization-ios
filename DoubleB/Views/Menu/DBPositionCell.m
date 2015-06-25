@@ -68,7 +68,7 @@
         if(position.weight == 0){
             self.weightLabel.hidden = YES;
         } else {
-            self.weightLabel.text = [NSString stringWithFormat:@"%.0f %@", position.weight, NSLocalizedString(@"г.", nil)];
+            self.weightLabel.text = [NSString stringWithFormat:@"%.0f %@", position.weight, NSLocalizedString(@"г", nil)];
             self.weightLabel.hidden = NO;
         }
         
