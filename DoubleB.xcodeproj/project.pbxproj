@@ -14271,7 +14271,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "7662a362-13a1-4cf5-b731-d19777636d76";
+				PROVISIONING_PROFILE = "cc76c5ca-c269-49c1-b929-0bda89769beb";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -14303,7 +14303,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "285fa27c-0e38-4725-992e-2927ca8986b0";
+				PROVISIONING_PROFILE = "ef295c08-08ef-4e7b-bf87-fd9fdf11a309";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
