@@ -6506,8 +6506,8 @@
 		7EB2D2B61B3C35C0009405C6 /* 7Donuts */ = {
 			isa = PBXGroup;
 			children = (
-				7EB2D2B71B3C35C0009405C6 /* 7Donuts-info.plist */,
 				7EB2D2B81B3C35C0009405C6 /* AdditionalResources */,
+				7EB2D2B71B3C35C0009405C6 /* 7Donuts-info.plist */,
 				7EB2D2B91B3C35C0009405C6 /* CompanyInfo.plist */,
 				7EB2D2BA1B3C35C0009405C6 /* InfoPlist.strings */,
 				7EB2D2BC1B3C35C0009405C6 /* Images-7Donuts.xcassets */,
@@ -14271,7 +14271,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "cc76c5ca-c269-49c1-b929-0bda89769beb";
+				PROVISIONING_PROFILE = "ffacc7b3-63a3-4fe7-bdcd-c1918baad951";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -14303,7 +14303,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "ef295c08-08ef-4e7b-bf87-fd9fdf11a309";
+				PROVISIONING_PROFILE = "cc76c5ca-c269-49c1-b929-0bda89769beb";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

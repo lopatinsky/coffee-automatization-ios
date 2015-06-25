@@ -170,10 +170,6 @@
             
             // Show shipping total in promos list
             self.shippingPrice = [[response getValueForKey:@"delivery_sum"] doubleValue];
-            NSString *shippingTotal = [response getValueForKey:@"delivery_sum_str"];
-            if(shippingTotal.length > 0){
-                [globalPromoMessages insertObject:shippingTotal atIndex:0];
-            }
             
             _promos = globalPromoMessages;
             _errors = globalErrorsMessages;

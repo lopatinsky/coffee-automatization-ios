@@ -103,6 +103,7 @@ typedef enum : NSUInteger {
 
 - (IBAction)showPickerWithCities:(id)sender {
     self.cityPickerView.items = [self.shippingManager arrayOfCities];
+    self.cityPickerView.selectedItem = [[self.shippingManager arrayOfCities] indexOfObject:self.shippingManager.selectedAddress.city];
     [self.cityPickerView showOnView:self.navigationController.view];
     [GANHelper analyzeEvent:@"city_spinner_show" category:ADDRESS_SCREEN];
 }

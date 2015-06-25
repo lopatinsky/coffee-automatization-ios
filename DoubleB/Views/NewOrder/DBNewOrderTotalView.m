@@ -16,6 +16,8 @@
 - (void)awakeFromNib{
     self.labelTotal.textColor = [UIColor db_defaultColor];
     
+    self.labelShippingTotal.textColor = [UIColor db_defaultColor];
+    
     [[OrderManager sharedManager] addObserver:self
                                    forKeyPath:@"totalPrice"
                                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
@@ -67,6 +69,14 @@
     self.labelTotal.text = [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Итого", nil)];
     self.labelOldTotal.attributedText = totalString;
     self.labelActualTotal.text = actualTotalString;
+    
+    double shippingTotal = [DBPromoManager sharedManager].shippingPrice;
+    if(shippingTotal > 0){
+        self.labelShippingTotal.hidden = NO;
+        self.labelShippingTotal.text = [NSString stringWithFormat:@"(%@: %.0f%@)", NSLocalizedString(@"Стоимость доставки", nil), shippingTotal, [Compatibility currencySymbol]];
+    } else {
+        self.labelShippingTotal.hidden = YES;
+    }
 }
 
 - (void)startUpdating{
