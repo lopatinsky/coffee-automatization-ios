@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C4605D3E-A876-4F59-AA83-474F5BA6447B" : 0,
+    "A075F5235577D80DA39283B40B7B311EF95DC08B" : 0,
+    "ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D889CDC4-5628-4A7F-95B6-26700763579C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C4605D3E-A876-4F59-AA83-474F5BA6447B" : "DoubleB",
+    "A075F5235577D80DA39283B40B7B311EF95DC08B" : "doubleb-ios",
+    "ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451" : "coffee-automatization-ios"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DoubleB",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DoubleB.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/empatika\/doubleb-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A075F5235577D80DA39283B40B7B311EF95DC08B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/empatika\/coffee-automatization-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "ACDFE601D4E071362F6D9FB4FF8AFDEF7B772451"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/bitbucket.org\/empatika\/doubleb-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C4605D3E-A876-4F59-AA83-474F5BA6447B"
+    }
+  ]
+}
