@@ -2580,10 +2580,6 @@
 		CB5AFD721B27209A00904BF7 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		CB5AFD731B27209A00904BF7 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		CB5AFD741B27209A00904BF7 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
-		CB5AFD891B27212C00904BF7 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD7F1B27212C00904BF7 /* launch_480.png */; };
-		CB5AFD8A1B27212C00904BF7 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD801B27212C00904BF7 /* launch_568.png */; };
-		CB5AFD8B1B27212C00904BF7 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD811B27212C00904BF7 /* launch_667.png */; };
-		CB5AFD8C1B27212C00904BF7 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD821B27212C00904BF7 /* launch_736.png */; };
 		CB5AFD8D1B27212C00904BF7 /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD831B27212C00904BF7 /* CompanyInfo.plist */; };
 		CB5AFD8E1B27212C00904BF7 /* ElephantBoutique-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD841B27212C00904BF7 /* ElephantBoutique-info.plist */; };
 		CB5AFD8F1B27212C00904BF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB5AFD851B27212C00904BF7 /* InfoPlist.strings */; };
@@ -4597,10 +4593,6 @@
 		CB59CE051B21FC5F00E9DD30 /* alarm_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alarm_icon@2x.png"; sourceTree = "<group>"; };
 		CB59CE061B21FC5F00E9DD30 /* alarm_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alarm_icon@3x.png"; sourceTree = "<group>"; };
 		CB5AFD7B1B27209A00904BF7 /* ElephantBoutique.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ElephantBoutique.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB5AFD7F1B27212C00904BF7 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
-		CB5AFD801B27212C00904BF7 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
-		CB5AFD811B27212C00904BF7 /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
-		CB5AFD821B27212C00904BF7 /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
 		CB5AFD831B27212C00904BF7 /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
 		CB5AFD841B27212C00904BF7 /* ElephantBoutique-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ElephantBoutique-info.plist"; sourceTree = "<group>"; };
 		CB5AFD861B27212C00904BF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -5779,32 +5771,12 @@
 		CB5AFD7C1B27212C00904BF7 /* ElephantBoutique */ = {
 			isa = PBXGroup;
 			children = (
-				CB5AFD7D1B27212C00904BF7 /* AdditionalResources */,
 				CB5AFD831B27212C00904BF7 /* CompanyInfo.plist */,
 				CB5AFD841B27212C00904BF7 /* ElephantBoutique-info.plist */,
 				CB5AFD851B27212C00904BF7 /* InfoPlist.strings */,
 				CB5AFD871B27212C00904BF7 /* Images-ElephantBoutique.xcassets */,
 			);
 			path = ElephantBoutique;
-			sourceTree = "<group>";
-		};
-		CB5AFD7D1B27212C00904BF7 /* AdditionalResources */ = {
-			isa = PBXGroup;
-			children = (
-				CB5AFD7E1B27212C00904BF7 /* Resources */,
-			);
-			path = AdditionalResources;
-			sourceTree = "<group>";
-		};
-		CB5AFD7E1B27212C00904BF7 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				CB5AFD7F1B27212C00904BF7 /* launch_480.png */,
-				CB5AFD801B27212C00904BF7 /* launch_568.png */,
-				CB5AFD811B27212C00904BF7 /* launch_667.png */,
-				CB5AFD821B27212C00904BF7 /* launch_736.png */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		CB60C0901AC5666100D5E962 /* Menu */ = {
@@ -8219,7 +8191,6 @@
 				CB5AFCB91B27209A00904BF7 /* clock.png in Resources */,
 				CB5AFCBA1B27209A00904BF7 /* cash_gray.png in Resources */,
 				CB5AFCBB1B27209A00904BF7 /* card@2x.png in Resources */,
-				CB5AFD8C1B27212C00904BF7 /* launch_736.png in Resources */,
 				CB5AFCBC1B27209A00904BF7 /* DBBonusPositionsViewController.xib in Resources */,
 				CB5AFCBD1B27209A00904BF7 /* DBNewOrderViewController.xib in Resources */,
 				CB5AFCBE1B27209A00904BF7 /* share_icon@2x.png in Resources */,
@@ -8253,7 +8224,6 @@
 				CB5AFCDB1B27209A00904BF7 /* mug_orders@2x.png in Resources */,
 				CB5AFCDC1B27209A00904BF7 /* card_gray.png in Resources */,
 				CB5AFCDD1B27209A00904BF7 /* mug_orders_gray@2x.png in Resources */,
-				CB5AFD8A1B27212C00904BF7 /* launch_568.png in Resources */,
 				CB5AFCDE1B27209A00904BF7 /* SDK-Database.bundle in Resources */,
 				CB5AFCDF1B27209A00904BF7 /* modifier_minus_icon@2x.png in Resources */,
 				CB5AFCE01B27209A00904BF7 /* noimage_icon@2x.png in Resources */,
@@ -8287,7 +8257,6 @@
 				CB5AFCFA1B27209A00904BF7 /* comment.png in Resources */,
 				CB5AFCFB1B27209A00904BF7 /* visa_icon@2x.png in Resources */,
 				CB5AFCFC1B27209A00904BF7 /* alerts.png in Resources */,
-				CB5AFD891B27212C00904BF7 /* launch_480.png in Resources */,
 				CB5AFCFD1B27209A00904BF7 /* bg1334.jpg in Resources */,
 				CB5AFCFE1B27209A00904BF7 /* plus_icon@2x.png in Resources */,
 				CB5AFCFF1B27209A00904BF7 /* DBOrderViewHeader.xib in Resources */,
@@ -8300,7 +8269,6 @@
 				CB5AFD061B27209A00904BF7 /* return_cause_change_icon@2x.png in Resources */,
 				CB5AFD071B27209A00904BF7 /* modifier_arrow_icon@2x.png in Resources */,
 				CB5AFD8E1B27212C00904BF7 /* ElephantBoutique-info.plist in Resources */,
-				CB5AFD8B1B27212C00904BF7 /* launch_667.png in Resources */,
 				CB5AFD081B27209A00904BF7 /* maestro_icon@2x.png in Resources */,
 				CB5AFD0A1B27209A00904BF7 /* profile.png in Resources */,
 				CB5AFD0B1B27209A00904BF7 /* Podfile in Resources */,
