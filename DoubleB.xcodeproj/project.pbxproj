@@ -3601,7 +3601,6 @@
 		CB3BA4411B205A2400F320CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB3BA4371B205A2400F320CA /* InfoPlist.strings */; };
 		CB3BA4421B205A2400F320CA /* Images-Korjov.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB3BA4391B205A2400F320CA /* Images-Korjov.xcassets */; };
 		CB3BA4431B205A2400F320CA /* Korjov-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB3BA43A1B205A2400F320CA /* Korjov-info.plist */; };
-		CB3BA4451B207F3D00F320CA /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7193B1B14AE2400C47A33 /* launch_736.png */; };
 		CB3BA4461B207F4000F320CA /* Chikarabar-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB718FD1B14AC6800C47A33 /* Chikarabar-info.plist */; };
 		CB3BA4471B207F4400F320CA /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB718FE1B14AC6800C47A33 /* CompanyInfo.plist */; };
 		CB3BA4481B207F4700F320CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBB718FF1B14AC6800C47A33 /* InfoPlist.strings */; };
@@ -5238,6 +5237,10 @@
 		CB9782AB1B1DF811000B5625 /* DBPromosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782981B1DF74D000B5625 /* DBPromosListViewController.m */; };
 		CB9782AC1B1DF812000B5625 /* DBPromosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782981B1DF74D000B5625 /* DBPromosListViewController.m */; };
 		CB9782AD1B1DF812000B5625 /* DBPromosListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782981B1DF74D000B5625 /* DBPromosListViewController.m */; };
+		CB9BFE531B3CCFAF005B7EB6 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB719381B14AE2400C47A33 /* launch_480.png */; };
+		CB9BFE591B3CCFB5005B7EB6 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB719391B14AE2400C47A33 /* launch_568.png */; };
+		CB9BFE5A1B3CCFB5005B7EB6 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7193A1B14AE2400C47A33 /* launch_667.png */; };
+		CB9BFE5B1B3CCFB5005B7EB6 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CBB7193B1B14AE2400C47A33 /* launch_736.png */; };
 		CBB042DA1B0CAE2B00901173 /* gift_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B81B0C97660032B59B /* gift_icon@2x.png */; };
 		CBB042DB1B0CAE2C00901173 /* gift_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B81B0C97660032B59B /* gift_icon@2x.png */; };
 		CBB042DC1B0CAE2C00901173 /* gift_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B81B0C97660032B59B /* gift_icon@2x.png */; };
@@ -8887,6 +8890,9 @@
 					CB60C0A31AC5AD2600D5E962 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
+					CB64FDFC1B317F760011CEEC = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
 					CB64FFAA1B31B7CF0011CEEC = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
@@ -10623,6 +10629,7 @@
 				CB1433311B0F1BBB00DD50C7 /* back_arrow_icon@2x.png in Resources */,
 				CB1433321B0F1BBB00DD50C7 /* promo_pic.png in Resources */,
 				CB1433331B0F1BBB00DD50C7 /* DBAdvertViewController.xib in Resources */,
+				CB9BFE531B3CCFAF005B7EB6 /* launch_480.png in Resources */,
 				CB1433341B0F1BBB00DD50C7 /* feedback@2x.png in Resources */,
 				CB59CE0E1B2200A900E9DD30 /* DBNewOrderItemErrorView.xib in Resources */,
 				7E21EC0B1B285FBC00AF7859 /* DBAddressViewController.xib in Resources */,
@@ -10667,7 +10674,6 @@
 				CB14335C1B0F1BBB00DD50C7 /* e-mail.png in Resources */,
 				CB14335D1B0F1BBB00DD50C7 /* visa_icon@3x.png in Resources */,
 				CB14335F1B0F1BBB00DD50C7 /* orders_icon_grey@3x.png in Resources */,
-				CB3BA4451B207F3D00F320CA /* launch_736.png in Resources */,
 				CB1433601B0F1BBB00DD50C7 /* gift_icon@2x.png in Resources */,
 				CB1433611B0F1BBB00DD50C7 /* DBPositionViewController.xib in Resources */,
 				CB1433621B0F1BBB00DD50C7 /* add_position.png in Resources */,
@@ -10675,6 +10681,7 @@
 				CB1433641B0F1BBB00DD50C7 /* category_selection_icon@2x.png in Resources */,
 				CB1433651B0F1BBB00DD50C7 /* venues_icon_grey@3x.png in Resources */,
 				CB9782A81B1DF80B000B5625 /* DBPromoCell.xib in Resources */,
+				CB9BFE5B1B3CCFB5005B7EB6 /* launch_736.png in Resources */,
 				CB1433661B0F1BBB00DD50C7 /* DBOrderReturnView.xib in Resources */,
 				CB1433671B0F1BBB00DD50C7 /* rules.html in Resources */,
 				CB1433681B0F1BBB00DD50C7 /* VenueViewController.xib in Resources */,
@@ -10698,6 +10705,7 @@
 				CB1433771B0F1BBB00DD50C7 /* arrow@2x.png in Resources */,
 				CB1433781B0F1BBB00DD50C7 /* heart@2x.png in Resources */,
 				CB1433791B0F1BBB00DD50C7 /* share@2x.png in Resources */,
+				CB9BFE591B3CCFB5005B7EB6 /* launch_568.png in Resources */,
 				CB14337A1B0F1BBB00DD50C7 /* not_paid.png in Resources */,
 				CB14337B1B0F1BBB00DD50C7 /* return_cause_venue_icon@2x.png in Resources */,
 				CB14337C1B0F1BBB00DD50C7 /* close_white@2x.png in Resources */,
@@ -10720,6 +10728,7 @@
 				CB14338D1B0F1BBB00DD50C7 /* DBSettingsCell.xib in Resources */,
 				CB14338E1B0F1BBB00DD50C7 /* not_paid@2x.png in Resources */,
 				CB14338F1B0F1BBB00DD50C7 /* canceled.png in Resources */,
+				CB9BFE5A1B3CCFB5005B7EB6 /* launch_667.png in Resources */,
 				CB1433901B0F1BBB00DD50C7 /* canceled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -15869,8 +15878,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -15885,7 +15894,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "126ba170-2f93-4e2d-9524-266ee9a6f3ea";
+				PROVISIONING_PROFILE = "ffacc7b3-63a3-4fe7-bdcd-c1918baad951";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -15902,7 +15911,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -15918,7 +15927,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeSnack;
-				PROVISIONING_PROFILE = "7662a362-13a1-4cf5-b731-d19777636d76";
+				PROVISIONING_PROFILE = "ffacc7b3-63a3-4fe7-bdcd-c1918baad951";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -16623,7 +16632,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -16638,7 +16647,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Chikarabar;
-				PROVISIONING_PROFILE = "cd272edd-0996-47aa-8b8f-c3a33c2faa0e";
+				PROVISIONING_PROFILE = "6de02a73-0f78-411a-9c45-ea4ff5edfbee";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16671,7 +16680,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Chikarabar;
-				PROVISIONING_PROFILE = "36f5247a-9c3c-4e16-a271-61f006bc9891";
+				PROVISIONING_PROFILE = "6de02a73-0f78-411a-9c45-ea4ff5edfbee";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -16816,8 +16825,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -16832,7 +16841,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Korjov;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "82c2d62e-d4aa-496c-bf74-404d9e232116";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16849,8 +16858,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -16865,7 +16874,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Korjov;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ac1340f5-543c-4171-ba7b-1bb26f5796da";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -17204,8 +17213,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -17220,7 +17229,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = PaffPoint;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5fd46822-7006-4cd4-aadc-ccf706f12571";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -17237,8 +17246,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -17253,7 +17262,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = PaffPoint;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5fd46822-7006-4cd4-aadc-ccf706f12571";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -17301,8 +17310,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -17317,7 +17326,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "d62d1b9d-e450-499d-9626-3d38901a2a27";
+				PROVISIONING_PROFILE = "9ab8d793-3494-4b62-81ce-2caacfa05c51";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -17334,7 +17343,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -17350,7 +17359,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "043c9e98-c3f6-46b8-9f24-3ddbbda45004";
+				PROVISIONING_PROFILE = "9ab8d793-3494-4b62-81ce-2caacfa05c51";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

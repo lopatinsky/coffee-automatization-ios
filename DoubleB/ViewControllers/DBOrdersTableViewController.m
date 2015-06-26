@@ -202,7 +202,9 @@
                 order.status = (OrderStatus)[notification.userInfo[@"order_status"] intValue];
                 
                 long long timestamp = [notification.userInfo[@"timestamp"] longLongValue];
-                order.time = [NSDate dateWithTimeIntervalSince1970:timestamp];
+                if(timestamp > 0){
+                    order.time = [NSDate dateWithTimeIntervalSince1970:timestamp];
+                }
                 
                 [[CoreDataHelper sharedHelper] save];
                 

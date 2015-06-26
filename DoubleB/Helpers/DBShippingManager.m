@@ -181,9 +181,12 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     _home = [dict[@"address"] getValueForKey:@"home"] ?: @"";
     _apartment = [dict[@"address"] getValueForKey:@"flat"] ?: @"";
     
-    double lat = [dict[@"coordinates"][@"lat"] doubleValue];
-    double lon = [dict[@"coordinates"][@"lon"] doubleValue];
-    _location = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+    NSDictionary *coordinates = [dict getValueForKey:@"coordinates"];
+    if(coordinates){
+        double lat = [[coordinates getValueForKey:@"lat"] doubleValue];
+        double lon = [[coordinates getValueForKey:@"lon"] doubleValue];
+        _location = [[CLLocation alloc] initWithLatitude:lat longitude:lon];
+    }
     
     _comment = [dict getValueForKey:@"comment"] ?: @"";
     
