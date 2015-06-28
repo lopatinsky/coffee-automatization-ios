@@ -2370,6 +2370,10 @@
 		7EDB5A671B32F79D00723DF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5D1B32F79D00723DF9 /* InfoPlist.strings */; };
 		7EDB5A681B32F79D00723DF9 /* FishRice-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5F1B32F79D00723DF9 /* FishRice-info.plist */; };
 		7EDB5A691B32F79D00723DF9 /* Images-FishRice.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A601B32F79D00723DF9 /* Images-FishRice.xcassets */; };
+		CB097BD21B400610003612DE /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB097BCE1B400610003612DE /* launch_480.png */; };
+		CB097BD31B400610003612DE /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB097BCF1B400610003612DE /* launch_568.png */; };
+		CB097BD41B400610003612DE /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB097BD01B400610003612DE /* launch_667.png */; };
+		CB097BD51B400610003612DE /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB097BD11B400610003612DE /* launch_736.png */; };
 		CB0B5BD81AD80C5F0094D534 /* category_selection_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD61AD80C5F0094D534 /* category_selection_icon@2x.png */; };
 		CB0B5BD91AD80C5F0094D534 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
 		CB0B5BDE1AD80CF90094D534 /* modifier_minus_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BDA1AD80CF90094D534 /* modifier_minus_icon@2x.png */; };
@@ -6215,6 +6219,10 @@
 		CB05B7961A6D321D006224BB /* mcard_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mcard_logo@2x.png"; sourceTree = "<group>"; };
 		CB05B79B1A6D369C006224BB /* DBShareHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBShareHelper.h; sourceTree = "<group>"; };
 		CB05B79C1A6D369C006224BB /* DBShareHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBShareHelper.m; sourceTree = "<group>"; };
+		CB097BCE1B400610003612DE /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
+		CB097BCF1B400610003612DE /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
+		CB097BD01B400610003612DE /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
+		CB097BD11B400610003612DE /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
 		CB0B5BD61AD80C5F0094D534 /* category_selection_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category_selection_icon@2x.png"; sourceTree = "<group>"; };
 		CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "category_selection_icon@3x.png"; sourceTree = "<group>"; };
 		CB0B5BDA1AD80CF90094D534 /* modifier_minus_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "modifier_minus_icon@2x.png"; sourceTree = "<group>"; };
@@ -7273,6 +7281,7 @@
 		7EB2D2B81B3C35C0009405C6 /* AdditionalResources */ = {
 			isa = PBXGroup;
 			children = (
+				CB097BCD1B400610003612DE /* Resources */,
 			);
 			path = AdditionalResources;
 			sourceTree = "<group>";
@@ -7732,6 +7741,17 @@
 				C775BAC7D71EB26B52F973FE /* Podfile */,
 				C3F1BDE223C3D0087AB918F8 /* Pods */,
 			);
+			sourceTree = "<group>";
+		};
+		CB097BCD1B400610003612DE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CB097BCE1B400610003612DE /* launch_480.png */,
+				CB097BCF1B400610003612DE /* launch_568.png */,
+				CB097BD01B400610003612DE /* launch_667.png */,
+				CB097BD11B400610003612DE /* launch_736.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CB0C99081ACEDA8500B1AE2F /* Modifiers */ = {
@@ -9570,6 +9590,7 @@
 				7EB2D20C1B3C3581009405C6 /* DBVenueCell.xib in Resources */,
 				7EB2D20D1B3C3581009405C6 /* bg960.jpg in Resources */,
 				7EB2D20E1B3C3581009405C6 /* venues_icon_grey@2x.png in Resources */,
+				CB097BD21B400610003612DE /* launch_480.png in Resources */,
 				7EB2D2101B3C3581009405C6 /* mug.png in Resources */,
 				7EB2D2111B3C3581009405C6 /* return_cause_time_icon@3x.png in Resources */,
 				7EB2D2121B3C3581009405C6 /* modifier_plus_icon@2x.png in Resources */,
@@ -9684,6 +9705,7 @@
 				7EB2D27E1B3C3581009405C6 /* about@2x.png in Resources */,
 				7EB2D27F1B3C3581009405C6 /* category_selection_icon@2x.png in Resources */,
 				7EB2D2801B3C3581009405C6 /* venues_icon_grey@3x.png in Resources */,
+				CB097BD51B400610003612DE /* launch_736.png in Resources */,
 				7EB2D2821B3C3581009405C6 /* DBPromoCell.xib in Resources */,
 				7EB2D2831B3C3581009405C6 /* DBOrderReturnView.xib in Resources */,
 				7EB2D2841B3C3581009405C6 /* rules.html in Resources */,
@@ -9707,6 +9729,7 @@
 				7EB2D2951B3C3581009405C6 /* heart@2x.png in Resources */,
 				7EB2D2961B3C3581009405C6 /* share@2x.png in Resources */,
 				7EB2D2971B3C3581009405C6 /* not_paid.png in Resources */,
+				CB097BD31B400610003612DE /* launch_568.png in Resources */,
 				7EB2D2981B3C3581009405C6 /* return_cause_venue_icon@2x.png in Resources */,
 				7EB2D2991B3C3581009405C6 /* close_white@2x.png in Resources */,
 				7EB2D29A1B3C3581009405C6 /* DBPositionSingleModifierCell.xib in Resources */,
@@ -9729,6 +9752,7 @@
 				7EB2D2AB1B3C3581009405C6 /* DBSettingsCell.xib in Resources */,
 				7EB2D2AC1B3C3581009405C6 /* not_paid@2x.png in Resources */,
 				7EB2D2AD1B3C3581009405C6 /* canceled.png in Resources */,
+				CB097BD41B400610003612DE /* launch_667.png in Resources */,
 				7EB2D2AE1B3C3581009405C6 /* canceled@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -15975,8 +15999,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -15991,7 +16015,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = HalkMarket;
-				PROVISIONING_PROFILE = "1028675f-12f6-4107-942f-0079315a0034";
+				PROVISIONING_PROFILE = "2162552a-9a18-4784-bde5-e507880c1cd1";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16008,7 +16032,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16072,7 +16096,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16088,7 +16112,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = "7 Donuts";
-				PROVISIONING_PROFILE = "d250fd2c-4c19-4555-b40d-7901838811b8";
+				PROVISIONING_PROFILE = "404d7643-69bc-435d-ae4f-aed79a8822d2";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16105,7 +16129,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16169,8 +16193,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -16185,7 +16209,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = DashiniPirozhki;
-				PROVISIONING_PROFILE = "8373414b-9075-425d-a28c-69c83ddda26e";
+				PROVISIONING_PROFILE = "eea805ec-fcbf-4942-9aed-e0539f12b0ac";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16631,7 +16655,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -16664,7 +16688,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -17116,8 +17140,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -17132,7 +17156,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeHostel;
-				PROVISIONING_PROFILE = "4440f1bb-5bf0-483a-993d-1d5d410299a6";
+				PROVISIONING_PROFILE = "b8b8d8c1-5dae-4a5f-8c64-ca87c2658b5b";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

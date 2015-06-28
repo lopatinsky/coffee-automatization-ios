@@ -42,6 +42,7 @@
     } else {
         self.title = NSLocalizedString(@"Оплата", nil);
     }
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.rowHeight = 50;
