@@ -16574,7 +16574,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeAutomation;
-				PROVISIONING_PROFILE = "b8b8d8c1-5dae-4a5f-8c64-ca87c2658b5b";
+				PROVISIONING_PROFILE = "02573565-029c-462c-a566-750a3c0c8a7a";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

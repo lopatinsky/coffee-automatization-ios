@@ -1,6 +1,6 @@
 /* Localized versions of Info.plist keys */
 
 "CFBundleDisplayName" = "Hulk Market";
-"NSLocationUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
-"NSLocationWhenInUseUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
-"NSLocationAlwaysUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
+"NSLocationUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших точек";
+"NSLocationWhenInUseUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших точек";
+"NSLocationAlwaysUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших точек";

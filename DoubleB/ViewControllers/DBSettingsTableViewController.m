@@ -185,7 +185,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *settingsItemInfo = self.settingsItems[indexPath.row];
+    NSDictionary *settingsItemInfo;
+    if(indexPath.row < [self.settingsItems count]){
+        settingsItemInfo = self.settingsItems[indexPath.row];
+    }
     
     NSString *event;
     
