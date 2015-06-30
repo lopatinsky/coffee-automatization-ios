@@ -9,6 +9,7 @@
 #import "DBPayPalManager.h"
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
+#import "DBCompanyInfo.h"
 
 #import "PayPalMobile.h"
 
@@ -34,9 +35,9 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
     
     _payPalConfiguration = [[PayPalConfiguration alloc] init];
     
-    _payPalConfiguration.merchantName = @"Ultramagnetic Omega Supreme";
-    _payPalConfiguration.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://www.omega.supreme.example/privacy"];
-    _payPalConfiguration.merchantUserAgreementURL = [NSURL URLWithString:@"https://www.omega.supreme.example/user_agreement"];
+    _payPalConfiguration.merchantName = [DBCompanyInfo sharedInstance].applicationName;
+    _payPalConfiguration.merchantPrivacyPolicyURL = [DBCompanyInfo db_payPalPrivacyPolicy];
+    _payPalConfiguration.merchantUserAgreementURL = [DBCompanyInfo db_payPalUserAgreement];
     
     [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
     

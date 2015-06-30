@@ -92,6 +92,20 @@
     return [NSURL URLWithString:urlString];
 }
 
+#pragma mark - PayPal
+
++ (NSURL *)db_payPalPrivacyPolicy{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"docs/paypal_privacy_policy.html"];
+    
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL *)db_payPalUserAgreement{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"docs/paypal_user_agreement.html"];
+    
+    return [NSURL URLWithString:urlString];
+}
+
 #pragma mark - Delivery
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId{

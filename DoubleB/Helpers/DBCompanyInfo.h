@@ -33,6 +33,10 @@
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;
 
+// Only for paypal
++ (NSURL *)db_payPalPrivacyPolicy;
++ (NSURL *)db_payPalUserAgreement;
+
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId;
 - (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId;
 
