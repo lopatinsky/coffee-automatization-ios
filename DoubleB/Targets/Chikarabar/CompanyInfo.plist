@@ -4,11 +4,18 @@
 <dict>
 	<key>CompanyChoiceEnabled</key>
 	<false/>
+	<key>Parse</key>
+	<dict>
+		<key>applicationId</key>
+		<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
+		<key>clientKey</key>
+		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+	</dict>
 	<key>CompanyGAKey</key>
-	<string>UA-62529990-5</string>
+	<string>UA-62529990-30</string>
 	<key>CompanyColor</key>
-	<integer>4285867301</integer>
+	<integer>4293939491</integer>
 	<key>BaseUrl</key>
-	<string>http://coffeehostel.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://chikarabar.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

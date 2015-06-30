@@ -37,6 +37,8 @@ public class DBCompaniesViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.title = NSLocalizedString("Список компаний", comment: "")
+        self.titleLabel.text = NSLocalizedString("Список компаний", comment: "")
     }
     
     func requestCompanies() {
@@ -49,7 +51,7 @@ public class DBCompaniesViewController: UIViewController {
     }
     
     public override func prefersStatusBarHidden() -> Bool {
-        return true
+        return firstLaunch
     }
 }
 
@@ -70,6 +72,7 @@ extension DBCompaniesViewController: UITableViewDelegate {
         let namespace = self.companies[indexPath.row].objectForKey("namespace") as! String
         DBAPIClient.sharedClient()!.setValue(namespace, forHeader: "namespace")
         
+        DBCompanyInfo.sharedInstance().currentCompanyName = self.companies[indexPath.row].objectForKey("name") as! String
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
             self.preloadData()
@@ -81,13 +84,16 @@ extension DBCompaniesViewController: UITableViewDelegate {
     
     func preloadData() {
         DBServerAPI.registerUser(nil)
+        Venue.dropAllVenues()
         Venue.fetchAllVenuesWithCompletionHandler { (venues) -> Void in
             let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
             delegate.saveContext()
         }
         DBMenu.sharedInstance().updateMenuForVenue(nil, remoteMenu: nil)
-        Order.dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions()
+        Order.dropAllOrders()
+        DBPromoManager.sharedManager().clear()
         DBPromoManager.sharedManager().updateInfo()
+        DBCompanyInfo.sharedInstance()
         DBCompanyInfo.sharedInstance().updateInfo()
     }
 }

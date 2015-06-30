@@ -52,7 +52,12 @@
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
     self.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
-    self.labelAddress.text = [self.order.venue address];
+    
+    if([self.order.deliveryType intValue] == DeliveryTypeIdShipping){
+        self.labelAddress.text = self.order.shippingAddress;
+    } else {
+        self.labelAddress.text = [self.order.venue address];
+    }
     
     [self.venueImageView templateImageWithName:@"venue.png"];
 }

@@ -9,6 +9,8 @@
 #import "DBAPIClient.h"
 #import "DBCompanyInfo.h"
 
+#define kDBCompanyHeader @"db_company_header"
+
 @interface DBAPIClient()
 
 @property (strong, nonatomic) AFHTTPRequestSerializer *reqSerializer;
@@ -32,6 +34,7 @@
         self.reqSerializer = [AFHTTPRequestSerializer serializer];
         [self.reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [self.reqSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+        [self enableCompanyHeader];
         [self setRequestSerializer:self.reqSerializer];
         [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
     }
@@ -42,9 +45,25 @@
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
 }
 
+- (void)enableCompanyHeader {
+    if (self.reqSerializer) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kDBCompanyHeader]) {
+            [self.reqSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:kDBCompanyHeader] forHTTPHeaderField:@"namespace"];
+        }
+    }
+}
+
+- (void)disableCompanyHeader {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:nil forHTTPHeaderField:@"namespace"];
+    }
+}
+
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
     if (self.reqSerializer) {
         [self.reqSerializer setValue:value forHTTPHeaderField:header];
+        [[NSUserDefaults standardUserDefaults] setObject:value forKey:kDBCompanyHeader];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

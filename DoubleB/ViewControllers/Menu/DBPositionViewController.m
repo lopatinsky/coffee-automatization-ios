@@ -85,16 +85,16 @@
     self.weightVolumeLabel.text = @"";
     
     if(self.position.weight > 0){
-        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.weight, NSLocalizedString(@"г.", nil)];
+        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.weight, NSLocalizedString(@"г", nil)];
     }
     
     if(self.position.volume > 0){
-        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.volume, NSLocalizedString(@"мл.", nil)];
+        self.weightVolumeLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.volume, NSLocalizedString(@"мл", nil)];
     }
     
     self.energyAmountLabel.text = @"";
     if(self.position.energyAmount > 0){
-        self.energyAmountLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.energyAmount, NSLocalizedString(@"ккал.", nil)];
+        self.energyAmountLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.energyAmount, NSLocalizedString(@"ккал", nil)];
     }
     
     if(self.mode == DBPositionViewControllerModeMenuPosition){

@@ -27,6 +27,12 @@
     return self;
 }
 
+- (NSString *)bundleName{
+    NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    
+    return bundleName;
+}
+
 - (void)updateInfo{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){

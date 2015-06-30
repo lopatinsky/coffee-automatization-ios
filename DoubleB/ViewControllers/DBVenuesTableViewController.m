@@ -26,16 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.picker = [UIPickerView new];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = NSLocalizedString(@"Точки", nil);
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    self.picker = [UIPickerView new];
     
     self.tableView.rowHeight = 73;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
     [self.tableView setSeparatorColor:[UIColor db_defaultColor]];
     
-    self.view.backgroundColor = [UIColor db_backgroundColor];
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
@@ -59,13 +60,10 @@
     if ([self.venues count] && !refreshControl) {
         return;
     }
-    [GANHelper analyzeEvent:@"update" category:self.eventsCategory];
+    [GANHelper analyzeEvent:@"venue_update" category:self.eventsCategory];
     
     self.venues = [Venue storedVenues];
 
-    /*if (!refreshControl) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    }*/
     if ([[LocationHelper sharedInstance] isDenied]) {
         [self fetchVenues:nil];
     } else {

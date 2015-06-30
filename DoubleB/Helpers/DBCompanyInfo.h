@@ -12,6 +12,8 @@
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
+@property(strong, nonatomic, readonly) NSString *bundleName;
+
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
 @property(strong, nonatomic, readonly) NSString *webSiteUrl;
@@ -28,7 +30,7 @@
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
-@property(strong, nonatomic, readonly) NSString *currentCompanyName;  
+@property(strong, nonatomic) NSString *currentCompanyName;
 
 - (void)updateInfo;
 

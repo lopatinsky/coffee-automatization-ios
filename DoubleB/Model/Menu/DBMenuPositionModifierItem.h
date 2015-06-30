@@ -10,7 +10,7 @@
 
 @class DBMenuPositionModifier;
 
-@interface DBMenuPositionModifierItem : NSObject<NSCopying>
+@interface DBMenuPositionModifierItem : NSObject<NSCopying, NSCoding>
 
 @property (strong, nonatomic) NSString *itemId;
 @property (strong, nonatomic) NSString *itemName;

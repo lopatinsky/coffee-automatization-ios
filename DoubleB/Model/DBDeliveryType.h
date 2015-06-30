@@ -16,6 +16,13 @@ typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
     DeliveryTypeIdTakeaway = 0
 };
 
+typedef NS_ENUM(NSUInteger, TimeMode) {
+    TimeModeTime = 1 << 0,
+    TimeModeDateTime = 1 << 1,
+    TimeModeSlots = 1 << 2,
+    TimeModeDateSlots = 1 << 3
+};
+
 
 @interface DBDeliveryType : NSObject<NSCoding>
 @property (nonatomic) DeliveryTypeId typeId;
@@ -23,13 +30,13 @@ typedef NS_ENUM(NSUInteger, DeliveryTypeId) {
 
 @property (nonatomic) double minOrderSum;
 
-@property (nonatomic, readonly) BOOL useTimePicker;
+@property (nonatomic) TimeMode timeMode;
+
 @property (nonatomic) int minTimeInterval;
 @property (nonatomic) int maxTimeInterval;
 
 @property (strong, nonatomic, readonly) NSDate *minDate;
 @property (strong, nonatomic, readonly) NSDate *maxDate;
-@property (nonatomic, readonly) BOOL onlyTime;
 
 @property (strong, nonatomic) NSArray *timeSlots;
 @property (strong, nonatomic) NSArray *timeSlotsNames;

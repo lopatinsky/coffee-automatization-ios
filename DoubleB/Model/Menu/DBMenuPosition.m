@@ -11,7 +11,7 @@
 #import "DBMenuPositionModifierItem.h"
 #import "Venue.h"
 
-@interface DBMenuPosition ()<NSCoding>
+@interface DBMenuPosition ()
 @property(strong, nonatomic) NSString *positionId;
 @property(strong, nonatomic) NSString *name;
 @property(nonatomic) NSInteger order;
@@ -86,6 +86,9 @@
     for(NSDictionary *modifierDictionary in positionDictionary[@"single_modifiers"]){
         [self.singleModifiers addObject:[DBMenuPositionModifier singleModifierFromDictionary:modifierDictionary]];
     }
+    [self.singleModifiers sortUsingComparator:^NSComparisonResult(DBMenuPositionModifier *obj1, DBMenuPositionModifier *obj2) {
+        return [@(obj1.order) compare:@(obj2.order)];
+    }];
 }
 
 - (BOOL)hasImage{
@@ -164,7 +167,7 @@
 #pragma mark - NSCoding methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
-    self = [[DBMenuPosition alloc] init];
+    self = [super init];
     if(self != nil){
         _positionId = [aDecoder decodeObjectForKey:@"positionId"];
         _name = [aDecoder decodeObjectForKey:@"name"];

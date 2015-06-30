@@ -35,11 +35,11 @@
 
 #pragma mark - Life-Cycle methods
 
-- (instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate {
-    self = [DBAddressViewController new];
-    self.delegate = delegate;
-    return self;
-}
+//- (instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate {
+//    self = [DBAddressViewController new];
+//    self.delegate = delegate;
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -98,7 +98,7 @@
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] ||
         [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
         DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
-        newController.delegate = self.delegate;
+        newController.delegate = self;
         newController.eventsCategory = VENUES_ORDER_SCREEN;
         self.controllers[@"Самовывоз"] = @{
                                             @"controller": newController,
@@ -139,9 +139,11 @@
 - (IBAction)deliveryTypeChanged:(id)sender {
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Самовывоз"]) {
         [[DBDeliverySettings sharedInstance] selectTakeout];
+        [GANHelper analyzeEvent:@"takeaway_selected" category:ORDER_SCREEN];
     }
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Доставка"]) {
         [[DBDeliverySettings sharedInstance] selectShipping];
+        [GANHelper analyzeEvent:@"shipping_selected" category:ORDER_SCREEN];
     }
     [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
 }

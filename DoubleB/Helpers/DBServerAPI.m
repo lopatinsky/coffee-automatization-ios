@@ -21,7 +21,6 @@
 #import "DBClientInfo.h"
 #import "Reachability.h"
 #import "CoreDataHelper.h"
-#import "DBMastercardPromo.h"
 #import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBShippingManager.h"
@@ -33,13 +32,16 @@
 #pragma mark - User
 
 + (void)requestCompanies:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
+    [[DBAPIClient sharedClient] disableCompanyHeader];
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 success(responseObject);
+                                [[DBAPIClient sharedClient] enableCompanyHeader];
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"FAIL");
+                                [[DBAPIClient sharedClient] enableCompanyHeader];
                             }];
 }
 
@@ -248,6 +250,8 @@
                                                        options:NSJSONWritingPrettyPrinted
                                                          error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    [GANHelper analyzeEvent:@"order_submit" category:ORDER_SCREEN];
 
     [[DBAPIClient sharedClient] POST:@"order"
                           parameters:@{@"order": jsonString}
@@ -256,32 +260,32 @@
                                  //NSLog(@"%@", responseObject);
                                  
                                  // Save order
-                                 Order *ord = [[Order alloc] init:YES];
-                                 ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
-                                 ord.total = @([[OrderManager sharedManager] totalPrice]);
-                                 ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
-                                 ord.paymentType = [[OrderManager sharedManager] paymentType];
-                                 ord.status = OrderStatusNew;
-                                 ord.venue = [OrderManager sharedManager].venue;
                                  
-                                 // Time
-                                 if([DBDeliverySettings sharedInstance].deliveryType.useTimePicker){
-                                     ord.time = [DBDeliverySettings sharedInstance].selectedTime;
-                                 } else {
-                                     NSString *dateString = [responseObject getValueForKey:@"delivery_time"];
-                                     NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
-                                     
-                                     NSDateFormatter *formatter = [NSDateFormatter new];
-                                     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-                                     NSDate *date = [formatter dateFromString:dateString];
-                                     ord.time = date;
-                                     
-                                     if(timeSlot){
-                                         ord.timeString = timeSlot;
-                                     }
-                                 }
-                                 
-                                 [[CoreDataHelper sharedHelper] save];
+                                 Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
+//                                 Order *ord = [[Order alloc] init:YES];
+//                                 ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
+//                                 ord.total = @([[OrderManager sharedManager] totalPrice]);
+//                                 ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
+//                                 ord.paymentType = [[OrderManager sharedManager] paymentType];
+//                                 ord.status = OrderStatusNew;
+//                                 ord.venue = [OrderManager sharedManager].venue;
+//                                 
+//                                 // Save Time
+//                                 NSString *timeString = [responseObject getValueForKey:@"delivery_time"];
+//                                 if(timeString){
+//                                     NSDateFormatter *formatter = [NSDateFormatter new];
+//                                     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//                                     NSDate *date = [formatter dateFromString:timeString];
+//                                     ord.time = date;
+//                                 }
+//                                 
+//                                 NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
+//                                 if(timeSlot){
+//                                     ord.timeString = timeSlot;
+//                                 }
+//                                 
+//                                 
+//                                 [[CoreDataHelper sharedHelper] save];
                                  if(success)
                                      success(ord);
                                  
@@ -291,13 +295,6 @@
                                  // Notify all about success order
                                  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:nil]];
                                  
-                                 // Notify Mastercard promo manager
-                                 if(ord.paymentType == PaymentTypeExtraType){
-                                     [[DBMastercardPromo sharedInstance] doneOrderWithMugCount:[OrderManager sharedManager].totalCount];
-                                 } else {
-                                     [[DBMastercardPromo sharedInstance] doneOrder];
-                                 }
-                                 
                                  hasOrderErrorInSession = NO;
                                  
                                  [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
@@ -306,7 +303,13 @@
                                  [Compatibility registerForNotifications];
                                  [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
                                  
-                                 [GANHelper analyzeEvent:@"order_placed"
+                                 NSString *event;
+                                 if(ord.paymentType == PaymentTypeCard){
+                                     event = @"order_card_success";
+                                 } else {
+                                     event = @"order_success";
+                                 }
+                                 [GANHelper analyzeEvent:event
                                                    label:[NSString stringWithFormat:@"%@, %@", ord.orderId, [IHSecureStore sharedInstance].clientId]
                                                 category:ORDER_SCREEN];
                                  
@@ -315,7 +318,13 @@
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
-                                 [GANHelper analyzeEvent:@"order_failed" category:ORDER_SCREEN];
+                                 NSString *event;
+                                 if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+                                     event = @"order_card_failed";
+                                 } else {
+                                     event = @"order_failed";
+                                 }
+                                 [GANHelper analyzeEvent:event category:ORDER_SCREEN];
                                  
                                  if(failure){
                                      if (error.code == NSURLErrorTimedOut || operation.response.statusCode == 0){
@@ -383,6 +392,9 @@
     // Total
     params[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
     
+    // Shipping price
+    params[@"delivery_sum"] = @([DBPromoManager sharedManager].shippingPrice);
+    
     // Payment
     if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
         params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
@@ -432,7 +444,7 @@
     [self assembleTimeIntoParams:params];
     
     // Delivery Type
-    [self assembleDeliveryInfoIntoParams:params encode:NO];
+    [self assembleDeliveryInfoIntoParams:params encode:YES];
     
     // Device type
     params[@"device_type"] = @(0);
@@ -537,23 +549,21 @@
 }
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
-    if([DBDeliverySettings sharedInstance].deliveryType.useTimePicker){
+    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         params[@"time_picker_value"] = [formatter stringFromDate:[DBDeliverySettings sharedInstance].selectedTime];
-    } else {
+    }
+    
+    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
         params[@"delivery_slot_id"] = [DBDeliverySettings sharedInstance].selectedTimeSlot.slotId;
-        
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        params[@"time_picker_value"] = [formatter stringFromDate:[NSDate date]];
     }
 }
 
 + (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
     params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
     if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress;
+        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress.jsonRepresentation;
         if(address){
             if(encode){
                 params[@"address"] = [address encodedString];

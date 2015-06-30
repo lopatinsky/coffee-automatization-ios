@@ -28,6 +28,7 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 @property (nonatomic, readonly) double modifierPrice;
 @property (nonatomic, readonly) NSInteger maxAmount;
 @property (nonatomic, readonly) NSInteger minAmount;
+@property (nonatomic, readonly) NSInteger order;
 @property (nonatomic) int selectedCount;
 
 //Only for Group modifiers

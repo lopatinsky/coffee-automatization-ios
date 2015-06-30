@@ -34,7 +34,6 @@
 #import "DBProfileViewController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBHTMLViewController.h"
-#import "DBMastercardPromo.h"
 #import "DBOrderItemCell.h"
 #import "DBOrderItemNotesCell.h"
 #import "Reachability.h"
@@ -58,7 +57,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBVenuesTableViewControllerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
@@ -103,7 +102,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.topItem.title = @"";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeTop;
@@ -190,11 +189,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
-    [self startUpdatingPromoInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [self startUpdatingPromoInfo];
     
     [_orderManager reloadTotal];
     
@@ -211,6 +211,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemCells removeAllObjects];
     
     [self.tableView reloadData];
+    if ([[OrderManager sharedManager] positionsCount] == 1) {
+        self.tableView.alwaysBounceVertical = NO;
+    } else {
+        self.tableView.alwaysBounceVertical = YES;
+    }
+    
     [self reloadTableViewHeight:NO];
     
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
@@ -243,8 +249,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             }
         }
     });
-    
-    [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -616,6 +620,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
     [self reloadContinueButton];
     [self reloadCard];
+
+    if ([[OrderManager sharedManager] positionsCount] == 1) {
+        self.tableView.alwaysBounceVertical = NO;
+    } else {
+        self.tableView.alwaysBounceVertical = YES;
+    }
 }
 
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell{
@@ -693,7 +703,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)reloadAddress{
     if (_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
-        NSString *address = [[DBShippingManager sharedManager] address];
+        NSString *address = [[DBShippingManager sharedManager].selectedAddress formattedAddressString:DBAddressStringModeNormal];
         if(address && address.length > 0){
             self.orderFooter.labelAddress.text = address;
             self.orderFooter.labelAddress.textColor = [UIColor blackColor];
@@ -734,8 +744,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         self.orderFooter.labelAddress.text = venue.title;
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
         [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
-        
-        [self startUpdatingPromoInfo];
     } else {
         self.orderFooter.labelAddress.textColor = [UIColor orangeColor];
         self.orderFooter.labelAddress.text = NSLocalizedString(@"Ошибка определения локации", nil);
@@ -750,16 +758,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (IBAction)clickAddress:(id)sender {
     [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
     
-    DBAddressViewController *addressController = [[DBAddressViewController alloc] initWithDelegate:self];
+    DBAddressViewController *addressController = [DBAddressViewController new];
     addressController.view.frame = [[UIScreen mainScreen] bounds];
     addressController.hidesBottomBarWhenPushed = YES;
     
     [self.navigationController pushViewController:addressController animated:YES];
-}
-
-- (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
-    [self setVenue:venue];
-    [self.orderFooter.activityIndicator stopAnimating];
 }
 
 
@@ -781,26 +784,47 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadTimePicker{
-    if(_deliverySettings.deliveryType.useTimePicker){
-        self.pickerView.type = _deliverySettings.deliveryType.onlyTime ? DBTimePickerTypeTime : DBTimePickerTypeDate;
-        
-        self.pickerView.selectedDate = _deliverySettings.selectedTime;
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+        self.pickerView.segments = @[];
     } else {
-        self.pickerView.type = DBTimePickerTypeItems;
-        
-        self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
-        self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
+        NSMutableArray *titles = [NSMutableArray new];
+        if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
+            [titles addObject:NSLocalizedString(@"С собой", nil)];
+        }
+        if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]){
+            [titles addObject:NSLocalizedString(@"На месте", nil)];
+        }
+        self.pickerView.segments = titles;
+        self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     }
     
-    NSMutableArray *titles = [NSMutableArray new];
-    if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
-        [titles addObject:NSLocalizedString(@"С собой", nil)];
+    switch (_deliverySettings.deliveryType.timeMode) {
+        case TimeModeTime:{
+            self.pickerView.type = DBTimePickerTypeTime;
+            self.pickerView.selectedDate = _deliverySettings.selectedTime;
+        }
+            break;
+        case TimeModeDateTime:{
+            self.pickerView.type = DBTimePickerTypeDateTime;
+            self.pickerView.selectedDate = _deliverySettings.selectedTime;
+        }
+            break;
+        case TimeModeSlots:{
+            self.pickerView.type = DBTimePickerTypeItems;
+            self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
+        }
+            break;
+        case TimeModeDateSlots:{
+            self.pickerView.type = DBTimePickerTypeDateAndItems;
+            self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.minDate = _deliverySettings.deliveryType.minDate;
+            self.pickerView.maxDate = _deliverySettings.deliveryType.maxDate;
+        }
+            
+        default:
+            break;
     }
-    if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]){
-        [titles addObject:NSLocalizedString(@"На месте", nil)];
-    }
-    self.pickerView.segments = titles;
-    self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     
     [self.pickerView configure];
 }
@@ -814,16 +838,31 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)selectedTimeString{
     NSString *timeString;
-    if(_deliverySettings.deliveryType.useTimePicker){
-        NSDateFormatter *formatter = [NSDateFormatter new];
-        if(_deliverySettings.deliveryType.onlyTime){
+    
+    NSDateFormatter *formatter = [NSDateFormatter new];
+    switch (_deliverySettings.deliveryType.timeMode) {
+        case TimeModeTime:{
             formatter.dateFormat = @"HH:mm";
-        } else {
-            formatter.dateFormat = @"dd/MM/yy HH:mm";
+            timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
         }
-        timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
-    } else {
-        timeString = _deliverySettings.selectedTimeSlot.slotTitle;
+            break;
+        case TimeModeDateTime:{
+            formatter.dateFormat = @"dd/MM/yy HH:mm";
+            timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
+        }
+            break;
+        case TimeModeSlots:{
+            timeString = _deliverySettings.selectedTimeSlot.slotTitle;
+        }
+            break;
+        case TimeModeDateSlots:{
+            formatter.dateFormat = @"ccc d";
+            timeString = [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:_deliverySettings.selectedTime], _deliverySettings.selectedTimeSlot.slotTitle];
+        }
+            break;
+            
+        default:
+            break;
     }
     
     return timeString;
@@ -831,7 +870,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)stringFromTime:(NSDate *)date{
     NSDateFormatter *formatter = [NSDateFormatter new];
-    if(_deliverySettings.deliveryType.onlyTime){
+    if(_deliverySettings.deliveryType.timeMode == TimeModeTime){
         formatter.dateFormat = @"HH:mm";
     } else {
         formatter.dateFormat = @"dd/MM/yy HH:mm";
@@ -848,6 +887,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         deliveryTypeId = DeliveryTypeIdInRestaurant;
     }
     
+    [GANHelper analyzeEvent:@"delivery_type_selected" number:@(deliveryTypeId) category:ORDER_SCREEN];
+    
     [_deliverySettings selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId]];
     
     [self reloadTimePicker];
@@ -857,30 +898,34 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     DBTimeSlot *timeSlot = _deliverySettings.deliveryType.timeSlots[index];
     _deliverySettings.selectedTimeSlot = timeSlot;
     [self reloadTime];
+    
+    [GANHelper analyzeEvent:@"delivery_slot_selected" label:timeSlot.slotTitle category:ORDER_SCREEN];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
     NSInteger comparisonResult = [_deliverySettings setNewSelectedTime:date];
     
-    NSString *message;
-    if(comparisonResult == NSOrderedAscending){
-        message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.minDate]];
-        [self showAlert:message];
+    if(_deliverySettings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
+        NSString *message;
+        if(comparisonResult == NSOrderedAscending){
+            message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.minDate]];
+            [self showAlert:message];
+        }
+        
+        if(comparisonResult == NSOrderedDescending){
+            message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
+            [self showAlert:message];
+        }
     }
     
-    if(comparisonResult == NSOrderedDescending){
-        message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
-        [self showAlert:message];
-    }
-    
-//    if(comparisonResult == NSOrderedSame){
-//        [self reloadTime];
-//    }
+    [GANHelper analyzeEvent:@"delivery_time_selected" number:@([date timeIntervalSince1970]) category:ORDER_SCREEN];
 }
 
 - (BOOL)db_shouldHideTimePickerView{
     [self reloadTime];
     [self startUpdatingPromoInfo];
+    
+    [GANHelper analyzeEvent:@"time_spinner_closed" category:ORDER_SCREEN];
     
     return YES;
 }
@@ -908,6 +953,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (IBAction)clickProfile:(id)sender {
     [GANHelper analyzeEvent:@"profile_click" category:ORDER_SCREEN];
+    
     NSString *eventLabel;
     if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
         eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];
@@ -956,35 +1002,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelCard.textColor = [UIColor blackColor];
             self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
             break;
+       
             
-        case PaymentTypeExtraType:
-            if([OrderManager sharedManager].totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
-                [OrderManager sharedManager].paymentType = PaymentTypeNotSet;
-                [self reloadCard];
-            } else {
-                self.orderFooter.labelCard.textColor = [UIColor blackColor];
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
-            }
-            break;
-            
-    }
-    
-    if([OrderManager sharedManager].totalCount <= [DBMastercardPromo sharedInstance].promoCurrentMugCount && [OrderManager sharedManager].paymentType != PaymentTypeExtraType){
-        if(!self.freeBeverageTipView){
-            self.freeBeverageTipView = self.orderFooter.freeBeverageTipView;
-            self.freeBeverageTipView.userInteractionEnabled = YES;
-            [self.freeBeverageTipView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-                [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
-                [self reloadCard];
-            }]];
-            
-            //[self.viewFooter showFreeBeverageTip];
-        }
-    } else {
-        if(self.freeBeverageTipView){
-            //[self.viewFooter hideFreeBeverageTip];
-            self.freeBeverageTipView = nil;
-        }
     }
 }
 
@@ -1016,7 +1035,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)cardsControllerDidChoosePaymentItem:(DBCardsViewController *)controller{
-    [self startUpdatingPromoInfo];
 }
 
 

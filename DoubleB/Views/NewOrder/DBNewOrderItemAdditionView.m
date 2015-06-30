@@ -52,6 +52,12 @@
 - (void)reload{
     NSString *text = [OrderManager sharedManager].totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
     self.positionAdditionLabel.text = text;
+    
+    // Fucking code for Elephant
+    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"elephantboutique"]){
+        self.positionAdditionLabel.textColor = [UIColor colorWithRed:216./255 green:134./255 blue:126./255 alpha:1.0];
+        self.positionAdditionLabel.text = @"Выбрать напиток";
+    }
 }
 
 - (void)setShowBonusPositionsView:(BOOL)showBonusPositionsView{

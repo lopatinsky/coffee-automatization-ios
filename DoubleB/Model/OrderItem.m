@@ -8,6 +8,7 @@
 
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
+#import "DBMenuBonusPosition.h"
 #import "DBMenu.h"
 
 @implementation OrderItem
@@ -19,23 +20,29 @@
     return self;
 }
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem{
++ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus{
     OrderItem *item = [[OrderItem alloc] init];
     
-    DBMenuPosition *menuPosition = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
-    if(menuPosition){
-        DBMenuPosition *position = [menuPosition copy];
-        
-        for(NSDictionary *modifier in historyItem[@"group_modifiers"]){
-            [position selectItem:modifier[@"choice"] forGroupModifier:modifier[@"id"]];
+    DBMenuPosition *position;
+    if(bonus){
+        position = [[DBMenuBonusPosition alloc] initWithResponseDictionary:historyItem];
+    } else {
+        DBMenuPosition *menuPosition = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
+        if(menuPosition){
+            position = [menuPosition copy];
         }
-        
-        for(NSDictionary *modifier in historyItem[@"single_modifiers"]){
-            [position addSingleModifier:modifier[@"id"] count:[modifier[@"quantity"] integerValue]];
-        }
-        
-        item.position = position;
     }
+    
+    
+    for(NSDictionary *modifier in historyItem[@"group_modifiers"]){
+        [position selectItem:modifier[@"choice"] forGroupModifier:modifier[@"id"]];
+    }
+    
+    for(NSDictionary *modifier in historyItem[@"single_modifiers"]){
+        [position addSingleModifier:modifier[@"id"] count:[modifier[@"quantity"] integerValue]];
+    }
+    
+    item.position = position;
     
     item.count = [historyItem[@"quantity"] integerValue];
     

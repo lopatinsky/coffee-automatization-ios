@@ -16,6 +16,6 @@
 	<key>CompanyColor</key>
 	<integer>4289235292</integer>
 	<key>BaseUrl</key>
-	<string>http://coffeeandthecity.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://coffeeandthecity.test.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

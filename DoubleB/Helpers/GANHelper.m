@@ -20,8 +20,8 @@
 }
 
 + (void)initialize {
-  /*  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
-    [[GAI sharedInstance] setDefaultTracker:tracker];*/
+//    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
+//    [[GAI sharedInstance] setDefaultTracker:tracker];
 }
 
 + (void)analyzeScreen:(NSString *)screen {

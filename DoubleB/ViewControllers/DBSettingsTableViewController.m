@@ -11,9 +11,7 @@
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
 #import "DBCardsViewController.h"
-#import "DBAboutPromoViewController.h"
 #import "DBPromosListViewController.h"
-#import "DBMastercardPromo.h"
 #import "IHSecureStore.h"
 #import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
@@ -46,7 +44,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     self.title = NSLocalizedString(@"Настройки", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
-    self.navigationController.navigationBar.topItem.title = @"";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
@@ -79,6 +77,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"menu_icon",
                                     @"viewController": promosVC}];
     
+    DBCompaniesViewController *companiesVC = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
+    companiesVC.firstLaunch = NO;
+    [self.settingsItems addObject:@{@"name": @"companiesVC",
+                                    @"title": NSLocalizedString(@"Список компаний", nil),
+                                    @"image": @"venue_gray",
+                                    @"viewController": companiesVC
+                                    }];
+    
     // Personal wallet item
     if([DBPromoManager sharedManager].walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
@@ -101,15 +107,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //    [self.settingsItems addObject:@{@"name": @"shareVC",
 //                                    @"title": NSLocalizedString(@"Рассказать друзьям", nil),
 //                                    @"image": @"share_icon"}];
-    
-//    if([[DBMastercardPromo sharedInstance] promoIsAvailable]){
-//        // About promo item
-//        DBAboutPromoViewController *aboutPromoVC = [DBAboutPromoViewController new];
-//        [self.settingsItems addObject:@{@"name": @"aboutPromoVC",
-//                                        @"title": NSLocalizedString(@"Об акции", nil),
-//                                        @"image": @"about_promo",
-//                                        @"viewController": aboutPromoVC}];
-//    }
+
     
     // Documents item
     DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];
@@ -195,7 +193,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *settingsItemInfo = self.settingsItems[indexPath.row];
+    NSDictionary *settingsItemInfo;
+    if(indexPath.row < [self.settingsItems count]){
+        settingsItemInfo = self.settingsItems[indexPath.row];
+    }
     
     NSString *event;
     
@@ -214,24 +215,24 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self presentMailViewControllerWithRecipients:nil callback:nil];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]) {
         [self shareAppPermission:nil];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]) {
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"personalWalletVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"personalWalletVC"]) {
         DBPersonalWalletView *view = [DBPersonalWalletView new];
         [view showOnView:self.navigationController.view];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"aboutPromoVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"aboutPromoVC"]) {
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"documentsVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"documentsVC"]) {
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
@@ -242,6 +243,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if ([settingsItemInfo[@"name"] isEqualToString: @"companyInfoVC"]) {
         event = @"about_app_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
+    if ([settingsItemInfo[@"name"] isEqualToString:@"companiesVC"]) {
+        event = @"companies_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];

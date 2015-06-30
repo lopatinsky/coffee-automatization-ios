@@ -12,10 +12,10 @@
 	<key>CompanyChoiceEnabled</key>
 	<false/>
 	<key>CompanyGAKey</key>
-	<string></string>
+	<string>UA-62529990-26</string>
 	<key>CompanyColor</key>
-	<integer>4289235292</integer>
+	<integer>4291373098</integer>
 	<key>BaseUrl</key>
-	<string>http://shashlichniydom.test.doubleb-automation-production.appspot.com/</string>
+	<string>http://shashlichniydom.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>
