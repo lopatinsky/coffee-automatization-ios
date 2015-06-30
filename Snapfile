@@ -1,16 +1,16 @@
 # Uncomment the lines below you want to change by removing the # in the beginning
 
 # A list of devices you want to take the screenshots from
-#devices([
-#  "iPhone 6"
-#])
-
 devices([
-   "iPhone 6",
-   "iPhone 6 Plus",
-   "iPhone 5",
-   "iPhone 4s"
+  "iPhone 6"
 ])
+
+# devices([
+#   "iPhone 6",
+#   "iPhone 6 Plus",
+#   "iPhone 5",
+#   "iPhone 4s"
+#])
 
 languages([
   'ru-RU'
