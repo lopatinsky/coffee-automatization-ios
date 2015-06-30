@@ -59,15 +59,18 @@
         NSDictionary *companyDict = [NSDictionary dictionaryWithContentsOfFile:path];
         
         NSMutableDictionary *companyInfo = [[NSMutableDictionary alloc] initWithDictionary:companyDict];
-        companyInfo[@"BaseUrl"] = [NSString stringWithFormat:@"%@/api/", appUrl];
+        companyInfo[@"BaseUrl"] = [NSString stringWithFormat:@"%@/", appUrl];
         
         [companyInfo writeToFile:path atomically:NO];
         
         [[[UIAlertView alloc] initWithTitle:@"Важно!"
-                                    message:@"Чтобы изменения вступили в силу, перезапустите приложение!"
+                                    message:@"Приложение сейчас закроется!"
                                    delegate:nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles:nil] show];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            abort();
+        });
     }
 }
 

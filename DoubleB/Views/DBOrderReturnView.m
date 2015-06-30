@@ -58,7 +58,7 @@
     [self.otherImageView templateImageWithName:@"return_cause_other_icon"];
     
     self.timeLabel.text = NSLocalizedString(@"ошибся временем", nil);
-    self.venueLabel.text = NSLocalizedString(@"ошибся кофейней", nil);
+    self.venueLabel.text = NSLocalizedString(@"не туда отправил", nil);
     self.changeLabel.text = NSLocalizedString(@"передумал", nil);
     self.otherLabel.text = NSLocalizedString(@"другое", nil);
     

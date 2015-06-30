@@ -213,12 +213,12 @@ typedef enum : NSUInteger {
 #pragma mark - UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.delegate keyboardWillAppear];
+    
+    self.addressSuggestionsTableView.hidden = YES;
+    
     if (textField == self.streetTextField) {
-        self.addressSuggestions = @[];
-        [self.addressSuggestionsTableView reloadData];
-        self.addressSuggestionsTableView.hidden = NO;
-        
         [self switchToCompactMode];
+        self.addressSuggestionsTableView.hidden = NO;
     }
 }
 
