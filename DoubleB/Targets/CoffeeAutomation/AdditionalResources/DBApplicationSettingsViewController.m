@@ -75,7 +75,7 @@
 }
 
 - (void)updateList{
-    [[DBAPIClient sharedClient] GET:@"http://doubleb-automation-production.appspot.com/api/company/base_urls"
+    [[DBAPIClient sharedClient] GET:@"http://test.doubleb-automation-production.appspot.com/api/company/base_urls"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSLog(@"%@", responseObject);
