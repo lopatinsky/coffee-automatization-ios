@@ -58,6 +58,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [self sendProfileInfo];
+    [self setString:self.profileCellName.profileCellTextField.text forTextField:self.profileCellName.profileCellTextField];
+    [self setString:self.profileCellPhone.profileCellTextField.text forTextField:self.profileCellPhone.profileCellTextField];
+    [self setString:self.profileCellMail.profileCellTextField.text forTextField:self.profileCellMail.profileCellTextField];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
