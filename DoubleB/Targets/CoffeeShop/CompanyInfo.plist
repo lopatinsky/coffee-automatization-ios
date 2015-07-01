@@ -5,15 +5,15 @@
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
-		<string>4YgNDVaO1VKYelnaE9RTzJAdofiSn3N2Y5xt44wD</string>
+		<string>ub5EOJeYGYNgaXtobu2QmlrRHB58D4cLMbKYEVOF</string>
 		<key>clientKey</key>
-		<string>vD6ZPXn7hEcCTIizGz9vYzO0Xx2fXbNwxx3TegbM</string>
+		<string>DoVDTYuQzW0H8Pg9tbfAp4ZHO3ypVQJKd6Za4bvv</string>
 	</dict>
 	<key>CompanyGAKey</key>
-	<string>UA-62529990-10</string>
+	<string>UA-62529990-39</string>
 	<key>CompanyColor</key>
-	<integer>4286598201</integer>
+	<integer>4279789118</integer>
 	<key>BaseUrl</key>
-	<string>http://cameraobscura.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://coffeeshopcompany.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

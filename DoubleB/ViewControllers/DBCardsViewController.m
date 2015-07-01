@@ -192,8 +192,10 @@
         cell.cardIconImageView.image = [UIImage imageNamed:@"paypal_icon"];
         
         if(_payPalManager.loggedIn){
-            cell.cardTitleLabel.text = @"PayPal";
+            cell.cardTitleLabel.textColor = [UIColor blackColor];
+            cell.cardTitleLabel.text = @"использовать PayPal";
         } else {
+            cell.cardTitleLabel.textColor = [UIColor db_defaultColor];
             cell.cardTitleLabel.text = @"Войти в аккаунт PayPal";
         }
         
@@ -221,7 +223,7 @@
     [tableView beginUpdates];
 
     if(indexPath.section == 2){
-        NSUInteger k = indexPath.row - 1;
+        NSUInteger k = indexPath.row;
         NSDictionary *card = self.cards[k];
         
         [[IHSecureStore sharedInstance] removeCardAtIndex:k];
