@@ -30,6 +30,8 @@
 - (void)updateInfo{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
+            _applicationName = response[@"appName"];
+            
             NSMutableArray *deliveryTypes = [NSMutableArray new];
             for(NSDictionary *typeDict in response[@"deliveryTypes"]){
                 [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];

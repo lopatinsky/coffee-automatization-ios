@@ -68,6 +68,10 @@
     self.payPalManager = [DBPayPalManager sharedInstance];
     self.payPalManager.delegate = self;
     
+    if([self.availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
+        self.title = NSLocalizedString(@"Электронные платежи", nil);
+    }
+    
     [self reloadCards];
 }
 
@@ -333,11 +337,13 @@
         eventLabel = @"paypal";
         
         if(_payPalManager.loggedIn){
-            [OrderManager sharedManager].paymentType = PaymentTypePayPal;
-            [self.tableView reloadData];
-            
-            [self.delegate cardsControllerDidChoosePaymentItem:self];
-            [self.navigationController popViewControllerAnimated:YES];
+            if(self.mode == CardsViewControllerModeChoosePayment){
+                [OrderManager sharedManager].paymentType = PaymentTypePayPal;
+                [self.tableView reloadData];
+                
+                [self.delegate cardsControllerDidChoosePaymentItem:self];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [_payPalManager bindPayPal:^(BOOL success, NSString *message) {
