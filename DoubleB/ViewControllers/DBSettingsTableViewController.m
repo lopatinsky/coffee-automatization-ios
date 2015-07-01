@@ -11,9 +11,7 @@
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
 #import "DBCardsViewController.h"
-#import "DBAboutPromoViewController.h"
 #import "DBPromosListViewController.h"
-#import "DBMastercardPromo.h"
 #import "IHSecureStore.h"
 #import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
@@ -47,7 +45,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     self.title = NSLocalizedString(@"Настройки", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
-    self.navigationController.navigationBar.topItem.title = @"";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
@@ -112,15 +110,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //    [self.settingsItems addObject:@{@"name": @"shareVC",
 //                                    @"title": NSLocalizedString(@"Рассказать друзьям", nil),
 //                                    @"image": @"share_icon"}];
-    
-//    if([[DBMastercardPromo sharedInstance] promoIsAvailable]){
-//        // About promo item
-//        DBAboutPromoViewController *aboutPromoVC = [DBAboutPromoViewController new];
-//        [self.settingsItems addObject:@{@"name": @"aboutPromoVC",
-//                                        @"title": NSLocalizedString(@"Об акции", nil),
-//                                        @"image": @"about_promo",
-//                                        @"viewController": aboutPromoVC}];
-//    }
+
     
     // Documents item
     DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];
@@ -206,7 +196,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSDictionary *settingsItemInfo = self.settingsItems[indexPath.row];
+    NSDictionary *settingsItemInfo;
+    if(indexPath.row < [self.settingsItems count]){
+        settingsItemInfo = self.settingsItems[indexPath.row];
+    }
     
     NSString *event;
     

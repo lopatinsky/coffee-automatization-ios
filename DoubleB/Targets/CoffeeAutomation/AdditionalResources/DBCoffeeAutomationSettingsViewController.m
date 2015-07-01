@@ -21,7 +21,7 @@
     
     // Application settings item
     DBApplicationSettingsViewController *applicationSettingsVC = [DBApplicationSettingsViewController new];
-    [self.settingsItems insertObject:@{@"name": @"profileVC",
+    [self.settingsItems insertObject:@{@"name": @"appSetterVC",
                                        @"title": @"Выбрать приложение",
                                        @"image": @"none",
                                        @"viewController": applicationSettingsVC}
@@ -29,9 +29,14 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSDictionary *settingsItemInfo = self.settingsItems[indexPath.row];
+    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
+    NSDictionary *settingsItemInfo;
+    if(indexPath.row < [self.settingsItems count]){
+        settingsItemInfo = self.settingsItems[indexPath.row];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"appSetterVC"]){
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
 }

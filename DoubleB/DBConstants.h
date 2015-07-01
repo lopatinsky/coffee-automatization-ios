@@ -20,7 +20,9 @@
 #define LAUNCH_PLACEHOLDER_SCREEN @"Launch_placeholder_screen"
 
 #define ORDER_SCREEN @"Order_screen"
+#define ADDRESS_SCREEN @"Address_screen"
 #define VENUES_SCREEN @"Venues_screen"
+#define VENUES_ORDER_SCREEN @"Venues_order_screen"
 #define VENUE_INFO_SCREEN @"Venue_info_screen"
 #define HISTORY_SCREEN @"History_screen"
 #define ORDER_HISTORY_SCREEN @"Order_history_screen"

@@ -33,6 +33,7 @@
 @property (strong, nonatomic) DBOrderViewFooter *viewFooter;
 
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) NSMutableArray *bonusItems;
 
 @property (strong, nonatomic) DBOrderReturnView *returnCauseView;
 
@@ -43,10 +44,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.topItem.title = @"";
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.edgesForExtendedLayout = UIRectEdgeTop;
     
-    self.items = [NSMutableArray new];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     
     self.tableView.delegate = self;
@@ -55,6 +55,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.items = [NSMutableArray arrayWithArray:self.order.items];
+    self.bonusItems = [NSMutableArray arrayWithArray:self.order.bonusItems];
+    
     NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
     [attributed setAttributes:@{
@@ -89,7 +91,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [GANHelper analyzeScreen:@"Order_info_screen"];
+    [GANHelper analyzeScreen:ORDER_HISTORY_SCREEN];
     [self reloadCancelRepeatButton];
 }
 
@@ -118,31 +120,37 @@
         self.order = (Order *)notification.object;
     }
     
-    OrderStatus status = self.order.status;
-    switch (status) {
-        case OrderStatusCanceledServer:
+    self.viewHeader.labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
+    self.viewHeader.labelStatus.textColor = [UIColor blackColor];
+    
+    switch (self.order.status) {
+        case OrderStatusNew:
+            self.viewHeader.labelStatus.text = [self.order.deliveryType intValue] == DeliveryTypeIdShipping ? NSLocalizedString(@"Ожидает подтверждения", nil) : NSLocalizedString(@"Готовится", nil);
+            break;
+        case OrderStatusConfirmed:
+            self.viewHeader.labelStatus.text =  NSLocalizedString(@"Подтвержден", nil);
+            break;
+        case OrderStatusOnWay:
+            self.viewHeader.labelStatus.text =  NSLocalizedString(@"В пути", nil);
+            break;
+        case OrderStatusCanceledBarista:
         case OrderStatusCanceled:
-            self.viewHeader.labelStatus.text = @"";
+            self.viewHeader.labelStatus.text =  @"";
             break;
         case OrderStatusDone:
-            self.viewHeader.labelStatus.text = NSLocalizedString(@"Выдан", nil);
-            self.viewHeader.labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            self.viewHeader.labelStatus.textColor = [UIColor blackColor];
+            self.viewHeader.labelStatus.text =  NSLocalizedString(@"Выдан", nil);
             break;
-        case OrderStatusNew:
-            self.viewHeader.labelStatus.text = NSLocalizedString(@"Готовится", nil);
-            self.viewHeader.labelStatus.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
-            self.viewHeader.labelStatus.textColor = [UIColor blackColor];
+            
         default:
             break;
     }
 
-    if (status == OrderStatusCanceled || status == OrderStatusCanceledServer) {
+    if (self.order.status == OrderStatusCanceled || self.order.status == OrderStatusCanceledBarista) {
         self.viewHeader.labelPaymentStatus.textColor = [UIColor fromHex:0xffe16941];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Отменен", nil);
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"canceled"];
     } else if (self.order.paymentType == PaymentTypeCard || self.order.paymentType == PaymentTypeExtraType ||
-               status == OrderStatusDone) {
+               self.order.status == OrderStatusDone) {
         self.viewHeader.labelPaymentStatus.textColor = [UIColor db_defaultColor];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Оплачен", nil);
         [self.viewHeader.imageViewPaymentStatus templateImageWithName:@"paid"];
@@ -163,7 +171,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DBAPIClient sharedClient] POST:@"return" parameters:@{@"order_id": self.order.orderId}
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                 [GANHelper analyzeEvent:@"cancel_success" label:eventLabel category:ORDER_HISTORY_SCREEN];
+                                 [GANHelper analyzeEvent:@"cancel_order_success" label:eventLabel category:ORDER_HISTORY_SCREEN];
                                  //NSLog(@"%@", responseObject);
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                  self.order.status = OrderStatusCanceled;
@@ -173,7 +181,7 @@
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSString *errorEventLabel = [eventLabel stringByAppendingString:[NSString stringWithFormat:@";%@", error.localizedDescription]];
-                                 [GANHelper analyzeEvent:@"cancel_failed" label:errorEventLabel category:ORDER_HISTORY_SCREEN];
+                                 [GANHelper analyzeEvent:@"cancel_order_failed" label:errorEventLabel category:ORDER_HISTORY_SCREEN];
                                  
                                  NSLog(@"%@", error);
                                  [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -210,7 +218,7 @@
 - (void)clickCancel:(UIButton *)sender{
     NSString *clientId = [IHSecureStore sharedInstance].clientId;
     NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", self.order.orderId, clientId];
-    [GANHelper analyzeEvent:@"cancel_button_pressed" label:eventLabel category:ORDER_HISTORY_SCREEN];
+    [GANHelper analyzeEvent:@"cancel_order_button_pressed" label:eventLabel category:ORDER_HISTORY_SCREEN];
     
     self.returnCauseView = [DBOrderReturnView new];
     self.returnCauseView.delegate = self;
@@ -218,7 +226,7 @@
 }
 
 - (void)clickRepeat:(UIButton *)sender {
-    [GANHelper analyzeEvent:@"repeat_button_pressed" category:ORDER_HISTORY_SCREEN];
+    [GANHelper analyzeEvent:@"repeat_order_button_pressed" category:ORDER_HISTORY_SCREEN];
     DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
     newOrderController.repeatedOrder = self.order;
     [self.navigationController pushViewController:newOrderController animated:YES];
@@ -227,17 +235,27 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.items.count;
+    if(section == 0){
+        return self.items.count;
+    } else {
+        return self.bonusItems.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBOrderItemCell *cell;
     
-    OrderItem *item = self.items[indexPath.row];
+    OrderItem *item;
+    if(indexPath.section == 0){
+        item = self.items[indexPath.row];
+    } else {
+        item = self.bonusItems[indexPath.row];
+    }
+    
     if(item.position.hasImage){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
         
@@ -253,6 +271,7 @@
     }
     
     cell.orderItem = item;
+    
     [cell configure];
     cell.panGestureRecognizer.delegate = self;
     
@@ -262,7 +281,13 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    OrderItem *item = self.items[indexPath.row];
+    OrderItem *item;
+    if(indexPath.section == 0){
+        item = self.items[indexPath.row];
+    } else {
+        item = self.bonusItems[indexPath.row];
+    }
+    
     if(item.position.hasImage){
         return 100;
     } else {
@@ -271,15 +296,20 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 111.f;
+    if(section == 0){
+        return 111.f;
+    } else {
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView *header = self.viewHeader;
-    return header;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(section == 0){
+        UIView *header = self.viewHeader;
+        return header;
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - UIGestureRecognizerDelegate

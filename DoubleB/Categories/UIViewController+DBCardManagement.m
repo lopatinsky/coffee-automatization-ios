@@ -9,7 +9,6 @@
 #import "UIViewController+DBCardManagement.h"
 #import "IHPaymentManager.h"
 #import "IHSecureStore.h"
-#import "DBMastercardPromo.h"
 #import "DBClientInfo.h"
 
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -21,10 +20,11 @@ static NSString *screenIdentifier;
 
 - (void)db_cardManagementBindNewCardOnScreen:(NSString *)screen
                                     callback:(void(^)(BOOL success))completionHandler{
+    screenIdentifier = screen;
+    
     if([[DBClientInfo sharedInstance] validClientName] && [[DBClientInfo sharedInstance] validClientPhone]){
         [self bindNewCard:completionHandler];
     } else {
-        screenIdentifier = screen;
         completionBlock = completionHandler;
         
         DBProfileViewController *profileViewController = [DBProfileViewController new];
@@ -42,7 +42,6 @@ static NSString *screenIdentifier;
     [[IHPaymentManager sharedInstance] bindNewCardForClient:[IHSecureStore sharedInstance].clientId
                                           completionHandler:^(BOOL success, NSString *message, NSDictionary *items) {
                                               if (success) {
-                                                  [[DBMastercardPromo sharedInstance] synchronisePromoInfoForClient:[IHSecureStore sharedInstance].clientId];
                                                   
                                                   /***** analytics *****/
                                                   
@@ -50,7 +49,7 @@ static NSString *screenIdentifier;
                                                   NSArray *cards = [IHSecureStore sharedInstance].cards;
                                                   NSString *cardType = [cards[cardsCount - 1][@"cardPan"] db_cardIssuer];
                                                   
-                                                  NSString *eventLabel = [NSString stringWithFormat:@"%@;%d", cardType, cardsCount - 1];
+                                                  NSString *eventLabel = [NSString stringWithFormat:@"%@;%ld", cardType, (long)(cardsCount - 1)];
                                                   
                                                   [GANHelper analyzeEvent:@"add_card_success" label:eventLabel category:PAYMENT_SCREEN];
                                                   

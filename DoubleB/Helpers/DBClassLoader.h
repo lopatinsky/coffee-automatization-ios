@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @class DBSettingsTableViewController;
+@class DBNewOrderViewController;
 
 @interface DBClassLoader : NSObject
 
++ (DBNewOrderViewController *)loadNewOrderViewController;
 + (DBSettingsTableViewController *)loadSettingsViewController;
 
 @end

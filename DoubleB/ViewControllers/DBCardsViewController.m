@@ -12,11 +12,9 @@
 #import "IHSecureStore.h"
 #import "OrderManager.h"
 #import "IHPaymentManager.h"
-#import "DBMastercardAdView.h"
 #import "DBProfileViewController.h"
 #import "DBAPIClient.h"
 #import "DBCardCell.h"
-#import "DBMastercardPromo.h"
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "Compatibility.h"
@@ -47,6 +45,7 @@
     } else {
         self.title = NSLocalizedString(@"Оплата", nil);
     }
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.rowHeight = 50;
@@ -63,7 +62,6 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.constraintAdvertViewTopSpace.constant = topY;
 
-    self.mastercardPromo = [DBMastercardPromo sharedInstance];
     
     self.payPalManager = [DBPayPalManager sharedInstance];
     self.payPalManager.delegate = self;
@@ -80,18 +78,8 @@
 
     [GANHelper analyzeScreen:self.screen];
     
-    // Configure Mastercard promo
-    if([self.mastercardPromo promoIsAvailable] && ![self.mastercardPromo userIntoPromo]){
-        DBMastercardAdView *mcAdView = [[DBMastercardAdView alloc] initWithDelegate:nil onScreen:self.screen];
-        mcAdView.backgroundColor = [UIColor db_backgroundColor];
-        mcAdView.plusImageView.hidden = YES;
-        self.constraintAdvertViewHeight.constant = mcAdView.frame.size.height;
-        self.advertView.hidden = NO;
-        [self.advertView addSubview:mcAdView];
-    } else {
-        self.constraintAdvertViewHeight.constant = 0;
-        self.advertView.hidden = YES;
-    }
+    self.constraintAdvertViewHeight.constant = 0;
+    self.advertView.hidden = YES;
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -129,8 +117,7 @@
     
     // Extra payment type
     if(section == 0){
-        BOOL available = self.mastercardPromo.promoCurrentMugCount > 0 && self.mode == CardsViewControllerModeChoosePayment;
-        result += available ? 1 : 0;
+        result += 0;
     }
     
     // Cash payment type
@@ -161,22 +148,6 @@
     
     if (!cell) {
         cell = [DBCardCell new];
-    }
-    
-    // Extra payment type
-    if(indexPath.section == 0){
-        cell.cardTitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%d кофе в подарок", nil), (int)[DBMastercardPromo sharedInstance].promoCurrentMugCount];
-        if([DBMastercardPromo sharedInstance].promoCurrentMugCount >= [OrderManager sharedManager].totalCount){
-            [cell.cardIconImageView templateImageWithName:@"mug"];
-            cell.cardTitleLabel.textColor = [UIColor blackColor];
-            
-            cell.checked = [OrderManager sharedManager].paymentType == PaymentTypeExtraType;
-        } else {
-            [cell.cardIconImageView templateImageWithName:@"mug_gray"];
-            cell.cardActiveIndicator.hidden = YES;
-            cell.cardTitleLabel.textColor = [UIColor grayColor];
-            cell.userInteractionEnabled = NO;
-        }
     }
     
     // Cash payment type
@@ -272,6 +243,8 @@
     }
     
     [tableView endUpdates];
+    
+    [GANHelper analyzeEvent:@"remove_card_success" category:self.screen];
 }
 
 

@@ -17,15 +17,13 @@
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfo.h"
+#import "DBShippingManager.h"
 
 //#import <Crashlytics/Crashlytics.h>
 
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 @interface OrderManager ()
-
-// Time management
-@property (strong, nonatomic) NSTimer *timer;
 @end
 
 @implementation OrderManager
@@ -65,23 +63,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         
         self.bonusPositions = [NSMutableArray new];
         
-        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
-        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purgePositions) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
-}
-
-- (void)setDeliveryType:(DBDeliveryType *)deliveryType{
-    _deliveryType = deliveryType;
-    
-    if(_deliveryType.useTimePicker){
-        [self launchTimer];
-    } else {
-        [self stopTimer];
-    }
-    
-    [self updateTimeAccordingToDeliveryType];
 }
 
 - (void)setVenue:(Venue *)venue{
@@ -95,12 +79,16 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 - (BOOL)validOrder{
     BOOL result = true;
     
-    result = result && self.venue;
+    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
+        result = result && [DBShippingManager sharedManager].validAddress;
+    } else {
+        result = result && self.venue;
+    }
     result = result && !(self.paymentType == PaymentTypeNotSet);
     result = result && [[DBClientInfo sharedInstance] validClientName];
     result = result && [[DBClientInfo sharedInstance] validClientPhone];
     result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
-    result = result && self.totalCount != 0;
+    result = result && (self.totalCount + [self.bonusPositions count]) > 0;
     result = result && [DBPromoManager sharedManager].validOrder;
     
     return result;
@@ -162,7 +150,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     self.venue = nil;
     self.comment = @"";
     self.location = nil;
-    self.orderId = nil;
+    
+    self.bonusPositions = [NSMutableArray new];
     
     self.totalPrice = 0;
 }
@@ -176,26 +165,6 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
     
     [self reloadTotal];
-}
-
-- (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler {
-    [[DBAPIClient sharedClient] GET:@"order_register"
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%s %@", __PRETTY_FUNCTION__, responseObject);
-                                self.orderId = [NSString stringWithFormat:@"%ld", (long)[responseObject[@"order_id"] integerValue]];
-                                
-//                                [Crashlytics setObjectValue:self.orderId forKey:@"lastRegisteredOrderId"];
-                                
-                                if (completionHandler) {
-                                    completionHandler(YES, self.orderId);
-                                }
-                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
-                                if (completionHandler) {
-                                    completionHandler(NO, nil);
-                                }
-                            }];
 }
 
 - (NSInteger)addPosition:(DBMenuPosition *)position {
@@ -355,6 +324,80 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
 }
 
+@end
+
+
+
+@interface DBDeliverySettings ()
+@property (strong, nonatomic) DBDeliveryType *lastNotShippingDeliveryType;
+
+// Time management
+@property (strong, nonatomic) NSTimer *timer;
+@end
+
+@implementation DBDeliverySettings
+
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static DBDeliverySettings *instance = nil;
+    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    return instance;
+}
+
+- (instancetype)init{
+    self = [super init];
+    
+    self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+    
+    return self;
+}
+
+#pragma mark - Delivery type
+
+- (void)selectDeliveryType:(DBDeliveryType *)type{
+    if(type.typeId == DeliveryTypeIdShipping){
+        self.lastNotShippingDeliveryType = self.deliveryType;
+    }
+    
+    self.deliveryType = type;
+    switch (self.deliveryType.typeId) {
+        case DeliveryTypeIdInRestaurant:
+            [GANHelper analyzeEvent:@"delivery_type_selected" label:@"InRestaurant" category:ADDRESS_SCREEN];
+            break;
+        case DeliveryTypeIdTakeaway:
+            [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Takeaway" category:ADDRESS_SCREEN];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)selectShipping{
+    if(self.deliveryType && self.deliveryType.typeId != DeliveryTypeIdShipping)
+        self.lastNotShippingDeliveryType = self.deliveryType;
+    
+    self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping];
+    [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Shipping" category:ADDRESS_SCREEN];
+}
+
+- (void)selectTakeout{
+    if(self.lastNotShippingDeliveryType)
+        self.deliveryType = self.lastNotShippingDeliveryType;
+}
+
+- (void)setDeliveryType:(DBDeliveryType *)deliveryType{
+    _deliveryType = deliveryType;
+    
+    if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
+        [self launchTimer];
+    } else {
+        [self stopTimer];
+    }
+    
+    [self updateTimeAccordingToDeliveryType];
+}
+
+
 #pragma mark - Time management
 
 - (void)launchTimer{
@@ -363,9 +406,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         seconds = seconds - seconds % 60 + 60 + 1;
         self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:15.f
                                                 target:self
-                                                selector:@selector(timerTick:)
-                                                userInfo:nil
-                                                repeats:YES];
+                                              selector:@selector(timerTick:)
+                                              userInfo:nil
+                                               repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
         [self timerTick:self.timer];
     }
@@ -377,18 +420,20 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)updateTimeAccordingToDeliveryType{
-    if(self.deliveryType.useTimePicker){
-        if(!self.selectedTime || [self.selectedTime compare:self.deliveryType.minDate] == NSOrderedAscending){
-            self.selectedTime = self.deliveryType.minDate;
+    if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
+        if(!self.selectedTime || [self.selectedTime compare:_deliveryType.minDate] == NSOrderedAscending){
+            self.selectedTime = _deliveryType.minDate;
         }
         
-        if([self.selectedTime compare:self.deliveryType.maxDate] == NSOrderedDescending){
-            self.selectedTime = self.deliveryType.maxDate;
+        if([self.selectedTime compare:_deliveryType.maxDate] == NSOrderedDescending){
+            self.selectedTime = _deliveryType.maxDate;
         }
-    } else {
-        DBTimeSlot *timeSlot = [self.deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
+    }
+    
+    if(self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+        DBTimeSlot *timeSlot = [_deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
         if(!timeSlot)
-            timeSlot = [self.deliveryType.timeSlots firstObject];
+            timeSlot = [_deliveryType.timeSlots firstObject];
         
         self.selectedTimeSlot = timeSlot;
     }
@@ -415,7 +460,11 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
         if(result != NSOrderedDescending){
             _selectedTime = date;
             result = NSOrderedSame;
+        } else {
+            _selectedTime = self.deliveryType.maxDate;
         }
+    } else {
+        _selectedTime = self.deliveryType.minDate;
     }
     
     return result;

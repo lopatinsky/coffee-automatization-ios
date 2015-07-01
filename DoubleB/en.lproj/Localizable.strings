@@ -16,9 +16,15 @@
 "NoInternetConnectionErrorMessage" = "Sorry, check your internet connection and try again";
 
 "р." = "rub.";
-"г." = "g.";
-"ккал." = "kcal.";
-"мл." = "ml.";
+"г" = "g";
+"ккал" = "kcal";
+"мл" = "ml";
+
+"Точки самовывоза" = "Venues";
+"Адрес доставки" = "Shipping address";
+"Улица, дом" = "Street, house";
+"Кв/Офис" = "apartment";
+
 
 "%.1f км" = "%.1f km";
 "%.0f м" = "%.0f m";
@@ -33,6 +39,7 @@
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
 "Точки" = "Venues";
+"Кофейни" = "Venues";
 
 "Можно выбрать один вариант" = "You can select one option";
 "Можно выбрать несколько" = "You can select multiple options";
@@ -47,13 +54,22 @@
 "Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
 "Скидка" = "Discount";
 
+"Ожидает подтверждения" = "Waiting";
+"Подтвержден" = "Approved";
 "Выдан" = "Served out";
 "Готовится" = "Preparing";
+"В пути" = "In delivery";
 "Отменен" = "Canceled";
 "Оплачен" = "Paid";
 "Не оплачен" = "Not paid";
+
 "Отменить" = "Cancel";
 "Повторить" = "Repeat";
+
+"ошибся временем" = "wrong time";
+"не туда отправил" = "wrong place";
+"передумал" = "change mind";
+"другое" = "other";
 
 "Ошибка" = "Error";
 "Успех" = "Success";
@@ -102,6 +118,7 @@
 "Оплатить бонусами" = "Pay with bonuses";
 
 "Готово" = "Done";
+"Сегодня" = "Today";
 
 "Заказать" = "Place order";
 "Номер заказа: %@" = "Order number: %@";

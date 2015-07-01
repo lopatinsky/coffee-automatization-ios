@@ -9,117 +9,176 @@
 #import "DBAddressViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBDeliveryViewController.h"
-#import "UIViewController+NavigationBarFix.h"
+
 #import "OrderManager.h"
+#import "DBCompanyInfo.h"
 
-@interface DBAddressViewController () <DBDeliveryViewControllerDataSource, DBVenuesTableViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
-@property (weak, nonatomic) IBOutlet UIView *segmentsHolderView;
-@property (weak, nonatomic) IBOutlet UIView *titleHolderView;
-@property (weak, nonatomic) IBOutlet UIView *horizSeparatorView;
+#import "UIViewController+NavigationBarFix.h"
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+// TODO: check event category for venues table view controller
+// TODO: chech delivery_type_selected event
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@interface DBAddressViewController ()
 
-@property (strong, nonatomic) NSArray *controllers;
+@property (strong, nonatomic) IBOutlet UIView *placeholderView;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
+
+@property (strong, nonatomic) NSMutableDictionary *controllers;
+@property (strong, nonatomic) NSArray *deliveryTypeNames;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *segmentHolderHeightConstraint;
+
 @end
 
 @implementation DBAddressViewController
-NSMutableArray *controllersInfo;
 
-- (instancetype)initWithControllers:(NSArray *)controllers {
-    self = [super init];
-    if (self) {
-        self.controllers = [NSArray arrayWithArray:controllers];
-    }
-    
-    return self;
-}
+#pragma mark - Life-Cycle methods
+
+//- (instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate {
+//    self = [DBAddressViewController new];
+//    self.delegate = delegate;
+//    return self;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.segmentedControl.tintColor = [UIColor whiteColor];
-    [self.segmentedControl addTarget:self
-                              action:@selector(segmentedControlClick:)
-                    forControlEvents:UIControlEventValueChanged];
     
-    controllersInfo = [NSMutableArray new];
+    self.controllers = [NSMutableDictionary new];
+    [self initializeViews];
+    [self initializeControllers];
     
-    for (UIViewController *controller in self.controllers) {
-        if ([controller isKindOfClass:[DBVenuesTableViewController class]]) {
-            /* Self-service */
-            [controllersInfo addObject: @{@"name": @"Самовывоз", @"controller": controller, @"title": @"Точки самовывоза"}];
-            ((DBVenuesTableViewController *)controller).delegate = self;
-        } else if ([controller isKindOfClass:[DBDeliveryViewController class]]) {
-            /* Delivery */
-            [controllersInfo addObject: @{@"name": @"Доставка", @"controller": controller, @"title": @"Адрес доставки"}];
-            [((DBDeliveryViewController *)controller) addToDataSource:self];
+    if ([self.deliveryTypeNames count] > 1) {
+        if ([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping) {
+            if ([[self.segmentedControl titleForSegmentAtIndex:0] isEqualToString:@"Доставка"]) {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
+                self.segmentedControl.selectedSegmentIndex = 0;
+            } else {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[1]];
+                self.segmentedControl.selectedSegmentIndex = 1;
+            }
+        } else {
+            if ([[self.segmentedControl titleForSegmentAtIndex:0] isEqualToString:@"Доставка"]) {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[1]];
+                self.segmentedControl.selectedSegmentIndex = 1;
+            } else {
+                [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
+                self.segmentedControl.selectedSegmentIndex = 0;
+            }
         }
+    } else if ([self.deliveryTypeNames count]) {
+        [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
     }
-    
-    [self.segmentedControl removeAllSegments];
-    for (int i = 0; i < [_controllers count]; ++i) {
-        [self.segmentedControl insertSegmentWithTitle:controllersInfo[i][@"name"] atIndex:i animated:NO];
-    }
-    self.segmentedControl.selectedSegmentIndex = 0;
-    [self setContentForIndex:_segmentedControl.selectedSegmentIndex];
-    
-    self.segmentsHolderView.backgroundColor = [UIColor db_defaultColor];
-    self.horizSeparatorView.backgroundColor = [UIColor db_defaultColor];
-    self.titleHolderView.backgroundColor = [UIColor whiteColor];
-    self.titleLabel.font = [UIFont boldSystemFontOfSize:17.f];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.backgroundView.backgroundColor = [UIColor db_defaultColor];
-    self.backgroundView.alpha = 0.885;
     [self hideNavigationBarShadow];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated {
     [self showNavigationBarShadow];
-}
-
-- (void)segmentedControlClick:(UISegmentedControl *)segmentedControl {
-    [self setContentForIndex:_segmentedControl.selectedSegmentIndex];
-}
-
-- (void)setContentForIndex:(NSUInteger)index {
-    [self changeContentViewWithViewController:controllersInfo[index][@"controller"]];
-    [self changeTitleLabelWithText:controllersInfo[index][@"title"]];
-}
-
-- (void)changeTitleLabelWithText:(NSString *)text {
-    self.titleLabel.text = text;
-}
-
-#pragma mark - FIXME DEBUG VIEW HIERARHY
-- (void)changeContentViewWithViewController:(UIViewController *)controller {
-    controller.view.frame = CGRectMake(0, 0, _contentView.frame.size.width, _contentView.frame.size.height);
-    for (UIView *view in self.contentView.subviews) {
-        [view removeFromSuperview];
+    
+    if ([[[DBDeliverySettings sharedInstance] deliveryType] typeId] == DeliveryTypeIdShipping) {
+        [GANHelper analyzeEvent:@"back_pressed" category:ADDRESS_SCREEN];
+    } else {
+        [GANHelper analyzeEvent:@"back_click" category:VENUES_SCREEN];
     }
-    [self.contentView addSubview:controller.view];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Other methods
+- (void)initializeViews {
+    self.placeholderView.backgroundColor = [UIColor db_defaultColor];
+    self.placeholderView.alpha = 0.885;
+    
+    self.segmentedControl.tintColor = [UIColor whiteColor];
+    self.segmentedControl.selectedSegmentIndex = 0;
+}
+
+- (void)initializeControllers {
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] ||
+        [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
+        DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
+        newController.delegate = self;
+        newController.eventsCategory = VENUES_ORDER_SCREEN;
+        self.controllers[@"Самовывоз"] = @{
+                                            @"controller": newController,
+                                            @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)
+                                           };
+    }
+    
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]) {
+        DBDeliveryViewController *deliveryViewController = [DBDeliveryViewController new];
+        deliveryViewController.delegate = self;
+        self.controllers[@"Доставка"] = @{
+                                           @"controller": deliveryViewController,
+                                           @"deliveryTypeName": NSLocalizedString(@"Адрес доставки", nil)
+                                           };
+    }
+    
+    self.deliveryTypeNames = [self.controllers.allKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSCaseInsensitiveSearch];
+    }];
+    
+    if ([self.deliveryTypeNames count] > 1) {
+        [self.segmentedControl removeAllSegments];
+        [self.deliveryTypeNames enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            [self.segmentedControl insertSegmentWithTitle:obj atIndex:idx animated:NO];
+        }];
+        
+        self.segmentedControl.selectedSegmentIndex = 0;
+    } else {
+        self.placeholderView.hidden = YES;
+        NSMutableArray *placeholderConstraints = [NSMutableArray arrayWithArray:self.placeholderView.constraints];
+        [placeholderConstraints removeObject:self.segmentHolderHeightConstraint];
+        [self.placeholderView removeConstraints:placeholderConstraints];
+        self.segmentHolderHeightConstraint.constant = 0.0f;
+        [self.view layoutIfNeeded];
+    }
+}
+
+- (IBAction)deliveryTypeChanged:(id)sender {
+    if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Самовывоз"]) {
+        [[DBDeliverySettings sharedInstance] selectTakeout];
+        [GANHelper analyzeEvent:@"takeaway_selected" category:ORDER_SCREEN];
+    }
+    if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Доставка"]) {
+        [[DBDeliverySettings sharedInstance] selectShipping];
+        [GANHelper analyzeEvent:@"shipping_selected" category:ORDER_SCREEN];
+    }
+    [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
+}
+
+- (void)displayContentControllerWithTitle:(NSString *)title {
+    if ([title isEqualToString:@"Самовывоз"]) {
+        [[DBDeliverySettings sharedInstance] selectTakeout];
+    }
+    if ([title isEqualToString:@"Доставка"]) {
+        [[DBDeliverySettings sharedInstance] selectShipping];
+    }
+    
+    UIViewController *controller = self.controllers[title][@"controller"];
+    [self setTitle:self.controllers[title][@"deliveryTypeName"]];
+    [self addChildViewController:controller];
+    controller.view.frame = [self.contentView bounds];
+    [self.contentView addSubview:controller.view];
+    [controller didMoveToParentViewController:self];
+}
+
+#pragma mark - KeyboardAppearance protocol FIX IT
+- (void)keyboardWillAppear {
+    self.segmentedControl.userInteractionEnabled = NO;
+}
+
+- (void)keyboardWillDisappear {
+    self.segmentedControl.userInteractionEnabled = YES;
 }
 
 #pragma mark - DBDeliveryViewControllerDataSource
-
 - (UIView *)superView {
     return self.contentView;
 }
 
 #pragma mark - DBVenuesTableViewControllerDelegate
-
 - (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
     if(venue){
         [OrderManager sharedManager].venue = venue;

@@ -12,6 +12,8 @@
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
+@property(strong, nonatomic, readonly) NSString *bundleName;
+
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
 @property(strong, nonatomic, readonly) NSString *webSiteUrl;
@@ -20,7 +22,13 @@
 
 @property(strong, nonatomic, readonly) NSArray *deliveryTypes;
 @property(strong, nonatomic, readonly) NSArray *deliveryTypeIdList;
+
 @property(strong, nonatomic, readonly) NSArray *deliveryCities;
+
+@property(strong, nonatomic, readonly) NSString *companyPushChannel;
+@property(strong, nonatomic, readonly) NSString *clientPushChannel;
+@property(strong, nonatomic, readonly) NSString *venuePushChannel;
+@property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
 - (void)updateInfo;
 
@@ -28,6 +36,9 @@
 + (NSString *)db_companyBaseUrl;
 + (NSNumber *)db_companyDefaultColor;
 + (NSString *)db_companyGoogleAnalyticsKey;
+
++ (NSString *)db_companyParseApplicationKey;
++ (NSString *)db_companyParseClientKey;
 
 + (NSURL *)db_aboutAppUrl;
 + (NSURL *)db_licenceUrl;

@@ -47,6 +47,11 @@
 //=========== Check of Current Order ===========
 
 /**
+ * Shipping total, should be not there
+ */
+@property (nonatomic) double shippingPrice;
+
+/**
  * Discount for order synchronized with server
  */
 @property (nonatomic, readonly) double discount;

@@ -58,6 +58,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated{
     [self sendProfileInfo];
+    [self setString:self.profileCellName.profileCellTextField.text forTextField:self.profileCellName.profileCellTextField];
+    [self setString:self.profileCellPhone.profileCellTextField.text forTextField:self.profileCellPhone.profileCellTextField];
+    [self setString:self.profileCellMail.profileCellTextField.text forTextField:self.profileCellMail.profileCellTextField];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -120,7 +123,13 @@
             cell.profileCellTextField.placeholder = NSLocalizedString(@"Контактный номер телефона", nil);
             cell.profileCellTextField.keyboardType = UIKeyboardTypePhonePad;
             cell.profileCellTextField.returnKeyType = UIReturnKeyNext;
-            cell.profileCellTextField.text = [DBClientInfo sharedInstance].clientPhone;
+            
+            NSString *mask = @"+* (***) ***-**-**";
+            
+            cell.profileCellTextField.text = [AKNumericFormatter formatString:[DBClientInfo sharedInstance].clientPhone usingMask:mask placeholderCharacter:'*'];
+            
+            cell.profileCellTextField.numericFormatter = [AKNumericFormatter formatterWithMask:mask placeholderCharacter:'*'];
+            
             break;
         }
         case 2: {
@@ -159,7 +168,7 @@
     }
     
     if(index == 1){
-        if([textField.text isEqualToString:@""])
+        if([textField.text isEqualToString:@""] || [textField.text isEqualToString:@"+"])
             textField.text = @"+7";
         
         [GANHelper analyzeEvent:@"phone_typing" label:eventLabel category:PROFILE_SCREEN];
@@ -291,9 +300,13 @@
         case 0:
             [DBClientInfo sharedInstance].clientName = string;
             break;
-        case 1:
-            [DBClientInfo sharedInstance].clientPhone = string;
+        case 1:{
+            NSString *newString = [[string componentsSeparatedByCharactersInSet:
+                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                   componentsJoinedByString:@""];
+            [DBClientInfo sharedInstance].clientPhone = newString;
             break;
+        }
         case 2:
             [DBClientInfo sharedInstance].clientMail = string;
             break;

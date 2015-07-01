@@ -9,7 +9,6 @@
 #import "DBNewOrderViewFooter.h"
 #import "OrderManager.h"
 #import "Compatibility.h"
-#import "DBMastercardPromo.h"
 #import "DBDiscountMessageCell.h"
 
 
@@ -32,27 +31,7 @@
     
     //Hide Free Beverage tip
     self.freeBeverageTipView.hidden = YES;
-    
-//    self.freeBeverageTipView.layer.cornerRadius = self.freeBeverageTipView.frame.size.width / 2;
-//    self.freeBeverageTipView.layer.masksToBounds = YES;
-//    self.freeBeverageTipView.backgroundColor = [UIColor whiteColor];
-//    self.freeBeverageTipView.layer.borderColor = [[UIColor db_blueColor] CGColor];
-//    self.freeBeverageTipView.layer.borderWidth = 2.f;
-//    
-//    if([DBMastercardPromo sharedInstance].promoCurrentMugCount > 0){
-//        [self.freeBeverageTipImageView templateImageWithName:@"mug"];
-//        int rad = 8;
-//        UILabel *mugCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.freeBeverageTipImageView.frame.size.width - rad*2, -6, rad*2, rad*2)];
-//        mugCountLabel.layer.cornerRadius = rad;
-//        mugCountLabel.layer.masksToBounds = YES;
-//        mugCountLabel.textColor = [UIColor whiteColor];
-//        mugCountLabel.backgroundColor = [UIColor blackColor];
-//        mugCountLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.f];
-//        mugCountLabel.textAlignment = NSTextAlignmentCenter;
-//        mugCountLabel.text = [NSString stringWithFormat:@"%d", (int)[DBMastercardPromo sharedInstance].promoCurrentMugCount];
-//        [self.freeBeverageTipImageView addSubview:mugCountLabel];
-//    }
-//    self.freeBeverageTipView.hidden = YES;
+
     [self configureStyling];
 }
 

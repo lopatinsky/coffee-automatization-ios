@@ -9,10 +9,12 @@
 #import <CoreData/CoreData.h>
 
 typedef NS_ENUM(int16_t, OrderStatus) {
-    OrderStatusNew,
-    OrderStatusDone,
-    OrderStatusCanceled,
-    OrderStatusCanceledServer
+    OrderStatusNew = 0,
+    OrderStatusConfirmed = 5,
+    OrderStatusOnWay = 6,
+    OrderStatusDone = 1,
+    OrderStatusCanceled = 2,
+    OrderStatusCanceledBarista = 3
 };
 
 typedef NS_ENUM(int16_t, PaymentType) {
@@ -33,15 +35,25 @@ typedef NS_ENUM(int16_t, PaymentType) {
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSString *timeString;
 @property (nonatomic, strong) NSData *dataItems; //array of JSON-encoded positions
+@property (nonatomic, strong) NSData *dataGifts; //array of JSON-encoded gift positions
+
 @property (nonatomic) OrderStatus status;
+
+@property (nonatomic, strong) NSNumber *deliveryType;
 @property (nonatomic, strong) Venue *venue;
+@property (nonatomic, strong) NSString *shippingAddress;
+
 @property (nonatomic) PaymentType paymentType;
 
 //not stored
 @property (nonatomic, readonly) NSArray *items;
+@property (nonatomic, readonly) NSArray *bonusItems;
 @property (nonatomic, readonly) NSString *formattedTimeString;
 
 - (instancetype)init:(BOOL)stored;
+- (instancetype)initNewOrderWithDict:(NSDictionary *)dict;
+- (instancetype)initWithResponseDict:(NSDictionary *)dict;
+- (void)synchronizeWithResponseDict:(NSDictionary *)dict;
 
 + (NSArray *)allOrders;
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;

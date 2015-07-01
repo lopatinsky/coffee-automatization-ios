@@ -6,240 +6,363 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
+#import "GANHelper.h"
+
+#import "DBShippingManager.h"
 #import "DBDeliveryViewController.h"
+#import "DBTimePickerView.h"
+#import "UIColor+Brandbook.h"
+
 #import "QuartzCore/QuartzCore.h"
 
-@interface DBDeliveryViewController () <UITextFieldDelegate>
-@property (weak, nonatomic) UIView *superLayer;
-@property (weak, nonatomic) id<DBDeliveryViewControllerDataSource> dataSource;
+typedef enum : NSUInteger {
+    StreetKeyboard,
+    Commentkeyboard,
+    NoKeyboard,
+} KeyboardStatus;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DBTimePickerViewDelegate>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomToLineConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *cityWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopToFirstHorizSeparatorViewContstraint;
 
-@property (weak, nonatomic) IBOutlet UITextField *cityTextField;
-@property (weak, nonatomic) IBOutlet UITextField *streetTextField;
-@property (weak, nonatomic) IBOutlet UITextField *appartmentTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCityViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintStreetViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCommentViewHeight;
 
-@property (weak, nonatomic) IBOutlet UIView *firstHorizSeparatorView;
-@property (weak, nonatomic) IBOutlet UIView *secondHorizSeparatorView;
-@property (weak, nonatomic) IBOutlet UIView *verticalSeparatorView;
+@property (nonatomic) double initialCityViewHeight;
+@property (nonatomic) double initialStreetViewHeight;
+@property (nonatomic) double initialCommentViewHeight;
 
-@property (weak, nonatomic) IBOutlet UIView *streetIndicatorView;
-@property (weak, nonatomic) IBOutlet UIView *cityIndicatorView;
+#pragma mark - Fake Separators
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint2;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint4;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *fakeSeparatorConstraint8;
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *fakeSeparator;
+@property (strong, nonatomic) IBOutlet UIView *fakeSeparator2;
+@property (strong, nonatomic) IBOutlet UIView *fakeSeparator4;
+@property (strong, nonatomic) IBOutlet UIView *fakeSeparator8;
 
-@property (strong, nonatomic) NSMutableArray *indicatorsForTextFields;
+#pragma mark - Text Fields
+@property (strong, nonatomic) IBOutlet UILabel *cityTextLabel;
+@property (strong, nonatomic) IBOutlet UITextField *streetTextField;
+@property (strong, nonatomic) IBOutlet UITextField *apartmentTextField;
+@property (strong, nonatomic) IBOutlet UITextField *commentTextField;
+
+#pragma mark - Useful variables
+@property (strong, nonatomic) IBOutlet UIView *streetIndicatorView;
+@property (strong, nonatomic) IBOutlet UIView *commentIndicatorView;
+@property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
+@property (strong, nonatomic) IBOutlet UIView *deliveryView;
+@property (strong, nonatomic) DBTimePickerView *cityPickerView;
+@property (strong, nonatomic) NSArray *addressSuggestions;
+@property (strong, nonatomic) DBShippingManager *shippingManager;
+@property (nonatomic) BOOL keyboardIsHidden;
+
 @end
 
 @implementation DBDeliveryViewController
-UITextField *currentTextField;
-CGSize keyboardSize;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.shippingManager = [DBShippingManager sharedManager];
+    
+    if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
+        self.tapOnCityLabelRecognizer.enabled = NO;
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestAddressSuggestions) name:DeliveryManagerDidRecieveSuggestionsNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear) name:UIKeyboardWillHideNotification object:nil];
+    
+    [self.streetTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.apartmentTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    [self.commentTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.initialCityViewHeight = self.constraintCityViewHeight.constant;
+    self.initialStreetViewHeight = self.constraintStreetViewHeight.constant;
+    self.initialCommentViewHeight = self.constraintCommentViewHeight.constant;
+    
+    [self initializeFakeSeparators];
+    [self initializePlaceholders];
+    [self initializeViews];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self reload];
+}
+
+#pragma mark - Life-cycle
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self getSuperView];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.cityWidthConstraint.constant = [[UIScreen mainScreen] bounds].size.width - 24.f;
-    self.bottomToLineConstraint.constant = _superLayer.frame.size.height - _secondHorizSeparatorView.frame.origin.y - 1;
-    [self registerForKeyboardNotifications];
-    
-    [self initTextFields];
-    [self initIndicatorsViews];
-    [self initSeparatorsViews];
-    [self initTableView];
-    
-    self.indicatorsForTextFields = [NSMutableArray new];
-    NSDictionary *cityTF = @{@"textField": _cityTextField,
-                             @"indicator": _cityIndicatorView};
-    [self.indicatorsForTextFields addObject:cityTF];
-    
-    NSDictionary *streetTF = @{@"textField": _streetTextField,
-                               @"indicator": _streetIndicatorView};
-    [self.indicatorsForTextFields addObject:streetTF];
-    
-    [self hideIndicatorsIfNeeded];
+- (IBAction)showPickerWithCities:(id)sender {
+    self.cityPickerView.items = [self.shippingManager arrayOfCities];
+    self.cityPickerView.selectedItem = [[self.shippingManager arrayOfCities] indexOfObject:self.shippingManager.selectedAddress.city];
+    [self.cityPickerView showOnView:self.navigationController.view];
+    [GANHelper analyzeEvent:@"city_spinner_show" category:ADDRESS_SCREEN];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Other functions
 
-- (void)registerForKeyboardNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeShown:)
-                                                 name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-
-// Called when the UIKeyboardDidShowNotification is sent.
-- (void)keyboardWillBeShown:(NSNotification*)aNotification {
-    NSDictionary* info = [aNotification userInfo];
-//    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    keyboardSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-    if (currentTextField == _streetTextField) {
-        CGPoint scrollPoint = CGPointMake(0.0, _firstHorizSeparatorView.frame.origin.y + 1.f);
-        [self.scrollView setContentOffset:scrollPoint animated:NO];
-        
-        return;
-    } else if (currentTextField == _cityTextField) {
-        CGPoint scrollPoint = CGPointMake(0.0, 0.0);
-        [self.scrollView setContentOffset:scrollPoint animated:NO];
-        
-        return;
-    }
-    
-    // If active text field is hidden by keyboard, scroll it so it's visible
-    // Your application might not need or want this behavior.
-    CGRect aRect = self.view.frame;
-    aRect.size.height -= keyboardSize.height;
-    if (!CGRectContainsPoint(aRect, currentTextField.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, currentTextField.frame.origin.y - keyboardSize.height);
-        [self.scrollView setContentOffset:scrollPoint animated:NO];
-    }
-}
-
-// Called when the UIKeyboardWillHideNotification is sent
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification {
-    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
-}
-
-- (void)hideIndicatorsIfNeeded {
-    for (NSDictionary *dict in _indicatorsForTextFields) {
-        [self hideIndicatorForDictionary:dict];
-    }
-}
-
-- (void)hideIndicatorIfNeededForTextField:(UITextField *)textField {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"textField == %@", textField];
-    NSDictionary *dictionary = [[_indicatorsForTextFields filteredArrayUsingPredicate:predicate] firstObject];
-    
-    [self hideIndicatorForDictionary:dictionary];
-}
-
-- (void)hideIndicatorForDictionary:(NSDictionary *)dict {
-    if (dict) {
-        if ([((UITextField *)dict[@"textField"]).text isEqualToString:@""]) {
-            ((UIView *)dict[@"indicator"]).hidden = NO;
-        } else {
-            ((UIView *)dict[@"indicator"]).hidden = YES;
-        }
-    }
-}
-
-- (void)hideTableViewIfNeeded {
-    if (currentTextField) {
-        [self hideTableView:NO];
-        UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0);
-        self.scrollView.contentInset = contentInsets;
-        self.scrollView.scrollIndicatorInsets = contentInsets;
-        CGPoint scrollPoint;
-        if (currentTextField == _cityTextField) {
-            self.tableViewTopToFirstHorizSeparatorViewContstraint.constant = 0;
-            scrollPoint = CGPointMake(0.0, 0.0);
-        } else if (currentTextField == _streetTextField || currentTextField == _appartmentTextField) {
-            self.tableViewTopToFirstHorizSeparatorViewContstraint.constant = 51;
-            scrollPoint = CGPointMake(0.0, _firstHorizSeparatorView.frame.origin.y + 1.f);
-        }
-        [self.scrollView setContentOffset:scrollPoint animated:YES];
+- (void)reload{
+    self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
+    self.streetTextField.text = [self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeAutocomplete];
+    if(self.streetTextField.text.length > 0){
+        self.streetIndicatorView.hidden = YES;
     } else {
-        [self hideTableView:YES];
-        [self keyboardWillBeHidden:nil];
+        self.streetTextField.hidden = NO;
+    }
+    
+    self.apartmentTextField.text = self.shippingManager.selectedAddress.apartment;
+    self.commentTextField.text = self.shippingManager.selectedAddress.comment;
+    if (self.commentTextField.text.length > 0){
+        self.commentIndicatorView.hidden = YES;
+    } else {
+        self.commentIndicatorView.hidden = NO;
     }
 }
 
-- (void)hideTableView:(BOOL)toHide {
-    if (toHide) {
-        self.tableView.hidden = YES;
-        self.scrollView.scrollEnabled = YES;
-    } else {
-        self.tableView.hidden = NO;
-        self.scrollView.scrollEnabled = NO;
-    }
+- (void)requestAddressSuggestions {
+    self.addressSuggestions = [self.shippingManager addressSuggestions];
+    [self.addressSuggestionsTableView reloadData];
+    
+    [GANHelper analyzeEvent:@"autocomplete_list_show" number:@([self.addressSuggestions count]) category:ADDRESS_SCREEN];
+}
+
+- (void)initializeFakeSeparators {
+    self.fakeSeparatorConstraint.constant = 1. / [[UIScreen mainScreen] scale];
+    self.fakeSeparatorConstraint2.constant = 1. / [[UIScreen mainScreen] scale];
+    self.fakeSeparatorConstraint4.constant = 1. / [[UIScreen mainScreen] scale];
+    self.fakeSeparatorConstraint8.constant = 1. / [[UIScreen mainScreen] scale];
+    
+    self.fakeSeparator.backgroundColor = [UIColor db_defaultColor];
+    self.fakeSeparator2.backgroundColor = [UIColor db_defaultColor];
+    self.fakeSeparator4.backgroundColor = [UIColor db_defaultColor];
+    self.fakeSeparator8.backgroundColor = [UIColor db_defaultColor];
+}
+
+- (void)initializePlaceholders {
+//    NSString *localizedString = NSLocalizedString(@"Улица, дом", nil);
+//    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
+//    [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
+//    [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, [localizedString length])];
+//    
+//    localizedString = NSLocalizedString(@"Кв/Офис", nil);
+//    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
+//    [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
+//    [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, [localizedString length])];
+    
+    self.streetTextField.placeholder = NSLocalizedString(@"Улица, дом", nil);
+    self.apartmentTextField.placeholder = NSLocalizedString(@"Кв/Офис", nil);
+    self.commentTextField.placeholder = NSLocalizedString(@"Комментарий", nil);
+}
+
+- (void)initializeViews {
+    self.addressSuggestionsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.streetIndicatorView.layer.cornerRadius = 4.0;
+    self.streetIndicatorView.clipsToBounds = YES;
+    self.streetIndicatorView.backgroundColor = [UIColor db_defaultColor];
+    
+    self.commentIndicatorView.layer.cornerRadius = 4.0;
+    self.commentIndicatorView.clipsToBounds = YES;
+    self.commentIndicatorView.backgroundColor = [UIColor db_defaultColor];
+    
+    self.streetTextField.enablesReturnKeyAutomatically = NO;
+    self.apartmentTextField.enablesReturnKeyAutomatically = NO;
+    self.commentTextField.enablesReturnKeyAutomatically = NO;
+    
+    self.cityPickerView = [[DBTimePickerView alloc] initWithDelegate:self];
+    self.cityPickerView.type = DBTimePickerTypeItems;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[self view] endEditing:YES];
+}
+
+- (void)keyboardWillAppear {
+    self.keyboardIsHidden = NO;
+}
+
+- (void)keyboardWillDisappear {
+    self.keyboardIsHidden = YES;
+}
+
+- (void)switchToCompactMode{
+    [UIView animateWithDuration:0.1 animations:^{
+        self.constraintCityViewHeight.constant = 0.f;
+        self.constraintCommentViewHeight.constant = 0.f;
+        [self.view layoutIfNeeded];
+    }];
+}
+
+- (void)switchToFullMode{
+    [UIView animateWithDuration:0.1 animations:^{
+        self.constraintCityViewHeight.constant = self.initialCityViewHeight;
+        self.constraintCommentViewHeight.constant = self.initialCommentViewHeight;
+        [self.view layoutIfNeeded];
+    }];
 }
 
 #pragma mark - UITextFieldDelegate
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    currentTextField = textField;
-    [self hideTableViewIfNeeded];
+    [self.delegate keyboardWillAppear];
+    
+    self.addressSuggestionsTableView.hidden = YES;
+    
+    if (textField == self.streetTextField) {
+        [self switchToCompactMode];
+        self.addressSuggestionsTableView.hidden = NO;
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    currentTextField = nil;
-    [self hideIndicatorsIfNeeded];
-    [self hideTableView:YES];
+    [self switchToFullMode];
+    
+    [self.delegate keyboardWillDisappear];
+    if(textField == self.streetTextField){
+        if ([textField.text isEqualToString:@""]) {
+            self.streetIndicatorView.hidden = NO;
+        } else {
+            self.streetIndicatorView.hidden = YES;
+        }
+    }
+    
+    if (textField == self.apartmentTextField) {
+        [self.shippingManager setApartment:self.apartmentTextField.text];
+    }
+    
+    if(textField == self.commentTextField){
+        if ([textField.text isEqualToString:@""]) {
+            self.commentIndicatorView.hidden = NO;
+        } else {
+            self.commentIndicatorView.hidden = YES;
+        }
+    }
+}
+
+- (void)textFieldDidChange:(UITextField *)sender {
+    if (sender == self.streetTextField) {
+        if ([self.streetTextField.text isEqualToString:@""]) {
+            self.streetIndicatorView.hidden = NO;
+        } else {
+            self.streetIndicatorView.hidden = YES;
+        }
+        [self.shippingManager setAddress:self.streetTextField.text];
+        [self.shippingManager requestSuggestions];
+        
+        [GANHelper analyzeEvent:@"street_text_changed" label:self.streetTextField.text category:ADDRESS_SCREEN];
+    }
+    
+    if (sender == self.apartmentTextField) {
+        [self.shippingManager setApartment:self.apartmentTextField.text];
+        [GANHelper analyzeEvent:@"apartment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
+    }
+    
+    if (sender == self.commentTextField) {
+        if ([self.commentTextField.text isEqualToString:@""]) {
+            self.commentIndicatorView.hidden = NO;
+        } else {
+            self.commentIndicatorView.hidden = YES;
+        }
+        [self.shippingManager setComment:self.commentTextField.text];
+        [GANHelper analyzeEvent:@"comment_text_changed" label:self.apartmentTextField.text category:ADDRESS_SCREEN];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    [self hideTableView:YES];
+    
+    self.addressSuggestionsTableView.hidden = YES;
+    [self.delegate keyboardWillDisappear];
+    
+    [GANHelper analyzeEvent:@"confirm_pressed" label:[self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull] category:ADDRESS_SCREEN];
     
     return YES;
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    [self hideIndicatorIfNeededForTextField:textField];
-//    
-//    return YES;
-//}
-
-- (void)addToDataSource:(id<DBDeliveryViewControllerDataSource>)dataSource {
-    self.dataSource = dataSource;
-}
-
-#pragma mark - DBDeliveryViewControllerDataSource
-
-- (void)getSuperView {
-    self.superLayer = [_dataSource superView];
-}
-
-#pragma mark - initiallizations
-
-- (void)initTextFields {
-    self.cityTextField.delegate = self;
-    self.streetTextField.delegate = self;
-    self.appartmentTextField.delegate = self;
+#pragma mark - DBTimePickerViewDelegate
+- (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index {
+    NSString *city = [self.shippingManager arrayOfCities][index];
+    [self.shippingManager setCity:city];
+    [self reload];
     
-//    self.cityTextField.font = [UIFont boldSystemFontOfSize:17.f];
+    [GANHelper analyzeEvent:@"city_spinner_selected" label:city category:ADDRESS_SCREEN];
+}
+
+- (BOOL)db_shouldHideTimePickerView {
+    self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
     
-    currentTextField = _cityTextField;
+    [GANHelper analyzeEvent:@"city_spinner_closed" category:ADDRESS_SCREEN];
+    
+    return YES;
 }
 
-- (void)initIndicatorsViews {
-    NSArray *indicators = [NSArray arrayWithObjects:_cityIndicatorView, _streetIndicatorView, nil];
-    for (UIView *indicator in indicators) {
-        indicator.backgroundColor = [UIColor redColor];
-        indicator.layer.cornerRadius = 5.f;
-        indicator.layer.masksToBounds = YES;
+#pragma mark - UIPickerViewDataSource
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [[self.shippingManager arrayOfCities] count];
+}
+
+#pragma mark - UIPickerViewDelegate
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return [self.shippingManager arrayOfCities][row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.addressSuggestions count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SuggestionCell"];
+    if(!cell){
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SuggestionCell"];
+        [cell.textLabel setFont:[UIFont fontWithName:@"HelveticaNeue" size:15.0]];
     }
+    
+    DBShippingAddress *suggestion = self.addressSuggestions[indexPath.row];
+    cell.textLabel.text = [suggestion formattedAddressString:DBAddressStringModeShort];
+   
+    return cell;
 }
 
-- (void)initSeparatorsViews {
-    NSArray *separators = [NSArray arrayWithObjects:_firstHorizSeparatorView, _secondHorizSeparatorView, _verticalSeparatorView, nil];
-    for (UIView *separator in separators) {
-        separator.backgroundColor = [UIColor db_defaultColor];
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.addressSuggestionsTableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [self.shippingManager selectSuggestion:self.addressSuggestions[indexPath.row]];
+    [self reload];
+    
+    self.addressSuggestions = @[];
+    [self.addressSuggestionsTableView reloadData];
+    self.addressSuggestionsTableView.hidden = NO;
+    
+    if (self.keyboardIsHidden) {
+        self.addressSuggestionsTableView.hidden = YES;
     }
+    
+    [GANHelper analyzeEvent:@"autocomplete_list_selected" label:[self.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull] category:ADDRESS_SCREEN];
 }
 
-- (void)initTableView {
-    self.tableView.backgroundColor = [UIColor whiteColor];
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [self.streetTextField resignFirstResponder];
+    [self.apartmentTextField resignFirstResponder];
+    [self.commentTextField resignFirstResponder];
+    [self.delegate keyboardWillDisappear];
 }
 
 @end

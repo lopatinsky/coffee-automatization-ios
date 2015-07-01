@@ -8,7 +8,7 @@
 
 #import "NSDictionary+NSNullRepresentation.h"
 
-@implementation NSDictionary (NSNullRepresentation)
+@implementation NSDictionary (DBExtension)
 
 - (id)getValueForKey:(NSString *)key{
     id value = [self valueForKey:key];

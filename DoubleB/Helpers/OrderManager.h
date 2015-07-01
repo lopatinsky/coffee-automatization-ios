@@ -16,22 +16,14 @@ extern NSString* const kDBDefaultsPaymentType;
 @class OrderItem;
 @class DBMenuPosition;
 @class DBMenuBonusPosition;
+@class DBDeliverySettings;
 
-//typedef NS_ENUM(NSUInteger, DBBeverageMode) {
-//    DBBeverageModeTakeaway = 0,
-//    DBBeverageModeInCafe = 1
-//};
 
 /**
 * Manages order
 * Only one order can be managed at a time
 */
 @interface OrderManager : NSObject
-
-/**
- * Selected type of delivery
- */
-@property (nonatomic, strong) DBDeliveryType *deliveryType;
 
 /**
 * Selected venue for order(if not shipping)
@@ -48,11 +40,6 @@ extern NSString* const kDBDefaultsPaymentType;
 * User's location
 */
 @property (nonatomic, strong) CLLocation *location;
-
-/**
-* Current order's ID fetched from server
-*/
-@property (nonatomic, strong) NSString *orderId;
 
 /**
 * Selected payment type
@@ -92,11 +79,6 @@ extern NSString* const kDBDefaultsPaymentType;
 
 - (void)reloadTotal;
 
-/**
-* Register new order on server in order to get orderID
-*/
-- (void)registerNewOrderWithCompletionHandler:(void(^)(BOOL success, NSString *orderId))completionHandler;
-
 - (NSInteger)addPosition:(DBMenuPosition *)position;
 
 // Return index of items that was merged into current item
@@ -122,6 +104,27 @@ extern NSString* const kDBDefaultsPaymentType;
 
 + (NSUInteger)totalCountForItems:(NSArray *)items;
 
+@end
+
+@interface DBDeliverySettings : NSObject
+
++ (instancetype)sharedInstance;
+
+/**
+ * Selected type of delivery
+ */
+@property (strong, nonatomic, readonly) DBDeliveryType *deliveryType;
+
+/**
+ * Only use when switch between inRestaurant and takeaway;
+ */
+- (void)selectDeliveryType:(DBDeliveryType *)type;
+
+/**
+ * Only use when switch between shipping and not shipping;
+ */
+- (void)selectShipping;
+- (void)selectTakeout;
 
 #pragma mark - Time management
 
@@ -142,3 +145,4 @@ extern NSString* const kDBDefaultsPaymentType;
 @property (nonatomic, strong) NSDate *minimumTime;
 
 @end
+

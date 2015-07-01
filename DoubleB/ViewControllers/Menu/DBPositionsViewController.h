@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-/**
-* First screen = Menu screen
-*/
-@interface DBPositionsViewController : UIViewController
+@interface DBPositionsViewController : UITableViewController
 
 @end

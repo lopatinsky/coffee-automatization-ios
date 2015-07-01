@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBAddressViewController : UIViewController
-- (instancetype)initWithControllers:(NSArray *)controllers;
+#import "DBVenuesTableViewController.h"
+#import "DBDeliveryViewController.h"
+
+@interface DBAddressViewController : UIViewController<KeyboardAppearance>
+
+//@property (strong, nonatomic) id<DBVenuesTableViewControllerDelegate> __nonnull delegate;
+//
+//- (nonnull instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate;
+
 @end
