@@ -30,7 +30,6 @@
 
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
-@property (strong, nonatomic) DBMastercardPromo *mastercardPromo;
 @property (strong, nonatomic) DBPayPalManager *payPalManager;
  
 @end
@@ -319,12 +318,14 @@
             }
         } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [_payPalManager bindPayPal:^(BOOL success, NSString *message) {
+            [_payPalManager bindPayPal:^(DBPayPalBindingState state, NSString *message) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 
-                if(success){
+                if(state == DBPayPalBindingStateDone){
                     [self.tableView reloadData];
-                } else {
+                }
+                
+                if(state == DBPayPalBindingStateFailure){
                     if(!message)
                         message = @"Произошла непредвиденная ошибка! Пожалуйста, попробуйте еще раз!";
                     

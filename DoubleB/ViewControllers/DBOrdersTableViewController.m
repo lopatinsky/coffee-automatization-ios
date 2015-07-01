@@ -139,59 +139,10 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderId == %@", newOrderId];
     Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
     
-//    // Time
-//    NSString *dateString = [orderDictionary getValueForKey:@"delivery_time_str"];
-//    NSString *timeSlot = [orderDictionary getValueForKey:@"delivery_slot_str"];
-//    
-//    NSDateFormatter *formatter = [NSDateFormatter new];
-//    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-//    NSDate *date = [formatter dateFromString:dateString];
     
     if(sameOrder){
-//        sameOrder.status = [orderDictionary[@"status"] intValue];
-//
-//        sameOrder.time = date;
-//        if(timeSlot)
-//            sameOrder.timeString = timeSlot;
         [sameOrder synchronizeWithResponseDict:orderDictionary];
     } else {
-<<<<<<< HEAD
-        Order *ord = [[Order alloc] init:YES];
-        ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
-        ord.total = orderDictionary[@"total"];
-
-        ord.time = date;
-        if(timeSlot)
-            ord.timeString = timeSlot;
-        
-        NSMutableArray *items = [[NSMutableArray alloc] init];
-        for (NSDictionary *itemDict in orderDictionary[@"items"]) {
-            [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
-        }
-        ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
-        ord.paymentType = [orderDictionary[@"payment_type_id"] intValue];
-        ord.status = [orderDictionary[@"status"] intValue];
-        ord.venue = [Venue venueById:orderDictionary[@"venue_id"]];
-=======
-//        Order *ord = [[Order alloc] initWithResponseDict:responseObject];
-//        Order *ord = [[Order alloc] init:YES];
-//        ord.orderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
-//        ord.total = orderDictionary[@"total"];
-//
-//        ord.time = date;
-//        if(timeSlot)
-//            ord.timeString = timeSlot;
-//        
-//        NSMutableArray *items = [[NSMutableArray alloc] init];
-//        for (NSDictionary *itemDict in orderDictionary[@"items"]) {
-//            [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict]];
-//        }
-//        ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
-//        ord.paymentType = [orderDictionary[@"payment_type_id"] intValue] + 1;
-//        ord.status = [orderDictionary[@"status"] intValue];
-//        ord.venue = [Venue venueById:orderDictionary[@"venue_id"]];
->>>>>>> master
-        
         Order *ord = [[Order alloc] initWithResponseDict:orderDictionary];
         
         [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];

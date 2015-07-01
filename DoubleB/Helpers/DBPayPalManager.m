@@ -18,7 +18,7 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
 @interface DBPayPalManager ()<PayPalFuturePaymentDelegate>
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
 
-@property (copy, nonatomic) void(^successBlock)(BOOL, NSString*);
+@property (copy, nonatomic) void(^successBlock)(DBPayPalBindingState, NSString*);
 @end
 
 @implementation DBPayPalManager
@@ -57,7 +57,7 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
     return [PayPalMobile clientMetadataID];
 }
 
-- (void)bindPayPal:(void(^)(BOOL success, NSString *message))callback{
+- (void)bindPayPal:(void(^)(DBPayPalBindingState state, NSString *message))callback{
     self.successBlock = callback;
     [self obtainConsent];
 }
@@ -115,7 +115,7 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
                                  self.loggedIn = YES;
                                  
                                  if(_successBlock)
-                                     _successBlock(YES, nil);
+                                     _successBlock(DBPayPalBindingStateDone, nil);
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
@@ -126,13 +126,16 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
                                  }
                                  
                                  if(_successBlock)
-                                     _successBlock(NO, message);
+                                     _successBlock(DBPayPalBindingStateFailure, message);
                              }];
 }
 
 #pragma mark - PayPalFuturePaymentDelegate methods
 
 - (void)payPalFuturePaymentDidCancel:(PayPalFuturePaymentViewController *)futurePaymentViewController {
+    if(self.successBlock)
+        self.successBlock(DBPayPalBindingStateCancelled, nil);
+    
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
         [self.delegate payPalManager:self shouldDismissViewController:futurePaymentViewController];
     }

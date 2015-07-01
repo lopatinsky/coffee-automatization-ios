@@ -621,7 +621,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self startUpdatingPromoInfo];
     [self reloadContinueButton];
     [self reloadPaymentType];
-    [self reloadCard];
 
     if ([[OrderManager sharedManager] positionsCount] == 1) {
         self.tableView.alwaysBounceVertical = NO;
@@ -1005,16 +1004,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
             break;
        
-            
-        case PaymentTypeExtraType:
-            if(_orderManager.totalCount > [DBMastercardPromo sharedInstance].promoCurrentMugCount){
-                _orderManager.paymentType = PaymentTypeNotSet;
-                [self reloadPaymentType];
-            } else {
-                self.orderFooter.labelCard.textColor = [UIColor blackColor];
-                self.orderFooter.labelCard.text = NSLocalizedString(@"Бесплатные кружки", nil);
-            }
-            break;
         case PaymentTypePayPal:
             if([DBPayPalManager sharedInstance].loggedIn){
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];

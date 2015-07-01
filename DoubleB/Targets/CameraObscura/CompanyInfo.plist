@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Parse</key>
+	<dict>
+		<key>applicationId</key>
+		<string>4YgNDVaO1VKYelnaE9RTzJAdofiSn3N2Y5xt44wD</string>
+		<key>clientKey</key>
+		<string>vD6ZPXn7hEcCTIizGz9vYzO0Xx2fXbNwxx3TegbM</string>
+	</dict>
 	<key>CompanyGAKey</key>
 	<string>UA-62529990-10</string>
 	<key>CompanyColor</key>

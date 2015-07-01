@@ -172,6 +172,8 @@
 - (void)loadFromMemory{
     NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyInfo];
     
+    _applicationName = [info getValueForKey:@"applicationName"] ?: @"";
+    
     NSData *deliveryTypesData = info[@"deliveryTypes"];
     if(deliveryTypesData){
         _deliveryTypes = [NSKeyedUnarchiver unarchiveObjectWithData:deliveryTypesData] ?: @[];
@@ -194,7 +196,8 @@
                                    @"_venuePushChannel":_venuePushChannel,
                                    @"_orderPushChannel":_orderPushChannel};
     
-    NSDictionary *info = @{@"deliveryTypes": deliveryTypesData,
+    NSDictionary *info = @{@"applicationName": _applicationName,
+                           @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
                            @"_deliveryCities": _deliveryCities};
     

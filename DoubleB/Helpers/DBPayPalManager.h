@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, DBPayPalBindingState) {
+    DBPayPalBindingStateCancelled = 0,
+    DBPayPalBindingStateDone = 1,
+    DBPayPalBindingStateFailure
+};
+
 @class DBPayPalManager;
 @protocol DBPayPalManagerDelegate <NSObject>
 - (void)payPalManager:(DBPayPalManager *)manager shouldPresentViewController:(UIViewController *)controller;
@@ -24,7 +30,7 @@
 
 + (instancetype)sharedInstance;
 
-- (void)bindPayPal:(void(^)(BOOL success, NSString *message))callback;
+- (void)bindPayPal:(void(^)(DBPayPalBindingState state, NSString *message))callback;
 - (void)unbindPayPal:(void(^)())callback;
 
 @end
