@@ -19531,7 +19531,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = DashiniPirozhki;
-				PROVISIONING_PROFILE = "eea805ec-fcbf-4942-9aed-e0539f12b0ac";
+				PROVISIONING_PROFILE = "d8e08f93-dce4-4ea8-929f-ae7c369696b0";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -19993,7 +19993,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Chikarabar;
-				PROVISIONING_PROFILE = "6de02a73-0f78-411a-9c45-ea4ff5edfbee";
+				PROVISIONING_PROFILE = "c0684ee0-7517-402d-9425-bd5aea198144";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -20672,7 +20672,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "9ab8d793-3494-4b62-81ce-2caacfa05c51";
+				PROVISIONING_PROFILE = "868136a9-136c-4d41-ae83-f6d5bad68b11";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -20866,7 +20866,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CameraObscura;
-				PROVISIONING_PROFILE = "f7020043-99d2-40ac-be25-af76969c9f46";
+				PROVISIONING_PROFILE = "124a4117-ca12-4443-bc57-f0e9ae5a25ae";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

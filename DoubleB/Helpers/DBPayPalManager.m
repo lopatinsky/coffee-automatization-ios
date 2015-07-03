@@ -15,7 +15,7 @@
 
 NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
 
-@interface DBPayPalManager ()<PayPalFuturePaymentDelegate>
+@interface DBPayPalManager ()<PayPalFuturePaymentDelegate, PayPalProfileSharingDelegate>
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
 
 @property (copy, nonatomic) void(^successBlock)(DBPayPalBindingState, NSString*);
@@ -87,12 +87,18 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
 
 
 - (void)obtainConsent {
-    PayPalFuturePaymentViewController *fpViewController;
-    fpViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration
-                                                                               delegate:self];
+    PayPalProfileSharingViewController *psViewController;
+    NSSet *scopes = [NSSet setWithArray:@[kPayPalOAuth2ScopeEmail, kPayPalOAuth2ScopeAddress, kPayPalOAuth2ScopePhone]];
+    
+    psViewController = [[PayPalProfileSharingViewController alloc] initWithScopeValues:scopes
+                                                                         configuration:_payPalConfiguration
+                                                                              delegate:self];
+//    PayPalFuturePaymentViewController *fpViewController;
+//    fpViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration
+//                                                                               delegate:self];
     
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldPresentViewController:)]){
-        [self.delegate payPalManager:self shouldPresentViewController:fpViewController];
+        [self.delegate payPalManager:self shouldPresentViewController:psViewController];
     }
 }
 
@@ -147,6 +153,25 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
     
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
         [self.delegate payPalManager:self shouldDismissViewController:futurePaymentViewController];
+    }
+}
+
+#pragma mark - PayPalProfileSharingDelegate methods
+
+- (void)userDidCancelPayPalProfileSharingViewController:(PayPalProfileSharingViewController *)profileSharingViewController{
+    if(self.successBlock)
+        self.successBlock(DBPayPalBindingStateCancelled, nil);
+    
+    if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
+        [self.delegate payPalManager:self shouldDismissViewController:profileSharingViewController];
+    }
+}
+
+- (void)payPalProfileSharingViewController:(PayPalProfileSharingViewController *)profileSharingViewController userDidLogInWithAuthorization:(NSDictionary *)profileSharingAuthorization{
+    [self sendAuthorizationToServer:profileSharingAuthorization];
+    
+    if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
+        [self.delegate payPalManager:self shouldDismissViewController:profileSharingViewController];
     }
 }
 
