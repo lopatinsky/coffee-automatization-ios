@@ -5,14 +5,14 @@
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
-		<string>ub5EOJeYGYNgaXtobu2QmlrRHB58D4cLMbKYEVOF</string>
+		<string>DId4pGbcAY4eJzWqgmImEgeIKQ1PBBhXqyrGfaa4</string>
 		<key>clientKey</key>
-		<string>DoVDTYuQzW0H8Pg9tbfAp4ZHO3ypVQJKd6Za4bvv</string>
+		<string>4555WZ33iZAk6L4iFwI16Ppp3x7IdQw93CiRsxDA</string>
 	</dict>
 	<key>CompanyGAKey</key>
-	<string></string>
+	<string>UA-62529990-41</string>
 	<key>CompanyColor</key>
-	<integer>4293001241</integer>
+	<integer>4285150221</integer>
 	<key>BaseUrl</key>
 	<string>http://automation-demo.appspot.com/</string>
 </dict>
