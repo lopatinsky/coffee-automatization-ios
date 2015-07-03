@@ -16,4 +16,7 @@
 
 + (NSString *)baseUrl;
 
+- (void)enableCompanyHeader:(NSString *)companyHeader;
+- (void)disableCompanyHeader;
+
 @end

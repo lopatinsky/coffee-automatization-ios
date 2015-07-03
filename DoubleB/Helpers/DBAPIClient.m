@@ -9,9 +9,13 @@
 #import "DBAPIClient.h"
 #import "DBCompanyInfo.h"
 
-@implementation DBAPIClient {
+NSString *const kDBDefaultsCompanyNamespaceHeader = @"kDBCompanyNamespaceHeader";
 
-}
+@interface DBAPIClient ()
+@property (strong, nonatomic) AFHTTPRequestSerializer *reqSerializer;
+@end
+
+@implementation DBAPIClient
 
 + (instancetype)sharedClient {
     static DBAPIClient *_sharedClient = nil;
@@ -36,12 +40,36 @@
     [self setRequestSerializer:requestSerializer];
     
     [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
+    
+    NSString *companyNamespace = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader];
+    if(companyNamespace.length > 0){
+        if (self.reqSerializer) {
+            [self.reqSerializer setValue:companyNamespace forHTTPHeaderField:@"namespace"];
+        }
+    }
 
     return self;
 }
 
 + (NSString *)baseUrl{
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+}
+
+- (void)enableCompanyHeader:(NSString *)companyHeader {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:companyHeader forHTTPHeaderField:@"namespace"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:companyHeader ?: @"" forKey:kDBDefaultsCompanyNamespaceHeader];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)disableCompanyHeader {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:nil forHTTPHeaderField:@"namespace"];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:kDBDefaultsCompanyNamespaceHeader];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

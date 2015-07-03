@@ -14,6 +14,6 @@
 	<key>CompanyColor</key>
 	<integer>4293001241</integer>
 	<key>BaseUrl</key>
-	<string>http://sushimarket.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://automation-demo.appspot.com/</string>
 </dict>
 </plist>

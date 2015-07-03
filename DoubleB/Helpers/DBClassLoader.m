@@ -7,8 +7,25 @@
 //
 
 #import "DBClassLoader.h"
+#import "DBTabBarController.h"
 
 @implementation DBClassLoader
+
++ (UIViewController *)loadFirstViewController{
+    Class firstVCClass = NSClassFromString(@"DBDemoLoginViewController");
+    
+    if(!firstVCClass){
+        firstVCClass = NSClassFromString(@"DBTabBarController");
+    }
+    
+    UIViewController *firstVC;
+    if([NSStringFromClass(firstVCClass) isEqualToString:@"DBTabBarController"]){
+        firstVC = [DBTabBarController sharedInstance];
+    } else {
+        firstVC = [firstVCClass new];
+    }
+    return firstVC;
+}
 
 + (DBSettingsTableViewController *)loadSettingsViewController{
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");

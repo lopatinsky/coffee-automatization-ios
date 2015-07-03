@@ -91,7 +91,7 @@
     if(![DBCompanyInfo sharedInstance].deliveryTypes){
         self.window.rootViewController = [DBLaunchEmulationViewController new];
     } else {
-        self.window.rootViewController = [DBTabBarController sharedInstance];
+        self.window.rootViewController = [DBClassLoader loadFirstViewController];
     }
 
     [self.window makeKeyAndVisible];

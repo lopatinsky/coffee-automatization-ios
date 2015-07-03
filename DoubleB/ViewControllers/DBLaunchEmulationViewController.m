@@ -67,7 +67,7 @@
     UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
     
     if([window.rootViewController isKindOfClass:[DBLaunchEmulationViewController class]]){
-        window.rootViewController = [DBTabBarController sharedInstance];
+        window.rootViewController = [DBClassLoader loadFirstViewController];
     }
 }
 
