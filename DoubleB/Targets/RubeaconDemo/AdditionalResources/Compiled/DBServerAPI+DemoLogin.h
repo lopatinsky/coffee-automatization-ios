@@ -12,6 +12,6 @@
 
 + (void)demoLogin:(NSString *)login
          password:(NSString *)password
-         callback:(void(^)(BOOL success, NSString *namespace))callback;
+         callback:(void(^)(BOOL success, NSString *result))callback;
 
 @end

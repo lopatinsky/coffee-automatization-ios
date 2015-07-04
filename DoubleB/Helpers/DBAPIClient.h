@@ -12,6 +12,8 @@
 
 @interface DBAPIClient : AFHTTPRequestOperationManager
 
+@property (strong, nonatomic) NSString *companyHeader;
+
 + (instancetype)sharedClient;
 
 + (NSString *)baseUrl;

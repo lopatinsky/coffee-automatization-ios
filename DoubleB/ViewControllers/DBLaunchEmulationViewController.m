@@ -88,7 +88,7 @@
     [GANHelper analyzeEvent:@"try_again_click" category:LAUNCH_PLACEHOLDER_SCREEN];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[DBCompanyInfo sharedInstance] updateInfo];
+        [[DBCompanyInfo sharedInstance] updateAllImportantInfo];
     });
 }
 

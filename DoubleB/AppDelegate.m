@@ -88,7 +88,7 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    if(![DBCompanyInfo sharedInstance].deliveryTypes){
+    if(![DBCompanyInfo sharedInstance].hasAllImportantData){
         self.window.rootViewController = [DBLaunchEmulationViewController new];
     } else {
         self.window.rootViewController = [DBClassLoader loadFirstViewController];

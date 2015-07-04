@@ -79,8 +79,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
-@property (strong, nonatomic) DBPositionsViewController *positionsViewController;
-
 @property (strong, nonatomic) OrderManager *orderManager;
 @property (strong, nonatomic) DBDeliverySettings *deliverySettings;
 
@@ -219,8 +217,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     [self reloadTableViewHeight:NO];
-    
-    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         if(self == self.navigationController.visibleViewController){
@@ -683,14 +679,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
-    if(!self.positionsViewController){
-        self.positionsViewController = [DBPositionsViewController new];
-        self.positionsViewController.hidesBottomBarWhenPushed = YES;
-    }
+    DBPositionsViewController *positionsVC = [DBPositionsViewController new];
+    positionsVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:positionsVC animated:YES];
     
     [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
-    
-    [self.navigationController pushViewController:self.positionsViewController animated:YES];
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{

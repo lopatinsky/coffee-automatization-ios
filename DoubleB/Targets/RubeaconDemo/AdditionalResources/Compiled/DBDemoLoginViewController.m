@@ -10,13 +10,20 @@
 #import "AppDelegate.h"
 #import "DBTabBarController.h"
 #import "DBServerAPI+DemoLogin.h"
+#import "DBMenu.h"
+#import "Venue.h"
+#import "Order.h"
+#import "OrderManager.h"
 #import "DBAPIClient.h"
+#import "MBProgressHUD.h"
 
 @interface DBDemoLoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *loginTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *demoButton;
+
+@property (nonatomic) BOOL inProcess;
 
 @end
 
@@ -25,7 +32,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.loginButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
+    self.loginButton.layer.cornerRadius = 5.f;
+    self.loginButton.layer.masksToBounds = YES;
+    
+    [self.demoButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
+    self.demoButton.layer.cornerRadius = 5.f;
+    self.demoButton.layer.masksToBounds = YES;
+    
     self.view.backgroundColor = [UIColor db_defaultColor];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
+                                                 name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(firstLaunchNecessaryInfoLoadFailureNotification:)
+                                                 name:kDBFirstLaunchNecessaryInfoLoadFailureNotification
+                                               object:nil];
+    
+    if([DBAPIClient sharedClient].companyHeader.length > 0){
+        [self moveForward];
+    }
+}
+
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)prefersStatusBarHidden{
@@ -37,32 +71,69 @@
     NSString *password = self.passwordTextField.text;
     
     if(login.length > 0 && password.length > 0){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [DBServerAPI demoLogin:login
                       password:password
-                      callback:^(BOOL success, NSString *namespace) {
+                      callback:^(BOOL success, NSString *result) {
                           if(success){
-                              [[DBAPIClient sharedClient] enableCompanyHeader:namespace];
-                              [self moveForward];
+                              _inProcess = YES;
+                              
+                              [[DBAPIClient sharedClient] enableCompanyHeader:result];
+                              
+                              [DBCompanyInfo sharedInstance].hasAllImportantData = NO;
+                              [[DBMenu sharedInstance] removeMenu];
+                              [[OrderManager sharedManager] purgePositions];
+                              [DBDeliverySettings sharedInstance].deliveryType = nil;
+                              [Venue dropAllVenues];
+                              [Order dropAllOrders];
+                              [[DBCompanyInfo sharedInstance] updateAllImportantInfo];
                           } else {
-                              [self showError:@"Неверная пара логин/пароль"];
+                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                              
+                              NSString *message = result ?: @"Неверная пара логин/пароль";
+                              [self showError:message];
                           }
                       }];
     }
 }
 
 - (IBAction)demoButtonClick:(id)sender {
-    [self moveForward];
+    if(![DBCompanyInfo sharedInstance].hasAllImportantData){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        _inProcess = YES;
+        
+        [[DBAPIClient sharedClient] disableCompanyHeader];
+        
+        [[DBMenu sharedInstance] removeMenu];
+        [[OrderManager sharedManager] purgePositions];
+        [DBDeliverySettings sharedInstance].deliveryType = nil;
+        [Venue dropAllVenues];
+        [Order dropAllOrders];
+        [[DBCompanyInfo sharedInstance] updateAllImportantInfo];
+    } else {
+        [self moveForward];
+    }
 }
 
 - (void)moveForward{
+    [[DBTabBarController sharedInstance] moveToStartState];
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBTabBarController sharedInstance];
-//    [UIView transitionWithView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
-//                      duration:0.5
-//                       options:UIViewAnimationOptionTransitionNone
-//                    animations:^{
-//                        [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBTabBarController sharedInstance];
-//                    }
-//                    completion:nil];
+}
+
+- (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification{
+    if(_inProcess){
+        _inProcess = NO;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self moveForward];
+    }
+}
+
+- (void)firstLaunchNecessaryInfoLoadFailureNotification:(NSNotification *)notification{
+    if(_inProcess){
+        _inProcess = NO;
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [self showAlert:@"Не удается настроить приложение, поскольку отсутствует интернет-соединение"];
+    }
 }
 
 

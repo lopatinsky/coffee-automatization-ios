@@ -28,23 +28,18 @@ NSString *const kDBDefaultsCompanyNamespaceHeader = @"kDBCompanyNamespaceHeader"
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
-    }
-    
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    //compression
-    [requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    [self setRequestSerializer:requestSerializer];
-    
-    [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-    
-    NSString *companyNamespace = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader];
-    if(companyNamespace.length > 0){
-        if (self.reqSerializer) {
-            [self.reqSerializer setValue:companyNamespace forHTTPHeaderField:@"namespace"];
+    if (self = [super initWithBaseURL:url]) {
+        self.reqSerializer = [AFHTTPRequestSerializer serializer];
+        [self.reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [self.reqSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+        [self setRequestSerializer:self.reqSerializer];
+        [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        
+        NSString *companyNamespace = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader];
+        if(companyNamespace.length > 0){
+            if (self.reqSerializer) {
+                [self.reqSerializer setValue:companyNamespace forHTTPHeaderField:@"namespace"];
+            }
         }
     }
 
@@ -53,6 +48,10 @@ NSString *const kDBDefaultsCompanyNamespaceHeader = @"kDBCompanyNamespaceHeader"
 
 + (NSString *)baseUrl{
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+}
+
+- (NSString *)companyHeader{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader];
 }
 
 - (void)enableCompanyHeader:(NSString *)companyHeader {

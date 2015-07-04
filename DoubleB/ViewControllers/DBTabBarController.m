@@ -72,6 +72,16 @@
     self.selectedIndex = 1;
 }
 
+- (void)moveToStartState{
+    for(UIViewController *controller in self.viewControllers){
+        if([controller isKindOfClass:[UINavigationController class]]){
+            [((UINavigationController*)controller) popToRootViewControllerAnimated:NO];
+        }
+    }
+    
+    self.selectedIndex = 0;
+}
+
 #pragma mark - DBNewOrderViewControllerDelegate
 
 - (void)newOrderViewController:(DBNewOrderViewController *)controller didFinishOrder:(Order *)order{

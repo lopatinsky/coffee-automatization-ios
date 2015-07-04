@@ -31,6 +31,10 @@
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
     if(!settingsVCClass){
+        settingsVCClass = NSClassFromString(@"DBRubeaconDemoSettingsViewController");
+    }
+    
+    if(!settingsVCClass){
         settingsVCClass = NSClassFromString(@"DBSettingsTableViewController");
     }
     

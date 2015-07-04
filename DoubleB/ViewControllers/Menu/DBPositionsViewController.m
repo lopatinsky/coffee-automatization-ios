@@ -30,7 +30,6 @@
 #define TAG_PICKER_OVERLAY 444
 
 @interface DBPositionsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCatecoryHeaderViewDelegate, DBCategoryPickerDelegate>
-@property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
 @property (strong, nonatomic) NSArray *categoryHeaders;
@@ -103,12 +102,8 @@
                                          remoteMenu:menuUpdateHandler];
     } else {
         if([OrderManager sharedManager].venue.venueId){
-            // Load menu for current Venue
-            if(!self.lastVenueId || ![self.lastVenueId isEqualToString:[OrderManager sharedManager].venue.venueId]){
-                self.lastVenueId = [OrderManager sharedManager].venue.venueId;
-                
-                self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue];
-            }
+            // Load menu for current venue
+            self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue];
         } else {
             // Load whole menu
             self.categories = [[DBMenu sharedInstance] getMenu];

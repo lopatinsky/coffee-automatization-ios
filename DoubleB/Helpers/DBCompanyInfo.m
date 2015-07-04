@@ -7,7 +7,11 @@
 //
 
 #import "DBCompanyInfo.h"
+#import "DBAPIClient.h"
 #import "DBServerAPI.h"
+#import "Order.h"
+
+NSString *const kDBCompanyInfoDidUpdateNotification = @"kDBCompanyInfoDidUpdateNotification";
 
 @implementation DBCompanyInfo
 
@@ -22,7 +26,7 @@
     self = [super init];
     
     [self loadFromMemory];
-    [self updateInfo];
+    [self updateAllImportantInfo];
     
     return self;
 }
@@ -33,7 +37,49 @@
     return bundleName;
 }
 
-- (void)updateInfo{
+- (BOOL)hasAllImportantData{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsHasAllImportantData] boolValue];
+}
+
+- (void)setHasAllImportantData:(BOOL)hasAllImportantData{
+    [[NSUserDefaults standardUserDefaults] setObject:@(hasAllImportantData) forKey:kDBDefaultsHasAllImportantData];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)updateAllImportantInfo{
+    [self updateAllImportantInfo:nil];
+}
+
+- (void)updateAllImportantInfo:(void(^)(BOOL success))callback{
+    __block NSInteger numberOfUpdates = 0;
+    __block BOOL successUpdates = YES;
+    
+    void (^block)(BOOL) = ^void(BOOL success){
+        successUpdates = successUpdates && success;
+        numberOfUpdates++;
+        
+        if(numberOfUpdates == 2){
+            self.hasAllImportantData = successUpdates;
+            
+            [self notify:successUpdates];
+            if(callback)
+                callback(successUpdates);
+        }
+    };
+    
+    [self updateInfo:block];
+    [self synchronizePaymentTypes:block];
+}
+
+- (void)notify:(BOOL)success{
+    if(success){
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
+    }
+}
+
+- (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
             _applicationName = response[@"appName"];
@@ -57,19 +103,49 @@
             NSString *orderPushChannel = [response[@"pushChannels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
-            
             [self synchronize];
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
         }
+        
+        if(callback)
+            callback(success);
+        
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBCompanyInfoDidUpdateNotification object:nil]];
     }];
+}
+
+- (void)synchronizePaymentTypes:(void(^)(BOOL success))callback {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *paymentTypes = [defaults objectForKey:kDBDefaultsAvailablePaymentTypes];
+    if (!paymentTypes) {
+        paymentTypes = @[@(PaymentTypeCash) ];
+        [defaults setObject:paymentTypes forKey:kDBDefaultsAvailablePaymentTypes];
+        [defaults synchronize];
+    }
+    
+    [[DBAPIClient sharedClient] GET:@"payment/payment_types"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                //NSLog(@"%@", responseObject);
+                                NSMutableArray *array = [NSMutableArray array];
+                                for (NSDictionary *paymentType in responseObject[@"payment_types"]) {
+                                    [array addObject:@([paymentType[@"id"] intValue])];
+                                }
+                                [defaults setObject:array forKey:kDBDefaultsAvailablePaymentTypes];
+                                [defaults synchronize];
+                                
+                                if(callback)
+                                    callback(YES);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO);
+                            }];
 }
 
 
 + (id)objectFromPropertyListByName:(NSString *)name{
-//    NSDictionary *companyInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
-
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
     NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];

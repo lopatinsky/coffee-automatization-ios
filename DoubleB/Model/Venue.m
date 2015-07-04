@@ -36,6 +36,16 @@ static NSMutableArray *storedVenues;
     return CLLocationCoordinate2DMake(self.latitude, self.longitude);
 }
 
++ (void)dropAllVenues{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
+    
+    NSArray *venues = [[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil];
+    
+    for(Venue *venue in venues){
+        [[CoreDataHelper sharedHelper].context deleteObject:venue];
+    }
+}
+
 + (instancetype)storedVenueForId:(NSString *)venueId {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
     request.predicate = [NSPredicate predicateWithFormat:@"venueId == %@", venueId];

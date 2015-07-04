@@ -44,6 +44,10 @@
 
 /********************/
 
+extern NSString *const kDBDefaultsHasAllImportantData;
+
+extern NSString *const kDBDefaultsAvailablePaymentTypes;
+
 extern NSString *const kDBDefaultsName;
 extern NSString *const kDBDefaultsPhone;
 extern NSString *const kDBDefaultsMail;

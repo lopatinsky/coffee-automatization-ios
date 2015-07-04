@@ -25,6 +25,7 @@
 
 + (NSArray *)storedVenues;
 + (Venue *)venueById:(NSString *)venueId;
++ (void)dropAllVenues;
 
 + (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler;
 + (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler;

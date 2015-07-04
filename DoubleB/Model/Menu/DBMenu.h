@@ -25,6 +25,7 @@
 - (void)synchronizeWithResponseMenu:(NSArray *)responseMenu;
 
 - (void)saveMenuToDeviceMemory;
+- (void)removeMenu;
 
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
 

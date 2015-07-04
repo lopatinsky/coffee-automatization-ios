@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "DBDeliveryType.h"
 
+extern NSString *const kDBCompanyInfoDidUpdateNotification;
+
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
@@ -30,7 +32,12 @@
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
-- (void)updateInfo;
+@property(nonatomic) BOOL hasAllImportantData;
+- (void)updateAllImportantInfo;
+- (void)updateAllImportantInfo:(void(^)(BOOL success))callback;
+
+- (void)updateInfo:(void(^)(BOOL success))callback;
+- (void)synchronizePaymentTypes:(void(^)(BOOL success))callback;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
 + (NSString *)db_companyBaseUrl;
