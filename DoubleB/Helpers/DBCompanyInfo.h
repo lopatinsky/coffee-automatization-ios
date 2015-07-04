@@ -9,11 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "DBDeliveryType.h"
 
+
+typedef NS_ENUM(NSUInteger, DBCompanyType) {
+    DBCompanyTypeCafe = 0,
+    DBCompanyTypeRestaurant = 1,
+    DBCompanyTypeOther = 2
+};
+
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
 @property(strong, nonatomic, readonly) NSString *bundleName;
 
+@property(nonatomic, readonly) DBCompanyType type;
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
 @property(strong, nonatomic, readonly) NSString *webSiteUrl;

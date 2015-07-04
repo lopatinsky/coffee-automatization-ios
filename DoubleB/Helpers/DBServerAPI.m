@@ -135,6 +135,7 @@
                                 response[@"support_emails"] = [responseObject getValueForKey:@"emails"] ?: [NSArray new];
                                 response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
                                 response[@"pushChannels"] = [responseObject getValueForKey:@"push_channels"] ?: @{};
+                                response[@"companyType"] = responseObject[@"screen_logic_type"];
                                 
                                 if(callback)
                                     callback(YES, response);

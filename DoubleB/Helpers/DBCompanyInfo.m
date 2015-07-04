@@ -36,6 +36,7 @@
 - (void)updateInfo{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
+            _type = [[response getValueForKey:@"companyType"] intValue];
             _applicationName = response[@"appName"];
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
@@ -172,6 +173,7 @@
 - (void)loadFromMemory{
     NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyInfo];
     
+    _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;
     _applicationName = [info getValueForKey:@"applicationName"] ?: @"";
     
     NSData *deliveryTypesData = info[@"deliveryTypes"];
@@ -196,7 +198,8 @@
                                    @"_venuePushChannel":_venuePushChannel,
                                    @"_orderPushChannel":_orderPushChannel};
     
-    NSDictionary *info = @{@"applicationName": _applicationName,
+    NSDictionary *info = @{@"type": @(_type),
+                           @"applicationName": _applicationName,
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
                            @"_deliveryCities": _deliveryCities};

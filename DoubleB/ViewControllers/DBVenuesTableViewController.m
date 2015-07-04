@@ -26,8 +26,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *title = NSLocalizedString(@"Точки", nil);
+    if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
+        int venuesCount = [[Venue storedVenues] count];
+        if(venuesCount == 1){
+            title = NSLocalizedString(@"Кофейня", nil);
+        } else {
+            title = NSLocalizedString(@"Кофейни", nil);
+        }
+    }
+    self.navigationItem.title = title;
+    
+    
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = NSLocalizedString(@"Точки", nil);
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.picker = [UIPickerView new];

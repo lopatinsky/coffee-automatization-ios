@@ -12,6 +12,7 @@ target.frontMostApp().mainWindow().tableViews()[0].cells()[2].textFields()[0].te
 target.frontMostApp().navigationBar().tapWithOptions({tapOffset:{x:0.09, y:0.27}});
 
 target.frontMostApp().mainWindow().scrollViews()[0].staticTexts()["Меню"].tapWithOptions({tapOffset:{x:0.39, y:0.75}});
+target.delay(5);
 captureLocalizedScreenshot('0-Menu');
 
 target.frontMostApp().mainWindow().tableViews()[0].cells()[0].buttons()[0].tap();

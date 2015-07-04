@@ -20902,7 +20902,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "e509e2e4-d878-44e4-83ff-f3e52e5dcb2a";
+				PROVISIONING_PROFILE = "6694c1d2-759e-49c6-9ccd-45231648ab6e";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
