@@ -87,7 +87,7 @@
                               
                               [DBCompanyInfo sharedInstance].hasAllImportantData = NO;
                               [[DBMenu sharedInstance] removeMenu];
-                              [[OrderManager sharedManager] purgePositions];
+                              [[OrderManager sharedManager] clear];
                               [DBDeliverySettings sharedInstance].deliveryType = nil;
                               [Venue dropAllVenues];
                               [Order dropAllOrders];
@@ -110,7 +110,7 @@
         [[DBAPIClient sharedClient] disableCompanyHeader];
         
         [[DBMenu sharedInstance] removeMenu];
-        [[OrderManager sharedManager] purgePositions];
+        [[OrderManager sharedManager] clear];
         [DBDeliverySettings sharedInstance].deliveryType = nil;
         [Venue dropAllVenues];
         [Order dropAllOrders];
