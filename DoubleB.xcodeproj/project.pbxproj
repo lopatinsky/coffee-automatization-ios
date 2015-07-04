@@ -3583,6 +3583,8 @@
 		CB3F9CB51AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB3F9CB61AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB3F9CB71AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
+		CB40FF061B48933D00F46411 /* demorubeacon_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB40FF041B48933D00F46411 /* demorubeacon_icon@2x.png */; };
+		CB40FF071B48933D00F46411 /* demorubeacon_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB40FF051B48933D00F46411 /* demorubeacon_icon@3x.png */; };
 		CB43E7A31ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */; };
 		CB43E7A41ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */; };
 		CB43E7DC1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
@@ -8023,6 +8025,8 @@
 		CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOrderViewHeader.m; sourceTree = "<group>"; };
 		CB3F9CB01AFA395B003A897F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CB3F9CB11AFA395B003A897F /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CB40FF041B48933D00F46411 /* demorubeacon_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demorubeacon_icon@2x.png"; sourceTree = "<group>"; };
+		CB40FF051B48933D00F46411 /* demorubeacon_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demorubeacon_icon@3x.png"; sourceTree = "<group>"; };
 		CB43E7A01ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionSingleModifierCell.h; sourceTree = "<group>"; };
 		CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionSingleModifierCell.m; sourceTree = "<group>"; };
 		CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionSingleModifierCell.xib; sourceTree = "<group>"; };
@@ -10011,6 +10015,8 @@
 		CB8201F11B46CC1F000BBE55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB40FF041B48933D00F46411 /* demorubeacon_icon@2x.png */,
+				CB40FF051B48933D00F46411 /* demorubeacon_icon@3x.png */,
 				CB8202411B48438B000BBE55 /* logout_icon@2x.png */,
 				CB8202421B48438B000BBE55 /* logout_icon@3x.png */,
 				CB8201F21B46CC1F000BBE55 /* launch_480.png */,
@@ -12606,6 +12612,7 @@
 				CB14317B1B0E371A00DD50C7 /* card@2x.png in Resources */,
 				CB14317C1B0E371A00DD50C7 /* DBBonusPositionsViewController.xib in Resources */,
 				CB14317D1B0E371A00DD50C7 /* DBNewOrderViewController.xib in Resources */,
+				CB40FF061B48933D00F46411 /* demorubeacon_icon@2x.png in Resources */,
 				CB14317E1B0E371A00DD50C7 /* share_icon@2x.png in Resources */,
 				CB14317F1B0E371A00DD50C7 /* category_selection_icon@3x.png in Resources */,
 				CB1431801B0E371A00DD50C7 /* venues_icon.png in Resources */,
@@ -12623,6 +12630,7 @@
 				CB14318B1B0E371A00DD50C7 /* DBVenueCell.xib in Resources */,
 				CB14318C1B0E371A00DD50C7 /* bg960.jpg in Resources */,
 				CB14318D1B0E371A00DD50C7 /* venues_icon_grey@2x.png in Resources */,
+				CB40FF071B48933D00F46411 /* demorubeacon_icon@3x.png in Resources */,
 				CB14318E1B0E371A00DD50C7 /* mug.png in Resources */,
 				7E47E4181B1DEBB0001432D9 /* DBDeliveryViewController.xib in Resources */,
 				CB14318F1B0E371A00DD50C7 /* return_cause_time_icon@3x.png in Resources */,
