@@ -24,7 +24,7 @@
     // Application settings item
     [self.settingsItems insertObject:@{@"name": @"logoutDemo",
                                        @"title": @"Выйти из демо",
-                                       @"image": @"none"}
+                                       @"image": @"logout_icon"}
                              atIndex:0];
 }
 

@@ -5600,6 +5600,8 @@
 		CB8202091B46D5B6000BBE55 /* DBDemoLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8202071B46D5B6000BBE55 /* DBDemoLoginViewController.xib */; };
 		CB82020C1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82020B1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m */; };
 		CB82020F1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82020E1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m */; };
+		CB8202431B48438B000BBE55 /* logout_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8202411B48438B000BBE55 /* logout_icon@2x.png */; };
+		CB8202441B48438B000BBE55 /* logout_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8202421B48438B000BBE55 /* logout_icon@3x.png */; };
 		CB82FBD41B442C70000BBE55 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB82FBD51B442C70000BBE55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB82FBD61B442C70000BBE55 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
@@ -8182,6 +8184,8 @@
 		CB82020B1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBServerAPI+DemoLogin.m"; sourceTree = "<group>"; };
 		CB82020D1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRubeaconDemoSettingsViewController.h; sourceTree = "<group>"; };
 		CB82020E1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRubeaconDemoSettingsViewController.m; sourceTree = "<group>"; };
+		CB8202411B48438B000BBE55 /* logout_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout_icon@2x.png"; sourceTree = "<group>"; };
+		CB8202421B48438B000BBE55 /* logout_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout_icon@3x.png"; sourceTree = "<group>"; };
 		CB82FD2A1B442C70000BBE55 /* CameraObscura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraObscura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB82FD2E1B442CBF000BBE55 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		CB82FD2F1B442CBF000BBE55 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -10007,6 +10011,8 @@
 		CB8201F11B46CC1F000BBE55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB8202411B48438B000BBE55 /* logout_icon@2x.png */,
+				CB8202421B48438B000BBE55 /* logout_icon@3x.png */,
 				CB8201F21B46CC1F000BBE55 /* launch_480.png */,
 				CB8201F31B46CC1F000BBE55 /* launch_568.png */,
 				CB8201F41B46CC1F000BBE55 /* launch_667.png */,
@@ -14554,6 +14560,7 @@
 				CB8201BF1B46CBB4000BBE55 /* paypal_icon@2x.png in Resources */,
 				CB8201C01B46CBB4000BBE55 /* feedback.png in Resources */,
 				CB8201C11B46CBB4000BBE55 /* DBPositionModifierCell.xib in Resources */,
+				CB8202431B48438B000BBE55 /* logout_icon@2x.png in Resources */,
 				CB8201C21B46CBB4000BBE55 /* tick.png in Resources */,
 				CB8201C31B46CBB4000BBE55 /* modifier_minus_icon@3x.png in Resources */,
 				CB8201C41B46CBB4000BBE55 /* 250.png in Resources */,
@@ -14581,6 +14588,7 @@
 				CB8201DA1B46CBB4000BBE55 /* about_promo.png in Resources */,
 				CB8201DB1B46CBB4000BBE55 /* mug_orders.png in Resources */,
 				CB8201DC1B46CBB4000BBE55 /* profile@2x.png in Resources */,
+				CB8202441B48438B000BBE55 /* logout_icon@3x.png in Resources */,
 				CB8201DD1B46CBB4000BBE55 /* settings.png in Resources */,
 				CB8201DE1B46CBB4000BBE55 /* clock@2x.png in Resources */,
 				CB8201DF1B46CBB4000BBE55 /* return_cause_change_icon@3x.png in Resources */,

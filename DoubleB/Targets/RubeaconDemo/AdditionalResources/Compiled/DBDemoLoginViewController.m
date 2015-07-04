@@ -27,20 +27,12 @@
 
 @end
 
-@implementation DBDemoLoginViewController
+@implementation DBDemoLoginViewController{
+    CAGradientLayer *_gradientLayer;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.loginButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
-    self.loginButton.layer.cornerRadius = 5.f;
-    self.loginButton.layer.masksToBounds = YES;
-    
-    [self.demoButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
-    self.demoButton.layer.cornerRadius = 5.f;
-    self.demoButton.layer.masksToBounds = YES;
-    
-    self.view.backgroundColor = [UIColor db_defaultColor];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
@@ -54,6 +46,19 @@
     
     if([DBAPIClient sharedClient].companyHeader.length > 0){
         [self moveForward];
+    }
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    if (!_gradientLayer) {
+        _gradientLayer = [CAGradientLayer layer];
+        _gradientLayer.frame = self.view.bounds;
+        _gradientLayer.colors = @[(id)[UIColor fromHex:0xff65331f].CGColor, (id)[UIColor fromHex:0xff331305].CGColor];
+        _gradientLayer.startPoint = CGPointMake(0.5, 0.0);
+        _gradientLayer.endPoint = CGPointMake(0.5, 1.0);
+        [self.view.layer insertSublayer:_gradientLayer atIndex:0];
     }
 }
 
