@@ -31,12 +31,18 @@
     
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+#warning Perchini legacy code
+    if ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] isEqualToString:@"FishRice"]) {
+        [requestSerializer setValue:@"perchiniribaris" forHTTPHeaderField:@"namespace"];
+    }
+    
     //compression
     [requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     [self setRequestSerializer:requestSerializer];
     
     [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-
+    
     return self;
 }
 

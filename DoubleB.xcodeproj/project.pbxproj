@@ -50,6 +50,10 @@
 		7E21EC0C1B285FBC00AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
 		7E21EC0D1B285FBD00AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
 		7E21EC0E1B285FC300AF7859 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
+		7E344E8A1B4DC01B00CFAA14 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E344E861B4DC01B00CFAA14 /* launch_480.png */; };
+		7E344E8B1B4DC01B00CFAA14 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E344E871B4DC01B00CFAA14 /* launch_568.png */; };
+		7E344E8C1B4DC01B00CFAA14 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E344E881B4DC01B00CFAA14 /* launch_667.png */; };
+		7E344E8D1B4DC01B00CFAA14 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E344E891B4DC01B00CFAA14 /* launch_736.png */; };
 		7E3DAAE41B06153E00A7FFD1 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		7E3DAAE51B06153E00A7FFD1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		7E3DAAE61B06153E00A7FFD1 /* DBNewOrderAdditionalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D391ABC3CAE00BD4E81 /* DBNewOrderAdditionalInfoView.m */; };
@@ -2341,10 +2345,6 @@
 		7EDB5A481B32F70400723DF9 /* not_paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222795197A71960098E429 /* not_paid@2x.png */; };
 		7EDB5A491B32F70400723DF9 /* canceled.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B542303E98F0A250887E /* canceled.png */; };
 		7EDB5A4A1B32F70400723DF9 /* canceled@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C775B0AC0B746DA6ACB22F0D /* canceled@2x.png */; };
-		7EDB5A621B32F79D00723DF9 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A581B32F79D00723DF9 /* launch_480.png */; };
-		7EDB5A631B32F79D00723DF9 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A591B32F79D00723DF9 /* launch_568.png */; };
-		7EDB5A641B32F79D00723DF9 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5A1B32F79D00723DF9 /* launch_667.png */; };
-		7EDB5A651B32F79D00723DF9 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5B1B32F79D00723DF9 /* launch_736.png */; };
 		7EDB5A661B32F79D00723DF9 /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5C1B32F79D00723DF9 /* CompanyInfo.plist */; };
 		7EDB5A671B32F79D00723DF9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5D1B32F79D00723DF9 /* InfoPlist.strings */; };
 		7EDB5A681B32F79D00723DF9 /* FishRice-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EDB5A5F1B32F79D00723DF9 /* FishRice-info.plist */; };
@@ -7772,6 +7772,10 @@
 		7E1E093E198B7ADC0024D8B8 /* DBVenueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBVenueViewController.m; sourceTree = "<group>"; };
 		7E1E0943198B7D960024D8B8 /* DBOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBOrderViewController.h; sourceTree = "<group>"; };
 		7E1E0944198B7D960024D8B8 /* DBOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOrderViewController.m; sourceTree = "<group>"; };
+		7E344E861B4DC01B00CFAA14 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
+		7E344E871B4DC01B00CFAA14 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
+		7E344E881B4DC01B00CFAA14 /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
+		7E344E891B4DC01B00CFAA14 /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
 		7E3DAC1B1B06153E00A7FFD1 /* Farsh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Farsh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E47E40A1B1DD540001432D9 /* UIViewController+NavigationBarFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarFix.h"; sourceTree = "<group>"; };
 		7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarFix.m"; sourceTree = "<group>"; };
@@ -7830,10 +7834,6 @@
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EDB5A511B32F70400723DF9 /* FishRice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishRice.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EDB5A581B32F79D00723DF9 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
-		7EDB5A591B32F79D00723DF9 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
-		7EDB5A5A1B32F79D00723DF9 /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
-		7EDB5A5B1B32F79D00723DF9 /* launch_736.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_736.png; sourceTree = "<group>"; };
 		7EDB5A5C1B32F79D00723DF9 /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
 		7EDB5A5E1B32F79D00723DF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EDB5A5F1B32F79D00723DF9 /* FishRice-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FishRice-info.plist"; sourceTree = "<group>"; };
@@ -9102,6 +9102,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E344E851B4DC01B00CFAA14 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7E344E861B4DC01B00CFAA14 /* launch_480.png */,
+				7E344E871B4DC01B00CFAA14 /* launch_568.png */,
+				7E344E881B4DC01B00CFAA14 /* launch_667.png */,
+				7E344E891B4DC01B00CFAA14 /* launch_736.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		7E5186311B42965600A129EE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -9289,20 +9300,9 @@
 		7EDB5A561B32F79D00723DF9 /* AdditionalResources */ = {
 			isa = PBXGroup;
 			children = (
-				7EDB5A571B32F79D00723DF9 /* Resources */,
+				7E344E851B4DC01B00CFAA14 /* Resources */,
 			);
 			path = AdditionalResources;
-			sourceTree = "<group>";
-		};
-		7EDB5A571B32F79D00723DF9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				7EDB5A581B32F79D00723DF9 /* launch_480.png */,
-				7EDB5A591B32F79D00723DF9 /* launch_568.png */,
-				7EDB5A5A1B32F79D00723DF9 /* launch_667.png */,
-				7EDB5A5B1B32F79D00723DF9 /* launch_736.png */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		B3B09FDD1A97761C008DC988 /* extobjc */ = {
@@ -11069,6 +11069,9 @@
 					7EB2D43F1B3C5C77009405C6 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
+					7EDB58EF1B32F70400723DF9 = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
 					CB1430EA1B0E371A00DD50C7 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
@@ -11097,6 +11100,9 @@
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
 					CB8200931B46CBB4000BBE55 = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
+					CB82FBD11B442C70000BBE55 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
 					CB82FDB11B4464F6000BBE55 = {
@@ -12412,7 +12418,6 @@
 				7EDB59B81B32F70400723DF9 /* email@2x.png in Resources */,
 				7EDB59B91B32F70400723DF9 /* agreement.html in Resources */,
 				7EDB59BB1B32F70400723DF9 /* about.png in Resources */,
-				7EDB5A641B32F79D00723DF9 /* launch_667.png in Resources */,
 				7EDB59BC1B32F70400723DF9 /* orders_icon@2x.png in Resources */,
 				7EDB59BD1B32F70400723DF9 /* DBDeliveryViewController.xib in Resources */,
 				7EDB59BE1B32F70400723DF9 /* confidence.png in Resources */,
@@ -12424,7 +12429,6 @@
 				7EDB59C51B32F70400723DF9 /* DBNewOrderItemErrorView.xib in Resources */,
 				7EDB59C61B32F70400723DF9 /* bg2208.jpg in Resources */,
 				7EDB59C71B32F70400723DF9 /* DBCardsViewController.xib in Resources */,
-				7EDB5A621B32F79D00723DF9 /* launch_480.png in Resources */,
 				7EDB59C91B32F70400723DF9 /* venues_icon@2x.png in Resources */,
 				7EDB59CA1B32F70400723DF9 /* mug@2x.png in Resources */,
 				7EDB5A671B32F79D00723DF9 /* InfoPlist.strings in Resources */,
@@ -12455,6 +12459,7 @@
 				7EDB59E41B32F70400723DF9 /* DBPositionGroupModifierItemCell.xib in Resources */,
 				7EDB59E51B32F70400723DF9 /* phone@2x.png in Resources */,
 				7EDB59E61B32F70400723DF9 /* DBOrderItemCell.xib in Resources */,
+				7E344E8A1B4DC01B00CFAA14 /* launch_480.png in Resources */,
 				7EDB59E71B32F70400723DF9 /* back_arrow_icon@2x.png in Resources */,
 				7EDB59E81B32F70400723DF9 /* promo_pic.png in Resources */,
 				7EDB59E91B32F70400723DF9 /* DBAdvertViewController.xib in Resources */,
@@ -12472,6 +12477,7 @@
 				7EDB59F51B32F70400723DF9 /* mug_gray@2x.png in Resources */,
 				7EDB59F61B32F70400723DF9 /* preview_2@2x.png in Resources */,
 				7EDB59F71B32F70400723DF9 /* paid.png in Resources */,
+				7E344E8C1B4DC01B00CFAA14 /* launch_667.png in Resources */,
 				7EDB59F81B32F70400723DF9 /* DBPositionModifierPicker.xib in Resources */,
 				7EDB59F91B32F70400723DF9 /* exclamation.png in Resources */,
 				7EDB59FA1B32F70400723DF9 /* bg1136.jpg in Resources */,
@@ -12488,7 +12494,7 @@
 				7EDB5A061B32F70400723DF9 /* payment@2x.png in Resources */,
 				7EDB5A071B32F70400723DF9 /* phone.png in Resources */,
 				7EDB5A081B32F70400723DF9 /* menu_icon_grey@3x.png in Resources */,
-				7EDB5A631B32F79D00723DF9 /* launch_568.png in Resources */,
+				7E344E8B1B4DC01B00CFAA14 /* launch_568.png in Resources */,
 				7EDB5A661B32F79D00723DF9 /* CompanyInfo.plist in Resources */,
 				7EDB5A681B32F79D00723DF9 /* FishRice-info.plist in Resources */,
 				7EDB5A0C1B32F70400723DF9 /* DBTimePickerView.xib in Resources */,
@@ -12503,7 +12509,6 @@
 				7EDB5A151B32F70400723DF9 /* orders_icon_grey@3x.png in Resources */,
 				7EDB5A161B32F70400723DF9 /* gift_icon@2x.png in Resources */,
 				7EDB5A171B32F70400723DF9 /* DBPositionViewController.xib in Resources */,
-				7EDB5A651B32F79D00723DF9 /* launch_736.png in Resources */,
 				7EDB5A181B32F70400723DF9 /* add_position.png in Resources */,
 				7EDB5A1A1B32F70400723DF9 /* about@2x.png in Resources */,
 				7EDB5A1B1B32F70400723DF9 /* category_selection_icon@2x.png in Resources */,
@@ -12525,6 +12530,7 @@
 				7EDB5A691B32F79D00723DF9 /* Images-FishRice.xcassets in Resources */,
 				7EDB5A2B1B32F70400723DF9 /* DBOrderViewController.xib in Resources */,
 				7EDB5A2C1B32F70400723DF9 /* venue_gray.png in Resources */,
+				7E344E8D1B4DC01B00CFAA14 /* launch_736.png in Resources */,
 				7EDB5A2D1B32F70400723DF9 /* paid@2x.png in Resources */,
 				7EDB5A2E1B32F70400723DF9 /* tick_gray@2x.png in Resources */,
 				7EDB5A2F1B32F70400723DF9 /* return_cause_other_icon@3x.png in Resources */,
@@ -19940,7 +19946,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -19955,7 +19961,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "df40d4d7-395e-449b-a9b1-40bdd5e0917b";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -19973,7 +19979,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -19988,7 +19994,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "81a283a9-2508-4197-a9e2-84963c671cfd";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -20005,7 +20011,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20020,7 +20026,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Farsh;
-				PROVISIONING_PROFILE = "ac663f92-aacc-4ea7-946b-35eb928176c5";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -20521,8 +20527,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20537,7 +20543,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = FishRice;
-				PROVISIONING_PROFILE = "126ba170-2f93-4e2d-9524-266ee9a6f3ea";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -20554,8 +20560,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20570,7 +20576,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = FishRice;
-				PROVISIONING_PROFILE = "7662a362-13a1-4cf5-b731-d19777636d76";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -20602,7 +20608,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = FishRice;
-				PROVISIONING_PROFILE = "285fa27c-0e38-4725-992e-2927ca8986b0";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -20693,7 +20699,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20708,7 +20714,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeAutomation;
-				PROVISIONING_PROFILE = "02573565-029c-462c-a566-750a3c0c8a7a";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -20726,7 +20732,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20741,7 +20747,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeAutomation;
-				PROVISIONING_PROFILE = "b621b9f0-2d34-41dd-9b50-8ecd4dbb4454";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -20789,8 +20795,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20805,7 +20811,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Chikarabar;
-				PROVISIONING_PROFILE = "c0684ee0-7517-402d-9425-bd5aea198144";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -20822,8 +20828,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20838,7 +20844,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Chikarabar;
-				PROVISIONING_PROFILE = "6de02a73-0f78-411a-9c45-ea4ff5edfbee";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -20983,8 +20989,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -20999,7 +21005,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Korjov;
-				PROVISIONING_PROFILE = "82c2d62e-d4aa-496c-bf74-404d9e232116";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -21016,8 +21022,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21032,7 +21038,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Korjov;
-				PROVISIONING_PROFILE = "ac1340f5-543c-4171-ba7b-1bb26f5796da";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -21469,7 +21475,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21502,7 +21508,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21549,7 +21555,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "740f6119-6bd7-4139-a0d5-7f567013d5c2";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -21760,7 +21766,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oleg Parinov (BA6FM4RUX3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21775,7 +21781,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CameraObscura;
-				PROVISIONING_PROFILE = "124a4117-ca12-4443-bc57-f0e9ae5a25ae";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -21793,7 +21799,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21808,7 +21814,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CameraObscura;
-				PROVISIONING_PROFILE = "f7020043-99d2-40ac-be25-af76969c9f46";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -21825,7 +21831,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21840,7 +21846,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CameraObscura;
-				PROVISIONING_PROFILE = "384450c3-04d7-41e1-9095-b3c2f40d119f";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -22148,7 +22154,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oleg Parinov (BA6FM4RUX3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -22163,7 +22169,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Luigi;
-				PROVISIONING_PROFILE = "2d14f093-df4a-4201-98c0-4e91436a56b9";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -22181,7 +22187,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -22196,7 +22202,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Luigi;
-				PROVISIONING_PROFILE = "c71f4e71-3a9c-4592-a2dd-7c385b2ded28";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -22213,7 +22219,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -22228,7 +22234,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Luigi;
-				PROVISIONING_PROFILE = "384450c3-04d7-41e1-9095-b3c2f40d119f";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

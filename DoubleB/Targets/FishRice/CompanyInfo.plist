@@ -5,14 +5,14 @@
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
-		<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
+		<string>4YgNDVaO1VKYelnaE9RTzJAdofiSn3N2Y5xt44wD</string>
 		<key>clientKey</key>
-		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+		<string>vD6ZPXn7hEcCTIizGz9vYzO0Xx2fXbNwxx3TegbM</string>
 	</dict>
 	<key>CompanyGAKey</key>
 	<string></string>
 	<key>CompanyColor</key>
-	<integer>4289732252</integer>
+	<integer>4293669431</integer>
 	<key>BaseUrl</key>
 	<string>http://proxy-perchini.1.doubleb-automation-production.appspot.com/</string>
 </dict>

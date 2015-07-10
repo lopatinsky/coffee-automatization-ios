@@ -158,6 +158,7 @@
 //}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"REMOTE PUSH SUPER PUSH %@", userInfo);
     [PFPush handlePush:userInfo];
 
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
