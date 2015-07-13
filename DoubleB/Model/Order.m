@@ -92,6 +92,7 @@
 
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict{
     self.status = [dict[@"status"] intValue];
+    self.total = dict[@"total"];
     [self setTimeFromResponseDict:dict];
     
     [[CoreDataHelper sharedHelper] save];

@@ -139,7 +139,6 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderId == %@", newOrderId];
     Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
     
-    
     if(sameOrder){
         [sameOrder synchronizeWithResponseDict:orderDictionary];
     } else {

@@ -49,6 +49,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *bonusItems;
 @property (nonatomic, readonly) NSString *formattedTimeString;
+@property (nonatomic, readonly) NSNumber *realTotal;
 
 - (instancetype)init:(BOOL)stored;
 - (instancetype)initNewOrderWithDict:(NSDictionary *)dict;

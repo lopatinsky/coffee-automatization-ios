@@ -47,7 +47,9 @@
     
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 //==================== Framework initialization =====================
-    
+    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
+    }
     
 //================ significant preloadings/initializations =================
     [DBServerAPI registerUser:nil];
