@@ -9766,6 +9766,10 @@
 		C775B1154DBD501B5D3549F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7EFF2736198A8DC40095ADED /* DBNewOrderViewController.h */,
+				7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */,
+				CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */,
+				CB715AE31ACEA3EB00EA84FC /* Menu */,
 				CB136A801B0A1D8300B93178 /* DBAddressViewController.h */,
 				CB136A811B0A1D8300B93178 /* DBAddressViewController.m */,
 				CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */,
@@ -9776,10 +9780,6 @@
 				CB136A871B0A1D8300B93178 /* DBPositionScrollViewController.m */,
 				7EFF2733198A84580095ADED /* DBVenuesTableViewController.h */,
 				7EFF2734198A84580095ADED /* DBVenuesTableViewController.m */,
-				7EFF2736198A8DC40095ADED /* DBNewOrderViewController.h */,
-				7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */,
-				CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */,
-				CB715AE31ACEA3EB00EA84FC /* Menu */,
 				CBA24A461A6570E500103699 /* DBTabBarController.h */,
 				CBA24A471A6570E500103699 /* DBTabBarController.m */,
 				7E55544E198A77A5008A4684 /* DBCommentViewController.h */,
@@ -10264,6 +10264,9 @@
 		CB6EB71D19E7DC0E0050DF90 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CB3E6B891A86536100640791 /* DBOrderViewFooter.h */,
+				CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */,
+				CB6EB73319E7DC0E0050DF90 /* DBOrderViewFooter.xib */,
 				CB715AE91ACEB21100EA84FC /* CustomControls */,
 				CB60C1C51AC9676900D5E962 /* Menu */,
 				CBD29D271ABC3B0A00BD4E81 /* NewOrder */,
@@ -10274,9 +10277,6 @@
 				CB3E6B8C1A866D0800640791 /* DBOrderViewHeader.h */,
 				CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */,
 				CB6EB73419E7DC0E0050DF90 /* DBOrderViewHeader.xib */,
-				CB3E6B891A86536100640791 /* DBOrderViewFooter.h */,
-				CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */,
-				CB6EB73319E7DC0E0050DF90 /* DBOrderViewFooter.xib */,
 				CBD0BEAF1ADBF61100E02E3B /* DBOrderReturnView.h */,
 				CBD0BEB01ADBF61100E02E3B /* DBOrderReturnView.m */,
 				CBD0BEB21ADBF62600E02E3B /* DBOrderReturnView.xib */,
@@ -22092,8 +22092,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -22108,7 +22108,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ElephantBoutique;
-				PROVISIONING_PROFILE = "560037e4-2f67-4168-ae45-1a1e1b493228";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -22125,8 +22125,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -22141,7 +22141,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ElephantBoutique;
-				PROVISIONING_PROFILE = "0481e16e-fd0d-4d94-9f0a-7d3aacc0b1c2";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -22399,7 +22399,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "868136a9-136c-4d41-ae83-f6d5bad68b11";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -22432,7 +22432,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "9ab8d793-3494-4b62-81ce-2caacfa05c51";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
@@ -22464,7 +22464,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = ShashlykHouse;
-				PROVISIONING_PROFILE = "740f6119-6bd7-4139-a0d5-7f567013d5c2";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";

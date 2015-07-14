@@ -110,7 +110,6 @@
                              parameters:@{@"client_id": clientId}
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     [GANHelper analyzeEvent:@"history_update_success" category:HISTORY_SCREEN];
-                                    //NSLog(@"%@", responseObject);
                                     
                                     for(NSDictionary *orderDict in responseObject[@"orders"]){
                                         [self synchronizeOrderWithHistory:orderDict];
@@ -149,6 +148,7 @@
         
         [Compatibility registerForNotifications];
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
         
         [GANHelper trackNewOrderInfo:ord];
     }
@@ -306,7 +306,7 @@
     labelOrder.attributedText = orderString;
     labelDate.text = order.formattedTimeString;
     labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venue.address;
-    labelTotal.text = [NSString stringWithFormat:@"%ld %@", (long)order.total.integerValue, [Compatibility currencySymbol]];
+    labelTotal.text = [NSString stringWithFormat:@"%ld %@", (long)order.realTotal.integerValue, [Compatibility currencySymbol]];
     
     return cell;
 }

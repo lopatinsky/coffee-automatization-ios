@@ -270,7 +270,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void)dealloc{
+- (void)dealloc {
     NSLog(@"dealloc");
     
     [_deliverySettings removeObserver:self forKeyPath:@"selectedTime"];
