@@ -31,42 +31,13 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self copyPlist];
     
-//==================== Frameworks initialization ====================
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    [self frameworksInitialization];
+    [self sdkInitialization];
     
-    [Fabric with:@[CrashlyticsKit]];
-    
-//    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
-    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-//==================== Framework initialization =====================
-    
-    
-//================ significant preloadings/initializations =================
-    [DBServerAPI registerUser:nil];
-    
-    [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
-        [self saveContext];
-    }];
-    
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
-    
-    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
-    
-    [JRSwizzleMethods swizzleUIViewDealloc];
-    //[DBShareHelper sharedInstance];
-    [[DBPromoManager sharedManager] updateInfo];
-    
-    [GANHelper trackClientInfo];
-//================ significant preloadings/initializations =================
-
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
     }
@@ -74,6 +45,11 @@
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(resetApplication)
+                                                 name:kDBCompanyInfoHardResetNotification
+                                               object:nil];
     
     //styling
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -88,7 +64,7 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-    if(![DBCompanyInfo sharedInstance].hasAllImportantData){
+    if (![DBCompanyInfo sharedInstance].hasAllImportantData){
         self.window.rootViewController = [DBLaunchEmulationViewController new];
     } else {
         self.window.rootViewController = [DBClassLoader loadFirstViewController];
@@ -96,6 +72,39 @@
 
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)frameworksInitialization
+{
+    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    [Fabric with:@[CrashlyticsKit]];
+    //    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
+    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
+}
+
+- (void)sdkInitialization
+{
+    [DBServerAPI registerUser:nil];
+    [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
+        [self saveContext];
+    }];
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
+    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
+    [JRSwizzleMethods swizzleUIViewDealloc];
+    //[DBShareHelper sharedInstance];
+    [[DBPromoManager sharedManager] updateInfo];
+    [GANHelper trackClientInfo];
+}
+
+- (void)resetApplication {
+    [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
+    if (![DBCompanyInfo sharedInstance].hasAllImportantData){
+        self.window.rootViewController = [DBLaunchEmulationViewController new];
+    } else {
+        self.window.rootViewController = [DBClassLoader loadFirstViewController];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -131,7 +140,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self saveContext];
 
 }

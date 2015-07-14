@@ -10,6 +10,7 @@
 #import "DBDeliveryType.h"
 
 extern NSString *const kDBCompanyInfoDidUpdateNotification;
+extern NSString *const kDBCompanyInfoHardResetNotification;
 
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
@@ -33,6 +34,7 @@ extern NSString *const kDBCompanyInfoDidUpdateNotification;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
 @property(nonatomic) BOOL hasAllImportantData;
+
 - (void)updateAllImportantInfo;
 - (void)updateAllImportantInfo:(void(^)(BOOL success))callback;
 

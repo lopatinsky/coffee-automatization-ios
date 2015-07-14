@@ -12,6 +12,7 @@
 #import "Order.h"
 
 NSString *const kDBCompanyInfoDidUpdateNotification = @"kDBCompanyInfoDidUpdateNotification";
+NSString *const kDBCompanyInfoHardResetNotification = @"kDBCompanyInfoHardResetNotification";
 
 @implementation DBCompanyInfo
 
@@ -103,6 +104,11 @@ NSString *const kDBCompanyInfoDidUpdateNotification = @"kDBCompanyInfoDidUpdateN
             NSString *orderPushChannel = [response[@"pushChannels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
+            if (![response[@"color"] isEqualToNumber:[DBCompanyInfo objectFromPropertyListByName:@"CompanyColor"]]) {
+                [DBCompanyInfo saveObjectToPropteryList:response[@"color"] byKey:@"CompanyColor"];
+                [self resetColor];
+            }
+            
             [self synchronize];
         }
         
@@ -111,6 +117,10 @@ NSString *const kDBCompanyInfoDidUpdateNotification = @"kDBCompanyInfoDidUpdateN
         
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBCompanyInfoDidUpdateNotification object:nil]];
     }];
+}
+
+- (void)resetColor {
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBCompanyInfoHardResetNotification object:nil]];
 }
 
 - (void)synchronizePaymentTypes:(void(^)(BOOL success))callback {
@@ -144,6 +154,13 @@ NSString *const kDBCompanyInfoDidUpdateNotification = @"kDBCompanyInfoDidUpdateN
                             }];
 }
 
++ (void)saveObjectToPropteryList:(NSObject *)object byKey:(NSString *)key {
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSMutableDictionary *companyInfo = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    companyInfo[key] = object;
+    [companyInfo writeToFile:path atomically:YES];
+}
 
 + (id)objectFromPropertyListByName:(NSString *)name{
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];

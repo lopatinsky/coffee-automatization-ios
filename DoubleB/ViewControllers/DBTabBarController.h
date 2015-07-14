@@ -15,5 +15,6 @@
 
 - (void)awakeFromRemoteNotification;
 - (void)moveToStartState;
+- (void)setupViewControllers;
 
 @end

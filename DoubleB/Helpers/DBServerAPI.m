@@ -136,6 +136,12 @@
                                 response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
                                 response[@"pushChannels"] = [responseObject getValueForKey:@"push_channels"] ?: @{};
                                 
+                                NSString *colorHex = [responseObject getValueForKey:@"colors"][@"action"];
+                                unsigned result = 0;
+                                NSScanner *scanner = [NSScanner scannerWithString:colorHex];
+                                [scanner scanHexInt:&result];
+                                response[@"color"] = @(result);
+                                
                                 if(callback)
                                     callback(YES, response);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

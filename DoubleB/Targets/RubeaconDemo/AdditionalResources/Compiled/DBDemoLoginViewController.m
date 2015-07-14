@@ -67,6 +67,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+
 - (BOOL)prefersStatusBarHidden{
     return YES;
 }
@@ -120,9 +122,10 @@
     }
 }
 
-- (void)moveForward{
+- (void)moveForward {
     [[DBTabBarController sharedInstance] moveToStartState];
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBTabBarController sharedInstance];
+    [[DBTabBarController sharedInstance] setupViewControllers];
 }
 
 - (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification{
