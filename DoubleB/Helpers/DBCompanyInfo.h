@@ -16,12 +16,18 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeOther = 2
 };
 
+typedef NS_ENUM(NSUInteger, TopViewControllerType) {
+    TVCMenu = 0,
+    TVCOrder = 1
+};
+
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
 @property(strong, nonatomic, readonly) NSString *bundleName;
 
 @property(nonatomic, readonly) DBCompanyType type;
+@property(nonatomic, readonly) TopViewControllerType topScreenType;
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
 @property(strong, nonatomic, readonly) NSString *webSiteUrl;

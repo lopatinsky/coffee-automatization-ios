@@ -191,6 +191,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
+    
+    if ([DBCompanyInfo sharedInstance].topScreenType == TVCMenu) {
+        [self pushPositionsViewControllerAnimated:NO];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -683,15 +687,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemAdditionView reload];
 }
 
-- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
-    if(!self.positionsViewController){
+- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view {
+    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
+    [self pushPositionsViewControllerAnimated:YES];
+}
+
+- (void)pushPositionsViewControllerAnimated:(BOOL)animated {
+    if (!self.positionsViewController) {
         self.positionsViewController = [DBPositionsViewController new];
         self.positionsViewController.hidesBottomBarWhenPushed = YES;
     }
-    
-    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
-    
-    [self.navigationController pushViewController:self.positionsViewController animated:YES];
+    [self.navigationController pushViewController:self.positionsViewController animated:animated];
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{
