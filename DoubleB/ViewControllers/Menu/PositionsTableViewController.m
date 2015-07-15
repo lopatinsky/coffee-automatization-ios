@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Empatika. All rights reserved.
 //
 
-#import "DBPositionsViewController.h"
+#import "PositionsTableViewController.h"
 #import "DBBarButtonItem.h"
 #import "DBPositionViewController.h"
 #import "MBProgressHUD.h"
@@ -29,7 +29,7 @@
 #define TAG_POPUP_OVERLAY 333
 #define TAG_PICKER_OVERLAY 444
 
-@interface DBPositionsViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCatecoryHeaderViewDelegate, DBCategoryPickerDelegate>
+@interface PositionsTableViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCatecoryHeaderViewDelegate, DBCategoryPickerDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
@@ -39,7 +39,7 @@
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
 @end
 
-@implementation DBPositionsViewController
+@implementation PositionsTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

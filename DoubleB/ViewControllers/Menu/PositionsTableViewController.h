@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PositionsViewControllerDelegate.h"
 
-@interface DBPositionsViewController : UITableViewController
+@interface PositionsTableViewController : UITableViewController <PositionsViewControllerDelegate>
 
 @end

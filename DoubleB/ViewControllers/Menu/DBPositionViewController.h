@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PositionsViewControllerDelegate.h"
 
 @class DBMenuPosition;
 

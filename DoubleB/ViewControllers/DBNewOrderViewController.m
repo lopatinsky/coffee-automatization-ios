@@ -41,7 +41,6 @@
 #import "DBTimePickerView.h"
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"
-#import "DBPositionsViewController.h"
 #import "DBBonusPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
@@ -49,6 +48,9 @@
 #import "DBNewOrderItemAdditionView.h"
 #import "DBPayPalManager.h"
 #import "DBAddressViewController.h"
+
+#import "ViewControllerManager.h"
+#import "PositionsViewControllerDelegate.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -79,7 +81,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
-@property (strong, nonatomic) DBPositionsViewController *positionsViewController;
+@property (strong, nonatomic) UIViewController<PositionsViewControllerDelegate> *positionsViewController;
 
 @property (strong, nonatomic) OrderManager *orderManager;
 @property (strong, nonatomic) DBDeliverySettings *deliverySettings;
@@ -694,7 +696,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)pushPositionsViewControllerAnimated:(BOOL)animated {
     if (!self.positionsViewController) {
-        self.positionsViewController = [DBPositionsViewController new];
+        self.positionsViewController = [ViewControllerManager positionsViewController];
         self.positionsViewController.hidesBottomBarWhenPushed = YES;
     }
     [self.navigationController pushViewController:self.positionsViewController animated:animated];
