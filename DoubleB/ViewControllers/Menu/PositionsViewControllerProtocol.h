@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PositionsViewControllerDelegate <NSObject>
+@protocol PositionsViewControllerProtocol <NSObject>
+
++ (instancetype)createViewController;
 
 @end

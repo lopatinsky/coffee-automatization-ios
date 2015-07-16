@@ -29,7 +29,7 @@
 #define TAG_POPUP_OVERLAY 333
 #define TAG_PICKER_OVERLAY 444
 
-@interface PositionsTableViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCatecoryHeaderViewDelegate, DBCategoryPickerDelegate>
+@interface PositionsTableViewController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
@@ -415,5 +415,9 @@
     [GANHelper analyzeEvent:@"menu_scroll" category:MENU_SCREEN];
 }
 
+#pragma mark - PositionsViewControllerProtocol
++ (instancetype)createViewController {
+    return [PositionsTableViewController new];
+}
 
 @end

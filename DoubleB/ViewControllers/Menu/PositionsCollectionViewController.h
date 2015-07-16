@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PositionsViewControllerDelegate.h"
+#import "PositionsViewControllerProtocol.h"
 
-@interface PositionsCollectionViewController : UICollectionViewController <PositionsViewControllerDelegate>
+@interface PositionsCollectionViewController : UICollectionViewController <PositionsViewControllerProtocol>
+
++ (instancetype)createViewController;
 
 @end

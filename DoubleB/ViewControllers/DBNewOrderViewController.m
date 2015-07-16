@@ -50,7 +50,7 @@
 #import "DBAddressViewController.h"
 
 #import "ViewControllerManager.h"
-#import "PositionsViewControllerDelegate.h"
+#import "PositionsViewControllerProtocol.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -81,7 +81,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
-@property (strong, nonatomic) UIViewController<PositionsViewControllerDelegate> *positionsViewController;
+@property (strong, nonatomic) UIViewController<PositionsViewControllerProtocol> *positionsViewController;
 
 @property (strong, nonatomic) OrderManager *orderManager;
 @property (strong, nonatomic) DBDeliverySettings *deliverySettings;

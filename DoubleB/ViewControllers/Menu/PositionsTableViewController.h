@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PositionsViewControllerDelegate.h"
+#import "PositionsViewControllerProtocol.h"
 
-@interface PositionsTableViewController : UITableViewController <PositionsViewControllerDelegate>
+@interface PositionsTableViewController : UITableViewController <PositionsViewControllerProtocol>
+
++ (instancetype)createViewController;
 
 @end

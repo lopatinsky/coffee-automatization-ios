@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, DBCategoryHeaderViewState) {
     DBCategoryHeaderViewStateFull
 };
 
-@protocol DBCatecoryHeaderViewDelegate <NSObject>
+@protocol DBCategoryHeaderViewDelegate <NSObject>
 @optional
 - (void) db_categoryHeaderViewDidSelect:(DBCategoryHeaderView *)headerView;
 @end
@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, DBCategoryHeaderViewState) {
 @property (nonatomic, readonly) BOOL categoryOpened;
 
 @property (strong, nonatomic) DBMenuCategory *category;
-@property (strong, nonatomic) id<DBCatecoryHeaderViewDelegate> delegate;
+@property (strong, nonatomic) id<DBCategoryHeaderViewDelegate> delegate;
 
 - (instancetype)initWithMenuCategory:(DBMenuCategory *)category state:(DBCategoryHeaderViewState)state;
 

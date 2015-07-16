@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PositionsViewControllerDelegate.h"
+#import "PositionsViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 
-+ (nonnull UIViewController<PositionsViewControllerDelegate> *)positionsViewController;
++ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController;
 
 @end

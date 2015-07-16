@@ -12,7 +12,7 @@
 #import "PositionsTableViewController.h"
 #import "PositionsCollectionViewController.h"
 
-@implementation ViewControllerManager(Test)
+@implementation ViewControllerManager(PositionsViewControllers)
 
 + (nonnull NSDictionary *)positionsViewControllerClasses {
     return @{
@@ -27,9 +27,9 @@
 #pragma mark - Manager implementation
 @implementation ViewControllerManager
 
-+ (nonnull UIViewController<PositionsViewControllerDelegate> *)positionsViewController {
-    Class positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
-    return [positionsVCClass new];
++ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
+    Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
+    return [positionsVCClass createViewController];
 }
 
 + (nullable NSString *)valueFromPropertyListByKey:(nonnull NSString *)key {

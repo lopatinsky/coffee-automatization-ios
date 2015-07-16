@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PositionsViewControllerDelegate.h"
 
 @class DBMenuPosition;
 
@@ -22,4 +21,5 @@ typedef NS_ENUM(NSUInteger, DBPositionViewControllerMode) {
 @property (weak, nonatomic) UINavigationController *parentNavigationController;
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position mode:(DBPositionViewControllerMode)mode;
+
 @end
