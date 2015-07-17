@@ -13,7 +13,6 @@
 
 @interface DBClassLoader : NSObject
 
-+ (UIViewController *)loadFirstViewController;
 + (DBNewOrderViewController *)loadNewOrderViewController;
 + (DBSettingsTableViewController *)loadSettingsViewController;
 

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kDBDefaultsAvailablePaymentTypes;
+
 extern NSString *const kDBPaymentErrorDefault;
 extern NSString *const kDBPaymentErrorCardNotUnique;
 extern NSString *const kDBPaymentErrorWrongCardData;
@@ -17,6 +19,11 @@ extern NSString *const kDBPaymentErrorNoInternetConnection;
 @interface IHPaymentManager : NSObject
 
 + (instancetype)sharedInstance;
+
+/**
+* Check on server what payment types available -> Cash | Card
+*/
+- (void)synchronizePaymentTypes;
 
 - (void)bindNewCardForClient:(NSString *)clientId
            completionHandler:(void(^)(BOOL success, NSString *message, NSDictionary *items))completionHandler;

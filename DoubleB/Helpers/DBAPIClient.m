@@ -9,7 +9,7 @@
 #import "DBAPIClient.h"
 #import "DBCompanyInfo.h"
 
-NSString *const kDBDefaultsCompanyNamespaceHeader = @"kDBCompanyNamespaceHeader";
+#define kDBCompanyHeader @"db_company_header"
 
 @interface DBAPIClient()
 
@@ -37,15 +37,7 @@ NSString *const kDBDefaultsCompanyNamespaceHeader = @"kDBCompanyNamespaceHeader"
         [self enableCompanyHeader];
         [self setRequestSerializer:self.reqSerializer];
         [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-
-        NSString *companyNamespace = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader];
-        if (companyNamespace.length > 0){
-            if (self.reqSerializer) {
-                [self.reqSerializer setValue:companyNamespace forHTTPHeaderField:@"namespace"];
-            }
-        }
     }
-
     return self;
 }
 
@@ -55,39 +47,24 @@ NSString *const kDBDefaultsCompanyNamespaceHeader = @"kDBCompanyNamespaceHeader"
 
 - (void)enableCompanyHeader {
     if (self.reqSerializer) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader]) {
-            [self.reqSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader] forHTTPHeaderField:@"namespace"];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:kDBCompanyHeader]) {
+            [self.reqSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:kDBCompanyHeader] forHTTPHeaderField:@"namespace"];
         }
     }
-}
-
-- (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
-    if (self.reqSerializer) {
-        [self.reqSerializer setValue:value forHTTPHeaderField:header];
-        [[NSUserDefaults standardUserDefaults] setObject:value forKey:kDBDefaultsCompanyNamespaceHeader];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-}
-
-- (NSString *)companyHeader{
-    return [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyNamespaceHeader];
-}
-
-- (void)enableCompanyHeader:(NSString *)companyHeader {
-    if (self.reqSerializer) {
-        [self.reqSerializer setValue:companyHeader forHTTPHeaderField:@"namespace"];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:companyHeader ?: @"" forKey:kDBDefaultsCompanyNamespaceHeader];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)disableCompanyHeader {
     if (self.reqSerializer) {
         [self.reqSerializer setValue:nil forHTTPHeaderField:@"namespace"];
     }
-    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:kDBDefaultsCompanyNamespaceHeader];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:value forHTTPHeaderField:header];
+        [[NSUserDefaults standardUserDefaults] setObject:value forKey:kDBCompanyHeader];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
 }
 
 @end

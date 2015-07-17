@@ -8,9 +8,6 @@
 
 #import "DBConstants.h"
 
-NSString *const kDBDefaultsHasAllImportantData = @"kDBDefaultsHasAllImportantData";
-
-NSString *const kDBDefaultsAvailablePaymentTypes = @"kDBDefaultsAvailablePaymentTypes";
 
 NSString *const kDBDefaultsName = @"kDBDefaultsName";
 NSString *const kDBDefaultsPhone = @"kDBDefaultsPhone";

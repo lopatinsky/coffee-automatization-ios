@@ -227,6 +227,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self reloadTableViewHeight:NO];
     
+    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
         if(self == self.navigationController.visibleViewController){
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

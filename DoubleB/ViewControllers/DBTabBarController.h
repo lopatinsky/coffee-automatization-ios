@@ -14,7 +14,5 @@
 + (instancetype)sharedInstance;
 
 - (void)awakeFromRemoteNotification;
-- (void)moveToStartState;
-- (void)setupViewControllers;
 
 @end
