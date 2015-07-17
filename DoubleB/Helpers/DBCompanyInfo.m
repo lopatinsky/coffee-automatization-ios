@@ -180,7 +180,7 @@
     _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;
     _applicationName = [info getValueForKey:@"applicationName"] ?: @"";
     
-    NSString *topScreen = [info getValueForKey:@"TopViewController"];
+    NSString *topScreen = [DBCompanyInfo objectFromPropertyListByName:@"TopViewController"];
     if ([topScreen isEqualToString:@"Menu"]) {
         _topScreenType = TVCMenu;
     } else if ([topScreen isEqualToString:@"Order"]) {
