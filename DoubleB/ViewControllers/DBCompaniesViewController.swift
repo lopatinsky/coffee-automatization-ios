@@ -37,8 +37,10 @@ public class DBCompaniesViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        self.title = NSLocalizedString("Список компаний", comment: "")
-        self.titleLabel.text = NSLocalizedString("Список компаний", comment: "")
+        self.titleLabel.text = NSLocalizedString("Выберите регион", comment: "")
+        self.titleLabel.textColor = UIColor.whiteColor()
+        self.title = NSLocalizedString("Выберите регион", comment: "")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
     func requestCompanies() {

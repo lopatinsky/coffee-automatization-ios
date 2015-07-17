@@ -91,7 +91,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBCompaniesViewController *companiesVC = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
     companiesVC.firstLaunch = NO;
     [self.settingsItems addObject:@{@"name": @"companiesVC",
-                                    @"title": NSLocalizedString(@"Список компаний", nil),
+                                    @"title": NSLocalizedString(@"Список регионов", nil),
                                     @"image": @"venue_gray",
                                     @"viewController": companiesVC
                                     }];
