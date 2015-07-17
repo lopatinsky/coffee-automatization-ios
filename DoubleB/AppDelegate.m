@@ -63,7 +63,6 @@
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     
     [JRSwizzleMethods swizzleUIViewDealloc];
-    //[DBShareHelper sharedInstance];
     [[DBPromoManager sharedManager] updateInfo];
     
     [GANHelper trackClientInfo];
@@ -90,13 +89,8 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
-<<<<<<< HEAD
     if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompanyInfo sharedInstance].currentCompanyName isEqualToString:@""]) {
         self.window.rootViewController = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
-=======
-    if (![DBCompanyInfo sharedInstance].deliveryTypes){
-        self.window.rootViewController = [DBLaunchEmulationViewController new];
->>>>>>> premaster
     } else {
         if (![DBCompanyInfo sharedInstance].deliveryTypes) {
             self.window.rootViewController = [DBLaunchEmulationViewController new];
@@ -291,9 +285,11 @@
     }
     
     path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
-    if(![fileManager fileExistsAtPath:path]){
-        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"ViewControllers" ofType:@"plist"];
-        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+    if(![fileManager fileExistsAtPath:path]) {
+        NSString *pathToViewControllers = [[NSBundle mainBundle] pathForResource:@"ViewControllers" ofType:@"plist"];
+        if (pathToViewControllers) {
+            [fileManager copyItemAtPath:pathToViewControllers toPath:path error:&error];
+        }
     }
 }
 

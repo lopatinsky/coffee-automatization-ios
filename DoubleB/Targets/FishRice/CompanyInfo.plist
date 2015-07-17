@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>TopViewController</key>
-	<string>Menu</string>
+	<string>Order</string>
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
