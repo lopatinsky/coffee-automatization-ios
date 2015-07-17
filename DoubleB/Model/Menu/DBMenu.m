@@ -164,14 +164,15 @@
     return mutableCategories;
 }
 
+- (NSString *)menuFilePath{
+    return [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/menu.txt"];
+}
 
 - (void)saveMenuToDeviceMemory{
     if(self.categories){
-        NSString *path = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/menu.txt"];
-        
         NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.categories];
         NSError *error;
-        [data writeToFile:path options:NSDataWritingAtomic error:&error];
+        [data writeToFile:[self menuFilePath] options:NSDataWritingAtomic error:&error];
         if(error != nil){
             NSLog(@"%@", error);
         }
@@ -179,11 +180,15 @@
 }
 
 - (void)loadMenuFromDeviceMemory{
-    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/menu.txt"];
-    
-    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSData *data = [NSData dataWithContentsOfFile:[self menuFilePath]];
     
     self.categories = [self sortCategories:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+}
+
+- (void)removeMenu{
+    NSError *error;
+    [[NSFileManager defaultManager] removeItemAtPath:[self menuFilePath] error:&error];
+    self.categories = nil;
 }
 
 @end

@@ -12,18 +12,14 @@
 #import "IHWebPageViewController.h"
 #import "MBProgressHUD.h"
 #import "DBAPIClient.h"
-#import "Order.h"
 #import "DBClientInfo.h"
 
-#define PAYMENT_TYPES_URL @"payment/payment_types"
 #define PAYMENT_REGISTRATION_URL @"register"
 #define CHECK_ORDER_STATUS_URL @"status"
 #define CHECK_EXTENDET_ORDER_STATUS_URL @"extended_status"
 #define LOCK_PAYMENT_URL @"payment_binding"
 #define UNLOCK_PAYMENT_URL @"reverse"
 #define UNBIND_CARD_URL @"unbind"
-
-NSString *const kDBDefaultsAvailablePaymentTypes = @"kDBDefaultsAvailablePaymentTypes";
 
 NSString *const kDBPaymentErrorDefault = @"kDBPaymentErrorDefault";
 NSString *const kDBPaymentErrorCardNotUnique = @"kDBPaymentErrorCardNotUnique";
@@ -47,31 +43,6 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
         instance = [IHPaymentManager new];
     });
     return instance;
-}
-
-- (void)synchronizePaymentTypes {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *paymentTypes = [defaults objectForKey:kDBDefaultsAvailablePaymentTypes];
-    if (!paymentTypes) {
-        paymentTypes = @[@(PaymentTypeCash) ];
-        [defaults setObject:paymentTypes forKey:kDBDefaultsAvailablePaymentTypes];
-        [defaults synchronize];
-    }
-
-    [[DBAPIClient sharedClient] GET:PAYMENT_TYPES_URL
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%@", responseObject);
-                                NSMutableArray *array = [NSMutableArray array];
-                                for (NSDictionary *paymentType in responseObject[@"payment_types"]) {
-                                    [array addObject:@([paymentType[@"id"] intValue])];
-                                }
-                                [defaults setObject:array forKey:kDBDefaultsAvailablePaymentTypes];
-                                [defaults synchronize];
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                            }];
 }
 
 -(void)bindNewCardForClient:(NSString *)clientId

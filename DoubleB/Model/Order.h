@@ -57,6 +57,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict;
 
 + (NSArray *)allOrders;
++ (void)dropAllOrders;
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;
 + (void)dropAllOrders;
 

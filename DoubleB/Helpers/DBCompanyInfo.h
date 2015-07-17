@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "DBDeliveryType.h"
 
-
 typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeCafe = 0,
     DBCompanyTypeRestaurant = 1,
@@ -20,6 +19,9 @@ typedef NS_ENUM(NSUInteger, TopViewControllerType) {
     TVCMenu = 0,
     TVCOrder = 1
 };
+
+extern NSString *const kDBCompanyInfoDidUpdateNotification;
+extern NSString *const kDBCompanyInfoHardResetNotification;
 
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
@@ -45,8 +47,14 @@ typedef NS_ENUM(NSUInteger, TopViewControllerType) {
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
 @property(strong, nonatomic) NSString *currentCompanyName;
+@property(nonatomic) BOOL hasAllImportantData;
 
 - (void)updateInfo;
+- (void)updateAllImportantInfo;
+- (void)updateAllImportantInfo:(void(^)(BOOL success))callback;
+
+- (void)updateInfo:(void(^)(BOOL success))callback;
+- (void)synchronizePaymentTypes:(void(^)(BOOL success))callback;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
 + (NSString *)db_companyBaseUrl;

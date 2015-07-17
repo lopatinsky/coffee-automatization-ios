@@ -88,6 +88,7 @@ extern NSString* const kDBDefaultsPaymentType;
 - (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index;
 - (void)removeOrderItemAtIndex:(NSInteger)index;
 
+- (void)clear; // clean & remove venue
 - (void)purgePositions; //clean
 - (void)overridePositions:(NSArray *)items; //clean and add from array
 
@@ -113,7 +114,7 @@ extern NSString* const kDBDefaultsPaymentType;
 /**
  * Selected type of delivery
  */
-@property (strong, nonatomic, readonly) DBDeliveryType *deliveryType;
+@property (strong, nonatomic) DBDeliveryType *deliveryType;
 
 /**
  * Only use when switch between inRestaurant and takeaway;

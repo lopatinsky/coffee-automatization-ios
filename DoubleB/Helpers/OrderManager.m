@@ -69,11 +69,14 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)setVenue:(Venue *)venue{
+    _venue = venue;
     if(venue){
-        _venue = venue;
         [[NSUserDefaults standardUserDefaults] setObject:venue.venueId forKey:kDBDefaultsLastSelectedVenue];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDBDefaultsLastSelectedVenue];
     }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (BOOL)validOrder{
@@ -145,9 +148,13 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return total;
 }
 
+- (void)clear{
+    [self purgePositions];
+    self.venue = nil;
+}
+
 - (void)purgePositions {
     self.items = [NSMutableArray array];
-    self.venue = nil;
     self.comment = @"";
     self.location = nil;
     
@@ -349,10 +356,22 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     
     self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateDeliveryType) name:kDBCompanyInfoDidUpdateNotification object:nil];
+    
     return self;
 }
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Delivery type
+
+- (void)updateDeliveryType{
+    if(!self.deliveryType){
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+    }
+}
 
 - (void)selectDeliveryType:(DBDeliveryType *)type{
     if(type.typeId == DeliveryTypeIdShipping){

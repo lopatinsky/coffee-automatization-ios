@@ -4076,6 +4076,8 @@
 		CB3F9CB51AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB3F9CB61AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB3F9CB71AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
+		CB40FF061B48933D00F46411 /* demorubeacon_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB40FF041B48933D00F46411 /* demorubeacon_icon@2x.png */; };
+		CB40FF071B48933D00F46411 /* demorubeacon_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB40FF051B48933D00F46411 /* demorubeacon_icon@3x.png */; };
 		CB43E7A31ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */; };
 		CB43E7A41ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */; };
 		CB43E7DC1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
@@ -6089,6 +6091,12 @@
 		CB8202011B46CC1F000BBE55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB8201F71B46CC1F000BBE55 /* InfoPlist.strings */; };
 		CB8202021B46CC1F000BBE55 /* Images-RubeaconDemo.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB8201F91B46CC1F000BBE55 /* Images-RubeaconDemo.xcassets */; };
 		CB8202031B46CC1F000BBE55 /* RubeaconDemo-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB8201FB1B46CC1F000BBE55 /* RubeaconDemo-info.plist */; };
+		CB8202081B46D5B6000BBE55 /* DBDemoLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8202061B46D5B6000BBE55 /* DBDemoLoginViewController.m */; };
+		CB8202091B46D5B6000BBE55 /* DBDemoLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8202071B46D5B6000BBE55 /* DBDemoLoginViewController.xib */; };
+		CB82020C1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82020B1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m */; };
+		CB82020F1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82020E1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m */; };
+		CB8202431B48438B000BBE55 /* logout_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8202411B48438B000BBE55 /* logout_icon@2x.png */; };
+		CB8202441B48438B000BBE55 /* logout_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8202421B48438B000BBE55 /* logout_icon@3x.png */; };
 		CB82FBD41B442C70000BBE55 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB82FBD51B442C70000BBE55 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB82FBD61B442C70000BBE55 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
@@ -8532,6 +8540,8 @@
 		CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBOrderViewHeader.m; sourceTree = "<group>"; };
 		CB3F9CB01AFA395B003A897F /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		CB3F9CB11AFA395B003A897F /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		CB40FF041B48933D00F46411 /* demorubeacon_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demorubeacon_icon@2x.png"; sourceTree = "<group>"; };
+		CB40FF051B48933D00F46411 /* demorubeacon_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demorubeacon_icon@3x.png"; sourceTree = "<group>"; };
 		CB43E7A01ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionSingleModifierCell.h; sourceTree = "<group>"; };
 		CB43E7A11ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionSingleModifierCell.m; sourceTree = "<group>"; };
 		CB43E7A21ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPositionSingleModifierCell.xib; sourceTree = "<group>"; };
@@ -8686,6 +8696,15 @@
 		CB8201F91B46CC1F000BBE55 /* Images-RubeaconDemo.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-RubeaconDemo.xcassets"; sourceTree = "<group>"; };
 		CB8201FA1B46CC1F000BBE55 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB8201FB1B46CC1F000BBE55 /* RubeaconDemo-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RubeaconDemo-info.plist"; sourceTree = "<group>"; };
+		CB8202051B46D5B6000BBE55 /* DBDemoLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDemoLoginViewController.h; sourceTree = "<group>"; };
+		CB8202061B46D5B6000BBE55 /* DBDemoLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDemoLoginViewController.m; sourceTree = "<group>"; };
+		CB8202071B46D5B6000BBE55 /* DBDemoLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBDemoLoginViewController.xib; sourceTree = "<group>"; };
+		CB82020A1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DBServerAPI+DemoLogin.h"; sourceTree = "<group>"; };
+		CB82020B1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DBServerAPI+DemoLogin.m"; sourceTree = "<group>"; };
+		CB82020D1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBRubeaconDemoSettingsViewController.h; sourceTree = "<group>"; };
+		CB82020E1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBRubeaconDemoSettingsViewController.m; sourceTree = "<group>"; };
+		CB8202411B48438B000BBE55 /* logout_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout_icon@2x.png"; sourceTree = "<group>"; };
+		CB8202421B48438B000BBE55 /* logout_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logout_icon@3x.png"; sourceTree = "<group>"; };
 		CB82FD2A1B442C70000BBE55 /* CameraObscura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CameraObscura.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB82FD2E1B442CBF000BBE55 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		CB82FD2F1B442CBF000BBE55 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -10622,6 +10641,7 @@
 		CB8201F01B46CC1F000BBE55 /* AdditionalResources */ = {
 			isa = PBXGroup;
 			children = (
+				CB8202041B46D591000BBE55 /* Compiled */,
 				CB8201F11B46CC1F000BBE55 /* Resources */,
 			);
 			path = AdditionalResources;
@@ -10630,12 +10650,30 @@
 		CB8201F11B46CC1F000BBE55 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CB40FF041B48933D00F46411 /* demorubeacon_icon@2x.png */,
+				CB40FF051B48933D00F46411 /* demorubeacon_icon@3x.png */,
+				CB8202411B48438B000BBE55 /* logout_icon@2x.png */,
+				CB8202421B48438B000BBE55 /* logout_icon@3x.png */,
 				CB8201F21B46CC1F000BBE55 /* launch_480.png */,
 				CB8201F31B46CC1F000BBE55 /* launch_568.png */,
 				CB8201F41B46CC1F000BBE55 /* launch_667.png */,
 				CB8201F51B46CC1F000BBE55 /* launch_736.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		CB8202041B46D591000BBE55 /* Compiled */ = {
+			isa = PBXGroup;
+			children = (
+				CB8202051B46D5B6000BBE55 /* DBDemoLoginViewController.h */,
+				CB8202061B46D5B6000BBE55 /* DBDemoLoginViewController.m */,
+				CB8202071B46D5B6000BBE55 /* DBDemoLoginViewController.xib */,
+				CB82020A1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.h */,
+				CB82020B1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m */,
+				CB82020D1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.h */,
+				CB82020E1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m */,
+			);
+			path = Compiled;
 			sourceTree = "<group>";
 		};
 		CB82FD2B1B442CBF000BBE55 /* CameraObscura */ = {
@@ -13467,6 +13505,7 @@
 				CB14317B1B0E371A00DD50C7 /* card@2x.png in Resources */,
 				CB14317C1B0E371A00DD50C7 /* DBBonusPositionsViewController.xib in Resources */,
 				CB14317D1B0E371A00DD50C7 /* DBNewOrderViewController.xib in Resources */,
+				CB40FF061B48933D00F46411 /* demorubeacon_icon@2x.png in Resources */,
 				CB14317E1B0E371A00DD50C7 /* share_icon@2x.png in Resources */,
 				CB14317F1B0E371A00DD50C7 /* category_selection_icon@3x.png in Resources */,
 				CB1431801B0E371A00DD50C7 /* venues_icon.png in Resources */,
@@ -13484,6 +13523,7 @@
 				CB14318B1B0E371A00DD50C7 /* DBVenueCell.xib in Resources */,
 				CB14318C1B0E371A00DD50C7 /* bg960.jpg in Resources */,
 				CB14318D1B0E371A00DD50C7 /* venues_icon_grey@2x.png in Resources */,
+				CB40FF071B48933D00F46411 /* demorubeacon_icon@3x.png in Resources */,
 				CB14318E1B0E371A00DD50C7 /* mug.png in Resources */,
 				7E47E4181B1DEBB0001432D9 /* DBDeliveryViewController.xib in Resources */,
 				CB14318F1B0E371A00DD50C7 /* return_cause_time_icon@3x.png in Resources */,
@@ -15377,6 +15417,7 @@
 				CB8201791B46CBB4000BBE55 /* return_cause_other_icon@2x.png in Resources */,
 				CB82017A1B46CBB4000BBE55 /* DBLaunchEmulationViewController.xib in Resources */,
 				CB82017B1B46CBB4000BBE55 /* payment.png in Resources */,
+				CB8202091B46D5B6000BBE55 /* DBDemoLoginViewController.xib in Resources */,
 				CB82017C1B46CBB4000BBE55 /* return_cause_change_icon@2x.png in Resources */,
 				CB82017D1B46CBB4000BBE55 /* modifier_arrow_icon@2x.png in Resources */,
 				CB82017E1B46CBB4000BBE55 /* maestro_icon@2x.png in Resources */,
@@ -15448,6 +15489,7 @@
 				CB8201BF1B46CBB4000BBE55 /* paypal_icon@2x.png in Resources */,
 				CB8201C01B46CBB4000BBE55 /* feedback.png in Resources */,
 				CB8201C11B46CBB4000BBE55 /* DBPositionModifierCell.xib in Resources */,
+				CB8202431B48438B000BBE55 /* logout_icon@2x.png in Resources */,
 				CB8201C21B46CBB4000BBE55 /* tick.png in Resources */,
 				CB8201C31B46CBB4000BBE55 /* modifier_minus_icon@3x.png in Resources */,
 				CB8201C41B46CBB4000BBE55 /* 250.png in Resources */,
@@ -15475,6 +15517,7 @@
 				CB8201DA1B46CBB4000BBE55 /* about_promo.png in Resources */,
 				CB8201DB1B46CBB4000BBE55 /* mug_orders.png in Resources */,
 				CB8201DC1B46CBB4000BBE55 /* profile@2x.png in Resources */,
+				CB8202441B48438B000BBE55 /* logout_icon@3x.png in Resources */,
 				CB8201DD1B46CBB4000BBE55 /* settings.png in Resources */,
 				CB8201DE1B46CBB4000BBE55 /* clock@2x.png in Resources */,
 				CB8201DF1B46CBB4000BBE55 /* return_cause_change_icon@3x.png in Resources */,
@@ -20041,12 +20084,14 @@
 				CB8200C41B46CBB4000BBE55 /* DBPersonalWalletView.m in Sources */,
 				CB8200C51B46CBB4000BBE55 /* NSDictionary+NSNullRepresentation.m in Sources */,
 				CB8200C61B46CBB4000BBE55 /* UIViewController+DBMessage.m in Sources */,
+				CB8202081B46D5B6000BBE55 /* DBDemoLoginViewController.m in Sources */,
 				CB8200C71B46CBB4000BBE55 /* DBMenu.m in Sources */,
 				CB8200C81B46CBB4000BBE55 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB8200C91B46CBB4000BBE55 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB8200CA1B46CBB4000BBE55 /* DBCardsViewController.m in Sources */,
 				CB8200CB1B46CBB4000BBE55 /* UIViewController+DBCardManagement.m in Sources */,
 				CB8200CC1B46CBB4000BBE55 /* (null) in Sources */,
+				CB82020C1B46E1DB000BBE55 /* DBServerAPI+DemoLogin.m in Sources */,
 				CB8200CD1B46CBB4000BBE55 /* DBNewOrderViewController.m in Sources */,
 				CB8200CE1B46CBB4000BBE55 /* DBCategoryPickerCell.m in Sources */,
 				CB8200CF1B46CBB4000BBE55 /* DBNewOrderNDAView.m in Sources */,
@@ -20086,6 +20131,7 @@
 				CB8200F01B46CBB4000BBE55 /* DBPopupTextView.m in Sources */,
 				CB8200F11B46CBB4000BBE55 /* CoreDataHelper.m in Sources */,
 				CB8200F21B46CBB4000BBE55 /* Compatibility.m in Sources */,
+				CB82020F1B46E8C6000BBE55 /* DBRubeaconDemoSettingsViewController.m in Sources */,
 				CB8200F31B46CBB4000BBE55 /* DBAddressViewController.m in Sources */,
 				CB8200F41B46CBB4000BBE55 /* DBDiscountAdvertView.m in Sources */,
 				CB8200F51B46CBB4000BBE55 /* DBOrderViewFooter.m in Sources */,
