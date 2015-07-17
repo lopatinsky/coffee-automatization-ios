@@ -4,6 +4,8 @@
 <dict>
 	<key>CompanyChoiceEnabled</key>
 	<false/>
+	<key>TopViewController</key>
+	<string>Menu</string>
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>

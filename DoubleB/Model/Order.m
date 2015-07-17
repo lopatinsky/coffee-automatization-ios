@@ -19,6 +19,7 @@
     NSArray *_bonusItems;
 }
 @dynamic orderId, total, time, timeString, dataItems, dataGifts, status, deliveryType, venue, shippingAddress, paymentType;
+@synthesize realTotal = _realTotal;
 
 - (instancetype)init:(BOOL)stored {
     if (stored) {
@@ -57,7 +58,7 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
-    self.total = dict[@"total"];
+    self.realTotal = dict[@"total"];
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
@@ -85,6 +86,12 @@
     
     [self setTimeFromResponseDict:dict];
     
+    double realTotal = 0;
+    for (OrderItem *item in items) {
+        realTotal += item.totalPrice;
+    }
+    self.total = @(realTotal);
+    
     [[CoreDataHelper sharedHelper] save];
     
     return self;
@@ -92,6 +99,7 @@
 
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict{
     self.status = [dict[@"status"] intValue];
+    self.realTotal = dict[@"total"];
     [self setTimeFromResponseDict:dict];
     
     [[CoreDataHelper sharedHelper] save];
@@ -185,6 +193,17 @@
                                      completionHandler(NO, nil);
                                  }
                              }];
+}
+
+- (void)setRealTotal:(NSNumber *)realTotal {
+    _realTotal = realTotal;
+    [[NSUserDefaults standardUserDefaults] setObject:_realTotal forKey:[NSString stringWithFormat:@"%@_total", self.orderId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSNumber *)realTotal {
+    _realTotal = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_total", self.orderId]];
+    return _realTotal;
 }
 
 - (NSArray *)items {

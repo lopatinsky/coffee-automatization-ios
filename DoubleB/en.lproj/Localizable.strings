@@ -40,6 +40,7 @@
 "Сохранить" = "Save";
 "Точки" = "Venues";
 "Кофейни" = "Venues";
+"Кофейня" = "Venue";
 
 "Можно выбрать один вариант" = "You can select one option";
 "Можно выбрать несколько" = "You can select multiple options";
@@ -103,7 +104,7 @@
 
 "О приложении" = "About application";
 "Политика конфиденциальности" = "Privacy policy";
-"Лицензионное соглашение" = "Licence Agreement";
+"Лицензионное соглашение" = "License Agreement";
 "Правила оплаты" = "Payment Rules";
 
 "Для отправки сообщений необходима авторизация в Mail" = "Please authorize in Mail to send messages";
@@ -128,6 +129,7 @@
 "Представьтесь, пожалуйста" = "Please fill your profile";
 
 "Добавить карту" = "Add card";
+"Электронные платежи" = "E payment";
 
 "Выберите тип оплаты" = "Please select payment type";
 "Нет карт" = "No cards";

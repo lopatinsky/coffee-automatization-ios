@@ -18,6 +18,7 @@
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "Compatibility.h"
+#import "MBProgressHUD.h"
 #import "DBPayPalManager.h"
 
 @interface DBCardsViewController () <UITableViewDataSource, UITableViewDelegate, DBPayPalManagerDelegate>
@@ -29,6 +30,7 @@
 
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
+@property (strong, nonatomic) DBPayPalManager *payPalManager;
  
 @end
 
@@ -59,6 +61,13 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.constraintAdvertViewTopSpace.constant = topY;
 
+    
+    self.payPalManager = [DBPayPalManager sharedInstance];
+    self.payPalManager.delegate = self;
+    
+    if([self.availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
+        self.title = NSLocalizedString(@"Электронные платежи", nil);
+    }
     
     [self reloadCards];
 }
@@ -99,19 +108,11 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     int result = 0;
-    
-    if(self.mode == CardsViewControllerModeManageCards){
-        if(section == 2) {
-            return [self.cards count] + 1;
-        } else {
-            return 0;
-        }
-    }
     
     // Extra payment type
     if(section == 0){
@@ -120,12 +121,18 @@
     
     // Cash payment type
     if(section == 1){
-        result += [self.availablePaymentTypes containsObject:@(PaymentTypeCash)] ? 1 : 0;
+        BOOL available = [self.availablePaymentTypes containsObject:@(PaymentTypeCash)] && self.mode == CardsViewControllerModeChoosePayment;
+        result += available ? 1 : 0;
     }
     
     // Cards payment type
     if(section == 2){
-        result += [self.availablePaymentTypes containsObject:@(PaymentTypeCard)] ?[self.cards count] + 1 : 0;
+        result += [self.availablePaymentTypes containsObject:@(PaymentTypeCard)] ? [self.cards count] + 1 : 0;
+    }
+    
+    // PayPal payment type
+    if(section == 3){
+        result += [self.availablePaymentTypes containsObject:@(PaymentTypePayPal)] ? 1 : 0;
     }
     
     return result;
@@ -139,7 +146,7 @@
     DBCardCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBCardCell"];
     
     if (!cell) {
-        cell = (DBCardCell *)[[[NSBundle mainBundle] loadNibNamed:@"DBCardCell" owner:self options:nil] firstObject];
+        cell = [DBCardCell new];
     }
     
     // Cash payment type
@@ -147,11 +154,8 @@
         cell.cardTitleLabel.text = NSLocalizedString(@"Наличные", nil);
         [cell.cardIconImageView templateImageWithName:@"cash"];
         cell.cardTitleLabel.textColor = [UIColor blackColor];
-        if ([OrderManager sharedManager].paymentType == PaymentTypeCash) {
-            [cell.cardActiveIndicator templateImageWithName:@"tick"];
-        } else {
-            cell.cardActiveIndicator.hidden = YES;
-        }
+        
+        cell.checked = [OrderManager sharedManager].paymentType == PaymentTypeCash;
     }
     
     // Cards payment type
@@ -177,40 +181,67 @@
             
             [cell.cardIconImageView templateImageWithName:@"card"];
             cell.cardTitleLabel.textColor = [UIColor blackColor];
-            if ([card[@"default"] boolValue] &&
-                ([OrderManager sharedManager].paymentType == PaymentTypeCard || self.mode == CardsViewControllerModeManageCards)) {
-                [cell.cardActiveIndicator templateImageWithName:@"tick"];
-            } else {
-                cell.cardActiveIndicator.hidden = YES;
-            }
+            
+            cell.checked = [card[@"default"] boolValue] &&
+            ([OrderManager sharedManager].paymentType == PaymentTypeCard || self.mode == CardsViewControllerModeManageCards);
         }
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    // PayPal payment type
+    if(indexPath.section == 3){
+        cell.cardIconImageView.image = [UIImage imageNamed:@"paypal_icon"];
+        
+        if(_payPalManager.loggedIn){
+            cell.cardTitleLabel.textColor = [UIColor blackColor];
+            cell.cardTitleLabel.text = @"использовать PayPal";
+        } else {
+            cell.cardTitleLabel.textColor = [UIColor db_defaultColor];
+            cell.cardTitleLabel.text = @"Войти в аккаунт PayPal";
+        }
+        
+        cell.checked = ([OrderManager sharedManager].paymentType == PaymentTypePayPal && self.mode == CardsViewControllerModeChoosePayment);
+    }
+    
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return self.mode == CardsViewControllerModeManageCards && indexPath.section == 2 && indexPath.row < [self.cards count];
+    BOOL result = NO;
+    
+    result = result || (self.mode == CardsViewControllerModeManageCards && indexPath.section == 2 && indexPath.row < [self.cards count]);
+    
+    result = result || (self.mode == CardsViewControllerModeManageCards && indexPath.section == 3 && [DBPayPalManager sharedInstance].loggedIn);
+    
+    return result;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return (indexPath.section == 2) ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
+    return (indexPath.section == 2 || indexPath.section == 3) ? UITableViewCellEditingStyleDelete : UITableViewCellEditingStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView beginUpdates];
 
-    NSUInteger k = indexPath.row - (NSUInteger)self.mode;
-    NSDictionary *card = self.cards[k];
+    if(indexPath.section == 2){
+        NSUInteger k = indexPath.row;
+        NSDictionary *card = self.cards[k];
+        
+        [[IHSecureStore sharedInstance] removeCardAtIndex:k];
+        
+        self.cards = [[IHSecureStore sharedInstance] cards];
+        
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        
+        [[IHPaymentManager sharedInstance] unbindCard:card[@"cardToken"]];
+    }
     
-    [[IHSecureStore sharedInstance] removeCardAtIndex:k];
-    
-    self.cards = [[IHSecureStore sharedInstance] cards];
-    
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-    
-    [[IHPaymentManager sharedInstance] unbindCard:card[@"cardToken"]];
+    if(indexPath.section == 3){
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[DBPayPalManager sharedInstance] unbindPayPal:^{
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self.tableView reloadData];
+        }];
+    }
     
     [tableView endUpdates];
     
@@ -275,6 +306,37 @@
         }
     }
     
+    // PayPal payment type
+    if(indexPath.section == 3){
+        eventLabel = @"paypal";
+        
+        if(_payPalManager.loggedIn){
+            if(self.mode == CardsViewControllerModeChoosePayment){
+                [OrderManager sharedManager].paymentType = PaymentTypePayPal;
+                [self.tableView reloadData];
+                
+                [self.delegate cardsControllerDidChoosePaymentItem:self];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        } else {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [_payPalManager bindPayPal:^(DBPayPalBindingState state, NSString *message) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                
+                if(state == DBPayPalBindingStateDone){
+                    [self.tableView reloadData];
+                }
+                
+                if(state == DBPayPalBindingStateFailure){
+                    if(!message)
+                        message = @"Произошла непредвиденная ошибка! Пожалуйста, попробуйте еще раз!";
+                    
+                    [self showError:message];
+                }
+            }];
+        }
+    }
+    
     [GANHelper analyzeEvent:@"payment_selected" label:eventLabel category:PAYMENT_SCREEN];
 }
 
@@ -289,27 +351,5 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - other methods
-
-- (NSString *)getCurrentSelectedPaymentType{
-    NSString *result = @"0";
-    
-    switch ([OrderManager sharedManager].paymentType) {
-        case PaymentTypeNotSet:
-            result = @"0";
-            break;
-        case PaymentTypeCash:
-            result = @"1";
-            break;
-        case PaymentTypeCard:
-            result = @"2";
-            break;
-        case PaymentTypeExtraType:
-            result = @"3";
-            break;
-    }
-    
-    return result;
-}
 
 @end

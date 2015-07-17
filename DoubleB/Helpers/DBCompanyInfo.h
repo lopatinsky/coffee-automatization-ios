@@ -9,11 +9,25 @@
 #import <Foundation/Foundation.h>
 #import "DBDeliveryType.h"
 
+
+typedef NS_ENUM(NSUInteger, DBCompanyType) {
+    DBCompanyTypeCafe = 0,
+    DBCompanyTypeRestaurant = 1,
+    DBCompanyTypeOther = 2
+};
+
+typedef NS_ENUM(NSUInteger, TopViewControllerType) {
+    TVCMenu = 0,
+    TVCOrder = 1
+};
+
 @interface DBCompanyInfo : NSObject
 + (instancetype)sharedInstance;
 
 @property(strong, nonatomic, readonly) NSString *bundleName;
 
+@property(nonatomic, readonly) DBCompanyType type;
+@property(nonatomic, readonly) TopViewControllerType topScreenType;
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
 @property(strong, nonatomic, readonly) NSString *webSiteUrl;
@@ -47,6 +61,9 @@
 + (NSURL *)db_paymentRulesUrl;
 
 + (BOOL)db_companyChoiceEnabled;
+// Only for paypal
++ (NSURL *)db_payPalPrivacyPolicy;
++ (NSURL *)db_payPalUserAgreement;
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId;
 - (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId;

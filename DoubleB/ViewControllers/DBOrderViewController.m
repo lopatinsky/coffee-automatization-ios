@@ -164,7 +164,7 @@
     self.viewFooter.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
 }
 
-- (void)cancelOrder{
+- (void)cancelOrder {
     NSString *clientId = [IHSecureStore sharedInstance].clientId;
     NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", self.order.orderId, clientId];
     

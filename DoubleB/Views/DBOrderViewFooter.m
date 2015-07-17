@@ -39,12 +39,20 @@
     return self;
 }
 
-- (void)awakeFromNib{
+- (void)awakeFromNib {
     self.initialHeight = self.frame.size.height;
 }
 
-- (void)configure{
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Итого: %ld %@", nil), (long)self.order.total.integerValue, [Compatibility currencySymbol]]];
+- (void)configure {
+    NSMutableAttributedString *string;
+    if ([self.order.realTotal isEqualToNumber:self.order.total]) {
+        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Итого: %ld %@", nil), (long)self.order.total.integerValue, [Compatibility currencySymbol]]];
+    } else {
+        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Итого: %ld %ld %@", nil),
+                                                                    (long)self.order.total.integerValue, (long)self.order.realTotal.integerValue, [Compatibility currencySymbol]]];
+        [string setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14.0], NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)}
+                        range:NSMakeRange(7, [[self.order.total stringValue] length])];
+    }
     [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, 6)];
     self.labelTotal.attributedText = string;
     

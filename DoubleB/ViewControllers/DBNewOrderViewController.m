@@ -41,13 +41,16 @@
 #import "DBTimePickerView.h"
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"
-#import "DBPositionsViewController.h"
 #import "DBBonusPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
 #import "DBPositionViewController.h"
 #import "DBNewOrderItemAdditionView.h"
+#import "DBPayPalManager.h"
 #import "DBAddressViewController.h"
+
+#import "ViewControllerManager.h"
+#import "PositionsViewControllerProtocol.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -78,7 +81,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
-@property (strong, nonatomic) DBPositionsViewController *positionsViewController;
+@property (strong, nonatomic) UIViewController<PositionsViewControllerProtocol> *positionsViewController;
 
 @property (strong, nonatomic) OrderManager *orderManager;
 @property (strong, nonatomic) DBDeliverySettings *deliverySettings;
@@ -102,6 +105,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -189,6 +193,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
+    
+    if ([DBCompanyInfo sharedInstance].topScreenType == TVCMenu) {
+        [self pushPositionsViewControllerAnimated:NO];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -201,7 +209,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadItemAdditionView];
     [self reloadAddress];
     [self reloadTime];
-    [self reloadCard];
+    [self reloadPaymentType];
     [self reloadProfile];
     [self reloadContinueButton];
     [self reloadComment];
@@ -268,7 +276,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
 }
 
-- (void)dealloc{
+- (void)dealloc {
     NSLog(@"dealloc");
     
     [_deliverySettings removeObserver:self forKeyPath:@"selectedTime"];
@@ -603,7 +611,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [cell reloadCount];
     [self startUpdatingPromoInfo];
-    [self reloadCard];
+    [self reloadPaymentType];
     [self reloadContinueButton];
 }
 
@@ -619,7 +627,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self startUpdatingPromoInfo];
     [self reloadContinueButton];
-    [self reloadCard];
+    [self reloadPaymentType];
 
     if ([[OrderManager sharedManager] positionsCount] == 1) {
         self.tableView.alwaysBounceVertical = NO;
@@ -681,15 +689,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemAdditionView reload];
 }
 
-- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
-    if(!self.positionsViewController){
-        self.positionsViewController = [DBPositionsViewController new];
+- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view {
+    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
+    [self pushPositionsViewControllerAnimated:YES];
+}
+
+- (void)pushPositionsViewControllerAnimated:(BOOL)animated {
+    if (!self.positionsViewController) {
+        self.positionsViewController = [ViewControllerManager positionsViewController];
         self.positionsViewController.hidesBottomBarWhenPushed = YES;
     }
-    
-    [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
-    
-    [self.navigationController pushViewController:self.positionsViewController animated:YES];
+    [self.navigationController pushViewController:self.positionsViewController animated:animated];
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{
@@ -968,14 +978,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Payment
 
-- (void)reloadCard {
+- (void)reloadPaymentType {
     [self.orderFooter.labelCard db_stopObservingAnimationNotification];
     
-    switch ([OrderManager sharedManager].paymentType) {
+    switch (_orderManager.paymentType) {
         case PaymentTypeNotSet:
-            [[OrderManager sharedManager] selectIfPossibleDefaultPaymentType];
-            if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
-                [self reloadCard];
+            [_orderManager selectIfPossibleDefaultPaymentType];
+            if(_orderManager.paymentType != PaymentTypeNotSet){
+                [self reloadPaymentType];
             } else {
                 self.orderFooter.labelCard.textColor = [UIColor orangeColor];
                 self.orderFooter.labelCard.text = NSLocalizedString(@"Выберите тип оплаты", nil);
@@ -1003,6 +1013,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
             break;
        
+        case PaymentTypePayPal:
+            if([DBPayPalManager sharedInstance].loggedIn){
+                self.orderFooter.labelCard.textColor = [UIColor blackColor];
+                self.orderFooter.labelCard.text = @"PayPal";
+            } else {
+                _orderManager.paymentType = PaymentTypeNotSet;
+                [self reloadPaymentType];
+            }
+            break;
             
     }
 }

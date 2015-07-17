@@ -7,7 +7,7 @@
 //
 
 #import "DBTabBarController.h"
-#import "DBPositionsViewController.h"
+#import "PositionsTableViewController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"
@@ -53,7 +53,17 @@
            [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping])){
             DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
             venuesController.eventsCategory = VENUES_SCREEN;
-            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Точки", nil)
+            
+            NSString *title = NSLocalizedString(@"Точки", nil);
+            if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
+                int venuesCount = [[Venue storedVenues] count];
+                if(venuesCount == 1){
+                    title = NSLocalizedString(@"Кофейня", nil);
+                } else {
+                    title = NSLocalizedString(@"Кофейни", nil);
+                }
+            }
+            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
                                                                         image:[UIImage imageNamed:@"venues_icon_grey.png"]
                                                                 selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
             [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];

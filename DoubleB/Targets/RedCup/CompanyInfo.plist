@@ -2,17 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>TopViewController</key>
+	<string>Menu</string>
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
-		<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
+		<string>ub5EOJeYGYNgaXtobu2QmlrRHB58D4cLMbKYEVOF</string>
 		<key>clientKey</key>
-		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+		<string>DoVDTYuQzW0H8Pg9tbfAp4ZHO3ypVQJKd6Za4bvv</string>
 	</dict>
 	<key>CompanyGAKey</key>
-	<string></string>
+	<string>UA-62529990-36</string>
 	<key>CompanyColor</key>
-	<integer>4290022232</integer>
+	<integer>4288023343</integer>
 	<key>BaseUrl</key>
 	<string>http://redcup.1.doubleb-automation-production.appspot.com/</string>
 </dict>

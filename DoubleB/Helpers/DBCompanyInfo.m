@@ -36,6 +36,9 @@
 - (void)updateInfo{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
+            _type = [[response getValueForKey:@"companyType"] intValue];
+            _applicationName = response[@"appName"];
+            
             NSMutableArray *deliveryTypes = [NSMutableArray new];
             for(NSDictionary *typeDict in response[@"deliveryTypes"]){
                 [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];
@@ -131,6 +134,20 @@
     return [NSURL URLWithString:urlString];
 }
 
+#pragma mark - PayPal
+
++ (NSURL *)db_payPalPrivacyPolicy{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"docs/paypal_privacy_policy.html"];
+    
+    return [NSURL URLWithString:urlString];
+}
+
++ (NSURL *)db_payPalUserAgreement{
+    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"docs/paypal_user_agreement.html"];
+    
+    return [NSURL URLWithString:urlString];
+}
+
 #pragma mark - Delivery
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId{
@@ -160,6 +177,16 @@
 - (void)loadFromMemory{
     NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyInfo];
     
+    _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;
+    _applicationName = [info getValueForKey:@"applicationName"] ?: @"";
+    
+    NSString *topScreen = [info getValueForKey:@"TopViewController"];
+    if ([topScreen isEqualToString:@"Menu"]) {
+        _topScreenType = TVCMenu;
+    } else if ([topScreen isEqualToString:@"Order"]) {
+        _topScreenType = TVCOrder;
+    }
+    
     NSData *deliveryTypesData = info[@"deliveryTypes"];
     if(deliveryTypesData){
         _deliveryTypes = [NSKeyedUnarchiver unarchiveObjectWithData:deliveryTypesData] ?: @[];
@@ -184,7 +211,9 @@
                                    @"_venuePushChannel":_venuePushChannel,
                                    @"_orderPushChannel":_orderPushChannel};
     
-    NSDictionary *info = @{@"deliveryTypes": deliveryTypesData,
+    NSDictionary *info = @{@"type": @(_type),
+                           @"applicationName": _applicationName,
+                           @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
                            @"_deliveryCities": _deliveryCities,
                            @"_currentCompanyName": _currentCompanyName ?: @""};

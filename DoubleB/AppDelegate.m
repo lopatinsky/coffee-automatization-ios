@@ -23,7 +23,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
 #import <GoogleMaps/GoogleMaps.h>
-//#import <PayPal-iOS-SDK/PayPalMobile.h>
+#import <PayPal-iOS-SDK/PayPalMobile.h>
 
 @implementation AppDelegate
 
@@ -45,9 +45,11 @@
 //    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     
-//    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentSandbox:@"Aedvczd_fDZnfkriC94V1gr46UqlpqnAcO7VDIL9nRjK50N_chA15XyeE96j4hORw5nz1Fstxi6Mzmin"}];
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 //==================== Framework initialization =====================
-    
+    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
+    }
     
 //================ significant preloadings/initializations =================
     [DBServerAPI registerUser:nil];
@@ -88,8 +90,13 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
+<<<<<<< HEAD
     if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompanyInfo sharedInstance].currentCompanyName isEqualToString:@""]) {
         self.window.rootViewController = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
+=======
+    if (![DBCompanyInfo sharedInstance].deliveryTypes){
+        self.window.rootViewController = [DBLaunchEmulationViewController new];
+>>>>>>> premaster
     } else {
         if (![DBCompanyInfo sharedInstance].deliveryTypes) {
             self.window.rootViewController = [DBLaunchEmulationViewController new];
@@ -162,6 +169,7 @@
 //}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"REMOTE PUSH SUPER PUSH %@", userInfo);
     [PFPush handlePush:userInfo];
 
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
@@ -270,7 +278,7 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-- (void)copyPlist{
+- (void)copyPlist {
     NSError *error;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths firstObject];
@@ -279,7 +287,12 @@
     
     if(![fileManager fileExistsAtPath:path]){
         NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:pathToCompanyInfo];
+        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+    }
+    
+    path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
+    if(![fileManager fileExistsAtPath:path]){
+        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"ViewControllers" ofType:@"plist"];
         [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
     }
 }

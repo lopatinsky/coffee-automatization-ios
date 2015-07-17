@@ -7,11 +7,18 @@
 //
 
 #import "DBPayPalManager.h"
+#import "IHSecureStore.h"
+#import "DBAPIClient.h"
+#import "DBCompanyInfo.h"
 
 #import "PayPalMobile.h"
 
-@interface DBPayPalManager ()<PayPalFuturePaymentDelegate>
+NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
+
+@interface DBPayPalManager ()<PayPalFuturePaymentDelegate, PayPalProfileSharingDelegate>
 @property (nonatomic, strong, readwrite) PayPalConfiguration *payPalConfiguration;
+
+@property (copy, nonatomic) void(^successBlock)(DBPayPalBindingState, NSString*);
 @end
 
 @implementation DBPayPalManager
@@ -28,39 +35,113 @@
     
     _payPalConfiguration = [[PayPalConfiguration alloc] init];
     
-    _payPalConfiguration.merchantName = @"Ultramagnetic Omega Supreme";
-    _payPalConfiguration.merchantPrivacyPolicyURL = [NSURL URLWithString:@"https://www.omega.supreme.example/privacy"];
-    _payPalConfiguration.merchantUserAgreementURL = [NSURL URLWithString:@"https://www.omega.supreme.example/user_agreement"];
+    _payPalConfiguration.merchantName = [DBCompanyInfo sharedInstance].applicationName;
+    _payPalConfiguration.merchantPrivacyPolicyURL = [DBCompanyInfo db_payPalPrivacyPolicy];
+    _payPalConfiguration.merchantUserAgreementURL = [DBCompanyInfo db_payPalUserAgreement];
     
-    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentNoNetwork];
+    [PayPalMobile preconnectWithEnvironment:PayPalEnvironmentProduction];
     
     return self;
 }
 
-- (void)authorize{
+- (BOOL)loggedIn{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsLoggedInPayPal] boolValue];
+}
+
+- (void)setLoggedIn:(BOOL)loggedIn{
+    [[NSUserDefaults standardUserDefaults] setObject:@(loggedIn) forKey:kDBDefaultsLoggedInPayPal];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSString *)paymentMetadata{
+    return [PayPalMobile clientMetadataID];
+}
+
+- (void)bindPayPal:(void(^)(DBPayPalBindingState state, NSString *message))callback{
+    self.successBlock = callback;
     [self obtainConsent];
+}
+
+- (void)unbindPayPal:(void(^)())callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    if([IHSecureStore sharedInstance].clientId){
+        params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
+    }
+    
+    [[DBAPIClient sharedClient] POST:@"payment/paypal/unbind"
+                          parameters:params
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 self.loggedIn = NO;
+                                 
+                                 if(callback)
+                                     callback();
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 
+                                 self.loggedIn = NO;
+                                 
+                                 if(callback)
+                                     callback();
+                             }];
 }
 
 
 - (void)obtainConsent {
-    PayPalFuturePaymentViewController *fpViewController;
-    fpViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration
-                                                                               delegate:self];
+    PayPalProfileSharingViewController *psViewController;
+    NSSet *scopes = [NSSet setWithArray:@[kPayPalOAuth2ScopeEmail, kPayPalOAuth2ScopeAddress, kPayPalOAuth2ScopePhone]];
+    
+    psViewController = [[PayPalProfileSharingViewController alloc] initWithScopeValues:scopes
+                                                                         configuration:_payPalConfiguration
+                                                                              delegate:self];
+//    PayPalFuturePaymentViewController *fpViewController;
+//    fpViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration
+//                                                                               delegate:self];
     
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldPresentViewController:)]){
-        [self.delegate payPalManager:self shouldPresentViewController:fpViewController];
+        [self.delegate payPalManager:self shouldPresentViewController:psViewController];
     }
 }
 
 - (void)sendAuthorizationToServer:(NSDictionary *)authorization {
-    NSData *consentJSONData = [NSJSONSerialization dataWithJSONObject:authorization
-                                                              options:0
-                                                                error:nil];
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if([IHSecureStore sharedInstance].clientId){
+        params[@"client_id"] = [IHSecureStore sharedInstance].clientId;
+    }
+    
+    NSString *auth_code = authorization[@"response"][@"code"];
+    if(auth_code){
+        params[@"auth_code"] = auth_code;
+    }
+    
+    [[DBAPIClient sharedClient] POST:@"payment/paypal/bind"
+                          parameters:params
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 NSLog(@"%@", responseObject);
+                                 self.loggedIn = YES;
+                                 
+                                 if(_successBlock)
+                                     _successBlock(DBPayPalBindingStateDone, nil);
+                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 
+                                 NSString *message;
+                                 
+                                 if (operation.response.statusCode == 400) {
+                                     message = operation.responseObject[@"description"];
+                                 }
+                                 
+                                 if(_successBlock)
+                                     _successBlock(DBPayPalBindingStateFailure, message);
+                             }];
 }
 
 #pragma mark - PayPalFuturePaymentDelegate methods
 
 - (void)payPalFuturePaymentDidCancel:(PayPalFuturePaymentViewController *)futurePaymentViewController {
+    if(self.successBlock)
+        self.successBlock(DBPayPalBindingStateCancelled, nil);
+    
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
         [self.delegate payPalManager:self shouldDismissViewController:futurePaymentViewController];
     }
@@ -72,6 +153,25 @@
     
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
         [self.delegate payPalManager:self shouldDismissViewController:futurePaymentViewController];
+    }
+}
+
+#pragma mark - PayPalProfileSharingDelegate methods
+
+- (void)userDidCancelPayPalProfileSharingViewController:(PayPalProfileSharingViewController *)profileSharingViewController{
+    if(self.successBlock)
+        self.successBlock(DBPayPalBindingStateCancelled, nil);
+    
+    if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
+        [self.delegate payPalManager:self shouldDismissViewController:profileSharingViewController];
+    }
+}
+
+- (void)payPalProfileSharingViewController:(PayPalProfileSharingViewController *)profileSharingViewController userDidLogInWithAuthorization:(NSDictionary *)profileSharingAuthorization{
+    [self sendAuthorizationToServer:profileSharingAuthorization];
+    
+    if([self.delegate respondsToSelector:@selector(payPalManager:shouldDismissViewController:)]){
+        [self.delegate payPalManager:self shouldDismissViewController:profileSharingViewController];
     }
 }
 

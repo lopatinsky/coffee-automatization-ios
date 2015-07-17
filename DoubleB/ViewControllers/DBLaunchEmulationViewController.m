@@ -10,6 +10,7 @@
 #import "DBTabBarController.h"
 #import "AppDelegate.h"
 #import "DBCompanyInfo.h"
+#import <Parse/PFPush.h>
 
 @interface DBLaunchEmulationViewController ()<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
@@ -66,7 +67,9 @@
     
     UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
     
-    if ([window.rootViewController isKindOfClass:[DBLaunchEmulationViewController class]]) {
+    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
+    
+    if([window.rootViewController isKindOfClass:[DBLaunchEmulationViewController class]]) {
         window.rootViewController = [DBTabBarController sharedInstance];
     }
 }

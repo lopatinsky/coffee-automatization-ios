@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TopViewController</key>
+	<string>Menu</string>
+	<key>Parse</key>
+	<dict>
+		<key>applicationId</key>
+		<string>DId4pGbcAY4eJzWqgmImEgeIKQ1PBBhXqyrGfaa4</string>
+		<key>clientKey</key>
+		<string>4555WZ33iZAk6L4iFwI16Ppp3x7IdQw93CiRsxDA</string>
+	</dict>
+	<key>CompanyGAKey</key>
+	<string></string>
+	<key>CompanyColor</key>
+	<integer>4279789118</integer>
+	<key>BaseUrl</key>
+	<string>http://krispykreme.1.doubleb-automation-production.appspot.com/</string>
+</dict>
+</plist>

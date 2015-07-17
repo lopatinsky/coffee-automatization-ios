@@ -14,15 +14,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" tag="1" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pDR-gA-fXB">
-                        <rect key="frame" x="9" y="9" width="30" height="30"/>
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pDR-gA-fXB">
+                        <rect key="frame" x="9" y="15" width="18" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="2ad-g5-1Sg"/>
-                            <constraint firstAttribute="height" constant="30" id="P2w-Ec-G6B"/>
+                            <constraint firstAttribute="width" constant="18" id="2ad-g5-1Sg"/>
+                            <constraint firstAttribute="height" constant="18" id="P2w-Ec-G6B"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JX1-uk-lnX">
-                        <rect key="frame" x="43" y="11" width="208" height="25"/>
+                        <rect key="frame" x="35" y="11" width="216" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Wsj-RD-U61"/>
                         </constraints>
@@ -52,7 +52,7 @@
                     <constraint firstAttribute="centerY" secondItem="JX1-uk-lnX" secondAttribute="centerY" constant="1" id="Jt0-Zo-XeT"/>
                     <constraint firstAttribute="centerY" secondItem="i2j-ut-QA3" secondAttribute="centerY" id="NV4-k8-cpY"/>
                     <constraint firstAttribute="trailing" secondItem="evb-2g-bOd" secondAttribute="trailing" constant="15" id="P5B-B9-9pv"/>
-                    <constraint firstItem="JX1-uk-lnX" firstAttribute="leading" secondItem="pDR-gA-fXB" secondAttribute="trailing" constant="4" id="QD4-do-4AP"/>
+                    <constraint firstItem="JX1-uk-lnX" firstAttribute="leading" secondItem="pDR-gA-fXB" secondAttribute="trailing" constant="8" id="QD4-do-4AP"/>
                     <constraint firstAttribute="trailing" secondItem="i2j-ut-QA3" secondAttribute="trailing" constant="15" id="aeG-sk-hAS"/>
                     <constraint firstItem="pDR-gA-fXB" firstAttribute="leading" secondItem="Q5t-WU-IPw" secondAttribute="leading" constant="9" id="ip1-NQ-VNp"/>
                 </constraints>

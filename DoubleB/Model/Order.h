@@ -18,10 +18,11 @@ typedef NS_ENUM(int16_t, OrderStatus) {
 };
 
 typedef NS_ENUM(int16_t, PaymentType) {
-    PaymentTypeNotSet = 0,
-    PaymentTypeCash,
-    PaymentTypeCard,
-    PaymentTypeExtraType
+    PaymentTypeNotSet = -1,
+    PaymentTypeCash = 0,
+    PaymentTypeCard = 1,
+    PaymentTypePayPal = 4,
+    PaymentTypeExtraType = 2
 };
 
 @class Venue;
@@ -48,6 +49,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *bonusItems;
 @property (nonatomic, readonly) NSString *formattedTimeString;
+@property (nonatomic, strong) NSNumber *realTotal;
 
 - (instancetype)init:(BOOL)stored;
 - (instancetype)initNewOrderWithDict:(NSDictionary *)dict;

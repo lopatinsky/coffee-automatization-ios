@@ -2,11 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>TopViewController</key>
+	<string>Menu</string>
 	<key>CompanyGAKey</key>
 	<string>UA-62529990-5</string>
 	<key>CompanyColor</key>
 	<integer>4278214478</integer>
 	<key>BaseUrl</key>
-	<string>http://coffeehostel.1.doubleb-automation-production.appspot.com/</string>
+	<string>http://coffeehostel.test.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>
