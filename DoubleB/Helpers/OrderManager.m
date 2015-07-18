@@ -94,6 +94,11 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return result;
 }
 
+- (void)reset {
+    self.paymentType = PaymentTypeNotSet;
+    self.venue = nil;
+}
+
 - (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition{
     OrderItem *itemWithSamePosition;
     

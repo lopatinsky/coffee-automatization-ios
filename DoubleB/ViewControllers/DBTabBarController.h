@@ -13,6 +13,7 @@
 
 + (instancetype)sharedInstance;
 
+- (void)moveToStartState;
 - (void)awakeFromRemoteNotification;
 
 @end

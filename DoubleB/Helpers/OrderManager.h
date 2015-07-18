@@ -101,6 +101,7 @@ extern NSString* const kDBDefaultsPaymentType;
 - (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index;
 
 - (void)selectIfPossibleDefaultPaymentType;
+- (void)reset;
 
 + (NSUInteger)totalCountForItems:(NSArray *)items;
 

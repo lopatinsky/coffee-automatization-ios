@@ -76,8 +76,8 @@ extension DBCompaniesViewController: UITableViewDelegate {
         
         DBCompanyInfo.sharedInstance().currentCompanyName = self.companies[indexPath.row].objectForKey("name") as! String
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.preloadData()
         if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
-            self.preloadData()
             delegate.window.rootViewController = DBLaunchEmulationViewController()
         } else {
             delegate.window.rootViewController = DBTabBarController.sharedInstance()
@@ -91,11 +91,14 @@ extension DBCompaniesViewController: UITableViewDelegate {
             let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
             delegate.saveContext()
         }
+        OrderManager.sharedManager().reset()
+        DBDeliverySettings.sharedInstance().selectShipping()
+        DBMenu.sharedInstance().clearMenu()
         DBMenu.sharedInstance().updateMenuForVenue(nil, remoteMenu: nil)
         Order.dropAllOrders()
         DBPromoManager.sharedManager().clear()
         DBPromoManager.sharedManager().updateInfo()
-        DBCompanyInfo.sharedInstance()
+        DBTabBarController.sharedInstance().moveToStartState()
         DBCompanyInfo.sharedInstance().updateInfo()
     }
 }
