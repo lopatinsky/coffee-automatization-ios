@@ -37,7 +37,7 @@
         [defaultImageView constrainHeight:[NSString stringWithFormat:@"%ld", (long)size]];
         [defaultImageView constrainWidth:[NSString stringWithFormat:@"%ld", (long)size]];
         
-        self.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
+        self.backgroundColor = [UIColor colorWithRed:235./255 green:235./255 blue:235./255 alpha:1.0f];
     }
 }
 

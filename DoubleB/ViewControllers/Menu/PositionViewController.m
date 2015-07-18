@@ -1,28 +1,30 @@
 //
-//  DBPositionViewController.m
-//  DoubleB
+//  PositionViewController.m
+//  
 //
-//  Created by Ivan Oschepkov on 03.04.15.
-//  Copyright (c) 2015 Empatika. All rights reserved.
+//  Created by Balaban Alexander on 18/07/15.
+//
 //
 
-#import "DBPositionViewController.h"
+#import "PositionViewController.h"
+#import "Compatibility.h"
+#import "OrderManager.h"
+
+#import "DBBarButtonItem.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
-#import "OrderManager.h"
-#import "DBBarButtonItem.h"
-#import "DBPositionModifierCell.h"
 #import "DBPositionModifierPicker.h"
-#import "Compatibility.h"
+#import "DBPositionModifierCell.h"
 
 #import "UIView+RoundedCorners.h"
-#import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
+#import "UINavigationController+DBAnimation.h"
 
-@interface DBPositionViewController ()<UITableViewDataSource, UITableViewDelegate, DBPositionModifierPickerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *defaultPositionImageView;
+@interface PositionViewController () <UITableViewDataSource, UITableViewDelegate, DBPositionModifierPickerDelegate>
+
+@property (strong, nonatomic) IBOutlet UIImageView *positionImageView;
+@property (strong, nonatomic) IBOutlet UIImageView *defaultPositionImageView;
 @property (weak, nonatomic) IBOutlet UILabel *positionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *positionModifiersLabel;
 
@@ -38,24 +40,24 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageSeparator;
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
+@property (strong, nonatomic) IBOutlet UIView *separator;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *separatorHeightConstraint;
 
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
 
 @end
 
-@implementation DBPositionViewController
+@implementation PositionViewController
 
 + (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode {
-    DBPositionViewController *positionVC = [DBPositionViewController new];
-    
+    PositionViewController *positionVC = [PositionViewController new];
     positionVC.position = position;
     positionVC.mode = mode;
-    
     return positionVC;
 }
 
-- (void)setParentNavigationController:(UINavigationController *)parentNavigationController {
-    _parentNavigationController = parentNavigationController;
+- (void)setParentNavigationController:(UINavigationController *)controller {
+    _parentNavigationController = controller;
 }
 
 - (void)viewDidLoad {
@@ -64,27 +66,29 @@
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.positionImageView alignLeading:@"0" trailing:@"0" toView:self.view];
     
-    if(self.mode == PositionViewControllerModeMenuPosition){
+    if (self.mode == PositionViewControllerModeMenuPosition) {
         self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
     }
     
-    // Configure position image
     self.positionImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
     self.defaultPositionImageView.hidden = NO;
-    if(self.position.imageUrl){
+    if (self.position.imageUrl) {
         [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:self.position.imageUrl]
                                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                             if(!error){
+                                             if (!error) {
                                                  self.positionImageView.backgroundColor = [UIColor clearColor];
                                                  self.defaultPositionImageView.hidden = YES;
                                              }
                                          }];
     }
     
+    self.separatorHeightConstraint.constant = 1./ [UIScreen mainScreen].scale;
+    
+    self.title = self.position.name;
     self.positionTitleLabel.text = self.position.name;
     self.positionModifiersLabel.textColor = [UIColor db_defaultColor];
     [self reloadSelectedModifiers];
-    self.positionDescriptionLabel.text = self.position.positionDescription;
+    self.positionDescriptionLabel.text = [NSString stringWithFormat:@"Ингредиенты:\n%@", self.position.positionDescription];
     
     self.weightVolumeLabel.text = @"";
     
@@ -101,16 +105,13 @@
         self.energyAmountLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.energyAmount, NSLocalizedString(@"ккал", nil)];
     }
     
-    if (self.mode == PositionViewControllerModeMenuPosition){
+    if(self.mode == PositionViewControllerModeMenuPosition){
         [self.priceLabel setRoundedCorners];
-        self.priceLabel.backgroundColor = [UIColor db_defaultColor];
         self.priceLabel.textColor = [UIColor whiteColor];
-        
         self.priceButton.enabled = YES;
     } else {
-        self.priceLabel.backgroundColor = [UIColor clearColor];
-        self.priceLabel.textColor = [UIColor db_defaultColor];
-        
+        [self.priceLabel setRoundedCorners];
+        self.priceLabel.textColor = [UIColor whiteColor];
         self.priceButton.enabled = NO;
     }
     [self reloadPrice];
@@ -132,8 +133,8 @@
 - (void)reloadSelectedModifiers{
     NSMutableString *modifiersString =[[NSMutableString alloc] init];
     
-    for(DBMenuPositionModifier *modifier in self.position.groupModifiers){
-        if(modifier.selectedItem){
+    for (DBMenuPositionModifier *modifier in self.position.groupModifiers) {
+        if (modifier.selectedItem) {
             if(modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f %@ - %@ (%@)\n", modifier.actualPrice, [Compatibility currencySymbol], modifier.selectedItem.itemName, modifier.modifierName]];
             } else {
@@ -232,6 +233,15 @@
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.modifierPicker hide];
     });
+}
+
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 @end

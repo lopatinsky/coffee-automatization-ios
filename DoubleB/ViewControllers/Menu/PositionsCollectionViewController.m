@@ -8,12 +8,15 @@
 
 #import "PositionsCollectionViewController.h"
 #import "PositionCollectionViewCell.h"
+#import "PositionCompactCollectionViewCell.h"
+#import "ViewControllerManager.h"
 
 #import "DBBarButtonItem.h"
 #import "DBCategoryPicker.h"
 #import "DBCategoryHeaderView.h"
 #import "DBMenu.h"
 #import "DBMenuCategory.h"
+#import "DBMenuPosition.h"
 #import "DBPositionCell.h"
 #import "OrderManager.h"
 #import "Venue.h"
@@ -36,7 +39,7 @@
 @implementation PositionsCollectionViewController
 
 static NSString * const reuseIdentifier = @"PositionCollectionCell";
-static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
+static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell";
 
 #pragma mark - Life-Cycle
 - (void)viewDidLoad {
@@ -53,9 +56,10 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
 
 - (void)initializeViews {
     [self.collectionView registerNib:[UINib nibWithNibName:@"PositionCollectionCellView" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"PositionCompactCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseCompactIdentifier];
     
     self.navigationItem.title = NSLocalizedString(@"Меню", nil);
-    self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveBack)];
+    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveBack)];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = [UIColor grayColor];
@@ -65,6 +69,7 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.navigationController.navigationBar.translucent = NO;
     
     [GANHelper analyzeScreen:@"Menu_screen"];
     
@@ -73,6 +78,7 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.translucent = YES;
     
     [self hideCategoryPicker];
 }
@@ -99,8 +105,12 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
     
     UIImageView *imageView = [UIImageView new];
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    [imageView templateImageWithName:@"category_selection_icon" tintColor:[UIColor whiteColor]];
-    
+    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
+        [imageView templateImageWithName:@"category_selection_icon" tintColor:[UIColor db_defaultColor]];
+    } else {
+        [imageView templateImageWithName:@"category_selection_icon" tintColor:[UIColor whiteColor]];
+    }
+
     [button addSubview:imageView];
     imageView.translatesAutoresizingMaskIntoConstraints = NO;
     [imageView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:button];
@@ -115,7 +125,7 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
         [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
     } forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 - (void)reloadCollectionView {
@@ -169,6 +179,11 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
         }
     };
     
+    self.categories = [[DBMenu sharedInstance] getMenu];
+    if (self.categories && [self.categories count] > 0) {
+        [self reloadCollectionView];
+    }
+    
     if (self.refreshControl) {
         [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
                                          remoteMenu:menuUpdateHandler];
@@ -207,12 +222,30 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    PositionCollectionViewCell *cell = (PositionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
     DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
-    [cell configureWithPosition:position];
     
-    return cell;
+    DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
+    if (category.categoryWithImages) {
+        PositionCollectionViewCell *cell = (PositionCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+        [cell configureWithPosition:position];
+        return cell;
+    } else {
+        PositionCompactCollectionViewCell *cell = (PositionCompactCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:reuseCompactIdentifier forIndexPath:indexPath];
+        [cell configureWithPosition:position];
+        cell.delegate = self;
+        return cell;
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
+    DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
+    if (category.categoryWithImages) {
+        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+        positionVC.parentNavigationController = self.navigationController;
+        [self.navigationController pushViewController:positionVC animated:YES];
+        [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
+    }
 }
 
 #pragma mark - UICollectionViewDelegateFlowLayout
@@ -225,13 +258,29 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CGFloat width = ([[UIScreen mainScreen] bounds].size.width - 18.0 )/ 2.0;
-    CGFloat height = width * 1.25;
-    return CGSizeMake(width, height);
+    DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
+    if (category.categoryWithImages) {
+        CGFloat width = ([[UIScreen mainScreen] bounds].size.width - 18.0 )/ 2.0;
+        CGFloat height = width * 1.25;
+        return CGSizeMake(width, height);
+    } else {
+        return CGSizeMake([[UIScreen mainScreen] bounds].size.width - 12.0, 60.0);
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
     return UIEdgeInsetsMake(6, 6, 6, 6);
+}
+
+#pragma mark - DBPositionCellDelegate
+- (void)positionCellDidOrder:(id<PositionCellProtocol>)cell {
+    [self cartAddPositionFromCell:[cell position]];
+    [GANHelper analyzeEvent:@"price_pressed" label:cell.position.positionId category:MENU_SCREEN];
+}
+
+- (void)cartAddPositionFromCell:(DBMenuPosition *)position {
+    [[OrderManager sharedManager] addPosition:position];
+    [GANHelper analyzeEvent:@"product_added" label:position.positionId category:MENU_SCREEN];
 }
 
 #pragma mark - DBCategoryPicker methods
@@ -281,6 +330,9 @@ static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
     [GANHelper analyzeEvent:@"category_spinner_selected" label:category.categoryId category:MENU_SCREEN];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
+}
 
 #pragma mark - PositionsViewControllerProtocol
 + (instancetype)createViewController {

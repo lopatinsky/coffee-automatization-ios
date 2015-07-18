@@ -51,6 +51,7 @@
 
 #import "ViewControllerManager.h"
 #import "PositionsViewControllerProtocol.h"
+#import "PositionViewControllerProtocol.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -641,8 +642,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    if(![item.position isKindOfClass:[DBMenuBonusPosition class]]){
-        DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+    if (![item.position isKindOfClass:[DBMenuBonusPosition class]]){
+        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
         positionVC.parentNavigationController = self.navigationController;
         positionVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:positionVC animated:YES];

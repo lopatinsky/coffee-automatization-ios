@@ -19,9 +19,13 @@
 - (void)awakeFromNib{
     self.backgroundColor = [UIColor clearColor];
     
-    [self.orderImageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor whiteColor]];
-    
-    self.totalLabel.textColor = [UIColor whiteColor];
+    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0].CGColor)) {
+        [self.orderImageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor blackColor]];
+        self.totalLabel.textColor = [UIColor blackColor];
+    } else {
+        [self.orderImageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor whiteColor]];
+        self.totalLabel.textColor = [UIColor whiteColor];
+    }
 }
 
 @end

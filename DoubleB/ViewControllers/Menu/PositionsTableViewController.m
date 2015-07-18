@@ -7,8 +7,9 @@
 //
 
 #import "PositionsTableViewController.h"
+#import "ViewControllerManager.h"
+
 #import "DBBarButtonItem.h"
-#import "DBPositionViewController.h"
 #import "MBProgressHUD.h"
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
@@ -296,8 +297,8 @@
     
     DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     DBMenuPosition *position = cell.position;
-
-    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
+    
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
     positionVC.parentNavigationController = self.navigationController;
     [self.navigationController pushViewController:positionVC animated:YES];
     

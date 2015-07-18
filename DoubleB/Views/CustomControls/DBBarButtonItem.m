@@ -18,7 +18,7 @@
 
 @implementation DBBarButtonItem
 
--(instancetype)initWithViewController:(UIViewController *)viewController
+- (instancetype)initWithViewController:(UIViewController *)viewController
                      action:(SEL)action{
     UIButton *buttonOrder = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonOrder setTitleColor:[UIColor db_defaultColor]

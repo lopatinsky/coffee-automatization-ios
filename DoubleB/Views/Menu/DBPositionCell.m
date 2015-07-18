@@ -20,6 +20,7 @@
 @end
 
 @implementation DBPositionCell
+@synthesize position = _position;
 
 - (instancetype)initWithType:(DBPositionCellAppearanceType)type{
     NSString *nibIdentifier;
@@ -139,6 +140,11 @@
 
 - (void)enable{
     [self.inactivityView removeFromSuperview];
+}
+
+#pragma mark - PositionCellProtocol
+- (DBMenuPosition *)position {
+    return _position;
 }
 
 @end

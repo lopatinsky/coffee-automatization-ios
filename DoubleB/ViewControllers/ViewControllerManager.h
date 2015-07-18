@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "PositionsViewControllerProtocol.h"
+#import "PositionViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 
 + (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController;
++ (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
 
 @end

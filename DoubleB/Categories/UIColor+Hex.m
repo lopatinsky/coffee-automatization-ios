@@ -16,4 +16,13 @@
     return [[UIColor alloc] initWithRed:red green:green blue:blue alpha:alpha];
 }
 
+- (CGFloat)getBrightness {
+    CGFloat hue;
+    CGFloat saturation;
+    CGFloat brightness;
+    CGFloat alpha;
+    [self getHue:&hue saturation:&saturation brightness:&brightness alpha:&alpha];
+    return brightness;
+}
+
 @end

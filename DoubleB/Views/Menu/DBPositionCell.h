@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PositionCellProtocol.h"
+
 @class DBPositionCell;
 @class DBMenuPosition;
 
@@ -16,14 +18,8 @@ typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
     DBPositionCellAppearanceTypeFull
 };
 
-@protocol DBPositionCellDelegate <NSObject>
--(void)positionCellDidOrder:(DBPositionCell *)cell;
 
-@optional
--(void)positionCell:(DBPositionCell *)cell shouldSelectModifiersForPosition:(DBMenuPosition *)position;
-@end
-
-@interface DBPositionCell : UITableViewCell
+@interface DBPositionCell : UITableViewCell <PositionCellProtocol>
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -44,5 +40,6 @@ typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
 
 - (void)disable;
 - (void)enable;
+- (DBMenuPosition *)position;
 
 @end

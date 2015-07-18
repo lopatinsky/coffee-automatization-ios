@@ -18,6 +18,7 @@
 #import "IHSecureStore.h"
 
 #import "DBLaunchEmulationViewController.h"
+#import "UIImage+Color.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -81,14 +82,23 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-        NSForegroundColorAttributeName: [UIColor whiteColor],
-        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-    }];
+    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
+        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                               NSForegroundColorAttributeName: [UIColor blackColor],
+                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
+                                                               }];
+    } else {
+        [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                               NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
+                                                               }];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     if (![DBCompanyInfo sharedInstance].deliveryTypes){
         self.window.rootViewController = [DBLaunchEmulationViewController new];
@@ -284,7 +294,9 @@
     path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
     if(![fileManager fileExistsAtPath:path]){
         NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"ViewControllers" ofType:@"plist"];
-        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+        if (pathToCompanyInfo) {
+            [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+        }
     }
 }
 

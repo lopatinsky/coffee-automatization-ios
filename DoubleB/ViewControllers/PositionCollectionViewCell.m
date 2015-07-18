@@ -25,4 +25,8 @@
     }];
 }
 
+- (DBMenuPosition *)position {
+    return _position;
+}
+
 @end
