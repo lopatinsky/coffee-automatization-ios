@@ -2433,6 +2433,8 @@
 		7EB2D5B01B3C5CD9009405C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A21B3C5CCE009405C6 /* InfoPlist.strings */; };
 		7EB2D5B11B3C5CEC009405C6 /* Images-RedCup.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */; };
 		7EB2D5B21B3C5CEF009405C6 /* RedCup-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */; };
+		7EBFD7341B5A32530054B583 /* PositionCompactCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBFD7321B5A32530054B583 /* PositionCompactCollectionViewCell.m */; };
+		7EBFD7351B5A32530054B583 /* PositionCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EBFD7331B5A32530054B583 /* PositionCompactCollectionViewCell.xib */; };
 		7EDB58F21B32F70400723DF9 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		7EDB58F31B32F70400723DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		7EDB58F41B32F70400723DF9 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
@@ -8264,6 +8266,9 @@
 		7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-RedCup.xcassets"; sourceTree = "<group>"; };
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EBFD7311B5A32530054B583 /* PositionCompactCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PositionCompactCollectionViewCell.h; path = ../../ViewControllers/PositionCompactCollectionViewCell.h; sourceTree = "<group>"; };
+		7EBFD7321B5A32530054B583 /* PositionCompactCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PositionCompactCollectionViewCell.m; path = ../../ViewControllers/PositionCompactCollectionViewCell.m; sourceTree = "<group>"; };
+		7EBFD7331B5A32530054B583 /* PositionCompactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PositionCompactCollectionViewCell.xib; path = ../../ViewControllers/PositionCompactCollectionViewCell.xib; sourceTree = "<group>"; };
 		7EDB5A511B32F70400723DF9 /* FishRice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishRice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDB5A5C1B32F79D00723DF9 /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
 		7EDB5A5E1B32F79D00723DF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -9707,6 +9712,9 @@
 		7E993EF51B57C4C70014F02A /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				7EBFD7311B5A32530054B583 /* PositionCompactCollectionViewCell.h */,
+				7EBFD7321B5A32530054B583 /* PositionCompactCollectionViewCell.m */,
+				7EBFD7331B5A32530054B583 /* PositionCompactCollectionViewCell.xib */,
 				7E993EF61B57C6610014F02A /* PositionCollectionCellView.xib */,
 				7E993EF81B57C7920014F02A /* PositionCollectionViewCell.h */,
 				7E993EF91B57C7920014F02A /* PositionCollectionViewCell.m */,
@@ -11805,6 +11813,7 @@
 				7E3DAB9D1B06153E00A7FFD1 /* DBOrderBarButtonView.xib in Resources */,
 				7EAFE56C1B56B08C0025E586 /* PositionsCollectionViewController.xib in Resources */,
 				7E3DAB9E1B06153E00A7FFD1 /* ProfileCell.xib in Resources */,
+				7EBFD7351B5A32530054B583 /* PositionCompactCollectionViewCell.xib in Resources */,
 				7E3DAB9F1B06153E00A7FFD1 /* DBDiscountMessageCell.xib in Resources */,
 				7E47E41C1B1DEBB3001432D9 /* DBDeliveryViewController.xib in Resources */,
 				7E993EF71B57C6610014F02A /* PositionCollectionCellView.xib in Resources */,
@@ -17725,6 +17734,7 @@
 				7E47E4101B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				7E3DAB351B06153E00A7FFD1 /* CoreDataHelper.m in Sources */,
 				7E3DAB361B06153E00A7FFD1 /* Compatibility.m in Sources */,
+				7EBFD7341B5A32530054B583 /* PositionCompactCollectionViewCell.m in Sources */,
 				7E3DAB371B06153E00A7FFD1 /* DBDiscountAdvertView.m in Sources */,
 				7E3DAB381B06153E00A7FFD1 /* DBOrderViewFooter.m in Sources */,
 				7E3DAB391B06153E00A7FFD1 /* DBPositionModifierCell.m in Sources */,

@@ -36,6 +36,7 @@
 @implementation PositionsCollectionViewController
 
 static NSString * const reuseIdentifier = @"PositionCollectionCell";
+static NSString * const reuseIdentifier = @"PositionCompactCollectionCell";
 
 #pragma mark - Life-Cycle
 - (void)viewDidLoad {
@@ -51,7 +52,7 @@ static NSString * const reuseIdentifier = @"PositionCollectionCell";
 }
 
 - (void)initializeViews {
-    [self.collectionView registerClass:[PositionCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"PositionCollectionCellView" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.navigationItem.title = NSLocalizedString(@"Меню", nil);
     self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveBack)];
@@ -229,6 +230,10 @@ static NSString * const reuseIdentifier = @"PositionCollectionCell";
     return CGSizeMake(width, height);
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(6, 6, 6, 6);
+}
+
 #pragma mark - DBCategoryPicker methods
 - (void)showCatecoryPickerFromRect:(CGRect)fromRect onView:(UIView *)onView{
     [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
@@ -283,7 +288,7 @@ static NSString * const reuseIdentifier = @"PositionCollectionCell";
     CGFloat width = ([[UIScreen mainScreen] bounds].size.width - 18.0)/ 2.0;
     CGFloat height = width * 1.25;
     [aFlowLayout setItemSize:CGSizeMake(width, height)];
-    [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     return [[PositionsCollectionViewController alloc] initWithCollectionViewLayout:aFlowLayout];
 }
 
