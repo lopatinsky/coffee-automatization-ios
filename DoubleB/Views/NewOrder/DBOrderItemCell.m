@@ -7,6 +7,7 @@
 //
 
 #import "DBOrderItemCell.h"
+#import "Compatibility.h"
 #import "OrderItem.h"
 #import "DBPromoManager.h"
 #import "DBMenuBonusPosition.h"
@@ -103,7 +104,7 @@
     if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
         self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     } else {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", _orderItem.position.actualPrice];
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", _orderItem.position.actualPrice, [Compatibility currencySymbol]];
     }
     
     [self reloadCount];

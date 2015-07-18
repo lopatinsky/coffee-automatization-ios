@@ -87,11 +87,18 @@
 
 #pragma mark - Other methods
 - (void)initializeViews {
-    self.placeholderView.backgroundColor = [UIColor db_defaultColor];
-    self.placeholderView.alpha = 0.885;
-    
-    self.segmentedControl.tintColor = [UIColor whiteColor];
+    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0].CGColor)) {
+        self.placeholderView.backgroundColor = [UIColor whiteColor];
+        self.segmentedControl.tintColor = [UIColor db_defaultColor];
+        
+    } else {
+        self.placeholderView.backgroundColor = [UIColor db_defaultColor];
+        self.placeholderView.alpha = 0.885;
+        
+        self.segmentedControl.tintColor = [UIColor whiteColor];
+    }
     self.segmentedControl.selectedSegmentIndex = 0;
+    
 }
 
 - (void)initializeControllers {

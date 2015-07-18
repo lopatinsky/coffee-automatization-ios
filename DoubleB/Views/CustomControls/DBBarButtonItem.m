@@ -9,6 +9,7 @@
 #import "DBBarButtonItem.h"
 #import "DBOrderBarButtonView.h"
 #import "DBPromoManager.h"
+#import "Compatibility.h"
 #import "OrderManager.h"
 
 @interface DBBarButtonItem ()
@@ -54,7 +55,7 @@
 }
 
 -(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
-    NSString *price = [NSString stringWithFormat:@"%.0fр.", totalPrice];
+    NSString *price = [NSString stringWithFormat:@"%.0f %@", totalPrice, [Compatibility currencySymbol]];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:
                                          [NSString stringWithFormat:@" | %@", price]];
     [string addAttribute:NSFontAttributeName

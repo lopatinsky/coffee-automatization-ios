@@ -1209,6 +1209,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             [self.scrollView layoutIfNeeded];
         } completion:nil];
         
+        order.realTotal = order.total;
         [self.delegate newOrderViewController:self didFinishOrder:order];
     } failure:^(NSString *errorTitle, NSString *errorMessage) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
