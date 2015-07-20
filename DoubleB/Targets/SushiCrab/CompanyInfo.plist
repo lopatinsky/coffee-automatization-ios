@@ -5,15 +5,15 @@
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
-		<string>sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe</string>
+		<string>ub5EOJeYGYNgaXtobu2QmlrRHB58D4cLMbKYEVOF</string>
 		<key>clientKey</key>
-		<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
+		<string>DoVDTYuQzW0H8Pg9tbfAp4ZHO3ypVQJKd6Za4bvv</string>
 	</dict>
 	<key>CompanyGAKey</key>
-	<string>UA-62529990-9</string>
+	<string></string>
 	<key>CompanyColor</key>
-	<integer>4280662221</integer>
+	<integer>4293001241</integer>
 	<key>BaseUrl</key>
-	<string>http://elephantboutique.test.doubleb-automation.appspot.com/</string>
+	<string>http://sushikrab.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>
