@@ -14,6 +14,6 @@
 	<key>CompanyColor</key>
 	<integer>4280662221</integer>
 	<key>BaseUrl</key>
-	<string>http://elephantboutique.test.doubleb-automation.appspot.com/</string>
+	<string>http://elephantboutique.test.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>
