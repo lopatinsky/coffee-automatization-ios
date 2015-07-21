@@ -93,7 +93,7 @@
     [self.moreButton setTitle:@"+" forState:UIControlStateNormal];
 }
 
-- (void)configure{
+- (void)configure {
     [self reload];
     [self moveContentToOriginal:NO];
 }
@@ -101,7 +101,7 @@
 - (void)reload{
     self.titleLabel.text = _orderItem.position.name;
     
-    if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
+    if (self.orderItem.position.positionType == Bonus) {
         self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     } else {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", _orderItem.position.actualPrice, [Compatibility currencySymbol]];
@@ -111,9 +111,9 @@
     
     NSMutableString *modifiersString =[[NSMutableString alloc] init];
     
-    for(DBMenuPositionModifier *modifier in _orderItem.position.groupModifiers){
-        if(modifier.selectedItem){
-            if(modifier.actualPrice > 0){
+    for (DBMenuPositionModifier *modifier in _orderItem.position.groupModifiers){
+        if (modifier.selectedItem) {
+            if (modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (%@)\n", modifier.actualPrice, modifier.selectedItem.itemName, modifier.modifierName]];
             } else {
                 [modifiersString appendString:[NSString stringWithFormat:@"%@ (%@)\n", modifier.selectedItem.itemName, modifier.modifierName]];

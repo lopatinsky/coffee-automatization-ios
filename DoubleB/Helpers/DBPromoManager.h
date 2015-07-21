@@ -110,7 +110,10 @@
 
 //=========== Bonus Positions promo ===========
 
-
+//=========== Gifts ===========
+@property (nonatomic, strong) NSArray *currentAvailableGifts;
+@property (nonatomic, strong) NSMutableArray *cancelledGifts;
+//=========== Gifts ===========
 
 //=========== Personal Wallet promo ===========
 /**

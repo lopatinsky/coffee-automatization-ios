@@ -84,10 +84,10 @@
 }
 
 - (void)reloadPriceLabel{
-    if([self.position isKindOfClass:[DBMenuBonusPosition class]]){
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", ((DBMenuBonusPosition *)self.position).pointsPrice];
+    if(self.position.positionType == Bonus){
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
     } else {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.price, [Compatibility currencySymbol]];
     }
 }
 

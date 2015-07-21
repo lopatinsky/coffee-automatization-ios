@@ -5,10 +5,10 @@
 	<key>TopViewController</key>
 	<string>Menu</string>
 	<key>CompanyGAKey</key>
-	<string>UA-62529990-5</string>
+	<string></string>
 	<key>CompanyColor</key>
 	<integer>4278214478</integer>
 	<key>BaseUrl</key>
-	<string>http://coffeehostel.test.doubleb-automation-production.appspot.com/</string>
+	<string>http://mycompany.test.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

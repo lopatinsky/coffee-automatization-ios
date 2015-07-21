@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, MenuPositionType) {
+    General = 0,
+    Bonus
+};
+
 @class Venue;
 
 @interface DBMenuPosition : NSObject<NSCopying, NSCoding>
@@ -27,6 +32,8 @@
 @property(strong, nonatomic, readonly) NSMutableArray *singleModifiers;
 
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
+
+@property (nonatomic) MenuPositionType positionType;
 
 // Not stored data
 @property(nonatomic, readonly) BOOL hasImage;

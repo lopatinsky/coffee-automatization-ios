@@ -46,7 +46,7 @@
     self.tableView.tableFooterView = [UIView new];
     
     self.withImages = NO;
-    for(DBMenuPosition *position in [DBPromoManager sharedManager].positionsAvailableAsBonuses){
+    for (DBMenuPosition *position in [DBPromoManager sharedManager].positionsAvailableAsBonuses) {
         self.withImages = self.withImages || position.hasImage;
     }
 }
@@ -75,7 +75,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBPositionCell *cell;
     
-    if(self.withImages){
+    if (self.withImages){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
         if (!cell) {
             cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
@@ -87,10 +87,10 @@
         }
     }
     
-    DBMenuBonusPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
+    DBMenuPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
     [cell configureWithPosition:position];
     
-    if(position.pointsPrice <= [self totalPoints]){
+    if (position.price <= [self totalPoints]) {
         [cell enable];
     } else {
         [cell disable];
@@ -102,7 +102,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.withImages){
+    if (self.withImages) {
         return 120;
     } else {
         return 44;
@@ -112,10 +112,10 @@
 #pragma mark - DBPositionCellDelegate
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
-    DBMenuBonusPosition *position = (DBMenuBonusPosition *)cell.position;
+    DBMenuPosition *position = cell.position;
     
-    if(position.pointsPrice <= [self totalPoints]){
-        [[OrderManager sharedManager] addBonusPosition:(DBMenuBonusPosition *)cell.position];
+    if(position.price <= [self totalPoints]) {
+        [[OrderManager sharedManager] addBonusPosition:cell.position];
         
         [self reloadBalance];
         [self.tableView reloadData];

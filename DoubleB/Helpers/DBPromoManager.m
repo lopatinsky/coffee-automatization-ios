@@ -83,16 +83,17 @@
         NSDictionary *bonusPositionsPromo = response[@"bonuses"];
         
         NSMutableArray *bonusPositions = [NSMutableArray new];
-        for(NSDictionary *bonusPositionDict in bonusPositionsPromo[@"items"]){
-            DBMenuBonusPosition *bonusPosition = [[DBMenuBonusPosition alloc] initWithResponseDictionary:bonusPositionDict];
+        for (NSDictionary *bonusPositionDict in bonusPositionsPromo[@"items"]){
+            DBMenuPosition *bonusPosition = [[DBMenuPosition alloc] initWithResponseDictionary:bonusPositionDict];
+            bonusPosition.positionType = Bonus;
             
-            if(bonusPosition){
-                bonusPosition.pointsPrice = [bonusPositionDict[@"points"] doubleValue];
+            if (bonusPosition){
+//                bonusPosition.pointsPrice = [bonusPositionDict[@"points"] doubleValue];
                 [bonusPositions addObject:bonusPosition];
             }
         }
         [bonusPositions sortUsingComparator:^NSComparisonResult(DBMenuBonusPosition *obj1, DBMenuBonusPosition *obj2) {
-            return [@(obj1.pointsPrice) compare:@(obj2.pointsPrice)];
+            return [@(obj1.price) compare:@(obj2.price)];
         }];
         _positionsAvailableAsBonuses = bonusPositions;
         
@@ -106,6 +107,17 @@
 //        _positionsAvailableAsBonuses = @[bonusPosition1, bonusPosition2];
         
         _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
+        
+        // gifts
+        NSDictionary *gifts = response[@"new_order_gifts"];
+        NSMutableArray *currentGifts = [NSMutableArray new];
+        for (NSDictionary *gift in gifts) {
+            DBMenuBonusPosition *bonusPosition = [[DBMenuBonusPosition alloc] initWithResponseDictionary:gift];
+            if (bonusPosition) {
+                [currentGifts addObject:bonusPosition];
+            }
+        }
+        self.currentAvailableGifts = currentGifts;
         
         // Personal wallet promo
         NSDictionary *personalWalletPromo = response[@"wallet"];
@@ -140,7 +152,7 @@
 
     double currentTotal = [OrderManager sharedManager].totalPrice;
     [DBServerAPI checkNewOrder:^(NSDictionary *response) {
-        if(self.lastUpdateNumber == currentUpdateNumber && callback){
+        if (self.lastUpdateNumber == currentUpdateNumber && callback){
             // bonus points balance
             _bonusPointsBalance = [[response getValueForKey:@"full_points"] doubleValue];
             _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];

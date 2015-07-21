@@ -94,11 +94,11 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return result;
 }
 
-- (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition{
+- (void)addBonusPosition:(DBMenuPosition *)bonusPosition{
     OrderItem *itemWithSamePosition;
     
-    for(OrderItem *item in self.bonusPositions){
-        if([item.position isEqual:bonusPosition]){
+    for (OrderItem *item in self.bonusPositions) {
+        if([item.position isEqual:bonusPosition]) {
             itemWithSamePosition = item;
             break;
         }
@@ -126,7 +126,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 }
 
 - (void)removeBonusPositionAtIndex:(NSUInteger)index{
-    if(index < self.bonusPositionsCount){
+    if (index < self.bonusPositionsCount){
         [self.bonusPositions removeObjectAtIndex:index];
     }
 }
@@ -137,9 +137,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 - (double)totalBonusPositionsPrice{
     double total = 0;
-    for(OrderItem *bonusItem in self.bonusPositions){
-        DBMenuBonusPosition *bonusPosition = (DBMenuBonusPosition *)bonusItem.position;
-        total += bonusPosition.pointsPrice * bonusItem.count;;
+    for (OrderItem *bonusItem in self.bonusPositions){
+        DBMenuPosition *bonusPosition = (DBMenuPosition *)bonusItem.position;
+        total += [bonusPosition.productDictionary[@"points"] floatValue] * bonusItem.count;;
     }
     
     return total;
@@ -400,8 +400,8 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 
 #pragma mark - Time management
 
-- (void)launchTimer{
-    if(!self.timer){
+- (void)launchTimer {
+    if (!self.timer) {
         long long seconds = [[NSDate date] timeIntervalSince1970];
         seconds = seconds - seconds % 60 + 60 + 1;
         self.timer = [[NSTimer alloc] initWithFireDate:[NSDate dateWithTimeIntervalSince1970:seconds] interval:15.f
@@ -414,12 +414,12 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
 }
 
-- (void)stopTimer{
+- (void)stopTimer {
     [self.timer invalidate];
     self.timer = nil;
 }
 
-- (void)updateTimeAccordingToDeliveryType{
+- (void)updateTimeAccordingToDeliveryType {
     if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         if(!self.selectedTime || [self.selectedTime compare:_deliveryType.minDate] == NSOrderedAscending){
             self.selectedTime = _deliveryType.minDate;

@@ -500,10 +500,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0){
+    if (section == 0){
         return [[OrderManager sharedManager] positionsCount];
-    } else {
+    } else if (section == 1) {
         return [[OrderManager sharedManager] bonusPositionsCount];
+    } else {
+        return [[DBPromoManager sharedManager] currentAvailableGifts].count;
     }
 }
 
@@ -511,13 +513,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     DBOrderItemCell *cell;
     
     OrderItem *item;
-    if(indexPath.section == 0){
+    if (indexPath.section == 0) {
         item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-    } else {
+    } else if (indexPath.section == 1) {
         item = [OrderManager sharedManager].bonusPositions[indexPath.row];
+    } else {
+        item = [[DBPromoManager sharedManager] currentAvailableGifts][indexPath.row];
     }
     
-    if(item.position.hasImage){
+    if (item.position.hasImage){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
         
         if (!cell) {
@@ -536,7 +540,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     cell.orderItem = item;
     
-    if(indexPath.section == 0){
+    if (indexPath.section == 0){
         DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
         cell.promoItem = promoItem;
     }
