@@ -8,6 +8,7 @@
 
 #import "UIViewController+DBMessage.h"
 #import "DBCompanyInfo.h"
+#import "DBAPIClient.h"
 
 @implementation UIViewController (DBMessage)
 
@@ -15,8 +16,8 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
 
 - (void)presentMailViewControllerWithRecipients:(NSArray *)recipients callback:(void(^)(BOOL completed))callback{
     NSMutableArray *emails = [NSMutableArray arrayWithArray:[[DBCompanyInfo sharedInstance] supportEmails]];
-    [emails addObject:[NSString stringWithFormat:@"support+%@@ru-beacon.ru"]];
-    [emails addObject:@"team@ru-beacon.ru"];
+    [emails addObject:[self getCompanySupportMail]];
+    [emails addObject:[NSString stringWithFormat:@"team@ru-beacon.ru"]];
     if([MFMailComposeViewController canSendMail]){
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         [mailer setSubject:NSLocalizedString(@"Обратная связь", nil)];
@@ -37,6 +38,18 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
                           otherButtonTitles:nil] show];
     }
     
+}
+
+- (NSString *)getCompanySupportMail {
+    NSString *companyURL = [DBAPIClient baseUrl];
+    NSString *namespace = [companyURL componentsSeparatedByString:@"."][0];
+    namespace = [namespace stringByReplacingOccurrencesOfString:@"http://" withString:@""];
+    
+    NSMutableString *companyMail = [NSMutableString new];
+    [companyMail appendString:@"support+"];
+    [companyMail appendString:namespace];
+    [companyMail appendString:@"@ru-beacon.ru"];
+    return companyMail;
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error{
