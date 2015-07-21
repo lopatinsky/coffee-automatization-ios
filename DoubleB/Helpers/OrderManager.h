@@ -91,8 +91,8 @@ extern NSString* const kDBDefaultsPaymentType;
 - (void)purgePositions; //clean
 - (void)overridePositions:(NSArray *)items; //clean and add from array
 
-- (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition;
-- (void)removeBonusPosition:(DBMenuBonusPosition *)bonusPosition;
+- (void)addBonusPosition:(DBMenuPosition *)bonusPosition;
+- (void)removeBonusPosition:(DBMenuPosition *)bonusPosition;
 - (void)removeBonusPositionAtIndex:(NSUInteger)index;
 
 - (OrderItem *)itemAtIndex:(NSUInteger)index;

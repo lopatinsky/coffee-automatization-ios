@@ -9,14 +9,15 @@
 #import "DBBonusPositionsViewController.h"
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
+#import "DBMenuPositionModifier.h"
 #import "DBPromoManager.h"
 #import "OrderManager.h"
 #import "DBMenuBonusPosition.h"
+#import "ViewControllerManager.h"
 
 @interface DBBonusPositionsViewController ()<UITableViewDelegate, UITableViewDataSource, DBPositionCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *promoDescriptionView;
 @property (weak, nonatomic) IBOutlet UILabel *promoDescriptionTitle;
-@property (weak, nonatomic) IBOutlet UILabel *promoBalanceTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *promoBalanceLabel;
 @property (weak, nonatomic) IBOutlet UIView *promoDescriptionSeparatorView;
 
@@ -36,7 +37,6 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.promoDescriptionTitle.text = [DBPromoManager sharedManager].bonusPositionsTextDescription;
-    self.promoBalanceTitleLabel.text = [NSString stringWithFormat:@"%@:", NSLocalizedString(@"Баланс", nil) ];
     [self reloadBalance];
     self.promoDescriptionSeparatorView.backgroundColor = [UIColor db_separatorColor];
     
@@ -51,6 +51,11 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self reloadBalance];
+    [self.tableView reloadData];
+}
+
 - (double)totalPoints{
     return [DBPromoManager sharedManager].bonusPointsBalance - [OrderManager sharedManager].totalBonusPositionsPrice;
 }
@@ -58,7 +63,7 @@
 - (void)reloadBalance{
     double totalPoints = [self totalPoints];
     
-    self.promoBalanceLabel.text = [NSString stringWithFormat:@"%.0f", totalPoints];
+    self.promoBalanceLabel.text = [NSString stringWithFormat:@"%@: %.0f", NSLocalizedString(@"Баланс", nil), totalPoints];
 }
 
 
@@ -90,7 +95,7 @@
     DBMenuPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
     [cell configureWithPosition:position];
     
-    if (position.price <= [self totalPoints]) {
+    if ([position.productDictionary[@"points"] floatValue] <= [self totalPoints]) {
         [cell enable];
     } else {
         [cell disable];
@@ -109,12 +114,22 @@
     }
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DBMenuPosition *position = [DBPromoManager sharedManager].positionsAvailableAsBonuses[indexPath.row];
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+    positionVC.parentNavigationController = self.navigationController;
+    positionVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:positionVC animated:YES];
+}
+
 #pragma mark - DBPositionCellDelegate
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
     DBMenuPosition *position = cell.position;
     
-    if(position.price <= [self totalPoints]) {
+    if([position.productDictionary[@"points"] floatValue] <= [self totalPoints]) {
         [[OrderManager sharedManager] addBonusPosition:cell.position];
         
         [self reloadBalance];

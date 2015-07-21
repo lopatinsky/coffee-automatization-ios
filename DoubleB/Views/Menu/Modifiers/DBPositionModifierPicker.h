@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class DBMenuPosition;
 @class DBMenuPositionModifier;
 @class DBMenuPositionModifierItem;
 @class DBPositionModifierPicker;
@@ -24,10 +25,11 @@ typedef NS_ENUM(NSUInteger, DBPositionModifierPickerType) {
 
 @interface DBPositionModifierPicker : UIView
 @property(nonatomic, readonly) DBPositionModifierPickerType type;
+@property (nonatomic, strong) DBMenuPosition *position;
 @property(weak, nonatomic) id<DBPositionModifierPickerDelegate> delegate;
 
-- (void)configureWithGroupModifier:(DBMenuPositionModifier *)modifier;
-- (void)configureWithSingleModifiers:(NSArray *)modifiers;
+- (void)configureGroupModifierAtIndexPath:(NSIndexPath *)indexPath;
+- (void)configureSingleModifiers;
 
 - (void)showOnView:(UIView *)parentView;
 - (void)hide;

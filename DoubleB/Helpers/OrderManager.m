@@ -113,7 +113,7 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
 }
 
-- (void)removeBonusPosition:(DBMenuBonusPosition *)bonusPosition{
+- (void)removeBonusPosition:(DBMenuPosition *)bonusPosition{
     OrderItem *item;
     
     for(OrderItem *orderItem in self.bonusPositions){

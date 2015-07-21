@@ -7,16 +7,20 @@
 //
 
 #import "UIViewController+DBMessage.h"
+#import "DBCompanyInfo.h"
 
 @implementation UIViewController (DBMessage)
 
 static void (^dbMailViewControllerCallBack)(BOOL completed);
 
 - (void)presentMailViewControllerWithRecipients:(NSArray *)recipients callback:(void(^)(BOOL completed))callback{
+    NSMutableArray *emails = [NSMutableArray arrayWithArray:[[DBCompanyInfo sharedInstance] supportEmails]];
+    [emails addObject:[NSString stringWithFormat:@"support+%@@ru-beacon.ru"]];
+    [emails addObject:@"team@ru-beacon.ru"];
     if([MFMailComposeViewController canSendMail]){
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         [mailer setSubject:NSLocalizedString(@"Обратная связь", nil)];
-        [mailer setToRecipients:@[@"team@empatika.com", @"team@ru-beacon.ru"]];
+        [mailer setToRecipients:emails];
         if(recipients)
             [mailer setToRecipients:recipients];
         [mailer setMailComposeDelegate:self];

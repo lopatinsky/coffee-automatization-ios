@@ -33,13 +33,17 @@
 }
 
 - (void)configureWithModifierItem:(DBMenuPositionModifierItem *)item
-                        havePrice:(BOOL)havePrice{
+                        havePrice:(BOOL)havePrice {
     _item = item;
     self.havePrice = havePrice;
     
-    if(item){
+    if (item) {
         self.titleLabel.text = item.itemName;
-        self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
+        if (self.positionType == General) {
+            self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
+        } else if (self.positionType == Bonus) {
+            self.priceLabel.text = [NSString stringWithFormat:@"%0.f", [item.itemDictionary[@"points"] floatValue]];
+        }
     } else {
         self.titleLabel.text = NSLocalizedString(@"Не выбирать ничего", nil);
         self.priceLabel.text = @"";

@@ -128,6 +128,7 @@
     
     self.modifierPicker = [DBPositionModifierPicker new];
     self.modifierPicker.delegate = self;
+    self.modifierPicker.position = self.position;
 }
 
 - (void)reloadSelectedModifiers{
@@ -159,8 +160,12 @@
     [self reloadPrice];
 }
 
-- (void)reloadPrice{
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
+- (void)reloadPrice {
+    if (self.position.positionType == General) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
+    } else if (self.position.positionType == Bonus) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    }
 }
 
 - (IBAction)priceButtonClick:(id)sender {
@@ -211,12 +216,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
-        [self.modifierPicker configureWithGroupModifier:self.position.groupModifiers[indexPath.row]];
+        [self.modifierPicker configureGroupModifierAtIndexPath:indexPath];
         [GANHelper analyzeEvent:@"group_modifier_show"
                           label:((DBMenuPositionModifier *)self.position.groupModifiers[indexPath.row]).modifierId
                        category:PRODUCT_SCREEN];
     } else {
-        [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
+        [self.modifierPicker configureSingleModifiers];
     }
     
     [self.modifierPicker showOnView:self.parentNavigationController.view];

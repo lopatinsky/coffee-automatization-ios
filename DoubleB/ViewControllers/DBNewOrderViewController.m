@@ -646,12 +646,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    if (item.position.positionType == General) {
-        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
-        positionVC.parentNavigationController = self.navigationController;
-        positionVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:positionVC animated:YES];
-    }
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
+    positionVC.parentNavigationController = self.navigationController;
+    positionVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:positionVC animated:YES];
 }
 
 - (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell{

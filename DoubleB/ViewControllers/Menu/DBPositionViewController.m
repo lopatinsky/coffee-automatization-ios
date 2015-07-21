@@ -12,6 +12,7 @@
 #import "DBMenuPositionModifierItem.h"
 #import "OrderManager.h"
 #import "DBBarButtonItem.h"
+#import "DBPromoManager.h"
 #import "DBPositionModifierCell.h"
 #import "DBPositionModifierPicker.h"
 #import "Compatibility.h"
@@ -127,6 +128,7 @@
     
     self.modifierPicker = [DBPositionModifierPicker new];
     self.modifierPicker.delegate = self;
+    self.modifierPicker.position = self.position;
 }
 
 - (void)reloadSelectedModifiers{
@@ -159,13 +161,29 @@
 }
 
 - (void)reloadPrice{
-    self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
+    if (self.position.positionType == General) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
+    } else if (self.position.positionType == Bonus) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    }
 }
 
 - (IBAction)priceButtonClick:(id)sender {
+    static BOOL clicked = false;
+    if (clicked) { return; }
+    clicked = true;
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
-        [[OrderManager sharedManager] addPosition:self.position];
+        if (self.position.positionType == General) {
+            [[OrderManager sharedManager] addPosition:self.position];
+        } else {
+            [[OrderManager sharedManager] addBonusPosition:self.position];
+            if ([self.position.productDictionary[@"points"] floatValue] > [self totalPoints]) {
+                self.priceButton.enabled = NO;
+                self.priceLabel.alpha = 0.6;
+            }
+        }
+        clicked = false;
     }];
 }
 
@@ -206,16 +224,20 @@
     return cell;
 }
 
+- (double)totalPoints{
+    return [DBPromoManager sharedManager].bonusPointsBalance - [OrderManager sharedManager].totalBonusPositionsPrice;
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 0){
-        [self.modifierPicker configureWithGroupModifier:self.position.groupModifiers[indexPath.row]];
+        [self.modifierPicker configureGroupModifierAtIndexPath:indexPath];
         [GANHelper analyzeEvent:@"group_modifier_show"
                           label:((DBMenuPositionModifier *)self.position.groupModifiers[indexPath.row]).modifierId
                        category:PRODUCT_SCREEN];
     } else {
-        [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
+        [self.modifierPicker configureSingleModifiers];
     }
     
     [self.modifierPicker showOnView:self.parentNavigationController.view];

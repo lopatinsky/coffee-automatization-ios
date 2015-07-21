@@ -35,7 +35,7 @@
 
 @implementation DBPositionModifierPicker
 
-- (instancetype)init{
+- (instancetype)init {
     self = [[[NSBundle mainBundle] loadNibNamed:@"DBPositionModifierPicker" owner:self options:nil] firstObject];
     
     [self commonInit];
@@ -43,7 +43,7 @@
     return self;
 }
 
-- (void)commonInit{
+- (void)commonInit {
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
     self.tableView.delegate = self;
@@ -54,7 +54,7 @@
     [self.doneButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)adoptFrame{
+- (void)adoptFrame {
     CGRect rect = self.frame;
     rect.size.height = self.titleView.frame.size.height + self.tableView.contentSize.height + 5;
     
@@ -67,12 +67,12 @@
     [self layoutIfNeeded];
 }
 
-- (void)configureWithGroupModifier:(DBMenuPositionModifier *)modifier{
-    self.modifier = modifier;
+- (void)configureGroupModifierAtIndexPath:(NSIndexPath *)indexPath {
+    self.modifier = self.position.groupModifiers[indexPath.row];
     _type = DBPositionModifierPickerTypeGroup;
     
     self.havePrice = NO;
-    for(DBMenuPositionModifierItem *item in modifier.items){
+    for (DBMenuPositionModifierItem *item in self.modifier.items){
         self.havePrice = self.havePrice || item.itemPrice > 0;
     }
     
@@ -82,13 +82,13 @@
     [self.tableView reloadData];
     [self adoptFrame];
 }
-
-- (void)configureWithSingleModifiers:(NSArray *)modifiers{
-    self.singleModifiers = modifiers;
+ 
+- (void)configureSingleModifiers {
+    self.singleModifiers = self.position.singleModifiers;
     _type = DBPositionModifierPickerTypeSingle;
     
     self.havePrice = NO;
-    for(DBMenuPositionModifier *singModifier in modifiers){
+    for (DBMenuPositionModifier *singModifier in self.position.singleModifiers) {
         self.havePrice = self.havePrice || singModifier.modifierPrice > 0;
     }
     
@@ -152,7 +152,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(self.type == DBPositionModifierPickerTypeGroup){
+    if (self.type == DBPositionModifierPickerTypeGroup) {
         NSInteger shift = self.modifier.required ? 0 : 1;
         return [self.modifier.items count] + shift;
     } else {
@@ -161,15 +161,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.type == DBPositionModifierPickerTypeGroup){
+    if (self.type == DBPositionModifierPickerTypeGroup) {
         DBPositionGroupModifierItemCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"DBPositionGroupModifierItemCell"];
-        if(!cell){
+        if (!cell) {
             cell = [[[NSBundle mainBundle] loadNibNamed:@"DBPositionGroupModifierItemCell" owner:self options:nil] firstObject];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
         NSInteger shift = self.modifier.required ? 0 : 1;
-        if(indexPath.row == 0 && shift == 1){
+        if (indexPath.row == 0 && shift == 1) {
             [cell configureWithModifierItem:nil havePrice:NO];
             [cell select:(self.modifier.selectedItem == nil) animated:NO];
         } else {

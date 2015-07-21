@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBMenuPosition.h"
 
 @class DBMenuPositionModifier;
 @class DBPositionSingleModifierCell;
@@ -21,6 +22,7 @@
 
 @property (weak, nonatomic) id<DBPositionSingleModifierCellDelegate> delegate;
 @property (nonatomic) BOOL havePrice;
+@property (nonatomic) MenuPositionType positionType;
 
 - (void)configureWithModifier:(DBMenuPositionModifier *)modifier
                     havePrice:(BOOL)havePrice

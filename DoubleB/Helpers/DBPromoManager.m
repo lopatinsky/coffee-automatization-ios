@@ -90,10 +90,12 @@
             if (bonusPosition){
 //                bonusPosition.pointsPrice = [bonusPositionDict[@"points"] doubleValue];
                 [bonusPositions addObject:bonusPosition];
+            } else {
+                NSLog(@"sdads");
             }
         }
         [bonusPositions sortUsingComparator:^NSComparisonResult(DBMenuBonusPosition *obj1, DBMenuBonusPosition *obj2) {
-            return [@(obj1.price) compare:@(obj2.price)];
+            return [@([obj1.productDictionary[@"points"] floatValue]) compare:@([obj2.productDictionary[@"points"] floatValue])];
         }];
         _positionsAvailableAsBonuses = bonusPositions;
         

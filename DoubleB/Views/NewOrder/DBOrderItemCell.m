@@ -196,6 +196,7 @@
 }
 
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
+    if (self.orderItem.position.positionType == Bonus) { return; };
     if([self.delegate db_orderItemCellCanEdit:self]){
         CGPoint translation = [recognizer translationInView:self.contentView];
 

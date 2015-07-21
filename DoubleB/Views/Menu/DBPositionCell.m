@@ -136,10 +136,12 @@
     [self.inactivityView setErrors:nil];
     
     [self.contentView addSubview:self.inactivityView];
+    [self setUserInteractionEnabled:NO];
 }
 
 - (void)enable{
     [self.inactivityView removeFromSuperview];
+    [self setUserInteractionEnabled:YES];
 }
 
 #pragma mark - PositionCellProtocol

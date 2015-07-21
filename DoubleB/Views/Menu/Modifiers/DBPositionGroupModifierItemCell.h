@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBMenuPosition.h"
 
 @class DBMenuPositionModifierItem;
 
@@ -14,8 +15,10 @@
 @property (nonatomic, strong, readonly) DBMenuPositionModifierItem *item;
 @property (nonatomic) BOOL havePrice;
 @property (nonatomic, readonly) BOOL stateSelected;
+@property (nonatomic) MenuPositionType positionType;
 
 - (void)configureWithModifierItem:(DBMenuPositionModifierItem *)item
                         havePrice:(BOOL)havePrice;
 - (void)select:(BOOL)selected animated:(BOOL)animated;
+
 @end
