@@ -70,8 +70,6 @@
     self.panGestureRecognizer.cancelsTouchesInView = NO;
     [self.orderCellContentView addGestureRecognizer:self.panGestureRecognizer];
     
-    [self addEditButtons];
-    
     self.errorView = [DBNewOrderItemErrorView new];
     self.errorView.delegate = self;
     
@@ -98,13 +96,14 @@
     [self moveContentToOriginal:NO];
 }
 
-- (void)reload{
+- (void)reload {
     self.titleLabel.text = _orderItem.position.name;
     
     if (self.orderItem.position.positionType == Bonus) {
         self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     } else {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", _orderItem.position.actualPrice, [Compatibility currencySymbol]];
+        [self addEditButtons];
     }
     
     [self reloadCount];

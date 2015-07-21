@@ -349,7 +349,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
          NSTextCheckingResult *match = matches[0];
         result = [address stringByReplacingCharactersInRange:NSMakeRange(0, match.range.location + match.range.length)
                                                   withString:@""];
-        while ([result hasPrefix:@" "]){
+        while ([result hasPrefix:@" "]) {
             result = [result stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
         }
     }
@@ -646,7 +646,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    if (![item.position isKindOfClass:[DBMenuBonusPosition class]]){
+    if (item.position.positionType == General) {
         UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
         positionVC.parentNavigationController = self.navigationController;
         positionVC.hidesBottomBarWhenPushed = YES;
