@@ -44,6 +44,8 @@ typedef NS_ENUM(NSUInteger, TopViewControllerType) {
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
+@property (strong, nonatomic) NSString *deliveryImageName;
+
 @property(strong, nonatomic) NSString *currentCompanyName;
 
 - (void)updateInfo;

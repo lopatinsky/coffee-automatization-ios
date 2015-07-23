@@ -115,6 +115,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Logic =========
     self.orderManager = [OrderManager sharedManager];
     self.deliverySettings = [DBDeliverySettings sharedInstance];
+    [self.deliverySettings selectShipping];
     
     self.delegate = [DBTabBarController sharedInstance];
     self.currentCard = [NSDictionary new];
@@ -209,6 +210,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadItemAdditionView];
     [self reloadAddress];
     [self reloadTime];
+    [self reloadTimePicker];
     [self reloadPaymentType];
     [self reloadProfile];
     [self reloadContinueButton];
@@ -793,7 +795,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.orderFooter.labelTime.text = timeString;
 }
 
-- (void)reloadTimePicker{
+- (void)reloadTimePicker {
     if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         self.pickerView.segments = @[];
     } else {

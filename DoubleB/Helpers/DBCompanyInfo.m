@@ -222,4 +222,19 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (NSString *)deliveryImageName {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"db_company_header"]) {
+        NSString *namespace = [[NSUserDefaults standardUserDefaults] objectForKey:@"db_company_header"];
+        if ([namespace isEqualToString:@"perchiniribaris"]) {
+            return @"krasnoselskaya";
+        } else if ([namespace isEqualToString:@"perchiniribarislublino"]) {
+            return @"lublino";
+        } else {
+            return @"";
+        }
+    } else {
+        return @"";
+    }
+}
+
 @end

@@ -19,6 +19,6 @@
 
 @property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) NSString *eventsCategory;
-@property (nonatomic, weak) id<DBVenuesTableViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<DBVenuesTableViewControllerDelegate> delegate;
 
 @end

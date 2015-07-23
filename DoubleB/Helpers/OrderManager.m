@@ -388,6 +388,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 - (void)selectTakeout{
     if(self.lastNotShippingDeliveryType)
         self.deliveryType = self.lastNotShippingDeliveryType;
+    
+    self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdTakeaway];
+    [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Takeout" category:ADDRESS_SCREEN];
 }
 
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{
