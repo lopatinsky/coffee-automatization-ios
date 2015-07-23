@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBCompaniesViewController" customModule="Cat" customModuleProvider="target">
             <connections>
+                <outlet property="splashImageView" destination="UKE-ju-Dak" id="hcf-0C-hD9"/>
                 <outlet property="tableView" destination="iDq-qx-5L8" id="7ib-PU-S03"/>
                 <outlet property="titleLabel" destination="khb-Iy-fOI" id="c86-xc-5Rn"/>
                 <outlet property="titleView" destination="8Vx-wI-1bl" id="ASc-b9-5ov"/>
@@ -51,11 +52,19 @@
                         <constraint firstAttribute="trailing" secondItem="khb-Iy-fOI" secondAttribute="trailing" id="icM-9H-NJv"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UKE-ju-Dak">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <animations/>
+                </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="UKE-ju-Dak" secondAttribute="trailing" id="17Y-z7-BUt"/>
                 <constraint firstAttribute="trailing" secondItem="iDq-qx-5L8" secondAttribute="trailing" id="19b-k4-Lxv"/>
+                <constraint firstItem="UKE-ju-Dak" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="A0m-nH-zBK"/>
+                <constraint firstItem="UKE-ju-Dak" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EJp-Ha-LOR"/>
+                <constraint firstAttribute="bottom" secondItem="UKE-ju-Dak" secondAttribute="bottom" id="aXl-Ez-2ec"/>
                 <constraint firstItem="iDq-qx-5L8" firstAttribute="top" secondItem="8Vx-wI-1bl" secondAttribute="bottom" id="b1L-nO-9SS"/>
                 <constraint firstItem="iDq-qx-5L8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ck2-jD-xOi"/>
                 <constraint firstAttribute="trailing" secondItem="8Vx-wI-1bl" secondAttribute="trailing" id="eEF-UJ-qAq"/>

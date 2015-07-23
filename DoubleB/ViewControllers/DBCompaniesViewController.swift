@@ -15,6 +15,7 @@ public class DBCompaniesViewController: UIViewController {
     @IBOutlet var titleView: UIView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var titleViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var splashImageView: UIImageView!
     
     public var firstLaunch = true
     private var companies = [NSDictionary]()
@@ -41,15 +42,39 @@ public class DBCompaniesViewController: UIViewController {
         self.titleLabel.textColor = UIColor.whiteColor()
         self.title = NSLocalizedString("Выберите регион", comment: "")
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        let height = Int(UIScreen.mainScreen().bounds.size.height)
+        let launchScreenName = "launch_\(height).png"
+        if self.firstLaunch {
+            self.splashImageView.image = UIImage(named:launchScreenName)
+        }
     }
     
     func requestCompanies() {
         DBServerAPI.requestCompanies({ (response) -> Void in
             self.companies = response["companies"] as! [NSDictionary]
             self.tableView.reloadData()
+            if self.companies.count == 1 {
+                self.putSelectedNamespace(self.companies.first!.objectForKey("namespace") as! String)
+                DBCompanyInfo.sharedInstance().currentCompanyName = self.companies.first!.objectForKey("name") as! String
+            } else {
+                self.splashImageView.hidden = true
+            }
         }, failure: { (error) -> Void in
             
         })
+    }
+    
+    func putSelectedNamespace(namespace: String) {
+        DBAPIClient.sharedClient()!.setValue(namespace, forHeader: "namespace")
+        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.preloadData()
+        if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
+            delegate.window.rootViewController = DBLaunchEmulationViewController()
+        } else {
+            delegate.window.rootViewController = DBTabBarController.sharedInstance()
+        }
     }
     
     public override func prefersStatusBarHidden() -> Bool {
@@ -72,16 +97,8 @@ extension DBCompaniesViewController: UITableViewDataSource {
 extension DBCompaniesViewController: UITableViewDelegate {
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let namespace = self.companies[indexPath.row].objectForKey("namespace") as! String
-        DBAPIClient.sharedClient()!.setValue(namespace, forHeader: "namespace")
-        
+        putSelectedNamespace(namespace)
         DBCompanyInfo.sharedInstance().currentCompanyName = self.companies[indexPath.row].objectForKey("name") as! String
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.preloadData()
-        if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
-            delegate.window.rootViewController = DBLaunchEmulationViewController()
-        } else {
-            delegate.window.rootViewController = DBTabBarController.sharedInstance()
-        }
     }
     
     func preloadData() {

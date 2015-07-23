@@ -18,6 +18,7 @@
 #import "DBCompanyInfoViewController.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"
+#import "DBServerAPI.h"
 #import "Order.h"
 #import "Compatibility.h"
 #import "DBPayPalManager.h"
@@ -88,14 +89,25 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"menu_icon",
                                     @"viewController": promosVC}];
     
-    DBCompaniesViewController *companiesVC = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
-    companiesVC.firstLaunch = NO;
-    [self.settingsItems addObject:@{@"name": @"companiesVC",
-                                    @"title": NSLocalizedString(@"Список регионов", nil),
-                                    @"image": @"venue_gray",
-                                    @"viewController": companiesVC
-                                    }];
-    
+    [DBServerAPI requestCompanies:^(NSDictionary *response) {
+        NSArray *companies = response[@"companies"];
+        if ([companies count] > 1) {
+            DBCompaniesViewController *companiesVC = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
+            companiesVC.firstLaunch = NO;
+            [self.settingsItems insertObject:@{@"name": @"companiesVC",
+                                            @"title": NSLocalizedString(@"Список регионов", nil),
+                                            @"image": @"venue_gray",
+                                            @"viewController": companiesVC
+                                            }
+                                     atIndex:3];
+            [UIView animateWithDuration:0.1 animations:^{
+                [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+
     // Personal wallet item
     if([DBPromoManager sharedManager].walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
