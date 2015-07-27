@@ -8537,6 +8537,7 @@
 		CB1549871B664E56008F749F /* DBItemsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemsManager.m; sourceTree = "<group>"; };
 		CB1549A01B664E72008F749F /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
 		CB1549A11B664E72008F749F /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
+		CB1549BA1B66508E008F749F /* DBManagerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerProtocol.h; sourceTree = "<group>"; };
 		CB1AF8981AE10E6900FA3224 /* Pastadeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pastadeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBOrderBarButtonView.xib; sourceTree = "<group>"; };
 		CB1B6CDD1A49E6C70034774C /* add_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_position.png; sourceTree = "<group>"; };
@@ -10395,6 +10396,7 @@
 				CB1549A11B664E72008F749F /* OrderManager.m */,
 				CB1549861B664E56008F749F /* DBItemsManager.h */,
 				CB1549871B664E56008F749F /* DBItemsManager.m */,
+				CB1549BA1B66508E008F749F /* DBManagerProtocol.h */,
 			);
 			path = Order;
 			sourceTree = "<group>";

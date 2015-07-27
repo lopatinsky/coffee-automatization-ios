@@ -14,7 +14,6 @@ extern NSString* const kDBDefaultsPaymentType;
 
 @class Venue;
 @class OrderItem;
-@class DBMenuPosition;
 @class DBMenuBonusPosition;
 @class DBDeliverySettings;
 
@@ -62,15 +61,6 @@ extern NSString* const kDBDefaultsPaymentType;
 + (instancetype)sharedManager;
 
 - (void)reloadTotal;
-
-- (NSInteger)addPosition:(DBMenuPosition *)position;
-
-// Return index of items that was merged into current item
-- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
-
-- (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
-- (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index;
-- (void)removeOrderItemAtIndex:(NSInteger)index;
 
 - (void)purgePositions; //clean
 - (void)overridePositions:(NSArray *)items; //clean and add from array
