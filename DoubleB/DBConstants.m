@@ -13,8 +13,6 @@ NSString *const kDBDefaultsName = @"kDBDefaultsName";
 NSString *const kDBDefaultsPhone = @"kDBDefaultsPhone";
 NSString *const kDBDefaultsMail = @"kDBDefaultsMail";
 
-NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
-
 NSString *const kDBDefaultsNDASigned = @"kDBDefaultsNDASigned";
 
 NSString *const kDBDefaultsSharingInfo = @"kDBDefaultsSharingInfo";
