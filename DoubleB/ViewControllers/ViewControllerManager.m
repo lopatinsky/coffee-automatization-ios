@@ -24,16 +24,27 @@
 
 @end
 
-#import "PositionViewController.h"
-#import "DBPositionViewController.h"
+#import "PositionViewController2.h"
+#import "PositionViewController1.h"
 
 @implementation ViewControllerManager(PositionViewControllers)
 
 + (nonnull NSDictionary *)positionViewControllerClasses {
     return @{
-             @"default": [DBPositionViewController class],
-             @"Classic": [DBPositionViewController class],
-             @"New": [PositionViewController class],
+             @"default": [PositionViewController1 class],
+             @"Classic": [PositionViewController1 class],
+             @"New": [PositionViewController2 class],
+             };
+}
+
+@end
+
+#import "LaunchViewController.h"
+@implementation ViewControllerManager(LaunchViewControllers)
+
++ (nonnull NSDictionary *)launchViewControllerClasses {
+    return @{
+             @"default": [LaunchViewController class]
              };
 }
 
@@ -41,6 +52,11 @@
 
 #pragma mark - Manager implementation
 @implementation ViewControllerManager
+
++ (nonnull UIViewController *)launchViewController {
+    Class launchViewController = [self launchViewControllerClasses][[self valueFromPropertyListByKey:@"Launch"] ?: @"default"];
+    return [launchViewController new];
+}
 
 + (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
     Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];

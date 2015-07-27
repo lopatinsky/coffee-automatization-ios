@@ -12,6 +12,7 @@
 
 @interface ViewControllerManager : NSObject
 
++ (nonnull UIViewController *)launchViewController;
 + (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController;
 + (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
 

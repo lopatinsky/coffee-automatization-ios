@@ -18,7 +18,7 @@
 @implementation OrderCoordinator(EnumMap)
 
 - (NSString * __nonnull)notificationNameByEnum:(CoordinatorNotification)en {
-    return @[@"CoordinatorNotificationOrderTotalPrice", @"CoordinatorNotificationOrderDiscount"][en];
+    return @[@"CoordinatorNotificationOrderTotalPrice", @"CoordinatorNotificationOrderDiscount", @"CoordinatorNotificationNewSelectedTime"][en];
 }
 
 @end
@@ -56,7 +56,7 @@
 }
 
 
-- (BOOL)validOrder{
+- (BOOL)validOrder {
     BOOL result = true;
 
     if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
@@ -97,7 +97,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:observer name:[self notificationNameByEnum:keyName] object:nil];
 }
 
-- (void)removeObserver:(NSObject * __nonnull)observer{
+- (void)removeObserver:(NSObject * __nonnull)observer {
     [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 
