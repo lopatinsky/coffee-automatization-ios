@@ -16,7 +16,7 @@
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
-#import "DBShippingManager.h"
+#import "ShippingManager.h"
 #import "OrderManager.h"
 #import "Order.h"
 #import "DBMenuPosition.h"

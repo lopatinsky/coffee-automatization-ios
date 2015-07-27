@@ -8,7 +8,7 @@
 
 #import "GANHelper.h"
 
-#import "DBShippingManager.h"
+#import "ShippingManager.h"
 #import "DBDeliveryViewController.h"
 #import "DBTimePickerView.h"
 #import "UIColor+Brandbook.h"
@@ -57,7 +57,7 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
 @property (strong, nonatomic) DBTimePickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
-@property (strong, nonatomic) DBShippingManager *shippingManager;
+@property (strong, nonatomic) ShippingManager *shippingManager;
 @property (nonatomic) BOOL keyboardIsHidden;
 
 @end
@@ -67,7 +67,7 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.shippingManager = [DBShippingManager sharedManager];
+    self.shippingManager = [ShippingManager sharedManager];
     
     if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
