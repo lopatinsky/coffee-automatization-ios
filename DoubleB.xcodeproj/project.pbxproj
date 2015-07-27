@@ -123,7 +123,6 @@
 		7E3DAB2F1B06153E00A7FFD1 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7E3DAB301B06153E00A7FFD1 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7E3DAB311B06153E00A7FFD1 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7E3DAB321B06153E00A7FFD1 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7E3DAB331B06153E00A7FFD1 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7E3DAB341B06153E00A7FFD1 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7E3DAB351B06153E00A7FFD1 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -445,7 +444,6 @@
 		7E7925711B3C1BDA00CA740D /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7E7925721B3C1BDA00CA740D /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7E7925731B3C1BDA00CA740D /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7E7925741B3C1BDA00CA740D /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7E7925751B3C1BDA00CA740D /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7E7925761B3C1BDA00CA740D /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7E7925771B3C1BDA00CA740D /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -776,7 +774,6 @@
 		7E7926F31B3C247D00CA740D /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7E7926F41B3C247D00CA740D /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7E7926F51B3C247D00CA740D /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7E7926F61B3C247D00CA740D /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7E7926F71B3C247D00CA740D /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7E7926F81B3C247D00CA740D /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7E7926F91B3C247D00CA740D /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -1121,7 +1118,6 @@
 		7E8BD5FB1B5027AA00CAFD5C /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7E8BD5FC1B5027AA00CAFD5C /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7E8BD5FD1B5027AA00CAFD5C /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7E8BD5FE1B5027AA00CAFD5C /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7E8BD5FF1B5027AA00CAFD5C /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7E8BD6001B5027AA00CAFD5C /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7E8BD6011B5027AA00CAFD5C /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -1531,7 +1527,6 @@
 		7EB2D1B81B3C3581009405C6 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EB2D1B91B3C3581009405C6 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7EB2D1BA1B3C3581009405C6 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7EB2D1BB1B3C3581009405C6 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7EB2D1BC1B3C3581009405C6 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7EB2D1BD1B3C3581009405C6 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7EB2D1BE1B3C3581009405C6 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -1862,7 +1857,6 @@
 		7EB2D3271B3C51A2009405C6 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EB2D3281B3C51A2009405C6 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7EB2D3291B3C51A2009405C6 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7EB2D32A1B3C51A2009405C6 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7EB2D32B1B3C51A2009405C6 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7EB2D32C1B3C51A2009405C6 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7EB2D32D1B3C51A2009405C6 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -2193,7 +2187,6 @@
 		7EB2D4971B3C5C77009405C6 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EB2D4981B3C5C77009405C6 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7EB2D4991B3C5C77009405C6 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7EB2D49A1B3C5C77009405C6 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7EB2D49B1B3C5C77009405C6 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7EB2D49C1B3C5C77009405C6 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7EB2D49D1B3C5C77009405C6 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -2617,7 +2610,6 @@
 		7EDB594C1B32F70400723DF9 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EDB594D1B32F70400723DF9 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		7EDB594E1B32F70400723DF9 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		7EDB594F1B32F70400723DF9 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		7EDB59501B32F70400723DF9 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		7EDB59511B32F70400723DF9 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		7EDB59521B32F70400723DF9 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -2950,7 +2942,6 @@
 		CB14313B1B0E371A00DD50C7 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB14313C1B0E371A00DD50C7 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB14313D1B0E371A00DD50C7 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB14313E1B0E371A00DD50C7 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB14313F1B0E371A00DD50C7 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB1431401B0E371A00DD50C7 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB1431411B0E371A00DD50C7 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -3252,7 +3243,6 @@
 		CB14329F1B0F1BBB00DD50C7 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB1432A01B0F1BBB00DD50C7 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB1432A11B0F1BBB00DD50C7 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB1432A21B0F1BBB00DD50C7 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB1432A31B0F1BBB00DD50C7 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB1432A41B0F1BBB00DD50C7 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB1432A51B0F1BBB00DD50C7 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -3494,6 +3484,54 @@
 		CB1433BA1B137E6000DD50C7 /* DBLaunchEmulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1433B01B137E6000DD50C7 /* DBLaunchEmulationViewController.xib */; };
 		CB1433BB1B137E6000DD50C7 /* DBLaunchEmulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1433B01B137E6000DD50C7 /* DBLaunchEmulationViewController.xib */; };
 		CB1433BC1B137E6000DD50C7 /* DBLaunchEmulationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1433B01B137E6000DD50C7 /* DBLaunchEmulationViewController.xib */; };
+		CB1549881B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549891B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15498A1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15498B1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15498C1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15498D1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15498E1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15498F1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549901B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549911B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549921B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549931B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549941B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549951B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549961B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549971B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549981B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549991B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15499A1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15499B1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15499C1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15499D1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15499E1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB15499F1B664E56008F749F /* DBItemsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549871B664E56008F749F /* DBItemsManager.m */; };
+		CB1549A21B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A31B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A41B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A51B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A61B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A71B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A81B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549A91B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549AA1B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549AB1B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549AC1B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549AD1B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549AE1B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549AF1B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B01B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B11B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B21B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B31B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B41B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B51B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B61B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B71B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B81B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
+		CB1549B91B664E72008F749F /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1549A11B664E72008F749F /* OrderManager.m */; };
 		CB1AF76B1AE10E6900FA3224 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB1AF76C1AE10E6900FA3224 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB1AF76D1AE10E6900FA3224 /* DBNewOrderAdditionalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D391ABC3CAE00BD4E81 /* DBNewOrderAdditionalInfoView.m */; };
@@ -3559,7 +3597,6 @@
 		CB1AF7B21AE10E6900FA3224 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB1AF7B31AE10E6900FA3224 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB1AF7B41AE10E6900FA3224 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB1AF7B51AE10E6900FA3224 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB1AF7B61AE10E6900FA3224 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB1AF7B71AE10E6900FA3224 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB1AF7B81AE10E6900FA3224 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -3843,7 +3880,6 @@
 		CB3BA32F1B20589300F320CA /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB3BA3301B20589300F320CA /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB3BA3311B20589300F320CA /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB3BA3321B20589300F320CA /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB3BA3331B20589300F320CA /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB3BA3341B20589300F320CA /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB3BA3351B20589300F320CA /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -4167,7 +4203,6 @@
 		CB517B8C1AEFB6B500A50F5C /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB517B8D1AEFB6B500A50F5C /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB517B8E1AEFB6B500A50F5C /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB517B8F1AEFB6B500A50F5C /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB517B901AEFB6B500A50F5C /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB517B911AEFB6B500A50F5C /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB517B921AEFB6B500A50F5C /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -4490,7 +4525,6 @@
 		CB5AFC791B27209A00904BF7 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB5AFC7A1B27209A00904BF7 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB5AFC7B1B27209A00904BF7 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB5AFC7C1B27209A00904BF7 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB5AFC7D1B27209A00904BF7 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB5AFC7E1B27209A00904BF7 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB5AFC7F1B27209A00904BF7 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -4779,7 +4813,6 @@
 		CB60C0E51AC5AD2600D5E962 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB60C0E61AC5AD2600D5E962 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB60C0E71AC5AD2600D5E962 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB60C0E81AC5AD2600D5E962 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB60C0E91AC5AD2600D5E962 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
 		CB60C0EA1AC5AD2600D5E962 /* Compatibility.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B4198A902E000F8D82 /* Compatibility.m */; };
 		CB60C0EB1AC5AD2600D5E962 /* DBDiscountAdvertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B36489AB1AA47EA100FE106A /* DBDiscountAdvertView.m */; };
@@ -4957,7 +4990,6 @@
 		CB6400071B31B7CF0011CEEC /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB6400081B31B7CF0011CEEC /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB6400091B31B7CF0011CEEC /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB64000A1B31B7CF0011CEEC /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB64000B1B31B7CF0011CEEC /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB64000C1B31B7CF0011CEEC /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB64000D1B31B7CF0011CEEC /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -5286,7 +5318,6 @@
 		CB64FE591B317F760011CEEC /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB64FE5A1B317F760011CEEC /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB64FE5B1B317F760011CEEC /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB64FE5C1B317F760011CEEC /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB64FE5D1B317F760011CEEC /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB64FE5E1B317F760011CEEC /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB64FE5F1B317F760011CEEC /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -5856,7 +5887,6 @@
 		CB8200EB1B46CBB4000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB8200EC1B46CBB4000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB8200ED1B46CBB4000BBE55 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB8200EE1B46CBB4000BBE55 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB8200EF1B46CBB4000BBE55 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB8200F01B46CBB4000BBE55 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB8200F11B46CBB4000BBE55 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -6191,7 +6221,6 @@
 		CB82FC291B442C70000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB82FC2A1B442C70000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB82FC2B1B442C70000BBE55 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB82FC2C1B442C70000BBE55 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB82FC2D1B442C70000BBE55 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB82FC2E1B442C70000BBE55 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB82FC2F1B442C70000BBE55 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -6622,7 +6651,6 @@
 		CB82FE091B4464F6000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB82FE0A1B4464F6000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB82FE0B1B4464F6000BBE55 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB82FE0C1B4464F6000BBE55 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB82FE0D1B4464F6000BBE55 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB82FE0E1B4464F6000BBE55 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB82FE0F1B4464F6000BBE55 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -6958,7 +6986,6 @@
 		CB82FF7A1B4579B5000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB82FF7B1B4579B5000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB82FF7C1B4579B5000BBE55 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CB82FF7D1B4579B5000BBE55 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CB82FF7E1B4579B5000BBE55 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CB82FF7F1B4579B5000BBE55 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB82FF801B4579B5000BBE55 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -7315,7 +7342,6 @@
 		CBD0C52B1B30724300DAD042 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CBD0C52C1B30724300DAD042 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CBD0C52D1B30724300DAD042 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CBD0C52E1B30724300DAD042 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CBD0C52F1B30724300DAD042 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CBD0C5301B30724300DAD042 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CBD0C5311B30724300DAD042 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -7661,7 +7687,6 @@
 		CBD2EB0D1B2A07D000E4AAA1 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CBD2EB0E1B2A07D000E4AAA1 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CBD2EB0F1B2A07D000E4AAA1 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CBD2EB101B2A07D000E4AAA1 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CBD2EB111B2A07D000E4AAA1 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CBD2EB121B2A07D000E4AAA1 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CBD2EB131B2A07D000E4AAA1 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -7988,7 +8013,6 @@
 		CBDC79DD1B42AFC700935328 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CBDC79DE1B42AFC700935328 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CBDC79DF1B42AFC700935328 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
-		CBDC79E01B42AFC700935328 /* OrderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629B1198A8C1F000F8D82 /* OrderManager.m */; };
 		CBDC79E11B42AFC700935328 /* DBPositionModifierPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0C990D1ACEDAC300B1AE2F /* DBPositionModifierPicker.m */; };
 		CBDC79E21B42AFC700935328 /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CBDC79E31B42AFC700935328 /* CoreDataHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BAC25365E7C2BB991475 /* CoreDataHelper.m */; };
@@ -8509,6 +8533,10 @@
 		CB1433AE1B137E6000DD50C7 /* DBLaunchEmulationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBLaunchEmulationViewController.h; sourceTree = "<group>"; };
 		CB1433AF1B137E6000DD50C7 /* DBLaunchEmulationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBLaunchEmulationViewController.m; sourceTree = "<group>"; };
 		CB1433B01B137E6000DD50C7 /* DBLaunchEmulationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBLaunchEmulationViewController.xib; sourceTree = "<group>"; };
+		CB1549861B664E56008F749F /* DBItemsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBItemsManager.h; sourceTree = "<group>"; };
+		CB1549871B664E56008F749F /* DBItemsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBItemsManager.m; sourceTree = "<group>"; };
+		CB1549A01B664E72008F749F /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
+		CB1549A11B664E72008F749F /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
 		CB1AF8981AE10E6900FA3224 /* Pastadeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pastadeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBOrderBarButtonView.xib; sourceTree = "<group>"; };
 		CB1B6CDD1A49E6C70034774C /* add_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_position.png; sourceTree = "<group>"; };
@@ -8925,8 +8953,6 @@
 		D55629A8198A82D2000F8D82 /* Venue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Venue.m; sourceTree = "<group>"; };
 		D55629AA198A8692000F8D82 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		D55629AB198A8692000F8D82 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
-		D55629B0198A8C1F000F8D82 /* OrderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderManager.h; sourceTree = "<group>"; };
-		D55629B1198A8C1F000F8D82 /* OrderManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderManager.m; sourceTree = "<group>"; };
 		D55629B3198A902E000F8D82 /* Compatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Compatibility.h; sourceTree = "<group>"; };
 		D55629B4198A902E000F8D82 /* Compatibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Compatibility.m; sourceTree = "<group>"; };
 		D55629B9198A98C2000F8D82 /* DBHTMLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBHTMLViewController.h; sourceTree = "<group>"; };
@@ -10283,9 +10309,8 @@
 		C775BE2E1D4C606917617A8E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				CB1549851B664E27008F749F /* Order */,
 				7EB75BF81B2F3DB2006ADEE3 /* Delivery */,
-				D55629B0198A8C1F000F8D82 /* OrderManager.h */,
-				D55629B1198A8C1F000F8D82 /* OrderManager.m */,
 				CB1432441B0E3D0400DD50C7 /* DBClassLoader.h */,
 				CB1432451B0E3D0400DD50C7 /* DBClassLoader.m */,
 				CB1B6CDF1A4B3CE40034774C /* DBBeaconObserver.h */,
@@ -10361,6 +10386,17 @@
 				CB43E7DB1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.xib */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		CB1549851B664E27008F749F /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				CB1549A01B664E72008F749F /* OrderManager.h */,
+				CB1549A11B664E72008F749F /* OrderManager.m */,
+				CB1549861B664E56008F749F /* DBItemsManager.h */,
+				CB1549871B664E56008F749F /* DBItemsManager.m */,
+			);
+			path = Order;
 			sourceTree = "<group>";
 		};
 		CB1B6CE81A4C63A70034774C /* jRSwizzle */ = {
@@ -17788,6 +17824,7 @@
 				7E3DAB041B06153E00A7FFD1 /* DBAPIClient.m in Sources */,
 				7E3DAB051B06153E00A7FFD1 /* DBVenueCell.m in Sources */,
 				CB9782951B1DF416000B5625 /* DBSettingsCell.m in Sources */,
+				CB15498C1B664E56008F749F /* DBItemsManager.m in Sources */,
 				7E3DAB061B06153E00A7FFD1 /* DBMenuCategory.m in Sources */,
 				7E3DAB071B06153E00A7FFD1 /* JRSwizzleMethods.m in Sources */,
 				7E3DAB081B06153E00A7FFD1 /* DBOrderItemCell.m in Sources */,
@@ -17839,7 +17876,6 @@
 				7E3DAB2F1B06153E00A7FFD1 /* DBConstants.m in Sources */,
 				7E3DAB301B06153E00A7FFD1 /* DBCategoryPicker.m in Sources */,
 				7E3DAB311B06153E00A7FFD1 /* OrderItem.m in Sources */,
-				7E3DAB321B06153E00A7FFD1 /* OrderManager.m in Sources */,
 				7E3DAB331B06153E00A7FFD1 /* DBPositionModifierPicker.m in Sources */,
 				7E3DAB341B06153E00A7FFD1 /* DBPopupTextView.m in Sources */,
 				7E47E4101B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
@@ -17852,6 +17888,7 @@
 				7E3DAB3A1B06153E00A7FFD1 /* UIView+Extension.m in Sources */,
 				7E3DAB3B1B06153E00A7FFD1 /* EXTConcreteProtocol.m in Sources */,
 				7E1AEA431B2734F50090FB6C /* DBShippingManager.m in Sources */,
+				CB1549A61B664E72008F749F /* OrderManager.m in Sources */,
 				7E3DAB3C1B06153E00A7FFD1 /* DBPositionSingleModifierCell.m in Sources */,
 				7E3DAB3D1B06153E00A7FFD1 /* CacheHelper.m in Sources */,
 				7E3DAB3E1B06153E00A7FFD1 /* DBPositionCell.m in Sources */,
@@ -17972,11 +18009,11 @@
 				7E7925711B3C1BDA00CA740D /* DBDeliveryType.m in Sources */,
 				7E7925721B3C1BDA00CA740D /* DBCategoryPicker.m in Sources */,
 				7E7925731B3C1BDA00CA740D /* OrderItem.m in Sources */,
-				7E7925741B3C1BDA00CA740D /* OrderManager.m in Sources */,
 				7E7925751B3C1BDA00CA740D /* DBPositionModifierPicker.m in Sources */,
 				7E7925761B3C1BDA00CA740D /* DBPopupTextView.m in Sources */,
 				7E7925771B3C1BDA00CA740D /* CoreDataHelper.m in Sources */,
 				7E7925781B3C1BDA00CA740D /* Compatibility.m in Sources */,
+				CB1549AF1B664E72008F749F /* OrderManager.m in Sources */,
 				7E7925791B3C1BDA00CA740D /* DBAddressViewController.m in Sources */,
 				7E79257A1B3C1BDA00CA740D /* DBDiscountAdvertView.m in Sources */,
 				7E79257B1B3C1BDA00CA740D /* DBOrderViewFooter.m in Sources */,
@@ -17990,6 +18027,7 @@
 				7E7925801B3C1BDA00CA740D /* CacheHelper.m in Sources */,
 				7E7925811B3C1BDA00CA740D /* DBPositionCell.m in Sources */,
 				7E7925821B3C1BDA00CA740D /* DBVenuesTableViewController.m in Sources */,
+				CB1549951B664E56008F749F /* DBItemsManager.m in Sources */,
 				7E7925831B3C1BDA00CA740D /* DBPromoManager.m in Sources */,
 				7E7925841B3C1BDA00CA740D /* DBProfileCell.m in Sources */,
 				7E7925851B3C1BDA00CA740D /* DBOrdersTableViewController.m in Sources */,
@@ -18106,11 +18144,11 @@
 				7E7926F31B3C247D00CA740D /* DBDeliveryType.m in Sources */,
 				7E7926F41B3C247D00CA740D /* DBCategoryPicker.m in Sources */,
 				7E7926F51B3C247D00CA740D /* OrderItem.m in Sources */,
-				7E7926F61B3C247D00CA740D /* OrderManager.m in Sources */,
 				7E7926F71B3C247D00CA740D /* DBPositionModifierPicker.m in Sources */,
 				7E7926F81B3C247D00CA740D /* DBPopupTextView.m in Sources */,
 				7E7926F91B3C247D00CA740D /* CoreDataHelper.m in Sources */,
 				7E7926FA1B3C247D00CA740D /* Compatibility.m in Sources */,
+				CB1549B01B664E72008F749F /* OrderManager.m in Sources */,
 				7E7926FB1B3C247D00CA740D /* DBAddressViewController.m in Sources */,
 				7E7926FC1B3C247D00CA740D /* DBDiscountAdvertView.m in Sources */,
 				7E7926FD1B3C247D00CA740D /* DBOrderViewFooter.m in Sources */,
@@ -18124,6 +18162,7 @@
 				7E7927021B3C247D00CA740D /* CacheHelper.m in Sources */,
 				7E7927031B3C247D00CA740D /* DBPositionCell.m in Sources */,
 				7E7927041B3C247D00CA740D /* DBVenuesTableViewController.m in Sources */,
+				CB1549961B664E56008F749F /* DBItemsManager.m in Sources */,
 				7E7927051B3C247D00CA740D /* DBPromoManager.m in Sources */,
 				7E7927061B3C247D00CA740D /* DBProfileCell.m in Sources */,
 				7E7927071B3C247D00CA740D /* DBOrdersTableViewController.m in Sources */,
@@ -18240,11 +18279,11 @@
 				7E8BD5FB1B5027AA00CAFD5C /* DBDeliveryType.m in Sources */,
 				7E8BD5FC1B5027AA00CAFD5C /* DBCategoryPicker.m in Sources */,
 				7E8BD5FD1B5027AA00CAFD5C /* OrderItem.m in Sources */,
-				7E8BD5FE1B5027AA00CAFD5C /* OrderManager.m in Sources */,
 				7E8BD5FF1B5027AA00CAFD5C /* DBPositionModifierPicker.m in Sources */,
 				7E8BD6001B5027AA00CAFD5C /* DBPopupTextView.m in Sources */,
 				7E8BD6011B5027AA00CAFD5C /* CoreDataHelper.m in Sources */,
 				7E8BD6021B5027AA00CAFD5C /* Compatibility.m in Sources */,
+				CB1549B91B664E72008F749F /* OrderManager.m in Sources */,
 				7E8BD6031B5027AA00CAFD5C /* DBAddressViewController.m in Sources */,
 				7E8BD6041B5027AA00CAFD5C /* DBDiscountAdvertView.m in Sources */,
 				7E8BD6051B5027AA00CAFD5C /* DBOrderViewFooter.m in Sources */,
@@ -18258,6 +18297,7 @@
 				7E8BD60B1B5027AA00CAFD5C /* CacheHelper.m in Sources */,
 				7E8BD60C1B5027AA00CAFD5C /* DBPositionCell.m in Sources */,
 				7E8BD60D1B5027AA00CAFD5C /* DBVenuesTableViewController.m in Sources */,
+				CB15499F1B664E56008F749F /* DBItemsManager.m in Sources */,
 				7E8BD60E1B5027AA00CAFD5C /* DBPromoManager.m in Sources */,
 				7E8BD60F1B5027AA00CAFD5C /* DBProfileCell.m in Sources */,
 				7E8BD6101B5027AA00CAFD5C /* DBOrdersTableViewController.m in Sources */,
@@ -18374,11 +18414,11 @@
 				7EB2D1B81B3C3581009405C6 /* DBDeliveryType.m in Sources */,
 				7EB2D1B91B3C3581009405C6 /* DBCategoryPicker.m in Sources */,
 				7EB2D1BA1B3C3581009405C6 /* OrderItem.m in Sources */,
-				7EB2D1BB1B3C3581009405C6 /* OrderManager.m in Sources */,
 				7EB2D1BC1B3C3581009405C6 /* DBPositionModifierPicker.m in Sources */,
 				7EB2D1BD1B3C3581009405C6 /* DBPopupTextView.m in Sources */,
 				7EB2D1BE1B3C3581009405C6 /* CoreDataHelper.m in Sources */,
 				7EB2D1BF1B3C3581009405C6 /* Compatibility.m in Sources */,
+				CB1549B11B664E72008F749F /* OrderManager.m in Sources */,
 				7EB2D1C01B3C3581009405C6 /* DBAddressViewController.m in Sources */,
 				7EB2D1C11B3C3581009405C6 /* DBDiscountAdvertView.m in Sources */,
 				7EB2D1C21B3C3581009405C6 /* DBOrderViewFooter.m in Sources */,
@@ -18392,6 +18432,7 @@
 				7EB2D1C71B3C3581009405C6 /* CacheHelper.m in Sources */,
 				7EB2D1C81B3C3581009405C6 /* DBPositionCell.m in Sources */,
 				7EB2D1C91B3C3581009405C6 /* DBVenuesTableViewController.m in Sources */,
+				CB1549971B664E56008F749F /* DBItemsManager.m in Sources */,
 				7EB2D1CA1B3C3581009405C6 /* DBPromoManager.m in Sources */,
 				7EB2D1CB1B3C3581009405C6 /* DBProfileCell.m in Sources */,
 				7EB2D1CC1B3C3581009405C6 /* DBOrdersTableViewController.m in Sources */,
@@ -18508,11 +18549,11 @@
 				7EB2D3271B3C51A2009405C6 /* DBDeliveryType.m in Sources */,
 				7EB2D3281B3C51A2009405C6 /* DBCategoryPicker.m in Sources */,
 				7EB2D3291B3C51A2009405C6 /* OrderItem.m in Sources */,
-				7EB2D32A1B3C51A2009405C6 /* OrderManager.m in Sources */,
 				7EB2D32B1B3C51A2009405C6 /* DBPositionModifierPicker.m in Sources */,
 				7EB2D32C1B3C51A2009405C6 /* DBPopupTextView.m in Sources */,
 				7EB2D32D1B3C51A2009405C6 /* CoreDataHelper.m in Sources */,
 				7EB2D32E1B3C51A2009405C6 /* Compatibility.m in Sources */,
+				CB1549B21B664E72008F749F /* OrderManager.m in Sources */,
 				7EB2D32F1B3C51A2009405C6 /* DBAddressViewController.m in Sources */,
 				7EB2D3301B3C51A2009405C6 /* DBDiscountAdvertView.m in Sources */,
 				7EB2D3311B3C51A2009405C6 /* DBOrderViewFooter.m in Sources */,
@@ -18526,6 +18567,7 @@
 				7EB2D3361B3C51A2009405C6 /* CacheHelper.m in Sources */,
 				7EB2D3371B3C51A2009405C6 /* DBPositionCell.m in Sources */,
 				7EB2D3381B3C51A2009405C6 /* DBVenuesTableViewController.m in Sources */,
+				CB1549981B664E56008F749F /* DBItemsManager.m in Sources */,
 				7EB2D3391B3C51A2009405C6 /* DBPromoManager.m in Sources */,
 				7EB2D33A1B3C51A2009405C6 /* DBProfileCell.m in Sources */,
 				7EB2D33B1B3C51A2009405C6 /* DBOrdersTableViewController.m in Sources */,
@@ -18642,11 +18684,11 @@
 				7EB2D4971B3C5C77009405C6 /* DBDeliveryType.m in Sources */,
 				7EB2D4981B3C5C77009405C6 /* DBCategoryPicker.m in Sources */,
 				7EB2D4991B3C5C77009405C6 /* OrderItem.m in Sources */,
-				7EB2D49A1B3C5C77009405C6 /* OrderManager.m in Sources */,
 				7EB2D49B1B3C5C77009405C6 /* DBPositionModifierPicker.m in Sources */,
 				7EB2D49C1B3C5C77009405C6 /* DBPopupTextView.m in Sources */,
 				7EB2D49D1B3C5C77009405C6 /* CoreDataHelper.m in Sources */,
 				7EB2D49E1B3C5C77009405C6 /* Compatibility.m in Sources */,
+				CB1549B31B664E72008F749F /* OrderManager.m in Sources */,
 				7EB2D49F1B3C5C77009405C6 /* DBAddressViewController.m in Sources */,
 				7EB2D4A01B3C5C77009405C6 /* DBDiscountAdvertView.m in Sources */,
 				7EB2D4A11B3C5C77009405C6 /* DBOrderViewFooter.m in Sources */,
@@ -18660,6 +18702,7 @@
 				7EB2D4A61B3C5C77009405C6 /* CacheHelper.m in Sources */,
 				7EB2D4A71B3C5C77009405C6 /* DBPositionCell.m in Sources */,
 				7EB2D4A81B3C5C77009405C6 /* DBVenuesTableViewController.m in Sources */,
+				CB1549991B664E56008F749F /* DBItemsManager.m in Sources */,
 				7EB2D4A91B3C5C77009405C6 /* DBPromoManager.m in Sources */,
 				7EB2D4AA1B3C5C77009405C6 /* DBProfileCell.m in Sources */,
 				7EB2D4AB1B3C5C77009405C6 /* DBOrdersTableViewController.m in Sources */,
@@ -18776,11 +18819,11 @@
 				7EDB594C1B32F70400723DF9 /* DBDeliveryType.m in Sources */,
 				7EDB594D1B32F70400723DF9 /* DBCategoryPicker.m in Sources */,
 				7EDB594E1B32F70400723DF9 /* OrderItem.m in Sources */,
-				7EDB594F1B32F70400723DF9 /* OrderManager.m in Sources */,
 				7EDB59501B32F70400723DF9 /* DBPositionModifierPicker.m in Sources */,
 				7EDB59511B32F70400723DF9 /* DBPopupTextView.m in Sources */,
 				7EDB59521B32F70400723DF9 /* CoreDataHelper.m in Sources */,
 				7EDB59531B32F70400723DF9 /* Compatibility.m in Sources */,
+				CB1549AE1B664E72008F749F /* OrderManager.m in Sources */,
 				7EDB59541B32F70400723DF9 /* DBAddressViewController.m in Sources */,
 				7EDB59551B32F70400723DF9 /* DBDiscountAdvertView.m in Sources */,
 				7EDB59561B32F70400723DF9 /* DBOrderViewFooter.m in Sources */,
@@ -18794,6 +18837,7 @@
 				7EDB595B1B32F70400723DF9 /* CacheHelper.m in Sources */,
 				7EDB595C1B32F70400723DF9 /* DBPositionCell.m in Sources */,
 				7EDB595D1B32F70400723DF9 /* DBVenuesTableViewController.m in Sources */,
+				CB1549941B664E56008F749F /* DBItemsManager.m in Sources */,
 				7EDB595E1B32F70400723DF9 /* DBPromoManager.m in Sources */,
 				7EDB595F1B32F70400723DF9 /* DBProfileCell.m in Sources */,
 				7EDB59601B32F70400723DF9 /* DBOrdersTableViewController.m in Sources */,
@@ -18865,6 +18909,7 @@
 				CB1431141B0E371A00DD50C7 /* NSInvocation+EXT.m in Sources */,
 				CB1431151B0E371A00DD50C7 /* UIColor+Brandbook.m in Sources */,
 				CB1431161B0E371A00DD50C7 /* DBCompanyInfoViewController.m in Sources */,
+				CB1549881B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB1431171B0E371A00DD50C7 /* NSDictionary+NSNullRepresentation.m in Sources */,
 				7E1AEA3F1B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB9782891B1DE28D000B5625 /* DBDocumentsViewController.m in Sources */,
@@ -18884,6 +18929,7 @@
 				CB1431241B0E371A00DD50C7 /* DBProfileViewController.m in Sources */,
 				CB1431271B0E371A00DD50C7 /* DBTableItemInactivityView.m in Sources */,
 				CB1431281B0E371A00DD50C7 /* DBCategoryHeaderView.m in Sources */,
+				CB1549A21B664E72008F749F /* OrderManager.m in Sources */,
 				CB6DBF5A1B1F00F1008D177E /* DBPersonalWalletView.m in Sources */,
 				CB1431291B0E371A00DD50C7 /* DBCompanyInfo.m in Sources */,
 				CB14312A1B0E371A00DD50C7 /* LocationHelper.m in Sources */,
@@ -18910,7 +18956,6 @@
 				CB14313B1B0E371A00DD50C7 /* DBConstants.m in Sources */,
 				CB14313C1B0E371A00DD50C7 /* DBCategoryPicker.m in Sources */,
 				CB14313D1B0E371A00DD50C7 /* OrderItem.m in Sources */,
-				CB14313E1B0E371A00DD50C7 /* OrderManager.m in Sources */,
 				7EBFD73C1B5A624E0054B583 /* PositionCompactCollectionViewCell.m in Sources */,
 				CB14313F1B0E371A00DD50C7 /* DBPositionModifierPicker.m in Sources */,
 				CB1431401B0E371A00DD50C7 /* DBPopupTextView.m in Sources */,
@@ -18994,6 +19039,7 @@
 				CB1432721B0F1BBB00DD50C7 /* DBVenueCell.m in Sources */,
 				CB1432731B0F1BBB00DD50C7 /* DBMenuCategory.m in Sources */,
 				CB1432741B0F1BBB00DD50C7 /* JRSwizzleMethods.m in Sources */,
+				CB15498D1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB1432751B0F1BBB00DD50C7 /* DBOrderItemCell.m in Sources */,
 				CB1432761B0F1BBB00DD50C7 /* DBBeaconObserver.m in Sources */,
 				CB1432771B0F1BBB00DD50C7 /* EXTSelectorChecking.m in Sources */,
@@ -19047,7 +19093,6 @@
 				CB1433AD1B13267A00DD50C7 /* DBDeliveryType.m in Sources */,
 				CB1432A01B0F1BBB00DD50C7 /* DBCategoryPicker.m in Sources */,
 				CB1432A11B0F1BBB00DD50C7 /* OrderItem.m in Sources */,
-				CB1432A21B0F1BBB00DD50C7 /* OrderManager.m in Sources */,
 				CB1432A31B0F1BBB00DD50C7 /* DBPositionModifierPicker.m in Sources */,
 				CB1432A41B0F1BBB00DD50C7 /* DBPopupTextView.m in Sources */,
 				7E47E4171B1DEBAB001432D9 /* DBDeliveryViewController.m in Sources */,
@@ -19058,6 +19103,7 @@
 				CB1432A91B0F1BBB00DD50C7 /* DBPositionModifierCell.m in Sources */,
 				CB1432AA1B0F1BBB00DD50C7 /* UIView+Extension.m in Sources */,
 				CB1432AB1B0F1BBB00DD50C7 /* EXTConcreteProtocol.m in Sources */,
+				CB1549A71B664E72008F749F /* OrderManager.m in Sources */,
 				CB1432AC1B0F1BBB00DD50C7 /* DBPositionSingleModifierCell.m in Sources */,
 				CB1432AD1B0F1BBB00DD50C7 /* CacheHelper.m in Sources */,
 				CB1432AE1B0F1BBB00DD50C7 /* DBPositionCell.m in Sources */,
@@ -19127,6 +19173,7 @@
 				CB1AF7891AE10E6900FA3224 /* DBAPIClient.m in Sources */,
 				CB1AF78A1AE10E6900FA3224 /* DBVenueCell.m in Sources */,
 				CB9782931B1DF415000B5625 /* DBSettingsCell.m in Sources */,
+				CB15498A1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB1AF78B1AE10E6900FA3224 /* DBMenuCategory.m in Sources */,
 				CB1AF78C1AE10E6900FA3224 /* JRSwizzleMethods.m in Sources */,
 				CB1AF78D1AE10E6900FA3224 /* DBOrderItemCell.m in Sources */,
@@ -19179,7 +19226,6 @@
 				CB1AF7B21AE10E6900FA3224 /* DBConstants.m in Sources */,
 				CB1AF7B31AE10E6900FA3224 /* DBCategoryPicker.m in Sources */,
 				CB1AF7B41AE10E6900FA3224 /* OrderItem.m in Sources */,
-				CB1AF7B51AE10E6900FA3224 /* OrderManager.m in Sources */,
 				CB1AF7B61AE10E6900FA3224 /* DBPositionModifierPicker.m in Sources */,
 				CB1AF7B71AE10E6900FA3224 /* DBPopupTextView.m in Sources */,
 				7E47E40E1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
@@ -19191,6 +19237,7 @@
 				CB1AF7BD1AE10E6900FA3224 /* UIView+Extension.m in Sources */,
 				CB1AF7BE1AE10E6900FA3224 /* EXTConcreteProtocol.m in Sources */,
 				7E1AEA411B2734F50090FB6C /* DBShippingManager.m in Sources */,
+				CB1549A41B664E72008F749F /* OrderManager.m in Sources */,
 				CB1AF7BF1AE10E6900FA3224 /* DBPositionSingleModifierCell.m in Sources */,
 				CB1AF7C01AE10E6900FA3224 /* CacheHelper.m in Sources */,
 				CB1AF7C11AE10E6900FA3224 /* DBPositionCell.m in Sources */,
@@ -19260,6 +19307,7 @@
 				CB3BA2FF1B20589300F320CA /* DBVenueCell.m in Sources */,
 				CB3BA3001B20589300F320CA /* DBMenuCategory.m in Sources */,
 				CB3BA3011B20589300F320CA /* JRSwizzleMethods.m in Sources */,
+				CB15498E1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB3BA3021B20589300F320CA /* DBOrderItemCell.m in Sources */,
 				CB3BA3031B20589300F320CA /* DBBeaconObserver.m in Sources */,
 				CB3BA3041B20589300F320CA /* EXTSelectorChecking.m in Sources */,
@@ -19312,7 +19360,6 @@
 				CB3BA32F1B20589300F320CA /* DBDeliveryType.m in Sources */,
 				CB3BA3301B20589300F320CA /* DBCategoryPicker.m in Sources */,
 				CB3BA3311B20589300F320CA /* OrderItem.m in Sources */,
-				CB3BA3321B20589300F320CA /* OrderManager.m in Sources */,
 				CB3BA3331B20589300F320CA /* DBPositionModifierPicker.m in Sources */,
 				CB3BA3341B20589300F320CA /* DBPopupTextView.m in Sources */,
 				CB3BA3351B20589300F320CA /* CoreDataHelper.m in Sources */,
@@ -19324,6 +19371,7 @@
 				CB3BA33A1B20589300F320CA /* UIView+Extension.m in Sources */,
 				CB3BA33B1B20589300F320CA /* EXTConcreteProtocol.m in Sources */,
 				CB3BA33C1B20589300F320CA /* DBPositionSingleModifierCell.m in Sources */,
+				CB1549A81B664E72008F749F /* OrderManager.m in Sources */,
 				CB3BA33D1B20589300F320CA /* CacheHelper.m in Sources */,
 				CB3BA33E1B20589300F320CA /* DBPositionCell.m in Sources */,
 				CB3BA33F1B20589300F320CA /* DBVenuesTableViewController.m in Sources */,
@@ -19393,6 +19441,7 @@
 				CB517B611AEFB6B500A50F5C /* DBAPIClient.m in Sources */,
 				CB517B621AEFB6B500A50F5C /* DBVenueCell.m in Sources */,
 				CB9782941B1DF416000B5625 /* DBSettingsCell.m in Sources */,
+				CB15498B1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB517B631AEFB6B500A50F5C /* DBMenuCategory.m in Sources */,
 				CB517B641AEFB6B500A50F5C /* JRSwizzleMethods.m in Sources */,
 				CB517B651AEFB6B500A50F5C /* DBOrderItemCell.m in Sources */,
@@ -19445,7 +19494,6 @@
 				CB517B8C1AEFB6B500A50F5C /* DBConstants.m in Sources */,
 				CB517B8D1AEFB6B500A50F5C /* DBCategoryPicker.m in Sources */,
 				CB517B8E1AEFB6B500A50F5C /* OrderItem.m in Sources */,
-				CB517B8F1AEFB6B500A50F5C /* OrderManager.m in Sources */,
 				CB517B901AEFB6B500A50F5C /* DBPositionModifierPicker.m in Sources */,
 				CB517B911AEFB6B500A50F5C /* DBPopupTextView.m in Sources */,
 				7E47E40F1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
@@ -19457,6 +19505,7 @@
 				CB517B971AEFB6B500A50F5C /* UIView+Extension.m in Sources */,
 				CB517B981AEFB6B500A50F5C /* EXTConcreteProtocol.m in Sources */,
 				7E1AEA421B2734F50090FB6C /* DBShippingManager.m in Sources */,
+				CB1549A51B664E72008F749F /* OrderManager.m in Sources */,
 				CB517B991AEFB6B500A50F5C /* DBPositionSingleModifierCell.m in Sources */,
 				CB517B9A1AEFB6B500A50F5C /* CacheHelper.m in Sources */,
 				CB517B9B1AEFB6B500A50F5C /* DBPositionCell.m in Sources */,
@@ -19526,6 +19575,7 @@
 				CB5AFC481B27209A00904BF7 /* DBVenueCell.m in Sources */,
 				CB5AFC491B27209A00904BF7 /* DBMenuCategory.m in Sources */,
 				CB5AFC4A1B27209A00904BF7 /* JRSwizzleMethods.m in Sources */,
+				CB15498F1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB5AFC4B1B27209A00904BF7 /* DBOrderItemCell.m in Sources */,
 				CB5AFC4C1B27209A00904BF7 /* DBBeaconObserver.m in Sources */,
 				CB5AFC4D1B27209A00904BF7 /* EXTSelectorChecking.m in Sources */,
@@ -19578,7 +19628,6 @@
 				CB5AFC791B27209A00904BF7 /* DBDeliveryType.m in Sources */,
 				CB5AFC7A1B27209A00904BF7 /* DBCategoryPicker.m in Sources */,
 				CB5AFC7B1B27209A00904BF7 /* OrderItem.m in Sources */,
-				CB5AFC7C1B27209A00904BF7 /* OrderManager.m in Sources */,
 				CB5AFC7D1B27209A00904BF7 /* DBPositionModifierPicker.m in Sources */,
 				CB5AFC7E1B27209A00904BF7 /* DBPopupTextView.m in Sources */,
 				CB5AFC7F1B27209A00904BF7 /* CoreDataHelper.m in Sources */,
@@ -19590,6 +19639,7 @@
 				CB5AFC841B27209A00904BF7 /* UIView+Extension.m in Sources */,
 				CB5AFC851B27209A00904BF7 /* EXTConcreteProtocol.m in Sources */,
 				CB5AFC861B27209A00904BF7 /* DBPositionSingleModifierCell.m in Sources */,
+				CB1549A91B664E72008F749F /* OrderManager.m in Sources */,
 				CB5AFC871B27209A00904BF7 /* CacheHelper.m in Sources */,
 				CB5AFC881B27209A00904BF7 /* DBPositionCell.m in Sources */,
 				CB5AFC891B27209A00904BF7 /* DBVenuesTableViewController.m in Sources */,
@@ -19659,6 +19709,7 @@
 				CB60C0C51AC5AD2600D5E962 /* DBAPIClient.m in Sources */,
 				CB60C0C61AC5AD2600D5E962 /* DBVenueCell.m in Sources */,
 				CB60C0C71AC5AD2600D5E962 /* DBMenuCategory.m in Sources */,
+				CB1549891B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB60C0C81AC5AD2600D5E962 /* JRSwizzleMethods.m in Sources */,
 				CB43E8261AD4508F0003D5B2 /* DBOrderItemCell.m in Sources */,
 				CB60C0C91AC5AD2600D5E962 /* DBBeaconObserver.m in Sources */,
@@ -19710,7 +19761,6 @@
 				CB1433A91B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
 				CB715ADB1ACD57F200EA84FC /* DBCategoryPicker.m in Sources */,
 				CB60C0E71AC5AD2600D5E962 /* OrderItem.m in Sources */,
-				CB60C0E81AC5AD2600D5E962 /* OrderManager.m in Sources */,
 				CB0C99111ACEDAC300B1AE2F /* DBPositionModifierPicker.m in Sources */,
 				CB215E281ADC1B8700EF9EEC /* DBPopupTextView.m in Sources */,
 				7E47E4131B1DEBA8001432D9 /* DBDeliveryViewController.m in Sources */,
@@ -19723,6 +19773,7 @@
 				CB60C0EE1AC5AD2600D5E962 /* EXTConcreteProtocol.m in Sources */,
 				CB43E7A31ACEEB6A0003D5B2 /* DBPositionSingleModifierCell.m in Sources */,
 				CB60C0EF1AC5AD2600D5E962 /* CacheHelper.m in Sources */,
+				CB1549A31B664E72008F749F /* OrderManager.m in Sources */,
 				CBE559551AC9A94600A166B9 /* DBPositionCell.m in Sources */,
 				CB60C0F01AC5AD2600D5E962 /* DBVenuesTableViewController.m in Sources */,
 				CB60C0F21AC5AD2600D5E962 /* DBPromoManager.m in Sources */,
@@ -19792,6 +19843,7 @@
 				CB64FE261B317F760011CEEC /* DBVenueCell.m in Sources */,
 				CB64FE271B317F760011CEEC /* DBMenuCategory.m in Sources */,
 				CB64FE281B317F760011CEEC /* JRSwizzleMethods.m in Sources */,
+				CB1549921B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB64FE291B317F760011CEEC /* DBOrderItemCell.m in Sources */,
 				CB64FE2A1B317F760011CEEC /* DBBeaconObserver.m in Sources */,
 				CB64FE2B1B317F760011CEEC /* EXTSelectorChecking.m in Sources */,
@@ -19844,7 +19896,6 @@
 				CB64FE591B317F760011CEEC /* DBDeliveryType.m in Sources */,
 				CB64FE5A1B317F760011CEEC /* DBCategoryPicker.m in Sources */,
 				CB64FE5B1B317F760011CEEC /* OrderItem.m in Sources */,
-				CB64FE5C1B317F760011CEEC /* OrderManager.m in Sources */,
 				CB64FE5D1B317F760011CEEC /* DBPositionModifierPicker.m in Sources */,
 				CB64FE5E1B317F760011CEEC /* DBPopupTextView.m in Sources */,
 				CB64FE5F1B317F760011CEEC /* CoreDataHelper.m in Sources */,
@@ -19856,6 +19907,7 @@
 				CB64FE651B317F760011CEEC /* UIView+Extension.m in Sources */,
 				CB64FE661B317F760011CEEC /* EXTConcreteProtocol.m in Sources */,
 				CB64FE671B317F760011CEEC /* DBPositionSingleModifierCell.m in Sources */,
+				CB1549AC1B664E72008F749F /* OrderManager.m in Sources */,
 				CB64FE681B317F760011CEEC /* CacheHelper.m in Sources */,
 				CB64FE691B317F760011CEEC /* DBPositionCell.m in Sources */,
 				CB64FE6A1B317F760011CEEC /* DBVenuesTableViewController.m in Sources */,
@@ -19976,11 +20028,11 @@
 				CB6400071B31B7CF0011CEEC /* DBDeliveryType.m in Sources */,
 				CB6400081B31B7CF0011CEEC /* DBCategoryPicker.m in Sources */,
 				CB6400091B31B7CF0011CEEC /* OrderItem.m in Sources */,
-				CB64000A1B31B7CF0011CEEC /* OrderManager.m in Sources */,
 				CB64000B1B31B7CF0011CEEC /* DBPositionModifierPicker.m in Sources */,
 				CB64000C1B31B7CF0011CEEC /* DBPopupTextView.m in Sources */,
 				CB64000D1B31B7CF0011CEEC /* CoreDataHelper.m in Sources */,
 				CB64000E1B31B7CF0011CEEC /* Compatibility.m in Sources */,
+				CB1549AD1B664E72008F749F /* OrderManager.m in Sources */,
 				CB64000F1B31B7CF0011CEEC /* DBAddressViewController.m in Sources */,
 				CB6400101B31B7CF0011CEEC /* DBDiscountAdvertView.m in Sources */,
 				CB6400111B31B7CF0011CEEC /* DBOrderViewFooter.m in Sources */,
@@ -19994,6 +20046,7 @@
 				CB6400161B31B7CF0011CEEC /* CacheHelper.m in Sources */,
 				CB6400171B31B7CF0011CEEC /* DBPositionCell.m in Sources */,
 				CB6400181B31B7CF0011CEEC /* DBVenuesTableViewController.m in Sources */,
+				CB1549931B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB6400191B31B7CF0011CEEC /* DBPromoManager.m in Sources */,
 				CB64001A1B31B7CF0011CEEC /* DBProfileCell.m in Sources */,
 				CB64001B1B31B7CF0011CEEC /* DBOrdersTableViewController.m in Sources */,
@@ -20110,11 +20163,11 @@
 				CB8200EB1B46CBB4000BBE55 /* DBDeliveryType.m in Sources */,
 				CB8200EC1B46CBB4000BBE55 /* DBCategoryPicker.m in Sources */,
 				CB8200ED1B46CBB4000BBE55 /* OrderItem.m in Sources */,
-				CB8200EE1B46CBB4000BBE55 /* OrderManager.m in Sources */,
 				CB8200EF1B46CBB4000BBE55 /* DBPositionModifierPicker.m in Sources */,
 				CB8200F01B46CBB4000BBE55 /* DBPopupTextView.m in Sources */,
 				CB8200F11B46CBB4000BBE55 /* CoreDataHelper.m in Sources */,
 				CB8200F21B46CBB4000BBE55 /* Compatibility.m in Sources */,
+				CB1549B81B664E72008F749F /* OrderManager.m in Sources */,
 				CB8200F31B46CBB4000BBE55 /* DBAddressViewController.m in Sources */,
 				CB8200F41B46CBB4000BBE55 /* DBDiscountAdvertView.m in Sources */,
 				CB8200F51B46CBB4000BBE55 /* DBOrderViewFooter.m in Sources */,
@@ -20128,6 +20181,7 @@
 				CB8200FB1B46CBB4000BBE55 /* CacheHelper.m in Sources */,
 				CB8200FC1B46CBB4000BBE55 /* DBPositionCell.m in Sources */,
 				CB8200FD1B46CBB4000BBE55 /* DBVenuesTableViewController.m in Sources */,
+				CB15499E1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB8200FE1B46CBB4000BBE55 /* DBPromoManager.m in Sources */,
 				CB8200FF1B46CBB4000BBE55 /* DBProfileCell.m in Sources */,
 				CB8201001B46CBB4000BBE55 /* DBOrdersTableViewController.m in Sources */,
@@ -20244,11 +20298,11 @@
 				CB82FC291B442C70000BBE55 /* DBDeliveryType.m in Sources */,
 				CB82FC2A1B442C70000BBE55 /* DBCategoryPicker.m in Sources */,
 				CB82FC2B1B442C70000BBE55 /* OrderItem.m in Sources */,
-				CB82FC2C1B442C70000BBE55 /* OrderManager.m in Sources */,
 				CB82FC2D1B442C70000BBE55 /* DBPositionModifierPicker.m in Sources */,
 				CB82FC2E1B442C70000BBE55 /* DBPopupTextView.m in Sources */,
 				CB82FC2F1B442C70000BBE55 /* CoreDataHelper.m in Sources */,
 				CB82FC301B442C70000BBE55 /* Compatibility.m in Sources */,
+				CB1549B51B664E72008F749F /* OrderManager.m in Sources */,
 				CB82FC311B442C70000BBE55 /* DBAddressViewController.m in Sources */,
 				CB82FC321B442C70000BBE55 /* DBDiscountAdvertView.m in Sources */,
 				CB82FC331B442C70000BBE55 /* DBOrderViewFooter.m in Sources */,
@@ -20262,6 +20316,7 @@
 				CB82FC381B442C70000BBE55 /* CacheHelper.m in Sources */,
 				CB82FC391B442C70000BBE55 /* DBPositionCell.m in Sources */,
 				CB82FC3A1B442C70000BBE55 /* DBVenuesTableViewController.m in Sources */,
+				CB15499B1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB82FC3B1B442C70000BBE55 /* DBPromoManager.m in Sources */,
 				CB82FC3C1B442C70000BBE55 /* DBProfileCell.m in Sources */,
 				CB82FC3D1B442C70000BBE55 /* DBOrdersTableViewController.m in Sources */,
@@ -20378,11 +20433,11 @@
 				CB82FE091B4464F6000BBE55 /* DBDeliveryType.m in Sources */,
 				CB82FE0A1B4464F6000BBE55 /* DBCategoryPicker.m in Sources */,
 				CB82FE0B1B4464F6000BBE55 /* OrderItem.m in Sources */,
-				CB82FE0C1B4464F6000BBE55 /* OrderManager.m in Sources */,
 				CB82FE0D1B4464F6000BBE55 /* DBPositionModifierPicker.m in Sources */,
 				CB82FE0E1B4464F6000BBE55 /* DBPopupTextView.m in Sources */,
 				CB82FE0F1B4464F6000BBE55 /* CoreDataHelper.m in Sources */,
 				CB82FE101B4464F6000BBE55 /* Compatibility.m in Sources */,
+				CB1549B61B664E72008F749F /* OrderManager.m in Sources */,
 				CB82FE111B4464F6000BBE55 /* DBAddressViewController.m in Sources */,
 				CB82FE121B4464F6000BBE55 /* DBDiscountAdvertView.m in Sources */,
 				CB82FE131B4464F6000BBE55 /* DBOrderViewFooter.m in Sources */,
@@ -20396,6 +20451,7 @@
 				CB82FE191B4464F6000BBE55 /* CacheHelper.m in Sources */,
 				CB82FE1A1B4464F6000BBE55 /* DBPositionCell.m in Sources */,
 				CB82FE1B1B4464F6000BBE55 /* DBVenuesTableViewController.m in Sources */,
+				CB15499C1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB82FE1C1B4464F6000BBE55 /* DBPromoManager.m in Sources */,
 				CB82FE1D1B4464F6000BBE55 /* DBProfileCell.m in Sources */,
 				CB82FE1E1B4464F6000BBE55 /* DBOrdersTableViewController.m in Sources */,
@@ -20512,11 +20568,11 @@
 				CB82FF7A1B4579B5000BBE55 /* DBDeliveryType.m in Sources */,
 				CB82FF7B1B4579B5000BBE55 /* DBCategoryPicker.m in Sources */,
 				CB82FF7C1B4579B5000BBE55 /* OrderItem.m in Sources */,
-				CB82FF7D1B4579B5000BBE55 /* OrderManager.m in Sources */,
 				CB82FF7E1B4579B5000BBE55 /* DBPositionModifierPicker.m in Sources */,
 				CB82FF7F1B4579B5000BBE55 /* DBPopupTextView.m in Sources */,
 				CB82FF801B4579B5000BBE55 /* CoreDataHelper.m in Sources */,
 				CB82FF811B4579B5000BBE55 /* Compatibility.m in Sources */,
+				CB1549B71B664E72008F749F /* OrderManager.m in Sources */,
 				CB82FF821B4579B5000BBE55 /* DBAddressViewController.m in Sources */,
 				CB82FF831B4579B5000BBE55 /* DBDiscountAdvertView.m in Sources */,
 				CB82FF841B4579B5000BBE55 /* DBOrderViewFooter.m in Sources */,
@@ -20530,6 +20586,7 @@
 				CB82FF8A1B4579B5000BBE55 /* CacheHelper.m in Sources */,
 				CB82FF8B1B4579B5000BBE55 /* DBPositionCell.m in Sources */,
 				CB82FF8C1B4579B5000BBE55 /* DBVenuesTableViewController.m in Sources */,
+				CB15499D1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CB82FF8D1B4579B5000BBE55 /* DBPromoManager.m in Sources */,
 				CB82FF8E1B4579B5000BBE55 /* DBProfileCell.m in Sources */,
 				CB82FF8F1B4579B5000BBE55 /* DBOrdersTableViewController.m in Sources */,
@@ -20646,11 +20703,11 @@
 				CBD0C52B1B30724300DAD042 /* DBDeliveryType.m in Sources */,
 				CBD0C52C1B30724300DAD042 /* DBCategoryPicker.m in Sources */,
 				CBD0C52D1B30724300DAD042 /* OrderItem.m in Sources */,
-				CBD0C52E1B30724300DAD042 /* OrderManager.m in Sources */,
 				CBD0C52F1B30724300DAD042 /* DBPositionModifierPicker.m in Sources */,
 				CBD0C5301B30724300DAD042 /* DBPopupTextView.m in Sources */,
 				CBD0C5311B30724300DAD042 /* CoreDataHelper.m in Sources */,
 				CBD0C5321B30724300DAD042 /* Compatibility.m in Sources */,
+				CB1549AB1B664E72008F749F /* OrderManager.m in Sources */,
 				CBD0C5331B30724300DAD042 /* DBAddressViewController.m in Sources */,
 				CBD0C5341B30724300DAD042 /* DBDiscountAdvertView.m in Sources */,
 				CBD0C5351B30724300DAD042 /* DBOrderViewFooter.m in Sources */,
@@ -20664,6 +20721,7 @@
 				CBD0C53A1B30724300DAD042 /* CacheHelper.m in Sources */,
 				CBD0C53B1B30724300DAD042 /* DBPositionCell.m in Sources */,
 				CBD0C53C1B30724300DAD042 /* DBVenuesTableViewController.m in Sources */,
+				CB1549911B664E56008F749F /* DBItemsManager.m in Sources */,
 				CBD0C53E1B30724300DAD042 /* DBPromoManager.m in Sources */,
 				CBD0C53F1B30724300DAD042 /* DBProfileCell.m in Sources */,
 				CBD0C5401B30724300DAD042 /* DBOrdersTableViewController.m in Sources */,
@@ -20729,6 +20787,7 @@
 				CBD2EADC1B2A07D000E4AAA1 /* DBVenueCell.m in Sources */,
 				CBD2EADD1B2A07D000E4AAA1 /* DBMenuCategory.m in Sources */,
 				CBD2EADE1B2A07D000E4AAA1 /* JRSwizzleMethods.m in Sources */,
+				CB1549901B664E56008F749F /* DBItemsManager.m in Sources */,
 				CBD2EADF1B2A07D000E4AAA1 /* DBOrderItemCell.m in Sources */,
 				CBD2EAE01B2A07D000E4AAA1 /* DBBeaconObserver.m in Sources */,
 				CBD2EAE11B2A07D000E4AAA1 /* EXTSelectorChecking.m in Sources */,
@@ -20781,7 +20840,6 @@
 				CBD2EB0D1B2A07D000E4AAA1 /* DBDeliveryType.m in Sources */,
 				CBD2EB0E1B2A07D000E4AAA1 /* DBCategoryPicker.m in Sources */,
 				CBD2EB0F1B2A07D000E4AAA1 /* OrderItem.m in Sources */,
-				CBD2EB101B2A07D000E4AAA1 /* OrderManager.m in Sources */,
 				CBD2EB111B2A07D000E4AAA1 /* DBPositionModifierPicker.m in Sources */,
 				CBD2EB121B2A07D000E4AAA1 /* DBPopupTextView.m in Sources */,
 				CBD2EB131B2A07D000E4AAA1 /* CoreDataHelper.m in Sources */,
@@ -20793,6 +20851,7 @@
 				CBD2EB181B2A07D000E4AAA1 /* UIView+Extension.m in Sources */,
 				CBD2EB191B2A07D000E4AAA1 /* EXTConcreteProtocol.m in Sources */,
 				CBD2EB1A1B2A07D000E4AAA1 /* DBPositionSingleModifierCell.m in Sources */,
+				CB1549AA1B664E72008F749F /* OrderManager.m in Sources */,
 				CBD2EB1B1B2A07D000E4AAA1 /* CacheHelper.m in Sources */,
 				CBD2EB1C1B2A07D000E4AAA1 /* DBPositionCell.m in Sources */,
 				CBD2EB1D1B2A07D000E4AAA1 /* DBVenuesTableViewController.m in Sources */,
@@ -20913,11 +20972,11 @@
 				CBDC79DD1B42AFC700935328 /* DBDeliveryType.m in Sources */,
 				CBDC79DE1B42AFC700935328 /* DBCategoryPicker.m in Sources */,
 				CBDC79DF1B42AFC700935328 /* OrderItem.m in Sources */,
-				CBDC79E01B42AFC700935328 /* OrderManager.m in Sources */,
 				CBDC79E11B42AFC700935328 /* DBPositionModifierPicker.m in Sources */,
 				CBDC79E21B42AFC700935328 /* DBPopupTextView.m in Sources */,
 				CBDC79E31B42AFC700935328 /* CoreDataHelper.m in Sources */,
 				CBDC79E41B42AFC700935328 /* Compatibility.m in Sources */,
+				CB1549B41B664E72008F749F /* OrderManager.m in Sources */,
 				CBDC79E51B42AFC700935328 /* DBAddressViewController.m in Sources */,
 				CBDC79E61B42AFC700935328 /* DBDiscountAdvertView.m in Sources */,
 				CBDC79E71B42AFC700935328 /* DBOrderViewFooter.m in Sources */,
@@ -20931,6 +20990,7 @@
 				CBDC79EC1B42AFC700935328 /* CacheHelper.m in Sources */,
 				CBDC79ED1B42AFC700935328 /* DBPositionCell.m in Sources */,
 				CBDC79EE1B42AFC700935328 /* DBVenuesTableViewController.m in Sources */,
+				CB15499A1B664E56008F749F /* DBItemsManager.m in Sources */,
 				CBDC79EF1B42AFC700935328 /* DBPromoManager.m in Sources */,
 				CBDC79F01B42AFC700935328 /* DBProfileCell.m in Sources */,
 				CBDC79F11B42AFC700935328 /* DBOrdersTableViewController.m in Sources */,

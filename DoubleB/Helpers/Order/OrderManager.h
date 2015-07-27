@@ -51,22 +51,6 @@ extern NSString* const kDBDefaultsPaymentType;
 */
 @property (nonatomic, readonly) BOOL validOrder;
 
-//@property (nonatomic) DBBeverageMode beverageMode;
-
-/**
- * All positions in order
- */
-@property (nonatomic, strong) NSMutableArray *items;
-
-/**
- * Total price for order according to promo info from server
- */
-@property (nonatomic) double totalPrice;
-
-@property (nonatomic, readonly) NSUInteger positionsCount;
-@property (nonatomic, readonly) NSUInteger totalCount;
-
-
 /**
  * Bonus positions in order
  */
