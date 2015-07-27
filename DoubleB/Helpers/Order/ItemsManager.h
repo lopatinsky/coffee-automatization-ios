@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DBManagerProtocol.h"
+#import "ManagerProtocol.h"
 
 @class DBMenuPosition;
 @class OrderItem;
 
-@interface DBItemsManager : NSObject<DBManagerProtocol>
+@interface ItemsManager : NSObject<ManagerProtocol>
 
 /**
  * All positions in order
@@ -22,7 +22,7 @@
 /**
  * Total price for order items
  */
-@property (nonatomic, readonly) double totalPrice;
+@property (nonatomic) double totalPrice;
 
 /**
  * Total count of order items
@@ -32,11 +32,23 @@
 
 - (NSInteger)addPosition:(DBMenuPosition *)position;
 
-// Return index of items that was merged into current item
-- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
-
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index;
 - (NSInteger)decreaseOrderItemCountAtIndex:(NSInteger)index;
 - (void)removeOrderItemAtIndex:(NSInteger)index;
+
+- (OrderItem *)itemAtIndex:(NSUInteger)index;
+- (OrderItem *)itemWithPositionId:(NSString *)positionId;
+- (OrderItem *)itemWithTemplatePosition:(DBMenuPosition *)templatePosition;
+
+/**
+ * Replace list of items with new list
+ */
+- (void)overrideItems:(NSArray *)items;
+
+/**
+ * Replace item with other position
+ * Return index of items that was merged into current item
+ */
+- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
 
 @end

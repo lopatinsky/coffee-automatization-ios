@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol DBManagerProtocol <NSObject>
+@protocol ManagerProtocol <NSObject>
 
 + (instancetype)sharedInstance;
 
@@ -21,5 +21,7 @@
  * Clear runtime & defaults cache
  */
 - (void)flushStoredCache;
+
+
 
 @end

@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DBItemsManager.h"
+#import "ItemsManager.h"
+#import "DBMenuPosition.h"
+#import "OrderItem.h"
 
-@implementation DBItemsManager
+@implementation ItemsManager
 
 + (instancetype)sharedInstance {
     static dispatch_once_t once;
-    static DBItemsManager *instance = nil;
+    static ItemsManager *instance = nil;
     dispatch_once(&once, ^{ instance = [[self alloc] init]; });
     return instance;
 }
@@ -21,21 +23,9 @@
     self = [super init];
     if (self) {
         _items = [NSMutableArray new];
-        _totalPrice = 0;
-        _totalCount = 0;
+        self.totalPrice = 0;
     }
     return self;
-}
-
-- (void)overridePositions:(NSArray *)items {
-    self.items = [NSMutableArray array];
-    
-    for (OrderItem *item in items) {
-        OrderItem *newItem = [item copy];
-        [self.items addObject:newItem];
-    }
-    
-    [self reloadTotal];
 }
 
 - (NSInteger)addPosition:(DBMenuPosition *)position {
@@ -64,26 +54,6 @@
     [self reloadTotal];
     
     return currentCount;
-}
-
-- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position{
-    DBMenuPosition *copyPosition = [position copy];
-    item.position = copyPosition;
-    
-    NSInteger index = -1;
-    for(OrderItem *orderItem in self.items){
-        if(orderItem != item && [orderItem.position isEqual:copyPosition]){
-            item.count += orderItem.count;
-            index = [self.items indexOfObject:orderItem];
-            [self.items removeObject:orderItem];
-            
-            break;
-        }
-    }
-    
-    [self reloadTotal];
-    
-    return index;
 }
 
 - (NSInteger)increaseOrderItemCountAtIndex:(NSInteger)index{
@@ -120,8 +90,76 @@
     [self reloadTotal];
 }
 
+- (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position{
+    DBMenuPosition *copyPosition = [position copy];
+    item.position = copyPosition;
+    
+    NSInteger index = -1;
+    for(OrderItem *orderItem in self.items){
+        if(orderItem != item && [orderItem.position isEqual:copyPosition]){
+            item.count += orderItem.count;
+            index = [self.items indexOfObject:orderItem];
+            [self.items removeObject:orderItem];
+            
+            break;
+        }
+    }
+    
+    [self reloadTotal];
+    
+    return index;
+}
+
+- (void)overrideItems:(NSArray *)items {
+    _items = [NSMutableArray array];
+    
+    for (OrderItem *item in items) {
+        OrderItem *newItem = [item copy];
+        [self.items addObject:newItem];
+    }
+    
+    [self reloadTotal];
+}
+
+
+- (OrderItem *)itemAtIndex:(NSUInteger)index {
+    return self.items[index];
+}
+
+- (OrderItem *)itemWithPositionId:(NSString *)positionId{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"position.positionId == %@", positionId];
+    OrderItem *item =[[self.items filteredArrayUsingPredicate:predicate] firstObject];
+    
+    return item;
+}
+
+- (OrderItem *)itemWithTemplatePosition:(DBMenuPosition *)templatePosition{
+    OrderItem *result;
+    for(OrderItem *item in self.items){
+        if([item.position isEqual:templatePosition]){
+            result = item;
+            break;
+        }
+    }
+    
+    return result;
+}
+
+- (void)reloadTotal{
+    // Reload initial total
+    double total = 0;
+    for (OrderItem *item in self.items) {
+        total += item.totalPrice;
+    }
+    self.totalPrice = total;
+}
+
 - (NSUInteger)totalCount {
-    return [self.items count];
+    NSUInteger count = 0;
+    for (OrderItem *item in self.items) {
+        count += item.count;
+    }
+    return count;
 }
 
 #pragma mark - DBManagerProtocol
