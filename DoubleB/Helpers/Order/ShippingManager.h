@@ -36,10 +36,10 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 - (NSString *)formattedAddressString:(DBAddressStringMode)mode;
 @end;
 
-@interface DBShippingManager : NSObject
 
-
+@interface ShippingManager : NSObject
 @property (nonatomic, strong, readonly) DBShippingAddress *selectedAddress;
+
 - (void)setAddress:(NSString *)address;
 - (void)setApartment:(NSString *)apartment;
 - (void)setCity:(NSString *)city;

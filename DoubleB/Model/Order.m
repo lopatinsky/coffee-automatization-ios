@@ -11,7 +11,7 @@
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
 #import "OrderManager.h"
-#import "DBShippingManager.h"
+#import "ShippingManager.h"
 #import "OrderItem.h"
 
 @implementation Order {

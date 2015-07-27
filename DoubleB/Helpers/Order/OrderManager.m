@@ -17,7 +17,7 @@
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfo.h"
-#import "DBShippingManager.h"
+#import "ShippingManager.h"
 
 NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";

@@ -24,7 +24,7 @@
 #import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
-#import "DBShippingManager.h"
+#import "ShippingManager.h"
 
 #import <Parse/Parse.h>
 

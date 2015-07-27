@@ -9,23 +9,23 @@
 #import "DBCompanyInfo.h"
 #import "DBServerAPI.h"
 
-#import "DBShippingManager.h"
+#import "ShippingManager.h"
 
 NSString *const kDBDefaultsShippingAddress = @"kDBDefaultsShippingAddress";
 
 NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDidRecieveSuggestionsNotification";
 
-@interface DBShippingManager()
+@interface ShippingManager()
 
 @property (nonatomic, strong) NSArray *addressSuggestions;
 //@property (nonatomic, strong) NSTimer *requestSuggestionsTimer;
 
 @end
 
-@implementation DBShippingManager
+@implementation ShippingManager
 
 + (instancetype)sharedManager {
-    static DBShippingManager *instance = nil;
+    static ShippingManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [self new];
