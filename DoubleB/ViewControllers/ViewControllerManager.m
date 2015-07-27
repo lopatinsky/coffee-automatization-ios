@@ -39,12 +39,24 @@
 
 @end
 
+#import "LaunchViewController.h"
+@implementation ViewControllerManager(LaunchViewControllers)
+
++ (nonnull NSDictionary *)launchViewControllerClasses {
+    return @{
+             @"default": [LaunchViewController class]
+             };
+}
+
+@end
+
 #pragma mark - Manager implementation
 @implementation ViewControllerManager
 
-//+ (nonnull UIViewController *)orderViewController {
-//    
-//}
++ (nonnull UIViewController *)launchViewController {
+    Class launchViewController = [self launchViewControllerClasses][[self valueFromPropertyListByKey:@"Launch"] ?: @"default"];
+    return [launchViewController new];
+}
 
 + (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
     Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];

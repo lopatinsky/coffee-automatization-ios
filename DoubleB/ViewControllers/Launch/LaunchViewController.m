@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DBLaunchEmulationViewController.h"
+#import "LaunchViewController.h"
 #import "DBTabBarController.h"
 #import "AppDelegate.h"
 #import "DBCompanyInfo.h"
 #import <Parse/PFPush.h>
 
-@interface DBLaunchEmulationViewController ()<UIAlertViewDelegate>
+@interface LaunchViewController ()<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 @property (weak, nonatomic) IBOutlet UIView *tipView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation DBLaunchEmulationViewController
+@implementation LaunchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -69,7 +69,7 @@
     
     [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     
-    if([window.rootViewController isKindOfClass:[DBLaunchEmulationViewController class]]){
+    if([window.rootViewController isKindOfClass:[LaunchViewController class]]){
         window.rootViewController = [DBTabBarController sharedInstance];
     }
 }

@@ -17,7 +17,7 @@
 #import "DBMenu.h"
 #import "IHSecureStore.h"
 
-#import "DBLaunchEmulationViewController.h"
+#import "ViewControllerManager.h"
 #import "UIImage+Color.h"
 
 #import <Fabric/Fabric.h>
@@ -101,7 +101,7 @@
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 
     if (![DBCompanyInfo sharedInstance].deliveryTypes){
-        self.window.rootViewController = [DBLaunchEmulationViewController new];
+        self.window.rootViewController = [ViewControllerManager launchViewController];
     } else {
         self.window.rootViewController = [DBTabBarController sharedInstance];
     }
