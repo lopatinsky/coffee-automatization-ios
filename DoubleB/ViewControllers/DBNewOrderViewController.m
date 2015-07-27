@@ -48,7 +48,7 @@
 #import "DBBonusPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
-#import "DBPositionViewController.h"
+#import "PositionViewController1.h"
 #import "DBNewOrderItemAdditionView.h"
 #import "DBPayPalManager.h"
 #import "DBAddressViewController.h"
