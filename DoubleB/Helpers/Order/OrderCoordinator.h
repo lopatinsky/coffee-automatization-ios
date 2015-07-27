@@ -12,12 +12,12 @@
 
 #import "OrderManager.h"
 #import "ItemsManager.h"
+#import "BonusItemsManager.h"
 
 @class ItemsManager;
 @class GiftsManager;
 @class TimeManager;
 @class ShippingManager;
-@class BonusManager;
 @class PromoManager;
 
 typedef enum : NSUInteger {
@@ -31,7 +31,7 @@ typedef enum : NSUInteger {
 @property (nonnull, nonatomic, strong) GiftsManager *giftsManager;
 @property (nonnull, nonatomic, strong) TimeManager *timeManager;
 @property (nonnull, nonatomic, strong) ShippingManager *shippingManager;
-@property (nonnull, nonatomic, strong) BonusManager *bonusManager;
+@property (nonnull, nonatomic, strong) BonusItemsManager *bonusItemsManager;
 @property (nonnull, nonatomic, strong) PromoManager *promoManager;
 
 - (void)addObserver:(NSObject * __nonnull)object withKeyPath:(CoordinatorEnum)keyName;

@@ -11,7 +11,7 @@
 @implementation OrderCoordinator(EnumMap)
 
 - (NSString * __nonnull)notificationNameByEnum:(CoordinatorEnum)en {
-    return @[@"Test", @"Test2"][en];
+    return @[@"Test1", @"Test2"][en];
 }
 
 @end
