@@ -13,7 +13,7 @@
 
 NSString *const kDBDefaultsShippingAddress = @"kDBDefaultsShippingAddress";
 
-NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDidRecieveSuggestionsNotification";
+NSString *ShippingManagerDidRecieveSuggestionsNotification = @"ShippingManagerDidRecieveSuggestionsNotification";
 
 @interface ShippingManager()
 
@@ -24,7 +24,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
 
 @implementation ShippingManager
 
-+ (instancetype)sharedManager {
++ (instancetype)sharedInstance {
     static ShippingManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -68,7 +68,7 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
                                       
                                       self.addressSuggestions = suggestions;
                                       
-                                      [[NSNotificationCenter defaultCenter] postNotificationName:DeliveryManagerDidRecieveSuggestionsNotification object:nil];
+                                      [[NSNotificationCenter defaultCenter] postNotificationName:ShippingManagerDidRecieveSuggestionsNotification object:nil];
                                   }];
 }
 
@@ -150,6 +150,20 @@ NSString *DeliveryManagerDidRecieveSuggestionsNotification = @"DeliveryManagerDi
     } else {
         _selectedAddress = [DBShippingAddress new];
     }
+}
+
+#pragma mark - DBManagerProtocol
+
+- (void)flushCache{
+    _addressSuggestions = @[];
+    _selectedAddress = [DBShippingAddress new];
+}
+
+- (void)flushStoredCache{
+    [self flushCache];
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kDBDefaultsShippingAddress];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

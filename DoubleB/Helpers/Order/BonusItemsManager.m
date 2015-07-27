@@ -64,6 +64,14 @@
     }
 }
 
+- (OrderItem *)itemAtIndex:(NSUInteger)index {
+    if(index < [self.items count]){
+        return self.items[index];
+    } else {
+        return nil;
+    }
+}
+
 - (NSUInteger)totalCount{
     NSUInteger count = 0;
     for (OrderItem *item in self.items) {

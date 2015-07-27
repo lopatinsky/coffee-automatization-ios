@@ -10,6 +10,8 @@
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 
+NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewTotalPriceNotification";
+
 @implementation ItemsManager
 
 + (instancetype)sharedInstance {
@@ -23,7 +25,7 @@
     self = [super init];
     if (self) {
         _items = [NSMutableArray new];
-        self.totalPrice = 0;
+        [self reloadTotal];
     }
     return self;
 }
@@ -123,7 +125,11 @@
 
 
 - (OrderItem *)itemAtIndex:(NSUInteger)index {
-    return self.items[index];
+    if(index < [self.items count]){
+        return self.items[index];
+    } else {
+        return nil;
+    }
 }
 
 - (OrderItem *)itemWithPositionId:(NSString *)positionId{
@@ -146,12 +152,16 @@
 }
 
 - (void)reloadTotal{
-    // Reload initial total
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBItemsManagerNewTotalPriceNotification object:nil]];
+}
+
+- (double)totalPrice{
     double total = 0;
     for (OrderItem *item in self.items) {
         total += item.totalPrice;
     }
-    self.totalPrice = total;
+    
+    return total;
 }
 
 - (NSUInteger)totalCount {

@@ -12,6 +12,8 @@
 @class DBMenuPosition;
 @class OrderItem;
 
+extern NSString *const kDBItemsManagerNewTotalPriceNotification;
+
 @interface ItemsManager : NSObject<ManagerProtocol>
 
 /**
@@ -22,7 +24,7 @@
 /**
  * Total price for order items
  */
-@property (nonatomic) double totalPrice;
+@property (nonatomic, readonly) double totalPrice;
 
 /**
  * Total count of order items

@@ -10,31 +10,32 @@
 
 #import "ManagerProtocol.h"
 
-#import "OrderManager.h"
-#import "ItemsManager.h"
-#import "BonusItemsManager.h"
-
 @class ItemsManager;
-@class GiftsManager;
-@class TimeManager;
+@class BonusItemsManager;
+@class OrderManager;
+@class DeliverySettings;
 @class ShippingManager;
-@class PromoManager;
+@class DBPromoManager;
 
-typedef enum : NSUInteger {
-    Test1, Test2
-} CoordinatorEnum;
+typedef NS_ENUM(NSUInteger, CoordinatorNotification) {
+    CoordinatorNotificationOrderTotalPrice = 0,
+    CoordinatorNotificationOrderDiscount,
+    CoordinatorNotificationNewSelectedTime
+};
 
 @interface OrderCoordinator : NSObject <ManagerProtocol>
 
-@property (nonnull, nonatomic, strong) ItemsManager *itemsManager;
-@property (nonnull, nonatomic, strong) OrderManager *orderManager;
-@property (nonnull, nonatomic, strong) GiftsManager *giftsManager;
-@property (nonnull, nonatomic, strong) TimeManager *timeManager;
-@property (nonnull, nonatomic, strong) ShippingManager *shippingManager;
-@property (nonnull, nonatomic, strong) BonusItemsManager *bonusItemsManager;
-@property (nonnull, nonatomic, strong) PromoManager *promoManager;
+@property (nonnull, nonatomic, strong, readonly) ItemsManager *itemsManager;
+@property (nonnull, nonatomic, strong, readonly) BonusItemsManager *bonusItemsManager;
+@property (nonnull, nonatomic, strong, readonly) OrderManager *orderManager;
+@property (nonnull, nonatomic, strong, readonly) DeliverySettings *deliverySettings;
+@property (nonnull, nonatomic, strong, readonly) ShippingManager *shippingManager;
+@property (nonnull, nonatomic, strong, readonly) DBPromoManager *promoManager;
 
-- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(CoordinatorEnum)keyName;
-- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(CoordinatorEnum)keyPath;
+- (BOOL)validOrder;
+
+- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(CoordinatorNotification)keyName selector:(__nonnull SEL)selector;
+- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(CoordinatorNotification)keyName;
+- (void)removeObserver:(NSObject * __nonnull )observer;
 
 @end

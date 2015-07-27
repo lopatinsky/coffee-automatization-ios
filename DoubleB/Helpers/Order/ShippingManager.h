@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "ManagerProtocol.h"
 
 typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
     DBAddressStringModeAutocomplete = 0,
@@ -15,8 +16,6 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
     DBAddressStringModeNormal,
     DBAddressStringModeFull
 };
-
-extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 
 @interface DBShippingAddress : NSObject
 @property (nonatomic, strong) NSString *address;
@@ -31,13 +30,14 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, strong) NSDictionary *jsonRepresentation;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
-- (void)clear;
 
 - (NSString *)formattedAddressString:(DBAddressStringMode)mode;
 @end;
 
 
-@interface ShippingManager : NSObject
+extern NSString *ShippingManagerDidRecieveSuggestionsNotification;
+
+@interface ShippingManager : NSObject<ManagerProtocol>
 @property (nonatomic, strong, readonly) DBShippingAddress *selectedAddress;
 
 - (void)setAddress:(NSString *)address;
@@ -46,8 +46,6 @@ extern NSString *DeliveryManagerDidRecieveSuggestionsNotification;
 - (void)setComment:(NSString *)comment;
 
 @property (nonatomic, readonly) BOOL validAddress;
-
-+ (instancetype)sharedManager;
 
 - (void)requestSuggestions;
 - (NSArray *)addressSuggestions;
