@@ -50,10 +50,6 @@ extern NSString* const kDBDefaultsPaymentType;
 */
 @property (nonatomic, readonly) BOOL validOrder;
 
-+ (instancetype)sharedManager;
-
-- (void)purgePositions; //clean
-
 - (void)selectIfPossibleDefaultPaymentType;
 
 @end
