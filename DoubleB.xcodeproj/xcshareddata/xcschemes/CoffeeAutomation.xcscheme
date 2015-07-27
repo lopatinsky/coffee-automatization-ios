@@ -5,6 +5,15 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "export PATH=/usr/local/opt/ruby/bin:/usr/local/bin:$PATH&#10;brew update&#10;brew upgrade&#10;gem update --system&#10;gem update cocoa pods&#10;cd ${SRCROOT}&#10;if [ -e &quot;Pods&quot; ]&#10;then&#10;pod update&#10;else&#10;pod install&#10;fi">
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
