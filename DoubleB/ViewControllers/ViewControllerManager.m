@@ -42,6 +42,10 @@
 #pragma mark - Manager implementation
 @implementation ViewControllerManager
 
+//+ (nonnull UIViewController *)orderViewController {
+//    
+//}
+
 + (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
     Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
     return [positionsVCClass createViewController];
