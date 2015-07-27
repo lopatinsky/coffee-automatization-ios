@@ -86,24 +86,6 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     }
 }
 
-//- (BOOL)validOrder{
-//    BOOL result = true;
-//    
-//    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-//        result = result && [DBShippingManager sharedManager].validAddress;
-//    } else {
-//        result = result && self.venue;
-//    }
-//    result = result && !(self.paymentType == PaymentTypeNotSet);
-//    result = result && [[DBClientInfo sharedInstance] validClientName];
-//    result = result && [[DBClientInfo sharedInstance] validClientPhone];
-//    result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
-//    result = result && (self.totalCount + [self.bonusPositions count]) > 0;
-//    result = result && [DBPromoManager sharedManager].validOrder;
-//    
-//    return result;
-//}
-
 #pragma mark - DBManagerProtocol
 
 - (void)flushCache{

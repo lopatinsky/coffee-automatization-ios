@@ -10,6 +10,7 @@
 #import "ManagerProtocol.h"
 
 @class DBMenuBonusPosition;
+@class OrderItem;
 
 @interface BonusItemsManager : NSObject<ManagerProtocol>
 
@@ -24,5 +25,7 @@
 - (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition;
 - (void)removeBonusPosition:(DBMenuBonusPosition *)bonusPosition;
 - (void)removeBonusPositionAtIndex:(NSUInteger)index;
+
+- (OrderItem *)itemAtIndex:(NSUInteger)index;
 
 @end

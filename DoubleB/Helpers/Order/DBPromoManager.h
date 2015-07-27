@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ManagerProtocol.h"
 
 @class OrderItem;
 @class DBMenuPosition;
@@ -36,9 +37,7 @@
 
 
 
-@interface DBPromoManager : NSObject
-
-+ (instancetype)sharedManager;
+@interface DBPromoManager : NSObject<ManagerProtocol>
 - (void)updateInfo;
 
 
@@ -78,7 +77,6 @@
 @property (strong, nonatomic, readonly) NSArray *orderGifts;
 
 - (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback;
-- (void)clear;
 
 - (DBPromoItem *)promosForOrderItem:(OrderItem *)item;
 

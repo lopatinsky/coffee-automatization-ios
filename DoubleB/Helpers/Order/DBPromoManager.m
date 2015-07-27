@@ -38,7 +38,7 @@
 
 @implementation DBPromoManager
 
-+ (instancetype)sharedManager {
++ (instancetype)sharedInstance {
     static dispatch_once_t once;
     static DBPromoManager *instance = nil;
     dispatch_once(&once, ^{ instance = [[self alloc] init]; });
@@ -254,13 +254,6 @@
     return YES;
 }
 
-- (void)clear{
-    _shippingPrice = 0;
-    _discount = 0;
-    _walletPointsAvailableForOrder = 0;
-    [self changeTotalDiscount];
-}
-
 - (DBPromoItem *)promosForOrderItem:(OrderItem *)item {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderItem == %@", item];
     DBPromoItem *promoItem = [[self.promoItems filteredArrayUsingPredicate:predicate] firstObject];
@@ -287,6 +280,18 @@
 - (void)setWalletActiveForOrder:(BOOL)walletActiveForOrder{
     _walletActiveForOrder = walletActiveForOrder;
     [self changeTotalDiscount];
+}
+
+#pragma mark - DBManagerProtocol
+
+- (void)flushCache{
+    _shippingPrice = 0;
+    _discount = 0;
+    _walletPointsAvailableForOrder = 0;
+    [self changeTotalDiscount];
+}
+
+- (void)flushStoredCache{
 }
 
 

@@ -8,6 +8,8 @@
 
 #import "DeliverySettings.h"
 
+NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySettingsNewSelectedTimeNotification";
+
 @interface DeliverySettings ()
 @property (strong, nonatomic) DBDeliveryType *lastNotShippingDeliveryType;
 
@@ -127,6 +129,8 @@
 - (void)reloadTime{
     if(!self.selectedTime || [self.selectedTime compare:self.minimumTime] != NSOrderedDescending){
         self.selectedTime = self.minimumTime;
+        
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBDeliverySettingsNewSelectedTimeNotification object:nil]];
     }
 }
 
