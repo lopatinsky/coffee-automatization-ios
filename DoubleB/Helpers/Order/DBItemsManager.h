@@ -20,6 +20,9 @@
  */
 @property (nonatomic) double totalPrice;
 
+/**
+ * Total count of order items
+ */
 @property (nonatomic, readonly) NSUInteger totalCount;
 
 @end
