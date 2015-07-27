@@ -1223,7 +1223,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([viewController class] == [DBOrdersTableViewController class]) {
-        [[OrderManager sharedManager] purgePositions];
+//        [[OrderManager sharedManager] purgePositions];
     }
 }
 

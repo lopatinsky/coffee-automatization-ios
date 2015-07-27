@@ -13,8 +13,4 @@
 
 @interface DBAddressViewController : UIViewController<KeyboardAppearance>
 
-//@property (strong, nonatomic) id<DBVenuesTableViewControllerDelegate> __nonnull delegate;
-//
-//- (nonnull instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate;
-
 @end
