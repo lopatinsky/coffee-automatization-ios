@@ -76,7 +76,7 @@ typedef enum : NSUInteger {
         self.tapOnCityLabelRecognizer.enabled = NO;
     }
     
-    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewAddressSuggestions selector:@selector(requestAddressSuggestions)];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationAddressSuggestionsUpdated selector:@selector(requestAddressSuggestions)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear) name:UIKeyboardWillHideNotification object:nil];

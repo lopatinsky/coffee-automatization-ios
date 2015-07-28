@@ -10,9 +10,9 @@
 
 @implementation ViewManager
 
-+ (nonnull UIView)demoView {
-    
-}
+//+ (nonnull UIView)demoView {
+//    
+//}
 
 + (nullable NSString *)valueFromPropertyListByKey:(nonnull NSString *)key {
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
