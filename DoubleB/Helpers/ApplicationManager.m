@@ -22,10 +22,12 @@
 + (void)copyPlistWithName:(NSString * __nonnull)plistName withDocumentDirectory:(NSString * __nonnull)directory {
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *path = [directory stringByAppendingPathComponent:[plistName stringByAppendingPathComponent:@".plist"]];
+    NSString *path = [directory stringByAppendingPathComponent:[plistName stringByAppendingString:@".plist"]];
     if (![fileManager fileExistsAtPath:path]) {
         NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
+        if (pathToCompanyInfo) {
         [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+        }
     }
 }
 
