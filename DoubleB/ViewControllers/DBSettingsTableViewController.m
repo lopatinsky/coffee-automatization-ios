@@ -17,7 +17,7 @@
 #import "DBClientInfo.h"
 #import "DBCompanyInfoViewController.h"
 #import "IHPaymentManager.h"
-#import "DBPromoManager.h"
+#import "OrderCoordinator.h"
 #import "Order.h"
 #import "Compatibility.h"
 #import "DBPayPalManager.h"
@@ -89,7 +89,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"viewController": promosVC}];
     
     // Personal wallet item
-    if([DBPromoManager sharedManager].walletEnabled){
+    if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
                                         @"image": @"payment"}];
     }
@@ -174,8 +174,8 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if([settingsItemInfo[@"name"] isEqualToString:@"personalWalletVC"]){
         NSString *profileText;
-        if([DBPromoManager sharedManager].walletBalance > 0){
-            profileText = [NSString stringWithFormat:@"%@: %.1f", NSLocalizedString(@"Личный счет", nil), [DBPromoManager sharedManager].walletBalance];
+        if([OrderCoordinator sharedInstance].promoManager.walletBalance > 0){
+            profileText = [NSString stringWithFormat:@"%@: %.1f", NSLocalizedString(@"Личный счет", nil), [OrderCoordinator sharedInstance].promoManager.walletBalance];
         } else {
             profileText = NSLocalizedString(@"Личный счет", nil);
         }

@@ -68,7 +68,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
                                       
                                       self.addressSuggestions = suggestions;
                                       
-                                      [[NSNotificationCenter defaultCenter] postNotificationName:ShippingManagerDidRecieveSuggestionsNotification object:nil];
+                                      [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBShippingManagerDidRecieveSuggestionsNotification object:nil]];
                                   }];
 }
 

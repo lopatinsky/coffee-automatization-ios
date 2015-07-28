@@ -7,7 +7,7 @@
 //
 
 #import "DBNewOrderItemAdditionView.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 
 @interface DBNewOrderItemAdditionView ()
 @property (weak, nonatomic) IBOutlet UIView *positionAdditionView;
@@ -50,7 +50,7 @@
 }
 
 - (void)reload{
-    NSString *text = [OrderManager sharedManager].totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
+    NSString *text = [OrderCoordinator sharedInstance].itemsManager.totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
     self.positionAdditionLabel.text = text;
     
     // Fucking code for Elephant
