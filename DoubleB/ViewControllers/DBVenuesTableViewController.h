@@ -8,17 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class DBVenuesTableViewController;
-@class Venue;
-
-@protocol DBVenuesTableViewControllerDelegate <NSObject>
-- (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue;
-@end
+typedef NS_ENUM(NSUInteger, DBVenuesTableViewControllerMode) {
+    DBVenuesTableViewControllerModeChooseVenue = 0,
+    DBVenuesTableViewControllerModeList
+};
 
 @interface DBVenuesTableViewController : UITableViewController
-
-@property (nonatomic, strong) NSArray *venues;
+@property (nonatomic) DBVenuesTableViewControllerMode mode;
 @property (nonatomic, strong) NSString *eventsCategory;
-@property (nonatomic, weak) id<DBVenuesTableViewControllerDelegate> delegate;
 
 @end

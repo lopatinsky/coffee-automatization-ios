@@ -13,7 +13,7 @@
 
 NSString *const kDBDefaultsShippingAddress = @"kDBDefaultsShippingAddress";
 
-NSString *ShippingManagerDidRecieveSuggestionsNotification = @"ShippingManagerDidRecieveSuggestionsNotification";
+NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingManagerDidRecieveSuggestionsNotification";
 
 @interface ShippingManager()
 

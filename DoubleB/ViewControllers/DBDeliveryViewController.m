@@ -8,6 +8,7 @@
 
 #import "GANHelper.h"
 
+#import "OrderCoordinator.h"
 #import "ShippingManager.h"
 #import "DBDeliveryViewController.h"
 #import "DBTimePickerView.h"
@@ -55,9 +56,11 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
+
+@property (strong, nonatomic) ShippingManager *shippingManager;
+
 @property (strong, nonatomic) DBTimePickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
-@property (strong, nonatomic) ShippingManager *shippingManager;
 @property (nonatomic) BOOL keyboardIsHidden;
 
 @end
@@ -67,13 +70,14 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.shippingManager = [ShippingManager sharedManager];
+    self.shippingManager = [OrderCoordinator sharedInstance].shippingManager;
     
     if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestAddressSuggestions) name:DeliveryManagerDidRecieveSuggestionsNotification object:nil];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewAddressSuggestions selector:@selector(requestAddressSuggestions)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear) name:UIKeyboardWillHideNotification object:nil];
     
@@ -98,7 +102,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - Life-cycle
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (IBAction)showPickerWithCities:(id)sender {

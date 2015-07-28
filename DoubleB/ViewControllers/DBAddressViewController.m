@@ -102,20 +102,18 @@
 - (void)initializeControllers {
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] ||
         [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
-        DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
-        newController.eventsCategory = VENUES_ORDER_SCREEN;
-        self.controllers[@"Самовывоз"] = @{
-                                            @"controller": newController,
-                                            @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)
-                                           };
+        DBVenuesTableViewController *venuesVC = [DBVenuesTableViewController new];
+        venuesVC.mode = DBVenuesTableViewControllerModeChooseVenue;
+        venuesVC.eventsCategory = VENUES_ORDER_SCREEN;
+        self.controllers[@"Самовывоз"] = @{@"controller": venuesVC,
+                                           @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)};
     }
     
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]) {
         DBDeliveryViewController *deliveryViewController = [DBDeliveryViewController new];
-        self.controllers[@"Доставка"] = @{
-                                           @"controller": deliveryViewController,
-                                           @"deliveryTypeName": NSLocalizedString(@"Адрес доставки", nil)
-                                           };
+        deliveryViewController.delegate = self;
+        self.controllers[@"Доставка"] = @{@"controller": deliveryViewController,
+                                          @"deliveryTypeName": NSLocalizedString(@"Адрес доставки", nil)};
     }
     
     self.deliveryTypeNames = [self.controllers.allKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
