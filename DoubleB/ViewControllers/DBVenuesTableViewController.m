@@ -8,6 +8,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "DBVenuesTableViewController.h"
+#import "OrderCoordinator.h"
+#import "OrderManager.h"
 #import "LocationHelper.h"
 #import "Venue.h"
 #import "DBVenueCell.h"
@@ -17,6 +19,7 @@
  
 @interface DBVenuesTableViewController ()
 
+@property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) UIPickerView *picker;
 
 @end
@@ -28,7 +31,7 @@
     
     NSString *title = NSLocalizedString(@"Точки", nil);
     if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
-        int venuesCount = [[Venue storedVenues] count];
+        NSUInteger venuesCount = [[Venue storedVenues] count];
         if(venuesCount == 1){
             title = NSLocalizedString(@"Кофейня", nil);
         } else {
@@ -51,6 +54,8 @@
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
+    
+    self.venues = [Venue storedVenues];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -155,7 +160,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (!self.delegate) {
+    if (self.mode == DBVenuesTableViewControllerModeList) {
         DBVenueViewController *controller = [DBVenueViewController new];
         Venue *venue = _venues[indexPath.row];
         controller.venue = venue;
@@ -169,9 +174,11 @@
         
         [self.navigationController pushViewController:controller animated:YES];
         return;
+    } else {
+        Venue *venue = _venues[indexPath.row];
+        [OrderCoordinator sharedInstance].orderManager.venue = venue;
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    [self.delegate venuesController:self didChooseVenue:self.venues[indexPath.row]];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

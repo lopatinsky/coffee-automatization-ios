@@ -52,11 +52,12 @@
         if(!([[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
            [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping])){
             DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+            venuesController.mode = DBVenuesTableViewControllerModeList;
             venuesController.eventsCategory = VENUES_SCREEN;
             
             NSString *title = NSLocalizedString(@"Точки", nil);
             if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
-                int venuesCount = [[Venue storedVenues] count];
+                NSUInteger venuesCount = [[Venue storedVenues] count];
                 if(venuesCount == 1){
                     title = NSLocalizedString(@"Кофейня", nil);
                 } else {

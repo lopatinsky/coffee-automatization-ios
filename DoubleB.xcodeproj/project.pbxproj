@@ -29,12 +29,6 @@
 		5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
 		5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
-		7E1AEA3F1B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
-		7E1AEA401B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
-		7E1AEA411B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
-		7E1AEA421B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
-		7E1AEA431B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
-		7E1AEA441B2734F50090FB6C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E21EBFE1B28542B00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EBFF1B28542C00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC001B28542C00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
@@ -42,7 +36,6 @@
 		7E21EC021B28542D00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC031B28542E00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC041B28543100AF7859 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
-		7E21EC061B28548900AF7859 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E21EC081B285FB900AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
 		7E21EC091B285FBA00AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
 		7E21EC0A1B285FBB00AF7859 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
@@ -467,7 +460,6 @@
 		7E7925901B3C1BDA00CA740D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7E7925911B3C1BDA00CA740D /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7E7925921B3C1BDA00CA740D /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7E7925931B3C1BDA00CA740D /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E7925951B3C1BDA00CA740D /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7E7925961B3C1BDA00CA740D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7E7925971B3C1BDA00CA740D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -791,7 +783,6 @@
 		7E7927121B3C247D00CA740D /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7E7927131B3C247D00CA740D /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7E7927141B3C247D00CA740D /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7E7927151B3C247D00CA740D /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E7927171B3C247D00CA740D /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7E7927181B3C247D00CA740D /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7E7927191B3C247D00CA740D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -1006,8 +997,6 @@
 		7E85BD741B2F0B11000BC2E1 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E85BD751B2F0B1E000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
 		7E85BD761B2F0B20000BC2E1 /* DBDeliveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */; };
-		7E85BD771B2F0B33000BC2E1 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
-		7E85BD781B2F0B34000BC2E1 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E85BD791B2F0BAD000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		7E85BD7A1B2F0BAE000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
 		7E85BD7B1B2F0BAF000BC2E1 /* UIViewController+NavigationBarFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */; };
@@ -1130,7 +1119,6 @@
 		7E8BD61B1B5027AA00CAFD5C /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7E8BD61C1B5027AA00CAFD5C /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7E8BD61D1B5027AA00CAFD5C /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7E8BD61E1B5027AA00CAFD5C /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7E8BD6201B5027AA00CAFD5C /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7E8BD6211B5027AA00CAFD5C /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7E8BD6221B5027AA00CAFD5C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -1484,7 +1472,6 @@
 		7EB2D1D71B3C3581009405C6 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7EB2D1D81B3C3581009405C6 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7EB2D1D91B3C3581009405C6 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7EB2D1DA1B3C3581009405C6 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7EB2D1DC1B3C3581009405C6 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7EB2D1DD1B3C3581009405C6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7EB2D1DE1B3C3581009405C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -1808,7 +1795,6 @@
 		7EB2D3461B3C51A2009405C6 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7EB2D3471B3C51A2009405C6 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7EB2D3481B3C51A2009405C6 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7EB2D3491B3C51A2009405C6 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7EB2D34B1B3C51A2009405C6 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7EB2D34C1B3C51A2009405C6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7EB2D34D1B3C51A2009405C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -2132,7 +2118,6 @@
 		7EB2D4B61B3C5C77009405C6 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7EB2D4B71B3C5C77009405C6 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7EB2D4B81B3C5C77009405C6 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7EB2D4B91B3C5C77009405C6 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7EB2D4BB1B3C5C77009405C6 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7EB2D4BC1B3C5C77009405C6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7EB2D4BD1B3C5C77009405C6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -2788,7 +2773,6 @@
 		7EDB596B1B32F70400723DF9 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		7EDB596C1B32F70400723DF9 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		7EDB596D1B32F70400723DF9 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		7EDB596E1B32F70400723DF9 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		7EDB59701B32F70400723DF9 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		7EDB59711B32F70400723DF9 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		7EDB59721B32F70400723DF9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -5221,7 +5205,6 @@
 		CB6400261B31B7CF0011CEEC /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CB6400271B31B7CF0011CEEC /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CB6400281B31B7CF0011CEEC /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CB6400291B31B7CF0011CEEC /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CB64002B1B31B7CF0011CEEC /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CB64002C1B31B7CF0011CEEC /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CB64002D1B31B7CF0011CEEC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -5543,7 +5526,6 @@
 		CB64FE781B317F760011CEEC /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CB64FE791B317F760011CEEC /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CB64FE7A1B317F760011CEEC /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CB64FE7B1B317F760011CEEC /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CB64FE7D1B317F760011CEEC /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CB64FE7E1B317F760011CEEC /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CB64FE7F1B317F760011CEEC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -6101,7 +6083,6 @@
 		CB82010B1B46CBB4000BBE55 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CB82010C1B46CBB4000BBE55 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CB82010D1B46CBB4000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CB82010E1B46CBB4000BBE55 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CB8201101B46CBB4000BBE55 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CB8201111B46CBB4000BBE55 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CB8201121B46CBB4000BBE55 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -6428,7 +6409,6 @@
 		CB82FC481B442C70000BBE55 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CB82FC491B442C70000BBE55 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CB82FC4A1B442C70000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CB82FC4B1B442C70000BBE55 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CB82FC4D1B442C70000BBE55 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CB82FC4E1B442C70000BBE55 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CB82FC4F1B442C70000BBE55 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -6853,7 +6833,6 @@
 		CB82FE291B4464F6000BBE55 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CB82FE2A1B4464F6000BBE55 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CB82FE2B1B4464F6000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CB82FE2C1B4464F6000BBE55 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CB82FE2E1B4464F6000BBE55 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CB82FE2F1B4464F6000BBE55 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CB82FE301B4464F6000BBE55 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -7182,7 +7161,6 @@
 		CB82FF9A1B4579B5000BBE55 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CB82FF9B1B4579B5000BBE55 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CB82FF9C1B4579B5000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CB82FF9D1B4579B5000BBE55 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CB82FF9F1B4579B5000BBE55 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CB82FFA01B4579B5000BBE55 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CB82FFA11B4579B5000BBE55 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -7529,7 +7507,6 @@
 		CBD0C54B1B30724300DAD042 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CBD0C54C1B30724300DAD042 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CBD0C54D1B30724300DAD042 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CBD0C54E1B30724300DAD042 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CBD0C5501B30724300DAD042 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CBD0C5511B30724300DAD042 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CBD0C5521B30724300DAD042 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -8188,7 +8165,6 @@
 		CBDC79FC1B42AFC700935328 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B59687E140B9B0E34D70 /* UIColor+Hex.m */; };
 		CBDC79FD1B42AFC700935328 /* DBAdvertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6EB6F519E3FF480050DF90 /* DBAdvertViewController.m */; };
 		CBDC79FE1B42AFC700935328 /* DBPositionGroupModifierItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E7DA1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.m */; };
-		CBDC79FF1B42AFC700935328 /* DBShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */; };
 		CBDC7A011B42AFC700935328 /* libEmpatikaBeaconsSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D55DB8A41993A89600E13F41 /* libEmpatikaBeaconsSDK.a */; };
 		CBDC7A021B42AFC700935328 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF90197090E700B882BB /* Accounts.framework */; };
 		CBDC7A031B42AFC700935328 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8E19708C3800B882BB /* SystemConfiguration.framework */; };
@@ -8441,8 +8417,6 @@
 		7E00C3E9198B988E005A0889 /* DBSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBSettingsTableViewController.m; sourceTree = "<group>"; };
 		7E00C3EB198B9D16005A0889 /* DBProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBProfileViewController.h; sourceTree = "<group>"; };
 		7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBProfileViewController.m; sourceTree = "<group>"; };
-		7E1AEA3D1B2734F50090FB6C /* DBShippingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBShippingManager.h; sourceTree = "<group>"; };
-		7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBShippingManager.m; sourceTree = "<group>"; };
 		7E1E093D198B7ADC0024D8B8 /* DBVenueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBVenueViewController.h; sourceTree = "<group>"; };
 		7E1E093E198B7ADC0024D8B8 /* DBVenueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBVenueViewController.m; sourceTree = "<group>"; };
 		7E1E0943198B7D960024D8B8 /* DBOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBOrderViewController.h; sourceTree = "<group>"; };
@@ -10129,15 +10103,6 @@
 			path = AdditionalResources;
 			sourceTree = "<group>";
 		};
-		7EB75BF81B2F3DB2006ADEE3 /* Delivery */ = {
-			isa = PBXGroup;
-			children = (
-				7E1AEA3D1B2734F50090FB6C /* DBShippingManager.h */,
-				7E1AEA3E1B2734F50090FB6C /* DBShippingManager.m */,
-			);
-			name = Delivery;
-			sourceTree = "<group>";
-		};
 		7ECA95B21B669CB50044DB31 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
@@ -10472,7 +10437,6 @@
 			isa = PBXGroup;
 			children = (
 				CB1549851B664E27008F749F /* Order */,
-				7EB75BF81B2F3DB2006ADEE3 /* Delivery */,
 				CB1432441B0E3D0400DD50C7 /* DBClassLoader.h */,
 				CB1432451B0E3D0400DD50C7 /* DBClassLoader.m */,
 				CB1B6CDF1A4B3CE40034774C /* DBBeaconObserver.h */,
@@ -18085,7 +18049,6 @@
 				7E3DAB391B06153E00A7FFD1 /* DBPositionModifierCell.m in Sources */,
 				7E3DAB3A1B06153E00A7FFD1 /* UIView+Extension.m in Sources */,
 				7E3DAB3B1B06153E00A7FFD1 /* EXTConcreteProtocol.m in Sources */,
-				7E1AEA431B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				7ECA95D21B669F180044DB31 /* LaunchViewController.m in Sources */,
 				CB1549A61B664E72008F749F /* OrderManager.m in Sources */,
 				7ECA95561B669C950044DB31 /* PositionViewController1.m in Sources */,
@@ -18250,7 +18213,6 @@
 				7E7925911B3C1BDA00CA740D /* DBAdvertViewController.m in Sources */,
 				7ECA94D91B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7E7925921B3C1BDA00CA740D /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E7925931B3C1BDA00CA740D /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18390,7 +18352,6 @@
 				7E7927131B3C247D00CA740D /* DBAdvertViewController.m in Sources */,
 				7ECA94DA1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7E7927141B3C247D00CA740D /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E7927151B3C247D00CA740D /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18530,7 +18491,6 @@
 				7E8BD61C1B5027AA00CAFD5C /* DBAdvertViewController.m in Sources */,
 				7ECA94E31B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7E8BD61D1B5027AA00CAFD5C /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E8BD61E1B5027AA00CAFD5C /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18670,7 +18630,6 @@
 				7EB2D1D81B3C3581009405C6 /* DBAdvertViewController.m in Sources */,
 				7ECA94DB1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7EB2D1D91B3C3581009405C6 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7EB2D1DA1B3C3581009405C6 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18810,7 +18769,6 @@
 				7EB2D3471B3C51A2009405C6 /* DBAdvertViewController.m in Sources */,
 				7ECA94DC1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7EB2D3481B3C51A2009405C6 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7EB2D3491B3C51A2009405C6 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -18950,7 +18908,6 @@
 				7EB2D4B71B3C5C77009405C6 /* DBAdvertViewController.m in Sources */,
 				7ECA94DD1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7EB2D4B81B3C5C77009405C6 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7EB2D4B91B3C5C77009405C6 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19090,7 +19047,6 @@
 				7EDB596C1B32F70400723DF9 /* DBAdvertViewController.m in Sources */,
 				7ECA94D81B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				7EDB596D1B32F70400723DF9 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7EDB596E1B32F70400723DF9 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19150,7 +19106,6 @@
 				CB1431161B0E371A00DD50C7 /* DBCompanyInfoViewController.m in Sources */,
 				CB1549881B664E56008F749F /* ItemsManager.m in Sources */,
 				CB1431171B0E371A00DD50C7 /* NSDictionary+NSNullRepresentation.m in Sources */,
-				7E1AEA3F1B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB9782891B1DE28D000B5625 /* DBDocumentsViewController.m in Sources */,
 				7ECA94E71B6694EB0044DB31 /* ViewManager.m in Sources */,
 				7ECA95011B669C740044DB31 /* PositionsTableViewController.m in Sources */,
@@ -19271,7 +19226,6 @@
 				CB14326B1B0F1BBB00DD50C7 /* EXTRuntimeExtensions.m in Sources */,
 				CB14326C1B0F1BBB00DD50C7 /* DBCommentViewController.m in Sources */,
 				CB14326D1B0F1BBB00DD50C7 /* DBClassLoader.m in Sources */,
-				7E1AEA441B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB14326E1B0F1BBB00DD50C7 /* Order.m in Sources */,
 				CB14326F1B0F1BBB00DD50C7 /* UIImageView+Extension.m in Sources */,
 				CB1432701B0F1BBB00DD50C7 /* UIView+DBErrorAnimation.m in Sources */,
@@ -19484,7 +19438,6 @@
 				CB1AF7BC1AE10E6900FA3224 /* DBPositionModifierCell.m in Sources */,
 				CB1AF7BD1AE10E6900FA3224 /* UIView+Extension.m in Sources */,
 				CB1AF7BE1AE10E6900FA3224 /* EXTConcreteProtocol.m in Sources */,
-				7E1AEA411B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				7ECA95D01B669F180044DB31 /* LaunchViewController.m in Sources */,
 				CB1549A41B664E72008F749F /* OrderManager.m in Sources */,
 				7ECA95541B669C950044DB31 /* PositionViewController1.m in Sources */,
@@ -19648,7 +19601,6 @@
 				CB3BA34E1B20589300F320CA /* UIColor+Hex.m in Sources */,
 				CB3BA34F1B20589300F320CA /* DBAdvertViewController.m in Sources */,
 				CB3BA3501B20589300F320CA /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E21EC061B28548900AF7859 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19762,7 +19714,6 @@
 				CB517B961AEFB6B500A50F5C /* DBPositionModifierCell.m in Sources */,
 				CB517B971AEFB6B500A50F5C /* UIView+Extension.m in Sources */,
 				CB517B981AEFB6B500A50F5C /* EXTConcreteProtocol.m in Sources */,
-				7E1AEA421B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				7ECA95D11B669F180044DB31 /* LaunchViewController.m in Sources */,
 				CB1549A51B664E72008F749F /* OrderManager.m in Sources */,
 				7ECA95551B669C950044DB31 /* PositionViewController1.m in Sources */,
@@ -19926,7 +19877,6 @@
 				CB5AFC981B27209A00904BF7 /* UIColor+Hex.m in Sources */,
 				CB5AFC991B27209A00904BF7 /* DBAdvertViewController.m in Sources */,
 				CB5AFC9A1B27209A00904BF7 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E85BD771B2F0B33000BC2E1 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -19966,7 +19916,6 @@
 				CB60C0C01AC5AD2600D5E962 /* EXTRuntimeExtensions.m in Sources */,
 				CB60C0C11AC5AD2600D5E962 /* DBCommentViewController.m in Sources */,
 				CB1432471B0E3D0400DD50C7 /* DBClassLoader.m in Sources */,
-				7E1AEA401B2734F50090FB6C /* DBShippingManager.m in Sources */,
 				CB60C0C21AC5AD2600D5E962 /* Order.m in Sources */,
 				CB60C0C31AC5AD2600D5E962 /* UIImageView+Extension.m in Sources */,
 				CB60C0C41AC5AD2600D5E962 /* UIView+DBErrorAnimation.m in Sources */,
@@ -20204,7 +20153,6 @@
 				CB64FE781B317F760011CEEC /* UIColor+Hex.m in Sources */,
 				CB64FE791B317F760011CEEC /* DBAdvertViewController.m in Sources */,
 				CB64FE7A1B317F760011CEEC /* DBPositionGroupModifierItemCell.m in Sources */,
-				CB64FE7B1B317F760011CEEC /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -20344,7 +20292,6 @@
 				CB6400271B31B7CF0011CEEC /* DBAdvertViewController.m in Sources */,
 				7ECA94D71B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CB6400281B31B7CF0011CEEC /* DBPositionGroupModifierItemCell.m in Sources */,
-				CB6400291B31B7CF0011CEEC /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -20484,7 +20431,6 @@
 				CB82010C1B46CBB4000BBE55 /* DBAdvertViewController.m in Sources */,
 				7ECA94E21B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CB82010D1B46CBB4000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */,
-				CB82010E1B46CBB4000BBE55 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -20624,7 +20570,6 @@
 				CB82FC491B442C70000BBE55 /* DBAdvertViewController.m in Sources */,
 				7ECA94DF1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CB82FC4A1B442C70000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */,
-				CB82FC4B1B442C70000BBE55 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -20764,7 +20709,6 @@
 				CB82FE2A1B4464F6000BBE55 /* DBAdvertViewController.m in Sources */,
 				7ECA94E01B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CB82FE2B1B4464F6000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */,
-				CB82FE2C1B4464F6000BBE55 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -20904,7 +20848,6 @@
 				CB82FF9B1B4579B5000BBE55 /* DBAdvertViewController.m in Sources */,
 				7ECA94E11B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CB82FF9C1B4579B5000BBE55 /* DBPositionGroupModifierItemCell.m in Sources */,
-				CB82FF9D1B4579B5000BBE55 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -21044,7 +20987,6 @@
 				CBD0C54C1B30724300DAD042 /* DBAdvertViewController.m in Sources */,
 				7ECA94D51B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CBD0C54D1B30724300DAD042 /* DBPositionGroupModifierItemCell.m in Sources */,
-				CBD0C54E1B30724300DAD042 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -21183,7 +21125,6 @@
 				CBD2EB2C1B2A07D000E4AAA1 /* UIColor+Hex.m in Sources */,
 				CBD2EB2D1B2A07D000E4AAA1 /* DBAdvertViewController.m in Sources */,
 				CBD2EB2E1B2A07D000E4AAA1 /* DBPositionGroupModifierItemCell.m in Sources */,
-				7E85BD781B2F0B34000BC2E1 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -21323,7 +21264,6 @@
 				CBDC79FD1B42AFC700935328 /* DBAdvertViewController.m in Sources */,
 				7ECA94DE1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CBDC79FE1B42AFC700935328 /* DBPositionGroupModifierItemCell.m in Sources */,
-				CBDC79FF1B42AFC700935328 /* DBShippingManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

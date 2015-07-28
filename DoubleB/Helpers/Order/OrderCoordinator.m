@@ -18,7 +18,7 @@
 @implementation OrderCoordinator(EnumMap)
 
 - (NSString * __nonnull)notificationNameByEnum:(CoordinatorNotification)en {
-    return @[@"CoordinatorNotificationOrderTotalPrice", @"CoordinatorNotificationOrderDiscount", @"CoordinatorNotificationNewSelectedTime"][en];
+    return @[@"CoordinatorNotificationOrderTotalPrice", @"CoordinatorNotificationOrderDiscount", @"CoordinatorNotificationNewSelectedTime", @"CoordinatorNotificationNewAddressSuggestions"][en];
 }
 
 @end
@@ -52,6 +52,10 @@
                                              selector:@selector(deliverySettingsNewTimeNotificationHandler:)
                                                  name:kDBDeliverySettingsNewSelectedTimeNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(shippingManagerNewSuggestionsNotificationHandler:)
+                                                 name:kDBShippingManagerDidRecieveSuggestionsNotification object:nil];
+    
     return self;
 }
 
@@ -84,6 +88,12 @@
 
 - (void)deliverySettingsNewTimeNotificationHandler:(NSNotification *)notification{
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:[self notificationNameByEnum:CoordinatorNotificationNewSelectedTime] object:nil]];
+}
+
+#pragma mark - ShippingManager notifications
+
+- (void)shippingManagerNewSuggestionsNotificationHandler:(NSNotification *)notification{
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:[self notificationNameByEnum:CoordinatorNotificationNewAddressSuggestions] object:nil]];
 }
 
 

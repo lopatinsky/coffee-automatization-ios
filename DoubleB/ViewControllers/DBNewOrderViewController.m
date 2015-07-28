@@ -31,7 +31,6 @@
 #import "LocationHelper.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"
-#import "DBVenuesTableViewController.h"
 #import "DBCardsViewController.h"
 #import "DBCommentViewController.h"
 #import "CoreDataHelper.h"

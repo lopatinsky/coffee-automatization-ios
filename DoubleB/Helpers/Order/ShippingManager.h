@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
 @end;
 
 
-extern NSString *ShippingManagerDidRecieveSuggestionsNotification;
+extern NSString *kDBShippingManagerDidRecieveSuggestionsNotification;
 
 @interface ShippingManager : NSObject<ManagerProtocol>
 @property (nonatomic, strong, readonly) DBShippingAddress *selectedAddress;

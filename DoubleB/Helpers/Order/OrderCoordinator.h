@@ -20,7 +20,8 @@
 typedef NS_ENUM(NSUInteger, CoordinatorNotification) {
     CoordinatorNotificationOrderTotalPrice = 0,
     CoordinatorNotificationOrderDiscount,
-    CoordinatorNotificationNewSelectedTime
+    CoordinatorNotificationNewSelectedTime,
+    CoordinatorNotificationNewAddressSuggestions
 };
 
 @interface OrderCoordinator : NSObject <ManagerProtocol>
