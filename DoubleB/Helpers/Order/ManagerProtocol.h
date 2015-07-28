@@ -10,8 +10,6 @@
 
 @protocol ManagerProtocol <NSObject>
 
-+ (instancetype)sharedInstance;
-
 /**
  * Clear runtime cache
  */

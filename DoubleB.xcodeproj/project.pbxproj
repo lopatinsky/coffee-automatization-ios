@@ -8699,6 +8699,7 @@
 		CB154A8B1B678788008F749F /* DBBonusPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBBonusPositionsViewController.h; sourceTree = "<group>"; };
 		CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBBonusPositionsViewController.m; sourceTree = "<group>"; };
 		CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBBonusPositionsViewController.xib; sourceTree = "<group>"; };
+		CB154ABF1B67EBF1008F749F /* OrderPartManagerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderPartManagerProtocol.h; sourceTree = "<group>"; };
 		CB1AF8981AE10E6900FA3224 /* Pastadeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pastadeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBOrderBarButtonView.xib; sourceTree = "<group>"; };
 		CB1B6CDD1A49E6C70034774C /* add_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_position.png; sourceTree = "<group>"; };
@@ -10527,6 +10528,8 @@
 		CB1549851B664E27008F749F /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				CB154ABF1B67EBF1008F749F /* OrderPartManagerProtocol.h */,
+				CB1549BA1B66508E008F749F /* ManagerProtocol.h */,
 				7ECA94CA1B6654DB0044DB31 /* OrderCoordinator.h */,
 				7ECA94CB1B6654DB0044DB31 /* OrderCoordinator.m */,
 				CB1549861B664E56008F749F /* ItemsManager.h */,
@@ -10537,7 +10540,6 @@
 				CB154A261B6678C5008F749F /* ShippingManager.m */,
 				CB1549A01B664E72008F749F /* OrderManager.h */,
 				CB1549A11B664E72008F749F /* OrderManager.m */,
-				CB1549BA1B66508E008F749F /* ManagerProtocol.h */,
 				CB1549BB1B665EBB008F749F /* BonusItemsManager.h */,
 				CB1549BC1B665EBB008F749F /* BonusItemsManager.m */,
 				CB1549D51B666178008F749F /* DeliverySettings.h */,

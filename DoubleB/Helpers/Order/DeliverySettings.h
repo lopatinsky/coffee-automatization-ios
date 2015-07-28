@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "ManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 
 extern NSString *const kDBDeliverySettingsNewSelectedTimeNotification;
 
-@interface DeliverySettings : NSObject<ManagerProtocol>
+@interface DeliverySettings : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 
 /**
  * Selected type of delivery

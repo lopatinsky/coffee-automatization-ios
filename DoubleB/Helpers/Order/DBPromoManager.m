@@ -7,7 +7,6 @@
 //
 
 #import "DBPromoManager.h"
-#import "OrderCoordinator.h"
 #import "DBServerAPI.h"
 #import "IHSecureStore.h"
 #import "OrderCoordinator.h"
@@ -23,26 +22,25 @@
 @property (strong, nonatomic) NSMutableArray *promoItems;
 
 @property (nonatomic) NSInteger lastUpdateNumber;
+
+@property (weak, nonatomic) OrderCoordinator *parentManager;
+
 @end
 
 @implementation DBPromoManager
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static DBPromoManager *instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
-
-- (instancetype)init {
+- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
     self = [super init];
     if (self) {
+        _parentManager = parentManager;
+        
         self.lastUpdateNumber = 0;
         _validOrder = YES;
         
         [self loadFromMemory];
         self.promoItems = [NSMutableArray new];
     }
+    
     return self;
 }
 
@@ -125,11 +123,11 @@
 - (void)setDiscount:(double)discount{
     _discount = discount;
     
-    [[OrderCoordinator sharedInstance] manager:self haveChange:DBPromoManagerChangeDiscount];
+    [_parentManager manager:self haveChange:DBPromoManagerChangeDiscount];
 }
 
 - (void)setShippingPrice:(double)shippingPrice{
-    [[OrderCoordinator sharedInstance] manager:self haveChange:DBPromoManagerChangeShippingPrice];
+    [_parentManager manager:self haveChange:DBPromoManagerChangeShippingPrice];
 }
 
 - (BOOL)checkCurrentOrder {
@@ -225,12 +223,12 @@
         }
         
         _validOrder = [response[@"valid"] boolValue];
-        [[OrderCoordinator sharedInstance] manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
+        [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
     } failure:^(NSError *error) {
         _validOrder = NO;
         
         if(self.lastUpdateNumber == currentUpdateNumber){
-            [[OrderCoordinator sharedInstance] manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
+            [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
         }
     }];
     

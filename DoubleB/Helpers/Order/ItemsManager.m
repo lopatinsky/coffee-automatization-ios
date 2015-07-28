@@ -9,25 +9,23 @@
 #import "ItemsManager.h"
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
-#import "OrderCoordinator.h"
 
 NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewTotalPriceNotification";
 
+@interface ItemsManager ()
+@property (weak, nonatomic) OrderCoordinator *parentManager;
+@end
+
 @implementation ItemsManager
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static ItemsManager *instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
-
-- (instancetype)init {
+- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
     self = [super init];
     if (self) {
+        _parentManager = parentManager;
         _items = [NSMutableArray new];
         [self reloadTotal];
     }
+    
     return self;
 }
 
@@ -153,7 +151,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 }
 
 - (void)reloadTotal{
-    [[OrderCoordinator sharedInstance] manager:self haveChange:ItemsManagerChangeTotalPrice];
+    [_parentManager manager:self haveChange:ItemsManagerChangeTotalPrice];
 }
 
 - (double)totalPrice{

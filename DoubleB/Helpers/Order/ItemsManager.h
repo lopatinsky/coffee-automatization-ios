@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 
 @class DBMenuPosition;
 @class OrderItem;
@@ -17,7 +18,7 @@ typedef NS_ENUM(NSInteger, ItemsManagerChange) {
     ItemsManagerChangeTotalCount
 };
 
-@interface ItemsManager : NSObject<ManagerProtocol>
+@interface ItemsManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 
 /**
  * All positions in order

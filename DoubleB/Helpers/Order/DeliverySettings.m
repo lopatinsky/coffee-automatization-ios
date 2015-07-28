@@ -11,6 +11,8 @@
 NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySettingsNewSelectedTimeNotification";
 
 @interface DeliverySettings ()
+@property (weak, nonatomic) OrderCoordinator *parentManager;
+
 @property (strong, nonatomic) DBDeliveryType *lastNotShippingDeliveryType;
 
 // Time management
@@ -19,17 +21,13 @@ NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySe
 
 @implementation DeliverySettings
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static DeliverySettings *instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
-
-- (instancetype)init{
+- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
     self = [super init];
-    
-    self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+    if (self) {
+        _parentManager = parentManager;
+        
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+    }
     
     return self;
 }

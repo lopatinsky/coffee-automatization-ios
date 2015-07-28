@@ -16,6 +16,7 @@ NSString *const kDBDefaultsShippingAddress = @"kDBDefaultsShippingAddress";
 NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingManagerDidRecieveSuggestionsNotification";
 
 @interface ShippingManager()
+@property (weak, nonatomic) OrderCoordinator *parentManager;
 
 @property (nonatomic, strong) NSArray *addressSuggestions;
 //@property (nonatomic, strong) NSTimer *requestSuggestionsTimer;
@@ -24,25 +25,19 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
 
 @implementation ShippingManager
 
-+ (instancetype)sharedInstance {
-    static ShippingManager *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [self new];
-    });
-    return instance;
-}
-
-- (instancetype)init{
+- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
     self = [super init];
-    
-    [self fetchAll];
-    
-    if(_selectedAddress.city.length == 0){
-        _selectedAddress.city = [self.arrayOfCities firstObject] ?: @"";
+    if (self) {
+        _parentManager = parentManager;
+        
+        [self fetchAll];
+        
+        if(_selectedAddress.city.length == 0){
+            _selectedAddress.city = [self.arrayOfCities firstObject] ?: @"";
+        }
+        
+        self.addressSuggestions = @[];
     }
-    
-    self.addressSuggestions = @[];
     
     return self;
 }

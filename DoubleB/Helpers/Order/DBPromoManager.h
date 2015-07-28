@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 
 @class OrderItem;
 @class DBMenuPosition;
@@ -21,7 +22,7 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
     DBPromoManagerChangeUpdatedPromoInfo
 };
 
-@interface DBPromoManager : NSObject<ManagerProtocol>
+@interface DBPromoManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 - (void)updateInfo;
 
 

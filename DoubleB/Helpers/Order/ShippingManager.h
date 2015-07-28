@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 
 typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
     DBAddressStringModeAutocomplete = 0,
@@ -37,7 +38,7 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
 
 extern NSString *kDBShippingManagerDidRecieveSuggestionsNotification;
 
-@interface ShippingManager : NSObject<ManagerProtocol>
+@interface ShippingManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 @property (nonatomic, strong, readonly) DBShippingAddress *selectedAddress;
 
 - (void)setAddress:(NSString *)address;

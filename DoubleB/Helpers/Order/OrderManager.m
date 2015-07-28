@@ -23,25 +23,22 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
 
 @interface OrderManager ()
+@property (weak, nonatomic) OrderCoordinator *parentManager;
 @end
 
 @implementation OrderManager
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static OrderManager *instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
-
-- (instancetype)init {
+- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
     self = [super init];
     if (self) {
+        _parentManager = parentManager;
+        
         NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
         _venue = [Venue venueById:lastVenueId];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flushCache) name:kDBNewOrderCreatedNotification object:nil];
     }
+    
     return self;
 }
 

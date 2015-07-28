@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 #import "ManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 #import "Order.h"
 
 extern NSString* const kDBDefaultsPaymentType;
@@ -23,7 +24,7 @@ extern NSString* const kDBDefaultsPaymentType;
 * Manages order
 * Only one order can be managed at a time
 */
-@interface OrderManager : NSObject<ManagerProtocol>
+@interface OrderManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 
 /**
 * Selected venue for order(if not shipping)

@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "ManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 
 @class DBMenuBonusPosition;
 @class OrderItem;
 
-@interface BonusItemsManager : NSObject<ManagerProtocol>
+@interface BonusItemsManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 
 /**
  * Bonus items in order

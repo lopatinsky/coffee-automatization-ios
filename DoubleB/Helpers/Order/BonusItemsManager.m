@@ -10,20 +10,20 @@
 #import "OrderItem.h"
 #import "DBMenuBonusPosition.h"
 
+@interface BonusItemsManager ()
+@property (weak, nonatomic) OrderCoordinator *parentManager;
+@end
+
 @implementation BonusItemsManager
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static BonusItemsManager *instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
-
-- (instancetype)init {
+- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
     self = [super init];
     if (self) {
+        _parentManager = parentManager;
+        
         _items = [NSMutableArray new];
     }
+    
     return self;
 }
 

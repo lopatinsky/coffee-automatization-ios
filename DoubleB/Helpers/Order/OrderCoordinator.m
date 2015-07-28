@@ -33,12 +33,12 @@ NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNo
 - (instancetype)init {
     self = [super init];
     
-    _itemsManager = [ItemsManager sharedInstance];
-    _bonusItemsManager = [BonusItemsManager sharedInstance];
-    _orderManager = [OrderManager sharedInstance];
-    _deliverySettings = [DeliverySettings sharedInstance];
-    _shippingManager = [ShippingManager sharedInstance];
-    _promoManager = [DBPromoManager sharedInstance];
+    _itemsManager = [[ItemsManager alloc] initWithParentManager:self];
+    _bonusItemsManager = [[BonusItemsManager  alloc] initWithParentManager:self];
+    _orderManager = [[OrderManager  alloc] initWithParentManager:self];
+    _deliverySettings = [[DeliverySettings  alloc] initWithParentManager:self];
+    _shippingManager = [[ShippingManager  alloc] initWithParentManager:self];
+    _promoManager = [[DBPromoManager  alloc] initWithParentManager:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(newOrderCreatedNotificationHandler:)

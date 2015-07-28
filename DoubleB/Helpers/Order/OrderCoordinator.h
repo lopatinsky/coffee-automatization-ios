@@ -37,6 +37,8 @@ extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;
 @property (nonnull, nonatomic, strong, readonly) ShippingManager *shippingManager;
 @property (nonnull, nonatomic, strong, readonly) DBPromoManager *promoManager;
 
++ (instancetype)sharedInstance;
+
 - (BOOL)validOrder;
 
 - (void)addObserver:(NSObject * __nonnull)object withKeyPath:(NSString * __nonnull)keyName selector:(__nonnull SEL)selector;
