@@ -281,7 +281,7 @@
                                  [self confirmOrderSuccess:ord.orderId];
                                  
                                  // Notify all about success order
-                                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:nil]];
+                                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:ord]];
                                  
                                  hasOrderErrorInSession = NO;
                                  

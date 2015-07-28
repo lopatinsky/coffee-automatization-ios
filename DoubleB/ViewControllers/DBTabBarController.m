@@ -74,9 +74,15 @@
         self.tabBar.tintColor = [UIColor blackColor];
         self.viewControllers = tabBarControllers;
         
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderCreatedNotification:) name:kDBNewOrderCreatedNotification object:nil];
+        
         self.delegate = self;
     }
     return self;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)awakeFromRemoteNotification{
@@ -85,9 +91,10 @@
 
 #pragma mark - DBNewOrderViewControllerDelegate
 
-- (void)newOrderViewController:(DBNewOrderViewController *)controller didFinishOrder:(Order *)order{
+- (void)newOrderCreatedNotification:(NSNotification *)notification{
     self.selectedIndex = 1;
     
+    Order *order = notification.object;
     for(UIViewController *controller in self.viewControllers){
         if([controller isKindOfClass:[UINavigationController class]]){
             UINavigationController *navController = (UINavigationController *)controller;

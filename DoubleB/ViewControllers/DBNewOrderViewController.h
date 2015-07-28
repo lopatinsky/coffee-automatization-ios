@@ -10,16 +10,10 @@
 
 extern NSString *const kDBDefaultsFaves;
 
-@class DBNewOrderViewController;
 @class Order;
-
-@protocol DBNewOrderViewControllerDelegate <NSObject>
-- (void)newOrderViewController:(DBNewOrderViewController *)controller didFinishOrder:(Order *)order;
-@end
 
 @interface DBNewOrderViewController : UIViewController 
 
 @property (nonatomic, strong) Order *repeatedOrder;
-@property (nonatomic, weak) id<DBNewOrderViewControllerDelegate> delegate;
 
 @end

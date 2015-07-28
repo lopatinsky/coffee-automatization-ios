@@ -118,7 +118,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Logic =========
     self.orderCoordinator = [OrderCoordinator sharedInstance];
     
-    self.delegate = [DBTabBarController sharedInstance];
     self.currentCard = [NSDictionary new];
     
     if (self.repeatedOrder) {
@@ -1202,7 +1201,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         } completion:nil];
         
         order.realTotal = order.total;
-        [self.delegate newOrderViewController:self didFinishOrder:order];
     } failure:^(NSString *errorTitle, NSString *errorMessage) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
