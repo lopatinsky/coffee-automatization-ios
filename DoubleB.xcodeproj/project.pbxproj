@@ -427,7 +427,6 @@
 		7E79256C1B3C1BDA00CA740D /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7E79256D1B3C1BDA00CA740D /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7E79256E1B3C1BDA00CA740D /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7E79256F1B3C1BDA00CA740D /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7E7925701B3C1BDA00CA740D /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7E7925711B3C1BDA00CA740D /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7E7925721B3C1BDA00CA740D /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -490,7 +489,6 @@
 		7E7925B11B3C1BDA00CA740D /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7E7925B21B3C1BDA00CA740D /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7E7925B31B3C1BDA00CA740D /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7E7925B41B3C1BDA00CA740D /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7E7925B51B3C1BDA00CA740D /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7E7925B61B3C1BDA00CA740D /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7E7925B71B3C1BDA00CA740D /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -750,7 +748,6 @@
 		7E7926EE1B3C247D00CA740D /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7E7926EF1B3C247D00CA740D /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7E7926F01B3C247D00CA740D /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7E7926F11B3C247D00CA740D /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7E7926F21B3C247D00CA740D /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7E7926F31B3C247D00CA740D /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7E7926F41B3C247D00CA740D /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -813,7 +810,6 @@
 		7E7927331B3C247D00CA740D /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7E7927341B3C247D00CA740D /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7E7927351B3C247D00CA740D /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7E7927361B3C247D00CA740D /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7E7927371B3C247D00CA740D /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7E7927381B3C247D00CA740D /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7E7927391B3C247D00CA740D /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -1085,7 +1081,6 @@
 		7E8BD5F61B5027AA00CAFD5C /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7E8BD5F71B5027AA00CAFD5C /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7E8BD5F81B5027AA00CAFD5C /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7E8BD5F91B5027AA00CAFD5C /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7E8BD5FA1B5027AA00CAFD5C /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7E8BD5FB1B5027AA00CAFD5C /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7E8BD5FC1B5027AA00CAFD5C /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -1149,7 +1144,6 @@
 		7E8BD63C1B5027AA00CAFD5C /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7E8BD63D1B5027AA00CAFD5C /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7E8BD63E1B5027AA00CAFD5C /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7E8BD63F1B5027AA00CAFD5C /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7E8BD6411B5027AA00CAFD5C /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7E8BD6421B5027AA00CAFD5C /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7E8BD6431B5027AA00CAFD5C /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -1439,7 +1433,6 @@
 		7EB2D1B31B3C3581009405C6 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7EB2D1B41B3C3581009405C6 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7EB2D1B51B3C3581009405C6 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7EB2D1B61B3C3581009405C6 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7EB2D1B71B3C3581009405C6 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7EB2D1B81B3C3581009405C6 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EB2D1B91B3C3581009405C6 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -1502,7 +1495,6 @@
 		7EB2D1F81B3C3581009405C6 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7EB2D1F91B3C3581009405C6 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7EB2D1FA1B3C3581009405C6 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7EB2D1FB1B3C3581009405C6 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7EB2D1FC1B3C3581009405C6 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7EB2D1FD1B3C3581009405C6 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7EB2D1FE1B3C3581009405C6 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -1762,7 +1754,6 @@
 		7EB2D3221B3C51A2009405C6 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7EB2D3231B3C51A2009405C6 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7EB2D3241B3C51A2009405C6 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7EB2D3251B3C51A2009405C6 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7EB2D3261B3C51A2009405C6 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7EB2D3271B3C51A2009405C6 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EB2D3281B3C51A2009405C6 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -1825,7 +1816,6 @@
 		7EB2D3671B3C51A2009405C6 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7EB2D3691B3C51A2009405C6 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7EB2D36A1B3C51A2009405C6 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7EB2D36B1B3C51A2009405C6 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7EB2D36C1B3C51A2009405C6 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7EB2D36D1B3C51A2009405C6 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7EB2D36E1B3C51A2009405C6 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -2085,7 +2075,6 @@
 		7EB2D4921B3C5C77009405C6 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7EB2D4931B3C5C77009405C6 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7EB2D4941B3C5C77009405C6 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7EB2D4951B3C5C77009405C6 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7EB2D4961B3C5C77009405C6 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7EB2D4971B3C5C77009405C6 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EB2D4981B3C5C77009405C6 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -2148,7 +2137,6 @@
 		7EB2D4D71B3C5C77009405C6 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7EB2D4D81B3C5C77009405C6 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7EB2D4D91B3C5C77009405C6 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7EB2D4DA1B3C5C77009405C6 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7EB2D4DB1B3C5C77009405C6 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7EB2D4DC1B3C5C77009405C6 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7EB2D4DD1B3C5C77009405C6 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -2740,7 +2728,6 @@
 		7EDB59471B32F70400723DF9 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		7EDB59481B32F70400723DF9 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		7EDB59491B32F70400723DF9 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		7EDB594A1B32F70400723DF9 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		7EDB594B1B32F70400723DF9 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		7EDB594C1B32F70400723DF9 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		7EDB594D1B32F70400723DF9 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -2803,7 +2790,6 @@
 		7EDB598C1B32F70400723DF9 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7EDB598D1B32F70400723DF9 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7EDB598E1B32F70400723DF9 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7EDB598F1B32F70400723DF9 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7EDB59901B32F70400723DF9 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7EDB59911B32F70400723DF9 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		7EDB59921B32F70400723DF9 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -3091,7 +3077,6 @@
 		CB1431371B0E371A00DD50C7 /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CB1431381B0E371A00DD50C7 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB1431391B0E371A00DD50C7 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CB14313A1B0E371A00DD50C7 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB14313B1B0E371A00DD50C7 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB14313C1B0E371A00DD50C7 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB14313D1B0E371A00DD50C7 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
@@ -3150,7 +3135,6 @@
 		CB1431791B0E371A00DD50C7 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB14317A1B0E371A00DD50C7 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB14317B1B0E371A00DD50C7 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB14317C1B0E371A00DD50C7 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB14317D1B0E371A00DD50C7 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB14317E1B0E371A00DD50C7 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB14317F1B0E371A00DD50C7 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -3388,7 +3372,6 @@
 		CB14329B1B0F1BBB00DD50C7 /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CB14329C1B0F1BBB00DD50C7 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB14329D1B0F1BBB00DD50C7 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CB14329E1B0F1BBB00DD50C7 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB14329F1B0F1BBB00DD50C7 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB1432A01B0F1BBB00DD50C7 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
 		CB1432A11B0F1BBB00DD50C7 /* OrderItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EF6A6D51AA3108200EED5A6 /* OrderItem.m */; };
@@ -3447,7 +3430,6 @@
 		CB1432DD1B0F1BBB00DD50C7 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB1432DE1B0F1BBB00DD50C7 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB1432DF1B0F1BBB00DD50C7 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB1432E01B0F1BBB00DD50C7 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB1432E11B0F1BBB00DD50C7 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB1432E21B0F1BBB00DD50C7 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB1432E31B0F1BBB00DD50C7 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -3762,6 +3744,54 @@
 		CB154A541B6678EB008F749F /* ShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A261B6678C5008F749F /* ShippingManager.m */; };
 		CB154A551B6678EC008F749F /* ShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A261B6678C5008F749F /* ShippingManager.m */; };
 		CB154A561B6678ED008F749F /* ShippingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A261B6678C5008F749F /* ShippingManager.m */; };
+		CB154A8E1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A8F1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A901B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A911B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A921B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A931B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A941B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A951B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A961B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A971B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A981B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A991B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A9A1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A9B1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A9C1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A9D1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A9E1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154A9F1B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA01B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA11B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA21B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA31B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA41B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA51B678788008F749F /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */; };
+		CB154AA61B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AA71B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AA81B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AA91B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AAA1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AAB1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AAC1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AAD1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AAE1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AAF1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB01B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB11B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB21B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB31B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB41B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB51B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB61B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB71B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB81B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154AB91B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154ABA1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154ABB1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154ABC1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
+		CB154ABD1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */; };
 		CB1AF76B1AE10E6900FA3224 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB1AF76C1AE10E6900FA3224 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB1AF76D1AE10E6900FA3224 /* DBNewOrderAdditionalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D391ABC3CAE00BD4E81 /* DBNewOrderAdditionalInfoView.m */; };
@@ -4100,7 +4130,6 @@
 		CB3BA32A1B20589300F320CA /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CB3BA32B1B20589300F320CA /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB3BA32C1B20589300F320CA /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CB3BA32D1B20589300F320CA /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB3BA32E1B20589300F320CA /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB3BA32F1B20589300F320CA /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB3BA3301B20589300F320CA /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -4162,7 +4191,6 @@
 		CB3BA36E1B20589300F320CA /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB3BA36F1B20589300F320CA /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB3BA3701B20589300F320CA /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB3BA3711B20589300F320CA /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB3BA3721B20589300F320CA /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB3BA3731B20589300F320CA /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB3BA3741B20589300F320CA /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -4736,7 +4764,6 @@
 		CB5AFC741B27209A00904BF7 /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CB5AFC751B27209A00904BF7 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB5AFC761B27209A00904BF7 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CB5AFC771B27209A00904BF7 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB5AFC781B27209A00904BF7 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB5AFC791B27209A00904BF7 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB5AFC7A1B27209A00904BF7 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -4798,7 +4825,6 @@
 		CB5AFCB91B27209A00904BF7 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB5AFCBA1B27209A00904BF7 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB5AFCBB1B27209A00904BF7 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB5AFCBC1B27209A00904BF7 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB5AFCBD1B27209A00904BF7 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB5AFCBE1B27209A00904BF7 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB5AFCBF1B27209A00904BF7 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -5196,7 +5222,6 @@
 		CB6400021B31B7CF0011CEEC /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB6400031B31B7CF0011CEEC /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		CB6400041B31B7CF0011CEEC /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		CB6400051B31B7CF0011CEEC /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB6400061B31B7CF0011CEEC /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB6400071B31B7CF0011CEEC /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB6400081B31B7CF0011CEEC /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -5259,7 +5284,6 @@
 		CB6400471B31B7CF0011CEEC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB6400481B31B7CF0011CEEC /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB6400491B31B7CF0011CEEC /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB64004A1B31B7CF0011CEEC /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB64004B1B31B7CF0011CEEC /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB64004C1B31B7CF0011CEEC /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB64004D1B31B7CF0011CEEC /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -5517,7 +5541,6 @@
 		CB64FE531B317F760011CEEC /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CB64FE541B317F760011CEEC /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB64FE551B317F760011CEEC /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CB64FE561B317F760011CEEC /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB64FE581B317F760011CEEC /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB64FE591B317F760011CEEC /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB64FE5A1B317F760011CEEC /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -5580,7 +5603,6 @@
 		CB64FE991B317F760011CEEC /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB64FE9A1B317F760011CEEC /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB64FE9B1B317F760011CEEC /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB64FE9C1B317F760011CEEC /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB64FE9D1B317F760011CEEC /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB64FE9E1B317F760011CEEC /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB64FE9F1B317F760011CEEC /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -6073,7 +6095,6 @@
 		CB8200E61B46CBB4000BBE55 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB8200E71B46CBB4000BBE55 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		CB8200E81B46CBB4000BBE55 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		CB8200E91B46CBB4000BBE55 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB8200EA1B46CBB4000BBE55 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB8200EB1B46CBB4000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB8200EC1B46CBB4000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -6137,7 +6158,6 @@
 		CB82012C1B46CBB4000BBE55 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB82012D1B46CBB4000BBE55 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB82012E1B46CBB4000BBE55 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB8201301B46CBB4000BBE55 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB8201311B46CBB4000BBE55 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB8201321B46CBB4000BBE55 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB8201331B46CBB4000BBE55 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -6400,7 +6420,6 @@
 		CB82FC241B442C70000BBE55 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB82FC251B442C70000BBE55 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		CB82FC261B442C70000BBE55 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		CB82FC271B442C70000BBE55 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB82FC281B442C70000BBE55 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB82FC291B442C70000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB82FC2A1B442C70000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -6463,7 +6482,6 @@
 		CB82FC6A1B442C70000BBE55 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB82FC6B1B442C70000BBE55 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB82FC6C1B442C70000BBE55 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB82FC6D1B442C70000BBE55 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB82FC6E1B442C70000BBE55 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB82FC6F1B442C70000BBE55 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB82FC701B442C70000BBE55 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -6823,7 +6841,6 @@
 		CB82FE041B4464F6000BBE55 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB82FE051B4464F6000BBE55 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		CB82FE061B4464F6000BBE55 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		CB82FE071B4464F6000BBE55 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB82FE081B4464F6000BBE55 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB82FE091B4464F6000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB82FE0A1B4464F6000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -6887,7 +6904,6 @@
 		CB82FE4C1B4464F6000BBE55 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB82FE4D1B4464F6000BBE55 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB82FE4E1B4464F6000BBE55 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB82FE4F1B4464F6000BBE55 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB82FE501B4464F6000BBE55 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB82FE511B4464F6000BBE55 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB82FE521B4464F6000BBE55 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -7151,7 +7167,6 @@
 		CB82FF751B4579B5000BBE55 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CB82FF761B4579B5000BBE55 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		CB82FF771B4579B5000BBE55 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		CB82FF781B4579B5000BBE55 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CB82FF791B4579B5000BBE55 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CB82FF7A1B4579B5000BBE55 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CB82FF7B1B4579B5000BBE55 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -7215,7 +7230,6 @@
 		CB82FFBD1B4579B5000BBE55 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB82FFBE1B4579B5000BBE55 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB82FFBF1B4579B5000BBE55 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB82FFC11B4579B5000BBE55 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB82FFC21B4579B5000BBE55 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB82FFC31B4579B5000BBE55 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CB82FFC41B4579B5000BBE55 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -7371,14 +7385,6 @@
 		CBB043021B0CAE3D00901173 /* return_cause_time_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF71AE16D3C007027A6 /* return_cause_time_icon@3x.png */; };
 		CBB043031B0CAE3D00901173 /* return_cause_venue_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF81AE16D3C007027A6 /* return_cause_venue_icon@2x.png */; };
 		CBB043041B0CAE3D00901173 /* return_cause_venue_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF91AE16D3C007027A6 /* return_cause_venue_icon@3x.png */; };
-		CBB0430B1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
-		CBB0430C1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
-		CBB0430D1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
-		CBB0430E1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
-		CBB0430F1B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
-		CBB043101B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
-		CBB043111B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
-		CBB043121B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CBB718E31B14A3EE00C47A33 /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBB718D91B14A3EE00C47A33 /* CompanyInfo.plist */; };
 		CBB718E41B14A3EE00C47A33 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBB718DA1B14A3EE00C47A33 /* InfoPlist.strings */; };
 		CBB718E51B14A3EE00C47A33 /* Images-MeatMe.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBB718DC1B14A3EE00C47A33 /* Images-MeatMe.xcassets */; };
@@ -7498,7 +7504,6 @@
 		CBD0C5261B30724300DAD042 /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CBD0C5271B30724300DAD042 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CBD0C5281B30724300DAD042 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CBD0C5291B30724300DAD042 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CBD0C52A1B30724300DAD042 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CBD0C52B1B30724300DAD042 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CBD0C52C1B30724300DAD042 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -7561,7 +7566,6 @@
 		CBD0C56C1B30724300DAD042 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CBD0C56D1B30724300DAD042 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CBD0C56E1B30724300DAD042 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CBD0C5701B30724300DAD042 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CBD0C5711B30724300DAD042 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CBD0C5721B30724300DAD042 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CBD0C5731B30724300DAD042 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -7836,7 +7840,6 @@
 		CBD2EB081B2A07D000E4AAA1 /* DBOrderViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8D1A866D0800640791 /* DBOrderViewHeader.m */; };
 		CBD2EB091B2A07D000E4AAA1 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CBD2EB0A1B2A07D000E4AAA1 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
-		CBD2EB0B1B2A07D000E4AAA1 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CBD2EB0C1B2A07D000E4AAA1 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CBD2EB0D1B2A07D000E4AAA1 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CBD2EB0E1B2A07D000E4AAA1 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -7898,7 +7901,6 @@
 		CBD2EB4D1B2A07D000E4AAA1 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CBD2EB4E1B2A07D000E4AAA1 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CBD2EB4F1B2A07D000E4AAA1 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CBD2EB511B2A07D000E4AAA1 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CBD2EB521B2A07D000E4AAA1 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CBD2EB531B2A07D000E4AAA1 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CBD2EB541B2A07D000E4AAA1 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -8156,7 +8158,6 @@
 		CBDC79D81B42AFC700935328 /* IHWebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C775BDB9B8E9335539AECB37 /* IHWebPageViewController.m */; };
 		CBDC79D91B42AFC700935328 /* DBOrderBarButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE162B71AE1376F006BB81F /* DBOrderBarButtonView.m */; };
 		CBDC79DA1B42AFC700935328 /* NSObject+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64FF9E1B3192100011CEEC /* NSObject+Encode.m */; };
-		CBDC79DB1B42AFC700935328 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */; };
 		CBDC79DC1B42AFC700935328 /* DBConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB37BC4119CB14110034B325 /* DBConstants.m */; };
 		CBDC79DD1B42AFC700935328 /* DBDeliveryType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1433A71B131B2E00DD50C7 /* DBDeliveryType.m */; };
 		CBDC79DE1B42AFC700935328 /* DBCategoryPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715ADA1ACD57F200EA84FC /* DBCategoryPicker.m */; };
@@ -8219,7 +8220,6 @@
 		CBDC7A1D1B42AFC700935328 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CBDC7A1E1B42AFC700935328 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CBDC7A1F1B42AFC700935328 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CBDC7A201B42AFC700935328 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CBDC7A211B42AFC700935328 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CBDC7A221B42AFC700935328 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
 		CBDC7A231B42AFC700935328 /* category_selection_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB0B5BD71AD80C5F0094D534 /* category_selection_icon@3x.png */; };
@@ -8675,8 +8675,6 @@
 		CB136A831B0A1D8300B93178 /* DBDeliveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDeliveryViewController.h; sourceTree = "<group>"; };
 		CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBDeliveryViewController.m; sourceTree = "<group>"; };
 		CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBDeliveryViewController.xib; sourceTree = "<group>"; };
-		CB136A861B0A1D8300B93178 /* DBPositionScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPositionScrollViewController.h; sourceTree = "<group>"; };
-		CB136A871B0A1D8300B93178 /* DBPositionScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPositionScrollViewController.m; sourceTree = "<group>"; };
 		CB1430D81B0DD76000DD50C7 /* DBMenuBonusPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMenuBonusPosition.h; sourceTree = "<group>"; };
 		CB1430D91B0DD76000DD50C7 /* DBMenuBonusPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMenuBonusPosition.m; sourceTree = "<group>"; };
 		CB1432331B0E371A00DD50C7 /* CoffeeAutomation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoffeeAutomation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -8698,6 +8696,9 @@
 		CB154A241B6678C5008F749F /* DBPromoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPromoManager.m; sourceTree = "<group>"; };
 		CB154A251B6678C5008F749F /* ShippingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShippingManager.h; sourceTree = "<group>"; };
 		CB154A261B6678C5008F749F /* ShippingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShippingManager.m; sourceTree = "<group>"; };
+		CB154A8B1B678788008F749F /* DBBonusPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBBonusPositionsViewController.h; sourceTree = "<group>"; };
+		CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBBonusPositionsViewController.m; sourceTree = "<group>"; };
+		CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBBonusPositionsViewController.xib; sourceTree = "<group>"; };
 		CB1AF8981AE10E6900FA3224 /* Pastadeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pastadeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB1AF8BC1AE12BBE00FA3224 /* DBOrderBarButtonView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBOrderBarButtonView.xib; sourceTree = "<group>"; };
 		CB1B6CDD1A49E6C70034774C /* add_position.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_position.png; sourceTree = "<group>"; };
@@ -8954,9 +8955,6 @@
 		CBA24A441A64300600103699 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
 		CBA24A461A6570E500103699 /* DBTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTabBarController.h; sourceTree = "<group>"; };
 		CBA24A471A6570E500103699 /* DBTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTabBarController.m; sourceTree = "<group>"; };
-		CBB043051B0CAEFF00901173 /* DBBonusPositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBBonusPositionsViewController.h; sourceTree = "<group>"; };
-		CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBBonusPositionsViewController.m; sourceTree = "<group>"; };
-		CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBBonusPositionsViewController.xib; sourceTree = "<group>"; };
 		CBB718D91B14A3EE00C47A33 /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
 		CBB718DB1B14A3EE00C47A33 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBB718DC1B14A3EE00C47A33 /* Images-MeatMe.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-MeatMe.xcassets"; sourceTree = "<group>"; };
@@ -10017,17 +10015,6 @@
 			name = Positions;
 			sourceTree = "<group>";
 		};
-		7EA227571B56B47900F18AA6 /* Bonus */ = {
-			isa = PBXGroup;
-			children = (
-				CBB043051B0CAEFF00901173 /* DBBonusPositionsViewController.h */,
-				CBB043061B0CAEFF00901173 /* DBBonusPositionsViewController.m */,
-				CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */,
-			);
-			name = Bonus;
-			path = Menu;
-			sourceTree = "<group>";
-		};
 		7EAFE5811B56B2FE0025E586 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -10219,7 +10206,6 @@
 				7EAFE5341B56A9420025E586 /* ViewControllerManager.m */,
 				7ECA95B21B669CB50044DB31 /* Launch */,
 				CB715AE31ACEA3EB00EA84FC /* Menu */,
-				7EA227571B56B47900F18AA6 /* Bonus */,
 				7EFF2736198A8DC40095ADED /* DBNewOrderViewController.h */,
 				7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */,
 				CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */,
@@ -10229,8 +10215,6 @@
 				CB136A831B0A1D8300B93178 /* DBDeliveryViewController.h */,
 				CB136A841B0A1D8300B93178 /* DBDeliveryViewController.m */,
 				CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */,
-				CB136A861B0A1D8300B93178 /* DBPositionScrollViewController.h */,
-				CB136A871B0A1D8300B93178 /* DBPositionScrollViewController.m */,
 				7EFF2733198A84580095ADED /* DBVenuesTableViewController.h */,
 				7EFF2734198A84580095ADED /* DBVenuesTableViewController.m */,
 				CBA24A461A6570E500103699 /* DBTabBarController.h */,
@@ -10562,6 +10546,16 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
+		CB154A8A1B678788008F749F /* Bonus */ = {
+			isa = PBXGroup;
+			children = (
+				CB154A8B1B678788008F749F /* DBBonusPositionsViewController.h */,
+				CB154A8C1B678788008F749F /* DBBonusPositionsViewController.m */,
+				CB154A8D1B678788008F749F /* DBBonusPositionsViewController.xib */,
+			);
+			path = Bonus;
+			sourceTree = "<group>";
+		};
 		CB1B6CE81A4C63A70034774C /* jRSwizzle */ = {
 			isa = PBXGroup;
 			children = (
@@ -10787,6 +10781,7 @@
 		CB715AE31ACEA3EB00EA84FC /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				CB154A8A1B678788008F749F /* Bonus */,
 				7EBFD7821B5A67FC0054B583 /* PositionViewControllerProtocol.h */,
 				7EAFE5801B56B1030025E586 /* PositionsViewControllerProtocol.h */,
 				7EA227561B56B46700F18AA6 /* Positions */,
@@ -12060,7 +12055,6 @@
 				7E3DAB661B06153E00A7FFD1 /* Localizable.strings in Resources */,
 				7E3DAB671B06153E00A7FFD1 /* tick@2x.png in Resources */,
 				7E3DAB681B06153E00A7FFD1 /* menu_icon_grey@2x.png in Resources */,
-				CBB043121B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */,
 				7E3DAB691B06153E00A7FFD1 /* share@3x.png in Resources */,
 				7E3DAB6A1B06153E00A7FFD1 /* clock.png in Resources */,
 				7E3DAB6B1B06153E00A7FFD1 /* cash_gray.png in Resources */,
@@ -12179,6 +12173,7 @@
 				7E3DABCF1B06153E00A7FFD1 /* mug_gray.png in Resources */,
 				7E3DABD01B06153E00A7FFD1 /* 250@2x.png in Resources */,
 				7E3DABD11B06153E00A7FFD1 /* orders_icon.png in Resources */,
+				CB154AAA1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CBB043041B0CAE3D00901173 /* return_cause_venue_icon@3x.png in Resources */,
 				7E3DABD21B06153E00A7FFD1 /* mcard_logo@2x.png in Resources */,
 				7E3DABD31B06153E00A7FFD1 /* comment@2x.png in Resources */,
@@ -12270,12 +12265,12 @@
 				7E7925B11B3C1BDA00CA740D /* clock.png in Resources */,
 				7E7925B21B3C1BDA00CA740D /* cash_gray.png in Resources */,
 				7E7925B31B3C1BDA00CA740D /* card@2x.png in Resources */,
-				7E7925B41B3C1BDA00CA740D /* DBBonusPositionsViewController.xib in Resources */,
 				7E7925B51B3C1BDA00CA740D /* DBNewOrderViewController.xib in Resources */,
 				7E7925B61B3C1BDA00CA740D /* share_icon@2x.png in Resources */,
 				7E7925B71B3C1BDA00CA740D /* category_selection_icon@3x.png in Resources */,
 				7E7925B81B3C1BDA00CA740D /* venues_icon.png in Resources */,
 				7E7925B91B3C1BDA00CA740D /* alarm_icon@2x.png in Resources */,
+				CB154AB31B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7E7925BA1B3C1BDA00CA740D /* mug_orders_gray.png in Resources */,
 				7E7925BB1B3C1BDA00CA740D /* menu_icon@3x.png in Resources */,
 				7E7925BC1B3C1BDA00CA740D /* bg.jpg in Resources */,
@@ -12473,12 +12468,12 @@
 				7E7927331B3C247D00CA740D /* clock.png in Resources */,
 				7E7927341B3C247D00CA740D /* cash_gray.png in Resources */,
 				7E7927351B3C247D00CA740D /* card@2x.png in Resources */,
-				7E7927361B3C247D00CA740D /* DBBonusPositionsViewController.xib in Resources */,
 				7E7927371B3C247D00CA740D /* DBNewOrderViewController.xib in Resources */,
 				7E7927381B3C247D00CA740D /* share_icon@2x.png in Resources */,
 				7E7927391B3C247D00CA740D /* category_selection_icon@3x.png in Resources */,
 				7E79273A1B3C247D00CA740D /* venues_icon.png in Resources */,
 				7E79273B1B3C247D00CA740D /* alarm_icon@2x.png in Resources */,
+				CB154AB41B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7E79273C1B3C247D00CA740D /* mug_orders_gray.png in Resources */,
 				7E79273D1B3C247D00CA740D /* menu_icon@3x.png in Resources */,
 				7E79273E1B3C247D00CA740D /* bg.jpg in Resources */,
@@ -12676,12 +12671,12 @@
 				7E8BD63C1B5027AA00CAFD5C /* clock.png in Resources */,
 				7E8BD63D1B5027AA00CAFD5C /* cash_gray.png in Resources */,
 				7E8BD63E1B5027AA00CAFD5C /* card@2x.png in Resources */,
-				7E8BD63F1B5027AA00CAFD5C /* DBBonusPositionsViewController.xib in Resources */,
 				7E8BD7111B50283300CAFD5C /* launch_736.png in Resources */,
 				7E8BD6411B5027AA00CAFD5C /* DBNewOrderViewController.xib in Resources */,
 				7E8BD6421B5027AA00CAFD5C /* share_icon@2x.png in Resources */,
 				7E8BD6431B5027AA00CAFD5C /* category_selection_icon@3x.png in Resources */,
 				7E8BD6441B5027AA00CAFD5C /* venues_icon.png in Resources */,
+				CB154ABD1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7E8BD6451B5027AA00CAFD5C /* alarm_icon@2x.png in Resources */,
 				7E8BD6461B5027AA00CAFD5C /* mug_orders_gray.png in Resources */,
 				7E8BD6471B5027AA00CAFD5C /* menu_icon@3x.png in Resources */,
@@ -12880,11 +12875,11 @@
 				7EB2D2C21B3C35FB009405C6 /* 7Donuts-info.plist in Resources */,
 				7EB2D1F91B3C3581009405C6 /* cash_gray.png in Resources */,
 				7EB2D1FA1B3C3581009405C6 /* card@2x.png in Resources */,
-				7EB2D1FB1B3C3581009405C6 /* DBBonusPositionsViewController.xib in Resources */,
 				7EB2D1FC1B3C3581009405C6 /* DBNewOrderViewController.xib in Resources */,
 				7EB2D1FD1B3C3581009405C6 /* share_icon@2x.png in Resources */,
 				7EB2D1FE1B3C3581009405C6 /* category_selection_icon@3x.png in Resources */,
 				7EB2D1FF1B3C3581009405C6 /* venues_icon.png in Resources */,
+				CB154AB51B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7EB2D2001B3C3581009405C6 /* alarm_icon@2x.png in Resources */,
 				7EB2D2011B3C3581009405C6 /* mug_orders_gray.png in Resources */,
 				7EB2D2021B3C3581009405C6 /* menu_icon@3x.png in Resources */,
@@ -13082,12 +13077,12 @@
 				7EB2D3671B3C51A2009405C6 /* clock.png in Resources */,
 				7EB2D3691B3C51A2009405C6 /* cash_gray.png in Resources */,
 				7EB2D36A1B3C51A2009405C6 /* card@2x.png in Resources */,
-				7EB2D36B1B3C51A2009405C6 /* DBBonusPositionsViewController.xib in Resources */,
 				7EB2D36C1B3C51A2009405C6 /* DBNewOrderViewController.xib in Resources */,
 				7EB2D36D1B3C51A2009405C6 /* share_icon@2x.png in Resources */,
 				7EB2D36E1B3C51A2009405C6 /* category_selection_icon@3x.png in Resources */,
 				7EB2D36F1B3C51A2009405C6 /* venues_icon.png in Resources */,
 				7EB2D3701B3C51A2009405C6 /* alarm_icon@2x.png in Resources */,
+				CB154AB61B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7EB2D3711B3C51A2009405C6 /* mug_orders_gray.png in Resources */,
 				7EB2D3721B3C51A2009405C6 /* menu_icon@3x.png in Resources */,
 				7EB2D3731B3C51A2009405C6 /* bg.jpg in Resources */,
@@ -13285,12 +13280,12 @@
 				7EB2D4D71B3C5C77009405C6 /* clock.png in Resources */,
 				7EB2D4D81B3C5C77009405C6 /* cash_gray.png in Resources */,
 				7EB2D4D91B3C5C77009405C6 /* card@2x.png in Resources */,
-				7EB2D4DA1B3C5C77009405C6 /* DBBonusPositionsViewController.xib in Resources */,
 				7EB2D4DB1B3C5C77009405C6 /* DBNewOrderViewController.xib in Resources */,
 				7EB2D4DC1B3C5C77009405C6 /* share_icon@2x.png in Resources */,
 				7EB2D4DD1B3C5C77009405C6 /* category_selection_icon@3x.png in Resources */,
 				7EB2D4DE1B3C5C77009405C6 /* venues_icon.png in Resources */,
 				7EB2D4DF1B3C5C77009405C6 /* alarm_icon@2x.png in Resources */,
+				CB154AB71B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7EB2D4E01B3C5C77009405C6 /* mug_orders_gray.png in Resources */,
 				7EB2D4E11B3C5C77009405C6 /* menu_icon@3x.png in Resources */,
 				7EB2D4E21B3C5C77009405C6 /* bg.jpg in Resources */,
@@ -13488,12 +13483,12 @@
 				7EDB598C1B32F70400723DF9 /* clock.png in Resources */,
 				7EDB598D1B32F70400723DF9 /* cash_gray.png in Resources */,
 				7EDB598E1B32F70400723DF9 /* card@2x.png in Resources */,
-				7EDB598F1B32F70400723DF9 /* DBBonusPositionsViewController.xib in Resources */,
 				7EDB59901B32F70400723DF9 /* DBNewOrderViewController.xib in Resources */,
 				7EDB59911B32F70400723DF9 /* share_icon@2x.png in Resources */,
 				7EDB59921B32F70400723DF9 /* category_selection_icon@3x.png in Resources */,
 				7EDB59931B32F70400723DF9 /* venues_icon.png in Resources */,
 				7EDB59941B32F70400723DF9 /* alarm_icon@2x.png in Resources */,
+				CB154AB21B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				7EDB59951B32F70400723DF9 /* mug_orders_gray.png in Resources */,
 				7EDB59971B32F70400723DF9 /* menu_icon@3x.png in Resources */,
 				7EDB59981B32F70400723DF9 /* bg.jpg in Resources */,
@@ -13692,11 +13687,11 @@
 				CB14317A1B0E371A00DD50C7 /* cash_gray.png in Resources */,
 				CBD14B8B1B14933B005AEAFE /* launch_667.jpg in Resources */,
 				CB14317B1B0E371A00DD50C7 /* card@2x.png in Resources */,
-				CB14317C1B0E371A00DD50C7 /* DBBonusPositionsViewController.xib in Resources */,
 				CB14317D1B0E371A00DD50C7 /* DBNewOrderViewController.xib in Resources */,
 				CB14317E1B0E371A00DD50C7 /* share_icon@2x.png in Resources */,
 				CB14317F1B0E371A00DD50C7 /* category_selection_icon@3x.png in Resources */,
 				CB1431801B0E371A00DD50C7 /* venues_icon.png in Resources */,
+				CB154AA61B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB59CE071B21FC5F00E9DD30 /* alarm_icon@2x.png in Resources */,
 				CB1431811B0E371A00DD50C7 /* mug_orders_gray.png in Resources */,
 				CB1431831B0E371A00DD50C7 /* menu_icon@3x.png in Resources */,
@@ -13894,12 +13889,12 @@
 				CB1432DD1B0F1BBB00DD50C7 /* clock.png in Resources */,
 				CB1432DE1B0F1BBB00DD50C7 /* cash_gray.png in Resources */,
 				CB1432DF1B0F1BBB00DD50C7 /* card@2x.png in Resources */,
-				CB1432E01B0F1BBB00DD50C7 /* DBBonusPositionsViewController.xib in Resources */,
 				CB1432E11B0F1BBB00DD50C7 /* DBNewOrderViewController.xib in Resources */,
 				CB1432E21B0F1BBB00DD50C7 /* share_icon@2x.png in Resources */,
 				CB1432E31B0F1BBB00DD50C7 /* category_selection_icon@3x.png in Resources */,
 				CB1432E41B0F1BBB00DD50C7 /* venues_icon.png in Resources */,
 				CB1432E51B0F1BBB00DD50C7 /* mug_orders_gray.png in Resources */,
+				CB154AAB1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB1432E71B0F1BBB00DD50C7 /* menu_icon@3x.png in Resources */,
 				CB1432E81B0F1BBB00DD50C7 /* bg.jpg in Resources */,
 				CB1432E91B0F1BBB00DD50C7 /* DBCategoryPicker.xib in Resources */,
@@ -14093,7 +14088,6 @@
 				CB1AF7EA1AE10E6900FA3224 /* Localizable.strings in Resources */,
 				CB1AF7EB1AE10E6900FA3224 /* tick@2x.png in Resources */,
 				CB1AF7EC1AE10E6900FA3224 /* menu_icon_grey@2x.png in Resources */,
-				CBB043101B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */,
 				CB1AF7ED1AE10E6900FA3224 /* share@3x.png in Resources */,
 				CB1AF7EE1AE10E6900FA3224 /* clock.png in Resources */,
 				CB1AF7EF1AE10E6900FA3224 /* cash_gray.png in Resources */,
@@ -14103,6 +14097,7 @@
 				CB1AF7F31AE10E6900FA3224 /* category_selection_icon@3x.png in Resources */,
 				CB1AF7F41AE10E6900FA3224 /* venues_icon.png in Resources */,
 				CBB042ED1B0CAE3C00901173 /* return_cause_other_icon@2x.png in Resources */,
+				CB154AA81B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB59CE171B2219E100E9DD30 /* alarm_icon@2x.png in Resources */,
 				CB1AF7F51AE10E6900FA3224 /* mug_orders_gray.png in Resources */,
 				CB1AF7F71AE10E6900FA3224 /* menu_icon@3x.png in Resources */,
@@ -14301,11 +14296,11 @@
 				CB3BA36E1B20589300F320CA /* clock.png in Resources */,
 				CB3BA36F1B20589300F320CA /* cash_gray.png in Resources */,
 				CB3BA3701B20589300F320CA /* card@2x.png in Resources */,
-				CB3BA3711B20589300F320CA /* DBBonusPositionsViewController.xib in Resources */,
 				CB3BA3721B20589300F320CA /* DBNewOrderViewController.xib in Resources */,
 				CB3BA3731B20589300F320CA /* share_icon@2x.png in Resources */,
 				CB3BA3741B20589300F320CA /* category_selection_icon@3x.png in Resources */,
 				CB3BA3751B20589300F320CA /* venues_icon.png in Resources */,
+				CB154AAC1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB59CE1F1B2219E200E9DD30 /* alarm_icon@2x.png in Resources */,
 				CB3BA3761B20589300F320CA /* mug_orders_gray.png in Resources */,
 				CB3BA3781B20589300F320CA /* menu_icon@3x.png in Resources */,
@@ -14498,7 +14493,6 @@
 				CB517BC31AEFB6B500A50F5C /* Localizable.strings in Resources */,
 				CB517BC41AEFB6B500A50F5C /* tick@2x.png in Resources */,
 				CB517BC51AEFB6B500A50F5C /* menu_icon_grey@2x.png in Resources */,
-				CBB043111B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */,
 				CB517BC61AEFB6B500A50F5C /* share@3x.png in Resources */,
 				CB517BC71AEFB6B500A50F5C /* clock.png in Resources */,
 				CB517BC81AEFB6B500A50F5C /* cash_gray.png in Resources */,
@@ -14509,6 +14503,7 @@
 				CBB042F61B0CAE3D00901173 /* return_cause_other_icon@2x.png in Resources */,
 				CB517BCC1AEFB6B500A50F5C /* category_selection_icon@3x.png in Resources */,
 				CB517BCD1AEFB6B500A50F5C /* venues_icon.png in Resources */,
+				CB154AA91B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB59CE191B2219E100E9DD30 /* alarm_icon@2x.png in Resources */,
 				CB517BCE1AEFB6B500A50F5C /* mug_orders_gray.png in Resources */,
 				CB517BD01AEFB6B500A50F5C /* menu_icon@3x.png in Resources */,
@@ -14707,11 +14702,11 @@
 				CB5AFCB91B27209A00904BF7 /* clock.png in Resources */,
 				CB5AFCBA1B27209A00904BF7 /* cash_gray.png in Resources */,
 				CB5AFCBB1B27209A00904BF7 /* card@2x.png in Resources */,
-				CB5AFCBC1B27209A00904BF7 /* DBBonusPositionsViewController.xib in Resources */,
 				CB5AFCBD1B27209A00904BF7 /* DBNewOrderViewController.xib in Resources */,
 				CB5AFCBE1B27209A00904BF7 /* share_icon@2x.png in Resources */,
 				CB5AFCBF1B27209A00904BF7 /* category_selection_icon@3x.png in Resources */,
 				CB5AFCC01B27209A00904BF7 /* venues_icon.png in Resources */,
+				CB154AAD1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB5AFCC11B27209A00904BF7 /* alarm_icon@2x.png in Resources */,
 				CB5AFCC21B27209A00904BF7 /* mug_orders_gray.png in Resources */,
 				CB5AFCC41B27209A00904BF7 /* menu_icon@3x.png in Resources */,
@@ -14909,12 +14904,12 @@
 				CB60C11B1AC5AD2600D5E962 /* clock.png in Resources */,
 				CB60C11C1AC5AD2600D5E962 /* cash_gray.png in Resources */,
 				CB60C11D1AC5AD2600D5E962 /* card@2x.png in Resources */,
-				CBB0430F1B0CAEFF00901173 /* DBBonusPositionsViewController.xib in Resources */,
 				CB60C11E1AC5AD2600D5E962 /* DBNewOrderViewController.xib in Resources */,
 				CB60C11F1AC5AD2600D5E962 /* share_icon@2x.png in Resources */,
 				CB0B5BD91AD80C5F0094D534 /* category_selection_icon@3x.png in Resources */,
 				CB60C1211AC5AD2600D5E962 /* venues_icon.png in Resources */,
 				CB60C1221AC5AD2600D5E962 /* mug_orders_gray.png in Resources */,
+				CB154AA71B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB59CE151B2219E000E9DD30 /* alarm_icon@2x.png in Resources */,
 				CB60C1241AC5AD2600D5E962 /* menu_icon@3x.png in Resources */,
 				5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */,
@@ -15112,12 +15107,12 @@
 				CB6400471B31B7CF0011CEEC /* clock.png in Resources */,
 				CB6400481B31B7CF0011CEEC /* cash_gray.png in Resources */,
 				CB6400491B31B7CF0011CEEC /* card@2x.png in Resources */,
-				CB64004A1B31B7CF0011CEEC /* DBBonusPositionsViewController.xib in Resources */,
 				CB64004B1B31B7CF0011CEEC /* DBNewOrderViewController.xib in Resources */,
 				CB64004C1B31B7CF0011CEEC /* share_icon@2x.png in Resources */,
 				CB64004D1B31B7CF0011CEEC /* category_selection_icon@3x.png in Resources */,
 				CB64004F1B31B7CF0011CEEC /* venues_icon.png in Resources */,
 				CB6400501B31B7CF0011CEEC /* alarm_icon@2x.png in Resources */,
+				CB154AB11B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB6400511B31B7CF0011CEEC /* mug_orders_gray.png in Resources */,
 				CB6400531B31B7CF0011CEEC /* menu_icon@3x.png in Resources */,
 				CB6400541B31B7CF0011CEEC /* bg.jpg in Resources */,
@@ -15315,12 +15310,12 @@
 				CB64FE991B317F760011CEEC /* clock.png in Resources */,
 				CB64FE9A1B317F760011CEEC /* cash_gray.png in Resources */,
 				CB64FE9B1B317F760011CEEC /* card@2x.png in Resources */,
-				CB64FE9C1B317F760011CEEC /* DBBonusPositionsViewController.xib in Resources */,
 				CB64FE9D1B317F760011CEEC /* DBNewOrderViewController.xib in Resources */,
 				CB64FE9E1B317F760011CEEC /* share_icon@2x.png in Resources */,
 				CB64FE9F1B317F760011CEEC /* category_selection_icon@3x.png in Resources */,
 				CB64FF711B3185000011CEEC /* launch_480.png in Resources */,
 				CB64FEA01B317F760011CEEC /* venues_icon.png in Resources */,
+				CB154AB01B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB64FEA11B317F760011CEEC /* alarm_icon@2x.png in Resources */,
 				CB64FEA21B317F760011CEEC /* mug_orders_gray.png in Resources */,
 				CB64FEA51B317F760011CEEC /* menu_icon@3x.png in Resources */,
@@ -15518,12 +15513,12 @@
 				CB82012C1B46CBB4000BBE55 /* clock.png in Resources */,
 				CB82012D1B46CBB4000BBE55 /* cash_gray.png in Resources */,
 				CB82012E1B46CBB4000BBE55 /* card@2x.png in Resources */,
-				CB8201301B46CBB4000BBE55 /* DBBonusPositionsViewController.xib in Resources */,
 				CB8201FF1B46CC1F000BBE55 /* launch_736.png in Resources */,
 				CB8201311B46CBB4000BBE55 /* DBNewOrderViewController.xib in Resources */,
 				CB8201321B46CBB4000BBE55 /* share_icon@2x.png in Resources */,
 				CB8201331B46CBB4000BBE55 /* category_selection_icon@3x.png in Resources */,
 				CB8201341B46CBB4000BBE55 /* venues_icon.png in Resources */,
+				CB154ABC1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB8201351B46CBB4000BBE55 /* alarm_icon@2x.png in Resources */,
 				CB8201361B46CBB4000BBE55 /* mug_orders_gray.png in Resources */,
 				CB8201371B46CBB4000BBE55 /* menu_icon@3x.png in Resources */,
@@ -15723,10 +15718,10 @@
 				CB82FC6A1B442C70000BBE55 /* clock.png in Resources */,
 				CB82FC6B1B442C70000BBE55 /* cash_gray.png in Resources */,
 				CB82FC6C1B442C70000BBE55 /* card@2x.png in Resources */,
-				CB82FC6D1B442C70000BBE55 /* DBBonusPositionsViewController.xib in Resources */,
 				CB82FC6E1B442C70000BBE55 /* DBNewOrderViewController.xib in Resources */,
 				CB82FC6F1B442C70000BBE55 /* share_icon@2x.png in Resources */,
 				CB82FC701B442C70000BBE55 /* category_selection_icon@3x.png in Resources */,
+				CB154AB91B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB82FC711B442C70000BBE55 /* venues_icon.png in Resources */,
 				CB82FC721B442C70000BBE55 /* alarm_icon@2x.png in Resources */,
 				CB82FC731B442C70000BBE55 /* mug_orders_gray.png in Resources */,
@@ -15927,9 +15922,9 @@
 				CB82FE4D1B4464F6000BBE55 /* cash_gray.png in Resources */,
 				CB82FE4E1B4464F6000BBE55 /* card@2x.png in Resources */,
 				CB82FF1D1B44659B000BBE55 /* launch_736.png in Resources */,
-				CB82FE4F1B4464F6000BBE55 /* DBBonusPositionsViewController.xib in Resources */,
 				CB82FE501B4464F6000BBE55 /* DBNewOrderViewController.xib in Resources */,
 				CB82FE511B4464F6000BBE55 /* share_icon@2x.png in Resources */,
+				CB154ABA1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB82FE521B4464F6000BBE55 /* category_selection_icon@3x.png in Resources */,
 				CB82FE531B4464F6000BBE55 /* venues_icon.png in Resources */,
 				CB82FE541B4464F6000BBE55 /* alarm_icon@2x.png in Resources */,
@@ -16128,11 +16123,11 @@
 				CB82FFBE1B4579B5000BBE55 /* cash_gray.png in Resources */,
 				CB82FFBF1B4579B5000BBE55 /* card@2x.png in Resources */,
 				CB82008E1B457B4A000BBE55 /* launch_736.png in Resources */,
-				CB82FFC11B4579B5000BBE55 /* DBBonusPositionsViewController.xib in Resources */,
 				CB82FFC21B4579B5000BBE55 /* DBNewOrderViewController.xib in Resources */,
 				CB82FFC31B4579B5000BBE55 /* share_icon@2x.png in Resources */,
 				CB82FFC41B4579B5000BBE55 /* category_selection_icon@3x.png in Resources */,
 				CB82FFC51B4579B5000BBE55 /* venues_icon.png in Resources */,
+				CB154ABB1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CB82FFC61B4579B5000BBE55 /* alarm_icon@2x.png in Resources */,
 				CB82FFC71B4579B5000BBE55 /* mug_orders_gray.png in Resources */,
 				CB82FFC81B4579B5000BBE55 /* menu_icon@3x.png in Resources */,
@@ -16329,7 +16324,6 @@
 				CBD0C56C1B30724300DAD042 /* clock.png in Resources */,
 				CBD0C56D1B30724300DAD042 /* cash_gray.png in Resources */,
 				CBD0C56E1B30724300DAD042 /* card@2x.png in Resources */,
-				CBD0C5701B30724300DAD042 /* DBBonusPositionsViewController.xib in Resources */,
 				CBD0C5711B30724300DAD042 /* DBNewOrderViewController.xib in Resources */,
 				CB82FD691B4444B1000BBE55 /* DBCardAddCell.xib in Resources */,
 				CBD0C5721B30724300DAD042 /* share_icon@2x.png in Resources */,
@@ -16356,6 +16350,7 @@
 				CBD0C5871B30724300DAD042 /* DBDiscountAdvertView.xib in Resources */,
 				CBD0C5881B30724300DAD042 /* arrow.png in Resources */,
 				CBD0C58A1B30724300DAD042 /* close_gray@2x.png in Resources */,
+				CB154AAF1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CBD0C69A1B30A68600DAD042 /* cat_logo@3x.png in Resources */,
 				CBD0C6901B30A68600DAD042 /* cat_logo@2x.png in Resources */,
 				CB82FD911B4444B1000BBE55 /* DBCardCell.xib in Resources */,
@@ -16538,11 +16533,11 @@
 				CBD2EB4E1B2A07D000E4AAA1 /* cash_gray.png in Resources */,
 				CBD2EB4F1B2A07D000E4AAA1 /* card@2x.png in Resources */,
 				CBD2EC381B2A08FA00E4AAA1 /* Images-Voda.xcassets in Resources */,
-				CBD2EB511B2A07D000E4AAA1 /* DBBonusPositionsViewController.xib in Resources */,
 				CBD2EB521B2A07D000E4AAA1 /* DBNewOrderViewController.xib in Resources */,
 				CBD2EB531B2A07D000E4AAA1 /* share_icon@2x.png in Resources */,
 				CBD2EB541B2A07D000E4AAA1 /* category_selection_icon@3x.png in Resources */,
 				CBD2EB551B2A07D000E4AAA1 /* venues_icon.png in Resources */,
+				CB154AAE1B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CBD2EB561B2A07D000E4AAA1 /* alarm_icon@2x.png in Resources */,
 				CBD2EB571B2A07D000E4AAA1 /* mug_orders_gray.png in Resources */,
 				CBD2EB591B2A07D000E4AAA1 /* menu_icon@3x.png in Resources */,
@@ -16741,11 +16736,11 @@
 				CBDC7A1D1B42AFC700935328 /* clock.png in Resources */,
 				CBDC7A1E1B42AFC700935328 /* cash_gray.png in Resources */,
 				CBDC7A1F1B42AFC700935328 /* card@2x.png in Resources */,
-				CBDC7A201B42AFC700935328 /* DBBonusPositionsViewController.xib in Resources */,
 				CBDC7A211B42AFC700935328 /* DBNewOrderViewController.xib in Resources */,
 				CBDC7A221B42AFC700935328 /* share_icon@2x.png in Resources */,
 				CBDC7A231B42AFC700935328 /* category_selection_icon@3x.png in Resources */,
 				CBDC7A241B42AFC700935328 /* venues_icon.png in Resources */,
+				CB154AB81B678788008F749F /* DBBonusPositionsViewController.xib in Resources */,
 				CBDC7A251B42AFC700935328 /* alarm_icon@2x.png in Resources */,
 				CBDC7A261B42AFC700935328 /* mug_orders_gray.png in Resources */,
 				CBDC7A271B42AFC700935328 /* menu_icon@3x.png in Resources */,
@@ -17981,7 +17976,6 @@
 				CB9104F11B19BD1F00506235 /* UIViewController+AlertView.m in Sources */,
 				7E3DAAED1B06153E00A7FFD1 /* DBVenueViewController.m in Sources */,
 				7E3DAAEE1B06153E00A7FFD1 /* DBMenuPositionModifierItem.m in Sources */,
-				CBB0430E1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
 				7E3DAAEF1B06153E00A7FFD1 /* DBOrderItemNotesCell.m in Sources */,
 				CB1430DC1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */,
 				7E3DAAF01B06153E00A7FFD1 /* DBDiscountMessageCell.m in Sources */,
@@ -18060,6 +18054,7 @@
 				7E47E4161B1DEBAA001432D9 /* DBDeliveryViewController.m in Sources */,
 				7E3DAB2B1B06153E00A7FFD1 /* UIView+SnapshotAdditions.m in Sources */,
 				7E3DAB2C1B06153E00A7FFD1 /* DBOrderViewHeader.m in Sources */,
+				CB154A921B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7E3DAB2D1B06153E00A7FFD1 /* IHWebPageViewController.m in Sources */,
 				7E3DAB2E1B06153E00A7FFD1 /* DBOrderBarButtonView.m in Sources */,
 				7E3DAB2F1B06153E00A7FFD1 /* DBConstants.m in Sources */,
@@ -18152,6 +18147,7 @@
 				7E7925421B3C1BDA00CA740D /* JRSwizzleMethods.m in Sources */,
 				7E7925431B3C1BDA00CA740D /* DBOrderItemCell.m in Sources */,
 				7E7925441B3C1BDA00CA740D /* DBBeaconObserver.m in Sources */,
+				CB154A9B1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7E7925451B3C1BDA00CA740D /* EXTSelectorChecking.m in Sources */,
 				7E7925461B3C1BDA00CA740D /* NSInvocation+EXT.m in Sources */,
 				7E7925471B3C1BDA00CA740D /* UIColor+Brandbook.m in Sources */,
@@ -18199,7 +18195,6 @@
 				7E79256D1B3C1BDA00CA740D /* DBOrderBarButtonView.m in Sources */,
 				7E79256E1B3C1BDA00CA740D /* NSObject+Encode.m in Sources */,
 				CB154A351B6678D2008F749F /* DBPromoManager.m in Sources */,
-				7E79256F1B3C1BDA00CA740D /* DBBonusPositionsViewController.m in Sources */,
 				7E7925701B3C1BDA00CA740D /* DBConstants.m in Sources */,
 				7E7925711B3C1BDA00CA740D /* DBDeliveryType.m in Sources */,
 				7E7925721B3C1BDA00CA740D /* DBCategoryPicker.m in Sources */,
@@ -18292,6 +18287,7 @@
 				7E7926C41B3C247D00CA740D /* JRSwizzleMethods.m in Sources */,
 				7E7926C51B3C247D00CA740D /* DBOrderItemCell.m in Sources */,
 				7E7926C61B3C247D00CA740D /* DBBeaconObserver.m in Sources */,
+				CB154A9C1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7E7926C71B3C247D00CA740D /* EXTSelectorChecking.m in Sources */,
 				7E7926C81B3C247D00CA740D /* NSInvocation+EXT.m in Sources */,
 				7E7926C91B3C247D00CA740D /* UIColor+Brandbook.m in Sources */,
@@ -18339,7 +18335,6 @@
 				7E7926EF1B3C247D00CA740D /* DBOrderBarButtonView.m in Sources */,
 				7E7926F01B3C247D00CA740D /* NSObject+Encode.m in Sources */,
 				CB154A361B6678D3008F749F /* DBPromoManager.m in Sources */,
-				7E7926F11B3C247D00CA740D /* DBBonusPositionsViewController.m in Sources */,
 				7E7926F21B3C247D00CA740D /* DBConstants.m in Sources */,
 				7E7926F31B3C247D00CA740D /* DBDeliveryType.m in Sources */,
 				7E7926F41B3C247D00CA740D /* DBCategoryPicker.m in Sources */,
@@ -18432,6 +18427,7 @@
 				7E8BD5CC1B5027AA00CAFD5C /* DBMenuCategory.m in Sources */,
 				7E8BD5CD1B5027AA00CAFD5C /* JRSwizzleMethods.m in Sources */,
 				7E8BD5CE1B5027AA00CAFD5C /* DBOrderItemCell.m in Sources */,
+				CB154AA51B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7E8BD5CF1B5027AA00CAFD5C /* DBBeaconObserver.m in Sources */,
 				7E8BD5D01B5027AA00CAFD5C /* EXTSelectorChecking.m in Sources */,
 				7E8BD5D11B5027AA00CAFD5C /* NSInvocation+EXT.m in Sources */,
@@ -18479,7 +18475,6 @@
 				7E8BD5F71B5027AA00CAFD5C /* DBOrderBarButtonView.m in Sources */,
 				7E8BD5F81B5027AA00CAFD5C /* NSObject+Encode.m in Sources */,
 				CB154A3F1B6678D9008F749F /* DBPromoManager.m in Sources */,
-				7E8BD5F91B5027AA00CAFD5C /* DBBonusPositionsViewController.m in Sources */,
 				7E8BD5FA1B5027AA00CAFD5C /* DBConstants.m in Sources */,
 				7E8BD5FB1B5027AA00CAFD5C /* DBDeliveryType.m in Sources */,
 				7E8BD5FC1B5027AA00CAFD5C /* DBCategoryPicker.m in Sources */,
@@ -18572,6 +18567,7 @@
 				7EB2D1891B3C3581009405C6 /* JRSwizzleMethods.m in Sources */,
 				7EB2D18A1B3C3581009405C6 /* DBOrderItemCell.m in Sources */,
 				7EB2D18B1B3C3581009405C6 /* DBBeaconObserver.m in Sources */,
+				CB154A9D1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D18C1B3C3581009405C6 /* EXTSelectorChecking.m in Sources */,
 				7EB2D18D1B3C3581009405C6 /* NSInvocation+EXT.m in Sources */,
 				7EB2D18E1B3C3581009405C6 /* UIColor+Brandbook.m in Sources */,
@@ -18619,7 +18615,6 @@
 				7EB2D1B41B3C3581009405C6 /* DBOrderBarButtonView.m in Sources */,
 				7EB2D1B51B3C3581009405C6 /* NSObject+Encode.m in Sources */,
 				CB154A371B6678D3008F749F /* DBPromoManager.m in Sources */,
-				7EB2D1B61B3C3581009405C6 /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D1B71B3C3581009405C6 /* DBConstants.m in Sources */,
 				7EB2D1B81B3C3581009405C6 /* DBDeliveryType.m in Sources */,
 				7EB2D1B91B3C3581009405C6 /* DBCategoryPicker.m in Sources */,
@@ -18712,6 +18707,7 @@
 				7EB2D2F81B3C51A2009405C6 /* JRSwizzleMethods.m in Sources */,
 				7EB2D2F91B3C51A2009405C6 /* DBOrderItemCell.m in Sources */,
 				7EB2D2FA1B3C51A2009405C6 /* DBBeaconObserver.m in Sources */,
+				CB154A9E1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D2FB1B3C51A2009405C6 /* EXTSelectorChecking.m in Sources */,
 				7EB2D2FC1B3C51A2009405C6 /* NSInvocation+EXT.m in Sources */,
 				7EB2D2FD1B3C51A2009405C6 /* UIColor+Brandbook.m in Sources */,
@@ -18759,7 +18755,6 @@
 				7EB2D3231B3C51A2009405C6 /* DBOrderBarButtonView.m in Sources */,
 				7EB2D3241B3C51A2009405C6 /* NSObject+Encode.m in Sources */,
 				CB154A381B6678D4008F749F /* DBPromoManager.m in Sources */,
-				7EB2D3251B3C51A2009405C6 /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D3261B3C51A2009405C6 /* DBConstants.m in Sources */,
 				7EB2D3271B3C51A2009405C6 /* DBDeliveryType.m in Sources */,
 				7EB2D3281B3C51A2009405C6 /* DBCategoryPicker.m in Sources */,
@@ -18852,6 +18847,7 @@
 				7EB2D4681B3C5C77009405C6 /* JRSwizzleMethods.m in Sources */,
 				7EB2D4691B3C5C77009405C6 /* DBOrderItemCell.m in Sources */,
 				7EB2D46A1B3C5C77009405C6 /* DBBeaconObserver.m in Sources */,
+				CB154A9F1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D46B1B3C5C77009405C6 /* EXTSelectorChecking.m in Sources */,
 				7EB2D46C1B3C5C77009405C6 /* NSInvocation+EXT.m in Sources */,
 				7EB2D46D1B3C5C77009405C6 /* UIColor+Brandbook.m in Sources */,
@@ -18899,7 +18895,6 @@
 				7EB2D4931B3C5C77009405C6 /* DBOrderBarButtonView.m in Sources */,
 				7EB2D4941B3C5C77009405C6 /* NSObject+Encode.m in Sources */,
 				CB154A391B6678D6008F749F /* DBPromoManager.m in Sources */,
-				7EB2D4951B3C5C77009405C6 /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D4961B3C5C77009405C6 /* DBConstants.m in Sources */,
 				7EB2D4971B3C5C77009405C6 /* DBDeliveryType.m in Sources */,
 				7EB2D4981B3C5C77009405C6 /* DBCategoryPicker.m in Sources */,
@@ -18992,6 +18987,7 @@
 				7EDB591B1B32F70400723DF9 /* JRSwizzleMethods.m in Sources */,
 				7EDB591C1B32F70400723DF9 /* DBOrderItemCell.m in Sources */,
 				7EDB591D1B32F70400723DF9 /* DBBeaconObserver.m in Sources */,
+				CB154A9A1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				7EDB591E1B32F70400723DF9 /* EXTSelectorChecking.m in Sources */,
 				7EDB591F1B32F70400723DF9 /* NSInvocation+EXT.m in Sources */,
 				7EDB59201B32F70400723DF9 /* UIColor+Brandbook.m in Sources */,
@@ -19039,7 +19035,6 @@
 				7EDB59481B32F70400723DF9 /* DBOrderBarButtonView.m in Sources */,
 				7EDB59491B32F70400723DF9 /* NSObject+Encode.m in Sources */,
 				CB154A341B6678D2008F749F /* DBPromoManager.m in Sources */,
-				7EDB594A1B32F70400723DF9 /* DBBonusPositionsViewController.m in Sources */,
 				7EDB594B1B32F70400723DF9 /* DBConstants.m in Sources */,
 				7EDB594C1B32F70400723DF9 /* DBDeliveryType.m in Sources */,
 				7EDB594D1B32F70400723DF9 /* DBCategoryPicker.m in Sources */,
@@ -19124,6 +19119,7 @@
 				7ECA94CC1B6654DB0044DB31 /* OrderCoordinator.m in Sources */,
 				CB1431071B0E371A00DD50C7 /* UIViewController+DBAnimation.m in Sources */,
 				CB1431081B0E371A00DD50C7 /* EXTRuntimeExtensions.m in Sources */,
+				CB154A8E1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB1431091B0E371A00DD50C7 /* DBCommentViewController.m in Sources */,
 				CB14310A1B0E371A00DD50C7 /* Order.m in Sources */,
 				CB14310B1B0E371A00DD50C7 /* UIImageView+Extension.m in Sources */,
@@ -19184,7 +19180,6 @@
 				CB1431381B0E371A00DD50C7 /* IHWebPageViewController.m in Sources */,
 				7EBFD7861B5A78440054B583 /* UIImage+Color.m in Sources */,
 				CB1431391B0E371A00DD50C7 /* DBOrderBarButtonView.m in Sources */,
-				CB14313A1B0E371A00DD50C7 /* DBBonusPositionsViewController.m in Sources */,
 				CB64FF9F1B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB14313B1B0E371A00DD50C7 /* DBConstants.m in Sources */,
 				CB14313C1B0E371A00DD50C7 /* DBCategoryPicker.m in Sources */,
@@ -19319,10 +19314,10 @@
 				CB9782AD1B1DF812000B5625 /* DBPromosListViewController.m in Sources */,
 				CB14329B1B0F1BBB00DD50C7 /* DBOrderViewHeader.m in Sources */,
 				CB14329C1B0F1BBB00DD50C7 /* IHWebPageViewController.m in Sources */,
+				CB154A931B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB64FFA41B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB14329D1B0F1BBB00DD50C7 /* DBOrderBarButtonView.m in Sources */,
 				7EBFD7581B5A62720054B583 /* PositionCollectionViewCell.m in Sources */,
-				CB14329E1B0F1BBB00DD50C7 /* DBBonusPositionsViewController.m in Sources */,
 				7ECA95871B669C960044DB31 /* PositionViewController2.m in Sources */,
 				CB154A2D1B6678CD008F749F /* DBPromoManager.m in Sources */,
 				CB14329F1B0F1BBB00DD50C7 /* DBConstants.m in Sources */,
@@ -19380,7 +19375,6 @@
 				CB9104EF1B19BD1E00506235 /* UIViewController+AlertView.m in Sources */,
 				CB1AF7741AE10E6900FA3224 /* DBVenueViewController.m in Sources */,
 				CB1AF7751AE10E6900FA3224 /* DBMenuPositionModifierItem.m in Sources */,
-				CBB0430C1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
 				CB1AF7761AE10E6900FA3224 /* DBOrderItemNotesCell.m in Sources */,
 				CB1430DB1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */,
 				CB1AF7771AE10E6900FA3224 /* DBDiscountMessageCell.m in Sources */,
@@ -19459,6 +19453,7 @@
 				7E47E4141B1DEBA8001432D9 /* DBDeliveryViewController.m in Sources */,
 				CB1AF7AF1AE10E6900FA3224 /* UIView+SnapshotAdditions.m in Sources */,
 				CB1AF7B01AE10E6900FA3224 /* DBOrderViewHeader.m in Sources */,
+				CB154A901B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB1AF7B11AE10E6900FA3224 /* IHWebPageViewController.m in Sources */,
 				7EBFD7541B5A626E0054B583 /* PositionCollectionViewCell.m in Sources */,
 				CBE162B91AE13C92006BB81F /* DBOrderBarButtonView.m in Sources */,
@@ -19597,9 +19592,9 @@
 				CB154A451B6678E0008F749F /* ShippingManager.m in Sources */,
 				CB3BA32A1B20589300F320CA /* DBOrderViewHeader.m in Sources */,
 				CB3BA32B1B20589300F320CA /* IHWebPageViewController.m in Sources */,
+				CB154A941B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB3BA32C1B20589300F320CA /* DBOrderBarButtonView.m in Sources */,
 				CB64FFA51B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				CB3BA32D1B20589300F320CA /* DBBonusPositionsViewController.m in Sources */,
 				7EBFD7571B5A62700054B583 /* PositionCollectionViewCell.m in Sources */,
 				CB3BA32E1B20589300F320CA /* DBConstants.m in Sources */,
 				7ECA95881B669C960044DB31 /* PositionViewController2.m in Sources */,
@@ -19658,7 +19653,6 @@
 				CB9104F01B19BD1E00506235 /* UIViewController+AlertView.m in Sources */,
 				CB517B4B1AEFB6B500A50F5C /* DBVenueViewController.m in Sources */,
 				CB517B4C1AEFB6B500A50F5C /* DBMenuPositionModifierItem.m in Sources */,
-				CBB0430D1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
 				CB517B4D1AEFB6B500A50F5C /* DBOrderItemNotesCell.m in Sources */,
 				CB1430DD1B0DE92F00DD50C7 /* DBMenuBonusPosition.m in Sources */,
 				CB517B4E1AEFB6B500A50F5C /* DBDiscountMessageCell.m in Sources */,
@@ -19737,6 +19731,7 @@
 				7E47E4151B1DEBAA001432D9 /* DBDeliveryViewController.m in Sources */,
 				CB517B881AEFB6B500A50F5C /* UIView+SnapshotAdditions.m in Sources */,
 				CB517B891AEFB6B500A50F5C /* DBOrderViewHeader.m in Sources */,
+				CB154A911B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB517B8A1AEFB6B500A50F5C /* IHWebPageViewController.m in Sources */,
 				7EBFD7561B5A62700054B583 /* PositionCollectionViewCell.m in Sources */,
 				CB517B8B1AEFB6B500A50F5C /* DBOrderBarButtonView.m in Sources */,
@@ -19875,9 +19870,9 @@
 				CB154A461B6678E1008F749F /* ShippingManager.m in Sources */,
 				CB5AFC741B27209A00904BF7 /* DBOrderViewHeader.m in Sources */,
 				CB5AFC751B27209A00904BF7 /* IHWebPageViewController.m in Sources */,
+				CB154A951B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB5AFC761B27209A00904BF7 /* DBOrderBarButtonView.m in Sources */,
 				CB64FFA61B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				CB5AFC771B27209A00904BF7 /* DBBonusPositionsViewController.m in Sources */,
 				7EBFD7591B5A62720054B583 /* PositionCollectionViewCell.m in Sources */,
 				CB5AFC781B27209A00904BF7 /* DBConstants.m in Sources */,
 				7ECA95891B669C960044DB31 /* PositionViewController2.m in Sources */,
@@ -20014,7 +20009,7 @@
 				CB60C0E41AC5AD2600D5E962 /* DBOrderViewHeader.m in Sources */,
 				CB60C0E51AC5AD2600D5E962 /* IHWebPageViewController.m in Sources */,
 				CBE162B81AE1376F006BB81F /* DBOrderBarButtonView.m in Sources */,
-				CBB0430B1B0CAEFF00901173 /* DBBonusPositionsViewController.m in Sources */,
+				CB154A8F1B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB60C0E61AC5AD2600D5E962 /* DBConstants.m in Sources */,
 				7EBFD7551B5A626E0054B583 /* PositionCollectionViewCell.m in Sources */,
 				CB1433A91B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
@@ -20153,9 +20148,9 @@
 				CB154A491B6678E2008F749F /* ShippingManager.m in Sources */,
 				CB64FE531B317F760011CEEC /* DBOrderViewHeader.m in Sources */,
 				CB64FE541B317F760011CEEC /* IHWebPageViewController.m in Sources */,
+				CB154A981B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB64FE551B317F760011CEEC /* DBOrderBarButtonView.m in Sources */,
 				CB64FFA91B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				CB64FE561B317F760011CEEC /* DBBonusPositionsViewController.m in Sources */,
 				7EBFD75C1B5A62740054B583 /* PositionCollectionViewCell.m in Sources */,
 				CB64FE581B317F760011CEEC /* DBConstants.m in Sources */,
 				7ECA958C1B669C960044DB31 /* PositionViewController2.m in Sources */,
@@ -20246,6 +20241,7 @@
 				CB64FFD61B31B7CF0011CEEC /* JRSwizzleMethods.m in Sources */,
 				CB64FFD71B31B7CF0011CEEC /* DBOrderItemCell.m in Sources */,
 				CB64FFD81B31B7CF0011CEEC /* DBBeaconObserver.m in Sources */,
+				CB154A991B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB64FFD91B31B7CF0011CEEC /* EXTSelectorChecking.m in Sources */,
 				CB64FFDA1B31B7CF0011CEEC /* NSInvocation+EXT.m in Sources */,
 				CB64FFDB1B31B7CF0011CEEC /* UIColor+Brandbook.m in Sources */,
@@ -20293,7 +20289,6 @@
 				CB6400031B31B7CF0011CEEC /* DBOrderBarButtonView.m in Sources */,
 				CB6400041B31B7CF0011CEEC /* NSObject+Encode.m in Sources */,
 				CB154A331B6678D0008F749F /* DBPromoManager.m in Sources */,
-				CB6400051B31B7CF0011CEEC /* DBBonusPositionsViewController.m in Sources */,
 				CB6400061B31B7CF0011CEEC /* DBConstants.m in Sources */,
 				CB6400071B31B7CF0011CEEC /* DBDeliveryType.m in Sources */,
 				CB6400081B31B7CF0011CEEC /* DBCategoryPicker.m in Sources */,
@@ -20386,6 +20381,7 @@
 				CB8200BC1B46CBB4000BBE55 /* DBMenuCategory.m in Sources */,
 				CB8200BD1B46CBB4000BBE55 /* JRSwizzleMethods.m in Sources */,
 				CB8200BE1B46CBB4000BBE55 /* DBOrderItemCell.m in Sources */,
+				CB154AA41B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB8200BF1B46CBB4000BBE55 /* DBBeaconObserver.m in Sources */,
 				CB8200C01B46CBB4000BBE55 /* EXTSelectorChecking.m in Sources */,
 				CB8200C11B46CBB4000BBE55 /* NSInvocation+EXT.m in Sources */,
@@ -20433,7 +20429,6 @@
 				CB8200E71B46CBB4000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB8200E81B46CBB4000BBE55 /* NSObject+Encode.m in Sources */,
 				CB154A3E1B6678D9008F749F /* DBPromoManager.m in Sources */,
-				CB8200E91B46CBB4000BBE55 /* DBBonusPositionsViewController.m in Sources */,
 				CB8200EA1B46CBB4000BBE55 /* DBConstants.m in Sources */,
 				CB8200EB1B46CBB4000BBE55 /* DBDeliveryType.m in Sources */,
 				CB8200EC1B46CBB4000BBE55 /* DBCategoryPicker.m in Sources */,
@@ -20526,6 +20521,7 @@
 				CB82FBF91B442C70000BBE55 /* DBMenuCategory.m in Sources */,
 				CB82FBFA1B442C70000BBE55 /* JRSwizzleMethods.m in Sources */,
 				CB82FBFB1B442C70000BBE55 /* DBOrderItemCell.m in Sources */,
+				CB154AA11B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB82FBFC1B442C70000BBE55 /* DBBeaconObserver.m in Sources */,
 				CB82FBFD1B442C70000BBE55 /* EXTSelectorChecking.m in Sources */,
 				CB82FBFE1B442C70000BBE55 /* NSInvocation+EXT.m in Sources */,
@@ -20573,7 +20569,6 @@
 				CB82FC251B442C70000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB82FC261B442C70000BBE55 /* NSObject+Encode.m in Sources */,
 				CB154A3B1B6678D7008F749F /* DBPromoManager.m in Sources */,
-				CB82FC271B442C70000BBE55 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FC281B442C70000BBE55 /* DBConstants.m in Sources */,
 				CB82FC291B442C70000BBE55 /* DBDeliveryType.m in Sources */,
 				CB82FC2A1B442C70000BBE55 /* DBCategoryPicker.m in Sources */,
@@ -20666,6 +20661,7 @@
 				CB82FDDA1B4464F6000BBE55 /* DBMenuCategory.m in Sources */,
 				CB82FDDB1B4464F6000BBE55 /* JRSwizzleMethods.m in Sources */,
 				CB82FDDC1B4464F6000BBE55 /* DBOrderItemCell.m in Sources */,
+				CB154AA21B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB82FDDD1B4464F6000BBE55 /* DBBeaconObserver.m in Sources */,
 				CB82FDDE1B4464F6000BBE55 /* EXTSelectorChecking.m in Sources */,
 				CB82FDDF1B4464F6000BBE55 /* NSInvocation+EXT.m in Sources */,
@@ -20713,7 +20709,6 @@
 				CB82FE051B4464F6000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB82FE061B4464F6000BBE55 /* NSObject+Encode.m in Sources */,
 				CB154A3C1B6678D7008F749F /* DBPromoManager.m in Sources */,
-				CB82FE071B4464F6000BBE55 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FE081B4464F6000BBE55 /* DBConstants.m in Sources */,
 				CB82FE091B4464F6000BBE55 /* DBDeliveryType.m in Sources */,
 				CB82FE0A1B4464F6000BBE55 /* DBCategoryPicker.m in Sources */,
@@ -20806,6 +20801,7 @@
 				CB82FF4B1B4579B5000BBE55 /* DBMenuCategory.m in Sources */,
 				CB82FF4C1B4579B5000BBE55 /* JRSwizzleMethods.m in Sources */,
 				CB82FF4D1B4579B5000BBE55 /* DBOrderItemCell.m in Sources */,
+				CB154AA31B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CB82FF4E1B4579B5000BBE55 /* DBBeaconObserver.m in Sources */,
 				CB82FF4F1B4579B5000BBE55 /* EXTSelectorChecking.m in Sources */,
 				CB82FF501B4579B5000BBE55 /* NSInvocation+EXT.m in Sources */,
@@ -20853,7 +20849,6 @@
 				CB82FF761B4579B5000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB82FF771B4579B5000BBE55 /* NSObject+Encode.m in Sources */,
 				CB154A3D1B6678D8008F749F /* DBPromoManager.m in Sources */,
-				CB82FF781B4579B5000BBE55 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FF791B4579B5000BBE55 /* DBConstants.m in Sources */,
 				CB82FF7A1B4579B5000BBE55 /* DBDeliveryType.m in Sources */,
 				CB82FF7B1B4579B5000BBE55 /* DBCategoryPicker.m in Sources */,
@@ -20946,6 +20941,7 @@
 				CBD0C4FA1B30724300DAD042 /* DBMenuCategory.m in Sources */,
 				CBD0C4FB1B30724300DAD042 /* JRSwizzleMethods.m in Sources */,
 				CBD0C4FC1B30724300DAD042 /* DBOrderItemCell.m in Sources */,
+				CB154A971B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CBD0C4FD1B30724300DAD042 /* DBBeaconObserver.m in Sources */,
 				CBD0C4FE1B30724300DAD042 /* EXTSelectorChecking.m in Sources */,
 				CBD0C4FF1B30724300DAD042 /* NSInvocation+EXT.m in Sources */,
@@ -20991,7 +20987,6 @@
 				CBD0C5261B30724300DAD042 /* DBOrderViewHeader.m in Sources */,
 				CBD0C5271B30724300DAD042 /* IHWebPageViewController.m in Sources */,
 				CBD0C5281B30724300DAD042 /* DBOrderBarButtonView.m in Sources */,
-				CBD0C5291B30724300DAD042 /* DBBonusPositionsViewController.m in Sources */,
 				CB154A311B6678CF008F749F /* DBPromoManager.m in Sources */,
 				CBD0C6631B309F0800DAD042 /* DBCatNewOrderViewController.m in Sources */,
 				CBD0C52A1B30724300DAD042 /* DBConstants.m in Sources */,
@@ -21132,9 +21127,9 @@
 				CB154A471B6678E1008F749F /* ShippingManager.m in Sources */,
 				CBD2EB081B2A07D000E4AAA1 /* DBOrderViewHeader.m in Sources */,
 				CBD2EB091B2A07D000E4AAA1 /* IHWebPageViewController.m in Sources */,
+				CB154A961B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CBD2EB0A1B2A07D000E4AAA1 /* DBOrderBarButtonView.m in Sources */,
 				CB64FFA71B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				CBD2EB0B1B2A07D000E4AAA1 /* DBBonusPositionsViewController.m in Sources */,
 				7EBFD75A1B5A62730054B583 /* PositionCollectionViewCell.m in Sources */,
 				CBD2EB0C1B2A07D000E4AAA1 /* DBConstants.m in Sources */,
 				7ECA958A1B669C960044DB31 /* PositionViewController2.m in Sources */,
@@ -21225,6 +21220,7 @@
 				CBDC79AE1B42AFC700935328 /* JRSwizzleMethods.m in Sources */,
 				CBDC79AF1B42AFC700935328 /* DBOrderItemCell.m in Sources */,
 				CBDC79B01B42AFC700935328 /* DBBeaconObserver.m in Sources */,
+				CB154AA01B678788008F749F /* DBBonusPositionsViewController.m in Sources */,
 				CBDC79B11B42AFC700935328 /* EXTSelectorChecking.m in Sources */,
 				CBDC79B21B42AFC700935328 /* NSInvocation+EXT.m in Sources */,
 				CBDC79B31B42AFC700935328 /* UIColor+Brandbook.m in Sources */,
@@ -21272,7 +21268,6 @@
 				CBDC79D91B42AFC700935328 /* DBOrderBarButtonView.m in Sources */,
 				CBDC79DA1B42AFC700935328 /* NSObject+Encode.m in Sources */,
 				CB154A3A1B6678D6008F749F /* DBPromoManager.m in Sources */,
-				CBDC79DB1B42AFC700935328 /* DBBonusPositionsViewController.m in Sources */,
 				CBDC79DC1B42AFC700935328 /* DBConstants.m in Sources */,
 				CBDC79DD1B42AFC700935328 /* DBDeliveryType.m in Sources */,
 				CBDC79DE1B42AFC700935328 /* DBCategoryPicker.m in Sources */,

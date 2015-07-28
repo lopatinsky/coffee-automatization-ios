@@ -17,11 +17,6 @@
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
 #import "OrderCoordinator.h"
-#import "ItemsManager.h"
-#import "BonusItemsManager.h"
-#import "ShippingManager.h"
-#import "DeliverySettings.h"
-#import "OrderManager.h"
 #import "Order.h"
 #import "DBMenuPosition.h"
 #import "DBMenuBonusPosition.h"
@@ -198,6 +193,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if ([DBCompanyInfo sharedInstance].topScreenType == TVCMenu) {
         [self pushPositionsViewControllerAnimated:NO];
     }
+    
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(promoUpdateHandler)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -349,52 +346,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Promo
 
 - (void)startUpdatingPromoInfo{
-    BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder:^(BOOL success) {
-        [self endUpdatingPromoInfo];
-        
-        if(success){
-            // Show order promos & errors
-            NSArray *promos = _orderCoordinator.promoManager.promos;
-            NSArray *errors = _orderCoordinator.promoManager.errors;
-            
-            [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
-            
-            BOOL shouldReloadAgain = NO;
-            for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
-                OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
-                DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
-                
-                DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-                cell.promoItem = promoItem;
-                
-                if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
-                    [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
-                    [promoItem clear];
-                    shouldReloadAgain = YES;
-                    
-                    [GANHelper analyzeEvent:@"position_autoreplace"
-                                      label:item.position.positionId
-                                   category:ORDER_SCREEN];
-                }
-            }
-
-            if(shouldReloadAgain){
-                [self startUpdatingPromoInfo];
-            }
-            [self reloadVisibleCells];
-            
-            // Gifts logic
-            [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
-
-        } else {
-            [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
-                                      animation:^{
-                                          [self.scrollView layoutIfNeeded];
-                                      } completion:nil];
-        }
-        
-        [self reloadBonusesView:YES];
-    }];
+    BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder];
     
     if(startUpdating){
         [self.totalView startUpdating];
@@ -406,6 +358,52 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.totalView endUpdating];
     
     [self reloadContinueButton];
+}
+
+- (void)promoUpdateHandler{
+    [self endUpdatingPromoInfo];
+    
+    if(_orderCoordinator.promoManager.validOrder){
+        // Show order promos & errors
+        NSArray *promos = _orderCoordinator.promoManager.promos;
+        NSArray *errors = _orderCoordinator.promoManager.errors;
+        
+        [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
+        
+        BOOL shouldReloadAgain = NO;
+        for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
+            OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
+            DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
+            
+            DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+            cell.promoItem = promoItem;
+            
+            if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
+                [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+                [promoItem clear];
+                shouldReloadAgain = YES;
+                
+                [GANHelper analyzeEvent:@"position_autoreplace"
+                                  label:item.position.positionId
+                               category:ORDER_SCREEN];
+            }
+        }
+        
+        if(shouldReloadAgain){
+            [self startUpdatingPromoInfo];
+        }
+        [self reloadVisibleCells];
+        
+        // Gifts logic
+        [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
+    } else {
+        [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
+                                  animation:^{
+                                      [self.scrollView layoutIfNeeded];
+                                  } completion:nil];
+    }
+    
+    [self reloadBonusesView:YES];
 }
 
 - (void) showOrHideAdditionalInfoViewWithErrors:(NSArray *)errors promos:(NSArray *)promos {
@@ -591,7 +589,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.tableView endUpdates];
     
     if (_orderCoordinator.itemsManager.totalCount == 0) {
-        [_orderCoordinator.promoManager flushCache];
         [self reloadBonusesView:YES];
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];

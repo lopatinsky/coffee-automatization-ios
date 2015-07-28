@@ -10,7 +10,7 @@
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 #import "DBBarButtonItem.h"
 #import "DBPromoManager.h"
 #import "DBPositionModifierCell.h"
@@ -175,9 +175,9 @@
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
         if (self.position.positionType == General) {
-            [[OrderManager sharedManager] addPosition:self.position];
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
         } else {
-            [[OrderManager sharedManager] addBonusPosition:self.position];
+            [[OrderCoordinator sharedInstance].bonusItemsManager addBonusPosition:(DBMenuBonusPosition *)self.position];
             if ([self.position.productDictionary[@"points"] floatValue] > [self totalPoints]) {
                 self.priceButton.enabled = NO;
                 self.priceLabel.alpha = 0.6;
@@ -225,7 +225,7 @@
 }
 
 - (double)totalPoints{
-    return [DBPromoManager sharedManager].bonusPointsBalance - [OrderManager sharedManager].totalBonusPositionsPrice;
+    return [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalCount;
 }
 
 #pragma mark - UITableViewDelegate

@@ -7,9 +7,12 @@
 //
 
 #import "DBNewOrderTotalView.h"
-#import "OrderManager.h"
-#import "DBPromoManager.h"
+#import "OrderCoordinator.h"
 #import "Compatibility.h"
+
+@interface DBNewOrderTotalView ()
+@property (strong, nonatomic) OrderCoordinator *orderCoordinator;
+@end
 
 @implementation DBNewOrderTotalView
 
@@ -18,44 +21,23 @@
     
     self.labelShippingTotal.textColor = [UIColor db_defaultColor];
     
-    [[OrderManager sharedManager] addObserver:self
-                                   forKeyPath:@"totalPrice"
-                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                      context:nil];
-    [[DBPromoManager sharedManager] addObserver:self
-                                     forKeyPath:@"totalDiscount"
-                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                        context:nil];
-    [[DBPromoManager sharedManager] addObserver:self
-                                     forKeyPath:@"shippingPrice"
-                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                        context:nil];
+    self.orderCoordinator = [OrderCoordinator sharedInstance];
+    [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalPrice, CoordinatorNotificationOrderDiscount, CoordinatorNotificationOrderWalletDiscount, CoordinatorNotificationOrderShippingPrice] selector:@selector(reloadTotal)];
     
     [self reloadTotal];
 }
 
 - (void)dealloc{
-    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"totalPrice"];
-    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"totalDiscount"];
-    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"shippingPrice"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context{
-    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"totalDiscount"] || [keyPath isEqualToString:@"shippingPrice"]){
-        [self reloadTotal];
-    }
+    [_orderCoordinator removeObserver:self];
 }
 
 - (void)reloadTotal{
-    double actualTotal = [OrderManager sharedManager].totalPrice - [DBPromoManager sharedManager].totalDiscount + [DBPromoManager sharedManager].shippingPrice;
+    double actualTotal = _orderCoordinator.itemsManager.totalPrice - _orderCoordinator.promoManager.totalDiscount + _orderCoordinator.promoManager.shippingPrice;
     NSString *actualTotalString = [NSString stringWithFormat:@"%.0f %@", actualTotal, [Compatibility currencySymbol]];
     
     NSString *oldTotalString;
-    if([DBPromoManager sharedManager].totalDiscount > 0){
-        oldTotalString= [NSString stringWithFormat:@"%.0f ", [OrderManager sharedManager].totalPrice];
+    if(_orderCoordinator.promoManager.totalDiscount > 0){
+        oldTotalString= [NSString stringWithFormat:@"%.0f ", _orderCoordinator.itemsManager.totalPrice];
     } else {
         oldTotalString = @"";
     }
@@ -70,7 +52,7 @@
     self.labelOldTotal.attributedText = totalString;
     self.labelActualTotal.text = actualTotalString;
     
-    double shippingTotal = [DBPromoManager sharedManager].shippingPrice;
+    double shippingTotal = _orderCoordinator.promoManager.shippingPrice;
     if(shippingTotal > 0){
         self.labelShippingTotal.hidden = NO;
         self.labelShippingTotal.text = [NSString stringWithFormat:@"(%@: %.0f%@)", NSLocalizedString(@"Стоимость доставки", nil), shippingTotal, [Compatibility currencySymbol]];

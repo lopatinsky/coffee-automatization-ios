@@ -18,7 +18,7 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBPositionCell.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 #import "Venue.h"
 
 #import "MBProgressHUD.h"
@@ -184,24 +184,29 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
         [self reloadCollectionView];
     }
     
-    if (self.refreshControl) {
-        [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
+    Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
+    if(refreshControl){
+        [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if ([OrderManager sharedManager].venue.venueId) {
-            if (!self.lastVenueId || ![self.lastVenueId isEqualToString:[OrderManager sharedManager].venue.venueId]) {
-                self.lastVenueId = [OrderManager sharedManager].venue.venueId;
-                self.categories = [[DBMenu sharedInstance] getMenuForVenue:[OrderManager sharedManager].venue];
+        if(venue.venueId){
+            // Load menu for current Venue
+            if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
+                self.lastVenueId = venue.venueId;
+                
+                self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
             }
         } else {
+            // Load whole menu
             self.categories = [[DBMenu sharedInstance] getMenu];
         }
         
-        if (self.categories && [self.categories count] > 0) {
+        
+        if (self.categories && [self.categories count] > 0){
             [self reloadCollectionView];
         } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[DBMenu sharedInstance] updateMenuForVenue:[OrderManager sharedManager].venue
+            [[DBMenu sharedInstance] updateMenuForVenue:venue
                                              remoteMenu:menuUpdateHandler];
         }
     }
@@ -279,7 +284,7 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
 }
 
 - (void)cartAddPositionFromCell:(DBMenuPosition *)position {
-    [[OrderManager sharedManager] addPosition:position];
+    [[OrderCoordinator sharedInstance].itemsManager addPosition:position];
     [GANHelper analyzeEvent:@"product_added" label:position.positionId category:MENU_SCREEN];
 }
 

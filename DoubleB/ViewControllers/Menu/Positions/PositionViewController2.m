@@ -8,7 +8,7 @@
 
 #import "PositionViewController2.h"
 #import "Compatibility.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 
 #import "DBBarButtonItem.h"
 #import "DBMenuPosition.h"
@@ -171,7 +171,7 @@
 - (IBAction)priceButtonClick:(id)sender {
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
-        [[OrderManager sharedManager] addPosition:self.position];
+        [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
     }];
 }
 

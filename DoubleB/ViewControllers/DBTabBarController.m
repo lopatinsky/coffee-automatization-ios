@@ -75,8 +75,6 @@
         self.viewControllers = tabBarControllers;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderCreatedNotification:) name:kDBNewOrderCreatedNotification object:nil];
-        
-        self.delegate = self;
     }
     return self;
 }
@@ -124,12 +122,9 @@
                                    }];
 }
 
-
-#pragma mark - UITabBarControllerDelegate
-
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+- (void)setSelectedIndex:(NSUInteger)selectedIndex{
     NSString *category = @"";
-    switch (tabBarController.selectedIndex) {
+    switch (self.selectedIndex) {
         case 0:
             category = MENU_SCREEN;
             break;
@@ -144,7 +139,7 @@
     }
     
     NSString *event = @"";
-    switch ([tabBarController.viewControllers indexOfObject:viewController]) {
+    switch (selectedIndex) {
         case 0:
             event = @"footer_order_click";
             break;
@@ -159,8 +154,6 @@
     }
     
     [GANHelper analyzeEvent:event category:category];
-        
-    return YES;
 }
 
 @end
