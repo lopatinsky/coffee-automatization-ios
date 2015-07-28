@@ -58,13 +58,14 @@
     }
     
     //styling
-//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    self.window.backgroundColor = [UIColor whiteColor];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
 
     
     [ApplicationManager applyBrandbookStyle];
     
     self.window.rootViewController = [ApplicationManager rootViewController];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
