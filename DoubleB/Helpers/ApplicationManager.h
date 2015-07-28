@@ -10,6 +10,20 @@
 
 @interface ApplicationManager : NSObject
 
++ (nonnull UIViewController *)rootViewController;
 + (void)copyPlists;
+
+@end
+
+@interface ApplicationManager(Initialization)
+
++ (void)initializeVendorFrameworks;
++ (void)initializeOrderFramework;
+
+@end
+
+@interface ApplicationManager(Appearance)
+
++ (void)applyBrandbookStyle;
 
 @end
