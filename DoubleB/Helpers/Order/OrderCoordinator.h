@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, CoordinatorNotification) {
 - (BOOL)validOrder;
 
 - (void)addObserver:(NSObject * __nonnull)object withKeyPath:(CoordinatorNotification)keyName selector:(__nonnull SEL)selector;
-- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(CoordinatorNotification)keyName;
-- (void)removeObserver:(NSObject * __nonnull )observer;
+- (void)removeObserver:(NSObject * __nonnull)observer forKeyPath:(CoordinatorNotification)keyName;
+- (void)removeObserver:(NSObject * __nonnull)observer;
 
 @end
