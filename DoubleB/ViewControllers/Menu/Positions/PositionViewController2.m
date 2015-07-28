@@ -9,7 +9,6 @@
 #import "PositionViewController2.h"
 #import "Compatibility.h"
 #import "OrderCoordinator.h"
-#import "ItemsManager.h"
 
 #import "DBBarButtonItem.h"
 #import "DBMenuPosition.h"

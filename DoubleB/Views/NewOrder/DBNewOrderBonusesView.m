@@ -7,6 +7,7 @@
 //
 
 #import "DBNewOrderBonusesView.h"
+#import "OrderCoordinator.h"
 #import "DBPromoManager.h"
 #import "Compatibility.h"
 
@@ -27,28 +28,16 @@
     
     [self.bonusSwitch addTarget:self action:@selector(bonusSwitchChangedValue:) forControlEvents:UIControlEventValueChanged];
     
-    [[DBPromoManager sharedManager] addObserver:self
-                                     forKeyPath:@"walletPointsAvailableForOrder"
-                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                        context:nil];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationOrderWalletDiscount selector:@selector(reloadTitle)];
 }
 
 - (void)dealloc{
-    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"walletPointsAvailableForOrder"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context{
-    if([keyPath isEqualToString:@"walletPointsAvailableForOrder"]){
-        [self reloadTitle];
-    }
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (void)reloadTitle{
-    if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [DBPromoManager sharedManager].walletPointsAvailableForOrder, [Compatibility currencySymbol]];
+    if([OrderCoordinator sharedInstance].promoManager.walletPointsAvailableForOrder > 0){
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [OrderCoordinator sharedInstance].promoManager.walletPointsAvailableForOrder, [Compatibility currencySymbol]];
     }
 }
 

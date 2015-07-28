@@ -11,31 +11,15 @@
 
 @class OrderItem;
 @class DBMenuPosition;
-
-/**
- * Class for holding info about each promotion
- */
-@interface DBPromotion : NSObject
-@property (strong, nonatomic) NSString *promotionName;
-@property (strong, nonatomic) NSString *promotionDescription;
-@end
-
-/**
- * Class for manage all info about item promo
- */
-@interface DBPromoItem : NSObject
-@property (strong, nonatomic) OrderItem *orderItem;
-
-@property (strong, nonatomic) NSArray *errors;
-@property (strong, nonatomic) NSArray *promos;
-
-@property (nonatomic) BOOL replaceToSubstituteAutomatic;
-@property (strong, nonatomic) DBMenuPosition *substitute;
-
-- (void)clear;
-@end
+@class DBPromoItem;
 
 
+typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
+    DBPromoManagerChangeDiscount = 0,
+    DBPromoManagerChangeWalletDiscount,
+    DBPromoManagerChangeShippingPrice,
+    DBPromoManagerChangeUpdatedPromoInfo
+};
 
 @interface DBPromoManager : NSObject<ManagerProtocol>
 - (void)updateInfo;
@@ -76,7 +60,7 @@
  */
 @property (strong, nonatomic, readonly) NSArray *orderGifts;
 
-- (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback;
+- (BOOL)checkCurrentOrder;
 
 - (DBPromoItem *)promosForOrderItem:(OrderItem *)item;
 
@@ -122,7 +106,7 @@
 /**
  * Bonuses available for order payment
  */
-@property (nonatomic, readonly) double walletPointsAvailableForOrder;
+@property (nonatomic) double walletPointsAvailableForOrder;
 
 /**
  * Define if user use bonuses for order payment
@@ -143,4 +127,28 @@
 
 //=========== Personal Wallet promo ===========
 
+@end
+
+
+/**
+ * Class for holding info about each promotion
+ */
+@interface DBPromotion : NSObject
+@property (strong, nonatomic) NSString *promotionName;
+@property (strong, nonatomic) NSString *promotionDescription;
+@end
+
+/**
+ * Class for manage all info about item promo
+ */
+@interface DBPromoItem : NSObject
+@property (strong, nonatomic) OrderItem *orderItem;
+
+@property (strong, nonatomic) NSArray *errors;
+@property (strong, nonatomic) NSArray *promos;
+
+@property (nonatomic) BOOL replaceToSubstituteAutomatic;
+@property (strong, nonatomic) DBMenuPosition *substitute;
+
+- (void)clear;
 @end

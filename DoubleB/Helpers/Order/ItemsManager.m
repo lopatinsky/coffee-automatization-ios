@@ -9,6 +9,7 @@
 #import "ItemsManager.h"
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
+#import "OrderCoordinator.h"
 
 NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewTotalPriceNotification";
 
@@ -152,7 +153,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 }
 
 - (void)reloadTotal{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBItemsManagerNewTotalPriceNotification object:nil]];
+    [[OrderCoordinator sharedInstance] manager:self haveChange:ItemsManagerChangeTotalPrice];
 }
 
 - (double)totalPrice{

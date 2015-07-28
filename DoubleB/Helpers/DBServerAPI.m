@@ -9,12 +9,6 @@
 #import "DBServerAPI.h"
 #import "DBAPIClient.h"
 #import "OrderCoordinator.h"
-#import "ItemsManager.h"
-#import "BonusItemsManager.h"
-#import "OrderManager.h"
-#import "ShippingManager.h"
-#import "DeliverySettings.h"
-#import "DBPromoManager.h"
 #import "OrderItem.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
@@ -29,7 +23,6 @@
 #import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
-#import "ShippingManager.h"
 
 #import <Parse/Parse.h>
 

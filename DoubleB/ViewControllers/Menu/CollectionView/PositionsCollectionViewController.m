@@ -19,8 +19,6 @@
 #import "DBMenuPosition.h"
 #import "DBPositionCell.h"
 #import "OrderCoordinator.h"
-#import "ItemsManager.h"
-#import "OrderManager.h"
 #import "Venue.h"
 
 #import "MBProgressHUD.h"

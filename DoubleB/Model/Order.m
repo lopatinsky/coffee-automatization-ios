@@ -10,7 +10,7 @@
 #import "Venue.h"
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 #import "ShippingManager.h"
 #import "OrderItem.h"
 
@@ -33,18 +33,18 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
-    self.total = @([[OrderManager sharedManager] totalPrice]);
-    self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
-    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].bonusPositions];
-    self.paymentType = [[OrderManager sharedManager] paymentType];
+    self.total = @([OrderCoordinator sharedInstance].itemsManager.totalPrice);
+    self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].itemsManager.items];
+    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].bonusItemsManager.items];
+    self.paymentType = [[OrderCoordinator sharedInstance].orderManager paymentType];
     self.status = OrderStatusNew;
     
     // Delivery
-    self.deliveryType = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
-    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        self.shippingAddress = [[DBShippingManager sharedManager].selectedAddress formattedAddressString:DBAddressStringModeFull];
+    self.deliveryType = @([OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId);
+    if([OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+        self.shippingAddress = [[OrderCoordinator sharedInstance].shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull];
     } else {
-        self.venue = [OrderManager sharedManager].venue;
+        self.venue = [OrderCoordinator sharedInstance].orderManager.venue;
     }
     
     [self setTimeFromResponseDict:dict];

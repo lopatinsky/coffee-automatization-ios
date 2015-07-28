@@ -13,6 +13,7 @@
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
 #import "DBCompanyInfo.h"
+#import "OrderCoordinator.h"
 #import "DBPromoManager.h"
 #import "DBMenu.h"
 #import "IHSecureStore.h"
@@ -65,7 +66,7 @@
     
     [JRSwizzleMethods swizzleUIViewDealloc];
     //[DBShareHelper sharedInstance];
-    [[DBPromoManager sharedManager] updateInfo];
+    [[OrderCoordinator sharedInstance].promoManager updateInfo];
     
     [GANHelper trackClientInfo];
 //================ significant preloadings/initializations =================

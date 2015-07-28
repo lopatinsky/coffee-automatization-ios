@@ -7,21 +7,17 @@
 //
 
 #import "OrderCoordinator.h"
-#import "ItemsManager.h"
-#import "BonusItemsManager.h"
-#import "OrderManager.h"
-#import "DeliverySettings.h"
-#import "ShippingManager.h"
-#import "DBPromoManager.h"
 #import "DBClientInfo.h"
 
-@implementation OrderCoordinator(EnumMap)
+NSString * __nonnull const CoordinatorNotificationOrderTotalPrice = @"CoordinatorNotificationOrderTotalPrice";
+NSString * __nonnull const CoordinatorNotificationOrderDiscount = @"CoordinatorNotificationOrderDiscount";
+NSString * __nonnull const CoordinatorNotificationOrderWalletDiscount = @"CoordinatorNotificationOrderWalletDiscount";
+NSString * __nonnull const CoordinatorNotificationOrderShippingPrice = @"CoordinatorNotificationOrderShippingPrice";
 
-- (NSString * __nonnull)notificationNameByEnum:(CoordinatorNotification)en {
-    return @[@"CoordinatorNotificationOrderTotalPrice", @"CoordinatorNotificationOrderDiscount", @"CoordinatorNotificationNewSelectedTime", @"CoordinatorNotificationNewAddressSuggestions"][en];
-}
+NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
 
-@end
+NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated = @"CoordinatorNotificationAddressSuggestionsUpdated";
+NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNotificationPromoUpdated";
 
 @implementation OrderCoordinator
 
@@ -45,8 +41,8 @@
     _promoManager = [DBPromoManager sharedInstance];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(itemsManagerNewTotalPriceNotificationHandler:)
-                                                 name:kDBItemsManagerNewTotalPriceNotification object:nil];
+                                             selector:@selector(newOrderCreatedNotificationHandler:)
+                                                 name:kDBNewOrderCreatedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(deliverySettingsNewTimeNotificationHandler:)
@@ -57,6 +53,10 @@
                                                  name:kDBShippingManagerDidRecieveSuggestionsNotification object:nil];
     
     return self;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -78,33 +78,95 @@
     return result;
 }
 
-#pragma mark - ItemsManager notifications
-
-- (void)itemsManagerNewTotalPriceNotificationHandler:(NSNotification *)notification{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:[self notificationNameByEnum:CoordinatorNotificationOrderTotalPrice] object:nil]];
+- (void)manager:(id<ManagerProtocol> __nonnull)manager haveChange:(NSInteger)changeType{
+    if([manager isKindOfClass:[ItemsManager class]]){
+        switch (changeType) {
+            case ItemsManagerChangeTotalPrice:
+                [self itemsManagerDidChangeTotalPrice];
+                break;
+            case ItemsManagerChangeTotalCount:
+                
+                break;
+        }
+    }
+    
+    if([manager isKindOfClass:[DBPromoManager class]]){
+        switch (changeType) {
+            case DBPromoManagerChangeDiscount:
+                [self promoManagerDidChangeDiscount];
+                break;
+            case DBPromoManagerChangeWalletDiscount:
+                [self promoManagerDidChangeWalletDiscount];
+                break;
+            case DBPromoManagerChangeUpdatedPromoInfo:
+                [self promoManagerDidUpdatePromoInfo];
+                break;
+            case DBPromoManagerChangeShippingPrice:
+                [self promoManagerDidChangeShippingPrice];
+                break;
+        }
+    }
 }
 
-#pragma mark - DeliverySettings notifications
+- (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
+    [_promoManager flushCache];
+}
+
+#pragma mark - ItemsManager changes
+
+- (void)itemsManagerDidChangeTotalPrice{
+    if(_itemsManager.totalCount == 0){
+        [_promoManager flushCache];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderTotalPrice object:nil]];
+}
+
+#pragma mark - DeliverySettings changes
 
 - (void)deliverySettingsNewTimeNotificationHandler:(NSNotification *)notification{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:[self notificationNameByEnum:CoordinatorNotificationNewSelectedTime] object:nil]];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationNewSelectedTime object:nil]];
 }
 
-#pragma mark - ShippingManager notifications
+#pragma mark - ShippingManager changes
 
 - (void)shippingManagerNewSuggestionsNotificationHandler:(NSNotification *)notification{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:[self notificationNameByEnum:CoordinatorNotificationNewAddressSuggestions] object:nil]];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationAddressSuggestionsUpdated object:nil]];
+}
+
+#pragma mark - PromoManager changes
+
+- (void)promoManagerDidChangeDiscount{
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderDiscount object:nil]];
+}
+
+- (void)promoManagerDidChangeWalletDiscount{
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderWalletDiscount object:nil]];
+}
+
+- (void)promoManagerDidChangeShippingPrice{
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderShippingPrice object:nil]];
+}
+
+- (void)promoManagerDidUpdatePromoInfo{
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationPromoUpdated object:nil]];
 }
 
 
 #pragma mark - Notifications subscription
 
-- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(CoordinatorNotification)keyName selector:(__nonnull SEL)selector; {
-    [[NSNotificationCenter defaultCenter] addObserver:object selector:selector name:[self notificationNameByEnum:keyName] object:nil];
+- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(NSString * __nonnull)keyName selector:(__nonnull SEL)selector {
+    [[NSNotificationCenter defaultCenter] addObserver:object selector:selector name:keyName object:nil];
 }
 
-- (void)removeObserver:(NSObject * __nonnull)observer forKeyPath:(CoordinatorNotification)keyName {
-    [[NSNotificationCenter defaultCenter] removeObserver:observer name:[self notificationNameByEnum:keyName] object:nil];
+- (void)addObserver:(NSObject * __nonnull)object withKeyPaths:(NSArray * __nonnull)keyNames selector:(__nonnull SEL)selector{
+    for(NSString *keyName in keyNames){
+        [self addObserver:object withKeyPath:keyName selector:selector];
+    }
+}
+
+- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(NSString * __nonnull)keyName {
+    [[NSNotificationCenter defaultCenter] removeObserver:observer name:keyName object:nil];
 }
 
 - (void)removeObserver:(NSObject * __nonnull)observer {

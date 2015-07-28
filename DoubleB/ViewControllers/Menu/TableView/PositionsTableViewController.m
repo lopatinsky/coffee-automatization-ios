@@ -17,8 +17,6 @@
 #import "DBCategoryHeaderView.h"
 #import "DBCategoryPicker.h"
 #import "OrderCoordinator.h"
-#import "ItemsManager.h"
-#import "OrderManager.h"
 #import "Venue.h"
 #import "Compatibility.h"
 #import "DBNewOrderViewController.h"

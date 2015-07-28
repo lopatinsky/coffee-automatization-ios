@@ -12,7 +12,10 @@
 @class DBMenuPosition;
 @class OrderItem;
 
-extern NSString *const kDBItemsManagerNewTotalPriceNotification;
+typedef NS_ENUM(NSInteger, ItemsManagerChange) {
+    ItemsManagerChangeTotalPrice = 0,
+    ItemsManagerChangeTotalCount
+};
 
 @interface ItemsManager : NSObject<ManagerProtocol>
 
