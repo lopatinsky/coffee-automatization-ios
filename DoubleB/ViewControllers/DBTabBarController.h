@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DBNewOrderViewController.h"
 
-@interface DBTabBarController : UITabBarController<UITabBarControllerDelegate>
+@interface DBTabBarController : UITabBarController
 
 + (instancetype)sharedInstance;
 

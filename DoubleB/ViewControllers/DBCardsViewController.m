@@ -10,6 +10,7 @@
 #import "UIViewController+DBCardManagement.h"
 #import "DBCardsViewController.h"
 #import "IHSecureStore.h"
+#import "OrderCoordinator.h"
 #import "OrderManager.h"
 #import "IHPaymentManager.h"
 #import "DBProfileViewController.h"
@@ -30,6 +31,8 @@
 
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
+
+@property (strong, nonatomic) OrderManager *orderManager;
 @property (strong, nonatomic) DBPayPalManager *payPalManager;
  
 @end
@@ -61,6 +64,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.constraintAdvertViewTopSpace.constant = topY;
 
+    self.orderManager = [OrderCoordinator sharedInstance].orderManager;
     
     self.payPalManager = [DBPayPalManager sharedInstance];
     self.payPalManager.delegate = self;

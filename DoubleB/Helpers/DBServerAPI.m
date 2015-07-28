@@ -8,7 +8,12 @@
 
 #import "DBServerAPI.h"
 #import "DBAPIClient.h"
+#import "OrderCoordinator.h"
+#import "ItemsManager.h"
+#import "BonusItemsManager.h"
 #import "OrderManager.h"
+#import "ShippingManager.h"
+#import "DeliverySettings.h"
 #import "DBPromoManager.h"
 #import "OrderItem.h"
 #import "DBMenuCategory.h"
@@ -307,7 +312,7 @@
                                  NSLog(@"%@", error);
                                  
                                  NSString *event;
-                                 if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+                                 if([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCard){
                                      event = @"order_card_failed";
                                  } else {
                                      event = @"order_failed";
@@ -378,13 +383,13 @@
     params[@"gifts"] = [DBServerAPI assembleBonusItems];
     
     // Total
-    params[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
+    params[@"total_sum"] = @([OrderCoordinator sharedInstance].itemsManager.totalPrice - [OrderCoordinator sharedInstance].promoManager.discount);
     
     // Shipping price
-    params[@"delivery_sum"] = @([DBPromoManager sharedManager].shippingPrice);
+    params[@"delivery_sum"] = @([OrderCoordinator sharedInstance].promoManager.shippingPrice);
     
     // Payment
-    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+    if([OrderCoordinator sharedInstance].orderManager.paymentType != PaymentTypeNotSet){
         params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
     }
     
@@ -395,11 +400,11 @@
     [self assembleDeliveryInfoIntoParams:params encode:NO];
     
     // Comment
-    params[@"comment"] = [OrderManager sharedManager].comment ?: @"";
+    params[@"comment"] = [OrderCoordinator sharedInstance].orderManager.comment ?: @"";
     
     // Location
-    if ([OrderManager sharedManager].location) {
-        CLLocation *location = [OrderManager sharedManager].location;
+    if ([OrderCoordinator sharedInstance].orderManager.location) {
+        CLLocation *location = [OrderCoordinator sharedInstance].orderManager.location;
         params[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
     }
     
@@ -424,7 +429,7 @@
     params[@"gifts"] = [[DBServerAPI assembleBonusItems] encodedString];
     
     // Payment
-    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+    if([OrderCoordinator sharedInstance].orderManager.paymentType != PaymentTypeNotSet){
         params[@"payment"] = [[DBServerAPI assemblyPaymentInfo] encodedString];
     }
     
@@ -442,7 +447,7 @@
 
 + (NSArray *)assembleOrderItems{
     NSMutableArray *items = [NSMutableArray new];
-    for (OrderItem *item in [OrderManager sharedManager].items) {
+    for (OrderItem *item in [OrderCoordinator sharedInstance].itemsManager.items) {
         [items addObject:[self assembleItem:item]];
     }
     
@@ -451,7 +456,7 @@
 
 + (NSArray *)assembleBonusItems{
     NSMutableArray *items = [NSMutableArray new];
-    for (OrderItem *item in [OrderManager sharedManager].bonusPositions) {
+    for (OrderItem *item in [OrderCoordinator sharedInstance].bonusItemsManager.items) {
         [items addObject:[self assembleItem:item]];
     }
     
@@ -499,9 +504,10 @@
 + (NSDictionary *)assemblyPaymentInfo{
     NSMutableDictionary *payment = [NSMutableDictionary new];
     
-    payment[@"type_id"] = @([OrderManager sharedManager].paymentType);
+    PaymentType paymentType = [OrderCoordinator sharedInstance].orderManager.paymentType;
+    payment[@"type_id"] = @(paymentType);
     
-    if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+    if(paymentType == PaymentTypeCard){
         NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
         if(card[@"cardToken"]){
             payment[@"binding_id"] = card[@"cardToken"];
@@ -519,31 +525,33 @@
         payment[@"return_url"] = @"alpha-payment://return-page";
     }
     
-    if([OrderManager sharedManager].paymentType == PaymentTypePayPal){
+    if(paymentType == PaymentTypePayPal){
         payment[@"correlation_id"] = [DBPayPalManager sharedInstance].paymentMetadata ?: @"";
     }
     
-    payment[@"wallet_payment"] = [DBPromoManager sharedManager].walletActiveForOrder ? @([DBPromoManager sharedManager].walletPointsAvailableForOrder) : @(0);
+    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder ? @([OrderCoordinator sharedInstance].promoManager.walletPointsAvailableForOrder) : @(0);
     
     return payment;
 }
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
-    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
+    DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
+    if(settings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        params[@"time_picker_value"] = [formatter stringFromDate:[DBDeliverySettings sharedInstance].selectedTime];
+        params[@"time_picker_value"] = [formatter stringFromDate:settings.selectedTime];
     }
     
-    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
-        params[@"delivery_slot_id"] = [DBDeliverySettings sharedInstance].selectedTimeSlot.slotId;
+    if(settings.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+        params[@"delivery_slot_id"] = settings.selectedTimeSlot.slotId;
     }
 }
 
 + (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
-    params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
-    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress.jsonRepresentation;
+    DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
+    params[@"delivery_type"] = @(settings.deliveryType.typeId);
+    if(settings.deliveryType.typeId == DeliveryTypeIdShipping){
+        NSDictionary *address = [OrderCoordinator sharedInstance].shippingManager.selectedAddress.jsonRepresentation;
         if(address){
             if(encode){
                 params[@"address"] = [address encodedString];
@@ -552,8 +560,8 @@
             }
         }
     } else {
-        if([OrderManager sharedManager].venue.venueId){
-            params[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
+        if([OrderCoordinator sharedInstance].orderManager.venue.venueId){
+            params[@"venue_id"] = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
         }
     }
 }
