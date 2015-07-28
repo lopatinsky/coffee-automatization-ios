@@ -17,6 +17,7 @@
 #import "DBMenu.h"
 #import "IHSecureStore.h"
 
+#import "ApplicationManager.h"
 #import "ViewControllerManager.h"
 #import "UIImage+Color.h"
 
@@ -35,7 +36,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self copyPlist];
+    [ApplicationManager copyPlists];
     
 //==================== Frameworks initialization ====================
     [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
@@ -278,27 +279,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-- (void)copyPlist {
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths firstObject];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if(![fileManager fileExistsAtPath:path]){
-        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
-        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
-    }
-    
-    path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
-    if(![fileManager fileExistsAtPath:path]){
-        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"ViewControllers" ofType:@"plist"];
-        if (pathToCompanyInfo) {
-            [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
-        }
-    }
 }
 
 @end
