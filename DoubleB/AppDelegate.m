@@ -38,38 +38,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [ApplicationManager copyPlists];
+    [ApplicationManager initializeVendorFrameworks];
+    [ApplicationManager initializeOrderFramework];
     
-//==================== Frameworks initialization ====================
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
-    
-    [Fabric with:@[CrashlyticsKit]];
-    
-//    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
-    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-//==================== Framework initialization =====================
+//==================== Frameworks initialization ===================================== Framework initialization =====================
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     }
     
-//================ significant preloadings/initializations =================
-    [DBServerAPI registerUser:nil];
     
-    [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
-        [self saveContext];
-    }];
-    
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
-    
-    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
-    
-    [JRSwizzleMethods swizzleUIViewDealloc];
-    //[DBShareHelper sharedInstance];
-    [[OrderCoordinator sharedInstance].promoManager updateInfo];
-    
-    [GANHelper trackClientInfo];
 //================ significant preloadings/initializations =================
 
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
@@ -81,34 +58,14 @@
     }
     
     //styling
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.backgroundColor = [UIColor whiteColor];
+
     
-    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                               NSForegroundColorAttributeName: [UIColor blackColor],
-                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-                                                               }];
-    } else {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                               NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-                                                               }];
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-
-    if (![DBCompanyInfo sharedInstance].deliveryTypes){
-        self.window.rootViewController = [ViewControllerManager launchViewController];
-    } else {
-        self.window.rootViewController = [DBTabBarController sharedInstance];
-    }
-
-    [self.window makeKeyAndVisible];
+    [ApplicationManager applyBrandbookStyle];
+    
+    self.window.rootViewController = [ApplicationManager rootViewController];
+    
     return YES;
 }
 

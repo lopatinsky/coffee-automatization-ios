@@ -8,8 +8,21 @@
 
 #import "ViewControllerManager.h"
 
-#pragma mark - Dependency declarations
+#pragma mark - General
 
+@implementation ViewControllerManager
+
++ (nullable NSString *)valueFromPropertyListByKey:(nonnull NSString *)key {
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
+    NSDictionary *viewControllersConfig = [NSDictionary dictionaryWithContentsOfFile:path];
+    return [viewControllersConfig objectForKey:key];
+}
+
+@end
+
+
+#pragma mark - Positions
 #import "PositionsTableViewController.h"
 #import "PositionsCollectionViewController.h"
 @implementation ViewControllerManager(PositionsViewControllers)
@@ -22,11 +35,17 @@
              };
 }
 
++ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
+    Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
+    return [positionsVCClass createViewController];
+}
+
 @end
 
 
-#import "PositionViewController2.h"
+#pragma mark - Position
 #import "PositionViewController1.h"
+#import "PositionViewController2.h"
 @implementation ViewControllerManager(PositionViewControllers)
 
 + (nonnull NSDictionary *)positionViewControllerClasses {
@@ -37,8 +56,15 @@
              };
 }
 
+
++ (__nonnull Class<PositionViewControllerProtocol>)positionViewController {
+    return [self positionViewControllerClasses][[self valueFromPropertyListByKey:@"Position"] ?: @"default"];
+}
+
 @end
 
+
+#pragma mark - Launch
 #import "LaunchViewController.h"
 @implementation ViewControllerManager(LaunchViewControllers)
 
@@ -48,31 +74,27 @@
              };
 }
 
-@end
-
-#pragma mark - Manager implementation
-
-@implementation ViewControllerManager
-
 + (nonnull UIViewController *)launchViewController {
-    Class launchViewController = [self launchViewControllerClasses][[self valueFromPropertyListByKey:@"Launch"] ?: @"default"];
+    Class launchViewController = [self launchViewControllerClasses][[ViewControllerManager valueFromPropertyListByKey:@"Launch"] ?: @"default"];
     return [launchViewController new];
 }
 
-+ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
-    Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
-    return [positionsVCClass createViewController];
+@end
+
+
+#pragma mark - Main
+#import "DBTabBarController.h"
+@implementation ViewControllerManager(MainViewControllers)
+
++ (nonnull NSDictionary *)mainViewControllerClasses {
+    return @{
+             @"default": [DBTabBarController class]
+             };
 }
 
-+ (__nonnull Class<PositionViewControllerProtocol>)positionViewController {
-    return [self positionViewControllerClasses][[self valueFromPropertyListByKey:@"Position"] ?: @"default"];
-}
-
-+ (nullable NSString *)valueFromPropertyListByKey:(nonnull NSString *)key {
-    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
-    NSDictionary *viewControllersConfig = [NSDictionary dictionaryWithContentsOfFile:path];
-    return [viewControllersConfig objectForKey:key];
++ (nonnull UIViewController *)mainViewController {
+    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
+    return [mainViewController new];
 }
 
 @end

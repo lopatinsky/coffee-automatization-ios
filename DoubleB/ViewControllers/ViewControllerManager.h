@@ -11,9 +11,20 @@
 #import "PositionViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
+@end
 
-+ (nonnull UIViewController *)launchViewController;
-+ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController;
+@interface ViewControllerManager(PositionViewControllers)
 + (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
+@end
 
+@interface ViewControllerManager(PositionsViewControllers)
++ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController;
+@end
+
+@interface ViewControllerManager(LaunchViewControllers)
++ (nonnull UIViewController *)launchViewController;
+@end
+
+@interface ViewControllerManager(MainViewControllers)
++ (nonnull UIViewController *)mainViewController;
 @end
