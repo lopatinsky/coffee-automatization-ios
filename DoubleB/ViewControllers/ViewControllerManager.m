@@ -9,9 +9,9 @@
 #import "ViewControllerManager.h"
 
 #pragma mark - Dependency declarations
+
 #import "PositionsTableViewController.h"
 #import "PositionsCollectionViewController.h"
-
 @implementation ViewControllerManager(PositionsViewControllers)
 
 + (nonnull NSDictionary *)positionsViewControllerClasses {
@@ -24,9 +24,9 @@
 
 @end
 
+
 #import "PositionViewController2.h"
 #import "PositionViewController1.h"
-
 @implementation ViewControllerManager(PositionViewControllers)
 
 + (nonnull NSDictionary *)positionViewControllerClasses {
@@ -51,6 +51,7 @@
 @end
 
 #pragma mark - Manager implementation
+
 @implementation ViewControllerManager
 
 + (nonnull UIViewController *)launchViewController {
