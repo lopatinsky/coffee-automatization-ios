@@ -9,6 +9,7 @@
 #import "ItemsManager.h"
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
+#import "OrderCoordinator.h"
 
 NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewTotalPriceNotification";
 

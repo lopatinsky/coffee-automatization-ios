@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OrderCoordinator.h"
+
+@class OrderCoordinator;
 
 @protocol OrderPartManagerProtocol <NSObject>
 
