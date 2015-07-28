@@ -32,9 +32,7 @@
     if (![DBCompanyInfo sharedInstance].deliveryTypes) {
         return [ViewControllerManager launchViewController];
     } else {
-        // TODO: ViewControllerManager tabBarViewController
-//        return [ViewControllerManager tabBarViewController];
-        return [DBTabBarController sharedInstance];
+        return [ViewControllerManager mainViewController];
     }
 }
 
