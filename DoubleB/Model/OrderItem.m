@@ -8,7 +8,6 @@
 
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
-#import "DBMenuBonusPosition.h"
 #import "DBMenu.h"
 
 @implementation OrderItem
@@ -20,17 +19,12 @@
     return self;
 }
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus{
++ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem{
     OrderItem *item = [[OrderItem alloc] init];
     
-    DBMenuPosition *position;
-    if(bonus){
-        position = [[DBMenuBonusPosition alloc] initWithResponseDictionary:historyItem];
-    } else {
-        DBMenuPosition *menuPosition = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
-        if(menuPosition){
-            position = [menuPosition copy];
-        }
+    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
+    if(position){
+        position = [position copy];
     }
     
     
@@ -59,6 +53,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [[OrderItem alloc] init];
     if(self != nil){
+        self.type = [[aDecoder decodeObjectForKey:@"type"] integerValue];
         self.position = [aDecoder decodeObjectForKey:@"position"];
         self.count = [[aDecoder decodeObjectForKey:@"count"] integerValue];
     }
@@ -67,6 +62,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:@(self.type) forKey:@"type"];
     [aCoder encodeObject:self.position forKey:@"position"];
     [aCoder encodeObject:@(self.count) forKey:@"count"];
 }
@@ -74,6 +70,7 @@
 - (id)copyWithZone:(NSZone *)zone{
     OrderItem *orderItem = [[[self class] allocWithZone:zone] init];
     
+    orderItem.type = self.type;
     orderItem.position = [self.position copy];
     orderItem.count = self.count;
     

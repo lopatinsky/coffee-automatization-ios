@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "ItemsManager.h"
+#import "OrderItemsManager.h"
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "OrderCoordinator.h"
@@ -30,6 +30,13 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     return self;
 }
 
+- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
+    OrderItem *item = [[OrderItem alloc] initWithPosition:position];
+    item.count = 1;
+    
+    return item;
+}
+
 - (NSInteger)addPosition:(DBMenuPosition *)position {
     // Main logic
     DBMenuPosition *copyPosition = [position copy];
@@ -44,9 +51,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     
     NSInteger currentCount;
     if (!itemWithSamePosition) {
-        itemWithSamePosition = [[OrderItem alloc] initWithPosition:copyPosition];
-        itemWithSamePosition.count = 1;
-        [self.items addObject:itemWithSamePosition];
+        [self.items addObject:[self createItemWithPosition:copyPosition]];
         currentCount = 1;
     } else {
         itemWithSamePosition.count ++;
@@ -182,5 +187,29 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     [self flushCache];
 }
 
+@end
 
+
+@implementation OrderItemsManager
+- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
+    OrderItem *item = [super createItemWithPosition:position];
+    item.type = OrderItemTypeRegular;
+    return item;
+}
+@end
+
+@implementation OrderBonusItemsManager
+- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
+    OrderItem *item = [super createItemWithPosition:position];
+    item.type = OrderItemTypeBonus;
+    return item;
+}
+@end
+
+@implementation OrderGiftItemsManager
+- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
+    OrderItem *item = [super createItemWithPosition:position];
+    item.type = OrderItemTypeGift;
+    return item;
+}
 @end

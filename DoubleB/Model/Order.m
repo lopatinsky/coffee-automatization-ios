@@ -62,13 +62,17 @@
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
-        [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict bonus:NO]];
+        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        item.type = OrderItemTypeRegular;
+        [items addObject:item];
     }
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
     
     NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
-        [bonusItems addObject:[OrderItem orderItemFromHistoryDictionary:itemDict bonus:YES]];
+        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        item.type = OrderItemTypeBonus;
+        [items addObject:item];
     }
     self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
     

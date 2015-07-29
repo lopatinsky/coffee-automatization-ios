@@ -18,6 +18,11 @@ typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
     DBPositionCellAppearanceTypeFull
 };
 
+typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
+    DBPositionCellContentTypeRegular = 0,
+    DBPositionCellContentTypeBonus
+};
+
 
 @interface DBPositionCell : UITableViewCell <PositionCellProtocol>
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
@@ -29,6 +34,7 @@ typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @property (nonatomic, readonly) DBPositionCellAppearanceType appearanceType;
+@property (nonatomic) DBPositionCellContentType contentType;
 
 @property (strong, nonatomic, readonly) DBMenuPosition *position;
 

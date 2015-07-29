@@ -10,15 +10,22 @@
 
 @class DBMenuPosition;
 
+typedef NS_ENUM(NSInteger, OrderItemType) {
+    OrderItemTypeRegular = 0,
+    OrderItemTypeBonus,
+    OrderItemTypeGift
+};
+
 @interface OrderItem : NSObject <NSCoding, NSCopying>
 
+@property (nonatomic) OrderItemType type;
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic, readonly) double totalPrice;
 @property (nonatomic) NSInteger count;
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position;
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus;
++ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
 
 @end
 

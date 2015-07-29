@@ -165,6 +165,10 @@
 "Бонус" = "Bonus";
 "Баланс" = "Balance";
 
+// Gift items promo
+
+"Подарок" = "Gift";
+
 // Sharing
 
 "Рассказать друзьям" = "Recommend app to friends";

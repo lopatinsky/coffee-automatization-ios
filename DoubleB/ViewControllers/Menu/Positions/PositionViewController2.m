@@ -49,10 +49,12 @@
 
 @implementation PositionViewController2
 
-+ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode {
++ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode contentType:(PositionViewControllerContentType)contentType {
     PositionViewController2 *positionVC = [PositionViewController2 new];
     positionVC.position = position;
     positionVC.mode = mode;
+    positionVC.contentType = contentType;
+    
     return positionVC;
 }
 
@@ -161,10 +163,12 @@
 }
 
 - (void)reloadPrice {
-    if (self.position.positionType == General) {
+    if (self.contentType == PositionViewControllerContentTypeRegularPosition) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
-    } else if (self.position.positionType == Bonus) {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    }
+    
+    if (self.contentType == PositionViewControllerContentTypeBonusPosition) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     }
 }
 

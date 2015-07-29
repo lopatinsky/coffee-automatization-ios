@@ -46,11 +46,12 @@
 
 @implementation PositionViewController1
 
-+ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode {
++ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode contentType:(PositionViewControllerContentType)contentType {
     PositionViewController1 *positionVC = [PositionViewController1 new];
     
     positionVC.position = position;
     positionVC.mode = mode;
+    positionVC.contentType = contentType;
     
     return positionVC;
 }
@@ -161,10 +162,12 @@
 }
 
 - (void)reloadPrice{
-    if (self.position.positionType == General) {
+    if (self.contentType == PositionViewControllerContentTypeRegularPosition) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
-    } else if (self.position.positionType == Bonus) {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    }
+    
+    if (self.contentType == PositionViewControllerContentTypeBonusPosition) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     }
 }
 
@@ -174,10 +177,10 @@
     clicked = true;
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
-        if (self.position.positionType == General) {
+        if (self.contentType == PositionViewControllerContentTypeRegularPosition) {
             [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
         } else {
-            [[OrderCoordinator sharedInstance].bonusItemsManager addBonusPosition:(DBMenuBonusPosition *)self.position];
+            [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:self.position];
             if ([self.position.productDictionary[@"points"] floatValue] > [self totalPoints]) {
                 self.priceButton.enabled = NO;
                 self.priceLabel.alpha = 0.6;

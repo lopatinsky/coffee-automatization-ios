@@ -18,6 +18,7 @@
 typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
     DBPromoManagerChangeDiscount = 0,
     DBPromoManagerChangeWalletDiscount,
+    DBPromoManagerChangeWalletBalance,
     DBPromoManagerChangeShippingPrice,
     DBPromoManagerChangeUpdatedPromoInfo
 };
@@ -90,13 +91,9 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
  */
 @property(strong, nonatomic, readonly) NSString *bonusPositionsTextDescription;
 
-
 //=========== Bonus Positions promo ===========
 
-//=========== Gifts ===========
-@property (nonatomic, strong) NSArray *currentAvailableGifts;
-@property (nonatomic, strong) NSMutableArray *cancelledGifts;
-//=========== Gifts ===========
+
 
 //=========== Personal Wallet promo ===========
 /**
@@ -107,7 +104,7 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
 /**
  * Bonuses available for order payment
  */
-@property (nonatomic) double walletPointsAvailableForOrder;
+@property (nonatomic) double walletDiscount;
 
 /**
  * Define if user use bonuses for order payment

@@ -259,6 +259,7 @@
     }
     
     DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
+    cell.contentType = DBPositionCellContentTypeRegular;
     [cell configureWithPosition:position];
     cell.delegate = self;
     

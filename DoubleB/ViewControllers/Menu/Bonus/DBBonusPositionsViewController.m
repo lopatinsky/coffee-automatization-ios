@@ -11,7 +11,6 @@
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "OrderCoordinator.h"
-#import "DBMenuBonusPosition.h"
 #import "ViewControllerManager.h"
 
 @interface DBBonusPositionsViewController ()<UITableViewDelegate, UITableViewDataSource, DBPositionCellDelegate>
@@ -96,9 +95,10 @@
     }
     
     DBMenuPosition *position = _promoManager.positionsAvailableAsBonuses[indexPath.row];
+    cell.contentType = DBPositionCellContentTypeBonus;
     [cell configureWithPosition:position];
     
-    if ([position.productDictionary[@"points"] floatValue] <= [self totalPoints]) {
+    if (position.price <= [self totalPoints]) {
         [cell enable];
     } else {
         [cell disable];
@@ -121,7 +121,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DBMenuPosition *position =_promoManager.positionsAvailableAsBonuses[indexPath.row];
-    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition contentType:PositionViewControllerContentTypeBonusPosition];
     positionVC.parentNavigationController = self.navigationController;
     positionVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:positionVC animated:YES];
@@ -133,7 +133,7 @@
     DBMenuPosition *position = cell.position;
     
     if([position.productDictionary[@"points"] floatValue] <= [self totalPoints]) {
-        [[OrderCoordinator sharedInstance].bonusItemsManager addBonusPosition:(DBMenuBonusPosition *)cell.position];
+        [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:cell.position];
         
         [self reloadBalance];
         [self.tableView reloadData];

@@ -92,6 +92,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
                                         @"image": @"payment"}];
+        [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
     
     // Contact us item
@@ -138,6 +139,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     if (!parent) {
         [GANHelper analyzeEvent:@"back_arrow_pressed" category:SETTINGS_SCREEN];
     }
+}
+
+- (void)dealloc{
+    [[OrderCoordinator sharedInstance] removeObserver:self];
+}
+
+- (void)reload{
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

@@ -58,3 +58,16 @@ typedef NS_ENUM(NSInteger, ItemsManagerChange) {
 - (NSInteger)replaceOrderItem:(OrderItem *)item withPosition:(DBMenuPosition *)position;
 
 @end
+
+
+// Manager for regular order items
+@interface OrderItemsManager : ItemsManager
+@end
+
+// Manager for bonus order items
+@interface OrderBonusItemsManager : ItemsManager
+@end
+
+// Manager for gift order items
+@interface OrderGiftItemsManager : ItemsManager
+@end

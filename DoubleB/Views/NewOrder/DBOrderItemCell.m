@@ -10,7 +10,6 @@
 #import "Compatibility.h"
 #import "OrderItem.h"
 #import "DBPromoManager.h"
-#import "DBMenuBonusPosition.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
@@ -99,11 +98,17 @@
 - (void)reload {
     self.titleLabel.text = _orderItem.position.name;
     
-    if (self.orderItem.position.positionType == Bonus) {
-        self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
-    } else {
+    if (self.orderItem.type == OrderItemTypeRegular){
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", _orderItem.position.actualPrice, [Compatibility currencySymbol]];
         [self addEditButtons];
+    }
+    
+    if (self.orderItem.type == OrderItemTypeBonus) {
+        self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
+    }
+    
+    if (self.orderItem.type == OrderItemTypeGift) {
+        self.priceLabel.text = NSLocalizedString(@"Подарок", nil);
     }
     
     [self reloadCount];
@@ -196,7 +201,6 @@
 }
 
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
-    if (self.orderItem.position.positionType == Bonus) { return; };
     if([self.delegate db_orderItemCellCanEdit:self]){
         CGPoint translation = [recognizer translationInView:self.contentView];
 

@@ -150,11 +150,12 @@
 }
 
 - (void)setSelectedItem:(NSInteger)selectedItem{
+    int component = self.type == DBTimePickerTypeDateAndItems ? 1 : 0;
+    
     if(selectedItem < 0 || selectedItem  >= [self.pickerView numberOfRowsInComponent:0]){
         selectedItem = 0;
     }
     
-    int component = self.type == DBTimePickerTypeDateAndItems ? 1 : 0;
     [self.pickerView selectRow:selectedItem inComponent:component animated:YES];
 }
 

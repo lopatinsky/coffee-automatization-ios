@@ -36,8 +36,8 @@
 }
 
 - (void)reloadTitle{
-    if([OrderCoordinator sharedInstance].promoManager.walletPointsAvailableForOrder > 0){
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [OrderCoordinator sharedInstance].promoManager.walletPointsAvailableForOrder, [Compatibility currencySymbol]];
+    if([OrderCoordinator sharedInstance].promoManager.walletDiscount > 0){
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [OrderCoordinator sharedInstance].promoManager.walletDiscount, [Compatibility currencySymbol]];
     }
 }
 

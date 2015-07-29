@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "ManagerProtocol.h"
-#import "ItemsManager.h"
-#import "BonusItemsManager.h"
+#import "OrderItemsManager.h"
 #import "OrderManager.h"
 #import "DeliverySettings.h"
 #import "ShippingManager.h"
@@ -25,13 +24,15 @@ extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
 
 extern NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;
+extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated;
 
 
 
 @interface OrderCoordinator : NSObject <ManagerProtocol>
 
-@property (nonnull, nonatomic, strong, readonly) ItemsManager *itemsManager;
-@property (nonnull, nonatomic, strong, readonly) BonusItemsManager *bonusItemsManager;
+@property (nonnull, nonatomic, strong, readonly) OrderItemsManager *itemsManager;
+@property (nonnull, nonatomic, strong, readonly) OrderBonusItemsManager *bonusItemsManager;
+@property (nonnull, nonatomic, strong, readonly) OrderGiftItemsManager *orderGiftsManager;
 @property (nonnull, nonatomic, strong, readonly) OrderManager *orderManager;
 @property (nonnull, nonatomic, strong, readonly) DeliverySettings *deliverySettings;
 @property (nonnull, nonatomic, strong, readonly) ShippingManager *shippingManager;
