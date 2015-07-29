@@ -41,13 +41,9 @@
     [ApplicationManager initializeVendorFrameworks];
     [ApplicationManager initializeOrderFramework];
     
-//==================== Frameworks initialization ===================================== Framework initialization =====================
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     }
-    
-    
-//================ significant preloadings/initializations =================
 
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
@@ -57,13 +53,10 @@
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
     
-    //styling
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-
-    
     [ApplicationManager applyBrandbookStyle];
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [ApplicationManager rootViewController];
     [self.window makeKeyAndVisible];
     
