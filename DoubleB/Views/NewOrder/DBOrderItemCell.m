@@ -98,16 +98,16 @@
 - (void)reload {
     self.titleLabel.text = _orderItem.position.name;
     
-    if (self.orderItem.type == OrderItemTypeRegular){
+    if (self.orderItem.position.mode == DBMenuPositionModeRegular){
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", _orderItem.position.actualPrice, [Compatibility currencySymbol]];
         [self addEditButtons];
     }
     
-    if (self.orderItem.type == OrderItemTypeBonus) {
+    if (self.orderItem.position.mode == DBMenuPositionModeBonus) {
         self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
     }
     
-    if (self.orderItem.type == OrderItemTypeGift) {
+    if (self.orderItem.position.mode == DBMenuPositionModeGift) {
         self.priceLabel.text = NSLocalizedString(@"Подарок", nil);
     }
     

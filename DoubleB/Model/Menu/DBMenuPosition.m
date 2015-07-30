@@ -181,6 +181,8 @@
         _singleModifiers = [aDecoder decodeObjectForKey:@"singleModifiers"];
         _venuesRestrictions = [aDecoder decodeObjectForKey:@"venuesRestrictions"];
         _productDictionary = [aDecoder decodeObjectForKey:@"productDictionary"];
+        
+        _mode = [[aDecoder decodeObjectForKey:@"positionMode"] integerValue];
     }
     
     return self;
@@ -200,6 +202,8 @@
     [aCoder encodeObject:self.singleModifiers forKey:@"singleModifiers"];
     [aCoder encodeObject:self.venuesRestrictions forKey:@"venuesRestrictions"];
     [aCoder encodeObject:self.productDictionary forKey:@"productDictionary"];
+    
+    [aCoder encodeObject:@(self.mode) forKey:@"positionMode"];
 }
 
 #pragma mark - NSCopying
@@ -226,6 +230,8 @@
     
     copyPosition.productDictionary = [self.productDictionary copy];
     copyPosition.venuesRestrictions = [self.venuesRestrictions copy];
+    
+    copyPosition.mode = self.mode;
     
     return copyPosition;
 }

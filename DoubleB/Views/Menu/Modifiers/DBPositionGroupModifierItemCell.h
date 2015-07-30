@@ -15,7 +15,7 @@
 @property (nonatomic, strong, readonly) DBMenuPositionModifierItem *item;
 @property (nonatomic) BOOL havePrice;
 @property (nonatomic, readonly) BOOL stateSelected;
-@property (nonatomic) MenuPositionType positionType;
+@property (nonatomic) DBMenuPositionMode positionType;
 
 - (void)configureWithModifierItem:(DBMenuPositionModifierItem *)item
                         havePrice:(BOOL)havePrice;

@@ -53,7 +53,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [[OrderItem alloc] init];
     if(self != nil){
-        self.type = [[aDecoder decodeObjectForKey:@"type"] integerValue];
         self.position = [aDecoder decodeObjectForKey:@"position"];
         self.count = [[aDecoder decodeObjectForKey:@"count"] integerValue];
     }
@@ -62,7 +61,6 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:@(self.type) forKey:@"type"];
     [aCoder encodeObject:self.position forKey:@"position"];
     [aCoder encodeObject:@(self.count) forKey:@"count"];
 }
@@ -70,7 +68,6 @@
 - (id)copyWithZone:(NSZone *)zone{
     OrderItem *orderItem = [[[self class] allocWithZone:zone] init];
     
-    orderItem.type = self.type;
     orderItem.position = [self.position copy];
     orderItem.count = self.count;
     

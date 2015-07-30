@@ -46,12 +46,11 @@
 
 @implementation PositionViewController1
 
-+ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode contentType:(PositionViewControllerContentType)contentType {
++ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode {
     PositionViewController1 *positionVC = [PositionViewController1 new];
     
     positionVC.position = position;
     positionVC.mode = mode;
-    positionVC.contentType = contentType;
     
     return positionVC;
 }
@@ -162,11 +161,11 @@
 }
 
 - (void)reloadPrice{
-    if (self.contentType == PositionViewControllerContentTypeRegularPosition) {
+    if (self.position.mode == DBMenuPositionModeRegular || self.position.mode == DBMenuPositionModeGift) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
     }
     
-    if (self.contentType == PositionViewControllerContentTypeBonusPosition) {
+    if (self.position.mode == DBMenuPositionModeBonus) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     }
 }
@@ -177,14 +176,14 @@
     clicked = true;
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
-        if (self.contentType == PositionViewControllerContentTypeRegularPosition) {
-            [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
-        } else {
+        if (self.position.mode == DBMenuPositionModeBonus) {
             [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:self.position];
-            if ([self.position.productDictionary[@"points"] floatValue] > [self totalPoints]) {
+            if (self.position.price > [self totalPoints]) {
                 self.priceButton.enabled = NO;
                 self.priceLabel.alpha = 0.6;
             }
+        } else {
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
         }
         clicked = false;
     }];

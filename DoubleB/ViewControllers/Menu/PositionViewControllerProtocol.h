@@ -13,17 +13,11 @@ typedef NS_ENUM(NSUInteger, PositionViewControllerMode) {
     PositionViewControllerModeOrderPosition
 };
 
-typedef NS_ENUM(NSInteger, PositionViewControllerContentType){
-    PositionViewControllerContentTypeRegularPosition = 0,
-    PositionViewControllerContentTypeBonusPosition,
-    PositionViewControllerContentTypeGiftPosition
-};
-
 @class DBMenuPosition;
 
 @protocol PositionViewControllerProtocol <NSObject>
 
-+ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode contentType:(PositionViewControllerContentType)contentType;
++ (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode;
 - (void)setParentNavigationController:(UINavigationController *)controller;
 
 @end

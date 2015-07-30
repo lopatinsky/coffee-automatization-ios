@@ -14,7 +14,6 @@
 @interface PositionViewController1 : UIViewController
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic) PositionViewControllerMode mode;
-@property (nonatomic) PositionViewControllerContentType contentType;
 @property (weak, nonatomic) UINavigationController *parentNavigationController;
 
 @end

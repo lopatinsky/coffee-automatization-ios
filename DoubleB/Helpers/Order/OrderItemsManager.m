@@ -191,25 +191,10 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 
 
 @implementation OrderItemsManager
-- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
-    OrderItem *item = [super createItemWithPosition:position];
-    item.type = OrderItemTypeRegular;
-    return item;
-}
 @end
 
 @implementation OrderBonusItemsManager
-- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
-    OrderItem *item = [super createItemWithPosition:position];
-    item.type = OrderItemTypeBonus;
-    return item;
-}
 @end
 
 @implementation OrderGiftItemsManager
-- (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
-    OrderItem *item = [super createItemWithPosition:position];
-    item.type = OrderItemTypeGift;
-    return item;
-}
 @end

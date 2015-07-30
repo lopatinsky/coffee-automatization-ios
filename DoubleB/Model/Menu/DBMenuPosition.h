@@ -10,8 +10,18 @@
 
 @class Venue;
 
+typedef NS_ENUM(NSInteger, DBMenuPositionMode){
+    DBMenuPositionModeRegular = 0,
+    DBMenuPositionModeBonus,
+    DBMenuPositionModeGift
+};
+
 @interface DBMenuPosition : NSObject<NSCopying, NSCoding>
 
+// mutable data(stored)
+@property(nonatomic) DBMenuPositionMode mode;
+
+// immutable(stored) data
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;
 @property(nonatomic, readonly) NSInteger order;
@@ -28,8 +38,7 @@
 
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
 
-
-// Not stored data
+// dynamic data(not stored)
 @property(nonatomic, readonly) BOOL hasImage;
 
 - (instancetype)initWithResponseDictionary:(NSDictionary *)positionDictionary;

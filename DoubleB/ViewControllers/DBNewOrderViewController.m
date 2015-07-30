@@ -641,17 +641,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    PositionViewControllerContentType contentType;
-    switch (item.type) {
-        case OrderItemTypeRegular: contentType = PositionViewControllerContentTypeRegularPosition;
-            break;
-        case OrderItemTypeBonus: contentType = PositionViewControllerContentTypeBonusPosition;
-            break;
-        case OrderItemTypeGift: contentType = PositionViewControllerContentTypeGiftPosition;
-            break;
-    }
     
-    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition contentType:contentType];
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
     positionVC.parentNavigationController = self.navigationController;
     positionVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:positionVC animated:YES];

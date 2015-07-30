@@ -22,7 +22,7 @@
 
 @property (weak, nonatomic) id<DBPositionSingleModifierCellDelegate> delegate;
 @property (nonatomic) BOOL havePrice;
-@property (nonatomic) MenuPositionType positionType;
+@property (nonatomic) DBMenuPositionMode positionMode;
 
 - (void)configureWithModifier:(DBMenuPositionModifier *)modifier
                     havePrice:(BOOL)havePrice

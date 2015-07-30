@@ -9,16 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class DBMenuPosition;
-
-typedef NS_ENUM(NSInteger, OrderItemType) {
-    OrderItemTypeRegular = 0,
-    OrderItemTypeBonus,
-    OrderItemTypeGift
-};
-
 @interface OrderItem : NSObject <NSCoding, NSCopying>
 
-@property (nonatomic) OrderItemType type;
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic, readonly) double totalPrice;
 @property (nonatomic) NSInteger count;
