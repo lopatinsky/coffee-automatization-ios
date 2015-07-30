@@ -177,6 +177,7 @@
             [cell configureWithModifierItem:item havePrice:self.havePrice];
             [cell select:[self.modifier.selectedItem isEqual:item] animated:NO];
         }
+        cell.currencyDisplayMode = self.currencyDisplayMode;
         
         return cell;
     } else {
@@ -187,6 +188,7 @@
         }
         
         [cell configureWithModifier:self.singleModifiers[indexPath.row] havePrice:self.havePrice delegate:self];
+        cell.currencyDisplayMode = self.currencyDisplayMode;
         
         return cell;
     }

@@ -111,10 +111,10 @@ typedef NS_ENUM(NSUInteger, SingleModifierCellState) {
     self.delegate = delegate;
     self.havePrice = havePrice;
     
-    if (self.positionMode == DBMenuPositionModeRegular || self.positionMode == DBMenuPositionModeGift) {
+    if (self.currencyDisplayMode == DBUICurrencyDisplayModeRub) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.modifier.modifierPrice, [Compatibility currencySymbol]];
     }
-    if (self.positionMode == DBMenuPositionModeBonus) {
+    if (self.currencyDisplayMode == DBUICurrencyDisplayModeNone) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.modifier.modifierDictionary[@"points"] floatValue]];
     }
     self.itemTitleLabel.text = self.modifier.modifierName;

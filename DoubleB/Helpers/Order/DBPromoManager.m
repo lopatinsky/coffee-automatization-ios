@@ -67,6 +67,7 @@
             DBMenuPosition *bonusPosition = [[DBMenuPosition alloc] initWithResponseDictionary:bonusPositionDict];
             
             if (bonusPosition){
+                bonusPosition.mode = DBMenuPositionModeBonus;
                 bonusPosition.price = [bonusPositionDict[@"points"] doubleValue];
                 [bonusPositions addObject:bonusPosition];
             } else {
@@ -126,7 +127,7 @@
     [_parentManager manager:self haveChange:DBPromoManagerChangeShippingPrice];
 }
 
-- (BOOL)checkCurrentOrder {
+- (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback {
     if (![IHSecureStore sharedInstance].clientId) {
         return NO;
     }
@@ -218,12 +219,26 @@
             }
         }
         
+        // Assemble order gifts
+        NSMutableArray *giftPositions = [NSMutableArray new];
+        for(NSDictionary *giftItem in response[@"order_gifts"]){
+            DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:giftItem];
+            giftPosition.mode = DBMenuPositionModeGift;
+            [giftPositions addObject:giftPosition];
+        }
+        [[OrderCoordinator sharedInstance].orderGiftsManager synchronizeItemsWithPositions:giftPositions];
+        
         _validOrder = [response[@"valid"] boolValue];
+        
+        if(callback)
+            callback(YES);
         [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
     } failure:^(NSError *error) {
         _validOrder = NO;
         
         if(self.lastUpdateNumber == currentUpdateNumber){
+            if(callback)
+                callback(YES);
             [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
         }
     }];
@@ -286,8 +301,14 @@
     
     NSDictionary *bonusPositionsPromo = promoInfo[@"bonusPositionsPromo"];
     NSData *positionsAvailableAsBonuses = bonusPositionsPromo[@"positionsAvailableAsBonuses"];
-    _positionsAvailableAsBonuses = [NSKeyedUnarchiver unarchiveObjectWithData:positionsAvailableAsBonuses] ?: @[];
     _bonusPositionsTextDescription = bonusPositionsPromo[@"bonusPositionsTextDescription"] ?: @"";
+    @try {
+        _positionsAvailableAsBonuses = [NSKeyedUnarchiver unarchiveObjectWithData:positionsAvailableAsBonuses] ?: @[];
+    }
+    @catch (NSException *exception) {
+        _positionsAvailableAsBonuses = @[];
+    }
+    
     
     NSDictionary *personalWalletPromo = promoInfo[@"personalWalletPromo"];
     _walletEnabled = [personalWalletPromo[@"walletEnabled"] boolValue];

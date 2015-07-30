@@ -242,6 +242,8 @@
         [self.modifierPicker configureSingleModifiers];
     }
     
+    self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
+    
     [self.modifierPicker showOnView:self.parentNavigationController.view];
 }
 

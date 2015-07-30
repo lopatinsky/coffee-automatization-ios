@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
  */
 @property (strong, nonatomic, readonly) NSArray *orderGifts;
 
-- (BOOL)checkCurrentOrder;
+- (BOOL)checkCurrentOrder:(void(^)(BOOL success))callback;
 
 - (DBPromoItem *)promosForOrderItem:(OrderItem *)item;
 

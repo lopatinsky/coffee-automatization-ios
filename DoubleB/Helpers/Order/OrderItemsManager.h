@@ -70,4 +70,6 @@ typedef NS_ENUM(NSInteger, ItemsManagerChange) {
 
 // Manager for gift order items
 @interface OrderGiftItemsManager : ItemsManager
+- (void)synchronizeItemsWithPositions:(NSArray *)positions;
+
 @end

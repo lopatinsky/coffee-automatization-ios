@@ -181,6 +181,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 
 - (void)flushCache{
     _items = [NSMutableArray new];
+    [self reloadTotal];
 }
 
 - (void)flushStoredCache{
@@ -197,4 +198,13 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 @end
 
 @implementation OrderGiftItemsManager
+
+- (void)synchronizeItemsWithPositions:(NSArray *)positions{
+    [self flushCache];
+    
+    for(DBMenuPosition *position in positions){
+        [self addPosition:position];
+    }
+}
+
 @end
