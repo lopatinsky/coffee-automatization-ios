@@ -239,7 +239,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                                                        [defaults setBool:YES forKey:kDBSettingsNotificationsEnabled];
                                                        [defaults synchronize];
                                                        
-                                                       [DBBeaconObserver createBeaconObserver];
+//                                                       [DBBeaconObserver createBeaconObserver];
+                                                       [Compatibility registerForNotifications];
                                                    } else {
                                                    }
                                                }];

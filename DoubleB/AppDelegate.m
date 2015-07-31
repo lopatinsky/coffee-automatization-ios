@@ -16,6 +16,7 @@
 #import "DBPromoManager.h"
 #import "DBMenu.h"
 #import "IHSecureStore.h"
+#import "Compatibility.h"
 
 #import "DBLaunchEmulationViewController.h"
 
@@ -48,7 +49,9 @@
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 //==================== Framework initialization =====================
     
-    
+    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
+    }
 //================ significant preloadings/initializations =================
     [DBServerAPI registerUser:nil];
     
@@ -87,7 +90,7 @@
     }];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-
+    
     if(![DBCompanyInfo sharedInstance].deliveryTypes){
         self.window.rootViewController = [DBLaunchEmulationViewController new];
     } else {
@@ -146,6 +149,10 @@
     NSNumber *lastOrderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastOrderId"];
     if (lastOrderId) {
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
+    }
+    
+    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     }
 }
 
