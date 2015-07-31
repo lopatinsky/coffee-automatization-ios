@@ -5,14 +5,14 @@
 	<key>Parse</key>
 	<dict>
 		<key>applicationId</key>
-		<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
+		<string>8i2TtZmbIQFMIcyfgKCAjEU8V9offpgbXrP8nQHM</string>
 		<key>clientKey</key>
-		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+		<string>rT11yrplIUpmHMiEEw7vaJFGw0fXMam05TYvYjA2</string>
 	</dict>
 	<key>CompanyGAKey</key>
 	<string>UA-62529990-48</string>
 	<key>CompanyColor</key>
-	<integer>4287722814</integer>
+	<integer>4284227617</integer>
 	<key>BaseUrl</key>
 	<string>http://lakmuss.1.doubleb-automation-production.appspot.com/</string>
 </dict>
