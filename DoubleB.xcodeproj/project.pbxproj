@@ -201,7 +201,6 @@
 		7E3830401B5CF692008F0241 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7E3830411B5CF692008F0241 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7E3830421B5CF692008F0241 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7E3830431B5CF692008F0241 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200841B457B4A000BBE55 /* launch_736.png */; };
 		7E3830441B5CF692008F0241 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7E3830451B5CF692008F0241 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7E3830461B5CF692008F0241 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
@@ -252,13 +251,11 @@
 		7E3830731B5CF692008F0241 /* ProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72619E7DC0E0050DF90 /* ProfileCell.xib */; };
 		7E3830741B5CF692008F0241 /* DBDiscountMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E30B6181AAF3D71001F66E2 /* DBDiscountMessageCell.xib */; };
 		7E3830751B5CF692008F0241 /* DBAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */; };
-		7E3830761B5CF692008F0241 /* SushiMarket-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB82008A1B457B4A000BBE55 /* SushiMarket-info.plist */; };
 		7E3830771B5CF692008F0241 /* DBNewOrderItemErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB59CE031B21F7E700E9DD30 /* DBNewOrderItemErrorView.xib */; };
 		7E3830781B5CF692008F0241 /* bg2208.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458961AEA481200DB8B64 /* bg2208.jpg */; };
 		7E3830791B5CF692008F0241 /* DBCardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */; };
 		7E38307A1B5CF692008F0241 /* venues_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307E19FF72E0001B4B6D /* venues_icon@2x.png */; };
 		7E38307B1B5CF692008F0241 /* mug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB2FD83419F55A580065285B /* mug@2x.png */; };
-		7E38307C1B5CF692008F0241 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200831B457B4A000BBE55 /* launch_667.png */; };
 		7E38307D1B5CF692008F0241 /* preview_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3C12CC41A94DD5F00E75DF0 /* preview_3@2x.png */; };
 		7E38307E1B5CF692008F0241 /* orders_icon_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307519FF72E0001B4B6D /* orders_icon_grey@2x.png */; };
 		7E38307F1B5CF692008F0241 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72419E7DC0E0050DF90 /* OrderCell.xib */; };
@@ -268,7 +265,6 @@
 		7E3830831B5CF692008F0241 /* visa_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3E6B6E1A7FC4E900640791 /* visa_icon@2x.png */; };
 		7E3830841B5CF692008F0241 /* alerts.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BDA196E88E1002A7AF3 /* alerts.png */; };
 		7E3830851B5CF692008F0241 /* bg1334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458971AEA481200DB8B64 /* bg1334.jpg */; };
-		7E3830861B5CF692008F0241 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200821B457B4A000BBE55 /* launch_568.png */; };
 		7E3830871B5CF692008F0241 /* DBCardAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB82FD5C1B4444B1000BBE55 /* DBCardAddCell.xib */; };
 		7E3830881B5CF692008F0241 /* plus_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B91B0C97660032B59B /* plus_icon@2x.png */; };
 		7E3830891B5CF692008F0241 /* DBOrderViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB73419E7DC0E0050DF90 /* DBOrderViewHeader.xib */; };
@@ -284,7 +280,6 @@
 		7E3830931B5CF692008F0241 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BC8196E8246002A7AF3 /* profile.png */; };
 		7E3830941B5CF692008F0241 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C775BAC7D71EB26B52F973FE /* Podfile */; };
 		7E3830951B5CF692008F0241 /* nda.html in Resources */ = {isa = PBXBuildFile; fileRef = D516FA461986D5870077FC17 /* nda.html */; };
-		7E3830961B5CF692008F0241 /* Images-SushiMarket.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB8200881B457B4A000BBE55 /* Images-SushiMarket.xcassets */; };
 		7E3830971B5CF692008F0241 /* DBPositionGroupModifierItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7DB1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.xib */; };
 		7E3830981B5CF692008F0241 /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE3196E8F74002A7AF3 /* phone@2x.png */; };
 		7E3830991B5CF692008F0241 /* DBOrderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E8251AD4508F0003D5B2 /* DBOrderItemCell.xib */; };
@@ -315,8 +310,6 @@
 		7E3830B21B5CF692008F0241 /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770424196A18640010D1B1 /* comment@2x.png */; };
 		7E3830B31B5CF692008F0241 /* venue_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222789197997380098E429 /* venue_gray@2x.png */; };
 		7E3830B41B5CF692008F0241 /* 300@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770416196A09410010D1B1 /* 300@2x.png */; };
-		7E3830B51B5CF692008F0241 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200811B457B4A000BBE55 /* launch_480.png */; };
-		7E3830B61B5CF692008F0241 /* CompanyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB8200851B457B4A000BBE55 /* CompanyInfo.plist */; };
 		7E3830B71B5CF692008F0241 /* return_cause_time_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF61AE16D3C007027A6 /* return_cause_time_icon@2x.png */; };
 		7E3830B81B5CF692008F0241 /* DBContactUsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60FC1AE658D2005D78A8 /* DBContactUsView.xib */; };
 		7E3830B91B5CF692008F0241 /* venues_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307F19FF72E0001B4B6D /* venues_icon@3x.png */; };
@@ -355,7 +348,6 @@
 		7E3830DA1B5CF692008F0241 /* orders_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307919FF72E0001B4B6D /* orders_icon@3x.png */; };
 		7E3830DB1B5CF692008F0241 /* DBOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB215E2D1ADC3D6400EF9EEC /* DBOrderViewController.xib */; };
 		7E3830DC1B5CF692008F0241 /* venue_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222788197997380098E429 /* venue_gray.png */; };
-		7E3830DD1B5CF692008F0241 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB8200861B457B4A000BBE55 /* InfoPlist.strings */; };
 		7E3830DE1B5CF692008F0241 /* paid@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222793197A71960098E429 /* paid@2x.png */; };
 		7E3830DF1B5CF692008F0241 /* tick_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BB7196D8A2E002A7AF3 /* tick_gray@2x.png */; };
 		7E3830E01B5CF692008F0241 /* return_cause_other_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF51AE16D3C007027A6 /* return_cause_other_icon@3x.png */; };
@@ -2513,7 +2505,6 @@
 		7ED4BD301B5EB64B00280D74 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		7ED4BD311B5EB64B00280D74 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		7ED4BD321B5EB64B00280D74 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		7ED4BD331B5EB64B00280D74 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200841B457B4A000BBE55 /* launch_736.png */; };
 		7ED4BD341B5EB64B00280D74 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		7ED4BD361B5EB64B00280D74 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		7ED4BD371B5EB64B00280D74 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
@@ -2569,7 +2560,6 @@
 		7ED4BD6B1B5EB64B00280D74 /* DBCardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */; };
 		7ED4BD6C1B5EB64B00280D74 /* venues_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307E19FF72E0001B4B6D /* venues_icon@2x.png */; };
 		7ED4BD6D1B5EB64B00280D74 /* mug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB2FD83419F55A580065285B /* mug@2x.png */; };
-		7ED4BD6E1B5EB64B00280D74 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200831B457B4A000BBE55 /* launch_667.png */; };
 		7ED4BD701B5EB64B00280D74 /* preview_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3C12CC41A94DD5F00E75DF0 /* preview_3@2x.png */; };
 		7ED4BD711B5EB64B00280D74 /* orders_icon_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307519FF72E0001B4B6D /* orders_icon_grey@2x.png */; };
 		7ED4BD721B5EB64B00280D74 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72419E7DC0E0050DF90 /* OrderCell.xib */; };
@@ -2579,7 +2569,6 @@
 		7ED4BD761B5EB64B00280D74 /* visa_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3E6B6E1A7FC4E900640791 /* visa_icon@2x.png */; };
 		7ED4BD771B5EB64B00280D74 /* alerts.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BDA196E88E1002A7AF3 /* alerts.png */; };
 		7ED4BD781B5EB64B00280D74 /* bg1334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458971AEA481200DB8B64 /* bg1334.jpg */; };
-		7ED4BD791B5EB64B00280D74 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200821B457B4A000BBE55 /* launch_568.png */; };
 		7ED4BD7A1B5EB64B00280D74 /* DBCardAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB82FD5C1B4444B1000BBE55 /* DBCardAddCell.xib */; };
 		7ED4BD7C1B5EB64B00280D74 /* plus_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B91B0C97660032B59B /* plus_icon@2x.png */; };
 		7ED4BD7D1B5EB64B00280D74 /* DBOrderViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB73419E7DC0E0050DF90 /* DBOrderViewHeader.xib */; };
@@ -2595,7 +2584,6 @@
 		7ED4BD871B5EB64B00280D74 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BC8196E8246002A7AF3 /* profile.png */; };
 		7ED4BD881B5EB64B00280D74 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C775BAC7D71EB26B52F973FE /* Podfile */; };
 		7ED4BD891B5EB64B00280D74 /* nda.html in Resources */ = {isa = PBXBuildFile; fileRef = D516FA461986D5870077FC17 /* nda.html */; };
-		7ED4BD8A1B5EB64B00280D74 /* Images-SushiMarket.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB8200881B457B4A000BBE55 /* Images-SushiMarket.xcassets */; };
 		7ED4BD8B1B5EB64B00280D74 /* DBPositionGroupModifierItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7DB1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.xib */; };
 		7ED4BD8C1B5EB64B00280D74 /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE3196E8F74002A7AF3 /* phone@2x.png */; };
 		7ED4BD8D1B5EB64B00280D74 /* DBOrderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E8251AD4508F0003D5B2 /* DBOrderItemCell.xib */; };
@@ -2626,7 +2614,6 @@
 		7ED4BDA61B5EB64B00280D74 /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770424196A18640010D1B1 /* comment@2x.png */; };
 		7ED4BDA71B5EB64B00280D74 /* venue_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222789197997380098E429 /* venue_gray@2x.png */; };
 		7ED4BDA81B5EB64B00280D74 /* 300@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770416196A09410010D1B1 /* 300@2x.png */; };
-		7ED4BDA91B5EB64B00280D74 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200811B457B4A000BBE55 /* launch_480.png */; };
 		7ED4BDAD1B5EB64B00280D74 /* return_cause_time_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF61AE16D3C007027A6 /* return_cause_time_icon@2x.png */; };
 		7ED4BDAE1B5EB64B00280D74 /* DBContactUsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60FC1AE658D2005D78A8 /* DBContactUsView.xib */; };
 		7ED4BDAF1B5EB64B00280D74 /* venues_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307F19FF72E0001B4B6D /* venues_icon@3x.png */; };
@@ -4707,7 +4694,6 @@
 		CB5793A31B6AB87300B17819 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770421196A18640010D1B1 /* clock.png */; };
 		CB5793A41B6AB87300B17819 /* cash_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = D52227791972FB6B0098E429 /* cash_gray.png */; };
 		CB5793A51B6AB87300B17819 /* card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770420196A18640010D1B1 /* card@2x.png */; };
-		CB5793A61B6AB87300B17819 /* launch_736.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200841B457B4A000BBE55 /* launch_736.png */; };
 		CB5793A71B6AB87300B17819 /* DBBonusPositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBB043071B0CAEFF00901173 /* DBBonusPositionsViewController.xib */; };
 		CB5793A81B6AB87300B17819 /* DBNewOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0ED9191ABB26880014798A /* DBNewOrderViewController.xib */; };
 		CB5793A91B6AB87300B17819 /* share_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB05B7891A6D08F6006224BB /* share_icon@2x.png */; };
@@ -4763,7 +4749,6 @@
 		CB5793DC1B6AB87300B17819 /* DBCardsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */; };
 		CB5793DD1B6AB87300B17819 /* venues_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307E19FF72E0001B4B6D /* venues_icon@2x.png */; };
 		CB5793DE1B6AB87300B17819 /* mug@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB2FD83419F55A580065285B /* mug@2x.png */; };
-		CB5793DF1B6AB87300B17819 /* launch_667.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200831B457B4A000BBE55 /* launch_667.png */; };
 		CB5793E01B6AB87300B17819 /* preview_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B3C12CC41A94DD5F00E75DF0 /* preview_3@2x.png */; };
 		CB5793E11B6AB87300B17819 /* orders_icon_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307519FF72E0001B4B6D /* orders_icon_grey@2x.png */; };
 		CB5793E21B6AB87300B17819 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB72419E7DC0E0050DF90 /* OrderCell.xib */; };
@@ -4773,7 +4758,6 @@
 		CB5793E71B6AB87300B17819 /* visa_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB3E6B6E1A7FC4E900640791 /* visa_icon@2x.png */; };
 		CB5793E91B6AB87300B17819 /* alerts.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BDA196E88E1002A7AF3 /* alerts.png */; };
 		CB5793EA1B6AB87300B17819 /* bg1334.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5ED458971AEA481200DB8B64 /* bg1334.jpg */; };
-		CB5793EC1B6AB87300B17819 /* launch_568.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200821B457B4A000BBE55 /* launch_568.png */; };
 		CB5793ED1B6AB87300B17819 /* DBCardAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB82FD5C1B4444B1000BBE55 /* DBCardAddCell.xib */; };
 		CB5793EE1B6AB87300B17819 /* plus_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB6DF3B91B0C97660032B59B /* plus_icon@2x.png */; };
 		CB5793EF1B6AB87300B17819 /* DBOrderViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB6EB73419E7DC0E0050DF90 /* DBOrderViewHeader.xib */; };
@@ -4789,7 +4773,6 @@
 		CB5793F91B6AB87300B17819 /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BC8196E8246002A7AF3 /* profile.png */; };
 		CB5793FA1B6AB87300B17819 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = C775BAC7D71EB26B52F973FE /* Podfile */; };
 		CB5793FB1B6AB87300B17819 /* nda.html in Resources */ = {isa = PBXBuildFile; fileRef = D516FA461986D5870077FC17 /* nda.html */; };
-		CB5793FC1B6AB87300B17819 /* Images-SushiMarket.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB8200881B457B4A000BBE55 /* Images-SushiMarket.xcassets */; };
 		CB5793FD1B6AB87300B17819 /* DBPositionGroupModifierItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7DB1AD298FA0003D5B2 /* DBPositionGroupModifierItemCell.xib */; };
 		CB5793FE1B6AB87300B17819 /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5869BE3196E8F74002A7AF3 /* phone@2x.png */; };
 		CB5793FF1B6AB87300B17819 /* DBOrderItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB43E8251AD4508F0003D5B2 /* DBOrderItemCell.xib */; };
@@ -4820,7 +4803,6 @@
 		CB5794191B6AB87300B17819 /* comment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770424196A18640010D1B1 /* comment@2x.png */; };
 		CB57941A1B6AB87300B17819 /* venue_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5222789197997380098E429 /* venue_gray@2x.png */; };
 		CB57941B1B6AB87300B17819 /* 300@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5770416196A09410010D1B1 /* 300@2x.png */; };
-		CB57941C1B6AB87300B17819 /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB8200811B457B4A000BBE55 /* launch_480.png */; };
 		CB57941D1B6AB87300B17819 /* return_cause_time_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBCCCFF61AE16D3C007027A6 /* return_cause_time_icon@2x.png */; };
 		CB57941E1B6AB87300B17819 /* DBContactUsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60FC1AE658D2005D78A8 /* DBContactUsView.xib */; };
 		CB57941F1B6AB87300B17819 /* venues_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB73307F19FF72E0001B4B6D /* venues_icon@3x.png */; };
@@ -12472,7 +12454,6 @@
 				7E3830401B5CF692008F0241 /* clock.png in Resources */,
 				7E3830411B5CF692008F0241 /* cash_gray.png in Resources */,
 				7E3830421B5CF692008F0241 /* card@2x.png in Resources */,
-				7E3830431B5CF692008F0241 /* launch_736.png in Resources */,
 				7E3830441B5CF692008F0241 /* DBBonusPositionsViewController.xib in Resources */,
 				7E3831131B5CF6A9008F0241 /* launch_736.png in Resources */,
 				7E3830451B5CF692008F0241 /* DBNewOrderViewController.xib in Resources */,
@@ -12525,13 +12506,11 @@
 				7E3830731B5CF692008F0241 /* ProfileCell.xib in Resources */,
 				7E3830741B5CF692008F0241 /* DBDiscountMessageCell.xib in Resources */,
 				7E3830751B5CF692008F0241 /* DBAddressViewController.xib in Resources */,
-				7E3830761B5CF692008F0241 /* SushiMarket-info.plist in Resources */,
 				7E3830771B5CF692008F0241 /* DBNewOrderItemErrorView.xib in Resources */,
 				7E3830781B5CF692008F0241 /* bg2208.jpg in Resources */,
 				7E3830791B5CF692008F0241 /* DBCardsViewController.xib in Resources */,
 				7E38307A1B5CF692008F0241 /* venues_icon@2x.png in Resources */,
 				7E38307B1B5CF692008F0241 /* mug@2x.png in Resources */,
-				7E38307C1B5CF692008F0241 /* launch_667.png in Resources */,
 				7E3831121B5CF6A9008F0241 /* launch_667.png in Resources */,
 				7E38307D1B5CF692008F0241 /* preview_3@2x.png in Resources */,
 				7E38307E1B5CF692008F0241 /* orders_icon_grey@2x.png in Resources */,
@@ -12542,7 +12521,6 @@
 				7E3830831B5CF692008F0241 /* visa_icon@2x.png in Resources */,
 				7E3830841B5CF692008F0241 /* alerts.png in Resources */,
 				7E3830851B5CF692008F0241 /* bg1334.jpg in Resources */,
-				7E3830861B5CF692008F0241 /* launch_568.png in Resources */,
 				7E3830871B5CF692008F0241 /* DBCardAddCell.xib in Resources */,
 				7E3831111B5CF6A9008F0241 /* launch_568.png in Resources */,
 				7E3830881B5CF692008F0241 /* plus_icon@2x.png in Resources */,
@@ -12559,7 +12537,6 @@
 				7E3830931B5CF692008F0241 /* profile.png in Resources */,
 				7E3830941B5CF692008F0241 /* Podfile in Resources */,
 				7E3830951B5CF692008F0241 /* nda.html in Resources */,
-				7E3830961B5CF692008F0241 /* Images-SushiMarket.xcassets in Resources */,
 				7E3830971B5CF692008F0241 /* DBPositionGroupModifierItemCell.xib in Resources */,
 				7E3830981B5CF692008F0241 /* phone@2x.png in Resources */,
 				7E3830991B5CF692008F0241 /* DBOrderItemCell.xib in Resources */,
@@ -12590,9 +12567,7 @@
 				7E3830B21B5CF692008F0241 /* comment@2x.png in Resources */,
 				7E3830B31B5CF692008F0241 /* venue_gray@2x.png in Resources */,
 				7E3830B41B5CF692008F0241 /* 300@2x.png in Resources */,
-				7E3830B51B5CF692008F0241 /* launch_480.png in Resources */,
 				7E3831101B5CF6A9008F0241 /* launch_480.png in Resources */,
-				7E3830B61B5CF692008F0241 /* CompanyInfo.plist in Resources */,
 				7E3831141B5CF6A9008F0241 /* CompanyInfo.plist in Resources */,
 				7E3830B71B5CF692008F0241 /* return_cause_time_icon@2x.png in Resources */,
 				7E3830B81B5CF692008F0241 /* DBContactUsView.xib in Resources */,
@@ -12632,7 +12607,6 @@
 				7E3830DA1B5CF692008F0241 /* orders_icon@3x.png in Resources */,
 				7E3830DB1B5CF692008F0241 /* DBOrderViewController.xib in Resources */,
 				7E3830DC1B5CF692008F0241 /* venue_gray.png in Resources */,
-				7E3830DD1B5CF692008F0241 /* InfoPlist.strings in Resources */,
 				7E3831151B5CF6A9008F0241 /* InfoPlist.strings in Resources */,
 				7E3830DE1B5CF692008F0241 /* paid@2x.png in Resources */,
 				7E3830DF1B5CF692008F0241 /* tick_gray@2x.png in Resources */,
@@ -13887,7 +13861,6 @@
 				7ED4BD301B5EB64B00280D74 /* clock.png in Resources */,
 				7ED4BD311B5EB64B00280D74 /* cash_gray.png in Resources */,
 				7ED4BD321B5EB64B00280D74 /* card@2x.png in Resources */,
-				7ED4BD331B5EB64B00280D74 /* launch_736.png in Resources */,
 				7ED4BD341B5EB64B00280D74 /* DBBonusPositionsViewController.xib in Resources */,
 				7ED4BD361B5EB64B00280D74 /* DBNewOrderViewController.xib in Resources */,
 				7ED4BD371B5EB64B00280D74 /* share_icon@2x.png in Resources */,
@@ -13944,7 +13917,6 @@
 				7ED4BD6B1B5EB64B00280D74 /* DBCardsViewController.xib in Resources */,
 				7ED4BD6C1B5EB64B00280D74 /* venues_icon@2x.png in Resources */,
 				7ED4BD6D1B5EB64B00280D74 /* mug@2x.png in Resources */,
-				7ED4BD6E1B5EB64B00280D74 /* launch_667.png in Resources */,
 				7ED4BD701B5EB64B00280D74 /* preview_3@2x.png in Resources */,
 				7ED4BD711B5EB64B00280D74 /* orders_icon_grey@2x.png in Resources */,
 				7ED4BD721B5EB64B00280D74 /* OrderCell.xib in Resources */,
@@ -13957,7 +13929,6 @@
 				7ED4BD771B5EB64B00280D74 /* alerts.png in Resources */,
 				7ED4BD781B5EB64B00280D74 /* bg1334.jpg in Resources */,
 				7ED4BE0E1B5EB67800280D74 /* InfoPlist.strings in Resources */,
-				7ED4BD791B5EB64B00280D74 /* launch_568.png in Resources */,
 				7ED4BD7A1B5EB64B00280D74 /* DBCardAddCell.xib in Resources */,
 				7ED4BD7C1B5EB64B00280D74 /* plus_icon@2x.png in Resources */,
 				7ED4BD7D1B5EB64B00280D74 /* DBOrderViewHeader.xib in Resources */,
@@ -13973,7 +13944,6 @@
 				7ED4BD871B5EB64B00280D74 /* profile.png in Resources */,
 				7ED4BD881B5EB64B00280D74 /* Podfile in Resources */,
 				7ED4BD891B5EB64B00280D74 /* nda.html in Resources */,
-				7ED4BD8A1B5EB64B00280D74 /* Images-SushiMarket.xcassets in Resources */,
 				7ED4BD8B1B5EB64B00280D74 /* DBPositionGroupModifierItemCell.xib in Resources */,
 				7ED4BD8C1B5EB64B00280D74 /* phone@2x.png in Resources */,
 				7ED4BD8D1B5EB64B00280D74 /* DBOrderItemCell.xib in Resources */,
@@ -14005,7 +13975,6 @@
 				7ED4BDA61B5EB64B00280D74 /* comment@2x.png in Resources */,
 				7ED4BDA71B5EB64B00280D74 /* venue_gray@2x.png in Resources */,
 				7ED4BDA81B5EB64B00280D74 /* 300@2x.png in Resources */,
-				7ED4BDA91B5EB64B00280D74 /* launch_480.png in Resources */,
 				7ED4BDAD1B5EB64B00280D74 /* return_cause_time_icon@2x.png in Resources */,
 				7ED4BDAE1B5EB64B00280D74 /* DBContactUsView.xib in Resources */,
 				7ED4BDAF1B5EB64B00280D74 /* venues_icon@3x.png in Resources */,
@@ -15299,7 +15268,6 @@
 				CB5793A31B6AB87300B17819 /* clock.png in Resources */,
 				CB5793A41B6AB87300B17819 /* cash_gray.png in Resources */,
 				CB5793A51B6AB87300B17819 /* card@2x.png in Resources */,
-				CB5793A61B6AB87300B17819 /* launch_736.png in Resources */,
 				CB5793A71B6AB87300B17819 /* DBBonusPositionsViewController.xib in Resources */,
 				CB5793A81B6AB87300B17819 /* DBNewOrderViewController.xib in Resources */,
 				CB5793A91B6AB87300B17819 /* share_icon@2x.png in Resources */,
@@ -15360,7 +15328,6 @@
 				CB5793DC1B6AB87300B17819 /* DBCardsViewController.xib in Resources */,
 				CB5793DD1B6AB87300B17819 /* venues_icon@2x.png in Resources */,
 				CB5793DE1B6AB87300B17819 /* mug@2x.png in Resources */,
-				CB5793DF1B6AB87300B17819 /* launch_667.png in Resources */,
 				CB5793E01B6AB87300B17819 /* preview_3@2x.png in Resources */,
 				CB5793E11B6AB87300B17819 /* orders_icon_grey@2x.png in Resources */,
 				CB5793E21B6AB87300B17819 /* OrderCell.xib in Resources */,
@@ -15370,7 +15337,6 @@
 				CB5793E71B6AB87300B17819 /* visa_icon@2x.png in Resources */,
 				CB5793E91B6AB87300B17819 /* alerts.png in Resources */,
 				CB5793EA1B6AB87300B17819 /* bg1334.jpg in Resources */,
-				CB5793EC1B6AB87300B17819 /* launch_568.png in Resources */,
 				CB5793ED1B6AB87300B17819 /* DBCardAddCell.xib in Resources */,
 				CB5793EE1B6AB87300B17819 /* plus_icon@2x.png in Resources */,
 				CB5793EF1B6AB87300B17819 /* DBOrderViewHeader.xib in Resources */,
@@ -15386,7 +15352,6 @@
 				CB5793F91B6AB87300B17819 /* profile.png in Resources */,
 				CB5793FA1B6AB87300B17819 /* Podfile in Resources */,
 				CB5793FB1B6AB87300B17819 /* nda.html in Resources */,
-				CB5793FC1B6AB87300B17819 /* Images-SushiMarket.xcassets in Resources */,
 				CB5793FD1B6AB87300B17819 /* DBPositionGroupModifierItemCell.xib in Resources */,
 				CB5793FE1B6AB87300B17819 /* phone@2x.png in Resources */,
 				CB5793FF1B6AB87300B17819 /* DBOrderItemCell.xib in Resources */,
@@ -15417,7 +15382,6 @@
 				CB5794191B6AB87300B17819 /* comment@2x.png in Resources */,
 				CB57941A1B6AB87300B17819 /* venue_gray@2x.png in Resources */,
 				CB57941B1B6AB87300B17819 /* 300@2x.png in Resources */,
-				CB57941C1B6AB87300B17819 /* launch_480.png in Resources */,
 				CB57947D1B6AB94300B17819 /* CompanyInfo.plist in Resources */,
 				CB57941D1B6AB87300B17819 /* return_cause_time_icon@2x.png in Resources */,
 				CB57941E1B6AB87300B17819 /* DBContactUsView.xib in Resources */,
