@@ -12371,6 +12371,9 @@
 					CB517B3F1AEFB6B500A50F5C = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
+					CB57930A1B6AB87300B17819 = {
+						DevelopmentTeam = WDRAVGQ9R2;
+					};
 					CB5AFC1F1B27209A00904BF7 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
@@ -23805,7 +23808,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oleg Parinov (BA6FM4RUX3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Пупкин Иван (3ZGPE3E32B)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -23820,7 +23823,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Luckmousse;
-				PROVISIONING_PROFILE = "0af8b1d3-02ba-4bba-8642-3a8defba5061";
+				PROVISIONING_PROFILE = "9d7bc8c0-4345-4c4e-b8a8-9b2b66aa73c9";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
