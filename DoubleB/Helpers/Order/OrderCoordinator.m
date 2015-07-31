@@ -18,6 +18,7 @@ NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"Coordinato
 
 NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated = @"CoordinatorNotificationAddressSuggestionsUpdated";
 NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNotificationPromoUpdated";
+NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated = @"CoordinatorNotificationPersonalWalletBalanceUpdated";
 
 @implementation OrderCoordinator
 
@@ -33,8 +34,9 @@ NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNo
 - (instancetype)init {
     self = [super init];
     
-    _itemsManager = [[ItemsManager alloc] initWithParentManager:self];
-    _bonusItemsManager = [[BonusItemsManager  alloc] initWithParentManager:self];
+    _itemsManager = [[OrderItemsManager alloc] initWithParentManager:self];
+    _bonusItemsManager = [[OrderBonusItemsManager  alloc] initWithParentManager:self];
+    _orderGiftsManager = [[OrderGiftItemsManager alloc] initWithParentManager:self];
     _orderManager = [[OrderManager  alloc] initWithParentManager:self];
     _deliverySettings = [[DeliverySettings  alloc] initWithParentManager:self];
     _shippingManager = [[ShippingManager  alloc] initWithParentManager:self];
@@ -79,7 +81,7 @@ NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNo
 }
 
 - (void)manager:(id<ManagerProtocol> __nonnull)manager haveChange:(NSInteger)changeType{
-    if([manager isKindOfClass:[ItemsManager class]]){
+    if([manager isKindOfClass:[OrderItemsManager class]]){
         switch (changeType) {
             case ItemsManagerChangeTotalPrice:
                 [self itemsManagerDidChangeTotalPrice];
@@ -97,6 +99,9 @@ NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNo
                 break;
             case DBPromoManagerChangeWalletDiscount:
                 [self promoManagerDidChangeWalletDiscount];
+                break;
+            case DBPromoManagerChangeWalletBalance:
+                [self promoManagerDidChangeWalletBalance];
                 break;
             case DBPromoManagerChangeUpdatedPromoInfo:
                 [self promoManagerDidUpdatePromoInfo];
@@ -142,6 +147,10 @@ NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNo
 
 - (void)promoManagerDidChangeWalletDiscount{
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderWalletDiscount object:nil]];
+}
+
+- (void)promoManagerDidChangeWalletBalance{
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationPersonalWalletBalanceUpdated object:nil]];
 }
 
 - (void)promoManagerDidChangeShippingPrice{

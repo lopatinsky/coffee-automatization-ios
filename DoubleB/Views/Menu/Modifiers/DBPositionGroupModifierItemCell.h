@@ -12,10 +12,11 @@
 @class DBMenuPositionModifierItem;
 
 @interface DBPositionGroupModifierItemCell : UITableViewCell
+@property(nonatomic) DBUICurrencyDisplayMode currencyDisplayMode;
+
 @property (nonatomic, strong, readonly) DBMenuPositionModifierItem *item;
 @property (nonatomic) BOOL havePrice;
 @property (nonatomic, readonly) BOOL stateSelected;
-@property (nonatomic) MenuPositionType positionType;
 
 - (void)configureWithModifierItem:(DBMenuPositionModifierItem *)item
                         havePrice:(BOOL)havePrice;

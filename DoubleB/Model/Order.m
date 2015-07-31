@@ -13,6 +13,7 @@
 #import "OrderCoordinator.h"
 #import "ShippingManager.h"
 #import "OrderItem.h"
+#import "DBMenuPosition.h"
 
 @implementation Order {
     NSArray *_items;
@@ -62,13 +63,17 @@
     
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
-        [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict bonus:NO]];
+        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        item.position.mode = DBMenuPositionModeRegular;
+        [items addObject:item];
     }
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
     
     NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
-        [bonusItems addObject:[OrderItem orderItemFromHistoryDictionary:itemDict bonus:YES]];
+        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        item.position.mode = DBMenuPositionModeBonus;
+        [items addObject:item];
     }
     self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
     

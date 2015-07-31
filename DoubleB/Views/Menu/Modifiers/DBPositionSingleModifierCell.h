@@ -20,9 +20,10 @@
 @interface DBPositionSingleModifierCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *itemTitleLabel;
 
+@property(nonatomic) DBUICurrencyDisplayMode currencyDisplayMode;
+
 @property (weak, nonatomic) id<DBPositionSingleModifierCellDelegate> delegate;
 @property (nonatomic) BOOL havePrice;
-@property (nonatomic) MenuPositionType positionType;
 
 - (void)configureWithModifier:(DBMenuPositionModifier *)modifier
                     havePrice:(BOOL)havePrice

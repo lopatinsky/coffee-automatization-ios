@@ -8,7 +8,6 @@
 
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
-#import "DBMenuBonusPosition.h"
 #import "DBMenu.h"
 
 @implementation OrderItem
@@ -20,17 +19,12 @@
     return self;
 }
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus{
++ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem{
     OrderItem *item = [[OrderItem alloc] init];
     
-    DBMenuPosition *position;
-    if(bonus){
-        position = [[DBMenuBonusPosition alloc] initWithResponseDictionary:historyItem];
-    } else {
-        DBMenuPosition *menuPosition = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
-        if(menuPosition){
-            position = [menuPosition copy];
-        }
+    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
+    if(position){
+        position = [position copy];
     }
     
     

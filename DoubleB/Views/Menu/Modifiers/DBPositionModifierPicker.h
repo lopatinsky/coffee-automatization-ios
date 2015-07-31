@@ -25,6 +25,8 @@ typedef NS_ENUM(NSUInteger, DBPositionModifierPickerType) {
 
 @interface DBPositionModifierPicker : UIView
 @property(nonatomic, readonly) DBPositionModifierPickerType type;
+@property(nonatomic) DBUICurrencyDisplayMode currencyDisplayMode;
+
 @property (nonatomic, strong) DBMenuPosition *position;
 @property(weak, nonatomic) id<DBPositionModifierPickerDelegate> delegate;
 

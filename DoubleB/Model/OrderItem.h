@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @class DBMenuPosition;
-
 @interface OrderItem : NSObject <NSCoding, NSCopying>
 
 @property (strong, nonatomic) DBMenuPosition *position;
@@ -18,7 +17,7 @@
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position;
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus;
++ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
 
 @end
 

@@ -39,9 +39,10 @@
     
     if (item) {
         self.titleLabel.text = item.itemName;
-        if (self.positionType == General) {
+        if (self.currencyDisplayMode == DBUICurrencyDisplayModeRub) {
             self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
-        } else if (self.positionType == Bonus) {
+        }
+        if (self.currencyDisplayMode == DBUICurrencyDisplayModeNone) {
             self.priceLabel.text = [NSString stringWithFormat:@"%0.f", [item.itemDictionary[@"points"] floatValue]];
         }
     } else {

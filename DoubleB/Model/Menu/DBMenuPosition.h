@@ -8,19 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, MenuPositionType) {
-    General = 0,
-    Bonus
-};
-
 @class Venue;
+
+typedef NS_ENUM(NSInteger, DBMenuPositionMode){
+    DBMenuPositionModeRegular = 0,
+    DBMenuPositionModeBonus,
+    DBMenuPositionModeGift
+};
 
 @interface DBMenuPosition : NSObject<NSCopying, NSCoding>
 
+// mutable data(stored)
+@property(nonatomic) DBMenuPositionMode mode;
+
+// immutable(stored) data
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;
 @property(nonatomic, readonly) NSInteger order;
-@property(nonatomic, readonly) double price;
+@property(nonatomic) double price;
 @property(nonatomic, readonly) double actualPrice;
 @property(strong, nonatomic, readonly) NSString *imageUrl;
 @property(strong, nonatomic, readonly) NSString *positionDescription;
@@ -33,9 +38,7 @@ typedef NS_ENUM(NSUInteger, MenuPositionType) {
 
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
 
-@property (nonatomic) MenuPositionType positionType;
-
-// Not stored data
+// dynamic data(not stored)
 @property(nonatomic, readonly) BOOL hasImage;
 
 - (instancetype)initWithResponseDictionary:(NSDictionary *)positionDictionary;

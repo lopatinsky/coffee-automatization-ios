@@ -15,7 +15,6 @@
 @property(strong, nonatomic) NSString *positionId;
 @property(strong, nonatomic) NSString *name;
 @property(nonatomic) NSInteger order;
-@property(nonatomic) double price;
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *positionDescription;
 @property(nonatomic) double energyAmount;
@@ -182,7 +181,8 @@
         _singleModifiers = [aDecoder decodeObjectForKey:@"singleModifiers"];
         _venuesRestrictions = [aDecoder decodeObjectForKey:@"venuesRestrictions"];
         _productDictionary = [aDecoder decodeObjectForKey:@"productDictionary"];
-        _positionType = [aDecoder decodeIntegerForKey:@"positionType"];
+        
+        _mode = [[aDecoder decodeObjectForKey:@"positionMode"] integerValue];
     }
     
     return self;
@@ -202,7 +202,8 @@
     [aCoder encodeObject:self.singleModifiers forKey:@"singleModifiers"];
     [aCoder encodeObject:self.venuesRestrictions forKey:@"venuesRestrictions"];
     [aCoder encodeObject:self.productDictionary forKey:@"productDictionary"];
-    [aCoder encodeInteger:self.positionType forKey:@"positionType"];
+    
+    [aCoder encodeObject:@(self.mode) forKey:@"positionMode"];
 }
 
 #pragma mark - NSCopying
@@ -218,7 +219,6 @@
     copyPosition.energyAmount = self.energyAmount;
     copyPosition.weight = self.weight;
     copyPosition.volume = self.volume;
-    copyPosition.positionType = self.positionType;
     
     copyPosition.groupModifiers = [NSMutableArray new];
     for(DBMenuPositionModifier *modifier in self.groupModifiers)
@@ -230,6 +230,8 @@
     
     copyPosition.productDictionary = [self.productDictionary copy];
     copyPosition.venuesRestrictions = [self.venuesRestrictions copy];
+    
+    copyPosition.mode = self.mode;
     
     return copyPosition;
 }

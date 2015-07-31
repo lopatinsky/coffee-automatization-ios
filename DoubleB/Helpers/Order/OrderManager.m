@@ -9,7 +9,6 @@
 #import "OrderManager.h"
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
-#import "DBMenuBonusPosition.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"

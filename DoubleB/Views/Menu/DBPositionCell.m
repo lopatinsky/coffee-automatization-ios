@@ -8,7 +8,6 @@
 
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
-#import "DBMenuBonusPosition.h"
 #import "Compatibility.h"
 #import "DBTableItemInactivityView.h"
 
@@ -83,9 +82,10 @@
     }
 }
 
+
 - (void)reloadPriceLabel{
-    if(self.position.positionType == Bonus){
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    if(self.contentType == DBPositionCellContentTypeBonus){
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     } else {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.price, [Compatibility currencySymbol]];
     }

@@ -161,10 +161,12 @@
 }
 
 - (void)reloadPrice{
-    if (self.position.positionType == General) {
+    if (self.position.mode == DBMenuPositionModeRegular || self.position.mode == DBMenuPositionModeGift) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
-    } else if (self.position.positionType == Bonus) {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    }
+    
+    if (self.position.mode == DBMenuPositionModeBonus) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     }
 }
 
@@ -174,14 +176,14 @@
     clicked = true;
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
-        if (self.position.positionType == General) {
-            [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
-        } else {
-            [[OrderCoordinator sharedInstance].bonusItemsManager addBonusPosition:(DBMenuBonusPosition *)self.position];
-            if ([self.position.productDictionary[@"points"] floatValue] > [self totalPoints]) {
+        if (self.position.mode == DBMenuPositionModeBonus) {
+            [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:self.position];
+            if (self.position.price > [self totalPoints]) {
                 self.priceButton.enabled = NO;
                 self.priceLabel.alpha = 0.6;
             }
+        } else {
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
         }
         clicked = false;
     }];
@@ -239,6 +241,8 @@
     } else {
         [self.modifierPicker configureSingleModifiers];
     }
+    
+    self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
     
     [self.modifierPicker showOnView:self.parentNavigationController.view];
 }

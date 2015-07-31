@@ -68,3 +68,9 @@ extern NSString *const kDBNewOrderAnimateAllErrorElementsNotification;
 
 extern NSString *const kDBBindingNecessaryForAuthorization;
 
+
+typedef NS_ENUM(NSInteger, DBUICurrencyDisplayMode){
+    DBUICurrencyDisplayModeRub = 0,
+    DBUICurrencyDisplayModeNone
+};
+

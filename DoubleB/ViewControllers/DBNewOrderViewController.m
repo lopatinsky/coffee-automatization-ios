@@ -19,7 +19,6 @@
 #import "OrderCoordinator.h"
 #import "Order.h"
 #import "DBMenuPosition.h"
-#import "DBMenuBonusPosition.h"
 #import "OrderItem.h"
 #import "Venue.h"
 #import "Compatibility.h"
@@ -193,8 +192,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if ([DBCompanyInfo sharedInstance].topScreenType == TVCMenu) {
         [self pushPositionsViewControllerAnimated:NO];
     }
-    
-    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(promoUpdateHandler)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -346,7 +343,52 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Promo
 
 - (void)startUpdatingPromoInfo{
-    BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder];
+    BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder:^(BOOL success) {
+        [self endUpdatingPromoInfo];
+        
+        if(success){
+            // Show order promos & errors
+            NSArray *promos = _orderCoordinator.promoManager.promos;
+            NSArray *errors = _orderCoordinator.promoManager.errors;
+            
+            [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
+            
+            BOOL shouldReloadAgain = NO;
+            for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
+                OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
+                DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
+                
+                DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+                cell.promoItem = promoItem;
+                
+                if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
+                    [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+                    [promoItem clear];
+                    shouldReloadAgain = YES;
+                    
+                    [GANHelper analyzeEvent:@"position_autoreplace"
+                                      label:item.position.positionId
+                                   category:ORDER_SCREEN];
+                }
+            }
+            
+            if(shouldReloadAgain){
+                [self startUpdatingPromoInfo];
+            }
+            [self reloadVisibleCells];
+            
+            // Gifts logic
+            [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
+            
+        } else {
+            [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
+                                      animation:^{
+                                          [self.scrollView layoutIfNeeded];
+                                      } completion:nil];
+        }
+        
+        [self reloadBonusesView:YES];
+    }];
     
     if(startUpdating){
         [self.totalView startUpdating];
@@ -358,52 +400,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.totalView endUpdating];
     
     [self reloadContinueButton];
-}
-
-- (void)promoUpdateHandler{
-    [self endUpdatingPromoInfo];
-    
-    if(_orderCoordinator.promoManager.validOrder){
-        // Show order promos & errors
-        NSArray *promos = _orderCoordinator.promoManager.promos;
-        NSArray *errors = _orderCoordinator.promoManager.errors;
-        
-        [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
-        
-        BOOL shouldReloadAgain = NO;
-        for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
-            OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
-            DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
-            
-            DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            cell.promoItem = promoItem;
-            
-            if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
-                [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
-                [promoItem clear];
-                shouldReloadAgain = YES;
-                
-                [GANHelper analyzeEvent:@"position_autoreplace"
-                                  label:item.position.positionId
-                               category:ORDER_SCREEN];
-            }
-        }
-        
-        if(shouldReloadAgain){
-            [self startUpdatingPromoInfo];
-        }
-        [self reloadVisibleCells];
-        
-        // Gifts logic
-        [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
-    } else {
-        [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
-                                  animation:^{
-                                      [self.scrollView layoutIfNeeded];
-                                  } completion:nil];
-    }
-    
-    [self reloadBonusesView:YES];
 }
 
 - (void) showOrHideAdditionalInfoViewWithErrors:(NSArray *)errors promos:(NSArray *)promos {
@@ -428,7 +424,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Personal wallet
 
 - (void)reloadBonusesView:(BOOL)animated{
-    if(_orderCoordinator.promoManager.walletPointsAvailableForOrder > 0){
+    if(_orderCoordinator.promoManager.walletDiscount > 0){
         self.bonusView.bonusSwitchActive = _orderCoordinator.promoManager.walletActiveForOrder;
         [self.bonusView show:animated completion:^{
             [self.scrollView layoutIfNeeded];
@@ -489,11 +485,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0){
         return [_orderCoordinator.itemsManager.items count];
-    } else if (section == 1) {
-        return [_orderCoordinator.bonusItemsManager.items count];
-    } else {
-        return [_orderCoordinator.promoManager currentAvailableGifts].count;
     }
+    if (section == 1) {
+        return [_orderCoordinator.bonusItemsManager.items count];
+    }
+    if (section == 2) {
+        return [_orderCoordinator.orderGiftsManager.items count];
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -502,10 +502,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     OrderItem *item;
     if (indexPath.section == 0) {
         item = [_orderCoordinator.itemsManager itemAtIndex:indexPath.row];
-    } else if (indexPath.section == 1) {
+    }
+    if (indexPath.section == 1) {
         item = [_orderCoordinator.bonusItemsManager itemAtIndex:indexPath.row];
-    } else {
-        item = [_orderCoordinator.promoManager currentAvailableGifts][indexPath.row];
+    }
+    if (indexPath.section == 2) {
+        item = [_orderCoordinator.orderGiftsManager itemAtIndex:indexPath.row];
     }
     
     if (item.position.hasImage){
@@ -541,11 +543,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderItem *item;
-    
-    if(indexPath.section == 0){
+    if (indexPath.section == 0) {
         item = [_orderCoordinator.itemsManager itemAtIndex:indexPath.row];
-    } else {
+    }
+    if (indexPath.section == 1) {
         item = [_orderCoordinator.bonusItemsManager itemAtIndex:indexPath.row];
+    }
+    if (indexPath.section == 2) {
+        item = [_orderCoordinator.orderGiftsManager itemAtIndex:indexPath.row];
     }
     
     if(item.position.hasImage){
@@ -564,7 +569,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [_orderCoordinator.bonusItemsManager removeBonusPositionAtIndex:indexPath.row];
+    [_orderCoordinator.bonusItemsManager removeOrderItemAtIndex:indexPath.row];
     
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath]
@@ -578,7 +583,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - DBOrderItemCellDelegate
 
 - (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
-    return ![cell.orderItem.position isKindOfClass:[DBMenuBonusPosition class]];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    return indexPath.section == 0;
 }
 
 - (void)removeRowAtIndex:(NSInteger)index{
@@ -632,6 +638,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
+    
     UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
     positionVC.parentNavigationController = self.navigationController;
     positionVC.hidesBottomBarWhenPushed = YES;

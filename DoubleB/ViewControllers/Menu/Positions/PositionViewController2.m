@@ -53,6 +53,7 @@
     PositionViewController2 *positionVC = [PositionViewController2 new];
     positionVC.position = position;
     positionVC.mode = mode;
+    
     return positionVC;
 }
 
@@ -161,10 +162,12 @@
 }
 
 - (void)reloadPrice {
-    if (self.position.positionType == General) {
+    if (self.position.mode == DBMenuPositionModeRegular || self.position.mode == DBMenuPositionModeGift) {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.actualPrice, [Compatibility currencySymbol]];
-    } else if (self.position.positionType == Bonus) {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", [self.position.productDictionary[@"points"] floatValue]];
+    }
+    
+    if (self.position.mode == DBMenuPositionModeBonus ) {
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     }
 }
 
