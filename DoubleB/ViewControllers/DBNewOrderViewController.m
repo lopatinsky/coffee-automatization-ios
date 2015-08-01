@@ -222,35 +222,36 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-        if(self == self.navigationController.visibleViewController){
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            if (![defaults boolForKey:@"ibeacon_question"]) {
-                
-                [defaults setBool:YES forKey:@"ibeacon_question"];
-                [defaults synchronize];
-                
-                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Спец. предложения", nil)
-                                               message:NSLocalizedString(@"Хотите ли вы активировать контекстные уведомления, чтобы мы присылалали вам спец. предложения и полезную информацию в зависимости от вашего местоположения?", nil)
-                                     cancelButtonTitle:NSLocalizedString(@"Нет, спасибо", nil)
-                                     otherButtonTitles:@[NSLocalizedString(@"Да, пожалуйста", nil)]
-                                               handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                   if (buttonIndex == 1) {
-                                                       [defaults setBool:YES forKey:kDBSettingsNotificationsEnabled];
-                                                       [defaults synchronize];
-                                                       
+    [Compatibility registerForNotifications];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
+//        if(self == self.navigationController.visibleViewController){
+//            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//            if (![defaults boolForKey:@"ibeacon_question"]) {
+//                
+//                [defaults setBool:YES forKey:@"ibeacon_question"];
+//                [defaults synchronize];
+//                
+//                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Спец. предложения", nil)
+//                                               message:NSLocalizedString(@"Хотите ли вы активировать контекстные уведомления, чтобы мы присылалали вам спец. предложения и полезную информацию в зависимости от вашего местоположения?", nil)
+//                                     cancelButtonTitle:NSLocalizedString(@"Нет, спасибо", nil)
+//                                     otherButtonTitles:@[NSLocalizedString(@"Да, пожалуйста", nil)]
+//                                               handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//                                                   if (buttonIndex == 1) {
+//                                                       [defaults setBool:YES forKey:kDBSettingsNotificationsEnabled];
+//                                                       [defaults synchronize];
+//                                                       
 //                                                       [DBBeaconObserver createBeaconObserver];
-                                                       [Compatibility registerForNotifications];
-                                                   } else {
-                                                   }
-                                               }];
-            } else {
-                if ([defaults boolForKey:kDBSettingsNotificationsEnabled]) {
-                    [DBBeaconObserver createBeaconObserver];
-                }
-            }
-        }
-    });
+//                                                       [Compatibility registerForNotifications];
+//                                                   } else {
+//                                                   }
+//                                               }];
+//            } else {
+//                if ([defaults boolForKey:kDBSettingsNotificationsEnabled]) {
+//                    [DBBeaconObserver createBeaconObserver];
+//                }
+//            }
+//        }
+//    });
 }
 
 - (void)viewDidAppear:(BOOL)animated{
