@@ -354,7 +354,18 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     
     self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companyInfoUpdateHandler:) name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil];
+    
     return self;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)companyInfoUpdateHandler:(NSNotification *)notification{
+    if(!self.deliveryType)
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
 }
 
 #pragma mark - Delivery type
@@ -473,6 +484,13 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
     
     return result;
+}
+
+- (void)reset{
+    self.deliveryType = nil;
+    self.selectedTimeSlot = nil;
+    self.selectedTime = nil;
+    self.lastNotShippingDeliveryType = nil;
 }
 
 @end

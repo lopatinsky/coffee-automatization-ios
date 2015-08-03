@@ -145,5 +145,7 @@ extern NSString* const kDBDefaultsPaymentType;
  */
 @property (nonatomic, strong) NSDate *minimumTime;
 
+- (void)reset;
+
 @end
 

@@ -20,13 +20,13 @@
 }
 
 + (void)initialize {
-//    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
-//    [[GAI sharedInstance] setDefaultTracker:tracker];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
+    [[GAI sharedInstance] setDefaultTracker:tracker];
 }
 
 + (void)analyzeScreen:(NSString *)screen {
-    [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:screen];
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
+//    [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:screen];
+//    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 + (void)analyzeEvent:(NSString *)eventName category:(NSString *)category{

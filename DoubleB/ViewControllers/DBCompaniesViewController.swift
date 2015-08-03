@@ -37,9 +37,9 @@ public class DBCompaniesViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
-        self.titleLabel.text = NSLocalizedString("Выберите регион", comment: "")
+        self.titleLabel.text = NSLocalizedString("Выберите ресторан", comment: "")
         self.titleLabel.textColor = UIColor.whiteColor()
-        self.title = NSLocalizedString("Выберите регион", comment: "")
+        self.title = NSLocalizedString("Выберите ресторан", comment: "")
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     }
     
@@ -92,7 +92,7 @@ extension DBCompaniesViewController: UITableViewDelegate {
             delegate.saveContext()
         }
         OrderManager.sharedManager().reset()
-        DBDeliverySettings.sharedInstance().selectShipping()
+        DBDeliverySettings.sharedInstance().reset()
         DBMenu.sharedInstance().clearMenu()
         DBMenu.sharedInstance().updateMenuForVenue(nil, remoteMenu: nil)
         Order.dropAllOrders()

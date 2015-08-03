@@ -7,10 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperationManager.h"
+#import "DBAPIClient.h"
 
-@interface IHPaymentClient : AFHTTPRequestOperationManager
-
-+ (instancetype)sharedClient;
+@interface IHPaymentClient : DBAPIClient
 
 @end
