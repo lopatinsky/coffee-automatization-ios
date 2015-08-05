@@ -53,10 +53,10 @@
     
     if (self.parent) {
         self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-        self.navigationItem.title = self.parent.name;
+        [self db_setTitle:self.parent.name];
     } else {
         self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
-        self.navigationItem.title = NSLocalizedString(@"Меню", nil);
+        [self db_setTitle:NSLocalizedString(@"Меню", nil)];
     }
     
     //styling

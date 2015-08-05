@@ -41,7 +41,7 @@
     
     self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
     
-    self.navigationItem.title = self.category.name;
+    [self db_setTitle:self.category.name];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 
     self.view.backgroundColor = [UIColor whiteColor];

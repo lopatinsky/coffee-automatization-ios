@@ -64,6 +64,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self db_setTitle:self.position.name];
+    
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.positionImageView alignLeading:@"0" trailing:@"0" toView:self.view];
     

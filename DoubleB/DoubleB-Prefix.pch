@@ -23,6 +23,7 @@
 #import "DBCompanyInfo.h"
 #import "DBClassLoader.h"
 
+#import "UIViewController+DBAppearance.h"
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+DBErrorAnimation.h"
 #import "UIView+FLKAutoLayout.h"
