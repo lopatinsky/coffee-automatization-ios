@@ -8,7 +8,7 @@
 
 #import "CategoriesTVController.h"
 #import "DBCategoryCell.h"
-#import "IHProductsViewController.h"
+#import "PositionsTVController.h"
 #import "DBNewOrderViewController.h"
 #import "OrderCoordinator.h"
 #import "DBBarButtonItem.h"
@@ -25,6 +25,8 @@
     MBProgressHUD *hud;
 }
 
+@property (nonatomic, strong) DBMenuCategory *parent;
+
 @property (nonatomic, strong) NSArray *categories;
 @property (strong, nonatomic) NSString *lastVenueId;
 
@@ -32,17 +34,28 @@
 
 @implementation CategoriesTVController
 
++ (instancetype)createViewController{
+    return [CategoriesTVController new];
+}
+
++ (instancetype)createWithMenuCategory:(DBMenuCategory *)category{
+    CategoriesTVController *categoriesTVC = [self createViewController];
+    categoriesTVC.parent = category;
+    
+    return categoriesTVC;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.navigationController.navigationBar.topItem.title = @"";
     
-    self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
-    
     if (self.parent) {
+        self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
         self.navigationItem.title = self.parent.name;
     } else {
+        self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
         self.navigationItem.title = NSLocalizedString(@"Меню", nil);
     }
     
@@ -62,6 +75,8 @@
         [self.navigationController.view addSubview:hud];
         
         [self loadMenu:nil];
+    } else {
+        _categories = self.parent.categories;
     }
 }
 
@@ -150,10 +165,12 @@
         CategoriesTVController *categoriesVC = [CategoriesTVController new];
         categoriesVC.parent = category;
         categoriesVC.categories = category.categories;
+        categoriesVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:categoriesVC animated:YES];
     } else {
-        IHProductsViewController *tableVC = [IHProductsViewController new];
+        PositionsTVController *tableVC = [PositionsTVController new];
         tableVC.category = category;
+        tableVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:tableVC animated:YES];
     }
 }
@@ -171,7 +188,7 @@
 
 - (void)goToOrderViewController
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuListViewControllerProtocol.h"
 
 @class DBMenuCategory;
 
-@interface IHProductsViewController : UITableViewController
+@interface PositionsTVController : UITableViewController<MenuListViewControllerProtocol>
 
 @property (nonatomic, strong) DBMenuCategory *category;
 

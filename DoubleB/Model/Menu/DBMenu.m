@@ -36,6 +36,15 @@
     return self;
 }
 
+- (BOOL)hasNestedCategories{
+    BOOL result = NO;
+    for(DBMenuCategory *category in self.categories){
+        result = result || category.type == DBMenuCategoryTypeParent;
+    }
+    
+    return result;
+}
+
 - (NSArray *)getMenu{
     if(!self.categories){
         [self loadMenuFromDeviceMemory];

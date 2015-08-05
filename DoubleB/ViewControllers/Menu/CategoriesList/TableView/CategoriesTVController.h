@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuListViewControllerProtocol.h"
 
-@class DBMenuCategory;
 
-@interface CategoriesTVController : UITableViewController
-
-@property (nonatomic, strong) DBMenuCategory *parent;
-@property (nonatomic) BOOL shouldProcessNotificationAfterLoading;
+@interface CategoriesTVController : UITableViewController<MenuListViewControllerProtocol>
 
 @end

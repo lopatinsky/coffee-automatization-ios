@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PositionsViewControllerProtocol.h"
+#import "MenuListViewControllerProtocol.h"
 
-@interface CategoriesAndPositionsTVController : UITableViewController <PositionsViewControllerProtocol>
+@interface CategoriesAndPositionsTVController : UITableViewController <MenuListViewControllerProtocol>
 
 @end

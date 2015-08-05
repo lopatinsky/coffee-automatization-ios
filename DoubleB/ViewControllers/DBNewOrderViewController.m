@@ -47,7 +47,7 @@
 #import "DBAddressViewController.h"
 
 #import "ViewControllerManager.h"
-#import "PositionsViewControllerProtocol.h"
+#import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 
 #import <Parse/Parse.h>
@@ -78,8 +78,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 @property (weak, nonatomic) IBOutlet DBNewOrderNDAView *ndaView;
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
-
-@property (strong, nonatomic) UIViewController<PositionsViewControllerProtocol> *positionsViewController;
 
 @property (strong, nonatomic) OrderCoordinator *orderCoordinator;
 
@@ -691,11 +689,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)pushPositionsViewControllerAnimated:(BOOL)animated {
-    if (!self.positionsViewController) {
-        self.positionsViewController = [ViewControllerManager positionsViewController];
-        self.positionsViewController.hidesBottomBarWhenPushed = YES;
-    }
-    [self.navigationController pushViewController:self.positionsViewController animated:animated];
+    UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+    [self.navigationController pushViewController:menuVC animated:animated];
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{

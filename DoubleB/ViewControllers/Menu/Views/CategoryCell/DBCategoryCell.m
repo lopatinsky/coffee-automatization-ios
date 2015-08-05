@@ -31,7 +31,7 @@
     self.categoryIconImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     self.disclosureIndicator.tintColor = [UIColor db_defaultColor];
-    [self.disclosureIndicator templateImageWithName:@"icon_arrow.png"];
+    [self.disclosureIndicator templateImageWithName:@"right_arrow_icon.png"];
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     

@@ -7,18 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PositionsViewControllerProtocol.h"
+#import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
 
-@interface ViewControllerManager(PositionViewControllers)
-+ (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
+@interface ViewControllerManager(MenuViewControllers)
++ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController;
+
++ (Class<MenuListViewControllerProtocol> __nonnull)categoriesViewController;
++ (Class<MenuListViewControllerProtocol> __nonnull)positionsViewController;
++ (Class<MenuListViewControllerProtocol> __nonnull)categoriesAndPositionsViewController;
 @end
 
-@interface ViewControllerManager(PositionsViewControllers)
-+ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController;
+@interface ViewControllerManager(PositionViewControllers)
++ (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
 @end
 
 @interface ViewControllerManager(LaunchViewControllers)

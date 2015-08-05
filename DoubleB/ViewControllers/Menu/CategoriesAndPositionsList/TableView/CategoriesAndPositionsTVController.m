@@ -41,6 +41,10 @@
 
 @implementation CategoriesAndPositionsTVController
 
++ (instancetype)createViewController {
+    return [CategoriesAndPositionsTVController new];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -415,11 +419,6 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [GANHelper analyzeEvent:@"menu_scroll" category:MENU_SCREEN];
-}
-
-#pragma mark - PositionsViewControllerProtocol
-+ (instancetype)createViewController {
-    return [CategoriesAndPositionsTVController new];
 }
 
 @end

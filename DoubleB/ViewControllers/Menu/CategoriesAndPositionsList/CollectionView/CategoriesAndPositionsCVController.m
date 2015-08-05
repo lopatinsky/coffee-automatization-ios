@@ -41,6 +41,15 @@
 static NSString * const reuseIdentifier = @"PositionCollectionCell";
 static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell";
 
++ (instancetype)createViewController {
+    UICollectionViewFlowLayout *aFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    CGFloat width = ([[UIScreen mainScreen] bounds].size.width - 18.0)/ 2.0;
+    CGFloat height = width * 1.25;
+    [aFlowLayout setItemSize:CGSizeMake(width, height)];
+    [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    return [[CategoriesAndPositionsCVController alloc] initWithCollectionViewLayout:aFlowLayout];
+}
+
 #pragma mark - Life-Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -337,16 +346,6 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
-}
-
-#pragma mark - PositionsViewControllerProtocol
-+ (instancetype)createViewController {
-    UICollectionViewFlowLayout *aFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat width = ([[UIScreen mainScreen] bounds].size.width - 18.0)/ 2.0;
-    CGFloat height = width * 1.25;
-    [aFlowLayout setItemSize:CGSizeMake(width, height)];
-    [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    return [[CategoriesAndPositionsCVController alloc] initWithCollectionViewLayout:aFlowLayout];
 }
 
 @end

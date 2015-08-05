@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MenuListViewControllerProtocol.h"
 
 @interface ApplicationManager : NSObject
 + (nonnull UIViewController *)rootViewController;
@@ -20,4 +21,8 @@
 
 @interface ApplicationManager(Appearance)
 + (void)applyBrandbookStyle;
+@end
+
+@interface ApplicationManager (Menu)
++ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController;
 @end

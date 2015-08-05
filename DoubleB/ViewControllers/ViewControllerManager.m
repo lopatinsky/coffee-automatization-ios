@@ -22,22 +22,43 @@
 @end
 
 
-#pragma mark - Positions
-#import "PositionsTableViewController.h"
-#import "PositionsCollectionViewController.h"
-@implementation ViewControllerManager(PositionsViewControllers)
+#pragma mark - Menu Controllers
+#import "CategoriesAndPositionsTVController.h"
+#import "CategoriesAndPositionsCVController.h"
+#import "CategoriesTVController.h"
+#import "PositionsTVController.h"
+@implementation ViewControllerManager(MenuViewControllers)
 
-+ (nonnull NSDictionary *)positionsViewControllerClasses {
++ (nonnull NSDictionary *)categoriesAndPositionsMenuViewControllerClasses {
     return @{
-             @"default": [PositionsTableViewController class],
-             @"TableView": [PositionsTableViewController class],
-             @"CollectionView": [PositionsCollectionViewController class],
+             @"default": [CategoriesAndPositionsTVController class],
+             @"TableView": [CategoriesAndPositionsTVController class],
+             @"CollectionView": [CategoriesAndPositionsCVController class],
              };
 }
 
-+ (nonnull UIViewController<PositionsViewControllerProtocol> *)positionsViewController {
-    Class<PositionsViewControllerProtocol> positionsVCClass = [self positionsViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
-    return [positionsVCClass createViewController];
++ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController{
+    NSString *menuControllersMode = [self valueFromPropertyListByKey:@"MenuViewControllers"];
+    if([menuControllersMode isEqualToString:@"Nested"]){
+        return [self categoriesViewController];
+    } else {
+        return [self categoriesAndPositionsViewController];
+    }
+}
+
++ (Class<MenuListViewControllerProtocol> __nonnull)categoriesViewController{
+    Class<MenuListViewControllerProtocol> categoriesVCClass = [CategoriesTVController class];
+    return categoriesVCClass;
+}
+
++ (Class<MenuListViewControllerProtocol> __nonnull)positionsViewController{
+    Class<MenuListViewControllerProtocol> positionsVCClass = [PositionsTVController class];
+    return positionsVCClass;
+}
+
++ (Class<MenuListViewControllerProtocol> __nonnull)categoriesAndPositionsViewController {
+    Class<MenuListViewControllerProtocol> catAndPosVCClass = [self categoriesAndPositionsMenuViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
+    return catAndPosVCClass;
 }
 
 @end

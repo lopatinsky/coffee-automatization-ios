@@ -13,6 +13,8 @@
 
 @interface DBMenu : NSObject
 
+@property(nonatomic, readonly) BOOL hasNestedCategories;
+
 + (instancetype)sharedInstance;
 
 - (NSArray *)getMenu;

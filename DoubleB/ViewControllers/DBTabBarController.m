@@ -7,7 +7,7 @@
 //
 
 #import "DBTabBarController.h"
-#import "PositionsTableViewController.h"
+#import "CategoriesAndPositionsTVController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"

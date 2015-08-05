@@ -17,7 +17,7 @@
 @implementation DBPositionModifierCell
 
 - (void)awakeFromNib {
-    [self.arrowImageView templateImageWithName:@"modifier_arrow_icon"];
+    [self.arrowImageView templateImageWithName:@"right_arrow_icon"];
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
 }
 

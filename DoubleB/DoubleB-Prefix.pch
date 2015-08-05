@@ -13,16 +13,15 @@
 #define BLOCK_SAFE_RUN(block, ...) block ? block(__VA_ARGS__) : nil
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-    #import <Foundation/Foundation.h>
-
-    #import <CoreData/CoreData.h>
-
-    #import "GANHelper.h"
-    #import "DBConstants.h"
-    #import "DBCompanyInfo.h"
-    #import "DBClassLoader.h"
+#import "ApplicationManager.h"
+#import "GANHelper.h"
+#import "DBConstants.h"
+#import "DBCompanyInfo.h"
+#import "DBClassLoader.h"
 
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+DBErrorAnimation.h"

@@ -32,6 +32,8 @@
 #define PROMOS_LIST_SCREEN @"Promos_list_screen"
 #define PROFILE_SCREEN @"Profile_screen"
 #define CONFIDENCE_SCREEN @"Confidence_screen"
+#define CATEGORIES_SCREEN @"Categories_screen"
+#define POSITIONS_SCREEN @"Positions_screen"
 #define MENU_SCREEN @"Menu_screen"
 #define PRODUCT_SCREEN @"Product_screen"
 #define GROUP_MODIFIER_PICKER @"Group_modifier_popup"

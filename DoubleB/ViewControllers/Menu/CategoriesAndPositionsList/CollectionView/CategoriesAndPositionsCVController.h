@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PositionsViewControllerProtocol.h"
+#import "MenuListViewControllerProtocol.h"
 
-@interface CategoriesAndPositionsCVController : UICollectionViewController <PositionsViewControllerProtocol>
-
-+ (instancetype)createViewController;
+@interface CategoriesAndPositionsCVController : UICollectionViewController <MenuListViewControllerProtocol>
 
 @end

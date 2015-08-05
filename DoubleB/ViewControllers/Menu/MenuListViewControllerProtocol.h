@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol PositionsViewControllerProtocol <NSObject>
+@class DBMenuCategory;
 
+@protocol MenuListViewControllerProtocol <NSObject>
+
+@optional
+// Initializer for root menu controller or mixed(Categories & Positions) controller
 + (instancetype)createViewController;
+
+// Initializer for nested menu controllers
++ (instancetype)createWithMenuCategory:(DBMenuCategory *)category;
 
 @end

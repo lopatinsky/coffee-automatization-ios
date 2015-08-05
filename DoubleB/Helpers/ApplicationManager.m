@@ -111,3 +111,14 @@
 }
 
 @end
+
+@implementation ApplicationManager (Menu)
++ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController{
+    if([DBMenu sharedInstance].hasNestedCategories){
+        return [ViewControllerManager categoriesViewController];
+    } else {
+        return [ViewControllerManager rootMenuViewController];
+    }
+}
+
+@end
