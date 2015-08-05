@@ -6,7 +6,7 @@
 //
 //
 
-#import "PositionsCollectionViewController.h"
+#import "CategoriesAndPositionsCVController.h"
 #import "PositionCollectionViewCell.h"
 #import "PositionCompactCollectionViewCell.h"
 #import "ViewControllerManager.h"
@@ -24,7 +24,7 @@
 #import "MBProgressHUD.h"
 #import <BlocksKit/UIControl+BlocksKit.h>
 
-@interface PositionsCollectionViewController () <UICollectionViewDelegateFlowLayout, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate>
+@interface CategoriesAndPositionsCVController () <UICollectionViewDelegateFlowLayout, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate>
 
 @property (nonatomic, strong) NSString *lastVenueId;
 @property (nonatomic, strong) NSArray *categories;
@@ -36,7 +36,7 @@
 
 @end
 
-@implementation PositionsCollectionViewController
+@implementation CategoriesAndPositionsCVController
 
 static NSString * const reuseIdentifier = @"PositionCollectionCell";
 static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell";
@@ -346,7 +346,7 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
     CGFloat height = width * 1.25;
     [aFlowLayout setItemSize:CGSizeMake(width, height)];
     [aFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    return [[PositionsCollectionViewController alloc] initWithCollectionViewLayout:aFlowLayout];
+    return [[CategoriesAndPositionsCVController alloc] initWithCollectionViewLayout:aFlowLayout];
 }
 
 @end

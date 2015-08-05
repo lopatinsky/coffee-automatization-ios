@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PositionsViewControllerProtocol.h"
 
-@interface PositionsTableViewController : UITableViewController <PositionsViewControllerProtocol>
-
-+ (instancetype)createViewController;
+@interface CategoriesAndPositionsTVController : UITableViewController <PositionsViewControllerProtocol>
 
 @end

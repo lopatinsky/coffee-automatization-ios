@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PositionsViewControllerProtocol.h"
 
-@interface PositionsCollectionViewController : UICollectionViewController <PositionsViewControllerProtocol>
+@interface CategoriesAndPositionsCVController : UICollectionViewController <PositionsViewControllerProtocol>
 
 + (instancetype)createViewController;
 
