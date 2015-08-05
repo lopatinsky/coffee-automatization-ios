@@ -122,9 +122,9 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     
     // Notifications item
-    [self.settingsItems addObject:@{@"name": @"notification",
-                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
-                                    @"image": @"alerts.png"}];
+//    [self.settingsItems addObject:@{@"name": @"notification",
+//                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
+//                                    @"image": @"alerts.png"}];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

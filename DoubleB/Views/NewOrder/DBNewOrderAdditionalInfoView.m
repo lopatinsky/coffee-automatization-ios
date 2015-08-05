@@ -7,7 +7,6 @@
 //
 
 #import "DBNewOrderAdditionalInfoView.h"
-#import "OrderManager.h"
 #import "DBDiscountMessageCell.h"
 
 @interface DBNewOrderAdditionalInfoView()<UITableViewDelegate, UITableViewDataSource>

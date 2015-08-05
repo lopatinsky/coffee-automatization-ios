@@ -7,20 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#import "Venue.h"
-#import "Order.h"
-#import "DBServerAPI.h"
+#import "IHSecureStore.h"
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
-#import "DBCompanyInfo.h"
-#import "OrderCoordinator.h"
-#import "DBPromoManager.h"
-#import "DBMenu.h"
-#import "IHSecureStore.h"
-
 #import "ApplicationManager.h"
 #import "ViewControllerManager.h"
-#import "UIImage+Color.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
