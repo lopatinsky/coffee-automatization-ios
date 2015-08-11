@@ -37,7 +37,7 @@
 }
 
 + (void)copyPlists {
-    NSArray *plists = @[@"CompanyInfo", @"ViewControllers", @"Views"];
+    NSArray *plists = @[@"CompanyInfo", @"ViewControllers", @"AppConfiguration"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths firstObject];
     for (NSString *plistName in plists) {

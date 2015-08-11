@@ -55,6 +55,8 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.orderCellContentView.backgroundColor = [UIColor whiteColor];
     
+    self.positionImageView.contentMode = [ViewManager defaultMenuIconsContentMode];
+    
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
     self.countLabel.textColor = [UIColor db_defaultColor];

@@ -32,6 +32,11 @@ NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySe
     return self;
 }
 
+- (void)updateAfterDeliveryTypesUpdate{
+    if(!self.deliveryType)
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+}
+
 #pragma mark - Delivery type
 
 - (void)selectDeliveryType:(DBDeliveryType *)type{
@@ -155,6 +160,10 @@ NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySe
 #pragma mark - DBManagerProtocol
 
 - (void)flushCache{
+    self.deliveryType = nil;
+    self.selectedTimeSlot = nil;
+    self.selectedTime = nil;
+    self.lastNotShippingDeliveryType = nil;
 }
 
 - (void)flushStoredCache{

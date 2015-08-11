@@ -54,6 +54,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
                                              selector:@selector(shippingManagerNewSuggestionsNotificationHandler:)
                                                  name:kDBShippingManagerDidRecieveSuggestionsNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(companyInfoUpdateNotificationHandler:)
+                                                 name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil];
+    
     return self;
 }
 
@@ -115,6 +119,12 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
     [_promoManager flushCache];
+}
+
+#pragma mark - External changes
+
+- (void)companyInfoUpdateNotificationHandler:(NSNotification *)notification{
+    [_deliverySettings updateAfterDeliveryTypesUpdate];
 }
 
 #pragma mark - ItemsManager changes
@@ -183,6 +193,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 }
 
 #pragma mark - Manager Protocol
+
 - (void)flushCache {
     [_itemsManager flushCache];
     [_bonusItemsManager flushCache];

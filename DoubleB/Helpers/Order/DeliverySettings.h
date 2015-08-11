@@ -48,4 +48,9 @@ extern NSString *const kDBDeliverySettingsNewSelectedTimeNotification;
  */
 @property (nonatomic, strong) NSDate *minimumTime;
 
+/**
+ * Any updates after Delivery types update
+ */
+- (void)updateAfterDeliveryTypesUpdate;
+
 @end
