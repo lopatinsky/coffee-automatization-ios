@@ -176,13 +176,6 @@
     _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;
     _applicationName = [info getValueForKey:@"applicationName"] ?: @"";
     
-    NSString *topScreen = [info getValueForKey:@"TopViewController"];
-    if ([topScreen isEqualToString:@"Menu"]) {
-        _topScreenType = TVCMenu;
-    } else if ([topScreen isEqualToString:@"Order"]) {
-        _topScreenType = TVCOrder;
-    }
-    
     NSData *deliveryTypesData = info[@"deliveryTypes"];
     if(deliveryTypesData){
         _deliveryTypes = [NSKeyedUnarchiver unarchiveObjectWithData:deliveryTypesData] ?: @[];

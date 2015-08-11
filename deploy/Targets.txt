@@ -1,0 +1,3 @@
+RubeaconDemo 1016019282
+CoffeeHostel 980364330
+CoffeeShop 1015063485

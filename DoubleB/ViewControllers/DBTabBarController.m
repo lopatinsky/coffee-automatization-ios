@@ -12,7 +12,7 @@
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBCompanyInfo.h"
-//#import "DBSharePermissionViewController.h"
+#import "DBCompanyInfo.h"
 
 #import "UIAlertView+BlocksKit.h"
 #import "Order.h"
@@ -38,7 +38,16 @@
                                                                       image:[UIImage imageNamed:@"orders_icon_grey.png"]
                                                               selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
         [newOrderController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
-        [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:newOrderController]];
+        
+        UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
+        
+//TODO: Rewrite normal logic for screen sequence management
+        if([[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"ElephantBoutique"]){
+            UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+            menuVC.hidesBottomBarWhenPushed = YES;
+            [newOrderNavController pushViewController:menuVC animated:NO];
+        }
+        [tabBarControllers addObject:newOrderNavController];
         
         // History vc
         DBOrdersTableViewController *ordersController = [DBOrdersTableViewController new];

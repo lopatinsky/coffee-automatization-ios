@@ -123,7 +123,9 @@
 
 #pragma mark - DBPositionCellDelegate
 
-- (void)positionCellDidOrder:(DBPositionCell *)cell{            
+- (void)positionCellDidOrder:(DBPositionCell *)cell{
+    [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
+    
     [self.navigationController animateAddProductFromView:cell.priceLabel completion:^{
         [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
     }];

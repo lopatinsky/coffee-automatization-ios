@@ -70,8 +70,6 @@
                 bonusPosition.mode = DBMenuPositionModeBonus;
                 bonusPosition.price = [bonusPositionDict[@"points"] doubleValue];
                 [bonusPositions addObject:bonusPosition];
-            } else {
-                NSLog(@"sdads");
             }
         }
         [bonusPositions sortUsingComparator:^NSComparisonResult(DBMenuPosition *obj1, DBMenuPosition *obj2) {
@@ -222,6 +220,11 @@
         // Assemble order gifts
         NSMutableArray *giftPositions = [NSMutableArray new];
         for(NSDictionary *giftItem in response[@"order_gifts"]){
+            DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:giftItem];
+            giftPosition.mode = DBMenuPositionModeGift;
+            [giftPositions addObject:giftPosition];
+        }
+        for(NSDictionary *giftItem in response[@"new_order_gifts"]){
             DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:giftItem];
             giftPosition.mode = DBMenuPositionModeGift;
             [giftPositions addObject:giftPosition];

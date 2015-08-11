@@ -186,10 +186,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
-    
-    if ([DBCompanyInfo sharedInstance].topScreenType == TVCMenu) {
-        [self pushPositionsViewControllerAnimated:NO];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -377,6 +373,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             }
             [self reloadVisibleCells];
             
+            // Reload order gifts section
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self reloadTableViewHeight:YES];
+            
             // Gifts logic
             [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
             
@@ -447,7 +447,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)reloadTableViewHeight:(BOOL)animated{
     int height = 0;
     
-    NSArray *items = [_orderCoordinator.itemsManager.items arrayByAddingObjectsFromArray:_orderCoordinator.bonusItemsManager.items];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:_orderCoordinator.itemsManager.items];
+    [items addObjectsFromArray:_orderCoordinator.bonusItemsManager.items];
+    [items addObjectsFromArray:_orderCoordinator.orderGiftsManager.items];
     for(OrderItem *item in items)
         if(item.position.hasImage){
             height += 100;
@@ -479,7 +481,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -687,12 +689,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view {
     [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
-    [self pushPositionsViewControllerAnimated:YES];
-}
-
-- (void)pushPositionsViewControllerAnimated:(BOOL)animated {
+    
     UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
-    [self.navigationController pushViewController:menuVC animated:animated];
+    menuVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:menuVC animated:YES];
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{

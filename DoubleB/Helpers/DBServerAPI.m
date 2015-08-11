@@ -375,6 +375,9 @@
     // Bonus items
     params[@"gifts"] = [DBServerAPI assembleBonusItems];
     
+    // Gift items
+    params[@"order_gifts"]=[DBServerAPI assembleGiftItems];
+    
     // Total
     params[@"total_sum"] = @([OrderCoordinator sharedInstance].itemsManager.totalPrice - [OrderCoordinator sharedInstance].promoManager.discount);
     
@@ -421,6 +424,9 @@
     // Bonus items
     params[@"gifts"] = [[DBServerAPI assembleBonusItems] encodedString];
     
+//    // Gift items
+//    params[@"order_gifts"]=[[DBServerAPI assembleGiftItems] encodedString];
+    
     // Payment
     if([OrderCoordinator sharedInstance].orderManager.paymentType != PaymentTypeNotSet){
         params[@"payment"] = [[DBServerAPI assemblyPaymentInfo] encodedString];
@@ -450,6 +456,15 @@
 + (NSArray *)assembleBonusItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].bonusItemsManager.items) {
+        [items addObject:[self assembleItem:item]];
+    }
+    
+    return items;
+}
+
++ (NSArray *)assembleGiftItems{
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in [OrderCoordinator sharedInstance].orderGiftsManager.items) {
         [items addObject:[self assembleItem:item]];
     }
     
