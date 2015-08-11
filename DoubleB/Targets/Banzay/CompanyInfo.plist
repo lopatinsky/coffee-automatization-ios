@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Parse</key>
+	<dict>
+		<key>applicationId</key>
+		<string>3AEOHApc3gEE9aWwafr0iDIIwVpVH370auXAfqnk</string>
+		<key>clientKey</key>
+		<string>3wU53Rm7NewVVyqyfrnBcjLHaHd72K1U41RrEAi7</string>
+	</dict>
+	<key>CompanyGAKey</key>
+	<string>UA-65821587-9</string>
+	<key>CompanyColor</key>
+	<integer>0</integer>
+	<key>BaseUrl</key>
+	<string>http://.1.doubleb-automation-production.appspot.com/</string>
+</dict>
+</plist>

@@ -73,6 +73,9 @@
     _order = [[positionDictionary getValueForKey:@"order"] integerValue];
     _price = [[positionDictionary getValueForKey:@"price"] doubleValue];
     _imageUrl = [positionDictionary getValueForKey:@"pic"];
+    if(!_imageUrl){
+        _imageUrl = [positionDictionary getValueForKey:@"image"];
+    }
     _positionDescription = [positionDictionary getValueForKey:@"description"];
     _energyAmount = [[positionDictionary getValueForKey:@"kal"] doubleValue];
     _weight = [[positionDictionary getValueForKey:@"weight"] doubleValue];
