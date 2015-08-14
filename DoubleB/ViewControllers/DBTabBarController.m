@@ -42,7 +42,7 @@
         UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
         
 //TODO: Rewrite normal logic for screen sequence management
-        if([[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"ElephantBoutique"]){
+        if([[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"ElephantBoutique"] || [[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"Luigi"]){
             UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
             menuVC.hidesBottomBarWhenPushed = YES;
             [newOrderNavController pushViewController:menuVC animated:NO];

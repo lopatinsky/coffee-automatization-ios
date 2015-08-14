@@ -70,7 +70,7 @@
     [JRSwizzleMethods swizzleUIViewDealloc];
     [GANHelper trackClientInfo];
 #warning PayPal legacy code
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe"}];
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 }
 
 + (void)initializeOrderFramework {
