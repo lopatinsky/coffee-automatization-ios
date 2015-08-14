@@ -248,32 +248,12 @@
                                  // Save order
                                  
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
-//                                 Order *ord = [[Order alloc] init:YES];
-//                                 ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
-//                                 ord.total = @([[OrderManager sharedManager] totalPrice]);
-//                                 ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
-//                                 ord.paymentType = [[OrderManager sharedManager] paymentType];
-//                                 ord.status = OrderStatusNew;
-//                                 ord.venue = [OrderManager sharedManager].venue;
-//                                 
-//                                 // Save Time
-//                                 NSString *timeString = [responseObject getValueForKey:@"delivery_time"];
-//                                 if(timeString){
-//                                     NSDateFormatter *formatter = [NSDateFormatter new];
-//                                     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-//                                     NSDate *date = [formatter dateFromString:timeString];
-//                                     ord.time = date;
-//                                 }
-//                                 
-//                                 NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
-//                                 if(timeSlot){
-//                                     ord.timeString = timeSlot;
-//                                 }
-//                                 
-//                                 
-//                                 [[CoreDataHelper sharedHelper] save];
                                  if(success)
                                      success(ord);
+                                 
+                                 [[OrderCoordinator sharedInstance].itemsManager flushCache];
+                                 [[OrderCoordinator sharedInstance].bonusItemsManager flushCache];
+                                 [[OrderCoordinator sharedInstance].orderGiftsManager flushCache];
                                  
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];

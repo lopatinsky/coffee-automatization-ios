@@ -29,16 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *title = NSLocalizedString(@"Точки", nil);
-    if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
-        NSUInteger venuesCount = [[Venue storedVenues] count];
-        if(venuesCount == 1){
-            title = NSLocalizedString(@"Кофейня", nil);
-        } else {
-            title = NSLocalizedString(@"Кофейни", nil);
-        }
-    }
-    self.navigationItem.title = title;
+    self.navigationItem.title = [DBTextResourcesHelper db_venuesTitleString];
     
     
     self.view.backgroundColor = [UIColor whiteColor];

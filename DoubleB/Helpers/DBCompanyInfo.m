@@ -46,6 +46,8 @@
             _deliveryTypes = deliveryTypes;
             _deliveryCities = response[@"cities"] ?: @[];
             
+            _supportEmails = response[@"support_emails"] ?: @[];
+            
             
             _companyPushChannel = [response[@"pushChannels"] getValueForKey:@"company"] ?: @"";
             

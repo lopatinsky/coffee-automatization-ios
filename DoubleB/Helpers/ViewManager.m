@@ -18,14 +18,19 @@
 }
 
 + (NSDictionary *)menuIconsConentModes {
-    return @{@"Scale": @(UIViewContentModeScaleAspectFill),
+    return @{@"Fill": @(UIViewContentModeScaleAspectFill),
              @"Fit": @(UIViewContentModeScaleAspectFit),
              @"Default": @(UIViewContentModeScaleAspectFill),
              };
 }
 
-+ (UIViewContentMode)defaultMenuIconsContentMode{
-    UIViewContentMode mode = [[self menuIconsConentModes][[self valueFromPropertyListByKey:@"MenuIconsContentMode"] ?: @"Default"] intValue];
++ (UIViewContentMode)defaultMenuPositionIconsContentMode{
+    UIViewContentMode mode = [[self menuIconsConentModes][[self valueFromPropertyListByKey:@"MenuPositionIconsContentMode"] ?: @"Default"] intValue];
+    return mode;
+}
+
++ (UIViewContentMode)defaultMenuCategoryIconsContentMode{
+    UIViewContentMode mode = [[self menuIconsConentModes][[self valueFromPropertyListByKey:@"MenuCategoryIconsContentMode"] ?: @"Default"] intValue];
     return mode;
 }
 

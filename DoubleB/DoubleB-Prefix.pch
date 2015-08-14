@@ -22,6 +22,7 @@
 #import "DBConstants.h"
 #import "DBCompanyInfo.h"
 #import "DBClassLoader.h"
+#import "DBTextResourcesHelper.h"
 
 #import "ViewManager.h"
 

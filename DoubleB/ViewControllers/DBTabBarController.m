@@ -42,11 +42,11 @@
         UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
         
 //TODO: Rewrite normal logic for screen sequence management
-        if([[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"ElephantBoutique"] || [[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"Luigi"]){
+//        if([[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"ElephantBoutique"] || [[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"Luigi"]){
             UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
             menuVC.hidesBottomBarWhenPushed = YES;
             [newOrderNavController pushViewController:menuVC animated:NO];
-        }
+//        }
         [tabBarControllers addObject:newOrderNavController];
         
         // History vc
@@ -63,17 +63,8 @@
             DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
             venuesController.mode = DBVenuesTableViewControllerModeList;
             venuesController.eventsCategory = VENUES_SCREEN;
-            
-            NSString *title = NSLocalizedString(@"Точки", nil);
-            if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
-                NSUInteger venuesCount = [[Venue storedVenues] count];
-                if(venuesCount == 1){
-                    title = NSLocalizedString(@"Кофейня", nil);
-                } else {
-                    title = NSLocalizedString(@"Кофейни", nil);
-                }
-            }
-            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
+
+            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:[DBTextResourcesHelper db_venuesTitleString]
                                                                         image:[UIImage imageNamed:@"venues_icon_grey.png"]
                                                                 selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
             [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
@@ -99,7 +90,7 @@
 #pragma mark - DBNewOrderViewControllerDelegate
 
 - (void)newOrderCreatedNotification:(NSNotification *)notification{
-    self.selectedIndex = 1;
+    self.selectedViewController = [self.viewControllers objectAtIndex:1];
     
     Order *order = notification.object;
     for(UIViewController *controller in self.viewControllers){
@@ -118,7 +109,6 @@
         }
     }
     
-    //self.selectedIndex = 1;
     [UIAlertView bk_showAlertViewWithTitle:order.venue.title
                                    message:NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil)
                          cancelButtonTitle:NSLocalizedString(@"OK", nil)

@@ -28,7 +28,7 @@
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.categoryIconImageView.contentMode = [ViewManager defaultMenuIconsContentMode];
+    self.categoryIconImageView.contentMode = [ViewManager defaultMenuCategoryIconsContentMode];
     
     self.disclosureIndicator.tintColor = [UIColor db_defaultColor];
     [self.disclosureIndicator templateImageWithName:@"right_arrow_icon.png"];

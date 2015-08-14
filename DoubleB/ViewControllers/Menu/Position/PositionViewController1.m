@@ -66,7 +66,7 @@
     
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.positionImageView alignLeading:@"0" trailing:@"0" toView:self.view];
-    self.positionImageView.contentMode = [ViewManager defaultMenuIconsContentMode];
+    self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
     
     if(self.mode == PositionViewControllerModeMenuPosition){
         self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];

@@ -372,10 +372,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 [self startUpdatingPromoInfo];
             }
             [self reloadVisibleCells];
+ 
+// TODO: Dirty trick to reload tableview without exceptions
+            @try {
+                // Reload order gifts section
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self reloadTableViewHeight:YES];
+            }
+            @catch (NSException *exception) {
+                [self.tableView reloadData];
+            }
             
-            // Reload order gifts section
-            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self reloadTableViewHeight:YES];
             
             // Gifts logic
             [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];

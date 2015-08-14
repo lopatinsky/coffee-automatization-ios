@@ -10,6 +10,7 @@
 
 @interface ViewManager : NSObject
 
-+ (UIViewContentMode)defaultMenuIconsContentMode;
++ (UIViewContentMode)defaultMenuPositionIconsContentMode;
++ (UIViewContentMode)defaultMenuCategoryIconsContentMode;
 
 @end
