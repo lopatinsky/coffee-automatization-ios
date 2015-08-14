@@ -32,9 +32,6 @@
 @property (strong, nonatomic) DBOrderViewHeader *viewHeader;
 @property (strong, nonatomic) DBOrderViewFooter *viewFooter;
 
-@property (nonatomic, strong) NSMutableArray *items;
-@property (nonatomic, strong) NSMutableArray *bonusItems;
-
 @property (strong, nonatomic) DBOrderReturnView *returnCauseView;
 
 @end
@@ -53,9 +50,6 @@
     self.tableView.dataSource = self;
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    self.items = [NSMutableArray arrayWithArray:self.order.items];
-    self.bonusItems = [NSMutableArray arrayWithArray:self.order.bonusItems];
     
     NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
@@ -235,15 +229,20 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(section == 0){
-        return self.items.count;
-    } else {
-        return self.bonusItems.count;
+        return self.order.items.count;
     }
+    if(section == 1){
+        return self.order.bonusItems.count;
+    }
+    if(section == 2){
+        return self.order.giftItems.count;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -251,9 +250,13 @@
     
     OrderItem *item;
     if(indexPath.section == 0){
-        item = self.items[indexPath.row];
-    } else {
-        item = self.bonusItems[indexPath.row];
+        item = self.order.items[indexPath.row];
+    }
+    if(indexPath.section == 1){
+        item = self.order.bonusItems[indexPath.row];
+    }
+    if(indexPath.section == 2){
+        item = self.order.giftItems[indexPath.row];
     }
     
     if(item.position.hasImage){
@@ -283,9 +286,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderItem *item;
     if(indexPath.section == 0){
-        item = self.items[indexPath.row];
-    } else {
-        item = self.bonusItems[indexPath.row];
+        item = self.order.items[indexPath.row];
+    }
+    if(indexPath.section == 1){
+        item = self.order.bonusItems[indexPath.row];
+    }
+    if(indexPath.section == 2){
+        item = self.order.giftItems[indexPath.row];
     }
     
     if(item.position.hasImage){
