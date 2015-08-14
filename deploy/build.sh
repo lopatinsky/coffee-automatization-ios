@@ -1,5 +1,5 @@
 DEV_ACCOUNT='isoschepkov@gmail.com'
-PASSWORD='Apisosch094epk8ov'
+PASSWORD=''
 
 PROJECT_NAME="DoubleB"
 DEBUG_SKIP_BUILD_STEP=0      # set to 1 if you don't want to clean and rebuild ipa files
