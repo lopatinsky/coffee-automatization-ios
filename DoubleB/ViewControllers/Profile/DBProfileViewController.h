@@ -1,12 +1,13 @@
 //
-//  DBProfileViewController.h
+//  DBProfileViewController1.h
 //  DoubleB
 //
-//  Created by Balaban Alexander on 01/08/14.
-//  Copyright (c) 2014 Empatika. All rights reserved.
+//  Created by Ivan Oschepkov on 14.08.15.
+//  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "DBModulesViewController.h"
 
 typedef NS_ENUM(NSUInteger, ProfileFillingMode) {
     ProfileFillingModeNoRestrictions = 0,
@@ -18,11 +19,11 @@ typedef NS_ENUM(NSUInteger, ProfileFillingMode) {
 - (void)profileViewControllerDidFillAllFields:(DBProfileViewController *)profileViewController;
 @end
 
-@interface DBProfileViewController : UITableViewController
+@interface DBProfileViewController : DBModulesViewController
 
 @property (nonatomic) ProfileFillingMode fillingMode;
-@property (nonatomic, weak) id<DBProfileViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *analyticsScreen;
 
-@property (nonatomic, strong) NSString *screen;
+@property (weak, nonatomic) id<DBProfileViewControllerDelegate> delegate;
 
 @end

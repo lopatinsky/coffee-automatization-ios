@@ -971,7 +971,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         eventLabel = @"null";
     }
     DBProfileViewController *profileViewController = [DBProfileViewController new];
-    profileViewController.screen = @"Profile_order_screen";
+    profileViewController.analyticsScreen = @"Profile_order_screen";
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
 

@@ -117,6 +117,31 @@
                              }];
 }
 
++ (void)sendUserInfo:(void(^)(BOOL success))callback {
+    NSString *clientId = [[IHSecureStore sharedInstance] clientId];
+    
+    if(clientId){
+        [[DBAPIClient sharedClient] POST:@"client"
+                              parameters:@{@"client_id": clientId,
+                                           @"client_name": [DBClientInfo sharedInstance].clientName,
+                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone,
+                                           @"client_email": [DBClientInfo sharedInstance].clientMail}
+                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                     //NSLog(@"%@", responseObject);
+                                     
+                                     if(callback)
+                                         callback(YES);
+                                 }
+                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"%@", error);
+                                     
+                                     if(callback)
+                                         callback(NO);
+                                 }];
+    }
+}
+
+
 #pragma mark - Company
 
 + (void)updateCompanyInfo:(void(^)(BOOL success, NSDictionary *response))callback{

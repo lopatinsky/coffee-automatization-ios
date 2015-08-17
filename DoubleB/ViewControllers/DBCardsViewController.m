@@ -12,7 +12,6 @@
 #import "IHSecureStore.h"
 #import "OrderCoordinator.h"
 #import "IHPaymentManager.h"
-#import "DBProfileViewController.h"
 #import "DBAPIClient.h"
 #import "DBCardCell.h"
 #import "DBPromoManager.h"
