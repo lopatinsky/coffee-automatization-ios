@@ -53,12 +53,12 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     NSString *eventLabel = textField.text;
-    [GANHelper analyzeEvent:@"mail_typing" label:eventLabel category:self.analyticsCategory];
+    [GANHelper analyzeEvent:@"name_typing" label:eventLabel category:self.analyticsCategory];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     NSString *eventLabel = textField.text;
-    [GANHelper analyzeEvent:@"mail_entered" label:eventLabel category:self.analyticsCategory];
+    [GANHelper analyzeEvent:@"name_entered" label:eventLabel category:self.analyticsCategory];
 }
 
 @end
