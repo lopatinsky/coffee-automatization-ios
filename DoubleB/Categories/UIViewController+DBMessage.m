@@ -25,7 +25,7 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
         [mailer setSubject:NSLocalizedString(@"Обратная связь", nil)];
-        [mailer setToRecipients:@[companyURL, @"team@ru-beacon.ru"]];
+        [mailer setToRecipients:[[[DBCompanyInfo sharedInstance] supportEmails] arrayByAddingObject:companyMail]];
         if(recipients)
             [mailer setToRecipients:recipients];
         [mailer setMailComposeDelegate:self];

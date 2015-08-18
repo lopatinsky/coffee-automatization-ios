@@ -38,6 +38,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
+
 - (void)updateInfo;
 
 + (id)objectFromPropertyListByName:(NSString *)name;

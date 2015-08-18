@@ -60,6 +60,8 @@
             
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
             
+            _supportEmails = response[@"support_emails"] ?: @[];
+            
             [self synchronize];
         } else {
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
@@ -186,6 +188,7 @@
     _clientPushChannel = pushChannels[@"_clientPushChannel"];
     _venuePushChannel = pushChannels[@"_venuePushChannel"];
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
+    _supportEmails = info[@"supportEmails"];
     
     _deliveryCities = info[@"_deliveryCities"];
 }
@@ -202,6 +205,7 @@
                            @"applicationName": _applicationName,
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
+                           @"supportEmails": _supportEmails,
                            @"_deliveryCities": _deliveryCities};
     
     
