@@ -5705,6 +5705,41 @@
 		CB1EABFE1B831A6E00425CD7 /* DBCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EABBA1B831A6E00425CD7 /* DBCardCell.xib */; };
 		CB1EABFF1B831A6E00425CD7 /* DBCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EABBA1B831A6E00425CD7 /* DBCardCell.xib */; };
 		CB1EAC001B831A6E00425CD7 /* DBCardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EABBA1B831A6E00425CD7 /* DBCardCell.xib */; };
+		CB1EAC031B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC041B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC051B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC061B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC071B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC081B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC091B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC0A1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC0B1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC0C1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC0D1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC0E1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC0F1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC101B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC111B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC121B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC131B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC141B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC151B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC161B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC171B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC181B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC191B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC1A1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC1B1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC1C1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC1D1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC1E1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC1F1B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC201B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC211B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC221B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC231B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC241B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
+		CB1EAC251B8324BB00425CD7 /* DBCardsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */; };
 		CB215E281ADC1B8700EF9EEC /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB215E2A1ADC1B9B00EF9EEC /* DBPopupTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB215E291ADC1B9B00EF9EEC /* DBPopupTextView.xib */; };
 		CB215E2C1ADC1EEB00EF9EEC /* back_arrow_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB215E2B1ADC1EEB00EF9EEC /* back_arrow_icon@3x.png */; };
@@ -13250,6 +13285,8 @@
 		CB1EABB81B831A6E00425CD7 /* DBCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCardCell.h; sourceTree = "<group>"; };
 		CB1EABB91B831A6E00425CD7 /* DBCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCardCell.m; sourceTree = "<group>"; };
 		CB1EABBA1B831A6E00425CD7 /* DBCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCardCell.xib; sourceTree = "<group>"; };
+		CB1EAC011B8324BB00425CD7 /* DBCardsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCardsManager.h; sourceTree = "<group>"; };
+		CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCardsManager.m; sourceTree = "<group>"; };
 		CB215E261ADC1B8700EF9EEC /* DBPopupTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPopupTextView.h; sourceTree = "<group>"; };
 		CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPopupTextView.m; sourceTree = "<group>"; };
 		CB215E291ADC1B9B00EF9EEC /* DBPopupTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPopupTextView.xib; sourceTree = "<group>"; };
@@ -15418,6 +15455,8 @@
 				CB3BA44B1B20B2FA00F320CA /* DBPayPalManager.m */,
 				CB6981911B7DE8A800B12B78 /* DBTextResourcesHelper.h */,
 				CB6981921B7DE8A800B12B78 /* DBTextResourcesHelper.m */,
+				CB1EAC011B8324BB00425CD7 /* DBCardsManager.h */,
+				CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -26782,6 +26821,7 @@
 				7E382FCA1B5CF692008F0241 /* DBClassLoader.m in Sources */,
 				7E382FCB1B5CF692008F0241 /* Order.m in Sources */,
 				CB1EA9A31B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC1B1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7E382FCC1B5CF692008F0241 /* UIImageView+Extension.m in Sources */,
 				7E382FCD1B5CF692008F0241 /* UIView+DBErrorAnimation.m in Sources */,
 				7E382FCE1B5CF692008F0241 /* DBAPIClient.m in Sources */,
@@ -26923,6 +26963,7 @@
 				CB82FD4B1B443096000BBE55 /* DBPayPalManager.m in Sources */,
 				CBDE1D5F1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB9782A11B1DF80B000B5625 /* DBPromoCell.m in Sources */,
+				CB1EAC091B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7E3DAAFB1B06153E00A7FFD1 /* DBContactUsView.m in Sources */,
 				7E3DAAFC1B06153E00A7FFD1 /* DBNewOrderViewFooter.m in Sources */,
 				7E3DAAFD1B06153E00A7FFD1 /* EXTSafeCategory.m in Sources */,
@@ -27081,6 +27122,7 @@
 				7E79253C1B3C1BDA00CA740D /* Order.m in Sources */,
 				7E79253D1B3C1BDA00CA740D /* UIImageView+Extension.m in Sources */,
 				CB1EA99A1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC121B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7E79253E1B3C1BDA00CA740D /* UIView+DBErrorAnimation.m in Sources */,
 				7E79253F1B3C1BDA00CA740D /* DBAPIClient.m in Sources */,
 				7E7925401B3C1BDA00CA740D /* DBVenueCell.m in Sources */,
@@ -27231,6 +27273,7 @@
 				7E7926BE1B3C247D00CA740D /* Order.m in Sources */,
 				7E7926BF1B3C247D00CA740D /* UIImageView+Extension.m in Sources */,
 				CB1EA99B1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC131B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7E7926C01B3C247D00CA740D /* UIView+DBErrorAnimation.m in Sources */,
 				7E7926C11B3C247D00CA740D /* DBAPIClient.m in Sources */,
 				7E7926C21B3C247D00CA740D /* DBVenueCell.m in Sources */,
@@ -27381,6 +27424,7 @@
 				7EB2D1831B3C3581009405C6 /* Order.m in Sources */,
 				7EB2D1841B3C3581009405C6 /* UIImageView+Extension.m in Sources */,
 				CB1EA99C1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC141B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7EB2D1851B3C3581009405C6 /* UIView+DBErrorAnimation.m in Sources */,
 				7EB2D1861B3C3581009405C6 /* DBAPIClient.m in Sources */,
 				7EB2D1871B3C3581009405C6 /* DBVenueCell.m in Sources */,
@@ -27531,6 +27575,7 @@
 				7EB2D2F21B3C51A2009405C6 /* Order.m in Sources */,
 				7EB2D2F31B3C51A2009405C6 /* UIImageView+Extension.m in Sources */,
 				CB1EA99D1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC151B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7EB2D2F41B3C51A2009405C6 /* UIView+DBErrorAnimation.m in Sources */,
 				7EB2D2F51B3C51A2009405C6 /* DBAPIClient.m in Sources */,
 				7EB2D2F61B3C51A2009405C6 /* DBVenueCell.m in Sources */,
@@ -27681,6 +27726,7 @@
 				7EB2D4621B3C5C77009405C6 /* Order.m in Sources */,
 				7EB2D4631B3C5C77009405C6 /* UIImageView+Extension.m in Sources */,
 				CB1EA99E1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC161B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7EB2D4641B3C5C77009405C6 /* UIView+DBErrorAnimation.m in Sources */,
 				7EB2D4651B3C5C77009405C6 /* DBAPIClient.m in Sources */,
 				7EB2D4661B3C5C77009405C6 /* DBVenueCell.m in Sources */,
@@ -27831,6 +27877,7 @@
 				7ED4BCBA1B5EB64B00280D74 /* DBClassLoader.m in Sources */,
 				7ED4BCBB1B5EB64B00280D74 /* Order.m in Sources */,
 				CB1EA9A41B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC1C1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7ED4BCBC1B5EB64B00280D74 /* UIImageView+Extension.m in Sources */,
 				7ED4BCBD1B5EB64B00280D74 /* UIView+DBErrorAnimation.m in Sources */,
 				7ED4BCBE1B5EB64B00280D74 /* DBAPIClient.m in Sources */,
@@ -27981,6 +28028,7 @@
 				7EDB59151B32F70400723DF9 /* Order.m in Sources */,
 				7EDB59161B32F70400723DF9 /* UIImageView+Extension.m in Sources */,
 				CB1EA9991B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC111B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				7EDB59171B32F70400723DF9 /* UIView+DBErrorAnimation.m in Sources */,
 				7EDB59181B32F70400723DF9 /* DBAPIClient.m in Sources */,
 				7EDB59191B32F70400723DF9 /* DBVenueCell.m in Sources */,
@@ -28131,6 +28179,7 @@
 				CB1429A11B7A677A00B72069 /* DBClassLoader.m in Sources */,
 				CB1429A21B7A677A00B72069 /* Order.m in Sources */,
 				CB1EA9AB1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC231B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB1429A31B7A677A00B72069 /* UIImageView+Extension.m in Sources */,
 				CB1429A41B7A677A00B72069 /* UIView+DBErrorAnimation.m in Sources */,
 				CB1429A51B7A677A00B72069 /* DBAPIClient.m in Sources */,
@@ -28281,6 +28330,7 @@
 				CB142B241B7A6A4D00B72069 /* DBClassLoader.m in Sources */,
 				CB142B251B7A6A4D00B72069 /* Order.m in Sources */,
 				CB1EA9AC1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC241B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB142B261B7A6A4D00B72069 /* UIImageView+Extension.m in Sources */,
 				CB142B271B7A6A4D00B72069 /* UIView+DBErrorAnimation.m in Sources */,
 				CB142B281B7A6A4D00B72069 /* DBAPIClient.m in Sources */,
@@ -28421,6 +28471,7 @@
 				CB1431051B0E371A00DD50C7 /* DBNewOrderViewFooter.m in Sources */,
 				CBDE1D981B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CBF358CE1B7E540C0036F4A9 /* DBProfileViewController.m in Sources */,
+				CB1EAC041B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB1431061B0E371A00DD50C7 /* EXTSafeCategory.m in Sources */,
 				CB1EA9E21B827DEE00425CD7 /* DBProfileMailModuleView.m in Sources */,
 				CB1431071B0E371A00DD50C7 /* UIViewController+DBAnimation.m in Sources */,
@@ -28573,6 +28624,7 @@
 				CB1432671B0F1BBB00DD50C7 /* DBContactUsView.m in Sources */,
 				CBDE1D601B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FD4C1B443096000BBE55 /* DBPayPalManager.m in Sources */,
+				CB1EAC0A1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB1432681B0F1BBB00DD50C7 /* DBNewOrderViewFooter.m in Sources */,
 				CB1432691B0F1BBB00DD50C7 /* EXTSafeCategory.m in Sources */,
 				CB14326A1B0F1BBB00DD50C7 /* UIViewController+DBAnimation.m in Sources */,
@@ -28731,6 +28783,7 @@
 				CB194C331B6BAECE0085ECF8 /* DBClassLoader.m in Sources */,
 				CB194C341B6BAECE0085ECF8 /* Order.m in Sources */,
 				CB1EA9A71B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC1F1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB194C351B6BAECE0085ECF8 /* UIImageView+Extension.m in Sources */,
 				CB194C361B6BAECE0085ECF8 /* UIView+DBErrorAnimation.m in Sources */,
 				CB194C371B6BAECE0085ECF8 /* DBAPIClient.m in Sources */,
@@ -28881,6 +28934,7 @@
 				CB194DA41B6BC2650085ECF8 /* DBClassLoader.m in Sources */,
 				CB194DA51B6BC2650085ECF8 /* Order.m in Sources */,
 				CB1EA9A81B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC201B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB194DA61B6BC2650085ECF8 /* UIImageView+Extension.m in Sources */,
 				CB194DA71B6BC2650085ECF8 /* UIView+DBErrorAnimation.m in Sources */,
 				CB194DA81B6BC2650085ECF8 /* DBAPIClient.m in Sources */,
@@ -29031,6 +29085,7 @@
 				CB194F151B6BD75B0085ECF8 /* DBClassLoader.m in Sources */,
 				CB194F161B6BD75B0085ECF8 /* Order.m in Sources */,
 				CB1EA9A91B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC211B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB194F171B6BD75B0085ECF8 /* UIImageView+Extension.m in Sources */,
 				CB194F181B6BD75B0085ECF8 /* UIView+DBErrorAnimation.m in Sources */,
 				CB194F191B6BD75B0085ECF8 /* DBAPIClient.m in Sources */,
@@ -29172,6 +29227,7 @@
 				CB82FD491B443095000BBE55 /* DBPayPalManager.m in Sources */,
 				CBDE1D5D1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB97829F1B1DF80B000B5625 /* DBPromoCell.m in Sources */,
+				CB1EAC071B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				5ED715B81AE8B3FA00E25EA8 /* DBContactUsView.m in Sources */,
 				CB1AF7811AE10E6900FA3224 /* DBNewOrderViewFooter.m in Sources */,
 				CB1AF7821AE10E6900FA3224 /* EXTSafeCategory.m in Sources */,
@@ -29330,6 +29386,7 @@
 				CB2421D81B7A1D4D00A02721 /* DBClassLoader.m in Sources */,
 				CB2421D91B7A1D4D00A02721 /* Order.m in Sources */,
 				CB1EA98B1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC031B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB2421DA1B7A1D4D00A02721 /* UIImageView+Extension.m in Sources */,
 				CB2421DB1B7A1D4D00A02721 /* UIView+DBErrorAnimation.m in Sources */,
 				CB2421DC1B7A1D4D00A02721 /* DBAPIClient.m in Sources */,
@@ -29471,6 +29528,7 @@
 				CB3BA2F31B20589300F320CA /* EXTADT.m in Sources */,
 				CBDE1D611B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FD4E1B443098000BBE55 /* DBPayPalManager.m in Sources */,
+				CB1EAC0B1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB3BA2F41B20589300F320CA /* DBContactUsView.m in Sources */,
 				CB3BA2F51B20589300F320CA /* DBNewOrderViewFooter.m in Sources */,
 				CB3BA2F61B20589300F320CA /* EXTSafeCategory.m in Sources */,
@@ -29620,6 +29678,7 @@
 				CB82FD4A1B443095000BBE55 /* DBPayPalManager.m in Sources */,
 				CBDE1D5E1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB9782A01B1DF80B000B5625 /* DBPromoCell.m in Sources */,
+				CB1EAC081B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB517B581AEFB6B500A50F5C /* DBContactUsView.m in Sources */,
 				CB517B591AEFB6B500A50F5C /* DBNewOrderViewFooter.m in Sources */,
 				CB517B5A1AEFB6B500A50F5C /* EXTSafeCategory.m in Sources */,
@@ -29778,6 +29837,7 @@
 				CB57932D1B6AB87300B17819 /* DBClassLoader.m in Sources */,
 				CB57932E1B6AB87300B17819 /* Order.m in Sources */,
 				CB1EA9A51B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC1D1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB57932F1B6AB87300B17819 /* UIImageView+Extension.m in Sources */,
 				CB5793301B6AB87300B17819 /* UIView+DBErrorAnimation.m in Sources */,
 				CB5793311B6AB87300B17819 /* DBAPIClient.m in Sources */,
@@ -29928,6 +29988,7 @@
 				CB5794A41B6BA76B00B17819 /* DBClassLoader.m in Sources */,
 				CB5794A51B6BA76B00B17819 /* Order.m in Sources */,
 				CB1EA9A61B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC1E1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB5794A61B6BA76B00B17819 /* UIImageView+Extension.m in Sources */,
 				CB5794A71B6BA76B00B17819 /* UIView+DBErrorAnimation.m in Sources */,
 				CB5794A81B6BA76B00B17819 /* DBAPIClient.m in Sources */,
@@ -30069,6 +30130,7 @@
 				CB5AFC3C1B27209A00904BF7 /* EXTADT.m in Sources */,
 				CBDE1D621B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FD4D1B443097000BBE55 /* DBPayPalManager.m in Sources */,
+				CB1EAC0C1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB5AFC3D1B27209A00904BF7 /* DBContactUsView.m in Sources */,
 				CB5AFC3E1B27209A00904BF7 /* DBNewOrderViewFooter.m in Sources */,
 				CB5AFC3F1B27209A00904BF7 /* EXTSafeCategory.m in Sources */,
@@ -30218,6 +30280,7 @@
 				CB60C0BD1AC5AD2600D5E962 /* EXTADT.m in Sources */,
 				CBDE1D5C1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				5E4E60FB1AE658B9005D78A8 /* DBContactUsView.m in Sources */,
+				CB1EAC061B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB60C0BE1AC5AD2600D5E962 /* DBNewOrderViewFooter.m in Sources */,
 				CB60C0BF1AC5AD2600D5E962 /* EXTSafeCategory.m in Sources */,
 				CB715AF11ACEB9F900EA84FC /* UIViewController+DBAnimation.m in Sources */,
@@ -30367,6 +30430,7 @@
 				CB64FE1A1B317F760011CEEC /* EXTADT.m in Sources */,
 				CBDE1D651B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FD511B44309A000BBE55 /* DBPayPalManager.m in Sources */,
+				CB1EAC0F1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB64FE1B1B317F760011CEEC /* DBContactUsView.m in Sources */,
 				CB64FE1C1B317F760011CEEC /* DBNewOrderViewFooter.m in Sources */,
 				CB64FE1D1B317F760011CEEC /* EXTSafeCategory.m in Sources */,
@@ -30525,6 +30589,7 @@
 				CB64FFD01B31B7CF0011CEEC /* Order.m in Sources */,
 				CB64FFD11B31B7CF0011CEEC /* UIImageView+Extension.m in Sources */,
 				CB1EA9981B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC101B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB64FFD21B31B7CF0011CEEC /* UIView+DBErrorAnimation.m in Sources */,
 				CB64FFD31B31B7CF0011CEEC /* DBAPIClient.m in Sources */,
 				CB64FFD41B31B7CF0011CEEC /* DBVenueCell.m in Sources */,
@@ -30675,6 +30740,7 @@
 				CB6980361B7DE33400B12B78 /* DBClassLoader.m in Sources */,
 				CB6980371B7DE33400B12B78 /* Order.m in Sources */,
 				CB1EA9AD1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC251B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB6980381B7DE33400B12B78 /* UIImageView+Extension.m in Sources */,
 				CB6980391B7DE33400B12B78 /* UIView+DBErrorAnimation.m in Sources */,
 				CB69803A1B7DE33400B12B78 /* DBAPIClient.m in Sources */,
@@ -30825,6 +30891,7 @@
 				CB8200B61B46CBB4000BBE55 /* DBClassLoader.m in Sources */,
 				CB8200B71B46CBB4000BBE55 /* Order.m in Sources */,
 				CB1EA98D1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC051B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB8200B81B46CBB4000BBE55 /* UIImageView+Extension.m in Sources */,
 				CB8200B91B46CBB4000BBE55 /* UIView+DBErrorAnimation.m in Sources */,
 				CB8200BA1B46CBB4000BBE55 /* DBAPIClient.m in Sources */,
@@ -30975,6 +31042,7 @@
 				CB82FBF31B442C70000BBE55 /* DBClassLoader.m in Sources */,
 				CB82FBF41B442C70000BBE55 /* Order.m in Sources */,
 				CB1EA9A01B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC181B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB82FBF51B442C70000BBE55 /* UIImageView+Extension.m in Sources */,
 				CB82FBF61B442C70000BBE55 /* UIView+DBErrorAnimation.m in Sources */,
 				CB82FBF71B442C70000BBE55 /* DBAPIClient.m in Sources */,
@@ -31125,6 +31193,7 @@
 				CB82FDD41B4464F6000BBE55 /* DBClassLoader.m in Sources */,
 				CB82FDD51B4464F6000BBE55 /* Order.m in Sources */,
 				CB1EA9A11B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC191B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB82FDD61B4464F6000BBE55 /* UIImageView+Extension.m in Sources */,
 				CB82FDD71B4464F6000BBE55 /* UIView+DBErrorAnimation.m in Sources */,
 				CB82FDD81B4464F6000BBE55 /* DBAPIClient.m in Sources */,
@@ -31275,6 +31344,7 @@
 				CB82FF451B4579B5000BBE55 /* DBClassLoader.m in Sources */,
 				CB82FF461B4579B5000BBE55 /* Order.m in Sources */,
 				CB1EA9A21B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC1A1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CB82FF471B4579B5000BBE55 /* UIImageView+Extension.m in Sources */,
 				CB82FF481B4579B5000BBE55 /* UIView+DBErrorAnimation.m in Sources */,
 				CB82FF491B4579B5000BBE55 /* DBAPIClient.m in Sources */,
@@ -31425,6 +31495,7 @@
 				CBD0C4F51B30724300DAD042 /* Order.m in Sources */,
 				CBD0C4F61B30724300DAD042 /* UIImageView+Extension.m in Sources */,
 				CB1EA9961B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC0E1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CBD0C4F71B30724300DAD042 /* UIView+DBErrorAnimation.m in Sources */,
 				CBD0C4F81B30724300DAD042 /* DBAPIClient.m in Sources */,
 				CB64FFA81B3192100011CEEC /* NSObject+Encode.m in Sources */,
@@ -31566,6 +31637,7 @@
 				CBD2EAD01B2A07D000E4AAA1 /* EXTADT.m in Sources */,
 				CBDE1D631B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FD4F1B443098000BBE55 /* DBPayPalManager.m in Sources */,
+				CB1EAC0D1B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CBD2EAD11B2A07D000E4AAA1 /* DBContactUsView.m in Sources */,
 				CBD2EAD21B2A07D000E4AAA1 /* DBNewOrderViewFooter.m in Sources */,
 				CBD2EAD31B2A07D000E4AAA1 /* EXTSafeCategory.m in Sources */,
@@ -31724,6 +31796,7 @@
 				CBDC79A81B42AFC700935328 /* Order.m in Sources */,
 				CBDC79A91B42AFC700935328 /* UIImageView+Extension.m in Sources */,
 				CB1EA99F1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC171B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CBDC79AA1B42AFC700935328 /* UIView+DBErrorAnimation.m in Sources */,
 				CBDC79AB1B42AFC700935328 /* DBAPIClient.m in Sources */,
 				CBDC79AC1B42AFC700935328 /* DBVenueCell.m in Sources */,
@@ -31874,6 +31947,7 @@
 				CBDE1B861B7280B50090A347 /* DBClassLoader.m in Sources */,
 				CBDE1B871B7280B50090A347 /* Order.m in Sources */,
 				CB1EA9AA1B82615C00425CD7 /* DBModulesViewController.m in Sources */,
+				CB1EAC221B8324BB00425CD7 /* DBCardsManager.m in Sources */,
 				CBDE1B881B7280B50090A347 /* UIImageView+Extension.m in Sources */,
 				CBDE1B891B7280B50090A347 /* UIView+DBErrorAnimation.m in Sources */,
 				CBDE1B8A1B7280B50090A347 /* DBAPIClient.m in Sources */,
