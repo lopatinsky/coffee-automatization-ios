@@ -8,6 +8,8 @@
 
 #import "ModuleManager.h"
 
+#import "NSDictionary+DeepMerge.h"
+
 @interface ModuleManager()
 
 @property (nonatomic, strong) NSMutableArray *modules;
@@ -21,6 +23,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [ModuleManager new];
+        instance.modules = [NSMutableArray new];
     });
     return instance;
 }
@@ -35,22 +38,30 @@
     [self.modules removeObject:module];
 }
 
+- (NSArray *)getModules {
+    return [self.modules copy];
+}
+
+- (void)cleanManager {
+    [self.modules removeAllObjects];
+}
+
 #pragma mark - ModuleServerAPIProtocol
 - (NSDictionary *)getOrderParams {
-    NSMutableDictionary *params = [NSMutableDictionary new];
+    __block NSDictionary *params = [NSMutableDictionary new];
     
     [self.modules enumerateObjectsUsingBlock:^(id<ModuleServerAPIProtocol> obj, NSUInteger idx, BOOL *stop) {
-        [params addEntriesFromDictionary:[obj getOrderParams]];
+        params = [params dictionaryByMergingWith:[obj getOrderParams]];
     }];
     
     return params;
 }
 
 - (NSDictionary *)getCheckOrderParams {
-    NSMutableDictionary *params = [NSMutableDictionary new];
+    __block NSDictionary *params = [NSMutableDictionary new];
     
     [self.modules enumerateObjectsUsingBlock:^(id<ModuleServerAPIProtocol> obj, NSUInteger idx, BOOL *stop) {
-        [params addEntriesFromDictionary:[obj getCheckOrderParams]];
+        params = [params dictionaryByMergingWith:[obj getCheckOrderParams]];
     }];
     
     return params;

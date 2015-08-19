@@ -10,16 +10,19 @@
 
 @protocol ModuleServerAPIProtocol <NSObject>
 
-- (NSDictionary *)getOrderParams;
-- (NSDictionary *)getCheckOrderParams;
+- (nonnull NSDictionary *)getOrderParams;
+- (nonnull NSDictionary *)getCheckOrderParams;
 
 @end
 
 @interface ModuleManager : NSObject<ModuleServerAPIProtocol>
 
-+ (instancetype)sharedManager;
++ (nonnull instancetype)sharedManager;
 
-- (void)addModule:(id<ModuleServerAPIProtocol>)module;
-- (void)removeModule:(id<ModuleServerAPIProtocol>)module;
+- (void)addModule:(nonnull id<ModuleServerAPIProtocol>)module;
+- (void)removeModule:(nonnull id<ModuleServerAPIProtocol>)module;
+- (nonnull NSArray *)getModules;
+
+- (void)cleanManager;
 
 @end

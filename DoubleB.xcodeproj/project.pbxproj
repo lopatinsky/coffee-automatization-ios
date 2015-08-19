@@ -2177,6 +2177,44 @@
 		7EB911411B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB911421B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB911431B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911671B84D3F2005C1012 /* ModuleManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911651B84D3F2005C1012 /* ModuleManagerTests.m */; };
+		7EB9116B1B84D5C7005C1012 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116A1B84D5C7005C1012 /* Module.m */; };
+		7EB9116F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911701B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911711B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911721B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911731B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911741B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911751B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911761B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911771B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911781B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911791B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9117A1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9117B1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9117C1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9117D1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9117E1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9117F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911801B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911811B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911821B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911831B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911841B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911851B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911861B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911871B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911881B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911891B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9118A1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9118B1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9118C1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9118D1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9118E1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB9118F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911901B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911911B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
+		7EB911921B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
 		7ED4BC9A1B5EB64B00280D74 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		7ED4BC9B1B5EB64B00280D74 /* DBPayPalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3BA44B1B20B2FA00F320CA /* DBPayPalManager.m */; };
 		7ED4BC9C1B5EB64B00280D74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
@@ -12469,6 +12507,16 @@
 		CBE5595F1AC9AED800A166B9 /* noimage_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBE5595D1AC9AED800A166B9 /* noimage_icon@3x.png */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7EB9115E1B84D36F005C1012 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C775B57B62F43E1ED63B3A30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB2421B01B7A1D4D00A02721;
+			remoteInfo = TestApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1DF35059AA6127E742BBFFBA /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		5E30B6161AAF3D71001F66E2 /* DBDiscountMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBDiscountMessageCell.h; sourceTree = "<group>"; };
@@ -12575,6 +12623,13 @@
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EB9111F1B84CBC6005C1012 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
 		7EB911201B84CBC6005C1012 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
+		7EB911581B84D36F005C1012 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EB9115B1B84D36F005C1012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7EB911651B84D3F2005C1012 /* ModuleManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManagerTests.m; sourceTree = "<group>"; };
+		7EB911691B84D5C7005C1012 /* Module.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Module.h; sourceTree = "<group>"; };
+		7EB9116A1B84D5C7005C1012 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module.m; sourceTree = "<group>"; };
+		7EB9116D1B84DACB005C1012 /* NSDictionary+DeepMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DeepMerge.h"; sourceTree = "<group>"; };
+		7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DeepMerge.m"; sourceTree = "<group>"; };
 		7ED4BDFA1B5EB64B00280D74 /* Magnolia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Magnolia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED4BDFF1B5EB67800280D74 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7ED4BE001B5EB67800280D74 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -13546,6 +13601,13 @@
 				7EB2D4CD1B3C5C77009405C6 /* CFNetwork.framework in Frameworks */,
 				7EB2D4CE1B3C5C77009405C6 /* libz.dylib in Frameworks */,
 				7EB2D4CF1B3C5C77009405C6 /* MessageUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB911551B84D36F005C1012 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -14530,6 +14592,49 @@
 			path = AdditionalResources;
 			sourceTree = "<group>";
 		};
+		7EB911591B84D36F005C1012 /* UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				7EB911641B84D3DA005C1012 /* Core */,
+				7EB9115A1B84D36F005C1012 /* Supporting Files */,
+			);
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		7EB9115A1B84D36F005C1012 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7EB9115B1B84D36F005C1012 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7EB911641B84D3DA005C1012 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7EB911681B84D5AE005C1012 /* ModuleManager */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		7EB911681B84D5AE005C1012 /* ModuleManager */ = {
+			isa = PBXGroup;
+			children = (
+				7EB9116C1B84D5CB005C1012 /* Mock */,
+				7EB911651B84D3F2005C1012 /* ModuleManagerTests.m */,
+			);
+			name = ModuleManager;
+			sourceTree = "<group>";
+		};
+		7EB9116C1B84D5CB005C1012 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				7EB911691B84D5C7005C1012 /* Module.h */,
+				7EB9116A1B84D5C7005C1012 /* Module.m */,
+			);
+			name = Mock;
+			sourceTree = "<group>";
+		};
 		7ED4BDFC1B5EB67800280D74 /* Magnolia */ = {
 			isa = PBXGroup;
 			children = (
@@ -14747,6 +14852,7 @@
 				CB142AE61B7A677A00B72069 /* Ladolchevita.app */,
 				CB142C691B7A6A4D00B72069 /* Banzay.app */,
 				CB69817B1B7DE33400B12B78 /* ProstoCoffee.app */,
+				7EB911581B84D36F005C1012 /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -14801,6 +14907,8 @@
 		C775BBD97C78B39C14A0CCFF /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9116D1B84DACB005C1012 /* NSDictionary+DeepMerge.h */,
+				7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */,
 				7E47E40A1B1DD540001432D9 /* UIViewController+NavigationBarFix.h */,
 				7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */,
 				CB9104EB1B19BC2B00506235 /* UIViewController+AlertView.h */,
@@ -14952,6 +15060,7 @@
 				C775B8BE38980BEB41AE2157 /* Products */,
 				C775B99433B24E5BC6767D08 /* Frameworks */,
 				C775BE1DB45F88A93186ABF9 /* DoubleB */,
+				7EB911591B84D36F005C1012 /* UnitTests */,
 				C775BAC7D71EB26B52F973FE /* Podfile */,
 				C3F1BDE223C3D0087AB918F8 /* Pods */,
 			);
@@ -16498,6 +16607,24 @@
 			productReference = 7EB2D5981B3C5C77009405C6 /* RedCup.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7EB911571B84D36F005C1012 /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7EB911601B84D36F005C1012 /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				7EB911541B84D36F005C1012 /* Sources */,
+				7EB911551B84D36F005C1012 /* Frameworks */,
+				7EB911561B84D36F005C1012 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7EB9115F1B84D36F005C1012 /* PBXTargetDependency */,
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 7EB911581B84D36F005C1012 /* UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7ED4BC971B5EB64B00280D74 /* Magnolia */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7ED4BDF61B5EB64B00280D74 /* Build configuration list for PBXNativeTarget "Magnolia" */;
@@ -17088,6 +17215,10 @@
 					7EB2D43F1B3C5C77009405C6 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
+					7EB911571B84D36F005C1012 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = CB2421B01B7A1D4D00A02721;
+					};
 					7ED4BC971B5EB64B00280D74 = {
 						DevelopmentTeam = WDRAVGQ9R2;
 					};
@@ -17192,6 +17323,7 @@
 				CB1429791B7A677A00B72069 /* Ladolchevita */,
 				CB142AFC1B7A6A4D00B72069 /* Banzay */,
 				CB69800E1B7DE33400B12B78 /* ProstoCoffee */,
+				7EB911571B84D36F005C1012 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -18637,6 +18769,13 @@
 				CBDE1D8B1B7286540090A347 /* DBBonusPositionsViewController.xib in Resources */,
 				7E5186381B42965600A129EE /* launch_667.png in Resources */,
 				7EB2D5911B3C5C77009405C6 /* canceled@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7EB911561B84D36F005C1012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -25996,6 +26135,7 @@
 				CB2423691B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E382FE31B5CF692008F0241 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21321B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911871B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7E382FE41B5CF692008F0241 /* DBDocumentsViewController.m in Sources */,
 				7E382FE51B5CF692008F0241 /* DBServerAPI.m in Sources */,
 				7E382FE61B5CF692008F0241 /* DBBarButtonItem.m in Sources */,
@@ -26124,6 +26264,7 @@
 				7E3DAB071B06153E00A7FFD1 /* JRSwizzleMethods.m in Sources */,
 				CBDE21EB1B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED31B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB911751B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7E3DAB081B06153E00A7FFD1 /* DBOrderItemCell.m in Sources */,
 				CBDE21CC1B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB2423571B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -26281,6 +26422,7 @@
 				CB2423601B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E7925551B3C1BDA00CA740D /* DBDocumentsViewController.m in Sources */,
 				CBDE21291B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9117E1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7E7925561B3C1BDA00CA740D /* DBServerAPI.m in Sources */,
 				7E7925571B3C1BDA00CA740D /* DBBarButtonItem.m in Sources */,
 				7E7925581B3C1BDA00CA740D /* DBProfileViewController.m in Sources */,
@@ -26424,6 +26566,7 @@
 				CB2423611B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E7926D71B3C247D00CA740D /* DBDocumentsViewController.m in Sources */,
 				CBDE212A1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9117F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7E7926D81B3C247D00CA740D /* DBServerAPI.m in Sources */,
 				7E7926D91B3C247D00CA740D /* DBBarButtonItem.m in Sources */,
 				7E7926DA1B3C247D00CA740D /* DBProfileViewController.m in Sources */,
@@ -26567,6 +26710,7 @@
 				CB2423621B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EB2D19C1B3C3581009405C6 /* DBDocumentsViewController.m in Sources */,
 				CBDE212B1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911801B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7EB2D19D1B3C3581009405C6 /* DBServerAPI.m in Sources */,
 				7EB2D19E1B3C3581009405C6 /* DBBarButtonItem.m in Sources */,
 				7EB2D19F1B3C3581009405C6 /* DBProfileViewController.m in Sources */,
@@ -26710,6 +26854,7 @@
 				CB2423631B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EB2D30B1B3C51A2009405C6 /* DBDocumentsViewController.m in Sources */,
 				CBDE212C1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911811B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7EB2D30C1B3C51A2009405C6 /* DBServerAPI.m in Sources */,
 				7EB2D30D1B3C51A2009405C6 /* DBBarButtonItem.m in Sources */,
 				7EB2D30E1B3C51A2009405C6 /* DBProfileViewController.m in Sources */,
@@ -26853,6 +26998,7 @@
 				CB2423641B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EB2D47B1B3C5C77009405C6 /* DBDocumentsViewController.m in Sources */,
 				CBDE212D1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911821B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7EB2D47C1B3C5C77009405C6 /* DBServerAPI.m in Sources */,
 				7EB2D47D1B3C5C77009405C6 /* DBBarButtonItem.m in Sources */,
 				7EB2D47E1B3C5C77009405C6 /* DBProfileViewController.m in Sources */,
@@ -26926,6 +27072,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7EB911541B84D36F005C1012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7EB9116B1B84D5C7005C1012 /* Module.m in Sources */,
+				7EB911921B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
+				7EB911671B84D3F2005C1012 /* ModuleManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7ED4BC991B5EB64B00280D74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -26996,6 +27152,7 @@
 				CB24236A1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7ED4BCD31B5EB64B00280D74 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21331B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911881B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7ED4BCD41B5EB64B00280D74 /* DBDocumentsViewController.m in Sources */,
 				7ED4BCD51B5EB64B00280D74 /* DBServerAPI.m in Sources */,
 				7ED4BCD61B5EB64B00280D74 /* DBBarButtonItem.m in Sources */,
@@ -27139,6 +27296,7 @@
 				CB24235F1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EDB592E1B32F70400723DF9 /* DBDocumentsViewController.m in Sources */,
 				CBDE21281B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9117D1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7EDB592F1B32F70400723DF9 /* DBServerAPI.m in Sources */,
 				7EDB59301B32F70400723DF9 /* DBBarButtonItem.m in Sources */,
 				7EDB59311B32F70400723DF9 /* DBProfileViewController.m in Sources */,
@@ -27282,6 +27440,7 @@
 				CB1429BA1B7A677A00B72069 /* ViewManager.m in Sources */,
 				CB1429BB1B7A677A00B72069 /* DBNewOrderNDAView.m in Sources */,
 				CB1429BC1B7A677A00B72069 /* PositionCollectionViewCell.m in Sources */,
+				7EB9118F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB1429BD1B7A677A00B72069 /* DBDocumentsViewController.m in Sources */,
 				CB1429BE1B7A677A00B72069 /* DBServerAPI.m in Sources */,
 				CB1429BF1B7A677A00B72069 /* DBBarButtonItem.m in Sources */,
@@ -27425,6 +27584,7 @@
 				CB142B3D1B7A6A4D00B72069 /* ViewManager.m in Sources */,
 				CB142B3E1B7A6A4D00B72069 /* DBNewOrderNDAView.m in Sources */,
 				CB142B3F1B7A6A4D00B72069 /* PositionCollectionViewCell.m in Sources */,
+				7EB911901B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB142B401B7A6A4D00B72069 /* DBDocumentsViewController.m in Sources */,
 				CB142B411B7A6A4D00B72069 /* DBServerAPI.m in Sources */,
 				CB142B421B7A6A4D00B72069 /* DBBarButtonItem.m in Sources */,
@@ -27599,6 +27759,7 @@
 				CB1431381B0E371A00DD50C7 /* IHWebPageViewController.m in Sources */,
 				CB1431391B0E371A00DD50C7 /* DBOrderBarButtonView.m in Sources */,
 				CB64FF9F1B3192100011CEEC /* NSObject+Encode.m in Sources */,
+				7EB911701B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CBDE1E141B7286540090A347 /* DBPositionGroupModifierItemCell.m in Sources */,
 				CB14313B1B0E371A00DD50C7 /* DBConstants.m in Sources */,
 				CBDE20231B7286540090A347 /* DBCategoryPicker.m in Sources */,
@@ -27697,6 +27858,7 @@
 				CBDE1ED41B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
 				CBDE21EC1B7286890090A347 /* DeliverySettings.m in Sources */,
 				CB1432761B0F1BBB00DD50C7 /* DBBeaconObserver.m in Sources */,
+				7EB911761B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB1432771B0F1BBB00DD50C7 /* EXTSelectorChecking.m in Sources */,
 				CBDE21CD1B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB2423581B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -27854,6 +28016,7 @@
 				CB24236D1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB194C4C1B6BAECE0085ECF8 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21361B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9118B1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB194C4D1B6BAECE0085ECF8 /* DBDocumentsViewController.m in Sources */,
 				CB194C4E1B6BAECE0085ECF8 /* DBServerAPI.m in Sources */,
 				CB194C4F1B6BAECE0085ECF8 /* DBBarButtonItem.m in Sources */,
@@ -27997,6 +28160,7 @@
 				CB24236E1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB194DBD1B6BC2650085ECF8 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21371B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9118C1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB194DBE1B6BC2650085ECF8 /* DBDocumentsViewController.m in Sources */,
 				CB194DBF1B6BC2650085ECF8 /* DBServerAPI.m in Sources */,
 				CB194DC01B6BC2650085ECF8 /* DBBarButtonItem.m in Sources */,
@@ -28140,6 +28304,7 @@
 				CB24236F1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB194F2E1B6BD75B0085ECF8 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21381B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9118D1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB194F2F1B6BD75B0085ECF8 /* DBDocumentsViewController.m in Sources */,
 				CB194F301B6BD75B0085ECF8 /* DBServerAPI.m in Sources */,
 				CB194F311B6BD75B0085ECF8 /* DBBarButtonItem.m in Sources */,
@@ -28268,6 +28433,7 @@
 				CB1AF78C1AE10E6900FA3224 /* JRSwizzleMethods.m in Sources */,
 				CBDE21E91B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED11B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB911731B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB1AF78D1AE10E6900FA3224 /* DBOrderItemCell.m in Sources */,
 				CBDE21CA1B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB2423551B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -28425,6 +28591,7 @@
 				CB2423511B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB2421F11B7A1D4D00A02721 /* DBNewOrderNDAView.m in Sources */,
 				CB2421F21B7A1D4D00A02721 /* PositionCollectionViewCell.m in Sources */,
+				7EB9116F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB2421F31B7A1D4D00A02721 /* DBDocumentsViewController.m in Sources */,
 				CB2421F41B7A1D4D00A02721 /* DBServerAPI.m in Sources */,
 				CB2421F51B7A1D4D00A02721 /* DBBarButtonItem.m in Sources */,
@@ -28553,6 +28720,7 @@
 				CB3BA3021B20589300F320CA /* DBOrderItemCell.m in Sources */,
 				CBDE21ED1B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED51B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB911771B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB3BA3031B20589300F320CA /* DBBeaconObserver.m in Sources */,
 				CBDE21CE1B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB2423591B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -28695,6 +28863,7 @@
 				CB517B641AEFB6B500A50F5C /* JRSwizzleMethods.m in Sources */,
 				CBDE21EA1B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED21B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB911741B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB517B651AEFB6B500A50F5C /* DBOrderItemCell.m in Sources */,
 				CBDE21CB1B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB2423561B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -28852,6 +29021,7 @@
 				CB24236B1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB5793461B6AB87300B17819 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21341B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911891B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB5793471B6AB87300B17819 /* DBDocumentsViewController.m in Sources */,
 				CB5793481B6AB87300B17819 /* DBServerAPI.m in Sources */,
 				CB5793491B6AB87300B17819 /* DBBarButtonItem.m in Sources */,
@@ -28995,6 +29165,7 @@
 				CB24236C1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB5794BD1B6BA76B00B17819 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21351B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9118A1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB5794BE1B6BA76B00B17819 /* DBDocumentsViewController.m in Sources */,
 				CB5794BF1B6BA76B00B17819 /* DBServerAPI.m in Sources */,
 				CB5794C01B6BA76B00B17819 /* DBBarButtonItem.m in Sources */,
@@ -29123,6 +29294,7 @@
 				CB5AFC4B1B27209A00904BF7 /* DBOrderItemCell.m in Sources */,
 				CBDE21EE1B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED61B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB911781B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB5AFC4C1B27209A00904BF7 /* DBBeaconObserver.m in Sources */,
 				CBDE21CF1B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB24235A1B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -29265,6 +29437,7 @@
 				CBDE1ED01B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
 				CBDE21E81B7286890090A347 /* DeliverySettings.m in Sources */,
 				CB43E8261AD4508F0003D5B2 /* DBOrderItemCell.m in Sources */,
+				7EB911721B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB60C0C91AC5AD2600D5E962 /* DBBeaconObserver.m in Sources */,
 				CBDE21C91B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB2423541B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -29407,6 +29580,7 @@
 				CB64FE291B317F760011CEEC /* DBOrderItemCell.m in Sources */,
 				CBDE21F11B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED91B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB9117B1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB64FE2A1B317F760011CEEC /* DBBeaconObserver.m in Sources */,
 				CBDE21D21B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB24235D1B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -29564,6 +29738,7 @@
 				CB24235E1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB64FFE91B31B7CF0011CEEC /* DBDocumentsViewController.m in Sources */,
 				CBDE21271B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9117C1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB64FFEA1B31B7CF0011CEEC /* DBServerAPI.m in Sources */,
 				CB64FFEB1B31B7CF0011CEEC /* DBBarButtonItem.m in Sources */,
 				CB64FFEC1B31B7CF0011CEEC /* DBProfileViewController.m in Sources */,
@@ -29707,6 +29882,7 @@
 				CB69804F1B7DE33400B12B78 /* ViewManager.m in Sources */,
 				CB6980501B7DE33400B12B78 /* DBNewOrderNDAView.m in Sources */,
 				CB6980511B7DE33400B12B78 /* PositionCollectionViewCell.m in Sources */,
+				7EB911911B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB6980521B7DE33400B12B78 /* DBDocumentsViewController.m in Sources */,
 				CB6980531B7DE33400B12B78 /* DBServerAPI.m in Sources */,
 				CB6980541B7DE33400B12B78 /* DBBarButtonItem.m in Sources */,
@@ -29850,6 +30026,7 @@
 				CB2423531B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB8200CF1B46CBB4000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE211C1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911711B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB8200D01B46CBB4000BBE55 /* DBDocumentsViewController.m in Sources */,
 				CB8200D11B46CBB4000BBE55 /* DBServerAPI.m in Sources */,
 				CB8200D21B46CBB4000BBE55 /* DBBarButtonItem.m in Sources */,
@@ -29993,6 +30170,7 @@
 				CB2423661B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB82FC0C1B442C70000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE212F1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911841B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB82FC0D1B442C70000BBE55 /* DBDocumentsViewController.m in Sources */,
 				CB82FC0E1B442C70000BBE55 /* DBServerAPI.m in Sources */,
 				CB82FC0F1B442C70000BBE55 /* DBBarButtonItem.m in Sources */,
@@ -30136,6 +30314,7 @@
 				CB2423671B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB82FDED1B4464F6000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21301B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911851B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB82FDEE1B4464F6000BBE55 /* DBDocumentsViewController.m in Sources */,
 				CB82FDEF1B4464F6000BBE55 /* DBServerAPI.m in Sources */,
 				CB82FDF01B4464F6000BBE55 /* DBBarButtonItem.m in Sources */,
@@ -30279,6 +30458,7 @@
 				CB2423681B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB82FF5E1B4579B5000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21311B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911861B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB82FF5F1B4579B5000BBE55 /* DBDocumentsViewController.m in Sources */,
 				CB82FF601B4579B5000BBE55 /* DBServerAPI.m in Sources */,
 				CB82FF611B4579B5000BBE55 /* DBBarButtonItem.m in Sources */,
@@ -30422,6 +30602,7 @@
 				CB24235C1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBD0C50E1B30724300DAD042 /* DBDocumentsViewController.m in Sources */,
 				CBDE21251B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9117A1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CBD0C50F1B30724300DAD042 /* DBServerAPI.m in Sources */,
 				CBD0C5101B30724300DAD042 /* DBBarButtonItem.m in Sources */,
 				CBD0C5111B30724300DAD042 /* DBProfileViewController.m in Sources */,
@@ -30550,6 +30731,7 @@
 				CBD2EADF1B2A07D000E4AAA1 /* DBOrderItemCell.m in Sources */,
 				CBDE21EF1B7286890090A347 /* DeliverySettings.m in Sources */,
 				CBDE1ED71B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
+				7EB911791B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CBD2EAE01B2A07D000E4AAA1 /* DBBeaconObserver.m in Sources */,
 				CBDE21D01B7286890090A347 /* DBPromoManager.m in Sources */,
 				CB24235B1B7A47AD00A02721 /* ViewManager.m in Sources */,
@@ -30707,6 +30889,7 @@
 				CB2423651B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBDC79C11B42AFC700935328 /* DBDocumentsViewController.m in Sources */,
 				CBDE212E1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB911831B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CBDC79C21B42AFC700935328 /* DBServerAPI.m in Sources */,
 				CBDC79C31B42AFC700935328 /* DBBarButtonItem.m in Sources */,
 				CBDC79C41B42AFC700935328 /* DBProfileViewController.m in Sources */,
@@ -30850,6 +31033,7 @@
 				CB2423701B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBDE1B9F1B7280B50090A347 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21391B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
+				7EB9118E1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CBDE1BA01B7280B50090A347 /* DBDocumentsViewController.m in Sources */,
 				CBDE1BA11B7280B50090A347 /* DBServerAPI.m in Sources */,
 				CBDE1BA21B7280B50090A347 /* DBBarButtonItem.m in Sources */,
@@ -30924,6 +31108,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7EB9115F1B84D36F005C1012 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB2421B01B7A1D4D00A02721 /* TestApp */;
+			targetProxy = 7EB9115E1B84D36F005C1012 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7E38310B1B5CF6A9008F0241 /* InfoPlist.strings */ = {
@@ -31929,6 +32121,75 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		7EB911611B84D36F005C1012 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
+			};
+			name = Debug;
+		};
+		7EB911621B84D36F005C1012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
+			};
+			name = Release;
+		};
+		7EB911631B84D36F005C1012 /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
 			};
 			name = "App Store";
 		};
@@ -34826,6 +35087,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		7EB911601B84D36F005C1012 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7EB911611B84D36F005C1012 /* Debug */,
+				7EB911621B84D36F005C1012 /* Release */,
+				7EB911631B84D36F005C1012 /* App Store */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		7ED4BDF61B5EB64B00280D74 /* Build configuration list for PBXNativeTarget "Magnolia" */ = {
 			isa = XCConfigurationList;
