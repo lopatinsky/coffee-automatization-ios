@@ -13196,8 +13196,8 @@
 		CBDE1D171B7286540090A347 /* PositionCompactCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionCompactCollectionViewCell.h; sourceTree = "<group>"; };
 		CBDE1D181B7286540090A347 /* PositionCompactCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionCompactCollectionViewCell.m; sourceTree = "<group>"; };
 		CBDE1D191B7286540090A347 /* PositionCompactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionCompactCollectionViewCell.xib; sourceTree = "<group>"; };
-		CBDE1D1A1B7286540090A347 /* ViewControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerManager.h; sourceTree = "<group>"; };
-		CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerManager.m; sourceTree = "<group>"; };
+		CBDE1D1A1B7286540090A347 /* ViewControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManager.h; path = ../ViewControllers/ViewControllerManager.h; sourceTree = "<group>"; };
+		CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManager.m; path = ../ViewControllers/ViewControllerManager.m; sourceTree = "<group>"; };
 		CBDE21971B7286890090A347 /* ApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationManager.h; sourceTree = "<group>"; };
 		CBDE21981B7286890090A347 /* ApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationManager.m; sourceTree = "<group>"; };
 		CBDE219A1B7286890090A347 /* DBPromoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPromoManager.h; sourceTree = "<group>"; };
@@ -14615,8 +14615,6 @@
 			children = (
 				CBDE1CD01B7286530090A347 /* Launch */,
 				CBDE1CD41B7286530090A347 /* Menu */,
-				CBDE1D1A1B7286540090A347 /* ViewControllerManager.h */,
-				CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */,
 				CB136A801B0A1D8300B93178 /* DBAddressViewController.h */,
 				CB136A811B0A1D8300B93178 /* DBAddressViewController.m */,
 				CB136A821B0A1D8300B93178 /* DBAddressViewController.xib */,
@@ -14870,6 +14868,10 @@
 				CBDE21981B7286890090A347 /* ApplicationManager.m */,
 				CB24234F1B7A47AD00A02721 /* ViewManager.h */,
 				CB2423501B7A47AD00A02721 /* ViewManager.m */,
+				CBDE1D1A1B7286540090A347 /* ViewControllerManager.h */,
+				CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */,
+				CB6981911B7DE8A800B12B78 /* DBTextResourcesHelper.h */,
+				CB6981921B7DE8A800B12B78 /* DBTextResourcesHelper.m */,
 				CBDE21991B7286890090A347 /* Order */,
 				CB1432441B0E3D0400DD50C7 /* DBClassLoader.h */,
 				CB1432451B0E3D0400DD50C7 /* DBClassLoader.m */,
@@ -14901,8 +14903,6 @@
 				CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */,
 				CB3BA44A1B20B2FA00F320CA /* DBPayPalManager.h */,
 				CB3BA44B1B20B2FA00F320CA /* DBPayPalManager.m */,
-				CB6981911B7DE8A800B12B78 /* DBTextResourcesHelper.h */,
-				CB6981921B7DE8A800B12B78 /* DBTextResourcesHelper.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
