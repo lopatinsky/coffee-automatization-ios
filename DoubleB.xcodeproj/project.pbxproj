@@ -2142,6 +2142,41 @@
 		7EB2D5B01B3C5CD9009405C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A21B3C5CCE009405C6 /* InfoPlist.strings */; };
 		7EB2D5B11B3C5CEC009405C6 /* Images-RedCup.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */; };
 		7EB2D5B21B3C5CEF009405C6 /* RedCup-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */; };
+		7EB911211B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911221B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911231B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911241B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911251B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911261B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911271B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911281B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911291B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112A1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112B1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112C1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112D1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112E1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112F1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911301B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911311B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911321B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911331B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911341B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911351B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911361B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911371B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911381B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911391B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113A1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113B1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113C1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113D1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113E1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113F1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911401B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911411B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911421B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911431B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7ED4BC9A1B5EB64B00280D74 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		7ED4BC9B1B5EB64B00280D74 /* DBPayPalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3BA44B1B20B2FA00F320CA /* DBPayPalManager.m */; };
 		7ED4BC9C1B5EB64B00280D74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
@@ -12538,6 +12573,8 @@
 		7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-RedCup.xcassets"; sourceTree = "<group>"; };
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EB9111F1B84CBC6005C1012 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
+		7EB911201B84CBC6005C1012 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
 		7ED4BDFA1B5EB64B00280D74 /* Magnolia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Magnolia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED4BDFF1B5EB67800280D74 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7ED4BE001B5EB67800280D74 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -14864,6 +14901,8 @@
 		C775BE2E1D4C606917617A8E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9111F1B84CBC6005C1012 /* ModuleManager.h */,
+				7EB911201B84CBC6005C1012 /* ModuleManager.m */,
 				CBDE21971B7286890090A347 /* ApplicationManager.h */,
 				CBDE21981B7286890090A347 /* ApplicationManager.m */,
 				CB24234F1B7A47AD00A02721 /* ViewManager.h */,
@@ -25910,6 +25949,7 @@
 				7E382FBA1B5CF692008F0241 /* DoubleB.xcdatamodeld in Sources */,
 				7E382FBC1B5CF692008F0241 /* EXTScope.m in Sources */,
 				7E382FBD1B5CF692008F0241 /* DBTimePickerView.m in Sources */,
+				7EB911391B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E382FBE1B5CF692008F0241 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20781B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7E382FBF1B5CF692008F0241 /* AppDelegate.m in Sources */,
@@ -26137,6 +26177,7 @@
 				7E3DAB2E1B06153E00A7FFD1 /* DBOrderBarButtonView.m in Sources */,
 				7E3DAB2F1B06153E00A7FFD1 /* DBConstants.m in Sources */,
 				7E3DAB311B06153E00A7FFD1 /* OrderItem.m in Sources */,
+				7EB911271B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E3DAB341B06153E00A7FFD1 /* DBPopupTextView.m in Sources */,
 				7E47E4101B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDE21201B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -26193,6 +26234,7 @@
 				7E79252D1B3C1BDA00CA740D /* EXTScope.m in Sources */,
 				7E79252E1B3C1BDA00CA740D /* DBTimePickerView.m in Sources */,
 				7E79252F1B3C1BDA00CA740D /* NSString+LanguageFeature.m in Sources */,
+				7EB911301B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E7925301B3C1BDA00CA740D /* AppDelegate.m in Sources */,
 				CBDE206F1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7E7925311B3C1BDA00CA740D /* DBOrderViewController.m in Sources */,
@@ -26335,6 +26377,7 @@
 				7E7926AF1B3C247D00CA740D /* EXTScope.m in Sources */,
 				7E7926B01B3C247D00CA740D /* DBTimePickerView.m in Sources */,
 				7E7926B11B3C247D00CA740D /* NSString+LanguageFeature.m in Sources */,
+				7EB911311B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E7926B21B3C247D00CA740D /* AppDelegate.m in Sources */,
 				CBDE20701B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7E7926B31B3C247D00CA740D /* DBOrderViewController.m in Sources */,
@@ -26477,6 +26520,7 @@
 				7EB2D1741B3C3581009405C6 /* EXTScope.m in Sources */,
 				7EB2D1751B3C3581009405C6 /* DBTimePickerView.m in Sources */,
 				7EB2D1761B3C3581009405C6 /* NSString+LanguageFeature.m in Sources */,
+				7EB911321B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EB2D1771B3C3581009405C6 /* AppDelegate.m in Sources */,
 				CBDE20711B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EB2D1781B3C3581009405C6 /* DBOrderViewController.m in Sources */,
@@ -26619,6 +26663,7 @@
 				7EB2D2E31B3C51A2009405C6 /* EXTScope.m in Sources */,
 				7EB2D2E41B3C51A2009405C6 /* DBTimePickerView.m in Sources */,
 				7EB2D2E51B3C51A2009405C6 /* NSString+LanguageFeature.m in Sources */,
+				7EB911331B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EB2D2E61B3C51A2009405C6 /* AppDelegate.m in Sources */,
 				CBDE20721B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EB2D2E71B3C51A2009405C6 /* DBOrderViewController.m in Sources */,
@@ -26761,6 +26806,7 @@
 				7EB2D4531B3C5C77009405C6 /* EXTScope.m in Sources */,
 				7EB2D4541B3C5C77009405C6 /* DBTimePickerView.m in Sources */,
 				7EB2D4551B3C5C77009405C6 /* NSString+LanguageFeature.m in Sources */,
+				7EB911341B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EB2D4561B3C5C77009405C6 /* AppDelegate.m in Sources */,
 				CBDE20731B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EB2D4571B3C5C77009405C6 /* DBOrderViewController.m in Sources */,
@@ -26903,6 +26949,7 @@
 				7ED4BCAA1B5EB64B00280D74 /* DoubleB.xcdatamodeld in Sources */,
 				7ED4BCAC1B5EB64B00280D74 /* EXTScope.m in Sources */,
 				7ED4BCAD1B5EB64B00280D74 /* DBTimePickerView.m in Sources */,
+				7EB9113A1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7ED4BCAE1B5EB64B00280D74 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20791B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7ED4BCAF1B5EB64B00280D74 /* AppDelegate.m in Sources */,
@@ -27045,6 +27092,7 @@
 				7EDB59061B32F70400723DF9 /* EXTScope.m in Sources */,
 				7EDB59071B32F70400723DF9 /* DBTimePickerView.m in Sources */,
 				7EDB59081B32F70400723DF9 /* NSString+LanguageFeature.m in Sources */,
+				7EB9112F1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EDB59091B32F70400723DF9 /* AppDelegate.m in Sources */,
 				CBDE206E1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EDB590A1B32F70400723DF9 /* DBOrderViewController.m in Sources */,
@@ -27187,6 +27235,7 @@
 				CB14298C1B7A677A00B72069 /* DoubleB.xcdatamodeld in Sources */,
 				CB14298D1B7A677A00B72069 /* EXTScope.m in Sources */,
 				CB14298E1B7A677A00B72069 /* DBTimePickerView.m in Sources */,
+				7EB911411B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB14298F1B7A677A00B72069 /* NSString+LanguageFeature.m in Sources */,
 				CB1429901B7A677A00B72069 /* DBCategoryPickerCell.m in Sources */,
 				CB1429911B7A677A00B72069 /* AppDelegate.m in Sources */,
@@ -27329,6 +27378,7 @@
 				CB142B0F1B7A6A4D00B72069 /* DoubleB.xcdatamodeld in Sources */,
 				CB142B101B7A6A4D00B72069 /* EXTScope.m in Sources */,
 				CB142B111B7A6A4D00B72069 /* DBTimePickerView.m in Sources */,
+				7EB911421B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB142B121B7A6A4D00B72069 /* NSString+LanguageFeature.m in Sources */,
 				CB142B131B7A6A4D00B72069 /* DBCategoryPickerCell.m in Sources */,
 				CB142B141B7A6A4D00B72069 /* AppDelegate.m in Sources */,
@@ -27471,6 +27521,7 @@
 				CBD14B7C1B148ED3005AEAFE /* DBCoffeeAutomationSettingsViewController.m in Sources */,
 				CBDE1DD61B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CB97829D1B1DF80B000B5625 /* DBPromoCell.m in Sources */,
+				7EB911221B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB1430FD1B0E371A00DD50C7 /* EXTScope.m in Sources */,
 				CB1430FE1B0E371A00DD50C7 /* DBTimePickerView.m in Sources */,
 				CB1430FF1B0E371A00DD50C7 /* AppDelegate.m in Sources */,
@@ -27699,6 +27750,7 @@
 				CB14329D1B0F1BBB00DD50C7 /* DBOrderBarButtonView.m in Sources */,
 				CB14329F1B0F1BBB00DD50C7 /* DBConstants.m in Sources */,
 				CB1433AD1B13267A00DD50C7 /* DBDeliveryType.m in Sources */,
+				7EB911281B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB1432A11B0F1BBB00DD50C7 /* OrderItem.m in Sources */,
 				CBDE21211B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB1432A41B0F1BBB00DD50C7 /* DBPopupTextView.m in Sources */,
@@ -27755,6 +27807,7 @@
 				CB194C231B6BAECE0085ECF8 /* DoubleB.xcdatamodeld in Sources */,
 				CB194C251B6BAECE0085ECF8 /* EXTScope.m in Sources */,
 				CB194C261B6BAECE0085ECF8 /* DBTimePickerView.m in Sources */,
+				7EB9113D1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB194C271B6BAECE0085ECF8 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207C1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB194C281B6BAECE0085ECF8 /* AppDelegate.m in Sources */,
@@ -27897,6 +27950,7 @@
 				CB194D941B6BC2650085ECF8 /* DoubleB.xcdatamodeld in Sources */,
 				CB194D961B6BC2650085ECF8 /* EXTScope.m in Sources */,
 				CB194D971B6BC2650085ECF8 /* DBTimePickerView.m in Sources */,
+				7EB9113E1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB194D981B6BC2650085ECF8 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207D1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB194D991B6BC2650085ECF8 /* AppDelegate.m in Sources */,
@@ -28039,6 +28093,7 @@
 				CB194F051B6BD75B0085ECF8 /* DoubleB.xcdatamodeld in Sources */,
 				CB194F071B6BD75B0085ECF8 /* EXTScope.m in Sources */,
 				CB194F081B6BD75B0085ECF8 /* DBTimePickerView.m in Sources */,
+				7EB9113F1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB194F091B6BD75B0085ECF8 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207E1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB194F0A1B6BD75B0085ECF8 /* AppDelegate.m in Sources */,
@@ -28266,6 +28321,7 @@
 				CBE162B91AE13C92006BB81F /* DBOrderBarButtonView.m in Sources */,
 				CB1AF7B21AE10E6900FA3224 /* DBConstants.m in Sources */,
 				CB1AF7B41AE10E6900FA3224 /* OrderItem.m in Sources */,
+				7EB911251B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB1AF7B71AE10E6900FA3224 /* DBPopupTextView.m in Sources */,
 				7E47E40E1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDE211E1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -28322,6 +28378,7 @@
 				CB2421C31B7A1D4D00A02721 /* DoubleB.xcdatamodeld in Sources */,
 				CB2421C41B7A1D4D00A02721 /* EXTScope.m in Sources */,
 				CB2421C51B7A1D4D00A02721 /* DBTimePickerView.m in Sources */,
+				7EB911211B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB2421C61B7A1D4D00A02721 /* NSString+LanguageFeature.m in Sources */,
 				CB2421C71B7A1D4D00A02721 /* DBCategoryPickerCell.m in Sources */,
 				CB2421C81B7A1D4D00A02721 /* AppDelegate.m in Sources */,
@@ -28549,6 +28606,7 @@
 				CB64FFA51B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB3BA32E1B20589300F320CA /* DBConstants.m in Sources */,
 				CB3BA32F1B20589300F320CA /* DBDeliveryType.m in Sources */,
+				7EB911291B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB3BA3311B20589300F320CA /* OrderItem.m in Sources */,
 				CB3BA3341B20589300F320CA /* DBPopupTextView.m in Sources */,
 				CBDE21221B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -28690,6 +28748,7 @@
 				CB517B8B1AEFB6B500A50F5C /* DBOrderBarButtonView.m in Sources */,
 				CB517B8C1AEFB6B500A50F5C /* DBConstants.m in Sources */,
 				CB517B8E1AEFB6B500A50F5C /* OrderItem.m in Sources */,
+				7EB911261B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB517B911AEFB6B500A50F5C /* DBPopupTextView.m in Sources */,
 				7E47E40F1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDE211F1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -28746,6 +28805,7 @@
 				CB57931D1B6AB87300B17819 /* DoubleB.xcdatamodeld in Sources */,
 				CB57931F1B6AB87300B17819 /* EXTScope.m in Sources */,
 				CB5793201B6AB87300B17819 /* DBTimePickerView.m in Sources */,
+				7EB9113B1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB5793211B6AB87300B17819 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207A1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB5793221B6AB87300B17819 /* AppDelegate.m in Sources */,
@@ -28888,6 +28948,7 @@
 				CB5794941B6BA76B00B17819 /* DoubleB.xcdatamodeld in Sources */,
 				CB5794961B6BA76B00B17819 /* EXTScope.m in Sources */,
 				CB5794971B6BA76B00B17819 /* DBTimePickerView.m in Sources */,
+				7EB9113C1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB5794981B6BA76B00B17819 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207B1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB5794991B6BA76B00B17819 /* AppDelegate.m in Sources */,
@@ -29115,6 +29176,7 @@
 				CB64FFA61B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB5AFC781B27209A00904BF7 /* DBConstants.m in Sources */,
 				CB5AFC791B27209A00904BF7 /* DBDeliveryType.m in Sources */,
+				7EB9112A1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB5AFC7B1B27209A00904BF7 /* OrderItem.m in Sources */,
 				CB5AFC7E1B27209A00904BF7 /* DBPopupTextView.m in Sources */,
 				CBDE21231B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -29256,6 +29318,7 @@
 				CB1433A91B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
 				CB60C0E71AC5AD2600D5E962 /* OrderItem.m in Sources */,
 				CB215E281ADC1B8700EF9EEC /* DBPopupTextView.m in Sources */,
+				7EB911241B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E47E4131B1DEBA8001432D9 /* DBDeliveryViewController.m in Sources */,
 				CBDE211D1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB60C0E91AC5AD2600D5E962 /* CoreDataHelper.m in Sources */,
@@ -29397,6 +29460,7 @@
 				CB64FFA91B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB64FE581B317F760011CEEC /* DBConstants.m in Sources */,
 				CB64FE591B317F760011CEEC /* DBDeliveryType.m in Sources */,
+				7EB9112D1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB64FE5B1B317F760011CEEC /* OrderItem.m in Sources */,
 				CB64FE5E1B317F760011CEEC /* DBPopupTextView.m in Sources */,
 				CBDE21261B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -29453,6 +29517,7 @@
 				CB64FFC11B31B7CF0011CEEC /* EXTScope.m in Sources */,
 				CB64FFC21B31B7CF0011CEEC /* DBTimePickerView.m in Sources */,
 				CB64FFC31B31B7CF0011CEEC /* NSString+LanguageFeature.m in Sources */,
+				7EB9112E1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB64FFC41B31B7CF0011CEEC /* AppDelegate.m in Sources */,
 				CBDE206D1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB64FFC51B31B7CF0011CEEC /* DBOrderViewController.m in Sources */,
@@ -29595,6 +29660,7 @@
 				CB6980211B7DE33400B12B78 /* DoubleB.xcdatamodeld in Sources */,
 				CB6980221B7DE33400B12B78 /* EXTScope.m in Sources */,
 				CB6980231B7DE33400B12B78 /* DBTimePickerView.m in Sources */,
+				7EB911431B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB6980241B7DE33400B12B78 /* NSString+LanguageFeature.m in Sources */,
 				CB6980251B7DE33400B12B78 /* DBCategoryPickerCell.m in Sources */,
 				CB6980261B7DE33400B12B78 /* AppDelegate.m in Sources */,
@@ -29737,6 +29803,7 @@
 				CB8200A61B46CBB4000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB8200A81B46CBB4000BBE55 /* EXTScope.m in Sources */,
 				CB8200A91B46CBB4000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911231B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB8200AA1B46CBB4000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20621B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB8200AB1B46CBB4000BBE55 /* AppDelegate.m in Sources */,
@@ -29879,6 +29946,7 @@
 				CB82FBE31B442C70000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB82FBE51B442C70000BBE55 /* EXTScope.m in Sources */,
 				CB82FBE61B442C70000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911361B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB82FBE71B442C70000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20751B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB82FBE81B442C70000BBE55 /* AppDelegate.m in Sources */,
@@ -30021,6 +30089,7 @@
 				CB82FDC41B4464F6000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB82FDC61B4464F6000BBE55 /* EXTScope.m in Sources */,
 				CB82FDC71B4464F6000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911371B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB82FDC81B4464F6000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20761B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB82FDC91B4464F6000BBE55 /* AppDelegate.m in Sources */,
@@ -30163,6 +30232,7 @@
 				CB82FF351B4579B5000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB82FF371B4579B5000BBE55 /* EXTScope.m in Sources */,
 				CB82FF381B4579B5000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911381B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB82FF391B4579B5000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20771B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB82FF3A1B4579B5000BBE55 /* AppDelegate.m in Sources */,
@@ -30305,6 +30375,7 @@
 				CBD0C4E61B30724300DAD042 /* EXTScope.m in Sources */,
 				CBD0C4E71B30724300DAD042 /* DBTimePickerView.m in Sources */,
 				CBD0C4E81B30724300DAD042 /* NSString+LanguageFeature.m in Sources */,
+				7EB9112C1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBD0C4E91B30724300DAD042 /* AppDelegate.m in Sources */,
 				CBDE206B1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CBD0C4EA1B30724300DAD042 /* DBOrderViewController.m in Sources */,
@@ -30532,6 +30603,7 @@
 				CB64FFA71B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CBD2EB0C1B2A07D000E4AAA1 /* DBConstants.m in Sources */,
 				CBD2EB0D1B2A07D000E4AAA1 /* DBDeliveryType.m in Sources */,
+				7EB9112B1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBD2EB0F1B2A07D000E4AAA1 /* OrderItem.m in Sources */,
 				CBD2EB121B2A07D000E4AAA1 /* DBPopupTextView.m in Sources */,
 				CBDE21241B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
@@ -30588,6 +30660,7 @@
 				CBDC79991B42AFC700935328 /* EXTScope.m in Sources */,
 				CBDC799A1B42AFC700935328 /* DBTimePickerView.m in Sources */,
 				CBDC799B1B42AFC700935328 /* NSString+LanguageFeature.m in Sources */,
+				7EB911351B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBDC799C1B42AFC700935328 /* AppDelegate.m in Sources */,
 				CBDE20741B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CBDC799D1B42AFC700935328 /* DBOrderViewController.m in Sources */,
@@ -30730,6 +30803,7 @@
 				CBDE1B761B7280B50090A347 /* DoubleB.xcdatamodeld in Sources */,
 				CBDE1B781B7280B50090A347 /* EXTScope.m in Sources */,
 				CBDE1B791B7280B50090A347 /* DBTimePickerView.m in Sources */,
+				7EB911401B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBDE1B7A1B7280B50090A347 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207F1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CBDE1B7B1B7280B50090A347 /* AppDelegate.m in Sources */,
