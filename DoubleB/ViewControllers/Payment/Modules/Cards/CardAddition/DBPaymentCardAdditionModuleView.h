@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBPaymentModuleViewProtocol.h"
 
-@interface DBPaymentCardAdditionModuleView : UIView
-
+@interface DBPaymentCardAdditionModuleView : UIView<DBPaymentModuleViewProtocol>
+@property(strong, nonatomic) NSString *analyticsCategory;
+@property(weak, nonatomic) id<DBPaymentModuleViewDelegate> delegate;
 @end

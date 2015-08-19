@@ -18,13 +18,13 @@
 @interface DBCardsManager : NSObject
 + (instancetype)sharedInstance;
 
-@property (strong, nonatomic, readonly) NSArray *cards;
+@property (strong, nonatomic, readonly) NSMutableArray *cards;
 @property (nonatomic, readonly) NSUInteger cardsCount;
 
 @property (strong, nonatomic) DBPaymentCard *defaultCard;
 
 - (DBPaymentCard *)cardAtIndex:(NSUInteger)index;
-- (void)addCard:(DBPaymentCard *)card;
+- (BOOL)addCard:(DBPaymentCard *)card;
 - (void)removeCard:(DBPaymentCard *)card;
 - (void)removeCardAtIndex:(NSUInteger)index;
 @end

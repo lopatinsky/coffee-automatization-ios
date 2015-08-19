@@ -41,6 +41,7 @@
 
 @end
 
+
 @implementation DBCardsManager
 
 + (instancetype)sharedInstance {
@@ -62,8 +63,6 @@
 - (void)fetch {
     NSData *data = [[UICKeyChainStore keyChainStore] dataForKey:@"payment_cards"];
     _cards = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    
-    
 }
 
 - (void)syncronize {
@@ -102,19 +101,30 @@
 }
 
 - (DBPaymentCard *)cardAtIndex:(NSUInteger)index {
-    
+    return index < self.cardsCount ? _cards[index] : nil;
 }
 
-- (void)addCard:(DBPaymentCard *)card {
+- (BOOL)addCard:(DBPaymentCard *)card {
+    BOOL response = YES;
+    for(DBPaymentCard *storedCard in _cards)
+        response &= ![storedCard.pan isEqualToString:card.pan];
     
+    if(response){
+        [_cards addObject:card];
+        self.defaultCard = card;
+        [self syncronize];
+    }
+    
+    return response;
 }
 
 - (void)removeCard:(DBPaymentCard *)card {
-    
+    [_cards removeObject:card];
 }
 
 - (void)removeCardAtIndex:(NSUInteger)index {
-    
+    if(index < self.cardsCount)
+        [_cards removeObjectAtIndex:index];
 }
 
 @end

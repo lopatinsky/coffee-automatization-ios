@@ -10,6 +10,10 @@
 #import "DBPaymentCardAdditionModuleView.h"
 #import "DBCardCell.h"
 
+#import "DBCardsManager.h"
+#import "IHPaymentManager.h"
+#import "OrderCoordinator.h"
+
 @interface DBPaymentCardsModuleView ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *cardsTableView;
 @property (weak, nonatomic) IBOutlet UIView *cardAdditionViewHolder;
@@ -33,12 +37,13 @@
     self.cardsTableView.tableFooterView = [UIView new];
     
     _additionModule = [DBPaymentCardAdditionModuleView new];
+    _additionModule.analyticsCategory = self.analyticsCategory;
     [self.cardAdditionViewHolder addSubview:_additionModule];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.cards count];
+    return [DBCardsManager sharedInstance].cardsCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -48,10 +53,9 @@
         cell = [DBCardCell new];
     }
     
-    NSDictionary *card = self.cards[indexPath.row];
-    NSString *cardNumber = card[@"cardPan"];
-    NSString *pan = [NSString stringWithFormat:@"....%@", [cardNumber substringFromIndex:cardNumber.length-4]];
-    cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [cardNumber db_cardIssuer], pan];
+    DBPaymentCard *card = [[DBCardsManager sharedInstance] cardAtIndex:indexPath.row];
+    NSString *pan = [NSString stringWithFormat:@"....%@", [card.pan substringFromIndex:card.pan.length-4]];
+    cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [card.pan db_cardIssuer], pan];
     
     [cell.cardIconImageView templateImageWithName:@"card"];
     cell.cardTitleLabel.textColor = [UIColor blackColor];
@@ -60,7 +64,7 @@
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
+    return _mode == DBPaymentCardsModuleViewModeManageCards;
 }
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,110 +74,33 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView beginUpdates];
     
-    NSUInteger k = indexPath.row;
-    NSDictionary *card = self.cards[k];
+    DBPaymentCard *card = [[DBCardsManager sharedInstance] cardAtIndex:indexPath.row];
     
-    [[IHSecureStore sharedInstance] removeCardAtIndex:k];
-    
-    self.cards = [[IHSecureStore sharedInstance] cards];
+    [[IHPaymentManager sharedInstance] unbindCard:card.token];
+    [[DBCardsManager sharedInstance] removeCard:card];
     
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    [tableView endUpdates];
     
-    [[IHPaymentManager sharedInstance] unbindCard:card[@"cardToken"]];
-    
-    [GANHelper analyzeEvent:@"remove_card_success" category:self.screen];
+    [GANHelper analyzeEvent:@"remove_card_success" category:self.analyticsCategory];
 }
 
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *eventLabel;
-    // Extra payment type
-    if(indexPath.section == 0){
-        eventLabel = @"extra";
-        _orderManager.paymentType = PaymentTypeExtraType;
-        [self.tableView reloadData];
-        
-        [self.delegate cardsControllerDidChoosePaymentItem:self];
-        [self.navigationController popViewControllerAnimated:YES];
+    [DBCardsManager sharedInstance].defaultCard = [[DBCardsManager sharedInstance] cardAtIndex:indexPath.row];
+    
+    if (_mode == DBPaymentCardsModuleViewModeSelectCard) {
+        [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCard;
+        [GANHelper analyzeEvent:@"payment_selected" label:@"card" category:self.analyticsCategory];
     }
     
-    // Cash payment type
-    if(indexPath.section == 1){
-        eventLabel = @"cash";
-        _orderManager.paymentType = PaymentTypeCash;
-        [self.tableView reloadData];
-        
-        [self.delegate cardsControllerDidChoosePaymentItem:self];
-        [self.navigationController popViewControllerAnimated:YES];
+    if (_mode == DBPaymentCardsModuleViewModeManageCards){
+        [GANHelper analyzeEvent:@"check_card"
+                          label:[NSString stringWithFormat:@"%d", (int)[DBCardsManager sharedInstance].cardsCount]
+                       category:self.analyticsCategory];
     }
-    
-    // Cards payment type
-    if(indexPath.section == 2){
-        eventLabel = @"card";
-        // add card button
-        if(indexPath.row == [self.cards count]){
-            [GANHelper analyzeEvent:@"add_card_pressed" category:PAYMENT_SCREEN];
-            [self db_cardManagementBindNewCardOnScreen:self.screen callback:^(BOOL success) {
-                if(success){
-                    [self reloadCards];
-                }
-            }];
-        } else {
-            if (self.mode == CardsViewControllerModeChoosePayment) {
-                _orderManager.paymentType = PaymentTypeCard;
-            }
-            
-            if (self.mode == CardsViewControllerModeManageCards){
-                [GANHelper analyzeEvent:@"check_card"
-                                  label:[NSString stringWithFormat:@"%d", (int)[self.cards count]]
-                               category:self.screen];
-            }
-            
-            NSDictionary *card = self.cards[indexPath.row];
-            [[IHSecureStore sharedInstance] setDefaultCardWithBindingId:card[@"cardToken"]];
-            [self reloadCards];
-            
-            eventLabel = [[card[@"cardPan"] db_cardIssuer] stringByAppendingString:@"_card"];
-            
-            [self.delegate cardsControllerDidChoosePaymentItem:self];
-            [self.navigationController popViewControllerAnimated:YES];
-        }
-    }
-    
-    // PayPal payment type
-    if(indexPath.section == 3){
-        eventLabel = @"paypal";
-        
-        if(_payPalManager.loggedIn){
-            if(self.mode == CardsViewControllerModeChoosePayment){
-                _orderManager.paymentType = PaymentTypePayPal;
-                [self.tableView reloadData];
-                
-                [self.delegate cardsControllerDidChoosePaymentItem:self];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [_payPalManager bindPayPal:^(DBPayPalBindingState state, NSString *message) {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                
-                if(state == DBPayPalBindingStateDone){
-                    [self.tableView reloadData];
-                }
-                
-                if(state == DBPayPalBindingStateFailure){
-                    if(!message)
-                        message = @"Произошла непредвиденная ошибка! Пожалуйста, попробуйте еще раз!";
-                    
-                    [self showError:message];
-                }
-            }];
-        }
-    }
-    
-    [GANHelper analyzeEvent:@"payment_selected" label:eventLabel category:PAYMENT_SCREEN];
 }
 
 @end

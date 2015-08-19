@@ -13287,6 +13287,7 @@
 		CB1EABBA1B831A6E00425CD7 /* DBCardCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCardCell.xib; sourceTree = "<group>"; };
 		CB1EAC011B8324BB00425CD7 /* DBCardsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBCardsManager.h; sourceTree = "<group>"; };
 		CB1EAC021B8324BB00425CD7 /* DBCardsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBCardsManager.m; sourceTree = "<group>"; };
+		CB1EAC261B83519400425CD7 /* DBPaymentModuleViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPaymentModuleViewProtocol.h; sourceTree = "<group>"; };
 		CB215E261ADC1B8700EF9EEC /* DBPopupTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPopupTextView.h; sourceTree = "<group>"; };
 		CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPopupTextView.m; sourceTree = "<group>"; };
 		CB215E291ADC1B9B00EF9EEC /* DBPopupTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPopupTextView.xib; sourceTree = "<group>"; };
@@ -15703,6 +15704,7 @@
 		CB1EAAFA1B83157500425CD7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				CB1EAC261B83519400425CD7 /* DBPaymentModuleViewProtocol.h */,
 				CB1EAB211B8316B800425CD7 /* Cards */,
 				CB1EAB221B8316B800425CD7 /* Cash */,
 				CB1EAB231B8316B800425CD7 /* CourierCard */,
