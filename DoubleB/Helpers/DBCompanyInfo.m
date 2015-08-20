@@ -69,10 +69,7 @@
     }];
 }
 
-
-+ (id)objectFromPropertyListByName:(NSString *)name{
-//    NSDictionary *companyInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
-
++ (id)objectFromPropertyListByName:(NSString *)name {
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
     NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -80,34 +77,38 @@
     return [companyInfo objectForKey:name];
 }
 
-+ (NSString *)db_companyBaseUrl{
-    NSString *baseUrl = [self objectFromPropertyListByName:@"BaseUrl"];
++ (id)objectFromApplicationPreferencesByName:(NSString *)name {
+    return [[self objectFromPropertyListByName:@"Preferences"] objectForKey:name];
+}
+
++ (NSString *)db_companyBaseUrl {
+    NSString *baseUrl = [self objectFromApplicationPreferencesByName:@"BaseUrl"];
     
     return baseUrl;
 }
 
-+ (NSNumber *)db_companyDefaultColor{
-    NSNumber *colorHex = [self objectFromPropertyListByName:@"CompanyColor"];
++ (NSNumber *)db_companyDefaultColor {
+    NSNumber *colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
     
     return colorHex;
 }
 
-+ (NSString *)db_companyGoogleAnalyticsKey{
-    NSString *GAKeyString = [self objectFromPropertyListByName:@"CompanyGAKey"];
++ (NSString *)db_companyGoogleAnalyticsKey {
+    NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
     
     return GAKeyString ?: @"";
 }
 
 
-+ (NSString *)db_companyParseApplicationKey{
-    NSDictionary *parseInfo = [self objectFromPropertyListByName:@"Parse"];
++ (NSString *)db_companyParseApplicationKey {
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
     
     NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"";
     return appId;
 }
 
-+ (NSString *)db_companyParseClientKey{
-    NSDictionary *parseInfo = [self objectFromPropertyListByName:@"Parse"];
++ (NSString *)db_companyParseClientKey {
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
     
     NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"";
     return clientKey;
@@ -172,7 +173,7 @@
 
 #pragma mark - Helper methods
 
-- (void)loadFromMemory{
+- (void)loadFromMemory {
     NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyInfo];
     
     _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;

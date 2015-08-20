@@ -41,6 +41,8 @@
     NSString *storedBuildNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"STORED_BUILD_NUMBER"] ?: @"0";
     if (forceCopy || [buildNumber compare:storedBuildNumber] == NSOrderedDescending) {
         [ApplicationManager copyFileWithName:plistName withExtension:@"plist"];
+        [[NSUserDefaults standardUserDefaults] setObject:buildNumber forKey:@"STORED_BUILD_NUMBER"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

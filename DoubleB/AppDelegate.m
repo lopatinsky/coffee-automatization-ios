@@ -28,7 +28,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [ApplicationManager copyPlistsWithNames:@[@"CompanyInfo", @"ViewControllers", @"AppConfiguration"] forceCopy:true];
+    // TODO: change forceCopy to false after test
+    [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     [ApplicationManager initializeVendorFrameworks];
     [ApplicationManager initializeOrderFramework];
     

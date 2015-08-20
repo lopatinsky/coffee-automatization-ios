@@ -5639,8 +5639,6 @@
 		CB24236E1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB24236F1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB2423701B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
-		CB2423721B7A48AD00A02721 /* AppConfiguration.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB2423711B7A48AD00A02721 /* AppConfiguration.plist */; };
-		CB2423741B7A517900A02721 /* ViewControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB2423731B7A517900A02721 /* ViewControllers.plist */; };
 		CB3BA2D91B20589300F320CA /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB3BA2DA1B20589300F320CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB3BA2DB1B20589300F320CA /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
@@ -12846,8 +12844,6 @@
 		CB24232A1B7A1FD500A02721 /* ViewControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViewControllers.plist; sourceTree = "<group>"; };
 		CB24234F1B7A47AD00A02721 /* ViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewManager.h; sourceTree = "<group>"; };
 		CB2423501B7A47AD00A02721 /* ViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewManager.m; sourceTree = "<group>"; };
-		CB2423711B7A48AD00A02721 /* AppConfiguration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AppConfiguration.plist; sourceTree = "<group>"; };
-		CB2423731B7A517900A02721 /* ViewControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViewControllers.plist; sourceTree = "<group>"; };
 		CB2FD83319F55A580065285B /* mug_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug_gray@2x.png"; sourceTree = "<group>"; };
 		CB2FD83419F55A580065285B /* mug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug@2x.png"; sourceTree = "<group>"; };
 		CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCardsViewController.xib; sourceTree = "<group>"; };
@@ -14638,13 +14634,11 @@
 		7ED4BDFC1B5EB67800280D74 /* Magnolia */ = {
 			isa = PBXGroup;
 			children = (
-				CB2423731B7A517900A02721 /* ViewControllers.plist */,
 				7ED4BDFD1B5EB67800280D74 /* AdditionalResources */,
 				7ED4BE031B5EB67800280D74 /* CompanyInfo.plist */,
 				7ED4BE041B5EB67800280D74 /* InfoPlist.strings */,
 				7ED4BE061B5EB67800280D74 /* Images-Magnolia.xcassets */,
 				7ED4BE071B5EB67800280D74 /* Magnolia-info.plist */,
-				CB2423711B7A48AD00A02721 /* AppConfiguration.plist */,
 			);
 			path = Magnolia;
 			sourceTree = "<group>";
@@ -18800,7 +18794,6 @@
 				7ED4BD3A1B5EB64B00280D74 /* alarm_icon@2x.png in Resources */,
 				7ED4BD3B1B5EB64B00280D74 /* mug_orders_gray.png in Resources */,
 				7ED4BE0A1B5EB67800280D74 /* launch_568.png in Resources */,
-				CB2423741B7A517900A02721 /* ViewControllers.plist in Resources */,
 				7ED4BD3C1B5EB64B00280D74 /* menu_icon@3x.png in Resources */,
 				7ED4BD3D1B5EB64B00280D74 /* bg.jpg in Resources */,
 				7ED4BD401B5EB64B00280D74 /* preview_5@2x.png in Resources */,
@@ -18945,7 +18938,6 @@
 				7ED4BDCA1B5EB64B00280D74 /* feedback.png in Resources */,
 				7ED4BDCC1B5EB64B00280D74 /* tick.png in Resources */,
 				7ED4BDCD1B5EB64B00280D74 /* modifier_minus_icon@3x.png in Resources */,
-				CB2423721B7A48AD00A02721 /* AppConfiguration.plist in Resources */,
 				7ED4BDCE1B5EB64B00280D74 /* 250.png in Resources */,
 				7ED4BDCF1B5EB64B00280D74 /* back_arrow_icon@3x.png in Resources */,
 				7ED4BDD01B5EB64B00280D74 /* orders_icon@3x.png in Resources */,
