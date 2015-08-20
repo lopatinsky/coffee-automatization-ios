@@ -13,6 +13,8 @@
 
 #import "PayPalMobile.h"
 
+NSString * const DBPayPalManagerNotificationAccountChange = @"DBPayPalManagerNotificationAccountChange";
+
 NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
 
 @interface DBPayPalManager ()<PayPalFuturePaymentDelegate, PayPalProfileSharingDelegate>
@@ -73,10 +75,14 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  self.loggedIn = NO;
                                  
+                                 [self notifyObserverOf:DBPayPalManagerNotificationAccountChange];
+                                 
                                  if(callback)
                                      callback();
                              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
+                                 
+                                 [self notifyObserverOf:DBPayPalManagerNotificationAccountChange];
                                  
                                  self.loggedIn = NO;
                                  
@@ -119,6 +125,8 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  NSLog(@"%@", responseObject);
                                  self.loggedIn = YES;
+                                 
+                                 [self notifyObserverOf:DBPayPalManagerNotificationAccountChange];
                                  
                                  if(_successBlock)
                                      _successBlock(DBPayPalBindingStateDone, nil);

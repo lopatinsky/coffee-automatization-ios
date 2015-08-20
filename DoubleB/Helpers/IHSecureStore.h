@@ -14,12 +14,4 @@
 
 @property (nonatomic, strong) NSString *clientId;
 
-- (NSUInteger)cardCount;
-- (NSDictionary *)cardWithIndex:(NSUInteger)index;
-- (NSArray *)cards;
-- (NSDictionary *)defaultCard;
-- (BOOL)addCard:(NSString *)bindingId withPan:(NSString *)cardPan;
-- (void)removeCardAtIndex:(NSInteger)index;
-- (void)setDefaultCardWithBindingId:(NSString *)bindingId;
-
 @end

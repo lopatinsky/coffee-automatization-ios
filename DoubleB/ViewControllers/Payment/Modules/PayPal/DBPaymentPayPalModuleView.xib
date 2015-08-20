@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBPaymentCashModuleView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBPaymentPayPalModuleView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -20,7 +20,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cash.png" translatesAutoresizingMaskIntoConstraints="NO" id="msk-az-3zo">
+                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card.png" translatesAutoresizingMaskIntoConstraints="NO" id="msk-az-3zo">
                     <rect key="frame" x="15" y="17" width="20" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="4oz-TM-MDW"/>
@@ -48,15 +48,15 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="iconImageView" destination="msk-az-3zo" id="KK7-wC-4e0"/>
-                <outlet property="tickImageView" destination="7jm-Ir-Dut" id="Rcw-bb-NLJ"/>
-                <outlet property="titleLabel" destination="uuv-an-Ife" id="2HM-Be-gaC"/>
+                <outlet property="iconImageView" destination="msk-az-3zo" id="qVc-eZ-7rd"/>
+                <outlet property="tickImageView" destination="7jm-Ir-Dut" id="Jrc-Og-A8C"/>
+                <outlet property="titleLabel" destination="uuv-an-Ife" id="Kya-Sz-XC7"/>
             </connections>
             <point key="canvasLocation" x="360" y="71.5"/>
         </view>
     </objects>
     <resources>
-        <image name="cash.png" width="25" height="19"/>
+        <image name="card.png" width="20" height="16"/>
         <image name="tick.png" width="19" height="13"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

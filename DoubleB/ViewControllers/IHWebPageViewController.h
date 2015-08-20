@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) NSString *sourceUrl;
 @property (nonatomic, copy) void(^completionHandler)(BOOL success);
+@property (strong, nonatomic) NSString *screenName;
 
 @end

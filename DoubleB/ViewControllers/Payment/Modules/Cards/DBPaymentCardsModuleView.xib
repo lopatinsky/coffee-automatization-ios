@@ -8,15 +8,18 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBPaymentCardsModuleView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="247"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="255"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nrL-wV-ovi">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="197"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="nrL-wV-ovi">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="567-GK-s3S"/>
+                    </constraints>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dec-8I-aPe">
-                    <rect key="frame" x="0.0" y="197" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="200" width="320" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="kkI-Ex-nxt"/>
@@ -28,7 +31,6 @@
                 <constraint firstAttribute="trailing" secondItem="nrL-wV-ovi" secondAttribute="trailing" id="0fP-Bp-rAw"/>
                 <constraint firstItem="Dec-8I-aPe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1QG-F0-wZE"/>
                 <constraint firstAttribute="trailing" secondItem="Dec-8I-aPe" secondAttribute="trailing" id="6aO-YY-psI"/>
-                <constraint firstAttribute="bottom" secondItem="Dec-8I-aPe" secondAttribute="bottom" id="RMC-zt-4Ut"/>
                 <constraint firstItem="Dec-8I-aPe" firstAttribute="top" secondItem="nrL-wV-ovi" secondAttribute="bottom" id="fFb-Z7-tdU"/>
                 <constraint firstItem="nrL-wV-ovi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nb6-Tx-KnP"/>
                 <constraint firstItem="nrL-wV-ovi" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="otD-1b-IbV"/>
@@ -38,8 +40,9 @@
             <connections>
                 <outlet property="cardAdditionViewHolder" destination="Dec-8I-aPe" id="A7l-ev-K42"/>
                 <outlet property="cardsTableView" destination="nrL-wV-ovi" id="Gch-8U-v9J"/>
+                <outlet property="constraintCardsTableViewHeight" destination="567-GK-s3S" id="F3a-N8-ExN"/>
             </connections>
-            <point key="canvasLocation" x="360" y="90.5"/>
+            <point key="canvasLocation" x="360" y="94.5"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

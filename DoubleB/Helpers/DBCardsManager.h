@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NotificationSubscriptionManager.h"
+#import "ManagerProtocol.h"
 
 @interface DBPaymentCard : NSObject<NSCoding>
 @property (strong, nonatomic, readonly) NSString *token;
@@ -15,7 +17,10 @@
 - (instancetype)init:(NSString *)token pan:(NSString *)pan;
 @end
 
-@interface DBCardsManager : NSObject
+
+extern NSString * const DBCardsManagerNotificationCardsChanged;
+
+@interface DBCardsManager : NotificationSubscriptionManager <ManagerProtocol>
 + (instancetype)sharedInstance;
 
 @property (strong, nonatomic, readonly) NSMutableArray *cards;

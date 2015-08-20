@@ -42,6 +42,9 @@
 @end
 
 
+
+NSString * const DBCardsManagerNotificationCardsChanged = @"DBCardsManagerNotificationCardsChanged";
+
 @implementation DBCardsManager
 
 + (instancetype)sharedInstance {
@@ -63,6 +66,25 @@
 - (void)fetch {
     NSData *data = [[UICKeyChainStore keyChainStore] dataForKey:@"payment_cards"];
     _cards = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    if(!_cards)
+        [self fetchWithOldFormat];
+    
+    if(!_cards)
+        _cards = [NSMutableArray new];
+}
+
+// Data migration from old format
+- (void)fetchWithOldFormat {
+    NSData *data = [[UICKeyChainStore keyChainStore] dataForKey:@"cards"];
+    NSArray *cards = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    for(NSDictionary *cardDict in cards){
+        NSString *token = cardDict[@"cardToken"];
+        NSString *pan = cardDict[@"cardPan"];
+        DBPaymentCard *card = [[DBPaymentCard alloc] init:token pan:pan];
+        card.isDefault = [cardDict[@"default"] boolValue];
+    }
 }
 
 - (void)syncronize {
@@ -98,6 +120,8 @@
             card.isDefault = NO;
         }
     }
+    
+    [self notifyObserver];
 }
 
 - (DBPaymentCard *)cardAtIndex:(NSUInteger)index {
@@ -115,16 +139,36 @@
         [self syncronize];
     }
     
+    [self notifyObserver];
+    
     return response;
 }
 
 - (void)removeCard:(DBPaymentCard *)card {
     [_cards removeObject:card];
+    
+    [self notifyObserver];
 }
 
 - (void)removeCardAtIndex:(NSUInteger)index {
-    if(index < self.cardsCount)
+    if(index < self.cardsCount) {
         [_cards removeObjectAtIndex:index];
+        [self notifyObserver];
+    }
+}
+
+- (void)notifyObserver {
+    [self notifyObserverOf:DBCardsManagerNotificationCardsChanged];
+}
+
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    
+}
+
+- (void)flushStoredCache {
+    [self flushCache];
 }
 
 @end

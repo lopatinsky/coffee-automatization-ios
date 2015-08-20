@@ -10,6 +10,8 @@
 
 @interface DBModulesViewController : UIViewController
 
+@property (strong, nonatomic) NSMutableArray *modules;
+
 - (void)layoutModules;
 
 @end

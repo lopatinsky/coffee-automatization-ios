@@ -135,7 +135,11 @@
 "Выберите тип оплаты" = "Please select payment type";
 "Нет карт" = "No cards";
 "Наличные" = "Cash";
+"Картой курьеру" = "Courier card";
 "Бесплатные кружки" = "Free beverages";
+
+"Использовать PayPal" = "Use PayPal";
+"Войти в аккаунт PayPal" = "Sign in PayPal";
 
 "Ошибка определения локации" = "Failed to fetch location";
 

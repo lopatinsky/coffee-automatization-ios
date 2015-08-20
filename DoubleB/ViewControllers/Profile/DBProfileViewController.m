@@ -18,7 +18,6 @@
 #import "UIBarButtonItem+BlocksKit.h"
 
 @interface DBProfileViewController ()<DBProfileModuleViewDelegate>
-@property (strong, nonatomic) NSMutableArray *modules;
 @end
 
 @implementation DBProfileViewController
@@ -33,19 +32,19 @@
     DBProfileNameModuleView *nameModule = [DBProfileNameModuleView new];
     nameModule.delegate = self;
     nameModule.analyticsCategory = self.analyticsScreen;
-    [_modules addObject:nameModule];
+    [self.modules addObject:nameModule];
     
     // Phone module
     DBProfilePhoneModuleView *phoneModule = [DBProfilePhoneModuleView new];
     phoneModule.delegate = self;
     phoneModule.analyticsCategory = self.analyticsScreen;
-    [_modules addObject:phoneModule];
+    [self.modules addObject:phoneModule];
     
     // Mail module
     DBProfileMailModuleView *mailModule = [DBProfileMailModuleView new];
     mailModule.delegate = self;
     mailModule.analyticsCategory = self.analyticsScreen;
-    [_modules addObject:mailModule];
+    [self.modules addObject:mailModule];
     
     [self layoutModules];
 }

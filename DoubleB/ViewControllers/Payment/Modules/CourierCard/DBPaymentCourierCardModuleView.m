@@ -6,40 +6,31 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DBPaymentCashModuleView.h"
+#import "DBPaymentCourierCardModuleView.h"
 #import "OrderCoordinator.h"
 
-#import "UIGestureRecognizer+BlocksKit.h"
-
-@interface DBPaymentCashModuleView ()
+@interface DBPaymentCourierCardModuleView ()
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *tickImageView;
 
 @end
 
-@implementation DBPaymentCashModuleView
+@implementation DBPaymentCourierCardModuleView
 
 - (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBPaymentCashModuleView" owner:self options:nil] firstObject];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBPaymentCourierCardModuleView" owner:self options:nil] firstObject];
     
     return self;
 }
 
 - (void)awakeFromNib {
-    self.titleLabel.text = NSLocalizedString(@"Наличные", nil);
+    self.titleLabel.text = NSLocalizedString(@"Картой курьеру", nil);
     self.titleLabel.textColor = [UIColor blackColor];
     
-    [self.iconImageView templateImageWithName:@"cash"];
+    [self.iconImageView templateImageWithName:@"card"];
     
     [self.tickImageView templateImageWithName:@"tick"];
-    
-    @weakify(self)
-    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self)
-        [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCash;
-        [GANHelper analyzeEvent:@"payment_selected" label:@"cash" category:self.analyticsCategory];
-    }]];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
 }
@@ -51,7 +42,7 @@
 - (void)reload {
     [super reload];
     
-    if([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCash){
+    if([OrderCoordinator sharedInstance].orderManager.paymentType == ){
         self.tickImageView.hidden = NO;
     } else {
         self.tickImageView.hidden = YES;

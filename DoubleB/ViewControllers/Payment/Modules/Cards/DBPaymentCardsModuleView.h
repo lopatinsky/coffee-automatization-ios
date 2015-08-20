@@ -7,16 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBPaymentModuleViewProtocol.h"
+#import "DBPaymentModuleView.h"
 
 typedef NS_ENUM(NSInteger, DBPaymentCardsModuleViewMode){
-    DBPaymentCardsModuleViewModeManageCards,
-    DBPaymentCardsModuleViewModeSelectCard
+    DBPaymentCardsModuleViewModeManageCards = 0,
+    DBPaymentCardsModuleViewModeSelectCardPayment
 };
 
-@interface DBPaymentCardsModuleView : UIView<DBPaymentModuleViewProtocol>
-@property(strong, nonatomic) NSString *analyticsCategory;
-@property(weak, nonatomic) id<DBPaymentModuleViewDelegate> delegate;
-
+@interface DBPaymentCardsModuleView : DBPaymentModuleView
 @property(nonatomic) DBPaymentCardsModuleViewMode mode;
 @end

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "NotificationSubscriptionManager.h"
+
 #import "ManagerProtocol.h"
 #import "OrderItemsManager.h"
 #import "OrderManager.h"
@@ -22,13 +24,15 @@ extern NSString * __nonnull const CoordinatorNotificationOrderShippingPrice;
 
 extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
 
+extern NSString * __nonnull const CoordinatorNotificationNewPaymentType;
+
 extern NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated;
 
 
 
-@interface OrderCoordinator : NSObject <ManagerProtocol>
+@interface OrderCoordinator : NotificationSubscriptionManager <ManagerProtocol>
 
 @property (nonnull, nonatomic, strong, readonly) OrderItemsManager *itemsManager;
 @property (nonnull, nonatomic, strong, readonly) OrderBonusItemsManager *bonusItemsManager;
@@ -41,12 +45,6 @@ extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUp
 + (instancetype)sharedInstance;
 
 - (BOOL)validOrder;
-
-- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(NSString * __nonnull)keyName selector:(__nonnull SEL)selector;
-- (void)addObserver:(NSObject * __nonnull)object withKeyPaths:(NSArray * __nonnull)keyNames selector:(__nonnull SEL)selector;
-
-- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(NSString * __nonnull)keyName;
-- (void)removeObserver:(NSObject * __nonnull )observer;
 
 - (void)manager:(id<ManagerProtocol> __nonnull)manager haveChange:(NSInteger)changeType;
 

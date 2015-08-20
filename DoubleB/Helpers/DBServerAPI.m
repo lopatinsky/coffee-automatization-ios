@@ -17,6 +17,7 @@
 #import "Order.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "DBClientInfo.h"
 #import "Reachability.h"
 #import "CoreDataHelper.h"
@@ -521,14 +522,14 @@
     payment[@"type_id"] = @(paymentType);
     
     if(paymentType == PaymentTypeCard){
-        NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
-        if(card[@"cardToken"]){
-            payment[@"binding_id"] = card[@"cardToken"];
+        DBPaymentCard *card = [DBCardsManager sharedInstance].defaultCard;
+        if(card){
+            payment[@"binding_id"] = card.token;
             
-            BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
+            BOOL mcardOrMaestro = [[card.pan db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card.pan db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
             payment[@"mastercard"] = @(mcardOrMaestro);
             
-            NSString *cardPan = card[@"cardPan"];
+            NSString *cardPan = card.pan;
             if(cardPan.length > 4){
                 cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
             }

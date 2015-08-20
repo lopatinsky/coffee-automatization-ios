@@ -11,8 +11,6 @@
 @interface DBModulesViewController ()
 @property (strong, nonatomic) UIScrollView *scrollView;
 
-@property (strong, nonatomic) NSMutableArray *modules;
-
 @end
 
 @implementation DBModulesViewController

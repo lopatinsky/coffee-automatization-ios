@@ -16,6 +16,8 @@ NSString * __nonnull const CoordinatorNotificationOrderShippingPrice = @"Coordin
 
 NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
 
+NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
+
 NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated = @"CoordinatorNotificationAddressSuggestionsUpdated";
 NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNotificationPromoUpdated";
 NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated = @"CoordinatorNotificationPersonalWalletBalanceUpdated";
@@ -115,6 +117,14 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
                 break;
         }
     }
+    
+    if([manager isKindOfClass:[OrderManager class]]){
+        switch (changeType) {
+            case OrderManagerChangePaymentType:
+                [self orderManagerDidChangePaymentType];
+                break;
+        }
+    }
 }
 
 - (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
@@ -134,62 +144,47 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
         [_promoManager flushCache];
     }
     
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderTotalPrice object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationOrderTotalPrice];
 }
 
 #pragma mark - DeliverySettings changes
 
 - (void)deliverySettingsNewTimeNotificationHandler:(NSNotification *)notification{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationNewSelectedTime object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationNewSelectedTime];
 }
 
 #pragma mark - ShippingManager changes
 
 - (void)shippingManagerNewSuggestionsNotificationHandler:(NSNotification *)notification{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationAddressSuggestionsUpdated object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationAddressSuggestionsUpdated];
 }
 
 #pragma mark - PromoManager changes
 
 - (void)promoManagerDidChangeDiscount{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderDiscount object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationOrderDiscount];
 }
 
 - (void)promoManagerDidChangeWalletDiscount{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderWalletDiscount object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationOrderWalletDiscount];
 }
 
 - (void)promoManagerDidChangeWalletBalance{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationPersonalWalletBalanceUpdated object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationPersonalWalletBalanceUpdated];
 }
 
 - (void)promoManagerDidChangeShippingPrice{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationOrderShippingPrice object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationOrderShippingPrice];
 }
 
 - (void)promoManagerDidUpdatePromoInfo{
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CoordinatorNotificationPromoUpdated object:nil]];
+    [self notifyObserverOf:CoordinatorNotificationPromoUpdated];
 }
 
+#pragma mark - OrderManager changes
 
-#pragma mark - Notifications subscription
-
-- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(NSString * __nonnull)keyName selector:(__nonnull SEL)selector {
-    [[NSNotificationCenter defaultCenter] addObserver:object selector:selector name:keyName object:nil];
-}
-
-- (void)addObserver:(NSObject * __nonnull)object withKeyPaths:(NSArray * __nonnull)keyNames selector:(__nonnull SEL)selector{
-    for(NSString *keyName in keyNames){
-        [self addObserver:object withKeyPath:keyName selector:selector];
-    }
-}
-
-- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(NSString * __nonnull)keyName {
-    [[NSNotificationCenter defaultCenter] removeObserver:observer name:keyName object:nil];
-}
-
-- (void)removeObserver:(NSObject * __nonnull)observer {
-    [[NSNotificationCenter defaultCenter] removeObserver:observer];
+- (void)orderManagerDidChangePaymentType{
+    [self notifyObserverOf:CoordinatorNotificationNewPaymentType];
 }
 
 #pragma mark - Manager Protocol

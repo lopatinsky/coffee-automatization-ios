@@ -7,13 +7,13 @@
 //
 
 #import "OrderManager.h"
+#import "OrderCoordinator.h"
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
 #import "Venue.h"
-#import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "DBAPIClient.h"
 #import "IHPaymentManager.h"
-#import "DBPromoManager.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfo.h"
 #import "ShippingManager.h"
@@ -56,14 +56,15 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:@(paymentType) forKey:kDBDefaultsPaymentType];
     [defaults synchronize];
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangePaymentType];
 }
 
 - (void)selectIfPossibleDefaultPaymentType{
     NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
     
     if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeCard)]){
-        NSDictionary *defaultCard = [[IHSecureStore sharedInstance] defaultCard];
-        if(defaultCard){
+        if([DBCardsManager sharedInstance].defaultCard){
             self.paymentType = PaymentTypeCard;
         }
     }

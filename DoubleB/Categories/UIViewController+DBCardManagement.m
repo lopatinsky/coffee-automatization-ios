@@ -9,6 +9,7 @@
 #import "UIViewController+DBCardManagement.h"
 #import "IHPaymentManager.h"
 #import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "DBClientInfo.h"
 
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -45,9 +46,9 @@ static NSString *screenIdentifier;
                                                   
                                                   /***** analytics *****/
                                                   
-                                                  NSUInteger cardsCount = [IHSecureStore sharedInstance].cardCount;
-                                                  NSArray *cards = [IHSecureStore sharedInstance].cards;
-                                                  NSString *cardType = [cards[cardsCount - 1][@"cardPan"] db_cardIssuer];
+                                                  NSUInteger cardsCount = [DBCardsManager sharedInstance].cardsCount;
+                                                  NSArray *cards = [DBCardsManager sharedInstance].cards;
+                                                  NSString *cardType = [((DBPaymentCard *)[cards lastObject]).pan db_cardIssuer];
                                                   
                                                   NSString *eventLabel = [NSString stringWithFormat:@"%@;%ld", cardType, (long)(cardsCount - 1)];
                                                   

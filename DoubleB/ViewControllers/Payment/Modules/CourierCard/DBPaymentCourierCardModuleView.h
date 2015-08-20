@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DBPaymentModuleView.h"
 
-@interface DBPaymentCashModuleView : DBPaymentModuleView
+@interface DBPaymentCourierCardModuleView : DBPaymentModuleView
 
 @end

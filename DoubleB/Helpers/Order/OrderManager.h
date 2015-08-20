@@ -19,6 +19,9 @@ extern NSString* const kDBDefaultsPaymentType;
 @class DBMenuBonusPosition;
 @class DBDeliverySettings;
 
+typedef NS_ENUM(NSInteger, OrderManagerChange) {
+    OrderManagerChangePaymentType = 0
+};
 
 /**
 * Manages order
