@@ -350,8 +350,6 @@
 		7E47E41B1B1DEBB2001432D9 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
 		7E47E41C1B1DEBB3001432D9 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
 		7E47E41D1B1DEBB4001432D9 /* DBDeliveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB136A851B0A1D8300B93178 /* DBDeliveryViewController.xib */; };
-		7E4BDF921B61666F0045F90F /* krasnoselskaya.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E4BDF901B61666F0045F90F /* krasnoselskaya.png */; };
-		7E4BDF931B6166700045F90F /* lublino.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E4BDF911B61666F0045F90F /* lublino.png */; };
 		7E5186271B4295A100A129EE /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
 		7E5186281B4295A200A129EE /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
 		7E5186291B4295A300A129EE /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E69DC631B32F18700CCCB31 /* DBCompaniesViewController.xib */; };
@@ -2461,6 +2459,8 @@
 		7EB2D5B01B3C5CD9009405C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A21B3C5CCE009405C6 /* InfoPlist.strings */; };
 		7EB2D5B11B3C5CEC009405C6 /* Images-RedCup.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */; };
 		7EB2D5B21B3C5CEF009405C6 /* RedCup-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */; };
+		7EB9119F1B861CF8005C1012 /* krasnoselskaya.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9119D1B861CF8005C1012 /* krasnoselskaya.png */; };
+		7EB911A01B861CF8005C1012 /* lublino.png in Resources */ = {isa = PBXBuildFile; fileRef = 7EB9119E1B861CF8005C1012 /* lublino.png */; };
 		7EDB58F21B32F70400723DF9 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		7EDB58F31B32F70400723DF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		7EDB58F41B32F70400723DF9 /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
@@ -8270,8 +8270,6 @@
 		7E3DAC1B1B06153E00A7FFD1 /* Farsh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Farsh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E47E40A1B1DD540001432D9 /* UIViewController+NavigationBarFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NavigationBarFix.h"; sourceTree = "<group>"; };
 		7E47E40B1B1DD540001432D9 /* UIViewController+NavigationBarFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NavigationBarFix.m"; sourceTree = "<group>"; };
-		7E4BDF901B61666F0045F90F /* krasnoselskaya.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = krasnoselskaya.png; path = ../../../../../../../../../../Desktop/krasnoselskaya.png; sourceTree = "<group>"; };
-		7E4BDF911B61666F0045F90F /* lublino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lublino.png; path = ../../../../../../../../../../Desktop/lublino.png; sourceTree = "<group>"; };
 		7E5186321B42965600A129EE /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7E5186331B42965600A129EE /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
 		7E5186341B42965600A129EE /* launch_667.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_667.png; sourceTree = "<group>"; };
@@ -8348,6 +8346,8 @@
 		7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-RedCup.xcassets"; sourceTree = "<group>"; };
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EB9119D1B861CF8005C1012 /* krasnoselskaya.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = krasnoselskaya.png; sourceTree = "<group>"; };
+		7EB9119E1B861CF8005C1012 /* lublino.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lublino.png; sourceTree = "<group>"; };
 		7EDB5A511B32F70400723DF9 /* FishRice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FishRice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDB5A5C1B32F79D00723DF9 /* CompanyInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CompanyInfo.plist; sourceTree = "<group>"; };
 		7EDB5A5E1B32F79D00723DF9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -9945,8 +9945,8 @@
 		7EDD12141B59472100091BB6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7E4BDF901B61666F0045F90F /* krasnoselskaya.png */,
-				7E4BDF911B61666F0045F90F /* lublino.png */,
+				7EB9119D1B861CF8005C1012 /* krasnoselskaya.png */,
+				7EB9119E1B861CF8005C1012 /* lublino.png */,
 				7EDD12151B59472100091BB6 /* launch_480.png */,
 				7EDD12161B59472100091BB6 /* launch_568.png */,
 				7EDD12171B59472100091BB6 /* launch_667.png */,
@@ -13260,7 +13260,7 @@
 				7EDB59871B32F70400723DF9 /* orders_icon_grey.png in Resources */,
 				7EDB5A6F1B32FD6400723DF9 /* DBCompaniesViewController.xib in Resources */,
 				7EDB59881B32F70400723DF9 /* Localizable.strings in Resources */,
-				7E4BDF921B61666F0045F90F /* krasnoselskaya.png in Resources */,
+				7EB9119F1B861CF8005C1012 /* krasnoselskaya.png in Resources */,
 				7EDB59891B32F70400723DF9 /* tick@2x.png in Resources */,
 				7EDB598A1B32F70400723DF9 /* menu_icon_grey@2x.png in Resources */,
 				7EDD121C1B59472100091BB6 /* launch_736.png in Resources */,
@@ -13301,7 +13301,7 @@
 				7EDB59AF1B32F70400723DF9 /* mug_orders_gray@2x.png in Resources */,
 				7EDB59B01B32F70400723DF9 /* SDK-Database.bundle in Resources */,
 				7EDB59B11B32F70400723DF9 /* modifier_minus_icon@2x.png in Resources */,
-				7E4BDF931B6166700045F90F /* lublino.png in Resources */,
+				7EB911A01B861CF8005C1012 /* lublino.png in Resources */,
 				7EDB59B21B32F70400723DF9 /* noimage_icon@2x.png in Resources */,
 				7EDB59B31B32F70400723DF9 /* alerts@2x.png in Resources */,
 				7EDB59B41B32F70400723DF9 /* 150.png in Resources */,
