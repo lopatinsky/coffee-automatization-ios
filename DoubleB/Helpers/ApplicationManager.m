@@ -40,7 +40,7 @@
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     NSString *storedBuildNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"STORED_BUILD_NUMBER"] ?: @"0";
     if (forceCopy || [buildNumber compare:storedBuildNumber] == NSOrderedDescending) {
-        [ApplicationManager copyFileWithName:plistName withExtension:@"plist"];
+        [ApplicationManager copyPlistContent:[ApplicationManager getPlistContent:@"CompanyInfo"] withName:@"CompanyInfo"];
         [[NSUserDefaults standardUserDefaults] setObject:buildNumber forKey:@"STORED_BUILD_NUMBER"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
@@ -52,16 +52,24 @@
     }];
 }
 
-+ (void)copyFileWithName:(nonnull NSString *)fileName withExtension:(nonnull NSString *)extension {
++ (void)copyPlistContent:(NSDictionary *)content withName:(NSString *)name {
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *directory = [paths firstObject];
-    NSString *path = [directory stringByAppendingPathComponent:[fileName stringByAppendingString:[NSString stringWithFormat:@".%@", extension]]];
-    NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:fileName ofType:extension];
-    if (pathToPlist) {
-        [fileManager copyItemAtPath:pathToPlist toPath:path error:&error];
+    NSString *plistPath = [directory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.plist", name]];
+    
+    if (![fileManager fileExistsAtPath:plistPath]) {
+        NSString *bundle = [[NSBundle mainBundle] pathForResource:name ofType:@"plist"];
+        [fileManager copyItemAtPath:bundle toPath:plistPath error:&error];
     }
+    [content writeToFile:plistPath atomically:YES];
+}
+
++ (NSMutableDictionary *)getPlistContent:(NSString *)name {
+    NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:name ofType:@",plist"];
+    NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:pathToPlist];
+    return [[NSMutableDictionary alloc] initWithDictionary:plistDict];
 }
 
 @end
