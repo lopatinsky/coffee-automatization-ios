@@ -12,9 +12,9 @@
 
 + (NSString *)valueFromPropertyListByKey:(NSString *)key {
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:@"AppConfiguration.plist"];
-    NSDictionary *viewControllersConfig = [NSDictionary dictionaryWithContentsOfFile:path];
-    return [viewControllersConfig objectForKey:key];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    return [[companyInfo objectForKey:@"AppConfiguration"] objectForKey:key];
 }
 
 + (NSDictionary *)menuIconsConentModes {
