@@ -105,7 +105,6 @@
 		7E3DAB201B06153E00A7FFD1 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7E3DAB211B06153E00A7FFD1 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7E3DAB221B06153E00A7FFD1 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7E3DAB241B06153E00A7FFD1 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7E3DAB251B06153E00A7FFD1 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7E3DAB261B06153E00A7FFD1 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7E3DAB271B06153E00A7FFD1 /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
@@ -452,7 +451,6 @@
 		7E79255E1B3C1BDA00CA740D /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7E79255F1B3C1BDA00CA740D /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7E7925601B3C1BDA00CA740D /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7E7925611B3C1BDA00CA740D /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7E7925621B3C1BDA00CA740D /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7E7925631B3C1BDA00CA740D /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7E7925641B3C1BDA00CA740D /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -783,7 +781,6 @@
 		7E7926E01B3C247D00CA740D /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7E7926E11B3C247D00CA740D /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7E7926E21B3C247D00CA740D /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7E7926E31B3C247D00CA740D /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7E7926E41B3C247D00CA740D /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7E7926E51B3C247D00CA740D /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7E7926E61B3C247D00CA740D /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -1128,7 +1125,6 @@
 		7E8BD5E81B5027AA00CAFD5C /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7E8BD5E91B5027AA00CAFD5C /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7E8BD5EA1B5027AA00CAFD5C /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7E8BD5EB1B5027AA00CAFD5C /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7E8BD5EC1B5027AA00CAFD5C /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7E8BD5ED1B5027AA00CAFD5C /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7E8BD5EE1B5027AA00CAFD5C /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -1538,7 +1534,6 @@
 		7EB2D1A51B3C3581009405C6 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7EB2D1A61B3C3581009405C6 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7EB2D1A71B3C3581009405C6 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7EB2D1A81B3C3581009405C6 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7EB2D1A91B3C3581009405C6 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7EB2D1AA1B3C3581009405C6 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7EB2D1AB1B3C3581009405C6 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -1869,7 +1864,6 @@
 		7EB2D3141B3C51A2009405C6 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7EB2D3151B3C51A2009405C6 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7EB2D3161B3C51A2009405C6 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7EB2D3171B3C51A2009405C6 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7EB2D3181B3C51A2009405C6 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7EB2D3191B3C51A2009405C6 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7EB2D31A1B3C51A2009405C6 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -2200,7 +2194,6 @@
 		7EB2D4841B3C5C77009405C6 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7EB2D4851B3C5C77009405C6 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7EB2D4861B3C5C77009405C6 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7EB2D4871B3C5C77009405C6 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7EB2D4881B3C5C77009405C6 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7EB2D4891B3C5C77009405C6 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7EB2D48A1B3C5C77009405C6 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -2529,7 +2522,6 @@
 		7EDB59381B32F70400723DF9 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		7EDB59391B32F70400723DF9 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		7EDB593A1B32F70400723DF9 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		7EDB593C1B32F70400723DF9 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		7EDB593D1B32F70400723DF9 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		7EDB593E1B32F70400723DF9 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		7EDB593F1B32F70400723DF9 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -2922,7 +2914,6 @@
 		CB14312B1B0E371A00DD50C7 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB14312C1B0E371A00DD50C7 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB14312D1B0E371A00DD50C7 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB14312F1B0E371A00DD50C7 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB1431301B0E371A00DD50C7 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB1431311B0E371A00DD50C7 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB1431321B0E371A00DD50C7 /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
@@ -3224,7 +3215,6 @@
 		CB14328F1B0F1BBB00DD50C7 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB1432901B0F1BBB00DD50C7 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB1432911B0F1BBB00DD50C7 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB1432931B0F1BBB00DD50C7 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB1432941B0F1BBB00DD50C7 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB1432951B0F1BBB00DD50C7 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB1432961B0F1BBB00DD50C7 /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
@@ -3533,7 +3523,6 @@
 		CB1AF7A41AE10E6900FA3224 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB1AF7A51AE10E6900FA3224 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB1AF7A61AE10E6900FA3224 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB1AF7A81AE10E6900FA3224 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB1AF7A91AE10E6900FA3224 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB1AF7AA1AE10E6900FA3224 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB1AF7AB1AE10E6900FA3224 /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
@@ -3813,7 +3802,6 @@
 		CB3BA31D1B20589300F320CA /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB3BA31E1B20589300F320CA /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB3BA31F1B20589300F320CA /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB3BA3211B20589300F320CA /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB3BA3221B20589300F320CA /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB3BA3231B20589300F320CA /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB3BA3241B20589300F320CA /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
@@ -4140,7 +4128,6 @@
 		CB517B7D1AEFB6B500A50F5C /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB517B7E1AEFB6B500A50F5C /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB517B7F1AEFB6B500A50F5C /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB517B811AEFB6B500A50F5C /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB517B821AEFB6B500A50F5C /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB517B831AEFB6B500A50F5C /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB517B841AEFB6B500A50F5C /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
@@ -4459,7 +4446,6 @@
 		CB5AFC661B27209A00904BF7 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB5AFC671B27209A00904BF7 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB5AFC681B27209A00904BF7 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB5AFC6A1B27209A00904BF7 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB5AFC6B1B27209A00904BF7 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB5AFC6C1B27209A00904BF7 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB5AFC6D1B27209A00904BF7 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -4756,7 +4742,6 @@
 		CB60C0D91AC5AD2600D5E962 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB60C0DA1AC5AD2600D5E962 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB60C0DB1AC5AD2600D5E962 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB60C0DD1AC5AD2600D5E962 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB60C0DF1AC5AD2600D5E962 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB60C0E01AC5AD2600D5E962 /* NSMethodSignature+EXT.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FF51A97761C008DC988 /* NSMethodSignature+EXT.m */; };
 		CB60C0E11AC5AD2600D5E962 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C31074196C9B2300C1D23B /* UIImage+ImageEffects.m */; };
@@ -5255,7 +5240,6 @@
 		CB64FE451B317F760011CEEC /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB64FE461B317F760011CEEC /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB64FE471B317F760011CEEC /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB64FE491B317F760011CEEC /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB64FE4A1B317F760011CEEC /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB64FE4B1B317F760011CEEC /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB64FE4C1B317F760011CEEC /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -5596,7 +5580,6 @@
 		CB64FFF31B31B7CF0011CEEC /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB64FFF41B31B7CF0011CEEC /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB64FFF51B31B7CF0011CEEC /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB64FFF71B31B7CF0011CEEC /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB64FFF81B31B7CF0011CEEC /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB64FFF91B31B7CF0011CEEC /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB64FFFA1B31B7CF0011CEEC /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -5824,7 +5807,6 @@
 		CB8200D81B46CBB4000BBE55 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB8200D91B46CBB4000BBE55 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB8200DA1B46CBB4000BBE55 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB8200DB1B46CBB4000BBE55 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB8200DC1B46CBB4000BBE55 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB8200DD1B46CBB4000BBE55 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB8200DE1B46CBB4000BBE55 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -6159,7 +6141,6 @@
 		CB82FC161B442C70000BBE55 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB82FC171B442C70000BBE55 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB82FC181B442C70000BBE55 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB82FC191B442C70000BBE55 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB82FC1A1B442C70000BBE55 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB82FC1B1B442C70000BBE55 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB82FC1C1B442C70000BBE55 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -6590,7 +6571,6 @@
 		CB82FDF61B4464F6000BBE55 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB82FDF71B4464F6000BBE55 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB82FDF81B4464F6000BBE55 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB82FDF91B4464F6000BBE55 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB82FDFA1B4464F6000BBE55 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB82FDFB1B4464F6000BBE55 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB82FDFC1B4464F6000BBE55 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -6926,7 +6906,6 @@
 		CB82FF671B4579B5000BBE55 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB82FF681B4579B5000BBE55 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CB82FF691B4579B5000BBE55 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CB82FF6A1B4579B5000BBE55 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CB82FF6B1B4579B5000BBE55 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CB82FF6C1B4579B5000BBE55 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CB82FF6D1B4579B5000BBE55 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -7284,7 +7263,6 @@
 		CBD0C5181B30724300DAD042 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CBD0C5191B30724300DAD042 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CBD0C51A1B30724300DAD042 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CBD0C51C1B30724300DAD042 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CBD0C51D1B30724300DAD042 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CBD0C51E1B30724300DAD042 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CBD0C51F1B30724300DAD042 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -7630,7 +7608,6 @@
 		CBD2EAFA1B2A07D000E4AAA1 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CBD2EAFB1B2A07D000E4AAA1 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CBD2EAFC1B2A07D000E4AAA1 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CBD2EAFE1B2A07D000E4AAA1 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CBD2EAFF1B2A07D000E4AAA1 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CBD2EB001B2A07D000E4AAA1 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CBD2EB011B2A07D000E4AAA1 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -7956,7 +7933,6 @@
 		CBDC79CA1B42AFC700935328 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CBDC79CB1B42AFC700935328 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
 		CBDC79CC1B42AFC700935328 /* Venue.m in Sources */ = {isa = PBXBuildFile; fileRef = D55629A8198A82D2000F8D82 /* Venue.m */; };
-		CBDC79CD1B42AFC700935328 /* IHPaymentClient.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B71E91DDFE98AE285B80 /* IHPaymentClient.m */; };
 		CBDC79CE1B42AFC700935328 /* IHPaymentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B6A835949DAF39FEE9E8 /* IHPaymentManager.m */; };
 		CBDC79CF1B42AFC700935328 /* DBPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB715AE51ACEA40C00EA84FC /* DBPositionViewController.m */; };
 		CBDC79D01B42AFC700935328 /* DBNewOrderItemErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB59CE011B21F7CB00E9DD30 /* DBNewOrderItemErrorView.m */; };
@@ -17839,7 +17815,6 @@
 				7E3DAB201B06153E00A7FFD1 /* DBTabBarController.m in Sources */,
 				7E3DAB211B06153E00A7FFD1 /* IHSecureStore.m in Sources */,
 				7E3DAB221B06153E00A7FFD1 /* Venue.m in Sources */,
-				7E3DAB241B06153E00A7FFD1 /* IHPaymentClient.m in Sources */,
 				7E3DAB251B06153E00A7FFD1 /* IHPaymentManager.m in Sources */,
 				7E3DAB261B06153E00A7FFD1 /* DBPositionViewController.m in Sources */,
 				7E3DAB271B06153E00A7FFD1 /* NSMethodSignature+EXT.m in Sources */,
@@ -17964,7 +17939,6 @@
 				7EDD12071B590C1500091BB6 /* PositionCollectionViewCell.m in Sources */,
 				7E79255F1B3C1BDA00CA740D /* IHSecureStore.m in Sources */,
 				7E7925601B3C1BDA00CA740D /* Venue.m in Sources */,
-				7E7925611B3C1BDA00CA740D /* IHPaymentClient.m in Sources */,
 				7E7925621B3C1BDA00CA740D /* IHPaymentManager.m in Sources */,
 				7E7925631B3C1BDA00CA740D /* DBPositionViewController.m in Sources */,
 				7E7925641B3C1BDA00CA740D /* DBNewOrderItemErrorView.m in Sources */,
@@ -18096,7 +18070,6 @@
 				7EDD12061B590C1500091BB6 /* PositionCollectionViewCell.m in Sources */,
 				7E7926E11B3C247D00CA740D /* IHSecureStore.m in Sources */,
 				7E7926E21B3C247D00CA740D /* Venue.m in Sources */,
-				7E7926E31B3C247D00CA740D /* IHPaymentClient.m in Sources */,
 				7E7926E41B3C247D00CA740D /* IHPaymentManager.m in Sources */,
 				7E7926E51B3C247D00CA740D /* DBPositionViewController.m in Sources */,
 				7E7926E61B3C247D00CA740D /* DBNewOrderItemErrorView.m in Sources */,
@@ -18228,7 +18201,6 @@
 				7E8BD5E81B5027AA00CAFD5C /* DBTabBarController.m in Sources */,
 				7E8BD5E91B5027AA00CAFD5C /* IHSecureStore.m in Sources */,
 				7E8BD5EA1B5027AA00CAFD5C /* Venue.m in Sources */,
-				7E8BD5EB1B5027AA00CAFD5C /* IHPaymentClient.m in Sources */,
 				7E8BD5EC1B5027AA00CAFD5C /* IHPaymentManager.m in Sources */,
 				7E8BD5ED1B5027AA00CAFD5C /* DBPositionViewController.m in Sources */,
 				7E8BD5EE1B5027AA00CAFD5C /* DBNewOrderItemErrorView.m in Sources */,
@@ -18359,7 +18331,6 @@
 				7EDD12051B590C1400091BB6 /* PositionCollectionViewCell.m in Sources */,
 				7EB2D1A61B3C3581009405C6 /* IHSecureStore.m in Sources */,
 				7EB2D1A71B3C3581009405C6 /* Venue.m in Sources */,
-				7EB2D1A81B3C3581009405C6 /* IHPaymentClient.m in Sources */,
 				7EB2D1A91B3C3581009405C6 /* IHPaymentManager.m in Sources */,
 				7EB2D1AA1B3C3581009405C6 /* DBPositionViewController.m in Sources */,
 				7EB2D1AB1B3C3581009405C6 /* DBNewOrderItemErrorView.m in Sources */,
@@ -18491,7 +18462,6 @@
 				7EDD12041B590C1400091BB6 /* PositionCollectionViewCell.m in Sources */,
 				7EB2D3151B3C51A2009405C6 /* IHSecureStore.m in Sources */,
 				7EB2D3161B3C51A2009405C6 /* Venue.m in Sources */,
-				7EB2D3171B3C51A2009405C6 /* IHPaymentClient.m in Sources */,
 				7EB2D3181B3C51A2009405C6 /* IHPaymentManager.m in Sources */,
 				7EB2D3191B3C51A2009405C6 /* DBPositionViewController.m in Sources */,
 				7EB2D31A1B3C51A2009405C6 /* DBNewOrderItemErrorView.m in Sources */,
@@ -18623,7 +18593,6 @@
 				7EDD12031B590C1300091BB6 /* PositionCollectionViewCell.m in Sources */,
 				7EB2D4851B3C5C77009405C6 /* IHSecureStore.m in Sources */,
 				7EB2D4861B3C5C77009405C6 /* Venue.m in Sources */,
-				7EB2D4871B3C5C77009405C6 /* IHPaymentClient.m in Sources */,
 				7EB2D4881B3C5C77009405C6 /* IHPaymentManager.m in Sources */,
 				7EB2D4891B3C5C77009405C6 /* DBPositionViewController.m in Sources */,
 				7EB2D48A1B3C5C77009405C6 /* DBNewOrderItemErrorView.m in Sources */,
@@ -18755,7 +18724,6 @@
 				7EDD12081B590C1600091BB6 /* PositionCollectionViewCell.m in Sources */,
 				7EDB59391B32F70400723DF9 /* IHSecureStore.m in Sources */,
 				7EDB593A1B32F70400723DF9 /* Venue.m in Sources */,
-				7EDB593C1B32F70400723DF9 /* IHPaymentClient.m in Sources */,
 				7EDB593D1B32F70400723DF9 /* IHPaymentManager.m in Sources */,
 				7EDB593E1B32F70400723DF9 /* DBPositionViewController.m in Sources */,
 				7EDB593F1B32F70400723DF9 /* DBNewOrderItemErrorView.m in Sources */,
@@ -18889,7 +18857,6 @@
 				CB14312C1B0E371A00DD50C7 /* IHSecureStore.m in Sources */,
 				CB1433A81B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
 				CB14312D1B0E371A00DD50C7 /* Venue.m in Sources */,
-				CB14312F1B0E371A00DD50C7 /* IHPaymentClient.m in Sources */,
 				CB1431301B0E371A00DD50C7 /* IHPaymentManager.m in Sources */,
 				7E47E4121B1DEBA7001432D9 /* DBDeliveryViewController.m in Sources */,
 				CB1431311B0E371A00DD50C7 /* DBPositionViewController.m in Sources */,
@@ -19022,7 +18989,6 @@
 				CB1432901B0F1BBB00DD50C7 /* IHSecureStore.m in Sources */,
 				7E21EC021B28542D00AF7859 /* DBAddressViewController.m in Sources */,
 				CB1432911B0F1BBB00DD50C7 /* Venue.m in Sources */,
-				CB1432931B0F1BBB00DD50C7 /* IHPaymentClient.m in Sources */,
 				CB1432941B0F1BBB00DD50C7 /* IHPaymentManager.m in Sources */,
 				CB1432951B0F1BBB00DD50C7 /* DBPositionViewController.m in Sources */,
 				CB59CE131B22045700E9DD30 /* DBNewOrderItemErrorView.m in Sources */,
@@ -19156,7 +19122,6 @@
 				CB1AF7A41AE10E6900FA3224 /* DBTabBarController.m in Sources */,
 				CB1AF7A51AE10E6900FA3224 /* IHSecureStore.m in Sources */,
 				CB1AF7A61AE10E6900FA3224 /* Venue.m in Sources */,
-				CB1AF7A81AE10E6900FA3224 /* IHPaymentClient.m in Sources */,
 				CB1AF7A91AE10E6900FA3224 /* IHPaymentManager.m in Sources */,
 				CB1AF7AA1AE10E6900FA3224 /* DBPositionViewController.m in Sources */,
 				CB1AF7AB1AE10E6900FA3224 /* NSMethodSignature+EXT.m in Sources */,
@@ -19283,7 +19248,6 @@
 				CB3BA31D1B20589300F320CA /* DBTabBarController.m in Sources */,
 				CB3BA31E1B20589300F320CA /* IHSecureStore.m in Sources */,
 				CB3BA31F1B20589300F320CA /* Venue.m in Sources */,
-				CB3BA3211B20589300F320CA /* IHPaymentClient.m in Sources */,
 				CB3BA3221B20589300F320CA /* IHPaymentManager.m in Sources */,
 				CB3BA3231B20589300F320CA /* DBPositionViewController.m in Sources */,
 				CB59CE141B22045700E9DD30 /* DBNewOrderItemErrorView.m in Sources */,
@@ -19418,7 +19382,6 @@
 				CB517B7D1AEFB6B500A50F5C /* DBTabBarController.m in Sources */,
 				CB517B7E1AEFB6B500A50F5C /* IHSecureStore.m in Sources */,
 				CB517B7F1AEFB6B500A50F5C /* Venue.m in Sources */,
-				CB517B811AEFB6B500A50F5C /* IHPaymentClient.m in Sources */,
 				CB517B821AEFB6B500A50F5C /* IHPaymentManager.m in Sources */,
 				CB517B831AEFB6B500A50F5C /* DBPositionViewController.m in Sources */,
 				CB517B841AEFB6B500A50F5C /* NSMethodSignature+EXT.m in Sources */,
@@ -19545,7 +19508,6 @@
 				CB5AFC661B27209A00904BF7 /* DBTabBarController.m in Sources */,
 				CB5AFC671B27209A00904BF7 /* IHSecureStore.m in Sources */,
 				CB5AFC681B27209A00904BF7 /* Venue.m in Sources */,
-				CB5AFC6A1B27209A00904BF7 /* IHPaymentClient.m in Sources */,
 				CB5AFC6B1B27209A00904BF7 /* IHPaymentManager.m in Sources */,
 				CB5AFC6C1B27209A00904BF7 /* DBPositionViewController.m in Sources */,
 				CB5AFC6D1B27209A00904BF7 /* DBNewOrderItemErrorView.m in Sources */,
@@ -19678,7 +19640,6 @@
 				CB60C0D91AC5AD2600D5E962 /* DBTabBarController.m in Sources */,
 				CB60C0DA1AC5AD2600D5E962 /* IHSecureStore.m in Sources */,
 				CB60C0DB1AC5AD2600D5E962 /* Venue.m in Sources */,
-				CB60C0DD1AC5AD2600D5E962 /* IHPaymentClient.m in Sources */,
 				CB60C0DF1AC5AD2600D5E962 /* IHPaymentManager.m in Sources */,
 				CB715AE71ACEA40C00EA84FC /* DBPositionViewController.m in Sources */,
 				CB60C0E01AC5AD2600D5E962 /* NSMethodSignature+EXT.m in Sources */,
@@ -19807,7 +19768,6 @@
 				CB64FE451B317F760011CEEC /* DBTabBarController.m in Sources */,
 				CB64FE461B317F760011CEEC /* IHSecureStore.m in Sources */,
 				CB64FE471B317F760011CEEC /* Venue.m in Sources */,
-				CB64FE491B317F760011CEEC /* IHPaymentClient.m in Sources */,
 				CB64FE4A1B317F760011CEEC /* IHPaymentManager.m in Sources */,
 				CB64FE4B1B317F760011CEEC /* DBPositionViewController.m in Sources */,
 				CB64FE4C1B317F760011CEEC /* DBNewOrderItemErrorView.m in Sources */,
@@ -19937,7 +19897,6 @@
 				7EDD12091B590C1600091BB6 /* PositionCollectionViewCell.m in Sources */,
 				CB64FFF41B31B7CF0011CEEC /* IHSecureStore.m in Sources */,
 				CB64FFF51B31B7CF0011CEEC /* Venue.m in Sources */,
-				CB64FFF71B31B7CF0011CEEC /* IHPaymentClient.m in Sources */,
 				CB64FFF81B31B7CF0011CEEC /* IHPaymentManager.m in Sources */,
 				CB64FFF91B31B7CF0011CEEC /* DBPositionViewController.m in Sources */,
 				CB64FFFA1B31B7CF0011CEEC /* DBNewOrderItemErrorView.m in Sources */,
@@ -20069,7 +20028,6 @@
 				CB8200D81B46CBB4000BBE55 /* DBTabBarController.m in Sources */,
 				CB8200D91B46CBB4000BBE55 /* IHSecureStore.m in Sources */,
 				CB8200DA1B46CBB4000BBE55 /* Venue.m in Sources */,
-				CB8200DB1B46CBB4000BBE55 /* IHPaymentClient.m in Sources */,
 				CB8200DC1B46CBB4000BBE55 /* IHPaymentManager.m in Sources */,
 				CB8200DD1B46CBB4000BBE55 /* DBPositionViewController.m in Sources */,
 				CB8200DE1B46CBB4000BBE55 /* DBNewOrderItemErrorView.m in Sources */,
@@ -20200,7 +20158,6 @@
 				CB82FC161B442C70000BBE55 /* DBTabBarController.m in Sources */,
 				CB82FC171B442C70000BBE55 /* IHSecureStore.m in Sources */,
 				CB82FC181B442C70000BBE55 /* Venue.m in Sources */,
-				CB82FC191B442C70000BBE55 /* IHPaymentClient.m in Sources */,
 				CB82FC1A1B442C70000BBE55 /* IHPaymentManager.m in Sources */,
 				CB82FC1B1B442C70000BBE55 /* DBPositionViewController.m in Sources */,
 				CB82FC1C1B442C70000BBE55 /* DBNewOrderItemErrorView.m in Sources */,
@@ -20331,7 +20288,6 @@
 				CB82FDF61B4464F6000BBE55 /* DBTabBarController.m in Sources */,
 				CB82FDF71B4464F6000BBE55 /* IHSecureStore.m in Sources */,
 				CB82FDF81B4464F6000BBE55 /* Venue.m in Sources */,
-				CB82FDF91B4464F6000BBE55 /* IHPaymentClient.m in Sources */,
 				CB82FDFA1B4464F6000BBE55 /* IHPaymentManager.m in Sources */,
 				CB82FDFB1B4464F6000BBE55 /* DBPositionViewController.m in Sources */,
 				CB82FDFC1B4464F6000BBE55 /* DBNewOrderItemErrorView.m in Sources */,
@@ -20462,7 +20418,6 @@
 				CB82FF671B4579B5000BBE55 /* DBTabBarController.m in Sources */,
 				CB82FF681B4579B5000BBE55 /* IHSecureStore.m in Sources */,
 				CB82FF691B4579B5000BBE55 /* Venue.m in Sources */,
-				CB82FF6A1B4579B5000BBE55 /* IHPaymentClient.m in Sources */,
 				CB82FF6B1B4579B5000BBE55 /* IHPaymentManager.m in Sources */,
 				CB82FF6C1B4579B5000BBE55 /* DBPositionViewController.m in Sources */,
 				CB82FF6D1B4579B5000BBE55 /* DBNewOrderItemErrorView.m in Sources */,
@@ -20593,7 +20548,6 @@
 				7EDD120B1B590C1800091BB6 /* PositionCollectionViewCell.m in Sources */,
 				CBD0C5191B30724300DAD042 /* IHSecureStore.m in Sources */,
 				CBD0C51A1B30724300DAD042 /* Venue.m in Sources */,
-				CBD0C51C1B30724300DAD042 /* IHPaymentClient.m in Sources */,
 				CBD0C51D1B30724300DAD042 /* IHPaymentManager.m in Sources */,
 				CBD0C51E1B30724300DAD042 /* DBPositionViewController.m in Sources */,
 				CBD0C51F1B30724300DAD042 /* DBNewOrderItemErrorView.m in Sources */,
@@ -20726,7 +20680,6 @@
 				CBD2EAFA1B2A07D000E4AAA1 /* DBTabBarController.m in Sources */,
 				CBD2EAFB1B2A07D000E4AAA1 /* IHSecureStore.m in Sources */,
 				CBD2EAFC1B2A07D000E4AAA1 /* Venue.m in Sources */,
-				CBD2EAFE1B2A07D000E4AAA1 /* IHPaymentClient.m in Sources */,
 				CBD2EAFF1B2A07D000E4AAA1 /* IHPaymentManager.m in Sources */,
 				CBD2EB001B2A07D000E4AAA1 /* DBPositionViewController.m in Sources */,
 				CBD2EB011B2A07D000E4AAA1 /* DBNewOrderItemErrorView.m in Sources */,
@@ -20855,7 +20808,6 @@
 				CBDC79CA1B42AFC700935328 /* DBTabBarController.m in Sources */,
 				CBDC79CB1B42AFC700935328 /* IHSecureStore.m in Sources */,
 				CBDC79CC1B42AFC700935328 /* Venue.m in Sources */,
-				CBDC79CD1B42AFC700935328 /* IHPaymentClient.m in Sources */,
 				CBDC79CE1B42AFC700935328 /* IHPaymentManager.m in Sources */,
 				CBDC79CF1B42AFC700935328 /* DBPositionViewController.m in Sources */,
 				CBDC79D01B42AFC700935328 /* DBNewOrderItemErrorView.m in Sources */,
@@ -21835,7 +21787,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -21850,7 +21802,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = FishRice;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4ce4df6b-23b8-46db-8645-592feedef37a";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "DoubleB-Swift.h";

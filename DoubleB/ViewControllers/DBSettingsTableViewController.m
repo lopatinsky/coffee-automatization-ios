@@ -106,9 +106,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         }
     } failure:^(NSError *error) {
         
-    }];
-
-    // Personal wallet item
+    }];    // Personal wallet item
     if([DBPromoManager sharedManager].walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
                                         @"image": @"payment"}];
