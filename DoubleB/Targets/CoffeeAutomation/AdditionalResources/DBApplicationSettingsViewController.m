@@ -59,7 +59,7 @@
         NSDictionary *companyDict = [NSDictionary dictionaryWithContentsOfFile:path];
         
         NSMutableDictionary *companyInfo = [[NSMutableDictionary alloc] initWithDictionary:companyDict];
-        companyInfo[@"BaseUrl"] = [NSString stringWithFormat:@"%@/", appUrl];
+        companyInfo[@"Preferences"][@"BaseUrl"] = [NSString stringWithFormat:@"%@/", appUrl];
         
         [companyInfo writeToFile:path atomically:NO];
         

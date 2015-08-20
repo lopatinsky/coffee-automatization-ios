@@ -14,9 +14,9 @@
 
 + (nullable NSString *)valueFromPropertyListByKey:(nonnull NSString *)key {
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
-    NSDictionary *viewControllersConfig = [NSDictionary dictionaryWithContentsOfFile:path];
-    return [viewControllersConfig objectForKey:key];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    return [[companyInfo objectForKey:@"ViewControllers"] objectForKey:key];
 }
 
 @end
@@ -37,7 +37,7 @@
              };
 }
 
-+ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController{
     NSString *menuControllersMode = [self valueFromPropertyListByKey:@"MenuViewControllers"];
     if([menuControllersMode isEqualToString:@"Nested"]){
         return [self categoriesViewController];
@@ -46,17 +46,17 @@
     }
 }
 
-+ (Class<MenuListViewControllerProtocol> __nonnull)categoriesViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)categoriesViewController{
     Class<MenuListViewControllerProtocol> categoriesVCClass = [CategoriesTVController class];
     return categoriesVCClass;
 }
 
-+ (Class<MenuListViewControllerProtocol> __nonnull)positionsViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)positionsViewController{
     Class<MenuListViewControllerProtocol> positionsVCClass = [PositionsTVController class];
     return positionsVCClass;
 }
 
-+ (Class<MenuListViewControllerProtocol> __nonnull)categoriesAndPositionsViewController {
++ (nonnull Class<MenuListViewControllerProtocol>)categoriesAndPositionsViewController {
     Class<MenuListViewControllerProtocol> catAndPosVCClass = [self categoriesAndPositionsMenuViewControllerClasses][[self valueFromPropertyListByKey:@"MenuPositions"] ?: @"default"];
     return catAndPosVCClass;
 }
@@ -78,7 +78,7 @@
 }
 
 
-+ (__nonnull Class<PositionViewControllerProtocol>)positionViewController {
++ (nonnull Class<PositionViewControllerProtocol>)positionViewController {
     return [self positionViewControllerClasses][[self valueFromPropertyListByKey:@"Position"] ?: @"default"];
 }
 
