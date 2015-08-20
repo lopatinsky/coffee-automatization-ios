@@ -2142,6 +2142,41 @@
 		7EB2D5B01B3C5CD9009405C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A21B3C5CCE009405C6 /* InfoPlist.strings */; };
 		7EB2D5B11B3C5CEC009405C6 /* Images-RedCup.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */; };
 		7EB2D5B21B3C5CEF009405C6 /* RedCup-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */; };
+		7EB911211B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911221B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911231B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911241B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911251B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911261B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911271B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911281B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911291B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112A1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112B1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112C1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112D1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112E1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9112F1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911301B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911311B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911321B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911331B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911341B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911351B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911361B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911371B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911381B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911391B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113A1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113B1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113C1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113D1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113E1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB9113F1B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911401B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911411B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911421B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
+		7EB911431B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB9116F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
 		7EB911701B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
 		7EB911711B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9116E1B84DACB005C1012 /* NSDictionary+DeepMerge.m */; };
@@ -2181,150 +2216,6 @@
 		7EB911991B86094D005C1012 /* Module.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911961B86094D005C1012 /* Module.m */; };
 		7EB9119A1B86094D005C1012 /* ModuleManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911971B86094D005C1012 /* ModuleManagerTests.m */; };
 		7EB9119C1B860994005C1012 /* ApplicationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB9119B1B860994005C1012 /* ApplicationManagerTests.m */; };
-		7EB911AA1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911AB1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911AC1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911AD1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911AE1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911AF1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B01B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B11B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B21B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B31B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B41B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B51B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B61B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B71B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B81B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911B91B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911BA1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911BB1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911BC1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911BD1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911BE1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911BF1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C01B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C11B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C21B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C31B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C41B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C51B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C61B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C71B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C81B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911C91B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911CA1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911CB1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911CC1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911CD1B861ECF005C1012 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A31B861ECF005C1012 /* ViewControllerManager.m */; };
-		7EB911CE1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911CF1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D01B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D11B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D21B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D31B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D41B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D51B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D61B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D71B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D81B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911D91B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911DA1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911DB1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911DC1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911DD1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911DE1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911DF1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E01B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E11B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E21B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E31B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E41B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E51B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E61B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E71B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E81B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911E91B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911EA1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911EB1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911EC1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911ED1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911EE1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911EF1B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911F01B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911F11B861ECF005C1012 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A51B861ECF005C1012 /* ApplicationManager.m */; };
-		7EB911F21B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F31B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F41B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F51B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F61B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F71B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F81B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911F91B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911FA1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911FB1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911FC1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911FD1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911FE1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB911FF1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912001B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912011B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912021B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912031B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912041B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912051B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912061B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912071B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912081B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912091B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB9120A1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB9120B1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB9120C1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB9120D1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB9120E1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB9120F1B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912101B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912111B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912121B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912131B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912141B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912151B861ECF005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A71B861ECF005C1012 /* ModuleManager.m */; };
-		7EB912161B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912171B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912181B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912191B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9121A1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9121B1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9121C1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9121D1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9121E1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9121F1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912201B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912211B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912221B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912231B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912241B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912251B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912261B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912271B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912281B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912291B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9122A1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9122B1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9122C1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9122D1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9122E1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB9122F1B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912301B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912311B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912321B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912331B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912341B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912351B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912361B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912371B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912381B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
-		7EB912391B861ECF005C1012 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911A91B861ECF005C1012 /* ViewManager.m */; };
 		7ED4BC9A1B5EB64B00280D74 /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		7ED4BC9B1B5EB64B00280D74 /* DBPayPalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3BA44B1B20B2FA00F320CA /* DBPayPalManager.m */; };
 		7ED4BC9C1B5EB64B00280D74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
@@ -3004,6 +2895,7 @@
 		CB1429B71B7A677A00B72069 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
 		CB1429B81B7A677A00B72069 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CB1429B91B7A677A00B72069 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
+		CB1429BA1B7A677A00B72069 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB1429BB1B7A677A00B72069 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
 		CB1429BC1B7A677A00B72069 /* PositionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D161B7286540090A347 /* PositionCollectionViewCell.m */; };
 		CB1429BD1B7A677A00B72069 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
@@ -3014,6 +2906,7 @@
 		CB1429C21B7A677A00B72069 /* DBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */; };
 		CB1429C31B7A677A00B72069 /* DBTableItemInactivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD2B3881AD6BF9F00D0FCF1 /* DBTableItemInactivityView.m */; };
 		CB1429C41B7A677A00B72069 /* DBCompanyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */; };
+		CB1429C51B7A677A00B72069 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
 		CB1429C61B7A677A00B72069 /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B501B00AA1168FE35578 /* LocationHelper.m */; };
 		CB1429C71B7A677A00B72069 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB1429C81B7A677A00B72069 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
@@ -3050,6 +2943,7 @@
 		CB1429E71B7A677A00B72069 /* CategoriesAndPositionsCVController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CDC1B7286530090A347 /* CategoriesAndPositionsCVController.m */; };
 		CB1429E81B7A677A00B72069 /* DBOrderViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */; };
 		CB1429E91B7A677A00B72069 /* DBCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82FD5E1B4444B1000BBE55 /* DBCardCell.m */; };
+		CB1429EA1B7A677A00B72069 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
 		CB1429EB1B7A677A00B72069 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA44E001AAF1CB9003AAE9F /* UIView+Extension.m */; };
 		CB1429EC1B7A677A00B72069 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CD71B7286530090A347 /* DBBonusPositionsViewController.m */; };
 		CB1429ED1B7A677A00B72069 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FE11A97761C008DC988 /* EXTConcreteProtocol.m */; };
@@ -3355,6 +3249,7 @@
 		CB142B3A1B7A6A4D00B72069 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
 		CB142B3B1B7A6A4D00B72069 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CB142B3C1B7A6A4D00B72069 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
+		CB142B3D1B7A6A4D00B72069 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB142B3E1B7A6A4D00B72069 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
 		CB142B3F1B7A6A4D00B72069 /* PositionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D161B7286540090A347 /* PositionCollectionViewCell.m */; };
 		CB142B401B7A6A4D00B72069 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
@@ -3365,6 +3260,7 @@
 		CB142B451B7A6A4D00B72069 /* DBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */; };
 		CB142B461B7A6A4D00B72069 /* DBTableItemInactivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD2B3881AD6BF9F00D0FCF1 /* DBTableItemInactivityView.m */; };
 		CB142B471B7A6A4D00B72069 /* DBCompanyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */; };
+		CB142B481B7A6A4D00B72069 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
 		CB142B491B7A6A4D00B72069 /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B501B00AA1168FE35578 /* LocationHelper.m */; };
 		CB142B4A1B7A6A4D00B72069 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB142B4B1B7A6A4D00B72069 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
@@ -3401,6 +3297,7 @@
 		CB142B6A1B7A6A4D00B72069 /* CategoriesAndPositionsCVController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CDC1B7286530090A347 /* CategoriesAndPositionsCVController.m */; };
 		CB142B6B1B7A6A4D00B72069 /* DBOrderViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */; };
 		CB142B6C1B7A6A4D00B72069 /* DBCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82FD5E1B4444B1000BBE55 /* DBCardCell.m */; };
+		CB142B6D1B7A6A4D00B72069 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
 		CB142B6E1B7A6A4D00B72069 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA44E001AAF1CB9003AAE9F /* UIView+Extension.m */; };
 		CB142B6F1B7A6A4D00B72069 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CD71B7286530090A347 /* DBBonusPositionsViewController.m */; };
 		CB142B701B7A6A4D00B72069 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FE11A97761C008DC988 /* EXTConcreteProtocol.m */; };
@@ -5429,6 +5326,7 @@
 		CB2421F81B7A1D4D00A02721 /* DBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */; };
 		CB2421F91B7A1D4D00A02721 /* DBTableItemInactivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD2B3881AD6BF9F00D0FCF1 /* DBTableItemInactivityView.m */; };
 		CB2421FA1B7A1D4D00A02721 /* DBCompanyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */; };
+		CB2421FB1B7A1D4D00A02721 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
 		CB2421FC1B7A1D4D00A02721 /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B501B00AA1168FE35578 /* LocationHelper.m */; };
 		CB2421FD1B7A1D4D00A02721 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB2421FE1B7A1D4D00A02721 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
@@ -5465,6 +5363,7 @@
 		CB24221D1B7A1D4D00A02721 /* CategoriesAndPositionsCVController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CDC1B7286530090A347 /* CategoriesAndPositionsCVController.m */; };
 		CB24221E1B7A1D4D00A02721 /* DBOrderViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */; };
 		CB24221F1B7A1D4D00A02721 /* DBCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82FD5E1B4444B1000BBE55 /* DBCardCell.m */; };
+		CB2422201B7A1D4D00A02721 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
 		CB2422211B7A1D4D00A02721 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA44E001AAF1CB9003AAE9F /* UIView+Extension.m */; };
 		CB2422221B7A1D4D00A02721 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CD71B7286530090A347 /* DBBonusPositionsViewController.m */; };
 		CB2422231B7A1D4D00A02721 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FE11A97761C008DC988 /* EXTConcreteProtocol.m */; };
@@ -5708,6 +5607,38 @@
 		CB2423301B7A1FD500A02721 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB2423251B7A1FD500A02721 /* InfoPlist.strings */; };
 		CB2423311B7A1FD500A02721 /* Images-TestApp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB2423271B7A1FD500A02721 /* Images-TestApp.xcassets */; };
 		CB2423321B7A1FD500A02721 /* TestApp-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB2423291B7A1FD500A02721 /* TestApp-info.plist */; };
+		CB2423511B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423521B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423531B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423541B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423551B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423561B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423571B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423581B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423591B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24235A1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24235B1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24235C1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24235D1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24235E1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24235F1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423601B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423611B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423621B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423631B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423641B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423651B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423661B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423671B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423681B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423691B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24236A1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24236B1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24236C1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24236D1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24236E1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB24236F1B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
+		CB2423701B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB3BA2D91B20589300F320CA /* DBMenuPositionModifier.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0981AC5666100D5E962 /* DBMenuPositionModifier.m */; };
 		CB3BA2DA1B20589300F320CA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B413003B00C4B2AD2F92 /* main.m */; };
 		CB3BA2DB1B20589300F320CA /* DBSettingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782901B1DE9A6000B5625 /* DBSettingsCell.m */; };
@@ -8090,6 +8021,7 @@
 		CB69804C1B7DE33400B12B78 /* UIViewController+DBCardManagement.m in Sources */ = {isa = PBXBuildFile; fileRef = B38363ED1A8E42D900BF950F /* UIViewController+DBCardManagement.m */; };
 		CB69804D1B7DE33400B12B78 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		CB69804E1B7DE33400B12B78 /* DBNewOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF2737198A8DC40095ADED /* DBNewOrderViewController.m */; };
+		CB69804F1B7DE33400B12B78 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB6980501B7DE33400B12B78 /* DBNewOrderNDAView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD29D3C1ABC63EC00BD4E81 /* DBNewOrderNDAView.m */; };
 		CB6980511B7DE33400B12B78 /* PositionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D161B7286540090A347 /* PositionCollectionViewCell.m */; };
 		CB6980521B7DE33400B12B78 /* DBDocumentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9782881B1DE28D000B5625 /* DBDocumentsViewController.m */; };
@@ -8100,6 +8032,7 @@
 		CB6980571B7DE33400B12B78 /* DBProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00C3EC198B9D16005A0889 /* DBProfileViewController.m */; };
 		CB6980581B7DE33400B12B78 /* DBTableItemInactivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD2B3881AD6BF9F00D0FCF1 /* DBTableItemInactivityView.m */; };
 		CB6980591B7DE33400B12B78 /* DBCompanyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79E9D41ADBD3A9001693FE /* DBCompanyInfo.m */; };
+		CB69805A1B7DE33400B12B78 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
 		CB69805B1B7DE33400B12B78 /* LocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B501B00AA1168FE35578 /* LocationHelper.m */; };
 		CB69805C1B7DE33400B12B78 /* DBTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA24A471A6570E500103699 /* DBTabBarController.m */; };
 		CB69805D1B7DE33400B12B78 /* IHSecureStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C775B77BC8F83597E1E0587F /* IHSecureStore.m */; };
@@ -8136,6 +8069,7 @@
 		CB69807C1B7DE33400B12B78 /* CategoriesAndPositionsCVController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CDC1B7286530090A347 /* CategoriesAndPositionsCVController.m */; };
 		CB69807D1B7DE33400B12B78 /* DBOrderViewFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3E6B8A1A86536100640791 /* DBOrderViewFooter.m */; };
 		CB69807E1B7DE33400B12B78 /* DBCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB82FD5E1B4444B1000BBE55 /* DBCardCell.m */; };
+		CB69807F1B7DE33400B12B78 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
 		CB6980801B7DE33400B12B78 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5EA44E001AAF1CB9003AAE9F /* UIView+Extension.m */; };
 		CB6980811B7DE33400B12B78 /* DBBonusPositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1CD71B7286530090A347 /* DBBonusPositionsViewController.m */; };
 		CB6980821B7DE33400B12B78 /* EXTConcreteProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = B3B09FE11A97761C008DC988 /* EXTConcreteProtocol.m */; };
@@ -12220,6 +12154,68 @@
 		CBDE21751B7286550090A347 /* PositionCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDE1D191B7286540090A347 /* PositionCompactCollectionViewCell.xib */; };
 		CBDE21761B7286550090A347 /* PositionCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDE1D191B7286540090A347 /* PositionCompactCollectionViewCell.xib */; };
 		CBDE21771B7286550090A347 /* PositionCompactCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDE1D191B7286540090A347 /* PositionCompactCollectionViewCell.xib */; };
+		CBDE21781B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21791B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE217A1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE217B1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE217C1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE217D1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE217E1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE217F1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21801B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21811B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21821B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21831B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21841B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21851B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21861B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21871B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21881B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21891B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE218A1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE218B1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE218C1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE218D1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE218E1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE218F1B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21901B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21911B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21921B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21931B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21941B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21951B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21961B7286550090A347 /* ViewControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */; };
+		CBDE21A81B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21A91B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21AA1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21AB1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21AC1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21AD1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21AE1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21AF1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B01B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B11B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B21B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B31B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B41B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B51B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B61B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B71B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B81B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21B91B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21BA1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21BB1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21BC1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21BD1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21BE1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21BF1B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C01B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C11B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C21B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C31B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C41B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C51B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
+		CBDE21C61B7286890090A347 /* ApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE21981B7286890090A347 /* ApplicationManager.m */; };
 		CBDE21C71B7286890090A347 /* DBPromoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE219B1B7286890090A347 /* DBPromoManager.m */; };
 		CBDE21C81B7286890090A347 /* DBPromoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE219B1B7286890090A347 /* DBPromoManager.m */; };
 		CBDE21C91B7286890090A347 /* DBPromoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE219B1B7286890090A347 /* DBPromoManager.m */; };
@@ -12620,6 +12616,8 @@
 		7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-RedCup.xcassets"; sourceTree = "<group>"; };
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EB9111F1B84CBC6005C1012 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
+		7EB911201B84CBC6005C1012 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
 		7EB911581B84D36F005C1012 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EB9115B1B84D36F005C1012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7EB9116D1B84DACB005C1012 /* NSDictionary+DeepMerge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DeepMerge.h"; sourceTree = "<group>"; };
@@ -12628,14 +12626,6 @@
 		7EB911961B86094D005C1012 /* Module.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Module.m; sourceTree = "<group>"; };
 		7EB911971B86094D005C1012 /* ModuleManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManagerTests.m; sourceTree = "<group>"; };
 		7EB9119B1B860994005C1012 /* ApplicationManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationManagerTests.m; sourceTree = "<group>"; };
-		7EB911A21B861ECF005C1012 /* ViewControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerManager.h; sourceTree = "<group>"; };
-		7EB911A31B861ECF005C1012 /* ViewControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewControllerManager.m; sourceTree = "<group>"; };
-		7EB911A41B861ECF005C1012 /* ApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationManager.h; sourceTree = "<group>"; };
-		7EB911A51B861ECF005C1012 /* ApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationManager.m; sourceTree = "<group>"; };
-		7EB911A61B861ECF005C1012 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
-		7EB911A71B861ECF005C1012 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
-		7EB911A81B861ECF005C1012 /* ViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewManager.h; sourceTree = "<group>"; };
-		7EB911A91B861ECF005C1012 /* ViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewManager.m; sourceTree = "<group>"; };
 		7ED4BDFA1B5EB64B00280D74 /* Magnolia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Magnolia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7ED4BDFF1B5EB67800280D74 /* launch_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_480.png; sourceTree = "<group>"; };
 		7ED4BE001B5EB67800280D74 /* launch_568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch_568.png; sourceTree = "<group>"; };
@@ -12849,6 +12839,8 @@
 		CB2423271B7A1FD500A02721 /* Images-TestApp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-TestApp.xcassets"; sourceTree = "<group>"; };
 		CB2423281B7A1FD500A02721 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB2423291B7A1FD500A02721 /* TestApp-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestApp-info.plist"; sourceTree = "<group>"; };
+		CB24234F1B7A47AD00A02721 /* ViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewManager.h; sourceTree = "<group>"; };
+		CB2423501B7A47AD00A02721 /* ViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewManager.m; sourceTree = "<group>"; };
 		CB2FD83319F55A580065285B /* mug_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug_gray@2x.png"; sourceTree = "<group>"; };
 		CB2FD83419F55A580065285B /* mug@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug@2x.png"; sourceTree = "<group>"; };
 		CB34A01A19E2F2F200011E2A /* DBCardsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCardsViewController.xib; sourceTree = "<group>"; };
@@ -13289,6 +13281,10 @@
 		CBDE1D171B7286540090A347 /* PositionCompactCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionCompactCollectionViewCell.h; sourceTree = "<group>"; };
 		CBDE1D181B7286540090A347 /* PositionCompactCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionCompactCollectionViewCell.m; sourceTree = "<group>"; };
 		CBDE1D191B7286540090A347 /* PositionCompactCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionCompactCollectionViewCell.xib; sourceTree = "<group>"; };
+		CBDE1D1A1B7286540090A347 /* ViewControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ViewControllerManager.h; path = ../ViewControllers/ViewControllerManager.h; sourceTree = "<group>"; };
+		CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ViewControllerManager.m; path = ../ViewControllers/ViewControllerManager.m; sourceTree = "<group>"; };
+		CBDE21971B7286890090A347 /* ApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationManager.h; sourceTree = "<group>"; };
+		CBDE21981B7286890090A347 /* ApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationManager.m; sourceTree = "<group>"; };
 		CBDE219A1B7286890090A347 /* DBPromoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPromoManager.h; sourceTree = "<group>"; };
 		CBDE219B1B7286890090A347 /* DBPromoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPromoManager.m; sourceTree = "<group>"; };
 		CBDE219C1B7286890090A347 /* DeliverySettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeliverySettings.h; sourceTree = "<group>"; };
@@ -14638,21 +14634,6 @@
 			path = ApplicationManager;
 			sourceTree = "<group>";
 		};
-		7EB911A11B861E60005C1012 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				7EB911A21B861ECF005C1012 /* ViewControllerManager.h */,
-				7EB911A31B861ECF005C1012 /* ViewControllerManager.m */,
-				7EB911A41B861ECF005C1012 /* ApplicationManager.h */,
-				7EB911A51B861ECF005C1012 /* ApplicationManager.m */,
-				7EB911A61B861ECF005C1012 /* ModuleManager.h */,
-				7EB911A71B861ECF005C1012 /* ModuleManager.m */,
-				7EB911A81B861ECF005C1012 /* ViewManager.h */,
-				7EB911A91B861ECF005C1012 /* ViewManager.m */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
 		7ED4BDFC1B5EB67800280D74 /* Magnolia */ = {
 			isa = PBXGroup;
 			children = (
@@ -15012,7 +14993,6 @@
 				C775BBB84D6C198A2E6EE8CD /* AppDelegate.m */,
 				CB37BC4019CB14110034B325 /* DBConstants.h */,
 				CB37BC4119CB14110034B325 /* DBConstants.m */,
-				7EB911A11B861E60005C1012 /* Core */,
 				C775BE2E1D4C606917617A8E /* Helpers */,
 				C775B1154DBD501B5D3549F5 /* ViewControllers */,
 				CB6EB71D19E7DC0E0050DF90 /* Views */,
@@ -15026,6 +15006,14 @@
 		C775BE2E1D4C606917617A8E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7EB9111F1B84CBC6005C1012 /* ModuleManager.h */,
+				7EB911201B84CBC6005C1012 /* ModuleManager.m */,
+				CBDE21971B7286890090A347 /* ApplicationManager.h */,
+				CBDE21981B7286890090A347 /* ApplicationManager.m */,
+				CB24234F1B7A47AD00A02721 /* ViewManager.h */,
+				CB2423501B7A47AD00A02721 /* ViewManager.m */,
+				CBDE1D1A1B7286540090A347 /* ViewControllerManager.h */,
+				CBDE1D1B1B7286540090A347 /* ViewControllerManager.m */,
 				CB6981911B7DE8A800B12B78 /* DBTextResourcesHelper.h */,
 				CB6981921B7DE8A800B12B78 /* DBTextResourcesHelper.m */,
 				CBDE21991B7286890090A347 /* Order */,
@@ -26080,15 +26068,14 @@
 				7E382FB41B5CF692008F0241 /* DBVenueViewController.m in Sources */,
 				7E382FB51B5CF692008F0241 /* DBDeliveryViewController.m in Sources */,
 				CBDE21DE1B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C21B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7E382FB61B5CF692008F0241 /* DBMenuPositionModifierItem.m in Sources */,
 				7E382FB71B5CF692008F0241 /* DBOrderItemNotesCell.m in Sources */,
 				7E382FB81B5CF692008F0241 /* DBDiscountMessageCell.m in Sources */,
 				7E382FB91B5CF692008F0241 /* DBNewOrderBonusesView.m in Sources */,
 				7E382FBA1B5CF692008F0241 /* DoubleB.xcdatamodeld in Sources */,
 				7E382FBC1B5CF692008F0241 /* EXTScope.m in Sources */,
-				7EB9120A1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7E382FBD1B5CF692008F0241 /* DBTimePickerView.m in Sources */,
+				7EB911391B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E382FBE1B5CF692008F0241 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20781B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7E382FBF1B5CF692008F0241 /* AppDelegate.m in Sources */,
@@ -26128,11 +26115,11 @@
 				7E382FDB1B5CF692008F0241 /* DBMenu.m in Sources */,
 				7E382FDC1B5CF692008F0241 /* DBNewOrderItemAdditionView.m in Sources */,
 				7E382FDD1B5CF692008F0241 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E61B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7E382FDE1B5CF692008F0241 /* DBCardsViewController.m in Sources */,
 				7E382FDF1B5CF692008F0241 /* UIViewController+DBCardManagement.m in Sources */,
 				7E382FE01B5CF692008F0241 /* (null) in Sources */,
 				7E382FE11B5CF692008F0241 /* DBNewOrderViewController.m in Sources */,
+				CB2423691B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E382FE31B5CF692008F0241 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21321B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911871B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -26144,6 +26131,7 @@
 				7E382FE71B5CF692008F0241 /* DBProfileViewController.m in Sources */,
 				7E382FE81B5CF692008F0241 /* DBTableItemInactivityView.m in Sources */,
 				7E382FEA1B5CF692008F0241 /* DBCompanyInfo.m in Sources */,
+				CBDE21BF1B7286890090A347 /* ApplicationManager.m in Sources */,
 				7E382FEB1B5CF692008F0241 /* LocationHelper.m in Sources */,
 				7E382FEC1B5CF692008F0241 /* DBTabBarController.m in Sources */,
 				7E382FED1B5CF692008F0241 /* IHSecureStore.m in Sources */,
@@ -26166,7 +26154,6 @@
 				7E382FFB1B5CF692008F0241 /* DBOrderBarButtonView.m in Sources */,
 				7E382FFC1B5CF692008F0241 /* NSObject+Encode.m in Sources */,
 				CB6981AB1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB9122E1B861ECF005C1012 /* ViewManager.m in Sources */,
 				7E382FFE1B5CF692008F0241 /* DBConstants.m in Sources */,
 				CBDE1EA71B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7E382FFF1B5CF692008F0241 /* DBDeliveryType.m in Sources */,
@@ -26182,6 +26169,7 @@
 				CBDE1DAF1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7E3830091B5CF692008F0241 /* DBOrderViewFooter.m in Sources */,
 				7E38300A1B5CF692008F0241 /* DBCardCell.m in Sources */,
+				CBDE218F1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E38300C1B5CF692008F0241 /* UIView+Extension.m in Sources */,
 				CBDE1D711B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7E38300D1B5CF692008F0241 /* EXTConcreteProtocol.m in Sources */,
@@ -26216,6 +26204,7 @@
 				7E3DAAE51B06153E00A7FFD1 /* main.m in Sources */,
 				7E3DAAE61B06153E00A7FFD1 /* DBNewOrderAdditionalInfoView.m in Sources */,
 				7E3DAAE71B06153E00A7FFD1 /* NSString+DoubleB.m in Sources */,
+				CBDE217D1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E3DAAE81B06153E00A7FFD1 /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
 				CB9105041B1C7DB100506235 /* UIView+RoundedCorners.m in Sources */,
 				CBDE1DDB1B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
@@ -26225,6 +26214,7 @@
 				7E3DAAEE1B06153E00A7FFD1 /* DBMenuPositionModifierItem.m in Sources */,
 				7E3DAAEF1B06153E00A7FFD1 /* DBOrderItemNotesCell.m in Sources */,
 				7E3DAAF01B06153E00A7FFD1 /* DBDiscountMessageCell.m in Sources */,
+				CBDE21AD1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1D9D1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7E3DAAF21B06153E00A7FFD1 /* DBNewOrderBonusesView.m in Sources */,
 				7E3DAAF41B06153E00A7FFD1 /* EXTScope.m in Sources */,
@@ -26264,6 +26254,7 @@
 				7EB911751B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7E3DAB081B06153E00A7FFD1 /* DBOrderItemCell.m in Sources */,
 				CBDE21CC1B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB2423571B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E3DAB091B06153E00A7FFD1 /* DBBeaconObserver.m in Sources */,
 				7E3DAB0A1B06153E00A7FFD1 /* EXTSelectorChecking.m in Sources */,
 				7E3DAB0B1B06153E00A7FFD1 /* NSInvocation+EXT.m in Sources */,
@@ -26306,19 +26297,16 @@
 				7E3DAB281B06153E00A7FFD1 /* DBOrderReturnView.m in Sources */,
 				7E3DAB291B06153E00A7FFD1 /* UIImage+ImageEffects.m in Sources */,
 				7E3DAB2A1B06153E00A7FFD1 /* DBSettingsTableViewController.m in Sources */,
-				7EB9121C1B861ECF005C1012 /* ViewManager.m in Sources */,
 				7E47E4161B1DEBAA001432D9 /* DBDeliveryViewController.m in Sources */,
 				7E3DAB2B1B06153E00A7FFD1 /* UIView+SnapshotAdditions.m in Sources */,
 				7E3DAB2C1B06153E00A7FFD1 /* DBOrderViewHeader.m in Sources */,
 				7E3DAB2D1B06153E00A7FFD1 /* IHWebPageViewController.m in Sources */,
 				CB6981991B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				7E3DAB2E1B06153E00A7FFD1 /* DBOrderBarButtonView.m in Sources */,
-				7EB911B01B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7E3DAB2F1B06153E00A7FFD1 /* DBConstants.m in Sources */,
 				7E3DAB311B06153E00A7FFD1 /* OrderItem.m in Sources */,
+				7EB911271B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E3DAB341B06153E00A7FFD1 /* DBPopupTextView.m in Sources */,
-				7EB911F81B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D41B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7E47E4101B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDE21201B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7E3DAB351B06153E00A7FFD1 /* CoreDataHelper.m in Sources */,
@@ -26367,15 +26355,14 @@
 				7E7925261B3C1BDA00CA740D /* DBDeliveryViewController.m in Sources */,
 				7E7925271B3C1BDA00CA740D /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D51B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911B91B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7E7925281B3C1BDA00CA740D /* DBOrderItemNotesCell.m in Sources */,
 				7E7925291B3C1BDA00CA740D /* DBDiscountMessageCell.m in Sources */,
 				7E79252A1B3C1BDA00CA740D /* DBNewOrderBonusesView.m in Sources */,
 				7E79252B1B3C1BDA00CA740D /* DoubleB.xcdatamodeld in Sources */,
 				7E79252D1B3C1BDA00CA740D /* EXTScope.m in Sources */,
 				7E79252E1B3C1BDA00CA740D /* DBTimePickerView.m in Sources */,
-				7EB912011B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7E79252F1B3C1BDA00CA740D /* NSString+LanguageFeature.m in Sources */,
+				7EB911301B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E7925301B3C1BDA00CA740D /* AppDelegate.m in Sources */,
 				CBDE206F1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7E7925311B3C1BDA00CA740D /* DBOrderViewController.m in Sources */,
@@ -26415,11 +26402,11 @@
 				7E79254D1B3C1BDA00CA740D /* DBNewOrderItemAdditionView.m in Sources */,
 				7E79254E1B3C1BDA00CA740D /* UIViewController+NavigationBarFix.m in Sources */,
 				7E79254F1B3C1BDA00CA740D /* DBCardsViewController.m in Sources */,
-				7EB911DD1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7E7925501B3C1BDA00CA740D /* UIViewController+DBCardManagement.m in Sources */,
 				7E7925511B3C1BDA00CA740D /* (null) in Sources */,
 				7E7925521B3C1BDA00CA740D /* DBNewOrderViewController.m in Sources */,
 				7E7925541B3C1BDA00CA740D /* DBNewOrderNDAView.m in Sources */,
+				CB2423601B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E7925551B3C1BDA00CA740D /* DBDocumentsViewController.m in Sources */,
 				CBDE21291B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9117E1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -26431,6 +26418,7 @@
 				7E79255A1B3C1BDA00CA740D /* DBTableItemInactivityView.m in Sources */,
 				7E79255C1B3C1BDA00CA740D /* DBCompanyInfo.m in Sources */,
 				7E79255D1B3C1BDA00CA740D /* LocationHelper.m in Sources */,
+				CBDE21B61B7286890090A347 /* ApplicationManager.m in Sources */,
 				7E79255E1B3C1BDA00CA740D /* DBTabBarController.m in Sources */,
 				7E79255F1B3C1BDA00CA740D /* IHSecureStore.m in Sources */,
 				7E7925601B3C1BDA00CA740D /* Venue.m in Sources */,
@@ -26453,7 +26441,6 @@
 				7E79256D1B3C1BDA00CA740D /* DBOrderBarButtonView.m in Sources */,
 				7E79256E1B3C1BDA00CA740D /* NSObject+Encode.m in Sources */,
 				CB6981A21B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912251B861ECF005C1012 /* ViewManager.m in Sources */,
 				7E7925701B3C1BDA00CA740D /* DBConstants.m in Sources */,
 				CBDE1E9E1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7E7925711B3C1BDA00CA740D /* DBDeliveryType.m in Sources */,
@@ -26469,6 +26456,7 @@
 				CBDE1DA61B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7E79257B1B3C1BDA00CA740D /* DBOrderViewFooter.m in Sources */,
 				CB82FD811B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21861B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E79257D1B3C1BDA00CA740D /* UIView+Extension.m in Sources */,
 				CBDE1D681B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7E79257E1B3C1BDA00CA740D /* EXTConcreteProtocol.m in Sources */,
@@ -26511,15 +26499,14 @@
 				7E7926A81B3C247D00CA740D /* DBDeliveryViewController.m in Sources */,
 				7E7926A91B3C247D00CA740D /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D61B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911BA1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7E7926AA1B3C247D00CA740D /* DBOrderItemNotesCell.m in Sources */,
 				7E7926AB1B3C247D00CA740D /* DBDiscountMessageCell.m in Sources */,
 				7E7926AC1B3C247D00CA740D /* DBNewOrderBonusesView.m in Sources */,
 				7E7926AD1B3C247D00CA740D /* DoubleB.xcdatamodeld in Sources */,
 				7E7926AF1B3C247D00CA740D /* EXTScope.m in Sources */,
 				7E7926B01B3C247D00CA740D /* DBTimePickerView.m in Sources */,
-				7EB912021B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7E7926B11B3C247D00CA740D /* NSString+LanguageFeature.m in Sources */,
+				7EB911311B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E7926B21B3C247D00CA740D /* AppDelegate.m in Sources */,
 				CBDE20701B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7E7926B31B3C247D00CA740D /* DBOrderViewController.m in Sources */,
@@ -26559,11 +26546,11 @@
 				7E7926CF1B3C247D00CA740D /* DBNewOrderItemAdditionView.m in Sources */,
 				7E7926D01B3C247D00CA740D /* UIViewController+NavigationBarFix.m in Sources */,
 				7E7926D11B3C247D00CA740D /* DBCardsViewController.m in Sources */,
-				7EB911DE1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7E7926D21B3C247D00CA740D /* UIViewController+DBCardManagement.m in Sources */,
 				7E7926D31B3C247D00CA740D /* (null) in Sources */,
 				7E7926D41B3C247D00CA740D /* DBNewOrderViewController.m in Sources */,
 				7E7926D61B3C247D00CA740D /* DBNewOrderNDAView.m in Sources */,
+				CB2423611B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7E7926D71B3C247D00CA740D /* DBDocumentsViewController.m in Sources */,
 				CBDE212A1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9117F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -26575,6 +26562,7 @@
 				7E7926DC1B3C247D00CA740D /* DBTableItemInactivityView.m in Sources */,
 				7E7926DE1B3C247D00CA740D /* DBCompanyInfo.m in Sources */,
 				7E7926DF1B3C247D00CA740D /* LocationHelper.m in Sources */,
+				CBDE21B71B7286890090A347 /* ApplicationManager.m in Sources */,
 				7E7926E01B3C247D00CA740D /* DBTabBarController.m in Sources */,
 				7E7926E11B3C247D00CA740D /* IHSecureStore.m in Sources */,
 				7E7926E21B3C247D00CA740D /* Venue.m in Sources */,
@@ -26597,7 +26585,6 @@
 				7E7926EF1B3C247D00CA740D /* DBOrderBarButtonView.m in Sources */,
 				7E7926F01B3C247D00CA740D /* NSObject+Encode.m in Sources */,
 				CB6981A31B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912261B861ECF005C1012 /* ViewManager.m in Sources */,
 				7E7926F21B3C247D00CA740D /* DBConstants.m in Sources */,
 				CBDE1E9F1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7E7926F31B3C247D00CA740D /* DBDeliveryType.m in Sources */,
@@ -26613,6 +26600,7 @@
 				CBDE1DA71B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7E7926FD1B3C247D00CA740D /* DBOrderViewFooter.m in Sources */,
 				CB82FD821B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21871B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E7926FF1B3C247D00CA740D /* UIView+Extension.m in Sources */,
 				CBDE1D691B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7E7927001B3C247D00CA740D /* EXTConcreteProtocol.m in Sources */,
@@ -26655,15 +26643,14 @@
 				7EB2D16D1B3C3581009405C6 /* DBDeliveryViewController.m in Sources */,
 				7EB2D16E1B3C3581009405C6 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D71B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911BB1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7EB2D16F1B3C3581009405C6 /* DBOrderItemNotesCell.m in Sources */,
 				7EB2D1701B3C3581009405C6 /* DBDiscountMessageCell.m in Sources */,
 				7EB2D1711B3C3581009405C6 /* DBNewOrderBonusesView.m in Sources */,
 				7EB2D1721B3C3581009405C6 /* DoubleB.xcdatamodeld in Sources */,
 				7EB2D1741B3C3581009405C6 /* EXTScope.m in Sources */,
 				7EB2D1751B3C3581009405C6 /* DBTimePickerView.m in Sources */,
-				7EB912031B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7EB2D1761B3C3581009405C6 /* NSString+LanguageFeature.m in Sources */,
+				7EB911321B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EB2D1771B3C3581009405C6 /* AppDelegate.m in Sources */,
 				CBDE20711B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EB2D1781B3C3581009405C6 /* DBOrderViewController.m in Sources */,
@@ -26703,11 +26690,11 @@
 				7EB2D1941B3C3581009405C6 /* DBNewOrderItemAdditionView.m in Sources */,
 				7EB2D1951B3C3581009405C6 /* UIViewController+NavigationBarFix.m in Sources */,
 				7EB2D1961B3C3581009405C6 /* DBCardsViewController.m in Sources */,
-				7EB911DF1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7EB2D1971B3C3581009405C6 /* UIViewController+DBCardManagement.m in Sources */,
 				7EB2D1981B3C3581009405C6 /* (null) in Sources */,
 				7EB2D1991B3C3581009405C6 /* DBNewOrderViewController.m in Sources */,
 				7EB2D19B1B3C3581009405C6 /* DBNewOrderNDAView.m in Sources */,
+				CB2423621B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EB2D19C1B3C3581009405C6 /* DBDocumentsViewController.m in Sources */,
 				CBDE212B1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911801B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -26719,6 +26706,7 @@
 				7EB2D1A11B3C3581009405C6 /* DBTableItemInactivityView.m in Sources */,
 				7EB2D1A31B3C3581009405C6 /* DBCompanyInfo.m in Sources */,
 				7EB2D1A41B3C3581009405C6 /* LocationHelper.m in Sources */,
+				CBDE21B81B7286890090A347 /* ApplicationManager.m in Sources */,
 				7EB2D1A51B3C3581009405C6 /* DBTabBarController.m in Sources */,
 				7EB2D1A61B3C3581009405C6 /* IHSecureStore.m in Sources */,
 				7EB2D1A71B3C3581009405C6 /* Venue.m in Sources */,
@@ -26741,7 +26729,6 @@
 				7EB2D1B41B3C3581009405C6 /* DBOrderBarButtonView.m in Sources */,
 				7EB2D1B51B3C3581009405C6 /* NSObject+Encode.m in Sources */,
 				CB6981A41B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912271B861ECF005C1012 /* ViewManager.m in Sources */,
 				7EB2D1B71B3C3581009405C6 /* DBConstants.m in Sources */,
 				CBDE1EA01B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7EB2D1B81B3C3581009405C6 /* DBDeliveryType.m in Sources */,
@@ -26757,6 +26744,7 @@
 				CBDE1DA81B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7EB2D1C21B3C3581009405C6 /* DBOrderViewFooter.m in Sources */,
 				CB82FD831B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21881B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EB2D1C41B3C3581009405C6 /* UIView+Extension.m in Sources */,
 				CBDE1D6A1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D1C51B3C3581009405C6 /* EXTConcreteProtocol.m in Sources */,
@@ -26799,15 +26787,14 @@
 				7EB2D2DC1B3C51A2009405C6 /* DBDeliveryViewController.m in Sources */,
 				7EB2D2DD1B3C51A2009405C6 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D81B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911BC1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7EB2D2DE1B3C51A2009405C6 /* DBOrderItemNotesCell.m in Sources */,
 				7EB2D2DF1B3C51A2009405C6 /* DBDiscountMessageCell.m in Sources */,
 				7EB2D2E01B3C51A2009405C6 /* DBNewOrderBonusesView.m in Sources */,
 				7EB2D2E11B3C51A2009405C6 /* DoubleB.xcdatamodeld in Sources */,
 				7EB2D2E31B3C51A2009405C6 /* EXTScope.m in Sources */,
 				7EB2D2E41B3C51A2009405C6 /* DBTimePickerView.m in Sources */,
-				7EB912041B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7EB2D2E51B3C51A2009405C6 /* NSString+LanguageFeature.m in Sources */,
+				7EB911331B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EB2D2E61B3C51A2009405C6 /* AppDelegate.m in Sources */,
 				CBDE20721B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EB2D2E71B3C51A2009405C6 /* DBOrderViewController.m in Sources */,
@@ -26847,11 +26834,11 @@
 				7EB2D3031B3C51A2009405C6 /* DBNewOrderItemAdditionView.m in Sources */,
 				7EB2D3041B3C51A2009405C6 /* UIViewController+NavigationBarFix.m in Sources */,
 				7EB2D3051B3C51A2009405C6 /* DBCardsViewController.m in Sources */,
-				7EB911E01B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7EB2D3061B3C51A2009405C6 /* UIViewController+DBCardManagement.m in Sources */,
 				7EB2D3071B3C51A2009405C6 /* (null) in Sources */,
 				7EB2D3081B3C51A2009405C6 /* DBNewOrderViewController.m in Sources */,
 				7EB2D30A1B3C51A2009405C6 /* DBNewOrderNDAView.m in Sources */,
+				CB2423631B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EB2D30B1B3C51A2009405C6 /* DBDocumentsViewController.m in Sources */,
 				CBDE212C1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911811B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -26863,6 +26850,7 @@
 				7EB2D3101B3C51A2009405C6 /* DBTableItemInactivityView.m in Sources */,
 				7EB2D3121B3C51A2009405C6 /* DBCompanyInfo.m in Sources */,
 				7EB2D3131B3C51A2009405C6 /* LocationHelper.m in Sources */,
+				CBDE21B91B7286890090A347 /* ApplicationManager.m in Sources */,
 				7EB2D3141B3C51A2009405C6 /* DBTabBarController.m in Sources */,
 				7EB2D3151B3C51A2009405C6 /* IHSecureStore.m in Sources */,
 				7EB2D3161B3C51A2009405C6 /* Venue.m in Sources */,
@@ -26885,7 +26873,6 @@
 				7EB2D3231B3C51A2009405C6 /* DBOrderBarButtonView.m in Sources */,
 				7EB2D3241B3C51A2009405C6 /* NSObject+Encode.m in Sources */,
 				CB6981A51B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912281B861ECF005C1012 /* ViewManager.m in Sources */,
 				7EB2D3261B3C51A2009405C6 /* DBConstants.m in Sources */,
 				CBDE1EA11B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7EB2D3271B3C51A2009405C6 /* DBDeliveryType.m in Sources */,
@@ -26901,6 +26888,7 @@
 				CBDE1DA91B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7EB2D3311B3C51A2009405C6 /* DBOrderViewFooter.m in Sources */,
 				CB82FD841B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21891B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EB2D3331B3C51A2009405C6 /* UIView+Extension.m in Sources */,
 				CBDE1D6B1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D3341B3C51A2009405C6 /* EXTConcreteProtocol.m in Sources */,
@@ -26943,15 +26931,14 @@
 				7EB2D44C1B3C5C77009405C6 /* DBDeliveryViewController.m in Sources */,
 				7EB2D44D1B3C5C77009405C6 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D91B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911BD1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7EB2D44E1B3C5C77009405C6 /* DBOrderItemNotesCell.m in Sources */,
 				7EB2D44F1B3C5C77009405C6 /* DBDiscountMessageCell.m in Sources */,
 				7EB2D4501B3C5C77009405C6 /* DBNewOrderBonusesView.m in Sources */,
 				7EB2D4511B3C5C77009405C6 /* DoubleB.xcdatamodeld in Sources */,
 				7EB2D4531B3C5C77009405C6 /* EXTScope.m in Sources */,
 				7EB2D4541B3C5C77009405C6 /* DBTimePickerView.m in Sources */,
-				7EB912051B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7EB2D4551B3C5C77009405C6 /* NSString+LanguageFeature.m in Sources */,
+				7EB911341B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EB2D4561B3C5C77009405C6 /* AppDelegate.m in Sources */,
 				CBDE20731B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EB2D4571B3C5C77009405C6 /* DBOrderViewController.m in Sources */,
@@ -26991,11 +26978,11 @@
 				7EB2D4731B3C5C77009405C6 /* DBNewOrderItemAdditionView.m in Sources */,
 				7EB2D4741B3C5C77009405C6 /* UIViewController+NavigationBarFix.m in Sources */,
 				7EB2D4751B3C5C77009405C6 /* DBCardsViewController.m in Sources */,
-				7EB911E11B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7EB2D4761B3C5C77009405C6 /* UIViewController+DBCardManagement.m in Sources */,
 				7EB2D4771B3C5C77009405C6 /* (null) in Sources */,
 				7EB2D4781B3C5C77009405C6 /* DBNewOrderViewController.m in Sources */,
 				7EB2D47A1B3C5C77009405C6 /* DBNewOrderNDAView.m in Sources */,
+				CB2423641B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EB2D47B1B3C5C77009405C6 /* DBDocumentsViewController.m in Sources */,
 				CBDE212D1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911821B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -27007,6 +26994,7 @@
 				7EB2D4801B3C5C77009405C6 /* DBTableItemInactivityView.m in Sources */,
 				7EB2D4821B3C5C77009405C6 /* DBCompanyInfo.m in Sources */,
 				7EB2D4831B3C5C77009405C6 /* LocationHelper.m in Sources */,
+				CBDE21BA1B7286890090A347 /* ApplicationManager.m in Sources */,
 				7EB2D4841B3C5C77009405C6 /* DBTabBarController.m in Sources */,
 				7EB2D4851B3C5C77009405C6 /* IHSecureStore.m in Sources */,
 				7EB2D4861B3C5C77009405C6 /* Venue.m in Sources */,
@@ -27029,7 +27017,6 @@
 				7EB2D4931B3C5C77009405C6 /* DBOrderBarButtonView.m in Sources */,
 				7EB2D4941B3C5C77009405C6 /* NSObject+Encode.m in Sources */,
 				CB6981A61B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912291B861ECF005C1012 /* ViewManager.m in Sources */,
 				7EB2D4961B3C5C77009405C6 /* DBConstants.m in Sources */,
 				CBDE1EA21B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7EB2D4971B3C5C77009405C6 /* DBDeliveryType.m in Sources */,
@@ -27045,6 +27032,7 @@
 				CBDE1DAA1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7EB2D4A11B3C5C77009405C6 /* DBOrderViewFooter.m in Sources */,
 				CB82FD851B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE218A1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EB2D4A31B3C5C77009405C6 /* UIView+Extension.m in Sources */,
 				CBDE1D6C1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7EB2D4A41B3C5C77009405C6 /* EXTConcreteProtocol.m in Sources */,
@@ -27075,14 +27063,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7EB912151B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7EB9119A1B86094D005C1012 /* ModuleManagerTests.m in Sources */,
 				7EB911921B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
-				7EB911F11B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7EB9119C1B860994005C1012 /* ApplicationManagerTests.m in Sources */,
 				7EB911991B86094D005C1012 /* Module.m in Sources */,
-				7EB912391B861ECF005C1012 /* ViewManager.m in Sources */,
-				7EB911CD1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -27102,15 +27086,14 @@
 				7ED4BCA41B5EB64B00280D74 /* DBVenueViewController.m in Sources */,
 				7ED4BCA51B5EB64B00280D74 /* DBDeliveryViewController.m in Sources */,
 				CBDE21DF1B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C31B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7ED4BCA61B5EB64B00280D74 /* DBMenuPositionModifierItem.m in Sources */,
 				7ED4BCA71B5EB64B00280D74 /* DBOrderItemNotesCell.m in Sources */,
 				7ED4BCA81B5EB64B00280D74 /* DBDiscountMessageCell.m in Sources */,
 				7ED4BCA91B5EB64B00280D74 /* DBNewOrderBonusesView.m in Sources */,
 				7ED4BCAA1B5EB64B00280D74 /* DoubleB.xcdatamodeld in Sources */,
 				7ED4BCAC1B5EB64B00280D74 /* EXTScope.m in Sources */,
-				7EB9120B1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7ED4BCAD1B5EB64B00280D74 /* DBTimePickerView.m in Sources */,
+				7EB9113A1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7ED4BCAE1B5EB64B00280D74 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20791B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7ED4BCAF1B5EB64B00280D74 /* AppDelegate.m in Sources */,
@@ -27150,11 +27133,11 @@
 				7ED4BCCB1B5EB64B00280D74 /* DBMenu.m in Sources */,
 				7ED4BCCC1B5EB64B00280D74 /* DBNewOrderItemAdditionView.m in Sources */,
 				7ED4BCCD1B5EB64B00280D74 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E71B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7ED4BCCE1B5EB64B00280D74 /* DBCardsViewController.m in Sources */,
 				7ED4BCCF1B5EB64B00280D74 /* UIViewController+DBCardManagement.m in Sources */,
 				7ED4BCD01B5EB64B00280D74 /* (null) in Sources */,
 				7ED4BCD11B5EB64B00280D74 /* DBNewOrderViewController.m in Sources */,
+				CB24236A1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7ED4BCD31B5EB64B00280D74 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21331B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911881B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -27166,6 +27149,7 @@
 				7ED4BCD71B5EB64B00280D74 /* DBProfileViewController.m in Sources */,
 				7ED4BCD81B5EB64B00280D74 /* DBTableItemInactivityView.m in Sources */,
 				7ED4BCDA1B5EB64B00280D74 /* DBCompanyInfo.m in Sources */,
+				CBDE21C01B7286890090A347 /* ApplicationManager.m in Sources */,
 				7ED4BCDB1B5EB64B00280D74 /* LocationHelper.m in Sources */,
 				7ED4BCDC1B5EB64B00280D74 /* DBTabBarController.m in Sources */,
 				7ED4BCDD1B5EB64B00280D74 /* IHSecureStore.m in Sources */,
@@ -27188,7 +27172,6 @@
 				7ED4BCEB1B5EB64B00280D74 /* DBOrderBarButtonView.m in Sources */,
 				7ED4BCEC1B5EB64B00280D74 /* NSObject+Encode.m in Sources */,
 				CB6981AC1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB9122F1B861ECF005C1012 /* ViewManager.m in Sources */,
 				7ED4BCEE1B5EB64B00280D74 /* DBConstants.m in Sources */,
 				CBDE1EA81B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7ED4BCEF1B5EB64B00280D74 /* DBDeliveryType.m in Sources */,
@@ -27204,6 +27187,7 @@
 				CBDE1DB01B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7ED4BCF91B5EB64B00280D74 /* DBOrderViewFooter.m in Sources */,
 				7ED4BCFA1B5EB64B00280D74 /* DBCardCell.m in Sources */,
+				CBDE21901B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7ED4BCFC1B5EB64B00280D74 /* UIView+Extension.m in Sources */,
 				CBDE1D721B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7ED4BCFD1B5EB64B00280D74 /* EXTConcreteProtocol.m in Sources */,
@@ -27246,15 +27230,14 @@
 				7EDB58FD1B32F70400723DF9 /* DBDeliveryViewController.m in Sources */,
 				7EDB58FE1B32F70400723DF9 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D41B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911B81B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				7EDB58FF1B32F70400723DF9 /* DBOrderItemNotesCell.m in Sources */,
 				7EDB59001B32F70400723DF9 /* DBDiscountMessageCell.m in Sources */,
 				7EDB59021B32F70400723DF9 /* DBNewOrderBonusesView.m in Sources */,
 				7EDB59031B32F70400723DF9 /* DoubleB.xcdatamodeld in Sources */,
 				7EDB59061B32F70400723DF9 /* EXTScope.m in Sources */,
 				7EDB59071B32F70400723DF9 /* DBTimePickerView.m in Sources */,
-				7EB912001B861ECF005C1012 /* ModuleManager.m in Sources */,
 				7EDB59081B32F70400723DF9 /* NSString+LanguageFeature.m in Sources */,
+				7EB9112F1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7EDB59091B32F70400723DF9 /* AppDelegate.m in Sources */,
 				CBDE206E1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				7EDB590A1B32F70400723DF9 /* DBOrderViewController.m in Sources */,
@@ -27294,11 +27277,11 @@
 				7EDB59261B32F70400723DF9 /* DBNewOrderItemAdditionView.m in Sources */,
 				7EDB59271B32F70400723DF9 /* UIViewController+NavigationBarFix.m in Sources */,
 				7EDB59281B32F70400723DF9 /* DBCardsViewController.m in Sources */,
-				7EB911DC1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7EDB59291B32F70400723DF9 /* UIViewController+DBCardManagement.m in Sources */,
 				7EDB592A1B32F70400723DF9 /* (null) in Sources */,
 				7EDB592B1B32F70400723DF9 /* DBNewOrderViewController.m in Sources */,
 				7EDB592D1B32F70400723DF9 /* DBNewOrderNDAView.m in Sources */,
+				CB24235F1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				7EDB592E1B32F70400723DF9 /* DBDocumentsViewController.m in Sources */,
 				CBDE21281B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9117D1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -27310,6 +27293,7 @@
 				7EDB59341B32F70400723DF9 /* DBTableItemInactivityView.m in Sources */,
 				7EDB59361B32F70400723DF9 /* DBCompanyInfo.m in Sources */,
 				7EDB59371B32F70400723DF9 /* LocationHelper.m in Sources */,
+				CBDE21B51B7286890090A347 /* ApplicationManager.m in Sources */,
 				7EDB59381B32F70400723DF9 /* DBTabBarController.m in Sources */,
 				7EDB59391B32F70400723DF9 /* IHSecureStore.m in Sources */,
 				7EDB593A1B32F70400723DF9 /* Venue.m in Sources */,
@@ -27332,7 +27316,6 @@
 				7EDB59481B32F70400723DF9 /* DBOrderBarButtonView.m in Sources */,
 				7EDB59491B32F70400723DF9 /* NSObject+Encode.m in Sources */,
 				CB6981A11B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912241B861ECF005C1012 /* ViewManager.m in Sources */,
 				7EDB594B1B32F70400723DF9 /* DBConstants.m in Sources */,
 				CBDE1E9D1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				7EDB594C1B32F70400723DF9 /* DBDeliveryType.m in Sources */,
@@ -27348,6 +27331,7 @@
 				CBDE1DA51B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				7EDB59561B32F70400723DF9 /* DBOrderViewFooter.m in Sources */,
 				CB82FD801B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21851B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EDB59581B32F70400723DF9 /* UIView+Extension.m in Sources */,
 				CBDE1D671B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				7EDB59591B32F70400723DF9 /* EXTConcreteProtocol.m in Sources */,
@@ -27390,15 +27374,14 @@
 				CB1429851B7A677A00B72069 /* DBVenueViewController.m in Sources */,
 				CB1429861B7A677A00B72069 /* DBDeliveryViewController.m in Sources */,
 				CB1429871B7A677A00B72069 /* DBPromoManager.m in Sources */,
-				7EB911CA1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB1429881B7A677A00B72069 /* DBMenuPositionModifierItem.m in Sources */,
 				CB1429891B7A677A00B72069 /* DBOrderItemNotesCell.m in Sources */,
 				CB14298A1B7A677A00B72069 /* DBDiscountMessageCell.m in Sources */,
 				CB14298B1B7A677A00B72069 /* DBNewOrderBonusesView.m in Sources */,
 				CB14298C1B7A677A00B72069 /* DoubleB.xcdatamodeld in Sources */,
 				CB14298D1B7A677A00B72069 /* EXTScope.m in Sources */,
-				7EB912121B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB14298E1B7A677A00B72069 /* DBTimePickerView.m in Sources */,
+				7EB911411B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB14298F1B7A677A00B72069 /* NSString+LanguageFeature.m in Sources */,
 				CB1429901B7A677A00B72069 /* DBCategoryPickerCell.m in Sources */,
 				CB1429911B7A677A00B72069 /* AppDelegate.m in Sources */,
@@ -27438,11 +27421,11 @@
 				CB1429B31B7A677A00B72069 /* DBMenu.m in Sources */,
 				CB1429B41B7A677A00B72069 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB1429B51B7A677A00B72069 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911EE1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB1429B61B7A677A00B72069 /* DBCardsViewController.m in Sources */,
 				CB1429B71B7A677A00B72069 /* UIViewController+DBCardManagement.m in Sources */,
 				CB1429B81B7A677A00B72069 /* (null) in Sources */,
 				CB1429B91B7A677A00B72069 /* DBNewOrderViewController.m in Sources */,
+				CB1429BA1B7A677A00B72069 /* ViewManager.m in Sources */,
 				CB1429BB1B7A677A00B72069 /* DBNewOrderNDAView.m in Sources */,
 				CB1429BC1B7A677A00B72069 /* PositionCollectionViewCell.m in Sources */,
 				7EB9118F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -27454,6 +27437,7 @@
 				CB1429C21B7A677A00B72069 /* DBProfileViewController.m in Sources */,
 				CB1429C31B7A677A00B72069 /* DBTableItemInactivityView.m in Sources */,
 				CB1429C41B7A677A00B72069 /* DBCompanyInfo.m in Sources */,
+				CB1429C51B7A677A00B72069 /* ApplicationManager.m in Sources */,
 				CB1429C61B7A677A00B72069 /* LocationHelper.m in Sources */,
 				CB1429C71B7A677A00B72069 /* DBTabBarController.m in Sources */,
 				CB1429C81B7A677A00B72069 /* IHSecureStore.m in Sources */,
@@ -27476,7 +27460,6 @@
 				CB1429D91B7A677A00B72069 /* DBOrderBarButtonView.m in Sources */,
 				CB1429DA1B7A677A00B72069 /* NSObject+Encode.m in Sources */,
 				CB6981B31B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912361B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB1429DB1B7A677A00B72069 /* DBConstants.m in Sources */,
 				CB1429DC1B7A677A00B72069 /* DBPositionModifierPicker.m in Sources */,
 				CB1429DD1B7A677A00B72069 /* DBDeliveryType.m in Sources */,
@@ -27492,6 +27475,7 @@
 				CB1429E71B7A677A00B72069 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB1429E81B7A677A00B72069 /* DBOrderViewFooter.m in Sources */,
 				CB1429E91B7A677A00B72069 /* DBCardCell.m in Sources */,
+				CB1429EA1B7A677A00B72069 /* ViewControllerManager.m in Sources */,
 				CB1429EB1B7A677A00B72069 /* UIView+Extension.m in Sources */,
 				CB1429EC1B7A677A00B72069 /* DBBonusPositionsViewController.m in Sources */,
 				CB1429ED1B7A677A00B72069 /* EXTConcreteProtocol.m in Sources */,
@@ -27534,15 +27518,14 @@
 				CB142B081B7A6A4D00B72069 /* DBVenueViewController.m in Sources */,
 				CB142B091B7A6A4D00B72069 /* DBDeliveryViewController.m in Sources */,
 				CB142B0A1B7A6A4D00B72069 /* DBPromoManager.m in Sources */,
-				7EB911CB1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB142B0B1B7A6A4D00B72069 /* DBMenuPositionModifierItem.m in Sources */,
 				CB142B0C1B7A6A4D00B72069 /* DBOrderItemNotesCell.m in Sources */,
 				CB142B0D1B7A6A4D00B72069 /* DBDiscountMessageCell.m in Sources */,
 				CB142B0E1B7A6A4D00B72069 /* DBNewOrderBonusesView.m in Sources */,
 				CB142B0F1B7A6A4D00B72069 /* DoubleB.xcdatamodeld in Sources */,
 				CB142B101B7A6A4D00B72069 /* EXTScope.m in Sources */,
-				7EB912131B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB142B111B7A6A4D00B72069 /* DBTimePickerView.m in Sources */,
+				7EB911421B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB142B121B7A6A4D00B72069 /* NSString+LanguageFeature.m in Sources */,
 				CB142B131B7A6A4D00B72069 /* DBCategoryPickerCell.m in Sources */,
 				CB142B141B7A6A4D00B72069 /* AppDelegate.m in Sources */,
@@ -27582,11 +27565,11 @@
 				CB142B361B7A6A4D00B72069 /* DBMenu.m in Sources */,
 				CB142B371B7A6A4D00B72069 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB142B381B7A6A4D00B72069 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911EF1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB142B391B7A6A4D00B72069 /* DBCardsViewController.m in Sources */,
 				CB142B3A1B7A6A4D00B72069 /* UIViewController+DBCardManagement.m in Sources */,
 				CB142B3B1B7A6A4D00B72069 /* (null) in Sources */,
 				CB142B3C1B7A6A4D00B72069 /* DBNewOrderViewController.m in Sources */,
+				CB142B3D1B7A6A4D00B72069 /* ViewManager.m in Sources */,
 				CB142B3E1B7A6A4D00B72069 /* DBNewOrderNDAView.m in Sources */,
 				CB142B3F1B7A6A4D00B72069 /* PositionCollectionViewCell.m in Sources */,
 				7EB911901B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -27598,6 +27581,7 @@
 				CB142B451B7A6A4D00B72069 /* DBProfileViewController.m in Sources */,
 				CB142B461B7A6A4D00B72069 /* DBTableItemInactivityView.m in Sources */,
 				CB142B471B7A6A4D00B72069 /* DBCompanyInfo.m in Sources */,
+				CB142B481B7A6A4D00B72069 /* ApplicationManager.m in Sources */,
 				CB142B491B7A6A4D00B72069 /* LocationHelper.m in Sources */,
 				CB142B4A1B7A6A4D00B72069 /* DBTabBarController.m in Sources */,
 				CB142B4B1B7A6A4D00B72069 /* IHSecureStore.m in Sources */,
@@ -27620,7 +27604,6 @@
 				CB142B5C1B7A6A4D00B72069 /* DBOrderBarButtonView.m in Sources */,
 				CB142B5D1B7A6A4D00B72069 /* NSObject+Encode.m in Sources */,
 				CB6981B41B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912371B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB142B5E1B7A6A4D00B72069 /* DBConstants.m in Sources */,
 				CB142B5F1B7A6A4D00B72069 /* DBPositionModifierPicker.m in Sources */,
 				CB142B601B7A6A4D00B72069 /* DBDeliveryType.m in Sources */,
@@ -27636,6 +27619,7 @@
 				CB142B6A1B7A6A4D00B72069 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB142B6B1B7A6A4D00B72069 /* DBOrderViewFooter.m in Sources */,
 				CB142B6C1B7A6A4D00B72069 /* DBCardCell.m in Sources */,
+				CB142B6D1B7A6A4D00B72069 /* ViewControllerManager.m in Sources */,
 				CB142B6E1B7A6A4D00B72069 /* UIView+Extension.m in Sources */,
 				CB142B6F1B7A6A4D00B72069 /* DBBonusPositionsViewController.m in Sources */,
 				CB142B701B7A6A4D00B72069 /* EXTConcreteProtocol.m in Sources */,
@@ -27671,6 +27655,7 @@
 				CB82FD481B443094000BBE55 /* DBPayPalManager.m in Sources */,
 				CB1430EE1B0E371A00DD50C7 /* main.m in Sources */,
 				CB1430EF1B0E371A00DD50C7 /* DBNewOrderAdditionalInfoView.m in Sources */,
+				CBDE21A81B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB1430F01B0E371A00DD50C7 /* NSString+DoubleB.m in Sources */,
 				CB1430F21B0E371A00DD50C7 /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
 				CB1430F41B0E371A00DD50C7 /* DBMenuPosition.m in Sources */,
@@ -27684,8 +27669,8 @@
 				CBD14B7C1B148ED3005AEAFE /* DBCoffeeAutomationSettingsViewController.m in Sources */,
 				CBDE1DD61B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CB97829D1B1DF80B000B5625 /* DBPromoCell.m in Sources */,
+				7EB911221B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB1430FD1B0E371A00DD50C7 /* EXTScope.m in Sources */,
-				7EB911F31B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB1430FE1B0E371A00DD50C7 /* DBTimePickerView.m in Sources */,
 				CB1430FF1B0E371A00DD50C7 /* AppDelegate.m in Sources */,
 				CB1431001B0E371A00DD50C7 /* DBOrderViewController.m in Sources */,
@@ -27713,7 +27698,6 @@
 				CB1431111B0E371A00DD50C7 /* DBOrderItemCell.m in Sources */,
 				CB1431121B0E371A00DD50C7 /* DBBeaconObserver.m in Sources */,
 				CB1431131B0E371A00DD50C7 /* EXTSelectorChecking.m in Sources */,
-				7EB911CF1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBDE1DF51B7286540090A347 /* CategoriesTVController.m in Sources */,
 				CB1431141B0E371A00DD50C7 /* NSInvocation+EXT.m in Sources */,
 				CB1431151B0E371A00DD50C7 /* UIColor+Brandbook.m in Sources */,
@@ -27731,8 +27715,8 @@
 				CB14311E1B0E371A00DD50C7 /* DBNewOrderViewController.m in Sources */,
 				CB1431201B0E371A00DD50C7 /* DBNewOrderNDAView.m in Sources */,
 				CB1431211B0E371A00DD50C7 /* DBServerAPI.m in Sources */,
+				CBDE21781B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB9782911B1DE9A6000B5625 /* DBSettingsCell.m in Sources */,
-				7EB911AB1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB1431231B0E371A00DD50C7 /* DBBarButtonItem.m in Sources */,
 				7E47E40C1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CB1431241B0E371A00DD50C7 /* DBProfileViewController.m in Sources */,
@@ -27746,7 +27730,6 @@
 				CB14312A1B0E371A00DD50C7 /* LocationHelper.m in Sources */,
 				CB14312B1B0E371A00DD50C7 /* DBTabBarController.m in Sources */,
 				CB14312C1B0E371A00DD50C7 /* IHSecureStore.m in Sources */,
-				7EB912171B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB1433A81B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
 				CB14312D1B0E371A00DD50C7 /* Venue.m in Sources */,
 				CB14312F1B0E371A00DD50C7 /* IHPaymentClient.m in Sources */,
@@ -27785,6 +27768,7 @@
 				CB9782991B1DF74D000B5625 /* DBPromosListViewController.m in Sources */,
 				CB1431491B0E371A00DD50C7 /* CacheHelper.m in Sources */,
 				CB14314B1B0E371A00DD50C7 /* DBVenuesTableViewController.m in Sources */,
+				CB2423521B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB9104ED1B19BC2B00506235 /* UIViewController+AlertView.m in Sources */,
 				CB14314E1B0E371A00DD50C7 /* DBProfileCell.m in Sources */,
 				CB9104F81B1B187F00506235 /* DoubleB.xcdatamodeld in Sources */,
@@ -27815,6 +27799,7 @@
 				CB1432511B0F1BBB00DD50C7 /* main.m in Sources */,
 				CB9782961B1DF417000B5625 /* DBSettingsCell.m in Sources */,
 				CB1432521B0F1BBB00DD50C7 /* DBNewOrderAdditionalInfoView.m in Sources */,
+				CBDE217E1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB1432531B0F1BBB00DD50C7 /* NSString+DoubleB.m in Sources */,
 				CBDE1DDC1B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CB1432551B0F1BBB00DD50C7 /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
@@ -27824,6 +27809,7 @@
 				CB14325A1B0F1BBB00DD50C7 /* DBMenuPositionModifierItem.m in Sources */,
 				CB14325B1B0F1BBB00DD50C7 /* DBOrderItemNotesCell.m in Sources */,
 				CB14325C1B0F1BBB00DD50C7 /* DBDiscountMessageCell.m in Sources */,
+				CBDE21AE1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1D9E1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB14325E1B0F1BBB00DD50C7 /* DBNewOrderBonusesView.m in Sources */,
 				CB9104FD1B1B188600506235 /* DoubleB.xcdatamodeld in Sources */,
@@ -27863,6 +27849,7 @@
 				7EB911761B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB1432771B0F1BBB00DD50C7 /* EXTSelectorChecking.m in Sources */,
 				CBDE21CD1B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB2423581B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB1432781B0F1BBB00DD50C7 /* NSInvocation+EXT.m in Sources */,
 				CB1432791B0F1BBB00DD50C7 /* UIColor+Brandbook.m in Sources */,
 				CB14327A1B0F1BBB00DD50C7 /* DBCompanyInfoViewController.m in Sources */,
@@ -27905,19 +27892,16 @@
 				CB1432981B0F1BBB00DD50C7 /* UIImage+ImageEffects.m in Sources */,
 				CB1432991B0F1BBB00DD50C7 /* DBSettingsTableViewController.m in Sources */,
 				CB14329A1B0F1BBB00DD50C7 /* UIView+SnapshotAdditions.m in Sources */,
-				7EB9121D1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB9782AD1B1DF812000B5625 /* DBPromosListViewController.m in Sources */,
 				CB14329B1B0F1BBB00DD50C7 /* DBOrderViewHeader.m in Sources */,
 				CB14329C1B0F1BBB00DD50C7 /* IHWebPageViewController.m in Sources */,
 				CB64FFA41B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB69819A1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB14329D1B0F1BBB00DD50C7 /* DBOrderBarButtonView.m in Sources */,
-				7EB911B11B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB14329F1B0F1BBB00DD50C7 /* DBConstants.m in Sources */,
 				CB1433AD1B13267A00DD50C7 /* DBDeliveryType.m in Sources */,
+				7EB911281B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB1432A11B0F1BBB00DD50C7 /* OrderItem.m in Sources */,
-				7EB911F91B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D51B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBDE21211B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB1432A41B0F1BBB00DD50C7 /* DBPopupTextView.m in Sources */,
 				7E47E4171B1DEBAB001432D9 /* DBDeliveryViewController.m in Sources */,
@@ -27966,15 +27950,14 @@
 				CB194C1D1B6BAECE0085ECF8 /* DBVenueViewController.m in Sources */,
 				CB194C1E1B6BAECE0085ECF8 /* DBDeliveryViewController.m in Sources */,
 				CBDE21E21B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C61B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB194C1F1B6BAECE0085ECF8 /* DBMenuPositionModifierItem.m in Sources */,
 				CB194C201B6BAECE0085ECF8 /* DBOrderItemNotesCell.m in Sources */,
 				CB194C211B6BAECE0085ECF8 /* DBDiscountMessageCell.m in Sources */,
 				CB194C221B6BAECE0085ECF8 /* DBNewOrderBonusesView.m in Sources */,
 				CB194C231B6BAECE0085ECF8 /* DoubleB.xcdatamodeld in Sources */,
 				CB194C251B6BAECE0085ECF8 /* EXTScope.m in Sources */,
-				7EB9120E1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB194C261B6BAECE0085ECF8 /* DBTimePickerView.m in Sources */,
+				7EB9113D1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB194C271B6BAECE0085ECF8 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207C1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB194C281B6BAECE0085ECF8 /* AppDelegate.m in Sources */,
@@ -28014,11 +27997,11 @@
 				CB194C441B6BAECE0085ECF8 /* DBMenu.m in Sources */,
 				CB194C451B6BAECE0085ECF8 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB194C461B6BAECE0085ECF8 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911EA1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB194C471B6BAECE0085ECF8 /* DBCardsViewController.m in Sources */,
 				CB194C481B6BAECE0085ECF8 /* UIViewController+DBCardManagement.m in Sources */,
 				CB194C491B6BAECE0085ECF8 /* (null) in Sources */,
 				CB194C4A1B6BAECE0085ECF8 /* DBNewOrderViewController.m in Sources */,
+				CB24236D1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB194C4C1B6BAECE0085ECF8 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21361B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9118B1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -28030,6 +28013,7 @@
 				CB194C501B6BAECE0085ECF8 /* DBProfileViewController.m in Sources */,
 				CB194C511B6BAECE0085ECF8 /* DBTableItemInactivityView.m in Sources */,
 				CB194C531B6BAECE0085ECF8 /* DBCompanyInfo.m in Sources */,
+				CBDE21C31B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB194C541B6BAECE0085ECF8 /* LocationHelper.m in Sources */,
 				CB194C551B6BAECE0085ECF8 /* DBTabBarController.m in Sources */,
 				CB194C561B6BAECE0085ECF8 /* IHSecureStore.m in Sources */,
@@ -28052,7 +28036,6 @@
 				CB194C641B6BAECE0085ECF8 /* DBOrderBarButtonView.m in Sources */,
 				CB194C651B6BAECE0085ECF8 /* NSObject+Encode.m in Sources */,
 				CB6981AF1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912321B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB194C671B6BAECE0085ECF8 /* DBConstants.m in Sources */,
 				CBDE1EAB1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB194C681B6BAECE0085ECF8 /* DBDeliveryType.m in Sources */,
@@ -28068,6 +28051,7 @@
 				CBDE1DB31B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB194C721B6BAECE0085ECF8 /* DBOrderViewFooter.m in Sources */,
 				CB194C731B6BAECE0085ECF8 /* DBCardCell.m in Sources */,
+				CBDE21931B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB194C751B6BAECE0085ECF8 /* UIView+Extension.m in Sources */,
 				CBDE1D751B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB194C761B6BAECE0085ECF8 /* EXTConcreteProtocol.m in Sources */,
@@ -28110,15 +28094,14 @@
 				CB194D8E1B6BC2650085ECF8 /* DBVenueViewController.m in Sources */,
 				CB194D8F1B6BC2650085ECF8 /* DBDeliveryViewController.m in Sources */,
 				CBDE21E31B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C71B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB194D901B6BC2650085ECF8 /* DBMenuPositionModifierItem.m in Sources */,
 				CB194D911B6BC2650085ECF8 /* DBOrderItemNotesCell.m in Sources */,
 				CB194D921B6BC2650085ECF8 /* DBDiscountMessageCell.m in Sources */,
 				CB194D931B6BC2650085ECF8 /* DBNewOrderBonusesView.m in Sources */,
 				CB194D941B6BC2650085ECF8 /* DoubleB.xcdatamodeld in Sources */,
 				CB194D961B6BC2650085ECF8 /* EXTScope.m in Sources */,
-				7EB9120F1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB194D971B6BC2650085ECF8 /* DBTimePickerView.m in Sources */,
+				7EB9113E1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB194D981B6BC2650085ECF8 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207D1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB194D991B6BC2650085ECF8 /* AppDelegate.m in Sources */,
@@ -28158,11 +28141,11 @@
 				CB194DB51B6BC2650085ECF8 /* DBMenu.m in Sources */,
 				CB194DB61B6BC2650085ECF8 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB194DB71B6BC2650085ECF8 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911EB1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB194DB81B6BC2650085ECF8 /* DBCardsViewController.m in Sources */,
 				CB194DB91B6BC2650085ECF8 /* UIViewController+DBCardManagement.m in Sources */,
 				CB194DBA1B6BC2650085ECF8 /* (null) in Sources */,
 				CB194DBB1B6BC2650085ECF8 /* DBNewOrderViewController.m in Sources */,
+				CB24236E1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB194DBD1B6BC2650085ECF8 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21371B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9118C1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -28174,6 +28157,7 @@
 				CB194DC11B6BC2650085ECF8 /* DBProfileViewController.m in Sources */,
 				CB194DC21B6BC2650085ECF8 /* DBTableItemInactivityView.m in Sources */,
 				CB194DC41B6BC2650085ECF8 /* DBCompanyInfo.m in Sources */,
+				CBDE21C41B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB194DC51B6BC2650085ECF8 /* LocationHelper.m in Sources */,
 				CB194DC61B6BC2650085ECF8 /* DBTabBarController.m in Sources */,
 				CB194DC71B6BC2650085ECF8 /* IHSecureStore.m in Sources */,
@@ -28196,7 +28180,6 @@
 				CB194DD51B6BC2650085ECF8 /* DBOrderBarButtonView.m in Sources */,
 				CB194DD61B6BC2650085ECF8 /* NSObject+Encode.m in Sources */,
 				CB6981B01B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912331B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB194DD81B6BC2650085ECF8 /* DBConstants.m in Sources */,
 				CBDE1EAC1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB194DD91B6BC2650085ECF8 /* DBDeliveryType.m in Sources */,
@@ -28212,6 +28195,7 @@
 				CBDE1DB41B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB194DE31B6BC2650085ECF8 /* DBOrderViewFooter.m in Sources */,
 				CB194DE41B6BC2650085ECF8 /* DBCardCell.m in Sources */,
+				CBDE21941B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB194DE61B6BC2650085ECF8 /* UIView+Extension.m in Sources */,
 				CBDE1D761B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB194DE71B6BC2650085ECF8 /* EXTConcreteProtocol.m in Sources */,
@@ -28254,15 +28238,14 @@
 				CB194EFF1B6BD75B0085ECF8 /* DBVenueViewController.m in Sources */,
 				CB194F001B6BD75B0085ECF8 /* DBDeliveryViewController.m in Sources */,
 				CBDE21E41B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C81B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB194F011B6BD75B0085ECF8 /* DBMenuPositionModifierItem.m in Sources */,
 				CB194F021B6BD75B0085ECF8 /* DBOrderItemNotesCell.m in Sources */,
 				CB194F031B6BD75B0085ECF8 /* DBDiscountMessageCell.m in Sources */,
 				CB194F041B6BD75B0085ECF8 /* DBNewOrderBonusesView.m in Sources */,
 				CB194F051B6BD75B0085ECF8 /* DoubleB.xcdatamodeld in Sources */,
 				CB194F071B6BD75B0085ECF8 /* EXTScope.m in Sources */,
-				7EB912101B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB194F081B6BD75B0085ECF8 /* DBTimePickerView.m in Sources */,
+				7EB9113F1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB194F091B6BD75B0085ECF8 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207E1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB194F0A1B6BD75B0085ECF8 /* AppDelegate.m in Sources */,
@@ -28302,11 +28285,11 @@
 				CB194F261B6BD75B0085ECF8 /* DBMenu.m in Sources */,
 				CB194F271B6BD75B0085ECF8 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB194F281B6BD75B0085ECF8 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911EC1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB194F291B6BD75B0085ECF8 /* DBCardsViewController.m in Sources */,
 				CB194F2A1B6BD75B0085ECF8 /* UIViewController+DBCardManagement.m in Sources */,
 				CB194F2B1B6BD75B0085ECF8 /* (null) in Sources */,
 				CB194F2C1B6BD75B0085ECF8 /* DBNewOrderViewController.m in Sources */,
+				CB24236F1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB194F2E1B6BD75B0085ECF8 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21381B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9118D1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -28318,6 +28301,7 @@
 				CB194F321B6BD75B0085ECF8 /* DBProfileViewController.m in Sources */,
 				CB194F331B6BD75B0085ECF8 /* DBTableItemInactivityView.m in Sources */,
 				CB194F351B6BD75B0085ECF8 /* DBCompanyInfo.m in Sources */,
+				CBDE21C51B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB194F361B6BD75B0085ECF8 /* LocationHelper.m in Sources */,
 				CB194F371B6BD75B0085ECF8 /* DBTabBarController.m in Sources */,
 				CB194F381B6BD75B0085ECF8 /* IHSecureStore.m in Sources */,
@@ -28340,7 +28324,6 @@
 				CB194F461B6BD75B0085ECF8 /* DBOrderBarButtonView.m in Sources */,
 				CB194F471B6BD75B0085ECF8 /* NSObject+Encode.m in Sources */,
 				CB6981B11B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912341B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB194F491B6BD75B0085ECF8 /* DBConstants.m in Sources */,
 				CBDE1EAD1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB194F4A1B6BD75B0085ECF8 /* DBDeliveryType.m in Sources */,
@@ -28356,6 +28339,7 @@
 				CBDE1DB51B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB194F541B6BD75B0085ECF8 /* DBOrderViewFooter.m in Sources */,
 				CB194F551B6BD75B0085ECF8 /* DBCardCell.m in Sources */,
+				CBDE21951B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB194F571B6BD75B0085ECF8 /* UIView+Extension.m in Sources */,
 				CBDE1D771B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB194F581B6BD75B0085ECF8 /* EXTConcreteProtocol.m in Sources */,
@@ -28390,6 +28374,7 @@
 				CB1AF76C1AE10E6900FA3224 /* main.m in Sources */,
 				CB1AF76D1AE10E6900FA3224 /* DBNewOrderAdditionalInfoView.m in Sources */,
 				CB1AF76E1AE10E6900FA3224 /* NSString+DoubleB.m in Sources */,
+				CBDE217B1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB1AF76F1AE10E6900FA3224 /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
 				CB9105021B1C7DB000506235 /* UIView+RoundedCorners.m in Sources */,
 				CBDE1DD91B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
@@ -28399,6 +28384,7 @@
 				CB1AF7751AE10E6900FA3224 /* DBMenuPositionModifierItem.m in Sources */,
 				CB1AF7761AE10E6900FA3224 /* DBOrderItemNotesCell.m in Sources */,
 				CB1AF7771AE10E6900FA3224 /* DBDiscountMessageCell.m in Sources */,
+				CBDE21AB1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1D9B1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB517EA71AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
 				CB1AF77A1AE10E6900FA3224 /* EXTScope.m in Sources */,
@@ -28438,6 +28424,7 @@
 				7EB911731B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB1AF78D1AE10E6900FA3224 /* DBOrderItemCell.m in Sources */,
 				CBDE21CA1B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB2423551B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB1AF78E1AE10E6900FA3224 /* DBBeaconObserver.m in Sources */,
 				CB1AF78F1AE10E6900FA3224 /* EXTSelectorChecking.m in Sources */,
 				CB1AF7901AE10E6900FA3224 /* NSInvocation+EXT.m in Sources */,
@@ -28480,19 +28467,16 @@
 				CB1AF7AC1AE10E6900FA3224 /* DBOrderReturnView.m in Sources */,
 				CB1AF7AD1AE10E6900FA3224 /* UIImage+ImageEffects.m in Sources */,
 				CB1AF7AE1AE10E6900FA3224 /* DBSettingsTableViewController.m in Sources */,
-				7EB9121A1B861ECF005C1012 /* ViewManager.m in Sources */,
 				7E47E4141B1DEBA8001432D9 /* DBDeliveryViewController.m in Sources */,
 				CB1AF7AF1AE10E6900FA3224 /* UIView+SnapshotAdditions.m in Sources */,
 				CB1AF7B01AE10E6900FA3224 /* DBOrderViewHeader.m in Sources */,
 				CB1AF7B11AE10E6900FA3224 /* IHWebPageViewController.m in Sources */,
 				CB6981971B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CBE162B91AE13C92006BB81F /* DBOrderBarButtonView.m in Sources */,
-				7EB911AE1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB1AF7B21AE10E6900FA3224 /* DBConstants.m in Sources */,
 				CB1AF7B41AE10E6900FA3224 /* OrderItem.m in Sources */,
+				7EB911251B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB1AF7B71AE10E6900FA3224 /* DBPopupTextView.m in Sources */,
-				7EB911F61B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D21B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7E47E40E1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDE211E1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB1AF7B81AE10E6900FA3224 /* CoreDataHelper.m in Sources */,
@@ -28541,15 +28525,14 @@
 				CB2421BC1B7A1D4D00A02721 /* DBVenueViewController.m in Sources */,
 				CB2421BD1B7A1D4D00A02721 /* DBDeliveryViewController.m in Sources */,
 				CB2421BE1B7A1D4D00A02721 /* DBPromoManager.m in Sources */,
-				7EB911AA1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB2421BF1B7A1D4D00A02721 /* DBMenuPositionModifierItem.m in Sources */,
 				CB2421C01B7A1D4D00A02721 /* DBOrderItemNotesCell.m in Sources */,
 				CB2421C11B7A1D4D00A02721 /* DBDiscountMessageCell.m in Sources */,
 				CB2421C21B7A1D4D00A02721 /* DBNewOrderBonusesView.m in Sources */,
 				CB2421C31B7A1D4D00A02721 /* DoubleB.xcdatamodeld in Sources */,
 				CB2421C41B7A1D4D00A02721 /* EXTScope.m in Sources */,
-				7EB911F21B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB2421C51B7A1D4D00A02721 /* DBTimePickerView.m in Sources */,
+				7EB911211B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB2421C61B7A1D4D00A02721 /* NSString+LanguageFeature.m in Sources */,
 				CB2421C71B7A1D4D00A02721 /* DBCategoryPickerCell.m in Sources */,
 				CB2421C81B7A1D4D00A02721 /* AppDelegate.m in Sources */,
@@ -28589,11 +28572,11 @@
 				CB2421EA1B7A1D4D00A02721 /* DBMenu.m in Sources */,
 				CB2421EB1B7A1D4D00A02721 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB2421EC1B7A1D4D00A02721 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911CE1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB2421ED1B7A1D4D00A02721 /* DBCardsViewController.m in Sources */,
 				CB2421EE1B7A1D4D00A02721 /* UIViewController+DBCardManagement.m in Sources */,
 				CB2421EF1B7A1D4D00A02721 /* (null) in Sources */,
 				CB2421F01B7A1D4D00A02721 /* DBNewOrderViewController.m in Sources */,
+				CB2423511B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB2421F11B7A1D4D00A02721 /* DBNewOrderNDAView.m in Sources */,
 				CB2421F21B7A1D4D00A02721 /* PositionCollectionViewCell.m in Sources */,
 				7EB9116F1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -28605,6 +28588,7 @@
 				CB2421F81B7A1D4D00A02721 /* DBProfileViewController.m in Sources */,
 				CB2421F91B7A1D4D00A02721 /* DBTableItemInactivityView.m in Sources */,
 				CB2421FA1B7A1D4D00A02721 /* DBCompanyInfo.m in Sources */,
+				CB2421FB1B7A1D4D00A02721 /* ApplicationManager.m in Sources */,
 				CB2421FC1B7A1D4D00A02721 /* LocationHelper.m in Sources */,
 				CB2421FD1B7A1D4D00A02721 /* DBTabBarController.m in Sources */,
 				CB2421FE1B7A1D4D00A02721 /* IHSecureStore.m in Sources */,
@@ -28627,7 +28611,6 @@
 				CB24220F1B7A1D4D00A02721 /* DBOrderBarButtonView.m in Sources */,
 				CB2422101B7A1D4D00A02721 /* NSObject+Encode.m in Sources */,
 				CB6981931B7DE8A800B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912161B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB2422111B7A1D4D00A02721 /* DBConstants.m in Sources */,
 				CB2422121B7A1D4D00A02721 /* DBPositionModifierPicker.m in Sources */,
 				CB2422131B7A1D4D00A02721 /* DBDeliveryType.m in Sources */,
@@ -28643,6 +28626,7 @@
 				CB24221D1B7A1D4D00A02721 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB24221E1B7A1D4D00A02721 /* DBOrderViewFooter.m in Sources */,
 				CB24221F1B7A1D4D00A02721 /* DBCardCell.m in Sources */,
+				CB2422201B7A1D4D00A02721 /* ViewControllerManager.m in Sources */,
 				CB2422211B7A1D4D00A02721 /* UIView+Extension.m in Sources */,
 				CB2422221B7A1D4D00A02721 /* DBBonusPositionsViewController.m in Sources */,
 				CB2422231B7A1D4D00A02721 /* EXTConcreteProtocol.m in Sources */,
@@ -28677,6 +28661,7 @@
 				CB3BA2DA1B20589300F320CA /* main.m in Sources */,
 				CB3BA2DB1B20589300F320CA /* DBSettingsCell.m in Sources */,
 				CB3BA2DC1B20589300F320CA /* DBNewOrderAdditionalInfoView.m in Sources */,
+				CBDE217F1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB3BA2DD1B20589300F320CA /* NSString+DoubleB.m in Sources */,
 				CBDE1DDD1B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CB3BA2DF1B20589300F320CA /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
@@ -28686,6 +28671,7 @@
 				7E21EC041B28543100AF7859 /* DBDeliveryViewController.m in Sources */,
 				CB3BA2E41B20589300F320CA /* DBMenuPositionModifierItem.m in Sources */,
 				CB3BA2E51B20589300F320CA /* DBOrderItemNotesCell.m in Sources */,
+				CBDE21AF1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1D9F1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB3BA2E61B20589300F320CA /* DBDiscountMessageCell.m in Sources */,
 				CB3BA2E81B20589300F320CA /* DBNewOrderBonusesView.m in Sources */,
@@ -28725,6 +28711,7 @@
 				7EB911771B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB3BA3031B20589300F320CA /* DBBeaconObserver.m in Sources */,
 				CBDE21CE1B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB2423591B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB3BA3041B20589300F320CA /* EXTSelectorChecking.m in Sources */,
 				CB3BA3051B20589300F320CA /* NSInvocation+EXT.m in Sources */,
 				CB3BA3061B20589300F320CA /* UIColor+Brandbook.m in Sources */,
@@ -28767,19 +28754,16 @@
 				CB3BA3261B20589300F320CA /* UIImage+ImageEffects.m in Sources */,
 				CB3BA3271B20589300F320CA /* DBSettingsTableViewController.m in Sources */,
 				CB3BA3281B20589300F320CA /* UIView+SnapshotAdditions.m in Sources */,
-				7EB9121E1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB3BA3291B20589300F320CA /* DBPromosListViewController.m in Sources */,
 				CB3BA32A1B20589300F320CA /* DBOrderViewHeader.m in Sources */,
 				CB3BA32B1B20589300F320CA /* IHWebPageViewController.m in Sources */,
 				CB3BA32C1B20589300F320CA /* DBOrderBarButtonView.m in Sources */,
 				CB69819B1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA51B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				7EB911B21B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB3BA32E1B20589300F320CA /* DBConstants.m in Sources */,
 				CB3BA32F1B20589300F320CA /* DBDeliveryType.m in Sources */,
+				7EB911291B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB3BA3311B20589300F320CA /* OrderItem.m in Sources */,
-				7EB911FA1B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D61B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB3BA3341B20589300F320CA /* DBPopupTextView.m in Sources */,
 				CBDE21221B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB3BA3351B20589300F320CA /* CoreDataHelper.m in Sources */,
@@ -28820,6 +28804,7 @@
 				CB517B431AEFB6B500A50F5C /* main.m in Sources */,
 				CB517B441AEFB6B500A50F5C /* DBNewOrderAdditionalInfoView.m in Sources */,
 				CB517B451AEFB6B500A50F5C /* NSString+DoubleB.m in Sources */,
+				CBDE217C1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB517B461AEFB6B500A50F5C /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
 				CB9105031B1C7DB000506235 /* UIView+RoundedCorners.m in Sources */,
 				CBDE1DDA1B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
@@ -28829,6 +28814,7 @@
 				CB517B4C1AEFB6B500A50F5C /* DBMenuPositionModifierItem.m in Sources */,
 				CB517B4D1AEFB6B500A50F5C /* DBOrderItemNotesCell.m in Sources */,
 				CB517B4E1AEFB6B500A50F5C /* DBDiscountMessageCell.m in Sources */,
+				CBDE21AC1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1D9C1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB517EA81AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
 				CB517B511AEFB6B500A50F5C /* EXTScope.m in Sources */,
@@ -28868,6 +28854,7 @@
 				7EB911741B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB517B651AEFB6B500A50F5C /* DBOrderItemCell.m in Sources */,
 				CBDE21CB1B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB2423561B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB517B661AEFB6B500A50F5C /* DBBeaconObserver.m in Sources */,
 				CB517B671AEFB6B500A50F5C /* EXTSelectorChecking.m in Sources */,
 				CB517B681AEFB6B500A50F5C /* NSInvocation+EXT.m in Sources */,
@@ -28910,19 +28897,16 @@
 				CB517B851AEFB6B500A50F5C /* DBOrderReturnView.m in Sources */,
 				CB517B861AEFB6B500A50F5C /* UIImage+ImageEffects.m in Sources */,
 				CB517B871AEFB6B500A50F5C /* DBSettingsTableViewController.m in Sources */,
-				7EB9121B1B861ECF005C1012 /* ViewManager.m in Sources */,
 				7E47E4151B1DEBAA001432D9 /* DBDeliveryViewController.m in Sources */,
 				CB517B881AEFB6B500A50F5C /* UIView+SnapshotAdditions.m in Sources */,
 				CB517B891AEFB6B500A50F5C /* DBOrderViewHeader.m in Sources */,
 				CB517B8A1AEFB6B500A50F5C /* IHWebPageViewController.m in Sources */,
 				CB6981981B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB517B8B1AEFB6B500A50F5C /* DBOrderBarButtonView.m in Sources */,
-				7EB911AF1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB517B8C1AEFB6B500A50F5C /* DBConstants.m in Sources */,
 				CB517B8E1AEFB6B500A50F5C /* OrderItem.m in Sources */,
+				7EB911261B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB517B911AEFB6B500A50F5C /* DBPopupTextView.m in Sources */,
-				7EB911F71B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D31B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				7E47E40F1B1DD540001432D9 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDE211F1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB517B921AEFB6B500A50F5C /* CoreDataHelper.m in Sources */,
@@ -28971,15 +28955,14 @@
 				CB5793171B6AB87300B17819 /* DBVenueViewController.m in Sources */,
 				CB5793181B6AB87300B17819 /* DBDeliveryViewController.m in Sources */,
 				CBDE21E01B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C41B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB5793191B6AB87300B17819 /* DBMenuPositionModifierItem.m in Sources */,
 				CB57931A1B6AB87300B17819 /* DBOrderItemNotesCell.m in Sources */,
 				CB57931B1B6AB87300B17819 /* DBDiscountMessageCell.m in Sources */,
 				CB57931C1B6AB87300B17819 /* DBNewOrderBonusesView.m in Sources */,
 				CB57931D1B6AB87300B17819 /* DoubleB.xcdatamodeld in Sources */,
 				CB57931F1B6AB87300B17819 /* EXTScope.m in Sources */,
-				7EB9120C1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB5793201B6AB87300B17819 /* DBTimePickerView.m in Sources */,
+				7EB9113B1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB5793211B6AB87300B17819 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207A1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB5793221B6AB87300B17819 /* AppDelegate.m in Sources */,
@@ -29019,11 +29002,11 @@
 				CB57933E1B6AB87300B17819 /* DBMenu.m in Sources */,
 				CB57933F1B6AB87300B17819 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB5793401B6AB87300B17819 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E81B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB5793411B6AB87300B17819 /* DBCardsViewController.m in Sources */,
 				CB5793421B6AB87300B17819 /* UIViewController+DBCardManagement.m in Sources */,
 				CB5793431B6AB87300B17819 /* (null) in Sources */,
 				CB5793441B6AB87300B17819 /* DBNewOrderViewController.m in Sources */,
+				CB24236B1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB5793461B6AB87300B17819 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21341B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911891B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -29035,6 +29018,7 @@
 				CB57934A1B6AB87300B17819 /* DBProfileViewController.m in Sources */,
 				CB57934B1B6AB87300B17819 /* DBTableItemInactivityView.m in Sources */,
 				CB57934D1B6AB87300B17819 /* DBCompanyInfo.m in Sources */,
+				CBDE21C11B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB57934E1B6AB87300B17819 /* LocationHelper.m in Sources */,
 				CB57934F1B6AB87300B17819 /* DBTabBarController.m in Sources */,
 				CB5793501B6AB87300B17819 /* IHSecureStore.m in Sources */,
@@ -29057,7 +29041,6 @@
 				CB57935E1B6AB87300B17819 /* DBOrderBarButtonView.m in Sources */,
 				CB57935F1B6AB87300B17819 /* NSObject+Encode.m in Sources */,
 				CB6981AD1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912301B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB5793611B6AB87300B17819 /* DBConstants.m in Sources */,
 				CBDE1EA91B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB5793621B6AB87300B17819 /* DBDeliveryType.m in Sources */,
@@ -29073,6 +29056,7 @@
 				CBDE1DB11B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB57936C1B6AB87300B17819 /* DBOrderViewFooter.m in Sources */,
 				CB57936D1B6AB87300B17819 /* DBCardCell.m in Sources */,
+				CBDE21911B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB57936F1B6AB87300B17819 /* UIView+Extension.m in Sources */,
 				CBDE1D731B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB5793701B6AB87300B17819 /* EXTConcreteProtocol.m in Sources */,
@@ -29115,15 +29099,14 @@
 				CB57948E1B6BA76B00B17819 /* DBVenueViewController.m in Sources */,
 				CB57948F1B6BA76B00B17819 /* DBDeliveryViewController.m in Sources */,
 				CBDE21E11B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C51B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB5794901B6BA76B00B17819 /* DBMenuPositionModifierItem.m in Sources */,
 				CB5794911B6BA76B00B17819 /* DBOrderItemNotesCell.m in Sources */,
 				CB5794921B6BA76B00B17819 /* DBDiscountMessageCell.m in Sources */,
 				CB5794931B6BA76B00B17819 /* DBNewOrderBonusesView.m in Sources */,
 				CB5794941B6BA76B00B17819 /* DoubleB.xcdatamodeld in Sources */,
 				CB5794961B6BA76B00B17819 /* EXTScope.m in Sources */,
-				7EB9120D1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB5794971B6BA76B00B17819 /* DBTimePickerView.m in Sources */,
+				7EB9113C1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB5794981B6BA76B00B17819 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207B1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB5794991B6BA76B00B17819 /* AppDelegate.m in Sources */,
@@ -29163,11 +29146,11 @@
 				CB5794B51B6BA76B00B17819 /* DBMenu.m in Sources */,
 				CB5794B61B6BA76B00B17819 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB5794B71B6BA76B00B17819 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E91B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB5794B81B6BA76B00B17819 /* DBCardsViewController.m in Sources */,
 				CB5794B91B6BA76B00B17819 /* UIViewController+DBCardManagement.m in Sources */,
 				CB5794BA1B6BA76B00B17819 /* (null) in Sources */,
 				CB5794BB1B6BA76B00B17819 /* DBNewOrderViewController.m in Sources */,
+				CB24236C1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB5794BD1B6BA76B00B17819 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21351B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9118A1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -29179,6 +29162,7 @@
 				CB5794C11B6BA76B00B17819 /* DBProfileViewController.m in Sources */,
 				CB5794C21B6BA76B00B17819 /* DBTableItemInactivityView.m in Sources */,
 				CB5794C41B6BA76B00B17819 /* DBCompanyInfo.m in Sources */,
+				CBDE21C21B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB5794C51B6BA76B00B17819 /* LocationHelper.m in Sources */,
 				CB5794C61B6BA76B00B17819 /* DBTabBarController.m in Sources */,
 				CB5794C71B6BA76B00B17819 /* IHSecureStore.m in Sources */,
@@ -29201,7 +29185,6 @@
 				CB5794D51B6BA76B00B17819 /* DBOrderBarButtonView.m in Sources */,
 				CB5794D61B6BA76B00B17819 /* NSObject+Encode.m in Sources */,
 				CB6981AE1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912311B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB5794D81B6BA76B00B17819 /* DBConstants.m in Sources */,
 				CBDE1EAA1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB5794D91B6BA76B00B17819 /* DBDeliveryType.m in Sources */,
@@ -29217,6 +29200,7 @@
 				CBDE1DB21B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB5794E31B6BA76B00B17819 /* DBOrderViewFooter.m in Sources */,
 				CB5794E41B6BA76B00B17819 /* DBCardCell.m in Sources */,
+				CBDE21921B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB5794E61B6BA76B00B17819 /* UIView+Extension.m in Sources */,
 				CBDE1D741B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB5794E71B6BA76B00B17819 /* EXTConcreteProtocol.m in Sources */,
@@ -29251,6 +29235,7 @@
 				CB5AFC231B27209A00904BF7 /* main.m in Sources */,
 				CB5AFC241B27209A00904BF7 /* DBSettingsCell.m in Sources */,
 				CB5AFC251B27209A00904BF7 /* DBNewOrderAdditionalInfoView.m in Sources */,
+				CBDE21801B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB5AFC261B27209A00904BF7 /* NSString+DoubleB.m in Sources */,
 				CBDE1DDE1B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CB5AFC281B27209A00904BF7 /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
@@ -29260,6 +29245,7 @@
 				7E85BD751B2F0B1E000BC2E1 /* DBDeliveryViewController.m in Sources */,
 				CB5AFC2D1B27209A00904BF7 /* DBMenuPositionModifierItem.m in Sources */,
 				CB5AFC2E1B27209A00904BF7 /* DBOrderItemNotesCell.m in Sources */,
+				CBDE21B01B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1DA01B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB5AFC2F1B27209A00904BF7 /* DBDiscountMessageCell.m in Sources */,
 				CB5AFC311B27209A00904BF7 /* DBNewOrderBonusesView.m in Sources */,
@@ -29299,6 +29285,7 @@
 				7EB911781B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB5AFC4C1B27209A00904BF7 /* DBBeaconObserver.m in Sources */,
 				CBDE21CF1B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB24235A1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB5AFC4D1B27209A00904BF7 /* EXTSelectorChecking.m in Sources */,
 				CB5AFC4E1B27209A00904BF7 /* NSInvocation+EXT.m in Sources */,
 				CB5AFC4F1B27209A00904BF7 /* UIColor+Brandbook.m in Sources */,
@@ -29341,19 +29328,16 @@
 				CB5AFC701B27209A00904BF7 /* UIImage+ImageEffects.m in Sources */,
 				CB5AFC711B27209A00904BF7 /* DBSettingsTableViewController.m in Sources */,
 				CB5AFC721B27209A00904BF7 /* UIView+SnapshotAdditions.m in Sources */,
-				7EB9121F1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB5AFC731B27209A00904BF7 /* DBPromosListViewController.m in Sources */,
 				CB5AFC741B27209A00904BF7 /* DBOrderViewHeader.m in Sources */,
 				CB5AFC751B27209A00904BF7 /* IHWebPageViewController.m in Sources */,
 				CB5AFC761B27209A00904BF7 /* DBOrderBarButtonView.m in Sources */,
 				CB69819C1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA61B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				7EB911B31B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB5AFC781B27209A00904BF7 /* DBConstants.m in Sources */,
 				CB5AFC791B27209A00904BF7 /* DBDeliveryType.m in Sources */,
+				7EB9112A1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB5AFC7B1B27209A00904BF7 /* OrderItem.m in Sources */,
-				7EB911FB1B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D71B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB5AFC7E1B27209A00904BF7 /* DBPopupTextView.m in Sources */,
 				CBDE21231B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB5AFC7F1B27209A00904BF7 /* CoreDataHelper.m in Sources */,
@@ -29394,6 +29378,7 @@
 				CB3BA4531B20D6BE00F320CA /* DBPayPalManager.m in Sources */,
 				CB60C0A71AC5AD2600D5E962 /* main.m in Sources */,
 				CB9782921B1DF415000B5625 /* DBSettingsCell.m in Sources */,
+				CBDE217A1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB60C0A81AC5AD2600D5E962 /* DBNewOrderAdditionalInfoView.m in Sources */,
 				CB60C0A91AC5AD2600D5E962 /* NSString+DoubleB.m in Sources */,
 				CBDE1DD81B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
@@ -29403,6 +29388,7 @@
 				CB60C0B11AC5AD2600D5E962 /* DBVenueViewController.m in Sources */,
 				CB60C0B21AC5AD2600D5E962 /* DBMenuPositionModifierItem.m in Sources */,
 				CB60C0B31AC5AD2600D5E962 /* DBOrderItemNotesCell.m in Sources */,
+				CBDE21AA1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1D9A1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB60C0B41AC5AD2600D5E962 /* DBDiscountMessageCell.m in Sources */,
 				CB517EA61AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
@@ -29442,6 +29428,7 @@
 				7EB911721B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB60C0C91AC5AD2600D5E962 /* DBBeaconObserver.m in Sources */,
 				CBDE21C91B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB2423541B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB60C0CA1AC5AD2600D5E962 /* EXTSelectorChecking.m in Sources */,
 				CB60C0CB1AC5AD2600D5E962 /* NSInvocation+EXT.m in Sources */,
 				CB60C0CC1AC5AD2600D5E962 /* UIColor+Brandbook.m in Sources */,
@@ -29484,19 +29471,16 @@
 				CB60C0E21AC5AD2600D5E962 /* DBSettingsTableViewController.m in Sources */,
 				CB60C0E31AC5AD2600D5E962 /* UIView+SnapshotAdditions.m in Sources */,
 				CB9782A91B1DF810000B5625 /* DBPromosListViewController.m in Sources */,
-				7EB912191B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB60C0E41AC5AD2600D5E962 /* DBOrderViewHeader.m in Sources */,
 				CB60C0E51AC5AD2600D5E962 /* IHWebPageViewController.m in Sources */,
 				CBE162B81AE1376F006BB81F /* DBOrderBarButtonView.m in Sources */,
 				CB60C0E61AC5AD2600D5E962 /* DBConstants.m in Sources */,
 				CB6981961B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB1433A91B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
-				7EB911AD1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB60C0E71AC5AD2600D5E962 /* OrderItem.m in Sources */,
 				CB215E281ADC1B8700EF9EEC /* DBPopupTextView.m in Sources */,
+				7EB911241B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				7E47E4131B1DEBA8001432D9 /* DBDeliveryViewController.m in Sources */,
-				7EB911F51B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D11B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBDE211D1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB60C0E91AC5AD2600D5E962 /* CoreDataHelper.m in Sources */,
 				CB60C0EA1AC5AD2600D5E962 /* Compatibility.m in Sources */,
@@ -29537,6 +29521,7 @@
 				CB64FE001B317F760011CEEC /* main.m in Sources */,
 				CB64FE011B317F760011CEEC /* DBSettingsCell.m in Sources */,
 				CB64FE021B317F760011CEEC /* DBNewOrderAdditionalInfoView.m in Sources */,
+				CBDE21831B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB64FE031B317F760011CEEC /* NSString+DoubleB.m in Sources */,
 				CBDE1DE11B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CB64FE051B317F760011CEEC /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
@@ -29546,6 +29531,7 @@
 				CB64FE0A1B317F760011CEEC /* DBDeliveryViewController.m in Sources */,
 				CB64FE0B1B317F760011CEEC /* DBMenuPositionModifierItem.m in Sources */,
 				CB64FE0C1B317F760011CEEC /* DBOrderItemNotesCell.m in Sources */,
+				CBDE21B31B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1DA31B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB64FE0D1B317F760011CEEC /* DBDiscountMessageCell.m in Sources */,
 				CB64FE0F1B317F760011CEEC /* DBNewOrderBonusesView.m in Sources */,
@@ -29585,6 +29571,7 @@
 				7EB9117B1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CB64FE2A1B317F760011CEEC /* DBBeaconObserver.m in Sources */,
 				CBDE21D21B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB24235D1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB64FE2B1B317F760011CEEC /* EXTSelectorChecking.m in Sources */,
 				CB64FE2C1B317F760011CEEC /* NSInvocation+EXT.m in Sources */,
 				CB64FE2D1B317F760011CEEC /* UIColor+Brandbook.m in Sources */,
@@ -29627,19 +29614,16 @@
 				CB64FE4F1B317F760011CEEC /* UIImage+ImageEffects.m in Sources */,
 				CB64FE501B317F760011CEEC /* DBSettingsTableViewController.m in Sources */,
 				CB64FE511B317F760011CEEC /* UIView+SnapshotAdditions.m in Sources */,
-				7EB912221B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB64FE521B317F760011CEEC /* DBPromosListViewController.m in Sources */,
 				CB64FE531B317F760011CEEC /* DBOrderViewHeader.m in Sources */,
 				CB64FE541B317F760011CEEC /* IHWebPageViewController.m in Sources */,
 				CB64FE551B317F760011CEEC /* DBOrderBarButtonView.m in Sources */,
 				CB69819F1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA91B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				7EB911B61B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB64FE581B317F760011CEEC /* DBConstants.m in Sources */,
 				CB64FE591B317F760011CEEC /* DBDeliveryType.m in Sources */,
+				7EB9112D1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB64FE5B1B317F760011CEEC /* OrderItem.m in Sources */,
-				7EB911FE1B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911DA1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB64FE5E1B317F760011CEEC /* DBPopupTextView.m in Sources */,
 				CBDE21261B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CB64FE5F1B317F760011CEEC /* CoreDataHelper.m in Sources */,
@@ -29688,15 +29672,14 @@
 				CB64FFB81B31B7CF0011CEEC /* DBDeliveryViewController.m in Sources */,
 				CB64FFB91B31B7CF0011CEEC /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D31B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911B71B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB64FFBA1B31B7CF0011CEEC /* DBOrderItemNotesCell.m in Sources */,
 				CB64FFBB1B31B7CF0011CEEC /* DBDiscountMessageCell.m in Sources */,
 				CB64FFBD1B31B7CF0011CEEC /* DBNewOrderBonusesView.m in Sources */,
 				CB64FFBE1B31B7CF0011CEEC /* DoubleB.xcdatamodeld in Sources */,
 				CB64FFC11B31B7CF0011CEEC /* EXTScope.m in Sources */,
 				CB64FFC21B31B7CF0011CEEC /* DBTimePickerView.m in Sources */,
-				7EB911FF1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB64FFC31B31B7CF0011CEEC /* NSString+LanguageFeature.m in Sources */,
+				7EB9112E1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB64FFC41B31B7CF0011CEEC /* AppDelegate.m in Sources */,
 				CBDE206D1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB64FFC51B31B7CF0011CEEC /* DBOrderViewController.m in Sources */,
@@ -29736,11 +29719,11 @@
 				CB64FFE11B31B7CF0011CEEC /* DBNewOrderItemAdditionView.m in Sources */,
 				CB64FFE21B31B7CF0011CEEC /* UIViewController+NavigationBarFix.m in Sources */,
 				CB64FFE31B31B7CF0011CEEC /* DBCardsViewController.m in Sources */,
-				7EB911DB1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB64FFE41B31B7CF0011CEEC /* UIViewController+DBCardManagement.m in Sources */,
 				CB64FFE51B31B7CF0011CEEC /* (null) in Sources */,
 				CB64FFE61B31B7CF0011CEEC /* DBNewOrderViewController.m in Sources */,
 				CB64FFE81B31B7CF0011CEEC /* DBNewOrderNDAView.m in Sources */,
+				CB24235E1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB64FFE91B31B7CF0011CEEC /* DBDocumentsViewController.m in Sources */,
 				CBDE21271B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9117C1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -29752,6 +29735,7 @@
 				CB64FFEF1B31B7CF0011CEEC /* DBTableItemInactivityView.m in Sources */,
 				CB64FFF11B31B7CF0011CEEC /* DBCompanyInfo.m in Sources */,
 				CB64FFF21B31B7CF0011CEEC /* LocationHelper.m in Sources */,
+				CBDE21B41B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB64FFF31B31B7CF0011CEEC /* DBTabBarController.m in Sources */,
 				CB64FFF41B31B7CF0011CEEC /* IHSecureStore.m in Sources */,
 				CB64FFF51B31B7CF0011CEEC /* Venue.m in Sources */,
@@ -29774,7 +29758,6 @@
 				CB6400031B31B7CF0011CEEC /* DBOrderBarButtonView.m in Sources */,
 				CB6400041B31B7CF0011CEEC /* NSObject+Encode.m in Sources */,
 				CB6981A01B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912231B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB6400061B31B7CF0011CEEC /* DBConstants.m in Sources */,
 				CBDE1E9C1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB6400071B31B7CF0011CEEC /* DBDeliveryType.m in Sources */,
@@ -29790,6 +29773,7 @@
 				CBDE1DA41B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB6400111B31B7CF0011CEEC /* DBOrderViewFooter.m in Sources */,
 				CB82FD7F1B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21841B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB6400131B31B7CF0011CEEC /* UIView+Extension.m in Sources */,
 				CBDE1D661B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB6400141B31B7CF0011CEEC /* EXTConcreteProtocol.m in Sources */,
@@ -29832,15 +29816,14 @@
 				CB69801A1B7DE33400B12B78 /* DBVenueViewController.m in Sources */,
 				CB69801B1B7DE33400B12B78 /* DBDeliveryViewController.m in Sources */,
 				CB69801C1B7DE33400B12B78 /* DBPromoManager.m in Sources */,
-				7EB911CC1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB69801D1B7DE33400B12B78 /* DBMenuPositionModifierItem.m in Sources */,
 				CB69801E1B7DE33400B12B78 /* DBOrderItemNotesCell.m in Sources */,
 				CB69801F1B7DE33400B12B78 /* DBDiscountMessageCell.m in Sources */,
 				CB6980201B7DE33400B12B78 /* DBNewOrderBonusesView.m in Sources */,
 				CB6980211B7DE33400B12B78 /* DoubleB.xcdatamodeld in Sources */,
 				CB6980221B7DE33400B12B78 /* EXTScope.m in Sources */,
-				7EB912141B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB6980231B7DE33400B12B78 /* DBTimePickerView.m in Sources */,
+				7EB911431B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB6980241B7DE33400B12B78 /* NSString+LanguageFeature.m in Sources */,
 				CB6980251B7DE33400B12B78 /* DBCategoryPickerCell.m in Sources */,
 				CB6980261B7DE33400B12B78 /* AppDelegate.m in Sources */,
@@ -29880,11 +29863,11 @@
 				CB6980481B7DE33400B12B78 /* DBMenu.m in Sources */,
 				CB6980491B7DE33400B12B78 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB69804A1B7DE33400B12B78 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911F01B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB69804B1B7DE33400B12B78 /* DBCardsViewController.m in Sources */,
 				CB69804C1B7DE33400B12B78 /* UIViewController+DBCardManagement.m in Sources */,
 				CB69804D1B7DE33400B12B78 /* (null) in Sources */,
 				CB69804E1B7DE33400B12B78 /* DBNewOrderViewController.m in Sources */,
+				CB69804F1B7DE33400B12B78 /* ViewManager.m in Sources */,
 				CB6980501B7DE33400B12B78 /* DBNewOrderNDAView.m in Sources */,
 				CB6980511B7DE33400B12B78 /* PositionCollectionViewCell.m in Sources */,
 				7EB911911B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -29896,6 +29879,7 @@
 				CB6980571B7DE33400B12B78 /* DBProfileViewController.m in Sources */,
 				CB6980581B7DE33400B12B78 /* DBTableItemInactivityView.m in Sources */,
 				CB6980591B7DE33400B12B78 /* DBCompanyInfo.m in Sources */,
+				CB69805A1B7DE33400B12B78 /* ApplicationManager.m in Sources */,
 				CB69805B1B7DE33400B12B78 /* LocationHelper.m in Sources */,
 				CB69805C1B7DE33400B12B78 /* DBTabBarController.m in Sources */,
 				CB69805D1B7DE33400B12B78 /* IHSecureStore.m in Sources */,
@@ -29918,7 +29902,6 @@
 				CB69806E1B7DE33400B12B78 /* DBOrderBarButtonView.m in Sources */,
 				CB69806F1B7DE33400B12B78 /* NSObject+Encode.m in Sources */,
 				CB6981B51B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912381B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB6980701B7DE33400B12B78 /* DBConstants.m in Sources */,
 				CB6980711B7DE33400B12B78 /* DBPositionModifierPicker.m in Sources */,
 				CB6980721B7DE33400B12B78 /* DBDeliveryType.m in Sources */,
@@ -29934,6 +29917,7 @@
 				CB69807C1B7DE33400B12B78 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB69807D1B7DE33400B12B78 /* DBOrderViewFooter.m in Sources */,
 				CB69807E1B7DE33400B12B78 /* DBCardCell.m in Sources */,
+				CB69807F1B7DE33400B12B78 /* ViewControllerManager.m in Sources */,
 				CB6980801B7DE33400B12B78 /* UIView+Extension.m in Sources */,
 				CB6980811B7DE33400B12B78 /* DBBonusPositionsViewController.m in Sources */,
 				CB6980821B7DE33400B12B78 /* EXTConcreteProtocol.m in Sources */,
@@ -29976,15 +29960,14 @@
 				CB8200A01B46CBB4000BBE55 /* DBVenueViewController.m in Sources */,
 				CB8200A11B46CBB4000BBE55 /* DBDeliveryViewController.m in Sources */,
 				CBDE21C81B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911AC1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB8200A21B46CBB4000BBE55 /* DBMenuPositionModifierItem.m in Sources */,
 				CB8200A31B46CBB4000BBE55 /* DBOrderItemNotesCell.m in Sources */,
 				CB8200A41B46CBB4000BBE55 /* DBDiscountMessageCell.m in Sources */,
 				CB8200A51B46CBB4000BBE55 /* DBNewOrderBonusesView.m in Sources */,
 				CB8200A61B46CBB4000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB8200A81B46CBB4000BBE55 /* EXTScope.m in Sources */,
-				7EB911F41B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB8200A91B46CBB4000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911231B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB8200AA1B46CBB4000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20621B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB8200AB1B46CBB4000BBE55 /* AppDelegate.m in Sources */,
@@ -30024,11 +30007,11 @@
 				CB8200C71B46CBB4000BBE55 /* DBMenu.m in Sources */,
 				CB8200C81B46CBB4000BBE55 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB8200C91B46CBB4000BBE55 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911D01B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB8200CA1B46CBB4000BBE55 /* DBCardsViewController.m in Sources */,
 				CB8200CB1B46CBB4000BBE55 /* UIViewController+DBCardManagement.m in Sources */,
 				CB8200CC1B46CBB4000BBE55 /* (null) in Sources */,
 				CB8200CD1B46CBB4000BBE55 /* DBNewOrderViewController.m in Sources */,
+				CB2423531B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB8200CF1B46CBB4000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE211C1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911711B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -30040,6 +30023,7 @@
 				CB8200D31B46CBB4000BBE55 /* DBProfileViewController.m in Sources */,
 				CB8200D41B46CBB4000BBE55 /* DBTableItemInactivityView.m in Sources */,
 				CB8200D61B46CBB4000BBE55 /* DBCompanyInfo.m in Sources */,
+				CBDE21A91B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB8200D71B46CBB4000BBE55 /* LocationHelper.m in Sources */,
 				CB8200D81B46CBB4000BBE55 /* DBTabBarController.m in Sources */,
 				CB8200D91B46CBB4000BBE55 /* IHSecureStore.m in Sources */,
@@ -30062,7 +30046,6 @@
 				CB8200E71B46CBB4000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB8200E81B46CBB4000BBE55 /* NSObject+Encode.m in Sources */,
 				CB6981951B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912181B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB8200EA1B46CBB4000BBE55 /* DBConstants.m in Sources */,
 				CBDE1E911B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB8200EB1B46CBB4000BBE55 /* DBDeliveryType.m in Sources */,
@@ -30078,6 +30061,7 @@
 				CBDE1D991B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB8200F51B46CBB4000BBE55 /* DBOrderViewFooter.m in Sources */,
 				CB8200F61B46CBB4000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21791B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB8200F81B46CBB4000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D5B1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB8200F91B46CBB4000BBE55 /* EXTConcreteProtocol.m in Sources */,
@@ -30120,15 +30104,14 @@
 				CB82FBDD1B442C70000BBE55 /* DBVenueViewController.m in Sources */,
 				CB82FBDE1B442C70000BBE55 /* DBDeliveryViewController.m in Sources */,
 				CBDE21DB1B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911BF1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB82FBDF1B442C70000BBE55 /* DBMenuPositionModifierItem.m in Sources */,
 				CB82FBE01B442C70000BBE55 /* DBOrderItemNotesCell.m in Sources */,
 				CB82FBE11B442C70000BBE55 /* DBDiscountMessageCell.m in Sources */,
 				CB82FBE21B442C70000BBE55 /* DBNewOrderBonusesView.m in Sources */,
 				CB82FBE31B442C70000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB82FBE51B442C70000BBE55 /* EXTScope.m in Sources */,
-				7EB912071B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB82FBE61B442C70000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911361B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB82FBE71B442C70000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20751B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB82FBE81B442C70000BBE55 /* AppDelegate.m in Sources */,
@@ -30168,11 +30151,11 @@
 				CB82FC041B442C70000BBE55 /* DBMenu.m in Sources */,
 				CB82FC051B442C70000BBE55 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB82FC061B442C70000BBE55 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E31B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB82FC071B442C70000BBE55 /* DBCardsViewController.m in Sources */,
 				CB82FC081B442C70000BBE55 /* UIViewController+DBCardManagement.m in Sources */,
 				CB82FC091B442C70000BBE55 /* (null) in Sources */,
 				CB82FC0A1B442C70000BBE55 /* DBNewOrderViewController.m in Sources */,
+				CB2423661B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB82FC0C1B442C70000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE212F1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911841B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -30184,6 +30167,7 @@
 				CB82FC101B442C70000BBE55 /* DBProfileViewController.m in Sources */,
 				CB82FC121B442C70000BBE55 /* DBTableItemInactivityView.m in Sources */,
 				CB82FC141B442C70000BBE55 /* DBCompanyInfo.m in Sources */,
+				CBDE21BC1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB82FC151B442C70000BBE55 /* LocationHelper.m in Sources */,
 				CB82FC161B442C70000BBE55 /* DBTabBarController.m in Sources */,
 				CB82FC171B442C70000BBE55 /* IHSecureStore.m in Sources */,
@@ -30206,7 +30190,6 @@
 				CB82FC251B442C70000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB82FC261B442C70000BBE55 /* NSObject+Encode.m in Sources */,
 				CB6981A81B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB9122B1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB82FC281B442C70000BBE55 /* DBConstants.m in Sources */,
 				CBDE1EA41B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB82FC291B442C70000BBE55 /* DBDeliveryType.m in Sources */,
@@ -30222,6 +30205,7 @@
 				CBDE1DAC1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB82FC331B442C70000BBE55 /* DBOrderViewFooter.m in Sources */,
 				CB82FD871B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE218C1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB82FC351B442C70000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D6E1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FC361B442C70000BBE55 /* EXTConcreteProtocol.m in Sources */,
@@ -30264,15 +30248,14 @@
 				CB82FDBE1B4464F6000BBE55 /* DBVenueViewController.m in Sources */,
 				CB82FDBF1B4464F6000BBE55 /* DBDeliveryViewController.m in Sources */,
 				CBDE21DC1B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C01B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB82FDC01B4464F6000BBE55 /* DBMenuPositionModifierItem.m in Sources */,
 				CB82FDC11B4464F6000BBE55 /* DBOrderItemNotesCell.m in Sources */,
 				CB82FDC21B4464F6000BBE55 /* DBDiscountMessageCell.m in Sources */,
 				CB82FDC31B4464F6000BBE55 /* DBNewOrderBonusesView.m in Sources */,
 				CB82FDC41B4464F6000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB82FDC61B4464F6000BBE55 /* EXTScope.m in Sources */,
-				7EB912081B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB82FDC71B4464F6000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911371B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB82FDC81B4464F6000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20761B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB82FDC91B4464F6000BBE55 /* AppDelegate.m in Sources */,
@@ -30312,11 +30295,11 @@
 				CB82FDE51B4464F6000BBE55 /* DBMenu.m in Sources */,
 				CB82FDE61B4464F6000BBE55 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB82FDE71B4464F6000BBE55 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E41B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB82FDE81B4464F6000BBE55 /* DBCardsViewController.m in Sources */,
 				CB82FDE91B4464F6000BBE55 /* UIViewController+DBCardManagement.m in Sources */,
 				CB82FDEA1B4464F6000BBE55 /* (null) in Sources */,
 				CB82FDEB1B4464F6000BBE55 /* DBNewOrderViewController.m in Sources */,
+				CB2423671B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB82FDED1B4464F6000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21301B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911851B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -30328,6 +30311,7 @@
 				CB82FDF11B4464F6000BBE55 /* DBProfileViewController.m in Sources */,
 				CB82FDF21B4464F6000BBE55 /* DBTableItemInactivityView.m in Sources */,
 				CB82FDF41B4464F6000BBE55 /* DBCompanyInfo.m in Sources */,
+				CBDE21BD1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB82FDF51B4464F6000BBE55 /* LocationHelper.m in Sources */,
 				CB82FDF61B4464F6000BBE55 /* DBTabBarController.m in Sources */,
 				CB82FDF71B4464F6000BBE55 /* IHSecureStore.m in Sources */,
@@ -30350,7 +30334,6 @@
 				CB82FE051B4464F6000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB82FE061B4464F6000BBE55 /* NSObject+Encode.m in Sources */,
 				CB6981A91B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB9122C1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB82FE081B4464F6000BBE55 /* DBConstants.m in Sources */,
 				CBDE1EA51B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB82FE091B4464F6000BBE55 /* DBDeliveryType.m in Sources */,
@@ -30366,6 +30349,7 @@
 				CBDE1DAD1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB82FE131B4464F6000BBE55 /* DBOrderViewFooter.m in Sources */,
 				CB82FE141B4464F6000BBE55 /* DBCardCell.m in Sources */,
+				CBDE218D1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB82FE161B4464F6000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D6F1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FE171B4464F6000BBE55 /* EXTConcreteProtocol.m in Sources */,
@@ -30408,15 +30392,14 @@
 				CB82FF2F1B4579B5000BBE55 /* DBVenueViewController.m in Sources */,
 				CB82FF301B4579B5000BBE55 /* DBDeliveryViewController.m in Sources */,
 				CBDE21DD1B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C11B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CB82FF311B4579B5000BBE55 /* DBMenuPositionModifierItem.m in Sources */,
 				CB82FF321B4579B5000BBE55 /* DBOrderItemNotesCell.m in Sources */,
 				CB82FF331B4579B5000BBE55 /* DBDiscountMessageCell.m in Sources */,
 				CB82FF341B4579B5000BBE55 /* DBNewOrderBonusesView.m in Sources */,
 				CB82FF351B4579B5000BBE55 /* DoubleB.xcdatamodeld in Sources */,
 				CB82FF371B4579B5000BBE55 /* EXTScope.m in Sources */,
-				7EB912091B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CB82FF381B4579B5000BBE55 /* DBTimePickerView.m in Sources */,
+				7EB911381B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CB82FF391B4579B5000BBE55 /* NSString+LanguageFeature.m in Sources */,
 				CBDE20771B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CB82FF3A1B4579B5000BBE55 /* AppDelegate.m in Sources */,
@@ -30456,11 +30439,11 @@
 				CB82FF561B4579B5000BBE55 /* DBMenu.m in Sources */,
 				CB82FF571B4579B5000BBE55 /* DBNewOrderItemAdditionView.m in Sources */,
 				CB82FF581B4579B5000BBE55 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911E51B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CB82FF591B4579B5000BBE55 /* DBCardsViewController.m in Sources */,
 				CB82FF5A1B4579B5000BBE55 /* UIViewController+DBCardManagement.m in Sources */,
 				CB82FF5B1B4579B5000BBE55 /* (null) in Sources */,
 				CB82FF5C1B4579B5000BBE55 /* DBNewOrderViewController.m in Sources */,
+				CB2423681B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CB82FF5E1B4579B5000BBE55 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21311B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911861B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -30472,6 +30455,7 @@
 				CB82FF621B4579B5000BBE55 /* DBProfileViewController.m in Sources */,
 				CB82FF631B4579B5000BBE55 /* DBTableItemInactivityView.m in Sources */,
 				CB82FF651B4579B5000BBE55 /* DBCompanyInfo.m in Sources */,
+				CBDE21BE1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CB82FF661B4579B5000BBE55 /* LocationHelper.m in Sources */,
 				CB82FF671B4579B5000BBE55 /* DBTabBarController.m in Sources */,
 				CB82FF681B4579B5000BBE55 /* IHSecureStore.m in Sources */,
@@ -30494,7 +30478,6 @@
 				CB82FF761B4579B5000BBE55 /* DBOrderBarButtonView.m in Sources */,
 				CB82FF771B4579B5000BBE55 /* NSObject+Encode.m in Sources */,
 				CB6981AA1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB9122D1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CB82FF791B4579B5000BBE55 /* DBConstants.m in Sources */,
 				CBDE1EA61B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CB82FF7A1B4579B5000BBE55 /* DBDeliveryType.m in Sources */,
@@ -30510,6 +30493,7 @@
 				CBDE1DAE1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CB82FF841B4579B5000BBE55 /* DBOrderViewFooter.m in Sources */,
 				CB82FF851B4579B5000BBE55 /* DBCardCell.m in Sources */,
+				CBDE218E1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB82FF871B4579B5000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D701B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CB82FF881B4579B5000BBE55 /* EXTConcreteProtocol.m in Sources */,
@@ -30552,15 +30536,14 @@
 				CBD0C4DD1B30724300DAD042 /* DBDeliveryViewController.m in Sources */,
 				CBD0C4DE1B30724300DAD042 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21D11B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911B51B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CBD0C4DF1B30724300DAD042 /* DBOrderItemNotesCell.m in Sources */,
 				CBD0C4E01B30724300DAD042 /* DBDiscountMessageCell.m in Sources */,
 				CBD0C4E21B30724300DAD042 /* DBNewOrderBonusesView.m in Sources */,
 				CBD0C4E31B30724300DAD042 /* DoubleB.xcdatamodeld in Sources */,
 				CBD0C4E61B30724300DAD042 /* EXTScope.m in Sources */,
 				CBD0C4E71B30724300DAD042 /* DBTimePickerView.m in Sources */,
-				7EB911FD1B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CBD0C4E81B30724300DAD042 /* NSString+LanguageFeature.m in Sources */,
+				7EB9112C1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBD0C4E91B30724300DAD042 /* AppDelegate.m in Sources */,
 				CBDE206B1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CBD0C4EA1B30724300DAD042 /* DBOrderViewController.m in Sources */,
@@ -30600,11 +30583,11 @@
 				CBD0C5051B30724300DAD042 /* DBMenu.m in Sources */,
 				CBD0C5061B30724300DAD042 /* DBNewOrderItemAdditionView.m in Sources */,
 				CBD0C5071B30724300DAD042 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911D91B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBD0C5081B30724300DAD042 /* DBCardsViewController.m in Sources */,
 				CBD0C5091B30724300DAD042 /* UIViewController+DBCardManagement.m in Sources */,
 				CBD0C50B1B30724300DAD042 /* DBNewOrderViewController.m in Sources */,
 				CBD0C50D1B30724300DAD042 /* DBNewOrderNDAView.m in Sources */,
+				CB24235C1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBD0C50E1B30724300DAD042 /* DBDocumentsViewController.m in Sources */,
 				CBDE21251B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9117A1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -30616,6 +30599,7 @@
 				CBD0C5141B30724300DAD042 /* DBTableItemInactivityView.m in Sources */,
 				CBD0C5161B30724300DAD042 /* DBCompanyInfo.m in Sources */,
 				CBD0C5171B30724300DAD042 /* LocationHelper.m in Sources */,
+				CBDE21B21B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBD0C5181B30724300DAD042 /* DBTabBarController.m in Sources */,
 				CBD0C5191B30724300DAD042 /* IHSecureStore.m in Sources */,
 				CBD0C51A1B30724300DAD042 /* Venue.m in Sources */,
@@ -30638,7 +30622,6 @@
 				CBD0C5281B30724300DAD042 /* DBOrderBarButtonView.m in Sources */,
 				CBD0C6631B309F0800DAD042 /* DBCatNewOrderViewController.m in Sources */,
 				CB69819E1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912211B861ECF005C1012 /* ViewManager.m in Sources */,
 				CBD0C52A1B30724300DAD042 /* DBConstants.m in Sources */,
 				CBDE1E9A1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CBD0C52B1B30724300DAD042 /* DBDeliveryType.m in Sources */,
@@ -30654,6 +30637,7 @@
 				CBDE1DA21B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CBD0C5351B30724300DAD042 /* DBOrderViewFooter.m in Sources */,
 				CB82FD7D1B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE21821B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBD0C5371B30724300DAD042 /* UIView+Extension.m in Sources */,
 				CBDE1D641B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CBD0C5381B30724300DAD042 /* EXTConcreteProtocol.m in Sources */,
@@ -30688,6 +30672,7 @@
 				CBD2EAB71B2A07D000E4AAA1 /* main.m in Sources */,
 				CBD2EAB81B2A07D000E4AAA1 /* DBSettingsCell.m in Sources */,
 				CBD2EAB91B2A07D000E4AAA1 /* DBNewOrderAdditionalInfoView.m in Sources */,
+				CBDE21811B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBD2EABA1B2A07D000E4AAA1 /* NSString+DoubleB.m in Sources */,
 				CBDE1DDF1B7286540090A347 /* CategoriesAndPositionsTVController.m in Sources */,
 				CBD2EABC1B2A07D000E4AAA1 /* AFHTTPRequestOperationManager+TimeoutExtension.m in Sources */,
@@ -30697,6 +30682,7 @@
 				7E85BD761B2F0B20000BC2E1 /* DBDeliveryViewController.m in Sources */,
 				CBD2EAC11B2A07D000E4AAA1 /* DBMenuPositionModifierItem.m in Sources */,
 				CBD2EAC21B2A07D000E4AAA1 /* DBOrderItemNotesCell.m in Sources */,
+				CBDE21B11B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1DA11B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CBD2EAC31B2A07D000E4AAA1 /* DBDiscountMessageCell.m in Sources */,
 				CBD2EAC51B2A07D000E4AAA1 /* DBNewOrderBonusesView.m in Sources */,
@@ -30736,6 +30722,7 @@
 				7EB911791B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				CBD2EAE01B2A07D000E4AAA1 /* DBBeaconObserver.m in Sources */,
 				CBDE21D01B7286890090A347 /* DBPromoManager.m in Sources */,
+				CB24235B1B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBD2EAE11B2A07D000E4AAA1 /* EXTSelectorChecking.m in Sources */,
 				CBD2EAE21B2A07D000E4AAA1 /* NSInvocation+EXT.m in Sources */,
 				CBD2EAE31B2A07D000E4AAA1 /* UIColor+Brandbook.m in Sources */,
@@ -30778,19 +30765,16 @@
 				CBD2EB041B2A07D000E4AAA1 /* UIImage+ImageEffects.m in Sources */,
 				CBD2EB051B2A07D000E4AAA1 /* DBSettingsTableViewController.m in Sources */,
 				CBD2EB061B2A07D000E4AAA1 /* UIView+SnapshotAdditions.m in Sources */,
-				7EB912201B861ECF005C1012 /* ViewManager.m in Sources */,
 				CBD2EB071B2A07D000E4AAA1 /* DBPromosListViewController.m in Sources */,
 				CBD2EB081B2A07D000E4AAA1 /* DBOrderViewHeader.m in Sources */,
 				CBD2EB091B2A07D000E4AAA1 /* IHWebPageViewController.m in Sources */,
 				CBD2EB0A1B2A07D000E4AAA1 /* DBOrderBarButtonView.m in Sources */,
 				CB69819D1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA71B3192100011CEEC /* NSObject+Encode.m in Sources */,
-				7EB911B41B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CBD2EB0C1B2A07D000E4AAA1 /* DBConstants.m in Sources */,
 				CBD2EB0D1B2A07D000E4AAA1 /* DBDeliveryType.m in Sources */,
+				7EB9112B1B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBD2EB0F1B2A07D000E4AAA1 /* OrderItem.m in Sources */,
-				7EB911FC1B861ECF005C1012 /* ModuleManager.m in Sources */,
-				7EB911D81B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBD2EB121B2A07D000E4AAA1 /* DBPopupTextView.m in Sources */,
 				CBDE21241B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				CBD2EB131B2A07D000E4AAA1 /* CoreDataHelper.m in Sources */,
@@ -30839,15 +30823,14 @@
 				CBDC79921B42AFC700935328 /* DBDeliveryViewController.m in Sources */,
 				CBDC79931B42AFC700935328 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE21DA1B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911BE1B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CBDC79941B42AFC700935328 /* DBOrderItemNotesCell.m in Sources */,
 				CBDC79951B42AFC700935328 /* DBDiscountMessageCell.m in Sources */,
 				CBDC79961B42AFC700935328 /* DBNewOrderBonusesView.m in Sources */,
 				CBDC79971B42AFC700935328 /* DoubleB.xcdatamodeld in Sources */,
 				CBDC79991B42AFC700935328 /* EXTScope.m in Sources */,
 				CBDC799A1B42AFC700935328 /* DBTimePickerView.m in Sources */,
-				7EB912061B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CBDC799B1B42AFC700935328 /* NSString+LanguageFeature.m in Sources */,
+				7EB911351B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBDC799C1B42AFC700935328 /* AppDelegate.m in Sources */,
 				CBDE20741B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CBDC799D1B42AFC700935328 /* DBOrderViewController.m in Sources */,
@@ -30887,11 +30870,11 @@
 				CBDC79B91B42AFC700935328 /* DBNewOrderItemAdditionView.m in Sources */,
 				CBDC79BA1B42AFC700935328 /* UIViewController+NavigationBarFix.m in Sources */,
 				CBDC79BB1B42AFC700935328 /* DBCardsViewController.m in Sources */,
-				7EB911E21B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBDC79BC1B42AFC700935328 /* UIViewController+DBCardManagement.m in Sources */,
 				CBDC79BD1B42AFC700935328 /* (null) in Sources */,
 				CBDC79BE1B42AFC700935328 /* DBNewOrderViewController.m in Sources */,
 				CBDC79C01B42AFC700935328 /* DBNewOrderNDAView.m in Sources */,
+				CB2423651B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBDC79C11B42AFC700935328 /* DBDocumentsViewController.m in Sources */,
 				CBDE212E1B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB911831B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -30903,6 +30886,7 @@
 				CBDC79C61B42AFC700935328 /* DBTableItemInactivityView.m in Sources */,
 				CBDC79C81B42AFC700935328 /* DBCompanyInfo.m in Sources */,
 				CBDC79C91B42AFC700935328 /* LocationHelper.m in Sources */,
+				CBDE21BB1B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDC79CA1B42AFC700935328 /* DBTabBarController.m in Sources */,
 				CBDC79CB1B42AFC700935328 /* IHSecureStore.m in Sources */,
 				CBDC79CC1B42AFC700935328 /* Venue.m in Sources */,
@@ -30925,7 +30909,6 @@
 				CBDC79D91B42AFC700935328 /* DBOrderBarButtonView.m in Sources */,
 				CBDC79DA1B42AFC700935328 /* NSObject+Encode.m in Sources */,
 				CB6981A71B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB9122A1B861ECF005C1012 /* ViewManager.m in Sources */,
 				CBDC79DC1B42AFC700935328 /* DBConstants.m in Sources */,
 				CBDE1EA31B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CBDC79DD1B42AFC700935328 /* DBDeliveryType.m in Sources */,
@@ -30941,6 +30924,7 @@
 				CBDE1DAB1B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CBDC79E71B42AFC700935328 /* DBOrderViewFooter.m in Sources */,
 				CB82FD861B4444B1000BBE55 /* DBCardCell.m in Sources */,
+				CBDE218B1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBDC79E91B42AFC700935328 /* UIView+Extension.m in Sources */,
 				CBDE1D6D1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CBDC79EA1B42AFC700935328 /* EXTConcreteProtocol.m in Sources */,
@@ -30983,15 +30967,14 @@
 				CBDE1B701B7280B50090A347 /* DBVenueViewController.m in Sources */,
 				CBDE1B711B7280B50090A347 /* DBDeliveryViewController.m in Sources */,
 				CBDE21E51B7286890090A347 /* DBPromoManager.m in Sources */,
-				7EB911C91B861ECF005C1012 /* ViewControllerManager.m in Sources */,
 				CBDE1B721B7280B50090A347 /* DBMenuPositionModifierItem.m in Sources */,
 				CBDE1B731B7280B50090A347 /* DBOrderItemNotesCell.m in Sources */,
 				CBDE1B741B7280B50090A347 /* DBDiscountMessageCell.m in Sources */,
 				CBDE1B751B7280B50090A347 /* DBNewOrderBonusesView.m in Sources */,
 				CBDE1B761B7280B50090A347 /* DoubleB.xcdatamodeld in Sources */,
 				CBDE1B781B7280B50090A347 /* EXTScope.m in Sources */,
-				7EB912111B861ECF005C1012 /* ModuleManager.m in Sources */,
 				CBDE1B791B7280B50090A347 /* DBTimePickerView.m in Sources */,
+				7EB911401B84CBC6005C1012 /* ModuleManager.m in Sources */,
 				CBDE1B7A1B7280B50090A347 /* NSString+LanguageFeature.m in Sources */,
 				CBDE207F1B7286540090A347 /* DBCategoryPickerCell.m in Sources */,
 				CBDE1B7B1B7280B50090A347 /* AppDelegate.m in Sources */,
@@ -31031,11 +31014,11 @@
 				CBDE1B971B7280B50090A347 /* DBMenu.m in Sources */,
 				CBDE1B981B7280B50090A347 /* DBNewOrderItemAdditionView.m in Sources */,
 				CBDE1B991B7280B50090A347 /* UIViewController+NavigationBarFix.m in Sources */,
-				7EB911ED1B861ECF005C1012 /* ApplicationManager.m in Sources */,
 				CBDE1B9A1B7280B50090A347 /* DBCardsViewController.m in Sources */,
 				CBDE1B9B1B7280B50090A347 /* UIViewController+DBCardManagement.m in Sources */,
 				CBDE1B9C1B7280B50090A347 /* (null) in Sources */,
 				CBDE1B9D1B7280B50090A347 /* DBNewOrderViewController.m in Sources */,
+				CB2423701B7A47AD00A02721 /* ViewManager.m in Sources */,
 				CBDE1B9F1B7280B50090A347 /* DBNewOrderNDAView.m in Sources */,
 				CBDE21391B7286550090A347 /* PositionCollectionViewCell.m in Sources */,
 				7EB9118E1B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
@@ -31047,6 +31030,7 @@
 				CBDE1BA31B7280B50090A347 /* DBProfileViewController.m in Sources */,
 				CBDE1BA41B7280B50090A347 /* DBTableItemInactivityView.m in Sources */,
 				CBDE1BA61B7280B50090A347 /* DBCompanyInfo.m in Sources */,
+				CBDE21C61B7286890090A347 /* ApplicationManager.m in Sources */,
 				CBDE1BA71B7280B50090A347 /* LocationHelper.m in Sources */,
 				CBDE1BA81B7280B50090A347 /* DBTabBarController.m in Sources */,
 				CBDE1BA91B7280B50090A347 /* IHSecureStore.m in Sources */,
@@ -31069,7 +31053,6 @@
 				CBDE1BB71B7280B50090A347 /* DBOrderBarButtonView.m in Sources */,
 				CBDE1BB81B7280B50090A347 /* NSObject+Encode.m in Sources */,
 				CB6981B21B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
-				7EB912351B861ECF005C1012 /* ViewManager.m in Sources */,
 				CBDE1BBA1B7280B50090A347 /* DBConstants.m in Sources */,
 				CBDE1EAE1B7286540090A347 /* DBPositionModifierPicker.m in Sources */,
 				CBDE1BBB1B7280B50090A347 /* DBDeliveryType.m in Sources */,
@@ -31085,6 +31068,7 @@
 				CBDE1DB61B7286540090A347 /* CategoriesAndPositionsCVController.m in Sources */,
 				CBDE1BC51B7280B50090A347 /* DBOrderViewFooter.m in Sources */,
 				CBDE1BC61B7280B50090A347 /* DBCardCell.m in Sources */,
+				CBDE21961B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBDE1BC81B7280B50090A347 /* UIView+Extension.m in Sources */,
 				CBDE1D781B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
 				CBDE1BC91B7280B50090A347 /* EXTConcreteProtocol.m in Sources */,
@@ -35100,7 +35084,6 @@
 				7EB911631B84D36F005C1012 /* App Store */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		7ED4BDF61B5EB64B00280D74 /* Build configuration list for PBXNativeTarget "Magnolia" */ = {
 			isa = XCConfigurationList;
