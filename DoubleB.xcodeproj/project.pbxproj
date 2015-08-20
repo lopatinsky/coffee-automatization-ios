@@ -712,6 +712,28 @@
 			<key>isa</key>
 			<string>PBXBuildFile</string>
 		</dict>
+		<key>7E248CB21B8637DC00F94577</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>7EB9111F1B84CBC6005C1012</string>
+				<string>7EB911201B84CBC6005C1012</string>
+				<string>CBDE21971B7286890090A347</string>
+				<string>CBDE21981B7286890090A347</string>
+				<string>CB24234F1B7A47AD00A02721</string>
+				<string>CB2423501B7A47AD00A02721</string>
+				<string>CBDE1D1A1B7286540090A347</string>
+				<string>CBDE1D1B1B7286540090A347</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Core</string>
+			<key>path</key>
+			<string>Core</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
 		<key>7E382FA71B5CF692008F0241</key>
 		<dict>
 			<key>buildConfigurationList</key>
@@ -15445,8 +15467,6 @@ fi
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Resources</string>
 			<key>path</key>
 			<string>Resources</string>
 			<key>sourceTree</key>
@@ -15458,8 +15478,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>image.png</string>
-			<key>name</key>
-			<string>launch_480.png</string>
 			<key>path</key>
 			<string>launch_480.png</string>
 			<key>sourceTree</key>
@@ -15471,8 +15489,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>image.png</string>
-			<key>name</key>
-			<string>launch_568.png</string>
 			<key>path</key>
 			<string>launch_568.png</string>
 			<key>sourceTree</key>
@@ -15484,8 +15500,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>image.png</string>
-			<key>name</key>
-			<string>launch_667.png</string>
 			<key>path</key>
 			<string>launch_667.png</string>
 			<key>sourceTree</key>
@@ -15497,8 +15511,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>image.png</string>
-			<key>name</key>
-			<string>launch_736.png</string>
 			<key>path</key>
 			<string>launch_736.png</string>
 			<key>sourceTree</key>
@@ -21394,6 +21406,8 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ModuleManager.h</string>
 			<key>path</key>
 			<string>ModuleManager.h</string>
 			<key>sourceTree</key>
@@ -21407,6 +21421,8 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ModuleManager.m</string>
 			<key>path</key>
 			<string>ModuleManager.m</string>
 			<key>sourceTree</key>
@@ -21757,8 +21773,6 @@ fi
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
 			<key>path</key>
 			<string>Supporting Files</string>
 			<key>sourceTree</key>
@@ -21807,6 +21821,8 @@ fi
 			</array>
 			<key>defaultConfigurationIsVisible</key>
 			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
 			<key>isa</key>
 			<string>XCConfigurationList</string>
 		</dict>
@@ -30094,8 +30110,6 @@ fi
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
 			<key>path</key>
 			<string>Supporting Files</string>
 			<key>sourceTree</key>
@@ -30113,6 +30127,7 @@ fi
 				<string>C775BBB84D6C198A2E6EE8CD</string>
 				<string>CB37BC4019CB14110034B325</string>
 				<string>CB37BC4119CB14110034B325</string>
+				<string>7E248CB21B8637DC00F94577</string>
 				<string>C775BE2E1D4C606917617A8E</string>
 				<string>C775B1154DBD501B5D3549F5</string>
 				<string>CB6EB71D19E7DC0E0050DF90</string>
@@ -30144,14 +30159,6 @@ fi
 		<dict>
 			<key>children</key>
 			<array>
-				<string>7EB9111F1B84CBC6005C1012</string>
-				<string>7EB911201B84CBC6005C1012</string>
-				<string>CBDE21971B7286890090A347</string>
-				<string>CBDE21981B7286890090A347</string>
-				<string>CB24234F1B7A47AD00A02721</string>
-				<string>CB2423501B7A47AD00A02721</string>
-				<string>CBDE1D1A1B7286540090A347</string>
-				<string>CBDE1D1B1B7286540090A347</string>
 				<string>CB6981911B7DE8A800B12B78</string>
 				<string>CB6981921B7DE8A800B12B78</string>
 				<string>CBDE21991B7286890090A347</string>
@@ -54058,8 +54065,6 @@ fi
 			</array>
 			<key>isa</key>
 			<string>PBXGroup</string>
-			<key>name</key>
-			<string>jRSwizzle</string>
 			<key>path</key>
 			<string>jRSwizzle</string>
 			<key>sourceTree</key>
@@ -54073,8 +54078,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JRSwizzle.h</string>
 			<key>path</key>
 			<string>JRSwizzle.h</string>
 			<key>sourceTree</key>
@@ -54088,8 +54091,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JRSwizzle.m</string>
 			<key>path</key>
 			<string>JRSwizzle.m</string>
 			<key>sourceTree</key>
@@ -54103,8 +54104,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>JRSwizzleMethods.h</string>
 			<key>path</key>
 			<string>JRSwizzleMethods.h</string>
 			<key>sourceTree</key>
@@ -54118,8 +54117,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
-			<key>name</key>
-			<string>JRSwizzleMethods.m</string>
 			<key>path</key>
 			<string>JRSwizzleMethods.m</string>
 			<key>sourceTree</key>
@@ -57559,6 +57556,8 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ViewManager.h</string>
 			<key>path</key>
 			<string>ViewManager.h</string>
 			<key>sourceTree</key>
@@ -57572,6 +57571,8 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ViewManager.m</string>
 			<key>path</key>
 			<string>ViewManager.m</string>
 			<key>sourceTree</key>
@@ -122483,6 +122484,8 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>ApplicationManager.h</string>
 			<key>path</key>
 			<string>ApplicationManager.h</string>
 			<key>sourceTree</key>
@@ -122496,6 +122499,8 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>ApplicationManager.m</string>
 			<key>path</key>
 			<string>ApplicationManager.m</string>
 			<key>sourceTree</key>
@@ -126241,8 +126246,6 @@ fi
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
 			<string>sourcecode.c.h</string>
-			<key>name</key>
-			<string>DoubleB-Bridging-Header.h</string>
 			<key>path</key>
 			<string>DoubleB-Bridging-Header.h</string>
 			<key>sourceTree</key>
