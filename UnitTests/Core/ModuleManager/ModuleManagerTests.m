@@ -18,6 +18,9 @@
 @property (nonatomic, strong) ModuleManager *moduleManager;
 @property (nonatomic, strong) NSMutableArray *modules;
 
+@property (nonatomic, strong) Module *module3;
+@property (nonatomic, strong) Module *module4;
+
 @end
 
 @implementation ModuleManagerTests
@@ -30,6 +33,11 @@
     [self.modules addObject:module1];
     Module *module2 = [[Module alloc] initWithOrderDict:@{@"order_dict2": @"simple1", @"id2": @2, @"ex": @"oh"} andCheckOrderDict:@{@"checkorder_dict1": @"simple"}];
     [self.modules addObject:module2];
+    
+    self.module3 = [[Module alloc] initWithOrderDict:@{@"array_test": @[@1, @2], @"dict_test": @{@"a": @"b"}}
+                                   andCheckOrderDict:@{@"mix_test1": @"string", @"mix_test2": @[@1, @2], @"mix_test3": @{@"string": @1}}];
+    self.module4 = [[Module alloc] initWithOrderDict:@{@"array_test": @[@3], @"dict_test": @{@"c": @"d"}}
+                                   andCheckOrderDict:@{@"mix_test1": @1, @"mix_test2": @{@1: @2}, @"mix_test3": @[@"array"]}];
     
     self.moduleManager = [ModuleManager sharedManager];
     [self.moduleManager addModule:module1];
@@ -75,6 +83,27 @@
     NSDictionary *dictionary = [self.moduleManager getCheckOrderParams];
     BOOL equals = [dictionary isEqualToDictionary:@{@"checkorder_dict": @"simple", @"id": @123, @"checkorder_dict1": @"simple"}];
     XCTAssertTrue(equals, @"CheckOrderParams dict is not valid");
+}
+
+- (void)testDeepMergeOrderDictionary {
+    [self.moduleManager cleanManager];
+    [self.moduleManager addModule:self.module3];
+    [self.moduleManager addModule:self.module4];
+    
+    NSDictionary *dictionary = [self.moduleManager getOrderParams];
+    XCTAssertTrue([dictionary[@"array_test"] count] == 3, @"Deep OrderParams dict is not valid");
+    XCTAssertTrue([dictionary[@"dict_test"][@"c"] isEqualToString:@"d"], @"Deep OrderParams dict is not valid");
+}
+
+- (void)testDeepMergeCheckOrderDictionary {
+    [self.moduleManager cleanManager];
+    [self.moduleManager addModule:self.module3];
+    [self.moduleManager addModule:self.module4];
+    
+    NSDictionary *dictionary = [self.moduleManager getCheckOrderParams];
+    XCTAssertTrue( [dictionary[@"mix_test1"] isKindOfClass:[NSArray class]] && [dictionary[@"mix_test1"] count] == 2, @"Deep CheckOrderParams dict is not valid");
+    XCTAssertTrue( [dictionary[@"mix_test2"] isKindOfClass:[NSArray class]] && [dictionary[@"mix_test2"] count] == 2, @"Deep CheckOrderParams dict is not valid");
+    XCTAssertTrue( [dictionary[@"mix_test3"] isKindOfClass:[NSArray class]] && [dictionary[@"mix_test3"] count] == 2, @"Deep CheckOrderParams dict is not valid");
 }
 
 @end
