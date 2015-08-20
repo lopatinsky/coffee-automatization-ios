@@ -5,7 +5,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://banzay.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://banzai.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>0</integer>
 		<key>CompanyGAKey</key>
