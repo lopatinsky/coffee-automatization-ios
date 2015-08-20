@@ -67,7 +67,7 @@
 }
 
 + (NSMutableDictionary *)getPlistContent:(NSString *)name {
-    NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:name ofType:@",plist"];
+    NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:name ofType:@".plist"];
     NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:pathToPlist];
     return [[NSMutableDictionary alloc] initWithDictionary:plistDict];
 }
