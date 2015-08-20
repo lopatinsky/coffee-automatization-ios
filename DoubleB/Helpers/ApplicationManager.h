@@ -11,7 +11,8 @@
 
 @interface ApplicationManager : NSObject
 + (nonnull UIViewController *)rootViewController;
-+ (void)copyPlists;
++ (void)copyPlistWithName:(nonnull NSString *)plistName forceCopy:(BOOL)forceCopy;
++ (void)copyPlistsWithNames:(nonnull NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
 @end
 
 @interface ApplicationManager(Initialization)
@@ -23,6 +24,6 @@
 + (void)applyBrandbookStyle;
 @end
 
-@interface ApplicationManager (Menu)
-+ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController;
+@interface ApplicationManager(Menu)
++ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController;
 @end

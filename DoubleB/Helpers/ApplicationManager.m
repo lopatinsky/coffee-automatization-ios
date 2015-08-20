@@ -36,24 +36,29 @@
     }
 }
 
-+ (void)copyPlists {
-    NSArray *plists = @[@"CompanyInfo", @"ViewControllers", @"AppConfiguration"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths firstObject];
-    for (NSString *plistName in plists) {
-        [ApplicationManager copyPlistWithName:plistName withDocumentDirectory:documentDirectory];
++ (void)copyPlistWithName:(nonnull NSString *)plistName forceCopy:(BOOL)forceCopy {
+    NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
+    NSString *storedBuildNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"STORED_BUILD_NUMBER"] ?: @"0";
+    if (forceCopy || [buildNumber compare:storedBuildNumber] == NSOrderedDescending) {
+        [ApplicationManager copyFileWithName:plistName withExtension:@"plist"];
     }
 }
 
-+ (void)copyPlistWithName:(NSString * __nonnull)plistName withDocumentDirectory:(NSString * __nonnull)directory {
++ (void)copyPlistsWithNames:(nonnull NSArray *)plistsNames forceCopy:(BOOL)forceCopy {
+    [plistsNames enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
+        [ApplicationManager copyPlistWithName:obj forceCopy:forceCopy];
+    }];
+}
+
++ (void)copyFileWithName:(nonnull NSString *)fileName withExtension:(nonnull NSString *)extension {
     NSError *error;
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *path = [directory stringByAppendingPathComponent:[plistName stringByAppendingString:@".plist"]];
-    if (![fileManager fileExistsAtPath:path]) {
-        NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:plistName ofType:@"plist"];
-        if (pathToPlist) {
-            [fileManager copyItemAtPath:pathToPlist toPath:path error:&error];
-        }
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *directory = [paths firstObject];
+    NSString *path = [directory stringByAppendingPathComponent:[fileName stringByAppendingString:[NSString stringWithFormat:@".%@", extension]]];
+    NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:fileName ofType:extension];
+    if (pathToPlist) {
+        [fileManager copyItemAtPath:pathToPlist toPath:path error:&error];
     }
 }
 
@@ -113,7 +118,7 @@
 @end
 
 @implementation ApplicationManager (Menu)
-+ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
