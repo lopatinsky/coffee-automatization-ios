@@ -2,18 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Parse</key>
+	<key>Preferences</key>
 	<dict>
-		<key>applicationId</key>
-		<string>sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe</string>
-		<key>clientKey</key>
-		<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
+		<key>BaseUrl</key>
+		<string>http://meatme.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4291892039</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-60202822-2</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe</string>
+			<key>clientKey</key>
+			<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
+		</dict>
 	</dict>
-	<key>CompanyGAKey</key>
-	<string>UA-60202822-2</string>
-	<key>CompanyColor</key>
-	<integer>4291892039</integer>
-	<key>BaseUrl</key>
-	<string>http://meatme.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

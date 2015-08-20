@@ -2,18 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Parse</key>
+	<key>Preferences</key>
 	<dict>
-		<key>applicationId</key>
-		<string>DId4pGbcAY4eJzWqgmImEgeIKQ1PBBhXqyrGfaa4</string>
-		<key>clientKey</key>
-		<string>4555WZ33iZAk6L4iFwI16Ppp3x7IdQw93CiRsxDA</string>
+		<key>BaseUrl</key>
+		<string>http://sushimarket.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4285150221</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-62529990-41</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>DId4pGbcAY4eJzWqgmImEgeIKQ1PBBhXqyrGfaa4</string>
+			<key>clientKey</key>
+			<string>4555WZ33iZAk6L4iFwI16Ppp3x7IdQw93CiRsxDA</string>
+		</dict>
 	</dict>
-	<key>CompanyGAKey</key>
-	<string>UA-62529990-41</string>
-	<key>CompanyColor</key>
-	<integer>4285150221</integer>
-	<key>BaseUrl</key>
-	<string>http://sushimarket.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

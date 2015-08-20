@@ -5606,7 +5606,6 @@
 		CB2423301B7A1FD500A02721 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB2423251B7A1FD500A02721 /* InfoPlist.strings */; };
 		CB2423311B7A1FD500A02721 /* Images-TestApp.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB2423271B7A1FD500A02721 /* Images-TestApp.xcassets */; };
 		CB2423321B7A1FD500A02721 /* TestApp-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB2423291B7A1FD500A02721 /* TestApp-info.plist */; };
-		CB2423331B7A1FD500A02721 /* ViewControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB24232A1B7A1FD500A02721 /* ViewControllers.plist */; };
 		CB2423511B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB2423521B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
 		CB2423531B7A47AD00A02721 /* ViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2423501B7A47AD00A02721 /* ViewManager.m */; };
@@ -12464,9 +12463,6 @@
 		CBDE22BE1B7286D20090A347 /* right_arrow_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDE22821B7286D20090A347 /* right_arrow_icon@3x.png */; };
 		CBDE22BF1B7286D20090A347 /* right_arrow_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDE22821B7286D20090A347 /* right_arrow_icon@3x.png */; };
 		CBDE22C01B7286D20090A347 /* right_arrow_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CBDE22821B7286D20090A347 /* right_arrow_icon@3x.png */; };
-		CBDE22C21B72874D0090A347 /* ViewControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBDE22C11B72874D0090A347 /* ViewControllers.plist */; };
-		CBDE22C41B72876C0090A347 /* ViewControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBDE22C31B72876C0090A347 /* ViewControllers.plist */; };
-		CBDE22C61B7287890090A347 /* ViewControllers.plist in Resources */ = {isa = PBXBuildFile; fileRef = CBDE22C51B7287890090A347 /* ViewControllers.plist */; };
 		CBDE22C91B7289AD0090A347 /* UIViewController+DBAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE22C81B7289AD0090A347 /* UIViewController+DBAppearance.m */; };
 		CBDE22CA1B7289AD0090A347 /* UIViewController+DBAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE22C81B7289AD0090A347 /* UIViewController+DBAppearance.m */; };
 		CBDE22CB1B7289AD0090A347 /* UIViewController+DBAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDE22C81B7289AD0090A347 /* UIViewController+DBAppearance.m */; };
@@ -12841,7 +12837,6 @@
 		CB2423271B7A1FD500A02721 /* Images-TestApp.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-TestApp.xcassets"; sourceTree = "<group>"; };
 		CB2423281B7A1FD500A02721 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB2423291B7A1FD500A02721 /* TestApp-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestApp-info.plist"; sourceTree = "<group>"; };
-		CB24232A1B7A1FD500A02721 /* ViewControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViewControllers.plist; sourceTree = "<group>"; };
 		CB24234F1B7A47AD00A02721 /* ViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewManager.h; sourceTree = "<group>"; };
 		CB2423501B7A47AD00A02721 /* ViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewManager.m; sourceTree = "<group>"; };
 		CB2FD83319F55A580065285B /* mug_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mug_gray@2x.png"; sourceTree = "<group>"; };
@@ -13304,9 +13299,6 @@
 		CBDE21A71B7286890090A347 /* ShippingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShippingManager.m; sourceTree = "<group>"; };
 		CBDE22811B7286D20090A347 /* right_arrow_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_arrow_icon@2x.png"; sourceTree = "<group>"; };
 		CBDE22821B7286D20090A347 /* right_arrow_icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_arrow_icon@3x.png"; sourceTree = "<group>"; };
-		CBDE22C11B72874D0090A347 /* ViewControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViewControllers.plist; sourceTree = "<group>"; };
-		CBDE22C31B72876C0090A347 /* ViewControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViewControllers.plist; sourceTree = "<group>"; };
-		CBDE22C51B7287890090A347 /* ViewControllers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ViewControllers.plist; sourceTree = "<group>"; };
 		CBDE22C71B7289AD0090A347 /* UIViewController+DBAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+DBAppearance.h"; sourceTree = "<group>"; };
 		CBDE22C81B7289AD0090A347 /* UIViewController+DBAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+DBAppearance.m"; sourceTree = "<group>"; };
 		CBDE4D3819FFDB7800FB1942 /* AFHTTPRequestOperationManager+TimeoutExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPRequestOperationManager+TimeoutExtension.h"; sourceTree = "<group>"; };
@@ -15246,7 +15238,6 @@
 				CB2423251B7A1FD500A02721 /* InfoPlist.strings */,
 				CB2423271B7A1FD500A02721 /* Images-TestApp.xcassets */,
 				CB2423291B7A1FD500A02721 /* TestApp-info.plist */,
-				CB24232A1B7A1FD500A02721 /* ViewControllers.plist */,
 			);
 			path = TestApp;
 			sourceTree = "<group>";
@@ -15783,7 +15774,6 @@
 		CBB719141B14AC8100C47A33 /* Farsh */ = {
 			isa = PBXGroup;
 			children = (
-				CBDE22C31B72876C0090A347 /* ViewControllers.plist */,
 				CBB719151B14AC8100C47A33 /* AdditionalResources */,
 				CBB719171B14AC8100C47A33 /* CompanyInfo.plist */,
 				CBB719181B14AC8100C47A33 /* InfoPlist.strings */,
@@ -15952,7 +15942,6 @@
 		CBD14B6A1B148ED3005AEAFE /* CoffeeAutomation */ = {
 			isa = PBXGroup;
 			children = (
-				CBDE22C11B72874D0090A347 /* ViewControllers.plist */,
 				CBD14B6B1B148ED3005AEAFE /* AdditionalResources */,
 				CBD14B751B148ED3005AEAFE /* CoffeeAutomation-info.plist */,
 				CBD14B761B148ED3005AEAFE /* CompanyInfo.plist */,
@@ -16082,7 +16071,6 @@
 		CBDE1CBF1B7281880090A347 /* Sushilar */ = {
 			isa = PBXGroup;
 			children = (
-				CBDE22C51B7287890090A347 /* ViewControllers.plist */,
 				CBDE1CC01B7281880090A347 /* AdditionalResources */,
 				CBDE1CC41B7281880090A347 /* CompanyInfo.plist */,
 				CBDE1CC51B7281880090A347 /* InfoPlist.strings */,
@@ -17670,7 +17658,6 @@
 				CBDE1FCB1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7E3DABDB1B06153E00A7FFD1 /* menu_icon_grey@3x.png in Resources */,
 				7E3DABDC1B06153E00A7FFD1 /* DBTimePickerView.xib in Resources */,
-				CBDE22C41B72876C0090A347 /* ViewControllers.plist in Resources */,
 				7E3DABDD1B06153E00A7FFD1 /* arrow_horizontal_icon.png in Resources */,
 				7E3DABDF1B06153E00A7FFD1 /* DBPopupTextView.xib in Resources */,
 				7E3DABE01B06153E00A7FFD1 /* about_promo@2x.png in Resources */,
@@ -19738,7 +19725,6 @@
 				CBDE1FC61B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB1431F41B0E371A00DD50C7 /* DBPopupTextView.xib in Resources */,
 				CBD14B811B148ED3005AEAFE /* CoffeeAutomation-info.plist in Resources */,
-				CBDE22C21B72874D0090A347 /* ViewControllers.plist in Resources */,
 				CB1431F51B0E371A00DD50C7 /* about_promo@2x.png in Resources */,
 				CB1431F61B0E371A00DD50C7 /* settings@2x.png in Resources */,
 				CB1431F81B0E371A00DD50C7 /* e-mail.png in Resources */,
@@ -20917,7 +20903,6 @@
 				CB2422981B7A1D4D00A02721 /* OrderCell.xib in Resources */,
 				CB2422991B7A1D4D00A02721 /* noimage_icon@3x.png in Resources */,
 				CB24229A1B7A1D4D00A02721 /* DBTableItemInactivityView.xib in Resources */,
-				CB2423331B7A1FD500A02721 /* ViewControllers.plist in Resources */,
 				CB24229B1B7A1D4D00A02721 /* comment.png in Resources */,
 				CB24229C1B7A1D4D00A02721 /* right_arrow_icon@2x.png in Resources */,
 				CB24229D1B7A1D4D00A02721 /* visa_icon@2x.png in Resources */,
@@ -24350,7 +24335,6 @@
 				CBDE1BF71B7280B50090A347 /* orders_icon_grey.png in Resources */,
 				CBDE1BF81B7280B50090A347 /* Localizable.strings in Resources */,
 				CBDE1BF91B7280B50090A347 /* tick@2x.png in Resources */,
-				CBDE22C61B7287890090A347 /* ViewControllers.plist in Resources */,
 				CBDE1BFA1B7280B50090A347 /* menu_icon_grey@2x.png in Resources */,
 				CBDE22C01B7286D20090A347 /* right_arrow_icon@3x.png in Resources */,
 				CBDE1BFB1B7280B50090A347 /* share@3x.png in Resources */,
