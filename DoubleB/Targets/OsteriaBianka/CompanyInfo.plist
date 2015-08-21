@@ -5,11 +5,11 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://banzay.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://osteriabianca.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<integer>4290651695</integer>
+		<integer>0</integer>
 		<key>CompanyGAKey</key>
-		<string>UA-65821587-9</string>
+		<string>UA-65821587-13</string>
 		<key>Parse</key>
 		<dict>
 			<key>applicationId</key>
