@@ -18,5 +18,10 @@
 			<string>3wU53Rm7NewVVyqyfrnBcjLHaHd72K1U41RrEAi7</string>
 		</dict>
 	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
 </dict>
 </plist>

@@ -30,9 +30,8 @@
         [category.positions addObject:[[DBMenuPosition alloc] initWithResponseDictionary:position]];
     [category sortPositions];
  
-//TODO: insert nested categories key
     category.categories = [[NSMutableArray alloc] init];
-    for(NSDictionary *nestedCategory in categoryDictionary[@""])
+    for(NSDictionary *nestedCategory in categoryDictionary[@"categories"])
         [category.categories addObject:[DBMenuCategory categoryFromResponseDictionary:nestedCategory]];
     [category sortCategories];
     
@@ -56,10 +55,9 @@
     _positions = positions;
     [self sortPositions];
  
-//TODO: insert nested categories key
     NSMutableArray *nestedCategories = [[NSMutableArray alloc] init];
-    for(NSDictionary *remoteCategory in categoryDictionary[@""]){
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", remoteCategory[@"id"]];
+    for(NSDictionary *remoteCategory in categoryDictionary[@"categories"]){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", remoteCategory[@"info"][@"category_id"]];
         DBMenuCategory *sameCategory = [[_categories filteredArrayUsingPredicate:predicate] firstObject];
         if(sameCategory){
             [sameCategory synchronizeWithResponseDictionary:remoteCategory];
@@ -133,6 +131,17 @@
     }
     
     return venuePositions;
+}
+
+- (NSMutableArray *)filterCategoriesForVenue:(Venue *)venue{
+    NSMutableArray *venueCategories = [NSMutableArray new];
+    
+    for(DBMenuCategory *category in _categories){
+        if([category availableInVenue:venue])
+            [venueCategories addObject:category];
+    }
+    
+    return venueCategories;
 }
 
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId{

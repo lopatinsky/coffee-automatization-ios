@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, DBMenuCategoryType) {
 
 - (BOOL)availableInVenue:(Venue *)venue;
 - (NSMutableArray *)filterPositionsForVenue:(Venue *)venue;
+- (NSMutableArray *)filterCategoriesForVenue:(Venue *)venue;
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
 
 @end
