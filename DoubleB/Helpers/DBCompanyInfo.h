@@ -38,6 +38,10 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
+@property (strong, nonatomic) NSString *deliveryImageName;
+
+@property(strong, nonatomic) NSString *currentCompanyName;
+
 - (void)updateInfo;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
@@ -52,6 +56,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;
 
++ (BOOL)db_companyChoiceEnabled;
 // Only for paypal
 + (NSURL *)db_payPalPrivacyPolicy;
 + (NSURL *)db_payPalUserAgreement;

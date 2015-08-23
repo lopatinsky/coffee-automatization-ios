@@ -191,6 +191,12 @@
     }
 }
 
+- (void)clearMenu {
+    self.categories = @[];
+    
+    [self saveMenuToDeviceMemory];
+}
+
 - (void)loadMenuFromDeviceMemory{
     NSString *path = [[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingString:@"/menu.txt"];
     

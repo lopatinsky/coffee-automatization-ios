@@ -36,6 +36,26 @@
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     }
+<<<<<<< HEAD
+=======
+    
+//================ significant preloadings/initializations =================
+    [DBServerAPI registerUser:nil];
+    
+    [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
+        [self saveContext];
+    }];
+    
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
+    
+    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
+    
+    [JRSwizzleMethods swizzleUIViewDealloc];
+    [[DBPromoManager sharedManager] updateInfo];
+    
+    [GANHelper trackClientInfo];
+//================ significant preloadings/initializations =================
+>>>>>>> venue_picker
 
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
@@ -49,8 +69,30 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+<<<<<<< HEAD
     self.window.rootViewController = [ApplicationManager rootViewController];
+=======
     
+    [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+        NSForegroundColorAttributeName: [UIColor whiteColor],
+        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
+    }];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+
+    if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompanyInfo sharedInstance].currentCompanyName isEqualToString:@""]) {
+        self.window.rootViewController = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
+    } else {
+        if (![DBCompanyInfo sharedInstance].deliveryTypes) {
+            self.window.rootViewController = [DBLaunchEmulationViewController new];
+        } else {
+            self.window.rootViewController = [DBTabBarController sharedInstance];
+        }
+    }
+    
+>>>>>>> venue_picker
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -97,6 +139,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 //    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
     
+    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
@@ -105,8 +148,6 @@
     if (lastOrderId) {
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
     }
-    
-    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -118,6 +159,7 @@
 //}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"REMOTE PUSH SUPER PUSH %@", userInfo);
     [PFPush handlePush:userInfo];
 
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
@@ -128,6 +170,8 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    NSLog(@"%@", notification);
+    //[DBMastercardPromo clearAllLocalNotifications];
 }
 
 - (void)saveContext
@@ -224,4 +268,28 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+<<<<<<< HEAD
+=======
+- (void)copyPlist {
+    NSError *error;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    if(![fileManager fileExistsAtPath:path]){
+        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
+        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
+    }
+    
+    path = [documentDirectory stringByAppendingPathComponent:@"ViewControllers.plist"];
+    if(![fileManager fileExistsAtPath:path]) {
+        NSString *pathToViewControllers = [[NSBundle mainBundle] pathForResource:@"ViewControllers" ofType:@"plist"];
+        if (pathToViewControllers) {
+            [fileManager copyItemAtPath:pathToViewControllers toPath:path error:&error];
+        }
+    }
+}
+
+>>>>>>> venue_picker
 @end

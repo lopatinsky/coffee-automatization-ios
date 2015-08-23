@@ -58,6 +58,15 @@ static NSMutableArray *storedVenues;
     return [self storedVenueForId:venueId];
 }
 
++ (void)dropAllVenues {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
+    
+    NSArray *venues = [[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil];
+    for (Venue *venue in venues) {
+        [[CoreDataHelper sharedHelper].context deleteObject:venue];
+    }
+}
+
 + (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler {
     [self fetchVenuesForLocation:nil withCompletionHandler:completionHandler];
 }

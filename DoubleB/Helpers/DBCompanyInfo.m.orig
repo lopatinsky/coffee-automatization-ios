@@ -100,8 +100,10 @@
 }
 
 + (BOOL)db_companyChoiceEnabled {
-    return [[self objectFromPropertyListByName:@"CompanyChoiceEnabled"] boolValue];
+//    return [[self objectFromPropertyListByName:@"CompanyChoiceEnabled"] boolValue];
+    return [[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"fishrice"];
 }
+
 
 + (NSString *)db_companyParseApplicationKey {
     NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
@@ -182,6 +184,16 @@
     _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;
     _applicationName = [info getValueForKey:@"applicationName"] ?: @"";
     
+<<<<<<< HEAD
+=======
+    NSString *topScreen = [DBCompanyInfo objectFromPropertyListByName:@"TopViewController"];
+    if ([topScreen isEqualToString:@"Menu"]) {
+        _topScreenType = TVCMenu;
+    } else if ([topScreen isEqualToString:@"Order"]) {
+        _topScreenType = TVCOrder;
+    }
+    
+>>>>>>> venue_picker
     NSData *deliveryTypesData = info[@"deliveryTypes"];
     if(deliveryTypesData){
         _deliveryTypes = [NSKeyedUnarchiver unarchiveObjectWithData:deliveryTypesData] ?: @[];

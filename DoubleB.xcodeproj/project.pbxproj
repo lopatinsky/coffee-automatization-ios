@@ -5607,6 +5607,78 @@
 		CB1EAF1B1B86F8F800425CD7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF111B86F8F800425CD7 /* InfoPlist.strings */; };
 		CB1EAF1C1B86F8F800425CD7 /* Images-OsteriaBianka.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF131B86F8F800425CD7 /* Images-OsteriaBianka.xcassets */; };
 		CB1EAF1D1B86F8F800425CD7 /* OsteriaBianka-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF141B86F8F800425CD7 /* OsteriaBianka-info.plist */; };
+		CB1EAF591B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF5A1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF5B1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF5C1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF5D1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF5E1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF5F1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF601B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF611B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF621B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF631B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF641B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF651B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF661B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF671B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF681B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF691B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF6A1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF6B1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF6C1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF6D1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF6E1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF6F1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF701B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF711B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF721B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF731B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF741B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF751B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF761B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF771B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF781B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF791B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF7A1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF7B1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF7C1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */; };
+		CB1EAF7D1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF7E1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF7F1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF801B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF811B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF821B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF831B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF841B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF851B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF861B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF871B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF881B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF891B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF8A1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF8B1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF8C1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF8D1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF8E1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF8F1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF901B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF911B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF921B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF931B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF941B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF951B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF961B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF971B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF981B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF991B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF9A1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF9B1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF9C1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF9D1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF9E1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAF9F1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
+		CB1EAFA01B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */; };
 		CB215E281ADC1B8700EF9EEC /* DBPopupTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */; };
 		CB215E2A1ADC1B9B00EF9EEC /* DBPopupTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB215E291ADC1B9B00EF9EEC /* DBPopupTextView.xib */; };
 		CB215E2C1ADC1EEB00EF9EEC /* back_arrow_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB215E2B1ADC1EEB00EF9EEC /* back_arrow_icon@3x.png */; };
@@ -13191,6 +13263,8 @@
 		CB1EAF131B86F8F800425CD7 /* Images-OsteriaBianka.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-OsteriaBianka.xcassets"; sourceTree = "<group>"; };
 		CB1EAF141B86F8F800425CD7 /* OsteriaBianka-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OsteriaBianka-info.plist"; sourceTree = "<group>"; };
 		CB1EAF151B86F8F800425CD7 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBCompaniesViewController.swift; sourceTree = "<group>"; };
+		CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBCompaniesViewController.xib; sourceTree = "<group>"; };
 		CB215E261ADC1B8700EF9EEC /* DBPopupTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPopupTextView.h; sourceTree = "<group>"; };
 		CB215E271ADC1B8700EF9EEC /* DBPopupTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPopupTextView.m; sourceTree = "<group>"; };
 		CB215E291ADC1B9B00EF9EEC /* DBPopupTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPopupTextView.xib; sourceTree = "<group>"; };
@@ -15162,6 +15236,8 @@
 		C775B1154DBD501B5D3549F5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CB1EAF571B8A1CD300425CD7 /* DBCompaniesViewController.swift */,
+				CB1EAF581B8A1CD300425CD7 /* DBCompaniesViewController.xib */,
 				CBDE1CD01B7286530090A347 /* Launch */,
 				CBDE1CD41B7286530090A347 /* Menu */,
 				CB136A801B0A1D8300B93178 /* DBAddressViewController.h */,
@@ -17792,6 +17868,7 @@
 				7E3830411B5CF692008F0241 /* cash_gray.png in Resources */,
 				CBDE20591B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7E3830421B5CF692008F0241 /* card@2x.png in Resources */,
+				CB1EAF951B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7E3831131B5CF6A9008F0241 /* launch_736.png in Resources */,
 				7E3830451B5CF692008F0241 /* DBNewOrderViewController.xib in Resources */,
 				7E3830461B5CF692008F0241 /* share_icon@2x.png in Resources */,
@@ -17998,6 +18075,7 @@
 				7E3DAB6A1B06153E00A7FFD1 /* clock.png in Resources */,
 				CBDE20471B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7E3DAB6B1B06153E00A7FFD1 /* cash_gray.png in Resources */,
+				CB1EAF831B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7E3DAB6C1B06153E00A7FFD1 /* card@2x.png in Resources */,
 				7E3DAB6D1B06153E00A7FFD1 /* DBNewOrderViewController.xib in Resources */,
 				7E3DAB6E1B06153E00A7FFD1 /* share_icon@2x.png in Resources */,
@@ -18204,6 +18282,7 @@
 				7E7925B21B3C1BDA00CA740D /* cash_gray.png in Resources */,
 				CBDE20501B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7E7925B31B3C1BDA00CA740D /* card@2x.png in Resources */,
+				CB1EAF8C1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7E7925B51B3C1BDA00CA740D /* DBNewOrderViewController.xib in Resources */,
 				7E7925B61B3C1BDA00CA740D /* share_icon@2x.png in Resources */,
 				7E7925B71B3C1BDA00CA740D /* category_selection_icon@3x.png in Resources */,
@@ -18410,6 +18489,7 @@
 				7E7927341B3C247D00CA740D /* cash_gray.png in Resources */,
 				CBDE20511B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7E7927351B3C247D00CA740D /* card@2x.png in Resources */,
+				CB1EAF8D1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7E7927371B3C247D00CA740D /* DBNewOrderViewController.xib in Resources */,
 				7E7927381B3C247D00CA740D /* share_icon@2x.png in Resources */,
 				7E7927391B3C247D00CA740D /* category_selection_icon@3x.png in Resources */,
@@ -18616,6 +18696,7 @@
 				7EB2D2C21B3C35FB009405C6 /* 7Donuts-info.plist in Resources */,
 				CBDE20521B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7EB2D1F91B3C3581009405C6 /* cash_gray.png in Resources */,
+				CB1EAF8E1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7EB2D1FA1B3C3581009405C6 /* card@2x.png in Resources */,
 				7EB2D1FC1B3C3581009405C6 /* DBNewOrderViewController.xib in Resources */,
 				7EB2D1FD1B3C3581009405C6 /* share_icon@2x.png in Resources */,
@@ -18822,6 +18903,7 @@
 				7EB2D3691B3C51A2009405C6 /* cash_gray.png in Resources */,
 				CBDE20531B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7EB2D36A1B3C51A2009405C6 /* card@2x.png in Resources */,
+				CB1EAF8F1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7EB2D36C1B3C51A2009405C6 /* DBNewOrderViewController.xib in Resources */,
 				7EB2D36D1B3C51A2009405C6 /* share_icon@2x.png in Resources */,
 				7EB2D36E1B3C51A2009405C6 /* category_selection_icon@3x.png in Resources */,
@@ -19028,6 +19110,7 @@
 				7EB2D4D81B3C5C77009405C6 /* cash_gray.png in Resources */,
 				CBDE20541B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7EB2D4D91B3C5C77009405C6 /* card@2x.png in Resources */,
+				CB1EAF901B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7EB2D4DB1B3C5C77009405C6 /* DBNewOrderViewController.xib in Resources */,
 				7EB2D4DC1B3C5C77009405C6 /* share_icon@2x.png in Resources */,
 				7EB2D4DD1B3C5C77009405C6 /* category_selection_icon@3x.png in Resources */,
@@ -19241,6 +19324,7 @@
 				7ED4BD311B5EB64B00280D74 /* cash_gray.png in Resources */,
 				CBDE205A1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7ED4BD321B5EB64B00280D74 /* card@2x.png in Resources */,
+				CB1EAF961B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7ED4BD361B5EB64B00280D74 /* DBNewOrderViewController.xib in Resources */,
 				7ED4BD371B5EB64B00280D74 /* share_icon@2x.png in Resources */,
 				7ED4BD381B5EB64B00280D74 /* category_selection_icon@3x.png in Resources */,
@@ -19447,6 +19531,7 @@
 				7EDB598D1B32F70400723DF9 /* cash_gray.png in Resources */,
 				CBDE204F1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				7EDB598E1B32F70400723DF9 /* card@2x.png in Resources */,
+				CB1EAF8B1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				7EDB59901B32F70400723DF9 /* DBNewOrderViewController.xib in Resources */,
 				7EDB59911B32F70400723DF9 /* share_icon@2x.png in Resources */,
 				7EDB59921B32F70400723DF9 /* category_selection_icon@3x.png in Resources */,
@@ -19653,6 +19738,7 @@
 				CB142A201B7A677A00B72069 /* cash_gray.png in Resources */,
 				CB142A211B7A677A00B72069 /* DBCategoryPicker.xib in Resources */,
 				CB142A221B7A677A00B72069 /* card@2x.png in Resources */,
+				CB1EAF9D1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB142A241B7A677A00B72069 /* DBNewOrderViewController.xib in Resources */,
 				CB142A251B7A677A00B72069 /* share_icon@2x.png in Resources */,
 				CB142A261B7A677A00B72069 /* category_selection_icon@3x.png in Resources */,
@@ -19859,6 +19945,7 @@
 				CB142BA31B7A6A4D00B72069 /* cash_gray.png in Resources */,
 				CB142BA41B7A6A4D00B72069 /* DBCategoryPicker.xib in Resources */,
 				CB142BA51B7A6A4D00B72069 /* card@2x.png in Resources */,
+				CB1EAF9E1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB142BA61B7A6A4D00B72069 /* DBNewOrderViewController.xib in Resources */,
 				CB142BA71B7A6A4D00B72069 /* share_icon@2x.png in Resources */,
 				CB142BA81B7A6A4D00B72069 /* category_selection_icon@3x.png in Resources */,
@@ -20065,6 +20152,7 @@
 				CB14317A1B0E371A00DD50C7 /* cash_gray.png in Resources */,
 				CBDE20421B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CBD14B8B1B14933B005AEAFE /* launch_667.jpg in Resources */,
+				CB1EAF7E1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB14317B1B0E371A00DD50C7 /* card@2x.png in Resources */,
 				CB14317D1B0E371A00DD50C7 /* DBNewOrderViewController.xib in Resources */,
 				CB14317E1B0E371A00DD50C7 /* share_icon@2x.png in Resources */,
@@ -20271,6 +20359,7 @@
 				CB1432DE1B0F1BBB00DD50C7 /* cash_gray.png in Resources */,
 				CBDE20481B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB1432DF1B0F1BBB00DD50C7 /* card@2x.png in Resources */,
+				CB1EAF841B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB1432E11B0F1BBB00DD50C7 /* DBNewOrderViewController.xib in Resources */,
 				CB1432E21B0F1BBB00DD50C7 /* share_icon@2x.png in Resources */,
 				CB1432E31B0F1BBB00DD50C7 /* category_selection_icon@3x.png in Resources */,
@@ -20477,6 +20566,7 @@
 				CB194CA91B6BAECE0085ECF8 /* clock.png in Resources */,
 				CBDE205D1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB194CAA1B6BAECE0085ECF8 /* cash_gray.png in Resources */,
+				CB1EAF991B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB194CAB1B6BAECE0085ECF8 /* card@2x.png in Resources */,
 				CB194CAD1B6BAECE0085ECF8 /* DBNewOrderViewController.xib in Resources */,
 				CB194D7C1B6BAFEC0085ECF8 /* launch_736.png in Resources */,
@@ -20683,6 +20773,7 @@
 				CB194E1C1B6BC2650085ECF8 /* cash_gray.png in Resources */,
 				CBDE205E1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB194E1D1B6BC2650085ECF8 /* card@2x.png in Resources */,
+				CB1EAF9A1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB194EED1B6BC2B30085ECF8 /* launch_736.png in Resources */,
 				CB194E1F1B6BC2650085ECF8 /* DBNewOrderViewController.xib in Resources */,
 				CB194E211B6BC2650085ECF8 /* share_icon@2x.png in Resources */,
@@ -20889,6 +20980,7 @@
 				CB194F8C1B6BD75B0085ECF8 /* cash_gray.png in Resources */,
 				CBDE205F1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB194F8D1B6BD75B0085ECF8 /* card@2x.png in Resources */,
+				CB1EAF9B1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB19505E1B6BD7930085ECF8 /* launch_736.png in Resources */,
 				CB194F901B6BD75B0085ECF8 /* DBNewOrderViewController.xib in Resources */,
 				CB194F911B6BD75B0085ECF8 /* share_icon@2x.png in Resources */,
@@ -21095,6 +21187,7 @@
 				CB1AF7EF1AE10E6900FA3224 /* cash_gray.png in Resources */,
 				CBDE20451B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB1AF7F01AE10E6900FA3224 /* card@2x.png in Resources */,
+				CB1EAF811B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB1AF7F11AE10E6900FA3224 /* DBNewOrderViewController.xib in Resources */,
 				CB1AF7F21AE10E6900FA3224 /* share_icon@2x.png in Resources */,
 				CB1AF7F31AE10E6900FA3224 /* category_selection_icon@3x.png in Resources */,
@@ -21301,6 +21394,7 @@
 				CB1EAE431B86F88700425CD7 /* cash_gray.png in Resources */,
 				CB1EAE441B86F88700425CD7 /* DBCategoryPicker.xib in Resources */,
 				CB1EAE451B86F88700425CD7 /* card@2x.png in Resources */,
+				CB1EAFA01B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB1EAE461B86F88700425CD7 /* DBNewOrderViewController.xib in Resources */,
 				CB1EAE471B86F88700425CD7 /* share_icon@2x.png in Resources */,
 				CB1EAE481B86F88700425CD7 /* category_selection_icon@3x.png in Resources */,
@@ -21507,6 +21601,7 @@
 				CB2422561B7A1D4D00A02721 /* cash_gray.png in Resources */,
 				CB2422571B7A1D4D00A02721 /* DBCategoryPicker.xib in Resources */,
 				CB2422581B7A1D4D00A02721 /* card@2x.png in Resources */,
+				CB1EAF7D1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB24225A1B7A1D4D00A02721 /* DBNewOrderViewController.xib in Resources */,
 				CB24225B1B7A1D4D00A02721 /* share_icon@2x.png in Resources */,
 				CB24225C1B7A1D4D00A02721 /* category_selection_icon@3x.png in Resources */,
@@ -21713,6 +21808,7 @@
 				CB3BA36E1B20589300F320CA /* clock.png in Resources */,
 				CBDE20491B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB3BA36F1B20589300F320CA /* cash_gray.png in Resources */,
+				CB1EAF851B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB3BA3701B20589300F320CA /* card@2x.png in Resources */,
 				CB3BA3721B20589300F320CA /* DBNewOrderViewController.xib in Resources */,
 				CB3BA3731B20589300F320CA /* share_icon@2x.png in Resources */,
@@ -21919,6 +22015,7 @@
 				CB517BC91AEFB6B500A50F5C /* card@2x.png in Resources */,
 				CBDE20461B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB517BCA1AEFB6B500A50F5C /* DBNewOrderViewController.xib in Resources */,
+				CB1EAF821B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB517BCB1AEFB6B500A50F5C /* share_icon@2x.png in Resources */,
 				CBB042F31B0CAE3D00901173 /* back_arrow_icon@2x.png in Resources */,
 				CBB042F61B0CAE3D00901173 /* return_cause_other_icon@2x.png in Resources */,
@@ -22125,6 +22222,7 @@
 				CB5793A41B6AB87300B17819 /* cash_gray.png in Resources */,
 				CBDE205B1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB5793A51B6AB87300B17819 /* card@2x.png in Resources */,
+				CB1EAF971B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB5793A81B6AB87300B17819 /* DBNewOrderViewController.xib in Resources */,
 				CB5793A91B6AB87300B17819 /* share_icon@2x.png in Resources */,
 				CB5793AA1B6AB87300B17819 /* category_selection_icon@3x.png in Resources */,
@@ -22331,6 +22429,7 @@
 				CB57951B1B6BA76B00B17819 /* cash_gray.png in Resources */,
 				CBDE205C1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB57951C1B6BA76B00B17819 /* card@2x.png in Resources */,
+				CB1EAF981B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB57951E1B6BA76B00B17819 /* DBNewOrderViewController.xib in Resources */,
 				CB5795ED1B6BAC8700B17819 /* launch_736.png in Resources */,
 				CB57951F1B6BA76B00B17819 /* share_icon@2x.png in Resources */,
@@ -22537,6 +22636,7 @@
 				CB5AFCB91B27209A00904BF7 /* clock.png in Resources */,
 				CBDE204A1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB5AFCBA1B27209A00904BF7 /* cash_gray.png in Resources */,
+				CB1EAF861B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB5AFCBB1B27209A00904BF7 /* card@2x.png in Resources */,
 				CB5AFCBD1B27209A00904BF7 /* DBNewOrderViewController.xib in Resources */,
 				CB5AFCBE1B27209A00904BF7 /* share_icon@2x.png in Resources */,
@@ -22743,6 +22843,7 @@
 				CB60C11C1AC5AD2600D5E962 /* cash_gray.png in Resources */,
 				CBDE20441B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB60C11D1AC5AD2600D5E962 /* card@2x.png in Resources */,
+				CB1EAF801B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB60C11E1AC5AD2600D5E962 /* DBNewOrderViewController.xib in Resources */,
 				CB60C11F1AC5AD2600D5E962 /* share_icon@2x.png in Resources */,
 				CB0B5BD91AD80C5F0094D534 /* category_selection_icon@3x.png in Resources */,
@@ -22949,6 +23050,7 @@
 				CB6400481B31B7CF0011CEEC /* cash_gray.png in Resources */,
 				CBDE204E1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB6400491B31B7CF0011CEEC /* card@2x.png in Resources */,
+				CB1EAF8A1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB64004B1B31B7CF0011CEEC /* DBNewOrderViewController.xib in Resources */,
 				CB64004C1B31B7CF0011CEEC /* share_icon@2x.png in Resources */,
 				CB64004D1B31B7CF0011CEEC /* category_selection_icon@3x.png in Resources */,
@@ -23155,6 +23257,7 @@
 				CB64FE9A1B317F760011CEEC /* cash_gray.png in Resources */,
 				CBDE204D1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB64FE9B1B317F760011CEEC /* card@2x.png in Resources */,
+				CB1EAF891B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB64FE9D1B317F760011CEEC /* DBNewOrderViewController.xib in Resources */,
 				CB64FE9E1B317F760011CEEC /* share_icon@2x.png in Resources */,
 				CB64FE9F1B317F760011CEEC /* category_selection_icon@3x.png in Resources */,
@@ -23361,6 +23464,7 @@
 				CB6980B41B7DE33400B12B78 /* clock.png in Resources */,
 				CB6980B51B7DE33400B12B78 /* cash_gray.png in Resources */,
 				CB6980B61B7DE33400B12B78 /* DBCategoryPicker.xib in Resources */,
+				CB1EAF9F1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB6980B71B7DE33400B12B78 /* card@2x.png in Resources */,
 				CB6980B81B7DE33400B12B78 /* DBNewOrderViewController.xib in Resources */,
 				CB6980B91B7DE33400B12B78 /* share_icon@2x.png in Resources */,
@@ -23567,6 +23671,7 @@
 				CB82012D1B46CBB4000BBE55 /* cash_gray.png in Resources */,
 				CBDE20431B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB82012E1B46CBB4000BBE55 /* card@2x.png in Resources */,
+				CB1EAF7F1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB8201FF1B46CC1F000BBE55 /* launch_736.png in Resources */,
 				CB8201311B46CBB4000BBE55 /* DBNewOrderViewController.xib in Resources */,
 				CB8201321B46CBB4000BBE55 /* share_icon@2x.png in Resources */,
@@ -23773,6 +23878,7 @@
 				CB82FD3B1B442CBF000BBE55 /* launch_736.png in Resources */,
 				CBDE20561B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB82FC6A1B442C70000BBE55 /* clock.png in Resources */,
+				CB1EAF921B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB82FC6B1B442C70000BBE55 /* cash_gray.png in Resources */,
 				CB82FC6C1B442C70000BBE55 /* card@2x.png in Resources */,
 				CB82FC6E1B442C70000BBE55 /* DBNewOrderViewController.xib in Resources */,
@@ -23979,6 +24085,7 @@
 				CB82FE4A1B4464F6000BBE55 /* share@3x.png in Resources */,
 				CBDE20571B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB82FE4C1B4464F6000BBE55 /* clock.png in Resources */,
+				CB1EAF931B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB82FE4D1B4464F6000BBE55 /* cash_gray.png in Resources */,
 				CB82FE4E1B4464F6000BBE55 /* card@2x.png in Resources */,
 				CB82FF1D1B44659B000BBE55 /* launch_736.png in Resources */,
@@ -24185,6 +24292,7 @@
 				CB82FFBE1B4579B5000BBE55 /* cash_gray.png in Resources */,
 				CBDE20581B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CB82FFBF1B4579B5000BBE55 /* card@2x.png in Resources */,
+				CB1EAF941B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CB82008E1B457B4A000BBE55 /* launch_736.png in Resources */,
 				CB82FFC21B4579B5000BBE55 /* DBNewOrderViewController.xib in Resources */,
 				CB82FFC31B4579B5000BBE55 /* share_icon@2x.png in Resources */,
@@ -24551,6 +24659,7 @@
 				CBD0C6061B30724300DAD042 /* back_arrow_icon@3x.png in Resources */,
 				CBDE1E7B1B7286540090A347 /* DBPositionModifierCell.xib in Resources */,
 				CBD0C6071B30724300DAD042 /* orders_icon@3x.png in Resources */,
+				CB1EAF881B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CBD0C6081B30724300DAD042 /* DBOrderViewController.xib in Resources */,
 				CBD0C6091B30724300DAD042 /* venue_gray.png in Resources */,
 				CBD0C60A1B30724300DAD042 /* paid@2x.png in Resources */,
@@ -24601,6 +24710,7 @@
 				CBD2EB4E1B2A07D000E4AAA1 /* cash_gray.png in Resources */,
 				CBDE204B1B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CBD2EB4F1B2A07D000E4AAA1 /* card@2x.png in Resources */,
+				CB1EAF871B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CBD2EC381B2A08FA00E4AAA1 /* Images-Voda.xcassets in Resources */,
 				CBD2EB521B2A07D000E4AAA1 /* DBNewOrderViewController.xib in Resources */,
 				CBD2EB531B2A07D000E4AAA1 /* share_icon@2x.png in Resources */,
@@ -24807,6 +24917,7 @@
 				CBDC7A1D1B42AFC700935328 /* clock.png in Resources */,
 				CBDE20551B7286540090A347 /* DBCategoryPicker.xib in Resources */,
 				CBDC7A1E1B42AFC700935328 /* cash_gray.png in Resources */,
+				CB1EAF911B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CBDC7A1F1B42AFC700935328 /* card@2x.png in Resources */,
 				CBDC7A211B42AFC700935328 /* DBNewOrderViewController.xib in Resources */,
 				CBDC7A221B42AFC700935328 /* share_icon@2x.png in Resources */,
@@ -25005,6 +25116,7 @@
 			files = (
 				CBDE1BF61B7280B50090A347 /* return_cause_venue_icon@3x.png in Resources */,
 				CBDE1FE41B7286540090A347 /* DBCategoryCell.xib in Resources */,
+				CB1EAF9C1B8A1CD300425CD7 /* DBCompaniesViewController.xib in Resources */,
 				CBDE1BF71B7280B50090A347 /* orders_icon_grey.png in Resources */,
 				CBDE1BF81B7280B50090A347 /* Localizable.strings in Resources */,
 				CBDE1BF91B7280B50090A347 /* tick@2x.png in Resources */,
@@ -26847,6 +26959,7 @@
 				7E382FF31B5CF692008F0241 /* NSMethodSignature+EXT.m in Sources */,
 				7E382FF41B5CF692008F0241 /* DBOrderReturnView.m in Sources */,
 				CBDE1F9F1B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF711B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7E382FF51B5CF692008F0241 /* UIImage+ImageEffects.m in Sources */,
 				7E382FF61B5CF692008F0241 /* DBSettingsTableViewController.m in Sources */,
 				7E382FF71B5CF692008F0241 /* UIView+SnapshotAdditions.m in Sources */,
@@ -27006,6 +27119,7 @@
 				7E3DAB2B1B06153E00A7FFD1 /* UIView+SnapshotAdditions.m in Sources */,
 				7E3DAB2C1B06153E00A7FFD1 /* DBOrderViewHeader.m in Sources */,
 				7E3DAB2D1B06153E00A7FFD1 /* IHWebPageViewController.m in Sources */,
+				CB1EAF5F1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB6981991B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				7E3DAB2E1B06153E00A7FFD1 /* DBOrderBarButtonView.m in Sources */,
 				7E3DAB2F1B06153E00A7FFD1 /* DBConstants.m in Sources */,
@@ -27134,6 +27248,7 @@
 				7E7925661B3C1BDA00CA740D /* DBOrderReturnView.m in Sources */,
 				7E7925671B3C1BDA00CA740D /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F961B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF681B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7E7925681B3C1BDA00CA740D /* DBSettingsTableViewController.m in Sources */,
 				CB82FD541B44309B000BBE55 /* DBPayPalManager.m in Sources */,
 				7E7925691B3C1BDA00CA740D /* UIView+SnapshotAdditions.m in Sources */,
@@ -27278,6 +27393,7 @@
 				7E7926E81B3C247D00CA740D /* DBOrderReturnView.m in Sources */,
 				7E7926E91B3C247D00CA740D /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F971B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF691B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7E7926EA1B3C247D00CA740D /* DBSettingsTableViewController.m in Sources */,
 				CB82FD551B44309C000BBE55 /* DBPayPalManager.m in Sources */,
 				7E7926EB1B3C247D00CA740D /* UIView+SnapshotAdditions.m in Sources */,
@@ -27422,6 +27538,7 @@
 				7EB2D1AD1B3C3581009405C6 /* DBOrderReturnView.m in Sources */,
 				7EB2D1AE1B3C3581009405C6 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F981B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF6A1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7EB2D1AF1B3C3581009405C6 /* DBSettingsTableViewController.m in Sources */,
 				CB82FD561B44309C000BBE55 /* DBPayPalManager.m in Sources */,
 				7EB2D1B01B3C3581009405C6 /* UIView+SnapshotAdditions.m in Sources */,
@@ -27566,6 +27683,7 @@
 				7EB2D31C1B3C51A2009405C6 /* DBOrderReturnView.m in Sources */,
 				7EB2D31D1B3C51A2009405C6 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F991B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF6B1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7EB2D31E1B3C51A2009405C6 /* DBSettingsTableViewController.m in Sources */,
 				CB82FD571B44309D000BBE55 /* DBPayPalManager.m in Sources */,
 				7EB2D31F1B3C51A2009405C6 /* UIView+SnapshotAdditions.m in Sources */,
@@ -27710,6 +27828,7 @@
 				7EB2D48C1B3C5C77009405C6 /* DBOrderReturnView.m in Sources */,
 				7EB2D48D1B3C5C77009405C6 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F9A1B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF6C1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7EB2D48E1B3C5C77009405C6 /* DBSettingsTableViewController.m in Sources */,
 				CB82FD581B44309D000BBE55 /* DBPayPalManager.m in Sources */,
 				7EB2D48F1B3C5C77009405C6 /* UIView+SnapshotAdditions.m in Sources */,
@@ -27865,6 +27984,7 @@
 				7ED4BCE31B5EB64B00280D74 /* NSMethodSignature+EXT.m in Sources */,
 				7ED4BCE41B5EB64B00280D74 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA01B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF721B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7ED4BCE51B5EB64B00280D74 /* UIImage+ImageEffects.m in Sources */,
 				7ED4BCE61B5EB64B00280D74 /* DBSettingsTableViewController.m in Sources */,
 				7ED4BCE71B5EB64B00280D74 /* UIView+SnapshotAdditions.m in Sources */,
@@ -28009,6 +28129,7 @@
 				7EDB59411B32F70400723DF9 /* DBOrderReturnView.m in Sources */,
 				7EDB59421B32F70400723DF9 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F951B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF671B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				7EDB59431B32F70400723DF9 /* DBSettingsTableViewController.m in Sources */,
 				CB82FD531B44309B000BBE55 /* DBPayPalManager.m in Sources */,
 				7EDB59441B32F70400723DF9 /* UIView+SnapshotAdditions.m in Sources */,
@@ -28153,6 +28274,7 @@
 				CB1429CD1B7A677A00B72069 /* NSMethodSignature+EXT.m in Sources */,
 				CB1429CE1B7A677A00B72069 /* DBOrderReturnView.m in Sources */,
 				CB1429CF1B7A677A00B72069 /* PositionsTVController.m in Sources */,
+				CB1EAF791B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB1429D01B7A677A00B72069 /* UIImage+ImageEffects.m in Sources */,
 				CB1429D11B7A677A00B72069 /* DBSettingsTableViewController.m in Sources */,
 				CB1429D21B7A677A00B72069 /* UIView+SnapshotAdditions.m in Sources */,
@@ -28297,6 +28419,7 @@
 				CB142B501B7A6A4D00B72069 /* NSMethodSignature+EXT.m in Sources */,
 				CB142B511B7A6A4D00B72069 /* DBOrderReturnView.m in Sources */,
 				CB142B521B7A6A4D00B72069 /* PositionsTVController.m in Sources */,
+				CB1EAF7A1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB142B531B7A6A4D00B72069 /* UIImage+ImageEffects.m in Sources */,
 				CB142B541B7A6A4D00B72069 /* DBSettingsTableViewController.m in Sources */,
 				CB142B551B7A6A4D00B72069 /* UIView+SnapshotAdditions.m in Sources */,
@@ -28465,6 +28588,7 @@
 				CB1431421B0E371A00DD50C7 /* Compatibility.m in Sources */,
 				CBDE1FA71B7286540090A347 /* DBCategoryCell.m in Sources */,
 				CB1431431B0E371A00DD50C7 /* DBDiscountAdvertView.m in Sources */,
+				CB1EAF5A1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB1431441B0E371A00DD50C7 /* DBOrderViewFooter.m in Sources */,
 				CB9105001B1C7DA900506235 /* UIView+RoundedCorners.m in Sources */,
 				CB1431461B0E371A00DD50C7 /* UIView+Extension.m in Sources */,
@@ -28601,6 +28725,7 @@
 				CB14329B1B0F1BBB00DD50C7 /* DBOrderViewHeader.m in Sources */,
 				CB14329C1B0F1BBB00DD50C7 /* IHWebPageViewController.m in Sources */,
 				CB64FFA41B3192100011CEEC /* NSObject+Encode.m in Sources */,
+				CB1EAF601B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB69819A1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB14329D1B0F1BBB00DD50C7 /* DBOrderBarButtonView.m in Sources */,
 				CB14329F1B0F1BBB00DD50C7 /* DBConstants.m in Sources */,
@@ -28729,6 +28854,7 @@
 				CB194C5C1B6BAECE0085ECF8 /* NSMethodSignature+EXT.m in Sources */,
 				CB194C5D1B6BAECE0085ECF8 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA31B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF751B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB194C5E1B6BAECE0085ECF8 /* UIImage+ImageEffects.m in Sources */,
 				CB194C5F1B6BAECE0085ECF8 /* DBSettingsTableViewController.m in Sources */,
 				CB194C601B6BAECE0085ECF8 /* UIView+SnapshotAdditions.m in Sources */,
@@ -28873,6 +28999,7 @@
 				CB194DCD1B6BC2650085ECF8 /* NSMethodSignature+EXT.m in Sources */,
 				CB194DCE1B6BC2650085ECF8 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA41B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF761B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB194DCF1B6BC2650085ECF8 /* UIImage+ImageEffects.m in Sources */,
 				CB194DD01B6BC2650085ECF8 /* DBSettingsTableViewController.m in Sources */,
 				CB194DD11B6BC2650085ECF8 /* UIView+SnapshotAdditions.m in Sources */,
@@ -29017,6 +29144,7 @@
 				CB194F3E1B6BD75B0085ECF8 /* NSMethodSignature+EXT.m in Sources */,
 				CB194F3F1B6BD75B0085ECF8 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA51B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF771B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB194F401B6BD75B0085ECF8 /* UIImage+ImageEffects.m in Sources */,
 				CB194F411B6BD75B0085ECF8 /* DBSettingsTableViewController.m in Sources */,
 				CB194F421B6BD75B0085ECF8 /* UIView+SnapshotAdditions.m in Sources */,
@@ -29176,6 +29304,7 @@
 				CB1AF7AF1AE10E6900FA3224 /* UIView+SnapshotAdditions.m in Sources */,
 				CB1AF7B01AE10E6900FA3224 /* DBOrderViewHeader.m in Sources */,
 				CB1AF7B11AE10E6900FA3224 /* IHWebPageViewController.m in Sources */,
+				CB1EAF5D1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB6981971B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CBE162B91AE13C92006BB81F /* DBOrderBarButtonView.m in Sources */,
 				CB1AF7B21AE10E6900FA3224 /* DBConstants.m in Sources */,
@@ -29304,6 +29433,7 @@
 				CB1EADEE1B86F88700425CD7 /* NSMethodSignature+EXT.m in Sources */,
 				CB1EADEF1B86F88700425CD7 /* DBOrderReturnView.m in Sources */,
 				CB1EADF01B86F88700425CD7 /* PositionsTVController.m in Sources */,
+				CB1EAF7C1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB1EADF11B86F88700425CD7 /* UIImage+ImageEffects.m in Sources */,
 				CB1EADF21B86F88700425CD7 /* DBSettingsTableViewController.m in Sources */,
 				CB1EADF31B86F88700425CD7 /* UIView+SnapshotAdditions.m in Sources */,
@@ -29448,6 +29578,7 @@
 				CB2422031B7A1D4D00A02721 /* NSMethodSignature+EXT.m in Sources */,
 				CB2422041B7A1D4D00A02721 /* DBOrderReturnView.m in Sources */,
 				CB2422051B7A1D4D00A02721 /* PositionsTVController.m in Sources */,
+				CB1EAF591B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB2422061B7A1D4D00A02721 /* UIImage+ImageEffects.m in Sources */,
 				CB2422071B7A1D4D00A02721 /* DBSettingsTableViewController.m in Sources */,
 				CB2422081B7A1D4D00A02721 /* UIView+SnapshotAdditions.m in Sources */,
@@ -29607,6 +29738,7 @@
 				CB3BA32A1B20589300F320CA /* DBOrderViewHeader.m in Sources */,
 				CB3BA32B1B20589300F320CA /* IHWebPageViewController.m in Sources */,
 				CB3BA32C1B20589300F320CA /* DBOrderBarButtonView.m in Sources */,
+				CB1EAF611B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB69819B1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA51B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB3BA32E1B20589300F320CA /* DBConstants.m in Sources */,
@@ -29750,6 +29882,7 @@
 				CB517B881AEFB6B500A50F5C /* UIView+SnapshotAdditions.m in Sources */,
 				CB517B891AEFB6B500A50F5C /* DBOrderViewHeader.m in Sources */,
 				CB517B8A1AEFB6B500A50F5C /* IHWebPageViewController.m in Sources */,
+				CB1EAF5E1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB6981981B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB517B8B1AEFB6B500A50F5C /* DBOrderBarButtonView.m in Sources */,
 				CB517B8C1AEFB6B500A50F5C /* DBConstants.m in Sources */,
@@ -29878,6 +30011,7 @@
 				CB5793561B6AB87300B17819 /* NSMethodSignature+EXT.m in Sources */,
 				CB5793571B6AB87300B17819 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA11B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF731B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB5793581B6AB87300B17819 /* UIImage+ImageEffects.m in Sources */,
 				CB5793591B6AB87300B17819 /* DBSettingsTableViewController.m in Sources */,
 				CB57935A1B6AB87300B17819 /* UIView+SnapshotAdditions.m in Sources */,
@@ -30022,6 +30156,7 @@
 				CB5794CD1B6BA76B00B17819 /* NSMethodSignature+EXT.m in Sources */,
 				CB5794CE1B6BA76B00B17819 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA21B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF741B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB5794CF1B6BA76B00B17819 /* UIImage+ImageEffects.m in Sources */,
 				CB5794D01B6BA76B00B17819 /* DBSettingsTableViewController.m in Sources */,
 				CB5794D11B6BA76B00B17819 /* UIView+SnapshotAdditions.m in Sources */,
@@ -30181,6 +30316,7 @@
 				CB5AFC741B27209A00904BF7 /* DBOrderViewHeader.m in Sources */,
 				CB5AFC751B27209A00904BF7 /* IHWebPageViewController.m in Sources */,
 				CB5AFC761B27209A00904BF7 /* DBOrderBarButtonView.m in Sources */,
+				CB1EAF621B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB69819C1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA61B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB5AFC781B27209A00904BF7 /* DBConstants.m in Sources */,
@@ -30324,6 +30460,7 @@
 				CB60C0E51AC5AD2600D5E962 /* IHWebPageViewController.m in Sources */,
 				CBE162B81AE1376F006BB81F /* DBOrderBarButtonView.m in Sources */,
 				CB60C0E61AC5AD2600D5E962 /* DBConstants.m in Sources */,
+				CB1EAF5C1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB6981961B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB1433A91B131B2E00DD50C7 /* DBDeliveryType.m in Sources */,
 				CB60C0E71AC5AD2600D5E962 /* OrderItem.m in Sources */,
@@ -30467,6 +30604,7 @@
 				CB64FE531B317F760011CEEC /* DBOrderViewHeader.m in Sources */,
 				CB64FE541B317F760011CEEC /* IHWebPageViewController.m in Sources */,
 				CB64FE551B317F760011CEEC /* DBOrderBarButtonView.m in Sources */,
+				CB1EAF651B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB69819F1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA91B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB64FE581B317F760011CEEC /* DBConstants.m in Sources */,
@@ -30595,6 +30733,7 @@
 				CB64FFFC1B31B7CF0011CEEC /* DBOrderReturnView.m in Sources */,
 				CB64FFFD1B31B7CF0011CEEC /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F941B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF661B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB64FFFE1B31B7CF0011CEEC /* DBSettingsTableViewController.m in Sources */,
 				CB82FD521B44309A000BBE55 /* DBPayPalManager.m in Sources */,
 				CB64FFFF1B31B7CF0011CEEC /* UIView+SnapshotAdditions.m in Sources */,
@@ -30739,6 +30878,7 @@
 				CB6980621B7DE33400B12B78 /* NSMethodSignature+EXT.m in Sources */,
 				CB6980631B7DE33400B12B78 /* DBOrderReturnView.m in Sources */,
 				CB6980641B7DE33400B12B78 /* PositionsTVController.m in Sources */,
+				CB1EAF7B1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB6980651B7DE33400B12B78 /* UIImage+ImageEffects.m in Sources */,
 				CB6980661B7DE33400B12B78 /* DBSettingsTableViewController.m in Sources */,
 				CB6980671B7DE33400B12B78 /* UIView+SnapshotAdditions.m in Sources */,
@@ -30883,6 +31023,7 @@
 				CB8200DF1B46CBB4000BBE55 /* NSMethodSignature+EXT.m in Sources */,
 				CB8200E01B46CBB4000BBE55 /* DBOrderReturnView.m in Sources */,
 				CBDE1F891B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF5B1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB8200E11B46CBB4000BBE55 /* UIImage+ImageEffects.m in Sources */,
 				CB8200E21B46CBB4000BBE55 /* DBSettingsTableViewController.m in Sources */,
 				CB8200E31B46CBB4000BBE55 /* UIView+SnapshotAdditions.m in Sources */,
@@ -31027,6 +31168,7 @@
 				CB82FC1D1B442C70000BBE55 /* NSMethodSignature+EXT.m in Sources */,
 				CB82FC1E1B442C70000BBE55 /* DBOrderReturnView.m in Sources */,
 				CBDE1F9C1B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF6E1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB82FC1F1B442C70000BBE55 /* UIImage+ImageEffects.m in Sources */,
 				CB82FC201B442C70000BBE55 /* DBSettingsTableViewController.m in Sources */,
 				CB82FC211B442C70000BBE55 /* UIView+SnapshotAdditions.m in Sources */,
@@ -31171,6 +31313,7 @@
 				CB82FDFD1B4464F6000BBE55 /* NSMethodSignature+EXT.m in Sources */,
 				CB82FDFE1B4464F6000BBE55 /* DBOrderReturnView.m in Sources */,
 				CBDE1F9D1B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF6F1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB82FDFF1B4464F6000BBE55 /* UIImage+ImageEffects.m in Sources */,
 				CB82FE001B4464F6000BBE55 /* DBSettingsTableViewController.m in Sources */,
 				CB82FE011B4464F6000BBE55 /* UIView+SnapshotAdditions.m in Sources */,
@@ -31315,6 +31458,7 @@
 				CB82FF6E1B4579B5000BBE55 /* NSMethodSignature+EXT.m in Sources */,
 				CB82FF6F1B4579B5000BBE55 /* DBOrderReturnView.m in Sources */,
 				CBDE1F9E1B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF701B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB82FF701B4579B5000BBE55 /* UIImage+ImageEffects.m in Sources */,
 				CB82FF711B4579B5000BBE55 /* DBSettingsTableViewController.m in Sources */,
 				CB82FF721B4579B5000BBE55 /* UIView+SnapshotAdditions.m in Sources */,
@@ -31459,6 +31603,7 @@
 				CBD0C5211B30724300DAD042 /* DBOrderReturnView.m in Sources */,
 				CBD0C5221B30724300DAD042 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F921B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF641B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CBD0C5231B30724300DAD042 /* DBSettingsTableViewController.m in Sources */,
 				CB82FD501B443099000BBE55 /* DBPayPalManager.m in Sources */,
 				CBD0C5241B30724300DAD042 /* UIView+SnapshotAdditions.m in Sources */,
@@ -31618,6 +31763,7 @@
 				CBD2EB081B2A07D000E4AAA1 /* DBOrderViewHeader.m in Sources */,
 				CBD2EB091B2A07D000E4AAA1 /* IHWebPageViewController.m in Sources */,
 				CBD2EB0A1B2A07D000E4AAA1 /* DBOrderBarButtonView.m in Sources */,
+				CB1EAF631B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CB69819D1B7DE8A900B12B78 /* DBTextResourcesHelper.m in Sources */,
 				CB64FFA71B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CBD2EB0C1B2A07D000E4AAA1 /* DBConstants.m in Sources */,
@@ -31746,6 +31892,7 @@
 				CBDC79D21B42AFC700935328 /* DBOrderReturnView.m in Sources */,
 				CBDC79D31B42AFC700935328 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1F9B1B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF6D1B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CBDC79D41B42AFC700935328 /* DBSettingsTableViewController.m in Sources */,
 				CB82FD591B44309E000BBE55 /* DBPayPalManager.m in Sources */,
 				CBDC79D51B42AFC700935328 /* UIView+SnapshotAdditions.m in Sources */,
@@ -31890,6 +32037,7 @@
 				CBDE1BAF1B7280B50090A347 /* NSMethodSignature+EXT.m in Sources */,
 				CBDE1BB01B7280B50090A347 /* DBOrderReturnView.m in Sources */,
 				CBDE1FA61B7286540090A347 /* PositionsTVController.m in Sources */,
+				CB1EAF781B8A1CD300425CD7 /* DBCompaniesViewController.swift in Sources */,
 				CBDE1BB11B7280B50090A347 /* UIImage+ImageEffects.m in Sources */,
 				CBDE1BB21B7280B50090A347 /* DBSettingsTableViewController.m in Sources */,
 				CBDE1BB31B7280B50090A347 /* UIView+SnapshotAdditions.m in Sources */,

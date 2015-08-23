@@ -32,6 +32,15 @@
     if (![DBCompanyInfo sharedInstance].deliveryTypes) {
         return [ViewControllerManager launchViewController];
     } else {
+        if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompanyInfo sharedInstance].currentCompanyName isEqualToString:@""]) {
+//            return [DBCompaniesViewController new];
+        }
+        
+        // Login VC for demoApp
+        if  ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"rubeacondemo"]){
+            return [self demoLoginViewController];
+        }
+        
         return [ViewControllerManager mainViewController];
     }
 }
@@ -133,6 +142,18 @@
         return [ViewControllerManager categoriesViewController];
     } else {
         return [ViewControllerManager rootMenuViewController];
+    }
+}
+@end
+
+@implementation ApplicationManager (DemoApp)
++ (nonnull UIViewController *)demoLoginViewController{
+    Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
+    
+    if(loginVCClass){
+        return [[loginVCClass alloc] init];
+    } else {
+        return nil;
     }
 }
 

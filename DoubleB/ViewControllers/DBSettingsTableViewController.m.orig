@@ -17,7 +17,12 @@
 #import "DBClientInfo.h"
 #import "DBCompanyInfoViewController.h"
 #import "IHPaymentManager.h"
+<<<<<<< HEAD
 #import "OrderCoordinator.h"
+=======
+#import "DBPromoManager.h"
+#import "DBServerAPI.h"
+>>>>>>> venue_picker
 #import "Order.h"
 #import "Compatibility.h"
 #import "DBPayPalManager.h"
@@ -88,6 +93,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"menu_icon",
                                     @"viewController": promosVC}];
     
+<<<<<<< HEAD
+    // Personal wallet item
+    if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
+=======
     [DBServerAPI requestCompanies:^(NSDictionary *response) {
         NSArray *companies = response[@"companies"];
         if ([companies count] > 1) {
@@ -107,6 +116,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         
     }];    // Personal wallet item
     if([DBPromoManager sharedManager].walletEnabled){
+>>>>>>> venue_picker
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
                                         @"image": @"payment"}];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];

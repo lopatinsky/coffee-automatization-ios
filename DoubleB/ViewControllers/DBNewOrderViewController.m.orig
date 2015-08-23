@@ -108,7 +108,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.title = NSLocalizedString(@"Заказ", nil);
     
 // ========= Configure Logic =========
+<<<<<<< HEAD
     self.orderCoordinator = [OrderCoordinator sharedInstance];
+=======
+    self.orderManager = [OrderManager sharedManager];
+    self.deliverySettings = [DBDeliverySettings sharedInstance];
+    [self.deliverySettings selectShipping];
+>>>>>>> venue_picker
     
     self.currentCard = [NSDictionary new];
     
@@ -794,8 +800,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.orderFooter.labelTime.text = timeString;
 }
 
+<<<<<<< HEAD
+- (void)reloadTimePicker{
+    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+=======
 - (void)reloadTimePicker {
     if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+>>>>>>> venue_picker
         self.pickerView.segments = @[];
     } else {
         NSMutableArray *titles = [NSMutableArray new];

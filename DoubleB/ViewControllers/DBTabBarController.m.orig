@@ -79,10 +79,10 @@
     return self;
 }
 
+<<<<<<< HEAD
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
+=======
 - (void)moveToStartState {
     for(UIViewController *controller in self.viewControllers){
         if([controller isKindOfClass:[UINavigationController class]]){
@@ -91,6 +91,7 @@
     }
     
     self.selectedIndex = 0;
+>>>>>>> venue_picker
 }
 
 - (void)awakeFromRemoteNotification{

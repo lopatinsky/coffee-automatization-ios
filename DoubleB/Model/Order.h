@@ -60,6 +60,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 
 + (NSArray *)allOrders;
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;
++ (void)dropAllOrders;
 
 /**
 * Fetch statuses for given Order objects

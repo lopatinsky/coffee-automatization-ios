@@ -30,6 +30,20 @@
 
 #pragma mark - User
 
++ (void)requestCompanies:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
+    [[DBAPIClient sharedClient] disableCompanyHeader];
+    [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
+                         parameters:@{}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                success(responseObject);
+                                [[DBAPIClient sharedClient] enableCompanyHeader];
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"FAIL");
+                                [[DBAPIClient sharedClient] enableCompanyHeader];
+                            }];
+}
+
 + (void)registerUser:(void(^)(BOOL success))callback{
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
 }

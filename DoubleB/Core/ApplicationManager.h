@@ -27,3 +27,7 @@
 @interface ApplicationManager(Menu)
 + (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController;
 @end
+
+@interface ApplicationManager(DemoApp)
++ (nonnull UIViewController *)demoLoginViewController;
+@end
