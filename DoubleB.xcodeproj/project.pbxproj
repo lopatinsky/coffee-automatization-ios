@@ -33497,7 +33497,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Banzay;
-				PROVISIONING_PROFILE = "1a001fd2-8e17-44bb-a248-b808689c265b";
+				PROVISIONING_PROFILE = "9f69c61b-da71-472e-bc13-81db55da7eb6";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
