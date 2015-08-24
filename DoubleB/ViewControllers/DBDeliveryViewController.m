@@ -11,6 +11,7 @@
 #import "OrderCoordinator.h"
 #import "ShippingManager.h"
 #import "DBDeliveryViewController.h"
+#import "DBCompaniesManager.h"
 #import "DBTimePickerView.h"
 #import "UIColor+Brandbook.h"
 
@@ -132,8 +133,8 @@ typedef enum : NSUInteger {
         self.commentIndicatorView.hidden = NO;
     }
     
-    if ([DBCompanyInfo sharedInstance].deliveryImageName) {
-        [self.deliveryImage setImage:[UIImage imageNamed:[DBCompanyInfo sharedInstance].deliveryImageName]];
+    if ([DBCompaniesManager sharedInstance].deliveryImageName) {
+        [self.deliveryImage setImage:[UIImage imageNamed:[DBCompaniesManager sharedInstance].deliveryImageName]];
     }
 }
 

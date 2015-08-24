@@ -795,7 +795,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadTimePicker {
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+    if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         self.pickerView.segments = @[];
     } else {
         NSMutableArray *titles = [NSMutableArray new];

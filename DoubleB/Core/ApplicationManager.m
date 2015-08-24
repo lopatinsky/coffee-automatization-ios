@@ -15,6 +15,7 @@
 #import "Venue.h"
 
 #import "DBCompaniesManager.h"
+#import "DBCompaniesViewController.h"
 #import "DBCompanyInfo.h"
 #import "DBMenu.h"
 #import "DBTabBarController.h"
@@ -101,7 +102,7 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
         return [ViewControllerManager launchViewController];
     } else {
         if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
-//            return [DBCompaniesViewController new];
+            return [DBCompaniesViewController new];
         }
         
         // Login VC for demoApp

@@ -56,7 +56,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(companyInfoUpdateNotificationHandler:)
-                                                 name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil];
+                                                 name:kDBApplicationManagerInfoLoadSuccess object:nil];
     
     return self;
 }

@@ -17,3 +17,4 @@
 #import "UIColor+Brandbook.h"
 
 #import "MBProgressHUD.h"
+#import "ApplicationManager.h"

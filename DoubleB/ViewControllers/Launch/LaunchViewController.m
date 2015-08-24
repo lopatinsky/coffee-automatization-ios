@@ -8,8 +8,10 @@
 
 #import "LaunchViewController.h"
 #import "DBTabBarController.h"
+#import "DBCompaniesViewController.h"
 #import "AppDelegate.h"
 #import "ApplicationManager.h"
+#import "DBCompaniesManager.h"
 #import <Parse/PFPush.h>
 
 @interface LaunchViewController ()<UIAlertViewDelegate>
@@ -62,15 +64,21 @@
     return YES;
 }
 
-- (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification{
+- (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification {
     [GANHelper analyzeEvent:@"preload_success" category:LAUNCH_PLACEHOLDER_SCREEN];
     
     UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
     
     [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     
-    if([window.rootViewController isKindOfClass:[LaunchViewController class]]){
-        window.rootViewController = [DBTabBarController sharedInstance];
+    if ([window.rootViewController isKindOfClass:[LaunchViewController class]]) {
+        if ([[DBCompaniesManager sharedInstance] hasCompanies]) {
+            DBCompaniesViewController *companiesViewController = [DBCompaniesViewController new];
+            companiesViewController.firstLaunch = YES;
+            window.rootViewController = companiesViewController;
+        } else {
+            window.rootViewController = [DBTabBarController sharedInstance];
+        }
     }
 }
 

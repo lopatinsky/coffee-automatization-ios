@@ -8,6 +8,7 @@
 
 #import "DBCompaniesManager.h"
 #import "DBServerAPI.h"
+#import "DBCompanyInfo.h"
 #import "DBAPIClient.h"
 
 NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsInfo";
@@ -35,7 +36,12 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     [DBServerAPI requestCompanies:^(NSArray *companies) {
         [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
         [DBCompaniesManager setValue:companies forKey:@"companies"];
-        
+        if (companies.count == 1) {
+//            [DBCompaniesManager selectCompanyName:companies[0]];
+//            [[DBCompanyInfo sharedInstance] flushCache];
+//            [[DBCompanyInfo sharedInstance] flushStoredCache];
+//            [[DBCompanyInfo sharedInstance] updateInfo];
+        }
         if(callback)
             callback(YES, companies);
     } failure:^(NSError *error) {
@@ -72,8 +78,6 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
         [DBAPIClient sharedClient].companyHeaderEnabled = NO;
     }
 }
-
-
 
 #pragma mark - Helper methods
 
