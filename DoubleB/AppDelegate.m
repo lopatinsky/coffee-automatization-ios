@@ -15,8 +15,8 @@
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <Parse/Parse.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
 @implementation AppDelegate

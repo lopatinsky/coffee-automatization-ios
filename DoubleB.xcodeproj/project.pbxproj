@@ -29,6 +29,7 @@
 		5ED715BD1AE8B4AE00E25EA8 /* call@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E4E60F61AE61E28005D78A8 /* call@2x.png */; };
 		5EDAD0B11AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
 		5EDAD0B21AE94FA900270F01 /* bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5EDAD0B01AE94FA900270F01 /* bg.jpg */; };
+		7E11122E1B8B76BE004D7B87 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7E21EBFE1B28542B00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EBFF1B28542C00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
 		7E21EC001B28542C00AF7859 /* DBAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB136A811B0A1D8300B93178 /* DBAddressViewController.m */; };
@@ -159,12 +160,9 @@
 		7E38302C1B5CF692008F0241 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7E38302D1B5CF692008F0241 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7E38302E1B5CF692008F0241 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7E38302F1B5CF692008F0241 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7E3830301B5CF692008F0241 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7E3830311B5CF692008F0241 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7E3830321B5CF692008F0241 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7E3830331B5CF692008F0241 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7E3830341B5CF692008F0241 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7E3830351B5CF692008F0241 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7E3830361B5CF692008F0241 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7E3830371B5CF692008F0241 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -445,12 +443,9 @@
 		7E3DAB571B06153E00A7FFD1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7E3DAB581B06153E00A7FFD1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7E3DAB591B06153E00A7FFD1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7E3DAB5A1B06153E00A7FFD1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7E3DAB5B1B06153E00A7FFD1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7E3DAB5C1B06153E00A7FFD1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7E3DAB5D1B06153E00A7FFD1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7E3DAB5E1B06153E00A7FFD1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7E3DAB5F1B06153E00A7FFD1 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7E3DAB601B06153E00A7FFD1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7E3DAB611B06153E00A7FFD1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7E3DAB621B06153E00A7FFD1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -744,12 +739,9 @@
 		7E79259D1B3C1BDA00CA740D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7E79259E1B3C1BDA00CA740D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7E79259F1B3C1BDA00CA740D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7E7925A01B3C1BDA00CA740D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7E7925A11B3C1BDA00CA740D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7E7925A21B3C1BDA00CA740D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7E7925A31B3C1BDA00CA740D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7E7925A41B3C1BDA00CA740D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7E7925A51B3C1BDA00CA740D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7E7925A61B3C1BDA00CA740D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7E7925A71B3C1BDA00CA740D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7E7925A81B3C1BDA00CA740D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -1045,12 +1037,9 @@
 		7E79271F1B3C247D00CA740D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7E7927201B3C247D00CA740D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7E7927211B3C247D00CA740D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7E7927221B3C247D00CA740D /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7E7927231B3C247D00CA740D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7E7927241B3C247D00CA740D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7E7927251B3C247D00CA740D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7E7927261B3C247D00CA740D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7E7927271B3C247D00CA740D /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7E7927281B3C247D00CA740D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7E7927291B3C247D00CA740D /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7E79272A1B3C247D00CA740D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -1357,12 +1346,9 @@
 		7EB2D1E41B3C3581009405C6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7EB2D1E51B3C3581009405C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7EB2D1E61B3C3581009405C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7EB2D1E71B3C3581009405C6 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7EB2D1E81B3C3581009405C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7EB2D1E91B3C3581009405C6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7EB2D1EA1B3C3581009405C6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7EB2D1EB1B3C3581009405C6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7EB2D1EC1B3C3581009405C6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7EB2D1ED1B3C3581009405C6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7EB2D1EE1B3C3581009405C6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7EB2D1EF1B3C3581009405C6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -1658,12 +1644,9 @@
 		7EB2D3531B3C51A2009405C6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7EB2D3541B3C51A2009405C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7EB2D3551B3C51A2009405C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7EB2D3561B3C51A2009405C6 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7EB2D3571B3C51A2009405C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7EB2D3581B3C51A2009405C6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7EB2D3591B3C51A2009405C6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7EB2D35A1B3C51A2009405C6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7EB2D35B1B3C51A2009405C6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7EB2D35C1B3C51A2009405C6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7EB2D35D1B3C51A2009405C6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7EB2D35E1B3C51A2009405C6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -1959,12 +1942,9 @@
 		7EB2D4C31B3C5C77009405C6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7EB2D4C41B3C5C77009405C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7EB2D4C51B3C5C77009405C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7EB2D4C61B3C5C77009405C6 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7EB2D4C71B3C5C77009405C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7EB2D4C81B3C5C77009405C6 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7EB2D4C91B3C5C77009405C6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7EB2D4CA1B3C5C77009405C6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7EB2D4CB1B3C5C77009405C6 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7EB2D4CC1B3C5C77009405C6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7EB2D4CD1B3C5C77009405C6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7EB2D4CE1B3C5C77009405C6 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -2332,12 +2312,10 @@
 		7ED4BD1C1B5EB64B00280D74 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7ED4BD1D1B5EB64B00280D74 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7ED4BD1E1B5EB64B00280D74 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7ED4BD1F1B5EB64B00280D74 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7ED4BD201B5EB64B00280D74 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
 		7ED4BD211B5EB64B00280D74 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7ED4BD221B5EB64B00280D74 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7ED4BD231B5EB64B00280D74 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7ED4BD241B5EB64B00280D74 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7ED4BD251B5EB64B00280D74 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7ED4BD261B5EB64B00280D74 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7ED4BD271B5EB64B00280D74 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -2636,12 +2614,9 @@
 		7EDB59781B32F70400723DF9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		7EDB59791B32F70400723DF9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		7EDB597A1B32F70400723DF9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		7EDB597B1B32F70400723DF9 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		7EDB597C1B32F70400723DF9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		7EDB597D1B32F70400723DF9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		7EDB597E1B32F70400723DF9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		7EDB597F1B32F70400723DF9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		7EDB59801B32F70400723DF9 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		7EDB59811B32F70400723DF9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		7EDB59821B32F70400723DF9 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		7EDB59831B32F70400723DF9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -2978,12 +2953,9 @@
 		CB142A0B1B7A677A00B72069 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB142A0C1B7A677A00B72069 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB142A0D1B7A677A00B72069 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB142A0E1B7A677A00B72069 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB142A0F1B7A677A00B72069 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB142A101B7A677A00B72069 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB142A111B7A677A00B72069 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB142A121B7A677A00B72069 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB142A131B7A677A00B72069 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB142A141B7A677A00B72069 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB142A151B7A677A00B72069 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB142A161B7A677A00B72069 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -3332,12 +3304,9 @@
 		CB142B8E1B7A6A4D00B72069 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB142B8F1B7A6A4D00B72069 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB142B901B7A6A4D00B72069 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB142B911B7A6A4D00B72069 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB142B921B7A6A4D00B72069 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB142B931B7A6A4D00B72069 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB142B941B7A6A4D00B72069 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB142B951B7A6A4D00B72069 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB142B961B7A6A4D00B72069 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB142B971B7A6A4D00B72069 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB142B981B7A6A4D00B72069 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB142B991B7A6A4D00B72069 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -3639,12 +3608,9 @@
 		CB1431651B0E371A00DD50C7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB1431661B0E371A00DD50C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB1431671B0E371A00DD50C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB1431681B0E371A00DD50C7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB1431691B0E371A00DD50C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB14316A1B0E371A00DD50C7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB14316B1B0E371A00DD50C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB14316C1B0E371A00DD50C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB14316D1B0E371A00DD50C7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB14316E1B0E371A00DD50C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB14316F1B0E371A00DD50C7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB1431701B0E371A00DD50C7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -3914,12 +3880,9 @@
 		CB1432C91B0F1BBB00DD50C7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB1432CA1B0F1BBB00DD50C7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB1432CB1B0F1BBB00DD50C7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB1432CC1B0F1BBB00DD50C7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB1432CD1B0F1BBB00DD50C7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB1432CE1B0F1BBB00DD50C7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB1432CF1B0F1BBB00DD50C7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB1432D01B0F1BBB00DD50C7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB1432D11B0F1BBB00DD50C7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB1432D21B0F1BBB00DD50C7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB1432D31B0F1BBB00DD50C7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB1432D41B0F1BBB00DD50C7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -4208,12 +4171,9 @@
 		CB194C951B6BAECE0085ECF8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB194C961B6BAECE0085ECF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB194C971B6BAECE0085ECF8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB194C981B6BAECE0085ECF8 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB194C991B6BAECE0085ECF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB194C9A1B6BAECE0085ECF8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB194C9B1B6BAECE0085ECF8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB194C9C1B6BAECE0085ECF8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB194C9D1B6BAECE0085ECF8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB194C9E1B6BAECE0085ECF8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB194C9F1B6BAECE0085ECF8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB194CA01B6BAECE0085ECF8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -4514,12 +4474,9 @@
 		CB194E061B6BC2650085ECF8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB194E071B6BC2650085ECF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB194E081B6BC2650085ECF8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB194E091B6BC2650085ECF8 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB194E0A1B6BC2650085ECF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB194E0B1B6BC2650085ECF8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB194E0C1B6BC2650085ECF8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB194E0D1B6BC2650085ECF8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB194E0E1B6BC2650085ECF8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB194E0F1B6BC2650085ECF8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB194E101B6BC2650085ECF8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB194E111B6BC2650085ECF8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -4820,12 +4777,9 @@
 		CB194F771B6BD75B0085ECF8 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB194F781B6BD75B0085ECF8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB194F791B6BD75B0085ECF8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB194F7A1B6BD75B0085ECF8 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB194F7B1B6BD75B0085ECF8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB194F7C1B6BD75B0085ECF8 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB194F7D1B6BD75B0085ECF8 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB194F7E1B6BD75B0085ECF8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB194F7F1B6BD75B0085ECF8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB194F801B6BD75B0085ECF8 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB194F811B6BD75B0085ECF8 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB194F821B6BD75B0085ECF8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -5105,7 +5059,6 @@
 		CB1AF7DE1AE10E6900FA3224 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
 		CB1AF7DF1AE10E6900FA3224 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB1AF7E11AE10E6900FA3224 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB1AF7E21AE10E6900FA3224 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB1AF7E31AE10E6900FA3224 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB1AF7E41AE10E6900FA3224 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB1AF7E51AE10E6900FA3224 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -5398,12 +5351,9 @@
 		CB1EAE2D1B86F88700425CD7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB1EAE2E1B86F88700425CD7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB1EAE2F1B86F88700425CD7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB1EAE301B86F88700425CD7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB1EAE311B86F88700425CD7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB1EAE321B86F88700425CD7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB1EAE331B86F88700425CD7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB1EAE341B86F88700425CD7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB1EAE351B86F88700425CD7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB1EAE361B86F88700425CD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB1EAE371B86F88700425CD7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB1EAE381B86F88700425CD7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -5755,12 +5705,9 @@
 		CB2422411B7A1D4D00A02721 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB2422421B7A1D4D00A02721 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB2422431B7A1D4D00A02721 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB2422441B7A1D4D00A02721 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB2422451B7A1D4D00A02721 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB2422461B7A1D4D00A02721 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB2422471B7A1D4D00A02721 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB2422481B7A1D4D00A02721 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB2422491B7A1D4D00A02721 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB24224A1B7A1D4D00A02721 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB24224B1B7A1D4D00A02721 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB24224C1B7A1D4D00A02721 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -6104,12 +6051,9 @@
 		CB3BA35A1B20589300F320CA /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB3BA35B1B20589300F320CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB3BA35C1B20589300F320CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB3BA35D1B20589300F320CA /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB3BA35E1B20589300F320CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB3BA35F1B20589300F320CA /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB3BA3601B20589300F320CA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB3BA3611B20589300F320CA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB3BA3621B20589300F320CA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB3BA3631B20589300F320CA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB3BA3641B20589300F320CA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB3BA3651B20589300F320CA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -6291,12 +6235,6 @@
 		CB3BA4481B207F4700F320CA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBB718FF1B14AC6800C47A33 /* InfoPlist.strings */; };
 		CB3BA4491B207F4A00F320CA /* Images-Chikarabar.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBB719011B14AC6800C47A33 /* Images-Chikarabar.xcassets */; };
 		CB3BA4531B20D6BE00F320CA /* DBPayPalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3BA44B1B20B2FA00F320CA /* DBPayPalManager.m */; };
-		CB3F9CB21AFA395B003A897F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
-		CB3F9CB31AFA395B003A897F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
-		CB3F9CB41AFA395B003A897F /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
-		CB3F9CB51AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
-		CB3F9CB61AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
-		CB3F9CB71AFA395B003A897F /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB43E7DF1AD29B410003D5B2 /* white_tick_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7DE1AD29B410003D5B2 /* white_tick_icon@3x.png */; };
 		CB43E7E11AD29BCB0003D5B2 /* white_tick_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CB43E7E01AD29BCB0003D5B2 /* white_tick_icon@2x.png */; };
 		CB43E8261AD4508F0003D5B2 /* DBOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB43E8241AD4508F0003D5B2 /* DBOrderItemCell.m */; };
@@ -6399,7 +6337,6 @@
 		CB517BB81AEFB6B500A50F5C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
 		CB517BB91AEFB6B500A50F5C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB517BBB1AEFB6B500A50F5C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB517BBC1AEFB6B500A50F5C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB517BBD1AEFB6B500A50F5C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB517BBE1AEFB6B500A50F5C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB517BBF1AEFB6B500A50F5C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -6674,12 +6611,9 @@
 		CB57938F1B6AB87300B17819 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB5793901B6AB87300B17819 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB5793911B6AB87300B17819 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB5793921B6AB87300B17819 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB5793931B6AB87300B17819 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB5793941B6AB87300B17819 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB5793951B6AB87300B17819 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB5793961B6AB87300B17819 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB5793971B6AB87300B17819 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB5793981B6AB87300B17819 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB5793991B6AB87300B17819 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB57939A1B6AB87300B17819 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -6980,12 +6914,9 @@
 		CB5795061B6BA76B00B17819 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB5795071B6BA76B00B17819 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB5795081B6BA76B00B17819 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB5795091B6BA76B00B17819 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB57950A1B6BA76B00B17819 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB57950B1B6BA76B00B17819 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB57950C1B6BA76B00B17819 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB57950D1B6BA76B00B17819 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB57950E1B6BA76B00B17819 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB57950F1B6BA76B00B17819 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB5795101B6BA76B00B17819 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB5795111B6BA76B00B17819 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -7307,12 +7238,9 @@
 		CB5AFCA41B27209A00904BF7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB5AFCA51B27209A00904BF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB5AFCA61B27209A00904BF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB5AFCA71B27209A00904BF7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB5AFCA81B27209A00904BF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB5AFCA91B27209A00904BF7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB5AFCAA1B27209A00904BF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB5AFCAB1B27209A00904BF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB5AFCAC1B27209A00904BF7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB5AFCAD1B27209A00904BF7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB5AFCAE1B27209A00904BF7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB5AFCAF1B27209A00904BF7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -7574,7 +7502,6 @@
 		CB60C10B1AC5AD2600D5E962 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
 		CB60C10C1AC5AD2600D5E962 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB60C10E1AC5AD2600D5E962 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB60C10F1AC5AD2600D5E962 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB60C1101AC5AD2600D5E962 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB60C1111AC5AD2600D5E962 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB60C1121AC5AD2600D5E962 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -7747,13 +7674,9 @@
 		CB6400331B31B7CF0011CEEC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB6400341B31B7CF0011CEEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB6400351B31B7CF0011CEEC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB6400361B31B7CF0011CEEC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB6400371B31B7CF0011CEEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB6400381B31B7CF0011CEEC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB6400391B31B7CF0011CEEC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB64003A1B31B7CF0011CEEC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB64003B1B31B7CF0011CEEC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
-		CB64003C1B31B7CF0011CEEC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB64003D1B31B7CF0011CEEC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB64003E1B31B7CF0011CEEC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
 		CB64003F1B31B7CF0011CEEC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775BEB89B621271E0A1A47F /* MessageUI.framework */; };
@@ -8046,12 +7969,9 @@
 		CB64FE851B317F760011CEEC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB64FE861B317F760011CEEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB64FE871B317F760011CEEC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB64FE881B317F760011CEEC /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB64FE891B317F760011CEEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB64FE8A1B317F760011CEEC /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB64FE8B1B317F760011CEEC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB64FE8C1B317F760011CEEC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB64FE8D1B317F760011CEEC /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB64FE8E1B317F760011CEEC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB64FE8F1B317F760011CEEC /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB64FE901B317F760011CEEC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -8461,12 +8381,9 @@
 		CB6980A01B7DE33400B12B78 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB6980A11B7DE33400B12B78 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB6980A21B7DE33400B12B78 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB6980A31B7DE33400B12B78 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB6980A41B7DE33400B12B78 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB6980A51B7DE33400B12B78 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB6980A61B7DE33400B12B78 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB6980A71B7DE33400B12B78 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB6980A81B7DE33400B12B78 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB6980A91B7DE33400B12B78 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB6980AA1B7DE33400B12B78 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB6980AB1B7DE33400B12B78 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -8953,12 +8870,9 @@
 		CB8201181B46CBB4000BBE55 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB8201191B46CBB4000BBE55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB82011A1B46CBB4000BBE55 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB82011B1B46CBB4000BBE55 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB82011C1B46CBB4000BBE55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB82011D1B46CBB4000BBE55 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB82011E1B46CBB4000BBE55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB82011F1B46CBB4000BBE55 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB8201201B46CBB4000BBE55 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB8201211B46CBB4000BBE55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB8201221B46CBB4000BBE55 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB8201231B46CBB4000BBE55 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -9257,12 +9171,9 @@
 		CB82FC551B442C70000BBE55 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB82FC561B442C70000BBE55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB82FC571B442C70000BBE55 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB82FC581B442C70000BBE55 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB82FC591B442C70000BBE55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB82FC5A1B442C70000BBE55 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB82FC5B1B442C70000BBE55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB82FC5C1B442C70000BBE55 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB82FC5D1B442C70000BBE55 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB82FC5E1B442C70000BBE55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB82FC5F1B442C70000BBE55 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB82FC601B442C70000BBE55 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -9659,12 +9570,9 @@
 		CB82FE361B4464F6000BBE55 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB82FE371B4464F6000BBE55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB82FE381B4464F6000BBE55 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB82FE391B4464F6000BBE55 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB82FE3A1B4464F6000BBE55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB82FE3B1B4464F6000BBE55 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB82FE3C1B4464F6000BBE55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB82FE3D1B4464F6000BBE55 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB82FE3E1B4464F6000BBE55 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB82FE3F1B4464F6000BBE55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB82FE401B4464F6000BBE55 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB82FE411B4464F6000BBE55 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -9965,12 +9873,9 @@
 		CB82FFA71B4579B5000BBE55 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CB82FFA81B4579B5000BBE55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CB82FFA91B4579B5000BBE55 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CB82FFAA1B4579B5000BBE55 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CB82FFAB1B4579B5000BBE55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CB82FFAC1B4579B5000BBE55 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CB82FFAD1B4579B5000BBE55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CB82FFAE1B4579B5000BBE55 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CB82FFAF1B4579B5000BBE55 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CB82FFB01B4579B5000BBE55 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CB82FFB11B4579B5000BBE55 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CB82FFB21B4579B5000BBE55 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -10290,12 +10195,9 @@
 		CBD0C5581B30724300DAD042 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CBD0C5591B30724300DAD042 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CBD0C55A1B30724300DAD042 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CBD0C55B1B30724300DAD042 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CBD0C55C1B30724300DAD042 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CBD0C55D1B30724300DAD042 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CBD0C55E1B30724300DAD042 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CBD0C55F1B30724300DAD042 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CBD0C5601B30724300DAD042 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CBD0C5611B30724300DAD042 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CBD0C5621B30724300DAD042 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CBD0C5631B30724300DAD042 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -10605,12 +10507,9 @@
 		CBD2EB381B2A07D000E4AAA1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CBD2EB391B2A07D000E4AAA1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CBD2EB3A1B2A07D000E4AAA1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CBD2EB3B1B2A07D000E4AAA1 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CBD2EB3C1B2A07D000E4AAA1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CBD2EB3D1B2A07D000E4AAA1 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CBD2EB3E1B2A07D000E4AAA1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CBD2EB3F1B2A07D000E4AAA1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CBD2EB401B2A07D000E4AAA1 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CBD2EB411B2A07D000E4AAA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CBD2EB421B2A07D000E4AAA1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CBD2EB431B2A07D000E4AAA1 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -10904,12 +10803,9 @@
 		CBDC7A091B42AFC700935328 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CBDC7A0A1B42AFC700935328 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CBDC7A0B1B42AFC700935328 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CBDC7A0C1B42AFC700935328 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CBDC7A0D1B42AFC700935328 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CBDC7A0E1B42AFC700935328 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CBDC7A0F1B42AFC700935328 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CBDC7A101B42AFC700935328 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CBDC7A111B42AFC700935328 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CBDC7A121B42AFC700935328 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CBDC7A131B42AFC700935328 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CBDC7A141B42AFC700935328 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -11207,12 +11103,9 @@
 		CBDE1BE81B7280B50090A347 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C31076196C9B2F00C1D23B /* Accelerate.framework */; };
 		CBDE1BE91B7280B50090A347 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B947EFF87E69FCD65EDF /* Foundation.framework */; };
 		CBDE1BEA1B7280B50090A347 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B81C609A64A58904A9E3 /* CoreGraphics.framework */; };
-		CBDE1BEB1B7280B50090A347 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB01AFA395B003A897F /* Fabric.framework */; };
 		CBDE1BEC1B7280B50090A347 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B65CD9F026EDDEF76639 /* UIKit.framework */; };
-		CBDE1BED1B7280B50090A347 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB3F9CB11AFA395B003A897F /* Crashlytics.framework */; };
 		CBDE1BEE1B7280B50090A347 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B25045DD6BBAC69AB563 /* CoreData.framework */; };
 		CBDE1BEF1B7280B50090A347 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85D0A9FF22D0417EA9ACD18C /* libPods.a */; };
-		CBDE1BF01B7280B50090A347 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF7E19708B3A00B882BB /* Parse.framework */; };
 		CBDE1BF11B7280B50090A347 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C775B91945332AD12ED98569 /* CoreLocation.framework */; };
 		CBDE1BF21B7280B50090A347 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8219708C0700B882BB /* CFNetwork.framework */; };
 		CBDE1BF31B7280B50090A347 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D5CBFF8419708C1500B882BB /* libz.dylib */; };
@@ -13780,12 +13673,9 @@
 				7E38302C1B5CF692008F0241 /* Accelerate.framework in Frameworks */,
 				7E38302D1B5CF692008F0241 /* Foundation.framework in Frameworks */,
 				7E38302E1B5CF692008F0241 /* CoreGraphics.framework in Frameworks */,
-				7E38302F1B5CF692008F0241 /* Fabric.framework in Frameworks */,
 				7E3830301B5CF692008F0241 /* UIKit.framework in Frameworks */,
-				7E3830311B5CF692008F0241 /* Crashlytics.framework in Frameworks */,
 				7E3830321B5CF692008F0241 /* CoreData.framework in Frameworks */,
 				7E3830331B5CF692008F0241 /* libPods.a in Frameworks */,
-				7E3830341B5CF692008F0241 /* Parse.framework in Frameworks */,
 				7E3830351B5CF692008F0241 /* CoreLocation.framework in Frameworks */,
 				7E3830361B5CF692008F0241 /* CFNetwork.framework in Frameworks */,
 				7E3830371B5CF692008F0241 /* libz.dylib in Frameworks */,
@@ -13808,12 +13698,9 @@
 				7E3DAB571B06153E00A7FFD1 /* Accelerate.framework in Frameworks */,
 				7E3DAB581B06153E00A7FFD1 /* Foundation.framework in Frameworks */,
 				7E3DAB591B06153E00A7FFD1 /* CoreGraphics.framework in Frameworks */,
-				7E3DAB5A1B06153E00A7FFD1 /* Fabric.framework in Frameworks */,
 				7E3DAB5B1B06153E00A7FFD1 /* UIKit.framework in Frameworks */,
-				7E3DAB5C1B06153E00A7FFD1 /* Crashlytics.framework in Frameworks */,
 				7E3DAB5D1B06153E00A7FFD1 /* CoreData.framework in Frameworks */,
 				7E3DAB5E1B06153E00A7FFD1 /* libPods.a in Frameworks */,
-				7E3DAB5F1B06153E00A7FFD1 /* Parse.framework in Frameworks */,
 				7E3DAB601B06153E00A7FFD1 /* CoreLocation.framework in Frameworks */,
 				7E3DAB611B06153E00A7FFD1 /* CFNetwork.framework in Frameworks */,
 				7E3DAB621B06153E00A7FFD1 /* libz.dylib in Frameworks */,
@@ -13836,12 +13723,9 @@
 				7E79259D1B3C1BDA00CA740D /* Accelerate.framework in Frameworks */,
 				7E79259E1B3C1BDA00CA740D /* Foundation.framework in Frameworks */,
 				7E79259F1B3C1BDA00CA740D /* CoreGraphics.framework in Frameworks */,
-				7E7925A01B3C1BDA00CA740D /* Fabric.framework in Frameworks */,
 				7E7925A11B3C1BDA00CA740D /* UIKit.framework in Frameworks */,
-				7E7925A21B3C1BDA00CA740D /* Crashlytics.framework in Frameworks */,
 				7E7925A31B3C1BDA00CA740D /* CoreData.framework in Frameworks */,
 				7E7925A41B3C1BDA00CA740D /* libPods.a in Frameworks */,
-				7E7925A51B3C1BDA00CA740D /* Parse.framework in Frameworks */,
 				7E7925A61B3C1BDA00CA740D /* CoreLocation.framework in Frameworks */,
 				7E7925A71B3C1BDA00CA740D /* CFNetwork.framework in Frameworks */,
 				7E7925A81B3C1BDA00CA740D /* libz.dylib in Frameworks */,
@@ -13864,12 +13748,9 @@
 				7E79271F1B3C247D00CA740D /* Accelerate.framework in Frameworks */,
 				7E7927201B3C247D00CA740D /* Foundation.framework in Frameworks */,
 				7E7927211B3C247D00CA740D /* CoreGraphics.framework in Frameworks */,
-				7E7927221B3C247D00CA740D /* Fabric.framework in Frameworks */,
 				7E7927231B3C247D00CA740D /* UIKit.framework in Frameworks */,
-				7E7927241B3C247D00CA740D /* Crashlytics.framework in Frameworks */,
 				7E7927251B3C247D00CA740D /* CoreData.framework in Frameworks */,
 				7E7927261B3C247D00CA740D /* libPods.a in Frameworks */,
-				7E7927271B3C247D00CA740D /* Parse.framework in Frameworks */,
 				7E7927281B3C247D00CA740D /* CoreLocation.framework in Frameworks */,
 				7E7927291B3C247D00CA740D /* CFNetwork.framework in Frameworks */,
 				7E79272A1B3C247D00CA740D /* libz.dylib in Frameworks */,
@@ -13892,12 +13773,9 @@
 				7EB2D1E41B3C3581009405C6 /* Accelerate.framework in Frameworks */,
 				7EB2D1E51B3C3581009405C6 /* Foundation.framework in Frameworks */,
 				7EB2D1E61B3C3581009405C6 /* CoreGraphics.framework in Frameworks */,
-				7EB2D1E71B3C3581009405C6 /* Fabric.framework in Frameworks */,
 				7EB2D1E81B3C3581009405C6 /* UIKit.framework in Frameworks */,
-				7EB2D1E91B3C3581009405C6 /* Crashlytics.framework in Frameworks */,
 				7EB2D1EA1B3C3581009405C6 /* CoreData.framework in Frameworks */,
 				7EB2D1EB1B3C3581009405C6 /* libPods.a in Frameworks */,
-				7EB2D1EC1B3C3581009405C6 /* Parse.framework in Frameworks */,
 				7EB2D1ED1B3C3581009405C6 /* CoreLocation.framework in Frameworks */,
 				7EB2D1EE1B3C3581009405C6 /* CFNetwork.framework in Frameworks */,
 				7EB2D1EF1B3C3581009405C6 /* libz.dylib in Frameworks */,
@@ -13920,12 +13798,9 @@
 				7EB2D3531B3C51A2009405C6 /* Accelerate.framework in Frameworks */,
 				7EB2D3541B3C51A2009405C6 /* Foundation.framework in Frameworks */,
 				7EB2D3551B3C51A2009405C6 /* CoreGraphics.framework in Frameworks */,
-				7EB2D3561B3C51A2009405C6 /* Fabric.framework in Frameworks */,
 				7EB2D3571B3C51A2009405C6 /* UIKit.framework in Frameworks */,
-				7EB2D3581B3C51A2009405C6 /* Crashlytics.framework in Frameworks */,
 				7EB2D3591B3C51A2009405C6 /* CoreData.framework in Frameworks */,
 				7EB2D35A1B3C51A2009405C6 /* libPods.a in Frameworks */,
-				7EB2D35B1B3C51A2009405C6 /* Parse.framework in Frameworks */,
 				7EB2D35C1B3C51A2009405C6 /* CoreLocation.framework in Frameworks */,
 				7EB2D35D1B3C51A2009405C6 /* CFNetwork.framework in Frameworks */,
 				7EB2D35E1B3C51A2009405C6 /* libz.dylib in Frameworks */,
@@ -13948,12 +13823,9 @@
 				7EB2D4C31B3C5C77009405C6 /* Accelerate.framework in Frameworks */,
 				7EB2D4C41B3C5C77009405C6 /* Foundation.framework in Frameworks */,
 				7EB2D4C51B3C5C77009405C6 /* CoreGraphics.framework in Frameworks */,
-				7EB2D4C61B3C5C77009405C6 /* Fabric.framework in Frameworks */,
 				7EB2D4C71B3C5C77009405C6 /* UIKit.framework in Frameworks */,
-				7EB2D4C81B3C5C77009405C6 /* Crashlytics.framework in Frameworks */,
 				7EB2D4C91B3C5C77009405C6 /* CoreData.framework in Frameworks */,
 				7EB2D4CA1B3C5C77009405C6 /* libPods.a in Frameworks */,
-				7EB2D4CB1B3C5C77009405C6 /* Parse.framework in Frameworks */,
 				7EB2D4CC1B3C5C77009405C6 /* CoreLocation.framework in Frameworks */,
 				7EB2D4CD1B3C5C77009405C6 /* CFNetwork.framework in Frameworks */,
 				7EB2D4CE1B3C5C77009405C6 /* libz.dylib in Frameworks */,
@@ -13983,12 +13855,10 @@
 				7ED4BD1C1B5EB64B00280D74 /* Accelerate.framework in Frameworks */,
 				7ED4BD1D1B5EB64B00280D74 /* Foundation.framework in Frameworks */,
 				7ED4BD1E1B5EB64B00280D74 /* CoreGraphics.framework in Frameworks */,
-				7ED4BD1F1B5EB64B00280D74 /* Fabric.framework in Frameworks */,
 				7ED4BD201B5EB64B00280D74 /* UIKit.framework in Frameworks */,
 				7ED4BD211B5EB64B00280D74 /* Crashlytics.framework in Frameworks */,
 				7ED4BD221B5EB64B00280D74 /* CoreData.framework in Frameworks */,
 				7ED4BD231B5EB64B00280D74 /* libPods.a in Frameworks */,
-				7ED4BD241B5EB64B00280D74 /* Parse.framework in Frameworks */,
 				7ED4BD251B5EB64B00280D74 /* CoreLocation.framework in Frameworks */,
 				7ED4BD261B5EB64B00280D74 /* CFNetwork.framework in Frameworks */,
 				7ED4BD271B5EB64B00280D74 /* libz.dylib in Frameworks */,
@@ -14011,12 +13881,9 @@
 				7EDB59781B32F70400723DF9 /* Accelerate.framework in Frameworks */,
 				7EDB59791B32F70400723DF9 /* Foundation.framework in Frameworks */,
 				7EDB597A1B32F70400723DF9 /* CoreGraphics.framework in Frameworks */,
-				7EDB597B1B32F70400723DF9 /* Fabric.framework in Frameworks */,
 				7EDB597C1B32F70400723DF9 /* UIKit.framework in Frameworks */,
-				7EDB597D1B32F70400723DF9 /* Crashlytics.framework in Frameworks */,
 				7EDB597E1B32F70400723DF9 /* CoreData.framework in Frameworks */,
 				7EDB597F1B32F70400723DF9 /* libPods.a in Frameworks */,
-				7EDB59801B32F70400723DF9 /* Parse.framework in Frameworks */,
 				7EDB59811B32F70400723DF9 /* CoreLocation.framework in Frameworks */,
 				7EDB59821B32F70400723DF9 /* CFNetwork.framework in Frameworks */,
 				7EDB59831B32F70400723DF9 /* libz.dylib in Frameworks */,
@@ -14039,12 +13906,9 @@
 				CB142A0B1B7A677A00B72069 /* Accelerate.framework in Frameworks */,
 				CB142A0C1B7A677A00B72069 /* Foundation.framework in Frameworks */,
 				CB142A0D1B7A677A00B72069 /* CoreGraphics.framework in Frameworks */,
-				CB142A0E1B7A677A00B72069 /* Fabric.framework in Frameworks */,
 				CB142A0F1B7A677A00B72069 /* UIKit.framework in Frameworks */,
-				CB142A101B7A677A00B72069 /* Crashlytics.framework in Frameworks */,
 				CB142A111B7A677A00B72069 /* CoreData.framework in Frameworks */,
 				CB142A121B7A677A00B72069 /* libPods.a in Frameworks */,
-				CB142A131B7A677A00B72069 /* Parse.framework in Frameworks */,
 				CB142A141B7A677A00B72069 /* CoreLocation.framework in Frameworks */,
 				CB142A151B7A677A00B72069 /* CFNetwork.framework in Frameworks */,
 				CB142A161B7A677A00B72069 /* libz.dylib in Frameworks */,
@@ -14067,12 +13931,9 @@
 				CB142B8E1B7A6A4D00B72069 /* Accelerate.framework in Frameworks */,
 				CB142B8F1B7A6A4D00B72069 /* Foundation.framework in Frameworks */,
 				CB142B901B7A6A4D00B72069 /* CoreGraphics.framework in Frameworks */,
-				CB142B911B7A6A4D00B72069 /* Fabric.framework in Frameworks */,
 				CB142B921B7A6A4D00B72069 /* UIKit.framework in Frameworks */,
-				CB142B931B7A6A4D00B72069 /* Crashlytics.framework in Frameworks */,
 				CB142B941B7A6A4D00B72069 /* CoreData.framework in Frameworks */,
 				CB142B951B7A6A4D00B72069 /* libPods.a in Frameworks */,
-				CB142B961B7A6A4D00B72069 /* Parse.framework in Frameworks */,
 				CB142B971B7A6A4D00B72069 /* CoreLocation.framework in Frameworks */,
 				CB142B981B7A6A4D00B72069 /* CFNetwork.framework in Frameworks */,
 				CB142B991B7A6A4D00B72069 /* libz.dylib in Frameworks */,
@@ -14095,12 +13956,9 @@
 				CB1431651B0E371A00DD50C7 /* Accelerate.framework in Frameworks */,
 				CB1431661B0E371A00DD50C7 /* Foundation.framework in Frameworks */,
 				CB1431671B0E371A00DD50C7 /* CoreGraphics.framework in Frameworks */,
-				CB1431681B0E371A00DD50C7 /* Fabric.framework in Frameworks */,
 				CB1431691B0E371A00DD50C7 /* UIKit.framework in Frameworks */,
-				CB14316A1B0E371A00DD50C7 /* Crashlytics.framework in Frameworks */,
 				CB14316B1B0E371A00DD50C7 /* CoreData.framework in Frameworks */,
 				CB14316C1B0E371A00DD50C7 /* libPods.a in Frameworks */,
-				CB14316D1B0E371A00DD50C7 /* Parse.framework in Frameworks */,
 				CB14316E1B0E371A00DD50C7 /* CoreLocation.framework in Frameworks */,
 				CB14316F1B0E371A00DD50C7 /* CFNetwork.framework in Frameworks */,
 				CB1431701B0E371A00DD50C7 /* libz.dylib in Frameworks */,
@@ -14123,12 +13981,9 @@
 				CB1432C91B0F1BBB00DD50C7 /* Accelerate.framework in Frameworks */,
 				CB1432CA1B0F1BBB00DD50C7 /* Foundation.framework in Frameworks */,
 				CB1432CB1B0F1BBB00DD50C7 /* CoreGraphics.framework in Frameworks */,
-				CB1432CC1B0F1BBB00DD50C7 /* Fabric.framework in Frameworks */,
 				CB1432CD1B0F1BBB00DD50C7 /* UIKit.framework in Frameworks */,
-				CB1432CE1B0F1BBB00DD50C7 /* Crashlytics.framework in Frameworks */,
 				CB1432CF1B0F1BBB00DD50C7 /* CoreData.framework in Frameworks */,
 				CB1432D01B0F1BBB00DD50C7 /* libPods.a in Frameworks */,
-				CB1432D11B0F1BBB00DD50C7 /* Parse.framework in Frameworks */,
 				CB1432D21B0F1BBB00DD50C7 /* CoreLocation.framework in Frameworks */,
 				CB1432D31B0F1BBB00DD50C7 /* CFNetwork.framework in Frameworks */,
 				CB1432D41B0F1BBB00DD50C7 /* libz.dylib in Frameworks */,
@@ -14151,12 +14006,9 @@
 				CB194C951B6BAECE0085ECF8 /* Accelerate.framework in Frameworks */,
 				CB194C961B6BAECE0085ECF8 /* Foundation.framework in Frameworks */,
 				CB194C971B6BAECE0085ECF8 /* CoreGraphics.framework in Frameworks */,
-				CB194C981B6BAECE0085ECF8 /* Fabric.framework in Frameworks */,
 				CB194C991B6BAECE0085ECF8 /* UIKit.framework in Frameworks */,
-				CB194C9A1B6BAECE0085ECF8 /* Crashlytics.framework in Frameworks */,
 				CB194C9B1B6BAECE0085ECF8 /* CoreData.framework in Frameworks */,
 				CB194C9C1B6BAECE0085ECF8 /* libPods.a in Frameworks */,
-				CB194C9D1B6BAECE0085ECF8 /* Parse.framework in Frameworks */,
 				CB194C9E1B6BAECE0085ECF8 /* CoreLocation.framework in Frameworks */,
 				CB194C9F1B6BAECE0085ECF8 /* CFNetwork.framework in Frameworks */,
 				CB194CA01B6BAECE0085ECF8 /* libz.dylib in Frameworks */,
@@ -14179,12 +14031,9 @@
 				CB194E061B6BC2650085ECF8 /* Accelerate.framework in Frameworks */,
 				CB194E071B6BC2650085ECF8 /* Foundation.framework in Frameworks */,
 				CB194E081B6BC2650085ECF8 /* CoreGraphics.framework in Frameworks */,
-				CB194E091B6BC2650085ECF8 /* Fabric.framework in Frameworks */,
 				CB194E0A1B6BC2650085ECF8 /* UIKit.framework in Frameworks */,
-				CB194E0B1B6BC2650085ECF8 /* Crashlytics.framework in Frameworks */,
 				CB194E0C1B6BC2650085ECF8 /* CoreData.framework in Frameworks */,
 				CB194E0D1B6BC2650085ECF8 /* libPods.a in Frameworks */,
-				CB194E0E1B6BC2650085ECF8 /* Parse.framework in Frameworks */,
 				CB194E0F1B6BC2650085ECF8 /* CoreLocation.framework in Frameworks */,
 				CB194E101B6BC2650085ECF8 /* CFNetwork.framework in Frameworks */,
 				CB194E111B6BC2650085ECF8 /* libz.dylib in Frameworks */,
@@ -14207,12 +14056,9 @@
 				CB194F771B6BD75B0085ECF8 /* Accelerate.framework in Frameworks */,
 				CB194F781B6BD75B0085ECF8 /* Foundation.framework in Frameworks */,
 				CB194F791B6BD75B0085ECF8 /* CoreGraphics.framework in Frameworks */,
-				CB194F7A1B6BD75B0085ECF8 /* Fabric.framework in Frameworks */,
 				CB194F7B1B6BD75B0085ECF8 /* UIKit.framework in Frameworks */,
-				CB194F7C1B6BD75B0085ECF8 /* Crashlytics.framework in Frameworks */,
 				CB194F7D1B6BD75B0085ECF8 /* CoreData.framework in Frameworks */,
 				CB194F7E1B6BD75B0085ECF8 /* libPods.a in Frameworks */,
-				CB194F7F1B6BD75B0085ECF8 /* Parse.framework in Frameworks */,
 				CB194F801B6BD75B0085ECF8 /* CoreLocation.framework in Frameworks */,
 				CB194F811B6BD75B0085ECF8 /* CFNetwork.framework in Frameworks */,
 				CB194F821B6BD75B0085ECF8 /* libz.dylib in Frameworks */,
@@ -14235,12 +14081,9 @@
 				CB1AF7DB1AE10E6900FA3224 /* Accelerate.framework in Frameworks */,
 				CB1AF7DC1AE10E6900FA3224 /* Foundation.framework in Frameworks */,
 				CB1AF7DD1AE10E6900FA3224 /* CoreGraphics.framework in Frameworks */,
-				CB3F9CB31AFA395B003A897F /* Fabric.framework in Frameworks */,
 				CB1AF7DE1AE10E6900FA3224 /* UIKit.framework in Frameworks */,
-				CB3F9CB61AFA395B003A897F /* Crashlytics.framework in Frameworks */,
 				CB1AF7DF1AE10E6900FA3224 /* CoreData.framework in Frameworks */,
 				CB1AF7E11AE10E6900FA3224 /* libPods.a in Frameworks */,
-				CB1AF7E21AE10E6900FA3224 /* Parse.framework in Frameworks */,
 				CB1AF7E31AE10E6900FA3224 /* CoreLocation.framework in Frameworks */,
 				CB1AF7E41AE10E6900FA3224 /* CFNetwork.framework in Frameworks */,
 				CB1AF7E51AE10E6900FA3224 /* libz.dylib in Frameworks */,
@@ -14263,12 +14106,9 @@
 				CB1EAE2D1B86F88700425CD7 /* Accelerate.framework in Frameworks */,
 				CB1EAE2E1B86F88700425CD7 /* Foundation.framework in Frameworks */,
 				CB1EAE2F1B86F88700425CD7 /* CoreGraphics.framework in Frameworks */,
-				CB1EAE301B86F88700425CD7 /* Fabric.framework in Frameworks */,
 				CB1EAE311B86F88700425CD7 /* UIKit.framework in Frameworks */,
-				CB1EAE321B86F88700425CD7 /* Crashlytics.framework in Frameworks */,
 				CB1EAE331B86F88700425CD7 /* CoreData.framework in Frameworks */,
 				CB1EAE341B86F88700425CD7 /* libPods.a in Frameworks */,
-				CB1EAE351B86F88700425CD7 /* Parse.framework in Frameworks */,
 				CB1EAE361B86F88700425CD7 /* CoreLocation.framework in Frameworks */,
 				CB1EAE371B86F88700425CD7 /* CFNetwork.framework in Frameworks */,
 				CB1EAE381B86F88700425CD7 /* libz.dylib in Frameworks */,
@@ -14291,12 +14131,9 @@
 				CB2422411B7A1D4D00A02721 /* Accelerate.framework in Frameworks */,
 				CB2422421B7A1D4D00A02721 /* Foundation.framework in Frameworks */,
 				CB2422431B7A1D4D00A02721 /* CoreGraphics.framework in Frameworks */,
-				CB2422441B7A1D4D00A02721 /* Fabric.framework in Frameworks */,
 				CB2422451B7A1D4D00A02721 /* UIKit.framework in Frameworks */,
-				CB2422461B7A1D4D00A02721 /* Crashlytics.framework in Frameworks */,
 				CB2422471B7A1D4D00A02721 /* CoreData.framework in Frameworks */,
 				CB2422481B7A1D4D00A02721 /* libPods.a in Frameworks */,
-				CB2422491B7A1D4D00A02721 /* Parse.framework in Frameworks */,
 				CB24224A1B7A1D4D00A02721 /* CoreLocation.framework in Frameworks */,
 				CB24224B1B7A1D4D00A02721 /* CFNetwork.framework in Frameworks */,
 				CB24224C1B7A1D4D00A02721 /* libz.dylib in Frameworks */,
@@ -14319,12 +14156,9 @@
 				CB3BA35A1B20589300F320CA /* Accelerate.framework in Frameworks */,
 				CB3BA35B1B20589300F320CA /* Foundation.framework in Frameworks */,
 				CB3BA35C1B20589300F320CA /* CoreGraphics.framework in Frameworks */,
-				CB3BA35D1B20589300F320CA /* Fabric.framework in Frameworks */,
 				CB3BA35E1B20589300F320CA /* UIKit.framework in Frameworks */,
-				CB3BA35F1B20589300F320CA /* Crashlytics.framework in Frameworks */,
 				CB3BA3601B20589300F320CA /* CoreData.framework in Frameworks */,
 				CB3BA3611B20589300F320CA /* libPods.a in Frameworks */,
-				CB3BA3621B20589300F320CA /* Parse.framework in Frameworks */,
 				CB3BA3631B20589300F320CA /* CoreLocation.framework in Frameworks */,
 				CB3BA3641B20589300F320CA /* CFNetwork.framework in Frameworks */,
 				CB3BA3651B20589300F320CA /* libz.dylib in Frameworks */,
@@ -14347,12 +14181,9 @@
 				CB517BB51AEFB6B500A50F5C /* Accelerate.framework in Frameworks */,
 				CB517BB61AEFB6B500A50F5C /* Foundation.framework in Frameworks */,
 				CB517BB71AEFB6B500A50F5C /* CoreGraphics.framework in Frameworks */,
-				CB3F9CB41AFA395B003A897F /* Fabric.framework in Frameworks */,
 				CB517BB81AEFB6B500A50F5C /* UIKit.framework in Frameworks */,
-				CB3F9CB71AFA395B003A897F /* Crashlytics.framework in Frameworks */,
 				CB517BB91AEFB6B500A50F5C /* CoreData.framework in Frameworks */,
 				CB517BBB1AEFB6B500A50F5C /* libPods.a in Frameworks */,
-				CB517BBC1AEFB6B500A50F5C /* Parse.framework in Frameworks */,
 				CB517BBD1AEFB6B500A50F5C /* CoreLocation.framework in Frameworks */,
 				CB517BBE1AEFB6B500A50F5C /* CFNetwork.framework in Frameworks */,
 				CB517BBF1AEFB6B500A50F5C /* libz.dylib in Frameworks */,
@@ -14375,12 +14206,9 @@
 				CB57938F1B6AB87300B17819 /* Accelerate.framework in Frameworks */,
 				CB5793901B6AB87300B17819 /* Foundation.framework in Frameworks */,
 				CB5793911B6AB87300B17819 /* CoreGraphics.framework in Frameworks */,
-				CB5793921B6AB87300B17819 /* Fabric.framework in Frameworks */,
 				CB5793931B6AB87300B17819 /* UIKit.framework in Frameworks */,
-				CB5793941B6AB87300B17819 /* Crashlytics.framework in Frameworks */,
 				CB5793951B6AB87300B17819 /* CoreData.framework in Frameworks */,
 				CB5793961B6AB87300B17819 /* libPods.a in Frameworks */,
-				CB5793971B6AB87300B17819 /* Parse.framework in Frameworks */,
 				CB5793981B6AB87300B17819 /* CoreLocation.framework in Frameworks */,
 				CB5793991B6AB87300B17819 /* CFNetwork.framework in Frameworks */,
 				CB57939A1B6AB87300B17819 /* libz.dylib in Frameworks */,
@@ -14403,12 +14231,9 @@
 				CB5795061B6BA76B00B17819 /* Accelerate.framework in Frameworks */,
 				CB5795071B6BA76B00B17819 /* Foundation.framework in Frameworks */,
 				CB5795081B6BA76B00B17819 /* CoreGraphics.framework in Frameworks */,
-				CB5795091B6BA76B00B17819 /* Fabric.framework in Frameworks */,
 				CB57950A1B6BA76B00B17819 /* UIKit.framework in Frameworks */,
-				CB57950B1B6BA76B00B17819 /* Crashlytics.framework in Frameworks */,
 				CB57950C1B6BA76B00B17819 /* CoreData.framework in Frameworks */,
 				CB57950D1B6BA76B00B17819 /* libPods.a in Frameworks */,
-				CB57950E1B6BA76B00B17819 /* Parse.framework in Frameworks */,
 				CB57950F1B6BA76B00B17819 /* CoreLocation.framework in Frameworks */,
 				CB5795101B6BA76B00B17819 /* CFNetwork.framework in Frameworks */,
 				CB5795111B6BA76B00B17819 /* libz.dylib in Frameworks */,
@@ -14431,12 +14256,9 @@
 				CB5AFCA41B27209A00904BF7 /* Accelerate.framework in Frameworks */,
 				CB5AFCA51B27209A00904BF7 /* Foundation.framework in Frameworks */,
 				CB5AFCA61B27209A00904BF7 /* CoreGraphics.framework in Frameworks */,
-				CB5AFCA71B27209A00904BF7 /* Fabric.framework in Frameworks */,
 				CB5AFCA81B27209A00904BF7 /* UIKit.framework in Frameworks */,
-				CB5AFCA91B27209A00904BF7 /* Crashlytics.framework in Frameworks */,
 				CB5AFCAA1B27209A00904BF7 /* CoreData.framework in Frameworks */,
 				CB5AFCAB1B27209A00904BF7 /* libPods.a in Frameworks */,
-				CB5AFCAC1B27209A00904BF7 /* Parse.framework in Frameworks */,
 				CB5AFCAD1B27209A00904BF7 /* CoreLocation.framework in Frameworks */,
 				CB5AFCAE1B27209A00904BF7 /* CFNetwork.framework in Frameworks */,
 				CB5AFCAF1B27209A00904BF7 /* libz.dylib in Frameworks */,
@@ -14459,12 +14281,9 @@
 				CB60C1081AC5AD2600D5E962 /* Accelerate.framework in Frameworks */,
 				CB60C1091AC5AD2600D5E962 /* Foundation.framework in Frameworks */,
 				CB60C10A1AC5AD2600D5E962 /* CoreGraphics.framework in Frameworks */,
-				CB3F9CB21AFA395B003A897F /* Fabric.framework in Frameworks */,
 				CB60C10B1AC5AD2600D5E962 /* UIKit.framework in Frameworks */,
-				CB3F9CB51AFA395B003A897F /* Crashlytics.framework in Frameworks */,
 				CB60C10C1AC5AD2600D5E962 /* CoreData.framework in Frameworks */,
 				CB60C10E1AC5AD2600D5E962 /* libPods.a in Frameworks */,
-				CB60C10F1AC5AD2600D5E962 /* Parse.framework in Frameworks */,
 				CB60C1101AC5AD2600D5E962 /* CoreLocation.framework in Frameworks */,
 				CB60C1111AC5AD2600D5E962 /* CFNetwork.framework in Frameworks */,
 				CB60C1121AC5AD2600D5E962 /* libz.dylib in Frameworks */,
@@ -14476,6 +14295,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E11122E1B8B76BE004D7B87 /* CoreLocation.framework in Frameworks */,
 				CB64002B1B31B7CF0011CEEC /* libEmpatikaBeaconsSDK.a in Frameworks */,
 				CB64002C1B31B7CF0011CEEC /* Accounts.framework in Frameworks */,
 				CB64002D1B31B7CF0011CEEC /* SystemConfiguration.framework in Frameworks */,
@@ -14487,13 +14307,9 @@
 				CB6400331B31B7CF0011CEEC /* Accelerate.framework in Frameworks */,
 				CB6400341B31B7CF0011CEEC /* Foundation.framework in Frameworks */,
 				CB6400351B31B7CF0011CEEC /* CoreGraphics.framework in Frameworks */,
-				CB6400361B31B7CF0011CEEC /* Fabric.framework in Frameworks */,
 				CB6400371B31B7CF0011CEEC /* UIKit.framework in Frameworks */,
-				CB6400381B31B7CF0011CEEC /* Crashlytics.framework in Frameworks */,
 				CB6400391B31B7CF0011CEEC /* CoreData.framework in Frameworks */,
 				CB64003A1B31B7CF0011CEEC /* libPods.a in Frameworks */,
-				CB64003B1B31B7CF0011CEEC /* Parse.framework in Frameworks */,
-				CB64003C1B31B7CF0011CEEC /* CoreLocation.framework in Frameworks */,
 				CB64003D1B31B7CF0011CEEC /* CFNetwork.framework in Frameworks */,
 				CB64003E1B31B7CF0011CEEC /* libz.dylib in Frameworks */,
 				CB64003F1B31B7CF0011CEEC /* MessageUI.framework in Frameworks */,
@@ -14515,12 +14331,9 @@
 				CB64FE851B317F760011CEEC /* Accelerate.framework in Frameworks */,
 				CB64FE861B317F760011CEEC /* Foundation.framework in Frameworks */,
 				CB64FE871B317F760011CEEC /* CoreGraphics.framework in Frameworks */,
-				CB64FE881B317F760011CEEC /* Fabric.framework in Frameworks */,
 				CB64FE891B317F760011CEEC /* UIKit.framework in Frameworks */,
-				CB64FE8A1B317F760011CEEC /* Crashlytics.framework in Frameworks */,
 				CB64FE8B1B317F760011CEEC /* CoreData.framework in Frameworks */,
 				CB64FE8C1B317F760011CEEC /* libPods.a in Frameworks */,
-				CB64FE8D1B317F760011CEEC /* Parse.framework in Frameworks */,
 				CB64FE8E1B317F760011CEEC /* CoreLocation.framework in Frameworks */,
 				CB64FE8F1B317F760011CEEC /* CFNetwork.framework in Frameworks */,
 				CB64FE901B317F760011CEEC /* libz.dylib in Frameworks */,
@@ -14543,12 +14356,9 @@
 				CB6980A01B7DE33400B12B78 /* Accelerate.framework in Frameworks */,
 				CB6980A11B7DE33400B12B78 /* Foundation.framework in Frameworks */,
 				CB6980A21B7DE33400B12B78 /* CoreGraphics.framework in Frameworks */,
-				CB6980A31B7DE33400B12B78 /* Fabric.framework in Frameworks */,
 				CB6980A41B7DE33400B12B78 /* UIKit.framework in Frameworks */,
-				CB6980A51B7DE33400B12B78 /* Crashlytics.framework in Frameworks */,
 				CB6980A61B7DE33400B12B78 /* CoreData.framework in Frameworks */,
 				CB6980A71B7DE33400B12B78 /* libPods.a in Frameworks */,
-				CB6980A81B7DE33400B12B78 /* Parse.framework in Frameworks */,
 				CB6980A91B7DE33400B12B78 /* CoreLocation.framework in Frameworks */,
 				CB6980AA1B7DE33400B12B78 /* CFNetwork.framework in Frameworks */,
 				CB6980AB1B7DE33400B12B78 /* libz.dylib in Frameworks */,
@@ -14571,12 +14381,9 @@
 				CB8201181B46CBB4000BBE55 /* Accelerate.framework in Frameworks */,
 				CB8201191B46CBB4000BBE55 /* Foundation.framework in Frameworks */,
 				CB82011A1B46CBB4000BBE55 /* CoreGraphics.framework in Frameworks */,
-				CB82011B1B46CBB4000BBE55 /* Fabric.framework in Frameworks */,
 				CB82011C1B46CBB4000BBE55 /* UIKit.framework in Frameworks */,
-				CB82011D1B46CBB4000BBE55 /* Crashlytics.framework in Frameworks */,
 				CB82011E1B46CBB4000BBE55 /* CoreData.framework in Frameworks */,
 				CB82011F1B46CBB4000BBE55 /* libPods.a in Frameworks */,
-				CB8201201B46CBB4000BBE55 /* Parse.framework in Frameworks */,
 				CB8201211B46CBB4000BBE55 /* CoreLocation.framework in Frameworks */,
 				CB8201221B46CBB4000BBE55 /* CFNetwork.framework in Frameworks */,
 				CB8201231B46CBB4000BBE55 /* libz.dylib in Frameworks */,
@@ -14599,12 +14406,9 @@
 				CB82FC551B442C70000BBE55 /* Accelerate.framework in Frameworks */,
 				CB82FC561B442C70000BBE55 /* Foundation.framework in Frameworks */,
 				CB82FC571B442C70000BBE55 /* CoreGraphics.framework in Frameworks */,
-				CB82FC581B442C70000BBE55 /* Fabric.framework in Frameworks */,
 				CB82FC591B442C70000BBE55 /* UIKit.framework in Frameworks */,
-				CB82FC5A1B442C70000BBE55 /* Crashlytics.framework in Frameworks */,
 				CB82FC5B1B442C70000BBE55 /* CoreData.framework in Frameworks */,
 				CB82FC5C1B442C70000BBE55 /* libPods.a in Frameworks */,
-				CB82FC5D1B442C70000BBE55 /* Parse.framework in Frameworks */,
 				CB82FC5E1B442C70000BBE55 /* CoreLocation.framework in Frameworks */,
 				CB82FC5F1B442C70000BBE55 /* CFNetwork.framework in Frameworks */,
 				CB82FC601B442C70000BBE55 /* libz.dylib in Frameworks */,
@@ -14627,12 +14431,9 @@
 				CB82FE361B4464F6000BBE55 /* Accelerate.framework in Frameworks */,
 				CB82FE371B4464F6000BBE55 /* Foundation.framework in Frameworks */,
 				CB82FE381B4464F6000BBE55 /* CoreGraphics.framework in Frameworks */,
-				CB82FE391B4464F6000BBE55 /* Fabric.framework in Frameworks */,
 				CB82FE3A1B4464F6000BBE55 /* UIKit.framework in Frameworks */,
-				CB82FE3B1B4464F6000BBE55 /* Crashlytics.framework in Frameworks */,
 				CB82FE3C1B4464F6000BBE55 /* CoreData.framework in Frameworks */,
 				CB82FE3D1B4464F6000BBE55 /* libPods.a in Frameworks */,
-				CB82FE3E1B4464F6000BBE55 /* Parse.framework in Frameworks */,
 				CB82FE3F1B4464F6000BBE55 /* CoreLocation.framework in Frameworks */,
 				CB82FE401B4464F6000BBE55 /* CFNetwork.framework in Frameworks */,
 				CB82FE411B4464F6000BBE55 /* libz.dylib in Frameworks */,
@@ -14655,12 +14456,9 @@
 				CB82FFA71B4579B5000BBE55 /* Accelerate.framework in Frameworks */,
 				CB82FFA81B4579B5000BBE55 /* Foundation.framework in Frameworks */,
 				CB82FFA91B4579B5000BBE55 /* CoreGraphics.framework in Frameworks */,
-				CB82FFAA1B4579B5000BBE55 /* Fabric.framework in Frameworks */,
 				CB82FFAB1B4579B5000BBE55 /* UIKit.framework in Frameworks */,
-				CB82FFAC1B4579B5000BBE55 /* Crashlytics.framework in Frameworks */,
 				CB82FFAD1B4579B5000BBE55 /* CoreData.framework in Frameworks */,
 				CB82FFAE1B4579B5000BBE55 /* libPods.a in Frameworks */,
-				CB82FFAF1B4579B5000BBE55 /* Parse.framework in Frameworks */,
 				CB82FFB01B4579B5000BBE55 /* CoreLocation.framework in Frameworks */,
 				CB82FFB11B4579B5000BBE55 /* CFNetwork.framework in Frameworks */,
 				CB82FFB21B4579B5000BBE55 /* libz.dylib in Frameworks */,
@@ -14683,12 +14481,9 @@
 				CBD0C5581B30724300DAD042 /* Accelerate.framework in Frameworks */,
 				CBD0C5591B30724300DAD042 /* Foundation.framework in Frameworks */,
 				CBD0C55A1B30724300DAD042 /* CoreGraphics.framework in Frameworks */,
-				CBD0C55B1B30724300DAD042 /* Fabric.framework in Frameworks */,
 				CBD0C55C1B30724300DAD042 /* UIKit.framework in Frameworks */,
-				CBD0C55D1B30724300DAD042 /* Crashlytics.framework in Frameworks */,
 				CBD0C55E1B30724300DAD042 /* CoreData.framework in Frameworks */,
 				CBD0C55F1B30724300DAD042 /* libPods.a in Frameworks */,
-				CBD0C5601B30724300DAD042 /* Parse.framework in Frameworks */,
 				CBD0C5611B30724300DAD042 /* CoreLocation.framework in Frameworks */,
 				CBD0C5621B30724300DAD042 /* CFNetwork.framework in Frameworks */,
 				CBD0C5631B30724300DAD042 /* libz.dylib in Frameworks */,
@@ -14711,12 +14506,9 @@
 				CBD2EB381B2A07D000E4AAA1 /* Accelerate.framework in Frameworks */,
 				CBD2EB391B2A07D000E4AAA1 /* Foundation.framework in Frameworks */,
 				CBD2EB3A1B2A07D000E4AAA1 /* CoreGraphics.framework in Frameworks */,
-				CBD2EB3B1B2A07D000E4AAA1 /* Fabric.framework in Frameworks */,
 				CBD2EB3C1B2A07D000E4AAA1 /* UIKit.framework in Frameworks */,
-				CBD2EB3D1B2A07D000E4AAA1 /* Crashlytics.framework in Frameworks */,
 				CBD2EB3E1B2A07D000E4AAA1 /* CoreData.framework in Frameworks */,
 				CBD2EB3F1B2A07D000E4AAA1 /* libPods.a in Frameworks */,
-				CBD2EB401B2A07D000E4AAA1 /* Parse.framework in Frameworks */,
 				CBD2EB411B2A07D000E4AAA1 /* CoreLocation.framework in Frameworks */,
 				CBD2EB421B2A07D000E4AAA1 /* CFNetwork.framework in Frameworks */,
 				CBD2EB431B2A07D000E4AAA1 /* libz.dylib in Frameworks */,
@@ -14739,12 +14531,9 @@
 				CBDC7A091B42AFC700935328 /* Accelerate.framework in Frameworks */,
 				CBDC7A0A1B42AFC700935328 /* Foundation.framework in Frameworks */,
 				CBDC7A0B1B42AFC700935328 /* CoreGraphics.framework in Frameworks */,
-				CBDC7A0C1B42AFC700935328 /* Fabric.framework in Frameworks */,
 				CBDC7A0D1B42AFC700935328 /* UIKit.framework in Frameworks */,
-				CBDC7A0E1B42AFC700935328 /* Crashlytics.framework in Frameworks */,
 				CBDC7A0F1B42AFC700935328 /* CoreData.framework in Frameworks */,
 				CBDC7A101B42AFC700935328 /* libPods.a in Frameworks */,
-				CBDC7A111B42AFC700935328 /* Parse.framework in Frameworks */,
 				CBDC7A121B42AFC700935328 /* CoreLocation.framework in Frameworks */,
 				CBDC7A131B42AFC700935328 /* CFNetwork.framework in Frameworks */,
 				CBDC7A141B42AFC700935328 /* libz.dylib in Frameworks */,
@@ -14767,12 +14556,9 @@
 				CBDE1BE81B7280B50090A347 /* Accelerate.framework in Frameworks */,
 				CBDE1BE91B7280B50090A347 /* Foundation.framework in Frameworks */,
 				CBDE1BEA1B7280B50090A347 /* CoreGraphics.framework in Frameworks */,
-				CBDE1BEB1B7280B50090A347 /* Fabric.framework in Frameworks */,
 				CBDE1BEC1B7280B50090A347 /* UIKit.framework in Frameworks */,
-				CBDE1BED1B7280B50090A347 /* Crashlytics.framework in Frameworks */,
 				CBDE1BEE1B7280B50090A347 /* CoreData.framework in Frameworks */,
 				CBDE1BEF1B7280B50090A347 /* libPods.a in Frameworks */,
-				CBDE1BF01B7280B50090A347 /* Parse.framework in Frameworks */,
 				CBDE1BF11B7280B50090A347 /* CoreLocation.framework in Frameworks */,
 				CBDE1BF21B7280B50090A347 /* CFNetwork.framework in Frameworks */,
 				CBDE1BF31B7280B50090A347 /* libz.dylib in Frameworks */,
@@ -25250,7 +25036,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7E3DAAE21B06153E00A7FFD1 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25293,7 +25079,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7E79251A1B3C1BDA00CA740D /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25336,7 +25122,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7E79269C1B3C247D00CA740D /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25379,7 +25165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7EB2D1611B3C3581009405C6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25422,7 +25208,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7EB2D2D01B3C51A2009405C6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25465,7 +25251,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7EB2D4401B3C5C77009405C6 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25508,7 +25294,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7ED4BC981B5EB64B00280D74 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25551,7 +25337,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		7EDB58F01B32F70400723DF9 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25594,7 +25380,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB14297A1B7A677A00B72069 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25637,7 +25423,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB142AFD1B7A6A4D00B72069 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25680,7 +25466,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB1430EB1B0E371A00DD50C7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25723,7 +25509,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB14324E1B0F1BBB00DD50C7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25766,7 +25552,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB194C111B6BAECE0085ECF8 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25809,7 +25595,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB194D821B6BC2650085ECF8 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25852,7 +25638,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB194EF31B6BD75B0085ECF8 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25895,7 +25681,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB1AF7691AE10E6900FA3224 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25938,7 +25724,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB1EAD991B86F88700425CD7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -25981,7 +25767,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB2421B11B7A1D4D00A02721 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26024,7 +25810,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB3BA2D71B20589300F320CA /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26067,7 +25853,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB517B401AEFB6B500A50F5C /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26110,7 +25896,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB57930B1B6AB87300B17819 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26153,7 +25939,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB5794821B6BA76B00B17819 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26196,7 +25982,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB5AFC201B27209A00904BF7 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26239,7 +26025,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB60C0A41AC5AD2600D5E962 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26282,7 +26068,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB6401061B31B7CF0011CEEC /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26310,7 +26096,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB64FDFD1B317F760011CEEC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26353,7 +26139,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB64FFAB1B31B7CF0011CEEC /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26411,7 +26197,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB8200771B4579B5000BBE55 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26439,7 +26225,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB8200941B46CBB4000BBE55 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26482,7 +26268,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB82FBD21B442C70000BBE55 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26525,7 +26311,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB82FDB21B4464F6000BBE55 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26568,7 +26354,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CB82FF231B4579B5000BBE55 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26626,7 +26412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CBD2EAB41B2A07D000E4AAA1 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26669,7 +26455,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CBDC79861B42AFC700935328 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26712,7 +26498,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 		CBDE1B641B7280B50090A347 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -26755,7 +26541,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
+			shellScript = "${PODS_ROOT}/Fabric/Fabric.framework/run 0546255b59ac9c3f96da6d8cee29c2d591e1fe8d 12be6abdc2a935df9428131f274ac2ab3e404ff48710df4f62f4a2f6416a3927";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -33292,6 +33078,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -33325,6 +33112,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -35984,6 +35772,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/**";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

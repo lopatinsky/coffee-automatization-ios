@@ -1,7 +1,0 @@
-RubeaconDemo 1016019282
-CoffeeHostel 980364330
-CoffeeShop 1015063485
-ProstoCoffee 1030710389
-Ladolchevita 1030706289
-Magnolia 1030706160
-SushiMarket 1019194696
