@@ -59,9 +59,6 @@ extern NSString *const kDBDefaultsCompanyInfo;
 
 extern NSString *const kDBDefaultsLastScheduledLocalNotification;
 
-NSString *const kDBFirstLaunchNecessaryInfoLoadSuccessNotification;
-NSString *const kDBFirstLaunchNecessaryInfoLoadFailureNotification;
-
 extern NSString *const kDBStatusUpdatedNotification;
 extern NSString *const kDBNotificationUpdatedOrder;
 extern NSString *const kDBRepeateOrderNotification;

@@ -50,6 +50,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [ApplicationManager rootViewController];
+    
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -96,7 +97,6 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 //    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
     
-    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
@@ -105,6 +105,8 @@
     if (lastOrderId) {
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
     }
+    
+    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -116,7 +118,6 @@
 //}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"REMOTE PUSH SUPER PUSH %@", userInfo);
     [PFPush handlePush:userInfo];
 
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
@@ -127,8 +128,6 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-    NSLog(@"%@", notification);
-    //[DBMastercardPromo clearAllLocalNotifications];
 }
 
 - (void)saveContext

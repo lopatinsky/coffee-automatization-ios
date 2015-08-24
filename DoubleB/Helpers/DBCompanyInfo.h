@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ManagerProtocol.h"
 #import "DBDeliveryType.h"
 
 
@@ -16,7 +17,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeOther = 2
 };
 
-@interface DBCompanyInfo : NSObject
+@interface DBCompanyInfo : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
 @property(strong, nonatomic, readonly) NSString *bundleName;
@@ -39,6 +40,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
 - (void)updateInfo;
+- (void)updateInfo:(void(^)(BOOL success))callback;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
 + (NSString *)db_companyBaseUrl;

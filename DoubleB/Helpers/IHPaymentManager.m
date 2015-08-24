@@ -7,7 +7,6 @@
 //
 
 #import "IHPaymentManager.h"
-#import "IHPaymentClient.h"
 #import "IHSecureStore.h"
 #import "IHWebPageViewController.h"
 #import "MBProgressHUD.h"
@@ -16,12 +15,12 @@
 #import "DBClientInfo.h"
 
 #define PAYMENT_TYPES_URL @"payment/payment_types"
-#define PAYMENT_REGISTRATION_URL @"register"
-#define CHECK_ORDER_STATUS_URL @"status"
-#define CHECK_EXTENDET_ORDER_STATUS_URL @"extended_status"
-#define LOCK_PAYMENT_URL @"payment_binding"
-#define UNLOCK_PAYMENT_URL @"reverse"
-#define UNBIND_CARD_URL @"unbind"
+#define PAYMENT_REGISTRATION_URL @"payment/register"
+#define CHECK_ORDER_STATUS_URL @"payment/status"
+#define CHECK_EXTENDET_ORDER_STATUS_URL @"payment/extended_status"
+#define LOCK_PAYMENT_URL @"payment/payment_binding"
+#define UNLOCK_PAYMENT_URL @"payment/reverse"
+#define UNBIND_CARD_URL @"payment/unbind"
 
 NSString *const kDBDefaultsAvailablePaymentTypes = @"kDBDefaultsAvailablePaymentTypes";
 
@@ -96,7 +95,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
     };
     
     [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [[IHPaymentClient sharedClient] POST:PAYMENT_REGISTRATION_URL
+    [[DBAPIClient sharedClient] POST:PAYMENT_REGISTRATION_URL
                              parameters:params
                                 success:^(AFHTTPRequestOperation *task, id responseObject) {
                                     //NSLog(@"%@", responseObject);
@@ -167,7 +166,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
             @"orderId": orderId
     };
     
-    [[IHPaymentClient sharedClient] POST:CHECK_ORDER_STATUS_URL
+    [[DBAPIClient sharedClient] POST:CHECK_ORDER_STATUS_URL
                              parameters:params
                                 success:^(AFHTTPRequestOperation *task, id responseObject) {
                                     //NSLog(@"%@", responseObject);
@@ -208,7 +207,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
 - (void)checkExtendedOrderStatus:(NSString *)orderId
                      orderNumber:(NSString *)orderNumber
            withCompletionHandler:(void(^)(BOOL success, NSString *message, NSDictionary *items))completionHandler{
-    [[IHPaymentClient sharedClient] POST:CHECK_EXTENDET_ORDER_STATUS_URL
+    [[DBAPIClient sharedClient] POST:CHECK_EXTENDET_ORDER_STATUS_URL
                               parameters:@{@"orderId": orderId}
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      //NSLog(@"%@", responseObject);
@@ -254,7 +253,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                              @"bindingId": cardToken
                              };
     
-    [[IHPaymentClient sharedClient] POST:UNBIND_CARD_URL
+    [[DBAPIClient sharedClient] POST:UNBIND_CARD_URL
                               parameters:params
                                  success:^(AFHTTPRequestOperation *task, id responseObject) {
                                      //NSLog(@"%@", responseObject);
@@ -272,7 +271,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
             @"mdOrder": orderId
     };
     
-    [[IHPaymentClient sharedClient] POST:LOCK_PAYMENT_URL
+    [[DBAPIClient sharedClient] POST:LOCK_PAYMENT_URL
                               parameters:params
                                  success:^(AFHTTPRequestOperation *task, id responseObject) {
                                      //NSLog(@"%@", responseObject);
@@ -301,7 +300,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
             @"orderId": orderId
     };
     
-    [[IHPaymentClient sharedClient] POST:UNLOCK_PAYMENT_URL
+    [[DBAPIClient sharedClient] POST:UNLOCK_PAYMENT_URL
                               parameters:params
                                  success:^(AFHTTPRequestOperation *task, id responseObject) {
                                      //NSLog(@"%@", responseObject);

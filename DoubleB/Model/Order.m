@@ -18,8 +18,9 @@
 @implementation Order {
     NSArray *_items;
     NSArray *_bonusItems;
+    NSArray *_giftItems;
 }
-@dynamic orderId, total, time, timeString, dataItems, dataGifts, status, deliveryType, venue, shippingAddress, paymentType;
+@dynamic orderId, total, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, deliveryType, venue, shippingAddress, paymentType;
 @synthesize realTotal = _realTotal;
 
 - (instancetype)init:(BOOL)stored {
@@ -36,7 +37,8 @@
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
     self.total = @([OrderCoordinator sharedInstance].itemsManager.totalPrice);
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].itemsManager.items];
-    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].bonusItemsManager.items];
+    self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].bonusItemsManager.items];
+    self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].orderGiftsManager.items];
     self.paymentType = [[OrderCoordinator sharedInstance].orderManager paymentType];
     self.status = OrderStatusNew;
     
@@ -61,6 +63,7 @@
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
     self.realTotal = dict[@"total"];
     
+    // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
         OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
@@ -69,13 +72,23 @@
     }
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
     
+    // Assemble bonus items
     NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
         OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
         item.position.mode = DBMenuPositionModeBonus;
-        [items addObject:item];
+        [bonusItems addObject:item];
     }
-    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
+    self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
+    
+    // Assemble gift items
+//    NSMutableArray *giftItems = [[NSMutableArray alloc] init];
+//    for (NSDictionary *itemDict in dict[@""]) {
+//        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+//        item.position.mode = DBMenuPositionModeGift;
+//        [giftItems addObject:item];
+//    }
+//    self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:giftItems];
     
     self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
     self.status = [dict[@"status"] intValue];
@@ -221,10 +234,18 @@
 
 - (NSArray *)bonusItems{
     if (!_bonusItems) {
-        _bonusItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataGifts];
+        _bonusItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataBonusItems];
     }
     
     return _bonusItems;
+}
+
+- (NSArray *)giftItems{
+    if (!_giftItems) {
+        _giftItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataGiftItems];
+    }
+    
+    return _giftItems;
 }
 
 - (NSString *)formattedTimeString{

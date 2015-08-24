@@ -7,12 +7,14 @@
 //
 
 #import "ApplicationManager.h"
-#import "OrderCoordinator.h"
 #import "ViewControllerManager.h"
 
+#import "OrderCoordinator.h"
+#import "DBMenu.h"
 #import "Order.h"
 #import "Venue.h"
 
+#import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
 #import "DBMenu.h"
 #import "DBTabBarController.h"
@@ -25,18 +27,93 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
+
+NSString *const kDBApplicationManagerInfoLoadSuccess = @"kDBApplicationManagerInfoLoadSuccess";
+NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerInfoLoadFailure";
+
 #pragma mark - General
+
 @implementation ApplicationManager
 
-+ (nonnull UIViewController *)rootViewController {
-    if (![DBCompanyInfo sharedInstance].deliveryTypes) {
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static ApplicationManager*instance = nil;
+    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    return instance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    
+    [self updateAllInfo:nil];
+    
+    return self;
+}
+
+- (void)updateAllInfo:(void (^)(BOOL))callback {
+    int maxNumberOfRequests = 2;
+    __block int numberOfRequests = 0;
+    
+    void (^successCompletionHandler)() = ^void(){
+        numberOfRequests++;
+        if(numberOfRequests == maxNumberOfRequests){
+            if(callback)
+                callback(YES);
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadSuccess object:nil]];
+        }
+    };
+    
+    __block void (^failureCompletionHandler)() = ^void(){
+        if(callback)
+            callback(NO);
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadFailure object:nil]];
+    };
+    
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+        if(success){
+            successCompletionHandler();
+        } else {
+            if(failureCompletionHandler){
+                failureCompletionHandler();
+                failureCompletionHandler = nil;
+            }
+        }
+    }];
+    
+    [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
+        if(success){
+            successCompletionHandler();
+        } else {
+            if(failureCompletionHandler){
+                failureCompletionHandler();
+                failureCompletionHandler = nil;
+            }
+        }
+    }];
+}
+
+- (BOOL)allInfoLoaded {
+    return [[DBCompanyInfo sharedInstance].deliveryTypes count] > 0 && [DBCompaniesManager sharedInstance].companiesLoaded;
+}
+
++ (UIViewController *)rootViewController {
+    if (![ApplicationManager sharedInstance].allInfoLoaded) {
         return [ViewControllerManager launchViewController];
     } else {
+        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
+//            return [DBCompaniesViewController new];
+        }
+        
+        // Login VC for demoApp
+        if  ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"rubeacondemo"]){
+            return [self demoLoginViewController];
+        }
+        
         return [ViewControllerManager mainViewController];
     }
 }
 
-+ (void)copyPlistWithName:(nonnull NSString *)plistName forceCopy:(BOOL)forceCopy {
++ (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     NSString *storedBuildNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"STORED_BUILD_NUMBER"] ?: @"0";
     if (forceCopy || [buildNumber compare:storedBuildNumber] == NSOrderedDescending) {
@@ -46,7 +123,7 @@
     }
 }
 
-+ (void)copyPlistsWithNames:(nonnull NSArray *)plistsNames forceCopy:(BOOL)forceCopy {
++ (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy {
     [plistsNames enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
         [ApplicationManager copyPlistWithName:obj forceCopy:forceCopy];
     }];
@@ -70,6 +147,24 @@
     NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:name ofType:@".plist"];
     NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:pathToPlist];
     return [[NSMutableDictionary alloc] initWithDictionary:plistDict];
+}
+
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    [[OrderCoordinator sharedInstance] flushCache];
+    [[DBCompanyInfo sharedInstance] flushCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
+}
+
+- (void)flushStoredCache {
+    [[OrderCoordinator sharedInstance] flushStoredCache];
+    [[DBCompanyInfo sharedInstance] flushStoredCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
 }
 
 @end
@@ -128,11 +223,23 @@
 @end
 
 @implementation ApplicationManager (Menu)
-+ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController{
++ (Class<MenuListViewControllerProtocol>)rootMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
         return [ViewControllerManager rootMenuViewController];
+    }
+}
+@end
+
+@implementation ApplicationManager (DemoApp)
++ (UIViewController *)demoLoginViewController{
+    Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
+    
+    if(loginVCClass){
+        return [[loginVCClass alloc] init];
+    } else {
+        return nil;
     }
 }
 

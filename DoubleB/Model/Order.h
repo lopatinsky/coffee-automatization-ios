@@ -35,7 +35,8 @@ typedef NS_ENUM(int16_t, PaymentType) {
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSString *timeString;
 @property (nonatomic, strong) NSData *dataItems; //array of JSON-encoded positions
-@property (nonatomic, strong) NSData *dataGifts; //array of JSON-encoded gift positions
+@property (nonatomic, strong) NSData *dataBonusItems; //array of JSON-encoded bonus positions
+@property (nonatomic, strong) NSData *dataGiftItems; //array of JSON-encoded bonus positions
 
 @property (nonatomic) OrderStatus status;
 
@@ -48,6 +49,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 //not stored
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *bonusItems;
+@property (nonatomic, readonly) NSArray *giftItems;
 @property (nonatomic, readonly) NSString *formattedTimeString;
 @property (nonatomic, strong) NSNumber *realTotal;
 
@@ -58,6 +60,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 
 + (NSArray *)allOrders;
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;
++ (void)dropAllOrders;
 
 /**
 * Fetch statuses for given Order objects

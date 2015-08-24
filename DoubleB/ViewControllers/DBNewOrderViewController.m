@@ -196,6 +196,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadItemAdditionView];
     [self reloadAddress];
     [self reloadTime];
+    [self reloadTimePicker];
     [self reloadPaymentType];
     [self reloadProfile];
     [self reloadContinueButton];
@@ -793,8 +794,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.orderFooter.labelTime.text = timeString;
 }
 
-- (void)reloadTimePicker{
-    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+- (void)reloadTimePicker {
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         self.pickerView.segments = @[];
     } else {
         NSMutableArray *titles = [NSMutableArray new];

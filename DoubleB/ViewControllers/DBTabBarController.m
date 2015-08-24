@@ -83,6 +83,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)moveToStartState {
+    for(UIViewController *controller in self.viewControllers){
+        if([controller isKindOfClass:[UINavigationController class]]){
+            [((UINavigationController*)controller) popToRootViewControllerAnimated:NO];
+        }
+    }
+    
+    self.selectedIndex = 0;
+}
+
 - (void)awakeFromRemoteNotification{
     self.selectedIndex = 1;
 }

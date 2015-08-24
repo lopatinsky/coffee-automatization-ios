@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="2" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="2" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Order" representedClassName="Order" syncable="YES">
-        <attribute name="dataGifts" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="dataBonusItems" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="dataGiftItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="dataItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="deliveryType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="orderId" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +24,7 @@
         <attribute name="workingTime" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Order" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="Order" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="Venue" positionX="-63" positionY="27" width="128" height="150"/>
     </elements>
 </model>

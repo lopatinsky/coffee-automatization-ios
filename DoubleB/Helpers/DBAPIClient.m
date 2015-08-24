@@ -8,10 +8,15 @@
 
 #import "DBAPIClient.h"
 #import "DBCompanyInfo.h"
+#import "DBCompaniesManager.h"
 
-@implementation DBAPIClient {
+@interface DBAPIClient()
 
-}
+@property (strong, nonatomic) AFHTTPRequestSerializer *reqSerializer;
+
+@end
+
+@implementation DBAPIClient
 
 + (instancetype)sharedClient {
     static DBAPIClient *_sharedClient = nil;
@@ -24,30 +29,42 @@
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
+    if (self = [super initWithBaseURL:url]) {
+        self.reqSerializer = [AFHTTPRequestSerializer serializer];
+        [self.reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [self.reqSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+        [self setRequestSerializer:self.reqSerializer];
+        [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        
+        self.companyHeaderEnabled = YES;
     }
-    
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    
-#warning Perchini legacy code
-    if ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"] isEqualToString:@"FishRice"]) {
-        [requestSerializer setValue:@"perchiniribaris" forHTTPHeaderField:@"namespace"];
-    }
-    
-    //compression
-    [requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    [self setRequestSerializer:requestSerializer];
-    
-    [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-    
     return self;
 }
 
-+ (NSString *)baseUrl{
++ (nullable NSString *)baseUrl {
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+}
+
+- (void)disableHeader:(nonnull NSString *)header {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:nil forHTTPHeaderField:header];
+    }
+}
+
+- (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:value forHTTPHeaderField:header];
+    }
+}
+
+- (void)setCompanyHeaderEnabled:(BOOL)companyHeaderEnabled {
+    _companyHeaderEnabled = companyHeaderEnabled;
+    
+    if(companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]){
+        [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
+    } else {
+        [self disableHeader:@"namespace"];
+    }
 }
 
 @end

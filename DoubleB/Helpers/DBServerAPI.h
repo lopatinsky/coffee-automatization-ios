@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Order.h"
 
 @interface DBServerAPI : NSObject
+
++ (void)requestCompanies:(void(^)(NSArray *companies))success
+                 failure:(void(^)(NSError *error))failure;
 
 + (void)registerUser:(void(^)(BOOL success))callback;
 

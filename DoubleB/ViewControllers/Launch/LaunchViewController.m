@@ -9,7 +9,7 @@
 #import "LaunchViewController.h"
 #import "DBTabBarController.h"
 #import "AppDelegate.h"
-#import "DBCompanyInfo.h"
+#import "ApplicationManager.h"
 #import <Parse/PFPush.h>
 
 @interface LaunchViewController ()<UIAlertViewDelegate>
@@ -39,12 +39,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
-                                                 name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification
+                                                 name:kDBApplicationManagerInfoLoadSuccess
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(firstLaunchNecessaryInfoLoadFailureNotification:)
-                                                 name:kDBFirstLaunchNecessaryInfoLoadFailureNotification
+                                                 name:kDBApplicationManagerInfoLoadFailure
                                                object:nil];
 }
 
@@ -91,7 +91,7 @@
     [GANHelper analyzeEvent:@"try_again_click" category:LAUNCH_PLACEHOLDER_SCREEN];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[DBCompanyInfo sharedInstance] updateInfo];
+        [[ApplicationManager sharedInstance] updateAllInfo:nil];
     });
 }
 
