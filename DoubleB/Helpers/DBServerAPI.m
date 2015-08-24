@@ -30,17 +30,20 @@
 
 #pragma mark - User
 
-+ (void)requestCompanies:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure {
-    [[DBAPIClient sharedClient] disableCompanyHeader];
++ (void)requestCompanies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [DBAPIClient sharedClient].companyHeaderEnabled = NO;
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
-                         parameters:@{}
+                         parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                success(responseObject);
-                                [[DBAPIClient sharedClient] enableCompanyHeader];
+                                if(success)
+                                    success(responseObject[@"companies"]);
+                                [DBAPIClient sharedClient].companyHeaderEnabled = NO;
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"FAIL");
-                                [[DBAPIClient sharedClient] enableCompanyHeader];
+                                NSLog(@"%@", error);
+                                if(failure)
+                                    failure(error);
+                                [DBAPIClient sharedClient].companyHeaderEnabled = NO;
                             }];
 }
 

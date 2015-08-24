@@ -51,12 +51,11 @@ public class DBCompaniesViewController: UIViewController {
     }
     
     func requestCompanies() {
-        DBServerAPI.requestCompanies({ (response) -> Void in
-            self.companies = response["companies"] as! [NSDictionary]
+        DBServerAPI.requestCompanies({ (companies) -> Void in
+            self.companies = companies as! [NSArray]
             self.tableView.reloadData()
             if self.companies.count == 1 {
                 self.putSelectedNamespace(self.companies.first!.objectForKey("namespace") as! String)
-                DBCompanyInfo.sharedInstance().currentCompanyName = self.companies.first!.objectForKey("name") as! String
             } else {
                 self.splashImageView.hidden = true
             }
@@ -66,7 +65,7 @@ public class DBCompaniesViewController: UIViewController {
     }
     
     func putSelectedNamespace(namespace: String) {
-        DBAPIClient.sharedClient()!.setValue(namespace, forHeader: "namespace")
+        DBCompaniesManager.sharedInstance().selectedCompanyName = namespace
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.preloadData()
@@ -98,7 +97,6 @@ extension DBCompaniesViewController: UITableViewDelegate {
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let namespace = self.companies[indexPath.row].objectForKey("namespace") as! String
         putSelectedNamespace(namespace)
-        DBCompanyInfo.sharedInstance().currentCompanyName = self.companies[indexPath.row].objectForKey("name") as! String
     }
     
     func preloadData() {

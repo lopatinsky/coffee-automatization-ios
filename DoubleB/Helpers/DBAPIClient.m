@@ -8,8 +8,7 @@
 
 #import "DBAPIClient.h"
 #import "DBCompanyInfo.h"
-
-#define kDBCompanyHeader @"db_company_header"
+#import "DBCompaniesManager.h"
 
 @interface DBAPIClient()
 
@@ -34,9 +33,10 @@
         self.reqSerializer = [AFHTTPRequestSerializer serializer];
         [self.reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [self.reqSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-        [self enableCompanyHeader];
         [self setRequestSerializer:self.reqSerializer];
         [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        
+        self.companyHeaderEnabled = YES;
     }
     return self;
 }
@@ -45,25 +45,25 @@
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
 }
 
-- (void)enableCompanyHeader {
+- (void)disableHeader:(nonnull NSString *)header {
     if (self.reqSerializer) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kDBCompanyHeader]) {
-            [self.reqSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:kDBCompanyHeader] forHTTPHeaderField:@"namespace"];
-        }
-    }
-}
-
-- (void)disableCompanyHeader {
-    if (self.reqSerializer) {
-        [self.reqSerializer setValue:nil forHTTPHeaderField:@"namespace"];
+        [self.reqSerializer setValue:nil forHTTPHeaderField:header];
     }
 }
 
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
     if (self.reqSerializer) {
         [self.reqSerializer setValue:value forHTTPHeaderField:header];
-        [[NSUserDefaults standardUserDefaults] setObject:value forKey:kDBCompanyHeader];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)setCompanyHeaderEnabled:(BOOL)companyHeaderEnabled {
+    _companyHeaderEnabled = companyHeaderEnabled;
+    
+    if(companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]){
+        [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
+    } else {
+        [self disableHeader:@"namespace"];
     }
 }
 

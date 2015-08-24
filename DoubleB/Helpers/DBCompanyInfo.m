@@ -194,8 +194,6 @@
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
     
     _deliveryCities = info[@"_deliveryCities"];
-    
-    _currentCompanyName = info[@"_currentCompanyName"] ?: @"";
 }
 
 - (void)synchronize{
@@ -210,26 +208,10 @@
                            @"applicationName": _applicationName,
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
-                           @"_deliveryCities": _deliveryCities,
-                           @"_currentCompanyName": _currentCompanyName ?: @""};
+                           @"_deliveryCities": _deliveryCities};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (NSString *)deliveryImageName {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"db_company_header"]) {
-        NSString *namespace = [[NSUserDefaults standardUserDefaults] objectForKey:@"db_company_header"];
-        if ([namespace isEqualToString:@"perchiniribaris"]) {
-            return @"krasnoselskaya";
-        } else if ([namespace isEqualToString:@"perchiniribarislublino"]) {
-            return @"lublino";
-        } else {
-            return @"";
-        }
-    } else {
-        return @"";
-    }
 }
 
 @end

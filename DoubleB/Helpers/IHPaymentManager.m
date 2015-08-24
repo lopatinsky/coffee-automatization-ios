@@ -7,7 +7,6 @@
 //
 
 #import "IHPaymentManager.h"
-//#import "IHPaymentClient.h"
 #import "IHSecureStore.h"
 #import "IHWebPageViewController.h"
 #import "MBProgressHUD.h"

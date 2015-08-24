@@ -11,7 +11,7 @@
 
 @interface DBServerAPI : NSObject
 
-+ (void)requestCompanies:(void(^)(NSDictionary *response))success
++ (void)requestCompanies:(void(^)(NSArray *companies))success
                  failure:(void(^)(NSError *error))failure;
 
 + (void)registerUser:(void(^)(BOOL success))callback;

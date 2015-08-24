@@ -16,7 +16,8 @@
 + (nullable NSString *)baseUrl;
 
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header;
-- (void)enableCompanyHeader;
-- (void)disableCompanyHeader;
+- (void)disableHeader:(nonnull NSString *)header;
+
+@property(nonatomic) BOOL companyHeaderEnabled;
 
 @end
