@@ -33,7 +33,11 @@
     return bundleName;
 }
 
-- (void)updateInfo{
+- (void)updateInfo {
+    [self updateInfo:nil];
+}
+
+- (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
             _type = [[response getValueForKey:@"companyType"] intValue];
@@ -66,6 +70,9 @@
         } else {
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
         }
+        
+        if(callback)
+            callback(success);
     }];
 }
 
@@ -212,6 +219,22 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    _applicationName = @"";
+    
+    _deliveryTypes = @[];
+    _deliveryCities = @[];
+    
+    _supportEmails = @[];
+}
+
+- (void)flushStoredCache {
+    [self flushCache];
+    [self synchronize];
 }
 
 @end

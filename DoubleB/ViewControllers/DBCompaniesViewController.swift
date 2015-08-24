@@ -70,7 +70,7 @@ public class DBCompaniesViewController: UIViewController {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.preloadData()
         if (DBCompanyInfo.sharedInstance().deliveryTypes != nil) {
-            delegate.window.rootViewController = DBLaunchEmulationViewController()
+            delegate.window.rootViewController = LaunchViewController()
         } else {
             delegate.window.rootViewController = DBTabBarController.sharedInstance()
         }

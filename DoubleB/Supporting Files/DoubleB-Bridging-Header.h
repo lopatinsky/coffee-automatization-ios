@@ -8,7 +8,7 @@
 #import "DBAPIClient.h"
 #import "DBServerAPI.h"
 #import "DBCompanyInfo.h"
-#import "DBLaunchEmulationViewController.h"
+#import "LaunchViewController.h"
 #import "DBTabBarController.h"
 #import "DBPromoManager.h"
 #import "DBMenu.h"

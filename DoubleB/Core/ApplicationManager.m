@@ -7,12 +7,14 @@
 //
 
 #import "ApplicationManager.h"
-#import "OrderCoordinator.h"
 #import "ViewControllerManager.h"
 
+#import "OrderCoordinator.h"
+#import "DBMenu.h"
 #import "Order.h"
 #import "Venue.h"
 
+#import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
 #import "DBMenu.h"
 #import "DBTabBarController.h"
@@ -28,11 +30,32 @@
 #pragma mark - General
 @implementation ApplicationManager
 
-+ (nonnull UIViewController *)rootViewController {
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static ApplicationManager*instance = nil;
+    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    return instance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    
+    return self;
+}
+
+- (void)updateAllInfo:(void (^)(BOOL))callback {
+    [[DBCompanyInfo sharedInstance] updateInfo:callback];
+}
+
+- (BOOL)allInfo {
+    return [[DBCompanyInfo sharedInstance].deliveryTypes count] > 0;
+}
+
++ (UIViewController *)rootViewController {
     if (![DBCompanyInfo sharedInstance].deliveryTypes) {
         return [ViewControllerManager launchViewController];
     } else {
-        if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompanyInfo sharedInstance].currentCompanyName isEqualToString:@""]) {
+        if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
 //            return [DBCompaniesViewController new];
         }
         
@@ -45,7 +68,7 @@
     }
 }
 
-+ (void)copyPlistWithName:(nonnull NSString *)plistName forceCopy:(BOOL)forceCopy {
++ (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     NSString *storedBuildNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"STORED_BUILD_NUMBER"] ?: @"0";
     if (forceCopy || [buildNumber compare:storedBuildNumber] == NSOrderedDescending) {
@@ -55,7 +78,7 @@
     }
 }
 
-+ (void)copyPlistsWithNames:(nonnull NSArray *)plistsNames forceCopy:(BOOL)forceCopy {
++ (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy {
     [plistsNames enumerateObjectsUsingBlock:^(NSString *obj, NSUInteger idx, BOOL *stop) {
         [ApplicationManager copyPlistWithName:obj forceCopy:forceCopy];
     }];
@@ -79,6 +102,24 @@
     NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:name ofType:@".plist"];
     NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:pathToPlist];
     return [[NSMutableDictionary alloc] initWithDictionary:plistDict];
+}
+
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    [[OrderCoordinator sharedInstance] flushCache];
+    [[DBCompanyInfo sharedInstance] flushCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
+}
+
+- (void)flushStoredCache {
+    [[OrderCoordinator sharedInstance] flushStoredCache];
+    [[DBCompanyInfo sharedInstance] flushStoredCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
 }
 
 @end
@@ -137,7 +178,7 @@
 @end
 
 @implementation ApplicationManager (Menu)
-+ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController{
++ (Class<MenuListViewControllerProtocol>)rootMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
@@ -147,7 +188,7 @@
 @end
 
 @implementation ApplicationManager (DemoApp)
-+ (nonnull UIViewController *)demoLoginViewController{
++ (UIViewController *)demoLoginViewController{
     Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
     
     if(loginVCClass){
