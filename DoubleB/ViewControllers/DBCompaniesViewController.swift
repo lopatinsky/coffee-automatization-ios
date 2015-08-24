@@ -51,6 +51,7 @@ public class DBCompaniesViewController: UIViewController {
     }
     
     func requestCompanies() {
+        MBProgressHUD
         DBServerAPI.requestCompanies({ (companies) -> Void in
             self.companies = companies as! [NSArray]
             self.tableView.reloadData()
@@ -100,20 +101,9 @@ extension DBCompaniesViewController: UITableViewDelegate {
     }
     
     func preloadData() {
-        DBServerAPI.registerUser(nil)
-        Venue.dropAllVenues()
-        Venue.fetchAllVenuesWithCompletionHandler { (venues) -> Void in
-            let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            delegate.saveContext()
-        }
-        OrderManager.sharedManager().reset()
-        DBDeliverySettings.sharedInstance().reset()
-        DBMenu.sharedInstance().clearMenu()
-        DBMenu.sharedInstance().updateMenuForVenue(nil, remoteMenu: nil)
-        Order.dropAllOrders()
-        DBPromoManager.sharedManager().clear()
-        DBPromoManager.sharedManager().updateInfo()
+        ApplicationManager.sharedInstance().flushStoredCache()
+        ApplicationManager.sharedInstance().updateAllInfo()
+        
         DBTabBarController.sharedInstance().moveToStartState()
-        DBCompanyInfo.sharedInstance().updateInfo()
     }
 }

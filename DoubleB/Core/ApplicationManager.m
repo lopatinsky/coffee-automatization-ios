@@ -27,7 +27,12 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
+
+NSString *const kDBApplicationManagerInfoLoadSuccess = @"kDBApplicationManagerInfoLoadSuccess";
+NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerInfoLoadFailure";
+
 #pragma mark - General
+
 @implementation ApplicationManager
 
 + (instancetype)sharedInstance {
@@ -40,22 +45,62 @@
 - (instancetype)init {
     self = [super init];
     
+    [self updateAllInfo:nil];
+    
     return self;
 }
 
 - (void)updateAllInfo:(void (^)(BOOL))callback {
-    [[DBCompanyInfo sharedInstance] updateInfo:callback];
+    int maxNumberOfRequests = 2;
+    __block int numberOfRequests = 0;
+    
+    void (^successCompletionHandler)() = ^void(){
+        numberOfRequests++;
+        if(numberOfRequests == maxNumberOfRequests){
+            if(callback)
+                callback(YES);
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadSuccess object:nil]];
+        }
+    };
+    
+    __block void (^failureCompletionHandler)() = ^void(){
+        if(callback)
+            callback(NO);
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadFailure object:nil]];
+    };
+    
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+        if(success){
+            successCompletionHandler();
+        } else {
+            if(failureCompletionHandler){
+                failureCompletionHandler();
+                failureCompletionHandler = nil;
+            }
+        }
+    }];
+    
+    [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
+        if(success){
+            successCompletionHandler();
+        } else {
+            if(failureCompletionHandler){
+                failureCompletionHandler();
+                failureCompletionHandler = nil;
+            }
+        }
+    }];
 }
 
-- (BOOL)allInfo {
-    return [[DBCompanyInfo sharedInstance].deliveryTypes count] > 0;
+- (BOOL)allInfoLoaded {
+    return [[DBCompanyInfo sharedInstance].deliveryTypes count] > 0 && [DBCompaniesManager sharedInstance].companiesLoaded;
 }
 
 + (UIViewController *)rootViewController {
-    if (![DBCompanyInfo sharedInstance].deliveryTypes) {
+    if (![ApplicationManager sharedInstance].allInfoLoaded) {
         return [ViewControllerManager launchViewController];
     } else {
-        if ([DBCompanyInfo db_companyChoiceEnabled] && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
+        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
 //            return [DBCompaniesViewController new];
         }
         

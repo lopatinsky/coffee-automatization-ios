@@ -10,10 +10,13 @@
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
+extern NSString *const kDBApplicationManagerInfoLoadSuccess;
+extern NSString *const kDBApplicationManagerInfoLoadFailure;
+
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
-@property (nonatomic, readonly) BOOL allInfo;
+@property (nonatomic, readonly) BOOL allInfoLoaded;
 - (void)updateAllInfo:(void(^)(BOOL success))callback;
 
 + (UIViewController *)rootViewController;

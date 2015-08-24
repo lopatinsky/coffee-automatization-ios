@@ -64,11 +64,7 @@
             NSString *orderPushChannel = [response[@"pushChannels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
-            
             [self synchronize];
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
         }
         
         if(callback)
@@ -104,10 +100,6 @@
     NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
     
     return GAKeyString ?: @"";
-}
-
-+ (BOOL)db_companyChoiceEnabled {
-    return [[self objectFromPropertyListByName:@"CompanyChoiceEnabled"] boolValue];
 }
 
 + (NSString *)db_companyParseApplicationKey {

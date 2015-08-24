@@ -11,12 +11,17 @@
 @interface DBCompaniesManager : NSObject
 + (instancetype)sharedInstance;
 
+@property (nonatomic, readonly) BOOL companiesLoaded;
+
+@property (nonatomic, readonly) BOOL hasCompanies;
+@property (strong, nonatomic) NSArray *companies;
+
 @property (strong, nonatomic) NSString *deliveryImageName;
 
 // Selected company name/namespace(Using for apps, that aggregate more than 1 company)
 + (NSString *)selectedCompanyName;
 + (void)selectCompanyName:(NSString *)name;
 
-+ (void)requesCompanies:(void(^)(BOOL success, NSArray *companies))callback;
+- (void)requestCompanies:(void(^)(BOOL success, NSArray *companies))callback;
                          
 @end

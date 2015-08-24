@@ -22,6 +22,7 @@
 #import "Compatibility.h"
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
+#import "DBCompaniesManager.h"
 
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
@@ -52,6 +53,17 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     self.tableView.rowHeight = 50;
     
     self.settingsItems = [[NSMutableArray alloc] init];
+    
+    // Companies item
+//    if([DBCompaniesManager sharedInstance].hasCompanies){
+//        DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
+//        companiesVC.firstLaunch = NO;
+//        [self.settingsItems addObject:@{@"name": @"companiesVC",
+//                                           @"title": NSLocalizedString(@"Список ресторанов", nil),
+//                                           @"image": @"venue_gray",
+//                                           @"viewController": companiesVC
+//                                           }];
+//    }
     
     // Profile item
     DBProfileViewController *profileVC = [DBProfileViewController new];
@@ -88,25 +100,8 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"menu_icon",
                                     @"viewController": promosVC}];
     
-    [DBServerAPI requestCompanies:^(NSDictionary *response) {
-        NSArray *companies = response[@"companies"];
-        if ([companies count] > 1) {
-            DBCompaniesViewController *companiesVC = [[DBCompaniesViewController alloc] initWithNibName:@"DBCompaniesViewController" bundle:[NSBundle mainBundle]];
-            companiesVC.firstLaunch = NO;
-            [self.settingsItems insertObject:@{@"name": @"companiesVC",
-                                            @"title": NSLocalizedString(@"Список регионов", nil),
-                                            @"image": @"venue_gray",
-                                            @"viewController": companiesVC
-                                            }
-                                     atIndex:3];
-            [UIView animateWithDuration:0.1 animations:^{
-                [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            }];
-        }
-    } failure:^(NSError *error) {
-        
-    }];    // Personal wallet item
-    if([DBPromoManager sharedManager].walletEnabled){
+    // Personal wallet item
+    if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
                                         @"image": @"payment"}];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];

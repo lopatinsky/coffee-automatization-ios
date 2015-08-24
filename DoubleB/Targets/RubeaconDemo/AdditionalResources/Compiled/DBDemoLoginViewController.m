@@ -13,6 +13,7 @@
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
 
+#import "ApplicationManager.h"
 #import "DBCompaniesManager.h"
 
 @interface DBDemoLoginViewController ()
@@ -34,17 +35,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
-                                                 name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification
+                                                 name:kDBApplicationManagerInfoLoadSuccess
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(firstLaunchNecessaryInfoLoadFailureNotification:)
-                                                 name:kDBFirstLaunchNecessaryInfoLoadFailureNotification
+                                                 name:kDBApplicationManagerInfoLoadFailure
                                                object:nil];
-    
-    if([DBAPIClient sharedClient].companyHeader.length > 0){
-        [self moveForward];
-    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -98,7 +95,7 @@
 }
 
 - (IBAction)demoButtonClick:(id)sender {
-    if(![ApplicationManager sharedInstance].allInfo){
+    if(![ApplicationManager sharedInstance].allInfoLoaded){
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         _inProcess = YES;
         
@@ -114,7 +111,6 @@
 - (void)moveForward {
     [[DBTabBarController sharedInstance] moveToStartState];
     [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBTabBarController sharedInstance];
-    [[DBTabBarController sharedInstance] setupViewControllers];
 }
 
 - (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification{

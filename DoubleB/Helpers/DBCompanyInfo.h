@@ -54,7 +54,6 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;
 
-+ (BOOL)db_companyChoiceEnabled;
 // Only for paypal
 + (NSURL *)db_payPalPrivacyPolicy;
 + (NSURL *)db_payPalUserAgreement;

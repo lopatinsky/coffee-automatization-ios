@@ -7,6 +7,7 @@
 //
 
 #import "DBCompaniesManager.h"
+#import "DBServerAPI.h"
 #import "DBAPIClient.h"
 
 NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsInfo";
@@ -26,6 +27,38 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     return self;
 }
 
+- (BOOL)companiesLoaded {
+    return [[DBCompaniesManager valueForKey:@"companiesLoaded"] boolValue];
+}
+
+- (void)requestCompanies:(void(^)(BOOL success, NSArray *companies))callback {
+    [DBServerAPI requestCompanies:^(NSArray *companies) {
+        [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
+        [DBCompaniesManager setValue:companies forKey:@"companies"];
+        
+        if(callback)
+            callback(YES, companies);
+    } failure:^(NSError *error) {
+        if(callback)
+            callback(NO, nil);
+    }];
+}
+
+- (BOOL)hasCompanies {
+    NSArray *companies = [DBCompaniesManager valueForKey:@"companies"];
+    
+    BOOL result = NO;
+    if([companies count] > 1){
+        result = YES;
+    }
+    
+    return result;
+}
+
+- (NSArray *)companies {
+    return [DBCompaniesManager valueForKey:@"companies"];
+}
+
 + (NSString *)selectedCompanyName{
     return [DBCompaniesManager valueForKey:@"selectedCompanyNamespace"];
 }
@@ -40,9 +73,7 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     }
 }
 
-+ (void)requesCompanies:(void(^)(BOOL success, NSArray *companies))callback{
-    
-}
+
 
 #pragma mark - Helper methods
 
