@@ -119,3 +119,20 @@
 }
 
 @end
+
+#pragma mark - News
+#import "PopupNewsViewController.h"
+@implementation ViewControllerManager(NewsViewControllers)
+
++ (nonnull NSDictionary *)newsViewControllerClasses {
+    return @{
+             @"default" : [PopupNewsViewController class]
+             };
+}
+
++ (nonnull UIViewController *)newsViewController {
+    Class newsViewController = [self newsViewControllerClasses][[self valueFromPropertyListByKey:@"News"] ?: @"default"];
+    return [newsViewController new];
+}
+
+@end

@@ -358,6 +358,23 @@
                             }];
 }
 
+#pragma mark - News 
+
++ (void)fetchCompanyNewsWithCallback:(void (^)(BOOL, NSDictionary *))callback {
+    [[DBAPIClient sharedClient] GET:@"news"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if (callback) {
+                                    callback(YES, responseObject);
+                                }
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
 #pragma mark - Order assembly helpers
 
 + (NSMutableDictionary *)assembleNewOrderParams{

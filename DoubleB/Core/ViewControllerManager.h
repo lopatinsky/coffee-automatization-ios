@@ -32,3 +32,7 @@
 @interface ViewControllerManager(MainViewControllers)
 + (nonnull UIViewController *)mainViewController;
 @end
+
+@interface ViewControllerManager(NewsViewControllers)
++ (nonnull UIViewController *)newsViewController;
+@end

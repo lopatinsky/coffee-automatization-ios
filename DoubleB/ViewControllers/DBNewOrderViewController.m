@@ -50,6 +50,8 @@
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 
+#import "CompanyNewsManager.h"
+
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
 #import <BlocksKit/UIControl+BlocksKit.h>
@@ -170,6 +172,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Time =========
 
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showActualNews) name:CompanyNewsManagerDidFetchActualNews object:nil];
+    
 // ========= Configure Autolayout =========
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView alignLeading:@"0" trailing:@"0" toView:self.view];
@@ -264,11 +269,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if (_orderCoordinator.itemsManager.totalCount == 0) {
         [self endUpdatingPromoInfo];
     }
+    
+    [[CompanyNewsManager sharedManager] fetchUpdates];
 }
 
 - (void)dealloc {
     NSLog(@"dealloc");
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_orderCoordinator removeObserver:self];
 }
 
@@ -1224,6 +1232,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }];
 }
 
+
+#pragma mark - CompanyNewsManager
+- (void)showActualNews {
+    UIViewController *newsViewController = [ViewControllerManager newsViewController];
+    [self presentViewController:newsViewController animated:YES completion:nil];
+}
 
 #pragma mark - UINavigationControllerDelegate
 

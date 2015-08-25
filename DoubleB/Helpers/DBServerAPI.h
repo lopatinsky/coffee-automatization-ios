@@ -33,4 +33,6 @@
 
 + (void)requestAddressSuggestions:(NSDictionary *)params callback:(void(^)(BOOL success, NSArray *response))callback;
 
++ (void)fetchCompanyNewsWithCallback:(void(^)(BOOL success, NSDictionary *response))callback;
+
 @end
