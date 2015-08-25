@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15A235d" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PromocodeViewController">
+            <connections>
+                <outlet property="activatedPromosTableView" destination="r4J-r3-Kdx" id="8SQ-KW-8yX"/>
+                <outlet property="activationButton" destination="lRY-UD-dMM" id="EFt-e4-8qd"/>
+                <outlet property="promoTextField" destination="tc8-mX-OGu" id="K3z-fr-fIB"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tc8-mX-OGu" userLabel="promo textfield">
+                    <rect key="frame" x="8" y="75" width="461" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="qFq-9g-WVm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="3yT-mN-VcO"/>
+                    </connections>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRY-UD-dMM">
+                    <rect key="frame" x="477" y="75" width="115" height="30"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Aox-cF-wj5"/>
+                        <constraint firstAttribute="width" constant="115" id="UjU-ae-op5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <state key="normal" title="Активировать">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="activateButtonPressed:" destination="-1" eventType="touchUpInside" id="Rzh-z4-uX3"/>
+                    </connections>
+                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="r4J-r3-Kdx">
+                    <rect key="frame" x="0.0" y="113" width="600" height="487"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="WYs-aK-EGo"/>
+                        <outlet property="delegate" destination="-1" id="Sco-uC-9dL"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="r4J-r3-Kdx" firstAttribute="top" secondItem="lRY-UD-dMM" secondAttribute="bottom" constant="8" id="41c-7S-Dex"/>
+                <constraint firstItem="r4J-r3-Kdx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mv8-cV-eqX"/>
+                <constraint firstItem="tc8-mX-OGu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="NgR-CY-HCL"/>
+                <constraint firstItem="lRY-UD-dMM" firstAttribute="leading" secondItem="tc8-mX-OGu" secondAttribute="trailing" constant="8" id="Vew-dy-00J"/>
+                <constraint firstItem="lRY-UD-dMM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="75" id="nbe-HW-QKx"/>
+                <constraint firstAttribute="trailing" secondItem="r4J-r3-Kdx" secondAttribute="trailing" id="qLB-Qd-Ihh"/>
+                <constraint firstAttribute="trailing" secondItem="lRY-UD-dMM" secondAttribute="trailing" constant="8" id="rU7-NQ-nHW"/>
+                <constraint firstAttribute="bottom" secondItem="r4J-r3-Kdx" secondAttribute="bottom" id="tKO-Mg-G8b"/>
+                <constraint firstItem="tc8-mX-OGu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="yhc-wo-n2l"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+        </view>
+    </objects>
+</document>

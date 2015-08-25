@@ -35,4 +35,7 @@
 
 + (void)fetchCompanyNewsWithCallback:(void(^)(BOOL success, NSDictionary *response))callback;
 
++ (void)fetchActivatedPromoCodesWithCallback:(void (^)(BOOL, NSDictionary *))callback;
++ (void)activatePromoCode:(NSString *)code withCallback:(void (^)(BOOL, NSDictionary *))callback;
+
 @end

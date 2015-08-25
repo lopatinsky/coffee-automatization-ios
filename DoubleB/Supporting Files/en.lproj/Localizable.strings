@@ -180,6 +180,11 @@
 "Ого! Поздравляю!\nНапиток в подарок от Mastercard!" = "Congratulations!\nFree beverage from Mastercard!";
 "Расскажи друзьям, если тебе нравится приложение Даблби.\nЕсть, что улучшить? Тогда напиши нам!" = "Share to your friends, if you like Doubleb. \nNeed to improve something? Then contact us!";
 
+// promo codes
+"Промокоды" = "Promocodes";
+"Проверьте соединение с интернетом и попробуйте ещё раз" = "Check your internet connection and try again";
+"Активировать" = "Activate";
+
 // Mastercard promo
 
 "Привяжи карту Mastercard и получай " = "Add Mastercard and get ";

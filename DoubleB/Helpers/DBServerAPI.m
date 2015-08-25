@@ -375,6 +375,31 @@
                             }];
 }
 
+#pragma mark - Promo code 
++ (void)fetchActivatedPromoCodesWithCallback:(void (^)(BOOL, NSDictionary *))callback {
+    [[DBAPIClient sharedClient] GET:[NSString stringWithFormat:@"promo_code/history?client_id=%@", [IHSecureStore sharedInstance].clientId]
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, NSDictionary *response) {
+                                if (callback) callback(YES, response);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                if (callback) callback(NO, nil);
+                            }];
+}
+
++ (void)activatePromoCode:(NSString *)code withCallback:(void (^)(BOOL, NSDictionary *))callback {
+    [[DBAPIClient sharedClient] POST:@"promo_code/enter"
+                         parameters:@{@"client_id": [IHSecureStore sharedInstance].clientId, @"key": code}
+                            success:^(AFHTTPRequestOperation *operation, NSDictionary *response) {
+                                if (callback) callback(YES, response);
+                                
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                if (callback) callback(NO, nil);
+                            }];
+}
+
 #pragma mark - Order assembly helpers
 
 + (NSMutableDictionary *)assembleNewOrderParams{
