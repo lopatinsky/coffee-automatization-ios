@@ -28,16 +28,36 @@
     return self.state == OperationFinished;
 }
 
-- (BOOL)asynchronous {
+- (BOOL)isConcurrent {
     return YES;
+}
+
+- (BOOL)isAsynchronous {
+    return YES;
+}
+
+- (void)setState:(ConcurrentOperationState)state {
+    NSString *statusForState = [self statusForState:state];
+    NSLog(@"%@ %@", self, statusForState);
+    [self willChangeValueForKey:statusForState];
+    _state = state;
+    [self didChangeValueForKey:statusForState];
+}
+
+- (NSString *)statusForState:(ConcurrentOperationState)state {
+    return @{
+             @(OperationReady): @"isReady",
+             @(OperationExecuting): @"isExecuting",
+             @(OperationFinished): @"isFinished"
+             }[@(state)];
 }
 
 - (void)start {
     if (self.cancelled) {
-        self.state = OperationFinished;
+        [self setState:OperationFinished];
     } else {
+        [self setState:OperationExecuting];
         [self main];
-        self.state = OperationExecuting;
     }
 }
 

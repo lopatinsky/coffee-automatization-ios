@@ -8,6 +8,7 @@
 
 #import "ApplicationManager.h"
 #import "ViewControllerManager.h"
+#import "NetworkManager.h"
 
 #import "OrderCoordinator.h"
 #import "DBMenu.h"
@@ -91,6 +92,8 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
             }
         }
     }];
+//    [[NetworkManager sharedManager] addUniqueOperation:FetchCompaniesOperation];
+//    [[NetworkManager sharedManager] addUniqueOperation:FetchCompanyInfoOperation];
 }
 
 - (BOOL)allInfoLoaded {

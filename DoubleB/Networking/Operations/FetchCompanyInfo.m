@@ -16,11 +16,14 @@
     if (self.cancelled) return;
     
     [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
-        if (success) {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadSuccess object:nil]];
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadFailure object:nil]];
+        if (self.queue.operations.count == 1) {
+            if (success) {
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadSuccess object:nil]];
+            } else {
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadFailure object:nil]];
+            }
         }
+        [self setState:OperationFinished];
     }];
 }
 
