@@ -31,7 +31,7 @@
     // TODO: change forceCopy to false after test
     [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     [ApplicationManager initializeVendorFrameworks];
-    [ApplicationManager initializeOrderFramework];
+    [ApplicationManager initializeOrderFramework:launchOptions];
     
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];

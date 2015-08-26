@@ -71,10 +71,6 @@
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
     
-    if([self.orderId isEqualToString:@"58"]){
-        NSLog(@"");
-    }
-    
     // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {

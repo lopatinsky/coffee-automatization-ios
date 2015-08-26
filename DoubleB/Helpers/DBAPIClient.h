@@ -19,5 +19,6 @@
 - (void)disableHeader:(nonnull NSString *)header;
 
 @property(nonatomic) BOOL companyHeaderEnabled;
+@property(nonatomic) BOOL clientHeaderEnabled;
 
 @end

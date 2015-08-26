@@ -11,15 +11,16 @@
 @interface DBShareHelper : NSObject
 
 @property(strong, nonatomic, readonly) UIImage *imageForShare;
-@property(strong, nonatomic, readonly) NSString *appUrl;
-@property(strong, nonatomic, readonly) NSString *appUrlForSettings;
-@property(strong, nonatomic, readonly) NSString *textShareNewOrder;
-@property(strong, nonatomic, readonly) NSString *textShareAboutApp;
+@property(strong, nonatomic, readonly) NSDictionary *appUrls;
+@property(strong, nonatomic, readonly) NSString *textShare;
 
 @property(strong, nonatomic, readonly) NSString *titleShareScreen;
 @property(strong, nonatomic, readonly) NSString *textShareScreen;
 
 + (instancetype)sharedInstance;
 
-- (void)updateShareInfo;
+- (void)fetchShareSupportInfo;
+- (void)fetchShareInfo:(void(^)(BOOL success))callback;
+
+
 @end

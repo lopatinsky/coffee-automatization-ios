@@ -23,6 +23,7 @@
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 #import "DBCompaniesManager.h"
+#import "DBSharePermissionViewController.h"
 
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
@@ -72,6 +73,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"profile",
                                     @"viewController": profileVC}];
     
+    // Share friends item
+    DBSharePermissionViewController *shareVC = [DBSharePermissionViewController new];
+//    shareVC.screen
+    [self.settingsItems addObject:@{@"name": @"shareVC",
+                                    @"title": NSLocalizedString(@"Рассказать друзьям", nil),
+                                    @"image": @"share_icon",
+                                    @"viewController": shareVC}];
+    
     // Payment item
     // Cards item
     NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
@@ -118,11 +127,6 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //                                   @"title": NSLocalizedString(@"О компании", nil),
 //                                   @"image": @"",
 //                                   @"viewController": companyInfoVC}];
-    
-//    // Share friends item
-//    [self.settingsItems addObject:@{@"name": @"shareVC",
-//                                    @"title": NSLocalizedString(@"Рассказать друзьям", nil),
-//                                    @"image": @"share_icon"}];
 
     
     // Documents item
@@ -240,7 +244,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]) {
-        [self shareAppPermission:nil];
+        [self presentViewController:settingsItemInfo[@"viewController"] animated:YES completion:nil];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]) {

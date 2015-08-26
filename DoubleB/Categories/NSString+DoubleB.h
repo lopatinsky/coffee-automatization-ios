@@ -17,6 +17,4 @@ extern NSString *const kDBCardTypeDinersClub;
 
 - (NSString *)db_cardIssuer;
 
-- (NSAttributedString *)attributedStringWithBoldKeyWordsWithFontSize:(CGFloat)size;
-
 @end
