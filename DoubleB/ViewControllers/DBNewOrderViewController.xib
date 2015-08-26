@@ -654,11 +654,11 @@
                                     <constraints>
                                         <constraint firstItem="NZ1-K4-uJQ" firstAttribute="top" secondItem="Fmw-Gh-0Xf" secondAttribute="top" id="74s-XV-89Q"/>
                                         <constraint firstAttribute="centerX" secondItem="Lmc-cJ-yF1" secondAttribute="centerX" id="H7I-01-9uc"/>
-                                        <constraint firstItem="vz0-T4-kyc" firstAttribute="leading" secondItem="NZ1-K4-uJQ" secondAttribute="trailing" constant="5" id="JgY-oA-Ufl"/>
+                                        <constraint firstItem="vz0-T4-kyc" firstAttribute="leading" secondItem="NZ1-K4-uJQ" secondAttribute="trailing" priority="999" constant="5" id="JgY-oA-Ufl"/>
                                         <constraint firstAttribute="width" constant="70" id="dlH-qn-Eje"/>
                                         <constraint firstItem="NZ1-K4-uJQ" firstAttribute="leading" secondItem="Fmw-Gh-0Xf" secondAttribute="leading" id="mVM-76-7YT"/>
                                         <constraint firstAttribute="bottom" secondItem="NZ1-K4-uJQ" secondAttribute="bottom" id="wVV-ab-ozK"/>
-                                        <constraint firstAttribute="trailing" secondItem="vz0-T4-kyc" secondAttribute="trailing" constant="5" id="yOO-Xg-SLc"/>
+                                        <constraint firstAttribute="trailing" secondItem="vz0-T4-kyc" secondAttribute="trailing" priority="999" constant="5" id="yOO-Xg-SLc"/>
                                         <constraint firstItem="vz0-T4-kyc" firstAttribute="top" secondItem="Lmc-cJ-yF1" secondAttribute="bottom" constant="2" id="ye7-kY-VYH"/>
                                         <constraint firstAttribute="centerY" secondItem="Lmc-cJ-yF1" secondAttribute="centerY" constant="6" id="yf6-fC-2Kz"/>
                                     </constraints>

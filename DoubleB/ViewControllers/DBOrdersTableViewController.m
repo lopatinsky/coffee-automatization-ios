@@ -306,7 +306,8 @@
     labelOrder.attributedText = orderString;
     labelDate.text = order.formattedTimeString;
     labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venue.address;
-    labelTotal.text = [NSString stringWithFormat:@"%ld %@", (long)order.realTotal.integerValue, [Compatibility currencySymbol]];
+    
+    labelTotal.text = [NSString stringWithFormat:@"%.0f %@", order.actualTotal - order.actualDiscount, [Compatibility currencySymbol]];
     
     return cell;
 }

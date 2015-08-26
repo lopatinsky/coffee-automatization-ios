@@ -20,8 +20,8 @@
     NSArray *_bonusItems;
     NSArray *_giftItems;
 }
-@dynamic orderId, total, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, deliveryType, venue, shippingAddress, paymentType;
-@synthesize realTotal = _realTotal;
+@dynamic total, discount, walletDiscount, shippingTotal;
+@dynamic orderId, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, deliveryType, venue, shippingAddress, paymentType;
 
 - (instancetype)init:(BOOL)stored {
     if (stored) {
@@ -35,7 +35,16 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
+    
     self.total = @([OrderCoordinator sharedInstance].itemsManager.totalPrice);
+    self.discount = @([OrderCoordinator sharedInstance].promoManager.discount);
+    if([OrderCoordinator sharedInstance].promoManager.walletActiveForOrder){
+        self.walletDiscount = @([OrderCoordinator sharedInstance].promoManager.walletDiscount);
+    } else {
+        self.walletDiscount = @0;
+    }
+    self.shippingTotal = @([OrderCoordinator sharedInstance].promoManager.shippingPrice);
+    
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].itemsManager.items];
     self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].bonusItemsManager.items];
     self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].orderGiftsManager.items];
@@ -61,7 +70,10 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
-    self.realTotal = dict[@"total"];
+    
+    if([self.orderId isEqualToString:@"58"]){
+        NSLog(@"");
+    }
     
     // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
@@ -82,13 +94,13 @@
     self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
     
     // Assemble gift items
-//    NSMutableArray *giftItems = [[NSMutableArray alloc] init];
-//    for (NSDictionary *itemDict in dict[@""]) {
-//        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
-//        item.position.mode = DBMenuPositionModeGift;
-//        [giftItems addObject:item];
-//    }
-//    self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:giftItems];
+    NSMutableArray *giftItems = [[NSMutableArray alloc] init];
+    for (NSDictionary *itemDict in dict[@""]) {
+        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        item.position.mode = DBMenuPositionModeGift;
+        [giftItems addObject:item];
+    }
+    self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:giftItems];
     
     self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
     self.status = [dict[@"status"] intValue];
@@ -104,11 +116,12 @@
     
     [self setTimeFromResponseDict:dict];
     
-    double realTotal = 0;
-    for (OrderItem *item in items) {
-        realTotal += item.totalPrice;
-    }
-    self.total = @(realTotal);
+    self.total = [dict getValueForKey:@"menu_sum"] ?: @0;
+    
+    double actualTotal = [[dict getValueForKey:@"total"] doubleValue];
+    self.discount = @(self.total.doubleValue - actualTotal);
+    self.walletDiscount = [dict getValueForKey:@"wallet_payment"] ?: @0;
+    self.shippingTotal = [dict getValueForKey:@"delivery_sum"] ?: @0;
     
     [[CoreDataHelper sharedHelper] save];
     
@@ -117,7 +130,6 @@
 
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict{
     self.status = [dict[@"status"] intValue];
-    self.realTotal = dict[@"total"];
     [self setTimeFromResponseDict:dict];
     
     [[CoreDataHelper sharedHelper] save];
@@ -213,15 +225,12 @@
                              }];
 }
 
-- (void)setRealTotal:(NSNumber *)realTotal {
-    _realTotal = realTotal;
-    [[NSUserDefaults standardUserDefaults] setObject:_realTotal forKey:[NSString stringWithFormat:@"%@_total", self.orderId]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+- (double)actualTotal {
+    return self.total.doubleValue + self.shippingTotal.doubleValue;
 }
 
-- (NSNumber *)realTotal {
-    _realTotal = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@_total", self.orderId]];
-    return _realTotal;
+- (double)actualDiscount {
+    return self.discount.doubleValue + self.walletDiscount.doubleValue;
 }
 
 - (NSArray *)items {

@@ -240,3 +240,19 @@
 }
 
 @end
+
+@implementation DBMenuPosition (HistoryResponse)
+- (instancetype)initWithHistoryDict:(NSDictionary *)positionDictionary{
+    self = [super init];
+    
+    self.positionId = [positionDictionary getValueForKey:@"id"] ?: @"";
+    self.imageUrl = [positionDictionary getValueForKey:@"pic"] ?: @"";
+    if(!self.imageUrl){
+        self.imageUrl = [positionDictionary getValueForKey:@"image"];
+    }
+    self.price = [[positionDictionary getValueForKey:@"price"] doubleValue];
+    self.name = [positionDictionary getValueForKey:@"title"] ?: @"";
+    
+    return self;
+}
+@end

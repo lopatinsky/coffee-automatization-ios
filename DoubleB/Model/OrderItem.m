@@ -10,11 +10,17 @@
 #import "DBMenuPosition.h"
 #import "DBMenu.h"
 
+@interface OrderItem ()
+@property (nonatomic) BOOL valid;
+@end
+
 @implementation OrderItem
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position{
     self = [super init];
+    
     self.position = position;
+    self.valid = YES;
     
     return self;
 }
@@ -25,8 +31,11 @@
     DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
     if(position){
         position = [position copy];
+        item.valid = YES;
+    } else {
+        position = [[DBMenuPosition alloc] initWithHistoryDict:historyItem];
+        item.valid = NO;
     }
-    
     
     for(NSDictionary *modifier in historyItem[@"group_modifiers"]){
         [position selectItem:modifier[@"choice"] forGroupModifier:modifier[@"id"]];
@@ -55,6 +64,7 @@
     if(self != nil){
         self.position = [aDecoder decodeObjectForKey:@"position"];
         self.count = [[aDecoder decodeObjectForKey:@"count"] integerValue];
+        self.valid = [[aDecoder decodeObjectForKey:@"valid"] boolValue];
     }
     
     return self;
@@ -63,6 +73,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.position forKey:@"position"];
     [aCoder encodeObject:@(self.count) forKey:@"count"];
+    [aCoder encodeObject:@(self.valid) forKey:@"valid"];
 }
 
 - (id)copyWithZone:(NSZone *)zone{
