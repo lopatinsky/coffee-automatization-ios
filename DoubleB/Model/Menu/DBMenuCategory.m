@@ -145,8 +145,21 @@
 }
 
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", positionId];
-    return [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+    DBMenuPosition *resultPosition;
+    for(DBMenuCategory *category in self.categories){
+        DBMenuPosition *position = [category findPositionWithId:positionId];
+        if(position){
+            resultPosition = position;
+            break;
+        }
+    }
+    
+    if(!resultPosition){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", positionId];
+        resultPosition = [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+    }
+    
+    return resultPosition;
 }
 
 #pragma mark - NSCoding methods
