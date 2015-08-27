@@ -34521,7 +34521,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Magnolia;
-				PROVISIONING_PROFILE = "28472fed-a208-4701-87e3-4381906d9bfc";
+				PROVISIONING_PROFILE = "99fa84e3-a396-41ac-8d62-c6b994655412";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

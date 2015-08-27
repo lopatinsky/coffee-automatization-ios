@@ -33,6 +33,9 @@
     if([key isEqual:@"price"]){
         self.itemPrice = value ? [value doubleValue] : 0;
     }
+    if([key isEqualToString:@"order"]){
+        self.order = value ? [value integerValue] : 0;
+    }
 }
 
 #pragma mark - NSCoding methods
@@ -43,6 +46,7 @@
         self.itemId = [aDecoder decodeObjectForKey:@"itemId"];
         self.itemName = [aDecoder decodeObjectForKey:@"itemName"];
         self.itemPrice = [[aDecoder decodeObjectForKey:@"itemPrice"] doubleValue];
+        self.order = [[aDecoder decodeObjectForKey:@"order"] integerValue];
         self.itemDictionary = [aDecoder decodeObjectForKey:@"itemDictionary"];
     }
     
@@ -53,6 +57,7 @@
     [aCoder encodeObject:self.itemId forKey:@"itemId"];
     [aCoder encodeObject:self.itemName forKey:@"itemName"];
     [aCoder encodeObject:@(self.itemPrice) forKey:@"itemPrice"];
+    [aCoder encodeObject:@(self.order) forKey:@"order"];
     [aCoder encodeObject:self.itemDictionary forKey:@"itemDictionary"];
 }
 

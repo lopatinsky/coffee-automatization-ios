@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DBActivityItemProvider : UIActivityItemProvider
+- (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links;
 - (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links image:(UIImage *)image;
 @end

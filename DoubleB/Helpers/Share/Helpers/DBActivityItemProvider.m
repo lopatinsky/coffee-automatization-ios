@@ -18,10 +18,18 @@
 @implementation DBActivityItemProvider
 
 - (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links image:(UIImage *)image{
+    self = [self initWithTextFormat:textFormat links:links];
+    
+    self.image = image;
+    
+    return self;
+}
+
+- (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links{
     self = [super initWithPlaceholderItem:@"Doubleb"];
+    
     self.textFormat = textFormat;
     self.links = links;
-    self.image = image;
     
     return self;
 }

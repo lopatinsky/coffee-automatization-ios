@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *itemId;
 @property (strong, nonatomic) NSString *itemName;
 @property (nonatomic) double itemPrice;
+@property (nonatomic) NSInteger order;
 @property (strong, nonatomic) NSDictionary *itemDictionary;
 
 + (DBMenuPositionModifierItem *)itemFromDictionary:(NSDictionary *)itemDictionary;
