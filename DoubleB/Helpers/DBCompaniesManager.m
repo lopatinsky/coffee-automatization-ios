@@ -11,6 +11,8 @@
 #import "DBCompanyInfo.h"
 #import "DBAPIClient.h"
 
+#import "NetworkManager.h"
+
 NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsInfo";
 
 @implementation DBCompaniesManager
@@ -37,10 +39,15 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
         [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
         [DBCompaniesManager setValue:companies forKey:@"companies"];
         if (companies.count == 1) {
-//            [DBCompaniesManager selectCompanyName:companies[0]];
-//            [[DBCompanyInfo sharedInstance] flushCache];
-//            [[DBCompanyInfo sharedInstance] flushStoredCache];
-//            [[DBCompanyInfo sharedInstance] updateInfo];
+            [DBCompaniesManager selectCompanyName:companies[0]];
+            [[DBCompanyInfo sharedInstance] flushCache];
+            [[DBCompanyInfo sharedInstance] flushStoredCache];
+            [[NetworkManager sharedManager] addPendingUniqueOperation:FetchCompanyInfoOperation];
+            [DBCompaniesManager setValue:@(NO) forKey:@"companiesSelectionIsAvailable"];
+        } else if (companies.count > 1) {
+            [DBCompaniesManager setValue:@(YES) forKey:@"companiesSelectionIsAvailable"];
+        } else {
+            [DBCompaniesManager setValue:@(NO) forKey:@"companiesSelectionIsAvailable"];
         }
         if(callback)
             callback(YES, companies);
@@ -69,10 +76,10 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     return [DBCompaniesManager valueForKey:@"selectedCompanyNamespace"];
 }
 
-+ (void)selectCompanyName:(NSString *)name{
-    [DBCompaniesManager setValue:name forKey:@"selectedCompanyNamespace"];
++ (void)selectCompanyName:(NSDictionary *)company {
+    [DBCompaniesManager setValue:[company objectForKey:@"namespace"] forKey:@"selectedCompanyNamespace"];
     
-    if(name){
+    if ([company objectForKey:@"namespace"]) {
         [DBAPIClient sharedClient].companyHeaderEnabled = YES;
     } else {
         [DBAPIClient sharedClient].companyHeaderEnabled = NO;

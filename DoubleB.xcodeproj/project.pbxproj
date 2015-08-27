@@ -2331,6 +2331,7 @@
 		7EB2D5B01B3C5CD9009405C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A21B3C5CCE009405C6 /* InfoPlist.strings */; };
 		7EB2D5B11B3C5CEC009405C6 /* Images-RedCup.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */; };
 		7EB2D5B21B3C5CEF009405C6 /* RedCup-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */; };
+		7EB75A691B8D9FEC007B8B29 /* NetworkManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB75A681B8D9FEC007B8B29 /* NetworkManagerTest.m */; };
 		7EB911211B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB911221B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB911231B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
@@ -13281,6 +13282,7 @@
 		7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-RedCup.xcassets"; sourceTree = "<group>"; };
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7EB75A681B8D9FEC007B8B29 /* NetworkManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkManagerTest.m; path = NetworkManager/NetworkManagerTest.m; sourceTree = "<group>"; };
 		7EB9111F1B84CBC6005C1012 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
 		7EB911201B84CBC6005C1012 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
 		7EB911581B84D36F005C1012 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -15235,6 +15237,14 @@
 			path = AdditionalResources;
 			sourceTree = "<group>";
 		};
+		7EB75A671B8D9F7B007B8B29 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				7EB75A681B8D9FEC007B8B29 /* NetworkManagerTest.m */,
+			);
+			name = NetworkManager;
+			sourceTree = "<group>";
+		};
 		7EB911591B84D36F005C1012 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -15255,6 +15265,7 @@
 		7EB911641B84D3DA005C1012 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7EB75A671B8D9F7B007B8B29 /* NetworkManager */,
 				7EB911931B86094D005C1012 /* ModuleManager */,
 				7EB911981B86094D005C1012 /* ApplicationManager */,
 			);
@@ -28226,6 +28237,7 @@
 				7EB9119A1B86094D005C1012 /* ModuleManagerTests.m in Sources */,
 				7EB911921B84DACB005C1012 /* NSDictionary+DeepMerge.m in Sources */,
 				7EB9119C1B860994005C1012 /* ApplicationManagerTests.m in Sources */,
+				7EB75A691B8D9FEC007B8B29 /* NetworkManagerTest.m in Sources */,
 				7EB911991B86094D005C1012 /* Module.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

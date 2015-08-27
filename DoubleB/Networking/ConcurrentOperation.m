@@ -12,24 +12,21 @@
 
 - (instancetype)init {
     self = [super init];
+    self.name = NSStringFromClass([self class]);
     self.state = OperationReady;
     return self;
 }
 
-- (BOOL)ready {
+- (BOOL)isReady {
     return super.ready && self.state == OperationReady;
 }
 
-- (BOOL)executing {
+- (BOOL)isExecuting {
     return self.state == OperationExecuting;
 }
 
-- (BOOL)finished {
+- (BOOL)isFinished {
     return self.state == OperationFinished;
-}
-
-- (BOOL)isConcurrent {
-    return YES;
 }
 
 - (BOOL)isAsynchronous {
@@ -37,10 +34,12 @@
 }
 
 - (void)setState:(ConcurrentOperationState)state {
+    NSString *oldStatus = [self statusForState:self.state];
     NSString *statusForState = [self statusForState:state];
-    NSLog(@"%@ %@", self, statusForState);
+    [self willChangeValueForKey:oldStatus];
     [self willChangeValueForKey:statusForState];
     _state = state;
+    [self didChangeValueForKey:oldStatus];
     [self didChangeValueForKey:statusForState];
 }
 
@@ -56,8 +55,8 @@
     if (self.cancelled) {
         [self setState:OperationFinished];
     } else {
-        [self setState:OperationExecuting];
         [self main];
+        [self setState:OperationExecuting];
     }
 }
 
