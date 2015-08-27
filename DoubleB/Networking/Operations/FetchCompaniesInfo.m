@@ -12,6 +12,11 @@
 
 @implementation FetchCompaniesInfo
 
+- (instancetype)init {
+    self = [super init];
+    return self;
+}
+
 - (void)main {
     if (self.cancelled) return;
     

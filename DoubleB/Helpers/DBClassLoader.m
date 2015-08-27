@@ -14,10 +14,7 @@
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
     if (!settingsVCClass) {
-        settingsVCClass = NSClassFromString(@"DBCoffeeHostelSettingsViewController");
-        if (!settingsVCClass) {
-            settingsVCClass = NSClassFromString(@"DBSettingsTableViewController");
-        }
+        settingsVCClass = NSClassFromString(@"DBSettingsTableViewController");
     }
     
     return [[settingsVCClass alloc] init];

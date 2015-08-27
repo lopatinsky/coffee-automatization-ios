@@ -25,6 +25,8 @@
 #import "DBCompaniesManager.h"
 #import "DBSharePermissionViewController.h"
 
+#import "ViewControllerManager.h"
+
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
 
@@ -141,6 +143,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //    [self.settingsItems addObject:@{@"name": @"notification",
 //                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
 //                                    @"image": @"alerts.png"}];
+    
+    if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
+        [self.settingsItems addObject:@{@"name": @"appPromoVC",
+                                        @"title": NSLocalizedString(@"Промокоды", nil),
+                                        @"image": @"none",
+                                        @"viewController": [ViewControllerManager promocodeViewControllers]}];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -277,6 +286,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         event = @"companies_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
+    if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
     [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];
 }
 

@@ -19,4 +19,8 @@ typedef enum : NSUInteger {
 @property (nonatomic) ConcurrentOperationState state;
 @property (nonatomic, weak) NSOperationQueue *queue;
 
+- (BOOL)isReady;
+- (BOOL)isExecuting;
+- (BOOL)isFinished;
+
 @end

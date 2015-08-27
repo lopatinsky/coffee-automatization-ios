@@ -12,8 +12,6 @@
 
 @interface NetworkManager()
 
-@property (nonatomic, strong) NSOperationQueue *operationQueue;
-
 @end
 
 @implementation NetworkManager
@@ -41,20 +39,41 @@
     _operationQueue = operationQueue;
 }
 
+- (void)addPendingUniqueOperation:(NetworkOperation)opType {
+    ConcurrentOperation *op = [NetworkManager operationWithType:opType];
+    if ([self.operationQueue operationCount] > 0) {
+        [op addDependency:[[self.operationQueue operations] lastObject]];
+    }
+    [self.operationQueue addUniqueOperation:op];
+}
+
 - (void)addUniqueOperation:(NetworkOperation)opType {
     ConcurrentOperation *operation = [NetworkManager operationWithType:opType];
-    if (self.operationQueue.operations.count > 0) {
-        [operation addDependency:self.operationQueue.operations.lastObject];
-    }
     [self.operationQueue addUniqueOperation:operation];
+}
+
+- (void)addPendingOperation:(NetworkOperation)opType {
+    ConcurrentOperation *op = [NetworkManager operationWithType:opType];
+    if ([self.operationQueue operationCount] > 0) {
+        [op addDependency:[[self.operationQueue operations] lastObject]];
+    }
+    [self.operationQueue addOperation:op];
 }
 
 - (void)addOperation:(NetworkOperation)opType {
     ConcurrentOperation *operation = [NetworkManager operationWithType:opType];
-    if (self.operationQueue.operations.count > 0) {
-        [operation addDependency:self.operationQueue.operations.lastObject];
-    }
     [self.operationQueue addOperation:operation];
+}
+
+- (void)addOperationsWithDependance:(NSArray *)operations {
+    NSMutableArray *ops = [NSMutableArray new];
+    for (NSNumber *opType in operations) {
+        [ops addObject:[NetworkManager operationWithType:opType.integerValue]];
+    }
+    for (NSUInteger i = 1; i < [ops count]; ++i) {
+        [[ops objectAtIndex:i] addDependency:[ops objectAtIndex:i - 1]];
+    }
+    [self.operationQueue addOperations:ops waitUntilFinished:NO];
 }
 
 @end
@@ -64,10 +83,12 @@
 @implementation NetworkManager(OperationLoader)
 
 + (ConcurrentOperation *)operationWithType:(NetworkOperation)type {
-    ConcurrentOperation *operation = @{
-        @(FetchCompaniesOperation): [FetchCompaniesInfo new],
-        @(FetchCompanyInfoOperation): [FetchCompanyInfo new]
-    }[@(type)];
+    NSDictionary *operationClasses = @{
+                                       @(FetchCompanyInfoOperation): [FetchCompanyInfo class],
+                                       @(FetchCompaniesOperation): [FetchCompaniesInfo class]
+                                       };
+    NSLog(@"OPERATION TYPE: %@", [operationClasses objectForKey:@(type)]);
+    ConcurrentOperation *operation = [[operationClasses objectForKey:@(type)] new];
     operation.queue = [NetworkManager sharedManager].operationQueue;
     return operation;
 }

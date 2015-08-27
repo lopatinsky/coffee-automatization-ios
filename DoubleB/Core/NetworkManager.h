@@ -16,11 +16,16 @@ typedef enum : NSUInteger {
 
 @interface NetworkManager : NSObject
 
+@property (nonatomic, strong) NSOperationQueue *operationQueue;
+
 + (instancetype)sharedManager;
 
 - (void)setOperationQueue:(NSOperationQueue *)queue;
+- (void)addPendingUniqueOperation:(NetworkOperation)operation;
 - (void)addUniqueOperation:(NetworkOperation)operation;
+- (void)addPendingOperation:(NetworkOperation)operation;
 - (void)addOperation:(NetworkOperation)operation;
+- (void)addOperationsWithDependance:(NSArray *)operations;
 
 @end
 

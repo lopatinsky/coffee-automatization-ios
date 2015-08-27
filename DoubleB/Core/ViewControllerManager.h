@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
+#import "PopupNewsViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -34,5 +35,9 @@
 @end
 
 @interface ViewControllerManager(NewsViewControllers)
-+ (nonnull UIViewController *)newsViewController;
++ (nonnull UIViewController<PopupNewsViewControllerProtocol> *)newsViewController;
+@end
+
+@interface ViewControllerManager(PromocodeViewControllers)
++ (nonnull UIViewController *)promocodeViewControllers;
 @end

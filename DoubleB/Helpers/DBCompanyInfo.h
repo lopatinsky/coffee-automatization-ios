@@ -39,9 +39,11 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
+@property(strong, nonatomic, readonly) NSNumber *promocodesIsEnabled;
+
 @property(nonatomic, readonly) BOOL friendInvitationEnabled;
 
-- (void)updateInfo;
+- (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");
 - (void)updateInfo:(void(^)(BOOL success))callback;
 
 + (id)objectFromPropertyListByName:(NSString *)name;

@@ -74,7 +74,7 @@
 - (void)setCompanyHeaderEnabled:(BOOL)companyHeaderEnabled {
     _companyHeaderEnabled = companyHeaderEnabled;
     
-    if(companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]){
+    if (companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]) {
         [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
     } else {
         [self disableHeader:@"namespace"];

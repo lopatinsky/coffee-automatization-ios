@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CompanyNewsManager.h"
 
-@interface PopupNewsViewController : UIViewController
+#import "PopupNewsViewControllerProtocol.h"
+
+@interface PopupNewsViewController : UIViewController <PopupNewsViewControllerProtocol>
 
 @end

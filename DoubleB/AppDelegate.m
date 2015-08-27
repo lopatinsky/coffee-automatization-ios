@@ -125,6 +125,8 @@
                                                                userInfo:userInfo ?: @{}];
 
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    // TODO: publish remote notification with popup view controller
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{

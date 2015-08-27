@@ -173,7 +173,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showActualNews) name:CompanyNewsManagerDidFetchActualNews object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showActualNews) name:CompanyNewsManagerDidFetchActualNews object:nil];
     
 // ========= Configure Autolayout =========
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -269,8 +269,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if (_orderCoordinator.itemsManager.totalCount == 0) {
         [self endUpdatingPromoInfo];
     }
-    
-    [[CompanyNewsManager sharedManager] fetchUpdates];
 }
 
 - (void)dealloc {
@@ -1233,7 +1231,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - CompanyNewsManager
 - (void)showActualNews {
-    UIViewController *newsViewController = [ViewControllerManager newsViewController];
+    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+    CompanyNews *actualNews = [[CompanyNewsManager sharedManager] actualNews];
+    [newsViewController setData:@{@"text": [actualNews text], @"image_url": [actualNews imageURL]}];
     [self presentViewController:newsViewController animated:YES completion:nil];
 }
 
