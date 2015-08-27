@@ -13,6 +13,7 @@
 #import "DBOrderViewController.h"
 #import "DBCompanyInfo.h"
 #import "DBCompanyInfo.h"
+#import "CompanyNewsManager.h"
 
 #import "UIAlertView+BlocksKit.h"
 #import "Order.h"
@@ -77,6 +78,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderCreatedNotification:) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [[CompanyNewsManager sharedManager] fetchUpdates];
 }
 
 - (void)dealloc{

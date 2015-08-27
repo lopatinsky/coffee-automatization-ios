@@ -131,7 +131,7 @@
              };
 }
 
-+ (nonnull UIViewController *)newsViewController {
++ (nonnull UIViewController<PopupNewsViewControllerProtocol> *)newsViewController {
     Class newsViewController = [self newsViewControllerClasses][[self valueFromPropertyListByKey:@"News"] ?: @"default"];
     return [newsViewController new];
 }

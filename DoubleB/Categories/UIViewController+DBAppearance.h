@@ -10,6 +10,8 @@
 
 @interface UIViewController (DBAppearance)
 
++ (UIViewController *)currentViewController;
+
 - (void)db_setTitle:(NSString *)title;
 
 @end

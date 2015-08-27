@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *popupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *popupTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *okButton;
+@property (strong, nonatomic) NSDictionary *data;
 
 @end
 
@@ -22,17 +23,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
-    
-    CompanyNews *companyNews = [[CompanyNewsManager sharedManager] actualNews];
-    self.popupTextLabel.text = companyNews.text;
-    [self.popupImageView sd_setImageWithURL:[NSURL URLWithString:companyNews.imageURL]];
-    
     self.popupImageView.clipsToBounds = YES;
     self.popupImageView.layer.cornerRadius = 70.;
     
     self.okButton.backgroundColor = [UIColor db_defaultColor];
     self.okButton.layer.cornerRadius = 5.;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.popupTextLabel.text = self.data[@"text"];
+    if ([self.data objectForKey:@"image_url"]) {
+        [self.popupImageView sd_setImageWithURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]]];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +52,11 @@
     [self dismissViewControllerAnimated:YES completion:^{
         
     }];
+}
+
+#pragma mark - PopupNewsViewControllerProtocol
+- (void)setData:(NSDictionary *)data {
+    _data = data;
 }
 
 @end

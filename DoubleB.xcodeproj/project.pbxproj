@@ -2332,6 +2332,76 @@
 		7EB2D5B11B3C5CEC009405C6 /* Images-RedCup.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A41B3C5CCE009405C6 /* Images-RedCup.xcassets */; };
 		7EB2D5B21B3C5CEF009405C6 /* RedCup-info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */; };
 		7EB75A691B8D9FEC007B8B29 /* NetworkManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB75A681B8D9FEC007B8B29 /* NetworkManagerTest.m */; };
+		7EB7A2D81B8EFC8D00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2D91B8EFC8E00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2DA1B8EFC8F00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2DB1B8EFC8F00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2DC1B8EFC9000510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2DD1B8EFC9100510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2DE1B8EFC9100510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2DF1B8EFC9200510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E01B8EFC9300510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E11B8EFC9300510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E21B8EFC9400510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E31B8EFC9500510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E41B8EFC9500510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E51B8EFC9600510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E61B8EFC9700510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E81B8EFC9A00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2E91B8EFC9A00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2EA1B8EFC9B00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2EB1B8EFC9C00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2EC1B8EFC9C00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2ED1B8EFC9E00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2EE1B8EFC9F00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2EF1B8EFCA000510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F01B8EFCA100510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F11B8EFCA500510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F31B8EFCA700510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F41B8EFCA800510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F51B8EFCA800510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F61B8EFCA900510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F71B8EFCAA00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F81B8EFCAB00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2F91B8EFCAB00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2FA1B8EFCAC00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2FB1B8EFCAD00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2FC1B8EFCAD00510484 /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
+		7EB7A2FD1B8EFCB400510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A2FE1B8EFCB500510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A2FF1B8EFCB600510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3001B8EFCB600510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3011B8EFCB700510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3021B8EFCB800510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3031B8EFCB800510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3041B8EFCB900510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3051B8EFCBA00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3061B8EFCBA00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3071B8EFCBD00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3081B8EFCBD00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3091B8EFCBE00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A30A1B8EFCBF00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A30B1B8EFCBF00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A30C1B8EFCC000510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A30D1B8EFCC100510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A30E1B8EFCC200510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A30F1B8EFCC300510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3101B8EFCC300510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3111B8EFCC400510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3121B8EFCC400510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3131B8EFCC500510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3141B8EFCC600510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3151B8EFCC700510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3161B8EFCC700510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3171B8EFCC800510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3181B8EFCC800510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A3191B8EFCC900510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A31A1B8EFCCA00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A31B1B8EFCCA00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A31C1B8EFCCB00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A31D1B8EFCCC00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A31E1B8EFCCC00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
+		7EB7A31F1B8EFCCD00510484 /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
 		7EB911211B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB911221B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
 		7EB911231B84CBC6005C1012 /* ModuleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB911201B84CBC6005C1012 /* ModuleManager.m */; };
@@ -13610,6 +13680,7 @@
 		7EB2D5A51B3C5CCE009405C6 /* RedCup-info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "RedCup-info.plist"; sourceTree = "<group>"; };
 		7EB2D5A61B3C5CCE009405C6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7EB75A681B8D9FEC007B8B29 /* NetworkManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkManagerTest.m; path = NetworkManager/NetworkManagerTest.m; sourceTree = "<group>"; };
+		7EB7A2D71B8EF76500510484 /* PopupNewsViewControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PopupNewsViewControllerProtocol.h; sourceTree = "<group>"; };
 		7EB9111F1B84CBC6005C1012 /* ModuleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModuleManager.h; sourceTree = "<group>"; };
 		7EB911201B84CBC6005C1012 /* ModuleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModuleManager.m; sourceTree = "<group>"; };
 		7EB911581B84D36F005C1012 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -15637,6 +15708,7 @@
 				7EFA53111B8CB2AD0014B25D /* PopupNewsViewController.h */,
 				7EFA53121B8CB2AD0014B25D /* PopupNewsViewController.m */,
 				7ED012581B8CA90C004323D6 /* PopupNewsViewController.xib */,
+				7EB7A2D71B8EF76500510484 /* PopupNewsViewControllerProtocol.h */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -18620,6 +18692,7 @@
 				7E3830B91B5CF692008F0241 /* venues_icon@3x.png in Resources */,
 				7E3830BA1B5CF692008F0241 /* payment@2x.png in Resources */,
 				7E3830BB1B5CF692008F0241 /* phone.png in Resources */,
+				7EB7A3121B8EFCC400510484 /* PromocodeViewController.xib in Resources */,
 				7E3830BC1B5CF692008F0241 /* menu_icon_grey@3x.png in Resources */,
 				CBDE1FDD1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7E3830BD1B5CF692008F0241 /* DBTimePickerView.xib in Resources */,
@@ -18833,6 +18906,7 @@
 				7E21EC0C1B285FBC00AF7859 /* DBAddressViewController.xib in Resources */,
 				7E3DABD81B06153E00A7FFD1 /* venues_icon@3x.png in Resources */,
 				7E3DABD91B06153E00A7FFD1 /* payment@2x.png in Resources */,
+				7EB7A3021B8EFCB800510484 /* PromocodeViewController.xib in Resources */,
 				7E3DABDA1B06153E00A7FFD1 /* phone.png in Resources */,
 				CBDE1FCB1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7E3DABDB1B06153E00A7FFD1 /* menu_icon_grey@3x.png in Resources */,
@@ -19046,6 +19120,7 @@
 				7E79262D1B3C1BDA00CA740D /* DBTimePickerView.xib in Resources */,
 				7E79262E1B3C1BDA00CA740D /* arrow_horizontal_icon.png in Resources */,
 				7E79268B1B3C1C4A00CA740D /* Images-CoffeeSnack.xcassets in Resources */,
+				7EB7A31B1B8EFCCA00510484 /* PromocodeViewController.xib in Resources */,
 				CBDE1FD41B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7E7926301B3C1BDA00CA740D /* DBPopupTextView.xib in Resources */,
 				7E7926311B3C1BDA00CA740D /* about_promo@2x.png in Resources */,
@@ -19259,6 +19334,7 @@
 				7E7927A91B3C247D00CA740D /* phone.png in Resources */,
 				7E7927AA1B3C247D00CA740D /* menu_icon_grey@3x.png in Resources */,
 				7E7927AB1B3C247D00CA740D /* DBTimePickerView.xib in Resources */,
+				7EB7A31A1B8EFCCA00510484 /* PromocodeViewController.xib in Resources */,
 				7E7927AC1B3C247D00CA740D /* arrow_horizontal_icon.png in Resources */,
 				CBDE1FD51B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7E7927AF1B3C247D00CA740D /* DBPopupTextView.xib in Resources */,
@@ -19472,6 +19548,7 @@
 				7EB2D2701B3C3581009405C6 /* menu_icon_grey@3x.png in Resources */,
 				7EB2D2711B3C3581009405C6 /* DBTimePickerView.xib in Resources */,
 				7EB2D2721B3C3581009405C6 /* arrow_horizontal_icon.png in Resources */,
+				7EB7A3191B8EFCC900510484 /* PromocodeViewController.xib in Resources */,
 				CBDE1FD61B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7EB2D2741B3C3581009405C6 /* DBPopupTextView.xib in Resources */,
 				7EB2D2751B3C3581009405C6 /* about_promo@2x.png in Resources */,
@@ -19685,6 +19762,7 @@
 				7EB2D3DC1B3C51A2009405C6 /* payment@2x.png in Resources */,
 				7EB2D3DD1B3C51A2009405C6 /* phone.png in Resources */,
 				7EB2D3DE1B3C51A2009405C6 /* menu_icon_grey@3x.png in Resources */,
+				7EB7A3181B8EFCC800510484 /* PromocodeViewController.xib in Resources */,
 				7EB2D3DF1B3C51A2009405C6 /* DBTimePickerView.xib in Resources */,
 				CBDE1FD71B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7EB2D3E01B3C51A2009405C6 /* arrow_horizontal_icon.png in Resources */,
@@ -19898,6 +19976,7 @@
 				7EB2D5501B3C5C77009405C6 /* phone.png in Resources */,
 				7EB2D5511B3C5C77009405C6 /* menu_icon_grey@3x.png in Resources */,
 				7EB2D5521B3C5C77009405C6 /* DBTimePickerView.xib in Resources */,
+				7EB7A3171B8EFCC800510484 /* PromocodeViewController.xib in Resources */,
 				7EB2D5531B3C5C77009405C6 /* arrow_horizontal_icon.png in Resources */,
 				CBDE1FD81B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7EB2D5551B3C5C77009405C6 /* DBPopupTextView.xib in Resources */,
@@ -20122,6 +20201,7 @@
 				7ED4BDB01B5EB64B00280D74 /* payment@2x.png in Resources */,
 				7ED4BDB11B5EB64B00280D74 /* phone.png in Resources */,
 				7ED4BDB21B5EB64B00280D74 /* menu_icon_grey@3x.png in Resources */,
+				7EB7A3111B8EFCC400510484 /* PromocodeViewController.xib in Resources */,
 				7ED4BDB31B5EB64B00280D74 /* DBTimePickerView.xib in Resources */,
 				CBDE1FDE1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7ED4BDB41B5EB64B00280D74 /* arrow_horizontal_icon.png in Resources */,
@@ -20335,6 +20415,7 @@
 				7EDB5A081B32F70400723DF9 /* menu_icon_grey@3x.png in Resources */,
 				7EDB5A631B32F79D00723DF9 /* launch_568.png in Resources */,
 				7EDB5A661B32F79D00723DF9 /* CompanyInfo.plist in Resources */,
+				7EB7A31C1B8EFCCB00510484 /* PromocodeViewController.xib in Resources */,
 				7EDB5A681B32F79D00723DF9 /* FishRice-info.plist in Resources */,
 				CBDE1FD31B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				7EDB5A0C1B32F70400723DF9 /* DBTimePickerView.xib in Resources */,
@@ -20548,6 +20629,7 @@
 				CB142A9A1B7A677A00B72069 /* venues_icon@3x.png in Resources */,
 				CB142A9B1B7A677A00B72069 /* payment@2x.png in Resources */,
 				CB142A9C1B7A677A00B72069 /* phone.png in Resources */,
+				7EB7A30A1B8EFCBF00510484 /* PromocodeViewController.xib in Resources */,
 				CB142A9D1B7A677A00B72069 /* menu_icon_grey@3x.png in Resources */,
 				CB142A9E1B7A677A00B72069 /* DBTimePickerView.xib in Resources */,
 				CB142A9F1B7A677A00B72069 /* DBCategoryCell.xib in Resources */,
@@ -20761,6 +20843,7 @@
 				CB142C1E1B7A6A4D00B72069 /* venues_icon@3x.png in Resources */,
 				CB142C1F1B7A6A4D00B72069 /* payment@2x.png in Resources */,
 				CB142C201B7A6A4D00B72069 /* phone.png in Resources */,
+				7EB7A3091B8EFCBE00510484 /* PromocodeViewController.xib in Resources */,
 				CB142C211B7A6A4D00B72069 /* menu_icon_grey@3x.png in Resources */,
 				CB142C221B7A6A4D00B72069 /* DBTimePickerView.xib in Resources */,
 				CB142C231B7A6A4D00B72069 /* DBCategoryCell.xib in Resources */,
@@ -20974,6 +21057,7 @@
 				CB1431EF1B0E371A00DD50C7 /* menu_icon_grey@3x.png in Resources */,
 				CBD14B8C1B14933B005AEAFE /* launch_736.jpg in Resources */,
 				CB1431F11B0E371A00DD50C7 /* DBTimePickerView.xib in Resources */,
+				7EB7A2FE1B8EFCB500510484 /* PromocodeViewController.xib in Resources */,
 				CB1431F21B0E371A00DD50C7 /* arrow_horizontal_icon.png in Resources */,
 				CBDE1FC61B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB1431F41B0E371A00DD50C7 /* DBPopupTextView.xib in Resources */,
@@ -21187,6 +21271,7 @@
 				CB1433581B0F1BBB00DD50C7 /* DBPopupTextView.xib in Resources */,
 				CB1433591B0F1BBB00DD50C7 /* about_promo@2x.png in Resources */,
 				CB14335A1B0F1BBB00DD50C7 /* settings@2x.png in Resources */,
+				7EB7A3031B8EFCB800510484 /* PromocodeViewController.xib in Resources */,
 				CBDE1FCC1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB59CE1E1B2219E200E9DD30 /* alarm_icon@3x.png in Resources */,
 				CB3BA4471B207F4400F320CA /* CompanyInfo.plist in Resources */,
@@ -21400,6 +21485,7 @@
 				CB194D1F1B6BAECE0085ECF8 /* return_cause_time_icon@2x.png in Resources */,
 				CB194D211B6BAECE0085ECF8 /* DBContactUsView.xib in Resources */,
 				CB194D221B6BAECE0085ECF8 /* venues_icon@3x.png in Resources */,
+				7EB7A30E1B8EFCC200510484 /* PromocodeViewController.xib in Resources */,
 				CB194D231B6BAECE0085ECF8 /* payment@2x.png in Resources */,
 				CBDE1FE11B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB194D241B6BAECE0085ECF8 /* phone.png in Resources */,
@@ -21613,6 +21699,7 @@
 				CB194E921B6BC2650085ECF8 /* return_cause_time_icon@2x.png in Resources */,
 				CB194E931B6BC2650085ECF8 /* DBContactUsView.xib in Resources */,
 				CB194E941B6BC2650085ECF8 /* venues_icon@3x.png in Resources */,
+				7EB7A30D1B8EFCC100510484 /* PromocodeViewController.xib in Resources */,
 				CB194E951B6BC2650085ECF8 /* payment@2x.png in Resources */,
 				CBDE1FE21B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB194E961B6BC2650085ECF8 /* phone.png in Resources */,
@@ -21826,6 +21913,7 @@
 				CB1950061B6BD75B0085ECF8 /* payment@2x.png in Resources */,
 				CB1950071B6BD75B0085ECF8 /* phone.png in Resources */,
 				CB1950081B6BD75B0085ECF8 /* menu_icon_grey@3x.png in Resources */,
+				7EB7A30C1B8EFCC000510484 /* PromocodeViewController.xib in Resources */,
 				CB1950091B6BD75B0085ECF8 /* DBTimePickerView.xib in Resources */,
 				CBDE1FE31B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB19500A1B6BD75B0085ECF8 /* arrow_horizontal_icon.png in Resources */,
@@ -22039,6 +22127,7 @@
 				CB1AF8571AE10E6900FA3224 /* venues_icon@3x.png in Resources */,
 				CB1AF8581AE10E6900FA3224 /* payment@2x.png in Resources */,
 				CB1AF8591AE10E6900FA3224 /* phone.png in Resources */,
+				7EB7A3001B8EFCB600510484 /* PromocodeViewController.xib in Resources */,
 				CB1AF85A1AE10E6900FA3224 /* menu_icon_grey@3x.png in Resources */,
 				CBDE1FC91B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB1AF85B1AE10E6900FA3224 /* DBTimePickerView.xib in Resources */,
@@ -22252,6 +22341,7 @@
 				CB1EAEBE1B86F88700425CD7 /* payment@2x.png in Resources */,
 				CB1EAEBF1B86F88700425CD7 /* phone.png in Resources */,
 				CB1EAEC01B86F88700425CD7 /* menu_icon_grey@3x.png in Resources */,
+				7EB7A3071B8EFCBD00510484 /* PromocodeViewController.xib in Resources */,
 				CB1EAEC11B86F88700425CD7 /* DBTimePickerView.xib in Resources */,
 				CB1EAEC21B86F88700425CD7 /* DBCategoryCell.xib in Resources */,
 				CB1EAEC31B86F88700425CD7 /* arrow_horizontal_icon.png in Resources */,
@@ -22465,6 +22555,7 @@
 				CB2422D01B7A1D4D00A02721 /* venues_icon@3x.png in Resources */,
 				CB2422D11B7A1D4D00A02721 /* payment@2x.png in Resources */,
 				CB2422D21B7A1D4D00A02721 /* phone.png in Resources */,
+				7EB7A2FD1B8EFCB400510484 /* PromocodeViewController.xib in Resources */,
 				CB2422D31B7A1D4D00A02721 /* menu_icon_grey@3x.png in Resources */,
 				CB2422D41B7A1D4D00A02721 /* DBTimePickerView.xib in Resources */,
 				CB2422D51B7A1D4D00A02721 /* DBCategoryCell.xib in Resources */,
@@ -22678,6 +22769,7 @@
 				CB3BA3E51B20589300F320CA /* payment@2x.png in Resources */,
 				CB3BA3E61B20589300F320CA /* phone.png in Resources */,
 				CB3BA3E71B20589300F320CA /* menu_icon_grey@3x.png in Resources */,
+				7EB7A3041B8EFCB900510484 /* PromocodeViewController.xib in Resources */,
 				CB3BA3E91B20589300F320CA /* DBTimePickerView.xib in Resources */,
 				CBDE1FCD1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB3BA3EA1B20589300F320CA /* arrow_horizontal_icon.png in Resources */,
@@ -22891,6 +22983,7 @@
 				CBB718E51B14A3EE00C47A33 /* Images-MeatMe.xcassets in Resources */,
 				CB517C351AEFB6B500A50F5C /* venues_icon@3x.png in Resources */,
 				CB517C361AEFB6B500A50F5C /* payment@2x.png in Resources */,
+				7EB7A3011B8EFCB700510484 /* PromocodeViewController.xib in Resources */,
 				CB517C371AEFB6B500A50F5C /* phone.png in Resources */,
 				CBDE1FCA1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB517C381AEFB6B500A50F5C /* menu_icon_grey@3x.png in Resources */,
@@ -23104,6 +23197,7 @@
 				CB57941F1B6AB87300B17819 /* venues_icon@3x.png in Resources */,
 				CB5794201B6AB87300B17819 /* payment@2x.png in Resources */,
 				CB5794211B6AB87300B17819 /* phone.png in Resources */,
+				7EB7A3101B8EFCC300510484 /* PromocodeViewController.xib in Resources */,
 				CB5794221B6AB87300B17819 /* menu_icon_grey@3x.png in Resources */,
 				CBDE1FDF1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB5794231B6AB87300B17819 /* DBTimePickerView.xib in Resources */,
@@ -23317,6 +23411,7 @@
 				CB5795911B6BA76B00B17819 /* DBContactUsView.xib in Resources */,
 				CB5795921B6BA76B00B17819 /* venues_icon@3x.png in Resources */,
 				CB5795931B6BA76B00B17819 /* payment@2x.png in Resources */,
+				7EB7A30F1B8EFCC300510484 /* PromocodeViewController.xib in Resources */,
 				CB5795941B6BA76B00B17819 /* phone.png in Resources */,
 				CBDE1FE01B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB5795951B6BA76B00B17819 /* menu_icon_grey@3x.png in Resources */,
@@ -23530,6 +23625,7 @@
 				CB5AFD311B27209A00904BF7 /* payment@2x.png in Resources */,
 				CB5AFD321B27209A00904BF7 /* phone.png in Resources */,
 				CB5AFD331B27209A00904BF7 /* menu_icon_grey@3x.png in Resources */,
+				7EB7A3051B8EFCBA00510484 /* PromocodeViewController.xib in Resources */,
 				CB5AFD351B27209A00904BF7 /* DBTimePickerView.xib in Resources */,
 				CBDE1FCE1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB5AFD361B27209A00904BF7 /* arrow_horizontal_icon.png in Resources */,
@@ -23957,6 +24053,7 @@
 				CB6400C31B31B7CF0011CEEC /* phone.png in Resources */,
 				CB6400C41B31B7CF0011CEEC /* menu_icon_grey@3x.png in Resources */,
 				CB6401321B31B8630011CEEC /* launch_568.png in Resources */,
+				7EB7A31D1B8EFCCC00510484 /* PromocodeViewController.xib in Resources */,
 				CB6401351B31B8630011CEEC /* CompanyInfo.plist in Resources */,
 				CBDE1FD21B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB6400C61B31B7CF0011CEEC /* DBTimePickerView.xib in Resources */,
@@ -24170,6 +24267,7 @@
 				CB64FF171B317F760011CEEC /* payment@2x.png in Resources */,
 				CB64FF181B317F760011CEEC /* phone.png in Resources */,
 				CB64FF191B317F760011CEEC /* menu_icon_grey@3x.png in Resources */,
+				7EB7A31E1B8EFCCC00510484 /* PromocodeViewController.xib in Resources */,
 				CB64FF1D1B317F760011CEEC /* DBTimePickerView.xib in Resources */,
 				CBDE1FD11B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB64FF1E1B317F760011CEEC /* arrow_horizontal_icon.png in Resources */,
@@ -24383,6 +24481,7 @@
 				CB6981301B7DE33400B12B78 /* venues_icon@3x.png in Resources */,
 				CB6981311B7DE33400B12B78 /* payment@2x.png in Resources */,
 				CB6981321B7DE33400B12B78 /* phone.png in Resources */,
+				7EB7A3081B8EFCBD00510484 /* PromocodeViewController.xib in Resources */,
 				CB6981331B7DE33400B12B78 /* menu_icon_grey@3x.png in Resources */,
 				CB6981341B7DE33400B12B78 /* DBTimePickerView.xib in Resources */,
 				CB6981351B7DE33400B12B78 /* DBCategoryCell.xib in Resources */,
@@ -24477,6 +24576,7 @@
 				CB8201351B46CBB4000BBE55 /* alarm_icon@2x.png in Resources */,
 				CB8201361B46CBB4000BBE55 /* mug_orders_gray.png in Resources */,
 				CB8201371B46CBB4000BBE55 /* menu_icon@3x.png in Resources */,
+				7EB7A2FF1B8EFCB600510484 /* PromocodeViewController.xib in Resources */,
 				CB8201381B46CBB4000BBE55 /* bg.jpg in Resources */,
 				CB82013B1B46CBB4000BBE55 /* preview_5@2x.png in Resources */,
 				CBDE1E721B7286540090A347 /* DBPositionModifierCell.xib in Resources */,
@@ -24810,6 +24910,7 @@
 				CB82FCE21B442C70000BBE55 /* payment@2x.png in Resources */,
 				CB82FD391B442CBF000BBE55 /* launch_568.png in Resources */,
 				CB82FCE31B442C70000BBE55 /* phone.png in Resources */,
+				7EB7A3151B8EFCC700510484 /* PromocodeViewController.xib in Resources */,
 				CB82FCE41B442C70000BBE55 /* menu_icon_grey@3x.png in Resources */,
 				CBDE1FDA1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB82FCE61B442C70000BBE55 /* DBTimePickerView.xib in Resources */,
@@ -25023,6 +25124,7 @@
 				CB82FEBF1B4464F6000BBE55 /* DBContactUsView.xib in Resources */,
 				CB82FF1A1B44659B000BBE55 /* launch_480.png in Resources */,
 				CB82FEC11B4464F6000BBE55 /* venues_icon@3x.png in Resources */,
+				7EB7A3141B8EFCC600510484 /* PromocodeViewController.xib in Resources */,
 				CB82FEC21B4464F6000BBE55 /* payment@2x.png in Resources */,
 				CBDE1FDB1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB82FEC41B4464F6000BBE55 /* phone.png in Resources */,
@@ -25236,6 +25338,7 @@
 				CB8200331B4579B5000BBE55 /* DBContactUsView.xib in Resources */,
 				CB8200351B4579B5000BBE55 /* venues_icon@3x.png in Resources */,
 				CB8200361B4579B5000BBE55 /* payment@2x.png in Resources */,
+				7EB7A3131B8EFCC500510484 /* PromocodeViewController.xib in Resources */,
 				CB8200371B4579B5000BBE55 /* phone.png in Resources */,
 				CBDE1FDC1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CB8200381B4579B5000BBE55 /* menu_icon_grey@3x.png in Resources */,
@@ -25385,6 +25488,7 @@
 				CBD0C63F1B3074FB00DAD042 /* launch_480.png in Resources */,
 				CBD0C5A91B30724300DAD042 /* DBCardsViewController.xib in Resources */,
 				CBD0C5AA1B30724300DAD042 /* venues_icon@2x.png in Resources */,
+				7EB7A31F1B8EFCCD00510484 /* PromocodeViewController.xib in Resources */,
 				CBD0C6451B3074FB00DAD042 /* InfoPlist.strings in Resources */,
 				CBD0C5AB1B30724300DAD042 /* mug@2x.png in Resources */,
 				CBD0C5AC1B30724300DAD042 /* preview_3@2x.png in Resources */,
@@ -25666,6 +25770,7 @@
 				CBD2EBC91B2A07D000E4AAA1 /* phone.png in Resources */,
 				CBD2EBCA1B2A07D000E4AAA1 /* menu_icon_grey@3x.png in Resources */,
 				CBD2EBCC1B2A07D000E4AAA1 /* DBTimePickerView.xib in Resources */,
+				7EB7A3061B8EFCBA00510484 /* PromocodeViewController.xib in Resources */,
 				CBD2EBCD1B2A07D000E4AAA1 /* arrow_horizontal_icon.png in Resources */,
 				CBDE1FCF1B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CBD2EBCF1B2A07D000E4AAA1 /* DBPopupTextView.xib in Resources */,
@@ -25879,6 +25984,7 @@
 				CBDC7A921B42AFC700935328 /* venues_icon@3x.png in Resources */,
 				CBDC7A941B42AFC700935328 /* payment@2x.png in Resources */,
 				CBDC7A951B42AFC700935328 /* phone.png in Resources */,
+				7EB7A3161B8EFCC700510484 /* PromocodeViewController.xib in Resources */,
 				CBDC7A961B42AFC700935328 /* menu_icon_grey@3x.png in Resources */,
 				CBDE1FD91B7286540090A347 /* DBCategoryCell.xib in Resources */,
 				CBDC7AEE1B42B36100935328 /* launch_568.png in Resources */,
@@ -26054,6 +26160,7 @@
 				CBDE1C521B7280B50090A347 /* phone@2x.png in Resources */,
 				CBDE20FB1B7286550090A347 /* DBPositionCompactCell.xib in Resources */,
 				CBDE1C531B7280B50090A347 /* DBOrderItemCell.xib in Resources */,
+				7EB7A30B1B8EFCBF00510484 /* PromocodeViewController.xib in Resources */,
 				CBDE1C541B7280B50090A347 /* back_arrow_icon@2x.png in Resources */,
 				CBDE1C551B7280B50090A347 /* promo_pic.png in Resources */,
 				CBDE1CCD1B7281880090A347 /* InfoPlist.strings in Resources */,
@@ -27750,6 +27857,7 @@
 				7E382FC21B5CF692008F0241 /* DBNewOrderTotalView.m in Sources */,
 				7E382FC31B5CF692008F0241 /* EXTADT.m in Sources */,
 				7E382FC41B5CF692008F0241 /* DBContactUsView.m in Sources */,
+				7EB7A2F01B8EFCA100510484 /* PromocodeViewController.m in Sources */,
 				7E382FC51B5CF692008F0241 /* DBNewOrderViewFooter.m in Sources */,
 				7E382FC61B5CF692008F0241 /* EXTSafeCategory.m in Sources */,
 				7E382FC71B5CF692008F0241 /* UIViewController+DBAnimation.m in Sources */,
@@ -27897,6 +28005,7 @@
 				7E3DAAF41B06153E00A7FFD1 /* EXTScope.m in Sources */,
 				CB14324A1B0E3D0400DD50C7 /* DBClassLoader.m in Sources */,
 				CB1EB00A1B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2DD1B8EFC9100510484 /* PromocodeViewController.m in Sources */,
 				7E3DAAF51B06153E00A7FFD1 /* DBTimePickerView.m in Sources */,
 				7E3DAAF61B06153E00A7FFD1 /* AppDelegate.m in Sources */,
 				CBB719461B14B74200C47A33 /* NSString+LanguageFeature.m in Sources */,
@@ -28063,6 +28172,7 @@
 				7E7925341B3C1BDA00CA740D /* EXTADT.m in Sources */,
 				7E7925351B3C1BDA00CA740D /* DBContactUsView.m in Sources */,
 				7E7925361B3C1BDA00CA740D /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2E61B8EFC9700510484 /* PromocodeViewController.m in Sources */,
 				7E7925371B3C1BDA00CA740D /* EXTSafeCategory.m in Sources */,
 				7E7925381B3C1BDA00CA740D /* UIViewController+DBAnimation.m in Sources */,
 				7E7925391B3C1BDA00CA740D /* EXTRuntimeExtensions.m in Sources */,
@@ -28220,6 +28330,7 @@
 				7E7926B61B3C247D00CA740D /* EXTADT.m in Sources */,
 				7E7926B71B3C247D00CA740D /* DBContactUsView.m in Sources */,
 				7E7926B81B3C247D00CA740D /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2E91B8EFC9A00510484 /* PromocodeViewController.m in Sources */,
 				7E7926B91B3C247D00CA740D /* EXTSafeCategory.m in Sources */,
 				7E7926BA1B3C247D00CA740D /* UIViewController+DBAnimation.m in Sources */,
 				7E7926BB1B3C247D00CA740D /* EXTRuntimeExtensions.m in Sources */,
@@ -28377,6 +28488,7 @@
 				7EB2D17B1B3C3581009405C6 /* EXTADT.m in Sources */,
 				7EB2D17C1B3C3581009405C6 /* DBContactUsView.m in Sources */,
 				7EB2D17D1B3C3581009405C6 /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2E81B8EFC9A00510484 /* PromocodeViewController.m in Sources */,
 				7EB2D17E1B3C3581009405C6 /* EXTSafeCategory.m in Sources */,
 				7EB2D17F1B3C3581009405C6 /* UIViewController+DBAnimation.m in Sources */,
 				7EB2D1801B3C3581009405C6 /* EXTRuntimeExtensions.m in Sources */,
@@ -28534,6 +28646,7 @@
 				7EB2D2EA1B3C51A2009405C6 /* EXTADT.m in Sources */,
 				7EB2D2EB1B3C51A2009405C6 /* DBContactUsView.m in Sources */,
 				7EB2D2EC1B3C51A2009405C6 /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2EA1B8EFC9B00510484 /* PromocodeViewController.m in Sources */,
 				7EB2D2ED1B3C51A2009405C6 /* EXTSafeCategory.m in Sources */,
 				7EB2D2EE1B3C51A2009405C6 /* UIViewController+DBAnimation.m in Sources */,
 				7EB2D2EF1B3C51A2009405C6 /* EXTRuntimeExtensions.m in Sources */,
@@ -28691,6 +28804,7 @@
 				7EB2D45A1B3C5C77009405C6 /* EXTADT.m in Sources */,
 				7EB2D45B1B3C5C77009405C6 /* DBContactUsView.m in Sources */,
 				7EB2D45C1B3C5C77009405C6 /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2EB1B8EFC9C00510484 /* PromocodeViewController.m in Sources */,
 				7EB2D45D1B3C5C77009405C6 /* EXTSafeCategory.m in Sources */,
 				7EB2D45E1B3C5C77009405C6 /* UIViewController+DBAnimation.m in Sources */,
 				7EB2D45F1B3C5C77009405C6 /* EXTRuntimeExtensions.m in Sources */,
@@ -28860,6 +28974,7 @@
 				7ED4BCB21B5EB64B00280D74 /* DBNewOrderTotalView.m in Sources */,
 				7ED4BCB31B5EB64B00280D74 /* EXTADT.m in Sources */,
 				7ED4BCB41B5EB64B00280D74 /* DBContactUsView.m in Sources */,
+				7EB7A2FC1B8EFCAD00510484 /* PromocodeViewController.m in Sources */,
 				7ED4BCB51B5EB64B00280D74 /* DBNewOrderViewFooter.m in Sources */,
 				7ED4BCB61B5EB64B00280D74 /* EXTSafeCategory.m in Sources */,
 				7ED4BCB71B5EB64B00280D74 /* UIViewController+DBAnimation.m in Sources */,
@@ -29017,6 +29132,7 @@
 				7EDB590D1B32F70400723DF9 /* EXTADT.m in Sources */,
 				7EDB590E1B32F70400723DF9 /* DBContactUsView.m in Sources */,
 				7EDB590F1B32F70400723DF9 /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2E51B8EFC9600510484 /* PromocodeViewController.m in Sources */,
 				7EDB59101B32F70400723DF9 /* EXTSafeCategory.m in Sources */,
 				7EDB59111B32F70400723DF9 /* UIViewController+DBAnimation.m in Sources */,
 				7EDB59121B32F70400723DF9 /* EXTRuntimeExtensions.m in Sources */,
@@ -29174,6 +29290,7 @@
 				CB1429971B7A677A00B72069 /* DBNewOrderTotalView.m in Sources */,
 				CB1429981B7A677A00B72069 /* EXTADT.m in Sources */,
 				CB1429991B7A677A00B72069 /* DBContactUsView.m in Sources */,
+				7EB7A2F51B8EFCA800510484 /* PromocodeViewController.m in Sources */,
 				CB14299A1B7A677A00B72069 /* DBNewOrderViewFooter.m in Sources */,
 				CB14299B1B7A677A00B72069 /* EXTSafeCategory.m in Sources */,
 				CB14299C1B7A677A00B72069 /* UIViewController+DBAnimation.m in Sources */,
@@ -29331,6 +29448,7 @@
 				CB142B1A1B7A6A4D00B72069 /* DBNewOrderTotalView.m in Sources */,
 				CB142B1B1B7A6A4D00B72069 /* EXTADT.m in Sources */,
 				CB142B1C1B7A6A4D00B72069 /* DBContactUsView.m in Sources */,
+				7EB7A2F31B8EFCA700510484 /* PromocodeViewController.m in Sources */,
 				CB142B1D1B7A6A4D00B72069 /* DBNewOrderViewFooter.m in Sources */,
 				CB142B1E1B7A6A4D00B72069 /* EXTSafeCategory.m in Sources */,
 				CB142B1F1B7A6A4D00B72069 /* UIViewController+DBAnimation.m in Sources */,
@@ -29508,6 +29626,7 @@
 				CB1431101B0E371A00DD50C7 /* JRSwizzleMethods.m in Sources */,
 				CBDE1ECE1B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
 				CB1431111B0E371A00DD50C7 /* DBOrderItemCell.m in Sources */,
+				7EB7A2D91B8EFC8E00510484 /* PromocodeViewController.m in Sources */,
 				CB1431121B0E371A00DD50C7 /* DBBeaconObserver.m in Sources */,
 				CB1431131B0E371A00DD50C7 /* EXTSelectorChecking.m in Sources */,
 				CBDE1DF51B7286540090A347 /* CategoriesTVController.m in Sources */,
@@ -29636,6 +29755,7 @@
 				CB9104FD1B1B188600506235 /* DoubleB.xcdatamodeld in Sources */,
 				CB1432601B0F1BBB00DD50C7 /* EXTScope.m in Sources */,
 				CB1EB00B1B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2DE1B8EFC9100510484 /* PromocodeViewController.m in Sources */,
 				CB1432611B0F1BBB00DD50C7 /* DBTimePickerView.m in Sources */,
 				CBB719471B14B74200C47A33 /* NSString+LanguageFeature.m in Sources */,
 				CB1432621B0F1BBB00DD50C7 /* AppDelegate.m in Sources */,
@@ -29802,6 +29922,7 @@
 				CB194C2B1B6BAECE0085ECF8 /* DBNewOrderTotalView.m in Sources */,
 				CB194C2C1B6BAECE0085ECF8 /* EXTADT.m in Sources */,
 				CB194C2D1B6BAECE0085ECF8 /* DBContactUsView.m in Sources */,
+				7EB7A2F91B8EFCAB00510484 /* PromocodeViewController.m in Sources */,
 				CB194C2E1B6BAECE0085ECF8 /* DBNewOrderViewFooter.m in Sources */,
 				CB194C2F1B6BAECE0085ECF8 /* EXTSafeCategory.m in Sources */,
 				CB194C301B6BAECE0085ECF8 /* UIViewController+DBAnimation.m in Sources */,
@@ -29959,6 +30080,7 @@
 				CB194D9C1B6BC2650085ECF8 /* DBNewOrderTotalView.m in Sources */,
 				CB194D9D1B6BC2650085ECF8 /* EXTADT.m in Sources */,
 				CB194D9E1B6BC2650085ECF8 /* DBContactUsView.m in Sources */,
+				7EB7A2F81B8EFCAB00510484 /* PromocodeViewController.m in Sources */,
 				CB194D9F1B6BC2650085ECF8 /* DBNewOrderViewFooter.m in Sources */,
 				CB194DA01B6BC2650085ECF8 /* EXTSafeCategory.m in Sources */,
 				CB194DA11B6BC2650085ECF8 /* UIViewController+DBAnimation.m in Sources */,
@@ -30116,6 +30238,7 @@
 				CB194F0D1B6BD75B0085ECF8 /* DBNewOrderTotalView.m in Sources */,
 				CB194F0E1B6BD75B0085ECF8 /* EXTADT.m in Sources */,
 				CB194F0F1B6BD75B0085ECF8 /* DBContactUsView.m in Sources */,
+				7EB7A2F71B8EFCAA00510484 /* PromocodeViewController.m in Sources */,
 				CB194F101B6BD75B0085ECF8 /* DBNewOrderViewFooter.m in Sources */,
 				CB194F111B6BD75B0085ECF8 /* EXTSafeCategory.m in Sources */,
 				CB194F121B6BD75B0085ECF8 /* UIViewController+DBAnimation.m in Sources */,
@@ -30263,6 +30386,7 @@
 				CB1AF77A1AE10E6900FA3224 /* EXTScope.m in Sources */,
 				CB1432481B0E3D0400DD50C7 /* DBClassLoader.m in Sources */,
 				CB1EB0081B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2DB1B8EFC8F00510484 /* PromocodeViewController.m in Sources */,
 				CB1AF77B1AE10E6900FA3224 /* DBTimePickerView.m in Sources */,
 				CB1AF77C1AE10E6900FA3224 /* AppDelegate.m in Sources */,
 				CBB719441B14B74200C47A33 /* NSString+LanguageFeature.m in Sources */,
@@ -30429,6 +30553,7 @@
 				CB1EADB71B86F88700425CD7 /* DBNewOrderTotalView.m in Sources */,
 				CB1EADB81B86F88700425CD7 /* EXTADT.m in Sources */,
 				CB1EADB91B86F88700425CD7 /* DBContactUsView.m in Sources */,
+				7EB7A2F11B8EFCA500510484 /* PromocodeViewController.m in Sources */,
 				CB1EADBA1B86F88700425CD7 /* DBNewOrderViewFooter.m in Sources */,
 				CB1EADBB1B86F88700425CD7 /* EXTSafeCategory.m in Sources */,
 				CB1EADBC1B86F88700425CD7 /* UIViewController+DBAnimation.m in Sources */,
@@ -30586,6 +30711,7 @@
 				CB2421CE1B7A1D4D00A02721 /* DBNewOrderTotalView.m in Sources */,
 				CB2421CF1B7A1D4D00A02721 /* EXTADT.m in Sources */,
 				CB2421D01B7A1D4D00A02721 /* DBContactUsView.m in Sources */,
+				7EB7A2D81B8EFC8D00510484 /* PromocodeViewController.m in Sources */,
 				CB2421D11B7A1D4D00A02721 /* DBNewOrderViewFooter.m in Sources */,
 				CB2421D21B7A1D4D00A02721 /* EXTSafeCategory.m in Sources */,
 				CB2421D31B7A1D4D00A02721 /* UIViewController+DBAnimation.m in Sources */,
@@ -30733,6 +30859,7 @@
 				CB3BA2E81B20589300F320CA /* DBNewOrderBonusesView.m in Sources */,
 				CB3BA2E91B20589300F320CA /* DoubleB.xcdatamodeld in Sources */,
 				CB1EB00C1B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2DF1B8EFC9200510484 /* PromocodeViewController.m in Sources */,
 				CB3BA2EC1B20589300F320CA /* EXTScope.m in Sources */,
 				CB3BA2ED1B20589300F320CA /* DBTimePickerView.m in Sources */,
 				CB3BA2EE1B20589300F320CA /* NSString+LanguageFeature.m in Sources */,
@@ -30889,6 +31016,7 @@
 				CB517B511AEFB6B500A50F5C /* EXTScope.m in Sources */,
 				CB1432491B0E3D0400DD50C7 /* DBClassLoader.m in Sources */,
 				CB1EB0091B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2DC1B8EFC9000510484 /* PromocodeViewController.m in Sources */,
 				CB517B521AEFB6B500A50F5C /* DBTimePickerView.m in Sources */,
 				CB517B531AEFB6B500A50F5C /* AppDelegate.m in Sources */,
 				CBB719451B14B74200C47A33 /* NSString+LanguageFeature.m in Sources */,
@@ -31055,6 +31183,7 @@
 				CB5793251B6AB87300B17819 /* DBNewOrderTotalView.m in Sources */,
 				CB5793261B6AB87300B17819 /* EXTADT.m in Sources */,
 				CB5793271B6AB87300B17819 /* DBContactUsView.m in Sources */,
+				7EB7A2FB1B8EFCAD00510484 /* PromocodeViewController.m in Sources */,
 				CB5793281B6AB87300B17819 /* DBNewOrderViewFooter.m in Sources */,
 				CB5793291B6AB87300B17819 /* EXTSafeCategory.m in Sources */,
 				CB57932A1B6AB87300B17819 /* UIViewController+DBAnimation.m in Sources */,
@@ -31212,6 +31341,7 @@
 				CB57949C1B6BA76B00B17819 /* DBNewOrderTotalView.m in Sources */,
 				CB57949D1B6BA76B00B17819 /* EXTADT.m in Sources */,
 				CB57949E1B6BA76B00B17819 /* DBContactUsView.m in Sources */,
+				7EB7A2FA1B8EFCAC00510484 /* PromocodeViewController.m in Sources */,
 				CB57949F1B6BA76B00B17819 /* DBNewOrderViewFooter.m in Sources */,
 				CB5794A01B6BA76B00B17819 /* EXTSafeCategory.m in Sources */,
 				CB5794A11B6BA76B00B17819 /* UIViewController+DBAnimation.m in Sources */,
@@ -31359,6 +31489,7 @@
 				CB5AFC311B27209A00904BF7 /* DBNewOrderBonusesView.m in Sources */,
 				CB5AFC321B27209A00904BF7 /* DoubleB.xcdatamodeld in Sources */,
 				CB1EB00D1B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2E01B8EFC9300510484 /* PromocodeViewController.m in Sources */,
 				CB5AFC351B27209A00904BF7 /* EXTScope.m in Sources */,
 				CB5AFC361B27209A00904BF7 /* DBTimePickerView.m in Sources */,
 				CB5AFC371B27209A00904BF7 /* NSString+LanguageFeature.m in Sources */,
@@ -31672,6 +31803,7 @@
 				CB64FE0F1B317F760011CEEC /* DBNewOrderBonusesView.m in Sources */,
 				CB64FE101B317F760011CEEC /* DoubleB.xcdatamodeld in Sources */,
 				CB1EB0101B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2E41B8EFC9500510484 /* PromocodeViewController.m in Sources */,
 				CB64FE131B317F760011CEEC /* EXTScope.m in Sources */,
 				CB64FE141B317F760011CEEC /* DBTimePickerView.m in Sources */,
 				CB64FE151B317F760011CEEC /* NSString+LanguageFeature.m in Sources */,
@@ -31838,6 +31970,7 @@
 				CB64FFC81B31B7CF0011CEEC /* EXTADT.m in Sources */,
 				CB64FFC91B31B7CF0011CEEC /* DBContactUsView.m in Sources */,
 				CB64FFCA1B31B7CF0011CEEC /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2E31B8EFC9500510484 /* PromocodeViewController.m in Sources */,
 				CB64FFCB1B31B7CF0011CEEC /* EXTSafeCategory.m in Sources */,
 				CB64FFCC1B31B7CF0011CEEC /* UIViewController+DBAnimation.m in Sources */,
 				CB64FFCD1B31B7CF0011CEEC /* EXTRuntimeExtensions.m in Sources */,
@@ -31995,6 +32128,7 @@
 				CB69802C1B7DE33400B12B78 /* DBNewOrderTotalView.m in Sources */,
 				CB69802D1B7DE33400B12B78 /* EXTADT.m in Sources */,
 				CB69802E1B7DE33400B12B78 /* DBContactUsView.m in Sources */,
+				7EB7A2F41B8EFCA800510484 /* PromocodeViewController.m in Sources */,
 				CB69802F1B7DE33400B12B78 /* DBNewOrderViewFooter.m in Sources */,
 				CB6980301B7DE33400B12B78 /* EXTSafeCategory.m in Sources */,
 				CB6980311B7DE33400B12B78 /* UIViewController+DBAnimation.m in Sources */,
@@ -32226,6 +32360,7 @@
 				CB8200E51B46CBB4000BBE55 /* DBOrderViewHeader.m in Sources */,
 				CB8200E61B46CBB4000BBE55 /* IHWebPageViewController.m in Sources */,
 				CBDE1E531B7286540090A347 /* DBPositionModifierCell.m in Sources */,
+				7EB7A2DA1B8EFC8F00510484 /* PromocodeViewController.m in Sources */,
 				CBDE1D1D1B7286540090A347 /* LaunchViewController.m in Sources */,
 				CBDE213B1B7286550090A347 /* PositionCompactCollectionViewCell.m in Sources */,
 				CB8200E71B46CBB4000BBE55 /* DBOrderBarButtonView.m in Sources */,
@@ -32312,6 +32447,7 @@
 				CB82FBEB1B442C70000BBE55 /* DBNewOrderTotalView.m in Sources */,
 				CB82FBEC1B442C70000BBE55 /* EXTADT.m in Sources */,
 				CB82FBED1B442C70000BBE55 /* DBContactUsView.m in Sources */,
+				7EB7A2EE1B8EFC9F00510484 /* PromocodeViewController.m in Sources */,
 				CB82FBEE1B442C70000BBE55 /* DBNewOrderViewFooter.m in Sources */,
 				CB82FBEF1B442C70000BBE55 /* EXTSafeCategory.m in Sources */,
 				CB82FBF01B442C70000BBE55 /* UIViewController+DBAnimation.m in Sources */,
@@ -32469,6 +32605,7 @@
 				CB82FDCC1B4464F6000BBE55 /* DBNewOrderTotalView.m in Sources */,
 				CB82FDCD1B4464F6000BBE55 /* EXTADT.m in Sources */,
 				CB82FDCE1B4464F6000BBE55 /* DBContactUsView.m in Sources */,
+				7EB7A2ED1B8EFC9E00510484 /* PromocodeViewController.m in Sources */,
 				CB82FDCF1B4464F6000BBE55 /* DBNewOrderViewFooter.m in Sources */,
 				CB82FDD01B4464F6000BBE55 /* EXTSafeCategory.m in Sources */,
 				CB82FDD11B4464F6000BBE55 /* UIViewController+DBAnimation.m in Sources */,
@@ -32626,6 +32763,7 @@
 				CB82FF3D1B4579B5000BBE55 /* DBNewOrderTotalView.m in Sources */,
 				CB82FF3E1B4579B5000BBE55 /* EXTADT.m in Sources */,
 				CB82FF3F1B4579B5000BBE55 /* DBContactUsView.m in Sources */,
+				7EB7A2EF1B8EFCA000510484 /* PromocodeViewController.m in Sources */,
 				CB82FF401B4579B5000BBE55 /* DBNewOrderViewFooter.m in Sources */,
 				CB82FF411B4579B5000BBE55 /* EXTSafeCategory.m in Sources */,
 				CB82FF421B4579B5000BBE55 /* UIViewController+DBAnimation.m in Sources */,
@@ -32783,6 +32921,7 @@
 				CBD0C4ED1B30724300DAD042 /* EXTADT.m in Sources */,
 				CBD0C4EE1B30724300DAD042 /* DBContactUsView.m in Sources */,
 				CBD0C4EF1B30724300DAD042 /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2E21B8EFC9400510484 /* PromocodeViewController.m in Sources */,
 				CBD0C4F01B30724300DAD042 /* EXTSafeCategory.m in Sources */,
 				CBD0C4F11B30724300DAD042 /* UIViewController+DBAnimation.m in Sources */,
 				CBD0C4F21B30724300DAD042 /* EXTRuntimeExtensions.m in Sources */,
@@ -32930,6 +33069,7 @@
 				CBD2EAC51B2A07D000E4AAA1 /* DBNewOrderBonusesView.m in Sources */,
 				CBD2EAC61B2A07D000E4AAA1 /* DoubleB.xcdatamodeld in Sources */,
 				CB1EB00E1B8DE19B00425CD7 /* DBShareHelper.m in Sources */,
+				7EB7A2E11B8EFC9300510484 /* PromocodeViewController.m in Sources */,
 				CBD2EAC91B2A07D000E4AAA1 /* EXTScope.m in Sources */,
 				CBD2EACA1B2A07D000E4AAA1 /* DBTimePickerView.m in Sources */,
 				CBD2EACB1B2A07D000E4AAA1 /* NSString+LanguageFeature.m in Sources */,
@@ -33096,6 +33236,7 @@
 				CBDC79A01B42AFC700935328 /* EXTADT.m in Sources */,
 				CBDC79A11B42AFC700935328 /* DBContactUsView.m in Sources */,
 				CBDC79A21B42AFC700935328 /* DBNewOrderViewFooter.m in Sources */,
+				7EB7A2EC1B8EFC9C00510484 /* PromocodeViewController.m in Sources */,
 				CBDC79A31B42AFC700935328 /* EXTSafeCategory.m in Sources */,
 				CBDC79A41B42AFC700935328 /* UIViewController+DBAnimation.m in Sources */,
 				CBDC79A51B42AFC700935328 /* EXTRuntimeExtensions.m in Sources */,
@@ -33253,6 +33394,7 @@
 				CBDE1B7E1B7280B50090A347 /* DBNewOrderTotalView.m in Sources */,
 				CBDE1B7F1B7280B50090A347 /* EXTADT.m in Sources */,
 				CBDE1B801B7280B50090A347 /* DBContactUsView.m in Sources */,
+				7EB7A2F61B8EFCA900510484 /* PromocodeViewController.m in Sources */,
 				CBDE1B811B7280B50090A347 /* DBNewOrderViewFooter.m in Sources */,
 				CBDE1B821B7280B50090A347 /* EXTSafeCategory.m in Sources */,
 				CBDE1B831B7280B50090A347 /* UIViewController+DBAnimation.m in Sources */,
