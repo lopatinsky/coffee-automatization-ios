@@ -1216,8 +1216,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
         } completion:nil];
-        
-        order.realTotal = order.total;
     } failure:^(NSString *errorTitle, NSString *errorMessage) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         

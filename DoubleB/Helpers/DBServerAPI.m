@@ -73,30 +73,30 @@
                                  
                                  [[IHSecureStore sharedInstance] setClientId:[NSString stringWithFormat:@"%lld", (long long)[responseObject[@"client_id"] longLongValue]]];
                                  
-                                 if(responseObject[@"share_type"]){
-                                     int shareType = [responseObject[@"share_type"] intValue];
-                                     switch (shareType) {
-                                         case 0:// Share
-                                             break;
-                                         case 1:// Ivitation to app
-                                             break;
-                                         case 2:{// Friend gift
-                                             NSString *branchName = responseObject[@"branch_name"];
-                                             NSString *branchPhone = responseObject[@"branch_phone"];
-                                             
-                                             if(![[DBClientInfo sharedInstance] validClientName]){
-                                                 [DBClientInfo sharedInstance].clientName = branchName;
-                                             }
-                                             
-                                             if(![[DBClientInfo sharedInstance] validClientPhone]){
-                                                 [DBClientInfo sharedInstance].clientPhone = branchPhone;
-                                             }
-                                             
-//                                             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFriendGiftRecievedNotification object:nil]];
-                                         }
-                                             break;
-                                     }
-                                 }
+//                                 if(responseObject[@"share_type"]){
+//                                     int shareType = [responseObject[@"share_type"] intValue];
+//                                     switch (shareType) {
+//                                         case 0:// Share
+//                                             break;
+//                                         case 1:// Ivitation to app
+//                                             break;
+//                                         case 2:{// Friend gift
+//                                             NSString *branchName = responseObject[@"branch_name"];
+//                                             NSString *branchPhone = responseObject[@"branch_phone"];
+//                                             
+//                                             if(![[DBClientInfo sharedInstance] validClientName]){
+//                                                 [DBClientInfo sharedInstance].clientName = branchName;
+//                                             }
+//                                             
+//                                             if(![[DBClientInfo sharedInstance] validClientPhone]){
+//                                                 [DBClientInfo sharedInstance].clientPhone = branchPhone;
+//                                             }
+//                                             
+////                                             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFriendGiftRecievedNotification object:nil]];
+//                                         }
+//                                             break;
+//                                     }
+//                                 }
                                  
 //                                 BOOL branchGiftsPromoEnabled = [responseObject[@"branch_gifts"] boolValue];
 //                                 [[NSUserDefaults standardUserDefaults] setObject:@(branchGiftsPromoEnabled)
@@ -137,20 +137,8 @@
     [[DBAPIClient sharedClient] GET:@"company/info"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSMutableDictionary *response = [NSMutableDictionary new];
-                                
-                                response[@"appName"] = [responseObject getValueForKey:@"app_name"] ?: @"";
-                                response[@"webSite"] = [responseObject getValueForKey:@"site"] ?: @"";
-                                response[@"deliveryTypes"] = [responseObject getValueForKey:@"delivery_types"] ?: [NSArray new];
-                                response[@"phone"] = [responseObject getValueForKey:@"phone"] ?: @"";
-                                response[@"cities"] = [responseObject getValueForKey:@"cities"] ?: [NSArray new];
-                                response[@"support_emails"] = [responseObject getValueForKey:@"emails"] ?: [NSArray new];
-                                response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
-                                response[@"pushChannels"] = [responseObject getValueForKey:@"push_channels"] ?: @{};
-                                response[@"companyType"] = responseObject[@"screen_logic_type"];
-                                
                                 if(callback)
-                                    callback(YES, response);
+                                    callback(YES, responseObject);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 

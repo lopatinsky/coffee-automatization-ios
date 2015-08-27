@@ -7,6 +7,7 @@
 
 
 #import "DBAPIClient.h"
+#import "IHSecureStore.h"
 #import "DBCompanyInfo.h"
 #import "DBCompaniesManager.h"
 
@@ -37,12 +38,25 @@
         [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
         
         self.companyHeaderEnabled = YES;
+        self.clientHeaderEnabled = YES;
+        
+        // API version
+        [self setValue:[DBAPIClient restAPIVersion] forHeader:@"Version"];
+        
+        // Locale/Language
+        [self setValue:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] forHeader:@"Language"];
     }
     return self;
 }
 
-+ (nullable NSString *)baseUrl {
++ (NSString *)baseUrl {
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+}
+
++ (NSString *)restAPIVersion {
+    // 0 - initial API version
+    
+    return @"0";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
@@ -64,6 +78,16 @@
         [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
     } else {
         [self disableHeader:@"namespace"];
+    }
+}
+
+- (void)setClientHeaderEnabled:(BOOL)clientHeaderEnabled {
+    _clientHeaderEnabled = clientHeaderEnabled;
+    
+    if(_clientHeaderEnabled && [IHSecureStore sharedInstance].clientId){
+        [self setValue:[IHSecureStore sharedInstance].clientId forHeader:@"Client-Id"];
+    } else {
+        [self disableHeader:@"Client-Id"];
     }
 }
 

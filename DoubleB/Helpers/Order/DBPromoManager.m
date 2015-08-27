@@ -140,7 +140,8 @@
         
         // bonus points balance
         _bonusPointsBalance = [[response getValueForKey:@"full_points"] doubleValue];
-        _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];
+//        _bonusPositionsAvailable = [[response getValueForKey:@"more_gift"] boolValue];
+        _bonusPositionsAvailable = _bonusPointsBalance > 0;
         
         // Calculate discount
         double currentTotal = [OrderCoordinator sharedInstance].itemsManager.totalPrice;

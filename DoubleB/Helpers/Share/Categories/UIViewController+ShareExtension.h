@@ -10,7 +10,6 @@
 
 @interface UIViewController (ShareExtension)
 
-- (void)shareAppPermission:(void(^)(BOOL completed))callback;
-- (void)shareSuccessfulOrder:(void(^)(BOOL completed))callback;
+- (void)sharePermissionOnScreen:(NSString *)analiticsScreenName callback:(void(^)(BOOL completed))callback;
 
 @end

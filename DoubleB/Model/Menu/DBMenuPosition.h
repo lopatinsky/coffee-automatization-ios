@@ -54,3 +54,7 @@ typedef NS_ENUM(NSInteger, DBMenuPositionMode){
 - (BOOL)isSamePosition:(DBMenuPosition *)object;
 
 @end
+
+@interface DBMenuPosition (HistoryResponse)
+- (instancetype)initWithHistoryDict:(NSDictionary *)positionDictionary;
+@end

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBSharePermissionViewController">
+            <connections>
+                <outlet property="closeButton" destination="YCy-jy-HVf" id="Bib-t8-FMI"/>
+                <outlet property="descriptionLabel" destination="pfB-m4-eW8" id="8L3-JP-r3w"/>
+                <outlet property="logoImageView" destination="d6G-eE-6eC" id="IBO-rg-0Ll"/>
+                <outlet property="logoLabel" destination="WIW-Hb-DbT" id="BeI-Za-L5J"/>
+                <outlet property="shareButton" destination="CDM-W0-0hy" id="dfJ-FX-Cxe"/>
+                <outlet property="shareImageView" destination="fjT-a8-l9e" id="40E-Pe-bF0"/>
+                <outlet property="titleLabel" destination="sAO-7A-Mn1" id="Vid-NW-xf6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_568.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-a8-l9e">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCy-jy-HVf">
+                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="Tba-Ah-xq2"/>
+                        <constraint firstAttribute="height" constant="40" id="xwa-7e-9fW"/>
+                    </constraints>
+                    <state key="normal" image="close_white.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDM-W0-0hy">
+                    <rect key="frame" x="75" y="235.5" width="170" height="40"/>
+                    <color key="backgroundColor" red="0.32549019610000002" green="0.81176470590000005" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="170" id="W5Y-KC-wOx"/>
+                        <constraint firstAttribute="height" constant="40" id="mVy-YG-3VZ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                    <state key="normal" title="Поделиться">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d6G-eE-6eC">
+                    <rect key="frame" x="110" y="15" width="100" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="8MO-gV-UaV"/>
+                        <constraint firstAttribute="height" constant="30" id="MiK-5j-iHJ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Даблби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIW-Hb-DbT">
+                    <rect key="frame" x="110" y="48" width="100" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="u5P-A6-Gdd"/>
+                        <constraint firstAttribute="height" constant="15" id="vJl-G2-xgz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расскажи о нашем чудесном кофе друзьям" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAO-7A-Mn1">
+                    <rect key="frame" x="15" y="93" width="290" height="40"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Они установят приложение Даблби  смогут заказать кофе с 50% скидкой. А ты получишь кружку в подарок" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfB-m4-eW8">
+                    <rect key="frame" x="15" y="153" width="290" height="52.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="pfB-m4-eW8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="3g6-Wl-AOG"/>
+                <constraint firstItem="pfB-m4-eW8" firstAttribute="top" secondItem="sAO-7A-Mn1" secondAttribute="bottom" constant="20" id="5gd-6E-5Uw"/>
+                <constraint firstItem="YCy-jy-HVf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5xz-eP-fmD"/>
+                <constraint firstAttribute="centerX" secondItem="d6G-eE-6eC" secondAttribute="centerX" id="BKY-cz-BgD"/>
+                <constraint firstItem="d6G-eE-6eC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="Ba6-Xs-c4R"/>
+                <constraint firstItem="YCy-jy-HVf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DXe-AE-HzM"/>
+                <constraint firstItem="d6G-eE-6eC" firstAttribute="centerX" secondItem="WIW-Hb-DbT" secondAttribute="centerX" id="F6b-1b-eAJ"/>
+                <constraint firstItem="sAO-7A-Mn1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Tvi-iu-j20"/>
+                <constraint firstItem="WIW-Hb-DbT" firstAttribute="top" secondItem="d6G-eE-6eC" secondAttribute="bottom" constant="3" id="bAc-5e-QTO"/>
+                <constraint firstAttribute="bottom" secondItem="fjT-a8-l9e" secondAttribute="bottom" id="cET-gG-VlS"/>
+                <constraint firstAttribute="trailing" secondItem="sAO-7A-Mn1" secondAttribute="trailing" constant="15" id="e5s-dM-Ahq"/>
+                <constraint firstItem="fjT-a8-l9e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gaf-P1-0aW"/>
+                <constraint firstItem="CDM-W0-0hy" firstAttribute="top" secondItem="pfB-m4-eW8" secondAttribute="bottom" constant="30" id="loA-TY-Z5m"/>
+                <constraint firstItem="fjT-a8-l9e" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oPb-bM-BZY"/>
+                <constraint firstAttribute="trailing" secondItem="pfB-m4-eW8" secondAttribute="trailing" constant="15" id="s0V-jA-DzT"/>
+                <constraint firstAttribute="centerX" secondItem="CDM-W0-0hy" secondAttribute="centerX" id="tzV-CH-da9"/>
+                <constraint firstItem="sAO-7A-Mn1" firstAttribute="top" secondItem="WIW-Hb-DbT" secondAttribute="bottom" constant="30" id="u1s-WS-gbR"/>
+                <constraint firstAttribute="trailing" secondItem="fjT-a8-l9e" secondAttribute="trailing" id="xed-mH-LI2"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="310" y="287"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="close_white.png" width="18" height="18"/>
+        <image name="share_568.jpg" width="320" height="568"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

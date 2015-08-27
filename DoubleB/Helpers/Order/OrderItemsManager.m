@@ -121,8 +121,10 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     _items = [NSMutableArray array];
     
     for (OrderItem *item in items) {
-        OrderItem *newItem = [item copy];
-        [self.items addObject:newItem];
+        if(item.valid){
+            OrderItem *newItem = [item copy];
+            [self.items addObject:newItem];
+        }
     }
     
     [self reloadTotal];

@@ -40,29 +40,31 @@
 - (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
-            _type = [[response getValueForKey:@"companyType"] intValue];
-            _applicationName = response[@"appName"];
+            _type = [[response getValueForKey:@"screen_logic_type"] intValue];
+            _applicationName = response[@"app_name"];
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
-            for(NSDictionary *typeDict in response[@"deliveryTypes"]){
+            for(NSDictionary *typeDict in response[@"delivery_types"]){
                 [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];
             }
             _deliveryTypes = deliveryTypes;
             _deliveryCities = response[@"cities"] ?: @[];
             
-            _supportEmails = response[@"support_emails"] ?: @[];
+            _supportEmails = response[@"emails"] ?: @[];
             
             
-            _companyPushChannel = [response[@"pushChannels"] getValueForKey:@"company"] ?: @"";
+            _companyPushChannel = [response[@"push_channels"] getValueForKey:@"company"] ?: @"";
             
-            NSString *clientPushChannel = [response[@"pushChannels"] getValueForKey:@"client"] ?: @"";
+            NSString *clientPushChannel = [response[@"push_channels"] getValueForKey:@"client"] ?: @"";
             _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            NSString *venuePushChannel = [response[@"pushChannels"] getValueForKey:@"venue"]  ?: @"";
+            NSString *venuePushChannel = [response[@"push_channels"] getValueForKey:@"venue"]  ?: @"";
             _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            NSString *orderPushChannel = [response[@"pushChannels"] getValueForKey:@"order"]  ?: @"";
+            NSString *orderPushChannel = [response[@"push_channels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+            
+            _friendInvitationEnabled = [response[@"share_invitation"][@"enabled"] boolValue];
             
             [self synchronize];
         }
@@ -193,6 +195,8 @@
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
     
     _deliveryCities = info[@"_deliveryCities"];
+    
+    _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
 }
 
 - (void)synchronize{
@@ -207,7 +211,8 @@
                            @"applicationName": _applicationName,
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
-                           @"_deliveryCities": _deliveryCities};
+                           @"_deliveryCities": _deliveryCities,
+                           @"_friendInvitationEnabled": @(_friendInvitationEnabled)};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -230,3 +235,4 @@
 }
 
 @end
+

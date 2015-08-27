@@ -21,8 +21,10 @@
 #import "DBMenu.h"
 #import "DBTabBarController.h"
 #import "DBServerAPI.h"
+#import "DBShareHelper.h"
 
 #import "JRSwizzleMethods.h"
+#import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <Parse/Parse.h>
@@ -186,7 +188,15 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 }
 
-+ (void)initializeOrderFramework {
++ (void)initializeOrderFramework:(NSDictionary *)launchOptions {
+    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        if(error){
+            NSLog(@"error %@", error);
+            [DBServerAPI registerUser:nil];
+        } else {
+            [DBServerAPI registerUserWithBranchParams:params callback:nil];
+        }
+    }];
     [DBServerAPI registerUser:nil];
     
     [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
@@ -195,6 +205,8 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
     [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
+    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
+    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
 }
 
 @end
