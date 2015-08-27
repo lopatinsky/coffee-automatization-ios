@@ -32,19 +32,19 @@
     self = [super init];
     
     self.secureStore = [UICKeyChainStore keyChainStore];
-    [self.secureStore removeAllItems];
+//    [self.secureStore removeAllItems];
     
     return self;
 }
 
 - (void)setClientId:(NSString *)clientId{
     if(clientId && ![clientId isEqualToString:@"0"] && ![clientId isEqualToString:@""]){
+        [self.secureStore setString:clientId forKey:@"clientId"];
+        [self.secureStore synchronize];
+        
         // Track clientId with crashes
         [[Crashlytics sharedInstance] setUserIdentifier:clientId];
         [DBAPIClient sharedClient].clientHeaderEnabled = YES;
-        
-        [self.secureStore setString:clientId forKey:@"clientId"];
-        [self.secureStore synchronize];
     }
 }
 
