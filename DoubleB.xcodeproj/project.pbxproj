@@ -3150,7 +3150,6 @@
 		7EFA53341B8CB2AD0014B25D /* PopupNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53121B8CB2AD0014B25D /* PopupNewsViewController.m */; };
 		7EFA53351B8CB2AD0014B25D /* PopupNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53121B8CB2AD0014B25D /* PopupNewsViewController.m */; };
 		7EFA53361B8CB2AD0014B25D /* PopupNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53121B8CB2AD0014B25D /* PopupNewsViewController.m */; };
-		7EFA535E1B8CC6E50014B25D /* DBCoffeeHostelSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53391B8CC5F30014B25D /* DBCoffeeHostelSettingsViewController.m */; };
 		7EFA53641B8CCD5A0014B25D /* PromocodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA53621B8CCD5A0014B25D /* PromocodeViewController.m */; };
 		7EFA53651B8CCD5A0014B25D /* PromocodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA53631B8CCD5A0014B25D /* PromocodeViewController.xib */; };
 		CB097BD21B400610003612DE /* launch_480.png in Resources */ = {isa = PBXBuildFile; fileRef = CB097BCE1B400610003612DE /* launch_480.png */; };
@@ -31515,7 +31514,6 @@
 				CB517EA61AEFC51800A50F5C /* DBNewOrderBonusesView.m in Sources */,
 				CB9104F91B1B188300506235 /* DoubleB.xcdatamodeld in Sources */,
 				CB60C0B71AC5AD2600D5E962 /* EXTScope.m in Sources */,
-				7EFA535E1B8CC6E50014B25D /* DBCoffeeHostelSettingsViewController.m in Sources */,
 				CB60C0B81AC5AD2600D5E962 /* DBTimePickerView.m in Sources */,
 				CBB719431B14B74200C47A33 /* NSString+LanguageFeature.m in Sources */,
 				7E1112341B8B7D78004D7B87 /* DBCompaniesViewController.m in Sources */,

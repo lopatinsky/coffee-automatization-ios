@@ -144,12 +144,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
 //                                    @"image": @"alerts.png"}];
     
-    if ([[DBCompanyInfo sharedInstance] promocodesIsEnabled]) {
-        [self.settingsItems insertObject:@{@"name": @"appPromoVC",
-                                           @"title": NSLocalizedString(@"Промокоды", nil),
-                                           @"image": @"none",
-                                           @"viewController": [ViewControllerManager promocodeViewControllers]}
-                                 atIndex:0];
+    if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
+        [self.settingsItems addObject:@{@"name": @"appPromoVC",
+                                        @"title": NSLocalizedString(@"Промокоды", nil),
+                                        @"image": @"none",
+                                        @"viewController": [ViewControllerManager promocodeViewControllers]}];
     }
 }
 
@@ -227,10 +226,6 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         cell.delegate = self;
     }
     
-    if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
-        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
-    }
-    
     return cell;
 }
 
@@ -291,6 +286,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         event = @"companies_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
+    if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
     [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];
 }
 
