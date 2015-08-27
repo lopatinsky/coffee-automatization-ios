@@ -120,6 +120,7 @@
 
 @end
 
+
 #pragma mark - News
 #import "PopupNewsViewController.h"
 @implementation ViewControllerManager(NewsViewControllers)
@@ -133,6 +134,24 @@
 + (nonnull UIViewController *)newsViewController {
     Class newsViewController = [self newsViewControllerClasses][[self valueFromPropertyListByKey:@"News"] ?: @"default"];
     return [newsViewController new];
+}
+
+@end
+
+
+#pragma mark - Promocodes
+#import "PromocodeViewController.h"
+@implementation ViewControllerManager(PromocodeViewControllers)
+
++ (nonnull NSDictionary *)promocodesViewControllerClasses {
+    return @{
+             @"default": [PromocodeViewController class]
+             };
+}
+
++ (nonnull UIViewController *)promocodeViewControllers {
+    Class promocodeViewControllerr = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
+    return [promocodeViewControllerr new];
 }
 
 @end

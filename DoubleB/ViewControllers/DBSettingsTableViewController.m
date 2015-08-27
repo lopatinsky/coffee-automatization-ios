@@ -25,6 +25,8 @@
 #import "DBCompaniesManager.h"
 #import "DBSharePermissionViewController.h"
 
+#import "ViewControllerManager.h"
+
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
 
@@ -141,6 +143,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 //    [self.settingsItems addObject:@{@"name": @"notification",
 //                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
 //                                    @"image": @"alerts.png"}];
+    
+    if ([[DBCompanyInfo sharedInstance] promocodesIsEnabled]) {
+        [self.settingsItems insertObject:@{@"name": @"appPromoVC",
+                                           @"title": NSLocalizedString(@"Промокоды", nil),
+                                           @"image": @"none",
+                                           @"viewController": [ViewControllerManager promocodeViewControllers]}
+                                 atIndex:0];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -215,6 +225,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 
         
         cell.delegate = self;
+    }
+    
+    if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     return cell;

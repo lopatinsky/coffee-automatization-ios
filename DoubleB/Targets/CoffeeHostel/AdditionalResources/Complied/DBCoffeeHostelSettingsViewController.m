@@ -34,7 +34,7 @@
         settingsItemInfo = self.settingsItems[indexPath.row];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
+    if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
 }

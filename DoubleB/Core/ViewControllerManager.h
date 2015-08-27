@@ -36,3 +36,7 @@
 @interface ViewControllerManager(NewsViewControllers)
 + (nonnull UIViewController *)newsViewController;
 @end
+
+@interface ViewControllerManager(PromocodeViewControllers)
++ (nonnull UIViewController *)promocodeViewControllers;
+@end

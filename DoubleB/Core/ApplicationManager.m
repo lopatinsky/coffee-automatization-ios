@@ -54,45 +54,6 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
 }
 
 - (void)updateAllInfo:(void (^)(BOOL))callback {
-//    int maxNumberOfRequests = 2;
-//    __block int numberOfRequests = 0;
-//    
-//    void (^successCompletionHandler)() = ^void(){
-//        numberOfRequests++;
-//        if(numberOfRequests == maxNumberOfRequests){
-//            if(callback)
-//                callback(YES);
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadSuccess object:nil]];
-//        }
-//    };
-//    
-//    __block void (^failureCompletionHandler)() = ^void(){
-//        if(callback)
-//            callback(NO);
-//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadFailure object:nil]];
-//    };
-//    
-//    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
-//        if(success){
-//            successCompletionHandler();
-//        } else {
-//            if(failureCompletionHandler){
-//                failureCompletionHandler();
-//                failureCompletionHandler = nil;
-//            }
-//        }
-//    }];
-//    
-//    [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
-//        if(success){
-//            successCompletionHandler();
-//        } else {
-//            if(failureCompletionHandler){
-//                failureCompletionHandler();
-//                failureCompletionHandler = nil;
-//            }
-//        }
-//    }];
     [[NetworkManager sharedManager] addUniqueOperation:FetchCompaniesOperation];
     [[NetworkManager sharedManager] addOperation:FetchCompanyInfoOperation];
 }

@@ -66,6 +66,8 @@
             
             _friendInvitationEnabled = [response[@"share_invitation"][@"enabled"] boolValue];
             
+            _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
+            
             [self synchronize];
         }
         
@@ -195,7 +197,7 @@
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
     
     _deliveryCities = info[@"_deliveryCities"];
-    
+    _promocodesIsEnabled = info[@"promocodeIsEnabled"];
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
 }
 
@@ -212,7 +214,8 @@
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
                            @"_deliveryCities": _deliveryCities,
-                           @"_friendInvitationEnabled": @(_friendInvitationEnabled)};
+                           @"_friendInvitationEnabled": @(_friendInvitationEnabled),
+                           @"promocodeIsEnabled": _promocodesIsEnabled};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
