@@ -135,13 +135,13 @@
 - (void)handleTap:(UITapGestureRecognizer *)recognizer{
     CGPoint touch = [recognizer locationInView:self];
     if(CGRectContainsPoint(self.timeView.frame, touch)){
-        [self.delegate db_orderReturnView:self DidSelectCause:DBOrderReturnCauseTime];
+        [self.delegate db_orderReturnView:self DidSelectCause:DBOrderCancelReasonWrongTime];
     }
     if(CGRectContainsPoint(self.venueView.frame, touch)){
-        [self.delegate db_orderReturnView:self DidSelectCause:DBOrderReturnCauseVenue];
+        [self.delegate db_orderReturnView:self DidSelectCause:DBOrderCancelReasonWrongPlace];
     }
     if(CGRectContainsPoint(self.changeView.frame, touch)){
-        [self.delegate db_orderReturnView:self DidSelectCause:DBOrderReturnCauseChangeMind];
+        [self.delegate db_orderReturnView:self DidSelectCause:DBOrderCancelReasonChangeMind];
     }
     if(CGRectContainsPoint(self.otherView.frame, touch)){
         [self showTextView];

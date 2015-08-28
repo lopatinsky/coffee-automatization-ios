@@ -27,6 +27,10 @@
         title = NSLocalizedString(@"Магазины", nil);
     }
     
+    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"pastadeli"]){
+        title = NSLocalizedString(@"Пастерии", nil);
+    }
+    
     return title;
 }
 

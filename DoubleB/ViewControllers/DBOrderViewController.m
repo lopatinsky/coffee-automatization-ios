@@ -158,12 +158,15 @@
     self.viewFooter.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
 }
 
-- (void)cancelOrder {
+- (void)cancelOrder:(DBOrderCancelReason)reason reasonText:(NSString *)reasonText {
     NSString *clientId = [IHSecureStore sharedInstance].clientId;
     NSString *eventLabel = [NSString stringWithFormat:@"%@;%@", self.order.orderId, clientId];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DBAPIClient sharedClient] POST:@"return" parameters:@{@"order_id": self.order.orderId}
+    [[DBAPIClient sharedClient] POST:@"return"
+                          parameters:@{@"order_id": self.order.orderId,
+                                       @"reason_id": @(reason),
+                                       @"reason_text": reasonText ?: @""}
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  [GANHelper analyzeEvent:@"cancel_order_success" label:eventLabel category:ORDER_HISTORY_SCREEN];
                                  //NSLog(@"%@", responseObject);
@@ -327,13 +330,13 @@
 
 #pragma mark - DBOrderReturnViewDelegate
 
-- (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectCause:(DBOrderReturnCause)cause{
-    [self cancelOrder];
+- (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectCause:(DBOrderCancelReason)cause{
+    [self cancelOrder:cause reasonText:nil];
     [self.returnCauseView hide];
 }
 
 - (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectOtherCause:(NSString *)cause{
-    [self cancelOrder];
+    [self cancelOrder:DBOrderCancelReasonOther reasonText:cause];
     [self.returnCauseView hide];
 }
 

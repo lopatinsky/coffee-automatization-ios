@@ -25,6 +25,13 @@ typedef NS_ENUM(int16_t, PaymentType) {
     PaymentTypeExtraType = 2
 };
 
+typedef NS_ENUM(int16_t, DBOrderCancelReason) {
+    DBOrderCancelReasonWrongTime = 0,
+    DBOrderCancelReasonWrongPlace,
+    DBOrderCancelReasonChangeMind,
+    DBOrderCancelReasonOther
+};
+
 @class Venue;
 
 @interface Order : NSManagedObject
