@@ -64,9 +64,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Даблби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIW-Hb-DbT">
-                    <rect key="frame" x="110" y="48" width="100" height="15"/>
+                    <rect key="frame" x="60" y="48" width="200" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="u5P-A6-Gdd"/>
+                        <constraint firstAttribute="width" constant="200" id="u5P-A6-Gdd"/>
                         <constraint firstAttribute="height" constant="15" id="vJl-G2-xgz"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>

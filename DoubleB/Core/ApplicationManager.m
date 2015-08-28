@@ -62,23 +62,6 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
     return [[DBCompanyInfo sharedInstance].deliveryTypes count] > 0 && [DBCompaniesManager sharedInstance].companiesLoaded;
 }
 
-+ (UIViewController *)rootViewController {
-    if (![ApplicationManager sharedInstance].allInfoLoaded) {
-        return [ViewControllerManager launchViewController];
-    } else {
-        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
-            return [DBCompaniesViewController new];
-        }
-        
-        // Login VC for demoApp
-        if  ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"rubeacondemo"]){
-            return [self demoLoginViewController];
-        }
-        
-        return [ViewControllerManager mainViewController];
-    }
-}
-
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
     NSString *storedBuildNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"STORED_BUILD_NUMBER"] ?: @"0";
@@ -196,6 +179,25 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 }
 
+@end
+
+@implementation ApplicationManager (Start)
++ (UIViewController *)rootViewController {
+    if (![ApplicationManager sharedInstance].allInfoLoaded) {
+        return [ViewControllerManager launchViewController];
+    } else {
+        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
+            return [DBCompaniesViewController new];
+        }
+        
+        // Login VC for demoApp
+        if  ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"rubeacondemo"]){
+            return [self demoLoginViewController];
+        }
+        
+        return [ViewControllerManager mainViewController];
+    }
+}
 @end
 
 @implementation ApplicationManager (Menu)

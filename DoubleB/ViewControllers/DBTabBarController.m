@@ -43,11 +43,10 @@
         UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
         
 //TODO: Rewrite normal logic for screen sequence management
-//        if([[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"ElephantBoutique"] || [[DBCompanyInfo sharedInstance].bundleName isEqualToString:@"Luigi"]){
-            UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
-            menuVC.hidesBottomBarWhenPushed = YES;
-            [newOrderNavController pushViewController:menuVC animated:NO];
-//        }
+        UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+        menuVC.hidesBottomBarWhenPushed = YES;
+        [newOrderNavController pushViewController:menuVC animated:NO];
+
         [tabBarControllers addObject:newOrderNavController];
         
         // History vc
@@ -57,7 +56,7 @@
                                                             selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
         [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:ordersController]];
-        
+
         // Venues vc
         if(!([[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
            [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping])){
@@ -81,6 +80,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [[CompanyNewsManager sharedManager] fetchUpdates];
 }
 

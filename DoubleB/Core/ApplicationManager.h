@@ -19,7 +19,6 @@ extern NSString *const kDBApplicationManagerInfoLoadFailure;
 @property (nonatomic, readonly) BOOL allInfoLoaded;
 - (void)updateAllInfo:(void(^)(BOOL success))callback;
 
-+ (UIViewController *)rootViewController;
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy;
 + (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
 @end
@@ -31,6 +30,10 @@ extern NSString *const kDBApplicationManagerInfoLoadFailure;
 
 @interface ApplicationManager(Appearance)
 + (void)applyBrandbookStyle;
+@end
+
+@interface ApplicationManager(Start)
++ (UIViewController *)rootViewController;
 @end
 
 @interface ApplicationManager(Menu)

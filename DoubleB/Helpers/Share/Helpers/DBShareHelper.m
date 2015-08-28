@@ -63,15 +63,17 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 //NSLog(@"%@", responseObject);
                                 
-                                NSString *imageUrl = responseObject[@"image"];
-                                dispatch_async(dispatch_queue_create("image_load_queue", NULL), ^{
-                                    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        [DBShareHelper saveValue:imageData forKey:@"shareImageData"];
+                                NSString *imageUrl = [responseObject getValueForKey:@"image"];
+                                if(imageUrl){
+                                    dispatch_async(dispatch_queue_create("image_load_queue", NULL), ^{
+                                        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                            [DBShareHelper saveValue:imageData forKey:@"shareImageData"];
+                                        });
                                     });
-                                });
+                                }
                                 
-                                [DBShareHelper saveValue:[responseObject getValueForKey:@"text"] forKey:@"shareText"];
+                                [DBShareHelper saveValue:[responseObject getValueForKey:@"text"] ?: @"" forKey:@"shareText"];
                                 
                                 _appUrls = [self processShareLinks:responseObject[@"urls"]];
                                 

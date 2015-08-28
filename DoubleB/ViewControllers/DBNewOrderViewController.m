@@ -172,9 +172,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Time =========
 
     
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showActualNews) name:CompanyNewsManagerDidFetchActualNews object:nil];
-    
 // ========= Configure Autolayout =========
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.tableView alignLeading:@"0" trailing:@"0" toView:self.view];
@@ -1226,15 +1223,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                              otherButtonTitles:nil
                                        handler:nil];
     }];
-}
-
-
-#pragma mark - CompanyNewsManager
-- (void)showActualNews {
-    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-    CompanyNews *actualNews = [[CompanyNewsManager sharedManager] actualNews];
-    [newsViewController setData:@{@"text": [actualNews text], @"image_url": [actualNews imageURL]}];
-    [self presentViewController:newsViewController animated:YES completion:nil];
 }
 
 #pragma mark - UINavigationControllerDelegate
