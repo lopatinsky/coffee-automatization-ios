@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://les.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4283781970</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-65821587-22</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>BI2QUEMKrLwNf5y2fifeMUbPO1138gKfFCu4M3QS</string>
+			<key>clientKey</key>
+			<string>0iWh4CCkePF6Hc39YnRPgGPKYjU2hnFNbdPXopC9</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

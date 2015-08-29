@@ -7,7 +7,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://mycompany.test2.doubleb-automation-production.appspot.com/</string>
+		<string>http://mycompany.resto.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4278214478</integer>
 		<key>CompanyGAKey</key>

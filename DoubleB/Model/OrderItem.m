@@ -25,7 +25,7 @@
     return self;
 }
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem{
++ (instancetype)orderItemFromDictionary:(NSDictionary *)historyItem{
     OrderItem *item = [[OrderItem alloc] init];
     
     DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];

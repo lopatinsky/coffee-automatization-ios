@@ -13,6 +13,7 @@
 #import "OrderItemsManager.h"
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
+#import "OrderItem.h"
 
 
 @interface DBPromoManager ()
@@ -219,18 +220,18 @@
         }
         
         // Assemble order gifts
-        NSMutableArray *giftPositions = [NSMutableArray new];
+        NSMutableArray *giftItems = [NSMutableArray new];
         for(NSDictionary *giftItem in response[@"order_gifts"]){
-            DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:giftItem];
-            giftPosition.mode = DBMenuPositionModeGift;
-            [giftPositions addObject:giftPosition];
+            OrderItem *item = [OrderItem orderItemFromDictionary:giftItem];
+            item.position.mode = DBMenuPositionModeGift;
+            [giftItems addObject:item];
         }
         for(NSDictionary *giftItem in response[@"new_order_gifts"]){
-            DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:giftItem];
-            giftPosition.mode = DBMenuPositionModeGift;
-            [giftPositions addObject:giftPosition];
+            OrderItem *item = [OrderItem orderItemFromDictionary:giftItem];
+            item.position.mode = DBMenuPositionModeGift;
+            [giftItems addObject:item];
         }
-        [[OrderCoordinator sharedInstance].orderGiftsManager synchronizeItemsWithPositions:giftPositions];
+        [[OrderCoordinator sharedInstance].orderGiftsManager overrideItems:giftItems];
         
         _validOrder = [response[@"valid"] boolValue];
         

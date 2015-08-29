@@ -20,7 +20,7 @@
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position;
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem;
++ (instancetype)orderItemFromDictionary:(NSDictionary *)historyItem;
 
 @end
 

@@ -74,7 +74,7 @@
     // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
-        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
         item.position.mode = DBMenuPositionModeRegular;
         [items addObject:item];
     }
@@ -83,7 +83,7 @@
     // Assemble bonus items
     NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
-        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
         item.position.mode = DBMenuPositionModeBonus;
         [bonusItems addObject:item];
     }
@@ -92,7 +92,7 @@
     // Assemble gift items
     NSMutableArray *giftItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@""]) {
-        OrderItem *item = [OrderItem orderItemFromHistoryDictionary:itemDict];
+        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
         item.position.mode = DBMenuPositionModeGift;
         [giftItems addObject:item];
     }
