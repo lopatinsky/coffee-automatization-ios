@@ -11,6 +11,7 @@
 #import "DBShareHelper.h"
 #import "MBProgressHUD.h"
 #import "DBActivityItemProvider.h"
+#import "CustomFBActivity.h"
 
 @implementation UIViewController (ShareExtension)
 
@@ -28,6 +29,7 @@ static NSString *dbAnaliticsNameScreenName;
         DBActivityItemProvider *customActivityProvider = [[DBActivityItemProvider alloc] initWithTextFormat:text
                                                                                                       links:urls
                                                                                                       image:image];
+        
         [self shareWithActivityItems:@[customActivityProvider, image] withCallback:callback];
     } else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -58,8 +60,10 @@ static NSString *dbAnaliticsNameScreenName;
 }
 
 - (void)shareWithActivityItems:(NSArray *)activityItems withCallback:(void(^)(BOOL completed))callback{
+    CustomFBActivity *customActivity = [[CustomFBActivity alloc] init];
+    customActivity.delegate = self;
     UIActivityViewController *shareVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                                                          applicationActivities:nil];
+                                                                          applicationActivities:@[customActivity]];
     shareVC.excludedActivityTypes = @[UIActivityTypeAirDrop,
                                       UIActivityTypePrint,
                                       UIActivityTypeAssignToContact,
@@ -67,7 +71,9 @@ static NSString *dbAnaliticsNameScreenName;
                                       UIActivityTypeSaveToCameraRoll,
                                       UIActivityTypeAddToReadingList,
                                       UIActivityTypePostToFlickr,
-                                      UIActivityTypePostToVimeo];
+                                      UIActivityTypePostToVimeo,
+                                      UIActivityTypePostToFacebook
+                                    ];
     
     
     if([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]){

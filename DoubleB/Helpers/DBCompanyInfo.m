@@ -223,7 +223,6 @@
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
                            @"supportEmails": _supportEmails,
-                           @"_deliveryCities": _deliveryCities};
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
                            @"promocodeIsEnabled": _promocodesIsEnabled};
