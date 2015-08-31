@@ -28,6 +28,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // TODO: change forceCopy to false after test
+    [ApplicationManager sharedInstance];
     [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     [ApplicationManager initializeVendorFrameworks];
     [ApplicationManager initializeOrderFramework:launchOptions];

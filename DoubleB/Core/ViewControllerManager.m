@@ -150,8 +150,27 @@
 }
 
 + (nonnull UIViewController *)promocodeViewControllers {
-    Class promocodeViewControllerr = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
-    return [promocodeViewControllerr new];
+    Class promocodeViewController = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
+    return [promocodeViewController new];
 }
 
 @end
+
+
+#pragma mark - Company
+#import "DBCompaniesViewController.h"
+@implementation ViewControllerManager(CompaniesViewControllers)
+
++ (nonnull NSDictionary *)companiesViewControllerClasses {
+    return @{
+             @"default": [DBCompaniesViewController class]
+             };
+}
+
++ (nonnull UIViewController *)companiesViewControllers {
+    Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
+    return [companiesViewController new];
+}
+
+@end
+

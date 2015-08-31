@@ -10,6 +10,9 @@
 
 @interface NSOperationQueue (UniqueOperation)
 
-- (BOOL)addUniqueOperation:(NSOperation *)operation;
+- (BOOL)addConcurrentUniqueOperation:(NSOperation *)operation;
+- (BOOL)addConcurrentPendingUniqueOperation:(NSOperation *)operation;
+- (void)addConcurrentPendingOperation:(NSOperation *)operation;
+- (void)addConcurrentOperation:(NSOperation *)operation;
 
 @end

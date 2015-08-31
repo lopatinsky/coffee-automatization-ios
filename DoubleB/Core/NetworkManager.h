@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ConcurrentOperation.h"
 
+extern NSString *const kDBNetworkManagerConnectionFailed;
+extern NSString *const kDBNetworkManagerShouldRetryToRequest;
+
 typedef enum : NSUInteger {
     NetworkOperationFetchCompanies = 0,
     NetworkOperationFetchCompanyInfo,
@@ -25,7 +28,6 @@ typedef enum : NSUInteger {
 - (void)addUniqueOperation:(NetworkOperation)operation;
 - (void)addPendingOperation:(NetworkOperation)operation;
 - (void)addOperation:(NetworkOperation)operation;
-- (void)addOperationsWithDependance:(NSArray *)operations;
 
 @end
 

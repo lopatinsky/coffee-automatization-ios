@@ -38,16 +38,6 @@
     self.backImageView.image = image;
     
     self.titleLabel.text = NSLocalizedString(@"Настройка приложения", nil);
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
-                                                 name:kDBApplicationManagerInfoLoadSuccess
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadFailureNotification:)
-                                                 name:kDBApplicationManagerInfoLoadFailure
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -88,11 +78,11 @@
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    [GANHelper analyzeEvent:@"try_again_click" category:LAUNCH_PLACEHOLDER_SCREEN];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
-    });
+//    [GANHelper analyzeEvent:@"try_again_click" category:LAUNCH_PLACEHOLDER_SCREEN];
+//    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
+//    });
 }
 
 @end

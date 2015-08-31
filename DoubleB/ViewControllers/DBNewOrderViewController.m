@@ -341,11 +341,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Promo
 
+
 - (void)startUpdatingPromoInfo{
     BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder:^(BOOL success) {
         [self endUpdatingPromoInfo];
         
-        if(success){
+        if (success) {
             // Show order promos & errors
             NSArray *promos = _orderCoordinator.promoManager.promos;
             NSArray *errors = _orderCoordinator.promoManager.errors;

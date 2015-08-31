@@ -38,16 +38,16 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     [DBServerAPI requestCompanies:^(NSArray *companies) {
         [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
         [DBCompaniesManager setValue:companies forKey:@"companies"];
-        if (companies.count == 1) {
-            [DBCompaniesManager selectCompanyName:companies[0]];
-            [[DBCompanyInfo sharedInstance] flushCache];
-            [[DBCompanyInfo sharedInstance] flushStoredCache];
-            [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanyInfo];
-            [DBCompaniesManager setValue:@(NO) forKey:@"companiesSelectionIsAvailable"];
-        } else if (companies.count > 1) {
+        if (companies.count > 1) {
             [DBCompaniesManager setValue:@(YES) forKey:@"companiesSelectionIsAvailable"];
         } else {
             [DBCompaniesManager setValue:@(NO) forKey:@"companiesSelectionIsAvailable"];
+            if (companies.count == 1) {
+                [DBCompaniesManager selectCompanyName:companies[0]];
+                [[DBCompanyInfo sharedInstance] flushCache];
+                [[DBCompanyInfo sharedInstance] flushStoredCache];
+            }
+            [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanyInfo];
         }
         if(callback)
             callback(YES, companies);
@@ -66,6 +66,10 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     }
     
     return result;
+}
+
+- (BOOL)companyIsChosen {
+    return [DBCompaniesManager valueForKey:@"selectedCompanyNamespace"] != nil;
 }
 
 - (NSArray *)companies {

@@ -15,7 +15,6 @@
 #import "Venue.h"
 
 #import "DBCompaniesManager.h"
-#import "DBCompaniesViewController.h"
 #import "DBCompanyInfo.h"
 #import "DBMenu.h"
 #import "DBTabBarController.h"
@@ -30,17 +29,28 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
-
-// Using currently only for DBCompanyInfo
-NSString *const kDBApplicationManagerInfoLoadSuccess = @"kDBApplicationManagerInfoLoadSuccess";
-NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerInfoLoadFailure";
+#import "UIAlertView+BlocksKit.h"
 
 #pragma mark - General
+
+typedef enum : NSUInteger {
+    RootStateLaunch,
+    RootStateMain,
+    RootStateCompanies,
+} RootState;
+
+@interface ApplicationManager()
+
+@property (nonatomic, strong) UIAlertView *alertView;
+@property (nonatomic) RootState state;
+
+@end
+
 @implementation ApplicationManager
 
 + (instancetype)sharedInstance {
     static dispatch_once_t once;
-    static ApplicationManager*instance = nil;
+    static ApplicationManager *instance = nil;
     dispatch_once(&once, ^{ instance = [[self alloc] init]; });
     return instance;
 }
@@ -48,8 +58,36 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
 - (instancetype)init {
     self = [super init];
     
+    self.state = RootStateLaunch;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
+    
     return self;
 }
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)showAlertViewWithInternetError {
+    if (!self.alertView || ![self.alertView isVisible]) {
+        self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
+                                              cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
+                                              }];
+    }
+}
+
+- (void)changeRoot {
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    if (self.state != RootStateMain) {
+        [window setRootViewController:[ApplicationManager rootViewController]];
+    }
+}
+
+#pragma mark - Static
 
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
@@ -140,6 +178,8 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    
+    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
 }
 
 @end
@@ -172,18 +212,16 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
 
 @implementation ApplicationManager (Start)
 + (UIViewController *)rootViewController {
-    if([DBCompanyInfo db_proxyApp]){
-//        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
-//            return [DBCompaniesViewController new];
-//        }
+    if (([[DBCompaniesManager sharedInstance] companiesLoaded] && [[DBCompaniesManager sharedInstance] companyIsChosen]) || [DBCompanyInfo sharedInstance].deliveryTypes.count > 0) {
+        [ApplicationManager sharedInstance].state = RootStateMain;
+        return [ViewControllerManager mainViewController];
+    } else if ([[DBCompaniesManager sharedInstance] companiesLoaded] && ([[DBCompaniesManager sharedInstance] companies].count > 1)) {
+        [ApplicationManager sharedInstance].state = RootStateCompanies;
+        return [ViewControllerManager companiesViewControllers];
     } else {
-        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
-        if(!([DBCompanyInfo sharedInstance].deliveryTypes.count > 0)){
-            return [ViewControllerManager launchViewController];
-        }
+        [ApplicationManager sharedInstance].state = RootStateLaunch;
+        return [ViewControllerManager launchViewController];
     }
-    
-    return [ViewControllerManager mainViewController];
 }
 @end
 

@@ -40,7 +40,7 @@
 
 - (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
-        if(success){
+        if (success) {
             _type = [[response getValueForKey:@"screen_logic_type"] intValue];
             _applicationName = response[@"app_name"];
             
@@ -205,17 +205,17 @@
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
     
     _deliveryCities = info[@"_deliveryCities"];
-    _promocodesIsEnabled = info[@"promocodeIsEnabled"];
+    _promocodesIsEnabled = info[@"promocodeIsEnabled"] ?: @NO;
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
 }
 
-- (void)synchronize{
+- (void)synchronize {
     NSData *deliveryTypesData = [NSKeyedArchiver archivedDataWithRootObject:_deliveryTypes];
     
-    NSDictionary *pushChannels = @{@"_companyPushChannel":_companyPushChannel,
-                                   @"_clientPushChannel":_clientPushChannel,
-                                   @"_venuePushChannel":_venuePushChannel,
-                                   @"_orderPushChannel":_orderPushChannel};
+    NSDictionary *pushChannels = @{@"_companyPushChannel":_companyPushChannel ?: @"",
+                                   @"_clientPushChannel":_clientPushChannel ?: @"",
+                                   @"_venuePushChannel":_venuePushChannel ?: @"",
+                                   @"_orderPushChannel":_orderPushChannel ?: @""};
     
     NSDictionary *info = @{@"type": @(_type),
                            @"applicationName": _applicationName,

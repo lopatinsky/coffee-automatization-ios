@@ -10,9 +10,6 @@
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
-extern NSString *const kDBApplicationManagerInfoLoadSuccess;
-extern NSString *const kDBApplicationManagerInfoLoadFailure;
-
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 

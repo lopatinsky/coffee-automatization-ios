@@ -10,7 +10,8 @@
 
 @implementation NSOperationQueue (UniqueOperation)
 
-- (BOOL)addUniqueOperation:(NSOperation *)operation {
+- (BOOL)addConcurrentUniqueOperation:(NSOperation *)operation {
+    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
     NSArray *ops = self.operations;
     BOOL exists = NO;
     
@@ -27,6 +28,36 @@
     }
     
     return exists;
+}
+
+- (BOOL)addConcurrentPendingUniqueOperation:(NSOperation *)operation {
+    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+    if (self.operations > 0) {
+        [operation addDependency:self.operations.lastObject];
+    }
+    return [self addConcurrentUniqueOperation:operation];
+}
+
+- (void)addConcurrentPendingOperation:(NSOperation *)operation {
+    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+    
+    NSOperation *lastOp = nil;
+    for (NSOperation *op in self.operations) {
+        if ([op class] == [operation class]) {
+            lastOp = op;
+        }
+    }
+    
+    if (lastOp) {
+        [operation addDependency:lastOp];
+    }
+    
+    [self addOperation:operation];
+}
+
+- (void)addConcurrentOperation:(NSOperation *)operation {
+    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+    [self addOperation:operation];
 }
 
 @end

@@ -7,10 +7,16 @@
 //
 
 #import "NetworkManager.h"
-
 #import "NSOperation+UniqueOperation.h"
 
+#define MAX_REPEATS 3
+
+NSString *const kDBNetworkManagerConnectionFailed = @"kDBNetworkManagerConnectionFailed";
+NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShouldRetryToRequest";
+
 @interface NetworkManager()
+
+@property (nonatomic, strong) NSMutableDictionary *errorsHandler;
 
 @end
 
@@ -31,8 +37,46 @@
     if (self = [super init]) {
         self.operationQueue = [NSOperationQueue new];
         self.operationQueue.maxConcurrentOperationCount = 1;
+        self.errorsHandler = [NSMutableDictionary new];
+        [self subscribeOnNetworkFailureEvents];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retryOperations) name:kDBNetworkManagerShouldRetryToRequest object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)subscribeOnNetworkFailureEvents {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationCompaniesLoadFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationCompanyInfoLoadFailure object:nil];
+}
+
+- (void)retryOperations {
+    for (NSString *key in [self.errorsHandler allKeys]) {
+        if ([[self.errorsHandler objectForKey:key] integerValue] == MAX_REPEATS) {
+            [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(key) new]];
+            [self.errorsHandler setObject:@(1) forKey:key];
+        }
+    }
+}
+
+- (void)connectionFailed:(NSNotification *)notification {
+    NSString *opClass = [notification userInfo][@"class"];
+    
+    if ([self.errorsHandler objectForKey:opClass]) {
+        NSInteger numOfErrors = [[self.errorsHandler objectForKey:opClass] integerValue];
+        [self.errorsHandler setObject:@(++numOfErrors) forKey:opClass];
+        if (numOfErrors == MAX_REPEATS) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerConnectionFailed object:nil];
+        } else {
+            [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(opClass) new]];
+        }
+    } else {
+        [self.errorsHandler setObject:@(1) forKey:opClass];
+        [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(opClass) new]];
+    }
 }
 
 - (void)setOperationQueue:(NSOperationQueue *)operationQueue {
@@ -41,39 +85,22 @@
 
 - (void)addPendingUniqueOperation:(NetworkOperation)opType {
     ConcurrentOperation *op = [NetworkManager operationWithType:opType];
-    if ([self.operationQueue operationCount] > 0) {
-        [op addDependency:[[self.operationQueue operations] lastObject]];
-    }
-    [self.operationQueue addUniqueOperation:op];
+    [self.operationQueue addConcurrentPendingUniqueOperation:op];
 }
 
 - (void)addUniqueOperation:(NetworkOperation)opType {
     ConcurrentOperation *operation = [NetworkManager operationWithType:opType];
-    [self.operationQueue addUniqueOperation:operation];
+    [self.operationQueue addConcurrentUniqueOperation:operation];
 }
 
 - (void)addPendingOperation:(NetworkOperation)opType {
     ConcurrentOperation *op = [NetworkManager operationWithType:opType];
-    if ([self.operationQueue operationCount] > 0) {
-        [op addDependency:[[self.operationQueue operations] lastObject]];
-    }
-    [self.operationQueue addOperation:op];
+    [self.operationQueue addConcurrentPendingOperation:op];
 }
 
 - (void)addOperation:(NetworkOperation)opType {
     ConcurrentOperation *operation = [NetworkManager operationWithType:opType];
-    [self.operationQueue addOperation:operation];
-}
-
-- (void)addOperationsWithDependance:(NSArray *)operations {
-    NSMutableArray *ops = [NSMutableArray new];
-    for (NSNumber *opType in operations) {
-        [ops addObject:[NetworkManager operationWithType:opType.integerValue]];
-    }
-    for (NSUInteger i = 1; i < [ops count]; ++i) {
-        [[ops objectAtIndex:i] addDependency:[ops objectAtIndex:i - 1]];
-    }
-    [self.operationQueue addOperations:ops waitUntilFinished:NO];
+    [self.operationQueue addConcurrentOperation:operation];
 }
 
 @end
@@ -87,7 +114,6 @@
                                        @(NetworkOperationFetchCompanyInfo): [FetchCompanyInfo class],
                                        @(NetworkOperationFetchCompanies): [FetchCompaniesInfo class]
                                        };
-    NSLog(@"OPERATION TYPE: %@", [operationClasses objectForKey:@(type)]);
     ConcurrentOperation *operation = [[operationClasses objectForKey:@(type)] new];
     operation.queue = [NetworkManager sharedManager].operationQueue;
     return operation;

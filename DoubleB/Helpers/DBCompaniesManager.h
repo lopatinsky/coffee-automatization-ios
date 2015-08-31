@@ -22,6 +22,7 @@
 + (NSString *)selectedCompanyName;
 + (void)selectCompanyName:(NSString *)name;
 
+- (BOOL)companyIsChosen;
 - (void)requestCompanies:(void(^)(BOOL success, NSArray *companies))callback;
                          
 @end

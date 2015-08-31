@@ -8,6 +8,13 @@
 
 #import "ConcurrentOperation.h"
 
+#pragma mark - CompanyInfo Operation
+NSString *const kDBConcurrentOperationCompanyInfoLoadSuccess = @"kDBConcurrentOperationCompanyInfoLoadSuccess";
+NSString *const kDBConcurrentOperationCompanyInfoLoadFailure = @"kDBConcurrentOperationCompanyInfoLoadFailure";
+#pragma mark - Companies Operation
+NSString *const kDBConcurrentOperationCompaniesLoadSuccess = @"kDBConcurrentOperationCompaniesLoadSuccess";
+NSString *const kDBConcurrentOperationCompaniesLoadFailure = @"kDBConcurrentOperationCompaniesLoadFailure";
+
 @implementation ConcurrentOperation
 
 - (instancetype)init {

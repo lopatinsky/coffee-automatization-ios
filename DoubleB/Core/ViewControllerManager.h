@@ -41,3 +41,7 @@
 @interface ViewControllerManager(PromocodeViewControllers)
 + (nonnull UIViewController *)promocodeViewControllers;
 @end
+
+@interface ViewControllerManager(CompaniesViewControllers)
++ (nonnull UIViewController *)companiesViewControllers;
+@end

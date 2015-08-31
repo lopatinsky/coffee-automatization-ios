@@ -21,12 +21,12 @@
     if (self.cancelled) return;
     
     [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
-        if (self.queue.operations.count == 1) {
-//            if (success) {
-//                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadSuccess object:nil]];
-//            } else {
-//                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationManagerInfoLoadFailure object:nil]];
-//            }
+        if (success) {
+            if (![[DBCompaniesManager sharedInstance] companyIsChosen]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            }
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadFailure object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
         }
         [self setState:OperationFinished];
     }];
