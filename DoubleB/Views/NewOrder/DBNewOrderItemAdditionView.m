@@ -7,14 +7,15 @@
 //
 
 #import "DBNewOrderItemAdditionView.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 
 @interface DBNewOrderItemAdditionView ()
 @property (weak, nonatomic) IBOutlet UIView *positionAdditionView;
-@property (weak, nonatomic) IBOutlet UILabel *positionAdditionLabel;
+@property (weak, nonatomic) UILabel *positionAdditionLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *giftAdditionView;
 @property (weak, nonatomic) IBOutlet UIImageView *giftAdditionImageView;
+@property (weak, nonatomic) IBOutlet UILabel *giftAdditionBalanceLabel;
 @property (weak, nonatomic) IBOutlet UIView *giftAdditionSeparatorView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintGiftAdditionViewWidth;
 @property (nonatomic) double initialGiftAdditionViewWidth;
@@ -23,6 +24,8 @@
 @implementation DBNewOrderItemAdditionView
 
 - (void)awakeFromNib{
+    self.positionAdditionLabel = (UILabel *)[self.positionAdditionView viewWithTag:10];
+    
     self.positionAdditionLabel.textColor = [UIColor db_defaultColor];
     
     [self.giftAdditionImageView templateImageWithName:@"gift_icon.png"];
@@ -50,13 +53,17 @@
 }
 
 - (void)reload{
-    NSString *text = [OrderManager sharedManager].totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
+    NSString *text = [OrderCoordinator sharedInstance].itemsManager.totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
     self.positionAdditionLabel.text = text;
     
     // Fucking code for Elephant
     if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"elephantboutique"]){
         self.positionAdditionLabel.textColor = [UIColor colorWithRed:216./255 green:134./255 blue:126./255 alpha:1.0];
         self.positionAdditionLabel.text = @"Выбрать напиток";
+        
+        int totalPoints = [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalPrice;
+        NSString *pointsString = [NSString db_localizedFormOfWordBall:totalPoints];
+        self.giftAdditionBalanceLabel.text = [NSString stringWithFormat:@"%ld %@", (long)totalPoints, pointsString];
     }
 }
 
@@ -66,6 +73,8 @@
 
 - (void)showBonusPositionsView:(BOOL)showBonusPositionsView animated:(BOOL)animated{
     _showBonusPositionsView = showBonusPositionsView;
+    
+    [self reload];
     
     void (^animationBlock)(BOOL) = ^void(BOOL showBonusPositionsView){
         if(showBonusPositionsView){

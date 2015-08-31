@@ -36,6 +36,15 @@
     return self;
 }
 
+- (BOOL)hasNestedCategories{
+    BOOL result = NO;
+    for(DBMenuCategory *category in self.categories){
+        result = result || category.type == DBMenuCategoryTypeParent;
+    }
+    
+    return result;
+}
+
 - (NSArray *)getMenu{
     if(!self.categories){
         [self loadMenuFromDeviceMemory];
@@ -112,7 +121,8 @@
         if([category availableInVenue:venue]){
             DBMenuCategory *newCategory = [category copy];
             newCategory.positions = [newCategory filterPositionsForVenue:venue];
-            if([newCategory.positions count] > 0){
+            newCategory.categories = [newCategory filterCategoriesForVenue:venue];
+            if([newCategory.positions count] > 0 || [newCategory.categories count] > 0){
                 [categories addObject:newCategory];
             }
         }
@@ -125,6 +135,9 @@
     NSMutableArray *newCategories = [[NSMutableArray alloc] init];
     
     for(NSDictionary *categoryDictionary in responseMenu){
+        if([categoryDictionary[@"info"][@"category_id"] isEqualToString:@"5695159920492544"]){
+            NSLog(@"");
+        }
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", categoryDictionary[@"info"][@"category_id"]];
         DBMenuCategory *sameCategory = [[self.categories filteredArrayUsingPredicate:predicate] firstObject];
         if(sameCategory){
@@ -176,6 +189,12 @@
             NSLog(@"%@", error);
         }
     }
+}
+
+- (void)clearMenu {
+    self.categories = @[];
+    
+    [self saveMenuToDeviceMemory];
 }
 
 - (void)loadMenuFromDeviceMemory{

@@ -16,18 +16,15 @@
 #import "IHSecureStore.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
-#import "DBShippingManager.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 #import "Order.h"
 #import "DBMenuPosition.h"
-#import "DBMenuBonusPosition.h"
 #import "OrderItem.h"
 #import "Venue.h"
 #import "Compatibility.h"
 #import "LocationHelper.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"
-#import "DBVenuesTableViewController.h"
 #import "DBCardsViewController.h"
 #import "DBCommentViewController.h"
 #import "CoreDataHelper.h"
@@ -41,14 +38,18 @@
 #import "DBTimePickerView.h"
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"
-#import "DBPositionsViewController.h"
 #import "DBBonusPositionsViewController.h"
 #import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
-#import "DBPositionViewController.h"
+#import "PositionViewController1.h"
 #import "DBNewOrderItemAdditionView.h"
 #import "DBPayPalManager.h"
 #import "DBAddressViewController.h"
+
+#import "MenuListViewControllerProtocol.h"
+#import "PositionViewControllerProtocol.h"
+
+#import "CompanyNewsManager.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -79,10 +80,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
-@property (strong, nonatomic) DBPositionsViewController *positionsViewController;
-
-@property (strong, nonatomic) OrderManager *orderManager;
-@property (strong, nonatomic) DBDeliverySettings *deliverySettings;
+@property (strong, nonatomic) OrderCoordinator *orderCoordinator;
 
 @property (nonatomic, strong) NSDictionary *currentCard;
 
@@ -103,6 +101,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -110,17 +109,18 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.title = NSLocalizedString(@"Заказ", nil);
     
 // ========= Configure Logic =========
-    self.orderManager = [OrderManager sharedManager];
-    self.deliverySettings = [DBDeliverySettings sharedInstance];
+    self.orderCoordinator = [OrderCoordinator sharedInstance];
     
-    self.delegate = [DBTabBarController sharedInstance];
     self.currentCard = [NSDictionary new];
     
     if (self.repeatedOrder) {
-        [[OrderManager sharedManager] purgePositions];
-        [[OrderManager sharedManager] overridePositions:self.repeatedOrder.items];
-        [OrderManager sharedManager].paymentType = self.repeatedOrder.paymentType;
-        [OrderManager sharedManager].venue = self.repeatedOrder.venue;
+        [_orderCoordinator.itemsManager flushCache];
+        [_orderCoordinator.bonusItemsManager flushCache];
+        [_orderCoordinator.orderManager flushCache];
+        
+        [_orderCoordinator.itemsManager overrideItems:self.repeatedOrder.items];
+        _orderCoordinator.orderManager.paymentType = self.repeatedOrder.paymentType;
+        _orderCoordinator.orderManager.venue = self.repeatedOrder.venue;
         
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBRepeateOrderNotification object:nil]];
         
@@ -167,10 +167,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
  
 // ========= Configure Time =========
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
-    [_deliverySettings addObserver:self
-                    forKeyPath:@"selectedTime"
-                       options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                       context:nil];
+    [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewSelectedTime selector:@selector(reloadTime)];
 // ========= Configure Time =========
 
     
@@ -197,11 +194,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self startUpdatingPromoInfo];
     
-    [_orderManager reloadTotal];
-    
     [self reloadItemAdditionView];
     [self reloadAddress];
     [self reloadTime];
+    [self reloadTimePicker];
     [self reloadPaymentType];
     [self reloadProfile];
     [self reloadContinueButton];
@@ -212,11 +208,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemCells removeAllObjects];
     
     [self.tableView reloadData];
-    if ([[OrderManager sharedManager] positionsCount] == 1) {
-        self.tableView.alwaysBounceVertical = NO;
-    } else {
-        self.tableView.alwaysBounceVertical = YES;
-    }
+//    if (_orderCoordinator.itemsManager.totalCount == 1) {
+//        self.tableView.alwaysBounceVertical = NO;
+//    } else {
+//        self.tableView.alwaysBounceVertical = YES;
+//    }
     
     [self reloadTableViewHeight:NO];
     
@@ -259,31 +255,23 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [GANHelper analyzeScreen:ORDER_SCREEN];
   
-    if([OrderManager sharedManager].positionsCount > 0){
+    if(_orderCoordinator.itemsManager.totalCount > 0){
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             [self showHintForUser];
         });
     }
 
-    if ([OrderManager sharedManager].totalCount == 0) {
+    if (_orderCoordinator.itemsManager.totalCount == 0) {
         [self endUpdatingPromoInfo];
     }
 }
 
-- (void)dealloc{
+- (void)dealloc {
     NSLog(@"dealloc");
     
-    [_deliverySettings removeObserver:self forKeyPath:@"selectedTime"];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context{
-    if([keyPath isEqualToString:@"selectedTime"]){
-        [self reloadTime];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [_orderCoordinator removeObserver:self];
 }
 
 - (void)setupSettingsNavigationItem{
@@ -319,7 +307,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     int numberOfHintsUsed = [[[NSUserDefaults standardUserDefaults] objectForKey:@"NumberOfPositionCellHintForUser"] intValue];
     
     if(numberOfHintsUsed < 3){
-        NSUInteger count = [[OrderManager sharedManager] positionsCount];
+        NSUInteger count = [_orderCoordinator.itemsManager.items count];
         DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:count - 1 inSection:0]];
         
         [cell moveContentToLeft:YES];
@@ -343,7 +331,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
          NSTextCheckingResult *match = matches[0];
         result = [address stringByReplacingCharactersInRange:NSMakeRange(0, match.range.location + match.range.length)
                                                   withString:@""];
-        while ([result hasPrefix:@" "]){
+        while ([result hasPrefix:@" "]) {
             result = [result stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
         }
     }
@@ -354,26 +342,26 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Promo
 
 - (void)startUpdatingPromoInfo{
-    BOOL startUpdating = [[DBPromoManager sharedManager] checkCurrentOrder:^(BOOL success) {
+    BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder:^(BOOL success) {
         [self endUpdatingPromoInfo];
         
         if(success){
             // Show order promos & errors
-            NSArray *promos = [DBPromoManager sharedManager].promos;
-            NSArray *errors = [DBPromoManager sharedManager].errors;
+            NSArray *promos = _orderCoordinator.promoManager.promos;
+            NSArray *errors = _orderCoordinator.promoManager.errors;
             
             [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
             
             BOOL shouldReloadAgain = NO;
-            for(int i = 0; i < [OrderManager sharedManager].items.count; i++){
-                OrderItem *item = [[OrderManager sharedManager] itemAtIndex:i];
-                DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
+            for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
+                OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
+                DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
                 
                 DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
                 cell.promoItem = promoItem;
                 
                 if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
-                    [_orderManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+                    [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
                     [promoItem clear];
                     shouldReloadAgain = YES;
                     
@@ -382,15 +370,26 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                                    category:ORDER_SCREEN];
                 }
             }
-
+            
             if(shouldReloadAgain){
                 [self startUpdatingPromoInfo];
             }
             [self reloadVisibleCells];
+ 
+// TODO: Dirty trick to reload tableview without exceptions
+            @try {
+                // Reload order gifts section
+                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self reloadTableViewHeight:YES];
+            }
+            @catch (NSException *exception) {
+                [self.tableView reloadData];
+            }
+            
             
             // Gifts logic
-            [self.itemAdditionView showBonusPositionsView:[DBPromoManager sharedManager].bonusPositionsAvailable animated:YES];
-
+            [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
+            
         } else {
             [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
                                       animation:^{
@@ -435,8 +434,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Personal wallet
 
 - (void)reloadBonusesView:(BOOL)animated{
-    if([DBPromoManager sharedManager].walletPointsAvailableForOrder > 0){
-        self.bonusView.bonusSwitchActive = [DBPromoManager sharedManager].walletActiveForOrder;
+    if(_orderCoordinator.promoManager.walletDiscount > 0){
+        self.bonusView.bonusSwitchActive = _orderCoordinator.promoManager.walletActiveForOrder;
         [self.bonusView show:animated completion:^{
             [self.scrollView layoutIfNeeded];
         }];
@@ -448,7 +447,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)db_newOrderBonusesView:(DBNewOrderBonusesView *)view didSelectBonuses:(BOOL)select{
-    [DBPromoManager sharedManager].walletActiveForOrder = select;
+    _orderCoordinator.promoManager.walletActiveForOrder = select;
     [self reloadBonusesView:NO];
 }
 
@@ -458,7 +457,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)reloadTableViewHeight:(BOOL)animated{
     int height = 0;
     
-    NSArray *items = [[OrderManager sharedManager].items arrayByAddingObjectsFromArray:[OrderManager sharedManager].bonusPositions];
+    NSMutableArray *items = [[NSMutableArray alloc] initWithArray:_orderCoordinator.itemsManager.items];
+    [items addObjectsFromArray:_orderCoordinator.bonusItemsManager.items];
+    [items addObjectsFromArray:_orderCoordinator.orderGiftsManager.items];
     for(OrderItem *item in items)
         if(item.position.hasImage){
             height += 100;
@@ -490,28 +491,38 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if(section == 0){
-        return [[OrderManager sharedManager] positionsCount];
-    } else {
-        return [[OrderManager sharedManager] bonusPositionsCount];
+    if (section == 0){
+        return [_orderCoordinator.itemsManager.items count];
     }
+    if (section == 1) {
+        return [_orderCoordinator.bonusItemsManager.items count];
+    }
+    if (section == 2) {
+        return [_orderCoordinator.orderGiftsManager.items count];
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBOrderItemCell *cell;
     
     OrderItem *item;
-    if(indexPath.section == 0){
-        item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-    } else {
-        item = [OrderManager sharedManager].bonusPositions[indexPath.row];
+    if (indexPath.section == 0) {
+        item = [_orderCoordinator.itemsManager itemAtIndex:indexPath.row];
+    }
+    if (indexPath.section == 1) {
+        item = [_orderCoordinator.bonusItemsManager itemAtIndex:indexPath.row];
+    }
+    if (indexPath.section == 2) {
+        item = [_orderCoordinator.orderGiftsManager itemAtIndex:indexPath.row];
     }
     
-    if(item.position.hasImage){
+    if (item.position.hasImage){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
         
         if (!cell) {
@@ -530,8 +541,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     cell.orderItem = item;
     
-    if(indexPath.section == 0){
-        DBPromoItem *promoItem = [[DBPromoManager sharedManager] promosForOrderItem:item];
+    if (indexPath.section == 0){
+        DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
         cell.promoItem = promoItem;
     }
     
@@ -544,11 +555,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     OrderItem *item;
-    
-    if(indexPath.section == 0){
-        item = [[OrderManager sharedManager] itemAtIndex:indexPath.row];
-    } else {
-        item = [OrderManager sharedManager].bonusPositions[indexPath.row];
+    if (indexPath.section == 0) {
+        item = [_orderCoordinator.itemsManager itemAtIndex:indexPath.row];
+    }
+    if (indexPath.section == 1) {
+        item = [_orderCoordinator.bonusItemsManager itemAtIndex:indexPath.row];
+    }
+    if (indexPath.section == 2) {
+        item = [_orderCoordinator.orderGiftsManager itemAtIndex:indexPath.row];
     }
     
     if(item.position.hasImage){
@@ -567,7 +581,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    [[OrderManager sharedManager] removeBonusPositionAtIndex:indexPath.row];
+    [_orderCoordinator.bonusItemsManager removeOrderItemAtIndex:indexPath.row];
     
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath]
@@ -581,7 +595,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - DBOrderItemCellDelegate
 
 - (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
-    return ![cell.orderItem.position isKindOfClass:[DBMenuBonusPosition class]];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    return indexPath.section == 0;
 }
 
 - (void)removeRowAtIndex:(NSInteger)index{
@@ -591,8 +606,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadTableViewHeight:YES];
     [self.tableView endUpdates];
     
-    if ([OrderManager sharedManager].totalCount == 0) {
-        [[DBPromoManager sharedManager] clear];
+    if (_orderCoordinator.itemsManager.totalCount == 0) {
         [self reloadBonusesView:YES];
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
@@ -602,7 +616,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
-    [[OrderManager sharedManager] increaseOrderItemCountAtIndex:index];
+    [_orderCoordinator.itemsManager increaseOrderItemCountAtIndex:index];
     
     [cell reloadCount];
     [self startUpdatingPromoInfo];
@@ -612,7 +626,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
-    NSInteger count = [[OrderManager sharedManager] decreaseOrderItemCountAtIndex:index];
+    NSInteger count = [_orderCoordinator.itemsManager decreaseOrderItemCountAtIndex:index];
     
     if(count == 0){
         [self removeRowAtIndex:index];
@@ -624,7 +638,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadContinueButton];
     [self reloadPaymentType];
 
-    if ([[OrderManager sharedManager] positionsCount] == 1) {
+    if ([_orderCoordinator.itemsManager.items count] == 1) {
         self.tableView.alwaysBounceVertical = NO;
     } else {
         self.tableView.alwaysBounceVertical = YES;
@@ -636,8 +650,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
-    if(![item.position isKindOfClass:[DBMenuBonusPosition class]]){
-        DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:item.position mode:DBPositionViewControllerModeOrderPosition];
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if(indexPath.section != 2){
+        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
         positionVC.parentNavigationController = self.navigationController;
         positionVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:positionVC animated:YES];
@@ -646,7 +662,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
-    [_orderManager removeOrderItemAtIndex:index];
+    [_orderCoordinator.itemsManager removeOrderItemAtIndex:index];
     [self removeRowAtIndex:index];
     
     [self startUpdatingPromoInfo];
@@ -658,7 +674,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell{
     if(cell.promoItem.substitute){
-        NSInteger index = [_orderManager replaceOrderItem:cell.orderItem withPosition:cell.promoItem.substitute];
+        NSInteger index = [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:cell.promoItem.substitute];
         [cell.promoItem clear];
         
         if(index != -1){
@@ -684,15 +700,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemAdditionView reload];
 }
 
-- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view{
-    if(!self.positionsViewController){
-        self.positionsViewController = [DBPositionsViewController new];
-        self.positionsViewController.hidesBottomBarWhenPushed = YES;
-    }
-    
+- (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view {
     [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
     
-    [self.navigationController pushViewController:self.positionsViewController animated:YES];
+    UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+    menuVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:menuVC animated:YES];
 }
 
 - (void)db_newOrderItemAdditionViewDidSelectBonusPositions:(DBNewOrderItemAdditionView *)view{
@@ -705,8 +718,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Delivery/Venue
 
 - (void)reloadAddress{
-    if (_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
-        NSString *address = [[DBShippingManager sharedManager].selectedAddress formattedAddressString:DBAddressStringModeNormal];
+    if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
+        NSString *address = [_orderCoordinator.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeNormal];
         if(address && address.length > 0){
             self.orderFooter.labelAddress.text = address;
             self.orderFooter.labelAddress.textColor = [UIColor blackColor];
@@ -715,12 +728,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelAddress.textColor = [UIColor orangeColor];
         }
     } else {
-        if (_orderManager.venue) {
-            [self setVenue:_orderManager.venue];
+        if (_orderCoordinator.orderManager.venue) {
+            [self setVenue:_orderCoordinator.orderManager.venue];
         } else {
             [self.orderFooter.activityIndicator startAnimating];
             [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-                [OrderManager sharedManager].location = location;
+                _orderCoordinator.orderManager.location = location;
                 
                 if (location) {
                     [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
@@ -742,7 +755,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)setVenue:(Venue *)venue{
     if(venue){
-        [OrderManager sharedManager].venue = venue;
+        _orderCoordinator.orderManager.venue = venue;
         
         self.orderFooter.labelAddress.text = venue.title;
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
@@ -773,21 +786,21 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)reloadTime{
     NSString *timeString = [self selectedTimeString];
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Доставка", nil)];
     }
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway){
+    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
     }
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdInRestaurant){
+    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdInRestaurant){
         timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
     }
     
     self.orderFooter.labelTime.text = timeString;
 }
 
-- (void)reloadTimePicker{
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+- (void)reloadTimePicker {
+    if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         self.pickerView.segments = @[];
     } else {
         NSMutableArray *titles = [NSMutableArray new];
@@ -798,31 +811,31 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             [titles addObject:NSLocalizedString(@"На месте", nil)];
         }
         self.pickerView.segments = titles;
-        self.pickerView.selectedSegmentIndex = _deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
+        self.pickerView.selectedSegmentIndex = _orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
     }
     
-    switch (_deliverySettings.deliveryType.timeMode) {
+    switch (_orderCoordinator.deliverySettings.deliveryType.timeMode) {
         case TimeModeTime:{
             self.pickerView.type = DBTimePickerTypeTime;
-            self.pickerView.selectedDate = _deliverySettings.selectedTime;
+            self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
         }
             break;
         case TimeModeDateTime:{
             self.pickerView.type = DBTimePickerTypeDateTime;
-            self.pickerView.selectedDate = _deliverySettings.selectedTime;
+            self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
         }
             break;
         case TimeModeSlots:{
             self.pickerView.type = DBTimePickerTypeItems;
-            self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
-            self.pickerView.selectedItem = [_deliverySettings.deliveryType.timeSlots indexOfObject:_deliverySettings.selectedTimeSlot];
+            self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.selectedItem = [_orderCoordinator.deliverySettings.deliveryType.timeSlots indexOfObject:_orderCoordinator.deliverySettings.selectedTimeSlot];
         }
             break;
         case TimeModeDateSlots:{
             self.pickerView.type = DBTimePickerTypeDateAndItems;
-            self.pickerView.items = _deliverySettings.deliveryType.timeSlotsNames;
-            self.pickerView.minDate = _deliverySettings.deliveryType.minDate;
-            self.pickerView.maxDate = _deliverySettings.deliveryType.maxDate;
+            self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.minDate = _orderCoordinator.deliverySettings.deliveryType.minDate;
+            self.pickerView.maxDate = _orderCoordinator.deliverySettings.deliveryType.maxDate;
         }
             
         default:
@@ -843,24 +856,24 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     NSString *timeString;
     
     NSDateFormatter *formatter = [NSDateFormatter new];
-    switch (_deliverySettings.deliveryType.timeMode) {
+    switch (_orderCoordinator.deliverySettings.deliveryType.timeMode) {
         case TimeModeTime:{
             formatter.dateFormat = @"HH:mm";
-            timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
+            timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
         }
             break;
         case TimeModeDateTime:{
             formatter.dateFormat = @"dd/MM/yy HH:mm";
-            timeString = [formatter stringFromDate:_deliverySettings.selectedTime];
+            timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
         }
             break;
         case TimeModeSlots:{
-            timeString = _deliverySettings.selectedTimeSlot.slotTitle;
+            timeString = _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle;
         }
             break;
         case TimeModeDateSlots:{
             formatter.dateFormat = @"ccc d";
-            timeString = [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:_deliverySettings.selectedTime], _deliverySettings.selectedTimeSlot.slotTitle];
+            timeString = [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime], _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle];
         }
             break;
             
@@ -873,7 +886,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (NSString *)stringFromTime:(NSDate *)date{
     NSDateFormatter *formatter = [NSDateFormatter new];
-    if(_deliverySettings.deliveryType.timeMode == TimeModeTime){
+    if(_orderCoordinator.deliverySettings.deliveryType.timeMode == TimeModeTime){
         formatter.dateFormat = @"HH:mm";
     } else {
         formatter.dateFormat = @"dd/MM/yy HH:mm";
@@ -892,31 +905,31 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [GANHelper analyzeEvent:@"delivery_type_selected" number:@(deliveryTypeId) category:ORDER_SCREEN];
     
-    [_deliverySettings selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId]];
+    [_orderCoordinator.deliverySettings selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId]];
     
     [self reloadTimePicker];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
-    DBTimeSlot *timeSlot = _deliverySettings.deliveryType.timeSlots[index];
-    _deliverySettings.selectedTimeSlot = timeSlot;
+    DBTimeSlot *timeSlot = _orderCoordinator.deliverySettings.deliveryType.timeSlots[index];
+    _orderCoordinator.deliverySettings.selectedTimeSlot = timeSlot;
     [self reloadTime];
     
     [GANHelper analyzeEvent:@"delivery_slot_selected" label:timeSlot.slotTitle category:ORDER_SCREEN];
 }
 
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
-    NSInteger comparisonResult = [_deliverySettings setNewSelectedTime:date];
+    NSInteger comparisonResult = [_orderCoordinator.deliverySettings setNewSelectedTime:date];
     
-    if(_deliverySettings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
+    if(_orderCoordinator.deliverySettings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
         NSString *message;
         if(comparisonResult == NSOrderedAscending){
-            message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.minDate]];
+            message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_orderCoordinator.deliverySettings.deliveryType.minDate]];
             [self showAlert:message];
         }
         
         if(comparisonResult == NSOrderedDescending){
-            message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_deliverySettings.deliveryType.maxDate]];
+            message = [NSString stringWithFormat:@"Максимальное время для выбора - %@", [self stringFromTime:_orderCoordinator.deliverySettings.deliveryType.maxDate]];
             [self showAlert:message];
         }
     }
@@ -974,10 +987,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)reloadPaymentType {
     [self.orderFooter.labelCard db_stopObservingAnimationNotification];
     
-    switch (_orderManager.paymentType) {
+    switch (_orderCoordinator.orderManager.paymentType) {
         case PaymentTypeNotSet:
-            [_orderManager selectIfPossibleDefaultPaymentType];
-            if(_orderManager.paymentType != PaymentTypeNotSet){
+            [_orderCoordinator.orderManager selectIfPossibleDefaultPaymentType];
+            if(_orderCoordinator.orderManager.paymentType != PaymentTypeNotSet){
                 [self reloadPaymentType];
             } else {
                 self.orderFooter.labelCard.textColor = [UIColor orangeColor];
@@ -1011,7 +1024,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];
                 self.orderFooter.labelCard.text = @"PayPal";
             } else {
-                _orderManager.paymentType = PaymentTypeNotSet;
+                _orderCoordinator.orderManager.paymentType = PaymentTypeNotSet;
                 [self reloadPaymentType];
             }
             break;
@@ -1021,7 +1034,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (IBAction)clickPaymentType:(id)sender {
     NSString *label = @"";
-    switch ([OrderManager sharedManager].paymentType) {
+    switch (_orderCoordinator.orderManager.paymentType) {
         case PaymentTypeNotSet:
             label = @"not_set";
             break;
@@ -1053,11 +1066,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Comment
 
 - (void)reloadComment {
-    if ([OrderManager sharedManager].comment.length > 0) {
-        if ([OrderManager sharedManager].comment.length > 10) {
-            self.orderFooter.labelComment.text = [NSString stringWithFormat:@"%@...", [[OrderManager sharedManager].comment substringToIndex:10]];
+    if (_orderCoordinator.orderManager.comment.length > 0) {
+        if (_orderCoordinator.orderManager.comment.length > 10) {
+            self.orderFooter.labelComment.text = [NSString stringWithFormat:@"%@...", [_orderCoordinator.orderManager.comment substringToIndex:10]];
         } else {
-            self.orderFooter.labelComment.text = [OrderManager sharedManager].comment;
+            self.orderFooter.labelComment.text = _orderCoordinator.orderManager.comment;
         }
     } else {
         self.orderFooter.labelComment.text = NSLocalizedString(@"Комментарий", nil);
@@ -1068,12 +1081,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [GANHelper analyzeEvent:@"comment_screen" category:ORDER_SCREEN];
     DBCommentViewController *commentController = [DBCommentViewController new];
     commentController.delegate = self;
-    commentController.comment = [OrderManager sharedManager].comment;
+    commentController.comment = _orderCoordinator.orderManager.comment;
     [self.navigationController pushViewController:commentController animated:YES];
 }
 
 - (void)commentViewController:(DBCommentViewController *)controller didFinishWithText:(NSString *)text {
-    [OrderManager sharedManager].comment = text;
+    _orderCoordinator.orderManager.comment = text;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -1121,7 +1134,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadContinueButton {
-    if (![OrderManager sharedManager].validOrder) {
+    if (!_orderCoordinator.validOrder) {
         self.continueButton.backgroundColor = [UIColor db_grayColor];
         self.continueButton.alpha = 0.5;
     } else {
@@ -1133,7 +1146,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)clickContinue:(id)sender {
     [GANHelper analyzeEvent:@"order_button_click" category:ORDER_SCREEN];
     
-    if(![OrderManager sharedManager].validOrder){
+    if(!_orderCoordinator.validOrder){
         [self startUpdatingPromoInfo];
         
         // Nice animation for all error elements
@@ -1182,7 +1195,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         return;
     }
     
-    if([OrderManager sharedManager].paymentType == PaymentTypeCard && !self.currentCard){
+    if(_orderCoordinator.orderManager.paymentType == PaymentTypeCard && !self.currentCard){
         [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
                                        message:NSLocalizedString(@"Пожалуйста, добавьте новую карту или выберите одну из существующих", nil)
                              cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];
@@ -1200,8 +1213,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
         } completion:nil];
-        
-        [self.delegate newOrderViewController:self didFinishOrder:order];
     } failure:^(NSString *errorTitle, NSString *errorMessage) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
@@ -1216,12 +1227,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }];
 }
 
-
 #pragma mark - UINavigationControllerDelegate
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     if ([viewController class] == [DBOrdersTableViewController class]) {
-        [[OrderManager sharedManager] purgePositions];
+//        [[OrderManager sharedManager] purgePositions];
     }
 }
 

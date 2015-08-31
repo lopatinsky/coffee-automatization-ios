@@ -9,16 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @class DBMenuPosition;
-
 @interface OrderItem : NSObject <NSCoding, NSCopying>
 
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic, readonly) double totalPrice;
 @property (nonatomic) NSInteger count;
 
+// Valid only if position currently available in menu
+@property (nonatomic, readonly) BOOL valid;
+
 - (instancetype)initWithPosition:(DBMenuPosition *)position;
 
-+ (instancetype)orderItemFromHistoryDictionary:(NSDictionary *)historyItem bonus:(BOOL)bonus;
++ (instancetype)orderItemFromDictionary:(NSDictionary *)historyItem;
 
 @end
 

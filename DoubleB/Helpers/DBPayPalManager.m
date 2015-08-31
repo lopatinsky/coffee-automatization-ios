@@ -87,18 +87,18 @@ NSString *const kDBDefaultsLoggedInPayPal = @"kDBDefaultsLoggedInPayPal";
 
 
 - (void)obtainConsent {
-    PayPalProfileSharingViewController *psViewController;
-    NSSet *scopes = [NSSet setWithArray:@[kPayPalOAuth2ScopeEmail, kPayPalOAuth2ScopeAddress, kPayPalOAuth2ScopePhone]];
-    
-    psViewController = [[PayPalProfileSharingViewController alloc] initWithScopeValues:scopes
-                                                                         configuration:_payPalConfiguration
-                                                                              delegate:self];
-//    PayPalFuturePaymentViewController *fpViewController;
-//    fpViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration
-//                                                                               delegate:self];
+//    PayPalProfileSharingViewController *psViewController;
+//    NSSet *scopes = [NSSet setWithArray:@[kPayPalOAuth2ScopeEmail, kPayPalOAuth2ScopeAddress, kPayPalOAuth2ScopePhone]];
+//    
+//    psViewController = [[PayPalProfileSharingViewController alloc] initWithScopeValues:scopes
+//                                                                         configuration:_payPalConfiguration
+//                                                                              delegate:self];
+    PayPalFuturePaymentViewController *fpViewController;
+    fpViewController = [[PayPalFuturePaymentViewController alloc] initWithConfiguration:_payPalConfiguration
+                                                                               delegate:self];
     
     if([self.delegate respondsToSelector:@selector(payPalManager:shouldPresentViewController:)]){
-        [self.delegate payPalManager:self shouldPresentViewController:psViewController];
+        [self.delegate payPalManager:self shouldPresentViewController:fpViewController];
     }
 }
 

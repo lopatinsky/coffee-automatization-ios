@@ -10,6 +10,8 @@
 #import "DBVenuesTableViewController.h"
 #import "DBDeliveryViewController.h"
 
+#import "OrderCoordinator.h"
+#import "DeliverySettings.h"
 #import "OrderManager.h"
 #import "DBCompanyInfo.h"
 
@@ -24,32 +26,28 @@
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet UIView *contentView;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *segmentHolderHeightConstraint;
+
+@property (strong, nonatomic) OrderCoordinator *orderCoordinator;
+
 @property (strong, nonatomic) NSMutableDictionary *controllers;
 @property (strong, nonatomic) NSArray *deliveryTypeNames;
-
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *segmentHolderHeightConstraint;
 
 @end
 
 @implementation DBAddressViewController
 
-#pragma mark - Life-Cycle methods
-
-//- (instancetype)initWithDelegate:(id<DBVenuesTableViewControllerDelegate> __nonnull)delegate {
-//    self = [DBAddressViewController new];
-//    self.delegate = delegate;
-//    return self;
-//}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.orderCoordinator = [OrderCoordinator sharedInstance];
     
     self.controllers = [NSMutableDictionary new];
     [self initializeViews];
     [self initializeControllers];
     
     if ([self.deliveryTypeNames count] > 1) {
-        if ([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping) {
+        if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
             if ([[self.segmentedControl titleForSegmentAtIndex:0] isEqualToString:@"Доставка"]) {
                 [self displayContentControllerWithTitle:self.deliveryTypeNames[0]];
                 self.segmentedControl.selectedSegmentIndex = 0;
@@ -78,7 +76,7 @@
 - (void)viewDidDisappear:(BOOL)animated {
     [self showNavigationBarShadow];
     
-    if ([[[DBDeliverySettings sharedInstance] deliveryType] typeId] == DeliveryTypeIdShipping) {
+    if ([[_orderCoordinator.deliverySettings deliveryType] typeId] == DeliveryTypeIdShipping) {
         [GANHelper analyzeEvent:@"back_pressed" category:ADDRESS_SCREEN];
     } else {
         [GANHelper analyzeEvent:@"back_click" category:VENUES_SCREEN];
@@ -87,32 +85,35 @@
 
 #pragma mark - Other methods
 - (void)initializeViews {
-    self.placeholderView.backgroundColor = [UIColor db_defaultColor];
-    self.placeholderView.alpha = 0.885;
-    
-    self.segmentedControl.tintColor = [UIColor whiteColor];
+    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0].CGColor)) {
+        self.placeholderView.backgroundColor = [UIColor whiteColor];
+        self.segmentedControl.tintColor = [UIColor db_defaultColor];
+        
+    } else {
+        self.placeholderView.backgroundColor = [UIColor db_defaultColor];
+        self.placeholderView.alpha = 0.885;
+        
+        self.segmentedControl.tintColor = [UIColor whiteColor];
+    }
     self.segmentedControl.selectedSegmentIndex = 0;
+    
 }
 
 - (void)initializeControllers {
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] ||
         [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
-        DBVenuesTableViewController *newController = [DBVenuesTableViewController new];
-        newController.delegate = self;
-        newController.eventsCategory = VENUES_ORDER_SCREEN;
-        self.controllers[@"Самовывоз"] = @{
-                                            @"controller": newController,
-                                            @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)
-                                           };
+        DBVenuesTableViewController *venuesVC = [DBVenuesTableViewController new];
+        venuesVC.mode = DBVenuesTableViewControllerModeChooseVenue;
+        venuesVC.eventsCategory = VENUES_ORDER_SCREEN;
+        self.controllers[@"Самовывоз"] = @{@"controller": venuesVC,
+                                           @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)};
     }
     
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]) {
         DBDeliveryViewController *deliveryViewController = [DBDeliveryViewController new];
         deliveryViewController.delegate = self;
-        self.controllers[@"Доставка"] = @{
-                                           @"controller": deliveryViewController,
-                                           @"deliveryTypeName": NSLocalizedString(@"Адрес доставки", nil)
-                                           };
+        self.controllers[@"Доставка"] = @{@"controller": deliveryViewController,
+                                          @"deliveryTypeName": NSLocalizedString(@"Адрес доставки", nil)};
     }
     
     self.deliveryTypeNames = [self.controllers.allKeys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
@@ -138,11 +139,11 @@
 
 - (IBAction)deliveryTypeChanged:(id)sender {
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Самовывоз"]) {
-        [[DBDeliverySettings sharedInstance] selectTakeout];
+        [_orderCoordinator.deliverySettings selectTakeout];
         [GANHelper analyzeEvent:@"takeaway_selected" category:ORDER_SCREEN];
     }
     if ([self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex] isEqualToString:@"Доставка"]) {
-        [[DBDeliverySettings sharedInstance] selectShipping];
+        [_orderCoordinator.deliverySettings selectShipping];
         [GANHelper analyzeEvent:@"shipping_selected" category:ORDER_SCREEN];
     }
     [self displayContentControllerWithTitle:self.deliveryTypeNames[self.segmentedControl.selectedSegmentIndex]];
@@ -150,10 +151,10 @@
 
 - (void)displayContentControllerWithTitle:(NSString *)title {
     if ([title isEqualToString:@"Самовывоз"]) {
-        [[DBDeliverySettings sharedInstance] selectTakeout];
+        [_orderCoordinator.deliverySettings selectTakeout];
     }
     if ([title isEqualToString:@"Доставка"]) {
-        [[DBDeliverySettings sharedInstance] selectShipping];
+        [_orderCoordinator.deliverySettings selectShipping];
     }
     
     UIViewController *controller = self.controllers[title][@"controller"];
@@ -181,7 +182,7 @@
 #pragma mark - DBVenuesTableViewControllerDelegate
 - (void)venuesController:(DBVenuesTableViewController *)controller didChooseVenue:(Venue *)venue {
     if(venue){
-        [OrderManager sharedManager].venue = venue;
+        _orderCoordinator.orderManager.venue = venue;
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

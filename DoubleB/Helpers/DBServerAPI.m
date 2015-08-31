@@ -8,8 +8,7 @@
 
 #import "DBServerAPI.h"
 #import "DBAPIClient.h"
-#import "OrderManager.h"
-#import "DBPromoManager.h"
+#import "OrderCoordinator.h"
 #import "OrderItem.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
@@ -24,13 +23,26 @@
 #import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
-#import "DBShippingManager.h"
 
 #import <Parse/Parse.h>
 
 @implementation DBServerAPI
 
 #pragma mark - User
+
++ (void)requestCompanies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if(success)
+                                    success(responseObject[@"companies"]);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                if(failure)
+                                    failure(error);
+                            }];
+}
 
 + (void)registerUser:(void(^)(BOOL success))callback{
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
@@ -54,6 +66,7 @@
         NSString *shareDataString = [[NSString alloc] initWithData:shareData encoding:NSUTF8StringEncoding];
         params[@"share_data"] = shareDataString;
     }
+    
     [[DBAPIClient sharedClient] POST:@"register"
                           parameters:params
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -61,30 +74,30 @@
                                  
                                  [[IHSecureStore sharedInstance] setClientId:[NSString stringWithFormat:@"%lld", (long long)[responseObject[@"client_id"] longLongValue]]];
                                  
-                                 if(responseObject[@"share_type"]){
-                                     int shareType = [responseObject[@"share_type"] intValue];
-                                     switch (shareType) {
-                                         case 0:// Share
-                                             break;
-                                         case 1:// Ivitation to app
-                                             break;
-                                         case 2:{// Friend gift
-                                             NSString *branchName = responseObject[@"branch_name"];
-                                             NSString *branchPhone = responseObject[@"branch_phone"];
-                                             
-                                             if(![[DBClientInfo sharedInstance] validClientName]){
-                                                 [DBClientInfo sharedInstance].clientName = branchName;
-                                             }
-                                             
-                                             if(![[DBClientInfo sharedInstance] validClientPhone]){
-                                                 [DBClientInfo sharedInstance].clientPhone = branchPhone;
-                                             }
-                                             
-//                                             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFriendGiftRecievedNotification object:nil]];
-                                         }
-                                             break;
-                                     }
-                                 }
+//                                 if(responseObject[@"share_type"]){
+//                                     int shareType = [responseObject[@"share_type"] intValue];
+//                                     switch (shareType) {
+//                                         case 0:// Share
+//                                             break;
+//                                         case 1:// Ivitation to app
+//                                             break;
+//                                         case 2:{// Friend gift
+//                                             NSString *branchName = responseObject[@"branch_name"];
+//                                             NSString *branchPhone = responseObject[@"branch_phone"];
+//                                             
+//                                             if(![[DBClientInfo sharedInstance] validClientName]){
+//                                                 [DBClientInfo sharedInstance].clientName = branchName;
+//                                             }
+//                                             
+//                                             if(![[DBClientInfo sharedInstance] validClientPhone]){
+//                                                 [DBClientInfo sharedInstance].clientPhone = branchPhone;
+//                                             }
+//                                             
+////                                             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFriendGiftRecievedNotification object:nil]];
+//                                         }
+//                                             break;
+//                                     }
+//                                 }
                                  
 //                                 BOOL branchGiftsPromoEnabled = [responseObject[@"branch_gifts"] boolValue];
 //                                 [[NSUserDefaults standardUserDefaults] setObject:@(branchGiftsPromoEnabled)
@@ -125,20 +138,8 @@
     [[DBAPIClient sharedClient] GET:@"company/info"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSMutableDictionary *response = [NSMutableDictionary new];
-                                
-                                response[@"appName"] = [responseObject getValueForKey:@"app_name"] ?: @"";
-                                response[@"webSite"] = [responseObject getValueForKey:@"site"] ?: @"";
-                                response[@"deliveryTypes"] = [responseObject getValueForKey:@"delivery_types"] ?: [NSArray new];
-                                response[@"phone"] = [responseObject getValueForKey:@"phone"] ?: @"";
-                                response[@"cities"] = [responseObject getValueForKey:@"cities"] ?: [NSArray new];
-                                response[@"support_emails"] = [responseObject getValueForKey:@"emails"] ?: [NSArray new];
-                                response[@"companyDescription"] = [responseObject getValueForKey:@"description"] ?: @"";
-                                response[@"pushChannels"] = [responseObject getValueForKey:@"push_channels"] ?: @{};
-                                response[@"companyType"] = responseObject[@"screen_logic_type"];
-                                
                                 if(callback)
-                                    callback(YES, response);
+                                    callback(YES, responseObject);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
@@ -250,38 +251,18 @@
                                  // Save order
                                  
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
-//                                 Order *ord = [[Order alloc] init:YES];
-//                                 ord.orderId = [NSString stringWithFormat:@"%@", responseObject[@"order_id"]];
-//                                 ord.total = @([[OrderManager sharedManager] totalPrice]);
-//                                 ord.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
-//                                 ord.paymentType = [[OrderManager sharedManager] paymentType];
-//                                 ord.status = OrderStatusNew;
-//                                 ord.venue = [OrderManager sharedManager].venue;
-//                                 
-//                                 // Save Time
-//                                 NSString *timeString = [responseObject getValueForKey:@"delivery_time"];
-//                                 if(timeString){
-//                                     NSDateFormatter *formatter = [NSDateFormatter new];
-//                                     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-//                                     NSDate *date = [formatter dateFromString:timeString];
-//                                     ord.time = date;
-//                                 }
-//                                 
-//                                 NSString *timeSlot = [responseObject getValueForKey:@"delivery_slot_name"];
-//                                 if(timeSlot){
-//                                     ord.timeString = timeSlot;
-//                                 }
-//                                 
-//                                 
-//                                 [[CoreDataHelper sharedHelper] save];
                                  if(success)
                                      success(ord);
+                                 
+                                 [[OrderCoordinator sharedInstance].itemsManager flushCache];
+                                 [[OrderCoordinator sharedInstance].bonusItemsManager flushCache];
+                                 [[OrderCoordinator sharedInstance].orderGiftsManager flushCache];
                                  
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];
                                  
                                  // Notify all about success order
-                                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:nil]];
+                                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:ord]];
                                  
                                  hasOrderErrorInSession = NO;
                                  
@@ -307,7 +288,7 @@
                                  NSLog(@"%@", error);
                                  
                                  NSString *event;
-                                 if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+                                 if([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCard){
                                      event = @"order_card_failed";
                                  } else {
                                      event = @"order_failed";
@@ -363,6 +344,48 @@
                             }];
 }
 
+#pragma mark - News 
+
++ (void)fetchCompanyNewsWithCallback:(void (^)(BOOL, NSDictionary *))callback {
+    [[DBAPIClient sharedClient] GET:@"news"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if (callback) {
+                                    callback(YES, responseObject);
+                                }
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
+#pragma mark - Promo code 
++ (void)fetchActivatedPromoCodesWithCallback:(void (^)(BOOL, NSDictionary *))callback {
+    [[DBAPIClient sharedClient] GET:[NSString stringWithFormat:@"promo_code/history?client_id=%@", [IHSecureStore sharedInstance].clientId]
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, NSDictionary *response) {
+                                if (callback) callback(YES, response);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                if (callback) callback(NO, nil);
+                            }];
+}
+
++ (void)activatePromoCode:(NSString *)code withCallback:(void (^)(BOOL, NSDictionary *))callback {
+    [[DBAPIClient sharedClient] POST:@"promo_code/enter"
+                         parameters:@{@"client_id": [IHSecureStore sharedInstance].clientId, @"key": code}
+                            success:^(AFHTTPRequestOperation *operation, NSDictionary *response) {
+                                if (callback) callback(YES, response);
+                                
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                if (callback) callback(NO, nil);
+                            }];
+}
+
 #pragma mark - Order assembly helpers
 
 + (NSMutableDictionary *)assembleNewOrderParams{
@@ -377,14 +400,17 @@
     // Bonus items
     params[@"gifts"] = [DBServerAPI assembleBonusItems];
     
+    // Gift items
+    params[@"order_gifts"]=[DBServerAPI assembleGiftItems];
+    
     // Total
-    params[@"total_sum"] = @([[OrderManager sharedManager] totalPrice] - [DBPromoManager sharedManager].discount);
+    params[@"total_sum"] = @([OrderCoordinator sharedInstance].itemsManager.totalPrice - [OrderCoordinator sharedInstance].promoManager.discount);
     
     // Shipping price
-    params[@"delivery_sum"] = @([DBPromoManager sharedManager].shippingPrice);
+    params[@"delivery_sum"] = @([OrderCoordinator sharedInstance].promoManager.shippingPrice);
     
     // Payment
-    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+    if([OrderCoordinator sharedInstance].orderManager.paymentType != PaymentTypeNotSet){
         params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
     }
     
@@ -395,11 +421,11 @@
     [self assembleDeliveryInfoIntoParams:params encode:NO];
     
     // Comment
-    params[@"comment"] = [OrderManager sharedManager].comment ?: @"";
+    params[@"comment"] = [OrderCoordinator sharedInstance].orderManager.comment ?: @"";
     
     // Location
-    if ([OrderManager sharedManager].location) {
-        CLLocation *location = [OrderManager sharedManager].location;
+    if ([OrderCoordinator sharedInstance].orderManager.location) {
+        CLLocation *location = [OrderCoordinator sharedInstance].orderManager.location;
         params[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
     }
     
@@ -423,8 +449,11 @@
     // Bonus items
     params[@"gifts"] = [[DBServerAPI assembleBonusItems] encodedString];
     
+//    // Gift items
+//    params[@"order_gifts"]=[[DBServerAPI assembleGiftItems] encodedString];
+    
     // Payment
-    if([OrderManager sharedManager].paymentType != PaymentTypeNotSet){
+    if([OrderCoordinator sharedInstance].orderManager.paymentType != PaymentTypeNotSet){
         params[@"payment"] = [[DBServerAPI assemblyPaymentInfo] encodedString];
     }
     
@@ -442,7 +471,7 @@
 
 + (NSArray *)assembleOrderItems{
     NSMutableArray *items = [NSMutableArray new];
-    for (OrderItem *item in [OrderManager sharedManager].items) {
+    for (OrderItem *item in [OrderCoordinator sharedInstance].itemsManager.items) {
         [items addObject:[self assembleItem:item]];
     }
     
@@ -451,7 +480,16 @@
 
 + (NSArray *)assembleBonusItems{
     NSMutableArray *items = [NSMutableArray new];
-    for (OrderItem *item in [OrderManager sharedManager].bonusPositions) {
+    for (OrderItem *item in [OrderCoordinator sharedInstance].bonusItemsManager.items) {
+        [items addObject:[self assembleItem:item]];
+    }
+    
+    return items;
+}
+
++ (NSArray *)assembleGiftItems{
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in [OrderCoordinator sharedInstance].orderGiftsManager.items) {
         [items addObject:[self assembleItem:item]];
     }
     
@@ -499,9 +537,10 @@
 + (NSDictionary *)assemblyPaymentInfo{
     NSMutableDictionary *payment = [NSMutableDictionary new];
     
-    payment[@"type_id"] = @([OrderManager sharedManager].paymentType);
+    PaymentType paymentType = [OrderCoordinator sharedInstance].orderManager.paymentType;
+    payment[@"type_id"] = @(paymentType);
     
-    if([OrderManager sharedManager].paymentType == PaymentTypeCard){
+    if(paymentType == PaymentTypeCard){
         NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
         if(card[@"cardToken"]){
             payment[@"binding_id"] = card[@"cardToken"];
@@ -519,31 +558,33 @@
         payment[@"return_url"] = @"alpha-payment://return-page";
     }
     
-    if([OrderManager sharedManager].paymentType == PaymentTypePayPal){
+    if(paymentType == PaymentTypePayPal){
         payment[@"correlation_id"] = [DBPayPalManager sharedInstance].paymentMetadata ?: @"";
     }
     
-    payment[@"wallet_payment"] = [DBPromoManager sharedManager].walletActiveForOrder ? @([DBPromoManager sharedManager].walletPointsAvailableForOrder) : @(0);
+    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletDiscount ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
     
     return payment;
 }
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
-    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
+    DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
+    if(settings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-        params[@"time_picker_value"] = [formatter stringFromDate:[DBDeliverySettings sharedInstance].selectedTime];
+        params[@"time_picker_value"] = [formatter stringFromDate:settings.selectedTime];
     }
     
-    if([DBDeliverySettings sharedInstance].deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
-        params[@"delivery_slot_id"] = [DBDeliverySettings sharedInstance].selectedTimeSlot.slotId;
+    if(settings.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+        params[@"delivery_slot_id"] = settings.selectedTimeSlot.slotId;
     }
 }
 
 + (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
-    params[@"delivery_type"] = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
-    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        NSDictionary *address = [DBShippingManager sharedManager].selectedAddress.jsonRepresentation;
+    DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
+    params[@"delivery_type"] = @(settings.deliveryType.typeId);
+    if(settings.deliveryType.typeId == DeliveryTypeIdShipping){
+        NSDictionary *address = [OrderCoordinator sharedInstance].shippingManager.selectedAddress.jsonRepresentation;
         if(address){
             if(encode){
                 params[@"address"] = [address encodedString];
@@ -552,8 +593,8 @@
             }
         }
     } else {
-        if([OrderManager sharedManager].venue.venueId){
-            params[@"venue_id"] = [OrderManager sharedManager].venue.venueId;
+        if([OrderCoordinator sharedInstance].orderManager.venue.venueId){
+            params[@"venue_id"] = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
         }
     }
 }

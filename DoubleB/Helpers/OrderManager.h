@@ -101,6 +101,7 @@ extern NSString* const kDBDefaultsPaymentType;
 - (NSUInteger)amountOfOrderPositionAtIndex:(NSInteger)index;
 
 - (void)selectIfPossibleDefaultPaymentType;
+- (void)reset;
 
 + (NSUInteger)totalCountForItems:(NSArray *)items;
 
@@ -143,6 +144,8 @@ extern NSString* const kDBDefaultsPaymentType;
  * Minimum time for new order
  */
 @property (nonatomic, strong) NSDate *minimumTime;
+
+- (void)reset;
 
 @end
 

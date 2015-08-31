@@ -9,6 +9,8 @@
 #import "DBCompanyInfo.h"
 #import "DBServerAPI.h"
 
+#import <Parse/PFPush.h>
+
 @implementation DBCompanyInfo
 
 + (instancetype)sharedInstance {
@@ -22,7 +24,6 @@
     self = [super init];
     
     [self loadFromMemory];
-    [self updateInfo];
     
     return self;
 }
@@ -33,46 +34,51 @@
     return bundleName;
 }
 
-- (void)updateInfo{
+- (void)updateInfo {
+    [self updateInfo:nil];
+}
+
+- (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if(success){
-            _type = [[response getValueForKey:@"companyType"] intValue];
-            _applicationName = response[@"appName"];
+            _type = [[response getValueForKey:@"screen_logic_type"] intValue];
+            _applicationName = response[@"app_name"];
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
-            for(NSDictionary *typeDict in response[@"deliveryTypes"]){
+            for(NSDictionary *typeDict in response[@"delivery_types"]){
                 [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];
             }
             _deliveryTypes = deliveryTypes;
             _deliveryCities = response[@"cities"] ?: @[];
             
+            _supportEmails = response[@"emails"] ?: @[];
             
-            _companyPushChannel = [response[@"pushChannels"] getValueForKey:@"company"] ?: @"";
             
-            NSString *clientPushChannel = [response[@"pushChannels"] getValueForKey:@"client"] ?: @"";
+            _companyPushChannel = [response[@"push_channels"] getValueForKey:@"company"] ?: @"";
+            [PFPush subscribeToChannelInBackground:_companyPushChannel];
+            
+            NSString *clientPushChannel = [response[@"push_channels"] getValueForKey:@"client"] ?: @"";
             _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            NSString *venuePushChannel = [response[@"pushChannels"] getValueForKey:@"venue"]  ?: @"";
+            NSString *venuePushChannel = [response[@"push_channels"] getValueForKey:@"venue"]  ?: @"";
             _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            NSString *orderPushChannel = [response[@"pushChannels"] getValueForKey:@"order"]  ?: @"";
+            NSString *orderPushChannel = [response[@"push_channels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil]];
+            _friendInvitationEnabled = [response[@"share_invitation"][@"enabled"] boolValue];
             
-            _supportEmails = response[@"support_emails"] ?: @[];
+            _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
             
             [self synchronize];
-        } else {
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFirstLaunchNecessaryInfoLoadFailureNotification object:nil]];
         }
+        
+        if(callback)
+            callback(success);
     }];
 }
 
-
-+ (id)objectFromPropertyListByName:(NSString *)name{
-//    NSDictionary *companyInfo = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CompanyInfo"];
-
++ (id)objectFromPropertyListByName:(NSString *)name {
     NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
     NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -80,34 +86,43 @@
     return [companyInfo objectForKey:name];
 }
 
-+ (NSString *)db_companyBaseUrl{
-    NSString *baseUrl = [self objectFromPropertyListByName:@"BaseUrl"];
++ (id)objectFromApplicationPreferencesByName:(NSString *)name {
+    return [[self objectFromPropertyListByName:@"Preferences"] objectForKey:name];
+}
+
++ (NSString *)db_companyBaseUrl {
+    NSString *baseUrl = [self objectFromApplicationPreferencesByName:@"BaseUrl"];
     
     return baseUrl;
 }
 
-+ (NSNumber *)db_companyDefaultColor{
-    NSNumber *colorHex = [self objectFromPropertyListByName:@"CompanyColor"];
++ (BOOL)db_proxyApp{
+    BOOL proxy = [[self objectFromApplicationPreferencesByName:@"Proxy"] boolValue];
+    
+    return proxy;
+}
+
++ (NSNumber *)db_companyDefaultColor {
+    NSNumber *colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
     
     return colorHex;
 }
 
-+ (NSString *)db_companyGoogleAnalyticsKey{
-    NSString *GAKeyString = [self objectFromPropertyListByName:@"CompanyGAKey"];
++ (NSString *)db_companyGoogleAnalyticsKey {
+    NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
     
     return GAKeyString ?: @"";
 }
 
-
-+ (NSString *)db_companyParseApplicationKey{
-    NSDictionary *parseInfo = [self objectFromPropertyListByName:@"Parse"];
++ (NSString *)db_companyParseApplicationKey {
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
     
     NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"";
     return appId;
 }
 
-+ (NSString *)db_companyParseClientKey{
-    NSDictionary *parseInfo = [self objectFromPropertyListByName:@"Parse"];
++ (NSString *)db_companyParseClientKey {
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
     
     NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"";
     return clientKey;
@@ -172,7 +187,7 @@
 
 #pragma mark - Helper methods
 
-- (void)loadFromMemory{
+- (void)loadFromMemory {
     NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsCompanyInfo];
     
     _type = [info getValueForKey:@"type"] ? [[info getValueForKey:@"type"] intValue] : DBCompanyTypeOther;
@@ -191,6 +206,8 @@
     _supportEmails = info[@"supportEmails"];
     
     _deliveryCities = info[@"_deliveryCities"];
+    _promocodesIsEnabled = info[@"promocodeIsEnabled"];
+    _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
 }
 
 - (void)synchronize{
@@ -207,11 +224,29 @@
                            @"pushChannels": pushChannels,
                            @"supportEmails": _supportEmails,
                            @"_deliveryCities": _deliveryCities};
-    
-    
+                           @"_deliveryCities": _deliveryCities,
+                           @"_friendInvitationEnabled": @(_friendInvitationEnabled),
+                           @"promocodeIsEnabled": _promocodesIsEnabled};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    _applicationName = @"";
+    
+    _deliveryTypes = @[];
+    _deliveryCities = @[];
+    
+    _supportEmails = @[];
+}
+
+- (void)flushStoredCache {
+    [self flushCache];
+    [self synchronize];
+}
+
 @end
+

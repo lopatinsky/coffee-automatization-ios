@@ -2,18 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Parse</key>
+	<key>Preferences</key>
 	<dict>
-		<key>applicationId</key>
-		<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
-		<key>clientKey</key>
-		<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+		<key>BaseUrl</key>
+		<string>http://luckmousse.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4287722814</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-65821587-6</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>gAEWvLVUBqP85yRQmvm6nVhyTyurbaJYQSFQtRve</string>
+			<key>clientKey</key>
+			<string>ZWmLhzBhfIL5L5M0a90WTMrrlWCVr4RVg4WleyV2</string>
+		</dict>
 	</dict>
-	<key>CompanyGAKey</key>
-	<string>UA-65821587-6</string>
-	<key>CompanyColor</key>
-	<integer>4287722814</integer>
-	<key>BaseUrl</key>
-	<string>http://luckmousse.1.doubleb-automation-production.appspot.com/</string>
 </dict>
 </plist>

@@ -7,7 +7,7 @@
 //
 
 #import "DBPersonalWalletView.h"
-#import "DBPromoManager.h"
+#import "OrderCoordinator.h"
 #import "Compatibility.h"
 
 @interface DBPersonalWalletView ()
@@ -45,7 +45,7 @@
 - (void)reload{
     [self.activityIndicator startAnimating];
     
-    [[DBPromoManager sharedManager] updatePersonalWalletBalance:^(double balance) {
+    [[OrderCoordinator sharedInstance].promoManager updatePersonalWalletBalance:^(double balance) {
         [self.activityIndicator stopAnimating];
         
         [self reloadAppearance];
@@ -57,10 +57,10 @@
 }
 
 - (void)reloadAppearance{
-    self.balanceLabel.text = [NSString stringWithFormat:@"%.1f", [DBPromoManager sharedManager].walletBalance];
+    self.balanceLabel.text = [NSString stringWithFormat:@"%.1f", [OrderCoordinator sharedInstance].promoManager.walletBalance];
     
-    if([DBPromoManager sharedManager].walletTextDescription.length > 0){
-        self.titleLabel.text = [DBPromoManager sharedManager].walletTextDescription;
+    if([OrderCoordinator sharedInstance].promoManager.walletTextDescription.length > 0){
+        self.titleLabel.text = [OrderCoordinator sharedInstance].promoManager.walletTextDescription;
     } else {
         self.titleLabel.text = @"Баланс вашего персонального счета";
     }

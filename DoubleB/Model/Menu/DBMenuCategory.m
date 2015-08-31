@@ -25,12 +25,16 @@
     
     [category copyFromResponseDictionary:categoryDictionary[@"info"]];
     
-    NSArray *positions = categoryDictionary[@"items"];
     category.positions = [[NSMutableArray alloc] init];
-    for(NSDictionary *position in positions)
+    for(NSDictionary *position in categoryDictionary[@"items"])
         [category.positions addObject:[[DBMenuPosition alloc] initWithResponseDictionary:position]];
-    
     [category sortPositions];
+ 
+    category.categories = [[NSMutableArray alloc] init];
+    for(NSDictionary *nestedCategory in categoryDictionary[@"categories"])
+        [category.categories addObject:[DBMenuCategory categoryFromResponseDictionary:nestedCategory]];
+    [category sortCategories];
+    
     return category;
 }
 
@@ -38,7 +42,6 @@
     [self copyFromResponseDictionary:categoryDictionary[@"info"]];
     
     NSMutableArray *positions = [[NSMutableArray alloc] init];
-    
     for(NSDictionary *remotePosition in categoryDictionary[@"items"]){
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", remotePosition[@"id"]];
         DBMenuPosition *samePosition = [[_positions filteredArrayUsingPredicate:predicate] firstObject];
@@ -49,9 +52,22 @@
             [positions addObject:[[DBMenuPosition alloc] initWithResponseDictionary:remotePosition]];
         }
     }
-    
     _positions = positions;
     [self sortPositions];
+ 
+    NSMutableArray *nestedCategories = [[NSMutableArray alloc] init];
+    for(NSDictionary *remoteCategory in categoryDictionary[@"categories"]){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", remoteCategory[@"info"][@"category_id"]];
+        DBMenuCategory *sameCategory = [[_categories filteredArrayUsingPredicate:predicate] firstObject];
+        if(sameCategory){
+            [sameCategory synchronizeWithResponseDictionary:remoteCategory];
+            [nestedCategories addObject:sameCategory];
+        } else {
+            [nestedCategories addObject:[DBMenuCategory categoryFromResponseDictionary:remoteCategory]];
+        }
+    }
+    _categories = nestedCategories;
+    [self sortCategories];
 }
 
 - (void)copyFromResponseDictionary:(NSDictionary *)categoryDictionary{
@@ -63,10 +79,20 @@
     _categoryDictionary = categoryDictionary;
 }
 
+- (void)sortCategories{
+    [self.categories sortUsingComparator:^NSComparisonResult(DBMenuCategory *obj1, DBMenuCategory *obj2) {
+        return [@(obj1.order) compare:@(obj2.order)];
+    }];
+}
+
 - (void)sortPositions{
     [self.positions sortUsingComparator:^NSComparisonResult(DBMenuPosition *obj1, DBMenuPosition *obj2) {
         return [@(obj1.order) compare:@(obj2.order)];
     }];
+}
+
+- (DBMenuCategoryType)type{
+    return [self.categories count] > 0 ? DBMenuCategoryTypeParent : DBMenuCategoryTypeStandart;
 }
 
 - (BOOL)hasImage{
@@ -107,9 +133,33 @@
     return venuePositions;
 }
 
+- (NSMutableArray *)filterCategoriesForVenue:(Venue *)venue{
+    NSMutableArray *venueCategories = [NSMutableArray new];
+    
+    for(DBMenuCategory *category in _categories){
+        if([category availableInVenue:venue])
+            [venueCategories addObject:category];
+    }
+    
+    return venueCategories;
+}
+
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId{
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", positionId];
-    return [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+    DBMenuPosition *resultPosition;
+    for(DBMenuCategory *category in self.categories){
+        DBMenuPosition *position = [category findPositionWithId:positionId];
+        if(position){
+            resultPosition = position;
+            break;
+        }
+    }
+    
+    if(!resultPosition){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", positionId];
+        resultPosition = [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+    }
+    
+    return resultPosition;
 }
 
 #pragma mark - NSCoding methods
@@ -121,6 +171,7 @@
         _name = [aDecoder decodeObjectForKey:@"name"];
         _order = [[aDecoder decodeObjectForKey:@"order"] integerValue];
         _imageUrl = [aDecoder decodeObjectForKey:@"imageUrl"];
+        _categories = [aDecoder decodeObjectForKey:@"categories"];
         _positions = [aDecoder decodeObjectForKey:@"positions"];
         _categoryDictionary = [aDecoder decodeObjectForKey:@"categoryDictionary"];
     }
@@ -133,6 +184,7 @@
     [aCoder encodeObject:_name forKey:@"name"];
     [aCoder encodeObject:@(_order) forKey:@"order"];
     [aCoder encodeObject:_imageUrl forKey:@"imageUrl"];
+    [aCoder encodeObject:_categories forKey:@"categories"];
     [aCoder encodeObject:_positions forKey:@"positions"];
     [aCoder encodeObject:self.categoryDictionary forKey:@"categoryDictionary"];
 }
@@ -145,6 +197,10 @@
     copyCategory.name = [self.name copy];
     copyCategory.order = self.order;
     copyCategory.imageUrl = [self.imageUrl copy];
+    
+    copyCategory.categories = [NSMutableArray new];
+    for(DBMenuCategory *category in self.categories)
+        [copyCategory.categories addObject:[category copyWithZone:zone]];
     
     copyCategory.positions = [NSMutableArray new];
     for(DBMenuPosition *position in self.positions)

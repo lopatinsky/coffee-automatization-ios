@@ -2,18 +2,26 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Parse</key>
+	<key>ViewControllers</key>
 	<dict>
-		<key>applicationId</key>
-		<string>8EdzRDGVxjOqnHzv7WU7S6XbhIUBsgzqPk6ax77m</string>
-		<key>clientKey</key>
-		<string>CSxzgKDGJwUv7GVySEpkti7nOiHYFJMHR3RYxnU0</string>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
 	</dict>
-	<key>CompanyGAKey</key>
-	<string>UA-57935469-3</string>
-	<key>CompanyColor</key>
-	<integer>4288661069</integer>
-	<key>BaseUrl</key>
-	<string>http://sushilar.resto.doubleb-automation-production.appspot.com/</string>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://sushilar.resto.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4288661069</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-57935469-3</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>8EdzRDGVxjOqnHzv7WU7S6XbhIUBsgzqPk6ax77m</string>
+			<key>clientKey</key>
+			<string>CSxzgKDGJwUv7GVySEpkti7nOiHYFJMHR3RYxnU0</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

@@ -94,6 +94,11 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     return result;
 }
 
+- (void)reset {
+    self.paymentType = PaymentTypeNotSet;
+    self.venue = nil;
+}
+
 - (void)addBonusPosition:(DBMenuBonusPosition *)bonusPosition{
     OrderItem *itemWithSamePosition;
     
@@ -349,7 +354,18 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     
     self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companyInfoUpdateHandler:) name:kDBFirstLaunchNecessaryInfoLoadSuccessNotification object:nil];
+    
     return self;
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)companyInfoUpdateHandler:(NSNotification *)notification{
+    if(!self.deliveryType)
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
 }
 
 #pragma mark - Delivery type
@@ -383,6 +399,9 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 - (void)selectTakeout{
     if(self.lastNotShippingDeliveryType)
         self.deliveryType = self.lastNotShippingDeliveryType;
+    
+    self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdTakeaway];
+    [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Takeout" category:ADDRESS_SCREEN];
 }
 
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{
@@ -468,6 +487,13 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
     }
     
     return result;
+}
+
+- (void)reset{
+    self.deliveryType = nil;
+    self.selectedTimeSlot = nil;
+    self.selectedTime = nil;
+    self.lastNotShippingDeliveryType = nil;
 }
 
 @end

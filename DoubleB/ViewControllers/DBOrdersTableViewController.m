@@ -110,7 +110,6 @@
                              parameters:@{@"client_id": clientId}
                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                     [GANHelper analyzeEvent:@"history_update_success" category:HISTORY_SCREEN];
-                                    //NSLog(@"%@", responseObject);
                                     
                                     for(NSDictionary *orderDict in responseObject[@"orders"]){
                                         [self synchronizeOrderWithHistory:orderDict];
@@ -138,7 +137,6 @@
     NSString *newOrderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderId == %@", newOrderId];
     Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
-    
     
     if(sameOrder){
         [sameOrder synchronizeWithResponseDict:orderDictionary];
@@ -307,7 +305,8 @@
     labelOrder.attributedText = orderString;
     labelDate.text = order.formattedTimeString;
     labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venue.address;
-    labelTotal.text = [NSString stringWithFormat:@"%ld %@", (long)order.total.integerValue, [Compatibility currencySymbol]];
+    
+    labelTotal.text = [NSString stringWithFormat:@"%.0f %@", order.actualTotal - order.actualDiscount, [Compatibility currencySymbol]];
     
     return cell;
 }

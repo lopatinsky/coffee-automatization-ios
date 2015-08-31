@@ -8,8 +8,8 @@
 
 #import "DBBarButtonItem.h"
 #import "DBOrderBarButtonView.h"
-#import "DBPromoManager.h"
-#import "OrderManager.h"
+#import "Compatibility.h"
+#import "OrderCoordinator.h"
 
 @interface DBBarButtonItem ()
 
@@ -18,7 +18,7 @@
 
 @implementation DBBarButtonItem
 
--(instancetype)initWithViewController:(UIViewController *)viewController
+- (instancetype)initWithViewController:(UIViewController *)viewController
                      action:(SEL)action{
     UIButton *buttonOrder = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonOrder setTitleColor:[UIColor db_defaultColor]
@@ -35,26 +35,18 @@
     
     self = [super initWithCustomView:buttonOrder];
     
-    [[OrderManager sharedManager] addObserver:self
-                                   forKeyPath:@"totalPrice"
-                                      options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                      context:nil];
-    [[DBPromoManager sharedManager] addObserver:self
-                                     forKeyPath:@"totalDiscount"
-                                        options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial
-                                        context:nil];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalPrice, CoordinatorNotificationOrderDiscount] selector:@selector(update)];
     
     [self update];
     return self;
 }
 
 -(void)dealloc{
-    [[OrderManager sharedManager] removeObserver:self forKeyPath:@"totalPrice"];
-    [[DBPromoManager sharedManager] removeObserver:self forKeyPath:@"totalDiscount"];
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 -(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
-    NSString *price = [NSString stringWithFormat:@"%.0fр.", totalPrice];
+    NSString *price = [NSString stringWithFormat:@"%.0f %@", totalPrice, [Compatibility currencySymbol]];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:
                                          [NSString stringWithFormat:@" | %@", price]];
     [string addAttribute:NSFontAttributeName
@@ -65,8 +57,8 @@
 
 -(void)update{
     UIButton *button = (UIButton *)self.customView;
-    NSAttributedString *string = [self attributedStringWithCount:[OrderManager sharedManager].positionsCount
-                                                  withTotalPrice:[OrderManager sharedManager].totalPrice - [DBPromoManager sharedManager].totalDiscount];
+    NSAttributedString *string = [self attributedStringWithCount:[OrderCoordinator sharedInstance].itemsManager.totalCount
+                                                  withTotalPrice:[OrderCoordinator sharedInstance].itemsManager.totalPrice - [OrderCoordinator sharedInstance].promoManager.discount];
     [self.orderView.totalLabel setAttributedText:string];
     
     CGRect newTitleRect = self.orderView.totalLabel.frame;
@@ -75,15 +67,6 @@
     CGRect newButtonRect = button.frame;
     newButtonRect.size.width = self.orderView.orderImageView.frame.size.width + newTitleRect.size.width;
     button.frame = newButtonRect;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context{
-    if([keyPath isEqualToString:@"totalPrice"] || [keyPath isEqualToString:@"totalDiscount"]){
-        [self update];
-    }
 }
 
 @end

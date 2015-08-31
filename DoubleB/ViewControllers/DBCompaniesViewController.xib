@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBCompaniesViewController" customModule="Banzay" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="iDq-qx-5L8" id="nem-wZ-JuF"/>
+                <outlet property="titleLabel" destination="khb-Iy-fOI" id="Tw2-6d-6vp"/>
+                <outlet property="titleView" destination="8Vx-wI-1bl" id="Ju8-Of-XO6"/>
+                <outlet property="titleViewHeightConstraint" destination="dSB-zH-9Lh" id="5Nk-2v-g1s"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iDq-qx-5L8" userLabel="Company Table View">
+                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Vx-wI-1bl" userLabel="Title View">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khb-Iy-fOI" userLabel="Title">
+                            <rect key="frame" x="0.0" y="21" width="600" height="21"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="1xb-f0-Mg3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="khb-Iy-fOI" secondAttribute="centerY" id="HsR-mb-rKr"/>
+                        <constraint firstItem="khb-Iy-fOI" firstAttribute="leading" secondItem="8Vx-wI-1bl" secondAttribute="leading" id="Pux-Uf-UOm"/>
+                        <constraint firstAttribute="height" constant="64" id="dSB-zH-9Lh"/>
+                        <constraint firstAttribute="trailing" secondItem="khb-Iy-fOI" secondAttribute="trailing" id="icM-9H-NJv"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="iDq-qx-5L8" secondAttribute="trailing" id="19b-k4-Lxv"/>
+                <constraint firstItem="iDq-qx-5L8" firstAttribute="top" secondItem="8Vx-wI-1bl" secondAttribute="bottom" id="b1L-nO-9SS"/>
+                <constraint firstItem="iDq-qx-5L8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ck2-jD-xOi"/>
+                <constraint firstAttribute="trailing" secondItem="8Vx-wI-1bl" secondAttribute="trailing" id="eEF-UJ-qAq"/>
+                <constraint firstItem="8Vx-wI-1bl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hn5-qo-6bO"/>
+                <constraint firstItem="8Vx-wI-1bl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jKf-De-Avx"/>
+                <constraint firstAttribute="bottom" secondItem="iDq-qx-5L8" secondAttribute="bottom" id="xmm-WF-tUS"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+        </view>
+    </objects>
+</document>

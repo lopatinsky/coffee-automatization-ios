@@ -7,9 +7,9 @@
 //
 
 #import "DBOrderItemCell.h"
+#import "Compatibility.h"
 #import "OrderItem.h"
 #import "DBPromoManager.h"
-#import "DBMenuBonusPosition.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
@@ -55,6 +55,8 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.orderCellContentView.backgroundColor = [UIColor whiteColor];
     
+    self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
+    
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
     self.countLabel.textColor = [UIColor db_defaultColor];
@@ -68,8 +70,6 @@
     self.panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     self.panGestureRecognizer.cancelsTouchesInView = NO;
     [self.orderCellContentView addGestureRecognizer:self.panGestureRecognizer];
-    
-    [self addEditButtons];
     
     self.errorView = [DBNewOrderItemErrorView new];
     self.errorView.delegate = self;
@@ -92,27 +92,34 @@
     [self.moreButton setTitle:@"+" forState:UIControlStateNormal];
 }
 
-- (void)configure{
+- (void)configure {
     [self reload];
     [self moveContentToOriginal:NO];
 }
 
-- (void)reload{
+- (void)reload {
     self.titleLabel.text = _orderItem.position.name;
     
-    if([self.orderItem.position isKindOfClass:[DBMenuBonusPosition class]]){
+    if (self.orderItem.position.mode == DBMenuPositionModeRegular){
+        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", _orderItem.position.actualPrice, [Compatibility currencySymbol]];
+        [self addEditButtons];
+    }
+    
+    if (self.orderItem.position.mode == DBMenuPositionModeBonus) {
         self.priceLabel.text = NSLocalizedString(@"Бонус", nil);
-    } else {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f р.", _orderItem.position.actualPrice];
+    }
+    
+    if (self.orderItem.position.mode == DBMenuPositionModeGift) {
+        self.priceLabel.text = NSLocalizedString(@"Подарок", nil);
     }
     
     [self reloadCount];
     
     NSMutableString *modifiersString =[[NSMutableString alloc] init];
     
-    for(DBMenuPositionModifier *modifier in _orderItem.position.groupModifiers){
-        if(modifier.selectedItem){
-            if(modifier.actualPrice > 0){
+    for (DBMenuPositionModifier *modifier in _orderItem.position.groupModifiers){
+        if (modifier.selectedItem) {
+            if (modifier.actualPrice > 0){
                 [modifiersString appendString:[NSString stringWithFormat:@"+%.0f р. - %@ (%@)\n", modifier.actualPrice, modifier.selectedItem.itemName, modifier.modifierName]];
             } else {
                 [modifiersString appendString:[NSString stringWithFormat:@"%@ (%@)\n", modifier.selectedItem.itemName, modifier.modifierName]];

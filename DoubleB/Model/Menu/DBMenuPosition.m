@@ -15,7 +15,6 @@
 @property(strong, nonatomic) NSString *positionId;
 @property(strong, nonatomic) NSString *name;
 @property(nonatomic) NSInteger order;
-@property(nonatomic) double price;
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *positionDescription;
 @property(nonatomic) double energyAmount;
@@ -38,7 +37,7 @@
     [self copyFromResponseDictionary:positionDictionary];
     
     self.groupModifiers = [NSMutableArray new];
-    for(NSDictionary *modifierDictionary in positionDictionary[@"group_modifiers"]){
+    for(NSDictionary *modifierDictionary in positionDictionary[@"group_modifiers"]) {
         DBMenuPositionModifier *modifier = [DBMenuPositionModifier groupModifierFromDictionary:modifierDictionary];
         if(modifier)
             [self.groupModifiers addObject:modifier];
@@ -74,6 +73,9 @@
     _order = [[positionDictionary getValueForKey:@"order"] integerValue];
     _price = [[positionDictionary getValueForKey:@"price"] doubleValue];
     _imageUrl = [positionDictionary getValueForKey:@"pic"];
+    if(!_imageUrl){
+        _imageUrl = [positionDictionary getValueForKey:@"image"];
+    }
     _positionDescription = [positionDictionary getValueForKey:@"description"];
     _energyAmount = [[positionDictionary getValueForKey:@"kal"] doubleValue];
     _weight = [[positionDictionary getValueForKey:@"weight"] doubleValue];
@@ -182,6 +184,8 @@
         _singleModifiers = [aDecoder decodeObjectForKey:@"singleModifiers"];
         _venuesRestrictions = [aDecoder decodeObjectForKey:@"venuesRestrictions"];
         _productDictionary = [aDecoder decodeObjectForKey:@"productDictionary"];
+        
+        _mode = [[aDecoder decodeObjectForKey:@"positionMode"] integerValue];
     }
     
     return self;
@@ -201,6 +205,8 @@
     [aCoder encodeObject:self.singleModifiers forKey:@"singleModifiers"];
     [aCoder encodeObject:self.venuesRestrictions forKey:@"venuesRestrictions"];
     [aCoder encodeObject:self.productDictionary forKey:@"productDictionary"];
+    
+    [aCoder encodeObject:@(self.mode) forKey:@"positionMode"];
 }
 
 #pragma mark - NSCopying
@@ -228,7 +234,25 @@
     copyPosition.productDictionary = [self.productDictionary copy];
     copyPosition.venuesRestrictions = [self.venuesRestrictions copy];
     
+    copyPosition.mode = self.mode;
+    
     return copyPosition;
 }
 
+@end
+
+@implementation DBMenuPosition (HistoryResponse)
+- (instancetype)initWithHistoryDict:(NSDictionary *)positionDictionary{
+    self = [super init];
+    
+    self.positionId = [positionDictionary getValueForKey:@"id"] ?: @"";
+    self.imageUrl = [positionDictionary getValueForKey:@"pic"] ?: @"";
+    if(!self.imageUrl){
+        self.imageUrl = [positionDictionary getValueForKey:@"image"];
+    }
+    self.price = [[positionDictionary getValueForKey:@"price"] doubleValue];
+    self.name = [positionDictionary getValueForKey:@"title"] ?: @"";
+    
+    return self;
+}
 @end

@@ -8,8 +8,10 @@
 
 #import "GANHelper.h"
 
-#import "DBShippingManager.h"
+#import "OrderCoordinator.h"
+#import "ShippingManager.h"
 #import "DBDeliveryViewController.h"
+#import "DBCompaniesManager.h"
 #import "DBTimePickerView.h"
 #import "UIColor+Brandbook.h"
 
@@ -55,10 +57,13 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) IBOutlet UITableView *addressSuggestionsTableView;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapOnCityLabelRecognizer;
 @property (strong, nonatomic) IBOutlet UIView *deliveryView;
+
+@property (strong, nonatomic) ShippingManager *shippingManager;
+
 @property (strong, nonatomic) DBTimePickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
-@property (strong, nonatomic) DBShippingManager *shippingManager;
 @property (nonatomic) BOOL keyboardIsHidden;
+@property (weak, nonatomic) IBOutlet UIImageView *deliveryImage;
 
 @end
 
@@ -67,13 +72,14 @@ typedef enum : NSUInteger {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.shippingManager = [DBShippingManager sharedManager];
+    self.shippingManager = [OrderCoordinator sharedInstance].shippingManager;
     
     if ([[self.shippingManager arrayOfCities] count] == 1 || ![self.shippingManager arrayOfCities]) {
         self.tapOnCityLabelRecognizer.enabled = NO;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestAddressSuggestions) name:DeliveryManagerDidRecieveSuggestionsNotification object:nil];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationAddressSuggestionsUpdated selector:@selector(requestAddressSuggestions)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillAppear) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillDisappear) name:UIKeyboardWillHideNotification object:nil];
     
@@ -98,7 +104,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - Life-cycle
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (IBAction)showPickerWithCities:(id)sender {
@@ -125,6 +131,10 @@ typedef enum : NSUInteger {
         self.commentIndicatorView.hidden = YES;
     } else {
         self.commentIndicatorView.hidden = NO;
+    }
+    
+    if ([DBCompaniesManager sharedInstance].deliveryImageName) {
+        [self.deliveryImage setImage:[UIImage imageNamed:[DBCompaniesManager sharedInstance].deliveryImageName]];
     }
 }
 
@@ -188,10 +198,12 @@ typedef enum : NSUInteger {
 
 - (void)keyboardWillAppear {
     self.keyboardIsHidden = NO;
+    self.deliveryImage.hidden = YES;
 }
 
 - (void)keyboardWillDisappear {
     self.keyboardIsHidden = YES;
+    self.deliveryImage.hidden = NO;
 }
 
 - (void)switchToCompactMode{

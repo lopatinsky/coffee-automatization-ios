@@ -8,8 +8,7 @@
 
 #import "DBPromosListViewController.h"
 #import "DBPromoCell.h"
-#import "DBPromoManager.h"
-#import "DBPromoManager.h"
+#import "OrderCoordinator.h"
 
 #import "MBProgressHUD.h"
 
@@ -40,7 +39,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[DBPromoManager sharedManager].promotionList count];
+    return [[OrderCoordinator sharedInstance].promoManager.promotionList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,7 +50,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    DBPromotion *promotion = [DBPromoManager sharedManager].promotionList[indexPath.row];
+    DBPromotion *promotion = [OrderCoordinator sharedInstance].promoManager.promotionList[indexPath.row];
     cell.titleLabel.text = promotion.promotionName;
     cell.descriptionLabel.text = promotion.promotionDescription;
     

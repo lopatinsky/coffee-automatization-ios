@@ -40,9 +40,11 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *modifiersLabel;
 
+@property (nonatomic, readonly) DBOrderItemCellType type;
+
 @property (strong, nonatomic) OrderItem *orderItem;
 @property (strong, nonatomic) DBPromoItem *promoItem;
-@property (nonatomic, readonly) DBOrderItemCellType type;
+
 @property (weak, nonatomic) id<DBOrderItemCellDelegate> delegate;
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 

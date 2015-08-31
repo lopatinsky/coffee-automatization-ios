@@ -10,7 +10,7 @@
 #import "UIViewController+DBCardManagement.h"
 #import "DBCardsViewController.h"
 #import "IHSecureStore.h"
-#import "OrderManager.h"
+#import "OrderCoordinator.h"
 #import "IHPaymentManager.h"
 #import "DBProfileViewController.h"
 #import "DBAPIClient.h"
@@ -30,6 +30,8 @@
 
 @property (nonatomic, strong) NSArray *cards;
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
+
+@property (strong, nonatomic) OrderManager *orderManager;
 @property (strong, nonatomic) DBPayPalManager *payPalManager;
  
 @end
@@ -61,6 +63,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.constraintAdvertViewTopSpace.constant = topY;
 
+    self.orderManager = [OrderCoordinator sharedInstance].orderManager;
     
     self.payPalManager = [DBPayPalManager sharedInstance];
     self.payPalManager.delegate = self;
@@ -155,7 +158,7 @@
         [cell.cardIconImageView templateImageWithName:@"cash"];
         cell.cardTitleLabel.textColor = [UIColor blackColor];
         
-        cell.checked = [OrderManager sharedManager].paymentType == PaymentTypeCash;
+        cell.checked = _orderManager.paymentType == PaymentTypeCash;
     }
     
     // Cards payment type
@@ -183,7 +186,7 @@
             cell.cardTitleLabel.textColor = [UIColor blackColor];
             
             cell.checked = [card[@"default"] boolValue] &&
-            ([OrderManager sharedManager].paymentType == PaymentTypeCard || self.mode == CardsViewControllerModeManageCards);
+            (_orderManager.paymentType == PaymentTypeCard || self.mode == CardsViewControllerModeManageCards);
         }
     }
     
@@ -199,7 +202,7 @@
             cell.cardTitleLabel.text = @"Войти в аккаунт PayPal";
         }
         
-        cell.checked = ([OrderManager sharedManager].paymentType == PaymentTypePayPal && self.mode == CardsViewControllerModeChoosePayment);
+        cell.checked = (_orderManager.paymentType == PaymentTypePayPal && self.mode == CardsViewControllerModeChoosePayment);
     }
     
     return cell;
@@ -256,7 +259,7 @@
     // Extra payment type
     if(indexPath.section == 0){
         eventLabel = @"extra";
-        [OrderManager sharedManager].paymentType = PaymentTypeExtraType;
+        _orderManager.paymentType = PaymentTypeExtraType;
         [self.tableView reloadData];
         
         [self.delegate cardsControllerDidChoosePaymentItem:self];
@@ -266,7 +269,7 @@
     // Cash payment type
     if(indexPath.section == 1){
         eventLabel = @"cash";
-        [OrderManager sharedManager].paymentType = PaymentTypeCash;
+        _orderManager.paymentType = PaymentTypeCash;
         [self.tableView reloadData];
         
         [self.delegate cardsControllerDidChoosePaymentItem:self];
@@ -286,7 +289,7 @@
             }];
         } else {
             if (self.mode == CardsViewControllerModeChoosePayment) {
-                [OrderManager sharedManager].paymentType = PaymentTypeCard;
+                _orderManager.paymentType = PaymentTypeCard;
             }
             
             if (self.mode == CardsViewControllerModeManageCards){
@@ -312,7 +315,7 @@
         
         if(_payPalManager.loggedIn){
             if(self.mode == CardsViewControllerModeChoosePayment){
-                [OrderManager sharedManager].paymentType = PaymentTypePayPal;
+                _orderManager.paymentType = PaymentTypePayPal;
                 [self.tableView reloadData];
                 
                 [self.delegate cardsControllerDidChoosePaymentItem:self];

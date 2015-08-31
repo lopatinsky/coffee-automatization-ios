@@ -7,12 +7,13 @@
 //
 
 #import "DBTabBarController.h"
-#import "DBPositionsViewController.h"
+#import "CategoriesAndPositionsTVController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBCompanyInfo.h"
-//#import "DBSharePermissionViewController.h"
+#import "DBCompanyInfo.h"
+#import "CompanyNewsManager.h"
 
 #import "UIAlertView+BlocksKit.h"
 #import "Order.h"
@@ -38,7 +39,15 @@
                                                                       image:[UIImage imageNamed:@"orders_icon_grey.png"]
                                                               selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
         [newOrderController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
-        [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:newOrderController]];
+        
+        UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
+        
+//TODO: Rewrite normal logic for screen sequence management
+        UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+        menuVC.hidesBottomBarWhenPushed = YES;
+        [newOrderNavController pushViewController:menuVC animated:NO];
+
+        [tabBarControllers addObject:newOrderNavController];
         
         // History vc
         DBOrdersTableViewController *ordersController = [DBOrdersTableViewController new];
@@ -47,23 +56,15 @@
                                                             selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
         [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:ordersController]];
-        
+
         // Venues vc
         if(!([[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
            [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping])){
             DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+            venuesController.mode = DBVenuesTableViewControllerModeList;
             venuesController.eventsCategory = VENUES_SCREEN;
-            
-            NSString *title = NSLocalizedString(@"Точки", nil);
-            if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
-                int venuesCount = [[Venue storedVenues] count];
-                if(venuesCount == 1){
-                    title = NSLocalizedString(@"Кофейня", nil);
-                } else {
-                    title = NSLocalizedString(@"Кофейни", nil);
-                }
-            }
-            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:title
+
+            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:[DBTextResourcesHelper db_venuesTitleString]
                                                                         image:[UIImage imageNamed:@"venues_icon_grey.png"]
                                                                 selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
             [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
@@ -73,9 +74,28 @@
         self.tabBar.tintColor = [UIColor blackColor];
         self.viewControllers = tabBarControllers;
         
-        self.delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newOrderCreatedNotification:) name:kDBNewOrderCreatedNotification object:nil];
     }
     return self;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
+}
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)moveToStartState {
+    for(UIViewController *controller in self.viewControllers){
+        if([controller isKindOfClass:[UINavigationController class]]){
+            [((UINavigationController*)controller) popToRootViewControllerAnimated:NO];
+        }
+    }
+    
+    self.selectedIndex = 0;
 }
 
 - (void)awakeFromRemoteNotification{
@@ -84,9 +104,10 @@
 
 #pragma mark - DBNewOrderViewControllerDelegate
 
-- (void)newOrderViewController:(DBNewOrderViewController *)controller didFinishOrder:(Order *)order{
-    self.selectedIndex = 1;
+- (void)newOrderCreatedNotification:(NSNotification *)notification{
+    self.selectedViewController = [self.viewControllers objectAtIndex:1];
     
+    Order *order = notification.object;
     for(UIViewController *controller in self.viewControllers){
         if([controller isKindOfClass:[UINavigationController class]]){
             UINavigationController *navController = (UINavigationController *)controller;
@@ -103,7 +124,6 @@
         }
     }
     
-    //self.selectedIndex = 1;
     [UIAlertView bk_showAlertViewWithTitle:order.venue.title
                                    message:NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil)
                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
@@ -116,12 +136,9 @@
                                    }];
 }
 
-
-#pragma mark - UITabBarControllerDelegate
-
-- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+- (void)setSelectedIndex:(NSUInteger)selectedIndex{
     NSString *category = @"";
-    switch (tabBarController.selectedIndex) {
+    switch (self.selectedIndex) {
         case 0:
             category = MENU_SCREEN;
             break;
@@ -136,7 +153,7 @@
     }
     
     NSString *event = @"";
-    switch ([tabBarController.viewControllers indexOfObject:viewController]) {
+    switch (selectedIndex) {
         case 0:
             event = @"footer_order_click";
             break;
@@ -151,8 +168,6 @@
     }
     
     [GANHelper analyzeEvent:event category:category];
-        
-    return YES;
 }
 
 @end

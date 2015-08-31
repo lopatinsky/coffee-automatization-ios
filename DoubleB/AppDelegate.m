@@ -7,23 +7,15 @@
 //
 
 #import "AppDelegate.h"
-#import "Venue.h"
-#import "Order.h"
-#import "DBServerAPI.h"
+#import "IHSecureStore.h"
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
-#import "DBCompanyInfo.h"
-#import "DBPromoManager.h"
-#import "DBMenu.h"
-#import "IHSecureStore.h"
-#import "Compatibility.h"
-
-#import "DBLaunchEmulationViewController.h"
+#import "ApplicationManager.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
 #import <GoogleMaps/GoogleMaps.h>
+#import <Parse/Parse.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
 @implementation AppDelegate
@@ -35,40 +27,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self copyPlist];
-    
-//==================== Frameworks initialization ====================
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
-    
-    [Fabric with:@[CrashlyticsKit]];
-    
-//    [GMSServices provideAPIKey:@"AIzaSyAbXdWCR4ygPVIpQCNq6zW5liZ_22biryg"];
-    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction:@"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-//==================== Framework initialization =====================
+    // TODO: change forceCopy to false after test
+    [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
+    [ApplicationManager initializeVendorFrameworks];
+    [ApplicationManager initializeOrderFramework:launchOptions];
     
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     }
-//================ significant preloadings/initializations =================
-    [DBServerAPI registerUser:nil];
-    
-    [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
-        [self saveContext];
-    }];
-    
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
-    
-    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
-    
-    [JRSwizzleMethods swizzleUIViewDealloc];
-    //[DBShareHelper sharedInstance];
-    [[DBPromoManager sharedManager] updateInfo];
-    
-    [GANHelper trackClientInfo];
-//================ significant preloadings/initializations =================
 
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
@@ -78,26 +44,14 @@
         [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
     
-    //styling
+    [ApplicationManager applyBrandbookStyle];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [ApplicationManager rootViewController];
     
-    [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{
-        NSForegroundColorAttributeName: [UIColor whiteColor],
-        NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-    }];
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
-    if(![DBCompanyInfo sharedInstance].deliveryTypes){
-        self.window.rootViewController = [DBLaunchEmulationViewController new];
-    } else {
-        self.window.rootViewController = [DBTabBarController sharedInstance];
-    }
-
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -141,7 +95,7 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 //    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
-
+    
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
@@ -151,9 +105,7 @@
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
     }
     
-    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
-        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
-    }
+    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -172,11 +124,11 @@
                                                                userInfo:userInfo ?: @{}];
 
     [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    // TODO: publish remote notification with popup view controller
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
-    NSLog(@"%@", notification);
-    //[DBMastercardPromo clearAllLocalNotifications];
 }
 
 - (void)saveContext
@@ -271,20 +223,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-- (void)copyPlist{
-    NSError *error;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths firstObject];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    
-    if(![fileManager fileExistsAtPath:path]){
-        NSString *pathToCompanyInfo = [[NSBundle mainBundle] pathForResource:@"CompanyInfo" ofType:@"plist"];
-        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:pathToCompanyInfo];
-        [fileManager copyItemAtPath:pathToCompanyInfo toPath:path error:&error];
-    }
 }
 
 @end

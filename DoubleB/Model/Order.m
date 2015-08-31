@@ -10,15 +10,18 @@
 #import "Venue.h"
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
-#import "OrderManager.h"
-#import "DBShippingManager.h"
+#import "OrderCoordinator.h"
+#import "ShippingManager.h"
 #import "OrderItem.h"
+#import "DBMenuPosition.h"
 
 @implementation Order {
     NSArray *_items;
     NSArray *_bonusItems;
+    NSArray *_giftItems;
 }
-@dynamic orderId, total, time, timeString, dataItems, dataGifts, status, deliveryType, venue, shippingAddress, paymentType;
+@dynamic total, discount, walletDiscount, shippingTotal;
+@dynamic orderId, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, deliveryType, venue, shippingAddress, paymentType;
 
 - (instancetype)init:(BOOL)stored {
     if (stored) {
@@ -32,18 +35,28 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
-    self.total = @([[OrderManager sharedManager] totalPrice]);
-    self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].items];
-    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:[OrderManager sharedManager].bonusPositions];
-    self.paymentType = [[OrderManager sharedManager] paymentType];
+    
+    self.total = @([OrderCoordinator sharedInstance].itemsManager.totalPrice);
+    self.discount = @([OrderCoordinator sharedInstance].promoManager.discount);
+    if([OrderCoordinator sharedInstance].promoManager.walletActiveForOrder){
+        self.walletDiscount = @([OrderCoordinator sharedInstance].promoManager.walletDiscount);
+    } else {
+        self.walletDiscount = @0;
+    }
+    self.shippingTotal = @([OrderCoordinator sharedInstance].promoManager.shippingPrice);
+    
+    self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].itemsManager.items];
+    self.dataBonusItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].bonusItemsManager.items];
+    self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].orderGiftsManager.items];
+    self.paymentType = [[OrderCoordinator sharedInstance].orderManager paymentType];
     self.status = OrderStatusNew;
     
     // Delivery
-    self.deliveryType = @([DBDeliverySettings sharedInstance].deliveryType.typeId);
-    if([DBDeliverySettings sharedInstance].deliveryType.typeId == DeliveryTypeIdShipping){
-        self.shippingAddress = [[DBShippingManager sharedManager].selectedAddress formattedAddressString:DBAddressStringModeFull];
+    self.deliveryType = @([OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId);
+    if([OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+        self.shippingAddress = [[OrderCoordinator sharedInstance].shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull];
     } else {
-        self.venue = [OrderManager sharedManager].venue;
+        self.venue = [OrderCoordinator sharedInstance].orderManager.venue;
     }
     
     [self setTimeFromResponseDict:dict];
@@ -57,19 +70,24 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
-    self.total = dict[@"total"];
     
+    // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
-        [items addObject:[OrderItem orderItemFromHistoryDictionary:itemDict bonus:NO]];
+        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
+        item.position.mode = DBMenuPositionModeRegular;
+        [items addObject:item];
     }
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
     
+    // Assemble bonus items
     NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
-        [bonusItems addObject:[OrderItem orderItemFromHistoryDictionary:itemDict bonus:YES]];
+        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
+        item.position.mode = DBMenuPositionModeGift;
+        [bonusItems addObject:item];
     }
-    self.dataGifts = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
+    self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
     
     self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
     self.status = [dict[@"status"] intValue];
@@ -84,6 +102,13 @@
     }
     
     [self setTimeFromResponseDict:dict];
+    
+    self.total = [dict getValueForKey:@"menu_sum"] ?: @0;
+    
+    double actualTotal = [[dict getValueForKey:@"total"] doubleValue];
+    self.discount = @(self.total.doubleValue - actualTotal);
+    self.walletDiscount = [dict getValueForKey:@"wallet_payment"] ?: @0;
+    self.shippingTotal = [dict getValueForKey:@"delivery_sum"] ?: @0;
     
     [[CoreDataHelper sharedHelper] save];
     
@@ -187,6 +212,14 @@
                              }];
 }
 
+- (double)actualTotal {
+    return self.total.doubleValue + self.shippingTotal.doubleValue;
+}
+
+- (double)actualDiscount {
+    return self.discount.doubleValue + self.walletDiscount.doubleValue;
+}
+
 - (NSArray *)items {
     if (!_items) {
         _items = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataItems];
@@ -197,10 +230,18 @@
 
 - (NSArray *)bonusItems{
     if (!_bonusItems) {
-        _bonusItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataGifts];
+        _bonusItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataBonusItems];
     }
     
     return _bonusItems;
+}
+
+- (NSArray *)giftItems{
+    if (!_giftItems) {
+        _giftItems = [NSKeyedUnarchiver unarchiveObjectWithData:self.dataGiftItems];
+    }
+    
+    return _giftItems;
 }
 
 - (NSString *)formattedTimeString{

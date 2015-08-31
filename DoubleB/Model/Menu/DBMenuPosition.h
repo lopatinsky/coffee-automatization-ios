@@ -10,12 +10,22 @@
 
 @class Venue;
 
+typedef NS_ENUM(NSInteger, DBMenuPositionMode){
+    DBMenuPositionModeRegular = 0,
+    DBMenuPositionModeBonus,
+    DBMenuPositionModeGift
+};
+
 @interface DBMenuPosition : NSObject<NSCopying, NSCoding>
 
+// mutable data(stored)
+@property(nonatomic) DBMenuPositionMode mode;
+
+// immutable(stored) data
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;
 @property(nonatomic, readonly) NSInteger order;
-@property(nonatomic, readonly) double price;
+@property(nonatomic) double price;
 @property(nonatomic, readonly) double actualPrice;
 @property(strong, nonatomic, readonly) NSString *imageUrl;
 @property(strong, nonatomic, readonly) NSString *positionDescription;
@@ -28,7 +38,7 @@
 
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
 
-// Not stored data
+// dynamic data(not stored)
 @property(nonatomic, readonly) BOOL hasImage;
 
 - (instancetype)initWithResponseDictionary:(NSDictionary *)positionDictionary;
@@ -43,4 +53,8 @@
 // For full equality use isEqual:
 - (BOOL)isSamePosition:(DBMenuPosition *)object;
 
+@end
+
+@interface DBMenuPosition (HistoryResponse)
+- (instancetype)initWithHistoryDict:(NSDictionary *)positionDictionary;
 @end

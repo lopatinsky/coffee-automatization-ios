@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ManagerProtocol.h"
 #import "DBDeliveryType.h"
 
 
@@ -16,7 +17,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeOther = 2
 };
 
-@interface DBCompanyInfo : NSObject
+@interface DBCompanyInfo : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
 @property(strong, nonatomic, readonly) NSString *bundleName;
@@ -38,11 +39,17 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSString *venuePushChannel;
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
+@property(strong, nonatomic, readonly) NSNumber *promocodesIsEnabled;
 
-- (void)updateInfo;
+@property(nonatomic, readonly) BOOL friendInvitationEnabled;
+
+- (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");
+- (void)updateInfo:(void(^)(BOOL success))callback;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
+
 + (NSString *)db_companyBaseUrl;
++ (BOOL)db_proxyApp;
 + (NSNumber *)db_companyDefaultColor;
 + (NSString *)db_companyGoogleAnalyticsKey;
 

@@ -13,6 +13,8 @@
 
 @interface DBMenu : NSObject
 
+@property(nonatomic, readonly) BOOL hasNestedCategories;
+
 + (instancetype)sharedInstance;
 
 - (NSArray *)getMenu;
@@ -25,7 +27,7 @@
 - (void)synchronizeWithResponseMenu:(NSArray *)responseMenu;
 
 - (void)saveMenuToDeviceMemory;
-
+- (void)clearMenu;
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
 
 @end

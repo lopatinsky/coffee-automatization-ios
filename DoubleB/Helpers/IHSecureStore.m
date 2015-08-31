@@ -8,6 +8,7 @@
 
 #import "IHSecureStore.h"
 #import "UICKeyChainStore.h"
+#import "DBAPIClient.h"
 #import <Crashlytics/Crashlytics.h>
 
 @interface IHSecureStore ()
@@ -31,17 +32,19 @@
     self = [super init];
     
     self.secureStore = [UICKeyChainStore keyChainStore];
+//    [self.secureStore removeAllItems];
     
     return self;
 }
 
 - (void)setClientId:(NSString *)clientId{
     if(clientId && ![clientId isEqualToString:@"0"] && ![clientId isEqualToString:@""]){
-        // Track clientId with crashes
-        [[Crashlytics sharedInstance] setUserIdentifier:clientId];
-        
         [self.secureStore setString:clientId forKey:@"clientId"];
         [self.secureStore synchronize];
+        
+        // Track clientId with crashes
+        [[Crashlytics sharedInstance] setUserIdentifier:clientId];
+        [DBAPIClient sharedClient].clientHeaderEnabled = YES;
     }
 }
 

@@ -7,11 +7,17 @@
 
 
 #import "DBAPIClient.h"
+#import "IHSecureStore.h"
 #import "DBCompanyInfo.h"
+#import "DBCompaniesManager.h"
 
-@implementation DBAPIClient {
+@interface DBAPIClient()
 
-}
+@property (strong, nonatomic) AFHTTPRequestSerializer *reqSerializer;
+
+@end
+
+@implementation DBAPIClient
 
 + (instancetype)sharedClient {
     static DBAPIClient *_sharedClient = nil;
@@ -24,24 +30,65 @@
 }
 
 - (id)initWithBaseURL:(NSURL *)url {
-    self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
+    if (self = [super initWithBaseURL:url]) {
+        self.reqSerializer = [AFHTTPRequestSerializer serializer];
+        [self.reqSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [self.reqSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+        [self setRequestSerializer:self.reqSerializer];
+        [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        
+        self.companyHeaderEnabled = YES;
+        self.clientHeaderEnabled = YES;
+        
+        // API version
+        [self setValue:[DBAPIClient restAPIVersion] forHeader:@"Version"];
+        
+        // Locale/Language
+        [self setValue:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] forHeader:@"Language"];
     }
-    
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-    //compression
-    [requestSerializer setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    [self setRequestSerializer:requestSerializer];
-    
-    [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
-
     return self;
 }
 
-+ (NSString *)baseUrl{
++ (NSString *)baseUrl {
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+}
+
++ (NSString *)restAPIVersion {
+    // 0 - initial API version
+    
+    return @"0";
+}
+
+- (void)disableHeader:(nonnull NSString *)header {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:nil forHTTPHeaderField:header];
+    }
+}
+
+- (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
+    if (self.reqSerializer) {
+        [self.reqSerializer setValue:value forHTTPHeaderField:header];
+    }
+}
+
+- (void)setCompanyHeaderEnabled:(BOOL)companyHeaderEnabled {
+    _companyHeaderEnabled = companyHeaderEnabled;
+    
+    if (companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]) {
+        [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
+    } else {
+        [self disableHeader:@"namespace"];
+    }
+}
+
+- (void)setClientHeaderEnabled:(BOOL)clientHeaderEnabled {
+    _clientHeaderEnabled = clientHeaderEnabled;
+    
+    if(_clientHeaderEnabled && [IHSecureStore sharedInstance].clientId){
+        [self setValue:[IHSecureStore sharedInstance].clientId forHeader:@"Client-Id"];
+    } else {
+        [self disableHeader:@"Client-Id"];
+    }
 }
 
 @end

@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DBNewOrderViewController.h"
 
-@interface DBTabBarController : UITabBarController<UITabBarControllerDelegate, DBNewOrderViewControllerDelegate>
+@interface DBTabBarController : UITabBarController
 
 + (instancetype)sharedInstance;
 
+- (void)moveToStartState;
 - (void)awakeFromRemoteNotification;
 
 @end

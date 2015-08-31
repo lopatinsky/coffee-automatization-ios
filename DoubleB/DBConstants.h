@@ -32,9 +32,13 @@
 #define PROMOS_LIST_SCREEN @"Promos_list_screen"
 #define PROFILE_SCREEN @"Profile_screen"
 #define CONFIDENCE_SCREEN @"Confidence_screen"
+#define CATEGORIES_SCREEN @"Categories_screen"
+#define POSITIONS_SCREEN @"Positions_screen"
 #define MENU_SCREEN @"Menu_screen"
 #define PRODUCT_SCREEN @"Product_screen"
+
 #define GROUP_MODIFIER_PICKER @"Group_modifier_popup"
+#define SINGLE_MODIFIER_PICKER @"Single_modifier_popup"
 
 #define DOCS_SCREEN @"Documents_screen"
 #define NDA_SCREEN @"NDA_Screen"
@@ -48,8 +52,6 @@ extern NSString *const kDBDefaultsName;
 extern NSString *const kDBDefaultsPhone;
 extern NSString *const kDBDefaultsMail;
 
-extern NSString *const kDBDefaultsLastSelectedVenue;
-
 extern NSString *const kDBDefaultsNDASigned;
 
 extern NSString *const kDBDefaultsSharingInfo;
@@ -59,9 +61,6 @@ extern NSString *const kDBDefaultsCompanyInfo;
 
 extern NSString *const kDBDefaultsLastScheduledLocalNotification;
 
-NSString *const kDBFirstLaunchNecessaryInfoLoadSuccessNotification;
-NSString *const kDBFirstLaunchNecessaryInfoLoadFailureNotification;
-
 extern NSString *const kDBStatusUpdatedNotification;
 extern NSString *const kDBNotificationUpdatedOrder;
 extern NSString *const kDBRepeateOrderNotification;
@@ -69,4 +68,10 @@ extern NSString *const kDBNewOrderCreatedNotification;
 extern NSString *const kDBNewOrderAnimateAllErrorElementsNotification;
 
 extern NSString *const kDBBindingNecessaryForAuthorization;
+
+
+typedef NS_ENUM(NSInteger, DBUICurrencyDisplayMode){
+    DBUICurrencyDisplayModeRub = 0,
+    DBUICurrencyDisplayModeNone
+};
 

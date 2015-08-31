@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Order.h"
 
 @interface DBServerAPI : NSObject
+
++ (void)requestCompanies:(void(^)(NSArray *companies))success
+                 failure:(void(^)(NSError *error))failure;
 
 + (void)registerUser:(void(^)(BOOL success))callback;
 
@@ -28,5 +32,10 @@
 + (void)getWalletInfo:(void(^)(BOOL success, NSDictionary *response))callback;
 
 + (void)requestAddressSuggestions:(NSDictionary *)params callback:(void(^)(BOOL success, NSArray *response))callback;
+
++ (void)fetchCompanyNewsWithCallback:(void(^)(BOOL success, NSDictionary *response))callback;
+
++ (void)fetchActivatedPromoCodesWithCallback:(void (^)(BOOL, NSDictionary *))callback;
++ (void)activatePromoCode:(NSString *)code withCallback:(void (^)(BOOL, NSDictionary *))callback;
 
 @end

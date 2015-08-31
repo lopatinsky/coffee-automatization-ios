@@ -13,7 +13,7 @@
 + (DBSettingsTableViewController *)loadSettingsViewController{
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
-    if(!settingsVCClass){
+    if (!settingsVCClass) {
         settingsVCClass = NSClassFromString(@"DBSettingsTableViewController");
     }
     

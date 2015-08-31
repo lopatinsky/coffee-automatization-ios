@@ -25,17 +25,30 @@ typedef NS_ENUM(int16_t, PaymentType) {
     PaymentTypeExtraType = 2
 };
 
+typedef NS_ENUM(int16_t, DBOrderCancelReason) {
+    DBOrderCancelReasonWrongTime = 0,
+    DBOrderCancelReasonWrongPlace,
+    DBOrderCancelReasonChangeMind,
+    DBOrderCancelReasonOther
+};
+
 @class Venue;
 
 @interface Order : NSManagedObject
 
 //stored
 @property (nonatomic, strong) NSString *orderId;
+
 @property (nonatomic, strong) NSNumber *total;
+@property (nonatomic, strong) NSNumber *discount;
+@property (nonatomic, strong) NSNumber *walletDiscount;
+@property (nonatomic, strong) NSNumber *shippingTotal;
+
 @property (nonatomic, strong) NSDate *time;
 @property (nonatomic, strong) NSString *timeString;
 @property (nonatomic, strong) NSData *dataItems; //array of JSON-encoded positions
-@property (nonatomic, strong) NSData *dataGifts; //array of JSON-encoded gift positions
+@property (nonatomic, strong) NSData *dataBonusItems; //array of JSON-encoded bonus positions
+@property (nonatomic, strong) NSData *dataGiftItems; //array of JSON-encoded bonus positions
 
 @property (nonatomic) OrderStatus status;
 
@@ -46,8 +59,13 @@ typedef NS_ENUM(int16_t, PaymentType) {
 @property (nonatomic) PaymentType paymentType;
 
 //not stored
+@property (nonatomic, readonly) double actualTotal;
+@property (nonatomic, readonly) double actualDiscount;
+
 @property (nonatomic, readonly) NSArray *items;
 @property (nonatomic, readonly) NSArray *bonusItems;
+@property (nonatomic, readonly) NSArray *giftItems;
+
 @property (nonatomic, readonly) NSString *formattedTimeString;
 
 - (instancetype)init:(BOOL)stored;
@@ -57,6 +75,7 @@ typedef NS_ENUM(int16_t, PaymentType) {
 
 + (NSArray *)allOrders;
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;
++ (void)dropAllOrders;
 
 /**
 * Fetch statuses for given Order objects

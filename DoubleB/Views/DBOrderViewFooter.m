@@ -39,13 +39,22 @@
     return self;
 }
 
-- (void)awakeFromNib{
+- (void)awakeFromNib {
     self.initialHeight = self.frame.size.height;
 }
 
-- (void)configure{
-    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Итого: %ld %@", nil), (long)self.order.total.integerValue, [Compatibility currencySymbol]]];
-    [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, 6)];
+- (void)configure {
+    NSString *totalString = NSLocalizedString(@"Итого", nil);
+    
+    NSMutableAttributedString *string;
+    if (self.order.actualDiscount <= 0) {
+        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %.0f %@", totalString, self.order.actualTotal, [Compatibility currencySymbol]]];
+    } else {
+        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %.0f %.0f %@", totalString, self.order.actualTotal, self.order.actualTotal - self.order.actualDiscount, [Compatibility currencySymbol]]];
+        [string setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14.0], NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)}
+                        range:NSMakeRange(totalString.length, [[self.order.total stringValue] length])];
+    }
+    [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, totalString.length)];
     self.labelTotal.attributedText = string;
     
     NSDateFormatter *formatter = [NSDateFormatter new];

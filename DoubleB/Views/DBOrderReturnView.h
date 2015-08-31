@@ -7,20 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSUInteger, DBOrderReturnCause) {
-    DBOrderReturnCauseTime = 0,
-    DBOrderReturnCauseVenue,
-    DBOrderReturnCauseChangeMind,
-    DBOrderReturnCauseOther
-};
+#import "Order.h"
 
 @class DBOrderReturnView;
 @protocol DBOrderReturnViewDelegate <NSObject>
 @optional
 - (void)db_orderReturnViewDidCancel:(DBOrderReturnView *)view;
 @required
-- (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectCause:(DBOrderReturnCause)cause;
+- (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectCause:(DBOrderCancelReason)cause;
 - (void)db_orderReturnView:(DBOrderReturnView *)view DidSelectOtherCause:(NSString *)cause;
 @end
 

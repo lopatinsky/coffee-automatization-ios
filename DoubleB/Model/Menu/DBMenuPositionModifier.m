@@ -45,64 +45,55 @@
 
 + (DBMenuPositionModifier *)groupModifierFromDictionary:(NSDictionary *)modifierDictionary{
     DBMenuPositionModifier *modifier = [[DBMenuPositionModifier alloc] init];
-    
-    modifier.modifierType = ModifierTypeGroup;
-    modifier.modifierId = modifierDictionary[@"modifier_id"];
-    modifier.modifierName = modifierDictionary[@"title"];
-    
-    modifier.required = NO;
-    for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
-        [modifier.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
-        
-        modifier.required = modifier.required || itemDict[@"default"];
-    }
-    [modifier sortItems];
-    
-    if(modifier.items.count > 0 && modifier.required){
-        modifier.selectedItem = [modifier.items firstObject];
-    }
+    [modifier copyGroupModifierFromDictionary:modifierDictionary];
     
     // If no variants to choose, not create modifier
     if([modifier.items count] < 1)
         modifier = nil;
     
-    modifier.selectedItem = [modifier.items firstObject];
-    
-    modifier.modifierDictionary = modifierDictionary;
-    
     return modifier;
 }
 
 - (BOOL)synchronizeGroupModifierWithDictionary:(NSDictionary *)modifierDictionary{
-    self.modifierType = ModifierTypeGroup;
-    self.modifierId = modifierDictionary[@"modifier_id"];
-    self.modifierName = modifierDictionary[@"title"];
-    
-    self.required = NO;
-    self.items = [NSMutableArray new];
-    for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
-        [self.items addObject:[DBMenuPositionModifierItem itemFromDictionary:itemDict]];
-        
-        self.required = self.required || itemDict[@"default"];
-    }
-    [self sortItems];
-    
-    if(self.items.count > 0 && self.required){
-        self.selectedItem = [self.items firstObject];
-    }
+    [self copyGroupModifierFromDictionary:modifierDictionary];
     
     // If no variants to choose, return fail of synchronization
     if([self.items count] < 1)
         return NO;
     
-    self.modifierDictionary = modifierDictionary;
-    
     return YES;
+}
+
+- (void)copyGroupModifierFromDictionary:(NSDictionary *)modifierDictionary {
+    self.modifierType = ModifierTypeGroup;
+    self.modifierId = modifierDictionary[@"modifier_id"];
+    self.modifierName = modifierDictionary[@"title"];
+    
+    self.required = [[modifierDictionary getValueForKey:@"required"] boolValue];
+    
+    self.items = [NSMutableArray new];
+    for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
+        DBMenuPositionModifierItem *modifierItem = [DBMenuPositionModifierItem itemFromDictionary:itemDict];
+        [self.items addObject:modifierItem];
+        
+        // Select Default choice
+        if([itemDict getValueForKey:@"default"]){
+            self.selectedItem = modifierItem;
+        }
+    }
+    [self sortItems];
+    
+    // If no default choice, select first choice
+    if(self.items.count > 0 && self.required && !self.selectedItem){
+        self.selectedItem = [self.items firstObject];
+    }
+    
+    self.modifierDictionary = modifierDictionary;
 }
 
 - (void)sortItems{
     [self.items sortUsingComparator:^NSComparisonResult(DBMenuPositionModifierItem *obj1, DBMenuPositionModifierItem *obj2) {
-        return [@(obj1.itemPrice) compare:@(obj2.itemPrice)];
+        return [@(obj1.order) compare:@(obj2.order)];
     }];
 }
 
