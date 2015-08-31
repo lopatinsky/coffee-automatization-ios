@@ -208,11 +208,11 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemCells removeAllObjects];
     
     [self.tableView reloadData];
-    if (_orderCoordinator.itemsManager.totalCount == 1) {
-        self.tableView.alwaysBounceVertical = NO;
-    } else {
-        self.tableView.alwaysBounceVertical = YES;
-    }
+//    if (_orderCoordinator.itemsManager.totalCount == 1) {
+//        self.tableView.alwaysBounceVertical = NO;
+//    } else {
+//        self.tableView.alwaysBounceVertical = YES;
+//    }
     
     [self reloadTableViewHeight:NO];
     
@@ -652,10 +652,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
     OrderItem *item = cell.orderItem;
     
-    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
-    positionVC.parentNavigationController = self.navigationController;
-    positionVC.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:positionVC animated:YES];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if(indexPath.section != 2){
+        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
+        positionVC.parentNavigationController = self.navigationController;
+        positionVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:positionVC animated:YES];
+    }
 }
 
 - (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell{

@@ -89,15 +89,6 @@
         
         _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
         
-        // gifts
-        NSDictionary *gifts = response[@"new_order_gifts"];
-        for (NSDictionary *gift in gifts) {
-            DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:gift];
-            if (giftPosition) {
-                [self.parentManager.orderGiftsManager addPosition:giftPosition];
-            }
-        }
-        
         // Personal wallet promo
         NSDictionary *personalWalletPromo = response[@"wallet"];
         _walletEnabled = [personalWalletPromo[@"enable"] boolValue];

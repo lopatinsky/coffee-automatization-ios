@@ -31,8 +31,8 @@
 }
 
 - (void)testNetwortQueue {
-    [self.networkManager addUniqueOperation:FetchCompaniesOperation];
-    [self.networkManager addUniqueOperation:FetchCompanyInfoOperation];
+    [self.networkManager addUniqueOperation:NetworkOperationFetchCompanies];
+    [self.networkManager addUniqueOperation:NetworkOperationFetchCompanyInfo];
 }
 
 @end

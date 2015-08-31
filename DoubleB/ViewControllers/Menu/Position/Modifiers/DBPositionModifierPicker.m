@@ -227,11 +227,25 @@
     if([self.delegate respondsToSelector:@selector(db_positionModifierPickerDidChangeItemCount:)]){
         [self.delegate db_positionModifierPickerDidChangeItemCount:self];
     }
+    
+    [GANHelper analyzeEvent:@"product_single_modifier_plus" label:modifier.modifierId category:SINGLE_MODIFIER_PICKER];
 }
 
 - (void)db_singleModifierCellDidDecreaseModifierItemCount:(DBMenuPositionModifier *)modifier{
     if([self.delegate respondsToSelector:@selector(db_positionModifierPickerDidChangeItemCount:)]){
         [self.delegate db_positionModifierPickerDidChangeItemCount:self];
+    }
+    
+    [GANHelper analyzeEvent:@"product_single_modifier_minus" label:modifier.modifierId category:SINGLE_MODIFIER_PICKER];
+}
+
+#pragma mark - ScrollView Delegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    if(self.type == DBPositionModifierPickerTypeGroup){
+        [GANHelper analyzeEvent:@"product_modifier_scroll" label:self.modifier.modifierId category:GROUP_MODIFIER_PICKER];
+    } else {
+        [GANHelper analyzeEvent:@"product_single_modifiers_scroll" category:SINGLE_MODIFIER_PICKER];
     }
 }
 
