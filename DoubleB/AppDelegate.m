@@ -11,7 +11,6 @@
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
 #import "ApplicationManager.h"
-#import "ViewControllerManager.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>

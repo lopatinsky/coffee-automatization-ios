@@ -42,7 +42,7 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
             [DBCompaniesManager selectCompanyName:companies[0]];
             [[DBCompanyInfo sharedInstance] flushCache];
             [[DBCompanyInfo sharedInstance] flushStoredCache];
-            [[NetworkManager sharedManager] addPendingUniqueOperation:FetchCompanyInfoOperation];
+            [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanyInfo];
             [DBCompaniesManager setValue:@(NO) forKey:@"companiesSelectionIsAvailable"];
         } else if (companies.count > 1) {
             [DBCompaniesManager setValue:@(YES) forKey:@"companiesSelectionIsAvailable"];

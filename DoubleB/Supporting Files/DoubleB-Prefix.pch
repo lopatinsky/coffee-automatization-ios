@@ -25,6 +25,7 @@
 #import "DBTextResourcesHelper.h"
 
 #import "ViewManager.h"
+#import "ViewControllerManager.h"
 
 #import "UIViewController+DBAppearance.h"
 #import "UIView+SnapshotAdditions.h"

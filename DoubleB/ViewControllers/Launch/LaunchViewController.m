@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import "ApplicationManager.h"
 #import "DBCompaniesManager.h"
-#import <Parse/PFPush.h>
+#import "NetworkManager.h"
 
 @interface LaunchViewController ()<UIAlertViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
@@ -69,16 +69,8 @@
     
     UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
     
-    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
-    
     if ([window.rootViewController isKindOfClass:[LaunchViewController class]]) {
-        if ([[DBCompaniesManager sharedInstance] hasCompanies]) {
-            DBCompaniesViewController *companiesViewController = [DBCompaniesViewController new];
-            companiesViewController.firstLaunch = YES;
-            window.rootViewController = companiesViewController;
-        } else {
-            window.rootViewController = [DBTabBarController sharedInstance];
-        }
+        window.rootViewController = [ViewControllerManager mainViewController];
     }
 }
 
@@ -99,7 +91,7 @@
     [GANHelper analyzeEvent:@"try_again_click" category:LAUNCH_PLACEHOLDER_SCREEN];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [[ApplicationManager sharedInstance] updateAllInfo:nil];
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
     });
 }
 

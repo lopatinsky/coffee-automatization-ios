@@ -16,9 +16,6 @@ extern NSString *const kDBApplicationManagerInfoLoadFailure;
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
-@property (nonatomic, readonly) BOOL allInfoLoaded;
-- (void)updateAllInfo:(void(^)(BOOL success))callback;
-
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy;
 + (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
 @end

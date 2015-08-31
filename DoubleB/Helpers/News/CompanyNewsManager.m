@@ -7,7 +7,6 @@
 //
 
 #import "CompanyNewsManager.h"
-#import "ViewControllerManager.h"
 #import "UIViewController+DBAppearance.h"
 #import "DBServerAPI.h"
 

@@ -25,7 +25,6 @@
 #import "DBCompaniesManager.h"
 #import "DBSharePermissionViewController.h"
 
-#import "ViewControllerManager.h"
 
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"

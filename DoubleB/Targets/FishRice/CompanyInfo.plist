@@ -6,6 +6,8 @@
 	<dict>
 		<key>BaseUrl</key>
 		<string>http://proxy-perchini.1.doubleb-automation-production.appspot.com/</string>
+		<key>Proxy</key>
+		<true/>
 		<key>CompanyColor</key>
 		<integer>4293669431</integer>
 		<key>CompanyGAKey</key>

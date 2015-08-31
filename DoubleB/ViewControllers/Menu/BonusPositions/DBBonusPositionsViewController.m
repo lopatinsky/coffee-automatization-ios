@@ -11,7 +11,6 @@
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
 #import "OrderCoordinator.h"
-#import "ViewControllerManager.h"
 
 @interface DBBonusPositionsViewController ()<UITableViewDelegate, UITableViewDataSource, DBPositionCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *promoDescriptionView;

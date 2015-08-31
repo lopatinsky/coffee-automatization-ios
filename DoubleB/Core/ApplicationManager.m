@@ -7,7 +7,6 @@
 //
 
 #import "ApplicationManager.h"
-#import "ViewControllerManager.h"
 #import "NetworkManager.h"
 
 #import "OrderCoordinator.h"
@@ -32,6 +31,7 @@
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
 
+// Using currently only for DBCompanyInfo
 NSString *const kDBApplicationManagerInfoLoadSuccess = @"kDBApplicationManagerInfoLoadSuccess";
 NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerInfoLoadFailure";
 
@@ -48,18 +48,7 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
 - (instancetype)init {
     self = [super init];
     
-    [self updateAllInfo:nil];
-    
     return self;
-}
-
-- (void)updateAllInfo:(void (^)(BOOL))callback {
-    [[NetworkManager sharedManager] addUniqueOperation:FetchCompaniesOperation];
-    [[NetworkManager sharedManager] addOperation:FetchCompanyInfoOperation];
-}
-
-- (BOOL)allInfoLoaded {
-    return [[DBCompanyInfo sharedInstance].deliveryTypes count] > 0 && [DBCompaniesManager sharedInstance].companiesLoaded;
 }
 
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
@@ -183,20 +172,18 @@ NSString *const kDBApplicationManagerInfoLoadFailure = @"kDBApplicationManagerIn
 
 @implementation ApplicationManager (Start)
 + (UIViewController *)rootViewController {
-    if (![ApplicationManager sharedInstance].allInfoLoaded) {
-        return [ViewControllerManager launchViewController];
+    if([DBCompanyInfo db_proxyApp]){
+//        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
+//            return [DBCompaniesViewController new];
+//        }
     } else {
-        if ([DBCompaniesManager sharedInstance].hasCompanies && [[DBCompaniesManager selectedCompanyName] isEqualToString:@""]) {
-            return [DBCompaniesViewController new];
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
+        if(!([DBCompanyInfo sharedInstance].deliveryTypes.count > 0)){
+            return [ViewControllerManager launchViewController];
         }
-        
-        // Login VC for demoApp
-        if  ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"rubeacondemo"]){
-            return [self demoLoginViewController];
-        }
-        
-        return [ViewControllerManager mainViewController];
     }
+    
+    return [ViewControllerManager mainViewController];
 }
 @end
 

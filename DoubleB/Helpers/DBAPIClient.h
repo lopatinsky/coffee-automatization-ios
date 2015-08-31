@@ -13,6 +13,7 @@
 @interface DBAPIClient : AFHTTPRequestOperationManager
 
 + (nullable instancetype)sharedClient;
+
 + (nullable NSString *)baseUrl;
 
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header;

@@ -9,7 +9,6 @@
 #import "CategoriesAndPositionsCVController.h"
 #import "PositionCollectionViewCell.h"
 #import "PositionCompactCollectionViewCell.h"
-#import "ViewControllerManager.h"
 
 #import "DBBarButtonItem.h"
 #import "DBCategoryPicker.h"

@@ -84,8 +84,8 @@
 
 + (ConcurrentOperation *)operationWithType:(NetworkOperation)type {
     NSDictionary *operationClasses = @{
-                                       @(FetchCompanyInfoOperation): [FetchCompanyInfo class],
-                                       @(FetchCompaniesOperation): [FetchCompaniesInfo class]
+                                       @(NetworkOperationFetchCompanyInfo): [FetchCompanyInfo class],
+                                       @(NetworkOperationFetchCompanies): [FetchCompaniesInfo class]
                                        };
     NSLog(@"OPERATION TYPE: %@", [operationClasses objectForKey:@(type)]);
     ConcurrentOperation *operation = [[operationClasses objectForKey:@(type)] new];

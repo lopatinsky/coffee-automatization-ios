@@ -7,7 +7,6 @@
 //
 
 #import "CategoriesAndPositionsTVController.h"
-#import "ViewControllerManager.h"
 
 #import "DBBarButtonItem.h"
 #import "MBProgressHUD.h"

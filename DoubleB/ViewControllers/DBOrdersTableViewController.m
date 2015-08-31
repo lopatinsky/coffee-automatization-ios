@@ -148,7 +148,6 @@
         
         [Compatibility registerForNotifications];
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
-        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
         
         [GANHelper trackNewOrderInfo:ord];
     }

@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, DBCompaniesViewControllerMode) {
+    DBCompaniesViewControllerModeChooseCompany = 0,
+    DBCompaniesViewControllerModeChangeCompany
+};
+
 @interface DBCompaniesViewController : UIViewController
-
-@property (nonatomic) BOOL firstLaunch;
-
+@property (nonatomic) DBCompaniesViewControllerMode mode;
 @end

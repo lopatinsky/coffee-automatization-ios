@@ -11,8 +11,7 @@
 
 #import "DBServerAPI.h"
 #import "DBCompanyInfo.h"
-#import "DBTabBarController.h"
-#import "LaunchViewController.h"
+#import "MBProgressHUD.h"
 #import "DBCompaniesManager.h"
 
 @interface DBCompaniesViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -22,7 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIView *titleView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *titleViewHeightConstraint;
-@property (strong, nonatomic) IBOutlet UIImageView *splashImageView;
 
 @property (strong, nonatomic) NSArray *companies;
 
@@ -35,11 +33,12 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     [self initializeViews];
-    [self requestCompanies];
+    
+    self.companies = [[DBCompaniesManager sharedInstance] companies];
 }
 
 - (void)initializeViews {
-    if (self.firstLaunch) {
+    if (self.mode == DBCompaniesViewControllerModeChangeCompany) {
         self.titleView.hidden = false;
         self.titleView.backgroundColor = [UIColor db_defaultColor];
     } else {
@@ -54,36 +53,23 @@
     
     self.title = NSLocalizedString(@"Выберите ресторан", nil);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
-    
-    if (self.firstLaunch) {
-        self.splashImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"launch_%d.png", (int)[[UIScreen mainScreen] bounds].size.height]];
-    }
-}
-
-- (void)requestCompanies {
-    self.companies = [[DBCompaniesManager sharedInstance] companies];
-    [self.tableView reloadData];
-    if (self.companies.count == 1) {
-        [self putSelectedNamespace:self.companies[0]];
-    } else {
-        self.splashImageView.hidden = YES;
-    }
 }
 
 - (void)putSelectedNamespace:(NSString *)namespace {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    [self preloadData];
-    if ([DBCompanyInfo sharedInstance].deliveryTypes) {
-        delegate.window.rootViewController = [LaunchViewController new];
-    } else {
-        delegate.window.rootViewController = [DBTabBarController sharedInstance];
-    }
-}
-
-- (void)preloadData {
     [[ApplicationManager sharedInstance] flushStoredCache];
-    [[ApplicationManager sharedInstance] updateAllInfo:nil];
-    [[DBTabBarController sharedInstance] moveToStartState];
+    [DBCompaniesManager selectCompanyName:namespace];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if(success){
+            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            delegate.window.rootViewController = [ViewControllerManager mainViewController];
+        } else {
+            [self showError:@"Не удалось загрузить информацию о выбранное компании"];
+        }
+    }];
 }
 
 #pragma mark - UITableViewDataSource

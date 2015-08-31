@@ -9,6 +9,8 @@
 #import "DBCompanyInfo.h"
 #import "DBServerAPI.h"
 
+#import <Parse/PFPush.h>
+
 @implementation DBCompanyInfo
 
 + (instancetype)sharedInstance {
@@ -22,7 +24,6 @@
     self = [super init];
     
     [self loadFromMemory];
-    [self updateInfo];
     
     return self;
 }
@@ -54,6 +55,7 @@
             
             
             _companyPushChannel = [response[@"push_channels"] getValueForKey:@"company"] ?: @"";
+            [PFPush subscribeToChannelInBackground:_companyPushChannel];
             
             NSString *clientPushChannel = [response[@"push_channels"] getValueForKey:@"client"] ?: @"";
             _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
@@ -92,6 +94,12 @@
     NSString *baseUrl = [self objectFromApplicationPreferencesByName:@"BaseUrl"];
     
     return baseUrl;
+}
+
++ (BOOL)db_proxyApp{
+    BOOL proxy = [[self objectFromApplicationPreferencesByName:@"Proxy"] boolValue];
+    
+    return proxy;
 }
 
 + (NSNumber *)db_companyDefaultColor {

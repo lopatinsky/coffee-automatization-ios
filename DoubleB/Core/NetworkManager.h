@@ -10,8 +10,8 @@
 #import "ConcurrentOperation.h"
 
 typedef enum : NSUInteger {
-    FetchCompaniesOperation,
-    FetchCompanyInfoOperation,
+    NetworkOperationFetchCompanies = 0,
+    NetworkOperationFetchCompanyInfo,
 } NetworkOperation;
 
 @interface NetworkManager : NSObject
