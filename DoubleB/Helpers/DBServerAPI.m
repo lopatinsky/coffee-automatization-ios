@@ -66,6 +66,7 @@
         NSString *shareDataString = [[NSString alloc] initWithData:shareData encoding:NSUTF8StringEncoding];
         params[@"share_data"] = shareDataString;
     }
+    
     [[DBAPIClient sharedClient] POST:@"register"
                           parameters:params
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
