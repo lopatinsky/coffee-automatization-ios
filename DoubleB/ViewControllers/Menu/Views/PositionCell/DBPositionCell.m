@@ -89,6 +89,10 @@
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     } else {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.price, [Compatibility currencySymbol]];
+        
+//        if(self.position.price < self.position.actualPrice){
+//            self.priceLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"от", nil), self.position.price, [Compatibility currencySymbol]];
+//        }
     }
 }
 

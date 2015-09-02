@@ -15,6 +15,7 @@
 "CardNotUniqueErrorMessage" = "Sorry, but card with the same number has already been added";
 "NoInternetConnectionErrorMessage" = "Sorry, check your internet connection and try again";
 
+"от" = "from";
 "р." = "rub.";
 "г" = "g";
 "ккал" = "kcal";
