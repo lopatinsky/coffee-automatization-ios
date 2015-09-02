@@ -8,10 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol SocialManagerDelegate <NSObject>
+
+- (void)socialManagerDidBeginFetchShareInfo;
+- (void)socialManagerDidEndFetchShareInfo;
+
+@end
+
 @interface SocialManager : NSObject
 
-+ (instancetype)sharedInstance;
++ (instancetype)sharedManagerWithDelegate:(UIViewController<SocialManagerDelegate> *)delegate;
 
-- (void)getFacebookUserInfo:(void(^)(BOOL success, NSDictionary *result))callback;
+- (void)shareFacebook;
+- (void)shareVk;
+- (void)shareOther:(NSString *)screen;
 
 @end

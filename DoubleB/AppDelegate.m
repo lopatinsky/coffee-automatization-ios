@@ -17,6 +17,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
+#import <VKSdk.h>
 
 @implementation AppDelegate
 
@@ -52,6 +53,11 @@
     
     [self.window makeKeyAndVisible];
     
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return YES;
 }
 

@@ -64,6 +64,7 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                                 //NSLog(@"%@", responseObject);
                                 
                                 NSString *imageUrl = [responseObject getValueForKey:@"image"];
+                                
                                 if(imageUrl){
                                     dispatch_async(dispatch_queue_create("image_load_queue", NULL), ^{
                                         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
@@ -74,7 +75,7 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                                 }
                                 
                                 [DBShareHelper saveValue:[responseObject getValueForKey:@"text"] ?: @"" forKey:@"shareText"];
-                                
+                                [DBShareHelper sharedInstance].imageURL = imageUrl;
                                 _appUrls = [self processShareLinks:responseObject[@"urls"]];
                                 
                                 if(callback)

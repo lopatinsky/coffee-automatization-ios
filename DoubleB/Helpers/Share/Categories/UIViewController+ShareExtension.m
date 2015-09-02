@@ -11,7 +11,6 @@
 #import "DBShareHelper.h"
 #import "MBProgressHUD.h"
 #import "DBActivityItemProvider.h"
-#import "CustomFBActivity.h"
 
 @implementation UIViewController (ShareExtension)
 
@@ -60,10 +59,8 @@ static NSString *dbAnaliticsNameScreenName;
 }
 
 - (void)shareWithActivityItems:(NSArray *)activityItems withCallback:(void(^)(BOOL completed))callback{
-    CustomFBActivity *customActivity = [[CustomFBActivity alloc] init];
-    customActivity.delegate = self;
     UIActivityViewController *shareVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                                                          applicationActivities:@[customActivity]];
+                                                                          applicationActivities:@[]];
     shareVC.excludedActivityTypes = @[UIActivityTypeAirDrop,
                                       UIActivityTypePrint,
                                       UIActivityTypeAssignToContact,

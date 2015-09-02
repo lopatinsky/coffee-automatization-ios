@@ -11,6 +11,7 @@
 @interface DBShareHelper : NSObject
 
 @property(strong, nonatomic, readonly) UIImage *imageForShare;
+@property(strong, nonatomic) NSString *imageURL;
 @property(strong, nonatomic, readonly) NSDictionary *appUrls;
 @property(strong, nonatomic, readonly) NSString *textShare;
 
