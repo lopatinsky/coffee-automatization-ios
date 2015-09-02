@@ -28,7 +28,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // TODO: change forceCopy to false after test
-    [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
+    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeautomation"]){
+        [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:false];
+    } else {
+        [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
+    }
     [ApplicationManager initializeVendorFrameworks];
     [ApplicationManager initializeOrderFramework:launchOptions];
     

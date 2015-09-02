@@ -58,6 +58,10 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
 }
 
 - (void)fetchShareInfo:(void(^)(BOOL success))callback{
+    if(![IHSecureStore sharedInstance].clientId){
+        return;
+    }
+    
     [[DBAPIClient sharedClient] GET:@"shared/invitation/get_url"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -15,6 +15,8 @@
 + (nullable instancetype)sharedClient;
 
 + (nullable NSString *)baseUrl;
+// Dirty way to change base url
++ (void)changeBaseUrl;
 
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header;
 - (void)disableHeader:(nonnull NSString *)header;

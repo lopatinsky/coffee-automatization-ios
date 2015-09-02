@@ -75,11 +75,9 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
 
 
 - (void)setVenue:(Venue *)venue{
-    if(venue){
-        _venue = venue;
-        [[NSUserDefaults standardUserDefaults] setObject:venue.venueId forKey:kDBDefaultsLastSelectedVenue];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
+    _venue = venue;
+    [[NSUserDefaults standardUserDefaults] setObject:venue.venueId forKey:kDBDefaultsLastSelectedVenue];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 #pragma mark - DBManagerProtocol

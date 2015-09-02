@@ -203,8 +203,8 @@
     _clientPushChannel = pushChannels[@"_clientPushChannel"];
     _venuePushChannel = pushChannels[@"_venuePushChannel"];
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
-    _supportEmails = info[@"supportEmails"];
     
+    _supportEmails = info[@"supportEmails"];
     _deliveryCities = info[@"_deliveryCities"];
     _promocodesIsEnabled = info[@"promocodeIsEnabled"];
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
@@ -223,7 +223,6 @@
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
                            @"supportEmails": _supportEmails,
-                           @"_deliveryCities": _deliveryCities};
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
                            @"promocodeIsEnabled": _promocodesIsEnabled};

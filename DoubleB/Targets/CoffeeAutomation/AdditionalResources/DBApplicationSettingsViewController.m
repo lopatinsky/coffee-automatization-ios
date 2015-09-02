@@ -7,6 +7,8 @@
 //
 
 #import "DBApplicationSettingsViewController.h"
+#import "DBTabBarController.h"
+#import "AppDelegate.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
 
@@ -63,14 +65,21 @@
         
         [companyInfo writeToFile:path atomically:NO];
         
-        [[[UIAlertView alloc] initWithTitle:@"Важно!"
-                                    message:@"Приложение сейчас закроется!"
-                                   delegate:nil
-                          cancelButtonTitle:@"OK"
-                          otherButtonTitles:nil] show];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            abort();
-        });
+        [[ApplicationManager sharedInstance] flushStoredCache];
+        [[DBTabBarController sharedInstance] moveToStartState];
+        [DBAPIClient changeBaseUrl];
+        
+        UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
+        window.rootViewController = [ApplicationManager rootViewController];
+        
+//        [[[UIAlertView alloc] initWithTitle:@"Важно!"
+//                                    message:@"Приложение сейчас закроется!"
+//                                   delegate:nil
+//                          cancelButtonTitle:@"OK"
+//                          otherButtonTitles:nil] show];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            abort();
+//        });
     }
 }
 

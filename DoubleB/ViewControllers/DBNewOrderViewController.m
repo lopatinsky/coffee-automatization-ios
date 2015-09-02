@@ -470,12 +470,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if(animated){
         [UIView animateWithDuration:0.3 animations:^{
             self.tableViewHeightConstraint.constant = height;
-            [self.tableView layoutIfNeeded];
             [self.scrollView layoutIfNeeded];
         }];
     } else {
         self.tableViewHeightConstraint.constant = height;
-        [self.tableView layoutIfNeeded];
         [self.scrollView layoutIfNeeded];
     }
 }

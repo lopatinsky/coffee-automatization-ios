@@ -75,12 +75,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"viewController": profileVC}];
     
     // Share friends item
-    DBSharePermissionViewController *shareVC = [DBSharePermissionViewController new];
-//    shareVC.screen
-    [self.settingsItems addObject:@{@"name": @"shareVC",
-                                    @"title": NSLocalizedString(@"Рассказать друзьям", nil),
-                                    @"image": @"share_icon",
-                                    @"viewController": shareVC}];
+    if([DBCompanyInfo sharedInstance].friendInvitationEnabled){
+        DBSharePermissionViewController *shareVC = [DBSharePermissionViewController new];
+        shareVC.screen = SHARE_SCREEN;
+        [self.settingsItems addObject:@{@"name": @"shareVC",
+                                        @"title": NSLocalizedString(@"Рассказать друзьям", nil),
+                                        @"image": @"share_icon",
+                                        @"viewController": shareVC}];
+    }
     
     // Payment item
     // Cards item

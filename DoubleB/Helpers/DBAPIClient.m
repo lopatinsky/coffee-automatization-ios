@@ -17,10 +17,11 @@
 
 @end
 
+static DBAPIClient *_sharedClient = nil;
+
 @implementation DBAPIClient
 
 + (instancetype)sharedClient {
-    static DBAPIClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:[DBAPIClient baseUrl]]];
@@ -53,10 +54,16 @@
     return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
 }
 
+// Dirty way to change base url
++ (void)changeBaseUrl{
+    _sharedClient = [[self alloc] initWithBaseURL:[NSURL URLWithString:[DBAPIClient baseUrl]]];
+}
+
 + (NSString *)restAPIVersion {
     // 0 - initial API version
+    // 1 - Share
     
-    return @"0";
+    return @"1";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
