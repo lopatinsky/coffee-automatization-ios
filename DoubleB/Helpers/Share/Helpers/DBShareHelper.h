@@ -17,6 +17,7 @@
 
 @property(strong, nonatomic, readonly) NSString *titleShareScreen;
 @property(strong, nonatomic, readonly) NSString *textShareScreen;
+@property(strong, nonatomic, readonly) NSString *promoCode;
 
 + (instancetype)sharedInstance;
 

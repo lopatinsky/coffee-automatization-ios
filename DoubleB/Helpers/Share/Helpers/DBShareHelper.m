@@ -75,7 +75,8 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                                 }
                                 
                                 [DBShareHelper saveValue:[responseObject getValueForKey:@"text"] ?: @"" forKey:@"shareText"];
-                                [DBShareHelper sharedInstance].imageURL = imageUrl;
+                                [DBShareHelper saveValue:imageUrl forKey:@"imageURL"];
+                                [DBShareHelper saveValue:[responseObject getValueForKey:@"promo_code"] ?: @"" forKey:@"promoCode"];
                                 _appUrls = [self processShareLinks:responseObject[@"urls"]];
                                 
                                 if(callback)
@@ -87,6 +88,14 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                                 if(callback)
                                     callback(NO);
                             }];
+}
+
+- (NSString *)promoCode {
+    return [DBShareHelper valueForKey:@"promoCode"];
+}
+
+- (NSString *)imageURL {
+    return [DBShareHelper valueForKey:@"imageURL"];
 }
 
 - (UIImage *)imageForShare{

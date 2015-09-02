@@ -149,9 +149,27 @@
              };
 }
 
-+ (nonnull UIViewController *)promocodeViewControllers {
++ (nonnull UIViewController *)promocodeViewController {
     Class promocodeViewControllerr = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
     return [promocodeViewControllerr new];
 }
 
 @end
+
+#pragma mark - Share Friend Invitation
+#import "DBSharePermissionViewController.h"
+@implementation ViewControllerManager(ShareFriendInvitationViewControllers)
+
++ (nonnull NSDictionary *)shareFriendInvitationViewControllerClasses {
+    return @{
+             @"default": [DBSharePermissionViewController class]
+             };
+}
+
++ (nonnull UIViewController *)shareFriendInvitationViewController {
+    Class shareFriendInvitation = [self shareFriendInvitationViewControllerClasses][[self valueFromPropertyListByKey:@"ShareFriendInvitation"] ?: @"default"];
+    return [shareFriendInvitation new];
+}
+
+@end
+
