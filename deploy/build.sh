@@ -7,15 +7,17 @@ DEBUG_SKIP_UPLOAD_STEP=1  # set to 1 if you don't want the built ipa files to be
 
 script_path="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 path_output="${script_path}/build" 
-workspace_file="${script_path%/*}/${PROJECT_NAME}.xcworkspace"
+workspace_file="${script_path%/*}/${PROJECT_NAME}.xcodeproj"
 
 
 #============
 # Build
 #============
 if [ $DEBUG_SKIP_BUILD_STEP -eq 0 ]; then
-  list=$(xcodebuild -list -workspace $workspace_file)
-  list=$(echo ${list:(53+${#PROJECT_NAME})})
+  list=$(xcodebuild -list -project $workspace_file)
+  # echo $list
+  echo ${list##Schemes*}
+  # list=$(echo ${list:(53+${#PROJECT_NAME})})
 
   schemes=($(echo $list))
 
@@ -129,6 +131,6 @@ if [ $DEBUG_SKIP_UPLOAD_STEP -eq 0 ]; then
     done
     app_id="${app_id_list[$index]}"
   
-    ipa distribute:itunesconnect -a "$DEV_ACCOUNT" -p PASSWORD -i "$app_id" -f "${path_output}/${ipa}"  --upload --verbose
+    ipa distribute:itunesconnect -a "$DEV_ACCOUNT" -p PASSWORD -i "$app_id" -f "${path_output}/${ipa}"  --upload
   done
 fi
