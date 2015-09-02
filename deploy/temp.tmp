@@ -1,0 +1,7 @@
+     xcodebuild  /Users/ivanoschepkov/Development/Empatika/coffee-automatization-ios/DoubleB.xcworkspace
+          xcrun  PackageApplication
+            zip  /Users/ivanoschepkov/Development/Empatika/coffee-automatization-ios/deploy/build/LES.app.dSYM
+~/Development/Empatika/coffee-automatization-ios/deploy/build ~/Development/Empatika/coffee-automatization-ios/deploy
+~/Development/Empatika/coffee-automatization-ios/deploy
+[32mSuccessfully built:[0m
+[32m/Users/ivanoschepkov/Development/Empatika/coffee-automatization-ios/deploy/build/LES.ipa[0m
