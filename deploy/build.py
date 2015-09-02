@@ -6,8 +6,8 @@ import json
 import glob
 import subprocess
  
-DEV_ACCOUNT = 'isoschepkov@gmail.com'
-PASSWORD = ''
+DEV_ACCOUNT = "isoschepkov@gmail.com"
+PASSWORD = ""
 
 PROJECT_NAME = 'DoubleB'
 DEBUG_SKIP_BUILD_STEP = False      # set to 1 if you don't want to clean and rebuild ipa files
@@ -37,6 +37,20 @@ def schemes_list():
 
 	return schemes
 
+def apple_id_for_scheme(scheme):
+	with open("Targets.txt") as f:
+		lines = f.readlines()
+
+	res = ""
+	for line in lines:
+		line = line.split()
+		if line[0] == scheme:
+			res = line[2]
+			break
+
+	return res
+
+
 def print_schemes(schemes):
 	i = 0
 	for scheme in schemes:
@@ -62,19 +76,39 @@ def build_schemes(schemes):
 		build_scheme(scheme)
 
 def build_scheme(scheme):
-	cmd = "ipa build -w %s -s %s -c AppStore -d %s" % ("/Users/ivanoschepkov/Development/Empatika/coffee-automatization-ios/DoubleB.xcworkspace", scheme, path_output)
+	# cmd = "./buildApp.sh scheme"
+	cmd = "ipa build -w %s -s %s -c AppStore -d %s" % (os.path.abspath(workspace_file), scheme, path_output)
 	cmd = cmd.split()
 	print cmd
-	with open(temp_file, "w") as f:
-		if subprocess.call(cmd, stdout=f) != 0:
-			print "nonzero exit code"
+	subprocess.call(cmd)
+	# with open(temp_file, "w") as f:
+	# 	if subprocess.call(cmd, stdout=f) != 0:
+	# 		print "nonzero exit code"
 
-	with open(temp_file) as f:
-		lines = f.readlines()
+	# with open(temp_file) as f:
+	# 	lines = f.readlines()
 
-	# os.remove(temp_file)
-	print lines
+	# # os.remove(temp_file)
+	# print lines
 
+def ipa_files():
+	ipa_files = []
+	for ipa_file in os.listdir(path_output):
+		if ipa_file.endswith(".ipa"):	
+			ipa_files += [ipa_file]
+
+	return ipa_files
+
+def upload_ipa(ipa_file):
+	scheme = ipa_file[:-4]
+	cmd = "ipa distribute:itunesconnect -a %s -p %s -i %s -f %s  --upload" % (DEV_ACCOUNT, apple_id_for_scheme(scheme), PASSWORD, os.path.abspath(ipa_file)
+	cmd = cmd.split()
+	print cmd
+	subprocess.call(cmd)
+
+
+
+# Get schemes for build & upload
 all_schemes = schemes_list()
 print_schemes(all_schemes)
 selected_scheme_nums = raw_input('Targets: ')
@@ -85,7 +119,9 @@ for num in selected_scheme_nums:
 	selected_schemes += [all_schemes[int(num) - 1]]
 schemes_count = len(selected_schemes)
 
-clean_folder(path_output)
+# Get password for upload
+if not DEBUG_SKIP_UPLOAD_STEP:
+	PASSWORD = raw_input('Password for AppleId %s: ' % (DEV_ACCOUNT))
 
 #============
 # Build
@@ -93,6 +129,7 @@ clean_folder(path_output)
 if not DEBUG_SKIP_BUILD_STEP:
 	clean_folder(path_output)
 
+	print
 	print "*** Start building ..."
 	print "All schemes (%s):" %schemes_count
 	print selected_schemes
@@ -104,6 +141,15 @@ else:
 #============
 # Upload
 #============
-# if not DEBUG_SKIP_UPLOAD_STEP:
-# else:	
+if not DEBUG_SKIP_UPLOAD_STEP:
+	print
+	print "*** Start uploading ..."
+
+	i = 0
+	ipa_fs = ipa_files()
+	for ipa_file in ipa_fs:
+		i += 1
+		print "Uploading %s/%s: %s" % (i, len(ipa_fs), ipa_file)
+
+		upload_ipa(ipa_file)	
 
