@@ -113,13 +113,16 @@
     NSLog(@"%s -> %@", __PRETTY_FUNCTION__, error);
 }
 
-//- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
-//
-//}
-
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
 
+    NSLog(@"%@", userInfo);
+    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+    [newsViewController setData:@{@"text": [userInfo objectForKey:@"alert"], @"image_url": @""}];
+    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:^{
+        
+    }];
+    
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
                                                                  object:nil
                                                                userInfo:userInfo ?: @{}];
