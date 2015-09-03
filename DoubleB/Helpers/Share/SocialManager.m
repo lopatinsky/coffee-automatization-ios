@@ -15,6 +15,7 @@
 #import "FBSDKShareDialog.h"
 #import "VKSdk.h"
 
+#import "UIAlertView+BlocksKit.h"
 #import "UIViewController+ShareExtension.h"
 
 @interface SocialManager () <VKSdkDelegate, FBSDKSharingDelegate>
@@ -45,9 +46,8 @@
             [self.delegate socialManagerDidEndFetchShareInfo];
         }];
     }
-    
-    // TODO: VKSDK appid from plist
-    [VKSdk initializeWithDelegate:self andAppId:@"5055279"];
+
+    [VKSdk initializeWithDelegate:self andAppId:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"VKAppId"] ?: @""];
     
     return self;
 }
@@ -73,10 +73,16 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     NSLog(@"%@", results);
+    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+    }];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
     NSLog(@"%@", error);
+    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+    }];
 }
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
@@ -107,6 +113,10 @@
     shareDialog.uploadImages = @[uploadImage];
     shareDialog.shareLink    = [[VKShareLink alloc] initWithTitle:@"Приглашение для друга" link:[NSURL URLWithString:[DBShareHelper sharedInstance].appUrls[@"other"]]];
     [shareDialog setCompletionHandler:^(VKShareDialogControllerResult result) {
+        if (result == VKShareDialogControllerResultDone) {
+            [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            }];
+        }
         [self.delegate dismissViewControllerAnimated:YES completion:nil];
     }];
     [self.delegate presentViewController:shareDialog animated:YES completion:nil];

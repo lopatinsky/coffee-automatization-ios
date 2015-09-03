@@ -94,6 +94,9 @@
     [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другие", nil) handler:^{
         [self.socialManager shareOther:self.screen];
     }];
+    [self.actionSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{
+        
+    }];
 }
 
 - (BOOL)prefersStatusBarHidden{

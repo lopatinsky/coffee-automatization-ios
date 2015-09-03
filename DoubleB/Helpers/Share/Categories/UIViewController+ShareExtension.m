@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
+#import "UIAlertView+BlocksKit.h"
 #import "UIViewController+ShareExtension.h"
 #import "Compatibility.h"
 #import "DBShareHelper.h"
@@ -77,6 +78,7 @@ static NSString *dbAnaliticsNameScreenName;
         shareVC.completionWithItemsHandler = ^void(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError){
             if(completed){
                 [GANHelper analyzeEvent:@"share_success" label:activityType category:dbAnaliticsNameScreenName];
+                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {}];
             } else {
                 if(activityError == nil){
                     if(activityType){
@@ -88,6 +90,10 @@ static NSString *dbAnaliticsNameScreenName;
                     [GANHelper analyzeEvent:@"share_failure"
                                       label:[NSString stringWithFormat:@"%@, %@", activityType, activityError.description]
                                    category:dbAnaliticsNameScreenName];
+                    
+                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        
+                    }];
                 }
             }
             if(callback)
@@ -97,6 +103,7 @@ static NSString *dbAnaliticsNameScreenName;
         shareVC.completionHandler = ^void(NSString *activityType, BOOL completed){
             if(completed){
                 [GANHelper analyzeEvent:@"share_success" label:activityType category:dbAnaliticsNameScreenName];
+                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {}];
             } else {
                 if(activityType){
                     [GANHelper analyzeEvent:@"share_dialog_cancelled" label:activityType category:dbAnaliticsNameScreenName];

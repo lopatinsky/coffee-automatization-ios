@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15A263e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -68,11 +68,10 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Даблби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIW-Hb-DbT">
-                    <rect key="frame" x="60" y="48" width="200" height="15"/>
+                    <rect key="frame" x="0.0" y="48" width="320" height="32"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="u5P-A6-Gdd"/>
-                        <constraint firstAttribute="height" constant="15" id="vJl-G2-xgz"/>
+                        <constraint firstAttribute="height" constant="32" id="vJl-G2-xgz"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,12 +106,14 @@
                 <constraint firstItem="WIW-Hb-DbT" firstAttribute="top" secondItem="d6G-eE-6eC" secondAttribute="bottom" constant="3" id="bAc-5e-QTO"/>
                 <constraint firstAttribute="bottom" secondItem="fjT-a8-l9e" secondAttribute="bottom" id="cET-gG-VlS"/>
                 <constraint firstAttribute="trailing" secondItem="sAO-7A-Mn1" secondAttribute="trailing" constant="15" id="e5s-dM-Ahq"/>
+                <constraint firstAttribute="trailing" secondItem="WIW-Hb-DbT" secondAttribute="trailing" id="fh9-sn-oZC"/>
                 <constraint firstItem="fjT-a8-l9e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gaf-P1-0aW"/>
                 <constraint firstItem="CDM-W0-0hy" firstAttribute="top" secondItem="pfB-m4-eW8" secondAttribute="bottom" constant="30" id="loA-TY-Z5m"/>
                 <constraint firstItem="fjT-a8-l9e" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oPb-bM-BZY"/>
                 <constraint firstAttribute="trailing" secondItem="pfB-m4-eW8" secondAttribute="trailing" constant="15" id="s0V-jA-DzT"/>
                 <constraint firstAttribute="centerX" secondItem="CDM-W0-0hy" secondAttribute="centerX" id="tzV-CH-da9"/>
-                <constraint firstItem="sAO-7A-Mn1" firstAttribute="top" secondItem="WIW-Hb-DbT" secondAttribute="bottom" constant="30" id="u1s-WS-gbR"/>
+                <constraint firstItem="sAO-7A-Mn1" firstAttribute="top" secondItem="WIW-Hb-DbT" secondAttribute="bottom" constant="13" id="u1s-WS-gbR"/>
+                <constraint firstItem="WIW-Hb-DbT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wfW-ib-92g"/>
                 <constraint firstAttribute="trailing" secondItem="fjT-a8-l9e" secondAttribute="trailing" id="xed-mH-LI2"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
