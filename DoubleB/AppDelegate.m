@@ -36,14 +36,6 @@
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
     }
-
-    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
-    }
-    
-    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
-    }
     
     [ApplicationManager applyBrandbookStyle];
     
@@ -52,6 +44,20 @@
     self.window.rootViewController = [ApplicationManager rootViewController];
     
     [self.window makeKeyAndVisible];
+    
+    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
+        
+        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
+        
+        NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+        [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
+        [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+        NSLog(@"%@", userInfo);
+        NSLog(@"newsVC: %@", newsViewController);
+        NSLog(@"currentVC: %@", [UIViewController currentViewController]);
+    }
     
     return YES;
 }
@@ -115,13 +121,18 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
-
-    NSLog(@"%@", userInfo);
-    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-    [newsViewController setData:@{@"text": [userInfo objectForKey:@"alert"], @"image_url": @""}];
-    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:^{
+    
+    if([UIApplication sharedApplication].applicationState != 0){
+        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+        [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
+        [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
         
-    }];
+        NSLog(@"%@", userInfo);
+        NSLog(@"newsVC: %@", newsViewController);
+        NSLog(@"currentVC: %@", [UIViewController currentViewController]);
+    } else {
+        NSLog(@"sdankdsjabjsdnfkjbs");
+    }
     
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
                                                                  object:nil
