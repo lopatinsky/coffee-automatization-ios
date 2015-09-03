@@ -11,7 +11,7 @@ PASSWORD = ""
 
 PROJECT_NAME = 'DoubleB'
 DEBUG_SKIP_BUILD_STEP = False      # set to 1 if you don't want to clean and rebuild ipa files
-DEBUG_SKIP_UPLOAD_STEP = True  # set to 1 if you don't want the built ipa files to be uploaded
+DEBUG_SKIP_UPLOAD_STEP = False  # set to 1 if you don't want the built ipa files to be uploaded
 
 path_output = "build" 
 project_file = "../%s.xcodeproj" % PROJECT_NAME
@@ -76,10 +76,8 @@ def build_schemes(schemes):
 		build_scheme(scheme)
 
 def build_scheme(scheme):
-	# cmd = "./buildApp.sh scheme"
 	cmd = "ipa build -w %s -s %s -c AppStore -d %s" % (os.path.abspath(workspace_file), scheme, path_output)
 	cmd = cmd.split()
-	print cmd
 	subprocess.call(cmd)
 	# with open(temp_file, "w") as f:
 	# 	if subprocess.call(cmd, stdout=f) != 0:
@@ -101,23 +99,16 @@ def ipa_files():
 
 def upload_ipa(ipa_file):
 	scheme = ipa_file[:-4]
-	cmd = "ipa distribute:itunesconnect -a %s -p %s -i %s -f %s  --upload" % (DEV_ACCOUNT, apple_id_for_scheme(scheme), PASSWORD, os.path.abspath(ipa_file)
+	ipa_path = os.path.abspath(path_output) + "/" + ipa_file
+	cmd = "ipa distribute:itunesconnect -a %s -p %s -i %s -f %s  --upload" % (DEV_ACCOUNT, PASSWORD, apple_id_for_scheme(scheme), ipa_path)
 	cmd = cmd.split()
-	print cmd
 	subprocess.call(cmd)
 
 
 
-# Get schemes for build & upload
-all_schemes = schemes_list()
-print_schemes(all_schemes)
-selected_scheme_nums = raw_input('Targets: ')
-selected_scheme_nums = selected_scheme_nums.split()
-
-selected_schemes = []
-for num in selected_scheme_nums:
-	selected_schemes += [all_schemes[int(num) - 1]]
-schemes_count = len(selected_schemes)
+#============
+# Start
+#============
 
 # Get password for upload
 if not DEBUG_SKIP_UPLOAD_STEP:
@@ -127,6 +118,18 @@ if not DEBUG_SKIP_UPLOAD_STEP:
 # Build
 #============
 if not DEBUG_SKIP_BUILD_STEP:
+
+	# Get schemes for build & upload
+	all_schemes = schemes_list()
+	print_schemes(all_schemes)
+	selected_scheme_nums = raw_input('Targets: ')
+	selected_scheme_nums = selected_scheme_nums.split()
+
+	selected_schemes = []
+	for num in selected_scheme_nums:
+		selected_schemes += [all_schemes[int(num) - 1]]
+	schemes_count = len(selected_schemes)
+
 	clean_folder(path_output)
 
 	print
