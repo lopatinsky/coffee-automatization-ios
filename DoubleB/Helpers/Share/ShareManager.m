@@ -71,7 +71,7 @@ typedef enum : NSUInteger {
 }
 
 - (BOOL)shareSuggestionIsAvailable {
-    return self.status == ShareManagerShareIsAvailable || true;
+    return self.status == ShareManagerShareIsAvailable;
 }
 
 #pragma mark - ShareSuggestionViewDelegate
