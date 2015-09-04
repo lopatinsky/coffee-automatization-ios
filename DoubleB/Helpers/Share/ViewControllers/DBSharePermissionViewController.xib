@@ -30,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_568.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-a8-l9e">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share2_568.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-a8-l9e">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <animations/>
                 </imageView>
@@ -123,7 +123,7 @@
     </objects>
     <resources>
         <image name="close_white.png" width="18" height="18"/>
-        <image name="share_568.jpg" width="320" height="568"/>
+        <image name="share2_568.jpg" width="319" height="568"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

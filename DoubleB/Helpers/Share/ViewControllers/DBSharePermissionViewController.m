@@ -43,7 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *imageName = [NSString stringWithFormat:@"share_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
+    NSString *imageName = [NSString stringWithFormat:@"share2_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
     self.shareImageView.image = [UIImage imageNamed:imageName];
     
     self.logoImageView.hidden = YES;

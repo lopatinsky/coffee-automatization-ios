@@ -59,7 +59,6 @@ typedef enum : NSUInteger {
 }
 
 - (void)showOnViewController:(UIViewController *)viewController {
-    // TODO: add subview with a share suggestion to the user
     CGRect frame = viewController.view.frame;
     self.shareView = [[ShareSuggestionView alloc] initWithNibNamed:@"ShareSuggestionView"];
     [self.shareView setFrame:CGRectMake(0.0, frame.size.height - 40, frame.size.width, 40)];
@@ -72,7 +71,7 @@ typedef enum : NSUInteger {
 }
 
 - (BOOL)shareSuggestionIsAvailable {
-    return self.status == ShareManagerShareIsAvailable;
+    return self.status == ShareManagerShareIsAvailable || true;
 }
 
 #pragma mark - ShareSuggestionViewDelegate

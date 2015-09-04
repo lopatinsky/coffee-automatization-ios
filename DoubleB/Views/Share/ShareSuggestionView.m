@@ -14,6 +14,8 @@
     self = [super initWithFrame:frame];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapOnView)];
     [self addGestureRecognizer:tapGestureRecognizer];
+    
+    self.closeButton.imageView.image = [UIImage imageNamed:@"close_white.png"];
     return self;
 }
 
