@@ -59,6 +59,7 @@
     int totalPoints = [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalPrice;
     NSString *pointsString = [NSString db_localizedFormOfWordBall:totalPoints];
     self.giftAdditionBalanceLabel.text = [NSString stringWithFormat:@"%ld %@", (long)totalPoints, pointsString];
+    [self showBonusPositionsView:(totalPoints > 0) animated:YES];
     
     // Fucking code for Elephant
     if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"elephantboutique"]){
@@ -73,8 +74,6 @@
 
 - (void)showBonusPositionsView:(BOOL)showBonusPositionsView animated:(BOOL)animated{
     _showBonusPositionsView = showBonusPositionsView;
-    
-    [self reload];
     
     void (^animationBlock)(BOOL) = ^void(BOOL showBonusPositionsView){
         if(showBonusPositionsView){
