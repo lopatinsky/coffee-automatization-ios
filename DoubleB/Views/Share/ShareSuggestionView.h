@@ -17,9 +17,9 @@
 
 @interface ShareSuggestionView : UIView
 
-@property (weak, nonatomic) IBOutlet UIButton *closeButton;
-@property (strong, nonatomic) IBOutlet UILabel *suggestTextLabel;
-
 @property (nonatomic, strong) id<ShareSuggestionViewDelegate> delegate;
+
+- (void)showOnView:(UIView *)view animated:(BOOL)animated;
+- (void)hide:(BOOL)animated;
 
 @end

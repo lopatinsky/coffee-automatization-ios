@@ -23,6 +23,7 @@
 #import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
+#import "ShareManager.h"
 
 #import <Parse/Parse.h>
 

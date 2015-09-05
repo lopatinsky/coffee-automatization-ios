@@ -36,6 +36,7 @@
 #define POSITIONS_SCREEN @"Positions_screen"
 #define MENU_SCREEN @"Menu_screen"
 #define PRODUCT_SCREEN @"Product_screen"
+#define SHARE_PERMISSION_SCREEN @"Share_permission_screen"
 
 #define GROUP_MODIFIER_PICKER @"Group_modifier_popup"
 #define SINGLE_MODIFIER_PICKER @"Single_modifier_popup"

@@ -43,6 +43,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if(!self.screen)
+        self.screen = SHARE_PERMISSION_SCREEN;
+    
     NSString *imageName = [NSString stringWithFormat:@"share2_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
     self.shareImageView.image = [UIImage imageNamed:imageName];
     

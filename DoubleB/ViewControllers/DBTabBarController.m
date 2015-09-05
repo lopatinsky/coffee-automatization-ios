@@ -12,7 +12,7 @@
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBCompanyInfo.h"
-#import "DBCompanyInfo.h"
+#import "ShareManager.h"
 #import "CompanyNewsManager.h"
 
 #import "UIAlertView+BlocksKit.h"
@@ -129,6 +129,12 @@
                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
                          otherButtonTitles:nil
                                    handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                       // Show suggestion to share
+                                       if ([ShareManager sharedManager].shareSuggestionIsAvailable) {
+                                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                               [[ShareManager sharedManager] showShareSuggestion:YES];
+                                           });
+                                       }
 //                                       if(order.paymentType == PaymentTypeExtraType){
 //                                           DBSharePermissionViewController *shareVC = [DBSharePermissionViewController new];
 //                                           [self presentViewController:shareVC animated:YES completion:nil];

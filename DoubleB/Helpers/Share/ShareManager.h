@@ -12,7 +12,9 @@
 
 + (nonnull instancetype)sharedManager;
 
-- (void)showOnViewController:(nonnull UIViewController *)viewController;
+@property (nonatomic) BOOL shareSuggestionIsAvailable;
+
+- (void)showShareSuggestion:(BOOL)animated;
 - (BOOL)shareSuggestionIsAvailable;
 
 @end

@@ -74,10 +74,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>fb1405759653067353</string>
+			<string>fb917995138272367</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1405759653067353</string>
+				<string>fb917995138272367</string>
 			</array>
 		</dict>
 		<dict>
@@ -108,9 +108,9 @@
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>1405759653067353</string>
+	<string>917995138272367</string>
 	<key>FacebookDisplayName</key>
-	<string>Open Game</string>
+	<string>Red Cup</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>

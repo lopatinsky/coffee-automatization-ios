@@ -69,24 +69,31 @@
     [FBSDKShareDialog showFromViewController:self.delegate
                                  withContent:content
                                     delegate:self];
+    
+    // Track if share correct
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
+        [GANHelper analyzeEvent:@"facebook_share" label:@"app" category:SHARE_PERMISSION_SCREEN];
+    } else {
+        [GANHelper analyzeEvent:@"facebook_share" label:@"external" category:SHARE_PERMISSION_SCREEN];
+    }
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
-    NSLog(@"%@", results);
-    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        
-    }];
+    [GANHelper analyzeEvent:@"share_success" label:@"facebook" category:SHARE_PERMISSION_SCREEN];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
-    NSLog(@"%@", error);
+    [GANHelper analyzeEvent:@"share_failure"
+                      label:[NSString stringWithFormat:@"facebook, %@", error.description]
+                   category:SHARE_PERMISSION_SCREEN];
+
     [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
         
     }];
 }
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
-    NSLog(@"canceled");
+    [GANHelper analyzeEvent:@"share_dialog_cancelled" label:@"facebook" category:SHARE_PERMISSION_SCREEN];
 }
 
 #pragma mark - VK
@@ -111,14 +118,17 @@
     text = [text stringByAppendingString:@". Или воспользуйте промокодом: %@"];
     shareDialog.text = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
     shareDialog.uploadImages = @[uploadImage];
-    shareDialog.shareLink    = [[VKShareLink alloc] initWithTitle:@"Приглашение для друга" link:[NSURL URLWithString:[DBShareHelper sharedInstance].appUrls[@"other"]]];
+    shareDialog.shareLink    = [[VKShareLink alloc] initWithTitle:@"Приглашение для друга" link:[NSURL URLWithString:[DBShareHelper sharedInstance].appUrls[@"vk"]]];
+    
     [shareDialog setCompletionHandler:^(VKShareDialogControllerResult result) {
         if (result == VKShareDialogControllerResultDone) {
-            [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            }];
+            [GANHelper analyzeEvent:@"share_success" label:@"vk" category:SHARE_PERMISSION_SCREEN];
+        } else {
+            [GANHelper analyzeEvent:@"share_dialog_cancelled" label:@"vk" category:SHARE_PERMISSION_SCREEN];
         }
         [self.delegate dismissViewControllerAnimated:YES completion:nil];
     }];
+    
     [self.delegate presentViewController:shareDialog animated:YES completion:nil];
 }
 

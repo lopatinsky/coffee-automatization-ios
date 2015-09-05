@@ -23,7 +23,7 @@
 #import "DBOrderReturnView.h"
 #import "IHSecureStore.h"
 
-#import "ShareManager.h"
+//#import "ShareManager.h"
 
 #import "UIAlertView+BlocksKit.h"
 
@@ -36,7 +36,7 @@
 
 @property (strong, nonatomic) DBOrderReturnView *returnCauseView;
 
-@property (weak, nonatomic) ShareManager *shareManager;
+//@property (weak, nonatomic) ShareManager *shareManager;
 
 @end
 
@@ -92,10 +92,10 @@
     [GANHelper analyzeScreen:ORDER_HISTORY_SCREEN];
     [self reloadCancelRepeatButton];
     
-    self.shareManager = [ShareManager sharedManager];
-    if ([self.shareManager shareSuggestionIsAvailable]) {
-        [self.shareManager showOnViewController:self];
-    }
+//    self.shareManager = [ShareManager sharedManager];
+//    if ([self.shareManager shareSuggestionIsAvailable]) {
+//        [self.shareManager showOnViewController:self];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
