@@ -12,7 +12,7 @@
 #import "DBVenuesTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBCompanyInfo.h"
-#import "ShareManager.h"
+#import "DBShareHelper.h"
 #import "CompanyNewsManager.h"
 
 #import "UIAlertView+BlocksKit.h"
@@ -130,9 +130,9 @@
                          otherButtonTitles:nil
                                    handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                        // Show suggestion to share
-                                       if ([ShareManager sharedManager].shareSuggestionIsAvailable) {
+                                       if ([DBShareHelper sharedInstance].shareSuggestionIsAvailable) {
                                            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                               [[ShareManager sharedManager] showShareSuggestion:YES];
+                                               [[DBShareHelper sharedInstance] showShareSuggestion:YES];
                                            });
                                        }
 //                                       if(order.paymentType == PaymentTypeExtraType){

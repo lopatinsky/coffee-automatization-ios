@@ -10,6 +10,9 @@
 #import "DBAPIClient.h"
 #import "IHSecureStore.h"
 
+#import "ShareSuggestionView.h"
+#import "UIView+NIBInit.h"
+
 typedef NS_ENUM(NSUInteger, ShareType) {
     ShareTypeVK = 0,
     ShareTypeFacebook,
@@ -24,8 +27,8 @@ typedef NS_ENUM(NSUInteger, ShareType) {
 
 NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
 
-@interface DBShareHelper ()
-
+@interface DBShareHelper ()<ShareSuggestionViewDelegate>
+@property (nonatomic, strong) ShareSuggestionView *shareView;
 @end
 
 @implementation DBShareHelper
@@ -43,6 +46,8 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
     }
     return self;
 }
+
+#pragma mark - Logic
 
 - (void)fetchShareSupportInfo{
     [[DBAPIClient sharedClient] GET:@"shared/invitation/info"
@@ -89,6 +94,8 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                                     callback(NO);
                             }];
 }
+
+#pragma mark - Storage
 
 - (NSString *)promoCode {
     return [DBShareHelper valueForKey:@"promoCode"];
@@ -168,6 +175,33 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
     
     return appLinks;
 }
+
+#pragma mark - UI
+
+- (BOOL)shareSuggestionIsAvailable {
+    return [[DBCompanyInfo sharedInstance] friendInvitationEnabled];
+}
+
+- (void)showShareSuggestion:(BOOL)animated {
+    if(!self.shareView) {
+        self.shareView = [[ShareSuggestionView alloc] initWithNibNamed:@"ShareSuggestionView"];
+        self.shareView.delegate = self;
+    }
+    
+    [self.shareView showOnView:[UIViewController currentViewController].view animated:animated];
+    //    self.status = ShareManagerShareIsNotAvailable;
+}
+
+#pragma mark - ShareSuggestionViewDelegate
+- (void)showShareViewController {
+    [self.shareView hide:YES];
+    [[UIViewController currentViewController] presentViewController:[ViewControllerManager shareFriendInvitationViewController] animated:YES completion:nil];
+}
+
+- (void)hideShareSuggestionView {
+    [self.shareView hide:YES];
+}
+
 
 #pragma mark - Helper methods
 

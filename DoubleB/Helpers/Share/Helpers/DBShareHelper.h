@@ -24,5 +24,9 @@
 - (void)fetchShareSupportInfo;
 - (void)fetchShareInfo:(void(^)(BOOL success))callback;
 
+// Small view on bottom of screen for share permission
+@property (nonatomic) BOOL shareSuggestionIsAvailable;
+
+- (void)showShareSuggestion:(BOOL)animated;
 
 @end
