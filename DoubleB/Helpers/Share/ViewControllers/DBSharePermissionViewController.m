@@ -10,10 +10,17 @@
 #import "UIViewController+ShareExtension.h"
 #import "DBShareHelper.h"
 #import "DBCompanyInfo.h"
+#import "SocialManager.h"
+#import "UIActionSheet+BlocksKit.h"
+
+#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKShareLinkContent.h>
+#import "FBSDKShareDialog.h"
+#import "MBProgressHUD.h"
 
 #import "CAGradientLayer+Helper.h"
 
-@interface DBSharePermissionViewController ()
+@interface DBSharePermissionViewController () <SocialManagerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *shareImageView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
@@ -25,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
+@property (nonatomic, strong) UIActionSheet *actionSheet;
+
+@property (nonatomic, strong) SocialManager *socialManager;
+
 @end
 
 @implementation DBSharePermissionViewController
@@ -32,7 +43,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *imageName = [NSString stringWithFormat:@"share_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
+    if(!self.screen)
+        self.screen = SHARE_PERMISSION_SCREEN;
+    
+    NSString *imageName = [NSString stringWithFormat:@"share2_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
     self.shareImageView.image = [UIImage imageNamed:imageName];
     
     self.logoImageView.hidden = YES;
@@ -51,16 +65,41 @@
 //    [self.shareButton.layer addSublayer:gradient];
     self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height / 2;
     self.shareButton.layer.masksToBounds = YES;
+    self.shareButton.enabled = YES;
     
     [self.closeButton addTarget:self action:@selector(closeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel.text = [DBShareHelper sharedInstance].titleShareScreen;
     self.descriptionLabel.text = [DBShareHelper sharedInstance].textShareScreen;
+
+    self.socialManager = [SocialManager sharedManagerWithDelegate:self];
+    [self initializeActionViewSheet];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [GANHelper analyzeScreen:self.screen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
+- (void)initializeActionViewSheet {
+    self.actionSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Поделиться", nil)];
+    
+    [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
+        [self.socialManager shareFacebook];
+    }];
+    [self.actionSheet bk_addButtonWithTitle:@"Vk" handler:^{
+        [self.socialManager shareVk];
+    }];
+    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другие", nil) handler:^{
+        [self.socialManager shareOther:self.screen];
+    }];
+    [self.actionSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{
+        
+    }];
 }
 
 - (BOOL)prefersStatusBarHidden{
@@ -76,11 +115,18 @@
 - (IBAction)shareButtonClick:(id)sender{
     [GANHelper analyzeEvent:@"share_click" category:self.screen];
     
-    [self sharePermissionOnScreen:self.screen callback:^(BOOL completed) {
-        if(completed){
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
+    [self.actionSheet showInView:self.view];
+}
+
+#pragma mark - SocialManagerDelegate
+- (void)socialManagerDidEndFetchShareInfo {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    self.shareButton.enabled = YES;
+}
+
+- (void)socialManagerDidBeginFetchShareInfo {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.shareButton.enabled = NO;
 }
 
 @end

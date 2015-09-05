@@ -44,8 +44,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+- (BOOL)prefersStatusBarHidden{
+    return YES;
 }
 
 - (IBAction)closeView:(id)sender {

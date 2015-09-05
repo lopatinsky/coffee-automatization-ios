@@ -23,7 +23,6 @@
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 #import "DBCompaniesManager.h"
-#import "DBSharePermissionViewController.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -75,13 +74,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"viewController": profileVC}];
     
     // Share friends item
-    if([DBCompanyInfo sharedInstance].friendInvitationEnabled){
-        DBSharePermissionViewController *shareVC = [DBSharePermissionViewController new];
-        shareVC.screen = SHARE_SCREEN;
+    if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
         [self.settingsItems addObject:@{@"name": @"shareVC",
                                         @"title": NSLocalizedString(@"Рассказать друзьям", nil),
                                         @"image": @"share_icon",
-                                        @"viewController": shareVC}];
+                                        @"viewController": [ViewControllerManager shareFriendInvitationViewController]}];
     }
     
     // Payment item
@@ -149,7 +146,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.settingsItems addObject:@{@"name": @"appPromoVC",
                                         @"title": NSLocalizedString(@"Промокоды", nil),
                                         @"image": @"none",
-                                        @"viewController": [ViewControllerManager promocodeViewControllers]}];
+                                        @"viewController": [ViewControllerManager promocodeViewController]}];
     }
 }
 

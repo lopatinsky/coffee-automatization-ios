@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
@@ -30,11 +30,13 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_568.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-a8-l9e">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share2_568.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fjT-a8-l9e">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <animations/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCy-jy-HVf">
                     <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="Tba-Ah-xq2"/>
                         <constraint firstAttribute="height" constant="40" id="xwa-7e-9fW"/>
@@ -45,6 +47,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDM-W0-0hy">
                     <rect key="frame" x="75" y="235.5" width="170" height="40"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.32549019610000002" green="0.81176470590000005" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="W5Y-KC-wOx"/>
@@ -58,16 +61,17 @@
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d6G-eE-6eC">
                     <rect key="frame" x="110" y="15" width="100" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="8MO-gV-UaV"/>
                         <constraint firstAttribute="height" constant="30" id="MiK-5j-iHJ"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Даблби" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIW-Hb-DbT">
-                    <rect key="frame" x="60" y="48" width="200" height="15"/>
+                    <rect key="frame" x="0.0" y="48" width="320" height="32"/>
+                    <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="u5P-A6-Gdd"/>
-                        <constraint firstAttribute="height" constant="15" id="vJl-G2-xgz"/>
+                        <constraint firstAttribute="height" constant="32" id="vJl-G2-xgz"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,17 +79,20 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Расскажи о нашем чудесном кофе друзьям" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAO-7A-Mn1">
                     <rect key="frame" x="15" y="93" width="290" height="40"/>
+                    <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Они установят приложение Даблби  смогут заказать кофе с 50% скидкой. А ты получишь кружку в подарок" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pfB-m4-eW8">
                     <rect key="frame" x="15" y="153" width="290" height="52.5"/>
+                    <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="pfB-m4-eW8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="3g6-Wl-AOG"/>
@@ -99,12 +106,14 @@
                 <constraint firstItem="WIW-Hb-DbT" firstAttribute="top" secondItem="d6G-eE-6eC" secondAttribute="bottom" constant="3" id="bAc-5e-QTO"/>
                 <constraint firstAttribute="bottom" secondItem="fjT-a8-l9e" secondAttribute="bottom" id="cET-gG-VlS"/>
                 <constraint firstAttribute="trailing" secondItem="sAO-7A-Mn1" secondAttribute="trailing" constant="15" id="e5s-dM-Ahq"/>
+                <constraint firstAttribute="trailing" secondItem="WIW-Hb-DbT" secondAttribute="trailing" id="fh9-sn-oZC"/>
                 <constraint firstItem="fjT-a8-l9e" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gaf-P1-0aW"/>
                 <constraint firstItem="CDM-W0-0hy" firstAttribute="top" secondItem="pfB-m4-eW8" secondAttribute="bottom" constant="30" id="loA-TY-Z5m"/>
                 <constraint firstItem="fjT-a8-l9e" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="oPb-bM-BZY"/>
                 <constraint firstAttribute="trailing" secondItem="pfB-m4-eW8" secondAttribute="trailing" constant="15" id="s0V-jA-DzT"/>
                 <constraint firstAttribute="centerX" secondItem="CDM-W0-0hy" secondAttribute="centerX" id="tzV-CH-da9"/>
-                <constraint firstItem="sAO-7A-Mn1" firstAttribute="top" secondItem="WIW-Hb-DbT" secondAttribute="bottom" constant="30" id="u1s-WS-gbR"/>
+                <constraint firstItem="sAO-7A-Mn1" firstAttribute="top" secondItem="WIW-Hb-DbT" secondAttribute="bottom" constant="13" id="u1s-WS-gbR"/>
+                <constraint firstItem="WIW-Hb-DbT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wfW-ib-92g"/>
                 <constraint firstAttribute="trailing" secondItem="fjT-a8-l9e" secondAttribute="trailing" id="xed-mH-LI2"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -114,7 +123,7 @@
     </objects>
     <resources>
         <image name="close_white.png" width="18" height="18"/>
-        <image name="share_568.jpg" width="320" height="568"/>
+        <image name="share2_568.jpg" width="319" height="568"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

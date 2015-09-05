@@ -23,6 +23,8 @@
 #import "DBOrderReturnView.h"
 #import "IHSecureStore.h"
 
+//#import "ShareManager.h"
+
 #import "UIAlertView+BlocksKit.h"
 
 #import <GoogleMaps/GoogleMaps.h>
@@ -33,6 +35,8 @@
 @property (strong, nonatomic) DBOrderViewFooter *viewFooter;
 
 @property (strong, nonatomic) DBOrderReturnView *returnCauseView;
+
+//@property (weak, nonatomic) ShareManager *shareManager;
 
 @end
 
@@ -87,6 +91,11 @@
     [super viewWillAppear:animated];
     [GANHelper analyzeScreen:ORDER_HISTORY_SCREEN];
     [self reloadCancelRepeatButton];
+    
+//    self.shareManager = [ShareManager sharedManager];
+//    if ([self.shareManager shareSuggestionIsAvailable]) {
+//        [self.shareManager showOnViewController:self];
+//    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {

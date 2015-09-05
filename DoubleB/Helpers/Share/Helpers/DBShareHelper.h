@@ -11,16 +11,22 @@
 @interface DBShareHelper : NSObject
 
 @property(strong, nonatomic, readonly) UIImage *imageForShare;
+@property(strong, nonatomic) NSString *imageURL;
 @property(strong, nonatomic, readonly) NSDictionary *appUrls;
 @property(strong, nonatomic, readonly) NSString *textShare;
 
 @property(strong, nonatomic, readonly) NSString *titleShareScreen;
 @property(strong, nonatomic, readonly) NSString *textShareScreen;
+@property(strong, nonatomic, readonly) NSString *promoCode;
 
 + (instancetype)sharedInstance;
 
 - (void)fetchShareSupportInfo;
 - (void)fetchShareInfo:(void(^)(BOOL success))callback;
 
+// Small view on bottom of screen for share permission
+@property (nonatomic) BOOL shareSuggestionIsAvailable;
+
+- (void)showShareSuggestion:(BOOL)animated;
 
 @end

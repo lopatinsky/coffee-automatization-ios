@@ -34,7 +34,7 @@
     return self;
 }
 
--(id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
+- (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
     NSLog(@"%@", activityType);
     
     NSString *shareUrl;
@@ -72,7 +72,7 @@
     }
 }
 
--(id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
+- (id)activityViewControllerPlaceholderItem:(UIActivityViewController *)activityViewController {
     return @"Doubleb";
 }
 @end

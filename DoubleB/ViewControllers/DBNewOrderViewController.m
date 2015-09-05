@@ -177,7 +177,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Autolayout =========r
     
     self.itemAdditionView.delegate = self;
-    self.itemAdditionView.showBonusPositionsView = NO;
     
     [self.additionalInfoView hide:nil completion:^{
         [self.scrollView layoutIfNeeded];
@@ -388,7 +387,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             
             
             // Gifts logic
-            [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
+            [self.itemAdditionView reload];
             
         } else {
             [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]

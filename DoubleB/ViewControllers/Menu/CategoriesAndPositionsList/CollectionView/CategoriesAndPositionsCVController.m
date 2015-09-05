@@ -343,8 +343,4 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
     [GANHelper analyzeEvent:@"category_spinner_selected" label:category.categoryId category:MENU_SCREEN];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
-}
-
 @end
