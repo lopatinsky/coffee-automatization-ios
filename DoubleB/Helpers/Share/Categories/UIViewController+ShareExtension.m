@@ -61,7 +61,7 @@ static NSString *dbAnaliticsNameScreenName;
 
 - (void)shareWithActivityItems:(NSArray *)activityItems withCallback:(void(^)(BOOL completed))callback{
     UIActivityViewController *shareVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems
-                                                                          applicationActivities:@[]];
+                                                                          applicationActivities:nil];
     shareVC.excludedActivityTypes = @[UIActivityTypeAirDrop,
                                       UIActivityTypePrint,
                                       UIActivityTypeAssignToContact,
