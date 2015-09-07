@@ -54,10 +54,10 @@
     
     // Cards module
     if([self.availablePaymentTypes containsObject:@(PaymentTypeCard)]){
-        DBPaymentCardsModuleView *cardsModule = [DBPaymentCardsModuleView new];
+        DBPaymentCardsModuleViewMode mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentCardsModuleViewModeSelectPayment : DBPaymentCardsModuleViewModeManageCards;
+        DBPaymentCardsModuleView *cardsModule = [[DBPaymentCardsModuleView alloc] initWithMode:mode];
         cardsModule.analyticsCategory = self.analyticsCategory;
         cardsModule.ownerViewController = self;
-        cardsModule.mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentCardsModuleViewModeSelectCardPayment : DBPaymentCardsModuleViewModeManageCards;
         [self.modules addObject:cardsModule];
     }
     
@@ -77,6 +77,8 @@
     [super viewWillAppear:animated];
     
     [GANHelper analyzeScreen:self.analyticsCategory];
+    
+    [self reloadModules:NO];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {

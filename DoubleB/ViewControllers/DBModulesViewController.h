@@ -13,5 +13,6 @@
 @property (strong, nonatomic) NSMutableArray *modules;
 
 - (void)layoutModules;
+- (void)reloadModules:(BOOL)animated;
 
 @end

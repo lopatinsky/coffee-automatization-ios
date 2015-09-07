@@ -28,6 +28,7 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     _titleLabel.textColor = [UIColor db_defaultColor];
     _titleLabel.text = NSLocalizedString(@"Добавить карту", nil);
     
@@ -40,5 +41,8 @@
     }]];
 }
 
+- (CGSize)moduleViewContentSize {
+    return self.frame.size;
+}
 
 @end

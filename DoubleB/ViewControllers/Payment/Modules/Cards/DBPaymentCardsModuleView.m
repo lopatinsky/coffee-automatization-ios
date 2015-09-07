@@ -26,16 +26,21 @@
 
 @implementation DBPaymentCardsModuleView
 
-- (instancetype)init {
+- (instancetype)initWithMode:(DBPaymentCardsModuleViewMode)mode{
     self = [[[NSBundle mainBundle] loadNibNamed:@"DBPaymentCardsModuleView" owner:self options:nil] firstObject];
+    
+    _mode = mode;
+    
+    [self commonInit];
     
     return self;
 }
 
-- (void)awakeFromNib {
+- (void)commonInit {
     self.cardsTableView.dataSource = self;
     self.cardsTableView.delegate = self;
     self.cardsTableView.rowHeight = 50;
+    self.cardsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.cardsTableView.tableFooterView = [UIView new];
     
     _additionModule = [DBPaymentCardAdditionModuleView new];
@@ -45,11 +50,16 @@
     _additionModule.translatesAutoresizingMaskIntoConstraints = NO;
     [_additionModule alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.cardAdditionViewHolder];
     
+    [self.submodules addObject:_additionModule];
+    
     [[DBCardsManager sharedInstance] addObserver:self withKeyPath:DBCardsManagerNotificationCardsChanged selector:@selector(reload)];
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
     
-    [self.cardsTableView reloadData];
-    [self reloadTableViewHeight:NO];
+    [self reload:NO];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
 }
 
 - (void)dealloc {
@@ -57,10 +67,10 @@
     [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
     [self.cardsTableView reloadData];
-    [self reloadTableViewHeight:YES];
+    [self reloadTableViewHeight:animated];
 }
 
 - (NSInteger)cardsTableViewHeight {
@@ -68,35 +78,45 @@
 }
 
 - (void)reloadTableViewHeight:(BOOL)animated{
-    if(animated){
-        [UIView animateWithDuration:0.3 animations:^{
-            self.constraintCardsTableViewHeight.constant = [self cardsTableViewHeight];
-            [self.cardsTableView layoutIfNeeded];
-        }];
-    } else {
+    @weakify(self)
+    void (^block)() = ^void(){
+        @strongify(self)
         self.constraintCardsTableViewHeight.constant = [self cardsTableViewHeight];
         [self.cardsTableView layoutIfNeeded];
+        [self layoutIfNeeded];
+    };
+    
+    if(animated){
+        [UIView animateWithDuration:0.3 animations:^{
+            block();
+        }];
+    } else {
+        block();
     }
     
     [self reloadHeight:animated];
 }
 
 - (void)reloadHeight:(BOOL)animated{
-    NSInteger height = [self cardsTableViewHeight] + self.cardAdditionViewHolder.frame.size.height;
+    @weakify(self)
+    void (^block)() = ^void(){
+        @strongify(self)
+        [self invalidateIntrinsicContentSize];
+        [self.cardsTableView layoutIfNeeded];
+        [self layoutIfNeeded];
+    };
     
     if(animated){
         [UIView animateWithDuration:0.3 animations:^{
-            CGRect rect = self.frame;
-            rect.size.height = height;
-            self.frame = rect;
-            [self.cardsTableView layoutIfNeeded];
+            block();
         }];
     } else {
-        CGRect rect = self.frame;
-        rect.size.height = height;
-        self.frame = rect;
-        [self.cardsTableView layoutIfNeeded];
+        block();
     }
+}
+
+- (CGSize)moduleViewContentSize {
+    return CGSizeMake(self.frame.size.width,[self cardsTableViewHeight] + self.cardAdditionViewHolder.frame.size.height);
 }
 
 #pragma mark - UITableViewDataSource
@@ -109,11 +129,12 @@
     
     if (!cell) {
         cell = [DBCardCell new];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     DBPaymentCard *card = [[DBCardsManager sharedInstance] cardAtIndex:indexPath.row];
     NSString *pan = [NSString stringWithFormat:@"....%@", [card.pan substringFromIndex:card.pan.length-4]];
-    cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [card.pan db_cardIssuer], pan];
+    cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@ - %@", card.cardIssuer, pan];
     
     [cell.cardIconImageView templateImageWithName:@"card"];
     cell.cardTitleLabel.textColor = [UIColor blackColor];
@@ -157,10 +178,10 @@
     DBPaymentCard *card = [[DBCardsManager sharedInstance] cardAtIndex:indexPath.row];
     [DBCardsManager sharedInstance].defaultCard = card;
     
-    if (_mode == DBPaymentCardsModuleViewModeSelectCardPayment) {
+    if (_mode == DBPaymentCardsModuleViewModeSelectPayment) {
         [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCard;
         
-        NSString *eventLabel = [[card.pan db_cardIssuer] stringByAppendingString:@"_card"];
+        NSString *eventLabel = [card.cardIssuer stringByAppendingString:@"_card"];
         [GANHelper analyzeEvent:@"payment_selected" label:eventLabel category:self.analyticsCategory];
     }
     

@@ -526,7 +526,7 @@
         if(card){
             payment[@"binding_id"] = card.token;
             
-            BOOL mcardOrMaestro = [[card.pan db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card.pan db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
+            BOOL mcardOrMaestro = [card.cardIssuer isEqualToString:kDBCardTypeMasterCard] || [card.cardIssuer isEqualToString:kDBCardTypeMaestro];
             payment[@"mastercard"] = @(mcardOrMaestro);
             
             NSString *cardPan = card.pan;

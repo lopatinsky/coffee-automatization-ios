@@ -29,6 +29,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     [self.iconImageView templateImageWithName:@"paypal_icon"];
     
     [self.tickImageView templateImageWithName:@"tick"];
@@ -49,6 +51,8 @@
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
     [[DBPayPalManager sharedInstance] addObserver:self withKeyPath:DBPayPalManagerNotificationAccountChange selector:@selector(reload)];
+    
+    [self reload:NO];
 }
 
 - (void)dealloc {
@@ -56,8 +60,8 @@
     [[DBPayPalManager sharedInstance] removeObserver:self];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
 
     if([DBPayPalManager sharedInstance].loggedIn){
         self.titleLabel.textColor = [UIColor blackColor];

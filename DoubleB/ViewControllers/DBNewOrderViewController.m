@@ -990,18 +990,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             }
             break;
             
-        case PaymentTypeCard:
-            if ([DBCardsManager sharedInstance].defaultCard) {
-                NSString *cardNumber = [DBCardsManager sharedInstance].defaultCard.pan;
+        case PaymentTypeCard:{
+            DBPaymentCard *defaultCard = [DBCardsManager sharedInstance].defaultCard;
+            if (defaultCard) {
+                NSString *cardNumber = defaultCard.pan;
                 NSString *pan = [cardNumber substringFromIndex:cardNumber.length-4];
-                self.orderFooter.labelCard.text = [NSString stringWithFormat:@"%@ ....%@", [cardNumber db_cardIssuer], pan];
+                self.orderFooter.labelCard.text = [NSString stringWithFormat:@"%@ ....%@", defaultCard.cardIssuer, pan];
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];
             } else {
                 self.orderFooter.labelCard.text = NSLocalizedString(@"Нет карт", nil);
                 self.orderFooter.labelCard.textColor = [UIColor orangeColor];
                 [self.orderFooter.labelCard db_startObservingAnimationNotification];
             }
-            break;
+        }break;
             
         case PaymentTypeCash:
             self.orderFooter.labelCard.textColor = [UIColor blackColor];

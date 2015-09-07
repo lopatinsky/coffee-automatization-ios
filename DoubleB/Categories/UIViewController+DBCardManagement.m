@@ -48,7 +48,7 @@ static NSString *screenIdentifier;
                                                   
                                                   NSUInteger cardsCount = [DBCardsManager sharedInstance].cardsCount;
                                                   NSArray *cards = [DBCardsManager sharedInstance].cards;
-                                                  NSString *cardType = [((DBPaymentCard *)[cards lastObject]).pan db_cardIssuer];
+                                                  NSString *cardType = ((DBPaymentCard *)[cards lastObject]).cardIssuer;
                                                   
                                                   NSString *eventLabel = [NSString stringWithFormat:@"%@;%ld", cardType, (long)(cardsCount - 1)];
                                                   

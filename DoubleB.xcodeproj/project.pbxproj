@@ -5786,41 +5786,41 @@
 		CB1EAC6D1B8493C300425CD7 /* DBPaymentCashModuleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAC4C1B8493C300425CD7 /* DBPaymentCashModuleView.xib */; };
 		CB1EAC6E1B8493C300425CD7 /* DBPaymentCashModuleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAC4C1B8493C300425CD7 /* DBPaymentCashModuleView.xib */; };
 		CB1EAC6F1B8493C300425CD7 /* DBPaymentCashModuleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1EAC4C1B8493C300425CD7 /* DBPaymentCashModuleView.xib */; };
-		CB1EAC721B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC731B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC741B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC751B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC761B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC771B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC781B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC791B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC7A1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC7B1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC7C1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC7D1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC7E1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC7F1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC801B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC811B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC821B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC831B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC841B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC851B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC861B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC871B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC881B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC891B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC8A1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC8B1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC8C1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC8D1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC8E1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC8F1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC901B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC911B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC921B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC931B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
-		CB1EAC941B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */; };
+		CB1EAC721B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC731B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC741B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC751B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC761B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC771B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC781B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC791B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC7A1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC7B1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC7C1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC7D1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC7E1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC7F1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC801B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC811B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC821B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC831B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC841B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC851B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC861B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC871B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC881B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC891B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC8A1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC8B1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC8C1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC8D1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC8E1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC8F1B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC901B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC911B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC921B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC931B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
+		CB1EAC941B84DF7D00425CD7 /* DBModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */; };
 		CB1EAC971B84E63600425CD7 /* NotificationSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC961B84E63600425CD7 /* NotificationSubscriptionManager.m */; };
 		CB1EAC981B84E63600425CD7 /* NotificationSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC961B84E63600425CD7 /* NotificationSubscriptionManager.m */; };
 		CB1EAC991B84E63600425CD7 /* NotificationSubscriptionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1EAC961B84E63600425CD7 /* NotificationSubscriptionManager.m */; };
@@ -13500,8 +13500,8 @@
 		CB1EAC271B8493B700425CD7 /* DBPaymentCashModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPaymentCashModuleView.h; sourceTree = "<group>"; };
 		CB1EAC281B8493B700425CD7 /* DBPaymentCashModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPaymentCashModuleView.m; sourceTree = "<group>"; };
 		CB1EAC4C1B8493C300425CD7 /* DBPaymentCashModuleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DBPaymentCashModuleView.xib; sourceTree = "<group>"; };
-		CB1EAC701B84DF7D00425CD7 /* DBPaymentModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPaymentModuleView.h; sourceTree = "<group>"; };
-		CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPaymentModuleView.m; sourceTree = "<group>"; };
+		CB1EAC701B84DF7D00425CD7 /* DBModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBModuleView.h; sourceTree = "<group>"; };
+		CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBModuleView.m; sourceTree = "<group>"; };
 		CB1EAC951B84E63600425CD7 /* NotificationSubscriptionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationSubscriptionManager.h; sourceTree = "<group>"; };
 		CB1EAC961B84E63600425CD7 /* NotificationSubscriptionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationSubscriptionManager.m; sourceTree = "<group>"; };
 		CB1EACBA1B84FC0E00425CD7 /* DBPaymentCourierCardModuleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPaymentCourierCardModuleView.h; sourceTree = "<group>"; };
@@ -15925,8 +15925,8 @@
 		CB1EAAFA1B83157500425CD7 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				CB1EAC701B84DF7D00425CD7 /* DBPaymentModuleView.h */,
-				CB1EAC711B84DF7D00425CD7 /* DBPaymentModuleView.m */,
+				CB1EAC701B84DF7D00425CD7 /* DBModuleView.h */,
+				CB1EAC711B84DF7D00425CD7 /* DBModuleView.m */,
 				CB1EAB211B8316B800425CD7 /* Cards */,
 				CB1EAB221B8316B800425CD7 /* Cash */,
 				CB1EAB231B8316B800425CD7 /* CourierCard */,
@@ -27225,7 +27225,7 @@
 				CBDE218F1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E38300C1B5CF692008F0241 /* UIView+Extension.m in Sources */,
 				CBDE1D711B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC8A1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC8A1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7E38300D1B5CF692008F0241 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22791B7286890090A347 /* ShippingManager.m in Sources */,
 				7E38300F1B5CF692008F0241 /* CacheHelper.m in Sources */,
@@ -27296,7 +27296,7 @@
 				CB1EAB771B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				7E3DAAFE1B06153E00A7FFD1 /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D211B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC781B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC781B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB64FFA31B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				7E3DAAFF1B06153E00A7FFD1 /* EXTRuntimeExtensions.m in Sources */,
 				7E3DAB001B06153E00A7FFD1 /* DBCommentViewController.m in Sources */,
@@ -27534,7 +27534,7 @@
 				CBDE21861B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E79257D1B3C1BDA00CA740D /* UIView+Extension.m in Sources */,
 				CBDE1D681B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC811B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC811B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7E79257E1B3C1BDA00CA740D /* EXTConcreteProtocol.m in Sources */,
 				CBDE22701B7286890090A347 /* ShippingManager.m in Sources */,
 				7E7925801B3C1BDA00CA740D /* CacheHelper.m in Sources */,
@@ -27689,7 +27689,7 @@
 				CBDE21871B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7E7926FF1B3C247D00CA740D /* UIView+Extension.m in Sources */,
 				CBDE1D691B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC821B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC821B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7E7927001B3C247D00CA740D /* EXTConcreteProtocol.m in Sources */,
 				CBDE22711B7286890090A347 /* ShippingManager.m in Sources */,
 				7E7927021B3C247D00CA740D /* CacheHelper.m in Sources */,
@@ -27844,7 +27844,7 @@
 				CBDE21881B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EB2D1C41B3C3581009405C6 /* UIView+Extension.m in Sources */,
 				CBDE1D6A1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC831B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC831B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7EB2D1C51B3C3581009405C6 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22721B7286890090A347 /* ShippingManager.m in Sources */,
 				7EB2D1C71B3C3581009405C6 /* CacheHelper.m in Sources */,
@@ -27999,7 +27999,7 @@
 				CBDE21891B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EB2D3331B3C51A2009405C6 /* UIView+Extension.m in Sources */,
 				CBDE1D6B1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC841B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC841B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7EB2D3341B3C51A2009405C6 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22731B7286890090A347 /* ShippingManager.m in Sources */,
 				7EB2D3361B3C51A2009405C6 /* CacheHelper.m in Sources */,
@@ -28154,7 +28154,7 @@
 				CBDE218A1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EB2D4A31B3C5C77009405C6 /* UIView+Extension.m in Sources */,
 				CBDE1D6C1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC851B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC851B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7EB2D4A41B3C5C77009405C6 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22741B7286890090A347 /* ShippingManager.m in Sources */,
 				7EB2D4A61B3C5C77009405C6 /* CacheHelper.m in Sources */,
@@ -28309,7 +28309,7 @@
 				CBDE21901B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7ED4BCFC1B5EB64B00280D74 /* UIView+Extension.m in Sources */,
 				CBDE1D721B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC8B1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC8B1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7ED4BCFD1B5EB64B00280D74 /* EXTConcreteProtocol.m in Sources */,
 				CBDE227A1B7286890090A347 /* ShippingManager.m in Sources */,
 				7ED4BCFF1B5EB64B00280D74 /* CacheHelper.m in Sources */,
@@ -28464,7 +28464,7 @@
 				CBDE21851B7286550090A347 /* ViewControllerManager.m in Sources */,
 				7EDB59581B32F70400723DF9 /* UIView+Extension.m in Sources */,
 				CBDE1D671B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC801B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC801B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				7EDB59591B32F70400723DF9 /* EXTConcreteProtocol.m in Sources */,
 				CBDE226F1B7286890090A347 /* ShippingManager.m in Sources */,
 				7EDB595B1B32F70400723DF9 /* CacheHelper.m in Sources */,
@@ -28619,7 +28619,7 @@
 				CB1429EA1B7A677A00B72069 /* ViewControllerManager.m in Sources */,
 				CB1429EB1B7A677A00B72069 /* UIView+Extension.m in Sources */,
 				CB1429EC1B7A677A00B72069 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC921B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC921B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB1429ED1B7A677A00B72069 /* EXTConcreteProtocol.m in Sources */,
 				CB1429EE1B7A677A00B72069 /* ShippingManager.m in Sources */,
 				CB1429EF1B7A677A00B72069 /* CacheHelper.m in Sources */,
@@ -28774,7 +28774,7 @@
 				CB142B6D1B7A6A4D00B72069 /* ViewControllerManager.m in Sources */,
 				CB142B6E1B7A6A4D00B72069 /* UIView+Extension.m in Sources */,
 				CB142B6F1B7A6A4D00B72069 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC931B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC931B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB142B701B7A6A4D00B72069 /* EXTConcreteProtocol.m in Sources */,
 				CB142B711B7A6A4D00B72069 /* ShippingManager.m in Sources */,
 				CB142B721B7A6A4D00B72069 /* CacheHelper.m in Sources */,
@@ -28854,7 +28854,7 @@
 				CB14310F1B0E371A00DD50C7 /* DBMenuCategory.m in Sources */,
 				CBDE213A1B7286550090A347 /* PositionCompactCollectionViewCell.m in Sources */,
 				CB1431101B0E371A00DD50C7 /* JRSwizzleMethods.m in Sources */,
-				CB1EAC731B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC731B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CBDE1ECE1B7286540090A347 /* DBPositionSingleModifierCell.m in Sources */,
 				CB1431111B0E371A00DD50C7 /* DBOrderItemCell.m in Sources */,
 				CB1431121B0E371A00DD50C7 /* DBBeaconObserver.m in Sources */,
@@ -29001,7 +29001,7 @@
 				CB1EAB781B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB14326B1B0F1BBB00DD50C7 /* EXTRuntimeExtensions.m in Sources */,
 				CBDE1D221B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC791B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC791B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB14326C1B0F1BBB00DD50C7 /* DBCommentViewController.m in Sources */,
 				CB14326D1B0F1BBB00DD50C7 /* DBClassLoader.m in Sources */,
 				CB14326E1B0F1BBB00DD50C7 /* Order.m in Sources */,
@@ -29239,7 +29239,7 @@
 				CBDE21931B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB194C751B6BAECE0085ECF8 /* UIView+Extension.m in Sources */,
 				CBDE1D751B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC8E1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC8E1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB194C761B6BAECE0085ECF8 /* EXTConcreteProtocol.m in Sources */,
 				CBDE227D1B7286890090A347 /* ShippingManager.m in Sources */,
 				CB194C781B6BAECE0085ECF8 /* CacheHelper.m in Sources */,
@@ -29394,7 +29394,7 @@
 				CBDE21941B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB194DE61B6BC2650085ECF8 /* UIView+Extension.m in Sources */,
 				CBDE1D761B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC8F1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC8F1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB194DE71B6BC2650085ECF8 /* EXTConcreteProtocol.m in Sources */,
 				CBDE227E1B7286890090A347 /* ShippingManager.m in Sources */,
 				CB194DE91B6BC2650085ECF8 /* CacheHelper.m in Sources */,
@@ -29549,7 +29549,7 @@
 				CBDE21951B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB194F571B6BD75B0085ECF8 /* UIView+Extension.m in Sources */,
 				CBDE1D771B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC901B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC901B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB194F581B6BD75B0085ECF8 /* EXTConcreteProtocol.m in Sources */,
 				CBDE227F1B7286890090A347 /* ShippingManager.m in Sources */,
 				CB194F5A1B6BD75B0085ECF8 /* CacheHelper.m in Sources */,
@@ -29620,7 +29620,7 @@
 				CB1EAB751B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB1AF7831AE10E6900FA3224 /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D1F1B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC761B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC761B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB64FFA11B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB1AF7841AE10E6900FA3224 /* EXTRuntimeExtensions.m in Sources */,
 				CB1AF7851AE10E6900FA3224 /* DBCommentViewController.m in Sources */,
@@ -29858,7 +29858,7 @@
 				CB2422201B7A1D4D00A02721 /* ViewControllerManager.m in Sources */,
 				CB2422211B7A1D4D00A02721 /* UIView+Extension.m in Sources */,
 				CB2422221B7A1D4D00A02721 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC721B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC721B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB2422231B7A1D4D00A02721 /* EXTConcreteProtocol.m in Sources */,
 				CB2422241B7A1D4D00A02721 /* ShippingManager.m in Sources */,
 				CB2422251B7A1D4D00A02721 /* CacheHelper.m in Sources */,
@@ -29929,7 +29929,7 @@
 				CB1EAB791B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB3BA2F71B20589300F320CA /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D231B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC7A1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC7A1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB3BA2F81B20589300F320CA /* EXTRuntimeExtensions.m in Sources */,
 				CB3BA2F91B20589300F320CA /* DBCommentViewController.m in Sources */,
 				CB3BA2FA1B20589300F320CA /* DBClassLoader.m in Sources */,
@@ -30083,7 +30083,7 @@
 				CB1EAB761B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB517B5B1AEFB6B500A50F5C /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D201B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC771B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC771B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB64FFA21B3192100011CEEC /* NSObject+Encode.m in Sources */,
 				CB517B5C1AEFB6B500A50F5C /* EXTRuntimeExtensions.m in Sources */,
 				CB517B5D1AEFB6B500A50F5C /* DBCommentViewController.m in Sources */,
@@ -30321,7 +30321,7 @@
 				CBDE21911B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB57936F1B6AB87300B17819 /* UIView+Extension.m in Sources */,
 				CBDE1D731B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC8C1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC8C1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB5793701B6AB87300B17819 /* EXTConcreteProtocol.m in Sources */,
 				CBDE227B1B7286890090A347 /* ShippingManager.m in Sources */,
 				CB5793721B6AB87300B17819 /* CacheHelper.m in Sources */,
@@ -30476,7 +30476,7 @@
 				CBDE21921B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB5794E61B6BA76B00B17819 /* UIView+Extension.m in Sources */,
 				CBDE1D741B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC8D1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC8D1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB5794E71B6BA76B00B17819 /* EXTConcreteProtocol.m in Sources */,
 				CBDE227C1B7286890090A347 /* ShippingManager.m in Sources */,
 				CB5794E91B6BA76B00B17819 /* CacheHelper.m in Sources */,
@@ -30547,7 +30547,7 @@
 				CB1EAB7A1B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB5AFC401B27209A00904BF7 /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D241B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC7B1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC7B1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB5AFC411B27209A00904BF7 /* EXTRuntimeExtensions.m in Sources */,
 				CB5AFC421B27209A00904BF7 /* DBCommentViewController.m in Sources */,
 				CB5AFC431B27209A00904BF7 /* DBClassLoader.m in Sources */,
@@ -30701,7 +30701,7 @@
 				CB1EAB741B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB60C0C01AC5AD2600D5E962 /* EXTRuntimeExtensions.m in Sources */,
 				CBDE1D1E1B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC751B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC751B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB60C0C11AC5AD2600D5E962 /* DBCommentViewController.m in Sources */,
 				CB1432471B0E3D0400DD50C7 /* DBClassLoader.m in Sources */,
 				CB60C0C21AC5AD2600D5E962 /* Order.m in Sources */,
@@ -30855,7 +30855,7 @@
 				CB1EAB7D1B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CB64FE1E1B317F760011CEEC /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D271B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC7E1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC7E1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB64FE1F1B317F760011CEEC /* EXTRuntimeExtensions.m in Sources */,
 				CB64FE201B317F760011CEEC /* DBCommentViewController.m in Sources */,
 				CB64FE211B317F760011CEEC /* DBClassLoader.m in Sources */,
@@ -31093,7 +31093,7 @@
 				CBDE21841B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB6400131B31B7CF0011CEEC /* UIView+Extension.m in Sources */,
 				CBDE1D661B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC7F1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC7F1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB6400141B31B7CF0011CEEC /* EXTConcreteProtocol.m in Sources */,
 				CBDE226E1B7286890090A347 /* ShippingManager.m in Sources */,
 				CB6400161B31B7CF0011CEEC /* CacheHelper.m in Sources */,
@@ -31248,7 +31248,7 @@
 				CB69807F1B7DE33400B12B78 /* ViewControllerManager.m in Sources */,
 				CB6980801B7DE33400B12B78 /* UIView+Extension.m in Sources */,
 				CB6980811B7DE33400B12B78 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC941B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC941B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB6980821B7DE33400B12B78 /* EXTConcreteProtocol.m in Sources */,
 				CB6980831B7DE33400B12B78 /* ShippingManager.m in Sources */,
 				CB6980841B7DE33400B12B78 /* CacheHelper.m in Sources */,
@@ -31403,7 +31403,7 @@
 				CBDE21791B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB8200F81B46CBB4000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D5B1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC741B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC741B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB8200F91B46CBB4000BBE55 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22631B7286890090A347 /* ShippingManager.m in Sources */,
 				CB8200FB1B46CBB4000BBE55 /* CacheHelper.m in Sources */,
@@ -31558,7 +31558,7 @@
 				CBDE218C1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB82FC351B442C70000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D6E1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC871B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC871B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB82FC361B442C70000BBE55 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22761B7286890090A347 /* ShippingManager.m in Sources */,
 				CB82FC381B442C70000BBE55 /* CacheHelper.m in Sources */,
@@ -31713,7 +31713,7 @@
 				CBDE218D1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB82FE161B4464F6000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D6F1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC881B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC881B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB82FE171B4464F6000BBE55 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22771B7286890090A347 /* ShippingManager.m in Sources */,
 				CB82FE191B4464F6000BBE55 /* CacheHelper.m in Sources */,
@@ -31868,7 +31868,7 @@
 				CBDE218E1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CB82FF871B4579B5000BBE55 /* UIView+Extension.m in Sources */,
 				CBDE1D701B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC891B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC891B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CB82FF881B4579B5000BBE55 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22781B7286890090A347 /* ShippingManager.m in Sources */,
 				CB82FF8A1B4579B5000BBE55 /* CacheHelper.m in Sources */,
@@ -32023,7 +32023,7 @@
 				CBDE21821B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBD0C5371B30724300DAD042 /* UIView+Extension.m in Sources */,
 				CBDE1D641B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC7D1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC7D1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CBD0C5381B30724300DAD042 /* EXTConcreteProtocol.m in Sources */,
 				CBDE226C1B7286890090A347 /* ShippingManager.m in Sources */,
 				CBD0C53A1B30724300DAD042 /* CacheHelper.m in Sources */,
@@ -32094,7 +32094,7 @@
 				CB1EAB7B1B83194E00425CD7 /* DBPaymentCardAdditionModuleView.m in Sources */,
 				CBD2EAD41B2A07D000E4AAA1 /* UIViewController+DBAnimation.m in Sources */,
 				CBDE1D251B7286540090A347 /* LaunchViewController.m in Sources */,
-				CB1EAC7C1B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC7C1B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CBD2EAD51B2A07D000E4AAA1 /* EXTRuntimeExtensions.m in Sources */,
 				CBD2EAD61B2A07D000E4AAA1 /* DBCommentViewController.m in Sources */,
 				CBD2EAD71B2A07D000E4AAA1 /* DBClassLoader.m in Sources */,
@@ -32332,7 +32332,7 @@
 				CBDE218B1B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBDC79E91B42AFC700935328 /* UIView+Extension.m in Sources */,
 				CBDE1D6D1B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC861B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC861B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CBDC79EA1B42AFC700935328 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22751B7286890090A347 /* ShippingManager.m in Sources */,
 				CBDC79EC1B42AFC700935328 /* CacheHelper.m in Sources */,
@@ -32487,7 +32487,7 @@
 				CBDE21961B7286550090A347 /* ViewControllerManager.m in Sources */,
 				CBDE1BC81B7280B50090A347 /* UIView+Extension.m in Sources */,
 				CBDE1D781B7286540090A347 /* DBBonusPositionsViewController.m in Sources */,
-				CB1EAC911B84DF7D00425CD7 /* DBPaymentModuleView.m in Sources */,
+				CB1EAC911B84DF7D00425CD7 /* DBModuleView.m in Sources */,
 				CBDE1BC91B7280B50090A347 /* EXTConcreteProtocol.m in Sources */,
 				CBDE22801B7286890090A347 /* ShippingManager.m in Sources */,
 				CBDE1BCB1B7280B50090A347 /* CacheHelper.m in Sources */,
@@ -33354,7 +33354,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = DashiniPirozhki;
-				PROVISIONING_PROFILE = "9d7bc8c0-4345-4c4e-b8a8-9b2b66aa73c9";
+				PROVISIONING_PROFILE = "a7bea5c9-d28d-40a7-92ed-3dc6da360414";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -34479,7 +34479,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -34495,7 +34495,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = Pastadeli;
-				PROVISIONING_PROFILE = "6694c1d2-759e-49c6-9ccd-45231648ab6e";
+				PROVISIONING_PROFILE = "a7bea5c9-d28d-40a7-92ed-3dc6da360414";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -34512,7 +34512,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -34544,7 +34544,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = DoubleB/DoubleB.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Empatika OOO (WDRAVGQ9R2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -35174,7 +35174,7 @@
 					"$(PROJECT_DIR)/DoubleB/Vendor",
 				);
 				PRODUCT_NAME = CoffeeHostel;
-				PROVISIONING_PROFILE = "b8b8d8c1-5dae-4a5f-8c64-ca87c2658b5b";
+				PROVISIONING_PROFILE = "942bfbb3-83bc-4f41-892d-2b03687e3ccc";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "DoubleB/ViewControllers/DoubleB-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";

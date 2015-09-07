@@ -25,6 +25,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.titleLabel.text = NSLocalizedString(@"Картой курьеру", nil);
     self.titleLabel.textColor = [UIColor blackColor];
     
@@ -33,14 +35,16 @@
     [self.tickImageView templateImageWithName:@"tick"];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
+    
+    [self reload:NO];
 }
 
 - (void)dealloc {
     [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
     
     if([OrderCoordinator sharedInstance].orderManager.paymentType == ){
         self.tickImageView.hidden = NO;

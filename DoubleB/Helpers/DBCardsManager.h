@@ -10,9 +10,15 @@
 #import "NotificationSubscriptionManager.h"
 #import "ManagerProtocol.h"
 
+extern NSString *const kDBCardTypeMasterCard;
+extern NSString *const kDBCardTypeVisa;
+extern NSString *const kDBCardTypeMaestro;
+extern NSString *const kDBCardTypeDinersClub;
+
 @interface DBPaymentCard : NSObject<NSCoding>
 @property (strong, nonatomic, readonly) NSString *token;
 @property (strong, nonatomic, readonly) NSString *pan;
+@property (strong, nonatomic, readonly) NSString *cardIssuer;
 
 - (instancetype)init:(NSString *)token pan:(NSString *)pan;
 @end

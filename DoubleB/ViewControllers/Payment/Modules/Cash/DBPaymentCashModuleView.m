@@ -27,6 +27,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.titleLabel.text = NSLocalizedString(@"Наличные", nil);
     self.titleLabel.textColor = [UIColor blackColor];
     
@@ -42,14 +44,16 @@
     }]];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
+    
+    [self reload:NO];
 }
 
 - (void)dealloc {
     [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
     
     if([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCash){
         self.tickImageView.hidden = NO;

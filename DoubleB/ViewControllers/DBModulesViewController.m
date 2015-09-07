@@ -7,6 +7,7 @@
 //
 
 #import "DBModulesViewController.h"
+#import "DBModuleView.h"
 
 @interface DBModulesViewController ()
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -36,7 +37,7 @@
         moduleView.translatesAutoresizingMaskIntoConstraints = NO;
         [moduleView alignLeadingEdgeWithView:_scrollView predicate:@"0"];
         [moduleView alignTrailingEdgeWithView:_scrollView predicate:@"0"];
-        [moduleView constrainHeight:[NSString stringWithFormat:@"%.f", moduleView.frame.size.height]];
+//        [moduleView constrainHeight:[NSString stringWithFormat:@"%.f", moduleView.frame.size.height]];
         
         if(i == 0){
             [moduleView alignTopEdgeWithView:_scrollView predicate:@"0"];
@@ -47,6 +48,12 @@
             UIView *topView = self.modules[i-1];
             [moduleView constrainTopSpaceToView:topView predicate:@"0"];
         }
+    }
+}
+
+- (void)reloadModules:(BOOL)animated {
+    for (DBModuleView *module in self.modules){
+        [module reload:animated];
     }
 }
 

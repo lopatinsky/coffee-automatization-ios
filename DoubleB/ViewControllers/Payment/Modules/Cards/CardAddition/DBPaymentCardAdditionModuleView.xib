@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -40,19 +45,29 @@
                         <constraint firstAttribute="width" constant="40" id="u60-qq-M1p"/>
                     </constraints>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWB-uk-loB">
+                    <rect key="frame" x="0.0" y="49.5" width="320" height="0.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.69999999999999996" id="0QB-28-EOB"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Vdv-mo-OHk" firstAttribute="centerY" secondItem="zlb-Y5-qiw" secondAttribute="centerY" id="0HA-hr-PQZ"/>
                 <constraint firstItem="zlb-Y5-qiw" firstAttribute="leading" secondItem="Vdv-mo-OHk" secondAttribute="trailing" constant="8" id="57k-18-CpQ"/>
                 <constraint firstItem="kbN-Xl-4al" firstAttribute="centerY" secondItem="zlb-Y5-qiw" secondAttribute="centerY" id="DIq-pS-7br"/>
+                <constraint firstItem="vWB-uk-loB" firstAttribute="leading" secondItem="xsd-eJ-q73" secondAttribute="leading" id="GKW-kl-qlp"/>
                 <constraint firstItem="EJc-CC-hH4" firstAttribute="leading" secondItem="kbN-Xl-4al" secondAttribute="trailing" constant="8" id="Nfy-SL-caD"/>
                 <constraint firstAttribute="trailing" secondItem="EJc-CC-hH4" secondAttribute="trailing" constant="10" id="TAL-mr-aoC"/>
+                <constraint firstAttribute="bottom" secondItem="vWB-uk-loB" secondAttribute="bottom" id="Tl4-hJ-iAG"/>
                 <constraint firstAttribute="height" constant="50" id="d3m-LX-CUZ"/>
                 <constraint firstItem="Vdv-mo-OHk" firstAttribute="leading" secondItem="xsd-eJ-q73" secondAttribute="leading" constant="15" id="hIj-3J-5ne"/>
                 <constraint firstAttribute="centerY" secondItem="Vdv-mo-OHk" secondAttribute="centerY" id="jh2-qa-yXw"/>
                 <constraint firstItem="kbN-Xl-4al" firstAttribute="leading" secondItem="zlb-Y5-qiw" secondAttribute="trailing" constant="8" id="mne-We-nSg"/>
                 <constraint firstItem="kbN-Xl-4al" firstAttribute="centerY" secondItem="EJc-CC-hH4" secondAttribute="centerY" id="qGQ-fX-rNF"/>
+                <constraint firstAttribute="trailing" secondItem="vWB-uk-loB" secondAttribute="trailing" id="qKJ-l7-v7U"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

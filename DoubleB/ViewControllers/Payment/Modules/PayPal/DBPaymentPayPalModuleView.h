@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBPaymentModuleView.h"
+#import "DBModuleView.h"
 
 typedef NS_ENUM(NSInteger, DBPaymentPayPalModuleViewMode) {
     DBPaymentPayPalModuleViewModePaymentType = 0,
     DBPaymentPayPalModuleViewModeManageAccount
 };
 
-@interface DBPaymentPayPalModuleView : DBPaymentModuleView
+@interface DBPaymentPayPalModuleView : DBModuleView
 @property (nonatomic) DBPaymentPayPalModuleViewMode mode;
 @end
