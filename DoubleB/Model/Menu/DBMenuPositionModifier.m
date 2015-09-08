@@ -77,7 +77,7 @@
         [self.items addObject:modifierItem];
         
         // Select Default choice
-        if([itemDict getValueForKey:@"default"]){
+        if([[itemDict getValueForKey:@"default"] boolValue]){
             self.selectedItem = modifierItem;
         }
     }
