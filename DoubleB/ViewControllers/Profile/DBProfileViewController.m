@@ -7,7 +7,6 @@
 //
 
 #import "DBProfileViewController.h"
-#import "DBProfileModuleViewProtocol.h"
 #import "DBProfileNameModuleView.h"
 #import "DBProfilePhoneModuleView.h"
 #import "DBProfileMailModuleView.h"
@@ -17,7 +16,7 @@
 
 #import "UIBarButtonItem+BlocksKit.h"
 
-@interface DBProfileViewController ()<DBProfileModuleViewDelegate>
+@interface DBProfileViewController ()
 @end
 
 @implementation DBProfileViewController
@@ -30,23 +29,25 @@
     
     // Name module
     DBProfileNameModuleView *nameModule = [DBProfileNameModuleView new];
-    nameModule.delegate = self;
+    nameModule.ownerViewController = self;
     nameModule.analyticsCategory = self.analyticsScreen;
     [self.modules addObject:nameModule];
     
     // Phone module
     DBProfilePhoneModuleView *phoneModule = [DBProfilePhoneModuleView new];
-    phoneModule.delegate = self;
+    phoneModule.ownerViewController = self;
     phoneModule.analyticsCategory = self.analyticsScreen;
     [self.modules addObject:phoneModule];
     
     // Mail module
     DBProfileMailModuleView *mailModule = [DBProfileMailModuleView new];
-    mailModule.delegate = self;
+    mailModule.ownerViewController = self;
     mailModule.analyticsCategory = self.analyticsScreen;
     [self.modules addObject:mailModule];
     
     [self layoutModules];
+    
+    [[DBClientInfo sharedInstance] addObserver:self withKeyPaths:@[DBClientInfoNotificationClientName, DBClientInfoNotificationClientPhone] selector:@selector(reloadDoneButton)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -75,6 +76,10 @@
     if (!parent) {
         [GANHelper analyzeEvent:@"back_arrow_pressed" category:self.analyticsScreen];
     }
+}
+
+- (void)dealloc {
+    [[DBClientInfo sharedInstance] removeObserver:self];
 }
 
 - (BOOL)dataIsValid {
@@ -113,18 +118,6 @@
     [GANHelper trackClientInfo];
     
     [DBServerAPI sendUserInfo:nil];
-}
-
-#pragma mark - DBProfileModuleViewDelegate
-
-- (void)db_profileModuleDidChange:(id<DBProfileModuleViewProtocol>)module {
-    if([module isKindOfClass:[DBProfileNameModuleView class]]){
-        [self reloadDoneButton];
-    }
-    
-    if([module isKindOfClass:[DBProfilePhoneModuleView class]]){
-        [self reloadDoneButton];
-    }
 }
 
 @end

@@ -9,10 +9,6 @@
 #import "DBConstants.h"
 
 
-NSString *const kDBDefaultsName = @"kDBDefaultsName";
-NSString *const kDBDefaultsPhone = @"kDBDefaultsPhone";
-NSString *const kDBDefaultsMail = @"kDBDefaultsMail";
-
 NSString *const kDBDefaultsNDASigned = @"kDBDefaultsNDASigned";
 
 NSString *const kDBDefaultsSharingInfo = @"kDBDefaultsSharingInfo";

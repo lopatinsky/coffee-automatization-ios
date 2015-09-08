@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBPrimaryManager.h"
 
-@interface DBClientInfo : NSObject
+// External notification constants
+extern NSString * const DBClientInfoNotificationClientName;
+extern NSString * const DBClientInfoNotificationClientPhone;
+extern NSString * const DBClientInfoNotificationClientMail;
+
+@interface DBClientInfo : DBPrimaryManager
 @property (strong, nonatomic, readonly) NSString *clientName;
 @property (strong, nonatomic, readonly) NSString *clientPhone;
 @property (strong, nonatomic, readonly) NSString *clientMail;

@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBProfileModuleViewProtocol.h"
+#import "DBModuleView.h"
 
 
-@interface DBProfileMailModuleView : UIView<DBProfileModuleViewProtocol>
-@property(strong, nonatomic) NSString *analyticsCategory;
-@property(weak, nonatomic) id<DBProfileModuleViewDelegate> delegate;
+@interface DBProfileMailModuleView : DBModuleView
 @end

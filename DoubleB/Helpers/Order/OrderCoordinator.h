@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NotificationSubscriptionManager.h"
+#import "DBPrimaryManager.h"
 
 #import "ManagerProtocol.h"
 #import "OrderItemsManager.h"
@@ -31,8 +31,7 @@ extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated;
 
 
-
-@interface OrderCoordinator : NotificationSubscriptionManager <ManagerProtocol>
+@interface OrderCoordinator : DBPrimaryManager <ManagerProtocol>
 
 @property (nonnull, nonatomic, strong, readonly) OrderItemsManager *itemsManager;
 @property (nonnull, nonatomic, strong, readonly) OrderBonusItemsManager *bonusItemsManager;
@@ -41,8 +40,6 @@ extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUp
 @property (nonnull, nonatomic, strong, readonly) DeliverySettings *deliverySettings;
 @property (nonnull, nonatomic, strong, readonly) ShippingManager *shippingManager;
 @property (nonnull, nonatomic, strong, readonly) DBPromoManager *promoManager;
-
-+ (instancetype)sharedInstance;
 
 - (BOOL)validOrder;
 

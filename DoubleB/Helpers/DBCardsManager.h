@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NotificationSubscriptionManager.h"
+#import "DBPrimaryManager.h"
 #import "ManagerProtocol.h"
 
 extern NSString *const kDBCardTypeMasterCard;
@@ -26,7 +26,7 @@ extern NSString *const kDBCardTypeDinersClub;
 
 extern NSString * const DBCardsManagerNotificationCardsChanged;
 
-@interface DBCardsManager : NotificationSubscriptionManager <ManagerProtocol>
+@interface DBCardsManager : DBPrimaryManager <ManagerProtocol>
 + (instancetype)sharedInstance;
 
 @property (strong, nonatomic, readonly) NSMutableArray *cards;

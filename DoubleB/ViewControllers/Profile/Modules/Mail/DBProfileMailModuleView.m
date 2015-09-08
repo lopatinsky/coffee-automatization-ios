@@ -35,10 +35,6 @@
 
 - (void)textFieldDidChangeText:(UITextField *)textField{
     [DBClientInfo sharedInstance].clientMail = textField.text;
-    
-    if([self.delegate respondsToSelector:@selector(db_profileModuleDidChange:)]){
-        [self.delegate db_profileModuleDidChange:self];
-    }
 }
 
 #pragma mark - UITextFieldDelegate

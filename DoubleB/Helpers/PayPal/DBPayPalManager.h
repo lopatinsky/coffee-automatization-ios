@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "NotificationSubscriptionManager.h"
+#import "DBPrimaryManager.h"
 
 typedef NS_ENUM(NSUInteger, DBPayPalBindingState) {
     DBPayPalBindingStateCancelled = 0,
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, DBPayPalBindingState) {
 
 extern NSString * const DBPayPalManagerNotificationAccountChange;
 
-@interface DBPayPalManager : NotificationSubscriptionManager
+@interface DBPayPalManager : DBPrimaryManager
 @property (weak, nonatomic) id<DBPayPalManagerDelegate> delegate;
 
 @property (nonatomic, readonly) BOOL loggedIn;

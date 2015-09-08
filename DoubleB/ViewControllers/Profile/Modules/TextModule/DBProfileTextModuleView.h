@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBProfileModuleViewProtocol.h"
+#import "DBModuleView.h"
 
-@interface DBProfileTextModuleView : UIView<DBProfileModuleViewProtocol>
+@interface DBProfileTextModuleView : DBModuleView
 
 @property (strong, nonatomic) UIImage *moduleImage;
 

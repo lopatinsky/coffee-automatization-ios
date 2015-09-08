@@ -46,10 +46,6 @@
 
 /********************/
 
-extern NSString *const kDBDefaultsName;
-extern NSString *const kDBDefaultsPhone;
-extern NSString *const kDBDefaultsMail;
-
 extern NSString *const kDBDefaultsNDASigned;
 
 extern NSString *const kDBDefaultsSharingInfo;

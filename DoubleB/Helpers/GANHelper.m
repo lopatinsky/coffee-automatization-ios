@@ -15,9 +15,7 @@
 #import "DBClientInfo.h"
 
 
-@implementation GANHelper {
-
-}
+@implementation GANHelper 
 
 + (void)initialize {
 //    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
