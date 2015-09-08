@@ -48,7 +48,6 @@
     return [self moduleViewContentSize];
 }
 
-#pragma mark - DBModuleViewProtocol
 
 - (CGSize)moduleViewContentSize {
     return self.frame.size;

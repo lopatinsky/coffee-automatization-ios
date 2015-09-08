@@ -15640,13 +15640,13 @@
 			isa = PBXGroup;
 			children = (
 				CB1EAD4D1B85A82000425CD7 /* PayPal */,
+				CBDE21991B7286890090A347 /* Order */,
 				CBDE21971B7286890090A347 /* ApplicationManager.h */,
 				CBDE21981B7286890090A347 /* ApplicationManager.m */,
 				CB24234F1B7A47AD00A02721 /* ViewManager.h */,
 				CB2423501B7A47AD00A02721 /* ViewManager.m */,
 				CB1EAC951B84E63600425CD7 /* NotificationSubscriptionManager.h */,
 				CB1EAC961B84E63600425CD7 /* NotificationSubscriptionManager.m */,
-				CBDE21991B7286890090A347 /* Order */,
 				CB1432441B0E3D0400DD50C7 /* DBClassLoader.h */,
 				CB1432451B0E3D0400DD50C7 /* DBClassLoader.m */,
 				CB1B6CDF1A4B3CE40034774C /* DBBeaconObserver.h */,
