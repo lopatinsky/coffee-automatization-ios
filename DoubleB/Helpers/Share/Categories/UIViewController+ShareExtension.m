@@ -8,7 +8,6 @@
 
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+ShareExtension.h"
-#import "Compatibility.h"
 #import "DBShareHelper.h"
 #import "MBProgressHUD.h"
 #import "DBActivityItemProvider.h"

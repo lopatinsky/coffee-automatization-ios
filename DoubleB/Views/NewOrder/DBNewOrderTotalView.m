@@ -8,7 +8,6 @@
 
 #import "DBNewOrderTotalView.h"
 #import "OrderCoordinator.h"
-#import "Compatibility.h"
 
 @interface DBNewOrderTotalView ()
 @property (strong, nonatomic) OrderCoordinator *orderCoordinator;

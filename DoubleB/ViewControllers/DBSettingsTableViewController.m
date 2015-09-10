@@ -19,7 +19,6 @@
 #import "IHPaymentManager.h"
 #import "OrderCoordinator.h"
 #import "Order.h"
-#import "Compatibility.h"
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 #import "DBCompaniesManager.h"

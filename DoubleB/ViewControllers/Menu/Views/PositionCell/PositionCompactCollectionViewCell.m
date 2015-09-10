@@ -7,7 +7,6 @@
 //
 
 #import "PositionCompactCollectionViewCell.h"
-#import "Compatibility.h"
 #import "DBMenuPosition.h"
 #import "UIView+RoundedCorners.h"
 

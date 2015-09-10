@@ -8,7 +8,6 @@
 
 #import "DBNewOrderViewFooter.h"
 #import "OrderManager.h"
-#import "Compatibility.h"
 #import "DBDiscountMessageCell.h"
 
 

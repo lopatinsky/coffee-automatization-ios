@@ -66,14 +66,14 @@
 
 #pragma mark - Position
 #import "PositionViewController1.h"
-#import "PositionViewController2.h"
+//#import "PositionViewController2.h"
 @implementation ViewControllerManager(PositionViewControllers)
 
 + (nonnull NSDictionary *)positionViewControllerClasses {
     return @{
              @"default": [PositionViewController1 class],
              @"Classic": [PositionViewController1 class],
-             @"New": [PositionViewController2 class],
+//             @"New": [PositionViewController2 class],
              };
 }
 

@@ -21,7 +21,6 @@
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "Venue.h"
-#import "Compatibility.h"
 #import "LocationHelper.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"

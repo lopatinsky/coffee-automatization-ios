@@ -15,7 +15,6 @@
 #import "DBOrderViewController.h"
 #import "DBNewOrderViewController.h"
 #import "UIAlertView+BlocksKit.h"
-#import "Compatibility.h"
 #import "OrderManager.h"
 #import "DBAPIClient.h"
 #import "IHSecureStore.h"

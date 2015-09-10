@@ -27,6 +27,8 @@
 #import "ViewManager.h"
 #import "ViewControllerManager.h"
 
+#import "Compatibility.h"
+
 #import "UIViewController+DBAppearance.h"
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+DBErrorAnimation.h"

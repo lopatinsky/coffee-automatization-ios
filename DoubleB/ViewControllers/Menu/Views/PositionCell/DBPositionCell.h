@@ -44,6 +44,8 @@ typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
 
+- (void)animatePositionAdditionWithCompletion:(void(^)())completion;
+
 - (void)disable;
 - (void)enable;
 - (DBMenuPosition *)position;

@@ -17,7 +17,6 @@
 #import "DBCardCell.h"
 #import "DBPromoManager.h"
 #import "DBClientInfo.h"
-#import "Compatibility.h"
 #import "MBProgressHUD.h"
 #import "DBPayPalManager.h"
 

@@ -20,7 +20,6 @@
 #import "DBClientInfo.h"
 #import "Reachability.h"
 #import "CoreDataHelper.h"
-#import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
 

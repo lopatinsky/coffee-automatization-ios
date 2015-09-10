@@ -8,7 +8,6 @@
 
 #import "DBPersonalWalletView.h"
 #import "OrderCoordinator.h"
-#import "Compatibility.h"
 
 @interface DBPersonalWalletView ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
