@@ -164,8 +164,6 @@
     if(cachedPosition){
         [cachedPosition syncWithPosition:position];
     }
-    
-    [self saveMenuToDeviceMemory];
 }
 
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId{

@@ -300,9 +300,6 @@
     positionVC.parentNavigationController = self.navigationController;
     [self.navigationController pushViewController:positionVC animated:YES];
     
-//    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
-//    [self.navigationController pushViewController:positionVC animated:YES];
-    
     [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
 }
 
@@ -314,9 +311,8 @@
         [modifiersList configureWithMenuPosition:cell.position];
         [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
     } else {
-        [cell animatePositionAdditionWithCompletion:^{
-            [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
-        }];
+        [cell animatePositionAdditionWithCompletion:nil];
+        [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
     }
     
     [GANHelper analyzeEvent:@"product_added" label:cell.position.positionId category:MENU_SCREEN];

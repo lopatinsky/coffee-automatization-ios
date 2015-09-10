@@ -10,6 +10,7 @@
 #import "DBAPIClient.h"
 #import "OrderCoordinator.h"
 #import "OrderItem.h"
+#import "DBMenu.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
@@ -248,7 +249,6 @@
                                  //NSLog(@"%@", responseObject);
                                  
                                  // Save order
-                                 
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
                                  if(success)
                                      success(ord);
@@ -259,6 +259,9 @@
                                  
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];
+                                 
+                                 // Save user choice of modifiers on positions of order
+                                 [[DBMenu sharedInstance] saveMenuToDeviceMemory];
                                  
                                  // Notify all about success order
                                  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:ord]];
