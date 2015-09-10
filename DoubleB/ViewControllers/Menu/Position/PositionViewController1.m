@@ -226,11 +226,14 @@
 #pragma mark - DBPositionModifierPickerDelegate
 
 - (void)db_positionModifierPickerDidChangeItemCount:(DBPositionModifierPicker *)picker{
+    [self.modifiersListView reload];
     [self reloadSelectedModifiers];
 }
 
 - (void)db_positionModifierPicker:(DBPositionModifierPicker *)picker didSelectNewItem:(DBMenuPositionModifierItem *)item{
+    [self.modifiersListView reload];
     [self reloadSelectedModifiers];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.modifierPicker hide];
     });

@@ -38,15 +38,21 @@ typedef NS_ENUM(NSInteger, DBMenuPositionMode){
 
 @property(strong, nonatomic, readonly) NSDictionary *productDictionary;
 
-// dynamic data(not stored)
-@property(nonatomic, readonly) BOOL hasImage;
 
 - (instancetype)initWithResponseDictionary:(NSDictionary *)positionDictionary;
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary;
 
+- (void)syncWithPosition:(DBMenuPosition *)position;
+
+// dynamic data(not stored)
+@property(nonatomic, readonly) BOOL hasImage;
+@property(nonatomic, readonly) BOOL hasEmptyRequiredModifiers;
 - (BOOL)availableInVenue:(Venue *)venue;
 
+// User actions
 - (void)selectItem:(NSString *)itemId forGroupModifier:(NSString *)modifierId;
+- (void)selectAllRequiredModifiers;
+
 - (void)addSingleModifier:(NSString *)modifierId count:(NSInteger)count;
 
 // Returns equality of initial data

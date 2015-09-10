@@ -47,8 +47,8 @@
     self.choiceLabel.text = @"";
     self.priceLabel.text = @"";
     
-    if(modifier.selectedItem){
-        self.choiceLabel.text = modifier.selectedItem.itemName;
+    if(modifier.selectedItem || modifier.defaultItem){
+        self.choiceLabel.text = modifier.selectedItem ? modifier.selectedItem.itemName : modifier.defaultItem.itemName;
         if(modifier.actualPrice > 0){
             self.priceLabel.text = [NSString stringWithFormat:@"+%.0f %@", modifier.actualPrice, [Compatibility currencySymbol]];
         }

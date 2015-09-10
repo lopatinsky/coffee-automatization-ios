@@ -116,11 +116,15 @@
         NSInteger shift = self.modifier.required ? 0 : 1;
         if (indexPath.row == 0 && shift == 1) {
             [cell configureWithModifierItem:nil havePrice:NO];
-            [cell select:(self.modifier.selectedItem == nil) animated:NO];
+            
+            BOOL selected = !self.modifier.required && !self.modifier.selectedItem && !self.modifier.selectedItem;
+            [cell select:selected animated:NO];
         } else {
             DBMenuPositionModifierItem *item = self.modifier.items[indexPath.row - shift];
             [cell configureWithModifierItem:item havePrice:self.havePrice];
-            [cell select:[self.modifier.selectedItem isEqual:item] animated:NO];
+            
+            BOOL selected = ([self.modifier.selectedItem isEqual:item]) || (!self.modifier.selectedItem && [self.modifier.defaultItem isEqual:item]);
+            [cell select:selected animated:NO];
         }
         cell.currencyDisplayMode = self.currencyDisplayMode;
         

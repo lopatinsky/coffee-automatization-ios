@@ -7,6 +7,7 @@
 //
 
 #import "OrderItemsManager.h"
+#import "DBMenu.h"
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "OrderCoordinator.h"
@@ -194,6 +195,15 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 
 
 @implementation OrderItemsManager
+
+- (NSInteger)addPosition:(DBMenuPosition *)position {
+    [position selectAllRequiredModifiers];
+    
+    [[DBMenu sharedInstance] syncWithPosition:position];
+    
+    return [super addPosition:position];
+}
+
 @end
 
 @implementation OrderBonusItemsManager

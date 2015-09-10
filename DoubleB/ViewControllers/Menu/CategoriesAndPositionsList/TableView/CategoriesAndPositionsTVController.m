@@ -309,13 +309,15 @@
 #pragma mark - DBPositionCellDelegate
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
-//    [cell animatePositionAdditionWithCompletion:^{
-//        [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
-//    }];
-    
-    DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
-    [modifiersList configureWithMenuPosition:cell.position];
-    [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    if(cell.position.hasEmptyRequiredModifiers) {
+        DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
+        [modifiersList configureWithMenuPosition:cell.position];
+        [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    } else {
+        [cell animatePositionAdditionWithCompletion:^{
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
+        }];
+    }
     
     [GANHelper analyzeEvent:@"product_added" label:cell.position.positionId category:MENU_SCREEN];
     [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
