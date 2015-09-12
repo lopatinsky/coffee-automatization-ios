@@ -53,4 +53,6 @@ extern NSString *const kDBDeliverySettingsNewSelectedTimeNotification;
  */
 - (void)updateAfterDeliveryTypesUpdate;
 
+- (void)setDefaultDeliveryType;
+
 @end

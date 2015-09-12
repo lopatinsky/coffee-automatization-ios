@@ -731,6 +731,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)updateVenuesStatus {
     NSArray *venues = [Venue storedVenues];
     [self setVenue:[venues firstObject]];
+    [[OrderCoordinator sharedInstance].deliverySettings setDefaultDeliveryType];
+    [self reloadTime];
+    [self reloadTimePicker];
+    [[NetworkManager sharedManager] addPendingOperation:NetworkOperationCheckOrder];
 }
 
 - (void)reloadAddress {
@@ -767,7 +771,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)setVenue:(Venue *)venue{
     if (venue) {
         _orderCoordinator.orderManager.venue = venue;
-        
         self.orderFooter.labelAddress.text = venue.title;
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
         [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
@@ -863,7 +866,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.pickerView showOnView:self.tabBarController.view];
 }
 
-- (NSString *)selectedTimeString{
+- (NSString *)selectedTimeString {
     NSString *timeString;
     
     NSDateFormatter *formatter = [NSDateFormatter new];
@@ -871,23 +874,22 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         case TimeModeTime:{
             formatter.dateFormat = @"HH:mm";
             timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
-        }
             break;
+        }
         case TimeModeDateTime:{
             formatter.dateFormat = @"dd/MM/yy HH:mm";
             timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
-        }
             break;
+        }
         case TimeModeSlots:{
             timeString = _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle;
-        }
             break;
+        }
         case TimeModeDateSlots:{
             formatter.dateFormat = @"ccc d";
             timeString = [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime], _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle];
-        }
             break;
-            
+        }
         default:
             break;
     }

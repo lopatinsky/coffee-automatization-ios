@@ -38,6 +38,11 @@ NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySe
 }
 
 #pragma mark - Delivery type
+- (void)setDefaultDeliveryType {
+    if (!_deliveryType) {
+        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+    }
+}
 
 - (void)selectDeliveryType:(DBDeliveryType *)type{
     if(type.typeId == DeliveryTypeIdShipping){
