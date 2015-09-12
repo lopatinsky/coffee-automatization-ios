@@ -44,7 +44,6 @@
 
 @interface ViewControllerManager(ShareFriendInvitationViewControllers)
 + (nonnull UIViewController *)shareFriendInvitationViewController;
-+ (nonnull UIViewController *)promocodeViewControllers;
 @end
 
 @interface ViewControllerManager(CompaniesViewControllers)

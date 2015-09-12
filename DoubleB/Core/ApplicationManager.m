@@ -205,7 +205,7 @@ typedef enum : NSUInteger {
                                                                }];
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
-    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 }
 
 @end
