@@ -323,6 +323,46 @@
 }
 
 
+#pragma mark - History
+
++ (void)fetchOrdersHistory:(void(^)(BOOL success, NSError *error))callback{
+    NSString *clientId = [[IHSecureStore sharedInstance] clientId];
+    
+    if(clientId){
+        [[DBAPIClient sharedClient] GET:@"history"
+                             parameters:@{@"client_id": clientId}
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                    
+                                    for(NSDictionary *orderDict in responseObject[@"orders"]){
+                                        NSString *newOrderId = [NSString stringWithFormat:@"%@", orderDict[@"order_id"]];
+                                        Order *sameOrder = [Order orderById:newOrderId];
+                                        
+                                        if(sameOrder){
+                                            [sameOrder synchronizeWithResponseDict:orderDict];
+                                        } else {
+                                            Order *ord = [[Order alloc] initWithResponseDict:orderDict];
+                                            
+                                            [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
+                                            [[NSUserDefaults standardUserDefaults] synchronize];
+                                            
+                                            [Compatibility registerForNotifications];
+                                            [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                        }
+                                    }
+                                    
+                                    if(callback)
+                                        callback(YES, nil);
+                                }
+                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    NSLog(@"%@", error);
+                                    
+                                    if(callback)
+                                        callback(NO, nil);
+                                }];
+    }
+}
+
+
 #pragma mark - Wallet
 
 + (void)getWalletInfo:(void(^)(BOOL success, NSDictionary *response))callback{

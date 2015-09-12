@@ -74,6 +74,8 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict;
 
 + (NSArray *)allOrders;
++ (Order *)orderById:(NSString *)orderId;
+
 + (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;
 + (void)dropAllOrders;
 
