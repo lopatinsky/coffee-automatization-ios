@@ -79,7 +79,8 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    long interval = (long)-[start timeIntervalSinceNow];
+    // TODO: check unused var interval in webViewDidFinishLoad
+//    long interval = (long)-[start timeIntervalSinceNow];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{

@@ -15,6 +15,7 @@
 @class DBPromoItem;
 
 
+
 typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
     DBPromoManagerChangeDiscount = 0,
     DBPromoManagerChangeWalletDiscount,

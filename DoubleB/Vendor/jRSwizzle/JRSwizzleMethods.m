@@ -7,6 +7,7 @@
 //
 
 #import "JRSwizzleMethods.h"
+#import "JRSwizzle.h"
 
 @implementation JRSwizzleMethods
 

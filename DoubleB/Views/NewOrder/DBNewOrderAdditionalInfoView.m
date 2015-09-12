@@ -55,7 +55,7 @@
 }
 
 - (void)show:(void(^)())animation completion:(void(^)())completion{
-    int errorViewHeight = 44 * [self.messages count];
+    unsigned long errorViewHeight = 44 * [self.messages count];
     
     self.hidden = NO;
     if(animation){

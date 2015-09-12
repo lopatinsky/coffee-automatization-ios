@@ -14,6 +14,11 @@ extern NSString *const kDBConcurrentOperationCompanyInfoLoadFailure;
 #pragma mark - Companies Operation
 extern NSString *const kDBConcurrentOperationCompaniesLoadSuccess;
 extern NSString *const kDBConcurrentOperationCompaniesLoadFailure;
+#pragma mark - CheckOrder Operation
+extern NSString *const kDBConcurrentOperationCheckOrderSuccess;
+extern NSString *const kDBConcurrentOperationCheckOrderFailure;
+extern NSString *const kDBConcurrentOperationCheckOrderStarted;
+extern NSString *const kDBConcurrentOperationCheckOrderFailed;
 
 typedef enum : NSUInteger {
     OperationReady,

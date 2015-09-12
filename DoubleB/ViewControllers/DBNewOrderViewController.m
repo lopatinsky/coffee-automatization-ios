@@ -50,6 +50,7 @@
 #import "PositionViewControllerProtocol.h"
 
 #import "CompanyNewsManager.h"
+#import "NetworkManager.h"
 
 #import <Parse/Parse.h>
 #import <BlocksKit/UIAlertView+BlocksKit.h>
@@ -187,6 +188,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
+    
+    // promo notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderSuccess) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailure) name:kDBConcurrentOperationCheckOrderFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderStarted) name:kDBConcurrentOperationCheckOrderStarted object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailed) name:kDBConcurrentOperationCheckOrderFailed object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -341,70 +348,74 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #pragma mark - Promo
 
-
-- (void)startUpdatingPromoInfo{
-    BOOL startUpdating = [_orderCoordinator.promoManager checkCurrentOrder:^(BOOL success) {
-        [self endUpdatingPromoInfo];
-        
-        if (success) {
-            // Show order promos & errors
-            NSArray *promos = _orderCoordinator.promoManager.promos;
-            NSArray *errors = _orderCoordinator.promoManager.errors;
-            
-            [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
-            
-            BOOL shouldReloadAgain = NO;
-            for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
-                OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
-                DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
-                
-                DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-                cell.promoItem = promoItem;
-                
-                if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
-                    [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
-                    [promoItem clear];
-                    shouldReloadAgain = YES;
-                    
-                    [GANHelper analyzeEvent:@"position_autoreplace"
-                                      label:item.position.positionId
-                                   category:ORDER_SCREEN];
-                }
-            }
-            
-            if(shouldReloadAgain){
-                [self startUpdatingPromoInfo];
-            }
-            [self reloadVisibleCells];
- 
-// TODO: Dirty trick to reload tableview without exceptions
-            @try {
-                // Reload order gifts section
-                [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
-                [self reloadTableViewHeight:YES];
-            }
-            @catch (NSException *exception) {
-                [self.tableView reloadData];
-            }
-            
-            
-            // Gifts logic
-            [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
-            
-        } else {
-            [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
-                                      animation:^{
-                                          [self.scrollView layoutIfNeeded];
-                                      } completion:nil];
-        }
-        
-        [self reloadBonusesView:YES];
-    }];
+- (void)checkOrderSuccess {
+    [self endUpdatingPromoInfo];
     
-    if(startUpdating){
-        [self.totalView startUpdating];
-        [self reloadContinueButton];
+    // Show order promos & errors
+    NSArray *promos = _orderCoordinator.promoManager.promos;
+    NSArray *errors = _orderCoordinator.promoManager.errors;
+    
+    [self showOrHideAdditionalInfoViewWithErrors:errors promos:promos];
+    
+    BOOL shouldReloadAgain = NO;
+    for(int i = 0; i < _orderCoordinator.itemsManager.items.count; i++){
+        OrderItem *item = [_orderCoordinator.itemsManager itemAtIndex:i];
+        DBPromoItem *promoItem = [_orderCoordinator.promoManager promosForOrderItem:item];
+        
+        DBOrderItemCell *cell = (DBOrderItemCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        cell.promoItem = promoItem;
+        
+        if(promoItem.substitute && promoItem.replaceToSubstituteAutomatic){
+            [_orderCoordinator.itemsManager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+            [promoItem clear];
+            shouldReloadAgain = YES;
+            
+            [GANHelper analyzeEvent:@"position_autoreplace"
+                              label:item.position.positionId
+                           category:ORDER_SCREEN];
+        }
     }
+    
+    if(shouldReloadAgain){
+        [self startUpdatingPromoInfo];
+    }
+    [self reloadVisibleCells];
+    
+    // TODO: Dirty trick to reload tableview without exceptions
+    @try {
+        // Reload order gifts section
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self reloadTableViewHeight:YES];
+    }
+    @catch (NSException *exception) {
+        [self.tableView reloadData];
+    }
+    
+    // Gifts logic
+    [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
+    [self reloadBonusesView:YES];
+}
+
+- (void)checkOrderFailure {
+    [self endUpdatingPromoInfo];
+    [self.additionalInfoView showErrors:@[NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil)]
+                              animation:^{
+                                  [self.scrollView layoutIfNeeded];
+                              } completion:nil];
+    [self reloadBonusesView:YES];
+}
+
+- (void)checkOrderStarted {
+    [self.totalView startUpdating];
+    [self reloadContinueButton];
+}
+
+- (void)checkOrderFailed {
+    [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startUpdatingPromoInfo) userInfo:nil repeats:NO];
+}
+
+- (void)startUpdatingPromoInfo {
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationCheckOrder];
 }
 
 - (void)endUpdatingPromoInfo{
@@ -413,7 +424,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self reloadContinueButton];
 }
 
-- (void) showOrHideAdditionalInfoViewWithErrors:(NSArray *)errors promos:(NSArray *)promos {
+- (void)showOrHideAdditionalInfoViewWithErrors:(NSArray *)errors promos:(NSArray *)promos {
     if ((!errors || [errors count] == 0) && (!promos || [promos count] == 0)) {
         [self.additionalInfoView hide:^{
             [self.scrollView layoutIfNeeded];
@@ -430,7 +441,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         }
     }
 }
-
 
 #pragma mark - Personal wallet
 
@@ -1029,7 +1039,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 [self reloadPaymentType];
             }
             break;
-            
+        case PaymentTypeExtraType:
+            break;
     }
 }
 
@@ -1044,6 +1055,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             break;
         case PaymentTypeCard:
             label = @"card";
+            break;
+        case PaymentTypePayPal:
+            label = @"paypal";
             break;
         case PaymentTypeExtraType:
             label = @"extra_type";

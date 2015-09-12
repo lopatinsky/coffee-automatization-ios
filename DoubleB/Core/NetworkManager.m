@@ -107,12 +107,14 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 
 #import "FetchCompanyInfo.h"
 #import "FetchCompaniesInfo.h"
+#import "CheckOrder.h"
 @implementation NetworkManager(OperationLoader)
 
 + (ConcurrentOperation *)operationWithType:(NetworkOperation)type {
     NSDictionary *operationClasses = @{
                                        @(NetworkOperationFetchCompanyInfo): [FetchCompanyInfo class],
-                                       @(NetworkOperationFetchCompanies): [FetchCompaniesInfo class]
+                                       @(NetworkOperationFetchCompanies): [FetchCompaniesInfo class],
+                                       @(NetworkOperationCheckOrder): [CheckOrder class],
                                        };
     ConcurrentOperation *operation = [[operationClasses objectForKey:@(type)] new];
     operation.queue = [NetworkManager sharedManager].operationQueue;

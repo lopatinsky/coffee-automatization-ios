@@ -32,7 +32,7 @@
 
 - (BOOL)addConcurrentPendingUniqueOperation:(NSOperation *)operation {
     NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
-    if (self.operations > 0) {
+    if (self.operations.count > 0) {
         [operation addDependency:self.operations.lastObject];
     }
     return [self addConcurrentUniqueOperation:operation];

@@ -14,6 +14,11 @@ NSString *const kDBConcurrentOperationCompanyInfoLoadFailure = @"kDBConcurrentOp
 #pragma mark - Companies Operation
 NSString *const kDBConcurrentOperationCompaniesLoadSuccess = @"kDBConcurrentOperationCompaniesLoadSuccess";
 NSString *const kDBConcurrentOperationCompaniesLoadFailure = @"kDBConcurrentOperationCompaniesLoadFailure";
+#pragma mark - Checkorder Operation
+NSString *const kDBConcurrentOperationCheckOrderSuccess = @"kDBConcurrentOperationCheckOrderSuccess";
+NSString *const kDBConcurrentOperationCheckOrderFailure = @"kDBConcurrentOperationCheckOrderFailure";
+NSString *const kDBConcurrentOperationCheckOrderStarted = @"kDBConcurrentOperationCheckOrderStarted";
+NSString *const kDBConcurrentOperationCheckOrderFailed = @"kDBConcurrentOperationCheckOrderFailed";
 
 @implementation ConcurrentOperation
 

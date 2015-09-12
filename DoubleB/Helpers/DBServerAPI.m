@@ -190,8 +190,8 @@
 #pragma mark - Order methods
 
 + (void)checkNewOrder:(void(^)(NSDictionary *response))success
-              failure:(void(^)(NSError *error))failure{
-    
+              failure:(void(^)(NSError *error))failure {
+    // TODO: check unused vars in checkNewOrder
     [[DBAPIClient sharedClient] POST:@"check_order"
                           parameters:[self assembleCheckOrderParams]
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -15,6 +15,7 @@ extern NSString *const kDBNetworkManagerShouldRetryToRequest;
 typedef enum : NSUInteger {
     NetworkOperationFetchCompanies = 0,
     NetworkOperationFetchCompanyInfo,
+    NetworkOperationCheckOrder
 } NetworkOperation;
 
 @interface NetworkManager : NSObject
