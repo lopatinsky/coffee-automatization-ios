@@ -27,7 +27,6 @@ extern NSString *const kDBCardTypeDinersClub;
 extern NSString * const DBCardsManagerNotificationCardsChanged;
 
 @interface DBCardsManager : DBPrimaryManager <ManagerProtocol>
-+ (instancetype)sharedInstance;
 
 @property (strong, nonatomic, readonly) NSMutableArray *cards;
 @property (nonatomic, readonly) NSUInteger cardsCount;

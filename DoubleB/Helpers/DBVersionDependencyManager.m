@@ -21,7 +21,7 @@
 }
 
 + (void)analyzeUserModifierChoicesFromHistory {
-    BOOL analyzed = [self valueForKey:@"kDBUserHistoryAnalyzedForModifiers"];
+    BOOL analyzed = [[self valueForKey:@"kDBUserHistoryAnalyzedForModifiers"] boolValue];
     
     if(!analyzed){
         NSArray *history = [Order allOrders];
@@ -40,13 +40,7 @@
 }
 
 + (void)analyzeOrders:(NSArray *)orders {
-    NSMutableArray *history = [[NSMutableArray alloc] initWithArray:orders];
-    
-    [history sortUsingComparator:^NSComparisonResult(Order *obj1, Order *obj2) {
-        return [obj1.time compare:obj2.time];
-    }];
-    
-    for (Order *order in [history reverseObjectEnumerator]){
+    for (Order *order in orders){
         NSArray *items = order.items;
         for (OrderItem *orderItem in items){
             DBMenuPosition *samePosition = [[DBMenu sharedInstance] findPositionWithId:orderItem.position.positionId];

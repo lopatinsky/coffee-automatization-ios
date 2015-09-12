@@ -27,25 +27,25 @@
     return [NSString stringWithFormat:@"%@_%@", NSStringFromClass([self class]), key];
 }
 
-- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(NSString * __nonnull)keyName selector:(__nonnull SEL)selector {
+- (void)addObserver:(NSObject *)object withKeyPath:(NSString *)keyName selector:(SEL)selector {
     [[NSNotificationCenter defaultCenter] addObserver:object selector:selector name:[self fullKeyName:keyName] object:nil];
 }
 
-- (void)addObserver:(NSObject * __nonnull)object withKeyPaths:(NSArray * __nonnull)keyNames selector:(__nonnull SEL)selector{
+- (void)addObserver:(NSObject *)object withKeyPaths:(NSArray *)keyNames selector:(SEL)selector{
     for(NSString *keyName in keyNames){
-        [self addObserver:object withKeyPath:[self fullKeyName:keyName] selector:selector];
+        [self addObserver:object withKeyPath:keyName selector:selector];
     }
 }
 
-- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(NSString * __nonnull)keyName {
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyName {
     [[NSNotificationCenter defaultCenter] removeObserver:observer name:[self fullKeyName:keyName] object:nil];
 }
 
-- (void)removeObserver:(NSObject * __nonnull)observer {
+- (void)removeObserver:(NSObject *)observer {
     [[NSNotificationCenter defaultCenter] removeObserver:observer];
 }
 
-- (void)notifyObserverOf:(NSString * __nonnull)keyName {
+- (void)notifyObserverOf:(NSString *)keyName {
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:[self fullKeyName:keyName] object:nil]];
 }
 

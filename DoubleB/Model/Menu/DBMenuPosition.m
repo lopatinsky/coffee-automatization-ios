@@ -81,7 +81,13 @@
 
 - (void)syncWithPosition:(DBMenuPosition *)position {
     if([self isSamePosition:position]){
-        self.groupModifiers = position.groupModifiers;
+        for (DBMenuPositionModifier *modifier in position.groupModifiers){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifier.modifierId];
+            DBMenuPositionModifier *storedModifier = [[self.groupModifiers filteredArrayUsingPredicate:predicate] firstObject];
+            if(storedModifier && [storedModifier isSameModifier:modifier] && !storedModifier.selectedItem && modifier.selectedItem){
+                storedModifier.selectedItem = modifier.selectedItem;
+            }
+        }
     }
 }
 

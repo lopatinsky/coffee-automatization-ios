@@ -23,12 +23,12 @@
  */
 @interface DBPrimaryManager (ChangesNotification)
 
-- (void)addObserver:(NSObject * __nonnull)object withKeyPath:(NSString * __nonnull)keyName selector:(__nonnull SEL)selector;
-- (void)addObserver:(NSObject * __nonnull)object withKeyPaths:(NSArray * __nonnull)keyNames selector:(__nonnull SEL)selector;
+- (void)addObserver:(NSObject *)object withKeyPath:(NSString *)keyName selector:(SEL)selector;
+- (void)addObserver:(NSObject *)object withKeyPaths:(NSArray *)keyNames selector:(SEL)selector;
 
-- (void)removeObserver:(NSObject * __nonnull )observer forKeyPath:(NSString * __nonnull)keyName;
-- (void)removeObserver:(NSObject * __nonnull )observer;
+- (void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyName;
+- (void)removeObserver:(NSObject *)observer;
 
-- (void)notifyObserverOf:(NSString * __nonnull)keyName;
+- (void)notifyObserverOf:(NSString *)keyName;
 
 @end
