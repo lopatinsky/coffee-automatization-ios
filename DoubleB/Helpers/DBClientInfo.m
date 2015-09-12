@@ -7,10 +7,20 @@
 //
 
 #import "DBClientInfo.h"
+
 #import "NSString+AKNumericFormatter.h"
 
+// External notification constants
+NSString * const DBClientInfoNotificationClientName = @"DBClientInfoNotificationClientName";
+NSString * const DBClientInfoNotificationClientPhone = @"DBClientInfoNotificationClientPhone";
+NSString * const DBClientInfoNotificationClientMail = @"DBClientInfoNotificationClientMail";
+
+// Internal storage constants
+NSString *const kDBDefaultsName = @"kDBDefaultsName";
+NSString *const kDBDefaultsPhone = @"kDBDefaultsPhone";
+NSString *const kDBDefaultsMail = @"kDBDefaultsMail";
+
 @interface DBClientInfo ()
-@property (strong, nonatomic) NSUserDefaults *userDefaults;
 @end
 
 @implementation DBClientInfo
@@ -29,34 +39,33 @@
 {
     self = [super init];
     
-    self.userDefaults = [NSUserDefaults standardUserDefaults];
-    _clientName = [self.userDefaults objectForKey:kDBDefaultsName] ?: @"";
-    _clientPhone = [self.userDefaults objectForKey:kDBDefaultsPhone] ?: @"";
-    _clientMail = [self.userDefaults objectForKey:kDBDefaultsMail] ?: @"";
+    _clientName = [DBClientInfo valueForKey:kDBDefaultsName] ?: @"";
+    _clientPhone = [DBClientInfo valueForKey:kDBDefaultsPhone] ?: @"";
+    _clientMail = [DBClientInfo valueForKey:kDBDefaultsMail] ?: @"";
     
     return self;
 }
 
 - (BOOL)setClientName:(NSString *)clientName{
     _clientName = clientName;
-    [self.userDefaults setObject:_clientName forKey:kDBDefaultsName];
-    [self.userDefaults synchronize];
+    [DBClientInfo setValue:_clientName forKey:kDBDefaultsName];
+    [self notifyObserverOf:DBClientInfoNotificationClientName];
     
     return YES;
 }
 
 - (BOOL)setClientPhone:(NSString *)clientPhone{
     _clientPhone = clientPhone;
-    [self.userDefaults setObject:_clientPhone forKey:kDBDefaultsPhone];
-    [self.userDefaults synchronize];
+    [DBClientInfo setValue:_clientPhone forKey:kDBDefaultsPhone];
+    [self notifyObserverOf:DBClientInfoNotificationClientPhone];
     
     return YES;
 }
 
 - (BOOL)setClientMail:(NSString *)clientMail{
     _clientMail = clientMail;
-    [self.userDefaults setObject:_clientMail forKey:kDBDefaultsMail];
-    [self.userDefaults synchronize];
+    [DBClientInfo setValue:_clientMail forKey:kDBDefaultsMail];
+    [self notifyObserverOf:DBClientInfoNotificationClientMail];
     
     return YES;
 }
@@ -116,6 +125,12 @@
 
 - (BOOL)validMailCharacters:(NSString *)mailCharacters{
     return YES;
+}
+
+#pragma mark - DBPrimaryManager methods override
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsClientInfo";
 }
 
 @end

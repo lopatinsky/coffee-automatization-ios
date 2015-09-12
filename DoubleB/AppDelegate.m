@@ -17,6 +17,8 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
+#import <FBSDKApplicationDelegate.h>
+#import <VKSdk.h>
 
 @implementation AppDelegate
 
@@ -28,10 +30,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // TODO: change forceCopy to false after test
-    [ApplicationManager sharedInstance];
-    [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
+    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeautomation"]){
+        [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:false];
+    } else {
+        [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
+    }
     [ApplicationManager initializeVendorFrameworks];
-    [ApplicationManager initializeOrderFramework:launchOptions];
+    [ApplicationManager startApplicationWithOptions:launchOptions];
     
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
@@ -60,6 +65,16 @@
     }
     
     return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [VKSdk processOpenURL:url fromApplication:sourceApplication];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation
+                    ];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -56,14 +56,15 @@
     NSString *text = [OrderCoordinator sharedInstance].itemsManager.totalCount > 0 ? NSLocalizedString(@"Дополнить", nil) : NSLocalizedString(@"Меню", nil);
     self.positionAdditionLabel.text = text;
     
+    int totalPoints = [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalPrice;
+    NSString *pointsString = [NSString db_localizedFormOfWordBall:totalPoints];
+    self.giftAdditionBalanceLabel.text = [NSString stringWithFormat:@"%ld %@", (long)totalPoints, pointsString];
+    [self showBonusPositionsView:(totalPoints > 0) animated:YES];
+    
     // Fucking code for Elephant
     if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"elephantboutique"]){
         self.positionAdditionLabel.textColor = [UIColor colorWithRed:216./255 green:134./255 blue:126./255 alpha:1.0];
         self.positionAdditionLabel.text = @"Выбрать напиток";
-        
-        int totalPoints = [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalPrice;
-        NSString *pointsString = [NSString db_localizedFormOfWordBall:totalPoints];
-        self.giftAdditionBalanceLabel.text = [NSString stringWithFormat:@"%ld %@", (long)totalPoints, pointsString];
     }
 }
 
@@ -73,8 +74,6 @@
 
 - (void)showBonusPositionsView:(BOOL)showBonusPositionsView animated:(BOOL)animated{
     _showBonusPositionsView = showBonusPositionsView;
-    
-    [self reload];
     
     void (^animationBlock)(BOOL) = ^void(BOOL showBonusPositionsView){
         if(showBonusPositionsView){

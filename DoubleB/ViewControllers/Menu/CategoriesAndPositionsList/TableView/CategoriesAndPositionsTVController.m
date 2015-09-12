@@ -17,9 +17,9 @@
 #import "DBCategoryPicker.h"
 #import "OrderCoordinator.h"
 #import "Venue.h"
-#import "Compatibility.h"
 #import "DBNewOrderViewController.h"
 #import "DBMenuCategory.h"
+#import "DBPositionModifiersListModalView.h"
 
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+DBCardManagement.h"
@@ -132,12 +132,6 @@
 - (void)moveBack {
     [self.navigationController popViewControllerAnimated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
-}
-
-- (void)cartAddPositionFromCell:(DBPositionCell *)cell{
-    [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
-    
-    [GANHelper analyzeEvent:@"product_added" label:cell.position.positionId category:MENU_SCREEN];
 }
 
 - (void)setupCategorySelectionBarButton{
@@ -306,17 +300,22 @@
     positionVC.parentNavigationController = self.navigationController;
     [self.navigationController pushViewController:positionVC animated:YES];
     
-//    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
-//    [self.navigationController pushViewController:positionVC animated:YES];
-    
     [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
 }
 
 #pragma mark - DBPositionCellDelegate
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
-    [self cartAddPositionFromCell:cell];
+    if(cell.position.hasEmptyRequiredModifiers) {
+        DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
+        [modifiersList configureWithMenuPosition:cell.position];
+        [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    } else {
+        [cell animatePositionAdditionWithCompletion:nil];
+        [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
+    }
     
+    [GANHelper analyzeEvent:@"product_added" label:cell.position.positionId category:MENU_SCREEN];
     [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
 }
 

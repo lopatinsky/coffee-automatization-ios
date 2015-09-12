@@ -178,6 +178,15 @@
     return orders;
 }
 
++ (Order *)orderById:(NSString *)orderId {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Order"];
+    request.predicate = [NSPredicate predicateWithFormat:@"orderId == %@", orderId];
+    request.fetchLimit = 1;
+    
+    NSArray *venues = [[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil];
+    return [venues count] > 0 ? venues[0] : nil;
+}
+
 + (void)synchronizeStatusesForOrders:(NSArray *)orders withCompletionHandler:(void(^)(BOOL success, NSArray *orders))completionHandler {
     NSMutableArray *orderIds = [NSMutableArray array];
     for (Order *order in orders) {

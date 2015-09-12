@@ -15,9 +15,8 @@
 #import "DBOrderViewController.h"
 #import "DBNewOrderViewController.h"
 #import "UIAlertView+BlocksKit.h"
-#import "Compatibility.h"
 #import "OrderManager.h"
-#import "DBAPIClient.h"
+#import "DBServerAPI.h"
 #import "IHSecureStore.h"
 #import "DBSharePermissionViewController.h"
 
@@ -104,53 +103,24 @@
 
 - (void)updateHistory:(id)sender{
     [GANHelper analyzeEvent:@"history_update" category:HISTORY_SCREEN];
-    NSString *clientId = [[IHSecureStore sharedInstance] clientId];
-    if(clientId){
-        [[DBAPIClient sharedClient] GET:@"history"
-                             parameters:@{@"client_id": clientId}
-                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                    [GANHelper analyzeEvent:@"history_update_success" category:HISTORY_SCREEN];
-                                    
-                                    for(NSDictionary *orderDict in responseObject[@"orders"]){
-                                        [self synchronizeOrderWithHistory:orderDict];
-                                    }
-                                    
-                                    [[CoreDataHelper sharedHelper] save];
-                                    [self reloadContent];
-                                    
-                                    if ([sender isKindOfClass:[UIRefreshControl class]]) {
-                                        [sender endRefreshing];
-                                    }
-                                }
-                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                    [GANHelper analyzeEvent:@"history_update_failed" label:error.localizedDescription category:HISTORY_SCREEN];
-                                    NSLog(@"%@", error);
-                                    
-                                    if ([sender isKindOfClass:[UIRefreshControl class]]) {
-                                        [sender endRefreshing];
-                                    }
-                                }];
-    }
-}
-
-- (void)synchronizeOrderWithHistory:(NSDictionary *)orderDictionary{
-    NSString *newOrderId = [NSString stringWithFormat:@"%@", orderDictionary[@"order_id"]];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"orderId == %@", newOrderId];
-    Order *sameOrder = [[self.orders filteredArrayUsingPredicate:predicate] firstObject];
     
-    if(sameOrder){
-        [sameOrder synchronizeWithResponseDict:orderDictionary];
-    } else {
-        Order *ord = [[Order alloc] initWithResponseDict:orderDictionary];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [Compatibility registerForNotifications];
-        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
-        
-        [GANHelper trackNewOrderInfo:ord];
-    }
+    [DBServerAPI fetchOrdersHistory:^(BOOL success, NSError *error) {
+        if(success) {
+            [GANHelper analyzeEvent:@"history_update_success" category:HISTORY_SCREEN];
+            
+            [self reloadContent];
+            
+            if ([sender isKindOfClass:[UIRefreshControl class]]) {
+                [sender endRefreshing];
+            }
+        } else {
+            [GANHelper analyzeEvent:@"history_update_failed" label:error.localizedDescription category:HISTORY_SCREEN];
+            
+            if ([sender isKindOfClass:[UIRefreshControl class]]) {
+                [sender endRefreshing];
+            }
+        }
+    }];
 }
 
 

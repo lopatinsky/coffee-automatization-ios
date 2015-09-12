@@ -8,7 +8,6 @@
 
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
-#import "Compatibility.h"
 #import "DBTableItemInactivityView.h"
 
 #import "UIView+RoundedCorners.h"
@@ -89,16 +88,18 @@
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
     } else {
         self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.price, [Compatibility currencySymbol]];
+        
+//        if(self.position.price < self.position.actualPrice){
+//            self.priceLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"от", nil), self.position.price, [Compatibility currencySymbol]];
+//        }
     }
 }
 
 - (IBAction)orderButtonPressed:(id)sender {
-    [self animateAdditionWithCompletion:^{
-        [self.delegate positionCellDidOrder:self];
-    }];
+    [self.delegate positionCellDidOrder:self];
 }
 
-- (void)animateAdditionWithCompletion:(void(^)())completion{
+- (void)animatePositionAdditionWithCompletion:(void(^)())completion{
     UIView *view = [[UIView alloc] initWithFrame:self.orderButton.frame];
     view.layer.cornerRadius = view.frame.size.height / 2.f;
     view.layer.masksToBounds = YES;

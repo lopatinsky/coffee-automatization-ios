@@ -39,6 +39,11 @@
 @end
 
 @interface ViewControllerManager(PromocodeViewControllers)
++ (nonnull UIViewController *)promocodeViewController;
+@end
+
+@interface ViewControllerManager(ShareFriendInvitationViewControllers)
++ (nonnull UIViewController *)shareFriendInvitationViewController;
 + (nonnull UIViewController *)promocodeViewControllers;
 @end
 

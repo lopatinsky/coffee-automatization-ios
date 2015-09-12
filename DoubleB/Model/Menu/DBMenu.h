@@ -26,6 +26,9 @@
 
 - (void)synchronizeWithResponseMenu:(NSArray *)responseMenu;
 
+//Synchronize menu position with position(all user actions)
+- (void)syncWithPosition:(DBMenuPosition *)position;
+
 - (void)saveMenuToDeviceMemory;
 - (void)clearMenu;
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;

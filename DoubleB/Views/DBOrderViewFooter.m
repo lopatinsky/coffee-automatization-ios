@@ -9,7 +9,6 @@
 #import "DBOrderViewFooter.h"
 #import "Order.h"
 #import "Venue.h"
-#import "Compatibility.h"
 
 @interface DBOrderViewFooter ()
 @property(strong, nonatomic) Order *order;

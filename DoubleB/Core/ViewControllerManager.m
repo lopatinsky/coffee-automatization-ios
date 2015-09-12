@@ -66,14 +66,14 @@
 
 #pragma mark - Position
 #import "PositionViewController1.h"
-#import "PositionViewController2.h"
+//#import "PositionViewController2.h"
 @implementation ViewControllerManager(PositionViewControllers)
 
 + (nonnull NSDictionary *)positionViewControllerClasses {
     return @{
              @"default": [PositionViewController1 class],
              @"Classic": [PositionViewController1 class],
-             @"New": [PositionViewController2 class],
+//             @"New": [PositionViewController2 class],
              };
 }
 
@@ -149,10 +149,29 @@
              };
 }
 
-+ (nonnull UIViewController *)promocodeViewControllers {
-    Class promocodeViewController = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
-    return [promocodeViewController new];
++ (nonnull UIViewController *)promocodeViewController {
+    Class promocodeViewControllerr = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
+    return [promocodeViewControllerr new];
 }
+
+@end
+
+#pragma mark - Share Friend Invitation
+#import "DBSharePermissionViewController.h"
+@implementation ViewControllerManager(ShareFriendInvitationViewControllers)
+
++ (nonnull NSDictionary *)shareFriendInvitationViewControllerClasses {
+    return @{
+             @"default": [DBSharePermissionViewController class]
+             };
+}
+
++ (nonnull UIViewController *)shareFriendInvitationViewController {
+    Class shareFriendInvitation = [self shareFriendInvitationViewControllerClasses][[self valueFromPropertyListByKey:@"ShareFriendInvitation"] ?: @"default"];
+    return [shareFriendInvitation new];
+}
+
+@end
 
 @end
 

@@ -7,7 +7,6 @@
 //
 
 #import "DBOrderItemCell.h"
-#import "Compatibility.h"
 #import "OrderItem.h"
 #import "DBPromoManager.h"
 #import "DBMenuPosition.h"

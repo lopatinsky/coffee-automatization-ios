@@ -15,13 +15,13 @@
 #import "DBPromoManager.h"
 #import "DBPositionModifierCell.h"
 #import "DBPositionModifierPicker.h"
-#import "Compatibility.h"
+#import "DBPositionModifiersList.h"
 
 #import "UIView+RoundedCorners.h"
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
 
-@interface PositionViewController1 ()<UITableViewDataSource, UITableViewDelegate, DBPositionModifierPickerDelegate>
+@interface PositionViewController1 ()<DBPositionModifierPickerDelegate, DBPositionModifiersListDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *defaultPositionImageView;
 @property (weak, nonatomic) IBOutlet UILabel *positionTitleLabel;
@@ -34,12 +34,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *energyAmountLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
-@property (weak, nonatomic) IBOutlet UITableView *modifiersTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintModifiersTableViewHeight;
+@property (weak, nonatomic) IBOutlet UIView *modifiersListContainer;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintModifiersListContainerViewHeight;
 
 @property (weak, nonatomic) IBOutlet UIView *imageSeparator;
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
 
+@property (strong, nonatomic) DBPositionModifiersList *modifiersListView;
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
 
 @end
@@ -122,16 +123,17 @@
     self.imageSeparator.backgroundColor = [UIColor db_separatorColor];
     self.tableTopSeparator.backgroundColor = [UIColor db_separatorColor];
     
-    self.modifiersTableView.dataSource = self;
-    self.modifiersTableView.delegate = self;
-    self.modifiersTableView.rowHeight = 40.f;
-    [self.modifiersTableView reloadData];
-    self.constraintModifiersTableViewHeight.constant = self.modifiersTableView.contentSize.height;
+    self.modifiersListView = [DBPositionModifiersList new];
+    [self.modifiersListView configureWithPosition:self.position];
+    self.modifiersListView.delegate = self;
+    [self.modifiersListContainer addSubview:self.modifiersListView];
+    self.modifiersListView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.modifiersListView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.modifiersListContainer];
+    self.constraintModifiersListContainerViewHeight.constant = self.modifiersListView.contentHeight;
     [self.scrollView layoutIfNeeded];
     
     self.modifierPicker = [DBPositionModifierPicker new];
     self.modifierPicker.delegate = self;
-    self.modifierPicker.position = self.position;
 }
 
 - (void)reloadSelectedModifiers{
@@ -197,67 +199,41 @@
     [GANHelper analyzeEvent:@"order_pressed" category:PRODUCT_SCREEN];
 }
 
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if(section == 0){
-        return [self.position.groupModifiers count];
-    } else {
-        return [self.position.singleModifiers count] > 0 ? 1 : 0;
-    }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    DBPositionModifierCell *cell = [self.modifiersTableView dequeueReusableCellWithIdentifier:@"DBPositionModifierCell"];
-    if(!cell){
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"DBPositionModifierCell" owner:self options:nil] firstObject];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    
-    if(indexPath.section == 0){
-        DBMenuPositionModifier *modifier = self.position.groupModifiers[indexPath.row];
-        cell.modifierTitleLabel.text = modifier.modifierName;
-    } else {
-        cell.modifierTitleLabel.text = @"Добавки";
-    }
-    
-    return cell;
-}
-
 - (double)totalPoints{
     return [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalCount;
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - DBPositionModifiersListDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.section == 0){
-        [self.modifierPicker configureGroupModifierAtIndexPath:indexPath];
-        [GANHelper analyzeEvent:@"group_modifier_show"
-                          label:((DBMenuPositionModifier *)self.position.groupModifiers[indexPath.row]).modifierId
-                       category:PRODUCT_SCREEN];
-    } else {
-        [self.modifierPicker configureSingleModifiers];
-    }
-    
+- (void)db_positionModifiersList:(DBPositionModifiersList *)list didSelectGroupModifier:(DBMenuPositionModifier *)modifier{
+    [self.modifierPicker configureWithGroupModifier:modifier];
     self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
     
-    [self.modifierPicker showOnView:self.parentNavigationController.view];
+    [self.modifierPicker showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    
+    [GANHelper analyzeEvent:@"group_modifier_show"
+                      label:modifier.modifierId
+                   category:PRODUCT_SCREEN];
+}
+
+- (void)db_positionModifiersListDidSelectSingleModifiers:(DBPositionModifiersList *)list {
+    [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
+    self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
+    
+    [self.modifierPicker showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
 }
 
 #pragma mark - DBPositionModifierPickerDelegate
 
 - (void)db_positionModifierPickerDidChangeItemCount:(DBPositionModifierPicker *)picker{
+    [self.modifiersListView reload];
     [self reloadSelectedModifiers];
 }
 
 - (void)db_positionModifierPicker:(DBPositionModifierPicker *)picker didSelectNewItem:(DBMenuPositionModifierItem *)item{
+    [self.modifiersListView reload];
     [self reloadSelectedModifiers];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.modifierPicker hide];
     });

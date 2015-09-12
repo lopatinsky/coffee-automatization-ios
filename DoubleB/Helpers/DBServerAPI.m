@@ -10,6 +10,7 @@
 #import "DBAPIClient.h"
 #import "OrderCoordinator.h"
 #import "OrderItem.h"
+#import "DBMenu.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBMenuPositionModifier.h"
@@ -17,10 +18,10 @@
 #import "Order.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "DBClientInfo.h"
 #import "Reachability.h"
 #import "CoreDataHelper.h"
-#import "Compatibility.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
 
@@ -131,6 +132,31 @@
                                      callback(NO);
                              }];
 }
+
++ (void)sendUserInfo:(void(^)(BOOL success))callback {
+    NSString *clientId = [[IHSecureStore sharedInstance] clientId];
+    
+    if(clientId){
+        [[DBAPIClient sharedClient] POST:@"client"
+                              parameters:@{@"client_id": clientId,
+                                           @"client_name": [DBClientInfo sharedInstance].clientName,
+                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone,
+                                           @"client_email": [DBClientInfo sharedInstance].clientMail}
+                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                     //NSLog(@"%@", responseObject);
+                                     
+                                     if(callback)
+                                         callback(YES);
+                                 }
+                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"%@", error);
+                                     
+                                     if(callback)
+                                         callback(NO);
+                                 }];
+    }
+}
+
 
 #pragma mark - Company
 
@@ -249,7 +275,6 @@
                                  //NSLog(@"%@", responseObject);
                                  
                                  // Save order
-                                 
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
                                  if(success)
                                      success(ord);
@@ -260,6 +285,9 @@
                                  
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];
+                                 
+                                 // Save user choice of modifiers on positions of order
+                                 [[DBMenu sharedInstance] saveMenuToDeviceMemory];
                                  
                                  // Notify all about success order
                                  [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBNewOrderCreatedNotification object:ord]];
@@ -318,6 +346,46 @@
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                              }];
+}
+
+
+#pragma mark - History
+
++ (void)fetchOrdersHistory:(void(^)(BOOL success, NSError *error))callback{
+    NSString *clientId = [[IHSecureStore sharedInstance] clientId];
+    
+    if(clientId){
+        [[DBAPIClient sharedClient] GET:@"history"
+                             parameters:@{@"client_id": clientId}
+                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                    
+                                    for(NSDictionary *orderDict in responseObject[@"orders"]){
+                                        NSString *newOrderId = [NSString stringWithFormat:@"%@", orderDict[@"order_id"]];
+                                        Order *sameOrder = [Order orderById:newOrderId];
+                                        
+                                        if(sameOrder){
+                                            [sameOrder synchronizeWithResponseDict:orderDict];
+                                        } else {
+                                            Order *ord = [[Order alloc] initWithResponseDict:orderDict];
+                                            
+                                            [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
+                                            [[NSUserDefaults standardUserDefaults] synchronize];
+                                            
+                                            [Compatibility registerForNotifications];
+                                            [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                        }
+                                    }
+                                    
+                                    if(callback)
+                                        callback(YES, nil);
+                                }
+                                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                    NSLog(@"%@", error);
+                                    
+                                    if(callback)
+                                        callback(NO, nil);
+                                }];
+    }
 }
 
 
@@ -541,14 +609,14 @@
     payment[@"type_id"] = @(paymentType);
     
     if(paymentType == PaymentTypeCard){
-        NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
-        if(card[@"cardToken"]){
-            payment[@"binding_id"] = card[@"cardToken"];
+        DBPaymentCard *card = [DBCardsManager sharedInstance].defaultCard;
+        if(card){
+            payment[@"binding_id"] = card.token;
             
-            BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
+            BOOL mcardOrMaestro = [card.cardIssuer isEqualToString:kDBCardTypeMasterCard] || [card.cardIssuer isEqualToString:kDBCardTypeMaestro];
             payment[@"mastercard"] = @(mcardOrMaestro);
             
-            NSString *cardPan = card[@"cardPan"];
+            NSString *cardPan = card.pan;
             if(cardPan.length > 4){
                 cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
             }

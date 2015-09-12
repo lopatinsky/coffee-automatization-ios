@@ -7,7 +7,6 @@
 //
 
 #import "PositionViewController2.h"
-#import "Compatibility.h"
 #import "OrderCoordinator.h"
 
 #import "DBBarButtonItem.h"
@@ -249,10 +248,6 @@
 
 - (BOOL)prefersStatusBarHidden {
     return NO;
-}
-
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
 }
 
 @end

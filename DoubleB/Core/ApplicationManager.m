@@ -20,6 +20,7 @@
 #import "DBTabBarController.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
+#import "DBVersionDependencyManager.h"
 
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
@@ -159,7 +160,7 @@ typedef enum : NSUInteger {
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 }
 
-+ (void)initializeOrderFramework:(NSDictionary *)launchOptions {
++ (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
     [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         if(error){
             NSLog(@"error %@", error);
@@ -175,6 +176,7 @@ typedef enum : NSUInteger {
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    [DBVersionDependencyManager performAll];
     
     [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];

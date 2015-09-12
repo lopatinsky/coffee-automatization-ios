@@ -42,6 +42,7 @@
         if(modifier)
             [self.groupModifiers addObject:modifier];
     }
+    [self sortModifiers:_groupModifiers];
     
     return self;
 }
@@ -50,18 +51,41 @@
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary{
     [self copyFromResponseDictionary:positionDictionary];
     
-    if([_groupModifiers count] != [positionDictionary[@"group_modifiers"] count]){
-        _groupModifiers = [NSMutableArray new];
-        for(NSDictionary *modifierDictionary in positionDictionary[@"group_modifiers"]){
-            DBMenuPositionModifier *modifier = [DBMenuPositionModifier groupModifierFromDictionary:modifierDictionary];
+    NSArray *remoteModifiers = positionDictionary[@"group_modifiers"];
+    
+    // Remove cached modifiers that not in remoteModifiers
+    for (DBMenuPositionModifier *modifier in _groupModifiers) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifier_id == %@", modifier.modifierId];
+        NSDictionary *remoteModifier = [[remoteModifiers filteredArrayUsingPredicate:predicate] firstObject];
+        if(!remoteModifier){
+            [_groupModifiers removeObject:modifier];
+        }
+    }
+    
+    // Synchronize cached modifiers with remoteModifiers
+    for (NSDictionary *remoteModifier in remoteModifiers) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", remoteModifier[@"modifier_id"]];
+        DBMenuPositionModifier *modifier = [[_groupModifiers filteredArrayUsingPredicate:predicate] firstObject];
+        if(modifier) {
+            if(![modifier synchronizeGroupModifierWithDictionary:remoteModifier])
+                [_groupModifiers removeObject:modifier];
+        } else {
+            DBMenuPositionModifier *modifier = [DBMenuPositionModifier groupModifierFromDictionary:remoteModifier];
             if(modifier)
                 [_groupModifiers addObject:modifier];
         }
-    } else {
-        for(int i = 0; i < [_groupModifiers count]; i++){
-            DBMenuPositionModifier *modifier = _groupModifiers[i];
-            if(![modifier synchronizeGroupModifierWithDictionary:positionDictionary[@"group_modifiers"][i]]){
-                [_groupModifiers removeObject:modifier];
+    }
+    
+    [self sortModifiers:_groupModifiers];
+}
+
+- (void)syncWithPosition:(DBMenuPosition *)position {
+    if([self isSamePosition:position]){
+        for (DBMenuPositionModifier *modifier in position.groupModifiers){
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifier.modifierId];
+            DBMenuPositionModifier *storedModifier = [[self.groupModifiers filteredArrayUsingPredicate:predicate] firstObject];
+            if(storedModifier && [storedModifier isSameModifier:modifier] && !storedModifier.selectedItem && modifier.selectedItem){
+                storedModifier.selectedItem = modifier.selectedItem;
             }
         }
     }
@@ -88,18 +112,16 @@
     for(NSDictionary *modifierDictionary in positionDictionary[@"single_modifiers"]){
         [self.singleModifiers addObject:[DBMenuPositionModifier singleModifierFromDictionary:modifierDictionary]];
     }
-    [self.singleModifiers sortUsingComparator:^NSComparisonResult(DBMenuPositionModifier *obj1, DBMenuPositionModifier *obj2) {
+    [self sortModifiers:_singleModifiers];
+}
+
+- (void)sortModifiers:(NSMutableArray *)modifiers{
+    [modifiers sortUsingComparator:^NSComparisonResult(DBMenuPositionModifier *obj1, DBMenuPositionModifier *obj2) {
         return [@(obj1.order) compare:@(obj2.order)];
     }];
 }
 
-- (BOOL)hasImage{
-    BOOL result = self.imageUrl != nil;
-    if(result){
-        result = result && self.imageUrl.length > 0;
-    }
-    return result;
-}
+#pragma mark - User actions
 
 - (void)selectItem:(NSString *)itemId forGroupModifier:(NSString *)modifierId{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifierId];
@@ -109,12 +131,30 @@
     }
 }
 
+- (void)selectAllRequiredModifiers {
+    for (DBMenuPositionModifier *modifier in self.groupModifiers){
+        if(modifier.required && !modifier.selectedItem)
+            [modifier selectDefaultItem];
+    }
+}
+
 - (void)addSingleModifier:(NSString *)modifierId count:(NSInteger)count{
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifierId];
     DBMenuPositionModifier *modifier = [[self.singleModifiers filteredArrayUsingPredicate:predicate] firstObject];
     if(modifier){
         modifier.selectedCount = (int)count;
     }
+}
+
+
+#pragma mark - Dynamic properties
+
+- (BOOL)hasImage{
+    BOOL result = self.imageUrl != nil;
+    if(result){
+        result = result && self.imageUrl.length > 0;
+    }
+    return result;
 }
 
 - (BOOL)availableInVenue:(Venue *)venue{
@@ -133,6 +173,18 @@
     
     return price;
 }
+
+- (BOOL)hasEmptyRequiredModifiers {
+    BOOL result = NO;
+    
+    for (DBMenuPositionModifier *modifier in self.groupModifiers){
+        result = result || (modifier.required && !modifier.selectedItem);
+    }
+    
+    return result;
+}
+
+#pragma mark - Equality
 
 - (BOOL)isSamePosition:(DBMenuPosition *)object{
     if(![object isKindOfClass:[DBMenuPosition class]]){

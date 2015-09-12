@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class DBMenuPositionModifier;
+
 @interface DBPositionModifierCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *modifierTitleLabel;
+
+- (void)configureWithGroupModifier:(DBMenuPositionModifier *)modifier;
+- (void)configureWithSingleModifiers:(NSArray *)singleModifiers;
 
 @end

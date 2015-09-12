@@ -204,6 +204,7 @@
     _venuePushChannel = pushChannels[@"_venuePushChannel"];
     _orderPushChannel = pushChannels[@"_orderPushChannel"];
     
+    _supportEmails = info[@"supportEmails"];
     _deliveryCities = info[@"_deliveryCities"];
     _promocodesIsEnabled = info[@"promocodeIsEnabled"] ?: @NO;
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
@@ -221,6 +222,7 @@
                            @"applicationName": _applicationName,
                            @"deliveryTypes": deliveryTypesData,
                            @"pushChannels": pushChannels,
+                           @"supportEmails": _supportEmails,
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
                            @"promocodeIsEnabled": _promocodesIsEnabled};

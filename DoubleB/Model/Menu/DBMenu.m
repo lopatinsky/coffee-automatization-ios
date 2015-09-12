@@ -8,6 +8,7 @@
 
 #import "DBMenu.h"
 #import "DBMenuCategory.h"
+#import "DBMenuPosition.h"
 
 #import "DBAPIClient.h"
 
@@ -34,6 +35,10 @@
     [self loadMenuFromDeviceMemory];
     
     return self;
+}
+
+- (void)dealloc {
+    [self saveMenuToDeviceMemory];
 }
 
 - (BOOL)hasNestedCategories{
@@ -152,6 +157,13 @@
     self.categories = [self sortCategories:newCategories];
     
     [self saveMenuToDeviceMemory];
+}
+
+- (void)syncWithPosition:(DBMenuPosition *)position {
+    DBMenuPosition *cachedPosition = [self findPositionWithId:position.positionId];
+    if(cachedPosition){
+        [cachedPosition syncWithPosition:position];
+    }
 }
 
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId{

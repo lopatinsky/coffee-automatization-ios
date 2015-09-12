@@ -15,6 +15,7 @@
 "CardNotUniqueErrorMessage" = "Sorry, but card with the same number has already been added";
 "NoInternetConnectionErrorMessage" = "Sorry, check your internet connection and try again";
 
+"от" = "from";
 "р." = "rub.";
 "г" = "g";
 "ккал" = "kcal";
@@ -139,7 +140,11 @@
 "Выберите тип оплаты" = "Please select payment type";
 "Нет карт" = "No cards";
 "Наличные" = "Cash";
+"Картой курьеру" = "Courier card";
 "Бесплатные кружки" = "Free beverages";
+
+"Использовать PayPal" = "Use PayPal";
+"Войти в аккаунт PayPal" = "Sign in PayPal";
 
 "Ошибка определения локации" = "Failed to fetch location";
 

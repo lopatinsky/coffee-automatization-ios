@@ -13,7 +13,7 @@
 #import "DBNewOrderNDAView.h"
 #import "DBNewOrderViewFooter.h"
 #import "DBServerAPI.h"
-#import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
 #import "OrderCoordinator.h"
@@ -21,11 +21,11 @@
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "Venue.h"
-#import "Compatibility.h"
 #import "LocationHelper.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"
-#import "DBCardsViewController.h"
+//#import "DBCardsViewController.h"
+#import "DBPaymentViewController.h"
 #import "DBCommentViewController.h"
 #import "CoreDataHelper.h"
 #import "DBProfileViewController.h"
@@ -60,7 +60,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 #define TAG_OVERLAY 333
 
-@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBCardsViewControllerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
+@interface DBNewOrderViewController () <UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIGestureRecognizerDelegate, DBCommentViewControllerDelegate, DBOrderItemCellDelegate, DBTimePickerViewDelegate, DBNewOrderNDAViewDelegate, DBNewOrderBonusesViewDelegate, DBNewOrderItemAdditionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *advertView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAdvertViewHeight;
@@ -82,8 +82,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 
 @property (strong, nonatomic) OrderCoordinator *orderCoordinator;
-
-@property (nonatomic, strong) NSDictionary *currentCard;
 
 @property (nonatomic, strong) DBTimePickerView *pickerView;
 
@@ -111,8 +109,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
 // ========= Configure Logic =========
     self.orderCoordinator = [OrderCoordinator sharedInstance];
-    
-    self.currentCard = [NSDictionary new];
     
     if (self.repeatedOrder) {
         [_orderCoordinator.itemsManager flushCache];
@@ -178,7 +174,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Autolayout =========r
     
     self.itemAdditionView.delegate = self;
-    self.itemAdditionView.showBonusPositionsView = NO;
     
     [self.additionalInfoView hide:nil completion:^{
         [self.scrollView layoutIfNeeded];
@@ -482,12 +477,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     if(animated){
         [UIView animateWithDuration:0.3 animations:^{
             self.tableViewHeightConstraint.constant = height;
-            [self.tableView layoutIfNeeded];
             [self.scrollView layoutIfNeeded];
         }];
     } else {
         self.tableViewHeightConstraint.constant = height;
-        [self.tableView layoutIfNeeded];
         [self.scrollView layoutIfNeeded];
     }
 }
@@ -990,7 +983,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         eventLabel = @"null";
     }
     DBProfileViewController *profileViewController = [DBProfileViewController new];
-    profileViewController.screen = @"Profile_order_screen";
+    profileViewController.analyticsScreen = @"Profile_order_screen";
     [self.navigationController pushViewController:profileViewController animated:YES];
 }
 
@@ -1011,20 +1004,19 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             }
             break;
             
-        case PaymentTypeCard:
-            self.currentCard = [[IHSecureStore sharedInstance] defaultCard];
-            
-            if (self.currentCard) {
-                NSString *cardNumber = self.currentCard[@"cardPan"];
+        case PaymentTypeCard:{
+            DBPaymentCard *defaultCard = [DBCardsManager sharedInstance].defaultCard;
+            if (defaultCard) {
+                NSString *cardNumber = defaultCard.pan;
                 NSString *pan = [cardNumber substringFromIndex:cardNumber.length-4];
-                self.orderFooter.labelCard.text = [NSString stringWithFormat:@"%@ ....%@", [cardNumber db_cardIssuer], pan];
+                self.orderFooter.labelCard.text = [NSString stringWithFormat:@"%@ ....%@", defaultCard.cardIssuer, pan];
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];
             } else {
                 self.orderFooter.labelCard.text = NSLocalizedString(@"Нет карт", nil);
                 self.orderFooter.labelCard.textColor = [UIColor orangeColor];
                 [self.orderFooter.labelCard db_startObservingAnimationNotification];
             }
-            break;
+        }break;
             
         case PaymentTypeCash:
             self.orderFooter.labelCard.textColor = [UIColor blackColor];
@@ -1067,15 +1059,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [GANHelper analyzeEvent:@"payment_click" label:label category:ORDER_SCREEN];
     
-    DBCardsViewController *cardsController = [DBCardsViewController new];
-    cardsController.hidesBottomBarWhenPushed = YES;
-    cardsController.mode = CardsViewControllerModeChoosePayment;
-    cardsController.delegate = self;
-    cardsController.screen = @"Cards_payment_screen";
-    [self.navigationController pushViewController:cardsController animated:YES];
-}
-
-- (void)cardsControllerDidChoosePaymentItem:(DBCardsViewController *)controller{
+    DBPaymentViewController *paymentVC = [DBPaymentViewController new];
+    paymentVC.mode = DBPaymentViewControllerModeChoosePayment;
+    paymentVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:paymentVC animated:YES];
 }
 
 
@@ -1211,7 +1198,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         return;
     }
     
-    if(_orderCoordinator.orderManager.paymentType == PaymentTypeCard && !self.currentCard){
+    if(_orderCoordinator.orderManager.paymentType == PaymentTypeCard && ![DBCardsManager sharedInstance].defaultCard){
         [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil)
                                        message:NSLocalizedString(@"Пожалуйста, добавьте новую карту или выберите одну из существующих", nil)
                              cancelButtonTitle:NSLocalizedString(@"ОК", nil) otherButtonTitles:nil handler:nil];

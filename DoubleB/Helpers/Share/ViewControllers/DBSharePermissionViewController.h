@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DBSharePermissionViewController : UIViewController
+
 @property (strong, nonatomic) NSString *screen;
+
 @end

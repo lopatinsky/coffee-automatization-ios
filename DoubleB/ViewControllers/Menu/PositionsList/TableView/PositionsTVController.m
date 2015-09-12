@@ -15,6 +15,7 @@
 #import "DBMenu.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
+#import "DBPositionModifiersListModalView.h"
 
 #import "PositionViewControllerProtocol.h"
 
@@ -102,9 +103,6 @@
     positionVC.parentNavigationController = self.navigationController;
     [self.navigationController pushViewController:positionVC animated:YES];
     
-    //    DBPositionViewController *positionVC = [[DBPositionViewController alloc] initWithPosition:position mode:DBPositionViewControllerModeMenuPosition];
-    //    [self.navigationController pushViewController:positionVC animated:YES];
-    
     [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
 }
 
@@ -124,9 +122,19 @@
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
     [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
     
-    [self.navigationController animateAddProductFromView:cell.priceLabel completion:^{
-        [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
-    }];
+    if(cell.position.hasEmptyRequiredModifiers) {
+        DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
+        [modifiersList configureWithMenuPosition:cell.position];
+        [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    } else {
+        [self.navigationController animateAddProductFromView:cell.priceLabel completion:^{
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
+        }];
+    }
+    
+//    DBPositionModifiersListView *modifiersList = [DBPositionModifiersListView new];
+//    [modifiersList configureWithMenuPosition:cell.position];
+//    [modifiersList showOnView:self.navigationController.view withTransition:DBPopupViewComponentAppearanceBottom];
 }
 
 @end

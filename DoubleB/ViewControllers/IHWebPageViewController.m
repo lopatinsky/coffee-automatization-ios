@@ -7,14 +7,12 @@
 //
 
 #import "IHWebPageViewController.h"
-#import "DBCardsViewController.h"
+#import "DBPaymentViewController.h"
 #import "IHPaymentManager.h"
 
 @interface IHWebPageViewController () <UIWebViewDelegate>
 @property (strong, nonatomic) UIWebView *webView;
 @property (weak, nonatomic) IHPaymentManager *paymentManager;
-
-@property (strong, nonatomic) NSString *screenName;
 
 @end
 
@@ -48,9 +46,9 @@
     if([controllers count] > 1){
         previousInStackVC = controllers[[controllers count] - 2];
     }
-    if(previousInStackVC && [previousInStackVC isKindOfClass:[DBCardsViewController class]]){
-        DBCardsViewController *cardsVC = (DBCardsViewController *)previousInStackVC;
-        if([cardsVC.screen isEqualToString:@"Cards_screen"]){
+    if(previousInStackVC && [previousInStackVC isKindOfClass:[DBPaymentViewController class]]){
+        DBPaymentViewController *cardsVC = (DBPaymentViewController *)previousInStackVC;
+        if(cardsVC.mode == DBPaymentViewControllerModeManage){
             self.screenName = @"Card_add_screen_settings";
         } else {
             self.screenName = @"Card_add_screen_payment";

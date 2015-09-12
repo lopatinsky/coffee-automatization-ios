@@ -7,7 +7,7 @@
 //
 
 #import "IHPaymentManager.h"
-#import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "IHWebPageViewController.h"
 #import "MBProgressHUD.h"
 #import "DBAPIClient.h"
@@ -179,8 +179,8 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                                             [self unlockPaymentForOrder:orderId];
                                             
                                             // try to add cardToken to secure storage
-                                            if([[IHSecureStore sharedInstance] addCard:response[@"bindingId"]
-                                                                               withPan:response[@"Pan"]]){
+                                            DBPaymentCard *card = [[DBPaymentCard alloc] init:response[@"bindingId"] pan:response[@"Pan"]];
+                                            if([[DBCardsManager sharedInstance] addCard:card]){
                                                 completionHandler(YES, nil, nil);
                                             } else {
                                                 completionHandler(NO, kDBPaymentErrorCardNotUnique, nil);

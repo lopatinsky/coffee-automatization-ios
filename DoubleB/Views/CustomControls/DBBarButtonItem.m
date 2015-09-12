@@ -8,7 +8,6 @@
 
 #import "DBBarButtonItem.h"
 #import "DBOrderBarButtonView.h"
-#import "Compatibility.h"
 #import "OrderCoordinator.h"
 
 @interface DBBarButtonItem ()

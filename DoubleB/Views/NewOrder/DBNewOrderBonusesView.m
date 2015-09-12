@@ -9,7 +9,6 @@
 #import "DBNewOrderBonusesView.h"
 #import "OrderCoordinator.h"
 #import "DBPromoManager.h"
-#import "Compatibility.h"
 
 @interface DBNewOrderBonusesView ()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeight;

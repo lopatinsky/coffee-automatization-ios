@@ -18,6 +18,8 @@
 
 + (void)registerUserWithBranchParams:(NSDictionary *)branchParams callback:(void(^)(BOOL success))callback;
 
++ (void)sendUserInfo:(void(^)(BOOL success))callback;
+
 + (void)updateCompanyInfo:(void(^)(BOOL success, NSDictionary *response))callback;
 
 + (void)updatePromoInfo:(void(^)(NSDictionary *response))success
@@ -28,6 +30,8 @@
 
 + (void)createNewOrder:(void(^)(Order *order))success
                failure:(void(^)(NSString *errorTitle, NSString *errorMessage))failure;
+
++ (void)fetchOrdersHistory:(void(^)(BOOL success, NSError *error))callback;
 
 + (void)getWalletInfo:(void(^)(BOOL success, NSDictionary *response))callback;
 
