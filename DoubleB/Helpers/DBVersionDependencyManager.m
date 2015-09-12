@@ -8,23 +8,34 @@
 
 #import "DBVersionDependencyManager.h"
 
+#import "DBServerAPI.h"
 #import "Order.h"
 #import "OrderItem.h"
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
 
-NSString *const kDBDefaultsVersionDependencyManager = @"kDBDefaultsVersionDependencyManager";
-
 @implementation DBVersionDependencyManager
 
 + (void)performAll {
-    
+    [self analyzeUserModifierChoicesFromHistory];
 }
 
 + (void)analyzeUserModifierChoicesFromHistory {
-    BOOL analyzed = [[NSUserDefaults standardUserDefaults] boolForKey:kDBDefaultsVersionDependencyManager];
+    BOOL analyzed = [self valueForKey:@"kDBUserHistoryAnalyzedForModifiers"];
     
     if(!analyzed){
+        NSArray *history = [Order allOrders];
+        if(history.count == 0){
+            [DBServerAPI fetchOrdersHistory:^(BOOL success, NSError *error) {
+                if(success){
+                    [self analyzeOrders:[Order allOrders]];
+                    [self setValue:@(YES) forKey:@"kDBUserHistoryAnalyzedForModifiers"];
+                }
+            }];
+        } else {
+            [self analyzeOrders:history];
+            [self setValue:@(YES) forKey:@"kDBUserHistoryAnalyzedForModifiers"];
+        }
     }
 }
 
@@ -46,6 +57,12 @@ NSString *const kDBDefaultsVersionDependencyManager = @"kDBDefaultsVersionDepend
     }
     
     [[DBMenu sharedInstance] saveMenuToDeviceMemory];
+}
+
+#pragma mark - DBDataManager
+
++ (NSString *)db_managerStorageKey {
+    return @"kDBDefaultsVersionDependencyManager";
 }
 
 @end

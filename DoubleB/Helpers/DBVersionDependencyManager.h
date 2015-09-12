@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBDataManager.h"
 
-@interface DBVersionDependencyManager : NSObject
+@interface DBVersionDependencyManager : DBDataManager
 
 + (void)performAll;
 

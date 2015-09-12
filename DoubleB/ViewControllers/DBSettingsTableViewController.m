@@ -10,7 +10,8 @@
 #import "DBSettingsCell.h"
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
-#import "DBCardsViewController.h"
+//#import "DBCardsViewController.h"
+#import "DBPaymentViewController.h"
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
 #import "DBBeaconObserver.h"
@@ -67,7 +68,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     // Profile item
     DBProfileViewController *profileVC = [DBProfileViewController new];
-    profileVC.screen = @"Profile_screen";
+    profileVC.analyticsScreen = @"Profile_screen";
     [self.settingsItems addObject:@{@"name": @"profileVC",
                                     @"image": @"profile",
                                     @"viewController": profileVC}];
@@ -84,8 +85,8 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     // Cards item
     NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
     if([availablePaymentTypes containsObject:@(PaymentTypeCard)] || [availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
-        DBCardsViewController *cardsVC = [DBCardsViewController new];
-        cardsVC.screen = @"Cards_screen";
+        DBPaymentViewController *paymentVC = [DBPaymentViewController new];
+        paymentVC.mode = DBPaymentViewControllerModeManage;
         
         NSString *title = NSLocalizedString(@"Карты", nil);
         
@@ -97,7 +98,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.settingsItems addObject:@{@"name": @"cardsVC",
                                         @"title": title,
                                         @"image": @"card",
-                                        @"viewController": cardsVC}];
+                                        @"viewController": paymentVC}];
     }
 
     

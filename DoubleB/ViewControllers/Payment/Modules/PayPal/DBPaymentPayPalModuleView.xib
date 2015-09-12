@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBPaymentPayPalModuleView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuv-an-Ife">
+                    <rect key="frame" x="44" y="14" width="233" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="YW4-VU-uCR"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card.png" translatesAutoresizingMaskIntoConstraints="NO" id="msk-az-3zo">
+                    <rect key="frame" x="15" y="17" width="20" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="4oz-TM-MDW"/>
+                        <constraint firstAttribute="height" constant="16" id="WdO-q7-SJ6"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="7jm-Ir-Dut">
+                    <rect key="frame" x="293" y="18" width="19" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="Njg-I3-N0p"/>
+                        <constraint firstAttribute="width" constant="19" id="RIF-Bz-Frn"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhW-35-jt8">
+                    <rect key="frame" x="0.0" y="49.5" width="320" height="0.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.69999999999999996" id="mS1-fa-B46"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7jm-Ir-Dut" secondAttribute="trailing" constant="8" id="CXt-eg-Jlb"/>
+                <constraint firstItem="7jm-Ir-Dut" firstAttribute="leading" secondItem="uuv-an-Ife" secondAttribute="trailing" constant="16" id="EDw-dp-bp4"/>
+                <constraint firstItem="ZhW-35-jt8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FgU-EF-R0I"/>
+                <constraint firstAttribute="bottom" secondItem="ZhW-35-jt8" secondAttribute="bottom" id="GLA-ro-IZg"/>
+                <constraint firstItem="uuv-an-Ife" firstAttribute="centerY" secondItem="msk-az-3zo" secondAttribute="centerY" constant="-0.5" id="Mwo-g9-Uep"/>
+                <constraint firstItem="uuv-an-Ife" firstAttribute="leading" secondItem="msk-az-3zo" secondAttribute="trailing" constant="9" id="ZtN-e1-IO0"/>
+                <constraint firstAttribute="centerY" secondItem="msk-az-3zo" secondAttribute="centerY" id="ddg-Fu-55R"/>
+                <constraint firstItem="uuv-an-Ife" firstAttribute="centerY" secondItem="7jm-Ir-Dut" secondAttribute="centerY" id="iDs-uA-Lmb"/>
+                <constraint firstItem="msk-az-3zo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ihG-hk-T7b"/>
+                <constraint firstAttribute="trailing" secondItem="ZhW-35-jt8" secondAttribute="trailing" id="n6X-xD-Dbq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="iconImageView" destination="msk-az-3zo" id="qVc-eZ-7rd"/>
+                <outlet property="tickImageView" destination="7jm-Ir-Dut" id="Jrc-Og-A8C"/>
+                <outlet property="titleLabel" destination="uuv-an-Ife" id="Kya-Sz-XC7"/>
+            </connections>
+            <point key="canvasLocation" x="360" y="71.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="card.png" width="20" height="16"/>
+        <image name="tick.png" width="19" height="13"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

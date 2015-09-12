@@ -22,7 +22,7 @@ extern NSString *const kDBApplicationManagerInfoLoadFailure;
 
 @interface ApplicationManager(Initialization)
 + (void)initializeVendorFrameworks;
-+ (void)initializeOrderFramework:(NSDictionary *)launchOptions;
++ (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
 @end
 
 @interface ApplicationManager(Appearance)

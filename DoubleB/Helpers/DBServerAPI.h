@@ -18,6 +18,8 @@
 
 + (void)registerUserWithBranchParams:(NSDictionary *)branchParams callback:(void(^)(BOOL success))callback;
 
++ (void)sendUserInfo:(void(^)(BOOL success))callback;
+
 + (void)updateCompanyInfo:(void(^)(BOOL success, NSDictionary *response))callback;
 
 + (void)updatePromoInfo:(void(^)(NSDictionary *response))success

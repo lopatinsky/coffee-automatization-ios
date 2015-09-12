@@ -36,7 +36,7 @@
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     }
     [ApplicationManager initializeVendorFrameworks];
-    [ApplicationManager initializeOrderFramework:launchOptions];
+    [ApplicationManager startApplicationWithOptions:launchOptions];
     
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];

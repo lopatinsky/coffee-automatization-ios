@@ -18,6 +18,7 @@
 #import "Order.h"
 #import "Venue.h"
 #import "IHSecureStore.h"
+#import "DBCardsManager.h"
 #import "DBClientInfo.h"
 #import "Reachability.h"
 #import "CoreDataHelper.h"
@@ -131,6 +132,31 @@
                                      callback(NO);
                              }];
 }
+
++ (void)sendUserInfo:(void(^)(BOOL success))callback {
+    NSString *clientId = [[IHSecureStore sharedInstance] clientId];
+    
+    if(clientId){
+        [[DBAPIClient sharedClient] POST:@"client"
+                              parameters:@{@"client_id": clientId,
+                                           @"client_name": [DBClientInfo sharedInstance].clientName,
+                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone,
+                                           @"client_email": [DBClientInfo sharedInstance].clientMail}
+                                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                     //NSLog(@"%@", responseObject);
+                                     
+                                     if(callback)
+                                         callback(YES);
+                                 }
+                                 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                     NSLog(@"%@", error);
+                                     
+                                     if(callback)
+                                         callback(NO);
+                                 }];
+    }
+}
+
 
 #pragma mark - Company
 
@@ -583,14 +609,14 @@
     payment[@"type_id"] = @(paymentType);
     
     if(paymentType == PaymentTypeCard){
-        NSDictionary *card = [IHSecureStore sharedInstance].defaultCard;
-        if(card[@"cardToken"]){
-            payment[@"binding_id"] = card[@"cardToken"];
+        DBPaymentCard *card = [DBCardsManager sharedInstance].defaultCard;
+        if(card){
+            payment[@"binding_id"] = card.token;
             
-            BOOL mcardOrMaestro = [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMasterCard] || [[card[@"cardPan"] db_cardIssuer] isEqualToString:kDBCardTypeMaestro];
+            BOOL mcardOrMaestro = [card.cardIssuer isEqualToString:kDBCardTypeMasterCard] || [card.cardIssuer isEqualToString:kDBCardTypeMaestro];
             payment[@"mastercard"] = @(mcardOrMaestro);
             
-            NSString *cardPan = card[@"cardPan"];
+            NSString *cardPan = card.pan;
             if(cardPan.length > 4){
                 cardPan = [cardPan stringByReplacingCharactersInRange:NSMakeRange(0, cardPan.length - 4) withString:@""];
             }
