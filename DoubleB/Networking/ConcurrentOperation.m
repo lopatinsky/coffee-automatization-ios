@@ -19,7 +19,6 @@ NSString *const kDBConcurrentOperationCompaniesLoadFailure = @"kDBConcurrentOper
 
 - (instancetype)init {
     self = [super init];
-    self.name = NSStringFromClass([self class]);
     self.state = OperationReady;
     return self;
 }
