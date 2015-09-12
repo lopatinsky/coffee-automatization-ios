@@ -9,16 +9,18 @@
 #import <Foundation/Foundation.h>
 
 #pragma mark - CompanyInfo Operation
-extern NSString *const kDBConcurrentOperationCompanyInfoLoadSuccess;
-extern NSString *const kDBConcurrentOperationCompanyInfoLoadFailure;
+extern NSString * __nonnull const kDBConcurrentOperationCompanyInfoLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationCompanyInfoLoadFailure;
 #pragma mark - Companies Operation
-extern NSString *const kDBConcurrentOperationCompaniesLoadSuccess;
-extern NSString *const kDBConcurrentOperationCompaniesLoadFailure;
+extern NSString * __nonnull const kDBConcurrentOperationCompaniesLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationCompaniesLoadFailure;
 #pragma mark - CheckOrder Operation
-extern NSString *const kDBConcurrentOperationCheckOrderSuccess;
-extern NSString *const kDBConcurrentOperationCheckOrderFailure;
-extern NSString *const kDBConcurrentOperationCheckOrderStarted;
-extern NSString *const kDBConcurrentOperationCheckOrderFailed;
+extern NSString * __nonnull const kDBConcurrentOperationCheckOrderSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationCheckOrderFailure;
+extern NSString * __nonnull const kDBConcurrentOperationCheckOrderStarted;
+extern NSString * __nonnull const kDBConcurrentOperationCheckOrderFailed;
+#pragma mark - FetchVenue Operation
+extern NSString * __nonnull const kDBConcurrentOperationFetchVenuesFinished;
 
 typedef enum : NSUInteger {
     OperationReady,
@@ -26,7 +28,13 @@ typedef enum : NSUInteger {
     OperationFinished,
 } ConcurrentOperationState;
 
-@interface ConcurrentOperation : NSOperation
+@protocol CustomizableOperation <NSObject>
+
+- (nonnull instancetype)initWithUserInfo:(nullable NSDictionary *)userInfo;
+
+@end
+
+@interface ConcurrentOperation : NSOperation<CustomizableOperation>
 
 @property (nonatomic) ConcurrentOperationState state;
 @property (nonatomic, weak) NSOperationQueue *queue;

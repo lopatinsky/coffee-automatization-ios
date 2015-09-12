@@ -84,22 +84,38 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 }
 
 - (void)addPendingUniqueOperation:(NetworkOperation)opType {
-    ConcurrentOperation *op = [NetworkManager operationWithType:opType];
+    [self addPendingUniqueOperation:opType withUserInfo:nil];
+}
+
+- (void)addPendingUniqueOperation:(NetworkOperation)opType withUserInfo:(NSDictionary *)userInfo {
+    ConcurrentOperation *op = [NetworkManager operationWithType:opType andUserInfo:userInfo];
     [self.operationQueue addConcurrentPendingUniqueOperation:op];
 }
 
 - (void)addUniqueOperation:(NetworkOperation)opType {
-    ConcurrentOperation *operation = [NetworkManager operationWithType:opType];
+    [self addUniqueOperation:opType withUserInfo:nil];
+}
+
+- (void)addUniqueOperation:(NetworkOperation)opType withUserInfo:(NSDictionary *)userInfo {
+    ConcurrentOperation *operation = [NetworkManager operationWithType:opType andUserInfo:userInfo];
     [self.operationQueue addConcurrentUniqueOperation:operation];
 }
 
 - (void)addPendingOperation:(NetworkOperation)opType {
-    ConcurrentOperation *op = [NetworkManager operationWithType:opType];
+    [self addPendingOperation:opType withUserInfo:nil];
+}
+
+- (void)addPendingOperation:(NetworkOperation)opType withUserInfo:(NSDictionary *)userInfo {
+    ConcurrentOperation *op = [NetworkManager operationWithType:opType andUserInfo:userInfo];
     [self.operationQueue addConcurrentPendingOperation:op];
 }
 
 - (void)addOperation:(NetworkOperation)opType {
-    ConcurrentOperation *operation = [NetworkManager operationWithType:opType];
+    [self addOperation:opType withUserInfo:nil];
+}
+
+- (void)addOperation:(NetworkOperation)opType withUserInfo:(NSDictionary *)userInfo {
+    ConcurrentOperation *operation = [NetworkManager operationWithType:opType andUserInfo:userInfo];
     [self.operationQueue addConcurrentOperation:operation];
 }
 
@@ -108,15 +124,21 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 #import "FetchCompanyInfo.h"
 #import "FetchCompaniesInfo.h"
 #import "CheckOrder.h"
+#import "FetchVenues.h"
 @implementation NetworkManager(OperationLoader)
 
 + (ConcurrentOperation *)operationWithType:(NetworkOperation)type {
+    return [NetworkManager operationWithType:type andUserInfo:nil];
+}
+
++ (ConcurrentOperation *)operationWithType:(NetworkOperation)type andUserInfo:(NSDictionary *)userInfo {
     NSDictionary *operationClasses = @{
                                        @(NetworkOperationFetchCompanyInfo): [FetchCompanyInfo class],
                                        @(NetworkOperationFetchCompanies): [FetchCompaniesInfo class],
                                        @(NetworkOperationCheckOrder): [CheckOrder class],
+                                       @(NetworkOperationFetchVenues): [FetchVenues class]
                                        };
-    ConcurrentOperation *operation = [[operationClasses objectForKey:@(type)] new];
+    ConcurrentOperation *operation = [[[operationClasses objectForKey:@(type)] alloc] initWithUserInfo:userInfo];
     operation.queue = [NetworkManager sharedManager].operationQueue;
     return operation;
 }

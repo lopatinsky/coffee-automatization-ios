@@ -19,12 +19,19 @@ NSString *const kDBConcurrentOperationCheckOrderSuccess = @"kDBConcurrentOperati
 NSString *const kDBConcurrentOperationCheckOrderFailure = @"kDBConcurrentOperationCheckOrderFailure";
 NSString *const kDBConcurrentOperationCheckOrderStarted = @"kDBConcurrentOperationCheckOrderStarted";
 NSString *const kDBConcurrentOperationCheckOrderFailed = @"kDBConcurrentOperationCheckOrderFailed";
+#pragma mark - FetchVenue Operation
+NSString *const kDBConcurrentOperationFetchVenuesFinished = @"kDBConcurrentOperationFetchVenuesFinished";
 
 @implementation ConcurrentOperation
 
 - (instancetype)init {
     self = [super init];
     self.state = OperationReady;
+    return self;
+}
+
+- (instancetype)initWithUserInfo:(NSDictionary *)userInfo {
+    self = [self init];
     return self;
 }
 

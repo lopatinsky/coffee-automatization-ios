@@ -170,9 +170,6 @@ typedef enum : NSUInteger {
     }];
     [DBServerAPI registerUser:nil];
     
-    [Venue fetchAllVenuesWithCompletionHandler:^(NSArray *venues) {
-        // TODO: Save database context
-    }];
     [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
@@ -180,6 +177,7 @@ typedef enum : NSUInteger {
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
     
     [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
 
 @end

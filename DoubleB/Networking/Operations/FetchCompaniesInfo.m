@@ -12,8 +12,8 @@
 
 @implementation FetchCompaniesInfo
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithUserInfo:(NSDictionary *)userInfo {
+    self = [self init];
     return self;
 }
 

@@ -194,6 +194,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailure) name:kDBConcurrentOperationCheckOrderFailure object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderStarted) name:kDBConcurrentOperationCheckOrderStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailed) name:kDBConcurrentOperationCheckOrderFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVenuesStatus) name:kDBConcurrentOperationFetchVenuesFinished object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -727,8 +728,12 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 
 #pragma mark - Delivery/Venue
+- (void)updateVenuesStatus {
+    NSArray *venues = [Venue storedVenues];
+    [self setVenue:[venues firstObject]];
+}
 
-- (void)reloadAddress{
+- (void)reloadAddress {
     if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
         NSString *address = [_orderCoordinator.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeNormal];
         if(address && address.length > 0){
@@ -747,12 +752,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 _orderCoordinator.orderManager.location = location;
                 
                 if (location) {
-                    [Venue fetchVenuesForLocation:location withCompletionHandler:^(NSArray *venues) {
-                        if(!venues)
-                            venues = [Venue storedVenues];
-                        
-                        [self setVenue:[venues firstObject]];
-                    }];
+                    [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchVenues withUserInfo:@{@"location": location}];
                 } else {
                     [self setVenue:[[Venue storedVenues] firstObject]];
                 }
@@ -765,7 +765,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)setVenue:(Venue *)venue{
-    if(venue){
+    if (venue) {
         _orderCoordinator.orderManager.venue = venue;
         
         self.orderFooter.labelAddress.text = venue.title;
@@ -994,7 +994,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 
 #pragma mark - Payment
-
 - (void)reloadPaymentType {
     [self.orderFooter.labelCard db_stopObservingAnimationNotification];
     

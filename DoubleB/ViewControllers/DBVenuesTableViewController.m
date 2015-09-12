@@ -15,8 +15,10 @@
 #import "DBVenueCell.h"
 #import "DBVenueViewController.h"
 #import "MBProgressHUD/MBProgressHUD.h"
+
 #import "OrderManager.h"
- 
+#import "NetworkManager.h"
+
 @interface DBVenuesTableViewController ()
 
 @property (nonatomic, strong) NSArray *venues;
@@ -47,6 +49,7 @@
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
     
     self.venues = [Venue storedVenues];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVenuesState) name:kDBConcurrentOperationFetchVenuesFinished object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,6 +64,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)reloadVenues:(UIRefreshControl *)refreshControl {
@@ -81,21 +88,20 @@
 }
 
 - (void)fetchVenues:(CLLocation *)location {
-    NSDate *start = [NSDate date];
-    void (^block)(NSArray *) = ^(NSArray *venues) {
-        if (venues) {
-            self.venues = venues;
-            [self.tableView reloadData];
-        }
-        long interval = -(long)[start timeIntervalSinceNow];
-        //[MBProgressHUD hideHUDForView:self.view animated:YES];
-        [self.refreshControl endRefreshing];
-    };
     if (location) {
-        [Venue fetchVenuesForLocation:location withCompletionHandler:block];
+        [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues withUserInfo:@{@"location": location}];
     } else {
-        [Venue fetchAllVenuesWithCompletionHandler:block];
+        [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
     }
+}
+
+- (void)updateVenuesState {
+    NSArray *venues = [Venue storedVenues];
+    if (venues) {
+        self.venues = venues;
+        [self.tableView reloadData];
+    }
+    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - Table view data source

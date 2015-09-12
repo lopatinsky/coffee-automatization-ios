@@ -12,6 +12,11 @@
 
 @implementation FetchCompanyInfo
 
+- (instancetype)initWithUserInfo:(NSDictionary *)userInfo {
+    self = [self init];
+    return self;
+}
+
 - (void)main {
     if (self.cancelled) return;
     
