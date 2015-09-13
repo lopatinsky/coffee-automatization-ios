@@ -13,16 +13,7 @@
 
 #import "NetworkManager.h"
 
-NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsInfo";
-
 @implementation DBCompaniesManager
-
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static DBCompaniesManager *instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
 
 - (instancetype)init {
     self = [super init];
@@ -90,25 +81,10 @@ NSString *const kDBCompaniesManagerDefaultsInfo = @"kDBCompaniesManagerDefaultsI
     }
 }
 
-#pragma mark - Helper methods
+#pragma mark - DBDataManager
 
-+ (id)valueForKey:(NSString *)key{
-    NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBCompaniesManagerDefaultsInfo];
-    return info[key];
-}
-
-+ (void)setValue:(id)value forKey:(NSString *)key {
-    NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBCompaniesManagerDefaultsInfo];
-    NSMutableDictionary *mutableInfo = [NSMutableDictionary dictionaryWithDictionary:info];
-    
-    if(value){
-        mutableInfo[key] = value;
-    } else {
-        [mutableInfo removeObjectForKey:key];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:mutableInfo forKey:kDBCompaniesManagerDefaultsInfo];
-    [[NSUserDefaults standardUserDefaults] synchronize];
++ (NSString *)db_managerStorageKey{
+    return @"kDBCompaniesManagerDefaultsInfo";
 }
 
 - (NSString *)deliveryImageName {
