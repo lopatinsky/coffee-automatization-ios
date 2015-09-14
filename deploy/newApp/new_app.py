@@ -12,29 +12,30 @@ MDF_LIVE = '--live'
 
 #============
 # Args
-sys_args = {
-'ARG_APP_NAME' : '-n',
-'ARG_BUNDLE_ID' : '-id',
-'ARG_URL_NAMESPACE' : '-urln',
-'ARG_APP_COLOR' : '-c', # App color in format #ffffff
-'ARG_ICON_PATH' : '-ipath',
-'ARG_LAUNCH_IMAGE_PATH' : '-lpath'
-}
+
+ARG_APP_NAME = '-n',
+ARG_BUNDLE_ID = '-id',
+ARG_URL_NAMESPACE = '-urln',
+ARG_APP_COLOR = '-c', # App color in format #ffffff
+ARG_ICON_PATH = '-ipath',
+ARG_LAUNCH_IMAGE_PATH = '-lpath'
+
 #============
 
 def parse_script_args():
 	args = {}
 	for i in xrange(1, len(sys.argv)):
 		key = sys.argv[i]
+		print key + '-' + str(is_arg(key))
 		if is_arg(key):
-			value = sys_argv[i+1]
+			value = sys.argv[i+1]
 			if not(is_arg(value) and is_modifier(value)):
 				args[key] = value
 
 	return args
 
 def is_arg(value):
-	return value in sys_arg.values()
+	return value in [ARG_APP_NAME, ARG_BUNDLE_ID, ARG_URL_NAMESPACE, ARG_APP_COLOR, ARG_ICON_PATH, ARG_LAUNCH_IMAGE_PATH]
 
 
 def parse_script_modifiers():

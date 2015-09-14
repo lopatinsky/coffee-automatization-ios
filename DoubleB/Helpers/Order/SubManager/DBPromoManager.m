@@ -243,7 +243,7 @@
         
         if(self.lastUpdateNumber == currentUpdateNumber){
             if(callback)
-                callback(YES);
+                callback(NO);
             [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
         }
     }];

@@ -24,7 +24,6 @@
 #import "LocationHelper.h"
 #import "IHPaymentManager.h"
 #import "DBPromoManager.h"
-//#import "DBCardsViewController.h"
 #import "DBPaymentViewController.h"
 #import "DBCommentViewController.h"
 #import "CoreDataHelper.h"
