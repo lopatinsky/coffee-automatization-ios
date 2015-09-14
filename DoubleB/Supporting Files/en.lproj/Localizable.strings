@@ -164,6 +164,10 @@
 "Нет, спасибо" = "No, thanks";
 "Да, пожалуйста" = "Yes";
 
+// Month subscription
+"Абонемент" = "Subscription";
+"Купить" = "Buy";
+
 // Order errors
 "Удалить" = "Delete";
 "Заменить" = "Replace";

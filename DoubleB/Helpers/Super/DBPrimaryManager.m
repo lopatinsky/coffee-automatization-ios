@@ -8,15 +8,27 @@
 
 #import "DBPrimaryManager.h"
 
+#import <objc/runtime.h>
+
+static char INSTANCE_KEY;
+
 @implementation DBPrimaryManager
 
++ (id)getInstance {
+    return objc_getAssociatedObject(self, &INSTANCE_KEY);
+}
+
++ (void)setInstance:(id)instance {
+    objc_setAssociatedObject(self, &INSTANCE_KEY, instance, OBJC_ASSOCIATION_RETAIN);
+}
+
 + (instancetype)sharedInstance {
-    static DBPrimaryManager *instance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[self class] new];
+        [self setInstance: [[self class] new]];
     });
-    return instance;
+    
+    return [self getInstance];
 }
 
 @end
