@@ -23,10 +23,9 @@ static char INSTANCE_KEY;
 }
 
 + (instancetype)sharedInstance {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    if(![self getInstance]){
         [self setInstance: [[self class] new]];
-    });
+    }
     
     return [self getInstance];
 }
