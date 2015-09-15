@@ -89,15 +89,6 @@
         
         _bonusPositionsTextDescription = bonusPositionsPromo[@"text"];
         
-        // gifts
-        NSDictionary *gifts = response[@"new_order_gifts"];
-        for (NSDictionary *gift in gifts) {
-            DBMenuPosition *giftPosition = [[DBMenuPosition alloc] initWithResponseDictionary:gift];
-            if (giftPosition) {
-                [self.parentManager.orderGiftsManager addPosition:giftPosition];
-            }
-        }
-        
         // Personal wallet promo
         NSDictionary *personalWalletPromo = response[@"wallet"];
         _walletEnabled = [personalWalletPromo[@"enable"] boolValue];
@@ -167,6 +158,7 @@
         // Show shipping total in promos list
         self.shippingPrice = [[response getValueForKey:@"delivery_sum"] doubleValue];
         
+        
         _promos = globalPromoMessages;
         _errors = globalErrorsMessages;
         
@@ -222,12 +214,12 @@
         // Assemble order gifts
         NSMutableArray *giftItems = [NSMutableArray new];
         for(NSDictionary *giftItem in response[@"order_gifts"]){
-            OrderItem *item = [OrderItem orderItemFromDictionary:giftItem];
+            OrderItem *item = [OrderItem orderItemFromResponceDict:giftItem];
             item.position.mode = DBMenuPositionModeGift;
             [giftItems addObject:item];
         }
         for(NSDictionary *giftItem in response[@"new_order_gifts"]){
-            OrderItem *item = [OrderItem orderItemFromDictionary:giftItem];
+            OrderItem *item = [OrderItem orderItemFromResponceDict:giftItem];
             item.position.mode = DBMenuPositionModeGift;
             [giftItems addObject:item];
         }

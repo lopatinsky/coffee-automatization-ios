@@ -15,7 +15,7 @@
 #import "DBPaymentCashModuleView.h"
 #import "DBPaymentPayPalModuleView.h"
 
-@interface DBPaymentViewController ()
+@interface DBPaymentViewController ()<DBPaymentModuleViewDelegate>
 @property (strong, nonatomic) NSString *analyticsCategory;
 
 @property (strong, nonatomic) NSArray *availablePaymentTypes;
@@ -49,6 +49,7 @@
         DBPaymentCashModuleView *cashModule = [DBPaymentCashModuleView new];
         cashModule.analyticsCategory = self.analyticsCategory;
         cashModule.ownerViewController = self;
+        cashModule.delegate = self;
         [self.modules addObject:cashModule];
     }
     
@@ -58,6 +59,7 @@
         DBPaymentCardsModuleView *cardsModule = [[DBPaymentCardsModuleView alloc] initWithMode:mode];
         cardsModule.analyticsCategory = self.analyticsCategory;
         cardsModule.ownerViewController = self;
+        cardsModule.delegate = self;
         [self.modules addObject:cardsModule];
     }
     
@@ -66,6 +68,7 @@
         DBPaymentPayPalModuleView *paypalModule = [DBPaymentPayPalModuleView new];
         paypalModule.analyticsCategory = self.analyticsCategory;
         paypalModule.ownerViewController = self;
+        paypalModule.delegate = self;
         paypalModule.mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentPayPalModuleViewModePaymentType : DBPaymentPayPalModuleViewModeManageAccount;
         [self.modules addObject:paypalModule];
     }
@@ -84,6 +87,14 @@
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
         [GANHelper analyzeEvent:@"back_arrow_pressed" category:self.analyticsCategory];
+    }
+}
+
+#pragma mark - DBPaymentModuleViewDelegate
+
+- (void)db_paymentModuleDidSelectPaymentType:(PaymentType)paymentType {
+    if(self.mode == DBPaymentCardsModuleViewModeSelectPayment){
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

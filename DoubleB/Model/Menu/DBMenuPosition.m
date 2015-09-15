@@ -298,7 +298,7 @@
     self = [super init];
     
     self.positionId = [positionDictionary getValueForKey:@"id"] ?: @"";
-    self.imageUrl = [positionDictionary getValueForKey:@"pic"] ?: @"";
+    self.imageUrl = [positionDictionary getValueForKey:@"pic"];
     if(!self.imageUrl){
         self.imageUrl = [positionDictionary getValueForKey:@"image"];
     }

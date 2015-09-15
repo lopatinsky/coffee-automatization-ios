@@ -41,6 +41,10 @@
         @strongify(self)
         [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCash;
         [GANHelper analyzeEvent:@"payment_selected" label:@"cash" category:self.analyticsCategory];
+        
+        if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+            [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCash];
+        }
     }]];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];

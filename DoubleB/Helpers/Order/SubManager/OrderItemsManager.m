@@ -16,6 +16,8 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 
 @interface ItemsManager ()
 @property (weak, nonatomic) OrderCoordinator *parentManager;
+
+@property (nonatomic, strong) NSMutableArray *items;
 @end
 
 @implementation ItemsManager
@@ -119,16 +121,6 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 }
 
 - (void)overrideItems:(NSArray *)items {
-    _items = [NSMutableArray array];
-    
-    for (OrderItem *item in items) {
-        if(item.valid){
-            OrderItem *newItem = [item copy];
-            [self.items addObject:newItem];
-        }
-    }
-    
-    [self reloadTotal];
 }
 
 
@@ -196,6 +188,20 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 
 @implementation OrderItemsManager
 
+- (void)overrideItems:(NSArray *)items {
+    [super overrideItems:items];
+    self.items = [NSMutableArray array];
+    
+    for (OrderItem *item in items) {
+        if(item.valid){
+            OrderItem *newItem = [item copy];
+            [self.items addObject:newItem];
+        }
+    }
+    
+    [self reloadTotal];
+}
+
 - (NSInteger)addPosition:(DBMenuPosition *)position {
     [position selectAllRequiredModifiers];
     
@@ -210,6 +216,18 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 @end
 
 @implementation OrderGiftItemsManager
+
+- (void)overrideItems:(NSArray *)items {
+    [super overrideItems:items];
+    self.items = [NSMutableArray array];
+    
+    for (OrderItem *item in items) {
+        OrderItem *newItem = [item copy];
+        [self.items addObject:newItem];
+    }
+    
+    [self reloadTotal];
+}
 
 - (void)synchronizeItemsWithPositions:(NSArray *)positions{
     [self flushCache];

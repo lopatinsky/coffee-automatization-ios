@@ -18,7 +18,7 @@ extern NSString * __nonnull const kDBConcurrentOperationCompaniesLoadFailure;
 extern NSString * __nonnull const kDBConcurrentOperationCheckOrderSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationCheckOrderFailure;
 extern NSString * __nonnull const kDBConcurrentOperationCheckOrderStarted;
-extern NSString * __nonnull const kDBConcurrentOperationCheckOrderFailed;
+extern NSString * __nonnull const kDBConcurrentOperationCheckOrderStartFailed;
 #pragma mark - FetchVenue Operation
 extern NSString * __nonnull const kDBConcurrentOperationFetchVenuesFinished;
 

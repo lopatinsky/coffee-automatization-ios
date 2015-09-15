@@ -10,50 +10,49 @@
 #import "DBMenuPosition.h"
 #import "DBMenu.h"
 
-@interface OrderItem ()
-@property (nonatomic) BOOL valid;
-@end
-
 @implementation OrderItem
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position{
     self = [super init];
     
     self.position = position;
-    self.valid = YES;
     
     return self;
 }
 
-+ (instancetype)orderItemFromDictionary:(NSDictionary *)historyItem{
++ (instancetype)orderItemFromResponceDict:(NSDictionary *)dict{
     OrderItem *item = [[OrderItem alloc] init];
     
-    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:historyItem[@"id"]];
+    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:dict[@"id"]];
     if(position){
         position = [position copy];
-        item.valid = YES;
     } else {
-        position = [[DBMenuPosition alloc] initWithHistoryDict:historyItem];
-        item.valid = NO;
+        position = [[DBMenuPosition alloc] initWithHistoryDict:dict];
     }
     
-    for(NSDictionary *modifier in historyItem[@"group_modifiers"]){
+    for(NSDictionary *modifier in dict[@"group_modifiers"]){
         [position selectItem:modifier[@"choice"] forGroupModifier:modifier[@"id"]];
     }
     
-    for(NSDictionary *modifier in historyItem[@"single_modifiers"]){
+    for(NSDictionary *modifier in dict[@"single_modifiers"]){
         [position addSingleModifier:modifier[@"id"] count:[modifier[@"quantity"] integerValue]];
     }
     
     item.position = position;
     
-    item.count = [historyItem[@"quantity"] integerValue];
+    item.count = [dict[@"quantity"] integerValue];
     
     return item;
 }
 
 - (double)totalPrice{
     return self.position.actualPrice * self.count;
+}
+
+- (BOOL)valid {
+    DBMenuPosition *position = [[DBMenu sharedInstance] findPositionWithId:self.position.positionId];
+    
+    return position != nil;
 }
 
 
@@ -64,7 +63,6 @@
     if(self != nil){
         self.position = [aDecoder decodeObjectForKey:@"position"];
         self.count = [[aDecoder decodeObjectForKey:@"count"] integerValue];
-        self.valid = [[aDecoder decodeObjectForKey:@"valid"] boolValue];
     }
     
     return self;
@@ -73,7 +71,6 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.position forKey:@"position"];
     [aCoder encodeObject:@(self.count) forKey:@"count"];
-    [aCoder encodeObject:@(self.valid) forKey:@"valid"];
 }
 
 - (id)copyWithZone:(NSZone *)zone{

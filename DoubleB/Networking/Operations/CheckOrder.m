@@ -32,7 +32,7 @@
     if (started) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderStarted object:nil userInfo:nil];
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderFailed object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderStartFailed object:nil userInfo:nil];
         [self setState:OperationFinished];
     }
 }
