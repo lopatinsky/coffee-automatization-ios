@@ -270,8 +270,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)dealloc {
-    NSLog(@"dealloc");
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_orderCoordinator removeObserver:self];
 }
@@ -387,6 +385,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     // Gifts logic
+    [self.itemAdditionView reload];
     [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
     [self reloadBonusesView:YES];
 }

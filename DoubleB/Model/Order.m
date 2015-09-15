@@ -92,14 +92,7 @@
     self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
     self.status = [dict[@"status"] intValue];
     
-    // Delivery
-    self.deliveryType = dict[@"delivery_type"];
-    if([self.deliveryType intValue] == DeliveryTypeIdShipping){
-        DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
-        self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
-    } else {
-        self.venue = [Venue venueById:dict[@"venue_id"]];
-    }
+    [self setAddressFromResponseDict:dict];
     
     [self setTimeFromResponseDict:dict];
     
@@ -117,9 +110,22 @@
 
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict{
     self.status = [dict[@"status"] intValue];
+    
+    [self setAddressFromResponseDict:dict];
+    
     [self setTimeFromResponseDict:dict];
     
     [[CoreDataHelper sharedHelper] save];
+}
+
+- (void)setAddressFromResponseDict:(NSDictionary *)dict {
+    self.deliveryType = dict[@"delivery_type"];
+    if([self.deliveryType intValue] == DeliveryTypeIdShipping){
+        DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
+        self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
+    } else {
+        self.venue = [Venue venueById:dict[@"venue_id"]];
+    }
 }
 
 - (void)setTimeFromResponseDict:(NSDictionary *)dict{

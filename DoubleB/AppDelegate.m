@@ -59,9 +59,6 @@
         UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
         [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
         [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-        NSLog(@"%@", userInfo);
-        NSLog(@"newsVC: %@", newsViewController);
-        NSLog(@"currentVC: %@", [UIViewController currentViewController]);
     }
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -131,7 +128,6 @@
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"%s -> %@", __PRETTY_FUNCTION__, error);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -141,12 +137,6 @@
         UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
         [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
         [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-        
-        NSLog(@"%@", userInfo);
-        NSLog(@"newsVC: %@", newsViewController);
-        NSLog(@"currentVC: %@", [UIViewController currentViewController]);
-    } else {
-        NSLog(@"sdankdsjabjsdnfkjbs");
     }
     
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification

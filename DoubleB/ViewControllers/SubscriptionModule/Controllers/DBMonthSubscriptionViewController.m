@@ -60,19 +60,19 @@
 
 - (void)clickOrderButton{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DBMonthSubscriptionManager sharedInstance] buySubscription:^(BOOL success, NSString *errorMessage) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        
-        if(success){
-            [self showAlert:@"Абонемент успешно оплачен"];
-        } else {
-            if(errorMessage){
-                [self showError:errorMessage];
-            } else {
-                [self showError:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)];
-            }
-        }
-    }];
+//    [DBMonthSubscriptionManager sharedInstance] buySubscription:[DBMonthSubscriptionManager sharedInstance].selectedVariant callback:^(BOOL success, NSString *errorMessage) {
+//        [MBProgressHUD hideHUDForView:self.view animated:YES];
+//        
+//        if(success){
+//            [self showAlert:@"Абонемент успешно оплачен"];
+//        } else {
+//            if(errorMessage){
+//                [self showError:errorMessage];
+//            } else {
+//                [self showError:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)];
+//            }
+//        }
+//    }];
 }
 
 - (void)reloadGiftButton{

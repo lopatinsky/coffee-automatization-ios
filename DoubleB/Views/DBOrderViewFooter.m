@@ -47,11 +47,11 @@
     
     NSMutableAttributedString *string;
     if (self.order.actualDiscount <= 0) {
-        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %.0f %@", totalString, self.order.actualTotal, [Compatibility currencySymbol]]];
+        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@: %.0f %@", totalString, self.order.actualTotal, [Compatibility currencySymbol]]];
     } else {
-        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %.0f %.0f %@", totalString, self.order.actualTotal, self.order.actualTotal - self.order.actualDiscount, [Compatibility currencySymbol]]];
+        string = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@: %.0f %.0f %@", totalString, self.order.actualTotal, self.order.actualTotal - self.order.actualDiscount, [Compatibility currencySymbol]]];
         [string setAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"HelveticaNeue-Thin" size:14.0], NSStrikethroughStyleAttributeName: @(NSUnderlineStyleSingle)}
-                        range:NSMakeRange(totalString.length, [[self.order.total stringValue] length])];
+                        range:NSMakeRange(totalString.length + 2, [[self.order.total stringValue] length])];
     }
     [string addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:NSMakeRange(0, totalString.length)];
     self.labelTotal.attributedText = string;

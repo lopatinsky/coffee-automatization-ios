@@ -199,10 +199,10 @@
     }
     
     NSDictionary *pushChannels = info[@"pushChannels"];
-    _companyPushChannel = pushChannels[@"_companyPushChannel"];
-    _clientPushChannel = pushChannels[@"_clientPushChannel"];
-    _venuePushChannel = pushChannels[@"_venuePushChannel"];
-    _orderPushChannel = pushChannels[@"_orderPushChannel"];
+    _companyPushChannel = [pushChannels getValueForKey:@"_companyPushChannel"] ?: @"";
+    _clientPushChannel = [pushChannels getValueForKey:@"_clientPushChannel"] ?: @"";
+    _venuePushChannel = [pushChannels getValueForKey:@"_venuePushChannel"] ?: @"";
+    _orderPushChannel = [pushChannels getValueForKey:@"_orderPushChannel"] ?: @"";
     
     _supportEmails = info[@"supportEmails"];
     _deliveryCities = info[@"_deliveryCities"];

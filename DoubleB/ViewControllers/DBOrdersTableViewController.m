@@ -127,8 +127,6 @@
 - (void)reloadStatuses:(id)sender {
     if ([sender isKindOfClass:[NSNotification class]]) {
         NSNotification *notification = (NSNotification *)sender;
-        //NSLog(@"%s",__PRETTY_FUNCTION__);
-        //NSLog(@"%@", notification.userInfo);
         if (notification.userInfo[@"order_id"]) {
             NSUInteger k = [self.orders indexOfObjectPassingTest:^BOOL(Order *obj, NSUInteger idx, BOOL *stop) {
                 BOOL b = [obj.orderId isEqualToString:notification.userInfo[@"order_id"]];
@@ -150,7 +148,6 @@
                 
                 NSString *notificationName = [kDBNotificationUpdatedOrder stringByAppendingFormat:@"_%@", order.orderId];
                 [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:notificationName object:order]];
-                //NSLog(@"%@", notificationName);
             }
         }
     }

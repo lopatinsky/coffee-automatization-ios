@@ -94,7 +94,7 @@
     [[DBAPIClient sharedClient] GET:@"menu"
                          parameters:@{}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"%@", responseObject);
+//                                NSLog(@"%@", responseObject);
                                 
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
@@ -140,9 +140,6 @@
     NSMutableArray *newCategories = [[NSMutableArray alloc] init];
     
     for(NSDictionary *categoryDictionary in responseMenu){
-        if([categoryDictionary[@"info"][@"category_id"] isEqualToString:@"5695159920492544"]){
-            NSLog(@"");
-        }
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"categoryId == %@", categoryDictionary[@"info"][@"category_id"]];
         DBMenuCategory *sameCategory = [[self.categories filteredArrayUsingPredicate:predicate] firstObject];
         if(sameCategory){

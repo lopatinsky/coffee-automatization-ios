@@ -11,7 +11,7 @@
 @implementation NSOperationQueue (UniqueOperation)
 
 - (BOOL)addConcurrentUniqueOperation:(NSOperation *)operation {
-    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+//    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
     NSArray *ops = self.operations;
     BOOL exists = NO;
     
@@ -31,7 +31,7 @@
 }
 
 - (BOOL)addConcurrentPendingUniqueOperation:(NSOperation *)operation {
-    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+//    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
     if (self.operations.count > 0) {
         [operation addDependency:self.operations.lastObject];
     }
@@ -39,7 +39,7 @@
 }
 
 - (void)addConcurrentPendingOperation:(NSOperation *)operation {
-    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+//    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
     
     NSOperation *lastOp = nil;
     for (NSOperation *op in self.operations) {
@@ -56,7 +56,7 @@
 }
 
 - (void)addConcurrentOperation:(NSOperation *)operation {
-    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+//    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
     [self addOperation:operation];
 }
 

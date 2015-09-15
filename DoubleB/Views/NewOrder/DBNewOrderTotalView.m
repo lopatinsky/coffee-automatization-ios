@@ -18,6 +18,8 @@
 - (void)awakeFromNib{
     self.labelTotal.textColor = [UIColor db_defaultColor];
     
+    self.totalRefreshControl.hidesWhenStopped = YES;
+    
     self.labelShippingTotal.textColor = [UIColor db_defaultColor];
     
     self.orderCoordinator = [OrderCoordinator sharedInstance];
@@ -61,13 +63,11 @@
 }
 
 - (void)startUpdating{
-    self.totalRefreshControl.hidden = NO;
     [self.totalRefreshControl startAnimating];
 }
 
 - (void)endUpdating{
     [self.totalRefreshControl stopAnimating];
-    self.totalRefreshControl.hidden = YES;
 }
 
 @end
