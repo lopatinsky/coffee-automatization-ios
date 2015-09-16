@@ -84,8 +84,8 @@
         for (DBMenuPositionModifier *modifier in position.groupModifiers){
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifierId == %@", modifier.modifierId];
             DBMenuPositionModifier *storedModifier = [[self.groupModifiers filteredArrayUsingPredicate:predicate] firstObject];
-            if(storedModifier && [storedModifier isSameModifier:modifier] && !storedModifier.selectedItem && modifier.selectedItem){
-                storedModifier.selectedItem = modifier.selectedItem;
+            if(storedModifier && [storedModifier isSameModifier:modifier] && !storedModifier.itemSelectedByUser && modifier.itemSelectedByUser){
+                [storedModifier selectItemById:modifier.selectedItem.itemId];
             }
         }
     }
@@ -133,7 +133,7 @@
 
 - (void)selectAllRequiredModifiers {
     for (DBMenuPositionModifier *modifier in self.groupModifiers){
-        if(modifier.required && !modifier.selectedItem)
+        if(modifier.required && !modifier.itemSelectedByUser)
             [modifier selectDefaultItem];
     }
 }
@@ -178,7 +178,7 @@
     BOOL result = NO;
     
     for (DBMenuPositionModifier *modifier in self.groupModifiers){
-        result = result || (modifier.required && !modifier.selectedItem);
+        result = result || (modifier.required && !modifier.itemSelectedByUser);
     }
     
     return result;

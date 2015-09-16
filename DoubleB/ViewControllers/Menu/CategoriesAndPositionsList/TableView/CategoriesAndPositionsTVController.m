@@ -48,7 +48,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = NSLocalizedString(@"Меню", nil);
+    [self db_setTitle:NSLocalizedString(@"Меню", nil)];
     self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveBack)];
     
     //styling
