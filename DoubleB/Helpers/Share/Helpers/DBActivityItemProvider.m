@@ -35,7 +35,6 @@
 }
 
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(NSString *)activityType {
-    NSLog(@"%@", activityType);
     
     NSString *shareUrl;
     if ([activityType isEqualToString:UIActivityTypePostToFacebook]) {

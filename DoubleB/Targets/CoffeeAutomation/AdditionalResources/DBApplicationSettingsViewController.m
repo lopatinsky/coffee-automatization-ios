@@ -87,7 +87,7 @@
     [[DBAPIClient sharedClient] GET:@"http://test.doubleb-automation-production.appspot.com/api/company/base_urls"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"%@", responseObject);
+//                                NSLog(@"%@", responseObject);
                                 
                                 [self.hud hide:YES];
                                 

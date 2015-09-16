@@ -43,6 +43,10 @@
             if(_mode == DBPaymentPayPalModuleViewModePaymentType){
                 [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypePayPal;
                 [GANHelper analyzeEvent:@"payment_selected" label:@"paypal" category:self.analyticsCategory];
+                
+                if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+                    [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
+                }
             }
         } else {
             [self.ownerViewController bindPayPal:nil];

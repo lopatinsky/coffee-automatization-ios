@@ -104,7 +104,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeTop;
-    self.title = NSLocalizedString(@"Заказ", nil);
+    self.navigationItem.title = NSLocalizedString(@"Заказ", nil);
     
 // ========= Configure Logic =========
     self.orderCoordinator = [OrderCoordinator sharedInstance];
@@ -187,7 +187,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderSuccess) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailure) name:kDBConcurrentOperationCheckOrderFailure object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderStarted) name:kDBConcurrentOperationCheckOrderStarted object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailed) name:kDBConcurrentOperationCheckOrderFailed object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderStartFailed) name:kDBConcurrentOperationCheckOrderStartFailed object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVenuesStatus) name:kDBConcurrentOperationFetchVenuesFinished object:nil];
 }
 
@@ -270,8 +271,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)dealloc {
-    NSLog(@"dealloc");
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_orderCoordinator removeObserver:self];
 }
@@ -387,6 +386,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     // Gifts logic
+    [self.itemAdditionView reload];
     [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
     [self reloadBonusesView:YES];
 }
@@ -401,11 +401,14 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)checkOrderStarted {
-    [self.totalView startUpdating];
-    [self reloadContinueButton];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.totalView startUpdating];
+        
+        [self reloadContinueButton];
+    });
 }
 
-- (void)checkOrderFailed {
+- (void)checkOrderStartFailed {
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startUpdatingPromoInfo) userInfo:nil repeats:NO];
 }
 

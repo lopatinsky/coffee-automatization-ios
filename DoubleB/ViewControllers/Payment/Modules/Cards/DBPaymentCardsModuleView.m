@@ -190,6 +190,10 @@
                           label:[NSString stringWithFormat:@"%d", (int)[DBCardsManager sharedInstance].cardsCount]
                        category:self.analyticsCategory];
     }
+    
+    if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+        [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
+    }
 }
 
 @end

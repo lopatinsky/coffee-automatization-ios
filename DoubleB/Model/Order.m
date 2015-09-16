@@ -74,7 +74,7 @@
     // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"items"]) {
-        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
+        OrderItem *item = [OrderItem orderItemFromResponceDict:itemDict];
         item.position.mode = DBMenuPositionModeRegular;
         [items addObject:item];
     }
@@ -83,7 +83,7 @@
     // Assemble bonus items
     NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
-        OrderItem *item = [OrderItem orderItemFromDictionary:itemDict];
+        OrderItem *item = [OrderItem orderItemFromResponceDict:itemDict];
         item.position.mode = DBMenuPositionModeGift;
         [bonusItems addObject:item];
     }
@@ -92,14 +92,7 @@
     self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
     self.status = [dict[@"status"] intValue];
     
-    // Delivery
-    self.deliveryType = dict[@"delivery_type"];
-    if([self.deliveryType intValue] == DeliveryTypeIdShipping){
-        DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
-        self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
-    } else {
-        self.venue = [Venue venueById:dict[@"venue_id"]];
-    }
+    [self setAddressFromResponseDict:dict];
     
     [self setTimeFromResponseDict:dict];
     
@@ -117,9 +110,22 @@
 
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict{
     self.status = [dict[@"status"] intValue];
+    
+    [self setAddressFromResponseDict:dict];
+    
     [self setTimeFromResponseDict:dict];
     
     [[CoreDataHelper sharedHelper] save];
+}
+
+- (void)setAddressFromResponseDict:(NSDictionary *)dict {
+    self.deliveryType = dict[@"delivery_type"];
+    if([self.deliveryType intValue] == DeliveryTypeIdShipping){
+        DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
+        self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
+    } else {
+        self.venue = [Venue venueById:dict[@"venue_id"]];
+    }
 }
 
 - (void)setTimeFromResponseDict:(NSDictionary *)dict{

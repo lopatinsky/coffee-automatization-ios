@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBModuleView.h"
+#import "DBPaymentModuleView.h"
 
 typedef NS_ENUM(NSInteger, DBPaymentCardsModuleViewMode){
     DBPaymentCardsModuleViewModeManageCards = 0,
     DBPaymentCardsModuleViewModeSelectPayment
 };
 
-@interface DBPaymentCardsModuleView : DBModuleView
+@interface DBPaymentCardsModuleView : DBPaymentModuleView
 @property(nonatomic, readonly) DBPaymentCardsModuleViewMode mode;
 
 - (instancetype)initWithMode:(DBPaymentCardsModuleViewMode)mode;

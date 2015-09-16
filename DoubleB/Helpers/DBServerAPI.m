@@ -200,7 +200,7 @@
     [[DBAPIClient sharedClient] GET:@"promo/list"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"%@", responseObject);
+//                                NSLog(@"%@", responseObject);
                                 
                                 if(success)
                                     success(responseObject);

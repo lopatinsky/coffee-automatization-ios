@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBModuleView.h"
+#import "DBPaymentModuleView.h"
 
-@interface DBPaymentCourierCardModuleView : DBModuleView
+@interface DBPaymentCourierCardModuleView : DBPaymentModuleView
 
 @end
