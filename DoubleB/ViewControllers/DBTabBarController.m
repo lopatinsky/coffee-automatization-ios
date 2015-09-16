@@ -95,7 +95,7 @@
         }
     }
     
-    self.selectedIndex = 0;
+    self.selectedViewController = [self.viewControllers objectAtIndex:0];
 }
 
 - (void)awakeFromRemoteNotification{

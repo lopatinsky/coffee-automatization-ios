@@ -187,7 +187,7 @@
 
 
 - (void)goToOrderViewController
-{
+{    
     [self.navigationController popToRootViewControllerAnimated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }

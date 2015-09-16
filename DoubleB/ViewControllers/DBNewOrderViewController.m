@@ -109,22 +109,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 // ========= Configure Logic =========
     self.orderCoordinator = [OrderCoordinator sharedInstance];
     
-    if (self.repeatedOrder) {
-        [_orderCoordinator.itemsManager flushCache];
-        [_orderCoordinator.bonusItemsManager flushCache];
-        [_orderCoordinator.orderManager flushCache];
-        
-        [_orderCoordinator.itemsManager overrideItems:self.repeatedOrder.items];
-        _orderCoordinator.orderManager.paymentType = self.repeatedOrder.paymentType;
-        _orderCoordinator.orderManager.venue = self.repeatedOrder.venue;
-        
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBRepeateOrderNotification object:nil]];
-        
-        // Hides bar if order repeated
-        self.tabBarController.tabBar.hidden = YES;
-    } else {
-        [self setupSettingsNavigationItem];
-    }
+    [self setupSettingsNavigationItem];
 // ========= Configure Logic =========
     
     
@@ -208,9 +193,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self.itemCells removeAllObjects];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
+    [self.tableView reloadData];
 //    if (_orderCoordinator.itemsManager.totalCount == 1) {
 //        self.tableView.alwaysBounceVertical = NO;
 //    } else {

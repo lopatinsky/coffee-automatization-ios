@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *const kDBDefaultsFaves;
-
-@class Order;
-
-@interface DBNewOrderViewController : UIViewController 
-
-@property (nonatomic, strong) Order *repeatedOrder;
+@interface DBNewOrderViewController : UIViewController
 
 @end

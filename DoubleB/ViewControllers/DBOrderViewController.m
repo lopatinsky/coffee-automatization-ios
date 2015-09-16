@@ -21,6 +21,8 @@
 #import "OrderManager.h"
 #import "DBOrderReturnView.h"
 #import "IHSecureStore.h"
+#import "OrderCoordinator.h"
+#import "DBTabBarController.h"
 
 //#import "ShareManager.h"
 
@@ -232,9 +234,20 @@
 
 - (void)clickRepeat:(UIButton *)sender {
     [GANHelper analyzeEvent:@"repeat_order_button_pressed" category:ORDER_HISTORY_SCREEN];
-    DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
-    newOrderController.repeatedOrder = self.order;
-    [self.navigationController pushViewController:newOrderController animated:YES];
+//    DBNewOrderViewController *newOrderController = [DBNewOrderViewController new];
+//    newOrderController.repeatedOrder = self.order;
+//    [self.navigationController pushViewController:newOrderController animated:YES];
+    
+    [[OrderCoordinator sharedInstance].itemsManager flushCache];
+    [[OrderCoordinator sharedInstance].bonusItemsManager flushCache];
+    [[OrderCoordinator sharedInstance].orderManager flushCache];
+    
+    [[OrderCoordinator sharedInstance].itemsManager overrideItems:self.order.items];
+    [OrderCoordinator sharedInstance].orderManager.paymentType = self.order.paymentType;
+    [OrderCoordinator sharedInstance].orderManager.venue = self.order.venue;
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self showAlert:@"Позиции из заказа успешно добавлены в корзину!"];
 }
 
 #pragma mark - Table view data source
