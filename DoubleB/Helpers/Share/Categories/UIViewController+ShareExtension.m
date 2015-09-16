@@ -19,33 +19,33 @@ static NSString *dbAnaliticsNameScreenName;
 - (void)sharePermissionOnScreen:(NSString *)analiticsScreenName callback:(void(^)(BOOL completed))callback{
     dbAnaliticsNameScreenName = analiticsScreenName;
     
+    NSString *text = [DBShareHelper sharedInstance].textShare;
+    UIImage *image = [DBShareHelper sharedInstance].imageForShare;
+    NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
+    text = [text stringByAppendingString:@" %@"];
+    
     if ([[DBShareHelper sharedInstance].appUrls count] > 0) {
-        NSString *text = [DBShareHelper sharedInstance].textShare;
-        UIImage *image = [DBShareHelper sharedInstance].imageForShare;
-        NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
-        text = [text stringByAppendingString:@" %@"];
+        NSMutableArray *activityItems = [NSMutableArray new];
+        [activityItems addObject:[[DBActivityItemProvider alloc] initWithTextFormat:text links:urls]];
         
-        DBActivityItemProvider *customActivityProvider = [[DBActivityItemProvider alloc] initWithTextFormat:text
-                                                                                                      links:urls
-                                                                                                      image:image];
+        if(image)
+            [activityItems addObject:image];
         
-        [self shareWithActivityItems:@[customActivityProvider, image] withCallback:callback];
+        [self shareWithActivityItems:activityItems withCallback:callback];
     } else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[DBShareHelper sharedInstance] fetchShareInfo:^(BOOL success) {
             if(success){
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 
-                NSString *text = [DBShareHelper sharedInstance].textShare;
-                UIImage *image = [DBShareHelper sharedInstance].imageForShare;
-                NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
-                text = [text stringByAppendingString:@" %@"];
-                
                 if([DBShareHelper sharedInstance].appUrls && [[DBShareHelper sharedInstance].appUrls count] > 0){
-                    DBActivityItemProvider *customActivityProvider = [[DBActivityItemProvider alloc] initWithTextFormat:text
-                                                                                                                  links:urls
-                                                                                                                  image:image];
-                    [self shareWithActivityItems:@[customActivityProvider, image] withCallback:callback];
+                    NSMutableArray *activityItems = [NSMutableArray new];
+                    [activityItems addObject:[[DBActivityItemProvider alloc] initWithTextFormat:text links:urls]];
+                    
+                    if(image)
+                        [activityItems addObject:image];
+                    
+                    [self shareWithActivityItems:activityItems withCallback:callback];
                 } else {
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ошибка", nil)
                                                 message:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)

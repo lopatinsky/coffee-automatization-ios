@@ -103,10 +103,6 @@
     }];
 }
 
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
 - (IBAction)closeButtonClick:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];
     

@@ -195,8 +195,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self startUpdatingPromoInfo];
-    
     [self reloadItemAdditionView];
     [self reloadAddress];
     [self reloadTime];
@@ -221,38 +219,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self reloadTableViewHeight:NO];
     
-    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    
     [Compatibility registerForNotifications];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^(void){
-//        if(self == self.navigationController.visibleViewController){
-//            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//            if (![defaults boolForKey:@"ibeacon_question"]) {
-//                
-//                [defaults setBool:YES forKey:@"ibeacon_question"];
-//                [defaults synchronize];
-//                
-//                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Спец. предложения", nil)
-//                                               message:NSLocalizedString(@"Хотите ли вы активировать контекстные уведомления, чтобы мы присылалали вам спец. предложения и полезную информацию в зависимости от вашего местоположения?", nil)
-//                                     cancelButtonTitle:NSLocalizedString(@"Нет, спасибо", nil)
-//                                     otherButtonTitles:@[NSLocalizedString(@"Да, пожалуйста", nil)]
-//                                               handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//                                                   if (buttonIndex == 1) {
-//                                                       [defaults setBool:YES forKey:kDBSettingsNotificationsEnabled];
-//                                                       [defaults synchronize];
-//                                                       
-//                                                       [DBBeaconObserver createBeaconObserver];
-//                                                       [Compatibility registerForNotifications];
-//                                                   } else {
-//                                                   }
-//                                               }];
-//            } else {
-//                if ([defaults boolForKey:kDBSettingsNotificationsEnabled]) {
-//                    [DBBeaconObserver createBeaconObserver];
-//                }
-//            }
-//        }
-//    });
+    
+    [self startUpdatingPromoInfo];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -389,7 +358,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     // Gifts logic
     [self.itemAdditionView reload];
-    [self.itemAdditionView showBonusPositionsView:_orderCoordinator.promoManager.bonusPositionsAvailable animated:YES];
     [self reloadBonusesView:YES];
 }
 
@@ -403,18 +371,17 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)checkOrderStarted {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.totalView startUpdating];
-        
-        [self reloadContinueButton];
-    });
+    
 }
 
 - (void)checkOrderStartFailed {
+    [self endUpdatingPromoInfo];
     [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(startUpdatingPromoInfo) userInfo:nil repeats:NO];
 }
 
 - (void)startUpdatingPromoInfo {
+    [self.totalView startUpdating];
+    [self reloadContinueButton];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationCheckOrder];
 }
 
@@ -532,13 +499,15 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     }
     
     if (item.position.hasImage){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
+        if(indexPath.section == 0)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
         
         if (!cell) {
             cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeFull];
         }
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCompactCell"];
+        if(indexPath.section == 0)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCompactCell"];
         
         if (!cell) {
             cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeCompact];
