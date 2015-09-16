@@ -707,7 +707,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 if (location) {
                     [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchVenues withUserInfo:@{@"location": location}];
                 } else {
-                    [self setVenue:[[Venue storedVenues] firstObject]];
+//                    [self setVenue:[[Venue storedVenues] firstObject]];
+                    [self updateVenuesStatus];
                 }
                 
                 [self.orderFooter.activityIndicator stopAnimating];
