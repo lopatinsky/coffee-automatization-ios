@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="2" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A282b" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="2" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="Order" representedClassName="Order" syncable="YES">
         <attribute name="dataBonusItems" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="dataGiftItems" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -25,7 +25,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="venueId" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="workingTime" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="venue" inverseEntity="Order" syncable="YES"/>
+        <relationship name="order" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="venue" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
         <element name="Order" positionX="-63" positionY="-18" width="128" height="270"/>

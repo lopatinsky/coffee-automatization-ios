@@ -12,18 +12,9 @@
 @interface DBActivityItemProvider ()
 @property(strong, nonatomic) NSString *textFormat;
 @property(strong, nonatomic) NSDictionary *links;
-@property(strong, nonatomic) UIImage *image;
 @end
 
 @implementation DBActivityItemProvider
-
-- (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links image:(UIImage *)image{
-    self = [self initWithTextFormat:textFormat links:links];
-    
-    self.image = image;
-    
-    return self;
-}
 
 - (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links{
     self = [super initWithPlaceholderItem:@"Doubleb"];

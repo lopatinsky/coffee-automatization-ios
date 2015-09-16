@@ -14,6 +14,7 @@
 #import "Order.h"
 #import "Venue.h"
 
+#import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
 #import "DBMenu.h"
@@ -172,6 +173,7 @@ typedef enum : NSUInteger {
     [DBServerAPI registerUser:nil];
     
     [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
+    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];

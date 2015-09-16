@@ -132,10 +132,9 @@
     DBMenuPosition *position = cell.position;
     
     if([position.productDictionary[@"points"] floatValue] <= [self totalPoints]) {
-        [cell animatePositionAdditionWithCompletion:^{
-            [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:cell.position];
-            [self reloadBalance];
-        }];
+        [cell animatePositionAdditionWithCompletion:nil];
+        [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:cell.position];
+        [self reloadBalance];
         [self.tableView reloadData];
     }
 }

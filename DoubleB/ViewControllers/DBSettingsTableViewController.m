@@ -251,9 +251,6 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]) {
-        [UIView animateWithDuration:0.2 animations:^{
-            [[UIApplication sharedApplication] setStatusBarHidden:YES];
-        }];
         [self presentViewController:settingsItemInfo[@"viewController"] animated:YES completion:nil];
     }
     
