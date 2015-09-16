@@ -104,7 +104,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.edgesForExtendedLayout = UIRectEdgeTop;
-    self.navigationItem.title = NSLocalizedString(@"Заказ", nil);
+    [self db_setTitle:NSLocalizedString(@"Заказ", nil)];
     
 // ========= Configure Logic =========
     self.orderCoordinator = [OrderCoordinator sharedInstance];
@@ -210,7 +210,9 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     
     [self.itemCells removeAllObjects];
     
-    [self.tableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 //    if (_orderCoordinator.itemsManager.totalCount == 1) {
 //        self.tableView.alwaysBounceVertical = NO;
 //    } else {

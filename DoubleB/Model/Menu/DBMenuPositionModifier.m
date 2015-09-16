@@ -24,6 +24,7 @@
 //Only for Group modifiers
 @property (strong, nonatomic) NSMutableArray *items;
 @property (strong, nonatomic) DBMenuPositionModifierItem *defaultItem;
+@property (strong, nonatomic) DBMenuPositionModifierItem *userSelectedItem;
 @end
 
 @implementation DBMenuPositionModifier
@@ -77,8 +78,8 @@
     [self copyGroupModifierFromDictionary:modifierDictionary];
     
     // Check in current selectedItem is in new _items
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", self.selectedItem.itemId];
-    self.selectedItem = [[_items filteredArrayUsingPredicate:predicate] firstObject];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", self.userSelectedItem.itemId];
+    self.userSelectedItem = [[_items filteredArrayUsingPredicate:predicate] firstObject];
     
     // If no variants to choose, return error of synchronization
     if([self.items count] < 1)
@@ -121,10 +122,18 @@
     }];
 }
 
+- (DBMenuPositionModifierItem *)selectedItem {
+    return self.userSelectedItem ? self.userSelectedItem : self.defaultItem;
+}
+
+- (BOOL)itemSelectedByUser {
+    return self.userSelectedItem != nil;
+}
+
 - (void)selectItemAtIndex:(NSInteger)index{
     if(index >= 0 && index < [self.items count]){
         DBMenuPositionModifierItem *selectedItem = self.items[index];
-        self.selectedItem = selectedItem;
+        self.userSelectedItem = selectedItem;
     }
 }
 
@@ -132,17 +141,17 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", itemId];
     DBMenuPositionModifierItem *item = [[self.items filteredArrayUsingPredicate:predicate] firstObject];
     if(item){
-        self.selectedItem = item;
+        self.userSelectedItem= item;
     }
 }
 
 - (void)selectDefaultItem {
     if(self.defaultItem)
-        self.selectedItem = self.defaultItem;
+        self.userSelectedItem = self.defaultItem;
 }
 
 - (void)clearSelectedItem{
-    self.selectedItem = nil;
+    self.userSelectedItem = nil;
 }
 
 
@@ -212,7 +221,7 @@
         self.required = [[aDecoder decodeObjectForKey:@"required"] boolValue];
         self.items = [aDecoder decodeObjectForKey:@"items"];
         self.defaultItem = [aDecoder decodeObjectForKey:@"defaultItem"];
-        self.selectedItem = [aDecoder decodeObjectForKey:@"selectedItem"];
+        self.userSelectedItem = [aDecoder decodeObjectForKey:@"userSelectedItem"];
     }
     
     return self;
@@ -236,8 +245,8 @@
     if(self.defaultItem)
         [aCoder encodeObject:self.defaultItem forKey:@"defaultItem"];
     
-    if(self.selectedItem)
-        [aCoder encodeObject:self.selectedItem forKey:@"selectedItem"];
+    if(self.userSelectedItem)
+        [aCoder encodeObject:self.userSelectedItem forKey:@"userSelectedItem"];
 }
 
 #pragma mark - NSCopying
@@ -261,7 +270,7 @@
         [copyModifier.items addObject:[item copyWithZone:zone]];
     
     copyModifier.defaultItem = [self.defaultItem copyWithZone:zone];
-    copyModifier.selectedItem = [self.selectedItem copyWithZone:zone];
+    copyModifier.userSelectedItem = [self.userSelectedItem copyWithZone:zone];
     
     return copyModifier;
 }

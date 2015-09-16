@@ -34,8 +34,9 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 //Only for Group modifiers
 @property (nonatomic) BOOL required;
 @property (strong, nonatomic, readonly) NSMutableArray *items;
-@property (strong, nonatomic, readonly) DBMenuPositionModifierItem *defaultItem;
-@property (strong, nonatomic) DBMenuPositionModifierItem *selectedItem;
+
+@property (strong, nonatomic, readonly) DBMenuPositionModifierItem *selectedItem;
+@property (nonatomic, readonly) BOOL itemSelectedByUser;
 
 // Single
 + (DBMenuPositionModifier *)singleModifierFromDictionary:(NSDictionary *)modifierDictionary;
