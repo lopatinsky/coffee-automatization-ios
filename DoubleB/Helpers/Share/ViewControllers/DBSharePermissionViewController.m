@@ -83,6 +83,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
 - (void)initializeActionViewSheet {
