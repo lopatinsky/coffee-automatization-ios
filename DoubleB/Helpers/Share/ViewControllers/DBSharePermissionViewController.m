@@ -77,11 +77,19 @@
     [self initializeActionViewSheet];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+}
+
 - (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     [GANHelper analyzeScreen:self.screen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
