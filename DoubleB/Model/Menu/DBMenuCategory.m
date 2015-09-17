@@ -35,6 +35,8 @@
         [category.categories addObject:[DBMenuCategory categoryFromResponseDictionary:nestedCategory]];
     [category sortCategories];
     
+    [category checkImage];
+    
     return category;
 }
 
@@ -68,6 +70,8 @@
     }
     _categories = nestedCategories;
     [self sortCategories];
+    
+    [self checkImage];
 }
 
 - (void)copyFromResponseDictionary:(NSDictionary *)categoryDictionary{
@@ -77,6 +81,15 @@
     _imageUrl = [categoryDictionary getValueForKey:@"pic"] ?: @"";
     _venuesRestrictions = [categoryDictionary[@"restrictions"] getValueForKey:@"venues"] ?: @[];
     _categoryDictionary = categoryDictionary;
+}
+
+- (void)checkImage {
+    if(self.imageUrl.length == 0){
+        if(self.type == DBMenuCategoryTypeParent)
+            self.imageUrl = ((DBMenuCategory *)self.categories.firstObject).imageUrl;
+        else
+            self.imageUrl = ((DBMenuPosition *)self.positions.firstObject).imageUrl;
+    }
 }
 
 - (void)sortCategories{
