@@ -21,19 +21,21 @@
     if (self.cancelled) return;
     
     BOOL started = [[OrderCoordinator sharedInstance].promoManager checkCurrentOrder:^(BOOL success) {
+        [self setState:OperationFinished];
+        
         if (success) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderSuccess object:nil userInfo:nil];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderFailure object:nil userInfo:nil];
         }
-        [self setState:OperationFinished];
     }];
     
     if (started) {
         [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderStarted object:nil userInfo:nil];
     } else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderStartFailed object:nil userInfo:nil];
         [self setState:OperationFinished];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCheckOrderStartFailed object:nil userInfo:nil];
     }
 }
 
