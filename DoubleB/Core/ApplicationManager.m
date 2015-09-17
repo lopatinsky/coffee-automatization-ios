@@ -172,13 +172,16 @@ typedef enum : NSUInteger {
     }];
     [DBServerAPI registerUser:nil];
     
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:nil];
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+        if(success){
+            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
+        }
+    }];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
-    [DBVersionDependencyManager performAll];
     
     [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
