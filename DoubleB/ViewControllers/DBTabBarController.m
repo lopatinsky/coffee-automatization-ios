@@ -32,43 +32,17 @@
     self = [super init];
     if (self) {
         NSMutableArray *tabBarControllers = [NSMutableArray new];
-        // New order vc
-        DBNewOrderViewController *newOrderController = [DBClassLoader loadNewOrderViewController];
-    
-        newOrderController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Заказ", nil)
-                                                                      image:[UIImage imageNamed:@"orders_icon_grey.png"]
-                                                              selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
-        [newOrderController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
         
-        UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
+        if ([self tabAtIndexEnabled:0]){
+            [tabBarControllers addObject:[self firstTabVC]];
+        }
         
-//TODO: Rewrite normal logic for screen sequence management
-        UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
-        menuVC.hidesBottomBarWhenPushed = YES;
-        [newOrderNavController pushViewController:menuVC animated:NO];
-
-        [tabBarControllers addObject:newOrderNavController];
+        if ([self tabAtIndexEnabled:1]){
+            [tabBarControllers addObject:[self secondTabVC]];
+        }
         
-        // History vc
-        DBOrdersTableViewController *ordersController = [DBOrdersTableViewController new];
-        ordersController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"История", nil)
-                                                                    image:[UIImage imageNamed:@"menu_icon_grey.png"]
-                                                            selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
-        [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
-        [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:ordersController]];
-
-        // Venues vc
-        if(!([[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
-           [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping])){
-            DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
-            venuesController.mode = DBVenuesTableViewControllerModeList;
-            venuesController.eventsCategory = VENUES_SCREEN;
-
-            venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:[DBTextResourcesHelper db_venuesTitleString]
-                                                                        image:[UIImage imageNamed:@"venues_icon_grey.png"]
-                                                                selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
-            [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
-            [tabBarControllers addObject:[[UINavigationController alloc] initWithRootViewController:venuesController]];
+        if ([self tabAtIndexEnabled:2]){
+            [tabBarControllers addObject:[self thirdTabVC]];
         }
         
         self.tabBar.tintColor = [UIColor blackColor];
@@ -86,6 +60,67 @@
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL)tabAtIndexEnabled:(NSUInteger)index {
+    BOOL result = NO;
+    
+    if(index == 0)
+        result = YES;
+    
+    if(index == 1)
+        result = YES;
+    
+    if(index == 2){
+        result = !([[DBCompanyInfo sharedInstance].deliveryTypes count] == 1 &&
+                   [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]);
+        
+        if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"osteriabianka"]){
+            result = NO;
+        }
+    }
+    
+    return result;
+}
+
+- (UIViewController *)firstTabVC {
+    DBNewOrderViewController *newOrderController = [DBClassLoader loadNewOrderViewController];
+    
+    newOrderController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Заказ", nil)
+                                                                  image:[UIImage imageNamed:@"orders_icon_grey.png"]
+                                                          selectedImage:[UIImage imageNamed:@"orsers_icon.png"]];
+    [newOrderController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+    
+    UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
+    
+    //TODO: Rewrite normal logic for screen sequence management
+    UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+    menuVC.hidesBottomBarWhenPushed = YES;
+    [newOrderNavController pushViewController:menuVC animated:NO];
+    
+    return newOrderNavController;
+}
+
+- (UIViewController *)secondTabVC {
+    DBOrdersTableViewController *ordersController = [DBOrdersTableViewController new];
+    ordersController.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"История", nil)
+                                                                image:[UIImage imageNamed:@"menu_icon_grey.png"]
+                                                        selectedImage:[UIImage imageNamed:@"menu_icon.png"]];
+    [ordersController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+    
+    return [[UINavigationController alloc] initWithRootViewController:ordersController];
+}
+
+- (UIViewController *)thirdTabVC {
+    DBVenuesTableViewController *venuesController = [DBVenuesTableViewController new];
+    venuesController.mode = DBVenuesTableViewControllerModeList;
+    venuesController.eventsCategory = VENUES_SCREEN;
+    
+    venuesController.tabBarItem = [[UITabBarItem alloc] initWithTitle:[DBTextResourcesHelper db_venuesTitleString]
+                                                                image:[UIImage imageNamed:@"venues_icon_grey.png"]
+                                                        selectedImage:[UIImage imageNamed:@"venues_icon.png"]];
+    [venuesController.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -4)];
+    return [[UINavigationController alloc] initWithRootViewController:venuesController];
 }
 
 - (void)moveToStartState {
@@ -135,10 +170,6 @@
                                                [[DBShareHelper sharedInstance] showShareSuggestion:YES];
                                            });
                                        }
-//                                       if(order.paymentType == PaymentTypeExtraType){
-//                                           DBSharePermissionViewController *shareVC = [DBSharePermissionViewController new];
-//                                           [self presentViewController:shareVC animated:YES completion:nil];
-//                                       }
                                    }];
 }
 
