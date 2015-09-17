@@ -17,7 +17,6 @@
 @implementation DBVersionDependencyManager
 
 + (void)performAll {
-    [self analyzeUserModifierChoicesFromHistory];
 }
 
 + (void)analyzeUserModifierChoicesFromHistory {

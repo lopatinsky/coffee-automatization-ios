@@ -95,7 +95,7 @@
         }
     }
     
-    self.selectedIndex = 0;
+    self.selectedViewController = [self.viewControllers objectAtIndex:0];
 }
 
 - (void)awakeFromRemoteNotification{
@@ -131,7 +131,7 @@
                                    handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                        // Show suggestion to share
                                        if ([DBShareHelper sharedInstance].shareSuggestionIsAvailable) {
-                                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                [[DBShareHelper sharedInstance] showShareSuggestion:YES];
                                            });
                                        }

@@ -80,14 +80,14 @@
     }
     self.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
     
-    // Assemble bonus items
-    NSMutableArray *bonusItems = [[NSMutableArray alloc] init];
+    // Assemble gift items
+    NSMutableArray *giftItems = [[NSMutableArray alloc] init];
     for (NSDictionary *itemDict in dict[@"gifts"]) {
         OrderItem *item = [OrderItem orderItemFromResponceDict:itemDict];
         item.position.mode = DBMenuPositionModeGift;
-        [bonusItems addObject:item];
+        [giftItems addObject:item];
     }
-    self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:bonusItems];
+    self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:giftItems];
     
     self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
     self.status = [dict[@"status"] intValue];

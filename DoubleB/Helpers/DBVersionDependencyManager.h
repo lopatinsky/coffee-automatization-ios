@@ -13,4 +13,6 @@
 
 + (void)performAll;
 
++ (void)analyzeUserModifierChoicesFromHistory;
+
 @end
