@@ -114,6 +114,8 @@
 }
 
 - (void)setShippingPrice:(double)shippingPrice{
+    _shippingPrice = shippingPrice;
+    
     [_parentManager manager:self haveChange:DBPromoManagerChangeShippingPrice];
 }
 
