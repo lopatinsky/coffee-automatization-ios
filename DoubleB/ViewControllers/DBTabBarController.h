@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "DBNewOrderViewController.h"
 
+
 @interface DBTabBarController : UITabBarController
 
 + (instancetype)sharedInstance;
+
+- (BOOL)tabAtIndexEnabled:(NSUInteger)index;
 
 - (void)moveToStartState;
 - (void)awakeFromRemoteNotification;
