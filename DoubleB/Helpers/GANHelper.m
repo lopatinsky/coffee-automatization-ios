@@ -23,8 +23,8 @@
 }
 
 + (void)analyzeScreen:(NSString *)screen {
-//    [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:screen];
-//    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
+    [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:screen];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 + (void)analyzeEvent:(NSString *)eventName category:(NSString *)category{

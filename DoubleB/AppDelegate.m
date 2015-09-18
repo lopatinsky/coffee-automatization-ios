@@ -113,7 +113,7 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
+    [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
     
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
