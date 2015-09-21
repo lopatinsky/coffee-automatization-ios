@@ -53,27 +53,8 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
     
-    
-}
-
-- (void)fetchInfo:(void(^)(BOOL success))callback{
-    [[DBAPIClient sharedClient] GET:@""
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%@", responseObject);
-                                
 //                                _titleFriendGiftScreen = responseObject[@"head"];
 //                                _textFriendGiftScreen = responseObject[@"text"];
-                                
-                                if(callback)
-                                    callback(YES);
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                                if(callback)
-                                    callback(NO);
-                            }];
 }
 
 
@@ -128,6 +109,27 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
                                  
                                  if(failure)
                                      failure(message);
+                             }];
+}
+
+- (void)fetchItems:(void(^)(BOOL success))callback {
+    [[DBAPIClient sharedClient] POST:@"shared/gift/items"
+                          parameters:nil
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 //NSLog(@"%@", responseObject);
+                                 
+                                 NSMutableArray *items = [NSMutableArray new];
+                                 for (NSDictionary *itemDict in responseObject[@"items"]) {
+                                     DBMenuPosition *position = [[DBMenuPosition alloc] initWithResponseDictionary:itemDict];
+                                     [items addObject:position];
+                                 }
+                                 _items = items;
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 
+                                 if(callback)
+                                     callback(NO);
                              }];
 }
 

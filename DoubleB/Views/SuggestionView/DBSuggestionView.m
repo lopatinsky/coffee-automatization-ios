@@ -35,13 +35,13 @@
 }
 
 - (IBAction)closeViewButtonTapped:(id)sender {
-    if([self.delegate respondsToSelector:@selector(closeSuggestionView:)])
-        [self.delegate closeSuggestionView:self];
+    if([self.delegate respondsToSelector:@selector(db_closeSuggestionView:)])
+        [self.delegate db_clickSuggestionView:self];
 }
 
 - (void)tapOnView {
-    if([self.delegate respondsToSelector:@selector(clickSuggestionView:)])
-        [self.delegate clickSuggestionView:self];
+    if([self.delegate respondsToSelector:@selector(db_clickSuggestionView:)])
+        [self.delegate db_clickSuggestionView:self];
 }
 
 - (void)showOnView:(UIView *)view animated:(BOOL)animated {
