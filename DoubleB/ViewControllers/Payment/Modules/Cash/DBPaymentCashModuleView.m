@@ -36,16 +36,16 @@
     
     [self.tickImageView templateImageWithName:@"tick"];
     
-    @weakify(self)
-    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self)
-        [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCash;
-        [GANHelper analyzeEvent:@"payment_selected" label:@"cash" category:self.analyticsCategory];
-        
-        if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
-            [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCash];
-        }
-    }]];
+//    @weakify(self)
+//    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+//        @strongify(self)
+//        [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCash;
+//        [GANHelper analyzeEvent:@"payment_selected" label:@"cash" category:self.analyticsCategory];
+//        
+//        if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+//            [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCash];
+//        }
+//    }]];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
     
@@ -63,6 +63,15 @@
         self.tickImageView.hidden = NO;
     } else {
         self.tickImageView.hidden = YES;
+    }
+}
+
+- (void)touchAtLocation:(CGPoint)location {
+    [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCash;
+    [GANHelper analyzeEvent:@"payment_selected" label:@"cash" category:self.analyticsCategory];
+    
+    if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+        [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCash];
     }
 }
 

@@ -15,8 +15,12 @@
 
 @property (strong, nonatomic) NSMutableArray *submodules;
 
+// Use only if you set modules from code;
+- (void)layoutModules;
+
 - (void)reload;
 - (void)reload:(BOOL)animated;
 
 - (CGSize)moduleViewContentSize;
+- (void)touchAtLocation:(CGPoint)location;
 @end

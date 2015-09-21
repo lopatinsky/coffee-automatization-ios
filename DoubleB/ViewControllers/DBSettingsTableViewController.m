@@ -200,7 +200,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     cell.titleLabel.text = settingsItemInfo[@"title"];
     
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
-        NSString *profileText = [DBClientInfo sharedInstance].clientName;
+        NSString *profileText = [DBClientInfo sharedInstance].clientName.value;
         cell.titleLabel.text = profileText && profileText.length ? profileText : NSLocalizedString(@"Профиль", nil);
     }
     

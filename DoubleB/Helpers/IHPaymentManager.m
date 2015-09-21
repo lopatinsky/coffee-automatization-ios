@@ -110,7 +110,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                                             viewController.hidesBottomBarWhenPushed = YES;
                                             viewController.sourceUrl = response[@"formUrl"];
                                             
-                                            NSString *phone = [DBClientInfo sharedInstance].clientPhone;
+                                            NSString *phone = [DBClientInfo sharedInstance].clientPhone.value;
                                             if (phone) {
                                                 viewController.sourceUrl = [viewController.sourceUrl stringByAppendingFormat:@"&phone=%@",
                                                                             [phone stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

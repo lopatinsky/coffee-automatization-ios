@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBFriendGiftViewController">
+            <connections>
+                <outlet property="descriptionLabel" destination="wp3-cy-wBr" id="7rm-zu-tiU"/>
+                <outlet property="giftButton" destination="TFW-jU-kp1" id="uKC-jR-SES"/>
+                <outlet property="giftInfoModule" destination="GVB-6r-fwl" id="T0A-5b-svw"/>
+                <outlet property="titleLabel" destination="iMV-VL-wlk" id="UZv-dh-e2d"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18K-za-knP">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFW-jU-kp1">
+                            <rect key="frame" x="75" y="286" width="170" height="40"/>
+                            <color key="backgroundColor" red="0.32549019610000002" green="0.81176470590000005" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="oxX-ZN-Cgv"/>
+                                <constraint firstAttribute="width" constant="170" id="yY9-VC-PmK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
+                            <state key="normal" title="Подарить">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wp3-cy-wBr">
+                            <rect key="frame" x="15" y="51" width="290" height="77"/>
+                            <string key="text">Вы можете подарить напиток своему другу! Для этого введите его имя и телефон. С вашей карты спишется 350 рублей, которые ваш друг сможет потратить на любой напиток из кофейни Даблби.</string>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Подари кофе другу" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMV-VL-wlk">
+                            <rect key="frame" x="15" y="15" width="290" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" priority="900" constant="290" id="Gvx-Gb-EgE"/>
+                                <constraint firstAttribute="height" constant="21" id="ZtB-JP-2w1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVB-6r-fwl" customClass="DBModuleView">
+                            <rect key="frame" x="0.0" y="148" width="320" height="118"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="118" id="kXx-Hc-Q0s"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="TFW-jU-kp1" secondAttribute="bottom" constant="20" id="11I-dO-dVl"/>
+                        <constraint firstItem="GVB-6r-fwl" firstAttribute="leading" secondItem="18K-za-knP" secondAttribute="leading" id="3Sm-Ip-pva"/>
+                        <constraint firstItem="wp3-cy-wBr" firstAttribute="top" secondItem="iMV-VL-wlk" secondAttribute="bottom" constant="15" id="5JS-td-cpO"/>
+                        <constraint firstItem="iMV-VL-wlk" firstAttribute="top" secondItem="18K-za-knP" secondAttribute="top" constant="15" id="8Xz-wb-7M3"/>
+                        <constraint firstItem="GVB-6r-fwl" firstAttribute="top" secondItem="wp3-cy-wBr" secondAttribute="bottom" constant="20" id="A65-fu-fnd"/>
+                        <constraint firstAttribute="trailing" secondItem="wp3-cy-wBr" secondAttribute="trailing" constant="15" id="CJb-G1-LIx"/>
+                        <constraint firstItem="wp3-cy-wBr" firstAttribute="leading" secondItem="18K-za-knP" secondAttribute="leading" constant="15" id="CfH-Om-pUR"/>
+                        <constraint firstAttribute="trailing" secondItem="iMV-VL-wlk" secondAttribute="trailing" constant="15" id="Q1x-QI-bP3"/>
+                        <constraint firstItem="iMV-VL-wlk" firstAttribute="leading" secondItem="18K-za-knP" secondAttribute="leading" constant="15" id="X3Q-Pd-9lw"/>
+                        <constraint firstAttribute="trailing" secondItem="GVB-6r-fwl" secondAttribute="trailing" id="e1x-ze-S1C"/>
+                        <constraint firstAttribute="bottom" secondItem="TFW-jU-kp1" secondAttribute="bottom" constant="20" id="kfN-PY-ZnN"/>
+                        <constraint firstItem="TFW-jU-kp1" firstAttribute="top" secondItem="GVB-6r-fwl" secondAttribute="bottom" priority="900" constant="20" id="yH6-Vf-bEv"/>
+                        <constraint firstAttribute="centerX" secondItem="TFW-jU-kp1" secondAttribute="centerX" id="zgQ-Ym-z1y"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="18K-za-knP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JBx-GO-YcR"/>
+                <constraint firstAttribute="bottom" secondItem="18K-za-knP" secondAttribute="bottom" id="o6x-RY-ueC"/>
+                <constraint firstAttribute="trailing" secondItem="18K-za-knP" secondAttribute="trailing" id="rpc-BY-NxV"/>
+                <constraint firstItem="18K-za-knP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vE8-zi-aOJ"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <point key="canvasLocation" x="280" y="265"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

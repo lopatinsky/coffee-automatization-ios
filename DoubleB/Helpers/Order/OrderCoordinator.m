@@ -68,8 +68,8 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
         result = result && _orderManager.venue;
     }
     result = result && !(_orderManager.paymentType == PaymentTypeNotSet);
-    result = result && [[DBClientInfo sharedInstance] validClientName];
-    result = result && [[DBClientInfo sharedInstance] validClientPhone];
+    result = result && [DBClientInfo sharedInstance].clientName.valid;
+    result = result && [DBClientInfo sharedInstance].clientPhone.valid;
     result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
     result = result && (_itemsManager.totalCount + _bonusItemsManager.totalCount) > 0;
     result = result && _promoManager.validOrder;

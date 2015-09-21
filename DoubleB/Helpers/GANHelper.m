@@ -101,19 +101,19 @@
                                              value:[IHSecureStore sharedInstance].clientId];
     }
     
-    if([[DBClientInfo sharedInstance] validClientPhone]){
+    if([DBClientInfo sharedInstance].clientPhone.valid){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:2]
-                                             value:[DBClientInfo sharedInstance].clientPhone];
+                                             value:[DBClientInfo sharedInstance].clientPhone.value];
     }
     
-    if([[DBClientInfo sharedInstance] validClientName]){
+    if([DBClientInfo sharedInstance].clientName.valid){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:3]
-                                             value:[DBClientInfo sharedInstance].clientName];
+                                             value:[DBClientInfo sharedInstance].clientName.value];
     }
     
-    if([[DBClientInfo sharedInstance] validClientMail]){
+    if([DBClientInfo sharedInstance].clientMail.valid){
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:4]
-                                             value:[DBClientInfo sharedInstance].clientMail];
+                                             value:[DBClientInfo sharedInstance].clientMail.value];
     }
 #endif
 }

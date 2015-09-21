@@ -19,11 +19,15 @@
 }
 
 - (void)showAlert:(NSString *)message{
-    [[[UIAlertView alloc] initWithTitle:@""
-                               message:message
-                              delegate:nil
-                     cancelButtonTitle:@"OK"
-                     otherButtonTitles:nil] show];
+    [self showAlert:@"" message:message];
+}
+
+- (void)showAlert:(NSString *)title message:(NSString *)message {
+    [[[UIAlertView alloc] initWithTitle:title
+                                message:message
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil] show];
 }
 
 @end

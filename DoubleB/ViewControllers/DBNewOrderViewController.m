@@ -913,13 +913,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 #pragma mark - Profile
 
 - (void)reloadProfile {
-    if ([[DBClientInfo sharedInstance] validClientName]) {
-        if (![[DBClientInfo sharedInstance] validClientPhone]) {
+    if ([DBClientInfo sharedInstance].clientName.valid) {
+        if (![DBClientInfo sharedInstance].clientPhone.valid) {
             self.orderFooter.labelProfile.text = NSLocalizedString(@"Укажите, пожалуйста, номер телефона", nil);
             self.orderFooter.labelProfile.textColor = [UIColor orangeColor];
             [self.orderFooter.labelProfile db_startObservingAnimationNotification];
         } else {
-            self.orderFooter.labelProfile.text = [DBClientInfo sharedInstance].clientName;
+            self.orderFooter.labelProfile.text = [DBClientInfo sharedInstance].clientName.value;
             self.orderFooter.labelProfile.textColor = [UIColor blackColor];
             [self.orderFooter.labelProfile db_stopObservingAnimationNotification];
         }
@@ -934,8 +934,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [GANHelper analyzeEvent:@"profile_click" category:ORDER_SCREEN];
     
     NSString *eventLabel;
-    if([[DBClientInfo sharedInstance] validClientName] || [[DBClientInfo sharedInstance] validClientPhone]){
-        eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName, [DBClientInfo sharedInstance].clientPhone];
+    if([DBClientInfo sharedInstance].clientName.valid || [DBClientInfo sharedInstance].clientPhone.valid){
+        eventLabel = [NSString stringWithFormat:@"%@,%@", [DBClientInfo sharedInstance].clientName.value, [DBClientInfo sharedInstance].clientPhone.value];
     } else {
         eventLabel = @"null";
     }

@@ -27,20 +27,20 @@
     
     _textField.placeholder = NSLocalizedString(@"Имя Фамилия", nil);
     _textField.keyboardType = UIKeyboardTypeDefault;
-    _textField.text = [DBClientInfo sharedInstance].clientName;
+    _textField.text = [DBClientInfo sharedInstance].clientName.value;
     _textField.delegate = self;
     
     [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)textFieldDidChangeText:(UITextField *)textField{
-    [DBClientInfo sharedInstance].clientName = textField.text;
+    [[DBClientInfo sharedInstance] setName:textField.text];
 }
 
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if([[DBClientInfo  sharedInstance] validNameCharacters:string] || [string isEqualToString:@""]){
+    if([[DBClientInfo  sharedInstance].clientName validCharacters:string] || [string isEqualToString:@""]){
         return YES;
     } else {
         return NO;

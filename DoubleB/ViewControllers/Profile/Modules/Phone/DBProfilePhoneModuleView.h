@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DBModuleView.h"
-
+#import "DBUserProperty.h"
 
 @interface DBProfilePhoneModuleView : DBModuleView
+
 @end

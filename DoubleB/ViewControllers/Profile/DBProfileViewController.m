@@ -83,8 +83,8 @@
 }
 
 - (BOOL)dataIsValid {
-    BOOL result = [[DBClientInfo sharedInstance] validClientName];
-    result = result && [[DBClientInfo sharedInstance] validClientPhone];
+    BOOL result = [DBClientInfo sharedInstance].clientName.valid;
+    result = result && [DBClientInfo sharedInstance].clientPhone.valid;
     
     return result;
 }

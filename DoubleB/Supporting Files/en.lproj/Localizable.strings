@@ -188,6 +188,10 @@
 "Рассказать друзьям" = "Recommend app to friends";
 "Рассказать" = "Share";
 
+// Friend gift
+
+"Ваш подарок успешно отправлен" = "Your gift sent successfully";
+
 // promo codes
 "Промокоды" = "Promocodes";
 "Проверьте соединение с интернетом и попробуйте ещё раз" = "Check your internet connection and try again";

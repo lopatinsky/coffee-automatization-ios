@@ -35,23 +35,23 @@
     
     [self.tickImageView templateImageWithName:@"tick"];
     
-    @weakify(self)
-    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self)
-        
-        if([DBPayPalManager sharedInstance].loggedIn){
-            if(_mode == DBPaymentPayPalModuleViewModePaymentType){
-                [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypePayPal;
-                [GANHelper analyzeEvent:@"payment_selected" label:@"paypal" category:self.analyticsCategory];
-                
-                if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
-                    [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
-                }
-            }
-        } else {
-            [self.ownerViewController bindPayPal:nil];
-        }
-    }]];
+//    @weakify(self)
+//    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+//        @strongify(self)
+//        
+//        if([DBPayPalManager sharedInstance].loggedIn){
+//            if(_mode == DBPaymentPayPalModuleViewModePaymentType){
+//                [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypePayPal;
+//                [GANHelper analyzeEvent:@"payment_selected" label:@"paypal" category:self.analyticsCategory];
+//                
+//                if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+//                    [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
+//                }
+//            }
+//        } else {
+//            [self.ownerViewController bindPayPal:nil];
+//        }
+//    }]];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
     [[DBPayPalManager sharedInstance] addObserver:self withKeyPath:DBPayPalManagerNotificationAccountChange selector:@selector(reload)];
@@ -79,6 +79,21 @@
         self.tickImageView.hidden = NO;
     } else {
         self.tickImageView.hidden = YES;
+    }
+}
+
+- (void)touchAtLocation:(CGPoint)location {
+    if([DBPayPalManager sharedInstance].loggedIn){
+        if(_mode == DBPaymentPayPalModuleViewModePaymentType){
+            [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypePayPal;
+            [GANHelper analyzeEvent:@"payment_selected" label:@"paypal" category:self.analyticsCategory];
+            
+            if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+                [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
+            }
+        }
+    } else {
+        [self.ownerViewController bindPayPal:nil];
     }
 }
 
