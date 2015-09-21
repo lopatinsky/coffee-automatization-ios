@@ -76,6 +76,7 @@
         if(state == DBProcessStateDone){
             [DBFriendGiftHelper sharedInstance].friendName.value = name;
             [DBFriendGiftHelper sharedInstance].friendPhone.value = phone;
+            [self reload];
             
             [GANHelper analyzeEvent:@"friend_contact_selected"
                               label:[NSString stringWithFormat:@"%@,%@", name, phone]

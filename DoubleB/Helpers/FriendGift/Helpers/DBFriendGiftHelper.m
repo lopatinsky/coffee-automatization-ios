@@ -50,6 +50,12 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
     [self.friendPhone removeObserver:self forKeyPath:@"value"];
 }
 
+- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
+    [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
+    
+    
+}
+
 - (void)fetchInfo:(void(^)(BOOL success))callback{
     [[DBAPIClient sharedClient] GET:@""
                          parameters:nil
@@ -134,6 +140,10 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
     result = result && [DBCardsManager sharedInstance].defaultCard;
     
     return result;
+}
+
+- (BOOL)enabled {
+    return [[DBFriendGiftHelper valueForKey:@"enabled"] boolValue];
 }
 
 - (NSString *)titleFriendGiftScreen {

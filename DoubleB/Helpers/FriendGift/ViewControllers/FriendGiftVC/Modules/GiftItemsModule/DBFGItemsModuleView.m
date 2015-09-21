@@ -11,9 +11,12 @@
 #import "DBFriendGiftHelper.h"
 #import "OrderItem.h"
 
+#import "DBFGItemsViewController.h"
+
 @interface DBFGItemsModuleView ()<UITableViewDataSource, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @end
 
@@ -30,7 +33,14 @@
     self.tableView.rowHeight = 60.f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
+}
+
+- (void)addButtonClick {
+    DBFGItemsViewController *itemsVC = [DBFGItemsViewController new];
+    [self.ownerViewController.navigationController pushViewController:itemsVC animated:YES];
 }
 
 - (void)reload {
