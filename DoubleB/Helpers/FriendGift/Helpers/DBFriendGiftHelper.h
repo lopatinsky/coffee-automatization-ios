@@ -25,6 +25,7 @@ extern NSString * const DBFriendGiftHelperNotificationFriendPhone;
 @property(strong, nonatomic, readonly) NSString *textFriendGiftScreen;
 
 @property(strong, nonatomic) NSArray *items;
+- (void)fetchItems:(void(^)(BOOL success))callback;
 
 
 // Data for gift processing

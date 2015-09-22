@@ -23,6 +23,8 @@
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 #import "DBCompaniesManager.h"
+#import "DBFriendGiftHelper.h"
+#import "DBFriendGiftViewController.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -81,6 +83,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"viewController": [ViewControllerManager shareFriendInvitationViewController]}];
     }
     
+    // Friend gift item
+//    if([DBFriendGiftHelper sharedInstance].enabled) {
+        [self.settingsItems addObject:@{@"name": @"friendGiftVC",
+                                        @"title": NSLocalizedString(@"Подарок другу", nil),
+                                        @"image": @"gift_icon",
+                                        @"viewController": [DBFriendGiftViewController new]}];
+//    }
+    
     // Payment item
     // Cards item
     NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
@@ -100,14 +110,6 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"image": @"card",
                                         @"viewController": paymentVC}];
     }
-
-    
-    // Promotion list item
-    DBPromosListViewController *promosVC = [DBPromosListViewController new];
-    [self.settingsItems addObject:@{@"name": @"promosVC",
-                                    @"title": NSLocalizedString(@"Список акций", nil),
-                                    @"image": @"menu_icon",
-                                    @"viewController": promosVC}];
     
     // Personal wallet item
     if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
@@ -115,6 +117,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"image": @"payment"}];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
+    
+    // Promotion list item
+    DBPromosListViewController *promosVC = [DBPromosListViewController new];
+    [self.settingsItems addObject:@{@"name": @"promosVC",
+                                    @"title": NSLocalizedString(@"Список акций", nil),
+                                    @"image": @"menu_icon",
+                                    @"viewController": promosVC}];
     
     // Contact us item
     [self.settingsItems addObject:@{@"name": @"mailer",
@@ -251,6 +260,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]) {
+        [self presentViewController:settingsItemInfo[@"viewController"] animated:YES completion:nil];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"friendGiftVC"]) {
         [self presentViewController:settingsItemInfo[@"viewController"] animated:YES completion:nil];
     }
     

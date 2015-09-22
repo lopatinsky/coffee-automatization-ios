@@ -53,8 +53,8 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
     
-//                                _titleFriendGiftScreen = responseObject[@"head"];
-//                                _textFriendGiftScreen = responseObject[@"text"];
+//    _titleFriendGiftScreen = responseObject[@"head"];
+//    _textFriendGiftScreen = responseObject[@"text"];
 }
 
 
@@ -123,7 +123,8 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
                                      DBMenuPosition *position = [[DBMenuPosition alloc] initWithResponseDictionary:itemDict];
                                      [items addObject:position];
                                  }
-                                 _items = items;
+                                 NSData *dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
+                                 [DBFriendGiftHelper setValue:dataItems forKey:@"itemsData"];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
@@ -165,11 +166,6 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
     }
     
     return items;
-}
-
-- (void)saveItems:(NSDictionary *)items {
-    for (NSDictionary *itemDict in items){
-    }
 }
 
 - (NSString *)smsText {

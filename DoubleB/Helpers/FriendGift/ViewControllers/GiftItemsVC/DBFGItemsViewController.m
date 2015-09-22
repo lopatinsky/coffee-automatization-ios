@@ -11,6 +11,8 @@
 #import "DBMenuPosition.h"
 #import "DBFriendGiftHelper.h"
 
+#import "MBProgressHUD.h"
+
 @interface DBFGItemsViewController ()<DBPositionCellDelegate>
 
 @end
@@ -23,6 +25,17 @@
     self.navigationItem.title = NSLocalizedString(@"Подарки", nil);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    if(![DBFriendGiftHelper sharedInstance].items) {
+        [[DBFriendGiftHelper sharedInstance] fetchItems:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self.tableView reloadData];
+        }];
+    }
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[DBFriendGiftHelper sharedInstance].items count];
