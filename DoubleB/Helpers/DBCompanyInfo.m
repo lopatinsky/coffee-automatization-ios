@@ -11,14 +11,9 @@
 
 #import <Parse/PFPush.h>
 
-@implementation DBCompanyInfo
+NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificationInfoUpdated";
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static DBCompanyInfo*instance = nil;
-    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
-    return instance;
-}
+@implementation DBCompanyInfo
 
 - (instancetype)init{
     self = [super init];
@@ -71,6 +66,8 @@
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
             
             [self synchronize];
+            
+            [self notifyObserverOf:DBCompanyInfoNotificationInfoUpdated];
         }
         
         if(callback)

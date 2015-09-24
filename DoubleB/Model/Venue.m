@@ -82,18 +82,8 @@ static NSMutableArray *storedVenues;
                          parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 //NSLog(@"%@", responseObject);
-                                storedVenues = [NSMutableArray array];
-                                for (NSDictionary *dict in responseObject[@"venues"]) {
-                                    Venue *venue = [self storedVenueForId:dict[@"id"]];
-                                    if (venue) {
-                                        [venue applyDict:dict];
-                                    } else {
-                                        venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
-                                        [venue applyDict:dict];
-                                    }
-                                    [storedVenues addObject:venue];
-                                }
-                                [[CoreDataHelper sharedHelper] save];
+                                
+                                [self syncVenues:responseObject[@"venues"]];
                                 
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
@@ -115,6 +105,21 @@ static NSMutableArray *storedVenues;
                                 if(completionHandler)
                                     completionHandler(nil);
                             }];
+}
+
++ (void)syncVenues:(NSArray *)responseVenues {
+    storedVenues = [NSMutableArray array];
+    for (NSDictionary *dict in responseVenues) {
+        Venue *venue = [self storedVenueForId:dict[@"id"]];
+        if (venue) {
+            [venue applyDict:dict];
+        } else {
+            venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
+            [venue applyDict:dict];
+        }
+        [storedVenues addObject:venue];
+    }
+    [[CoreDataHelper sharedHelper] save];
 }
 
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{

@@ -7,8 +7,7 @@
 //
 
 #import "DeliverySettings.h"
-
-NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySettingsNewSelectedTimeNotification";
+#import "OrderCoordinator.h"
 
 @interface DeliverySettings ()
 @property (weak, nonatomic) OrderCoordinator *parentManager;
@@ -138,7 +137,7 @@ NSString *const kDBDeliverySettingsNewSelectedTimeNotification = @"kDBDeliverySe
     if(!self.selectedTime || [self.selectedTime compare:self.minimumTime] != NSOrderedDescending){
         self.selectedTime = self.minimumTime;
         
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBDeliverySettingsNewSelectedTimeNotification object:nil]];
+        [self.parentManager manager:self haveChange:DeliverySettingsChangeNewTime];
     }
 }
 
