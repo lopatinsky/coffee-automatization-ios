@@ -127,8 +127,10 @@
         self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
     } else {
         Venue *venue = [Venue venueById:dict[@"venue_id"]];
-        self.venueId = venue.venueId;
-        self.venueName = venue.title;
+        if(venue) {
+            self.venueId = venue.venueId;
+            self.venueName = venue.title;
+        }
     }
 }
 
