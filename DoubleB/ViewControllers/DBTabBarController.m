@@ -159,7 +159,7 @@
         }
     }
     
-    [UIAlertView bk_showAlertViewWithTitle:order.venue.title
+    [UIAlertView bk_showAlertViewWithTitle:order.venueName
                                    message:NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil)
                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
                          otherButtonTitles:nil

@@ -49,7 +49,7 @@
 
 + (void)trackNewOrderInfo:(Order *)order{
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createTransactionWithId:order.orderId
-                                                                                   affiliation:order.venue.venueId
+                                                                                   affiliation:order.venueId
                                                                                        revenue:order.total
                                                                                            tax:@(0)
                                                                                       shipping:@(0)

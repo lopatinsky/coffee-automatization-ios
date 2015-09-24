@@ -244,7 +244,10 @@
     
     [[OrderCoordinator sharedInstance].itemsManager overrideItems:self.order.items];
     [OrderCoordinator sharedInstance].orderManager.paymentType = self.order.paymentType;
-    [OrderCoordinator sharedInstance].orderManager.venue = self.order.venue;
+    
+    Venue *venue = [Venue venueById:self.order.venueId];
+    if(venue)
+        [OrderCoordinator sharedInstance].orderManager.venue = venue;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self showAlert:@"Позиции из заказа успешно добавлены в корзину!"];
