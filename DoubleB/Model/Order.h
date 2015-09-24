@@ -53,7 +53,8 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 @property (nonatomic) OrderStatus status;
 
 @property (nonatomic, strong) NSNumber *deliveryType;
-@property (nonatomic, strong) Venue *venue;
+@property (nonatomic, strong) NSString *venueId;
+@property (nonatomic, strong) NSString *venueName;
 @property (nonatomic, strong) NSString *shippingAddress;
 
 @property (nonatomic) PaymentType paymentType;

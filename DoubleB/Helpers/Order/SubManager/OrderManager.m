@@ -81,21 +81,24 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     [self.parentManager manager:self haveChange:OrderManagerChangeVenue];
 }
 
+
 #pragma mark - DBManagerProtocol
 
 - (void)flushCache{
-    self.venue = nil;
+    NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
+    _venue = [Venue venueById:lastVenueId];
+    
     self.comment = @"";
     self.location = nil;
 }
 
 - (void)flushStoredCache{
-    [self flushCache];
-    
     NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
     [defs removeObjectForKey:kDBDefaultsLastSelectedVenue];
     [defs removeObjectForKey:kDBDefaultsPaymentType];
     [defs synchronize];
+    
+    [self flushCache];
 }
 
 @end

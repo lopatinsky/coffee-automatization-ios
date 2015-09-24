@@ -19,12 +19,13 @@
 
 + (void)initialize {
     id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
     [[GAI sharedInstance] setDefaultTracker:tracker];
 }
 
 + (void)analyzeScreen:(NSString *)screen {
     [[[GAI sharedInstance] defaultTracker] set:kGAIScreenName value:screen];
-    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createAppView] build]];
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 + (void)analyzeEvent:(NSString *)eventName category:(NSString *)category{
@@ -49,7 +50,7 @@
 
 + (void)trackNewOrderInfo:(Order *)order{
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createTransactionWithId:order.orderId
-                                                                                   affiliation:order.venue.venueId
+                                                                                   affiliation:order.venueId
                                                                                        revenue:order.total
                                                                                            tax:@(0)
                                                                                       shipping:@(0)
