@@ -10,7 +10,9 @@
 #import "ManagerProtocol.h"
 #import "OrderPartManagerProtocol.h"
 
-extern NSString *const kDBDeliverySettingsNewSelectedTimeNotification;
+typedef NS_ENUM(NSInteger, DeliverySettingsChange) {
+    DeliverySettingsChangeNewTime = 0
+};
 
 @interface DeliverySettings : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 

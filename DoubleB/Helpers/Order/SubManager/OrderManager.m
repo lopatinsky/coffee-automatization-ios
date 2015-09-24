@@ -34,8 +34,6 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
         
         NSString *lastVenueId = [[NSUserDefaults standardUserDefaults] stringForKey:kDBDefaultsLastSelectedVenue];
         _venue = [Venue venueById:lastVenueId];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(flushCache) name:kDBNewOrderCreatedNotification object:nil];
     }
     
     return self;
@@ -74,11 +72,13 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     }
 }
 
-
 - (void)setVenue:(Venue *)venue{
     _venue = venue;
+    
     [[NSUserDefaults standardUserDefaults] setObject:venue.venueId forKey:kDBDefaultsLastSelectedVenue];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangeVenue];
 }
 
 #pragma mark - DBManagerProtocol

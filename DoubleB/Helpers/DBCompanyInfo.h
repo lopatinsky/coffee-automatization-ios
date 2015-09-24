@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBPrimaryManager.h"
 #import "ManagerProtocol.h"
 #import "DBDeliveryType.h"
 
+
+extern NSString * const DBCompanyInfoNotificationInfoUpdated;
 
 typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeCafe = 0,
@@ -17,9 +20,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeOther = 2
 };
 
-@interface DBCompanyInfo : NSObject<ManagerProtocol>
-+ (instancetype)sharedInstance;
-
+@interface DBCompanyInfo : DBPrimaryManager<ManagerProtocol>
 @property(strong, nonatomic, readonly) NSString *bundleName;
 
 @property(nonatomic, readonly) DBCompanyType type;

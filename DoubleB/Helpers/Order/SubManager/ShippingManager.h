@@ -11,6 +11,11 @@
 #import "ManagerProtocol.h"
 #import "OrderPartManagerProtocol.h"
 
+
+typedef NS_ENUM(NSInteger, ShippingManagerChange) {
+    ShippingManagerChangeSuggestions = 0
+};
+
 typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
     DBAddressStringModeAutocomplete = 0,
     DBAddressStringModeShort,

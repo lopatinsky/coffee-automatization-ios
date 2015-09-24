@@ -8,6 +8,9 @@
 
 #import "OrderCoordinator.h"
 #import "DBClientInfo.h"
+#import "DBCompanyInfo.h"
+#import "NetworkManager.h"
+#import "Venue.h"
 
 NSString * __nonnull const CoordinatorNotificationOrderTotalPrice = @"CoordinatorNotificationOrderTotalPrice";
 NSString * __nonnull const CoordinatorNotificationOrderDiscount = @"CoordinatorNotificationOrderDiscount";
@@ -17,6 +20,7 @@ NSString * __nonnull const CoordinatorNotificationOrderShippingPrice = @"Coordin
 NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
 
 NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
+NSString * __nonnull const CoordinatorNotificationNewVenue = @"CoordinatorNotificationNewVenue";
 
 NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated = @"CoordinatorNotificationAddressSuggestionsUpdated";
 NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNotificationPromoUpdated";
@@ -40,22 +44,19 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
                                                  name:kDBNewOrderCreatedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(deliverySettingsNewTimeNotificationHandler:)
-                                                 name:kDBDeliverySettingsNewSelectedTimeNotification object:nil];
+                                             selector:@selector(venuesUpdatedNotificationHandler:)
+                                                 name:kDBConcurrentOperationFetchVenuesFinished object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(shippingManagerNewSuggestionsNotificationHandler:)
-                                                 name:kDBShippingManagerDidRecieveSuggestionsNotification object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(companyInfoUpdateNotificationHandler:)
-//                                                 name:kDBApplicationManagerInfoLoadSuccess object:nil];
+    [[DBCompanyInfo sharedInstance] addObserver:self
+                                    withKeyPath:DBCompanyInfoNotificationInfoUpdated
+                                       selector:@selector(companyInfoUpdateNotificationHandler)];
     
     return self;
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[DBCompanyInfo sharedInstance] removeObserver:self];
 }
 
 
@@ -114,18 +115,48 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             case OrderManagerChangePaymentType:
                 [self orderManagerDidChangePaymentType];
                 break;
+            case OrderManagerChangeVenue:
+                [self orderManagerDidChangeVenue];
+                break;
+        }
+    }
+    
+    if([manager isKindOfClass:[DeliverySettings class]]){
+        switch (changeType) {
+            case DeliverySettingsChangeNewTime:
+                [self deliverySettingsDidChangeTime];
+                break;
+        }
+    }
+    
+    if([manager isKindOfClass:[ShippingManager class]]){
+        switch (changeType) {
+            case ShippingManagerChangeSuggestions:
+                [self shippingManagerDidChangeSuggestions];
+                break;
         }
     }
 }
 
-- (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
-    [_promoManager flushCache];
-}
-
 #pragma mark - External changes
 
-- (void)companyInfoUpdateNotificationHandler:(NSNotification *)notification{
+- (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
+    [_promoManager flushCache];
+    [_orderManager flushCache];
+    
+    [_itemsManager flushCache];
+    [_bonusItemsManager flushCache];
+    [_orderGiftsManager flushCache];
+}
+
+- (void)companyInfoUpdateNotificationHandler{
     [_deliverySettings updateAfterDeliveryTypesUpdate];
+}
+
+- (void)venuesUpdatedNotificationHandler:(NSNotification *)notification {
+    if (!self.orderManager.venue) {
+        self.orderManager.venue = [[Venue storedVenues] firstObject];
+    }
 }
 
 #pragma mark - ItemsManager changes
@@ -138,15 +169,9 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     [self notifyObserverOf:CoordinatorNotificationOrderTotalPrice];
 }
 
-#pragma mark - DeliverySettings changes
-
-- (void)deliverySettingsNewTimeNotificationHandler:(NSNotification *)notification{
-    [self notifyObserverOf:CoordinatorNotificationNewSelectedTime];
-}
-
 #pragma mark - ShippingManager changes
 
-- (void)shippingManagerNewSuggestionsNotificationHandler:(NSNotification *)notification{
+- (void)shippingManagerDidChangeSuggestions{
     [self notifyObserverOf:CoordinatorNotificationAddressSuggestionsUpdated];
 }
 
@@ -176,6 +201,16 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)orderManagerDidChangePaymentType{
     [self notifyObserverOf:CoordinatorNotificationNewPaymentType];
+}
+
+- (void)orderManagerDidChangeVenue{
+    [self notifyObserverOf:CoordinatorNotificationNewVenue];
+}
+
+#pragma mark - DeliverySettings changes
+
+- (void)deliverySettingsDidChangeTime{
+    [self notifyObserverOf:CoordinatorNotificationNewSelectedTime];
 }
 
 #pragma mark - Manager Protocol

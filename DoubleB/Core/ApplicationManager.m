@@ -179,6 +179,7 @@ typedef enum : NSUInteger {
     }];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
+    [OrderCoordinator sharedInstance];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
