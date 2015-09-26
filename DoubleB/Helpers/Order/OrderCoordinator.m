@@ -151,6 +151,9 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)companyInfoUpdateNotificationHandler{
     [_deliverySettings updateAfterDeliveryTypesUpdate];
+    
+    if(_shippingManager.selectedAddress.city.length == 0)
+        [_shippingManager setCity:[_shippingManager.arrayOfCities firstObject]];
 }
 
 - (void)venuesUpdatedNotificationHandler:(NSNotification *)notification {
