@@ -23,13 +23,17 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Подарки", nil);
+    
+    self.tableView.rowHeight = 44.f;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [UIView new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    if(![DBFriendGiftHelper sharedInstance].items) {
+    if([DBFriendGiftHelper sharedInstance].items.count == 0) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[DBFriendGiftHelper sharedInstance] fetchItems:^(BOOL success) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             [self.tableView reloadData];

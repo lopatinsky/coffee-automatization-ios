@@ -37,6 +37,7 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     // Initialize name
     [self.profileImageView templateImageWithName:@"profile"];
     
@@ -63,12 +64,11 @@
     [self.contactsButton addTarget:self action:@selector(clickContactsButton) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
     
     self.nameTextField.text = [DBFriendGiftHelper sharedInstance].friendName.value;
     self.phoneTextField.text = [AKNumericFormatter formatString:[DBFriendGiftHelper sharedInstance].friendPhone.value usingMask:@"+* (***) ***-**-**" placeholderCharacter:'*'];
-    
 }
 
 - (void)clickContactsButton {
@@ -98,7 +98,7 @@
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    BOOL result = [string isEqualToString:@""];
+    BOOL result = YES;
     if(textField == self.nameTextField){
         result = result && [[DBFriendGiftHelper sharedInstance].friendName validCharacters:string];
     }

@@ -10,7 +10,6 @@
 #import "DBSettingsCell.h"
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
-//#import "DBCardsViewController.h"
 #import "DBPaymentViewController.h"
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
@@ -19,7 +18,6 @@
 #import "DBCompanyInfoViewController.h"
 #import "IHPaymentManager.h"
 #import "OrderCoordinator.h"
-#import "Order.h"
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 #import "DBCompaniesManager.h"
@@ -93,20 +91,12 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     // Payment item
     // Cards item
-    NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
-    if([availablePaymentTypes containsObject:@(PaymentTypeCard)] || [availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
+    if([[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard] || [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCash]){
         DBPaymentViewController *paymentVC = [DBPaymentViewController new];
-        paymentVC.mode = DBPaymentViewControllerModeManage;
-        
-        NSString *title = NSLocalizedString(@"Карты", nil);
-        
-        // PayPal item
-        if([availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
-            title = NSLocalizedString(@"Электронные платежи", nil);
-        }
+        paymentVC.mode = DBPaymentViewControllerModeSettings;
         
         [self.settingsItems addObject:@{@"name": @"cardsVC",
-                                        @"title": title,
+                                        @"title": NSLocalizedString(@"Оплата", nil),
                                         @"image": @"card",
                                         @"viewController": paymentVC}];
     }
@@ -264,7 +254,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"friendGiftVC"]) {
-        [self presentViewController:settingsItemInfo[@"viewController"] animated:YES completion:nil];
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]) {

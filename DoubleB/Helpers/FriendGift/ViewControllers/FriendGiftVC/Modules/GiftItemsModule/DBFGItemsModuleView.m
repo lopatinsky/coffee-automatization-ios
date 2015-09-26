@@ -29,10 +29,13 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 60.f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    [self.addButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
+    [self.addButton setTitle:NSLocalizedString(@"Выбери подарок", nil) forState:UIControlStateNormal];
     [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
@@ -43,13 +46,16 @@
     [self.ownerViewController.navigationController pushViewController:itemsVC animated:YES];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
     [self.tableView reloadData];
+    [self setNeedsLayout];
 }
 
 - (CGSize)moduleViewContentSize {
-    return CGSizeMake(self.frame.size.width, [DBFriendGiftHelper sharedInstance].itemsManager.totalCount * self.tableView.rowHeight);
+    int height = self.frame.size.height - self.tableView.frame.size.height;
+    height += [DBFriendGiftHelper sharedInstance].itemsManager.totalCount * self.tableView.rowHeight;
+    return CGSizeMake(self.frame.size.width, height);
 }
 
 #pragma mark - UITableViewDataSource

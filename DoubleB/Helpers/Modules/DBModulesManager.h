@@ -18,4 +18,6 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
 
 + (instancetype)sharedInstance;
 
+- (void)fetchModules:(void(^)(BOOL success))callback;
+
 @end

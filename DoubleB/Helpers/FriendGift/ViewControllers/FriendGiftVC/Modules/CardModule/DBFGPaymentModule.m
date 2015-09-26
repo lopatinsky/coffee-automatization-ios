@@ -8,6 +8,8 @@
 
 #import "DBFGPaymentModule.h"
 #import "DBCardsManager.h"
+#import "DBPaymentViewController.h"
+#import "IHPaymentManager.h"
 
 @interface DBFGPaymentModule ()
 @property (weak, nonatomic) IBOutlet UIImageView *cardImageView;
@@ -25,12 +27,13 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
     [self.cardImageView templateImageWithName:@"card.png"];
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
 }
 
-- (void)reload {
-    [super reload];
+- (void)reload:(BOOL)animated {
+    [super reload:animated];
     
     DBPaymentCard *defaultCard = [DBCardsManager sharedInstance].defaultCard;
     if (defaultCard) {
@@ -46,6 +49,12 @@
 
 - (void)touchAtLocation:(CGPoint)location {
     [GANHelper analyzeEvent:@"gift_card_choice_click" category:self.analyticsCategory];
+    
+    DBPaymentViewController *paymentVC = [DBPaymentViewController new];
+    paymentVC.mode = DBPaymentViewControllerModeChoosePayment;
+    paymentVC.paymentTypes = @[@(PaymentTypeCard)];
+    
+    [self.ownerViewController.navigationController pushViewController:paymentVC animated:YES];
 }
 
 @end

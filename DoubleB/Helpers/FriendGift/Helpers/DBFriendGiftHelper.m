@@ -53,8 +53,10 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
     
-//    _titleFriendGiftScreen = responseObject[@"head"];
-//    _textFriendGiftScreen = responseObject[@"text"];
+    [DBFriendGiftHelper setValue:@"Заголовок с сервака" forKey:@"titleFriendGiftScreen"];
+    [DBFriendGiftHelper setValue:@"Перепиши, чтобы текст брался с сервака" forKey:@"textFriendGiftScreen"];
+    
+    [self fetchItems:nil];
 }
 
 
@@ -113,7 +115,7 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 }
 
 - (void)fetchItems:(void(^)(BOOL success))callback {
-    [[DBAPIClient sharedClient] POST:@"shared/gift/items"
+    [[DBAPIClient sharedClient] GET:@"shared/gift/items"
                           parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  //NSLog(@"%@", responseObject);

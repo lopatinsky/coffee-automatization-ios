@@ -22,6 +22,7 @@
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
+#import "DBModulesManager.h"
 
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
@@ -177,6 +178,7 @@ typedef enum : NSUInteger {
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
         }
     }];
+    [[DBModulesManager sharedInstance] fetchModules:nil];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];

@@ -55,6 +55,8 @@
     for(DBModuleView *module in _submodules){
         [module reload:animated];
     }
+    
+    [self layoutIfNeeded];
 }
 
 #pragma mark - Setters
@@ -86,6 +88,7 @@
     int height = self.frame.size.height;
     
     if(_submodules.count > 0) {
+        height = 0;
         for(DBModuleView *module in _submodules)
             height += module.moduleViewContentSize.height;
     }

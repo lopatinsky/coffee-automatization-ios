@@ -30,7 +30,7 @@
     [[DBAPIClient sharedClient] GET:@"company/modules"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, NSDictionary *response) {
-                                
+                                [self processResponse:response];
                                 if (callback) callback(YES);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);

@@ -50,6 +50,9 @@
     self.titleLabel.text = [DBFriendGiftHelper sharedInstance].titleFriendGiftScreen;
     self.descriptionLabel.text = [DBFriendGiftHelper sharedInstance].textFriendGiftScreen;
     
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.titleLabel alignTrailingEdgeWithView:self.view predicate:@"-15"];
+    
     [self initModules];
     
     [self initGiftButton];
@@ -73,6 +76,8 @@
     
     [self.giftInfoModule reload];
     [self reloadGiftButton];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)dealloc{

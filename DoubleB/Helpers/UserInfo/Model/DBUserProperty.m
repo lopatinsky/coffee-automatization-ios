@@ -35,7 +35,7 @@
 #pragma mark - NSCoding
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
-    self = [[DBUserProperty alloc] init];
+    self = [[[self class] alloc] init];
     if(self != nil){
         self.value = [aDecoder decodeObjectForKey:@"value"];
     }
@@ -86,7 +86,7 @@
 - (BOOL)validCharacters:(NSString *)characters {
     NSCharacterSet *stringSet = [NSCharacterSet characterSetWithCharactersInString:characters];
     NSMutableCharacterSet *charSet = [NSMutableCharacterSet decimalDigitCharacterSet];
-    [charSet addCharactersInString:@"+() "];
+    [charSet addCharactersInString:@"+()- "];
     
     return [charSet isSupersetOfSet:stringSet];
 }
