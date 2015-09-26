@@ -168,13 +168,13 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.bonusView.delegate = self;
     self.ndaView.delegate = self;
     
+    [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewVenue selector:@selector(reloadAddress)];
+    
     // promo notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderSuccess) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderFailure) name:kDBConcurrentOperationCheckOrderFailure object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderStarted) name:kDBConcurrentOperationCheckOrderStarted object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkOrderStartFailed) name:kDBConcurrentOperationCheckOrderStartFailed object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVenuesStatus) name:kDBConcurrentOperationFetchVenuesFinished object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -194,11 +194,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     [self.itemCells removeAllObjects];
     
     [self.tableView reloadData];
-//    if (_orderCoordinator.itemsManager.totalCount == 1) {
-//        self.tableView.alwaysBounceVertical = NO;
-//    } else {
-//        self.tableView.alwaysBounceVertical = YES;
-//    }
     
     [self reloadTableViewHeight:NO];
     
@@ -677,14 +672,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 
 #pragma mark - Delivery/Venue
-- (void)updateVenuesStatus {
-    NSArray *venues = [Venue storedVenues];
-    [self setVenue:[venues firstObject]];
-    [[OrderCoordinator sharedInstance].deliverySettings setDefaultDeliveryType];
-    [self reloadTime];
-    [self reloadTimePicker];
-    [[NetworkManager sharedManager] addPendingOperation:NetworkOperationCheckOrder];
-}
 
 - (void)reloadAddress {
     if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
@@ -707,8 +694,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
                 if (location) {
                     [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchVenues withUserInfo:@{@"location": location}];
                 } else {
-//                    [self setVenue:[[Venue storedVenues] firstObject]];
-                    [self updateVenuesStatus];
+                    [self setVenue:[[Venue storedVenues] firstObject]];
                 }
                 
                 [self.orderFooter.activityIndicator stopAnimating];
@@ -720,7 +706,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)setVenue:(Venue *)venue{
     if (venue) {
-        _orderCoordinator.orderManager.venue = venue;
         self.orderFooter.labelAddress.text = venue.title;
         self.orderFooter.labelAddress.textColor = [UIColor blackColor];
         [self.orderFooter.labelAddress db_stopObservingAnimationNotification];
@@ -729,8 +714,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         self.orderFooter.labelAddress.text = NSLocalizedString(@"Ошибка определения локации", nil);
         [self.orderFooter.labelAddress db_startObservingAnimationNotification];
     }
-    
-    [self reloadTime];
     
     [self.orderFooter.activityIndicator stopAnimating];
 }

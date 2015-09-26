@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *tickImageView;
+@property (weak, nonatomic) IBOutlet UIButton *unbindButton;
 
 @end
 
@@ -31,9 +32,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.iconImageView templateImageWithName:@"paypal_icon"];
-    
-    [self.tickImageView templateImageWithName:@"tick"];
+    self.iconImageView.image = [UIImage imageNamed:@"paypal_icon"];
     
 //    @weakify(self)
 //    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
@@ -53,6 +52,8 @@
 //        }
 //    }]];
     
+    [self.unbindButton addTarget:self action:@selector(unbindPayPal) forControlEvents:UIControlEventTouchUpInside];
+    
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
     [[DBPayPalManager sharedInstance] addObserver:self withKeyPath:DBPayPalManagerNotificationAccountChange selector:@selector(reload)];
     
@@ -62,6 +63,10 @@
 - (void)dealloc {
     [[OrderCoordinator sharedInstance] removeObserver:self];
     [[DBPayPalManager sharedInstance] removeObserver:self];
+}
+
+- (void)unbindPayPal {
+    [self.ownerViewController unbindPayPal:nil];
 }
 
 - (void)reload:(BOOL)animated {
@@ -75,10 +80,18 @@
         self.titleLabel.text = NSLocalizedString(@"Войти в аккаунт PayPal", nil);
     }
     
-    if([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypePayPal){
-        self.tickImageView.hidden = NO;
+    self.unbindButton.enabled = NO;
+    if (self.mode == DBPaymentPayPalModuleViewModePaymentType) {
+        self.tickImageView.hidden = [OrderCoordinator sharedInstance].orderManager.paymentType != PaymentTypePayPal;
+        [self.tickImageView templateImageWithName:@"tick"];
     } else {
-        self.tickImageView.hidden = YES;
+        if([DBPayPalManager sharedInstance].loggedIn){
+            self.tickImageView.hidden = NO;
+            [self.tickImageView templateImageWithName:@"close_gray"];
+            self.unbindButton.enabled = YES;
+        } else {
+            self.tickImageView.hidden = YES;
+        }
     }
 }
 

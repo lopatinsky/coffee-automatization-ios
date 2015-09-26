@@ -49,6 +49,10 @@ static NSMutableArray *storedVenues;
     if(!storedVenues){
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
         storedVenues = [NSMutableArray arrayWithArray:[[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil]];
+        
+        [storedVenues sortUsingComparator:^NSComparisonResult(Venue *obj1, Venue *obj2) {
+            return [@(obj1.distance) compare:@(obj2.distance)];
+        }];
     }
 
     return storedVenues;
@@ -82,18 +86,8 @@ static NSMutableArray *storedVenues;
                          parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 //NSLog(@"%@", responseObject);
-                                storedVenues = [NSMutableArray array];
-                                for (NSDictionary *dict in responseObject[@"venues"]) {
-                                    Venue *venue = [self storedVenueForId:dict[@"id"]];
-                                    if (venue) {
-                                        [venue applyDict:dict];
-                                    } else {
-                                        venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
-                                        [venue applyDict:dict];
-                                    }
-                                    [storedVenues addObject:venue];
-                                }
-                                [[CoreDataHelper sharedHelper] save];
+                                
+                                [self syncVenues:responseObject[@"venues"]];
                                 
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
@@ -103,7 +97,7 @@ static NSMutableArray *storedVenues;
                                                category:APPLICATION_START];
                                 
                                 if(completionHandler)
-                                    completionHandler(storedVenues);
+                                    completionHandler([self storedVenues]);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
@@ -115,6 +109,28 @@ static NSMutableArray *storedVenues;
                                 if(completionHandler)
                                     completionHandler(nil);
                             }];
+}
+
++ (void)syncVenues:(NSArray *)responseVenues {
+    for (Venue *venue in storedVenues) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", venue.venueId];
+        NSDictionary *responseVenue = [[responseVenues filteredArrayUsingPredicate:predicate] firstObject];
+        if(!responseVenue) {
+            [[CoreDataHelper sharedHelper].context deleteObject:venue];
+        }
+    }
+    
+    for (NSDictionary *dict in responseVenues) {
+        Venue *venue = [self storedVenueForId:dict[@"id"]];
+        if (venue) {
+            [venue applyDict:dict];
+        } else {
+            venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
+            [venue applyDict:dict];
+        }
+    }
+    [[CoreDataHelper sharedHelper] save];
+    storedVenues = nil;
 }
 
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{

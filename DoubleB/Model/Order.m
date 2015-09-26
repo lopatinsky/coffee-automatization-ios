@@ -21,7 +21,8 @@
     NSArray *_giftItems;
 }
 @dynamic total, discount, walletDiscount, shippingTotal;
-@dynamic orderId, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, deliveryType, venue, shippingAddress, paymentType;
+@dynamic orderId, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, paymentType;
+@dynamic deliveryType, venueId, venueName, shippingAddress;
 
 - (instancetype)init:(BOOL)stored {
     if (stored) {
@@ -56,7 +57,8 @@
     if([OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         self.shippingAddress = [[OrderCoordinator sharedInstance].shippingManager.selectedAddress formattedAddressString:DBAddressStringModeFull];
     } else {
-        self.venue = [OrderCoordinator sharedInstance].orderManager.venue;
+        self.venueId = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
+        self.venueName = [OrderCoordinator sharedInstance].orderManager.venue.title;
     }
     
     [self setTimeFromResponseDict:dict];
@@ -124,7 +126,11 @@
         DBShippingAddress *address = [[DBShippingAddress alloc] initWithDict:dict[@"address"]];
         self.shippingAddress = [address formattedAddressString:DBAddressStringModeFull];
     } else {
-        self.venue = [Venue venueById:dict[@"venue_id"]];
+        Venue *venue = [Venue venueById:dict[@"venue_id"]];
+        if(venue) {
+            self.venueId = venue.venueId;
+            self.venueName = venue.title;
+        }
     }
 }
 

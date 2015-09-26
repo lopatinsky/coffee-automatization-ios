@@ -193,6 +193,9 @@
             case PaymentTypeCard:
                 [imageViewPayment templateImageWithName:@"card"];
                 break;
+            case PaymentTypePayPal:
+                [imageViewPayment templateImageWithName:@"card"];
+                break;
             case PaymentTypeExtraType:
                 [imageViewPayment templateImageWithName:@"mug_orders"];
                 break;
@@ -231,6 +234,9 @@
             case PaymentTypeCard:
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
+            case PaymentTypePayPal:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
             case PaymentTypeExtraType:
                 [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
                 break;
@@ -253,6 +259,9 @@
             case PaymentTypeCard:
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
+            case PaymentTypePayPal:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
             case PaymentTypeExtraType:
                 [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
                 break;
@@ -271,7 +280,7 @@
     
     labelOrder.attributedText = orderString;
     labelDate.text = order.formattedTimeString;
-    labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venue.address;
+    labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venueName;
     
     labelTotal.text = [NSString stringWithFormat:@"%.0f %@", order.actualTotal - order.actualDiscount, [Compatibility currencySymbol]];
     

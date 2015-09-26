@@ -71,12 +71,7 @@
 }
 
 - (void)reloadVenues:(UIRefreshControl *)refreshControl {
-    if ([self.venues count] && !refreshControl) {
-        return;
-    }
     [GANHelper analyzeEvent:@"venue_update" category:self.eventsCategory];
-    
-    self.venues = [Venue storedVenues];
 
     if ([[LocationHelper sharedInstance] isDenied]) {
         [self fetchVenues:nil];
@@ -96,11 +91,8 @@
 }
 
 - (void)updateVenuesState {
-    NSArray *venues = [Venue storedVenues];
-    if (venues) {
-        self.venues = venues;
-        [self.tableView reloadData];
-    }
+    self.venues = [Venue storedVenues];
+    [self.tableView reloadData];
     [self.refreshControl endRefreshing];
 }
 

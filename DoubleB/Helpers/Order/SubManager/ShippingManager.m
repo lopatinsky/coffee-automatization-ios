@@ -7,6 +7,7 @@
 //
 
 #import "DBCompanyInfo.h"
+#import "OrderCoordinator.h"
 #import "DBServerAPI.h"
 
 #import "ShippingManager.h"
@@ -63,7 +64,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
                                       
                                       self.addressSuggestions = suggestions;
                                       
-                                      [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBShippingManagerDidRecieveSuggestionsNotification object:nil]];
+                                      [self.parentManager manager:self haveChange:ShippingManagerChangeSuggestions];
                                   }];
 }
 

@@ -245,10 +245,6 @@
                                  if(success)
                                      success(ord);
                                  
-                                 [[OrderCoordinator sharedInstance].itemsManager flushCache];
-                                 [[OrderCoordinator sharedInstance].bonusItemsManager flushCache];
-                                 [[OrderCoordinator sharedInstance].orderGiftsManager flushCache];
-                                 
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];
                                  
