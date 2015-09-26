@@ -18,6 +18,7 @@
     self.submodules = [NSMutableArray new];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerHandler:)];
+    tapRecognizer.cancelsTouchesInView = NO;
     self.userInteractionEnabled = YES;
     [self addGestureRecognizer:tapRecognizer];
 }

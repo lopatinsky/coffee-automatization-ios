@@ -44,16 +44,6 @@
         [self.modules addObject:cashModule];
     }
     
-    // Cards module
-    if([self moduleEnabled:[DBPaymentCardsModuleView class]]){
-        DBPaymentCardsModuleViewMode mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentCardsModuleViewModeSelectPayment : DBPaymentCardsModuleViewModeManageCards;
-        DBPaymentCardsModuleView *cardsModule = [[DBPaymentCardsModuleView alloc] initWithMode:mode];
-        cardsModule.analyticsCategory = self.analyticsCategory;
-        cardsModule.ownerViewController = self;
-        cardsModule.delegate = self;
-        [self.modules addObject:cardsModule];
-    }
-    
     // PayPal module
     if([self moduleEnabled:[DBPaymentPayPalModuleView class]]){
         DBPaymentPayPalModuleView *paypalModule = [DBPaymentPayPalModuleView new];
@@ -62,6 +52,16 @@
         paypalModule.delegate = self;
         paypalModule.mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentPayPalModuleViewModePaymentType : DBPaymentPayPalModuleViewModeManageAccount;
         [self.modules addObject:paypalModule];
+    }
+    
+    // Cards module
+    if([self moduleEnabled:[DBPaymentCardsModuleView class]]){
+        DBPaymentCardsModuleViewMode mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentCardsModuleViewModeSelectPayment : DBPaymentCardsModuleViewModeManageCards;
+        DBPaymentCardsModuleView *cardsModule = [[DBPaymentCardsModuleView alloc] initWithMode:mode];
+        cardsModule.analyticsCategory = self.analyticsCategory;
+        cardsModule.ownerViewController = self;
+        cardsModule.delegate = self;
+        [self.modules addObject:cardsModule];
     }
     
     [self layoutModules];
