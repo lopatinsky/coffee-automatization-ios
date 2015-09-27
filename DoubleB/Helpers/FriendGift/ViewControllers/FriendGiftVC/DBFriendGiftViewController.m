@@ -30,7 +30,9 @@
 
 @property (weak, nonatomic) IBOutlet DBModuleView *giftInfoModule;
 
-@property (weak, nonatomic) IBOutlet UIButton *giftButton;
+@property (weak, nonatomic) IBOutlet UIView *giftView;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *giftLabel;
 
 @property (strong, nonatomic) NSString *analyticsScreen;
 
@@ -55,11 +57,11 @@
     
     [self initModules];
     
-    [self initGiftButton];
+    [self initGiftView];
     
     [self checkSuggestion:NO];
     
-    [[DBFriendGiftHelper sharedInstance] addObserver:self withKeyPaths:@[DBFriendGiftHelperNotificationFriendName, DBFriendGiftHelperNotificationFriendPhone] selector:@selector(reloadGiftButton)];
+    [[DBFriendGiftHelper sharedInstance] addObserver:self withKeyPaths:@[DBFriendGiftHelperNotificationFriendName, DBFriendGiftHelperNotificationFriendPhone, DBFriendGiftHelperNotificationItemsPrice] selector:@selector(reloadGiftButton)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -74,10 +76,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.giftInfoModule reload];
-    [self reloadGiftButton];
-    
-    [self.view layoutIfNeeded];
+    [self reload];
 }
 
 - (void)dealloc{
@@ -86,15 +85,15 @@
 }
 
 - (void)initModules {
-    DBFGItemsModuleView *itemsModule = [DBFGItemsModuleView new];
-    itemsModule.analyticsCategory = self.analyticsScreen;
-    itemsModule.ownerViewController = self;
-    [self.giftInfoModule.submodules addObject:itemsModule];
-    
     DBFGRecipientModuleView *recipientModule = [DBFGRecipientModuleView new];
     recipientModule.analyticsCategory = self.analyticsScreen;
     recipientModule.ownerViewController = self;
     [self.giftInfoModule.submodules addObject:recipientModule];
+    
+    DBFGItemsModuleView *itemsModule = [DBFGItemsModuleView new];
+    itemsModule.analyticsCategory = self.analyticsScreen;
+    itemsModule.ownerViewController = self;
+    [self.giftInfoModule.submodules addObject:itemsModule];
     
     DBFGPaymentModule *paymentModule = [DBFGPaymentModule new];
     paymentModule.analyticsCategory = self.analyticsScreen;
@@ -104,12 +103,18 @@
     [self.giftInfoModule layoutModules];
 }
 
-- (void)initGiftButton {
-    [self.giftButton setTitle:NSLocalizedString(@"Подарить", nil) forState:UIControlStateNormal];
-    [self.giftButton addTarget:self action:@selector(clickGiftButton) forControlEvents:UIControlEventTouchUpInside];
-    [self.giftButton setBackgroundColor:[UIColor db_defaultColor]];
-    self.giftButton.layer.cornerRadius = self.giftButton.frame.size.height / 2;
-    self.giftButton.layer.masksToBounds = YES;
+- (void)initGiftView {
+    self.giftView.backgroundColor = [UIColor db_defaultColor];
+    self.giftView.layer.cornerRadius = self.giftView.frame.size.height / 2;
+    self.giftView.layer.masksToBounds = YES;
+    
+    self.giftLabel.text = NSLocalizedString(@"Подарить", nil);
+    
+    @weakify(self)
+    [self.giftView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        [self clickGiftButton];
+    }]];
 }
 
 - (void)clickGiftButton{
@@ -134,9 +139,18 @@
                    category:self.analyticsScreen];
 }
 
+- (void)reload {
+    [self.giftInfoModule reload:NO];
+    [self.giftInfoModule layoutIfNeeded];
+    
+    [self reloadGiftButton];
+}
+
 - (void)reloadGiftButton{
-    self.giftButton.enabled = [DBFriendGiftHelper sharedInstance].validData;
-    self.giftButton.alpha = [DBFriendGiftHelper sharedInstance].validData ? 1.0 : 0.5;
+    self.totalLabel.text = [NSString stringWithFormat:@"%.0f %@", [DBFriendGiftHelper sharedInstance].itemsManager.totalPrice, [Compatibility currencySymbol]];
+    
+    self.giftView.userInteractionEnabled = [DBFriendGiftHelper sharedInstance].validData;
+    self.giftView.alpha = [DBFriendGiftHelper sharedInstance].validData ? 1.0 : 0.5;
 }
 
 - (void)checkSuggestion:(BOOL)animated {

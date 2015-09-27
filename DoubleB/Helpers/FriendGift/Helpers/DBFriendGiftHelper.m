@@ -17,6 +17,8 @@
 NSString * const DBFriendGiftHelperNotificationFriendName = @"DBFriendGiftHelperNotificationFriendName";
 NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelperNotificationFriendPhone";
 
+NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelperNotificationItemsPrice";
+
 @implementation DBFriendGiftHelper
 - (instancetype)init {
     self = [super init];
@@ -26,8 +28,15 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
         
         [self.friendName addObserver:self forKeyPath:@"value" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) context:nil];
         [self.friendPhone addObserver:self forKeyPath:@"value" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) context:nil];
+        
+        _itemsManager = [[OrderItemsManager alloc] initWithParentManager:self];
     }
     return self;
+}
+
+- (void)dealloc {
+    [self.friendName removeObserver:self forKeyPath:@"value"];
+    [self.friendPhone removeObserver:self forKeyPath:@"value"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -45,16 +54,22 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
     }
 }
 
-- (void)dealloc {
-    [self.friendName removeObserver:self forKeyPath:@"value"];
-    [self.friendPhone removeObserver:self forKeyPath:@"value"];
+- (void)manager:(id<OrderPartManagerProtocol>)manager haveChange:(NSInteger)changeType {
+    switch (changeType) {
+        case ItemsManagerChangeTotalPrice:{
+            [self notifyObserverOf:DBFriendGiftHelperNotificationItemsPrice];
+        }break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
     
     [DBFriendGiftHelper setValue:@"Заголовок с сервака" forKey:@"titleFriendGiftScreen"];
-    [DBFriendGiftHelper setValue:@"Перепиши, чтобы текст брался с сервака" forKey:@"textFriendGiftScreen"];
+    [DBFriendGiftHelper setValue:@"Перепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака" forKey:@"textFriendGiftScreen"];
     
     [self fetchItems:nil];
 }
@@ -62,7 +77,7 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 
 - (void)processGift:(void(^)(NSString *smsText))success
             failure:(void(^)(NSString *errorDescription))failure {
-    if(self.validData){
+    if(!self.validData){
         if(failure)
             failure(nil);
         return;

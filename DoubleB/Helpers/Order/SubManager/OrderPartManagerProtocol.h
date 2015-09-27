@@ -8,13 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-@class OrderCoordinator;
+@protocol OrderPartManagerProtocol;
+
+@protocol OrderParentManagerProtocol <NSObject>
+
+- (void)manager:(id<OrderPartManagerProtocol>)manager haveChange:(NSInteger)changeType;
+
+@end
 
 @protocol OrderPartManagerProtocol <NSObject>
 
 /**
  * Initializer for all managers, that manages by coordinator
  */
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager;
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager;
 
 @end

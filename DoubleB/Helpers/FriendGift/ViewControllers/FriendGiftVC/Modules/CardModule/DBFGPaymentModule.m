@@ -12,7 +12,9 @@
 #import "IHPaymentManager.h"
 
 @interface DBFGPaymentModule ()
-@property (weak, nonatomic) IBOutlet UIImageView *cardImageView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
@@ -28,7 +30,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    [self.cardImageView templateImageWithName:@"card.png"];
+    
+    self.headerLabel.textColor = [UIColor db_textGrayColor];
+    self.headerLabel.text = NSLocalizedString(@"Выберите карту для оплаты", nil);
+    
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
 }
 
@@ -39,7 +44,7 @@
     if (defaultCard) {
         NSString *cardNumber = defaultCard.pan;
         NSString *pan = [cardNumber substringFromIndex:cardNumber.length-4];
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ ....%@", defaultCard.cardIssuer, pan];
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ - **** **** **** %@", defaultCard.cardIssuer, pan];
         self.titleLabel.textColor = [UIColor blackColor];
     } else {
         self.titleLabel.text = NSLocalizedString(@"Нет карт", nil);

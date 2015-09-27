@@ -11,12 +11,15 @@
 #import "OrderItemsManager.h"
 #import "DBUserProperty.h"
 #import "DBModuleManagerProtocol.h"
+#import "OrderPartManagerProtocol.h"
 
 // External notification constants
 extern NSString * const DBFriendGiftHelperNotificationFriendName;
 extern NSString * const DBFriendGiftHelperNotificationFriendPhone;
 
-@interface DBFriendGiftHelper : DBPrimaryManager<DBModuleManagerProtocol>
+extern NSString * const DBFriendGiftHelperNotificationItemsPrice;
+
+@interface DBFriendGiftHelper : DBPrimaryManager<DBModuleManagerProtocol, OrderParentManagerProtocol>
 
 @property (nonatomic, readonly) BOOL enabled;
 

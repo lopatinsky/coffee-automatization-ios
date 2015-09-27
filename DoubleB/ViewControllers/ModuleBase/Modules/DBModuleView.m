@@ -45,11 +45,11 @@
         }
     }
     
-    [self reload];
+    [self reload:NO];
 }
 
-- (void)reload{
-    [self reload:NO];
+- (void)reload {
+    [self reload:YES];
 }
 
 - (void)reload:(BOOL)animated {
@@ -57,6 +57,7 @@
         [module reload:animated];
     }
     
+    [self invalidateIntrinsicContentSize];
     [self layoutIfNeeded];
 }
 

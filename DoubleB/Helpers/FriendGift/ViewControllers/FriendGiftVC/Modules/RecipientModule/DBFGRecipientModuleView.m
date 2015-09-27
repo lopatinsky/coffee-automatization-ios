@@ -14,10 +14,14 @@
 #import "UIViewController+DBPeoplePickerController.h"
 
 @interface DBFGRecipientModuleView ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *profileLabel;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
-@property (weak, nonatomic) IBOutlet UIImageView *phoneImageView;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @property (weak, nonatomic) IBOutlet UIImageView *contactsImageView;
@@ -25,6 +29,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *middleSeparatorView;
 @property (weak, nonatomic) IBOutlet UIView *bottomSeparatorView;
+@property (weak, nonatomic) IBOutlet UIView *topSeparatorView;
 
 @end
 
@@ -38,8 +43,12 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.headerLabel.textColor = [UIColor db_textGrayColor];
+    self.headerLabel.text = NSLocalizedString(@"Контактные данные вашего друга", nil);
+    
     // Initialize name
-    [self.profileImageView templateImageWithName:@"profile"];
+    self.profileLabel.text = NSLocalizedString(@"ФИО", nil);
     
     self.nameTextField.placeholder = NSLocalizedString(@"Имя Фамилия", nil);
     self.nameTextField.keyboardType = UIKeyboardTypeDefault;
@@ -47,7 +56,7 @@
     [self.nameTextField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
     
     // Initialize phone
-    [self.phoneImageView templateImageWithName:@"phone"];
+    self.phoneLabel.text = NSLocalizedString(@"Телефон", nil);
     
     self.phoneTextField.placeholder = NSLocalizedString(@"Контактный номер телефона", nil);
     self.phoneTextField.keyboardType = UIKeyboardTypePhonePad;
@@ -56,6 +65,7 @@
     [self.phoneTextField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
     
     // Initialize separators
+    self.topSeparatorView.backgroundColor = [UIColor db_separatorColor];
     self.middleSeparatorView.backgroundColor = [UIColor db_separatorColor];
     self.bottomSeparatorView.backgroundColor = [UIColor db_separatorColor];
     
@@ -76,7 +86,7 @@
         if(state == DBProcessStateDone){
             [DBFriendGiftHelper sharedInstance].friendName.value = name;
             [DBFriendGiftHelper sharedInstance].friendPhone.value = phone;
-            [self reload];
+            [self reload:YES];
             
             [GANHelper analyzeEvent:@"friend_contact_selected"
                               label:[NSString stringWithFormat:@"%@,%@", name, phone]

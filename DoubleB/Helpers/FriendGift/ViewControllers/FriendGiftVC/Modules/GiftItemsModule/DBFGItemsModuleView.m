@@ -14,9 +14,20 @@
 #import "DBFGItemsViewController.h"
 
 @interface DBFGItemsModuleView ()<UITableViewDataSource, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
+
+@property (weak, nonatomic) IBOutlet UIView *topSeparator;
+@property (weak, nonatomic) IBOutlet UIView *bottomSeparator;
+
+@property (weak, nonatomic) IBOutlet UIView *addView;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIImageView *addImage;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consraintAddViewLeadingToSuperView;
+@property (nonatomic) CGFloat initialAddViewWidth;
 
 @end
 
@@ -30,15 +41,22 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.headerLabel.textColor = [UIColor db_textGrayColor];
+    self.headerLabel.text = NSLocalizedString(@"Выберите подарок", nil);
+    
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 60.f;
+    self.tableView.rowHeight = 44.f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.scrollEnabled = NO;
     
-    [self.addButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
-    [self.addButton setTitle:NSLocalizedString(@"Выбери подарок", nil) forState:UIControlStateNormal];
+    self.initialAddViewWidth = self.addView.frame.size.width;
+    self.consraintAddViewLeadingToSuperView.constant = 0;
     [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.addImage templateImageWithName:@"gift_icon"];
     
-    self.separatorView.backgroundColor = [UIColor db_separatorColor];
+    self.topSeparator.backgroundColor = [UIColor db_separatorColor];
+    self.bottomSeparator.backgroundColor = [UIColor db_separatorColor];
 }
 
 - (void)addButtonClick {
@@ -48,20 +66,41 @@
 
 - (void)reload:(BOOL)animated {
     [super reload:animated];
+    
     [self.tableView reloadData];
-    [self setNeedsLayout];
+    
+    void (^block)() = ^void() {
+        if([DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
+            self.consraintAddViewLeadingToSuperView.constant = 0;
+        } else {
+            self.consraintAddViewLeadingToSuperView.constant = self.frame.size.width - self.initialAddViewWidth;
+        }
+        [self layoutIfNeeded];
+    };
+    
+    if(animated) {
+        [UIView animateWithDuration:2 animations:block];
+    } else {
+        block();
+    }
 }
 
 - (CGSize)moduleViewContentSize {
-    int height = self.frame.size.height - self.tableView.frame.size.height;
-    height += [DBFriendGiftHelper sharedInstance].itemsManager.totalCount * self.tableView.rowHeight;
+    int height = self.headerView.frame.size.height;
+    int tableHeight = [DBFriendGiftHelper sharedInstance].itemsManager.items.count * self.tableView.rowHeight;
+    height += tableHeight;
+    
+    if(tableHeight == 0) {
+        height += 40;
+    }
+    
     return CGSizeMake(self.frame.size.width, height);
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [DBFriendGiftHelper sharedInstance].itemsManager.totalCount;
+    return [DBFriendGiftHelper sharedInstance].itemsManager.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -92,7 +131,7 @@
     [self.tableView beginUpdates];
     [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                           withRowAnimation:UITableViewRowAnimationLeft];
-    [self reload];
+    [self reload:YES];
     [self.tableView endUpdates];
 }
 
@@ -112,6 +151,14 @@
     } else {
         [cell reloadCount];
     }
+}
+
+- (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell{
+    OrderItem *item = cell.orderItem;
+    
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
+    positionVC.parentNavigationController = self.ownerViewController.navigationController;
+    [self.ownerViewController.navigationController pushViewController:positionVC animated:YES];
 }
 
 #pragma mark - UIGestureRecognizerDelegate

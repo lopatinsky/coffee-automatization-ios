@@ -1,71 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBFGPaymentModule">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card.png" translatesAutoresizingMaskIntoConstraints="NO" id="p5G-pg-NhI">
-                    <rect key="frame" x="8" y="12" width="20" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="16" id="6bJ-8f-XrN"/>
-                        <constraint firstAttribute="width" constant="20" id="WJA-4i-8Sb"/>
-                    </constraints>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnB-ML-eU7">
-                    <rect key="frame" x="0.0" y="39.5" width="320" height="0.5"/>
+                    <rect key="frame" x="0.0" y="84.5" width="320" height="0.5"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.69999999999999996" id="PdC-u2-WjJ"/>
                     </constraints>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02g-Hi-7QA">
-                    <rect key="frame" x="37" y="9" width="275" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="fW2-NK-sLa"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <rect key="frame" x="8" y="50" width="304" height="24.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZp-8r-qgY">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите карту для оплаты" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6v-wX-AXH">
+                            <rect key="frame" x="8" y="10" width="307" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Grs-WZ-CFk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="e6v-wX-AXH" secondAttribute="bottom" id="4Fq-Ba-yNb"/>
+                        <constraint firstItem="e6v-wX-AXH" firstAttribute="leading" secondItem="mZp-8r-qgY" secondAttribute="leading" constant="8" id="N4t-c0-PxA"/>
+                        <constraint firstAttribute="trailing" secondItem="e6v-wX-AXH" secondAttribute="trailing" constant="5" id="cuq-VW-OHf"/>
+                        <constraint firstAttribute="height" constant="40" id="ydS-JD-hGj"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="WnB-ML-eU7" secondAttribute="bottom" id="AAt-fF-Hu8"/>
-                <constraint firstItem="02g-Hi-7QA" firstAttribute="centerY" secondItem="p5G-pg-NhI" secondAttribute="centerY" id="Byt-QP-F86"/>
-                <constraint firstItem="p5G-pg-NhI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="MrC-Y2-gWh"/>
+                <constraint firstItem="mZp-8r-qgY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OTG-01-chk"/>
                 <constraint firstItem="WnB-ML-eU7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Rb9-75-9md"/>
-                <constraint firstItem="02g-Hi-7QA" firstAttribute="leading" secondItem="p5G-pg-NhI" secondAttribute="trailing" constant="9" id="Y09-Xl-3Nm"/>
-                <constraint firstAttribute="centerY" secondItem="p5G-pg-NhI" secondAttribute="centerY" id="jE8-h4-YX6"/>
+                <constraint firstItem="02g-Hi-7QA" firstAttribute="top" secondItem="mZp-8r-qgY" secondAttribute="bottom" constant="10" id="Tli-4r-kRd"/>
+                <constraint firstItem="WnB-ML-eU7" firstAttribute="top" secondItem="02g-Hi-7QA" secondAttribute="bottom" constant="10" id="XGb-0w-t4T"/>
+                <constraint firstAttribute="trailing" secondItem="mZp-8r-qgY" secondAttribute="trailing" id="auV-AG-ZtD"/>
                 <constraint firstAttribute="trailing" secondItem="WnB-ML-eU7" secondAttribute="trailing" id="m9I-Uj-vTw"/>
                 <constraint firstAttribute="trailing" secondItem="02g-Hi-7QA" secondAttribute="trailing" constant="8" id="t2L-Pf-MnA"/>
+                <constraint firstItem="mZp-8r-qgY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yKx-kK-swV"/>
+                <constraint firstItem="02g-Hi-7QA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="zA5-2W-uDB"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="cardImageView" destination="p5G-pg-NhI" id="cBH-E1-dSL"/>
+                <outlet property="headerLabel" destination="e6v-wX-AXH" id="8qv-ZP-nLp"/>
+                <outlet property="headerView" destination="mZp-8r-qgY" id="QwE-hN-bG6"/>
                 <outlet property="separatorView" destination="WnB-ML-eU7" id="pN2-Kz-QBp"/>
                 <outlet property="titleLabel" destination="02g-Hi-7QA" id="VHZ-AO-gom"/>
             </connections>
-            <point key="canvasLocation" x="359" y="98"/>
+            <point key="canvasLocation" x="359" y="51.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="card.png" width="20" height="16"/>
-    </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

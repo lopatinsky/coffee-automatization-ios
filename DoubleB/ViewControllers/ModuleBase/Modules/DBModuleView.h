@@ -18,8 +18,16 @@
 // Use only if you set modules from code;
 - (void)layoutModules;
 
-- (void)reload;
+/**
+ * Reload content of module and all submodules. Recalculate size
+ */
 - (void)reload:(BOOL)animated;
+
+/**
+ * Animated reload
+ * Not override this method. Use in only for react on notifications
+ */
+- (void)reload;
 
 - (CGSize)moduleViewContentSize;
 - (void)touchAtLocation:(CGPoint)location;

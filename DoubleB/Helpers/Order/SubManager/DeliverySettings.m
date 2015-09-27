@@ -10,7 +10,7 @@
 #import "OrderCoordinator.h"
 
 @interface DeliverySettings ()
-@property (weak, nonatomic) OrderCoordinator *parentManager;
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 
 @property (strong, nonatomic) DBDeliveryType *lastNotShippingDeliveryType;
 
@@ -20,7 +20,7 @@
 
 @implementation DeliverySettings
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
     self = [super init];
     if (self) {
         _parentManager = parentManager;

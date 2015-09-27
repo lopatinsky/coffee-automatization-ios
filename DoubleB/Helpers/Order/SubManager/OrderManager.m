@@ -22,12 +22,12 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
 
 @interface OrderManager ()
-@property (weak, nonatomic) OrderCoordinator *parentManager;
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 @end
 
 @implementation OrderManager
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
     self = [super init];
     if (self) {
         _parentManager = parentManager;

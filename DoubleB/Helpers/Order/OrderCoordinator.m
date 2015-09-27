@@ -78,7 +78,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     return result;
 }
 
-- (void)manager:(id<ManagerProtocol> __nonnull)manager haveChange:(NSInteger)changeType{
+- (void)manager:(id<OrderPartManagerProtocol>)manager haveChange:(NSInteger)changeType{
     if([manager isKindOfClass:[OrderItemsManager class]]){
         switch (changeType) {
             case ItemsManagerChangeTotalPrice:
