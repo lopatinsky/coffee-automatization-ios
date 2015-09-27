@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ViewControllers</key>
+	<dict/>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://mycompany.test2.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4278214478</integer>
+		<key>CompanyGAKey</key>
+		<string></string>
+	</dict>
+</dict>
+</plist>
