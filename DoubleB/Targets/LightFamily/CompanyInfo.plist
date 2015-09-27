@@ -7,11 +7,18 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://mycompany.test2.doubleb-automation-production.appspot.com/</string>
+		<string>http://lightfamily.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<integer>4278214478</integer>
+		<integer>0</integer>
 		<key>CompanyGAKey</key>
-		<string></string>
+		<string>UA-65821587-46</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>klCcZr7mnacqTCWQtlSGHRXYkXpLsrHRERhqjaLZ</string>
+			<key>clientKey</key>
+			<string>j0o9HzZVNNBORVRkuzzRnLLXxdQ1Ero8D2lp7YI1</string>
+		</dict>
 	</dict>
 </dict>
 </plist>
