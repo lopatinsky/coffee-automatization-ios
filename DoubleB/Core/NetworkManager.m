@@ -63,20 +63,20 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 }
 
 - (void)connectionFailed:(NSNotification *)notification {
-    NSString *opClass = [notification userInfo][@"class"];
-    
-    if ([self.errorsHandler objectForKey:opClass]) {
-        NSInteger numOfErrors = [[self.errorsHandler objectForKey:opClass] integerValue];
-        [self.errorsHandler setObject:@(++numOfErrors) forKey:opClass];
-        if (numOfErrors == MAX_REPEATS) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerConnectionFailed object:nil];
-        } else {
-            [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(opClass) new]];
-        }
-    } else {
-        [self.errorsHandler setObject:@(1) forKey:opClass];
-        [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(opClass) new]];
-    }
+//    NSString *opClass = [notification userInfo][@"class"];
+//    
+//    if ([self.errorsHandler objectForKey:opClass]) {
+//        NSInteger numOfErrors = [[self.errorsHandler objectForKey:opClass] integerValue];
+//        [self.errorsHandler setObject:@(++numOfErrors) forKey:opClass];
+//        if (numOfErrors == MAX_REPEATS) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerConnectionFailed object:nil];
+//        } else {
+//            [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(opClass) new]];
+//        }
+//    } else {
+//        [self.errorsHandler setObject:@(1) forKey:opClass];
+//        [self.operationQueue addConcurrentPendingOperation:[NSClassFromString(opClass) new]];
+//    }
 }
 
 - (void)setOperationQueue:(NSOperationQueue *)operationQueue {

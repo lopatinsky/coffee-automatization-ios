@@ -62,7 +62,7 @@ typedef enum : NSUInteger {
     
     self.state = RootStateLaunch;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
     
@@ -73,14 +73,14 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)showAlertViewWithInternetError {
-    if (!self.alertView || ![self.alertView isVisible]) {
-        self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
-                                              cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
-                                              }];
-    }
-}
+//- (void)showAlertViewWithInternetError {
+//    if (!self.alertView || ![self.alertView isVisible]) {
+//        self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
+//                                              cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
+//                                              }];
+//    }
+//}
 
 - (void)changeRoot {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
