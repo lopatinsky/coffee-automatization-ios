@@ -10,5 +10,8 @@
 
 @interface UIViewController (AlertView)
 - (void)showError:(NSString *)message;
+
 - (void)showAlert:(NSString *)message;
+- (void)showAlert:(NSString *)title message:(NSString *)message;
+
 @end

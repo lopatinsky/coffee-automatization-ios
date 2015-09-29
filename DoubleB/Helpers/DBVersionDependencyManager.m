@@ -19,6 +19,7 @@
 + (void)performAll {
 }
 
+#pragma mark - User History
 + (void)analyzeUserModifierChoicesFromHistory {
     BOOL analyzed = [[self valueForKey:@"kDBUserHistoryAnalyzedForModifiers"] boolValue];
     

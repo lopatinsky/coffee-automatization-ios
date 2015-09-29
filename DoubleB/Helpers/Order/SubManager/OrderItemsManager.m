@@ -15,21 +15,29 @@
 NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewTotalPriceNotification";
 
 @interface ItemsManager ()
-@property (weak, nonatomic) OrderCoordinator *parentManager;
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 
 @property (nonatomic, strong) NSMutableArray *items;
 @end
 
 @implementation ItemsManager
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
-    self = [super init];
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
+    self = [self init];
     if (self) {
         _parentManager = parentManager;
+        
+    }
+    
+    return self;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if(self) {
         _items = [NSMutableArray new];
         [self reloadTotal];
     }
-    
     return self;
 }
 

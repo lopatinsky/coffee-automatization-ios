@@ -10,7 +10,6 @@
 #import "DBSettingsCell.h"
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
-//#import "DBCardsViewController.h"
 #import "DBPaymentViewController.h"
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
@@ -19,10 +18,11 @@
 #import "DBCompanyInfoViewController.h"
 #import "IHPaymentManager.h"
 #import "OrderCoordinator.h"
-#import "Order.h"
 #import "DBPayPalManager.h"
 #import "DBPersonalWalletView.h"
 #import "DBCompaniesManager.h"
+#import "DBFriendGiftHelper.h"
+#import "DBFriendGiftViewController.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -81,33 +81,25 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"viewController": [ViewControllerManager shareFriendInvitationViewController]}];
     }
     
+    // Friend gift item
+//    if([DBFriendGiftHelper sharedInstance].enabled) {
+        [self.settingsItems addObject:@{@"name": @"friendGiftVC",
+                                        @"title": NSLocalizedString(@"Подарок другу", nil),
+                                        @"image": @"gift_icon",
+                                        @"viewController": [DBFriendGiftViewController new]}];
+//    }
+    
     // Payment item
     // Cards item
-    NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
-    if([availablePaymentTypes containsObject:@(PaymentTypeCard)] || [availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
+    if([[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard] || [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCash]){
         DBPaymentViewController *paymentVC = [DBPaymentViewController new];
-        paymentVC.mode = DBPaymentViewControllerModeManage;
-        
-        NSString *title = NSLocalizedString(@"Карты", nil);
-        
-        // PayPal item
-        if([availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
-            title = NSLocalizedString(@"Электронные платежи", nil);
-        }
+        paymentVC.mode = DBPaymentViewControllerModeSettings;
         
         [self.settingsItems addObject:@{@"name": @"cardsVC",
-                                        @"title": title,
+                                        @"title": NSLocalizedString(@"Оплата", nil),
                                         @"image": @"card",
                                         @"viewController": paymentVC}];
     }
-
-    
-    // Promotion list item
-    DBPromosListViewController *promosVC = [DBPromosListViewController new];
-    [self.settingsItems addObject:@{@"name": @"promosVC",
-                                    @"title": NSLocalizedString(@"Список акций", nil),
-                                    @"image": @"menu_icon",
-                                    @"viewController": promosVC}];
     
     // Personal wallet item
     if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
@@ -115,6 +107,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"image": @"payment"}];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
+    
+    // Promotion list item
+    DBPromosListViewController *promosVC = [DBPromosListViewController new];
+    [self.settingsItems addObject:@{@"name": @"promosVC",
+                                    @"title": NSLocalizedString(@"Список акций", nil),
+                                    @"image": @"menu_icon",
+                                    @"viewController": promosVC}];
     
     // Contact us item
     [self.settingsItems addObject:@{@"name": @"mailer",
@@ -200,7 +199,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     cell.titleLabel.text = settingsItemInfo[@"title"];
     
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
-        NSString *profileText = [DBClientInfo sharedInstance].clientName;
+        NSString *profileText = [DBClientInfo sharedInstance].clientName.value;
         cell.titleLabel.text = profileText && profileText.length ? profileText : NSLocalizedString(@"Профиль", nil);
     }
     
@@ -252,6 +251,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]) {
         [self presentViewController:settingsItemInfo[@"viewController"] animated:YES completion:nil];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"friendGiftVC"]) {
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]) {

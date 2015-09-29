@@ -21,17 +21,20 @@
 @synthesize position = _position;
 
 - (instancetype)initWithType:(DBPositionCellAppearanceType)type{
-    NSString *nibIdentifier;
-    if (type == DBPositionCellAppearanceTypeCompact) {
-        nibIdentifier = @"DBPositionCompactCell";
-    } else {
-        nibIdentifier = @"DBPositionCell";
-    }
+    NSString *nibIdentifier = [DBPositionCell reuseIdentifierFor:type];
     
     self = [[[NSBundle mainBundle] loadNibNamed:nibIdentifier owner:self options:nil] firstObject];
     _appearanceType = type;
     
     return self;
+}
+
++ (NSString *)reuseIdentifierFor:(DBPositionCellAppearanceType)type {
+    if (type == DBPositionCellAppearanceTypeCompact) {
+        return @"DBPositionCompactCell";
+    } else {
+        return @"DBPositionCell";
+    }
 }
 
 - (void)awakeFromNib

@@ -75,40 +75,6 @@
                                  
                                  [[IHSecureStore sharedInstance] setClientId:[NSString stringWithFormat:@"%lld", (long long)[responseObject[@"client_id"] longLongValue]]];
                                  
-//                                 if(responseObject[@"share_type"]){
-//                                     int shareType = [responseObject[@"share_type"] intValue];
-//                                     switch (shareType) {
-//                                         case 0:// Share
-//                                             break;
-//                                         case 1:// Ivitation to app
-//                                             break;
-//                                         case 2:{// Friend gift
-//                                             NSString *branchName = responseObject[@"branch_name"];
-//                                             NSString *branchPhone = responseObject[@"branch_phone"];
-//                                             
-//                                             if(![[DBClientInfo sharedInstance] validClientName]){
-//                                                 [DBClientInfo sharedInstance].clientName = branchName;
-//                                             }
-//                                             
-//                                             if(![[DBClientInfo sharedInstance] validClientPhone]){
-//                                                 [DBClientInfo sharedInstance].clientPhone = branchPhone;
-//                                             }
-//                                             
-////                                             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFriendGiftRecievedNotification object:nil]];
-//                                         }
-//                                             break;
-//                                     }
-//                                 }
-                                 
-//                                 BOOL branchGiftsPromoEnabled = [responseObject[@"branch_gifts"] boolValue];
-//                                 [[NSUserDefaults standardUserDefaults] setObject:@(branchGiftsPromoEnabled)
-//                                                                           forKey:kDBGiftForFriendPromoEnabled];
-//                                 
-//                                 BOOL branchInvitationsPromoEnabled = [responseObject[@"branch_invitations"] boolValue];
-//                                 [[NSUserDefaults standardUserDefaults] setObject:@(branchInvitationsPromoEnabled)
-//                                                                           forKey:kDBFreeBeveragesForSharePromoEnabled];
-//                                 
-//                                 [[NSUserDefaults standardUserDefaults] synchronize];
                                  
                                  if(analytics){
                                      [GANHelper analyzeEvent:@"user_register_success"
@@ -139,9 +105,9 @@
     if(clientId){
         [[DBAPIClient sharedClient] POST:@"client"
                               parameters:@{@"client_id": clientId,
-                                           @"client_name": [DBClientInfo sharedInstance].clientName,
-                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone,
-                                           @"client_email": [DBClientInfo sharedInstance].clientMail}
+                                           @"client_name": [DBClientInfo sharedInstance].clientName.value,
+                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone.value,
+                                           @"client_email": [DBClientInfo sharedInstance].clientMail.value}
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      //NSLog(@"%@", responseObject);
                                      
@@ -591,9 +557,9 @@
 + (NSDictionary *)assembleClientInfo{
     NSMutableDictionary *clientInfo = [NSMutableDictionary new];
     clientInfo[@"id"] = [[IHSecureStore sharedInstance] clientId];
-    clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName;
-    clientInfo[@"phone"] = [DBClientInfo sharedInstance].clientPhone;
-    clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail;
+    clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName.value;
+    clientInfo[@"phone"] = [DBClientInfo sharedInstance].clientPhone.value;
+    clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail.value;
     
     return clientInfo;
 }

@@ -23,13 +23,13 @@
 
 @property (nonatomic) NSInteger lastUpdateNumber;
 
-@property (weak, nonatomic) OrderCoordinator *parentManager;
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 
 @end
 
 @implementation DBPromoManager
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
     self = [super init];
     if (self) {
         _parentManager = parentManager;

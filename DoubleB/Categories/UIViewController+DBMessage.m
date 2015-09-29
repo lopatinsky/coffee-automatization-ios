@@ -13,13 +13,13 @@
 @implementation UIViewController (DBMessage)
 
 static void (^dbMailViewControllerCallBack)(BOOL completed);
+static void (^dbMessageViewControllerCallBack)(MessageComposeResult result);
 
 - (void)presentMailViewControllerWithRecipients:(NSArray *)recipients callback:(void(^)(BOOL completed))callback{
     NSMutableArray *emails = [NSMutableArray arrayWithArray:[[DBCompanyInfo sharedInstance] supportEmails]];
     [emails addObject:[self getCompanySupportMail]];
     if([MFMailComposeViewController canSendMail]){
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-//        [mailer setSubject:NSLocalizedString(@"Обратная связь", nil)];
         [mailer setSubject:[DBCompanyInfo sharedInstance].bundleName];
         [mailer setToRecipients:emails];
         if(recipients)
@@ -79,6 +79,53 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     }
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)presentMessageViewControllerWithText:(NSString *)text
+                                  recipients:(NSArray *)recipients
+                                    callback:(void(^)(MessageComposeResult result))callback{
+    if([MFMessageComposeViewController canSendText]){
+        dbMessageViewControllerCallBack = callback;
+        MFMessageComposeViewController *messenger = [[MFMessageComposeViewController alloc] init];
+        messenger.body = text;
+        messenger.recipients = recipients;
+        messenger.messageComposeDelegate = self;
+        messenger.navigationBar.tintColor = [UIColor whiteColor];
+        
+        [self.navigationController presentViewController:messenger animated:YES completion:nil];
+    } else {
+        dbMessageViewControllerCallBack = nil;
+        [[[UIAlertView alloc] initWithTitle:@"Ошибка"
+                                    message:@"Вы не можете посылать SMS-сообщения с этого устройства"
+                                   delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil] show];
+    }
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            NSLog(@"Message sending Cancelled");
+            break;
+        case MessageComposeResultFailed:
+            [[[UIAlertView alloc] initWithTitle:@"Ошибка"
+                                        message:@"Произошла непредвиденная ошибка при отправке сообщения"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+            break;
+        case MessageComposeResultSent:
+            break;
+        default:
+            break;
+    }
+    
+    if(dbMessageViewControllerCallBack){
+        dbMessageViewControllerCallBack(result);
+    }
+    
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

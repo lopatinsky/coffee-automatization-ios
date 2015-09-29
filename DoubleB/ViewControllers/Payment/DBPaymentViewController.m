@@ -17,8 +17,6 @@
 
 @interface DBPaymentViewController ()<DBPaymentModuleViewDelegate>
 @property (strong, nonatomic) NSString *analyticsCategory;
-
-@property (strong, nonatomic) NSArray *availablePaymentTypes;
 @end
 
 @implementation DBPaymentViewController
@@ -30,22 +28,15 @@
     
     self.view.backgroundColor = [UIColor db_backgroundColor];
     
-    self.availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
-    
-    if(self.mode == DBPaymentViewControllerModeManage){
-        self.title = NSLocalizedString(@"Карты", nil);
+    self.title = NSLocalizedString(@"Оплата", nil);
+    if(self.mode == DBPaymentViewControllerModeSettings){
         self.analyticsCategory = CARDS_SCREEN;
-        
-        if([self.availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
-            self.title = NSLocalizedString(@"Электронные платежи", nil);
-        }
     } else {
-        self.title = NSLocalizedString(@"Оплата", nil);
         self.analyticsCategory = PAYMENT_SCREEN;
     }
     
     // Cash module
-    if([self.availablePaymentTypes containsObject:@(PaymentTypeCash)] && self.mode == DBPaymentViewControllerModeChoosePayment){
+    if([self moduleEnabled:[DBPaymentCashModuleView class]]){
         DBPaymentCashModuleView *cashModule = [DBPaymentCashModuleView new];
         cashModule.analyticsCategory = self.analyticsCategory;
         cashModule.ownerViewController = self;
@@ -54,7 +45,7 @@
     }
     
     // PayPal module
-    if([self.availablePaymentTypes containsObject:@(PaymentTypePayPal)]){
+    if([self moduleEnabled:[DBPaymentPayPalModuleView class]]){
         DBPaymentPayPalModuleView *paypalModule = [DBPaymentPayPalModuleView new];
         paypalModule.analyticsCategory = self.analyticsCategory;
         paypalModule.ownerViewController = self;
@@ -64,7 +55,7 @@
     }
     
     // Cards module
-    if([self.availablePaymentTypes containsObject:@(PaymentTypeCard)]){
+    if([self moduleEnabled:[DBPaymentCardsModuleView class]]){
         DBPaymentCardsModuleViewMode mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentCardsModuleViewModeSelectPayment : DBPaymentCardsModuleViewModeManageCards;
         DBPaymentCardsModuleView *cardsModule = [[DBPaymentCardsModuleView alloc] initWithMode:mode];
         cardsModule.analyticsCategory = self.analyticsCategory;
@@ -88,6 +79,28 @@
     if (!parent) {
         [GANHelper analyzeEvent:@"back_arrow_pressed" category:self.analyticsCategory];
     }
+}
+
+- (BOOL)moduleEnabled:(Class)moduleClass {
+    BOOL result = NO;
+    
+    if ([moduleClass isEqual:[DBPaymentCashModuleView class]]) {
+        result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCash];
+        result = result && self.mode == DBPaymentViewControllerModeChoosePayment;
+        result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypeCash)] : YES);
+    }
+    
+    if ([moduleClass isEqual:[DBPaymentCardsModuleView class]]) {
+        result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard];
+        result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypeCard)] : YES);
+    }
+    
+    if ([moduleClass isEqual:[DBPaymentPayPalModuleView class]]) {
+        result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypePayPal];
+        result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypePayPal)] : YES);
+    }
+    
+    return result;
 }
 
 #pragma mark - DBPaymentModuleViewDelegate

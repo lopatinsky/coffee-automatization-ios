@@ -115,12 +115,6 @@
 
 "Для отправки сообщений необходима авторизация в Mail" = "Please authorize in Mail to send messages";
 
-"Кофе Хостел" = "Coffee Hostel";
-
-"Имя Фамилия" = "Full name";
-"Контактный номер телефона" = "Phone number";
-"Ваш e-mail для получения чеков" = "Your e-mail for receipt";
-
 "Ваш баланс:" = "Your balance:";
 "Оплатить бонусами" = "Pay with bonuses";
 
@@ -131,8 +125,15 @@
 "Номер заказа: %@" = "Order number: %@";
 "Дополнить" = "Refill";
 
+// Profile
+"ФИО" = "Name";
+"Телефон" = "Phone";
+"Имя Фамилия" = "Full name";
+"Контактный номер телефона" = "Phone number";
+"Ваш e-mail для получения чеков" = "Your e-mail for receipt";
 "Укажите, пожалуйста, номер телефона" = "Please set your phone number";
 "Представьтесь, пожалуйста" = "Please fill your profile";
+"Контактные данные вашего друга" = "Your friend contacts";
 
 "Добавить карту" = "Add card";
 "Электронные платежи" = "E payment";
@@ -181,12 +182,20 @@
 
 // Gift items promo
 
+"Подарок другу" = "Gift for friend";
+"Выберите подарок" = "Choose the gift";
 "Подарок" = "Gift";
+"Подарки" = "Gifts";
+"Выберите карту для оплаты" = "Choose card for payment";
 
 // Sharing
 
 "Рассказать друзьям" = "Recommend app to friends";
 "Рассказать" = "Share";
+
+// Friend gift
+
+"Ваш подарок успешно отправлен" = "Your gift sent successfully";
 
 // promo codes
 "Промокоды" = "Promocodes";
