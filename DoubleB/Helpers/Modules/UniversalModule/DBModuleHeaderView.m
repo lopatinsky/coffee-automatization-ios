@@ -22,6 +22,7 @@
 }
 
 - (void)awakeFromNib {
+    self.backgroundColor = [UIColor db_backgroundColor];
     self.titleLabel.textColor = [UIColor db_textGrayColor];
 }
 

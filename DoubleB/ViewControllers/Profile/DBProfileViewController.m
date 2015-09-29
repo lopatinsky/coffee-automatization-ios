@@ -14,6 +14,9 @@
 #import "DBClientInfo.h"
 #import "DBServerAPI.h"
 
+#import "DBUniversalModulesManager.h"
+#import "DBUniversalModule.h"
+
 #import "UIBarButtonItem+BlocksKit.h"
 
 @interface DBProfileViewController ()
@@ -45,6 +48,13 @@
     mailModule.analyticsCategory = self.analyticsScreen;
     [self.modules addObject:mailModule];
     
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+        DBModuleView *moduleView = [module getModuleView];
+        moduleView.ownerViewController = self;
+        moduleView.analyticsCategory = self.analyticsScreen;
+        [self.modules addObject:moduleView];
+    }
+    
     [self layoutModules];
     
     [[DBClientInfo sharedInstance] addObserver:self withKeyPaths:@[DBClientInfoNotificationClientName, DBClientInfoNotificationClientPhone] selector:@selector(reloadDoneButton)];
@@ -65,6 +75,7 @@
         }];
     }
     
+    [self reloadModules:NO];
     [self reloadDoneButton];
 }
 

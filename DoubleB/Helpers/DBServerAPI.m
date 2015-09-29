@@ -25,6 +25,9 @@
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
 
+#import "DBUniversalModulesManager.h"
+#import "DBUniversalModule.h"
+
 #import <Parse/Parse.h>
 
 @implementation DBServerAPI
@@ -560,6 +563,10 @@
     clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName.value;
     clientInfo[@"phone"] = [DBClientInfo sharedInstance].clientPhone.value;
     clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail.value;
+    
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+        clientInfo[module.jsonField] = [module jsonRepresentation];
+    }
     
     return clientInfo;
 }

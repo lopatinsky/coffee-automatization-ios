@@ -10,6 +10,19 @@
 #import "DBAPIClient.h"
 
 #import "DBFriendGiftHelper.h"
+#import "DBUniversalModulesManager.h"
+
+typedef NS_ENUM(NSInteger, DBModuleType) {
+    DBModuleTypeMonthSubscription = 0,
+    DBModuleTypeFriendGift = 1,
+    DBModuleTypeFriendInvitation = 2,
+    DBModuleTypeProfileScreenUniversal = 4,
+    
+    DBModuleTypeLast // Enum item for iteration, not in use
+};
+
+@interface DBModulesManager ()
+@end
 
 @implementation DBModulesManager
 
@@ -40,16 +53,38 @@
 }
 
 - (void)processResponse:(NSDictionary *)response {
-    NSArray *modules = response[@"modules"];
+    NSMutableArray *appModules = [NSMutableArray new];
+    for (int i = 0; i < DBModuleTypeLast; i++){
+        [appModules addObject:@(i)];
+    }
     
+    // Switch on all necessary modules
+    NSArray *modules = response[@"modules"];
     for (NSDictionary *moduleDict in modules) {
         NSInteger type = [moduleDict getValueForKey:@"type"] ? [[moduleDict getValueForKey:@"type"] integerValue] : -1;
-        BOOL enabled = [[moduleDict getValueForKey:@"enable"] boolValue];
-        NSDictionary *dict = [moduleDict getValueForKey:@"info"];
         
         switch (type) {
             case DBModuleTypeFriendGift:
-                [[DBFriendGiftHelper sharedInstance] enableModule:enabled withDict:dict];
+                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:[moduleDict getValueForKey:@"info"]];
+                break;
+            case DBModuleTypeProfileScreenUniversal:
+                [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
+                
+            default:
+                [appModules removeObject:@(type)];
+                break;
+        }
+    }
+    
+    // Switch off all modules that not switched on
+    for (NSNumber *type in appModules) {
+        switch (type.integerValue) {
+            case DBModuleTypeFriendGift:
+                [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeProfileScreenUniversal:
+                [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
                 break;
                 
             default:

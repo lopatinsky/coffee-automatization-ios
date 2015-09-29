@@ -8,12 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, DBModuleType) {
-    DBModuleTypeMonthSubscription = 0,
-    DBModuleTypeFriendGift = 1,
-    DBModuleTypeFriendInvitation = 2
-};
-
 @interface DBModulesManager : NSObject
 
 + (instancetype)sharedInstance;
