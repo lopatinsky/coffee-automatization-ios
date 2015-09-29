@@ -16,4 +16,7 @@
 + (UIColor *)db_separatorColor;
 + (UIColor *)db_grayColor;
 
++ (UIColor *)db_defaultTextColor;
++ (UIColor *)db_textGrayColor;
+
 @end

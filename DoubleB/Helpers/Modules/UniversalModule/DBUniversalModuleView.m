@@ -7,15 +7,47 @@
 //
 
 #import "DBUniversalModuleView.h"
+#import "DBUniversalModule.h"
+#import "DBUniversalModuleItem.h"
+
+#import "DBModuleHeaderView.h"
+#import "DBUniversalModuleTextItemView.h"
+
+@interface DBUniversalModuleView ()
+
+@end
 
 @implementation DBUniversalModuleView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (instancetype)initWithModule:(DBUniversalModule *)module {
+    self = [super init];
+    
+    _module = module;
+    
+    [self commonInit];
+    
+    return self;
 }
-*/
+
+- (void)awakeFromNib {
+    
+}
+
+- (void)commonInit {
+    if (_module.title.length > 0) {
+        DBModuleHeaderView *headerView = [DBModuleHeaderView new];
+        headerView.title = _module.title;
+        
+        [self.submodules addObject:headerView];
+    }
+    
+    for (DBUniversalModuleItem *item in _module.items) {
+        DBUniversalModuleTextItemView *itemView = [[DBUniversalModuleTextItemView alloc] initWithItem:item];
+        [self.submodules addObject:itemView];
+    }
+    
+    self layoutM
+}
+
 
 @end

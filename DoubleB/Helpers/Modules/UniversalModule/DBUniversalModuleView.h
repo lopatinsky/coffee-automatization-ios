@@ -8,6 +8,12 @@
 
 #import "DBModuleView.h"
 
+@class DBUniversalModule;
+
 @interface DBUniversalModuleView : DBModuleView
+
+@property (strong, nonatomic, readonly) DBUniversalModule *module;
+
+- (instancetype)initWithModule:(DBUniversalModule *)module;
 
 @end
