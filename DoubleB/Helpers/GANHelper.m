@@ -18,9 +18,15 @@
 @implementation GANHelper 
 
 + (void)initialize {
+#ifdef DEBUG
 //    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
 //    [GAI sharedInstance].trackUncaughtExceptions = YES;
 //    [[GAI sharedInstance] setDefaultTracker:tracker];
+#else
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [[GAI sharedInstance] setDefaultTracker:tracker];
+#endif
 }
 
 + (void)analyzeScreen:(NSString *)screen {
