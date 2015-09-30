@@ -56,7 +56,7 @@
 - (void)shareFacebook {
     NSString *text = [DBShareHelper sharedInstance].textShare;
     NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
-    text = [text stringByAppendingString:@". Или воспользуйте промокодом: %@"];
+    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
     
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     content.contentURL = [NSURL URLWithString:urls[@"facebook"]];
@@ -115,7 +115,7 @@
     uploadImage.sourceImage = [DBShareHelper sharedInstance].imageForShare;
     
     NSString *text = [DBShareHelper sharedInstance].textShare;
-    text = [text stringByAppendingString:@". Или воспользуйте промокодом: %@"];
+    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
     shareDialog.text = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
     shareDialog.uploadImages = @[uploadImage];
     shareDialog.shareLink    = [[VKShareLink alloc] initWithTitle:@"Приглашение для друга" link:[NSURL URLWithString:[DBShareHelper sharedInstance].appUrls[@"vk"]]];
