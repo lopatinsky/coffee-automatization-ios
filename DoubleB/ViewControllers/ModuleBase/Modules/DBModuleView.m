@@ -15,7 +15,7 @@
 @implementation DBModuleView
 
 - (instancetype)init {
-    self = [super init];
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 40)];
     
     [self commomInit];
     

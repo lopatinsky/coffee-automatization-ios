@@ -12,6 +12,7 @@
 @interface DBProfileMailModuleView ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @end
 
@@ -31,6 +32,8 @@
     _textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
+    
+    self.separatorView.backgroundColor = [UIColor db_separatorColor];
 }
 
 - (void)textFieldDidChangeText:(UITextField *)textField{

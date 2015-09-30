@@ -10,10 +10,22 @@
 #import "DBUniversalModule.h"
 #import "DBUniversalModuleItem.h"
 
+#import "DBUniversalModuleDelegate.h"
+
+@interface DBUniversalModulesManager ()<DBUniversalModuleDelegate>
+
+@end
+
 @implementation DBUniversalModulesManager
 
 - (instancetype)init {
     self = [super init];
+    
+    NSData *modulesData = [DBUniversalModulesManager valueForKey:@"clientInfoModulesData"];
+    _availableModules = [NSKeyedUnarchiver unarchiveObjectWithData:modulesData];
+    for (DBUniversalModule *module in _availableModules){
+        module.delegate = self;
+    }
     
     return self;
 }
@@ -22,27 +34,42 @@
     if(enabled) {
         NSMutableArray *availableModules = [NSMutableArray new];
         for (NSDictionary *groupDict in moduleDict[@"groups"]) {
-            NSMutableArray *items = [NSMutableArray new];
-            for (NSDictionary *itemDict in groupDict[@"fields"]) {
-                DBUniversalModuleItem *item = [DBUniversalModuleItem new];
-                item.placeholder = [itemDict getValueForKey:@"title"] ?: @"";
-                item.order = [[itemDict getValueForKey:@"order"] integerValue];
-                item.jsonField = [itemDict getValueForKey:@"field"] ?: @"";
-                
-                [items addObject:item];
-            }
+            NSString *groupId = groupDict[@"group_field"];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moduleId == %@", groupId];
+            DBUniversalModule *module = [[_availableModules filteredArrayUsingPredicate:predicate] firstObject];
             
-            DBUniversalModule *module = [[DBUniversalModule alloc] initWithItems:items];
-            module.title = [groupDict getValueForKey:@"group_title"] ?: @"";
-            module.jsonField = [groupDict getValueForKey:@"group_field"] ?: @"";
-            [availableModules addObject:module];
+            if(module) {
+                [module syncWithResponseDict:groupDict];
+                [availableModules addObject:module];
+            } else {
+                DBUniversalModule *newModule = [[DBUniversalModule alloc] initWithResponseDict:groupDict];
+                newModule.delegate = self;
+                [availableModules addObject:newModule];
+            }
         }
-        
-        
         _availableModules = availableModules;
     } else {
         _availableModules = @[];
     }
+    
+    [self save];
+}
+
+- (void)save {
+    NSData *modulesData = [NSKeyedArchiver archivedDataWithRootObject:_availableModules];
+    [DBUniversalModulesManager setValue:modulesData forKey:@"clientInfoModulesData"];
+}
+
+#pragma mark - DBPrimaryManager
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsUniversalModulesManager";
+}
+
+#pragma mark - DBUniversalModuleDelegate
+
+- (void)db_universalModuleHaveChange {
+    [self save];
 }
 
 @end

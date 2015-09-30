@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Здесь будет текст" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Vf-Av-KRE">
-                    <rect key="frame" x="8" y="8" width="304" height="24"/>
+                    <rect key="frame" x="8" y="0.0" width="304" height="40"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -24,18 +24,18 @@
                     <rect key="frame" x="0.0" y="39.5" width="320" height="0.5"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="0.69999999999999996" id="EHm-Ft-rsI"/>
+                        <constraint firstAttribute="height" priority="900" constant="1" id="EHm-Ft-rsI"/>
                     </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="0Vf-Av-KRE" secondAttribute="bottom" constant="8" id="1xt-95-MDd"/>
+                <constraint firstAttribute="bottom" secondItem="0Vf-Av-KRE" secondAttribute="bottom" id="1xt-95-MDd"/>
                 <constraint firstAttribute="trailing" secondItem="wJm-ap-lUo" secondAttribute="trailing" id="2Pe-oL-N6V"/>
                 <constraint firstAttribute="trailing" secondItem="0Vf-Av-KRE" secondAttribute="trailing" constant="8" id="BNg-lc-EVJ"/>
                 <constraint firstItem="0Vf-Av-KRE" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="CdU-uH-7mc"/>
                 <constraint firstAttribute="bottom" secondItem="wJm-ap-lUo" secondAttribute="bottom" id="DQq-cT-eX3"/>
-                <constraint firstItem="0Vf-Av-KRE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="GZ3-GL-45H"/>
+                <constraint firstItem="0Vf-Av-KRE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="GZ3-GL-45H"/>
                 <constraint firstItem="wJm-ap-lUo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Vhs-Ez-ywo"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

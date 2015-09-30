@@ -9,7 +9,7 @@
 #import "DBUniversalModuleTextItemView.h"
 #import "DBUniversalModuleItem.h"
 
-@interface DBUniversalModuleTextItemView ()
+@interface DBUniversalModuleTextItemView ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
@@ -29,6 +29,7 @@
 
 - (void)awakeFromNib {
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
+    self.textField.delegate = self;
 }
 
 - (void)commonInit {
@@ -41,6 +42,10 @@
 
 - (void)textFieldDidChangeText:(UITextField *)textField{
     _item.text = textField.text;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [_item save];
 }
 
 
