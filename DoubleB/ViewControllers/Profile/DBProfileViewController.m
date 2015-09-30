@@ -11,6 +11,8 @@
 #import "DBProfilePhoneModuleView.h"
 #import "DBProfileMailModuleView.h"
 
+#import "DBModuleHeaderView.h"
+
 #import "DBClientInfo.h"
 #import "DBServerAPI.h"
 
@@ -29,6 +31,11 @@
     
     self.title = NSLocalizedString(@"Профиль", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
+    
+//    // Header module
+//    DBModuleHeaderView *headerModule = [DBModuleHeaderView new];
+//    headerModule.title = NSLocalizedString(@"Введите ваши контактные данные", nil);
+//    [self.modules addObject:headerModule];
     
     // Name module
     DBProfileNameModuleView *nameModule = [DBProfileNameModuleView new];

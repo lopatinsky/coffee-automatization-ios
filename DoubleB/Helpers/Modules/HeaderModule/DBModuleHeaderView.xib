@@ -11,9 +11,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrL-mB-9mx">
-                    <rect key="frame" x="8" y="17" width="304" height="15"/>
+                    <rect key="frame" x="8" y="10" width="304" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="15" id="s4k-V5-Ms5"/>
+                        <constraint firstAttribute="height" constant="30" id="s4k-V5-Ms5"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -22,7 +22,7 @@
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="TrL-mB-9mx" secondAttribute="bottom" constant="8" id="5Ji-gX-jFt"/>
+                <constraint firstAttribute="bottom" secondItem="TrL-mB-9mx" secondAttribute="bottom" id="5Ji-gX-jFt"/>
                 <constraint firstAttribute="trailing" secondItem="TrL-mB-9mx" secondAttribute="trailing" constant="8" id="GRm-dH-S1B"/>
                 <constraint firstItem="TrL-mB-9mx" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="imr-sf-JDL"/>
             </constraints>
