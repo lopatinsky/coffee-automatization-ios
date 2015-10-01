@@ -73,6 +73,9 @@
 }
 
 - (void)configure {
+    [self.datePickerView setDatePickerMode:UIDatePickerModeDateAndTime];
+    [self.datePickerView setDatePickerMode:UIDatePickerModeTime];
+    
     if(_type == DBTimePickerTypeDateTime || _type == DBTimePickerTypeTime){
         self.datePickerView.hidden = NO;
         self.pickerView.hidden = YES;
