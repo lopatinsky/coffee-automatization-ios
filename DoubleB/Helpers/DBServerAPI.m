@@ -105,12 +105,22 @@
 + (void)sendUserInfo:(void(^)(BOOL success))callback {
     NSString *clientId = [[IHSecureStore sharedInstance] clientId];
     
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"client_id"] = clientId;
+    params[@"client_name"] = [DBClientInfo sharedInstance].clientName.value;
+    params[@"client_phone"] = [DBClientInfo sharedInstance].clientPhone.value;
+    params[@"client_email"] = [DBClientInfo sharedInstance].clientMail.value;
+    
+    NSMutableDictionary *universalModules = [NSMutableDictionary new];
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+        universalModules[module.jsonField] = [module jsonRepresentation];
+    }
+    params[@"groups"] = [universalModules encodedString];
+    
     if(clientId){
         [[DBAPIClient sharedClient] POST:@"client"
-                              parameters:@{@"client_id": clientId,
-                                           @"client_name": [DBClientInfo sharedInstance].clientName.value,
-                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone.value,
-                                           @"client_email": [DBClientInfo sharedInstance].clientMail.value}
+                              parameters:params
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      //NSLog(@"%@", responseObject);
                                      
@@ -568,7 +578,7 @@
     for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
         universalModules[module.jsonField] = [module jsonRepresentation];
     }
-    clientInfo[@"fields"] = universalModules;
+    clientInfo[@"groups"] = universalModules;
     
     return clientInfo;
 }
