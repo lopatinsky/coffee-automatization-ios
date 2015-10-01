@@ -151,7 +151,9 @@
         if(self.categoryPicker.isOpened){
             [self hideCategoryPicker];
         } else {
-            [self showCatecoryPickerFromRect:self.navigationController.navigationBar.frame onView:self.navigationController.view];
+            if (self.categories.count > 0){
+                [self showCatecoryPickerFromRect:self.navigationController.navigationBar.frame onView:self.navigationController.view];
+            }
         }
         
         [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
