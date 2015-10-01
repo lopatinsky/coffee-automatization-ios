@@ -70,11 +70,9 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
-                
-            default:
-                [appModules removeObject:@(type)];
-                break;
         }
+        
+        [appModules removeObject:@(type)];
     }
     
     // Switch off all modules that not switched on

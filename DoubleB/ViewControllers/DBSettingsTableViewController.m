@@ -82,12 +82,12 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     // Friend gift item
-//    if([DBFriendGiftHelper sharedInstance].enabled) {
+    if([DBFriendGiftHelper sharedInstance].enabled) {
         [self.settingsItems addObject:@{@"name": @"friendGiftVC",
                                         @"title": NSLocalizedString(@"Подарок другу", nil),
                                         @"image": @"gift_icon",
                                         @"viewController": [DBFriendGiftViewController new]}];
-//    }
+    }
     
     // Payment item
     // Cards item
