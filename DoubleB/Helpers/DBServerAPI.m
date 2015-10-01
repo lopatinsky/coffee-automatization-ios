@@ -564,9 +564,11 @@
     clientInfo[@"phone"] = [DBClientInfo sharedInstance].clientPhone.value;
     clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail.value;
     
+    NSMutableDictionary *universalModules = [NSMutableDictionary new];
     for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
-        clientInfo[module.jsonField] = [module jsonRepresentation];
+        universalModules[module.jsonField] = [module jsonRepresentation];
     }
+    clientInfo[@"fields"] = universalModules;
     
     return clientInfo;
 }
