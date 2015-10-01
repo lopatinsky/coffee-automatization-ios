@@ -5,9 +5,9 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://luckmousse.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://cafepushkin.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<integer>4287722814</integer>
+		<integer>4293834061</integer>
 		<key>CompanyGAKey</key>
 		<string>UA-65821587-6</string>
 		<key>Parse</key>
