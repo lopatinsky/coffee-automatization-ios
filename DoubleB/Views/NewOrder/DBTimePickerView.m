@@ -73,6 +73,7 @@
 }
 
 - (void)configure {
+    // Hack for repare iOS9 bug
     [self.datePickerView setDatePickerMode:UIDatePickerModeDateAndTime];
     [self.datePickerView setDatePickerMode:UIDatePickerModeTime];
     
