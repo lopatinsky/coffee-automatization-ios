@@ -11,12 +11,12 @@
 #import "DBPaymentViewController.h"
 #import "IHPaymentManager.h"
 
+#import "DBModuleHeaderView.h"
+
 @interface DBFGPaymentModule ()
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @end
 
@@ -31,10 +31,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.headerLabel.textColor = [UIColor db_textGrayColor];
-    self.headerLabel.text = NSLocalizedString(@"Выберите карту для оплаты", nil);
-    
-    self.separatorView.backgroundColor = [UIColor db_separatorColor];
+    DBModuleHeaderView *header = [DBModuleHeaderView new];
+    header.title = NSLocalizedString(@"Выберите карту для оплаты", nil);
+    header.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.headerView addSubview:header];
+    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
 }
 
 - (void)reload:(BOOL)animated {

@@ -12,6 +12,7 @@
 #import "IHSecureStore.h"
 #import "DBClientInfo.h"
 #import "DBMenuPosition.h"
+#import "OrderItem.h"
 
 
 NSString * const DBFriendGiftHelperNotificationFriendName = @"DBFriendGiftHelperNotificationFriendName";
@@ -103,6 +104,14 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
     if([DBClientInfo sharedInstance].clientMail.valid){
         params[@"sender_mail"] = [DBClientInfo sharedInstance].clientMail.value;
     }
+    
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in self.itemsManager.items) {
+        [items addObject:[item requestJson]];
+    }
+    params[@"items"] = [items encodedString];
+    params[@"total_sum"] = @(self.itemsManager.totalPrice);
+    
     
     [[DBAPIClient sharedClient] POST:@"shared/gift/get_url"
                           parameters:params

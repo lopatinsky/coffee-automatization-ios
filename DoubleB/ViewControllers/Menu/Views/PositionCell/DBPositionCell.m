@@ -39,6 +39,8 @@
 
 - (void)awakeFromNib
 {
+    self.positionImageView = [self viewWithTag:1];
+    
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.backgroundColor = [UIColor whiteColor];
     

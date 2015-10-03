@@ -24,7 +24,7 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                 </textField>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZ7-HV-okI">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZ7-HV-okI" customClass="DBDefaultSeparatorView">
                     <rect key="frame" x="8" y="84" width="267" height="1"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -55,14 +55,14 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-xI-sMt">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tl4-xI-sMt" customClass="DBDefaultSeparatorView">
                     <rect key="frame" x="0.0" y="129" width="320" height="1"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="FR3-jJ-JmU"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abl-e8-4SX">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Abl-e8-4SX" customClass="DBDefaultSeparatorView">
                     <rect key="frame" x="0.0" y="40" width="320" height="1"/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -71,23 +71,8 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v0K-Yg-YqD">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите контактные данные вашего друга" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oV6-Fi-0JP">
-                            <rect key="frame" x="8" y="10" width="307" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="JeW-SP-xcN"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.47058823529411764" green="0.49019607843137253" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="0qj-Gd-pXo"/>
-                        <constraint firstItem="oV6-Fi-0JP" firstAttribute="leading" secondItem="v0K-Yg-YqD" secondAttribute="leading" constant="8" id="KzB-qd-gVi"/>
-                        <constraint firstAttribute="bottom" secondItem="oV6-Fi-0JP" secondAttribute="bottom" id="hN8-Nw-foc"/>
-                        <constraint firstAttribute="trailing" secondItem="oV6-Fi-0JP" secondAttribute="trailing" constant="5" id="jr3-0B-GEt"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ФИО" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K9H-sb-LBh">
@@ -145,17 +130,13 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="bottomSeparatorView" destination="tl4-xI-sMt" id="Q5s-da-Kak"/>
                 <outlet property="contactsButton" destination="1qg-ve-wPW" id="4nP-GB-ZAO"/>
                 <outlet property="contactsImageView" destination="No8-9Q-y1f" id="Xwy-Oz-VHj"/>
-                <outlet property="headerLabel" destination="oV6-Fi-0JP" id="GbF-MP-qZQ"/>
                 <outlet property="headerView" destination="v0K-Yg-YqD" id="Lud-5p-Quj"/>
-                <outlet property="middleSeparatorView" destination="tZ7-HV-okI" id="TjD-Oy-4P7"/>
                 <outlet property="nameTextField" destination="iGu-in-7TW" id="BLW-Y9-BCZ"/>
                 <outlet property="phoneLabel" destination="uk9-oY-X9Y" id="FeC-bA-Vnp"/>
                 <outlet property="phoneTextField" destination="ic9-5X-Fxy" id="HHu-ct-OXg"/>
                 <outlet property="profileLabel" destination="K9H-sb-LBh" id="nzk-q6-8j4"/>
-                <outlet property="topSeparatorView" destination="Abl-e8-4SX" id="IKK-3O-lGO"/>
             </connections>
             <point key="canvasLocation" x="359" y="-15.5"/>
         </view>

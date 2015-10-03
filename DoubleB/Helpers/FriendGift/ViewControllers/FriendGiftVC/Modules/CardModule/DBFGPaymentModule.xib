@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnB-ML-eU7">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnB-ML-eU7" customClass="DBDefaultSeparatorView">
                     <rect key="frame" x="0.0" y="84.5" width="320" height="0.5"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -25,22 +25,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZp-8r-qgY">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Введите карту для оплаты" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6v-wX-AXH">
-                            <rect key="frame" x="8" y="10" width="307" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="Grs-WZ-CFk"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" red="0.47058823529999999" green="0.49019607840000001" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="e6v-wX-AXH" secondAttribute="bottom" id="4Fq-Ba-yNb"/>
-                        <constraint firstItem="e6v-wX-AXH" firstAttribute="leading" secondItem="mZp-8r-qgY" secondAttribute="leading" constant="8" id="N4t-c0-PxA"/>
-                        <constraint firstAttribute="trailing" secondItem="e6v-wX-AXH" secondAttribute="trailing" constant="5" id="cuq-VW-OHf"/>
                         <constraint firstAttribute="height" constant="40" id="ydS-JD-hGj"/>
                     </constraints>
                 </view>
@@ -61,9 +46,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="headerLabel" destination="e6v-wX-AXH" id="8qv-ZP-nLp"/>
                 <outlet property="headerView" destination="mZp-8r-qgY" id="QwE-hN-bG6"/>
-                <outlet property="separatorView" destination="WnB-ML-eU7" id="pN2-Kz-QBp"/>
                 <outlet property="titleLabel" destination="02g-Hi-7QA" id="VHZ-AO-gom"/>
             </connections>
             <point key="canvasLocation" x="359" y="51.5"/>

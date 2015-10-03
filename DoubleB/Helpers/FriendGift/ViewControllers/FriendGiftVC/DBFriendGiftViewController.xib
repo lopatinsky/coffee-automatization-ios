@@ -94,7 +94,6 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="GVB-6r-fwl" firstAttribute="leading" secondItem="18K-za-knP" secondAttribute="leading" id="3Sm-Ip-pva"/>
                         <constraint firstItem="wp3-cy-wBr" firstAttribute="top" secondItem="iMV-VL-wlk" secondAttribute="bottom" constant="15" id="5JS-td-cpO"/>

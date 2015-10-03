@@ -12,11 +12,10 @@
 #import "AKNumericFormatter.h"
 #import "UITextField+AKNumericFormatter.h"
 #import "UIViewController+DBPeoplePickerController.h"
+#import "DBModuleHeaderView.h"
 
 @interface DBFGRecipientModuleView ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
-
 
 @property (weak, nonatomic) IBOutlet UILabel *profileLabel;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
@@ -26,10 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *contactsImageView;
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
-
-@property (weak, nonatomic) IBOutlet UIView *middleSeparatorView;
-@property (weak, nonatomic) IBOutlet UIView *bottomSeparatorView;
-@property (weak, nonatomic) IBOutlet UIView *topSeparatorView;
 
 @end
 
@@ -44,8 +39,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.headerLabel.textColor = [UIColor db_textGrayColor];
-    self.headerLabel.text = NSLocalizedString(@"Контактные данные вашего друга", nil);
+    DBModuleHeaderView *header = [DBModuleHeaderView new];
+    header.title = NSLocalizedString(@"Контактные данные вашего друга", nil);
+    header.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.headerView addSubview:header];
+    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
     
     // Initialize name
     self.profileLabel.text = NSLocalizedString(@"ФИО", nil);
@@ -64,11 +62,6 @@
     self.phoneTextField.numericFormatter = [AKNumericFormatter formatterWithMask:@"+* (***) ***-**-**" placeholderCharacter:'*'];
     [self.phoneTextField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
     
-    // Initialize separators
-    self.topSeparatorView.backgroundColor = [UIColor db_separatorColor];
-    self.middleSeparatorView.backgroundColor = [UIColor db_separatorColor];
-    self.bottomSeparatorView.backgroundColor = [UIColor db_separatorColor];
-    
     // Initialize contacts button
     [self.contactsImageView templateImageWithName:@"contacts_icon"];
     [self.contactsButton addTarget:self action:@selector(clickContactsButton) forControlEvents:UIControlEventTouchUpInside];
@@ -85,6 +78,7 @@
     [self.ownerViewController db_presentPeoplePickerController:^(DBProcessState state, NSString *name, NSString *phone) {
         if(state == DBProcessStateDone){
             [DBFriendGiftHelper sharedInstance].friendName.value = name;
+            
             [DBFriendGiftHelper sharedInstance].friendPhone.value = phone;
             [self reload:YES];
             

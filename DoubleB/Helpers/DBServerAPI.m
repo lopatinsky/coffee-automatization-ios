@@ -211,6 +211,7 @@
                                                                                             options:NSJSONWritingPrettyPrinted
                                                                                               error:nil];
                                      NSString *eventLabel = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+//                                     [GANHelper analyzeEvent:@"" label:eventLabel category:ORDER_SCREEN];
                                  }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -221,6 +222,7 @@
                                  
                                  // Analitics
                                  NSString *eventLabel = [NSString stringWithFormat:@"%ld", (long)error.code];
+//                                 [GANHelper analyzeEvent:@"" label:eventLabel category:ORDER_SCREEN];
                              }];
 }
 
@@ -515,7 +517,7 @@
 + (NSArray *)assembleOrderItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].itemsManager.items) {
-        [items addObject:[self assembleItem:item]];
+        [items addObject:[item requestJson]];
     }
     
     return items;
@@ -524,7 +526,7 @@
 + (NSArray *)assembleBonusItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].bonusItemsManager.items) {
-        [items addObject:[self assembleItem:item]];
+        [items addObject:[item requestJson]];
     }
     
     return items;
@@ -533,38 +535,10 @@
 + (NSArray *)assembleGiftItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].orderGiftsManager.items) {
-        [items addObject:[self assembleItem:item]];
+        [items addObject:[item requestJson]];
     }
     
     return items;
-}
-
-+ (NSDictionary *)assembleItem:(OrderItem *)item {
-    NSMutableDictionary *itemDict = [NSMutableDictionary new];
-    
-    itemDict[@"item_id"] = item.position.positionId;
-    itemDict[@"quantity"] = @(item.count);
-    
-    NSMutableArray *singleModifiers = [NSMutableArray new];
-    for(DBMenuPositionModifier *modifier in item.position.singleModifiers){
-        [singleModifiers addObject:@{@"single_modifier_id": modifier.modifierId,
-                                     @"quantity": @(modifier.selectedCount)}];
-    }
-    
-    NSMutableArray *groupModifiers = [NSMutableArray new];
-    for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
-        if(!modifier.selectedItem)
-            continue;
-        
-        [groupModifiers addObject:@{@"group_modifier_id": modifier.modifierId,
-                                    @"choice": modifier.selectedItem.itemId,
-                                    @"quantity": @1}];
-    }
-    
-    itemDict[@"single_modifiers"] = singleModifiers;
-    itemDict[@"group_modifiers"] = groupModifiers;
-    
-    return itemDict;
 }
 
 + (NSDictionary *)assembleClientInfo{

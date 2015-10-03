@@ -12,15 +12,12 @@
 #import "OrderItem.h"
 
 #import "DBFGItemsViewController.h"
+#import "DBModuleHeaderView.h"
 
 @interface DBFGItemsModuleView ()<UITableViewDataSource, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (weak, nonatomic) IBOutlet UIView *topSeparator;
-@property (weak, nonatomic) IBOutlet UIView *bottomSeparator;
 
 @property (weak, nonatomic) IBOutlet UIView *addView;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
@@ -42,8 +39,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.headerLabel.textColor = [UIColor db_textGrayColor];
-    self.headerLabel.text = NSLocalizedString(@"Выберите подарок", nil);
+    DBModuleHeaderView *header = [DBModuleHeaderView new];
+    header.title = NSLocalizedString(@"Выберите подарок", nil);
+    header.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.headerView addSubview:header];
+    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
     
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 44.f;
@@ -54,9 +54,6 @@
     self.consraintAddViewLeadingToSuperView.constant = 0;
     [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.addImage templateImageWithName:@"gift_icon"];
-    
-    self.topSeparator.backgroundColor = [UIColor db_separatorColor];
-    self.bottomSeparator.backgroundColor = [UIColor db_separatorColor];
 }
 
 - (void)addButtonClick {

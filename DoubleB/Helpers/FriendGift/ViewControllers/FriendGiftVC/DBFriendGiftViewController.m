@@ -47,6 +47,8 @@
     
     self.navigationItem.title = NSLocalizedString(@"Подарок", nil);
     
+    self.view.backgroundColor = [UIColor db_backgroundColor];
+    
     self.analyticsScreen = @"Friend_gift_screen";
     
     self.titleLabel.text = [DBFriendGiftHelper sharedInstance].titleFriendGiftScreen;

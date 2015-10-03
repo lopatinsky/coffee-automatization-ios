@@ -22,6 +22,8 @@
 
 + (instancetype)orderItemFromResponceDict:(NSDictionary *)dict;
 
+- (NSDictionary *)requestJson;
+
 @end
 
 
