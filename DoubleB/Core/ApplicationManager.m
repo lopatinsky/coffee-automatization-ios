@@ -35,12 +35,6 @@
 
 #pragma mark - General
 
-typedef enum : NSUInteger {
-    RootStateLaunch,
-    RootStateMain,
-    RootStateCompanies,
-} RootState;
-
 @interface ApplicationManager()
 
 @property (nonatomic, strong) UIAlertView *alertView;
@@ -60,17 +54,29 @@ typedef enum : NSUInteger {
 - (instancetype)init {
     self = [super init];
     
-    self.state = RootStateLaunch;
+    self.state = [self currentState];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companiesLoadedSuccess) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companyInfoLoadedSuccess) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
     
     return self;
 }
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)companiesLoadedSuccess {
+    if([DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen){
+        [self changeRoot];
+    } else {
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
+    }
+}
+
+- (void)companyInfoLoadedSuccess {
+    [self changeRoot];
 }
 
 - (void)showAlertViewWithInternetError {
@@ -92,9 +98,10 @@ typedef enum : NSUInteger {
 }
 
 - (void)changeRoot {
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    if (self.state != RootStateMain) {
-        [window setRootViewController:[ApplicationManager rootViewController]];
+    if (self.state != [self currentState]) {
+        self.state = [self currentState];
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        [window setRootViewController:[self rootViewController]];
     }
 }
 
@@ -171,6 +178,7 @@ typedef enum : NSUInteger {
 }
 
 + (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+    // Check Branch and register user
     [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         if(error){
             NSLog(@"error %@", error);
@@ -179,15 +187,15 @@ typedef enum : NSUInteger {
             [DBServerAPI registerUserWithBranchParams:params callback:nil];
         }
     }];
-    [DBServerAPI registerUser:nil];
     
+    // Update menu
     [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
         if(success){
+            // Analyse user history to fetch selected modifiers
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
         }
     }];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
     [OrderCoordinator sharedInstance];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
@@ -218,30 +226,42 @@ typedef enum : NSUInteger {
                                                                NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
-//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 }
 
 @end
 
 @implementation ApplicationManager (Start)
-+ (UIViewController *)rootViewController {
-    if (([[DBCompaniesManager sharedInstance] companiesLoaded] && [[DBCompaniesManager sharedInstance] companyIsChosen]) || [DBCompanyInfo sharedInstance].deliveryTypes.count > 0) {
-        [ApplicationManager sharedInstance].state = RootStateMain;
+
+- (RootState)currentState {
+    if ([DBCompanyInfo sharedInstance].infoLoaded) {
+        return RootStateMain;
+    }
+    
+    if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
+        return RootStateCompanies;
+    }
+    
+    return RootStateLaunch;
+}
+
+- (UIViewController *)rootViewController {
+    if ([self currentState] == RootStateMain) {
         return [ViewControllerManager mainViewController];
-    } else if ([[DBCompaniesManager sharedInstance] companiesLoaded] && ([[DBCompaniesManager sharedInstance] companies].count > 1)) {
-        [ApplicationManager sharedInstance].state = RootStateCompanies;
-        return [ViewControllerManager companiesViewControllers];
-    } else {
-        [ApplicationManager sharedInstance].state = RootStateLaunch;
+    }
+    if ([self currentState] == RootStateCompanies) {
+        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
+    }
+    if ([self currentState] == RootStateLaunch) {
         return [ViewControllerManager launchViewController];
     }
+    
+    return [ViewControllerManager mainViewController];
 }
 @end
 
 @implementation ApplicationManager (Menu)
-+ (Class<MenuListViewControllerProtocol>)rootMenuViewController{
+- (Class<MenuListViewControllerProtocol>)rootMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
@@ -251,7 +271,7 @@ typedef enum : NSUInteger {
 @end
 
 @implementation ApplicationManager (DemoApp)
-+ (UIViewController *)demoLoginViewController{
+- (UIViewController *)demoLoginViewController{
     Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
     
     if(loginVCClass){

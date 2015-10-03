@@ -29,6 +29,10 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return bundleName;
 }
 
+- (BOOL)infoLoaded {
+    return [[DBCompanyInfo valueForKey:@"infoLoaded"] boolValue];
+}
+
 - (void)updateInfo {
     [self updateInfo:nil];
 }
@@ -36,6 +40,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 - (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if (success) {
+            [DBCompanyInfo setValue:@(YES) forKey:@"infoLoaded"];
+            
             _type = [[response getValueForKey:@"screen_logic_type"] intValue];
             _applicationName = response[@"app_name"];
             
@@ -228,6 +234,12 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - DBDataManager
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsCompanyInfo";
+}
+
 #pragma mark - ManagerProtocol
 
 - (void)flushCache {
@@ -242,6 +254,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 - (void)flushStoredCache {
     [self flushCache];
     [self synchronize];
+    
+    [DBCompanyInfo setValue:@(NO) forKey:@"infoLoaded"];
 }
 
 @end

@@ -81,8 +81,8 @@ static DBAPIClient *_sharedClient = nil;
 - (void)setCompanyHeaderEnabled:(BOOL)companyHeaderEnabled {
     _companyHeaderEnabled = companyHeaderEnabled;
     
-    if (companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]) {
-        [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
+    if (companyHeaderEnabled && [DBCompaniesManager selectedCompanyNamespace]) {
+        [self setValue:[DBCompaniesManager selectedCompanyNamespace] forHeader:@"namespace"];
     } else {
         [self disableHeader:@"namespace"];
     }

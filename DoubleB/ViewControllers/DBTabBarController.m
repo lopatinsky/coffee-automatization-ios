@@ -94,7 +94,8 @@
     UINavigationController *newOrderNavController = [[UINavigationController alloc] initWithRootViewController:newOrderController];
     
     //TODO: Rewrite normal logic for screen sequence management
-    UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+    UIViewController<MenuListViewControllerProtocol> *menuVC = [[[ApplicationManager sharedInstance
+                                                                 ]rootMenuViewController] createViewController];
     menuVC.hidesBottomBarWhenPushed = YES;
     [newOrderNavController pushViewController:menuVC animated:NO];
     

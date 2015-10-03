@@ -32,14 +32,20 @@
 #pragma mark - User
 
 + (void)requestCompanies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+    [[DBAPIClient sharedClient] setCompanyHeaderEnabled:NO];
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                [[DBAPIClient sharedClient] setCompanyHeaderEnabled:YES];
+                                
                                 if(success)
                                     success(responseObject[@"companies"]);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
+                                
+                                 [[DBAPIClient sharedClient] setCompanyHeaderEnabled:YES];
+                                
                                 if(failure)
                                     failure(error);
                             }];

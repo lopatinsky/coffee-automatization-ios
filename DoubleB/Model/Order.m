@@ -159,18 +159,6 @@
     }
 }
 
-+ (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions{
-    NSString *lastMajorUpdateVersion = @"1.2";
-    
-    NSString *fieldName = [NSString stringWithFormat:@"launchedBeforeVersion_%@", lastMajorUpdateVersion];
-    BOOL isLaunchedBefore = [[NSUserDefaults standardUserDefaults] boolForKey:fieldName];
-    
-    if(!isLaunchedBefore){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:fieldName];
-        [Order dropAllOrders];
-    }
-}
-
 + (void)dropAllOrders{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Order"];
     

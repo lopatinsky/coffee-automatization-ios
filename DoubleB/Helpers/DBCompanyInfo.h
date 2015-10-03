@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 
 @property(nonatomic, readonly) BOOL friendInvitationEnabled;
 
+@property (nonatomic) BOOL infoLoaded;
 - (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");
 - (void)updateInfo:(void(^)(BOOL success))callback;
 

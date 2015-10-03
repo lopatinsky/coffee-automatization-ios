@@ -46,8 +46,4 @@
     [GANHelper analyzeScreen:LAUNCH_PLACEHOLDER_SCREEN];
 }
 
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 @end

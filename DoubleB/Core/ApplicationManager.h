@@ -10,6 +10,12 @@
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
+typedef enum : NSUInteger {
+    RootStateLaunch,
+    RootStateMain,
+    RootStateCompanies,
+} RootState;
+
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
@@ -27,13 +33,14 @@
 @end
 
 @interface ApplicationManager(Start)
-+ (UIViewController *)rootViewController;
+- (RootState)currentState;
+- (UIViewController *)rootViewController;
 @end
 
 @interface ApplicationManager(Menu)
-+ (Class<MenuListViewControllerProtocol>)rootMenuViewController;
+- (Class<MenuListViewControllerProtocol>)rootMenuViewController;
 @end
 
 @interface ApplicationManager(DemoApp)
-+ (UIViewController *)demoLoginViewController;
+- (UIViewController *)demoLoginViewController;
 @end
