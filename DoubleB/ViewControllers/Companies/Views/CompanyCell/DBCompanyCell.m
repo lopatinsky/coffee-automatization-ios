@@ -31,7 +31,7 @@
     CGRect rect = self.gradientView.bounds;
     rect.size.width = [UIScreen mainScreen].bounds.size.width;
     gradientLayer.frame = rect;
-    gradientLayer.colors = @[(id)[UIColor colorWithWhite:0 alpha:0.3].CGColor, (id)[UIColor clearColor].CGColor];
+    gradientLayer.colors = @[(id)[UIColor colorWithWhite:0 alpha:0.5].CGColor, (id)[UIColor clearColor].CGColor];
     gradientLayer.startPoint = CGPointMake(0.5, 1.0);
     gradientLayer.endPoint = CGPointMake(0.5, 0.0);
     self.gradientView.layer.mask = gradientLayer;

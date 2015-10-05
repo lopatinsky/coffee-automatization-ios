@@ -19,13 +19,14 @@ typedef enum : NSUInteger {
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
-+ (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy;
-+ (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
-@end
-
-@interface ApplicationManager(Initialization)
 + (void)initializeVendorFrameworks;
 + (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
+
+@end
+
+@interface ApplicationManager(Plist)
++ (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy;
++ (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
 @end
 
 @interface ApplicationManager(Appearance)

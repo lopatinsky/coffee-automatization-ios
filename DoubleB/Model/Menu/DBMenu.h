@@ -14,6 +14,7 @@
 @interface DBMenu : NSObject
 
 @property(nonatomic, readonly) BOOL hasNestedCategories;
+@property(nonatomic, readonly) BOOL hasImages;
 
 + (instancetype)sharedInstance;
 

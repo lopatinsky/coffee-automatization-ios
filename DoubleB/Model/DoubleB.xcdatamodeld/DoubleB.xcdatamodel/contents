@@ -7,6 +7,7 @@
         <attribute name="deliveryType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="discount" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="orderId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="paymentType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="shippingAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="shippingTotal" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
@@ -28,7 +29,7 @@
         <attribute name="workingTime" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Order" positionX="-63" positionY="-18" width="128" height="285"/>
+        <element name="Order" positionX="-63" positionY="-18" width="128" height="300"/>
         <element name="Venue" positionX="-63" positionY="27" width="128" height="150"/>
     </elements>
 </model>

@@ -30,6 +30,8 @@
 @property (nonatomic, strong) NSArray *categories;
 @property (strong, nonatomic) NSString *lastVenueId;
 
+@property (nonatomic) BOOL hasImages;
+
 @end
 
 @implementation CategoriesTVController
@@ -75,8 +77,10 @@
         [self.navigationController.view addSubview:hud];
         
         [self loadMenu:nil];
+        _hasImages = [DBMenu sharedInstance].hasImages;
     } else {
         _categories = self.parent.categories;
+        _hasImages = self.parent.categoryWithImages;
     }
 }
 
@@ -134,7 +138,11 @@
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+    if (_hasImages) {
+        return 90.f;
+    } else {
+        return 50.f;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -145,7 +153,11 @@
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
     if (!cell){
-        cell = [DBCategoryCell new];
+        if (_hasImages){
+            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeFull];
+        } else {
+            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeCompact];
+        }
     }
     
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.row];

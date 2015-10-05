@@ -38,6 +38,7 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 
 //stored
 @property (nonatomic, strong) NSString *orderId;
+@property (nonatomic, strong) NSString *orderNumber;
 
 @property (nonatomic, strong) NSNumber *total;
 @property (nonatomic, strong) NSNumber *discount;

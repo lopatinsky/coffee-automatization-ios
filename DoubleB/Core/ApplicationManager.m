@@ -67,6 +67,48 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - Frameworks initialization
++ (void)initializeVendorFrameworks {
+    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    [Fabric with:@[CrashlyticsKit]];
+    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
+    [JRSwizzleMethods swizzleUIViewDealloc];
+    [GANHelper trackClientInfo];
+#warning PayPal legacy code
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
+}
+
++ (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+    // Check Branch and register user
+    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        if(error){
+            NSLog(@"error %@", error);
+            [DBServerAPI registerUser:nil];
+        } else {
+            [DBServerAPI registerUserWithBranchParams:params callback:nil];
+        }
+    }];
+    
+    // Update menu
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+        if(success){
+            // Analyse user history to fetch selected modifiers
+            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
+        }
+    }];
+    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
+    [OrderCoordinator sharedInstance];
+    [[OrderCoordinator sharedInstance].promoManager updateInfo];
+    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
+    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    
+    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
+}
+
+#pragma mark - API Notification handlers
 - (void)companiesLoadedSuccess {
     if([DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen){
         [self changeRoot];
@@ -105,7 +147,28 @@
     }
 }
 
-#pragma mark - Static
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    [[OrderCoordinator sharedInstance] flushCache];
+    [[DBCompanyInfo sharedInstance] flushCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
+}
+
+- (void)flushStoredCache {
+    [[OrderCoordinator sharedInstance] flushStoredCache];
+    [[DBCompanyInfo sharedInstance] flushStoredCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
+}
+
+@end
+
+#pragma mark - Plist
+@implementation ApplicationManager(Plist)
 
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
@@ -141,68 +204,6 @@
     NSString *pathToPlist = [[NSBundle mainBundle] pathForResource:name ofType:@".plist"];
     NSDictionary *plistDict = [NSDictionary dictionaryWithContentsOfFile:pathToPlist];
     return [[NSMutableDictionary alloc] initWithDictionary:plistDict];
-}
-
-#pragma mark - ManagerProtocol
-
-- (void)flushCache {
-    [[OrderCoordinator sharedInstance] flushCache];
-    [[DBCompanyInfo sharedInstance] flushCache];
-    [[DBMenu sharedInstance] clearMenu];
-    [Venue dropAllVenues];
-    [Order dropAllOrders];
-}
-
-- (void)flushStoredCache {
-    [[OrderCoordinator sharedInstance] flushStoredCache];
-    [[DBCompanyInfo sharedInstance] flushStoredCache];
-    [[DBMenu sharedInstance] clearMenu];
-    [Venue dropAllVenues];
-    [Order dropAllOrders];
-}
-
-@end
-
-#pragma mark - Initialization
-@implementation ApplicationManager(Initialization)
-
-+ (void)initializeVendorFrameworks {
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
-    [Fabric with:@[CrashlyticsKit]];
-    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    [JRSwizzleMethods swizzleUIViewDealloc];
-    [GANHelper trackClientInfo];
-#warning PayPal legacy code
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-}
-
-+ (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
-    // Check Branch and register user
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
-    
-    // Update menu
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
-        if(success){
-            // Analyse user history to fetch selected modifiers
-            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
-        }
-    }];
-    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    [OrderCoordinator sharedInstance];
-    [[OrderCoordinator sharedInstance].promoManager updateInfo];
-    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
-    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
-    
-    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
 
 @end
