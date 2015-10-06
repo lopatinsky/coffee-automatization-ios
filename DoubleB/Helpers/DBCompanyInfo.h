@@ -74,6 +74,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId;
 - (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId;
+- (DBDeliveryType *)defaultDeliveryType;
 
 @end
 

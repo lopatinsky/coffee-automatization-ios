@@ -188,6 +188,24 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return [self deliveryTypeById:typeId] != nil;
 }
 
+- (DBDeliveryType *)defaultDeliveryType {
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSDictionary *prefs = [companyInfo objectForKey:@"AppConfiguration"];
+    
+    NSString *deliveryTypeString = [prefs objectForKey:@"DefaultDeliveryType"];
+    DeliveryTypeId deliveryTypeId;
+    if ([deliveryTypeString isEqualToString:@"Shipping"]) {
+        deliveryTypeId = DeliveryTypeIdShipping;
+    }
+    
+    DBDeliveryType *result = [self deliveryTypeById:deliveryTypeId];
+    if (!result)
+        result = [_deliveryTypes firstObject];
+    
+    return result;
+}
 
 #pragma mark - Helper methods
 
