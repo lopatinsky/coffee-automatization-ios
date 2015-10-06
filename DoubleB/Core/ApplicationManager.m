@@ -81,6 +81,8 @@
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+    [DBVersionDependencyManager performAll];
+    
     // Check Branch and register user
     [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         if(error){
@@ -100,6 +102,7 @@
     
     // Init update all necessary info if company has chosen
     if ([self currentState] == RootStateMain) {
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
         [self fetchCompanyDependentInfo];
     }
 }
@@ -130,6 +133,10 @@
 }
 
 - (void)companyInfoLoadedSuccess {
+    if (self.state != [self currentState]){
+        [self fetchCompanyDependentInfo];
+    }
+    
     [self changeRoot];
 }
 

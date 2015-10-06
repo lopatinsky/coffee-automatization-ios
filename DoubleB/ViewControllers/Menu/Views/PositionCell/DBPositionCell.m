@@ -9,7 +9,6 @@
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
 #import "DBTableItemInactivityView.h"
-#import "DBPositionPriceView.h"
 
 #import "UIView+RoundedCorners.h"
 #import "UIImageView+WebCache.h"
@@ -66,7 +65,8 @@
     self.priceView.mode = DBPositionPriceViewModeInteracted;
     self.priceView.touchAction = ^void(){
         [self.delegate positionCellDidOrder:self];
-        [self.priceView animatePositionAdditionWithCompletion:nil];
+        if (self.priceAnimated)
+            [self.priceView animatePositionAdditionWithCompletion:nil];
     };
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];

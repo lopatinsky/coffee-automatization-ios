@@ -95,6 +95,7 @@
     
     DBMenuPosition *position = _promoManager.positionsAvailableAsBonuses[indexPath.row];
     cell.contentType = DBPositionCellContentTypeBonus;
+    cell.priceAnimated = YES;
     [cell configureWithPosition:position];
     
     if (position.price <= [self totalPoints]) {

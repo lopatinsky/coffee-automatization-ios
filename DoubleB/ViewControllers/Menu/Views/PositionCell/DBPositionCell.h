@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 #import "PositionCellProtocol.h"
+#import "DBPositionPriceView.h"
 
 @class DBPositionCell;
 @class DBMenuPosition;
-@class DBPositionPriceView;
 
 typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
     DBPositionCellAppearanceTypeCompact = 0,
@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
 
 @property (nonatomic, readonly) DBPositionCellAppearanceType appearanceType;
 @property (nonatomic) DBPositionCellContentType contentType;
+@property (nonatomic) BOOL priceAnimated;
 
 @property (strong, nonatomic, readonly) DBMenuPosition *position;
 

@@ -13,6 +13,11 @@
 
 + (void)performAll;
 
+// Analyze user history to fetch previously selected modifiers
 + (void)analyzeUserModifierChoicesFromHistory;
 
+// Check if it is necessary to clean app cache
++ (void)checkCompatibilityOfStoredData;
+
 @end
+

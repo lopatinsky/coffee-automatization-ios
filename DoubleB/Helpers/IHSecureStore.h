@@ -14,4 +14,9 @@
 
 @property (nonatomic, strong) NSString *clientId;
 
+- (NSData *)dataForKey:(NSString *)key;
+- (void)setData:(NSData *)data forKey:(NSString *)key;
+
+- (void)removeAll;
+
 @end
