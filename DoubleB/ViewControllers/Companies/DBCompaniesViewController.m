@@ -59,6 +59,7 @@
             [self showError:@"Не удалось загрузить информацию о выбранной компании"];
         }
     }];
+    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
 }
 
 #pragma mark - UITableViewDataSource

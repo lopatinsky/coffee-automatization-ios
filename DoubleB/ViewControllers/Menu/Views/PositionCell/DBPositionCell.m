@@ -9,11 +9,19 @@
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
 #import "DBTableItemInactivityView.h"
+#import "DBPositionPriceView.h"
 
 #import "UIView+RoundedCorners.h"
 #import "UIImageView+WebCache.h"
 
 @interface DBPositionCell()
+@property (weak, nonatomic) UIImageView *positionImageView;
+@property (weak, nonatomic) UILabel *titleLabel;
+@property (weak, nonatomic) UILabel *descriptionLabel;
+@property (weak, nonatomic) UILabel *weightLabel;
+@property (weak, nonatomic) UIView *separatorView;
+
+
 @property (strong, nonatomic) DBTableItemInactivityView *inactivityView;
 @end
 
@@ -21,31 +29,45 @@
 @synthesize position = _position;
 
 - (instancetype)initWithType:(DBPositionCellAppearanceType)type{
-    NSString *nibIdentifier;
-    if (type == DBPositionCellAppearanceTypeCompact) {
-        nibIdentifier = @"DBPositionCompactCell";
+    if (type == DBPositionCellAppearanceTypeFull) {
+        self = [self initFullCell];
     } else {
-        nibIdentifier = @"DBPositionCell";
+        self = [self initCompactCell];
     }
-    
-    self = [[[NSBundle mainBundle] loadNibNamed:nibIdentifier owner:self options:nil] firstObject];
     _appearanceType = type;
     
     return self;
 }
 
+- (instancetype)init{
+    self = [self initFullCell];
+    return self;
+}
+
+- (instancetype)initFullCell {
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBPositionCell" owner:self options:nil] firstObject];
+    return self;
+}
+
+- (instancetype)initCompactCell {
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBPositionCompactCell" owner:self options:nil] firstObject];
+    return self;
+}
+
 - (void)awakeFromNib
 {
+    [self initOutlets];
+    
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.backgroundColor = [UIColor whiteColor];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [self.orderButton addTarget:self action:@selector(orderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.priceLabel.backgroundColor = [UIColor db_defaultColor];
-    [self.priceLabel setRoundedCorners];
-    self.priceLabel.textColor = [UIColor whiteColor];
+    self.priceView.mode = DBPositionPriceViewModeInteracted;
+    self.priceView.touchAction = ^void(){
+        [self.delegate positionCellDidOrder:self];
+        [self.priceView animatePositionAdditionWithCompletion:nil];
+    };
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
@@ -54,6 +76,15 @@
     }
     
     self.inactivityView = [DBTableItemInactivityView new];
+}
+
+- (void)initOutlets {
+    self.positionImageView = (UIImageView *)[self.contentView viewWithTag:1];
+    self.titleLabel = (UILabel *)[self.contentView viewWithTag:2];
+    self.descriptionLabel = (UILabel *)[self.contentView viewWithTag:3];
+    self.weightLabel = (UILabel *)[self.contentView viewWithTag:4];
+    self.priceView = (DBPositionPriceView *)[self.contentView viewWithTag:5];
+    self.separatorView = [self.contentView viewWithTag:6];
 }
 
 - (void)configureWithPosition:(DBMenuPosition *)position{
@@ -85,52 +116,10 @@
 
 - (void)reloadPriceLabel{
     if(self.contentType == DBPositionCellContentTypeBonus){
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f", self.position.price];
+        self.priceView.title = [NSString stringWithFormat:@"%.0f", self.position.price];
     } else {
-        self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.price, [Compatibility currencySymbol]];
-        
-//        if(self.position.price < self.position.actualPrice){
-//            self.priceLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"от", nil), self.position.price, [Compatibility currencySymbol]];
-//        }
+        self.priceView.title = [NSString stringWithFormat:@"%.0f %@", self.position.price, [Compatibility currencySymbol]];
     }
-}
-
-- (IBAction)orderButtonPressed:(id)sender {
-    [self.delegate positionCellDidOrder:self];
-}
-
-- (void)animatePositionAdditionWithCompletion:(void(^)())completion{
-    UIView *view = [[UIView alloc] initWithFrame:self.orderButton.frame];
-    view.layer.cornerRadius = view.frame.size.height / 2.f;
-    view.layer.masksToBounds = YES;
-    view.backgroundColor = [UIColor db_defaultColor];
-    
-    [self.contentView addSubview:view];
-    
-    self.orderButton.alpha = 0;
-    [UIView animateWithDuration:0.3
-                          delay:0
-                        options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         view.transform = CGAffineTransformMakeScale(1.5, 1.5);
-                     }
-                     completion:^(BOOL finished) {
-                         [view removeFromSuperview];
-                         
-                         if(completion)
-                             completion();
-                     }];
-    
-    [UIView animateWithDuration:0.2
-                          delay:0.1
-                        options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-                         view.alpha = 0;
-                         self.orderButton.alpha = 1;
-                     }
-                     completion:^(BOOL finished) {
-                         [view removeFromSuperview];
-                     }];
 }
 
 - (void)disable{

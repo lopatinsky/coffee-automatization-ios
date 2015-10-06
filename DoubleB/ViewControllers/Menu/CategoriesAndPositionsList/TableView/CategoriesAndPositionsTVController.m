@@ -270,7 +270,7 @@
     if(category.categoryWithImages){
         return 120;
     } else {
-        return 44;
+        return 50;
     }
 }
 
@@ -313,7 +313,6 @@
         [modifiersList configureWithMenuPosition:cell.position];
         [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
     } else {
-        [cell animatePositionAdditionWithCompletion:nil];
         [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
     }
     

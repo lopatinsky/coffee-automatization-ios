@@ -69,7 +69,7 @@
 
 
 #pragma mark - Frameworks initialization
-+ (void)initializeVendorFrameworks {
+- (void)initializeVendorFrameworks {
     [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
                   clientKey:[DBCompanyInfo db_companyParseClientKey]];
     [Fabric with:@[CrashlyticsKit]];
@@ -80,7 +80,7 @@
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 }
 
-+ (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+- (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
     // Check Branch and register user
     [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         if(error){
@@ -91,6 +91,20 @@
         }
     }];
     
+    [IHPaymentManager sharedInstance];
+    [DBShareHelper sharedInstance];
+    [OrderCoordinator sharedInstance];
+    
+    // Fetch all companies
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanies];
+    
+    // Init update all necessary info if company has chosen
+    if ([self currentState] == RootStateMain) {
+        [self fetchCompanyDependentInfo];
+    }
+}
+
+- (void)fetchCompanyDependentInfo {
     // Update menu
     [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
         if(success){
@@ -99,12 +113,10 @@
         }
     }];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    [OrderCoordinator sharedInstance];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
     
-    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
 

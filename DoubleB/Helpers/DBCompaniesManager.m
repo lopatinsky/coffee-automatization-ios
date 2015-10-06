@@ -57,8 +57,6 @@
 
 - (void)requestCompanies:(void(^)(BOOL success, NSArray *companies))callback {
     [DBServerAPI requestCompanies:^(NSArray *companies) {
-        [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
-        
         // Assemble companies
         NSMutableArray *array = [NSMutableArray new];
         for (NSDictionary *companyDict in companies) {
@@ -67,11 +65,15 @@
         NSData *companiesData = [NSKeyedArchiver archivedDataWithRootObject:array];
         [DBCompaniesManager setValue:companiesData forKey:@"companies"];
         
-        if (companies.count == 1) {
-            [DBCompaniesManager selectCompany:[array firstObject]];
-            
-            [[DBCompanyInfo sharedInstance] flushStoredCache];
+        if (!self.companiesLoaded){
+            if (companies.count == 1) {
+                [DBCompaniesManager selectCompany:[array firstObject]];
+                
+                [[DBCompanyInfo sharedInstance] flushStoredCache];
+            }
         }
+        
+        [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
         
         if(callback)
             callback(YES, companies);

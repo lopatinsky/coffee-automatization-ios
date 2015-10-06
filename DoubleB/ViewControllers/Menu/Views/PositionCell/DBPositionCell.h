@@ -12,6 +12,7 @@
 
 @class DBPositionCell;
 @class DBMenuPosition;
+@class DBPositionPriceView;
 
 typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
     DBPositionCellAppearanceTypeCompact = 0,
@@ -25,13 +26,7 @@ typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
 
 
 @interface DBPositionCell : UITableViewCell <PositionCellProtocol>
-@property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *weightLabel;
-@property (weak, nonatomic) IBOutlet UIButton *orderButton;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
+@property (weak, nonatomic) DBPositionPriceView *priceView;
 
 @property (nonatomic, readonly) DBPositionCellAppearanceType appearanceType;
 @property (nonatomic) DBPositionCellContentType contentType;
@@ -43,8 +38,6 @@ typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
 - (instancetype)initWithType:(DBPositionCellAppearanceType)type;
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
-
-- (void)animatePositionAdditionWithCompletion:(void(^)())completion;
 
 - (void)disable;
 - (void)enable;

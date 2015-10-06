@@ -141,7 +141,7 @@
     if (_hasImages) {
         return 90.f;
     } else {
-        return 50.f;
+        return 65.f;
     }
 }
 

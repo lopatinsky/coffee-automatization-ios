@@ -18,9 +18,10 @@ typedef enum : NSUInteger {
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
+- (void)initializeVendorFrameworks;
+- (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
 
-+ (void)initializeVendorFrameworks;
-+ (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
+- (void)fetchCompanyDependentInfo;
 
 @end
 

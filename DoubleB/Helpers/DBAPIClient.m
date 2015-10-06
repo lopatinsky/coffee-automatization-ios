@@ -62,8 +62,9 @@ static DBAPIClient *_sharedClient = nil;
 + (NSString *)restAPIVersion {
     // 0 - initial API version
     // 1 - Share
+    // 2 - New start logic 
     
-    return @"1";
+    return @"2";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
