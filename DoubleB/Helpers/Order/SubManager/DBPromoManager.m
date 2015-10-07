@@ -236,6 +236,22 @@
         if(callback)
             callback(YES);
         [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
+        
+        // Analytics
+        if (_validOrder) {
+            NSMutableString *label = [NSMutableString new];
+            for (NSString *promo in _promos) {
+                [label appendFormat:@"%@ | ", promo];
+            }
+            [GANHelper analyzeEvent:@"check_order_success_server_ok" label:label category:ORDER_SCREEN];
+        } else {
+            NSMutableString *label = [NSMutableString new];
+            for (NSString *error in _errors) {
+                [label appendFormat:@"%@ | ", error];
+            }
+            [GANHelper analyzeEvent:@"check_order_success_server_no" label:label category:ORDER_SCREEN];
+        }
+        
     } failure:^(NSError *error) {
         _validOrder = NO;
         
@@ -244,6 +260,10 @@
                 callback(NO);
             [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
         }
+        
+        //analytics
+        NSString *label = [NSString stringWithFormat:@"%@", error.localizedDescription];
+        [GANHelper analyzeEvent:@"check_order_fail" label:label category:ORDER_SCREEN];
     }];
     
     return YES;

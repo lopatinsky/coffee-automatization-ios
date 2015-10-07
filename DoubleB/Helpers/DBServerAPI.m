@@ -228,23 +228,12 @@
                                  
                                  if(success)
                                      success(responseObject);
-                                 
-                                 // Analitics
-                                 if(responseObject){
-                                     NSData *responseData = [NSJSONSerialization dataWithJSONObject:responseObject
-                                                                                            options:NSJSONWritingPrettyPrinted
-                                                                                              error:nil];
-                                     NSString *eventLabel = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-                                 }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
                                  if(failure)
                                      failure(error);
-                                 
-                                 // Analitics
-                                 NSString *eventLabel = [NSString stringWithFormat:@"%ld", (long)error.code];
                              }];
 }
 
