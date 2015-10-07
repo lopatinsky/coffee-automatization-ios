@@ -10,7 +10,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://brasserieproxy.test2.doubleb-automation-production.appspot.com/</string>
+		<string>http://brasserieproxy.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4283322708</integer>
 		<key>CompanyGAKey</key>
