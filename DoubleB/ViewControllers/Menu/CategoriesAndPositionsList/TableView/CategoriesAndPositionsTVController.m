@@ -151,7 +151,9 @@
         if(self.categoryPicker.isOpened){
             [self hideCategoryPicker];
         } else {
-            [self showCatecoryPickerFromRect:self.navigationController.navigationBar.frame onView:self.navigationController.view];
+            if (self.categories.count > 0){
+                [self showCatecoryPickerFromRect:self.navigationController.navigationBar.frame onView:self.navigationController.view];
+            }
         }
         
         [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
@@ -257,6 +259,7 @@
     
     DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
     cell.contentType = DBPositionCellContentTypeRegular;
+    cell.priceAnimated = YES;
     [cell configureWithPosition:position];
     cell.delegate = self;
     
@@ -268,7 +271,7 @@
     if(category.categoryWithImages){
         return 120;
     } else {
-        return 44;
+        return 50;
     }
 }
 
@@ -311,7 +314,6 @@
         [modifiersList configureWithMenuPosition:cell.position];
         [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
     } else {
-        [cell animatePositionAdditionWithCompletion:nil];
         [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
     }
     

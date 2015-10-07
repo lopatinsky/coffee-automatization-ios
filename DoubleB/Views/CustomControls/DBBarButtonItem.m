@@ -47,7 +47,7 @@
 -(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
     NSString *price = [NSString stringWithFormat:@"%.0f %@", totalPrice, [Compatibility currencySymbol]];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:
-                                         [NSString stringWithFormat:@" | %@", price]];
+                                         [NSString stringWithFormat:@" %@", price]];
     [string addAttribute:NSFontAttributeName
                    value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.f]
                    range:NSMakeRange(0, [string.string length])];

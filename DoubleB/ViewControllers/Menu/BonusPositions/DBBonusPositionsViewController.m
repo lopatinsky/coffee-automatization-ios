@@ -95,6 +95,7 @@
     
     DBMenuPosition *position = _promoManager.positionsAvailableAsBonuses[indexPath.row];
     cell.contentType = DBPositionCellContentTypeBonus;
+    cell.priceAnimated = YES;
     [cell configureWithPosition:position];
     
     if (position.price <= [self totalPoints]) {
@@ -132,7 +133,6 @@
     DBMenuPosition *position = cell.position;
     
     if([position.productDictionary[@"points"] floatValue] <= [self totalPoints]) {
-        [cell animatePositionAdditionWithCompletion:nil];
         [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:cell.position];
         [self reloadBalance];
         [self.tableView reloadData];

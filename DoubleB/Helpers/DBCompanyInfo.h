@@ -14,6 +14,11 @@
 
 extern NSString * const DBCompanyInfoNotificationInfoUpdated;
 
+typedef NS_ENUM(NSUInteger, DBCompanyPOS) {
+    DBCompanyPOSAutomation = 0,
+    DBCompanyPOSIIko = 1
+};
+
 typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeCafe = 0,
     DBCompanyTypeRestaurant = 1,
@@ -23,6 +28,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @interface DBCompanyInfo : DBPrimaryManager<ManagerProtocol>
 @property(strong, nonatomic, readonly) NSString *bundleName;
 
+@property(nonatomic, readonly) DBCompanyPOS companyPOS;
 @property(nonatomic, readonly) DBCompanyType type;
 @property(strong, nonatomic, readonly) NSString *applicationName;
 @property(strong, nonatomic, readonly) NSString *companyDescription;
@@ -44,6 +50,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 
 @property(nonatomic, readonly) BOOL friendInvitationEnabled;
 
+@property (nonatomic) BOOL infoLoaded;
 - (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");
 - (void)updateInfo:(void(^)(BOOL success))callback;
 
@@ -67,6 +74,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 
 - (DBDeliveryType *)deliveryTypeById:(DeliveryTypeId)typeId;
 - (BOOL)isDeliveryTypeEnabled:(DeliveryTypeId)typeId;
+- (DBDeliveryType *)defaultDeliveryType;
 
 @end
 

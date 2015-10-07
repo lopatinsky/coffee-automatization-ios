@@ -50,6 +50,15 @@
     return result;
 }
 
+- (BOOL)hasImages{
+    BOOL result = NO;
+    for(DBMenuCategory *category in self.categories){
+        result = result || category.hasImage;
+    }
+    
+    return result;
+}
+
 - (NSArray *)getMenu{
     if(!self.categories){
         [self loadMenuFromDeviceMemory];

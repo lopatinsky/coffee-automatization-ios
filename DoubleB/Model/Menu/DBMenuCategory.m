@@ -118,8 +118,15 @@
 
 - (BOOL)categoryWithImages{
     BOOL result = NO;
-    for(DBMenuPosition *position in self.positions){
-        result = result || position.hasImage;
+    
+    if (self.type == DBMenuCategoryTypeStandart){
+        for(DBMenuPosition *position in self.positions){
+            result = result || position.hasImage;
+        }
+    } else {
+        for(DBMenuCategory *category in self.categories){
+            result = result || category.hasImage;
+        }
     }
     
     return result;

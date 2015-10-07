@@ -27,6 +27,7 @@
     
     _textField.placeholder = NSLocalizedString(@"Имя Фамилия", nil);
     _textField.keyboardType = UIKeyboardTypeDefault;
+    _textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     _textField.text = [DBClientInfo sharedInstance].clientName;
     _textField.delegate = self;
     

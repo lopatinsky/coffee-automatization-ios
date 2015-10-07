@@ -8,16 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, DBCategoryCellAppearanceType) {
+    DBCategoryCellAppearanceTypeCompact = 0,
+    DBCategoryCellAppearanceTypeFull
+};
+
 @class DBMenuCategory;
 
 @interface DBCategoryCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *categoryIconImageView;
-@property (weak, nonatomic) IBOutlet UILabel *categoryNameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *disclosureIndicator;
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
-
 @property (strong, nonatomic, readonly) DBMenuCategory *category;
 
+- (instancetype)initWithType:(DBCategoryCellAppearanceType)type;
 - (void)configureWithCategory:(DBMenuCategory *)category;
 
 @end

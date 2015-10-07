@@ -659,7 +659,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)db_newOrderItemAdditionViewDidSelectPositions:(DBNewOrderItemAdditionView *)view {
     [GANHelper analyzeEvent:@"plus_click" category:ORDER_SCREEN];
     
-    UIViewController<MenuListViewControllerProtocol> *menuVC = [[ApplicationManager rootMenuViewController] createViewController];
+    UIViewController<MenuListViewControllerProtocol> *menuVC = [[[ApplicationManager sharedInstance] rootMenuViewController] createViewController];
     menuVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:menuVC animated:YES];
 }

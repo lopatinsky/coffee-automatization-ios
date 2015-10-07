@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
@@ -32,7 +31,7 @@
                         <constraint firstAttribute="height" constant="16" id="WdO-q7-SJ6"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="7jm-Ir-Dut">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="7jm-Ir-Dut">
                     <rect key="frame" x="293" y="18" width="19" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="Njg-I3-N0p"/>
@@ -40,12 +39,18 @@
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhW-35-jt8">
-                    <rect key="frame" x="0.0" y="49.5" width="320" height="0.5"/>
+                    <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.69999999999999996" id="mS1-fa-B46"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJn-Za-JF2">
+                    <rect key="frame" x="290" y="0.0" width="30" height="49.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="2Eh-8H-Lt9"/>
+                    </constraints>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -56,9 +61,12 @@
                 <constraint firstItem="uuv-an-Ife" firstAttribute="centerY" secondItem="msk-az-3zo" secondAttribute="centerY" constant="-0.5" id="Mwo-g9-Uep"/>
                 <constraint firstItem="uuv-an-Ife" firstAttribute="leading" secondItem="msk-az-3zo" secondAttribute="trailing" constant="9" id="ZtN-e1-IO0"/>
                 <constraint firstAttribute="centerY" secondItem="msk-az-3zo" secondAttribute="centerY" id="ddg-Fu-55R"/>
+                <constraint firstAttribute="trailing" secondItem="WJn-Za-JF2" secondAttribute="trailing" id="f2W-vi-9Ea"/>
                 <constraint firstItem="uuv-an-Ife" firstAttribute="centerY" secondItem="7jm-Ir-Dut" secondAttribute="centerY" id="iDs-uA-Lmb"/>
                 <constraint firstItem="msk-az-3zo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ihG-hk-T7b"/>
                 <constraint firstAttribute="trailing" secondItem="ZhW-35-jt8" secondAttribute="trailing" id="n6X-xD-Dbq"/>
+                <constraint firstItem="ZhW-35-jt8" firstAttribute="top" secondItem="WJn-Za-JF2" secondAttribute="bottom" id="nb8-bG-gbt"/>
+                <constraint firstItem="WJn-Za-JF2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tIn-el-iVS"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -66,6 +74,7 @@
                 <outlet property="iconImageView" destination="msk-az-3zo" id="qVc-eZ-7rd"/>
                 <outlet property="tickImageView" destination="7jm-Ir-Dut" id="Jrc-Og-A8C"/>
                 <outlet property="titleLabel" destination="uuv-an-Ife" id="Kya-Sz-XC7"/>
+                <outlet property="unbindButton" destination="WJn-Za-JF2" id="ZLa-cN-7lt"/>
             </connections>
             <point key="canvasLocation" x="360" y="71.5"/>
         </view>
@@ -74,9 +83,4 @@
         <image name="card.png" width="20" height="16"/>
         <image name="tick.png" width="19" height="13"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

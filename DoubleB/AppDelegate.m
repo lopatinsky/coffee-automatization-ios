@@ -35,8 +35,8 @@
     } else {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     }
-    [ApplicationManager initializeVendorFrameworks];
-    [ApplicationManager startApplicationWithOptions:launchOptions];
+    [[ApplicationManager sharedInstance] initializeVendorFrameworks];
+    [[ApplicationManager sharedInstance] startApplicationWithOptions:launchOptions];
     
     if ([DBCompanyInfo sharedInstance].companyPushChannel) {
         [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
@@ -46,7 +46,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
-    self.window.rootViewController = [ApplicationManager rootViewController];
+    self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
     

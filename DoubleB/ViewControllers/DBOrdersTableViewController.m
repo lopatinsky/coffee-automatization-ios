@@ -180,17 +180,20 @@
     UIImageView *imageViewVenue = (UIImageView *)[cell viewWithTag:7];
     
     UIColor *textColor;
-    NSMutableAttributedString *orderString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), [order orderId]]];
+    NSMutableAttributedString *orderString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), order.orderNumber]];
     
     if(order.status == OrderStatusNew || order.status == OrderStatusConfirmed || order.status == OrderStatusOnWay){
         [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 6)];
-        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderNumber]]];
         [imageViewVenue templateImageWithName:@"venue"];
         switch (order.paymentType) {
             case PaymentTypeCash:
                 [imageViewPayment templateImageWithName:@"cash"];
                 break;
             case PaymentTypeCard:
+                [imageViewPayment templateImageWithName:@"card"];
+                break;
+            case PaymentTypePayPal:
                 [imageViewPayment templateImageWithName:@"card"];
                 break;
             case PaymentTypeExtraType:
@@ -222,13 +225,16 @@
     
     if(order.status == OrderStatusCanceledBarista || order.status == OrderStatusCanceled){
         [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
-        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor fromHex:0xffe16941] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor fromHex:0xffe16941] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderNumber]]];
         [imageViewVenue templateImageWithName:@"venue" tintColor:[UIColor db_grayColor]];
         switch (order.paymentType) {
             case PaymentTypeCash:
                 [imageViewPayment templateImageWithName:@"cash" tintColor:[UIColor db_grayColor]];
                 break;
             case PaymentTypeCard:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
+            case PaymentTypePayPal:
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
             case PaymentTypeExtraType:
@@ -253,6 +259,9 @@
             case PaymentTypeCard:
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
+            case PaymentTypePayPal:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
             case PaymentTypeExtraType:
                 [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
                 break;
@@ -271,7 +280,7 @@
     
     labelOrder.attributedText = orderString;
     labelDate.text = order.formattedTimeString;
-    labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venue.address;
+    labelAddress.text = [order.deliveryType intValue] == DeliveryTypeIdShipping ? order.shippingAddress : order.venueName;
     
     labelTotal.text = [NSString stringWithFormat:@"%.0f %@", order.actualTotal - order.actualDiscount, [Compatibility currencySymbol]];
     

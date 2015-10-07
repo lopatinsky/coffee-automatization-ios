@@ -2,10 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://izbrasserie.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://brasserieproxy.test2.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4283322708</integer>
 		<key>CompanyGAKey</key>
@@ -13,9 +18,9 @@
 		<key>Parse</key>
 		<dict>
 			<key>applicationId</key>
-			<string>gEHp48xj0RNbVBVdbewTSJuy9ZNdPTXz2iqJyAmH</string>
+			<string>klCcZr7mnacqTCWQtlSGHRXYkXpLsrHRERhqjaLZ</string>
 			<key>clientKey</key>
-			<string>PX596eyx1xEyMKuiYVDtJDRAmO8fKMboEVo6tpRw</string>
+			<string>j0o9HzZVNNBORVRkuzzRnLLXxdQ1Ero8D2lp7YI1</string>
 		</dict>
 	</dict>
 </dict>

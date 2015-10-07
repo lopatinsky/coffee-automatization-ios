@@ -27,7 +27,7 @@
 - (void)configure{
     self.backgroundColor = [UIColor db_backgroundColor];
     
-    NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
+    NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderNumber];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
     [attributed setAttributes:@{NSForegroundColorAttributeName: [UIColor db_defaultColor],
                                 NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16]}
@@ -36,10 +36,6 @@
                                 NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:16]}
                         range:NSMakeRange(0, attributed.string.length)];
     self.labelOrder.attributedText = attributed;
-    
-    /*[attributed addAttribute:NSForegroundColorAttributeName
-                       value:[UIColor whiteColor]
-                       range:[attributed.string rangeOfString:[NSString stringWithFormat:@"#%@", self.order.orderId]]];*/
     
     self.labelOrder.userInteractionEnabled = YES;
     [self.labelOrder addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {

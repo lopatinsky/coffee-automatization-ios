@@ -13,13 +13,43 @@
 
 #import "NetworkManager.h"
 
-@implementation DBCompaniesManager
+@implementation DBCompany
 
-- (instancetype)init {
+- (instancetype)initWithResponseDict:(NSDictionary *)dict {
     self = [super init];
+    
+    self.companyNamespace = [dict getValueForKey:@"namespace"] ?: @"";
+    self.companyName = [dict getValueForKey:@"name"] ?: @"";
+    self.companyDescription = [dict getValueForKey:@"description"] ?: @"";
+    self.companyImageUrl = [dict getValueForKey:@"image"] ?: @"";
     
     return self;
 }
+
+#pragma mark - NSCoding methods
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [[DBCompany alloc] init];
+    if(self != nil){
+        _companyNamespace = [aDecoder decodeObjectForKey:@"_companyNamespace"];
+        _companyName = [aDecoder decodeObjectForKey:@"_companyName"];
+        _companyDescription = [aDecoder decodeObjectForKey:@"_companyDescription"];
+        _companyImageUrl = [aDecoder decodeObjectForKey:@"_companyImageUrl"];
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:_companyNamespace forKey:@"_companyNamespace"];
+    [aCoder encodeObject:_companyName forKey:@"_companyName"];
+    [aCoder encodeObject:_companyDescription forKey:@"_companyDescription"];
+    [aCoder encodeObject:_companyImageUrl forKey:@"_companyImageUrl"];
+}
+
+@end
+
+@implementation DBCompaniesManager
 
 - (BOOL)companiesLoaded {
     return [[DBCompaniesManager valueForKey:@"companiesLoaded"] boolValue];
@@ -27,34 +57,36 @@
 
 - (void)requestCompanies:(void(^)(BOOL success, NSArray *companies))callback {
     [DBServerAPI requestCompanies:^(NSArray *companies) {
-        [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
-        [DBCompaniesManager setValue:companies forKey:@"companies"];
-        if (companies.count <= 1) {
+        // Assemble companies
+        NSMutableArray *array = [NSMutableArray new];
+        for (NSDictionary *companyDict in companies) {
+            [array addObject:[[DBCompany alloc] initWithResponseDict:companyDict]];
+        }
+        NSData *companiesData = [NSKeyedArchiver archivedDataWithRootObject:array];
+        [DBCompaniesManager setValue:companiesData forKey:@"companies"];
+        
+        if (!self.companiesLoaded){
             if (companies.count == 1) {
-                [DBCompaniesManager selectCompanyName:companies[0]];
-                [[DBCompanyInfo sharedInstance] flushCache];
+                [DBCompaniesManager selectCompany:[array firstObject]];
+                
                 [[DBCompanyInfo sharedInstance] flushStoredCache];
             }
-            
-            [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanyInfo];
         }
+        
+        [DBCompaniesManager setValue:@(YES) forKey:@"companiesLoaded"];
+        
         if(callback)
             callback(YES, companies);
     } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+        
         if(callback)
             callback(NO, nil);
     }];
 }
 
 - (BOOL)hasCompanies {
-    NSArray *companies = [DBCompaniesManager valueForKey:@"companies"];
-    
-    BOOL result = NO;
-    if([companies count] > 1){
-        result = YES;
-    }
-    
-    return result;
+    return [self companies].count > 1;
 }
 
 - (BOOL)companyIsChosen {
@@ -62,17 +94,27 @@
 }
 
 - (NSArray *)companies {
-    return [DBCompaniesManager valueForKey:@"companies"];
+    NSData *companiesData = [DBCompaniesManager valueForKey:@"companies"];
+    
+    return [NSKeyedUnarchiver unarchiveObjectWithData:companiesData];
 }
 
-+ (NSString *)selectedCompanyName{
++ (DBCompany *)selectedCompany {
+    NSArray *companies = [DBCompaniesManager sharedInstance].companies;
+    NSString *selectedCompNamespace = [self selectedCompanyNamespace];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"companyNamespace == %@", selectedCompNamespace];
+    
+    return [[companies filteredArrayUsingPredicate:predicate] firstObject];
+}
+
++ (NSString *)selectedCompanyNamespace{
     return [DBCompaniesManager valueForKey:@"selectedCompanyNamespace"];
 }
 
-+ (void)selectCompanyName:(NSDictionary *)company {
-    [DBCompaniesManager setValue:[company objectForKey:@"namespace"] forKey:@"selectedCompanyNamespace"];
++ (void)selectCompany:(DBCompany *)company {
+    [DBCompaniesManager setValue:company.companyNamespace forKey:@"selectedCompanyNamespace"];
     
-    if ([company objectForKey:@"namespace"]) {
+    if (company.companyNamespace) {
         [DBAPIClient sharedClient].companyHeaderEnabled = YES;
     } else {
         [DBAPIClient sharedClient].companyHeaderEnabled = NO;
@@ -83,21 +125,6 @@
 
 + (NSString *)db_managerStorageKey{
     return @"kDBCompaniesManagerDefaultsInfo";
-}
-
-- (NSString *)deliveryImageName {
-    NSString *companyName = [DBCompaniesManager selectedCompanyName];
-    if (companyName) {
-        if ([companyName isEqualToString:@"perchiniribaris"]) {
-            return @"krasnoselskaya";
-        } else if ([companyName isEqualToString:@"perchiniribarislublino"]) {
-            return @"lublino";
-        } else {
-            return @"";
-        }
-    } else {
-        return @"";
-    }
 }
 
 @end

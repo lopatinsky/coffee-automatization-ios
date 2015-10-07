@@ -64,7 +64,7 @@
     if([self.order.deliveryType intValue] == DeliveryTypeIdShipping){
         self.labelAddress.text = self.order.shippingAddress;
     } else {
-        self.labelAddress.text = [self.order.venue address];
+        self.labelAddress.text = self.order.venueName;
     }
     
     [self.venueImageView templateImageWithName:@"venue.png"];

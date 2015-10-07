@@ -14,7 +14,7 @@
 #import "DBCompaniesManager.h"
 #import "NetworkManager.h"
 
-@interface LaunchViewController ()<UIAlertViewDelegate>
+@interface LaunchViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 @property (weak, nonatomic) IBOutlet UIView *tipView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -44,45 +44,6 @@
     [self.activityIndicator startAnimating];
     
     [GANHelper analyzeScreen:LAUNCH_PLACEHOLDER_SCREEN];
-}
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
-- (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification {
-    [GANHelper analyzeEvent:@"preload_success" category:LAUNCH_PLACEHOLDER_SCREEN];
-    
-    UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
-    
-    if ([window.rootViewController isKindOfClass:[LaunchViewController class]]) {
-        window.rootViewController = [ViewControllerManager mainViewController];
-    }
-}
-
-- (void)firstLaunchNecessaryInfoLoadFailureNotification:(NSNotification *)notification{
-    [GANHelper analyzeEvent:@"preload_failed" category:LAUNCH_PLACEHOLDER_SCREEN];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
-                                                    message:@"Не удается настроить приложение, поскольку отсутствует интернет-соединение"
-                                                   delegate:self
-                                          cancelButtonTitle:@"Попробовать еще раз"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-//    [GANHelper analyzeEvent:@"try_again_click" category:LAUNCH_PLACEHOLDER_SCREEN];
-//    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
-//    });
 }
 
 @end

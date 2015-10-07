@@ -25,7 +25,7 @@
     if (self) {
         _parentManager = parentManager;
         
-        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+        self.deliveryType = [[DBCompanyInfo sharedInstance] defaultDeliveryType];
     }
     
     return self;
@@ -33,15 +33,10 @@
 
 - (void)updateAfterDeliveryTypesUpdate{
     if(!self.deliveryType)
-        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
+        self.deliveryType = [[DBCompanyInfo sharedInstance] defaultDeliveryType];
 }
 
 #pragma mark - Delivery type
-- (void)setDefaultDeliveryType {
-    if (!_deliveryType) {
-        self.deliveryType = [[DBCompanyInfo sharedInstance].deliveryTypes firstObject];
-    }
-}
 
 - (void)selectDeliveryType:(DBDeliveryType *)type{
     if(type.typeId == DeliveryTypeIdShipping){

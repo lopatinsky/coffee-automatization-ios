@@ -3,7 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>ViewControllers</key>
-	<dict/>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>

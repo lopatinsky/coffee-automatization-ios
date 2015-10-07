@@ -29,6 +29,10 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return bundleName;
 }
 
+- (BOOL)infoLoaded {
+    return [[DBCompanyInfo valueForKey:@"infoLoaded"] boolValue];
+}
+
 - (void)updateInfo {
     [self updateInfo:nil];
 }
@@ -36,6 +40,9 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 - (void)updateInfo:(void(^)(BOOL success))callback{
     [DBServerAPI updateCompanyInfo:^(BOOL success, NSDictionary *response) {
         if (success) {
+            [DBCompanyInfo setValue:@(YES) forKey:@"infoLoaded"];
+            
+            _companyPOS = [[response getValueForKey:@"back_end"] intValue];
             _type = [[response getValueForKey:@"screen_logic_type"] intValue];
             _applicationName = response[@"app_name"];
             
@@ -181,6 +188,24 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return [self deliveryTypeById:typeId] != nil;
 }
 
+- (DBDeliveryType *)defaultDeliveryType {
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSDictionary *prefs = [companyInfo objectForKey:@"AppConfiguration"];
+    
+    NSString *deliveryTypeString = [prefs objectForKey:@"DefaultDeliveryType"];
+    DeliveryTypeId deliveryTypeId;
+    if ([deliveryTypeString isEqualToString:@"Shipping"]) {
+        deliveryTypeId = DeliveryTypeIdShipping;
+    }
+    
+    DBDeliveryType *result = [self deliveryTypeById:deliveryTypeId];
+    if (!result)
+        result = [_deliveryTypes firstObject];
+    
+    return result;
+}
 
 #pragma mark - Helper methods
 
@@ -228,6 +253,12 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+#pragma mark - DBDataManager
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsCompanyInfo";
+}
+
 #pragma mark - ManagerProtocol
 
 - (void)flushCache {
@@ -242,6 +273,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 - (void)flushStoredCache {
     [self flushCache];
     [self synchronize];
+    
+    [DBCompanyInfo setValue:@(NO) forKey:@"infoLoaded"];
 }
 
 @end

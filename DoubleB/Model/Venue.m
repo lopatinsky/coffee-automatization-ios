@@ -49,6 +49,10 @@ static NSMutableArray *storedVenues;
     if(!storedVenues){
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
         storedVenues = [NSMutableArray arrayWithArray:[[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil]];
+        
+        [storedVenues sortUsingComparator:^NSComparisonResult(Venue *obj1, Venue *obj2) {
+            return [@(obj1.distance) compare:@(obj2.distance)];
+        }];
     }
 
     return storedVenues;
@@ -93,7 +97,7 @@ static NSMutableArray *storedVenues;
                                                category:APPLICATION_START];
                                 
                                 if(completionHandler)
-                                    completionHandler(storedVenues);
+                                    completionHandler([self storedVenues]);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
@@ -108,7 +112,14 @@ static NSMutableArray *storedVenues;
 }
 
 + (void)syncVenues:(NSArray *)responseVenues {
-    storedVenues = [NSMutableArray array];
+    for (Venue *venue in storedVenues) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"id == %@", venue.venueId];
+        NSDictionary *responseVenue = [[responseVenues filteredArrayUsingPredicate:predicate] firstObject];
+        if(!responseVenue) {
+            [[CoreDataHelper sharedHelper].context deleteObject:venue];
+        }
+    }
+    
     for (NSDictionary *dict in responseVenues) {
         Venue *venue = [self storedVenueForId:dict[@"id"]];
         if (venue) {
@@ -117,9 +128,9 @@ static NSMutableArray *storedVenues;
             venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
             [venue applyDict:dict];
         }
-        [storedVenues addObject:venue];
     }
     [[CoreDataHelper sharedHelper] save];
+    storedVenues = nil;
 }
 
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{

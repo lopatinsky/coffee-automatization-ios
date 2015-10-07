@@ -23,6 +23,7 @@
 #import "IHSecureStore.h"
 #import "OrderCoordinator.h"
 #import "DBTabBarController.h"
+#import "DBCompanyInfo.h"
 
 //#import "ShareManager.h"
 
@@ -56,7 +57,7 @@
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderId];
+    NSString *temp = [NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), self.order.orderNumber];
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
     [attributed setAttributes:@{
             NSForegroundColorAttributeName: [UIColor whiteColor],
@@ -65,7 +66,7 @@
 
     [attributed addAttribute:NSForegroundColorAttributeName
                        value:[UIColor whiteColor]
-                       range:[attributed.string rangeOfString:[NSString stringWithFormat:@"#%@", self.order.orderId]]];
+                       range:[attributed.string rangeOfString:[NSString stringWithFormat:@"#%@", self.order.orderNumber]]];
 
     UILabel *titleLabel = [UILabel new];
     titleLabel.attributedText = attributed;
@@ -208,9 +209,13 @@
     button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
     
     NSString *orderString = @"";
-    if (self.order.status == OrderStatusNew) {
+    if (self.order.status == OrderStatusNew || self.order.status == OrderStatusConfirmed || self.order.status == OrderStatusOnWay) {
         orderString = NSLocalizedString(@"Отменить", nil);
         [button addTarget:self action:@selector(clickCancel:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if([DBCompanyInfo sharedInstance].companyPOS == DBCompanyPOSIIko){
+            button = nil;
+        }
     } else {
         orderString = NSLocalizedString(@"Повторить", nil);
         [button addTarget:self action:@selector(clickRepeat:) forControlEvents:UIControlEventTouchUpInside];
@@ -244,7 +249,10 @@
     
     [[OrderCoordinator sharedInstance].itemsManager overrideItems:self.order.items];
     [OrderCoordinator sharedInstance].orderManager.paymentType = self.order.paymentType;
-    [OrderCoordinator sharedInstance].orderManager.venue = self.order.venue;
+    
+    Venue *venue = [Venue venueById:self.order.venueId];
+    if(venue)
+        [OrderCoordinator sharedInstance].orderManager.venue = venue;
     
     [self.navigationController popToRootViewControllerAnimated:YES];
     [self showAlert:@"Позиции из заказа успешно добавлены в корзину!"];

@@ -35,12 +35,6 @@
 
 #pragma mark - General
 
-typedef enum : NSUInteger {
-    RootStateLaunch,
-    RootStateMain,
-    RootStateCompanies,
-} RootState;
-
 @interface ApplicationManager()
 
 @property (nonatomic, strong) UIAlertView *alertView;
@@ -60,11 +54,11 @@ typedef enum : NSUInteger {
 - (instancetype)init {
     self = [super init];
     
-    self.state = RootStateLaunch;
+    self.state = [self currentState];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeRoot) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companiesLoadedSuccess) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companyInfoLoadedSuccess) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
     
     return self;
 }
@@ -73,23 +67,127 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - Frameworks initialization
+- (void)initializeVendorFrameworks {
+    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    [Fabric with:@[CrashlyticsKit]];
+    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
+    [JRSwizzleMethods swizzleUIViewDealloc];
+    [GANHelper trackClientInfo];
+#warning PayPal legacy code
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
+}
+
+- (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+    [DBVersionDependencyManager performAll];
+    
+    // Check Branch and register user
+    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        if(error){
+            NSLog(@"error %@", error);
+            [DBServerAPI registerUser:nil];
+        } else {
+            [DBServerAPI registerUserWithBranchParams:params callback:nil];
+        }
+    }];
+    
+    [IHPaymentManager sharedInstance];
+    [DBShareHelper sharedInstance];
+    [OrderCoordinator sharedInstance];
+    
+    // Fetch all companies
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanies];
+    
+    // Init update all necessary info if company has chosen
+    if ([self currentState] == RootStateMain) {
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
+        [self fetchCompanyDependentInfo];
+    }
+}
+
+- (void)fetchCompanyDependentInfo {
+    // Update menu
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+        if(success){
+            // Analyse user history to fetch selected modifiers
+            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
+        }
+    }];
+    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
+    [[OrderCoordinator sharedInstance].promoManager updateInfo];
+    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
+    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
+}
+
+#pragma mark - API Notification handlers
+- (void)companiesLoadedSuccess {
+    if([DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen){
+        [self changeRoot];
+    } else {
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
+    }
+}
+
+- (void)companyInfoLoadedSuccess {
+    if (self.state != [self currentState]){
+        [self fetchCompanyDependentInfo];
+    }
+    
+    [self changeRoot];
+}
+
 - (void)showAlertViewWithInternetError {
-    if (!self.alertView || ![self.alertView isVisible]) {
-        self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
-                                              cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                  [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
-                                              }];
+    BOOL show = YES;
+    show = show && ![self.alertView isVisible];
+    show = show && ([ApplicationManager sharedInstance].state == RootStateLaunch);
+    if (show) {
+        if(!self.alertView){
+            self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
+                                                  cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                                          [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
+                                                      });
+                                                  }];
+        }
+        
+        [self.alertView show];
     }
 }
 
 - (void)changeRoot {
-    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-    if (self.state != RootStateMain) {
-        [window setRootViewController:[ApplicationManager rootViewController]];
+    if (self.state != [self currentState]) {
+        self.state = [self currentState];
+        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+        [window setRootViewController:[self rootViewController]];
     }
 }
 
-#pragma mark - Static
+#pragma mark - ManagerProtocol
+
+- (void)flushCache {
+    [[OrderCoordinator sharedInstance] flushCache];
+    [[DBCompanyInfo sharedInstance] flushCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
+}
+
+- (void)flushStoredCache {
+    [[OrderCoordinator sharedInstance] flushStoredCache];
+    [[DBCompanyInfo sharedInstance] flushStoredCache];
+    [[DBMenu sharedInstance] clearMenu];
+    [Venue dropAllVenues];
+    [Order dropAllOrders];
+}
+
+@end
+
+#pragma mark - Plist
+@implementation ApplicationManager(Plist)
 
 + (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy {
     NSString *buildNumber = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
@@ -127,67 +225,6 @@ typedef enum : NSUInteger {
     return [[NSMutableDictionary alloc] initWithDictionary:plistDict];
 }
 
-#pragma mark - ManagerProtocol
-
-- (void)flushCache {
-    [[OrderCoordinator sharedInstance] flushCache];
-    [[DBCompanyInfo sharedInstance] flushCache];
-    [[DBMenu sharedInstance] clearMenu];
-    [Venue dropAllVenues];
-    [Order dropAllOrders];
-}
-
-- (void)flushStoredCache {
-    [[OrderCoordinator sharedInstance] flushStoredCache];
-    [[DBCompanyInfo sharedInstance] flushStoredCache];
-    [[DBMenu sharedInstance] clearMenu];
-    [Venue dropAllVenues];
-    [Order dropAllOrders];
-}
-
-@end
-
-#pragma mark - Initialization
-@implementation ApplicationManager(Initialization)
-
-+ (void)initializeVendorFrameworks {
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
-    [Fabric with:@[CrashlyticsKit]];
-    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    [JRSwizzleMethods swizzleUIViewDealloc];
-    [GANHelper trackClientInfo];
-#warning PayPal legacy code
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-}
-
-+ (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
-    [DBServerAPI registerUser:nil];
-    
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
-        if(success){
-            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
-        }
-    }];
-    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    [Order dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions];
-    [OrderCoordinator sharedInstance];
-    [[OrderCoordinator sharedInstance].promoManager updateInfo];
-    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
-    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
-    
-    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanies];
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
-}
-
 @end
 
 #pragma mark - Style
@@ -209,30 +246,42 @@ typedef enum : NSUInteger {
                                                                NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     }
-//    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
 }
 
 @end
 
 @implementation ApplicationManager (Start)
-+ (UIViewController *)rootViewController {
-    if (([[DBCompaniesManager sharedInstance] companiesLoaded] && [[DBCompaniesManager sharedInstance] companyIsChosen]) || [DBCompanyInfo sharedInstance].deliveryTypes.count > 0) {
-        [ApplicationManager sharedInstance].state = RootStateMain;
+
+- (RootState)currentState {
+    if ([DBCompanyInfo sharedInstance].infoLoaded) {
+        return RootStateMain;
+    }
+    
+    if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
+        return RootStateCompanies;
+    }
+    
+    return RootStateLaunch;
+}
+
+- (UIViewController *)rootViewController {
+    if ([self currentState] == RootStateMain) {
         return [ViewControllerManager mainViewController];
-    } else if ([[DBCompaniesManager sharedInstance] companiesLoaded] && ([[DBCompaniesManager sharedInstance] companies].count > 1)) {
-        [ApplicationManager sharedInstance].state = RootStateCompanies;
-        return [ViewControllerManager companiesViewControllers];
-    } else {
-        [ApplicationManager sharedInstance].state = RootStateLaunch;
+    }
+    if ([self currentState] == RootStateCompanies) {
+        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
+    }
+    if ([self currentState] == RootStateLaunch) {
         return [ViewControllerManager launchViewController];
     }
+    
+    return [ViewControllerManager mainViewController];
 }
 @end
 
 @implementation ApplicationManager (Menu)
-+ (Class<MenuListViewControllerProtocol>)rootMenuViewController{
+- (Class<MenuListViewControllerProtocol>)rootMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
@@ -242,7 +291,7 @@ typedef enum : NSUInteger {
 @end
 
 @implementation ApplicationManager (DemoApp)
-+ (UIViewController *)demoLoginViewController{
+- (UIViewController *)demoLoginViewController{
     Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
     
     if(loginVCClass){

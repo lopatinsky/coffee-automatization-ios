@@ -11,7 +11,7 @@
 @implementation UIView (RoundedCorners)
 
 - (void)setRoundedCorners{
-    [self setRoundedCornersWithRadius:self.frame.size.height / 2];
+    [self setRoundedCornersWithRadius:6];
 }
 
 - (void)setRoundedCornersWithRadius:(CGFloat)radius{

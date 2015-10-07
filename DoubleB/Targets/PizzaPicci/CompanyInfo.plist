@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>DefaultDeliveryType</key>
+		<string>Shipping</string>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://pizzapichi.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4291374892</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-65821587-44</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>gEHp48xj0RNbVBVdbewTSJuy9ZNdPTXz2iqJyAmH</string>
+			<key>clientKey</key>
+			<string>PX596eyx1xEyMKuiYVDtJDRAmO8fKMboEVo6tpRw</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

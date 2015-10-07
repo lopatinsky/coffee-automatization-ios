@@ -63,7 +63,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) DBTimePickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
 @property (nonatomic) BOOL keyboardIsHidden;
-@property (weak, nonatomic) IBOutlet UIImageView *deliveryImage;
 
 @end
 
@@ -132,10 +131,6 @@ typedef enum : NSUInteger {
     } else {
         self.commentIndicatorView.hidden = NO;
     }
-    
-    if ([DBCompaniesManager sharedInstance].deliveryImageName) {
-        [self.deliveryImage setImage:[UIImage imageNamed:[DBCompaniesManager sharedInstance].deliveryImageName]];
-    }
 }
 
 - (void)requestAddressSuggestions {
@@ -198,12 +193,10 @@ typedef enum : NSUInteger {
 
 - (void)keyboardWillAppear {
     self.keyboardIsHidden = NO;
-    self.deliveryImage.hidden = YES;
 }
 
 - (void)keyboardWillDisappear {
     self.keyboardIsHidden = YES;
-    self.deliveryImage.hidden = NO;
 }
 
 - (void)switchToCompactMode{

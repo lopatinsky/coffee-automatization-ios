@@ -38,6 +38,7 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 
 //stored
 @property (nonatomic, strong) NSString *orderId;
+@property (nonatomic, strong) NSString *orderNumber;
 
 @property (nonatomic, strong) NSNumber *total;
 @property (nonatomic, strong) NSNumber *discount;
@@ -53,7 +54,8 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 @property (nonatomic) OrderStatus status;
 
 @property (nonatomic, strong) NSNumber *deliveryType;
-@property (nonatomic, strong) Venue *venue;
+@property (nonatomic, strong) NSString *venueId;
+@property (nonatomic, strong) NSString *venueName;
 @property (nonatomic, strong) NSString *shippingAddress;
 
 @property (nonatomic) PaymentType paymentType;
@@ -76,7 +78,6 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 + (NSArray *)allOrders;
 + (Order *)orderById:(NSString *)orderId;
 
-+ (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions;
 + (void)dropAllOrders;
 
 /**

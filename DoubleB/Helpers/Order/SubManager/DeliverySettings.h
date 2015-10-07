@@ -55,6 +55,4 @@ typedef NS_ENUM(NSInteger, DeliverySettingsChange) {
  */
 - (void)updateAfterDeliveryTypesUpdate;
 
-- (void)setDefaultDeliveryType;
-
 @end
