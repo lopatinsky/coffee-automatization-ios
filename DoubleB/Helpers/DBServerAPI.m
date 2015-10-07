@@ -629,7 +629,7 @@
         payment[@"correlation_id"] = [DBPayPalManager sharedInstance].paymentMetadata ?: @"";
     }
     
-    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletDiscount ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
+    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
     
     return payment;
 }
