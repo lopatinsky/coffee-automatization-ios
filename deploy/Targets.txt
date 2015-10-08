@@ -9,7 +9,7 @@ CameraObscura com.empatika.cameraobscura 1018297610
 Cat com.rubeacon.coffeeandthecity None
 Chikarabar com.empatika.chikarabar 1012335742
 CoffeeAutomation com.empatika.coffeeautomation None
-CoffeeCake com.empatika.coffeecake None
+CoffeeCake com.empatika.coffeecake 1034724025
 CoffeeHostel com.empatika.coffeehostel 980364330
 CoffeeShop com.empatika.coffeeshop None
 CoffeeSnack com.empatika.coffeesnack 1012432613
@@ -26,14 +26,14 @@ IIkoHack com.empatika.resto 931192721
 Korjov com.empatika.korjov 1012335004
 KrispyKreme com.empatika.krispykreme None
 Ladolchevita com.empatika.ladolcevita 1030706289
-LES com.empatika.les None
+LES com.empatika.les 1035363655
 LightFamily com.empatika.lightfamily None
 Luckmousse com.empatika.luckmousse 1025306281
 Luigi com.empatika.luigi 1014540512
 Magnolia com.empatika.magnolia 1030706160
 MeatMe com.empatika.meatme 1003753614
 Nasushi com.empatika.nasushi 1040561557
-NookCoffee com.empatika.nookcafe None
+NookCoffee com.empatika.nookcafe 1034725653
 OsteriaBianka com.empatika.osteriabianka None
 PaffPoint com.empatika.paffpoint None
 Pastadeli com.empatika.pastadeli 990194521
