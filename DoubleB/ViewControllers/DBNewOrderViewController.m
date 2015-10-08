@@ -360,7 +360,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)startUpdatingPromoInfo {
     [self.totalView startUpdating];
     [self reloadContinueButton];
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationCheckOrder];
+
+    [[NetworkManager sharedManager] addOperation:NetworkOperationCheckOrder];
 }
 
 - (void)endUpdatingPromoInfo{

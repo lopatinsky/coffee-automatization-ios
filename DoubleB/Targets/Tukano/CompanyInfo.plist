@@ -10,7 +10,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://tykano.resto.doubleb-automation-production.appspot.com/</string>
+		<string>http://tykano.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4293962270</integer>
 		<key>CompanyGAKey</key>
