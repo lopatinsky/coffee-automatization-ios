@@ -54,6 +54,12 @@
     self.consraintAddViewLeadingToSuperView.constant = 0;
     [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.addImage templateImageWithName:@"gift_icon"];
+    
+    [[DBFriendGiftHelper sharedInstance] addObserver:self withKeyPath:DBFriendGiftHelperNotificationItemsPrice selector:@selector(reload)];
+}
+
+- (void)dealloc {
+    [[DBFriendGiftHelper sharedInstance] removeObserver:self];
 }
 
 - (void)addButtonClick {
@@ -76,7 +82,7 @@
     };
     
     if(animated) {
-        [UIView animateWithDuration:2 animations:block];
+        [UIView animateWithDuration:0.5 animations:block];
     } else {
         block();
     }
@@ -125,11 +131,7 @@
 }
 
 - (void)removeRowAtIndex:(NSInteger)index{
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                          withRowAnimation:UITableViewRowAnimationLeft];
     [self reload:YES];
-    [self.tableView endUpdates];
 }
 
 - (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell{

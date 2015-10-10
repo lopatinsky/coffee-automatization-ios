@@ -86,7 +86,6 @@
 - (BOOL)validCharacters:(NSString *)characters {
     NSCharacterSet *stringSet = [NSCharacterSet characterSetWithCharactersInString:characters];
     NSMutableCharacterSet *charSet = [NSMutableCharacterSet decimalDigitCharacterSet];
-    [charSet addCharactersInString:@"+()- "];
     
     return [charSet isSupersetOfSet:stringSet];
 }

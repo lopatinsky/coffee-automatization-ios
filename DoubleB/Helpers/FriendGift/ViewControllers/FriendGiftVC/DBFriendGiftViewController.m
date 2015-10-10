@@ -143,8 +143,7 @@
 
 - (void)reload {
     [self.giftInfoModule reload:NO];
-    [self.giftInfoModule layoutIfNeeded];
-    
+
     [self reloadGiftButton];
 }
 
