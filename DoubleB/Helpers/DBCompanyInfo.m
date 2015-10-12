@@ -195,7 +195,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     NSDictionary *prefs = [companyInfo objectForKey:@"AppConfiguration"];
     
     NSString *deliveryTypeString = [prefs objectForKey:@"DefaultDeliveryType"];
-    DeliveryTypeId deliveryTypeId;
+    DeliveryTypeId deliveryTypeId = DeliveryTypeIdTakeaway;
     if ([deliveryTypeString isEqualToString:@"Shipping"]) {
         deliveryTypeId = DeliveryTypeIdShipping;
     }

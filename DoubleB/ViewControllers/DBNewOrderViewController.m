@@ -1039,7 +1039,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (void)reloadNDAView{
     BOOL showNDA = ![[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
-    showNDA = showNDA && !([Order allOrders].count > 0);
+    showNDA = showNDA || !([Order allOrders].count > 0);
     if(showNDA){
         [self.ndaView show];
     } else {
