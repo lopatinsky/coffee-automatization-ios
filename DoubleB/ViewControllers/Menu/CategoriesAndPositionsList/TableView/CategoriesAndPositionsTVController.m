@@ -413,7 +413,7 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hideCategoryPicker];
 }
 

@@ -25,7 +25,7 @@
     if (self) {
         _parentManager = parentManager;
         
-        self.deliveryType = [[DBCompanyInfo sharedInstance] defaultDeliveryType];
+        [self selectDeliveryType:[[DBCompanyInfo sharedInstance] defaultDeliveryType]];
     }
     
     return self;
@@ -33,14 +33,14 @@
 
 - (void)updateAfterDeliveryTypesUpdate{
     if(!self.deliveryType)
-        self.deliveryType = [[DBCompanyInfo sharedInstance] defaultDeliveryType];
+        [self selectDeliveryType:[[DBCompanyInfo sharedInstance].deliveryTypes firstObject]];
 }
 
 #pragma mark - Delivery type
 
 - (void)selectDeliveryType:(DBDeliveryType *)type{
-    if(type.typeId == DeliveryTypeIdShipping){
-        self.lastNotShippingDeliveryType = self.deliveryType;
+    if(type.typeId != DeliveryTypeIdShipping){
+        self.lastNotShippingDeliveryType = type;
     }
     
     self.deliveryType = type;
@@ -51,22 +51,32 @@
         case DeliveryTypeIdTakeaway:
             [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Takeaway" category:ADDRESS_SCREEN];
             break;
+        case DeliveryTypeIdShipping:
+            [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Shipping" category:ADDRESS_SCREEN];
+            break;
         default:
             break;
     }
 }
 
 - (void)selectShipping{
-    if(self.deliveryType && self.deliveryType.typeId != DeliveryTypeIdShipping)
-        self.lastNotShippingDeliveryType = self.deliveryType;
-    
-    self.deliveryType = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping];
-    [GANHelper analyzeEvent:@"delivery_type_selected" label:@"Shipping" category:ADDRESS_SCREEN];
+    [self selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping]];
 }
 
 - (void)selectTakeout{
-    if(self.lastNotShippingDeliveryType)
-        self.deliveryType = self.lastNotShippingDeliveryType;
+    if(!self.lastNotShippingDeliveryType){
+        DBDeliveryType *type = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdTakeaway];
+        if (!type) {
+            type = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdInRestaurant];
+        }
+        
+        if (type) {
+            self.lastNotShippingDeliveryType = type;
+        }
+    }
+    
+    if (self.lastNotShippingDeliveryType)
+        [self selectDeliveryType:self.lastNotShippingDeliveryType];
 }
 
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{

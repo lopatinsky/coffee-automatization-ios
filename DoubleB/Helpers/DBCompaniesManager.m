@@ -95,6 +95,8 @@
 
 - (NSArray *)companies {
     NSData *companiesData = [DBCompaniesManager valueForKey:@"companies"];
+    if (![companiesData isKindOfClass:[NSData class]])
+        companiesData = nil;
     
     return [NSKeyedUnarchiver unarchiveObjectWithData:companiesData];
 }

@@ -228,23 +228,12 @@
                                  
                                  if(success)
                                      success(responseObject);
-                                 
-                                 // Analitics
-                                 if(responseObject){
-                                     NSData *responseData = [NSJSONSerialization dataWithJSONObject:responseObject
-                                                                                            options:NSJSONWritingPrettyPrinted
-                                                                                              error:nil];
-                                     NSString *eventLabel = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-                                 }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
                                  if(failure)
                                      failure(error);
-                                 
-                                 // Analitics
-                                 NSString *eventLabel = [NSString stringWithFormat:@"%ld", (long)error.code];
                              }];
 }
 
@@ -629,7 +618,7 @@
         payment[@"correlation_id"] = [DBPayPalManager sharedInstance].paymentMetadata ?: @"";
     }
     
-    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletDiscount ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
+    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
     
     return payment;
 }

@@ -106,7 +106,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBPromosListViewController *promosVC = [DBPromosListViewController new];
     [self.settingsItems addObject:@{@"name": @"promosVC",
                                     @"title": NSLocalizedString(@"Список акций", nil),
-                                    @"image": @"menu_icon",
+                                    @"image": @"promos_icon",
                                     @"viewController": promosVC}];
     
     // Personal wallet item
@@ -145,7 +145,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
         [self.settingsItems addObject:@{@"name": @"appPromoVC",
                                         @"title": NSLocalizedString(@"Промокоды", nil),
-                                        @"image": @"none",
+                                        @"image": @"promocodes_icon",
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
     }
 }

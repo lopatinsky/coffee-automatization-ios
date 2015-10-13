@@ -360,7 +360,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 - (void)startUpdatingPromoInfo {
     [self.totalView startUpdating];
     [self reloadContinueButton];
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationCheckOrder];
+
+    [[NetworkManager sharedManager] addOperation:NetworkOperationCheckOrder];
 }
 
 - (void)endUpdatingPromoInfo{
@@ -880,7 +881,8 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         }
     }
     
-    [GANHelper analyzeEvent:@"delivery_time_selected" number:@([date timeIntervalSince1970]) category:ORDER_SCREEN];
+    int interval = [date timeIntervalSince1970];
+    [GANHelper analyzeEvent:@"delivery_time_selected" number:@(interval) category:ORDER_SCREEN];
 }
 
 - (BOOL)db_shouldHideTimePickerView{
