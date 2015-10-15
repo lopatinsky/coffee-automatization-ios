@@ -22,10 +22,11 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 - (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell;
 - (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell;
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell;
+
+@optional
 - (void)db_orderItemCellSwipe:(DBOrderItemCell *)cell;
 
 - (void)db_orderItemCellDidSelect:(DBOrderItemCell *)cell;
-
 - (void)db_orderItemCellDidSelectDelete:(DBOrderItemCell *)cell;
 - (void)db_orderItemCellDidSelectReplace:(DBOrderItemCell *)cell;
 @end

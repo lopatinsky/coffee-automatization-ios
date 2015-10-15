@@ -23,7 +23,7 @@ static NSString *screenIdentifier;
                                     callback:(void(^)(BOOL success))completionHandler{
     screenIdentifier = screen;
     
-    if([[DBClientInfo sharedInstance] validClientName] && [[DBClientInfo sharedInstance] validClientPhone]){
+    if([DBClientInfo sharedInstance].clientName.valid && [DBClientInfo sharedInstance].clientPhone.valid){
         [self bindNewCard:completionHandler];
     } else {
         completionBlock = completionHandler;
@@ -91,8 +91,8 @@ static NSString *screenIdentifier;
                                                                                  handler:nil];
                                                   
                                                   NSMutableString *eventLabel = [[NSMutableString alloc] init];
-                                                  [eventLabel appendFormat:@"%@;", [DBClientInfo sharedInstance].clientName];
-                                                  [eventLabel appendFormat:@"%@;", [DBClientInfo sharedInstance].clientPhone];
+                                                  [eventLabel appendFormat:@"%@;", [DBClientInfo sharedInstance].clientName.value];
+                                                  [eventLabel appendFormat:@"%@;", [DBClientInfo sharedInstance].clientPhone.value];
                                                   
                                                   if(items){
                                                       [eventLabel appendString:items[@"alfaResponse"]];

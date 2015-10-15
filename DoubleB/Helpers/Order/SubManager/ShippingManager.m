@@ -17,7 +17,7 @@ NSString *const kDBDefaultsShippingAddress = @"kDBDefaultsShippingAddress";
 NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingManagerDidRecieveSuggestionsNotification";
 
 @interface ShippingManager()
-@property (weak, nonatomic) OrderCoordinator *parentManager;
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 
 @property (nonatomic, strong) NSArray *addressSuggestions;
 //@property (nonatomic, strong) NSTimer *requestSuggestionsTimer;
@@ -26,7 +26,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
 
 @implementation ShippingManager
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
     self = [super init];
     if (self) {
         _parentManager = parentManager;

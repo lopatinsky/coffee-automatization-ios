@@ -25,6 +25,9 @@
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
 
+#import "DBUniversalModulesManager.h"
+#import "DBUniversalModule.h"
+
 #import <Parse/Parse.h>
 
 @implementation DBServerAPI
@@ -78,40 +81,6 @@
                                  
                                  [[IHSecureStore sharedInstance] setClientId:[NSString stringWithFormat:@"%lld", (long long)[responseObject[@"client_id"] longLongValue]]];
                                  
-//                                 if(responseObject[@"share_type"]){
-//                                     int shareType = [responseObject[@"share_type"] intValue];
-//                                     switch (shareType) {
-//                                         case 0:// Share
-//                                             break;
-//                                         case 1:// Ivitation to app
-//                                             break;
-//                                         case 2:{// Friend gift
-//                                             NSString *branchName = responseObject[@"branch_name"];
-//                                             NSString *branchPhone = responseObject[@"branch_phone"];
-//                                             
-//                                             if(![[DBClientInfo sharedInstance] validClientName]){
-//                                                 [DBClientInfo sharedInstance].clientName = branchName;
-//                                             }
-//                                             
-//                                             if(![[DBClientInfo sharedInstance] validClientPhone]){
-//                                                 [DBClientInfo sharedInstance].clientPhone = branchPhone;
-//                                             }
-//                                             
-////                                             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBFriendGiftRecievedNotification object:nil]];
-//                                         }
-//                                             break;
-//                                     }
-//                                 }
-                                 
-//                                 BOOL branchGiftsPromoEnabled = [responseObject[@"branch_gifts"] boolValue];
-//                                 [[NSUserDefaults standardUserDefaults] setObject:@(branchGiftsPromoEnabled)
-//                                                                           forKey:kDBGiftForFriendPromoEnabled];
-//                                 
-//                                 BOOL branchInvitationsPromoEnabled = [responseObject[@"branch_invitations"] boolValue];
-//                                 [[NSUserDefaults standardUserDefaults] setObject:@(branchInvitationsPromoEnabled)
-//                                                                           forKey:kDBFreeBeveragesForSharePromoEnabled];
-//                                 
-//                                 [[NSUserDefaults standardUserDefaults] synchronize];
                                  
                                  if(analytics){
                                      [GANHelper analyzeEvent:@"user_register_success"
@@ -139,12 +108,22 @@
 + (void)sendUserInfo:(void(^)(BOOL success))callback {
     NSString *clientId = [[IHSecureStore sharedInstance] clientId];
     
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"client_id"] = clientId;
+    params[@"client_name"] = [DBClientInfo sharedInstance].clientName.value;
+    params[@"client_phone"] = [DBClientInfo sharedInstance].clientPhone.value;
+    params[@"client_email"] = [DBClientInfo sharedInstance].clientMail.value;
+    
+    NSMutableDictionary *universalModules = [NSMutableDictionary new];
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+        universalModules[module.jsonField] = [module jsonRepresentation];
+    }
+    params[@"groups"] = [universalModules encodedString];
+    
     if(clientId){
         [[DBAPIClient sharedClient] POST:@"client"
-                              parameters:@{@"client_id": clientId,
-                                           @"client_name": [DBClientInfo sharedInstance].clientName,
-                                           @"client_phone": [DBClientInfo sharedInstance].clientPhone,
-                                           @"client_email": [DBClientInfo sharedInstance].clientMail}
+                              parameters:params
                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                      //NSLog(@"%@", responseObject);
                                      
@@ -528,7 +507,7 @@
 + (NSArray *)assembleOrderItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].itemsManager.items) {
-        [items addObject:[self assembleItem:item]];
+        [items addObject:[item requestJson]];
     }
     
     return items;
@@ -537,7 +516,7 @@
 + (NSArray *)assembleBonusItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].bonusItemsManager.items) {
-        [items addObject:[self assembleItem:item]];
+        [items addObject:[item requestJson]];
     }
     
     return items;
@@ -546,46 +525,24 @@
 + (NSArray *)assembleGiftItems{
     NSMutableArray *items = [NSMutableArray new];
     for (OrderItem *item in [OrderCoordinator sharedInstance].orderGiftsManager.items) {
-        [items addObject:[self assembleItem:item]];
+        [items addObject:[item requestJson]];
     }
     
     return items;
 }
 
-+ (NSDictionary *)assembleItem:(OrderItem *)item {
-    NSMutableDictionary *itemDict = [NSMutableDictionary new];
-    
-    itemDict[@"item_id"] = item.position.positionId;
-    itemDict[@"quantity"] = @(item.count);
-    
-    NSMutableArray *singleModifiers = [NSMutableArray new];
-    for(DBMenuPositionModifier *modifier in item.position.singleModifiers){
-        [singleModifiers addObject:@{@"single_modifier_id": modifier.modifierId,
-                                     @"quantity": @(modifier.selectedCount)}];
-    }
-    
-    NSMutableArray *groupModifiers = [NSMutableArray new];
-    for(DBMenuPositionModifier *modifier in item.position.groupModifiers){
-        if(!modifier.selectedItem)
-            continue;
-        
-        [groupModifiers addObject:@{@"group_modifier_id": modifier.modifierId,
-                                    @"choice": modifier.selectedItem.itemId,
-                                    @"quantity": @1}];
-    }
-    
-    itemDict[@"single_modifiers"] = singleModifiers;
-    itemDict[@"group_modifiers"] = groupModifiers;
-    
-    return itemDict;
-}
-
 + (NSDictionary *)assembleClientInfo{
     NSMutableDictionary *clientInfo = [NSMutableDictionary new];
     clientInfo[@"id"] = [[IHSecureStore sharedInstance] clientId];
-    clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName;
-    clientInfo[@"phone"] = [DBClientInfo sharedInstance].clientPhone;
-    clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail;
+    clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName.value;
+    clientInfo[@"phone"] = [DBClientInfo sharedInstance].clientPhone.value;
+    clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail.value;
+    
+    NSMutableDictionary *universalModules = [NSMutableDictionary new];
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+        universalModules[module.jsonField] = [module jsonRepresentation];
+    }
+    clientInfo[@"groups"] = universalModules;
     
     return clientInfo;
 }

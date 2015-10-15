@@ -22,6 +22,7 @@
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
+#import "DBModulesManager.h"
 
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
