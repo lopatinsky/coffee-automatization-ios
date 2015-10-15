@@ -61,4 +61,18 @@
     }
 }
 
+- (NSData *)dataForKey:(NSString *)key {
+    return [self.secureStore dataForKey:key];
+}
+
+- (void)setData:(NSData *)data forKey:(NSString *)key {
+    [self.secureStore setData:data forKey:key];
+    [self.secureStore synchronize];
+}
+
+- (void)removeAll {
+    [self.secureStore removeAllItems];
+    [self.secureStore synchronize];
+}
+
 @end

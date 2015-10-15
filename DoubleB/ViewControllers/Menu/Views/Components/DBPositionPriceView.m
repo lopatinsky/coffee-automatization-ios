@@ -39,6 +39,7 @@
 }
 
 - (void)awakeFromNib {
+    self.backgroundColor = [UIColor clearColor];
     self.priceLabel.backgroundColor = [UIColor db_defaultColor];
     [self.priceLabel setRoundedCorners];
     
@@ -82,8 +83,7 @@
 
 - (void)animatePositionAdditionWithCompletion:(void(^)())completion{
     UIView *view = [[UIView alloc] initWithFrame:self.priceLabel.frame];
-    view.layer.cornerRadius = view.frame.size.height / 2.f;
-    view.layer.masksToBounds = YES;
+    [view setRoundedCorners];
     view.backgroundColor = [UIColor db_defaultColor];
     
     [self addSubview:view];

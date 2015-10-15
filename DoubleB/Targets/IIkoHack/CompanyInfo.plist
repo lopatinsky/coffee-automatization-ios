@@ -3,11 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>ViewControllers</key>
-	<dict/>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://resto.resto.doubleb-automation-production.appspot.com/</string>
+		<string>http://resto.test2.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4278214478</integer>
 		<key>CompanyGAKey</key>

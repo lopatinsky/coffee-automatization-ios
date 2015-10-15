@@ -22,9 +22,7 @@
     
     [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
         if (success) {
-            if (![[DBCompaniesManager sharedInstance] companyIsChosen]) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
-            }
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
         } else {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadFailure object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
         }

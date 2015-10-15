@@ -62,8 +62,10 @@ static DBAPIClient *_sharedClient = nil;
 + (NSString *)restAPIVersion {
     // 0 - initial API version
     // 1 - Share
+    // 2 - New start logic
+    // 3 - Significant bug in apps with shipping and takeout(was on 2 version)
     
-    return @"1";
+    return @"3";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
@@ -81,8 +83,8 @@ static DBAPIClient *_sharedClient = nil;
 - (void)setCompanyHeaderEnabled:(BOOL)companyHeaderEnabled {
     _companyHeaderEnabled = companyHeaderEnabled;
     
-    if (companyHeaderEnabled && [DBCompaniesManager selectedCompanyName]) {
-        [self setValue:[DBCompaniesManager selectedCompanyName] forHeader:@"namespace"];
+    if (companyHeaderEnabled && [DBCompaniesManager selectedCompanyNamespace]) {
+        [self setValue:[DBCompaniesManager selectedCompanyNamespace] forHeader:@"namespace"];
     } else {
         [self disableHeader:@"namespace"];
     }

@@ -21,7 +21,7 @@
     NSArray *_giftItems;
 }
 @dynamic total, discount, walletDiscount, shippingTotal;
-@dynamic orderId, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, paymentType;
+@dynamic orderId, orderNumber, time, timeString, dataItems, dataBonusItems, dataGiftItems, status, paymentType;
 @dynamic deliveryType, venueId, venueName, shippingAddress;
 
 - (instancetype)init:(BOOL)stored {
@@ -36,6 +36,7 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
+    self.orderNumber = [NSString stringWithFormat:@"%@", dict[@"number"]];
     
     self.total = @([OrderCoordinator sharedInstance].itemsManager.totalPrice);
     self.discount = @([OrderCoordinator sharedInstance].promoManager.discount);
@@ -72,6 +73,7 @@
     self = [self init:YES];
     
     self.orderId = [NSString stringWithFormat:@"%@", dict[@"order_id"]];
+    self.orderNumber = [NSString stringWithFormat:@"%@", dict[@"number"]];
     
     // Assemble items
     NSMutableArray *items = [[NSMutableArray alloc] init];
@@ -111,6 +113,7 @@
 }
 
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict{
+    self.orderNumber = [NSString stringWithFormat:@"%@", dict[@"number"]];
     self.status = [dict[@"status"] intValue];
     
     [self setAddressFromResponseDict:dict];
@@ -147,8 +150,12 @@
             timeSlot = [dict getValueForKey:@"delivery_slot_str"];
         }
         
-        NSDateFormatter *formatter = [NSDateFormatter new];
+        static NSDateFormatter *formatter = nil;
+        if (!formatter) {
+            formatter = [NSDateFormatter new];
+        }
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+        formatter.locale = [NSLocale localeWithLocaleIdentifier:@"ru-RU"];
         NSDate *date = [formatter dateFromString:dateString];
         
         self.time = date;
@@ -156,18 +163,6 @@
             self.timeString = timeSlot;
     }
     @catch (NSException *exception) {
-    }
-}
-
-+ (void)dropOrdersHistoryIfItIsFirstLaunchOfSomeVersions{
-    NSString *lastMajorUpdateVersion = @"1.2";
-    
-    NSString *fieldName = [NSString stringWithFormat:@"launchedBeforeVersion_%@", lastMajorUpdateVersion];
-    BOOL isLaunchedBefore = [[NSUserDefaults standardUserDefaults] boolForKey:fieldName];
-    
-    if(!isLaunchedBefore){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:fieldName];
-        [Order dropAllOrders];
     }
 }
 

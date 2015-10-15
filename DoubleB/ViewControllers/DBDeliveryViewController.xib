@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
@@ -22,7 +22,6 @@
                 <outlet property="constraintCityViewHeight" destination="gxK-Yq-rZB" id="7Q6-YE-Bed"/>
                 <outlet property="constraintCommentViewHeight" destination="a8q-p6-nWP" id="AX5-8W-7lf"/>
                 <outlet property="constraintStreetViewHeight" destination="u0R-Ia-oYy" id="urs-Lo-f8R"/>
-                <outlet property="deliveryImage" destination="L0U-v0-fSg" id="WbV-Di-dF6"/>
                 <outlet property="deliveryView" destination="i5M-Pr-FkT" id="Krt-C2-MPc"/>
                 <outlet property="fakeSeparator" destination="r9C-1u-sSp" id="fZN-11-SGw"/>
                 <outlet property="fakeSeparator2" destination="pYd-to-aYm" id="QHx-fI-pfC"/>
@@ -204,10 +203,6 @@
                         <outlet property="delegate" destination="-1" id="Tcx-V1-xXU"/>
                     </connections>
                 </tableView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="L0U-v0-fSg" userLabel="deliveryImage">
-                    <rect key="frame" x="0.0" y="150" width="320" height="418"/>
-                    <animations/>
-                </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -215,8 +210,6 @@
                 <constraint firstItem="HtN-lc-Wed" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0Jd-if-hJF"/>
                 <constraint firstAttribute="trailing" secondItem="ZsI-pR-S2d" secondAttribute="trailing" id="6gA-BS-6wY"/>
                 <constraint firstAttribute="trailing" secondItem="xWG-lT-Fi1" secondAttribute="trailing" id="Apl-l8-nJD"/>
-                <constraint firstAttribute="bottom" secondItem="L0U-v0-fSg" secondAttribute="bottom" id="MNH-lX-5HR"/>
-                <constraint firstItem="L0U-v0-fSg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MXh-ts-wyV"/>
                 <constraint firstAttribute="trailing" secondItem="ecL-HN-cff" secondAttribute="trailing" id="Pis-5G-uvj"/>
                 <constraint firstItem="xWG-lT-Fi1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SuK-15-IAa"/>
                 <constraint firstAttribute="trailing" secondItem="HtN-lc-Wed" secondAttribute="trailing" id="WRH-Xj-iNz"/>
@@ -226,8 +219,6 @@
                 <constraint firstItem="ZsI-pR-S2d" firstAttribute="top" secondItem="HtN-lc-Wed" secondAttribute="bottom" id="iqU-Rl-V6O"/>
                 <constraint firstItem="xWG-lT-Fi1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="l7a-Iz-OcN"/>
                 <constraint firstAttribute="bottom" secondItem="ZsI-pR-S2d" secondAttribute="bottom" id="my1-z9-0S5"/>
-                <constraint firstItem="L0U-v0-fSg" firstAttribute="top" secondItem="HtN-lc-Wed" secondAttribute="bottom" id="wbZ-sb-Skx"/>
-                <constraint firstAttribute="trailing" secondItem="L0U-v0-fSg" secondAttribute="trailing" id="x7E-JS-6oh"/>
                 <constraint firstItem="ZsI-pR-S2d" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="y66-Ik-ykg"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
@@ -240,9 +231,4 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

@@ -259,6 +259,7 @@
     
     DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
     cell.contentType = DBPositionCellContentTypeRegular;
+    cell.priceAnimated = YES;
     [cell configureWithPosition:position];
     cell.delegate = self;
     
@@ -270,7 +271,7 @@
     if(category.categoryWithImages){
         return 120;
     } else {
-        return 44;
+        return 50;
     }
 }
 
@@ -313,7 +314,6 @@
         [modifiersList configureWithMenuPosition:cell.position];
         [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
     } else {
-        [cell animatePositionAdditionWithCompletion:nil];
         [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
     }
     
@@ -413,7 +413,7 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self hideCategoryPicker];
 }
 

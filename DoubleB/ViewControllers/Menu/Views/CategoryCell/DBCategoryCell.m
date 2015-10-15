@@ -12,18 +12,42 @@
 #import "UIImageView+WebCache.h"
 
 @interface DBCategoryCell ()<UIGestureRecognizerDelegate>
+@property (weak, nonatomic) UIImageView *categoryIconImageView;
+@property (weak, nonatomic) UILabel *categoryNameLabel;
+@property (weak, nonatomic) UIImageView *disclosureIndicator;
+@property (weak, nonatomic) UIView *separatorView;
 @end
 
 @implementation DBCategoryCell
 
-- (instancetype)init{
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCell" owner:self options:nil] firstObject];
+- (instancetype)initWithType:(DBCategoryCellAppearanceType)type {
+    if (type == DBCategoryCellAppearanceTypeFull)
+        self = [self initFullCell];
+    else
+        self = [self initCompactCell];
     
+    return self;
+}
+
+- (instancetype)init{
+    self = [self initFullCell];
+    return self;
+}
+
+- (instancetype)initFullCell {
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCell" owner:self options:nil] firstObject];
+    return self;
+}
+
+- (instancetype)initCompactCell {
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCompactCell" owner:self options:nil] firstObject];
     return self;
 }
 
 - (void)awakeFromNib
 {
+    [self initOutlets];
+    
     self.backgroundColor = [UIColor whiteColor];
     self.contentView.backgroundColor = [UIColor whiteColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -38,6 +62,13 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     tapGestureRecognizer.delegate = self;
     [self addGestureRecognizer:tapGestureRecognizer];
+}
+
+- (void)initOutlets {
+    self.categoryIconImageView = (UIImageView *)[self.contentView viewWithTag:1];
+    self.categoryNameLabel = (UILabel *)[self.contentView viewWithTag:2];
+    self.disclosureIndicator = (UIImageView *)[self.contentView viewWithTag:3];
+    self.separatorView = [self.contentView viewWithTag:4];
 }
 
 - (void)configureWithCategory:(DBMenuCategory *)category{

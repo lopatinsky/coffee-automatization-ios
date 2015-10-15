@@ -10,16 +10,24 @@
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
+typedef enum : NSUInteger {
+    RootStateLaunch,
+    RootStateMain,
+    RootStateCompanies,
+} RootState;
+
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
+- (void)initializeVendorFrameworks;
+- (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
 
-+ (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy;
-+ (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
+- (void)fetchCompanyDependentInfo;
+
 @end
 
-@interface ApplicationManager(Initialization)
-+ (void)initializeVendorFrameworks;
-+ (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
+@interface ApplicationManager(Plist)
++ (void)copyPlistWithName:(NSString *)plistName forceCopy:(BOOL)forceCopy;
++ (void)copyPlistsWithNames:(NSArray *)plistsNames forceCopy:(BOOL)forceCopy;
 @end
 
 @interface ApplicationManager(Appearance)
@@ -27,13 +35,14 @@
 @end
 
 @interface ApplicationManager(Start)
-+ (UIViewController *)rootViewController;
+- (RootState)currentState;
+- (UIViewController *)rootViewController;
 @end
 
 @interface ApplicationManager(Menu)
-+ (Class<MenuListViewControllerProtocol>)rootMenuViewController;
+- (Class<MenuListViewControllerProtocol>)rootMenuViewController;
 @end
 
 @interface ApplicationManager(DemoApp)
-+ (UIViewController *)demoLoginViewController;
+- (UIViewController *)demoLoginViewController;
 @end

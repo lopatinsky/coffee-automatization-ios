@@ -130,11 +130,23 @@
     }
 }
 
+- (BOOL)hasImages {
+    if(!self.parent){
+        return [DBMenu sharedInstance].hasImages;
+    } else {
+        return self.parent.categoryWithImages;
+    }
+}
+
 
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90;
+    if ([self hasImages]) {
+        return 90.f;
+    } else {
+        return 65.f;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -145,7 +157,11 @@
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
     if (!cell){
-        cell = [DBCategoryCell new];
+        if ([self hasImages]){
+            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeFull];
+        } else {
+            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeCompact];
+        }
     }
     
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.row];

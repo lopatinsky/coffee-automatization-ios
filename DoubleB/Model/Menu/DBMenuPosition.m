@@ -52,15 +52,7 @@
     [self copyFromResponseDictionary:positionDictionary];
     
     NSArray *remoteModifiers = positionDictionary[@"group_modifiers"];
-    
-    // Remove cached modifiers that not in remoteModifiers
-    for (DBMenuPositionModifier *modifier in _groupModifiers) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"modifier_id == %@", modifier.modifierId];
-        NSDictionary *remoteModifier = [[remoteModifiers filteredArrayUsingPredicate:predicate] firstObject];
-        if(!remoteModifier){
-            [_groupModifiers removeObject:modifier];
-        }
-    }
+    NSMutableArray *newModifiers = [NSMutableArray new];
     
     // Synchronize cached modifiers with remoteModifiers
     for (NSDictionary *remoteModifier in remoteModifiers) {
@@ -68,14 +60,16 @@
         DBMenuPositionModifier *modifier = [[_groupModifiers filteredArrayUsingPredicate:predicate] firstObject];
         if(modifier) {
             if(![modifier synchronizeGroupModifierWithDictionary:remoteModifier])
-                [_groupModifiers removeObject:modifier];
+                modifier = nil;
         } else {
-            DBMenuPositionModifier *modifier = [DBMenuPositionModifier groupModifierFromDictionary:remoteModifier];
-            if(modifier)
-                [_groupModifiers addObject:modifier];
+            modifier = [DBMenuPositionModifier groupModifierFromDictionary:remoteModifier];
         }
+        
+        if(modifier)
+            [newModifiers addObject:modifier];
     }
     
+    _groupModifiers = newModifiers;
     [self sortModifiers:_groupModifiers];
 }
 

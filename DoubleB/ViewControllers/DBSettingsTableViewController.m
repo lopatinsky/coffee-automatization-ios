@@ -16,6 +16,7 @@
 #import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfoViewController.h"
+#import "DBCompaniesViewController.h"
 #import "IHPaymentManager.h"
 #import "OrderCoordinator.h"
 #import "DBPayPalManager.h"
@@ -56,15 +57,15 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     self.settingsItems = [[NSMutableArray alloc] init];
     
     // Companies item
-//    if([DBCompaniesManager sharedInstance].hasCompanies){
-//        DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
-//        companiesVC.firstLaunch = NO;
-//        [self.settingsItems addObject:@{@"name": @"companiesVC",
-//                                           @"title": NSLocalizedString(@"Список ресторанов", nil),
-//                                           @"image": @"venue_gray",
-//                                           @"viewController": companiesVC
-//                                           }];
-//    }
+    if([DBCompaniesManager sharedInstance].hasCompanies){
+        DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
+        companiesVC.mode = DBCompaniesViewControllerModeChangeCompany;
+        [self.settingsItems addObject:@{@"name": @"companiesVC",
+                                           @"title": NSLocalizedString(@"Список ресторанов", nil),
+                                           @"image": @"venue_gray",
+                                           @"viewController": companiesVC
+                                           }];
+    }
     
     // Profile item
     DBProfileViewController *profileVC = [DBProfileViewController new];
@@ -112,7 +113,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBPromosListViewController *promosVC = [DBPromosListViewController new];
     [self.settingsItems addObject:@{@"name": @"promosVC",
                                     @"title": NSLocalizedString(@"Список акций", nil),
-                                    @"image": @"menu_icon",
+                                    @"image": @"promos_icon",
                                     @"viewController": promosVC}];
     
     // Contact us item
@@ -144,7 +145,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
         [self.settingsItems addObject:@{@"name": @"appPromoVC",
                                         @"title": NSLocalizedString(@"Промокоды", nil),
-                                        @"image": @"none",
+                                        @"image": @"promocodes_icon",
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
     }
 }

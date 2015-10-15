@@ -59,7 +59,7 @@
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
     self.countLabel.textColor = [UIColor db_defaultColor];
-    self.modifiersLabel.textColor = [UIColor db_defaultColor];
+    self.modifiersLabel.textColor = [UIColor colorWithWhite:0.f alpha:0.5f];
     self.priceLabel.textColor = [UIColor db_defaultColor];
     
     self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];

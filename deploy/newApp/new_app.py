@@ -13,11 +13,11 @@ MDF_LIVE = '--live'
 #============
 # Args
 
-ARG_APP_NAME = '-n',
-ARG_BUNDLE_ID = '-id',
-ARG_URL_NAMESPACE = '-urln',
-ARG_APP_COLOR = '-c', # App color in format #ffffff
-ARG_ICON_PATH = '-ipath',
+ARG_APP_NAME = '-n'
+ARG_BUNDLE_ID = '-id'
+ARG_URL_NAMESPACE = '-urln'
+ARG_APP_COLOR = '-c' # App color in format #ffffff
+ARG_ICON_PATH = '-ipath'
 ARG_LAUNCH_IMAGE_PATH = '-lpath'
 
 #============
@@ -26,7 +26,6 @@ def parse_script_args():
 	args = {}
 	for i in xrange(1, len(sys.argv)):
 		key = sys.argv[i]
-		print key + '-' + str(is_arg(key))
 		if is_arg(key):
 			value = sys.argv[i+1]
 			if not(is_arg(value) and is_modifier(value)):

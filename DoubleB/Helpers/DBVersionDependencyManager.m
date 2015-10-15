@@ -14,12 +14,16 @@
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
 
+#import "DBCompanyInfo.h"
+#import "IHSecureStore.h"
+
 @implementation DBVersionDependencyManager
 
 + (void)performAll {
+    [self checkCompatibilityOfStoredData];
 }
 
-#pragma mark - User History
+#pragma mark - Analyze user history
 + (void)analyzeUserModifierChoicesFromHistory {
     BOOL analyzed = [[self valueForKey:@"kDBUserHistoryAnalyzedForModifiers"] boolValue];
     
@@ -51,6 +55,42 @@
     }
     
     [[DBMenu sharedInstance] saveMenuToDeviceMemory];
+}
+
+#pragma mark - check compatibility of stored data
++ (void)checkCompatibilityOfStoredData {
+    if ([self needsToFlush]) {
+        // Clear KeyChain
+        [[IHSecureStore sharedInstance] removeAll];
+        
+        // Clear UserDefaults
+        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary * dict = [userDefaults dictionaryRepresentation];
+        for (id key in dict) {
+            [userDefaults removeObjectForKey:key];
+        }
+        [userDefaults synchronize];
+        
+        // Clear menu
+        [[DBMenu sharedInstance] clearMenu];
+        
+        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:@(YES)];
+        [[IHSecureStore sharedInstance] setData:data forKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+    }
+}
+
++ (BOOL)needsToFlush {
+    BOOL needsToFlush = NO;
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"tukano"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
+    
+    return needsToFlush;
 }
 
 #pragma mark - DBDataManager

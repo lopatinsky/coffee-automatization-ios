@@ -64,22 +64,23 @@
         companyInfo[@"Preferences"][@"BaseUrl"] = [NSString stringWithFormat:@"%@/", appUrl];
         
         [companyInfo writeToFile:path atomically:NO];
+
         
         [[ApplicationManager sharedInstance] flushStoredCache];
-        [[DBTabBarController sharedInstance] moveToStartState];
         [DBAPIClient changeBaseUrl];
         
-        UIWindow *window = [(AppDelegate *)[[UIApplication sharedApplication] delegate] window];
-        window.rootViewController = [ApplicationManager rootViewController];
-        
-//        [[[UIAlertView alloc] initWithTitle:@"Важно!"
-//                                    message:@"Приложение сейчас закроется!"
-//                                   delegate:nil
-//                          cancelButtonTitle:@"OK"
-//                          otherButtonTitles:nil] show];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            abort();
-//        });
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+            if(success){
+                AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                delegate.window.rootViewController = [ViewControllerManager mainViewController];
+            } else {
+                [self showError:@"Не удалось загрузить информацию о выбранной компании"];
+            }
+        }];
+        [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
     }
 }
 

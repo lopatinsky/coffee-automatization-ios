@@ -35,6 +35,7 @@
 #pragma mark - User
 
 + (void)requestCompanies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
+//    [[DBAPIClient sharedClient] setCompanyHeaderEnabled:NO];
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -43,9 +44,11 @@
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
+                                
                                 if(failure)
                                     failure(error);
                             }];
+//    [[DBAPIClient sharedClient] setCompanyHeaderEnabled:YES];
 }
 
 + (void)registerUser:(void(^)(BOOL success))callback{
@@ -204,25 +207,12 @@
                                  
                                  if(success)
                                      success(responseObject);
-                                 
-                                 // Analitics
-                                 if(responseObject){
-                                     NSData *responseData = [NSJSONSerialization dataWithJSONObject:responseObject
-                                                                                            options:NSJSONWritingPrettyPrinted
-                                                                                              error:nil];
-                                     NSString *eventLabel = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-//                                     [GANHelper analyzeEvent:@"" label:eventLabel category:ORDER_SCREEN];
-                                 }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
                                  
                                  if(failure)
                                      failure(error);
-                                 
-                                 // Analitics
-                                 NSString *eventLabel = [NSString stringWithFormat:@"%ld", (long)error.code];
-//                                 [GANHelper analyzeEvent:@"" label:eventLabel category:ORDER_SCREEN];
                              }];
 }
 
@@ -585,7 +575,7 @@
         payment[@"correlation_id"] = [DBPayPalManager sharedInstance].paymentMetadata ?: @"";
     }
     
-    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletDiscount ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
+    payment[@"wallet_payment"] = [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder ? @([OrderCoordinator sharedInstance].promoManager.walletDiscount) : @(0);
     
     return payment;
 }

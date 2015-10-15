@@ -180,11 +180,11 @@
     UIImageView *imageViewVenue = (UIImageView *)[cell viewWithTag:7];
     
     UIColor *textColor;
-    NSMutableAttributedString *orderString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), [order orderId]]];
+    NSMutableAttributedString *orderString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:NSLocalizedString(@"Заказ #%@", nil), order.orderNumber]];
     
     if(order.status == OrderStatusNew || order.status == OrderStatusConfirmed || order.status == OrderStatusOnWay){
         [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 6)];
-        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor db_defaultColor] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderNumber]]];
         [imageViewVenue templateImageWithName:@"venue"];
         switch (order.paymentType) {
             case PaymentTypeCash:
@@ -225,7 +225,7 @@
     
     if(order.status == OrderStatusCanceledBarista || order.status == OrderStatusCanceled){
         [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, 6)];
-        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor fromHex:0xffe16941] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderId]]];
+        [orderString addAttribute:NSForegroundColorAttributeName value:[UIColor fromHex:0xffe16941] range:[orderString.string rangeOfString:[NSString stringWithFormat:@"#%@", order.orderNumber]]];
         [imageViewVenue templateImageWithName:@"venue" tintColor:[UIColor db_grayColor]];
         switch (order.paymentType) {
             case PaymentTypeCash:
