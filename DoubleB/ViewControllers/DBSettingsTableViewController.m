@@ -121,12 +121,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"title": NSLocalizedString(@"Написать нам", nil),
                                     @"image": @"feedback"}];
     
-    // Company info
-//    DBCompanyInfoViewController *companyInfoVC = [DBCompanyInfoViewController new];
-//    [self.settingsItems addObject:@{@"name": @"companyInfoVC",
-//                                   @"title": NSLocalizedString(@"О компании", nil),
-//                                   @"image": @"",
-//                                   @"viewController": companyInfoVC}];
+    
 
     
     // Documents item
