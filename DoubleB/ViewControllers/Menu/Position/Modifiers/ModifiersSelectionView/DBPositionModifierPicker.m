@@ -148,7 +148,7 @@
     if(self.type == DBPositionModifierPickerTypeGroup){
         NSInteger shift = self.modifier.required ? 0 : 1;
         if(indexPath.row == 0 && shift == 1){
-            [self.modifier clearSelectedItem];
+            [self.modifier selectNothing];
         } else {
             [self.modifier selectItemAtIndex:indexPath.row - shift];
         }

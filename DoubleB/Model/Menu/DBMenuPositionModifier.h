@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 - (void)selectItemAtIndex:(NSInteger)index;
 - (void)selectItemById:(NSString *)itemId;
 - (void)selectDefaultItem;
-- (void)clearSelectedItem;
+- (void)selectNothing;
 
 // Both
 

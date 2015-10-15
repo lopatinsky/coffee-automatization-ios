@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSMutableArray *items;
 @property (strong, nonatomic) DBMenuPositionModifierItem *defaultItem;
 @property (strong, nonatomic) DBMenuPositionModifierItem *userSelectedItem;
+@property (nonatomic) BOOL selectedByUser;
 @end
 
 @implementation DBMenuPositionModifier
@@ -95,6 +96,7 @@
     
     self.required = [[modifierDictionary getValueForKey:@"required"] boolValue];
     
+    self.defaultItem = nil;
     // Reload items
     self.items = [NSMutableArray new];
     for(NSDictionary *itemDict in modifierDictionary[@"choices"]){
@@ -123,17 +125,22 @@
 }
 
 - (DBMenuPositionModifierItem *)selectedItem {
-    return self.userSelectedItem ? self.userSelectedItem : self.defaultItem;
+    if (self.selectedByUser) {
+        return self.userSelectedItem;
+    } else {
+        return self.defaultItem;
+    }
 }
 
 - (BOOL)itemSelectedByUser {
-    return self.userSelectedItem != nil;
+    return self.selectedByUser;
 }
 
 - (void)selectItemAtIndex:(NSInteger)index{
     if(index >= 0 && index < [self.items count]){
         DBMenuPositionModifierItem *selectedItem = self.items[index];
         self.userSelectedItem = selectedItem;
+        self.selectedByUser = YES;
     }
 }
 
@@ -141,17 +148,21 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemId == %@", itemId];
     DBMenuPositionModifierItem *item = [[self.items filteredArrayUsingPredicate:predicate] firstObject];
     if(item){
-        self.userSelectedItem= item;
+        self.userSelectedItem = item;
+        self.selectedByUser = YES;
     }
 }
 
 - (void)selectDefaultItem {
-    if(self.defaultItem)
+    if(self.defaultItem) {
         self.userSelectedItem = self.defaultItem;
+        self.selectedByUser = YES;
+    }
 }
 
-- (void)clearSelectedItem{
+- (void)selectNothing{
     self.userSelectedItem = nil;
+    self.selectedByUser = YES;
 }
 
 
@@ -222,6 +233,9 @@
         self.items = [aDecoder decodeObjectForKey:@"items"];
         self.defaultItem = [aDecoder decodeObjectForKey:@"defaultItem"];
         self.userSelectedItem = [aDecoder decodeObjectForKey:@"userSelectedItem"];
+        self.selectedByUser = [[aDecoder decodeObjectForKey:@"selectedByUser"] boolValue];
+        if (self.userSelectedItem)
+            self.selectedByUser = YES;
     }
     
     return self;
@@ -247,6 +261,7 @@
     
     if(self.userSelectedItem)
         [aCoder encodeObject:self.userSelectedItem forKey:@"userSelectedItem"];
+    [aCoder encodeObject:@(self.selectedByUser) forKey:@"selectedByUser"];
 }
 
 #pragma mark - NSCopying
@@ -271,6 +286,7 @@
     
     copyModifier.defaultItem = [self.defaultItem copyWithZone:zone];
     copyModifier.userSelectedItem = [self.userSelectedItem copyWithZone:zone];
+    copyModifier.selectedByUser = self.selectedByUser;
     
     return copyModifier;
 }

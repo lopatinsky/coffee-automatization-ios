@@ -10,7 +10,7 @@ DEV_ACCOUNT = "isoschepkov@gmail.com"
 PASSWORD = ""
 
 PROJECT_NAME = 'DoubleB'
-DEBUG_SKIP_BUILD_STEP = False      # set to 1 if you don't want to clean and rebuild ipa files
+DEBUG_SKIP_BUILD_STEP = True      # set to 1 if you don't want to clean and rebuild ipa files
 DEBUG_SKIP_UPLOAD_STEP = False  # set to 1 if you don't want the built ipa files to be uploaded
 
 path_output = "build" 
