@@ -53,6 +53,14 @@
     return self;
 }
 
++ (NSString *)reuseIdentifierFor:(DBPositionCellAppearanceType)type {
+    if (type == DBPositionCellAppearanceTypeFull) {
+        return @"DBPositionCell";
+    } else {
+        return @"DBPositionCompactCell";
+    }
+}
+
 - (void)awakeFromNib
 {
     [self initOutlets];
