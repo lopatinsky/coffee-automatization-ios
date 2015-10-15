@@ -116,6 +116,7 @@
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
         }
     }];
+    [[DBModulesManager sharedInstance] fetchModules:nil];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];

@@ -51,6 +51,7 @@
     if(!cell){
         cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
         cell.delegate = self;
+        cell.priceAnimated = YES;
     }
     
     DBMenuPosition *position = [DBFriendGiftHelper sharedInstance].items[indexPath.row];
@@ -61,7 +62,6 @@
 
 -(void)positionCellDidOrder:(id<PositionCellProtocol>)cell {
     [[DBFriendGiftHelper sharedInstance].itemsManager addPosition:[cell position]];
-    [((DBPositionCell*)cell) animatePositionAdditionWithCompletion:nil];
 }
 
 @end
