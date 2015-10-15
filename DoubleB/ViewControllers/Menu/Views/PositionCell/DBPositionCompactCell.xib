@@ -15,11 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u3Z-hl-QOK" id="vnW-HT-6jB">
-<<<<<<< HEAD
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-=======
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
->>>>>>> master
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0G-KE-kJz" customClass="DBPositionPriceView">
