@@ -19,4 +19,6 @@
 + (UIColor *)db_defaultTextColor;
 + (UIColor *)db_textGrayColor;
 
++ (UIColor *)db_errorColor;
+
 @end

@@ -40,4 +40,8 @@
     return  [UIColor colorWithRed:120./255 green:125./255 blue:135./255 alpha:1.];
 }
 
++ (UIColor *)db_errorColor {
+    return [UIColor orangeColor];
+}
+
 @end
