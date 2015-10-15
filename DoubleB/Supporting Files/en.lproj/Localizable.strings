@@ -207,3 +207,6 @@
 "Вы накопили:" = "You have accumulated:";
 "Чтобы получить напиток в подарок, измените тип оплаты на экране заказа" = "To get free beverage change payment type on the order screen";
 "Копите баллы, оплачивая покупки картой Mastercard, и получайте каждый %d напиток в подарок." = "Accumulate points by paying with Mastercard and get every %dth beverage as a gift.";
+
+// Subscription
+"Абонемент" = "Subscription";

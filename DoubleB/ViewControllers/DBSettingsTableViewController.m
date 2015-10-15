@@ -143,6 +143,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"image": @"promocodes_icon",
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
     }
+    
+    if ([[[DBCompanyInfo sharedInstance] subscriptionIsEnabled] boolValue]) {
+        [self.settingsItems addObject:@{@"name": @"subscriptionVC",
+                                        @"title": NSLocalizedString(@"Абонемент", nil),
+                                        @"image": @"subscription_icon",
+                                        @"viewController": [ViewControllerManager subscriptionViewController]}];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

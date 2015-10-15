@@ -49,3 +49,7 @@
 @interface ViewControllerManager(CompaniesViewControllers)
 + (nonnull UIViewController *)companiesViewControllers;
 @end
+
+@interface ViewControllerManager(SubscriptionViewControllers)
++ (nonnull UIViewController *)subscriptionViewController;
+@end

@@ -191,3 +191,20 @@
 
 @end
 
+
+#pragma mark - Company
+#import "DBCompaniesViewController.h"
+@implementation ViewControllerManager(SubscriptionViewControllers)
+
++ (nonnull NSDictionary *)subscriptionViewControllerClasses {
+    return @{
+             @"default": [DBCompaniesViewController class]
+             };
+}
+
++ (nonnull UIViewController *)subscriptionViewController {
+    Class companiesViewController = [self subscriptionViewControllerClasses][[self valueFromPropertyListByKey:@"Subscription"] ?: @"default"];
+    return [companiesViewController new];
+}
+
+@end
