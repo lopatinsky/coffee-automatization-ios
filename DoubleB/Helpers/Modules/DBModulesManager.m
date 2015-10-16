@@ -13,7 +13,7 @@
 #import "DBUniversalModulesManager.h"
 
 typedef NS_ENUM(NSInteger, DBModuleType) {
-    DBModuleTypeMonthSubscription = 0,
+    DBModuleTypeSubscription = 0,
     DBModuleTypeFriendGift = 1,
     DBModuleTypeFriendInvitation = 2,
     DBModuleTypeProfileScreenUniversal = 4,
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
 - (void)processResponse:(NSDictionary *)response {
     NSMutableArray *appModules = [NSMutableArray new];
     for (int i = 0; i < DBModuleTypeLast; i++){
-        [appModules addObject:@(i)];
+
     }
     
     // Switch on all necessary modules
@@ -69,6 +69,9 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
+            case DBModuleTypeSubscription:
+                
                 break;
         }
         
