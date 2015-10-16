@@ -9,6 +9,7 @@
 #import "DBModulesManager.h"
 #import "DBAPIClient.h"
 
+#import "DBSubscriptionManager.h"
 #import "DBFriendGiftHelper.h"
 #import "DBUniversalModulesManager.h"
 
@@ -71,7 +72,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
             case DBModuleTypeSubscription:
-                
+                [[DBSubscriptionManager sharedInstance] ena]
                 break;
         }
         
