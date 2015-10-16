@@ -131,17 +131,18 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"about",
                                     @"viewController": documentsVC}];
     
-    
-    // Notifications item
-//    [self.settingsItems addObject:@{@"name": @"notification",
-//                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
-//                                    @"image": @"alerts.png"}];
-    
     if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
         [self.settingsItems addObject:@{@"name": @"appPromoVC",
                                         @"title": NSLocalizedString(@"Промокоды", nil),
                                         @"image": @"promocodes_icon",
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
+    }
+    
+    if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
+        [self.settingsItems addObject:@{@"name": @"subscriptionVC",
+                                        @"title": NSLocalizedString(@"Абонемент", nil),
+                                        @"image": @"subscription_icon",
+                                        @"viewController": [ViewControllerManager subscriptionViewController]}];
     }
 }
 

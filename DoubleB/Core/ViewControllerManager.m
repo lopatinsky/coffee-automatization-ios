@@ -184,7 +184,7 @@
              };
 }
 
-+ (nonnull UIViewController *)companiesViewControllers {
++ (nonnull UIViewController *)companiesViewController {
     Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
     return [companiesViewController new];
 }

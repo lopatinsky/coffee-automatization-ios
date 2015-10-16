@@ -272,7 +272,7 @@
         return [ViewControllerManager mainViewController];
     }
     if ([self currentState] == RootStateCompanies) {
-        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
+        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewController]];
     }
     if ([self currentState] == RootStateLaunch) {
         return [ViewControllerManager launchViewController];
