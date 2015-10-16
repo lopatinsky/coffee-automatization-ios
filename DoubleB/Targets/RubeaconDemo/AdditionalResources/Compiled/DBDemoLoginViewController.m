@@ -81,7 +81,7 @@
                               _inProcess = YES;
                               
                               [[ApplicationManager sharedInstance] flushStoredCache];
-                              [DBCompaniesManager selectCompanyName:result];
+                              [DBCompaniesManager selectCompany:[[DBCompany alloc] initWithResponseDict:result]];
                               
                               [[ApplicationManager sharedInstance] updateAllInfo:nil];
                           } else {
