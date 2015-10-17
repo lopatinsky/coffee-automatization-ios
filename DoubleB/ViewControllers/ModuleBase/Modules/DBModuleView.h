@@ -10,9 +10,13 @@
 
 
 @interface DBModuleView : UIView
+// Category for analytics
 @property (strong, nonatomic) NSString *analyticsCategory;
+
+// Controller which hold module
 @property (weak, nonatomic) UIViewController *ownerViewController;
 
+// Array of submodules
 @property (strong, nonatomic) NSMutableArray *submodules;
 
 // Use only if you set modules from code;
@@ -25,10 +29,19 @@
 
 /**
  * Animated reload
- * Not override this method. Use in only for react on notifications
+ * Not override this method. Use it only for react on notifications
  */
 - (void)reload;
 
+/**
+ * Returns content size of current module. By default returns frame size
+ * Override it to customize module size
+ */
 - (CGSize)moduleViewContentSize;
+
+/**
+ * Invokes when get touch on self
+ * Override to customize touch actions
+ */
 - (void)touchAtLocation:(CGPoint)location;
 @end

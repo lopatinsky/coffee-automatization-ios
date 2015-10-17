@@ -57,15 +57,8 @@
 }
 
 - (void)setupModules {
-    DBNOItemsModuleView *itemsModule = [DBNOItemsModuleView new];
-    itemsModule.analyticsCategory = self.analyticsCategory;
-    itemsModule.ownerViewController = self;
-    [self.modules addObject:itemsModule];
-    
-    DBNOBonusItemsModuleView *bonusItemsModule = [DBNOBonusItemsModuleView new];
-    bonusItemsModule.analyticsCategory = self.analyticsCategory;
-    bonusItemsModule.ownerViewController = self;
-    [self.modules addObject:bonusItemsModule];
+    [self.modules addObject:[DBNOItemsModuleView new]];
+    [self.modules addObject:[DBNOBonusItemsModuleView new]];
 }
 
 - (void)setupSettingsNavigationItem{

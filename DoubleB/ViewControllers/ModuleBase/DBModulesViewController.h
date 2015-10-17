@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBModulesViewController : UIViewController
+@class DBModuleView;
 
+@interface DBModulesViewController : UIViewController
+@property (strong, nonatomic) NSString *analyticsCategory;
+
+/**
+ * Array of modules
+ * Use addModule method to automaticaly set all settings for module
+ */
 @property (strong, nonatomic) NSMutableArray *modules;
+
+- (void)addModule:(DBModuleView *)moduleView;
+- (void)removeModule:(DBModuleView *)moduleView;
 
 - (void)layoutModules;
 - (void)reloadModules:(BOOL)animated;

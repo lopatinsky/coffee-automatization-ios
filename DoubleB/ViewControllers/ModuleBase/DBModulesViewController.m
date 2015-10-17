@@ -50,6 +50,25 @@
     self.constraintBottomScrollViewAlignment = [[_scrollView alignBottomEdgeWithView:self.view predicate:@"0"] firstObject];
 }
 
+- (void)setAnalyticsCategory:(NSString *)analyticsCategory {
+    _analyticsCategory = analyticsCategory;
+    
+    for (DBModuleView *moduleView in self.modules) {
+        moduleView.analyticsCategory = _analyticsCategory;
+    }
+}
+
+- (void)addModule:(DBModuleView *)moduleView {
+    moduleView.analyticsCategory = self.analyticsCategory;
+    moduleView.ownerViewController = self;
+    
+    [self.modules addObject:moduleView];
+}
+
+- (void)removeModule:(DBModuleView *)moduleView {
+    [self.modules removeObject:moduleView];
+}
+
 - (void)layoutModules {
     for (int i = 0; i < self.modules.count; i++){
         UIView *moduleView = self.modules[i];
