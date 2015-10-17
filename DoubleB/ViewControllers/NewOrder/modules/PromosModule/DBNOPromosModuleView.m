@@ -7,11 +7,12 @@
 //
 
 #import "DBNOPromosModuleView.h"
+#import "DBDiscountMessageCell.h"
+
+#import "OrderCoordinator.h"
 
 @interface DBNOPromosModuleView ()<UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (strong, nonatomic) NSArray *messages;
 @end
 
 @implementation DBNOPromosModuleView
@@ -35,6 +36,12 @@
     [self.tableView reloadData];
 }
 
+- (CGSize)moduleViewContentSize {
+    double height = [OrderCoordinator sharedInstance].promoManager.promos.count * 44.f;
+    
+    return CGSizeMake(self.frame.size.width, height);
+}
+
 #pragma mark UITableViewDelegate
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -48,27 +55,21 @@
 #pragma mark UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.messages count];
+    return [[OrderCoordinator sharedInstance].promoManager.promos count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBDiscountMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBDiscountMessageCell"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBDiscountMessageCell" owner:self options:nil] firstObject];
-    }
-    
-    cell.messageLabel.text = self.messages[indexPath.row];
-    
-    if (self.currentlyShowPromos) {
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         cell.messageLabel.textColor = [UIColor db_defaultColor];
         cell.messageLabel.textAlignment = NSTextAlignmentRight;
-    } else {
-        cell.messageLabel.textColor = [UIColor orangeColor];
-        cell.messageLabel.textAlignment = NSTextAlignmentLeft;
-        [cell.messageLabel db_startObservingAnimationNotification];
     }
     
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.messageLabel.text = [OrderCoordinator sharedInstance].promoManager.promos[indexPath.row];
     
     return cell;
 }
