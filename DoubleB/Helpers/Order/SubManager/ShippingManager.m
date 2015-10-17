@@ -78,6 +78,8 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     _selectedAddress.location = suggestion.location;
     
     [self synchronize];
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 - (BOOL)hasCity:(NSString *)city{
@@ -92,28 +94,16 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     _selectedAddress.location = nil;
     
     [self synchronize];
-//    
-//    if (_address == nil) {
-//        _address = address;
-//        return;
-//    }
-//    
-//    _selectedAddress[@"address"][@"street"] = _address;
-//    if (![_address isEqualToString:address]) {
-//        _address = address;
-//        if (self.requestSuggestionsTimer) {
-//            [self.requestSuggestionsTimer invalidate];
-//            self.requestSuggestionsTimer = nil;
-//        }
-//        self.requestSuggestionsTimer = [NSTimer scheduledTimerWithTimeInterval:.5 target:self selector:@selector(requestSuggestions) userInfo:nil repeats:NO];
-//        [self saveToUserDefaultsValue:address withKey:kDeliveryAddress];
-//    }
+
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 - (void)setApartment:(NSString *)apartment {
     _selectedAddress.apartment = apartment ?: @"";
     
     [self synchronize];
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 - (void)setCity:(NSString *)city {
@@ -124,12 +114,16 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     _selectedAddress.location = nil;
     
     [self synchronize];
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 - (void)setComment:(NSString *)comment {
     _selectedAddress.comment = comment ?: @"";
     
     [self synchronize];
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 - (void)synchronize {
@@ -146,6 +140,8 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     } else {
         _selectedAddress = [DBShippingAddress new];
     }
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 #pragma mark - DBManagerProtocol

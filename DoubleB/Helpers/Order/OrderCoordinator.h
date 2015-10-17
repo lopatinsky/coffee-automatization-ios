@@ -27,6 +27,7 @@ extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
 
 extern NSString * __nonnull const CoordinatorNotificationNewPaymentType;
 extern NSString * __nonnull const CoordinatorNotificationNewVenue;
+extern NSString * __nonnull const CoordinatorNotificationNewShippingAddress;
 
 extern NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;

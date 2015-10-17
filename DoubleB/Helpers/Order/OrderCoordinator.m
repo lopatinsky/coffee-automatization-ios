@@ -21,6 +21,7 @@ NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"Coordinato
 
 NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
 NSString * __nonnull const CoordinatorNotificationNewVenue = @"CoordinatorNotificationNewVenue";
+NSString * __nonnull const CoordinatorNotificationNewShippingAddress = @"CoordinatorNotificationNewShippingAddress";
 
 NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated = @"CoordinatorNotificationAddressSuggestionsUpdated";
 NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNotificationPromoUpdated";
@@ -134,6 +135,9 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             case ShippingManagerChangeSuggestions:
                 [self shippingManagerDidChangeSuggestions];
                 break;
+            case ShippingManagerChangeAddress:
+                [self shippingManagerDidChangeAddress];
+                break;
         }
     }
 }
@@ -176,6 +180,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)shippingManagerDidChangeSuggestions{
     [self notifyObserverOf:CoordinatorNotificationAddressSuggestionsUpdated];
+}
+
+- (void)shippingManagerDidChangeAddress{
+    [self notifyObserverOf:CoordinatorNotificationNewShippingAddress];
 }
 
 #pragma mark - PromoManager changes
