@@ -24,6 +24,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.bonusSwitch.onTintColor = [UIColor db_defaultColor];
     
     [self.bonusSwitch addTarget:self action:@selector(bonusSwitchChangedValue:) forControlEvents:UIControlEventValueChanged];

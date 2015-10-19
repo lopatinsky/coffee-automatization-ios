@@ -30,15 +30,13 @@
 }
 
 - (void)awakeFromNib {
-    [self commonInit];
-}
-
-- (void)commonInit {
-    [self.paymentImageView templateImageWithName:@"payment"];
+    [super awakeFromNib];
     
+    [self.paymentImageView templateImageWithName:@"payment"];
+     
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
-    
+     
     [self reload:NO];
 }
 

@@ -27,10 +27,8 @@
 }
 
 - (void)awakeFromNib {
-    [self commomInit];
-}
-
-- (void)commomInit {
+    [super awakeFromNib];
+    
     [self.commentImageView templateImageWithName:@"comment"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];

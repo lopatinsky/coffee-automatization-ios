@@ -25,6 +25,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.tableView = (UITableView *)[self viewWithTag:1];
     
     [self reload:NO];

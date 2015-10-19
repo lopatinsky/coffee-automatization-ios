@@ -24,6 +24,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     self.tableView.scrollEnabled = NO;
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.delegate = self;

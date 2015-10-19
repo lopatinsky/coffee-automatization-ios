@@ -30,6 +30,8 @@
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
+    
     self.labelTotal.textColor = [UIColor db_defaultColor];
     
     self.totalRefreshControl.hidesWhenStopped = YES;

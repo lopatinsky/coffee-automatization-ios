@@ -33,6 +33,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     [self.venueImageView templateImageWithName:@"venue"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];

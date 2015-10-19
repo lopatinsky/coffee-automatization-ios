@@ -24,6 +24,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     [self.orderButton setRoundedCorners];
     [self.orderButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
     [self.orderButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];

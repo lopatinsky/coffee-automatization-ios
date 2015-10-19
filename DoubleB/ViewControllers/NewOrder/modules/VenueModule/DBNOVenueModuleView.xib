@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-ib-dI5">
-                    <rect key="frame" x="37" y="12" width="275" height="21"/>
+                    <rect key="frame" x="36" y="12" width="276" height="21"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="o5D-iA-has"/>
@@ -25,18 +25,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g8d-ji-iPN">
-                    <rect key="frame" x="37" y="12" width="20" height="20"/>
+                    <rect key="frame" x="36" y="12" width="20" height="20"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="CgF-sp-NWf"/>
                         <constraint firstAttribute="height" constant="20" id="oXf-f9-pUr"/>
                     </constraints>
                 </activityIndicatorView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venue.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
-                    <rect key="frame" x="8" y="11" width="16" height="22"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venue.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
+                    <rect key="frame" x="8" y="11" width="15" height="22"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="16" id="Xkx-XR-X2N"/>
+                        <constraint firstAttribute="width" constant="15" id="Xkx-XR-X2N"/>
                         <constraint firstAttribute="height" constant="22" id="rCs-CM-2VH"/>
                     </constraints>
                 </imageView>

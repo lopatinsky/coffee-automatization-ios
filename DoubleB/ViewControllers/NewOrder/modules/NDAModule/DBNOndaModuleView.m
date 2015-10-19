@@ -27,6 +27,8 @@
 }
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
+    
     self.labelNda.text = NSLocalizedString(@"Согласен с Правилами оплаты", nil);
     [self reload];
     self.ndaAcceptSwitch.onTintColor = [UIColor db_defaultColor];

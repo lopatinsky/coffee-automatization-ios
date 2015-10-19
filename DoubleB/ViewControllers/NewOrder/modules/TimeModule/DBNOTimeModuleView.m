@@ -30,6 +30,8 @@
 }
 
 - (void)awakeFromNib {
+    [super awakeFromNib];
+    
     [self.timeImageView templateImageWithName:@"clock"];
     
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
