@@ -44,8 +44,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAnimating) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAnimating) name:kDBConcurrentOperationCheckOrderFailure object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimating) name:kDBConcurrentOperationCheckOrderStarted object:nil];
-    
-    [self reload:NO];
 }
 
 - (void)dealloc{

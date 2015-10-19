@@ -48,8 +48,6 @@
             [GANHelper analyzeEvent:@"decline_policy" category:ORDER_SCREEN];
         }
     } forControlEvents:UIControlEventValueChanged];
-    
-    [self reload:NO];
 }
 
 - (void)reload:(BOOL)animated{

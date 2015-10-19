@@ -37,8 +37,6 @@
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewSelectedTime selector:@selector(reload)];
-    
-    [self reload:NO];
 }
 
 - (void)reload:(BOOL)animated {

@@ -76,6 +76,8 @@
 #pragma mark - Lifecicle
 
 - (void)viewAddedOnVC {
+    [self reload:NO];
+    
     for (DBModuleView *submodule in self.submodules) {
         [submodule viewAddedOnVC];
     }

@@ -39,8 +39,6 @@
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress] selector:@selector(reload)];
-    
-    [self reload:NO];
 }
 
 - (void)dealloc {

@@ -32,8 +32,6 @@
     [self.commentImageView templateImageWithName:@"comment"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
-    
-    [self reload];
 }
 
 - (void)reload:(BOOL)animated {

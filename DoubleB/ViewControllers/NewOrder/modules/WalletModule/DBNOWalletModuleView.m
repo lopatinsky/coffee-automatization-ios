@@ -31,8 +31,6 @@
     [self.bonusSwitch addTarget:self action:@selector(bonusSwitchChangedValue:) forControlEvents:UIControlEventValueChanged];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationOrderWalletDiscount selector:@selector(reload)];
-    
-    [self reload:NO];
 }
 
 - (void)dealloc{

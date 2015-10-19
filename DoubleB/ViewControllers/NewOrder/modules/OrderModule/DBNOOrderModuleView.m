@@ -31,8 +31,6 @@
     [self.orderButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];
     
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[] selector:@selector(reload)];
-    
-    [self reload:NO];
 }
 
 - (void)dealloc {
