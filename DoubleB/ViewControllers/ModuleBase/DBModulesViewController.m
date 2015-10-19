@@ -36,6 +36,30 @@
                                                object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    for (DBModuleView *submodule in self.modules) {
+        [submodule viewWillAppearOnVC];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    for (DBModuleView *submodule in self.modules) {
+        [submodule viewDidAppearOnVC];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    for (DBModuleView *submodule in self.modules) {
+        [submodule viewWillDissapearFromVC];
+    }
+}
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -63,6 +87,8 @@
     moduleView.ownerViewController = self;
     
     [self.modules addObject:moduleView];
+    
+    [moduleView viewAddedOnVC];
 }
 
 - (void)removeModule:(DBModuleView *)moduleView {
