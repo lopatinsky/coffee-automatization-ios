@@ -106,7 +106,10 @@
     [GANHelper analyzeEvent:@"time_click" category:self.analyticsCategory];
     
     [self reloadTimePicker];
-    [self.pickerView showOnView:self.ownerViewController.view];
+    
+    if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]){
+        [self.pickerView showOnView:[self.delegate db_moduleViewModalComponentContainer:self]];
+    }
 }
 
 #pragma mark - helper methods

@@ -7,7 +7,6 @@
 //
 
 #import "DBModulesViewController.h"
-#import "DBModuleView.h"
 
 @interface DBModulesViewController ()
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -85,6 +84,7 @@
 - (void)addModule:(DBModuleView *)moduleView {
     moduleView.analyticsCategory = self.analyticsCategory;
     moduleView.ownerViewController = self;
+    moduleView.delegate = self;
     
     [self.modules addObject:moduleView];
     
@@ -127,6 +127,14 @@
     for (DBModuleView *module in self.modules){
         [module reload:animated];
     }
+}
+
+- (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view {
+    return [self containerForModuleModalComponent:view];
+}
+
+- (UIView *)containerForModuleModalComponent:(DBModuleView *)view {
+    return self.view;
 }
 
 #pragma mark - Keyboard events
