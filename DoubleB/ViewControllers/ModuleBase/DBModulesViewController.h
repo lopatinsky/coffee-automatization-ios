@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBModuleView.h"
 
-@class DBModuleView;
-
-@interface DBModulesViewController : UIViewController
+@interface DBModulesViewController : UIViewController<DBModuleViewDelegate>
 @property (strong, nonatomic) NSString *analyticsCategory;
 
 /**
@@ -24,5 +23,11 @@
 
 - (void)layoutModules;
 - (void)reloadModules:(BOOL)animated;
+
+/**
+ * return view where moduleView will display modal component
+ * Override this method to customize appearance
+ */
+- (UIView *)containerForModuleModalComponent:(DBModuleView *)view;
 
 @end

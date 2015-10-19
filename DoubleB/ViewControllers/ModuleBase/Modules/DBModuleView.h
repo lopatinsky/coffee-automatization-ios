@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DBModuleViewDelegate;
 
 @interface DBModuleView : UIView
 // Category for analytics
@@ -15,6 +16,8 @@
 
 // Controller which hold module
 @property (weak, nonatomic) UIViewController *ownerViewController;
+
+@property (weak, nonatomic) id<DBModuleViewDelegate> delegate;
 
 // Array of submodules
 @property (strong, nonatomic) NSMutableArray *submodules;
@@ -68,4 +71,11 @@
  * Override to customize touch actions
  */
 - (void)touchAtLocation:(CGPoint)location;
+@end
+
+
+@protocol DBModuleViewDelegate <NSObject>
+
+- (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view;
+
 @end
