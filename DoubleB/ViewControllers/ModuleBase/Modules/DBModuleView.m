@@ -73,6 +73,32 @@
     [self layoutIfNeeded];
 }
 
+#pragma mark - Lifecicle
+
+- (void)viewAddedOnVC {
+    for (DBModuleView *submodule in self.submodules) {
+        [submodule viewAddedOnVC];
+    }
+}
+
+- (void)viewWillAppearOnVC {
+    for (DBModuleView *submodule in self.submodules) {
+        [submodule viewWillAppearOnVC];
+    }
+}
+
+- (void)viewDidAppearOnVC {
+    for (DBModuleView *submodule in self.submodules) {
+        [submodule viewDidAppearOnVC];
+    }
+}
+
+- (void)viewWillDissapearFromVC {
+    for (DBModuleView *submodule in self.submodules) {
+        [submodule viewWillDissapearFromVC];
+    }
+}
+
 #pragma mark - Setters
 
 - (void)setAnalyticsCategory:(NSString *)analyticsCategory{

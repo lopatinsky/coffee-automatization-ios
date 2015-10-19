@@ -22,6 +22,30 @@
 // Use only if you set modules from code;
 - (void)layoutModules;
 
+#pragma mark - Lifecicle
+
+/**
+ * Invokes when module added to VC or module
+ */
+- (void)viewAddedOnVC;
+
+/**
+ * Invokes viewWillAppear method of owner ViewController
+ */
+- (void)viewWillAppearOnVC;
+
+/**
+ * Invokes viewDidAppear method of owner ViewController
+ */
+- (void)viewDidAppearOnVC;
+
+/**
+ * Invokes viewWillDissapear method of owner ViewController
+ */
+- (void)viewWillDissapearFromVC;
+
+
+#pragma mark - Content
 /**
  * Reload content of module and all submodules. Recalculate size
  */
