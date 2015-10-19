@@ -6,7 +6,7 @@
 //  Copyright © 2015 Empatika. All rights reserved.
 //
 
-#import "DBNOVenueModelView.h"
+#import "DBNOVenueModuleView.h"
 #import "DBAddressViewController.h"
 
 #import "OrderCoordinator.h"
@@ -15,7 +15,7 @@
 
 #import "Venue.h"
 
-@interface DBNOVenueModelView ()
+@interface DBNOVenueModuleView ()
 @property (weak, nonatomic) IBOutlet UIImageView *venueImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *activityIndicator;
@@ -24,10 +24,10 @@
 
 @end
 
-@implementation DBNOVenueModelView
+@implementation DBNOVenueModuleView
 
 - (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOVenueModelView" owner:self options:nil] firstObject];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOVenueModuleView" owner:self options:nil] firstObject];
     
     return self;
 }

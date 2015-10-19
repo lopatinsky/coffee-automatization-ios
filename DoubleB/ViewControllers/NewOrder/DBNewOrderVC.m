@@ -15,7 +15,7 @@
 #import "DBNOWalletModuleView.h"
 #import "DBNOTotalModuleView.h"
 #import "DBNOPromosModuleView.h"
-#import "DBNOVenueModelView.h"
+#import "DBNOVenueModuleView.h"
 #import "DBNOTimeModuleView.h"
 #import "DBNOProfileModuleView.h"
 #import "DBNOPaymentModuleView.h"
@@ -24,7 +24,6 @@
 #import "DBNOOrderModuleView.h"
 
 @interface DBNewOrderVC ()
-@property (strong, nonatomic) NSString *analyticsCategory;
 @end
 
 @implementation DBNewOrderVC
@@ -34,20 +33,23 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor db_backgroundColor];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.edgesForExtendedLayout = UIRectEdgeTop;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self db_setTitle:NSLocalizedString(@"Заказ", nil)];
     
     self.analyticsCategory = ORDER_SCREEN;
     
     [self setupSettingsNavigationItem];
     [self setupModules];
+    
+    [self layoutModules];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [Compatibility registerForNotifications];
+    
+    [self reloadModules:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -57,8 +59,19 @@
 }
 
 - (void)setupModules {
-    [self.modules addObject:[DBNOItemsModuleView new]];
-    [self.modules addObject:[DBNOBonusItemsModuleView new]];
+//    [self addModule:[DBNOItemsModuleView new]];
+//    [self addModule:[DBNOBonusItemsModuleView new]];
+//    [self addModule:[DBNOGiftItemsModuleView new]];
+    [self addModule:[DBNOWalletModuleView new]];
+    [self addModule:[DBNOTotalModuleView new]];
+//    [self addModule:[DBNOPromosModuleView new]];
+    [self addModule:[DBNOVenueModuleView new]];
+    [self addModule:[DBNOTimeModuleView new]];
+    [self addModule:[DBNOProfileModuleView new]];
+    [self addModule:[DBNOPaymentModuleView new]];
+    [self addModule:[DBNOCommentModuleView new]];
+    [self addModule:[DBNOndaModuleView new]];
+    [self addModule:[DBNOOrderModuleView new]];
 }
 
 - (void)setupSettingsNavigationItem{

@@ -26,6 +26,8 @@
 
 - (void)awakeFromNib {
     self.tableView = (UITableView *)[self viewWithTag:1];
+    
+    [self reload:NO];
 }
 
 - (ItemsManager *)manager {

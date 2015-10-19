@@ -8,6 +8,6 @@
 
 #import "DBModuleView.h"
 
-@interface DBNOVenueModelView : DBModuleView
+@interface DBNOVenueModuleView : DBModuleView
 
 @end

@@ -28,6 +28,8 @@
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [self reload:NO];
 }
 
 - (void)reload:(BOOL)animated {

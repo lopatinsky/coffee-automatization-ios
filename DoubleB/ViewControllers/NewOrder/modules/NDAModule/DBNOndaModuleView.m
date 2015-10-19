@@ -21,7 +21,7 @@
 @implementation DBNOndaModuleView
 
 - (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"" owner:self options:nil] firstObject];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOndaModuleView" owner:self options:nil] firstObject];
     
     return self;
 }
@@ -46,6 +46,8 @@
             [GANHelper analyzeEvent:@"decline_policy" category:ORDER_SCREEN];
         }
     } forControlEvents:UIControlEventValueChanged];
+    
+    [self reload:NO];
 }
 
 - (void)reload:(BOOL)animated{

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
@@ -11,12 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBNOVenueModelView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBNOVenueModuleView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-ib-dI5">
                     <rect key="frame" x="37" y="12" width="275" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="o5D-iA-has"/>
                     </constraints>
@@ -25,6 +26,7 @@
                 </label>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g8d-ji-iPN">
                     <rect key="frame" x="37" y="12" width="20" height="20"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="CgF-sp-NWf"/>
                         <constraint firstAttribute="height" constant="20" id="oXf-f9-pUr"/>
@@ -32,12 +34,14 @@
                 </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venue.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
                     <rect key="frame" x="8" y="11" width="16" height="22"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="Xkx-XR-X2N"/>
                         <constraint firstAttribute="height" constant="22" id="rCs-CM-2VH"/>
                     </constraints>
                 </imageView>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="WI0-ib-dI5" firstAttribute="centerY" secondItem="kNg-g0-2zK" secondAttribute="centerY" id="Kqx-zN-zcu"/>

@@ -52,7 +52,7 @@
 }
 
 - (void)reload:(BOOL)animated{
-    [self reload:animated];
+    [super reload:animated];
     double actualTotal = _orderCoordinator.itemsManager.totalPrice - _orderCoordinator.promoManager.totalDiscount + _orderCoordinator.promoManager.shippingPrice;
     NSString *actualTotalString = [NSString stringWithFormat:@"%.0f %@", actualTotal, [Compatibility currencySymbol]];
     
