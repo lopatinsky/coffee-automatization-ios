@@ -43,10 +43,12 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         if (ndaSigned) {
-            [GANHelper analyzeEvent:@"accept_policy" category:ORDER_SCREEN];
+            [GANHelper analyzeEvent:@"accept_policy" category:self.analyticsCategory];
         } else {
-            [GANHelper analyzeEvent:@"decline_policy" category:ORDER_SCREEN];
+            [GANHelper analyzeEvent:@"decline_policy" category:self.analyticsCategory];
         }
+        
+        [self reload:YES];
     } forControlEvents:UIControlEventValueChanged];
 }
 
@@ -70,7 +72,7 @@
         ndaVC.url = [DBCompanyInfo db_paymentRulesUrl];
         ndaVC.screen = PAYMENT_RULES_SCREEN;
         
-        [GANHelper analyzeEvent:@"confidence_show" category:ORDER_SCREEN];
+        [GANHelper analyzeEvent:@"confidence_show" category:self.analyticsCategory];
         
         ndaVC.hidesBottomBarWhenPushed = YES;
         [self.ownerViewController.navigationController pushViewController:ndaVC animated:YES];

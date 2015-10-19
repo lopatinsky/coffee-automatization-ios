@@ -18,8 +18,9 @@ NSString * __nonnull const CoordinatorNotificationOrderWalletDiscount = @"Coordi
 NSString * __nonnull const CoordinatorNotificationOrderShippingPrice = @"CoordinatorNotificationOrderShippingPrice";
 
 NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
-
 NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
+NSString * __nonnull const CoordinatorNotificationNewComment = @"CoordinatorNotificationNewComment";
+
 NSString * __nonnull const CoordinatorNotificationNewVenue = @"CoordinatorNotificationNewVenue";
 NSString * __nonnull const CoordinatorNotificationNewShippingAddress = @"CoordinatorNotificationNewShippingAddress";
 
@@ -119,6 +120,9 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             case OrderManagerChangeVenue:
                 [self orderManagerDidChangeVenue];
                 break;
+            case OrderManagerChangeComment:
+                [self orderManagerDidChangeComment];
+                break;
         }
     }
     
@@ -216,6 +220,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)orderManagerDidChangeVenue{
     [self notifyObserverOf:CoordinatorNotificationNewVenue];
+}
+
+- (void)orderManagerDidChangeComment{
+    [self notifyObserverOf:CoordinatorNotificationNewComment];
 }
 
 #pragma mark - DeliverySettings changes

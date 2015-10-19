@@ -78,6 +78,11 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     [self.parentManager manager:self haveChange:OrderManagerChangeVenue];
 }
 
+- (void)setComment:(NSString *)comment {
+    _comment = comment;
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangeComment];
+}
 
 #pragma mark - DBManagerProtocol
 

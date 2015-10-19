@@ -7,6 +7,7 @@
 //
 
 #import "DBCommentViewController.h"
+#import "OrderCoordinator.h"
 
 @interface DBCommentViewController ()
 
@@ -18,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.title = NSLocalizedString(@"Комментарий", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width - 20, self.view.frame.size.height - 10)];
@@ -39,7 +40,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.textView.text = self.comment;
+    self.textView.text = [OrderCoordinator sharedInstance].orderManager.comment;
     [self.textView becomeFirstResponder];
 
     [GANHelper analyzeScreen:@"Comments_screen"];
@@ -49,14 +50,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didMoveToParentViewController:(UIViewController *)parent {
-}
-
 - (void)clickSave:(UIBarButtonItem *)sender {
-    [self.delegate commentViewController:self didFinishWithText:self.textView.text];
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView{
+    [OrderCoordinator sharedInstance].orderManager.comment = self.textView.text;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {

@@ -87,6 +87,12 @@
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 
+#pragma mark - DBModulesViewController
+
+- (UIView *)containerForModuleModalComponent:(DBModuleView *)view {
+    return self.tabBarController.view;
+}
+
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{

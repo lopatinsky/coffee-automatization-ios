@@ -21,7 +21,8 @@ extern NSString* const kDBDefaultsPaymentType;
 
 typedef NS_ENUM(NSInteger, OrderManagerChange) {
     OrderManagerChangePaymentType = 0,
-    OrderManagerChangeVenue
+    OrderManagerChangeVenue,
+    OrderManagerChangeComment
 };
 
 /**

@@ -32,17 +32,18 @@
     [self.commentImageView templateImageWithName:@"comment"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
+    [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewComment selector:@selector(reload)];
+}
+
+- (void)dealloc {
+    [_orderCoordinator removeObserver:self];
 }
 
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
     if (_orderCoordinator.orderManager.comment.length > 0) {
-        if (_orderCoordinator.orderManager.comment.length > 10) {
-            self.titleLabel.text = [NSString stringWithFormat:@"%@...", [_orderCoordinator.orderManager.comment substringToIndex:10]];
-        } else {
-            self.titleLabel.text = _orderCoordinator.orderManager.comment;
-        }
+        self.titleLabel.text = _orderCoordinator.orderManager.comment;
     } else {
         self.titleLabel.text = NSLocalizedString(@"Комментарий", nil);
     }
