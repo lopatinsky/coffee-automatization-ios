@@ -22,6 +22,7 @@
     self = [super init];
     
     self.tableView = [UITableView new];
+    self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.dataSource = self;

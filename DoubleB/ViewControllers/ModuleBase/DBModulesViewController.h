@@ -19,7 +19,9 @@
 @property (strong, nonatomic) NSMutableArray *modules;
 
 - (void)addModule:(DBModuleView *)moduleView;
-- (void)removeModule:(DBModuleView *)moduleView;
+- (void)addModule:(DBModuleView *)moduleView topOffset:(CGFloat)topOffset;
+- (void)addModule:(DBModuleView *)moduleView bottomOffset:(CGFloat)bottomOffset;
+- (void)addModule:(DBModuleView *)moduleView topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset;
 
 - (void)layoutModules;
 - (void)reloadModules:(BOOL)animated;

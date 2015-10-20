@@ -38,12 +38,18 @@
                                                object:nil];
 }
 
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     self.textView.text = [OrderCoordinator sharedInstance].orderManager.comment;
     [self.textView becomeFirstResponder];
 
     [GANHelper analyzeScreen:@"Comments_screen"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.textView resignFirstResponder];
 }
 
 - (void)dealloc{

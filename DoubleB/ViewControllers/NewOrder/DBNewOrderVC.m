@@ -64,19 +64,19 @@
 }
 
 - (void)setupModules {
-    [self addModule:[DBNOOrderItemsModuleView new]];
-    [self addModule:[DBNOBonusItemsModuleView new]];
-    [self addModule:[DBNOGiftItemsModuleView new]];
+    [self addModule:[DBNOOrderItemsModuleView new] topOffset:15];
+    [self addModule:[DBNOBonusItemsModuleView new] topOffset:15];
+    [self addModule:[DBNOGiftItemsModuleView new] topOffset:15];
     [self addModule:[DBNOItemAdditionModuleView new]];
     [self addModule:[DBNOWalletModuleView new]];
     [self addModule:[DBNOTotalModuleView new]];
     [self addModule:[DBNOPromosModuleView new]];
     [self addModule:[DBNOVenueModuleView new]];
-    [self addModule:[DBNOTimeModuleView new]];
-    [self addModule:[DBNOProfileModuleView new]];
-    [self addModule:[DBNOPaymentModuleView new]];
-    [self addModule:[DBNOCommentModuleView new]];
-    [self addModule:[DBNOndaModuleView new]];
+    [self addModule:[DBNOTimeModuleView new] topOffset:1];
+    [self addModule:[DBNOProfileModuleView new] topOffset:1];
+    [self addModule:[DBNOPaymentModuleView new]topOffset:5];
+    [self addModule:[DBNOCommentModuleView new]topOffset:5];
+    [self addModule:[DBNOndaModuleView new]topOffset:5];
     [self addModule:[DBNOOrderModuleView new]];
 }
 

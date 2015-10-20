@@ -9,7 +9,7 @@
 #import "DBModuleView.h"
 
 @interface DBModuleView ()
-
+@property (nonatomic) BOOL moduleHidden;
 @end
 
 @implementation DBModuleView
@@ -70,31 +70,40 @@
     }
     
     // Define if module needs to be hidden
-    BOOL hidden = [self moduleViewContentHeight] == 0;
+    self.moduleHidden = [self moduleViewContentHeight] == 0;
     
     if (animated) {
-        if (self.hidden != hidden) { // If module will change its hidden property
+        if (self.hidden != self.moduleHidden) { // If module will change its hidden property
             // Show if module was hidden
             if (self.hidden){
-                self.hidden = hidden;
+                self.hidden = self.moduleHidden;
             }
             
             [UIView animateWithDuration:0.2 animations:^{
                 [self invalidateIntrinsicContentSize];
-                [self.superview layoutIfNeeded];
+                
+                if ([self.delegate respondsToSelector:@selector(db_additonalAnimationFroModuleAnimation:)]){
+                    [self.delegate db_additonalAnimationFroModuleAnimation:self]();
+                }
             } completion:^(BOOL finished) {
-                self.hidden = hidden;
+                self.hidden = self.moduleHidden;
             }];
         } else { // If module will not change its hidden property, just reload size
             [UIView animateWithDuration:0.2 animations:^{
                 [self invalidateIntrinsicContentSize];
-                [self.superview layoutIfNeeded];
+                
+                if ([self.delegate respondsToSelector:@selector(db_additonalAnimationFroModuleAnimation:)]){
+                    [self.delegate db_additonalAnimationFroModuleAnimation:self]();
+                }
             }];
         }
     } else {
-        self.hidden = hidden;
+        self.hidden = self.moduleHidden;
         [self invalidateIntrinsicContentSize];
-        [self layoutIfNeeded];
+        
+        if ([self.delegate respondsToSelector:@selector(db_additonalAnimationFroModuleAnimation:)]){
+            [self.delegate db_additonalAnimationFroModuleAnimation:self]();
+        }
     }
 
 }
@@ -145,7 +154,15 @@
     }
 }
 
-#pragma mark - Size
+#pragma mark - Appearance
+
+- (CGFloat)actualTopOffset {
+    return self.moduleHidden ? 0 : self.topOffset;
+}
+
+- (CGFloat)actualBottomOffset {
+    return self.moduleHidden ? 0 : self.bottomOffset;
+}
 
 - (CGSize)intrinsicContentSize {
     return [self moduleViewContentSize];

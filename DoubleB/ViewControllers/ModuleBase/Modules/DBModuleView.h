@@ -61,6 +61,13 @@
 - (void)reload;
 
 #pragma mark - Appearance
+@property (nonatomic) CGFloat topOffset;
+@property (nonatomic) CGFloat bottomOffset;
+
+@property (nonatomic, readonly) BOOL moduleHidden; // Show if module currently hidden
+@property (nonatomic, readonly) CGFloat actualTopOffset; // top offset according to moduleHidden property
+@property (nonatomic, readonly) CGFloat actualBottomOffset; // bottom offset according to moduleHidden property
+
 /**
  * Returns content size of current module. By default returns frame size
  * Override it to customize module size
@@ -85,5 +92,7 @@
 @protocol DBModuleViewDelegate <NSObject>
 
 - (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view;
+
+- (void(^)())db_additonalAnimationFroModuleAnimation:(DBModuleView *)view;
 
 @end
