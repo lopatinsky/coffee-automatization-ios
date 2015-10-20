@@ -19,15 +19,18 @@
 @implementation DBNOItemsModuleView
 
 - (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOItemsModuleView" owner:self options:nil] firstObject];
+    self = [super init];
+    
+    self.tableView = [UITableView new];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:self.tableView];
+    [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
     
     return self;
-}
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    
-    self.tableView = (UITableView *)[self viewWithTag:1];
 }
 
 - (ItemsManager *)manager {

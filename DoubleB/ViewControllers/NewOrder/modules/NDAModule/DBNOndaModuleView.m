@@ -65,6 +65,10 @@
     }
 }
 
+- (CGSize)moduleViewContentSize {
+    
+}
+
 - (void)touchAtLocation:(CGPoint)location {
     if (!CGRectContainsPoint(self.ndaAcceptSwitch.frame, location)) {
         DBHTMLViewController *ndaVC = [DBHTMLViewController new];

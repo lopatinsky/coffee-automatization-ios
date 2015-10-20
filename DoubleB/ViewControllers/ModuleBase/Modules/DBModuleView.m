@@ -69,8 +69,15 @@
         [module reload:animated];
     }
     
-    [self invalidateIntrinsicContentSize];
-    [self layoutIfNeeded];
+    if (animated) {
+        [UIView animateWithDuration:0.2 animations:^{
+            [self invalidateIntrinsicContentSize];
+            [self.superview layoutIfNeeded];
+        }];
+    } else {
+        [self invalidateIntrinsicContentSize];
+        [self layoutIfNeeded];
+    }
 }
 
 #pragma mark - Lifecicle
@@ -135,7 +142,7 @@
             height += module.moduleViewContentSize.height;
     }
     
-    return CGSizeMake(self.frame.size.width, height);
+    return CGSizeMake(UIViewNoIntrinsicMetric, height);
 }
 
 #pragma mark - Touches

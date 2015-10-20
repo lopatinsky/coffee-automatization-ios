@@ -41,8 +41,8 @@
     self.orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalPrice, CoordinatorNotificationOrderDiscount, CoordinatorNotificationOrderWalletDiscount, CoordinatorNotificationOrderShippingPrice] selector:@selector(reload)];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAnimating) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAnimating) name:kDBConcurrentOperationCheckOrderFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAnimating) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAnimating) name:kDBConcurrentOperationCheckOrderFailure object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimating) name:kDBConcurrentOperationCheckOrderStarted object:nil];
 }
 

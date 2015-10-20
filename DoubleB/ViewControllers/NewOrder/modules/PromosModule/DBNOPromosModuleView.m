@@ -30,6 +30,12 @@
     self.tableView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(reload)];
+}
+
+- (void)dealloc {
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (void)reload:(BOOL)animated {

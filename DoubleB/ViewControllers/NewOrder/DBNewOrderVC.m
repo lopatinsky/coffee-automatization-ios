@@ -9,9 +9,10 @@
 #import "DBNewOrderVC.h"
 #import "DBSettingsTableViewController.h"
 
-#import "DBNOItemsModuleView.h"
+#import "DBNOOrderItemsModuleView.h"
 #import "DBNOGiftItemsModuleView.h"
 #import "DBNOBonusItemsModuleView.h"
+#import "DBNOItemAdditionModuleView.h"
 #import "DBNOWalletModuleView.h"
 #import "DBNOTotalModuleView.h"
 #import "DBNOPromosModuleView.h"
@@ -22,6 +23,8 @@
 #import "DBNOCommentModuleView.h"
 #import "DBNOndaModuleView.h"
 #import "DBNOOrderModuleView.h"
+
+#import "NetworkManager.h"
 
 @interface DBNewOrderVC ()
 @end
@@ -50,6 +53,8 @@
     [Compatibility registerForNotifications];
     
     [self reloadModules:NO];
+    
+    [[NetworkManager sharedManager] addOperation:NetworkOperationCheckOrder];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -59,12 +64,13 @@
 }
 
 - (void)setupModules {
-//    [self addModule:[DBNOItemsModuleView new]];
-//    [self addModule:[DBNOBonusItemsModuleView new]];
-//    [self addModule:[DBNOGiftItemsModuleView new]];
+    [self addModule:[DBNOOrderItemsModuleView new]];
+    [self addModule:[DBNOBonusItemsModuleView new]];
+    [self addModule:[DBNOGiftItemsModuleView new]];
+    [self addModule:[DBNOItemAdditionModuleView new]];
     [self addModule:[DBNOWalletModuleView new]];
     [self addModule:[DBNOTotalModuleView new]];
-//    [self addModule:[DBNOPromosModuleView new]];
+    [self addModule:[DBNOPromosModuleView new]];
     [self addModule:[DBNOVenueModuleView new]];
     [self addModule:[DBNOTimeModuleView new]];
     [self addModule:[DBNOProfileModuleView new]];
@@ -91,12 +97,6 @@
 
 - (UIView *)containerForModuleModalComponent:(DBModuleView *)view {
     return self.tabBarController.view;
-}
-
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
-    return YES;
 }
 
 @end
