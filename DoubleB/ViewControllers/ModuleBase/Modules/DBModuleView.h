@@ -60,12 +60,20 @@
  */
 - (void)reload;
 
+#pragma mark - Appearance
 /**
  * Returns content size of current module. By default returns frame size
  * Override it to customize module size
  */
 - (CGSize)moduleViewContentSize;
 
+/**
+ * Returns content height of current module. By default returns frame height
+ * Override it to customize module height
+ */
+- (CGFloat)moduleViewContentHeight;
+
+#pragma mark - Actions
 /**
  * Invokes when get touch on self
  * Override to customize touch actions
