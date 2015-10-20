@@ -125,6 +125,10 @@
 
 
 - (CGSize)moduleViewContentSize {
+    return CGSizeMake(self.frame.size.width, [self moduleViewContentHeight]);
+}
+
+- (CGFloat)moduleViewContentHeight {
     int height = self.frame.size.height;
     
     if(_submodules.count > 0) {
@@ -133,7 +137,7 @@
             height += module.moduleViewContentSize.height;
     }
     
-    return CGSizeMake(self.frame.size.width, height);
+    return height;
 }
 
 #pragma mark - Touches
