@@ -69,15 +69,34 @@
         [module reload:animated];
     }
     
+    // Define if module needs to be hidden
+    BOOL hidden = [self moduleViewContentHeight] == 0;
+    
     if (animated) {
-        [UIView animateWithDuration:0.2 animations:^{
-            [self invalidateIntrinsicContentSize];
-            [self.superview layoutIfNeeded];
-        }];
+        if (self.hidden != hidden) { // If module will change its hidden property
+            // Show if module was hidden
+            if (self.hidden){
+                self.hidden = hidden;
+            }
+            
+            [UIView animateWithDuration:0.2 animations:^{
+                [self invalidateIntrinsicContentSize];
+                [self.superview layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                self.hidden = hidden;
+            }];
+        } else { // If module will not change its hidden property, just reload size
+            [UIView animateWithDuration:0.2 animations:^{
+                [self invalidateIntrinsicContentSize];
+                [self.superview layoutIfNeeded];
+            }];
+        }
     } else {
+        self.hidden = hidden;
         [self invalidateIntrinsicContentSize];
         [self layoutIfNeeded];
     }
+
 }
 
 #pragma mark - Lifecicle
