@@ -41,6 +41,12 @@
     [self.giftAdditionImageView templateImageWithName:@"gift_icon.png"];
     
     self.initialGiftAdditionViewWidth = self.constraintGiftAdditionViewWidth.constant;
+    
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(reload)];
+}
+
+- (void)dealloc {
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (void)reload:(BOOL)animated {

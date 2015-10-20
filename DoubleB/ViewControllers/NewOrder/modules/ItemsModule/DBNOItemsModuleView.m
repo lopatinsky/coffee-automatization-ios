@@ -117,10 +117,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     [[self manager] removeOrderItemAtIndex:indexPath.row];
     
-    [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationLeft];
-    [self.tableView endUpdates];
+    [self removeRowAtIndex:indexPath.row];
 }
 
 #pragma mark - DBOrderItemCellDelegate
