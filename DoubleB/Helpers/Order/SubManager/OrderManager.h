@@ -52,9 +52,9 @@ typedef NS_ENUM(NSInteger, OrderManagerChange) {
 @property (nonatomic) PaymentType paymentType;
 
 /**
-* Check if current order satisfy all conditions
-*/
-@property (nonatomic, readonly) BOOL validOrder;
+ * Define if user has accepted NDA
+ */
+@property (nonatomic) BOOL ndaAccepted;
 
 - (void)selectIfPossibleDefaultPaymentType;
 

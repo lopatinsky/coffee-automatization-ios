@@ -146,7 +146,6 @@
             height += module.moduleViewContentSize.height;
     }
     
-    return CGSizeMake(UIViewNoIntrinsicMetric, height);
     return height;
 }
 

@@ -44,7 +44,7 @@
     [self.tableView reloadData];
 }
 
-- (CGSize)moduleViewContentSize {
+- (CGFloat)moduleViewContentHeight{
     int height = 0;
     
     for(OrderItem *item in [self manager].items)
@@ -54,7 +54,7 @@
             height += 60;
         }
     
-    return CGSizeMake(self.frame.size.width, height);
+    return height;
 }
 
 #pragma mark - UITableViewDataSource

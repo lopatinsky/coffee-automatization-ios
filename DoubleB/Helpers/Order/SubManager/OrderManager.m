@@ -84,6 +84,23 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     [self.parentManager manager:self haveChange:OrderManagerChangeComment];
 }
 
+- (BOOL)ndaAccepted {
+    BOOL ndaSigned;
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned]){
+        self.ndaAccepted = [Order allOrders].count > 0;
+        ndaSigned = self.ndaAccepted;
+    } else {
+        ndaSigned = [[NSUserDefaults standardUserDefaults] boolForKey:kDBDefaultsNDASigned];
+    }
+    
+    return ndaSigned;
+}
+
+- (void)setNdaAccepted:(BOOL)ndaAccepted {
+    [[NSUserDefaults standardUserDefaults] setBool:ndaAccepted forKey:kDBDefaultsNDASigned];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 #pragma mark - DBManagerProtocol
 
 - (void)flushCache{

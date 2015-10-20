@@ -9,6 +9,7 @@
 #import "DBNOndaModuleView.h"
 #import "DBHTMLViewController.h"
 
+#import "OrderCoordinator.h"
 #import "DBCompanyInfo.h"
 
 #import <BlocksKit/UIControl+BlocksKit.h>
@@ -39,8 +40,7 @@
         
         BOOL ndaSigned = self.ndaAcceptSwitch.isOn;
         
-        [[NSUserDefaults standardUserDefaults] setBool:ndaSigned forKey:kDBDefaultsNDASigned];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [OrderCoordinator sharedInstance].orderManager.ndaAccepted = ndaSigned;
         
         if (ndaSigned) {
             [GANHelper analyzeEvent:@"accept_policy" category:self.analyticsCategory];
@@ -55,7 +55,7 @@
 - (void)reload:(BOOL)animated{
     [super reload:animated];
     
-    BOOL ndaSigned = [[NSUserDefaults standardUserDefaults] boolForKey:kDBDefaultsNDASigned];
+    BOOL ndaSigned = [OrderCoordinator sharedInstance].orderManager.ndaAccepted;
     
     self.ndaAcceptSwitch.on = ndaSigned;
     if(ndaSigned){
@@ -65,8 +65,16 @@
     }
 }
 
-- (CGSize)moduleViewContentSize {
+- (CGFloat)moduleViewContentHeight {
+    int height = self.frame.size.height;
     
+    if ([OrderCoordinator sharedInstance].orderManager.ndaAccepted) {
+        if ([Order allOrders].count > 0) {
+            height = 0;
+        }
+    }
+    
+    return height;
 }
 
 - (void)touchAtLocation:(CGPoint)location {

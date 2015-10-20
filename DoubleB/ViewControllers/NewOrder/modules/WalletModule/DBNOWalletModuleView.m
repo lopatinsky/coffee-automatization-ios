@@ -40,8 +40,14 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
+    self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [OrderCoordinator sharedInstance].promoManager.walletDiscount, [Compatibility currencySymbol]];
+}
+
+- (CGFloat)moduleViewContentHeight {
     if([OrderCoordinator sharedInstance].promoManager.walletDiscount > 0){
-        self.titleLabel.text = [NSString stringWithFormat:@"%@ %.0f %@", NSLocalizedString(@"Оплатить бонусами", nil), [OrderCoordinator sharedInstance].promoManager.walletDiscount, [Compatibility currencySymbol]];
+        return self.frame.size.height;
+    } else {
+        return 0;
     }
 }
 

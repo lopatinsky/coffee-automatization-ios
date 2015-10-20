@@ -44,10 +44,10 @@
     [self.tableView reloadData];
 }
 
-- (CGSize)moduleViewContentSize {
+- (CGFloat)moduleViewContentHeight {
     double height = [OrderCoordinator sharedInstance].promoManager.promos.count * 44.f;
     
-    return CGSizeMake(self.frame.size.width, height);
+    return height;
 }
 
 #pragma mark UITableViewDelegate

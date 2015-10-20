@@ -7,7 +7,7 @@
 //
 
 #import "DBNOItemAdditionModuleView.h"
-#import "DBBonusPositionsViewController.h";
+#import "DBBonusPositionsViewController.h"
 
 #import "OrderCoordinator.h"
 
