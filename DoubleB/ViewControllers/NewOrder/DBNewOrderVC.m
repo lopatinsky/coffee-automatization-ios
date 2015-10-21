@@ -16,6 +16,7 @@
 #import "DBNOWalletModuleView.h"
 #import "DBNOTotalModuleView.h"
 #import "DBNOPromosModuleView.h"
+#import "DBNODeliveryTypeModuleView.h"
 #import "DBNOVenueModuleView.h"
 #import "DBNOTimeModuleView.h"
 #import "DBNOProfileModuleView.h"
@@ -71,7 +72,8 @@
     [self addModule:[DBNOWalletModuleView new]];
     [self addModule:[DBNOTotalModuleView new]];
     [self addModule:[DBNOPromosModuleView new]];
-    [self addModule:[DBNOVenueModuleView new]];
+    [self addModule:[DBNODeliveryTypeModuleView new]];
+    [self addModule:[DBNOVenueModuleView new] topOffset:5];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
     [self addModule:[DBNOProfileModuleView new] topOffset:1];
     [self addModule:[DBNOPaymentModuleView new]topOffset:5];

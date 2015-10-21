@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
@@ -16,30 +16,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuv-an-Ife">
-                    <rect key="frame" x="44" y="14" width="233" height="21"/>
+                    <rect key="frame" x="44" y="14" width="234" height="21"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="YW4-VU-uCR"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card.png" translatesAutoresizingMaskIntoConstraints="NO" id="msk-az-3zo">
                     <rect key="frame" x="15" y="17" width="20" height="16"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="4oz-TM-MDW"/>
                         <constraint firstAttribute="height" constant="16" id="WdO-q7-SJ6"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="7jm-Ir-Dut">
-                    <rect key="frame" x="293" y="18" width="19" height="13"/>
+                    <rect key="frame" x="294" y="15.5" width="18" height="18"/>
+                    <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="13" id="Njg-I3-N0p"/>
-                        <constraint firstAttribute="width" constant="19" id="RIF-Bz-Frn"/>
+                        <constraint firstAttribute="height" constant="18" id="Njg-I3-N0p"/>
+                        <constraint firstAttribute="width" constant="18" id="RIF-Bz-Frn"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZhW-35-jt8">
                     <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.69999999999999996" id="mS1-fa-B46"/>
@@ -47,11 +51,13 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJn-Za-JF2">
                     <rect key="frame" x="290" y="0.0" width="30" height="49.5"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="2Eh-8H-Lt9"/>
                     </constraints>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="7jm-Ir-Dut" secondAttribute="trailing" constant="8" id="CXt-eg-Jlb"/>
@@ -81,6 +87,6 @@
     </objects>
     <resources>
         <image name="card.png" width="20" height="16"/>
-        <image name="tick.png" width="19" height="13"/>
+        <image name="tick.png" width="50" height="50"/>
     </resources>
 </document>

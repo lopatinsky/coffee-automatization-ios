@@ -11,7 +11,8 @@
 #import "OrderPartManagerProtocol.h"
 
 typedef NS_ENUM(NSInteger, DeliverySettingsChange) {
-    DeliverySettingsChangeNewTime = 0
+    DeliverySettingsChangeNewDeliveryType = 0,
+    DeliverySettingsChangeNewTime
 };
 
 @interface DeliverySettings : NSObject<ManagerProtocol, OrderPartManagerProtocol>

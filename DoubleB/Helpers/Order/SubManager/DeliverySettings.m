@@ -88,6 +88,7 @@
         [self stopTimer];
     }
     
+    [self.parentManager manager:self haveChange:DeliverySettingsChangeNewDeliveryType];
     [self updateTimeAccordingToDeliveryType];
 }
 

@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, DBPopupViewComponentTransition) {
 @property (weak, nonatomic) UIView *parentView;
 @property (strong, nonatomic) UIImageView *overlayView;
 
+- (void)configOverlay;
+
 - (void)showOnView:(UIView *)parentView withAppearance:(DBPopupViewComponentAppearance)appearance;
 - (void)showOnView:(UIView *)parentView withAppearance:(DBPopupViewComponentAppearance)appearance transition:(DBPopupViewComponentTransition)transition;
 
