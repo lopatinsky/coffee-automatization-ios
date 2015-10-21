@@ -69,16 +69,16 @@
     [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
     [self addModule:[DBNOGiftItemsModuleView new] topOffset:5];
     [self addModule:[DBNOItemAdditionModuleView new]];
-    [self addModule:[DBNOWalletModuleView new]];
-    [self addModule:[DBNOTotalModuleView new]];
-    [self addModule:[DBNOPromosModuleView new]];
-    [self addModule:[DBNODeliveryTypeModuleView new]];
+    [self addModule:[DBNODeliveryTypeModuleView new] topOffset:5];
     [self addModule:[DBNOVenueModuleView new] topOffset:5];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
     [self addModule:[DBNOProfileModuleView new] topOffset:1];
     [self addModule:[DBNOPaymentModuleView new]topOffset:5];
     [self addModule:[DBNOCommentModuleView new]topOffset:5];
     [self addModule:[DBNOndaModuleView new]topOffset:5];
+    [self addModule:[DBNOWalletModuleView new] topOffset:5];
+    [self addModule:[DBNOTotalModuleView new] topOffset:1];
+//    [self addModule:[DBNOPromosModuleView new] topOffset:1];
     [self addModule:[DBNOOrderModuleView new]];
 }
 

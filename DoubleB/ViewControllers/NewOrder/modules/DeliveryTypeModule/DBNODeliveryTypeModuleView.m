@@ -14,6 +14,7 @@
 @interface DBNODeliveryTypeModuleView ()
 @property (weak, nonatomic) IBOutlet UIImageView *tickImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *disclosureIndicator;
 
 @property (strong, nonatomic) DBDeliveryTypesPopupView *typesPopupView;
 @end
@@ -28,6 +29,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    [self.tickImageView templateImageWithName:@"tick.png"];
+    [self.disclosureIndicator templateImageWithName:@"arrow_horizontal_icon" tintColor:[UIColor db_grayColor]];
     
     self.typesPopupView = [DBDeliveryTypesPopupView new];
     

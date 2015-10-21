@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
@@ -15,26 +15,30 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qxt-ih-XG1">
-                    <rect key="frame" x="8" y="5" width="15" height="30"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="qxt-ih-XG1">
+                    <rect key="frame" x="8" y="12.5" width="15" height="15"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="Egq-A8-G8j"/>
-                        <constraint firstAttribute="height" constant="30" id="tIG-mW-Es7"/>
+                        <constraint firstAttribute="height" constant="15" id="tIG-mW-Es7"/>
                     </constraints>
                 </imageView>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NEo-fQ-NFr">
                     <rect key="frame" x="28" y="0.0" width="284" height="40"/>
+                    <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3yT-qK-WKM">
                     <rect key="frame" x="0.0" y="39.5" width="320" height="0.5"/>
+                    <animations/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.69999999999999996" id="x9s-TO-hny"/>
                     </constraints>
                 </view>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="3yT-qK-WKM" firstAttribute="leading" secondItem="bSX-6m-q2j" secondAttribute="leading" id="2hB-fF-ey0"/>
@@ -57,4 +61,7 @@
             <point key="canvasLocation" x="348" y="149.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="email_icon.png" width="20" height="20"/>
+    </resources>
 </document>

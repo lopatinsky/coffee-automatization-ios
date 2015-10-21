@@ -99,6 +99,8 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
 - (void)setNdaAccepted:(BOOL)ndaAccepted {
     [[NSUserDefaults standardUserDefaults] setBool:ndaAccepted forKey:kDBDefaultsNDASigned];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangeNDAAccept];
 }
 
 #pragma mark - DBManagerProtocol

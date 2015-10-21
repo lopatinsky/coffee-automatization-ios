@@ -4,8 +4,8 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeue.ttc">
-            <string>HelveticaNeue-Bold</string>
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -16,12 +16,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-ib-dI5">
-                    <rect key="frame" x="36" y="12" width="276" height="21"/>
+                    <rect key="frame" x="33" y="12" width="279" height="21"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="o5D-iA-has"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g8d-ji-iPN">
@@ -32,12 +32,12 @@
                         <constraint firstAttribute="height" constant="20" id="oXf-f9-pUr"/>
                     </constraints>
                 </activityIndicatorView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venue.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
-                    <rect key="frame" x="8" y="11" width="15" height="22"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
+                    <rect key="frame" x="8" y="13" width="15" height="18"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="Xkx-XR-X2N"/>
-                        <constraint firstAttribute="height" constant="22" id="rCs-CM-2VH"/>
+                        <constraint firstAttribute="height" constant="18" id="rCs-CM-2VH"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -46,7 +46,7 @@
             <constraints>
                 <constraint firstItem="WI0-ib-dI5" firstAttribute="centerY" secondItem="kNg-g0-2zK" secondAttribute="centerY" id="Kqx-zN-zcu"/>
                 <constraint firstItem="g8d-ji-iPN" firstAttribute="leading" secondItem="kNg-g0-2zK" secondAttribute="trailing" constant="13" id="Owh-md-tea"/>
-                <constraint firstItem="WI0-ib-dI5" firstAttribute="leading" secondItem="kNg-g0-2zK" secondAttribute="trailing" constant="13" id="XVn-eq-XEH"/>
+                <constraint firstItem="WI0-ib-dI5" firstAttribute="leading" secondItem="kNg-g0-2zK" secondAttribute="trailing" constant="10" id="XVn-eq-XEH"/>
                 <constraint firstAttribute="trailing" secondItem="WI0-ib-dI5" secondAttribute="trailing" constant="8" id="Z3J-Wk-XeC"/>
                 <constraint firstItem="kNg-g0-2zK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="fKG-fw-8RG"/>
                 <constraint firstItem="g8d-ji-iPN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="paG-eD-VBu"/>
@@ -55,7 +55,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="activityIndicator" destination="kNg-g0-2zK" id="E0Z-Le-qGT"/>
                 <outlet property="titleLabel" destination="WI0-ib-dI5" id="Ckr-ew-bSi"/>
                 <outlet property="venueImageView" destination="kNg-g0-2zK" id="FdQ-5o-Bzr"/>
             </connections>
@@ -63,6 +62,6 @@
         </view>
     </objects>
     <resources>
-        <image name="venue.png" width="16" height="22"/>
+        <image name="map_icon.png" width="20" height="29"/>
     </resources>
 </document>

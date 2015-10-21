@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-Yw-rBb">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-Yw-rBb">
                     <rect key="frame" x="8" y="12.5" width="15" height="20"/>
                     <animations/>
                     <constraints>
@@ -24,7 +24,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Константин константинович" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="TWI-7k-0YO">
-                    <rect key="frame" x="34" y="12" width="278" height="21"/>
+                    <rect key="frame" x="33" y="12" width="279" height="21"/>
                     <animations/>
                     <accessibility key="accessibilityConfiguration" label="Personal data"/>
                     <constraints>
@@ -40,7 +40,7 @@
                 <constraint firstItem="Ml8-Yw-rBb" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Asw-cA-fmS"/>
                 <constraint firstItem="TWI-7k-0YO" firstAttribute="centerY" secondItem="Ml8-Yw-rBb" secondAttribute="centerY" id="Exk-IH-kR9"/>
                 <constraint firstAttribute="trailing" secondItem="TWI-7k-0YO" secondAttribute="trailing" constant="8" id="b5E-xh-KwV"/>
-                <constraint firstItem="TWI-7k-0YO" firstAttribute="leading" secondItem="Ml8-Yw-rBb" secondAttribute="trailing" constant="11" id="gfF-e5-5U3"/>
+                <constraint firstItem="TWI-7k-0YO" firstAttribute="leading" secondItem="Ml8-Yw-rBb" secondAttribute="trailing" constant="10" id="gfF-e5-5U3"/>
                 <constraint firstItem="Ml8-Yw-rBb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="mac-Ey-fjX"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -53,6 +53,6 @@
         </view>
     </objects>
     <resources>
-        <image name="profile.png" width="16" height="19"/>
+        <image name="profile_icon.png" width="20" height="20"/>
     </resources>
 </document>

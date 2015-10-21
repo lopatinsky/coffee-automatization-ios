@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment.png" translatesAutoresizingMaskIntoConstraints="NO" id="hQK-Ze-SGk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="hQK-Ze-SGk">
                     <rect key="frame" x="8" y="15.5" width="15" height="15"/>
                     <animations/>
                     <constraints>
@@ -24,7 +24,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Комментарий" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="100" translatesAutoresizingMaskIntoConstraints="NO" id="gR1-xS-Pjx">
-                    <rect key="frame" x="34" y="12" width="278" height="21"/>
+                    <rect key="frame" x="33" y="12" width="279" height="21"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="lxT-Z5-qrp"/>
@@ -38,7 +38,7 @@
             <constraints>
                 <constraint firstItem="gR1-xS-Pjx" firstAttribute="centerY" secondItem="hQK-Ze-SGk" secondAttribute="centerY" id="dHW-gJ-y7j"/>
                 <constraint firstAttribute="trailing" secondItem="gR1-xS-Pjx" secondAttribute="trailing" constant="8" id="erd-Kd-JWI"/>
-                <constraint firstItem="gR1-xS-Pjx" firstAttribute="leading" secondItem="hQK-Ze-SGk" secondAttribute="trailing" constant="11" id="mmG-v0-06P"/>
+                <constraint firstItem="gR1-xS-Pjx" firstAttribute="leading" secondItem="hQK-Ze-SGk" secondAttribute="trailing" constant="10" id="mmG-v0-06P"/>
                 <constraint firstItem="hQK-Ze-SGk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wBx-7A-gCu"/>
                 <constraint firstItem="hQK-Ze-SGk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="zqy-iT-p5O"/>
             </constraints>
@@ -52,6 +52,6 @@
         </view>
     </objects>
     <resources>
-        <image name="comment.png" width="19" height="18"/>
+        <image name="comment_icon.png" width="20" height="16"/>
     </resources>
 </document>

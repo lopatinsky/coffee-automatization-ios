@@ -12,7 +12,7 @@
 #import "ShippingManager.h"
 #import "DBDeliveryViewController.h"
 #import "DBCompaniesManager.h"
-#import "DBTimePickerView.h"
+#import "DBPickerView.h"
 #import "UIColor+Brandbook.h"
 
 #import "QuartzCore/QuartzCore.h"
@@ -23,7 +23,7 @@ typedef enum : NSUInteger {
     NoKeyboard,
 } KeyboardStatus;
 
-@interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DBTimePickerViewDelegate>
+@interface DBDeliveryViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, DBPickerViewDelegate, DBPopupViewComponentDelegate>
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintCityViewHeight;
@@ -60,7 +60,7 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) ShippingManager *shippingManager;
 
-@property (strong, nonatomic) DBTimePickerView *cityPickerView;
+@property (strong, nonatomic) DBPickerView *cityPickerView;
 @property (strong, nonatomic) NSArray *addressSuggestions;
 @property (nonatomic) BOOL keyboardIsHidden;
 
@@ -70,6 +70,9 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    [self db_setTitle:NSLocalizedString(@"Доставка", nil)];
     
     self.shippingManager = [OrderCoordinator sharedInstance].shippingManager;
     
@@ -107,9 +110,10 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)showPickerWithCities:(id)sender {
-    self.cityPickerView.items = [self.shippingManager arrayOfCities];
-    self.cityPickerView.selectedItem = [[self.shippingManager arrayOfCities] indexOfObject:self.shippingManager.selectedAddress.city];
-    [self.cityPickerView showOnView:self.navigationController.view];
+    [self.cityPickerView configureWithItems:[self.shippingManager arrayOfCities]];
+    self.cityPickerView.selectedIndex = [[self.shippingManager arrayOfCities] indexOfObject:self.shippingManager.selectedAddress.city];
+    
+    [self.cityPickerView showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
     [GANHelper analyzeEvent:@"city_spinner_show" category:ADDRESS_SCREEN];
 }
 
@@ -153,16 +157,6 @@ typedef enum : NSUInteger {
 }
 
 - (void)initializePlaceholders {
-//    NSString *localizedString = NSLocalizedString(@"Улица, дом", nil);
-//    self.streetPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
-//    [self.streetPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
-//    [self.streetPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, [localizedString length])];
-//    
-//    localizedString = NSLocalizedString(@"Кв/Офис", nil);
-//    self.apartmentPlaceholder = [[NSMutableAttributedString alloc] initWithString:localizedString];
-//    [self.apartmentPlaceholder addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Light" size:15.0] range:NSMakeRange(0, [localizedString length])];
-//    [self.apartmentPlaceholder addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, [localizedString length])];
-    
     self.streetTextField.placeholder = NSLocalizedString(@"Улица, дом", nil);
     self.apartmentTextField.placeholder = NSLocalizedString(@"Кв/Офис", nil);
     self.commentTextField.placeholder = NSLocalizedString(@"Комментарий", nil);
@@ -183,8 +177,8 @@ typedef enum : NSUInteger {
     self.apartmentTextField.enablesReturnKeyAutomatically = NO;
     self.commentTextField.enablesReturnKeyAutomatically = NO;
     
-    self.cityPickerView = [[DBTimePickerView alloc] initWithDelegate:self];
-    self.cityPickerView.type = DBTimePickerTypeItems;
+    self.cityPickerView = [DBPickerView new];
+    self.cityPickerView.pickerDelegate = self;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -292,40 +286,21 @@ typedef enum : NSUInteger {
     return YES;
 }
 
-#pragma mark - DBTimePickerViewDelegate
-- (void)db_timePickerView:(nonnull DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index {
-    NSString *city = [self.shippingManager arrayOfCities][index];
-    [self.shippingManager setCity:city];
+#pragma mark - DBPickerViewDelegate
+
+- (void)db_pickerView:(DBPickerView *)view didSelectRow:(NSString *)row {
+    [self.shippingManager setCity:row];
     [self reload];
     
-    [GANHelper analyzeEvent:@"city_spinner_selected" label:city category:ADDRESS_SCREEN];
+    [GANHelper analyzeEvent:@"city_spinner_selected" label:row category:ADDRESS_SCREEN];
 }
 
-- (BOOL)db_shouldHideTimePickerView {
+- (void)db_componentWillDismiss:(DBPopupViewComponent *)component {
     self.cityTextLabel.text = self.shippingManager.selectedAddress.city;
     
     [GANHelper analyzeEvent:@"city_spinner_closed" category:ADDRESS_SCREEN];
-    
-    return YES;
 }
 
-#pragma mark - UIPickerViewDataSource
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [[self.shippingManager arrayOfCities] count];
-}
-
-#pragma mark - UIPickerViewDelegate
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.shippingManager arrayOfCities][row];
-}
-
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
-}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

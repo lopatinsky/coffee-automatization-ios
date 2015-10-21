@@ -96,6 +96,10 @@
 }
 
 - (void)hide {
+    if ([self.delegate respondsToSelector:@selector(db_componentWillDismiss:)]) {
+        [self.delegate db_componentWillDismiss:self];
+    }
+    
     if(_appearance == DBPopupViewComponentAppearancePush) {
         [self dismiss];
     } else {

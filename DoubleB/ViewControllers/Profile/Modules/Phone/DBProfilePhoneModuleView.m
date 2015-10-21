@@ -26,7 +26,7 @@
 }
 
 - (void)awakeFromNib{
-    [_imageView templateImageWithName:@"phone"];
+    [_imageView templateImageWithName:@"phone_icon"];
     
     _textField.placeholder = NSLocalizedString(@"Контактный номер телефона", nil);
     _textField.keyboardType = UIKeyboardTypePhonePad;

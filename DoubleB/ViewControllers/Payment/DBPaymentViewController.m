@@ -28,7 +28,7 @@
     
     self.view.backgroundColor = [UIColor db_backgroundColor];
     
-    self.title = NSLocalizedString(@"Оплата", nil);
+    [self db_setTitle:NSLocalizedString(@"Оплата", nil)];
     if(self.mode == DBPaymentViewControllerModeSettings){
         self.analyticsCategory = CARDS_SCREEN;
     } else {

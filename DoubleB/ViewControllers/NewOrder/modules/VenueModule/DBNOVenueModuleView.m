@@ -7,7 +7,8 @@
 //
 
 #import "DBNOVenueModuleView.h"
-#import "DBAddressViewController.h"
+#import "DBDeliveryViewController.h"
+#import "DBVenuesTableViewController.h"
 
 #import "OrderCoordinator.h"
 #import "LocationHelper.h"
@@ -35,7 +36,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.venueImageView templateImageWithName:@"venue"];
+    [self.venueImageView templateImageWithName:@"map_icon"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress, CoordinatorNotificationNewDeliveryType] selector:@selector(reload)];
@@ -53,8 +54,10 @@
         if(address && address.length > 0){
             self.titleLabel.text = address;
             self.titleLabel.textColor = [UIColor blackColor];
+            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
         } else {
             self.titleLabel.text = NSLocalizedString(@"Введите адрес доставки", nil);
+            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
             self.titleLabel.textColor = [UIColor db_errorColor];
         }
     } else {
@@ -81,20 +84,26 @@
     if (venue) {
         self.titleLabel.text = venue.title;
         self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
     } else {
-        self.titleLabel.textColor = [UIColor db_errorColor];
         self.titleLabel.text = NSLocalizedString(@"Ошибка определения локации", nil);
+        self.titleLabel.textColor = [UIColor db_errorColor];
+        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
     }
 }
 
 - (void)touchAtLocation:(CGPoint)location {
     [GANHelper analyzeEvent:@"venues_click" category:self.analyticsCategory];
     
-    DBAddressViewController *addressController = [DBAddressViewController new];
-//    addressController.view.frame = [[UIScreen mainScreen] bounds];
-    addressController.hidesBottomBarWhenPushed = YES;
+    UIViewController *vc;
+    if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
+        vc = [DBDeliveryViewController new];
+    } else {
+        vc = [DBVenuesTableViewController new];
+    }
+    vc.hidesBottomBarWhenPushed = YES;
     
-    [self.ownerViewController.navigationController pushViewController:addressController animated:YES];
+    [self.ownerViewController.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Комментарий", nil);
+    [self db_setTitle:NSLocalizedString(@"Комментарий", nil)];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(10, 10, self.view.frame.size.width - 20, self.view.frame.size.height - 10)];
     self.textView.font = [UIFont fontWithName:@"HelveticaNeue" size:14];

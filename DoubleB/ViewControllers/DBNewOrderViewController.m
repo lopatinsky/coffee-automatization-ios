@@ -43,7 +43,6 @@
 #import "PositionViewController1.h"
 #import "DBNewOrderItemAdditionView.h"
 #import "DBPayPalManager.h"
-#import "DBAddressViewController.h"
 
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
@@ -721,12 +720,6 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 
 - (IBAction)clickAddress:(id)sender {
     [GANHelper analyzeEvent:@"venues_click" category:ORDER_SCREEN];
-    
-    DBAddressViewController *addressController = [DBAddressViewController new];
-    addressController.view.frame = [[UIScreen mainScreen] bounds];
-    addressController.hidesBottomBarWhenPushed = YES;
-    
-    [self.navigationController pushViewController:addressController animated:YES];
 }
 
 
@@ -748,7 +741,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
 }
 
 - (void)reloadTimePicker {
-    if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+    /*if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         self.pickerView.segments = @[];
     } else {
         NSMutableArray *titles = [NSMutableArray new];
@@ -760,7 +753,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
         }
         self.pickerView.segments = titles;
         self.pickerView.selectedSegmentIndex = _orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
-    }
+    }*/
     
     switch (_orderCoordinator.deliverySettings.deliveryType.timeMode) {
         case TimeModeTime:{

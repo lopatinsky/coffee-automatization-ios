@@ -32,7 +32,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.timeImageView templateImageWithName:@"clock"];
+    [self.timeImageView templateImageWithName:@"time_icon"];
     
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
     _orderCoordinator = [OrderCoordinator sharedInstance];
@@ -45,20 +45,6 @@
 }
 
 - (void)reloadTimePicker {
-    if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
-        self.pickerView.segments = @[];
-    } else {
-        NSMutableArray *titles = [NSMutableArray new];
-        if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant]){
-            [titles addObject:NSLocalizedString(@"С собой", nil)];
-        }
-        if([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]){
-            [titles addObject:NSLocalizedString(@"На месте", nil)];
-        }
-        self.pickerView.segments = titles;
-        self.pickerView.selectedSegmentIndex = _orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway ? 0 : 1;
-    }
-    
     switch (_orderCoordinator.deliverySettings.deliveryType.timeMode) {
         case TimeModeTime:{
             self.pickerView.type = DBTimePickerTypeTime;

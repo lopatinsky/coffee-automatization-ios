@@ -18,8 +18,10 @@ typedef NS_ENUM(NSInteger, DBPopupViewComponentTransition) {
     DBPopupViewComponentTransitionCenter
 };
 
-@interface DBPopupViewComponent : UIView
+@protocol DBPopupViewComponentDelegate;
 
+@interface DBPopupViewComponent : UIView
+@property (weak, nonatomic) id<DBPopupViewComponentDelegate> delegate;
 @property (weak, nonatomic) UIView *parentView;
 @property (strong, nonatomic) UIImageView *overlayView;
 
@@ -30,4 +32,9 @@ typedef NS_ENUM(NSInteger, DBPopupViewComponentTransition) {
 
 - (void)hide;
 
+@end
+
+@protocol DBPopupViewComponentDelegate <NSObject>
+@optional
+- (void)db_componentWillDismiss:(DBPopupViewComponent *)component;
 @end

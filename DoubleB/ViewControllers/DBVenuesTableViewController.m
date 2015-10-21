@@ -31,8 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = [DBTextResourcesHelper db_venuesTitleString];
-    
+    [self db_setTitle:[DBTextResourcesHelper db_venuesTitleString]];
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -41,8 +40,7 @@
     
     self.tableView.rowHeight = 73;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.separatorInset = UIEdgeInsetsZero;
-    [self.tableView setSeparatorColor:[UIColor db_defaultColor]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UIRefreshControl *refreshControl = [UIRefreshControl new];
     self.refreshControl = refreshControl;
@@ -154,12 +152,8 @@
         Venue *venue = _venues[indexPath.row];
         controller.venue = venue;
         controller.hidesBottomBarWhenPushed = YES;
-        [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-            NSString *eventLabel = [NSString stringWithFormat:@"%@;%f;%f,%f",
-                                    venue.venueId, venue.distance, location.coordinate.latitude, location.coordinate.longitude];
-            [GANHelper analyzeEvent:@"venue_click" label:eventLabel category:self.eventsCategory];
-        }];
         
+        [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
         
         [self.navigationController pushViewController:controller animated:YES];
         return;

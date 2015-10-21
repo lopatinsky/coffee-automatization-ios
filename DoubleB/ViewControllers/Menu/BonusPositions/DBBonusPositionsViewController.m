@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = NSLocalizedString(@"Бонусы", nil);
+    [self db_setTitle:NSLocalizedString(@"Бонусы", nil)];
     self.navigationItem.leftBarButtonItem.title = @"";
     
     self.edgesForExtendedLayout = UIRectEdgeNone;

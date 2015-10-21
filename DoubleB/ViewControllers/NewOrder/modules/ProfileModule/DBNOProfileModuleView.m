@@ -28,7 +28,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.profileImageView templateImageWithName:@"profile"];
+    [self.profileImageView templateImageWithName:@"profile_icon"];
     
     [[DBClientInfo sharedInstance] addObserver:self withKeyPaths:@[DBClientInfoNotificationClientName, DBClientInfoNotificationClientPhone, DBClientInfoNotificationClientMail] selector:@selector(reload)];
 }

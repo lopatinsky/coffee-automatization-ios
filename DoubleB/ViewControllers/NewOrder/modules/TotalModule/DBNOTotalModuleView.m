@@ -8,15 +8,30 @@
 
 #import "DBNOTotalModuleView.h"
 #import "OrderCoordinator.h"
-#import "NetworkManager.h"
 
 @interface DBNOTotalModuleView ()
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *totalRefreshControl;
-@property (weak, nonatomic) IBOutlet UILabel *labelTotal;
-@property (weak, nonatomic) IBOutlet UILabel *labelActualTotal;
-@property (weak, nonatomic) IBOutlet UILabel *labelOldTotal;
+@property (weak, nonatomic) IBOutlet UIView *sumView;
+@property (weak, nonatomic) IBOutlet UILabel *sumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sumTotal;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintSumViewHeight;
+@property (nonatomic) NSInteger initialSumViewHeight;
 
-@property (weak, nonatomic) IBOutlet UILabel *labelShippingTotal;
+@property (weak, nonatomic) IBOutlet UIView *shippingView;
+@property (weak, nonatomic) IBOutlet UILabel *shippingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *shippingTotal;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintShippingViewHeight;
+@property (nonatomic) NSInteger initialShippingViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *discountView;
+@property (weak, nonatomic) IBOutlet UILabel *discountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *discountTotal;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintDiscountViewHeight;
+@property (nonatomic) NSInteger initialDiscountViewHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *totalView;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalTotal;
+@property (nonatomic) NSInteger initialTotalViewHeight;
 
 @property (strong, nonatomic) OrderCoordinator *orderCoordinator;
 @end
@@ -32,62 +47,69 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     
-    self.labelTotal.textColor = [UIColor db_defaultColor];
+    self.backgroundColor = [UIColor db_backgroundColor];
     
-    self.totalRefreshControl.hidesWhenStopped = YES;
+    self.initialSumViewHeight = self.constraintSumViewHeight.constant;
+    self.initialShippingViewHeight = self.constraintShippingViewHeight.constant;
+    self.initialDiscountViewHeight = self.constraintDiscountViewHeight.constant;
+    self.initialTotalViewHeight = self.totalView.frame.size.height;
     
-    self.labelShippingTotal.textColor = [UIColor db_defaultColor];
+    self.sumLabel.text = NSLocalizedString(@"Сумма", nil);
+    self.shippingLabel.text = NSLocalizedString(@"Стоимость доставки", nil);
+    self.discountLabel.text = NSLocalizedString(@"Скидка", nil);
+    self.totalLabel.text = NSLocalizedString(@"Итого к оплате", nil);
     
     self.orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalPrice, CoordinatorNotificationOrderDiscount, CoordinatorNotificationOrderWalletDiscount, CoordinatorNotificationOrderShippingPrice] selector:@selector(reload)];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAnimating) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAnimating) name:kDBConcurrentOperationCheckOrderFailure object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startAnimating) name:kDBConcurrentOperationCheckOrderStarted object:nil];
 }
 
 - (void)dealloc{
     [_orderCoordinator removeObserver:self];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)reload:(BOOL)animated{
     [super reload:animated];
-    double actualTotal = _orderCoordinator.itemsManager.totalPrice - _orderCoordinator.promoManager.totalDiscount + _orderCoordinator.promoManager.shippingPrice;
-    NSString *actualTotalString = [NSString stringWithFormat:@"%.0f %@", actualTotal, [Compatibility currencySymbol]];
     
-    NSString *oldTotalString;
-    if(_orderCoordinator.promoManager.totalDiscount > 0){
-        oldTotalString= [NSString stringWithFormat:@"%.0f ", _orderCoordinator.itemsManager.totalPrice];
+    if (_orderCoordinator.itemsManager.totalPrice == 0) {
+        self.constraintSumViewHeight.constant = 0;
+        self.sumView.hidden = YES;
     } else {
-        oldTotalString = @"";
+        self.constraintSumViewHeight.constant = self.initialSumViewHeight;
+        self.sumView.hidden = NO;
+        
+        self.sumTotal.text = [NSString stringWithFormat:@"%.0f %@", _orderCoordinator.itemsManager.totalPrice, [Compatibility currencySymbol]];
     }
     
-    NSMutableAttributedString *totalString = [[NSMutableAttributedString alloc] initWithString:oldTotalString];
-    
-    [totalString addAttribute:NSStrikethroughStyleAttributeName
-                        value:@(NSUnderlineStyleSingle)
-                        range:NSMakeRange(0, oldTotalString.length)];
-    
-    self.labelTotal.text = [NSString stringWithFormat:@"%@: ", NSLocalizedString(@"Итого", nil)];
-    self.labelOldTotal.attributedText = totalString;
-    self.labelActualTotal.text = actualTotalString;
-    
-    double shippingTotal = _orderCoordinator.promoManager.shippingPrice;
-    if(shippingTotal > 0){
-        self.labelShippingTotal.hidden = NO;
-        self.labelShippingTotal.text = [NSString stringWithFormat:@"(%@: %.0f%@)", NSLocalizedString(@"Стоимость доставки", nil), shippingTotal, [Compatibility currencySymbol]];
+    if (_orderCoordinator.promoManager.shippingPrice == 0) {
+        self.constraintShippingViewHeight.constant = 0;
+        self.shippingView.hidden = YES;
     } else {
-        self.labelShippingTotal.hidden = YES;
+        self.constraintShippingViewHeight.constant = self.initialShippingViewHeight;
+        self.shippingView.hidden = NO;
+        
+        self.shippingTotal.text = [NSString stringWithFormat:@"%.0f %@", _orderCoordinator.promoManager.shippingPrice, [Compatibility currencySymbol]];
     }
+    
+    double discount = _orderCoordinator.promoManager.discount;
+    discount += _orderCoordinator.promoManager.walletActiveForOrder ? _orderCoordinator.promoManager.walletDiscount : 0;
+    if (discount == 0) {
+        self.constraintDiscountViewHeight.constant = 0;
+        self.discountView.hidden = YES;
+    } else {
+        self.constraintDiscountViewHeight.constant = self.initialDiscountViewHeight;
+        self.discountView.hidden = NO;
+        
+        self.discountTotal.text = [NSString stringWithFormat:@"%.0f %@", discount, [Compatibility currencySymbol]];
+    }
+    
+    double total = _orderCoordinator.itemsManager.totalPrice + _orderCoordinator.promoManager.shippingPrice - discount;
+    self.totalTotal.text = [NSString stringWithFormat:@"%.0f %@", total, [Compatibility currencySymbol]];
 }
 
-- (void)startAnimating{
-    [self.totalRefreshControl startAnimating];
-}
-
-- (void)endAnimating{
-    [self.totalRefreshControl stopAnimating];
+- (CGFloat)moduleViewContentHeight {
+    int height = self.constraintSumViewHeight.constant + self.constraintShippingViewHeight.constant + self.constraintDiscountViewHeight.constant + self.initialTotalViewHeight;
+    
+    return height;
 }
 
 @end

@@ -24,7 +24,7 @@
 }
 
 - (void)awakeFromNib{
-    [_imageView templateImageWithName:@"profile"];
+    [_imageView templateImageWithName:@"profile_icon"];
     
     _textField.placeholder = NSLocalizedString(@"Имя Фамилия", nil);
     _textField.keyboardType = UIKeyboardTypeDefault;

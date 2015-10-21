@@ -33,6 +33,10 @@
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationOrderWalletDiscount selector:@selector(reload)];
 }
 
+- (void)viewWillAppearOnVC {
+    self.bonusSwitch.on = [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder;
+}
+
 - (void)dealloc{
     [[OrderCoordinator sharedInstance] removeObserver:self];
 }
@@ -45,7 +49,7 @@
 
 - (CGFloat)moduleViewContentHeight {
     if([OrderCoordinator sharedInstance].promoManager.walletDiscount > 0){
-        return self.frame.size.height;
+        return 40;
     } else {
         return 0;
     }

@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Профиль", nil);
+    [self db_setTitle:NSLocalizedString(@"Профиль", nil)];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     
 //    // Header module
