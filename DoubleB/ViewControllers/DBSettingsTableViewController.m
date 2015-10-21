@@ -71,7 +71,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBProfileViewController *profileVC = [DBProfileViewController new];
     profileVC.analyticsScreen = @"Profile_screen";
     [self.settingsItems addObject:@{@"name": @"profileVC",
-                                    @"image": @"profile",
+                                    @"image": @"profile_icon",
                                     @"viewController": profileVC}];
     
     // Share friends item
@@ -105,7 +105,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     // Personal wallet item
     if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
-                                        @"image": @"payment"}];
+                                        @"image": @"wallet_icon"}];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
     

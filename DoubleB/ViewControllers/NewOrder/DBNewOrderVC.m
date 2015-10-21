@@ -73,8 +73,8 @@
     [self addModule:[DBNOVenueModuleView new] topOffset:5];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
     [self addModule:[DBNOProfileModuleView new] topOffset:1];
-    [self addModule:[DBNOPaymentModuleView new]topOffset:5];
-    [self addModule:[DBNOCommentModuleView new]topOffset:5];
+    [self addModule:[DBNOPaymentModuleView new]topOffset:1];
+    [self addModule:[DBNOCommentModuleView new]topOffset:1];
     [self addModule:[DBNOndaModuleView new]topOffset:5];
     [self addModule:[DBNOWalletModuleView new] topOffset:5];
     [self addModule:[DBNOTotalModuleView new] topOffset:1];
