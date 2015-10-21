@@ -24,6 +24,7 @@
 #import "DBCompaniesManager.h"
 #import "DBFriendGiftHelper.h"
 #import "DBFriendGiftViewController.h"
+#import "DBSubscriptionManager.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -138,7 +139,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
     }
     
-    if ([[[DBCompanyInfo sharedInstance] subscriptionIsEnabled] boolValue]) {
+    if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
         [self.settingsItems addObject:@{@"name": @"subscriptionVC",
                                         @"title": NSLocalizedString(@"Абонемент", nil),
                                         @"image": @"subscription_icon",
