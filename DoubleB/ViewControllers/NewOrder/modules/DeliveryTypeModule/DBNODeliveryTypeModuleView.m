@@ -58,8 +58,10 @@
 }
 
 - (void)touchAtLocation:(CGPoint)location {
-    if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
-        [self.typesPopupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+    if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1) {
+        if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
+            [self.typesPopupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+        }
     }
 }
 

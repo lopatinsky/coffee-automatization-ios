@@ -52,6 +52,7 @@
 - (void)touchAtLocation:(CGPoint)location {
     [GANHelper analyzeEvent:@"comment_screen" category:self.analyticsCategory];
     DBCommentViewController *commentController = [DBCommentViewController new];
+    commentController.hidesBottomBarWhenPushed = YES;
     [self.ownerViewController.navigationController pushViewController:commentController animated:YES];
 }
 

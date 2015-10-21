@@ -65,9 +65,9 @@
 }
 
 - (void)setupModules {
-    [self addModule:[DBNOOrderItemsModuleView new] topOffset:15];
-    [self addModule:[DBNOBonusItemsModuleView new] topOffset:15];
-    [self addModule:[DBNOGiftItemsModuleView new] topOffset:15];
+    [self addModule:[DBNOOrderItemsModuleView new]];
+    [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
+    [self addModule:[DBNOGiftItemsModuleView new] topOffset:5];
     [self addModule:[DBNOItemAdditionModuleView new]];
     [self addModule:[DBNOWalletModuleView new]];
     [self addModule:[DBNOTotalModuleView new]];

@@ -36,24 +36,12 @@
     
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
     _orderCoordinator = [OrderCoordinator sharedInstance];
-    [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewSelectedTime selector:@selector(reload)];
+    [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewSelectedTime, CoordinatorNotificationNewDeliveryType] selector:@selector(reload)];
 }
 
 - (void)reload:(BOOL)animated {
     [super reload:animated];
-    
-    NSString *timeString = [self selectedTimeString];
-    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
-        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Доставка", nil)];
-    }
-    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdTakeaway){
-        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"Возьму с собой", nil)];
-    }
-    if(_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdInRestaurant){
-        timeString = [NSString stringWithFormat:@"%@ | %@", timeString, NSLocalizedString(@"На месте", nil)];
-    }
-    
-    self.titleLabel.text = timeString;
+    self.titleLabel.text = [self selectedTimeString];
 }
 
 - (void)reloadTimePicker {

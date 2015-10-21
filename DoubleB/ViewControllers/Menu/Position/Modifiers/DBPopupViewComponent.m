@@ -107,7 +107,7 @@
     CGPoint touch = [sender locationInView:nil];
     
     if(!CGRectContainsPoint(self.frame, touch)){
-        [self hideModal];
+        [self hide];
     }
 }
 

@@ -15,8 +15,11 @@
 @interface DBDeliveryTypesPopupView ()<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 
+@property (strong, nonatomic) NSArray *deliveryTypes;
+
 @property (strong, nonatomic) UIView *holder;
 @property (strong, nonatomic) UIImageView *placeholderView;
+
 @end
 
 @implementation DBDeliveryTypesPopupView
@@ -24,11 +27,15 @@
 - (instancetype)init {
     self = [super init];
     
+    self.backgroundColor = [UIColor whiteColor];
+    
     self.tableView = [UITableView new];
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = 45.f;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.tableView];
@@ -37,8 +44,19 @@
     return self;
 }
 
-- (void)showFrom:(UIView *)fromView onView:(UIView *)parentView {
+- (void)config {
+    NSMutableArray *types = [[NSMutableArray alloc] initWithArray:[DBCompanyInfo sharedInstance].deliveryTypes];
+    DBDeliveryType *selectedType = [[DBCompanyInfo sharedInstance] deliveryTypeById:[OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId];
+    [types removeObject:selectedType];
+    [types insertObject:selectedType atIndex:0];
+    
+    self.deliveryTypes = types;
+    
     [self.tableView reloadData];
+}
+
+- (void)showFrom:(UIView *)fromView onView:(UIView *)parentView {
+    [self config];
     
     self.parentView = parentView;
     [self configOverlay];
@@ -64,33 +82,28 @@
     
     [self.parentView addSubview:_holder];
     
-    double time = 1.f;
-//    NSLog(@"%ld",(long)[OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId);
-    DBDeliveryType *selectedType = [[DBCompanyInfo sharedInstance] deliveryTypeById:[OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId];
-    NSInteger index = [[DBCompanyInfo sharedInstance].deliveryTypes indexOfObject:selectedType];
-    NSInteger count = [DBCompanyInfo sharedInstance].deliveryTypes.count - 1;
     
-    [UIView animateWithDuration:((count - index) / (double)count * time) animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         CGRect rect = self.frame;
-        rect.origin.y = -index * self.tableView.rowHeight;
+        rect.origin.y = 0;
         self.frame = rect;
+        
+        self.overlayView.alpha = 1;
     } completion:^(BOOL finished) {
         [_placeholderView removeFromSuperview];
-        [UIView animateWithDuration:((index) / (double)count * time) animations:^{
-            CGRect rect = self.frame;
-            rect.origin.y = 0;
-            self.frame = rect;
-        }];
-    }];
-    
-    [UIView animateWithDuration:time animations:^{
-        self.overlayView.alpha = 1;
     }];
 }
 
 - (void)hide {
-    [UIView animateWithDuration:0.2 animations:^{
+    double time = 0.2;
+    
+    [UIView animateWithDuration:time animations:^{
+        CGRect rect = self.frame;
+        rect.origin.y = -[self contentHeight];
+        self.frame = rect;
+        
         self.overlayView.alpha = 0;
+        self.holder.alpha = 0;
     } completion:^(BOOL f){
         [self.holder removeFromSuperview];
         [self.overlayView removeFromSuperview];
@@ -104,7 +117,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [DBCompanyInfo sharedInstance].deliveryTypes.count;
+    return self.deliveryTypes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -117,7 +130,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    DBDeliveryType *type = [DBCompanyInfo sharedInstance].deliveryTypes[indexPath.row];
+    DBDeliveryType *type = self.deliveryTypes[indexPath.row];
     [cell configureWithDeliveryType:type];
     
     return cell;
@@ -129,6 +142,7 @@
     DBDeliveryTypeCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
     [[OrderCoordinator sharedInstance].deliverySettings selectDeliveryType:cell.deliveryType];
+    [self.tableView reloadData];
     [self hide];
 }
 

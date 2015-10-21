@@ -38,7 +38,7 @@
     [self.venueImageView templateImageWithName:@"venue"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
-    [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress] selector:@selector(reload)];
+    [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress, CoordinatorNotificationNewDeliveryType] selector:@selector(reload)];
 }
 
 - (void)dealloc {

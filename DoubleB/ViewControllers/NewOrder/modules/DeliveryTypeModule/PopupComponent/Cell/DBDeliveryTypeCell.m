@@ -8,6 +8,7 @@
 
 #import "DBDeliveryTypeCell.h"
 #import "DBDeliveryType.h"
+#import "OrderCoordinator.h"
 
 @interface DBDeliveryTypeCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *tickImageView;
@@ -28,6 +29,8 @@
 
 - (void)configureWithDeliveryType:(DBDeliveryType *)type {
     _deliveryType = type;
+    
+    self.tickImageView.hidden = _deliveryType.typeId != [OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId;
     
     switch (_deliveryType.typeId) {
         case DeliveryTypeIdShipping:
