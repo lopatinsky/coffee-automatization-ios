@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
             case DBModuleTypeSubscription:
-                [[DBSubscriptionManager sharedInstance] ena]
+                [[DBSubscriptionManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
         }
         

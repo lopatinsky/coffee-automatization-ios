@@ -46,7 +46,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Настройки", nil);
+    [self db_setTitle:NSLocalizedString(@"Настройки", nil)];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -148,7 +148,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     [GANHelper analyzeScreen:@"Settings_screen"];
     
     [self.tableView reloadData];
@@ -285,6 +285,9 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    if ([settingsItemInfo[@"name"] isEqualToString:@"subscriptionVC"]){
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     

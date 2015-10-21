@@ -284,7 +284,7 @@
 
 @implementation ApplicationManager (Menu)
 - (Class<MenuListViewControllerProtocol>)rootMenuViewController{
-    if([DBMenu sharedInstance].hasNestedCategories){
+    if ([DBMenu sharedInstance].hasNestedCategories && false) {
         return [ViewControllerManager categoriesViewController];
     } else {
         return [ViewControllerManager rootMenuViewController];

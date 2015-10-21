@@ -10,6 +10,7 @@
 #import "PositionCollectionViewCell.h"
 #import "PositionCompactCollectionViewCell.h"
 
+#import "DBSubscriptionManager.h"
 #import "DBBarButtonItem.h"
 #import "DBCategoryPicker.h"
 #import "DBCategoryHeaderView.h"
@@ -32,6 +33,7 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (nonatomic, strong) DBCategoryPicker *categoryPicker;
+@property (nonatomic, strong) NSDictionary *subscriptionPositions;
 
 @end
 
@@ -60,6 +62,7 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
     self.categoryPicker.delegate = self;
     [self setupCategorySelectionBarButton];
     [self initializeViews];
+    [self setupSubscriptionCategory];
 }
 
 - (void)initializeViews {
@@ -73,6 +76,12 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
     self.refreshControl.tintColor = [UIColor grayColor];
     [self.refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
     [self.collectionView addSubview:self.refreshControl];
+}
+
+- (void)setupSubscriptionCategory {
+    if ([DBSubscriptionManager sharedInstance].currentSubscription) {
+        self.subscriptionPositions = [[DBSubscriptionManager sharedInstance] subscriptionCategory];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -226,12 +235,24 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
 
 #pragma mark <UICollectionViewDataSource>
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return [self.categories count];
+    if (self.subscriptionPositions) {
+        return [self.categories count] + 1;
+    } else {
+        return [self.categories count];
+    }
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.rowsPerSection[section] integerValue];
+    if (self.subscriptionPositions) {
+        if (section == 0) {
+            return [self.subscriptionPositions count];
+        } else {
+            return [self.rowsPerSection[section - 1] integerValue];
+        }
+    } else {
+        return [self.rowsPerSection[section] integerValue];
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {

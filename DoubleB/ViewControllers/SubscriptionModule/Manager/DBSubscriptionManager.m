@@ -8,11 +8,17 @@
 
 #import "DBSubscriptionManager.h"
 #import "DBAPIClient.h"
+#import "DBMenuCategory.h"
 #import "DBCardsManager.h"
+#import "DBConstants.h"
+
+#import "IHSecureStore.h"
 
 @interface DBSubscriptionManager()
 
 @property (nonatomic, strong) NSMutableArray *subscriptionVariants;
+@property (nonatomic) NSInteger currentCupsInOrder;
+@property (nonatomic) BOOL available;
 
 @end
 
@@ -22,11 +28,78 @@
     self = [super init];
     
     self.subscriptionVariants = [NSMutableArray new];
+    [self loadCurrentSubscription];
+    [self.currentSubscription calculateDays];
+    [self saveCurrentSubscription];
+    
+    [self loadSubscriptionCategory];
+    self.available = [[DBSubscriptionManager valueForKey:@"__available"] boolValue];
+    
+    self.subscriptionScreenTitle = [DBSubscriptionManager valueForKey:@"__subscriptionScreenTitle"];
+    self.subscriptionScreenText = [DBSubscriptionManager valueForKey:@"__subscriptionScreenText"];
+    self.subscriptionMenuTitle = [DBSubscriptionManager valueForKey:@"__subscriptionMenuTitle"];
+    self.subscriptionMenuText = [DBSubscriptionManager valueForKey:@"__subscriptionMenuText"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderCreated) name:kDBNewOrderCreatedNotification object:nil];
     
     return self;
 }
 
-- (void)synchWithResponseInfo:(NSDictionary *)infoDict{
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)orderCreated {
+    self.currentSubscription.amount = @([self.currentSubscription.amount integerValue] - self.currentCupsInOrder);
+    self.currentCupsInOrder = 0;
+    [self saveCurrentSubscription];
+}
+
+#pragma mark – Cache section
+
+- (void)loadCurrentSubscription {
+    self.currentSubscription = [NSKeyedUnarchiver unarchiveObjectWithData:[DBSubscriptionManager valueForKey:@"__currentSubscription"]];
+    NSLog(@"sdsdf");
+}
+
+- (void)saveCurrentSubscription {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.currentSubscription];
+    [DBSubscriptionManager setValue:data forKey:@"__currentSubscription"];
+}
+
+- (void)loadSubscriptionCategory {
+    self.subscriptionCategory = [NSKeyedUnarchiver unarchiveObjectWithData:[DBSubscriptionManager valueForKey:@"__subscriptionCategory"]];
+}
+
+- (void)saveSubscriptionCategory {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.subscriptionCategory];
+    [DBSubscriptionManager setValue:data forKey:@"__subscriptionCategory"];
+}
+
+#pragma mark - Auxiliary
+
+- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
+    self.available = enabled;
+    [DBSubscriptionManager setValue:@(enabled) forKey:@"__available"];
+    if (self.available) {
+        self.subscriptionScreenText = moduleDict[@"info"][@"screen"][@"description"];
+        self.subscriptionScreenTitle = moduleDict[@"info"][@"screen"][@"title"];
+        self.subscriptionMenuText = moduleDict[@"info"][@"menu"][@"description"];
+        self.subscriptionMenuTitle = moduleDict[@"info"][@"menu"][@"title"];
+        
+        [DBSubscriptionManager setValue:self.subscriptionScreenTitle forKey:@"__subscriptionScreenTitle"];
+        [DBSubscriptionManager setValue:self.subscriptionScreenText forKey:@"__subscriptionScreenText"];
+        [DBSubscriptionManager setValue:self.subscriptionMenuTitle forKey:@"__subscriptionMenuTitle"];
+        [DBSubscriptionManager setValue:self.subscriptionMenuText forKey:@"__subscriptionMenuText"];
+        
+        [self subscriptionInfo:^(NSArray *info) {
+            
+        } failure:^(NSString *errorMessage) {
+            
+        }];
+    }
+}
+
+- (void)synchWithResponseInfo:(NSDictionary *)infoDict {
     
 }
 
@@ -36,7 +109,8 @@
     NSDictionary *params= @{@"return_url": @"alpha-payment://return-page",
                             @"type_id": @1,
                             @"card_pan": [DBCardsManager sharedInstance].defaultCard.pan,
-                            @"binding_id": [DBCardsManager sharedInstance].defaultCard.token};
+                            @"binding_id": [DBCardsManager sharedInstance].defaultCard.token,
+                            @"client_id": [IHSecureStore sharedInstance].clientId};
     
     [[DBAPIClient sharedClient] POST:@"subscription/buy"
                           parameters:@{@"payment" : [params encodedString],
@@ -56,6 +130,30 @@
                                  if(callback)
                                      callback(NO, errorMessage);
                              }];
+}
+
+- (void)subscriptionInfo:(void(^)(NSArray *info))success
+                 failure:(void(^)(NSString *errorMessage))failure {
+    [[DBAPIClient sharedClient] GET:@"subscription/info"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if ([responseObject objectForKey:@"amount"] && [responseObject objectForKey:@"days"]) {
+                                    DBCurrentSubscription *currentSubscription = [DBCurrentSubscription new];
+                                    currentSubscription.amount = [responseObject objectForKey:@"amount"];
+                                    currentSubscription.creationDate = [NSDate date];
+                                    currentSubscription.days = [responseObject objectForKey:@"days"];
+                                    self.currentSubscription = currentSubscription;
+                                    [self saveCurrentSubscription];
+                                }
+                                if(success)
+                                    success(@[]);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(failure)
+                                    failure(nil);
+                            }];
 }
 
 - (void)checkSubscriptionVariants:(void(^)(NSArray *variants))success
@@ -81,8 +179,74 @@
                             }];
 }
 
+- (NSDictionary *)cutSubscriptionCategory:(NSDictionary *)menu {
+    NSMutableDictionary *mutableMenu = [NSMutableDictionary dictionaryWithDictionary:menu];
+    NSMutableArray *categories = [NSMutableArray arrayWithArray:menu[@"menu"]];
+    
+    __block NSInteger index = -1;
+    [categories enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull category, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([[category[@"info"] objectForKey:@"category_id"] integerValue] == 1) {
+            index = idx;
+        }
+    }];
+    
+    if (index != -1) {
+        self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:categories[index]];
+        [categories removeObjectAtIndex:index];
+        mutableMenu[@"menu"] = categories;
+        
+        [self saveSubscriptionCategory];
+    }
+    
+    return mutableMenu;
+}
+
 - (NSArray<DBSubscriptionVariant *> *)subscriptionVariants {
     return _subscriptionVariants;
+}
+
+- (NSDictionary *)menuRequest {
+    return @{@"request_subscription": self.available ? @"true": @"false" };
+}
+
+- (DBMenuCategory *)subscriptionCategory {
+    return _subscriptionCategory;
+}
+
+- (BOOL)isAvailable {
+    return _available;
+}
+
+- (BOOL)isEnabled {
+    BOOL enabled = self.currentSubscription != nil;
+    enabled = enabled && [[NSDate dateWithTimeIntervalSinceNow:[self.currentSubscription.days integerValue] * 24 * 60 * 60] compare:[NSDate date]] == NSOrderedDescending;
+    enabled = enabled && [self.currentSubscription.amount integerValue] > 0;
+    return enabled;
+}
+
+#pragma mark - Cups Managment
+
+- (BOOL)cupIsAvailableToPurchase {
+    return [self numberOfAvailableCups] > 0;
+}
+
+- (NSInteger)numberOfAvailableCups {
+    NSInteger temp = [self.currentSubscription.amount integerValue] - self.currentCupsInOrder;
+    return temp >= 0 ? temp : 0;
+}
+
+- (void)incrementNumberOfCupsInOrder {
+    self.currentCupsInOrder += 1;
+    [self.delegate currentSubscriptionStateChanged];
+}
+
+- (void)decrementNumberOfCupsInOrder {
+    self.currentCupsInOrder -= 1;
+    [self.delegate currentSubscriptionStateChanged];
+}
+
++ (NSString *)db_managerStorageKey {
+    return @"kDBDefaultsDBSubscriptionManager";
 }
 
 @end

@@ -9,6 +9,7 @@
 #import "DBMenu.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
+#import "DBSubscriptionManager.h"
 
 #import "DBAPIClient.h"
 
@@ -101,10 +102,8 @@
 - (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
     NSDate *startTime = [NSDate date];
     [[DBAPIClient sharedClient] GET:@"menu"
-                         parameters:@{}
+                         parameters:[[DBSubscriptionManager sharedInstance] menuRequest]
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//                                NSLog(@"%@", responseObject);
-                                
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
                                 
@@ -112,7 +111,9 @@
                                                  number:@(interval)
                                                category:APPLICATION_START];
                                 
-                                [self synchronizeWithResponseMenu:responseObject[@"menu"]];
+                                
+                                NSDictionary *menu = [[DBSubscriptionManager sharedInstance] cutSubscriptionCategory:responseObject];
+                                [self synchronizeWithResponseMenu:menu[@"menu"]];
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(YES, self.categories);

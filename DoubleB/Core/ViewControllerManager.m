@@ -191,3 +191,23 @@
 
 @end
 
+
+#pragma mark - Subscription
+#import "DBSubscriptionViewController.h"
+#import "DBSubscriptionTableViewController.h"
+@implementation ViewControllerManager(SubscriptionViewControllers)
+
++ (nonnull NSDictionary *)subscriptionViewControllerClasses {
+    return @{
+             @"default": [DBSubscriptionTableViewController class],
+             @"nondefault": [DBSubscriptionViewController class]
+             };
+}
+
++ (nonnull UIViewController *)subscriptionViewController {
+    Class subscriptionViewController = [self subscriptionViewControllerClasses][[self valueFromPropertyListByKey:@"Subscription"] ?: @"default"];
+    return [subscriptionViewController new];
+}
+
+@end
+
