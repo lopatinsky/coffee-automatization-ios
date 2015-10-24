@@ -54,6 +54,14 @@
     self.initialDiscountViewHeight = self.constraintDiscountViewHeight.constant;
     self.initialTotalViewHeight = self.totalView.frame.size.height;
     
+    self.sumLabel.textColor = [UIColor db_textGrayColor];
+    self.shippingLabel.textColor = [UIColor db_textGrayColor];
+    self.discountLabel.textColor = [UIColor db_textGrayColor];
+    
+    self.sumTotal.textColor = [UIColor db_textGrayColor];
+    self.shippingTotal.textColor = [UIColor db_textGrayColor];
+    self.discountTotal.textColor = [UIColor db_textGrayColor];
+    
     self.sumLabel.text = NSLocalizedString(@"Сумма", nil);
     self.shippingLabel.text = NSLocalizedString(@"Стоимость доставки", nil);
     self.discountLabel.text = NSLocalizedString(@"Скидка", nil);

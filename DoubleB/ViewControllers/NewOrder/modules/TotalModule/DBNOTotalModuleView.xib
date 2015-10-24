@@ -7,22 +7,22 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-oU-v3N" customClass="DBNOTotalModuleView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1h-Qt-q6E">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Сумма" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7j-CR-uab">
-                            <rect key="frame" x="8" y="0.0" width="234" height="25"/>
+                            <rect key="frame" x="8" y="0.0" width="237.5" height="25"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="150 руб." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yqc-Np-n2B">
-                            <rect key="frame" x="257" y="0.0" width="54.5" height="25"/>
+                            <rect key="frame" x="260.5" y="0.0" width="51" height="25"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -44,16 +44,16 @@
                     <rect key="frame" x="0.0" y="25" width="320" height="25"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Стоимость доставки" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1m-yc-ktT">
-                            <rect key="frame" x="8" y="0.0" width="234" height="25"/>
+                            <rect key="frame" x="8" y="0.0" width="237.5" height="25"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="150 руб." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTk-Um-o5J">
-                            <rect key="frame" x="257" y="0.0" width="54.5" height="25"/>
+                            <rect key="frame" x="260.5" y="0.0" width="51" height="25"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -75,16 +75,16 @@
                     <rect key="frame" x="0.0" y="50" width="320" height="25"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Скидка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cu4-tC-yYg">
-                            <rect key="frame" x="8" y="0.0" width="234" height="25"/>
+                            <rect key="frame" x="8" y="0.0" width="237.5" height="25"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="150 руб." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J1r-Qt-qZJ">
-                            <rect key="frame" x="257" y="0.0" width="54.5" height="25"/>
+                            <rect key="frame" x="260.5" y="0.0" width="51" height="25"/>
                             <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -103,25 +103,25 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5f-JS-Kox">
-                    <rect key="frame" x="0.0" y="75" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="75" width="320" height="35"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Итого к оплате" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7a-8u-RQ4">
-                            <rect key="frame" x="8" y="12" width="114" height="20.5"/>
+                            <rect key="frame" x="8" y="7" width="107.5" height="20.5"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="UWb-75-0eb"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="150 руб." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-AH-nSl">
-                            <rect key="frame" x="250" y="12" width="62" height="20.5"/>
+                            <rect key="frame" x="253" y="7" width="59" height="20.5"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="fyA-8z-ah6"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>

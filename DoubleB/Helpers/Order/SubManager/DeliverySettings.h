@@ -27,12 +27,6 @@ typedef NS_ENUM(NSInteger, DeliverySettingsChange) {
  */
 - (void)selectDeliveryType:(DBDeliveryType *)type;
 
-/**
- * Only use when switch between shipping and not shipping;
- */
-- (void)selectShipping;
-- (void)selectTakeout;
-
 #pragma mark - Time management
 
 /**

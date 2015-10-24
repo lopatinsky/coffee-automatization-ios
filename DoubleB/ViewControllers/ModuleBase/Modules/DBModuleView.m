@@ -85,7 +85,7 @@
                 if ([self.delegate respondsToSelector:@selector(db_additonalAnimationFroModuleAnimation:)]){
                     [self.delegate db_additonalAnimationFroModuleAnimation:self]();
                 }
-                [self.superview setNeedsLayout];
+//                [self.superview setNeedsLayout];
             } completion:^(BOOL finished) {
                 self.hidden = self.moduleHidden;
             }];
@@ -96,7 +96,7 @@
                 if ([self.delegate respondsToSelector:@selector(db_additonalAnimationFroModuleAnimation:)]){
                     [self.delegate db_additonalAnimationFroModuleAnimation:self]();
                 }
-                [self.superview setNeedsLayout];
+//                [self.superview setNeedsLayout];
             }];
         }
     } else {

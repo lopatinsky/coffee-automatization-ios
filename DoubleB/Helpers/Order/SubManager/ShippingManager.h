@@ -25,12 +25,12 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
 };
 
 @interface DBShippingAddress : NSObject
-@property (nonatomic, strong) NSString *address;
-@property (nonatomic, strong) NSString *apartment;
-@property (nonatomic, strong) NSString *city;
-@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *country;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *home;
+@property (nonatomic, strong) NSString *apartment;
+@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *comment;
 
 @property (nonatomic) BOOL valid;
@@ -47,19 +47,18 @@ extern NSString *kDBShippingManagerDidRecieveSuggestionsNotification;
 @interface ShippingManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
 @property (nonatomic, strong, readonly) DBShippingAddress *selectedAddress;
 
-- (void)setAddress:(NSString *)address;
-- (void)setApartment:(NSString *)apartment;
 - (void)setCity:(NSString *)city;
+- (void)setStreet:(NSString *)street;
+- (void)setHome:(NSString *)home;
+- (void)setApartment:(NSString *)apartment;
 - (void)setComment:(NSString *)comment;
 
 @property (nonatomic, readonly) BOOL validAddress;
 
 - (void)requestSuggestions;
 - (NSArray *)addressSuggestions;
-- (void)selectSuggestion:(DBShippingAddress *)suggestion;
 
 - (NSArray *)arrayOfCities;
-
 - (BOOL)hasCity:(NSString *)city;
 
 @end

@@ -47,6 +47,10 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     return [[DBCompanyInfo sharedInstance] deliveryCities];
 }
 
+- (BOOL)hasCity:(NSString *)city{
+    return [self.arrayOfCities containsObject:city];
+}
+
 - (BOOL)validAddress{
     return _selectedAddress.valid;
 }
@@ -55,7 +59,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     // request suggestions from backend and push notification about it
 //    [self.requestSuggestionsTimer invalidate];
 //    self.requestSuggestionsTimer = nil;
-    [DBServerAPI requestAddressSuggestions:@{@"city": _selectedAddress.city, @"street": _selectedAddress.address}
+    [DBServerAPI requestAddressSuggestions:@{@"city": _selectedAddress.city, @"street": _selectedAddress.street}
                                   callback:^(BOOL success, NSArray *response) {
                                       NSMutableArray *suggestions = [NSMutableArray new];
                                       for(NSDictionary *suggestionDict in response){
@@ -72,46 +76,38 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     return _addressSuggestions;
 }
 
-- (void)selectSuggestion:(DBShippingAddress *)suggestion{
-    _selectedAddress.address = suggestion.address;
-    _selectedAddress.home = suggestion.home;
-    _selectedAddress.location = suggestion.location;
+
+#pragma mark - Setter overrides
+
+- (void)setCity:(NSString *)city {
+    _selectedAddress.city = city ?: @"";
+    
+    _selectedAddress.street = @"";
+    _selectedAddress.location = nil;
     
     [self synchronize];
     
     [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
-- (BOOL)hasCity:(NSString *)city{
-    return [self.arrayOfCities containsObject:city];
-}
-
-
-#pragma mark - Setter overrides
-- (void)setAddress:(NSString *)address {
-    _selectedAddress.address = address ?: @"";
-    _selectedAddress.home = @"";
-    _selectedAddress.location = nil;
+- (void)setStreet:(NSString *)street {
+    _selectedAddress.street = street ?: @"";
     
     [self synchronize];
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
+}
 
+- (void)setHome:(NSString *)home {
+    _selectedAddress.home = home ?: @"";
+    
+    [self synchronize];
+    
     [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
 - (void)setApartment:(NSString *)apartment {
     _selectedAddress.apartment = apartment ?: @"";
-    
-    [self synchronize];
-    
-    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
-}
-
-- (void)setCity:(NSString *)city {
-    _selectedAddress.city = city ?: @"";
-    
-    _selectedAddress.address = @"";
-    _selectedAddress.home = @"";
-    _selectedAddress.location = nil;
     
     [self synchronize];
     
@@ -125,6 +121,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     
     [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
+
 
 - (void)synchronize {
     if(self.selectedAddress){
@@ -168,7 +165,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     
     _country = @"";
     _city = @"";
-    _address = @"";
+    _street = @"";
     _home = @"";
     _apartment = @"";
     _comment = @"";
@@ -183,7 +180,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     
     _country = [dict[@"address"] getValueForKey:@"country"] ?: @"";
     _city = [dict[@"address"] getValueForKey:@"city"] ?: @"";
-    _address = [dict[@"address"] getValueForKey:@"street"] ?: @"";
+    _street = [dict[@"address"] getValueForKey:@"street"] ?: @"";
     _home = [dict[@"address"] getValueForKey:@"home"] ?: @"";
     _apartment = [dict[@"address"] getValueForKey:@"flat"] ?: @"";
     
@@ -208,7 +205,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     
     NSDictionary *address = @{@"country": _country ?: @"",
                               @"city": _city ?: @"",
-                              @"street": _address ?: @"",
+                              @"street": _street ?: @"",
                               @"home": _home ?: @"",
                               @"flat": _apartment ?: @""};
     
@@ -218,23 +215,23 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
 - (NSString *)formattedAddressString:(DBAddressStringMode)mode{
     NSString *result = @"";
     
-    if(mode == DBAddressStringModeAutocomplete){
-        if(_address.length > 0){
-            result = _address;
-            
-            if([result rangeOfString:@","].location == NSNotFound){
-                result = [NSString stringWithFormat:@"%@, ", result];
-            }
-            
-            if(_home.length > 0){
-                result = [NSString stringWithFormat:@"%@%@",result, _home];
-            }
-        }
-    }
-        
+//    if(mode == DBAddressStringModeAutocomplete){
+//        if(_street.length > 0){
+//            result = _street;
+//            
+//            if([result rangeOfString:@","].location == NSNotFound){
+//                result = [NSString stringWithFormat:@"%@, ", result];
+//            }
+//            
+//            if(_home.length > 0){
+//                result = [NSString stringWithFormat:@"%@%@",result, _home];
+//            }
+//        }
+//    }
+    
     if(mode >= DBAddressStringModeShort){
-        if(_address.length > 0){
-            result =  _address;
+        if(_street.length > 0){
+            result =  _street;
             
             if(_home.length > 0){
                 result = [NSString stringWithFormat:@"%@, %@",result, _home];
@@ -243,7 +240,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     }
     
     if(mode >= DBAddressStringModeNormal){
-        if(_home.length > 0 && _apartment.length > 0){
+        if(result.length > 0 && _apartment.length > 0){
             result = [NSString stringWithFormat:@"%@ - %@", result, _apartment];
         }
     }
@@ -260,7 +257,8 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
 - (BOOL)valid{
     BOOL valid = YES;
     valid = valid && _city && _city.length > 0;
-    valid = valid && _address && _address.length > 0;
+    valid = valid && _street && _street.length > 0;
+    valid = valid && _home && _home.length > 0;
     valid = valid && _apartment && _apartment.length > 0;
     
     return valid;

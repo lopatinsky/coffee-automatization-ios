@@ -12,8 +12,6 @@
 @interface DeliverySettings ()
 @property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 
-@property (strong, nonatomic) DBDeliveryType *lastNotShippingDeliveryType;
-
 // Time management
 @property (strong, nonatomic) NSTimer *timer;
 @end
@@ -39,10 +37,6 @@
 #pragma mark - Delivery type
 
 - (void)selectDeliveryType:(DBDeliveryType *)type{
-    if(type.typeId != DeliveryTypeIdShipping){
-        self.lastNotShippingDeliveryType = type;
-    }
-    
     self.deliveryType = type;
     switch (self.deliveryType.typeId) {
         case DeliveryTypeIdInRestaurant:
@@ -57,26 +51,6 @@
         default:
             break;
     }
-}
-
-- (void)selectShipping{
-    [self selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdShipping]];
-}
-
-- (void)selectTakeout{
-    if(!self.lastNotShippingDeliveryType){
-        DBDeliveryType *type = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdTakeaway];
-        if (!type) {
-            type = [[DBCompanyInfo sharedInstance] deliveryTypeById:DeliveryTypeIdInRestaurant];
-        }
-        
-        if (type) {
-            self.lastNotShippingDeliveryType = type;
-        }
-    }
-    
-    if (self.lastNotShippingDeliveryType)
-        [self selectDeliveryType:self.lastNotShippingDeliveryType];
 }
 
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType{

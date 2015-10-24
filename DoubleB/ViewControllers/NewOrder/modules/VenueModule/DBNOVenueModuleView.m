@@ -7,7 +7,7 @@
 //
 
 #import "DBNOVenueModuleView.h"
-#import "DBDeliveryViewController.h"
+#import "DBShippingViewController.h"
 #import "DBVenuesTableViewController.h"
 
 #import "OrderCoordinator.h"
@@ -97,7 +97,7 @@
     
     UIViewController *vc;
     if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
-        vc = [DBDeliveryViewController new];
+        vc = [DBShippingViewController new];
     } else {
         vc = [DBVenuesTableViewController new];
     }
