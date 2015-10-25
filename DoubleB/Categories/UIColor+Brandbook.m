@@ -16,8 +16,17 @@
 }
 
 + (UIColor *)db_defaultColor {
-    NSNumber *hex = [DBCompanyInfo db_companyDefaultColor];
-    return [UIColor fromHex:[hex intValue]];
+    id color = [DBCompanyInfo db_companyDefaultColor];
+    
+    if ([color isKindOfClass:[NSNumber class]]) {
+        return [UIColor fromHex:[color intValue]];
+    }
+    
+    if ([color isKindOfClass:[NSString class]]){
+        return [UIColor fromHex:[color integerValue]];
+    }
+    
+    return nil;
 }
 
 + (UIColor *)db_defaultColorWithAlpha:(CGFloat)alpha{
