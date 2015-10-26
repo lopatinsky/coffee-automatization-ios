@@ -90,6 +90,7 @@
 "У вас пока нет заказов.\nЗаказ можно сделать из раздела \"Меню\"" = "You don\'t have any orders yet.\nYou can place an order from \"Menu\"";
 "Для регистрации заказа вам необходимо выбрать хотя бы один напиток" = "You should choose at least one beverage to place an order";
 "Пожалуйста, добавьте новую карту или выберите одну из существующих" = "Please add new card or select one from already existed";
+"Пожалуйста, добавьте карту для оплаты" = "Please add a card";
 "Произошла ошибка на этапе оплаты" = "Sorry,there was an error during payment.";
 "Нестабильное интернет-соединение. Возможно ваш заказ был успешно создан, пожалуйста, дождитесь подтверждения по смс и обновите историю" = "Bad internet-connection. Maybe your order has been created successfully, please wait for confirmation by SMS and update history";
 "Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение" = "We can not place the order right now. Please check your Internet connection";

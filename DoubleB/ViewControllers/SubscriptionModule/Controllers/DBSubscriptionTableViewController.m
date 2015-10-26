@@ -10,11 +10,13 @@
 #import "DBSubscriptionManager.h"
 #import "DBFGPaymentModule.h"
 #import "DBSubscriptionTableViewCell.h"
+#import "DBCardsManager.h"
 
 #import "DBModuleView.h"
 #import "DBSubscriptionVariant.h"
 #import "UIColor+Brandbook.h"
 #import "MBProgressHUD.h"
+#import "UIAlertView+BlocksKit.h"
 
 @interface DBSubscriptionTableViewController ()
 
@@ -139,24 +141,31 @@
 }
 
 - (void)clickOrderButton {
-    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [[DBSubscriptionManager sharedInstance] buySubscription:[DBSubscriptionManager sharedInstance].selectedVariant callback:^(BOOL success, NSString *errorMessage) {
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        if (success) {
-            [self showAlert:@"Абонемент успешно оплачен"];
-            [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray *info) {
-                
-            } failure:^(NSString *errorMessage) {
-                
-            }];
-        } else {
-            if (errorMessage) {
-                [self showError:errorMessage];
+    if ([[DBCardsManager sharedInstance] cardsCount] == 0) {
+        UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Пожалуйста, добавьте карту для оплаты", nil) cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            
+        }];
+        [alert show];
+    } else {
+        [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        [[DBSubscriptionManager sharedInstance] buySubscription:[DBSubscriptionManager sharedInstance].selectedVariant callback:^(BOOL success, NSString *errorMessage) {
+            [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+            if (success) {
+                [self showAlert:@"Абонемент успешно оплачен"];
+                [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray *info) {
+                    
+                } failure:^(NSString *errorMessage) {
+                    
+                }];
             } else {
-                [self showError:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)];
+                if (errorMessage) {
+                    [self showError:errorMessage];
+                } else {
+                    [self showError:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)];
+                }
             }
-        }
-    }];
+        }];
+    }
 }
 
 #pragma mark - Table view data source
