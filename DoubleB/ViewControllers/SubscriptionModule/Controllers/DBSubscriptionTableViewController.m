@@ -166,13 +166,21 @@
                     }];
                 }];
             } else {
-                [GANHelper analyzeEvent:@"abonement_payment_failure" label:errorMessage category:self.screenName];
-                
                 if (errorMessage) {
                     [self showError:errorMessage];
+                    [GANHelper analyzeEvent:@"abonement_payment_failure" label:errorMessage category:self.screenName];
                 } else {
                     [self showError:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)];
+                    [GANHelper analyzeEvent:@"abonement_payment_failure" label:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil) category:self.screenName];
                 }
+                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:@"Произошла ошибка при проведении операции. Пожалуйста, попробуйте ещё раз."
+                                     cancelButtonTitle:NSLocalizedString(@"Отменить", nil)
+                                     otherButtonTitles:@[NSLocalizedString(@"Повторить", nil)] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        [GANHelper analyzeEvent:@"abonement_payment_retry" label:errorMessage category:self.screenName];
+                        [self clickOrderButton];
+                    }
+                }];
             }
         }];
     }
