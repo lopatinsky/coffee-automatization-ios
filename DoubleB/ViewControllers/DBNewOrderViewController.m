@@ -38,7 +38,7 @@
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"
 #import "DBBonusPositionsViewController.h"
-#import "DBBeaconObserver.h"
+//#import "DBBeaconObserver.h"
 #import "DBDiscountAdvertView.h"
 #import "PositionViewController1.h"
 #import "DBNewOrderItemAdditionView.h"
