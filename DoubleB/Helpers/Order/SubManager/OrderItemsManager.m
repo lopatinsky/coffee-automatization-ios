@@ -68,7 +68,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     
     NSArray *positionIds = [self positionIdsForSubscribers];
     if ([positionIds containsObject:position.positionId]) {
-        [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder];
+        [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder:position.positionId];
     }
     
     for(OrderItem *item in self.items){
@@ -101,7 +101,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     
     NSArray *positionIds = [self positionIdsForSubscribers];
     if ([positionIds containsObject:orderItem.position.positionId]) {
-        [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder];
+        [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder:orderItem.position.positionId];
     }
     
     [self reloadTotal];

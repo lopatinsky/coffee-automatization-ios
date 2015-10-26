@@ -12,6 +12,7 @@
 #import "DBCardsManager.h"
 #import "DBConstants.h"
 
+#import "GANHelper.h"
 #import "IHSecureStore.h"
 
 NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionManagerCategoryIsAvailable";
@@ -171,12 +172,14 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
                                 
                                 self.subscriptionVariants = variants;
                                 
+                                [GANHelper analyzeEvent:@"abonement_load_success" category:@"Abonement_screen"];
                                 if(success)
                                     success(variants);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
+                                [GANHelper analyzeEvent:@"abonement_load_fail" label:[error localizedDescription] category:@"Abonement_screen"];
                                 if(failure)
                                     failure(nil);
                             }];
@@ -236,6 +239,11 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 - (NSInteger)numberOfAvailableCups {
     NSInteger temp = [self.currentSubscription.amount integerValue] - self.currentCupsInOrder;
     return temp >= 0 ? temp : 0;
+}
+
+- (void)incrementNumberOfCupsInOrder:(NSString *)productId {
+    [GANHelper analyzeEvent:@"abonement_product_select" label:productId category:MENU_SCREEN];
+    [self incrementNumberOfCupsInOrder];
 }
 
 - (void)incrementNumberOfCupsInOrder {

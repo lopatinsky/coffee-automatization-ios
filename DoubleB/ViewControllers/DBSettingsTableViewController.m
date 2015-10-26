@@ -289,6 +289,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     if ([settingsItemInfo[@"name"] isEqualToString:@"subscriptionVC"]){
+        event = @"abonement_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     

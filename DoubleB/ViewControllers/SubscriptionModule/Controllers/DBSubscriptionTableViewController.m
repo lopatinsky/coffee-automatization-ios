@@ -17,6 +17,8 @@
 #import "UIColor+Brandbook.h"
 #import "MBProgressHUD.h"
 #import "UIAlertView+BlocksKit.h"
+#import "GANHelper.h"
+#import "IHSecureStore.h"
 
 @interface DBSubscriptionTableViewController ()
 
@@ -48,6 +50,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [GANHelper analyzeScreen:self.screenName];
+    
     [self updateView];
     [self.cardsModuleContainer reload:YES];
 }
@@ -80,6 +84,7 @@
     [self.cardsModuleContainer.submodules addObject:self.cardsModuleView];
     self.cardsModuleView.ownerViewController = self;
     [self.cardsModuleContainer layoutModules];
+    self.cardsModuleView.analyticsCategory = self.screenName;
     
     [self.buyButton setTitle:NSLocalizedString(@"Купить", nil) forState:UIControlStateNormal];
     [self.buyButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];
@@ -103,6 +108,7 @@
         self.variants = variants;
         if (self.variants.count) {
             [DBSubscriptionManager sharedInstance].selectedVariant = self.variants[0];
+            [GANHelper analyzeEvent:@"abonement_select" label:[self.variants[0] variantId] category:self.screenName];
         }
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
@@ -142,10 +148,14 @@
         }];
         [alert show];
     } else {
+        [GANHelper analyzeEvent:@"abonement_payment_click" category:self.screenName];
+        
         [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         [[DBSubscriptionManager sharedInstance] buySubscription:[DBSubscriptionManager sharedInstance].selectedVariant callback:^(BOOL success, NSString *errorMessage) {
             [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
             if (success) {
+                [GANHelper analyzeEvent:@"abonement_payment_success" label:[IHSecureStore sharedInstance].clientId category:self.screenName];
+                
                 [self showAlert:@"Абонемент успешно оплачен"];
                 [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray *info) {
                     [self.delegate subscriptionViewControllerWillDissappear];
@@ -156,6 +166,8 @@
                     }];
                 }];
             } else {
+                [GANHelper analyzeEvent:@"abonement_payment_failure" label:errorMessage category:self.screenName];
+                
                 if (errorMessage) {
                     [self showError:errorMessage];
                 } else {
@@ -204,6 +216,8 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [GANHelper analyzeEvent:@"abonement_select" label:[self.variants[indexPath.row] variantId] category:self.screenName];
     
     NSInteger index = indexPath.row;
     if ([DBSubscriptionManager sharedInstance].selectedVariant) {

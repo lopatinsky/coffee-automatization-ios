@@ -345,6 +345,7 @@
     
     if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
+            [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
             [self pushSubscriptionViewController];
         } else if (indexPath.section == 0 && indexPath.row == 0) {
             return;
@@ -369,9 +370,13 @@
         return NO;
     } else {
         if (![[DBSubscriptionManager sharedInstance] cupIsAvailableToPurchase]) {
+            [GANHelper analyzeEvent:@"abonement_offer" category:MENU_SCREEN];
             [UIAlertView bk_showAlertViewWithTitle:@"Закончились кружки" message:@"Приобрести ещё?" cancelButtonTitle:@"Отмена" otherButtonTitles:@[@"Да"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
+                    [GANHelper analyzeEvent:@"abonement_offer_yes" category:MENU_SCREEN];
                     [self pushSubscriptionViewController];
+                } else {
+                    [GANHelper analyzeEvent:@"abonement_offer_no" category:MENU_SCREEN];
                 }
             }];
             return NO;
