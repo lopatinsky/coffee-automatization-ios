@@ -54,7 +54,7 @@
 }
 
 - (void)touchAtLocation:(CGPoint)location {
-    [GANHelper analyzeEvent:@"gift_card_choice_click" category:self.analyticsCategory];
+    [GANHelper analyzeEvent:@"card_add_click" category:self.analyticsCategory];
     
     DBPaymentViewController *paymentVC = [DBPaymentViewController new];
     paymentVC.mode = DBPaymentViewControllerModeChoosePayment;
