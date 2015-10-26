@@ -31,7 +31,7 @@
 #define TAG_POPUP_OVERLAY 333
 #define TAG_PICKER_OVERLAY 444
 
-@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol>
+@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
@@ -215,6 +215,16 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
+- (void)pushSubscriptionViewController {
+    UIViewController<SubscriptionViewControllerProtocol> *subscriptionVC = [ViewControllerManager subscriptionViewController];
+    subscriptionVC.delegate = self;
+    [self.navigationController pushViewController:subscriptionVC animated:YES];
+}
+
+#pragma mark - SubscriptionViewControllerDelegate methods
+- (void)subscriptionViewControllerWillDissappear {
+    [self.tableView reloadData];
+}
 
 #pragma mark - UITableView methods
 
@@ -335,7 +345,7 @@
     
     if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
-            [self.navigationController pushViewController:[ViewControllerManager subscriptionViewController] animated:YES];
+            [self pushSubscriptionViewController];
         } else if (indexPath.section == 0 && indexPath.row == 0) {
             return;
         }
@@ -355,13 +365,13 @@
 
 - (BOOL)subscriptionPositionDidOrder:(DBPositionCell *)cell {
     if (![[DBSubscriptionManager sharedInstance] isAvailable]) {
-        [self.navigationController pushViewController:[ViewControllerManager subscriptionViewController] animated:YES];
+        [self pushSubscriptionViewController];
         return NO;
     } else {
         if (![[DBSubscriptionManager sharedInstance] cupIsAvailableToPurchase]) {
             [UIAlertView bk_showAlertViewWithTitle:@"Закончились кружки" message:@"Приобрести ещё?" cancelButtonTitle:@"Отмена" otherButtonTitles:@[@"Да"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                 if (buttonIndex == 1) {
-                    [self.navigationController pushViewController:[ViewControllerManager subscriptionViewController] animated:YES];
+                    [self pushSubscriptionViewController];
                 }
             }];
             return NO;

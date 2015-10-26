@@ -20,16 +20,17 @@
 
 @interface DBSubscriptionTableViewController ()
 
+@property (weak, nonatomic) IBOutlet DBModuleView *cardsModuleContainer;
+@property (strong, nonatomic) DBFGPaymentModule *cardsModuleView;
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet DBModuleView *cardsModuleContainer;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIView *footerView;
 @property (weak, nonatomic) IBOutlet UIView *separator;
 @property (weak, nonatomic) IBOutlet UIView *separator2;
 
-@property (strong, nonatomic) DBFGPaymentModule *cardsModuleView;
 @property (strong, nonatomic) NSString *screenName;
 @property (strong, nonatomic) NSArray *variants;
 
@@ -41,19 +42,39 @@
     [super viewDidLoad];
     
     self.variants = [NSArray new];
+    
     [self configureViews];
     [self loadVariants];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateView];
+    [self.cardsModuleContainer reload:YES];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - User methods
 - (void)configureViews {
-    [self.tableView registerNib:[UINib nibWithNibName:@"DBSubscriptionVariantCell" bundle:nil]
-         forCellReuseIdentifier:@"variantCell"];
+    self.screenName = @"Abonement_screen";
+    
     [self db_setTitle:NSLocalizedString(@"Абонемент", nil)];
     self.navigationController.navigationBar.topItem.title = @"";
-    self.screenName = @"subscription_screen";
     
     self.titleLabel.text = [DBSubscriptionManager sharedInstance].subscriptionScreenTitle;
     self.descriptionLabel.text = [DBSubscriptionManager sharedInstance].subscriptionScreenText;
+    
+    [self.tableView registerNib:[UINib nibWithNibName:@"DBSubscriptionVariantCell" bundle:nil]
+         forCellReuseIdentifier:@"variantCell"];
+    self.tableView.bounces = NO;
+    UIView *backgroundView = [UIView new];
+    backgroundView.backgroundColor = [UIColor db_backgroundColor];
+    self.tableView.backgroundView = backgroundView;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100.0;
     
     self.cardsModuleView = [DBFGPaymentModule new];
     [self.cardsModuleContainer.submodules addObject:self.cardsModuleView];
@@ -63,37 +84,31 @@
     [self.buyButton setTitle:NSLocalizedString(@"Купить", nil) forState:UIControlStateNormal];
     [self.buyButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];
     self.buyButton.backgroundColor = [UIColor db_defaultColor];
+    self.buyButton.layer.cornerRadius = 5.;
+    self.buyButton.clipsToBounds = YES;
     
-    self.tableView.bounces = NO;
     CGRect frame = self.separator.frame;
     frame.size.height = 1.0 / [UIScreen mainScreen].scale;
     self.separator.frame = frame;
     frame = self.separator2.frame;
     frame.size.height = 1.0 / [UIScreen mainScreen].scale;
     self.separator2.frame = frame;
-    self.buyButton.layer.cornerRadius = 5.;
-    self.buyButton.clipsToBounds = YES;
-    
-    for (id view in self.footerView.subviews) {
-        if ([NSStringFromClass([view class]) isEqualToString:@"UITableViewWrapperView"]) {
-            if([view isKindOfClass:[UIScrollView class]]) {
-                UIScrollView *scroll = (UIScrollView *) view;
-                scroll.delaysContentTouches = NO;
-            }
-            break;
-        }
-    }
     
     self.footerView.backgroundColor = [UIColor db_backgroundColor];
-    UIView *backgroundView = [UIView new];
-    backgroundView.backgroundColor = [UIColor db_backgroundColor];
-    self.tableView.backgroundView = backgroundView;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 100.0;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self updateView];
+- (void)loadVariants {
+    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [[DBSubscriptionManager sharedInstance] checkSubscriptionVariants:^(NSArray *variants) {
+        self.variants = variants;
+        if (self.variants.count) {
+            [DBSubscriptionManager sharedInstance].selectedVariant = self.variants[0];
+        }
+        [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+    } failure:^(NSString *errorMessage) {
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];        
+    }];
 }
 
 - (void)updateView {
@@ -120,26 +135,6 @@
     return ceilf(height / font.lineHeight) * font.lineHeight;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)loadVariants {
-    [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [[DBSubscriptionManager sharedInstance] checkSubscriptionVariants:^(NSArray *variants) {
-        self.variants = variants;
-        if (self.variants.count) {
-            [DBSubscriptionManager sharedInstance].selectedVariant = self.variants[0];
-        }
-        [self.tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-    } failure:^(NSString *errorMessage) {
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
-        
-    }];
-}
-
 - (void)clickOrderButton {
     if ([[DBCardsManager sharedInstance] cardsCount] == 0) {
         UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Пожалуйста, добавьте карту для оплаты", nil) cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
@@ -153,9 +148,12 @@
             if (success) {
                 [self showAlert:@"Абонемент успешно оплачен"];
                 [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray *info) {
-                    
+                    [self.delegate subscriptionViewControllerWillDissappear];
+                    [self.navigationController popViewControllerAnimated:YES];
                 } failure:^(NSString *errorMessage) {
-                    
+                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:errorMessage cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                        
+                    }];
                 }];
             } else {
                 if (errorMessage) {
@@ -169,7 +167,6 @@
 }
 
 #pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -204,44 +201,7 @@
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -255,15 +215,5 @@
     }
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
