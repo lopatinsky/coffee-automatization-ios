@@ -113,7 +113,15 @@
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
     } failure:^(NSString *errorMessage) {
-        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];        
+        [MBProgressHUD hideHUDForView:self.navigationController.view animated:YES];
+        [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:@"Произошла ошибка при проведении операции. Пожалуйста, попробуйте ещё раз."
+                             cancelButtonTitle:NSLocalizedString(@"Отменить", nil)
+                             otherButtonTitles:@[NSLocalizedString(@"Повторить", nil)] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                 if (buttonIndex == 1) {
+                                     [GANHelper analyzeEvent:@"abonement_load_retry" label:errorMessage category:self.screenName];
+                                     [self loadVariants];
+                                 }
+                             }];
     }];
 }
 
@@ -143,6 +151,7 @@
 
 - (void)clickOrderButton {
     if ([[DBCardsManager sharedInstance] cardsCount] == 0) {
+        [GANHelper analyzeEvent:@"abonement_no_card_try" category:self.screenName];
         UIAlertView *alert = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Пожалуйста, добавьте карту для оплаты", nil) cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
             
         }];
