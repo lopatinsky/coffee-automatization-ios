@@ -13,6 +13,8 @@
 #import "DBSubscriptionVariant.h"
 #import "DBCurrentSubscription.h"
 
+extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
+
 @class DBMenuCategory;
 
 @protocol DBSubscriptionManagerProtocol <NSObject>

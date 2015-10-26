@@ -14,11 +14,13 @@
 
 #import "IHSecureStore.h"
 
+NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionManagerCategoryIsAvailable";
+
 @interface DBSubscriptionManager()
 
 @property (nonatomic, strong) NSMutableArray *subscriptionVariants;
 @property (nonatomic) NSInteger currentCupsInOrder;
-@property (nonatomic) BOOL available;
+@property (nonatomic) BOOL enable;
 
 @end
 
@@ -33,7 +35,7 @@
     [self saveCurrentSubscription];
     
     [self loadSubscriptionCategory];
-    self.available = [[DBSubscriptionManager valueForKey:@"__available"] boolValue];
+    self.enable = [[DBSubscriptionManager valueForKey:@"__available"] boolValue];
     
     self.subscriptionScreenTitle = [DBSubscriptionManager valueForKey:@"__subscriptionScreenTitle"];
     self.subscriptionScreenText = [DBSubscriptionManager valueForKey:@"__subscriptionScreenText"];
@@ -58,7 +60,6 @@
 
 - (void)loadCurrentSubscription {
     self.currentSubscription = [NSKeyedUnarchiver unarchiveObjectWithData:[DBSubscriptionManager valueForKey:@"__currentSubscription"]];
-    NSLog(@"sdsdf");
 }
 
 - (void)saveCurrentSubscription {
@@ -78,9 +79,11 @@
 #pragma mark - Auxiliary
 
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    self.available = enabled;
+    self.enable = enabled;
     [DBSubscriptionManager setValue:@(enabled) forKey:@"__available"];
-    if (self.available) {
+    if (self.enable) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+        
         self.subscriptionScreenText = moduleDict[@"info"][@"screen"][@"description"];
         self.subscriptionScreenTitle = moduleDict[@"info"][@"screen"][@"title"];
         self.subscriptionMenuText = moduleDict[@"info"][@"menu"][@"description"];
@@ -206,18 +209,18 @@
 }
 
 - (NSDictionary *)menuRequest {
-    return @{@"request_subscription": self.available ? @"true": @"false" };
+    return @{@"request_subscription": self.enable ? @"true": @"false" };
 }
 
 - (DBMenuCategory *)subscriptionCategory {
     return _subscriptionCategory;
 }
 
-- (BOOL)isAvailable {
-    return _available;
+- (BOOL)isEnabled {
+    return _enable;
 }
 
-- (BOOL)isEnabled {
+- (BOOL)isAvailable {
     BOOL enabled = self.currentSubscription != nil;
     enabled = enabled && [[NSDate dateWithTimeIntervalSinceNow:[self.currentSubscription.days integerValue] * 24 * 60 * 60] compare:[NSDate date]] == NSOrderedDescending;
     enabled = enabled && [self.currentSubscription.amount integerValue] > 0;

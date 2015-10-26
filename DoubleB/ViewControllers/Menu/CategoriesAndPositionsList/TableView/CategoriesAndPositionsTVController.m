@@ -21,6 +21,7 @@
 #import "DBMenuCategory.h"
 #import "DBPositionModifiersListModalView.h"
 #import "DBSubscriptionManager.h"
+#import "NetworkManager.h"
 
 #import "SubscriptionInfoTableViewCell.h"
 #import "UIAlertView+BlocksKit.h"
@@ -38,6 +39,9 @@
 @property (strong, nonatomic) NSMutableArray *rowsPerSection;
 
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
+// so bad, so fucking bad
+@property (nonatomic) NSInteger numberOfLoadings;
+
 @end
 
 @implementation CategoriesAndPositionsTVController
@@ -69,6 +73,7 @@
     self.categoryPicker.delegate = self;
     
     [self setupCategorySelectionBarButton];
+    [self subscribeForNotifications];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -88,20 +93,31 @@
     [self hideCategoryPicker];
 }
 
+- (void)subscribeForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMenu) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+}
+
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadMenu:(UIRefreshControl *)refreshControl{
+- (void)loadMenu {
+    [self loadMenu:nil];
+}
+
+- (void)loadMenu:(UIRefreshControl *)refreshControl {
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
     
     void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [refreshControl endRefreshing];
+        self.numberOfLoadings -= 1;
+        if (!self.numberOfLoadings) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [refreshControl endRefreshing];
+        }
         
         if (success) {
             if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
                     NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
                     [dict addObjectsFromArray:categories];
                     self.categories = dict;
@@ -119,7 +135,8 @@
     };
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
-    if(refreshControl){
+    if (refreshControl) {
+        self.numberOfLoadings += 1;
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
@@ -131,7 +148,7 @@
                 self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
                 
                 if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                    if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
                         NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
                         [dict addObjectsFromArray:self.categories];
                         self.categories = dict;
@@ -143,7 +160,7 @@
             self.categories = [[DBMenu sharedInstance] getMenu];
             
             if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
                     NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
                     [dict addObjectsFromArray:self.categories];
                     self.categories = dict;
@@ -152,10 +169,13 @@
         }
         
         
-        if (self.categories && [self.categories count] > 0){
+        if (self.categories && [self.categories count] > 0) {
             [self reloadTableView];
         } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            if (!self.numberOfLoadings) {
+                self.numberOfLoadings += 1;
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            }
             [[DBMenu sharedInstance] updateMenuForVenue:venue
                                              remoteMenu:menuUpdateHandler];
         }
@@ -238,11 +258,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[DBSubscriptionManager sharedInstance] isAvailable] && [[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
-                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
                     cell.placeholderView.hidden = YES;
                     cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", [[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
                     cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
@@ -313,31 +333,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([[DBSubscriptionManager sharedInstance] isAvailable] && indexPath.section == 0) {
-        if (![[DBSubscriptionManager sharedInstance] isEnabled]) {
-            if (indexPath.row != 0) {
-                [self.navigationController pushViewController:[ViewControllerManager subscriptionViewController] animated:YES];
-            }
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
+            [self.navigationController pushViewController:[ViewControllerManager subscriptionViewController] animated:YES];
+        } else if (indexPath.section == 0 && indexPath.row == 0) {
             return;
-        } else {
-//            [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder];
         }
+    } else {
+        DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        DBMenuPosition *position = cell.position;
+        
+        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+        positionVC.parentNavigationController = self.navigationController;
+        [self.navigationController pushViewController:positionVC animated:YES];
+        
+        [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
     }
-    
-    DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    DBMenuPosition *position = cell.position;
-    
-    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
-    positionVC.parentNavigationController = self.navigationController;
-    [self.navigationController pushViewController:positionVC animated:YES];
-    
-    [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
 }
 
 #pragma mark - DBPositionCellDelegate
 
 - (BOOL)subscriptionPositionDidOrder:(DBPositionCell *)cell {
-    if (![[DBSubscriptionManager sharedInstance] isEnabled]) {
+    if (![[DBSubscriptionManager sharedInstance] isAvailable]) {
         [self.navigationController pushViewController:[ViewControllerManager subscriptionViewController] animated:YES];
         return NO;
     } else {
@@ -446,7 +463,7 @@
 #pragma mark - DBSubscriberManagerDelegate 
 
 - (void)currentSubscriptionStateChanged {
-    if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
         [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }

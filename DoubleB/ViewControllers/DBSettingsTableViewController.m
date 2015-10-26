@@ -139,7 +139,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
     }
     
-    if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
         [self.settingsItems addObject:@{@"name": @"subscriptionVC",
                                         @"title": NSLocalizedString(@"Абонемент", nil),
                                         @"image": @"subscription_icon",

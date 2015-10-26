@@ -21,6 +21,9 @@ NSString *const kDBConcurrentOperationCheckOrderStarted = @"kDBConcurrentOperati
 NSString *const kDBConcurrentOperationCheckOrderStartFailed = @"kDBConcurrentOperationCheckOrderStartFailed";
 #pragma mark - FetchVenue Operation
 NSString *const kDBConcurrentOperationFetchVenuesFinished = @"kDBConcurrentOperationFetchVenuesFinished";
+#pragma mark - Subscription Operation
+NSString *const kDBConcurrentOperationFetchSubscriptionInfoSuccess = @"kDBConcurrentOperationFetchSubscriptionInfoSuccess";
+NSString *const kDBConcurrentOperationFetchSubscriptionInfoFailure = @"kDBConcurrentOperationFetchSubscriptionInfoFailure";
 
 @implementation ConcurrentOperation
 

@@ -33,7 +33,8 @@
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (nonatomic, strong) DBCategoryPicker *categoryPicker;
-@property (nonatomic, strong) NSDictionary *subscriptionPositions;
+@property (nonatomic, strong) DBMenuCategory *subscriptionPositions;
+@property (nonatomic) BOOL needsRefresh;
 
 @end
 
@@ -246,7 +247,7 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (self.subscriptionPositions) {
         if (section == 0) {
-            return [self.subscriptionPositions count];
+            return [[self.subscriptionPositions positions] count];
         } else {
             return [self.rowsPerSection[section - 1] integerValue];
         }
