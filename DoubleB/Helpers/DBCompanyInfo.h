@@ -58,7 +58,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 
 + (NSString *)db_companyBaseUrl;
 + (BOOL)db_proxyApp;
-+ (NSNumber *)db_companyDefaultColor;
++ (id)db_companyDefaultColor;
 + (NSString *)db_companyGoogleAnalyticsKey;
 
 + (NSString *)db_companyParseApplicationKey;

@@ -106,8 +106,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return proxy;
 }
 
-+ (NSNumber *)db_companyDefaultColor {
-    NSNumber *colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
++ (id)db_companyDefaultColor {
+    id colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
     
     return colorHex;
 }
