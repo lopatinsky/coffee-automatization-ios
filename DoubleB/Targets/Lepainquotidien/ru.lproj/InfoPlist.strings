@@ -1,0 +1,6 @@
+/* Localized versions of Info.plist keys */
+
+"CFBundleDisplayName" = "Хлеб Насущный";
+"NSLocationUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
+"NSLocationWhenInUseUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
+"NSLocationAlwaysUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";

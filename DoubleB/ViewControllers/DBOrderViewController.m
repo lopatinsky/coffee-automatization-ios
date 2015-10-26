@@ -154,8 +154,8 @@
         self.viewHeader.labelPaymentStatus.textColor = [UIColor fromHex:0xffe16941];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Отменен", nil);
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"canceled"];
-    } else if (self.order.paymentType == PaymentTypeCard || self.order.paymentType == PaymentTypeExtraType ||
-               self.order.status == OrderStatusDone) {
+    } else if (self.order.paymentType == PaymentTypeCard || self.order.paymentType == PaymentTypePayPal ||
+               self.order.paymentType == PaymentTypeExtraType || self.order.status == OrderStatusDone) {
         self.viewHeader.labelPaymentStatus.textColor = [UIColor db_defaultColor];
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Оплачен", nil);
         [self.viewHeader.imageViewPaymentStatus templateImageWithName:@"paid"];
