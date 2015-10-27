@@ -10,9 +10,8 @@
 #import "DBShareHelper.h"
 
 #import "MBProgressHUD.h"
-#import <FacebookSDK/FacebookSDK.h>
-#import <FBSDKShareLinkContent.h>
-#import "FBSDKShareDialog.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 #import "VKSdk.h"
 
 #import "UIAlertView+BlocksKit.h"

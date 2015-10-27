@@ -13,9 +13,9 @@
 #import "SocialManager.h"
 #import "UIActionSheet+BlocksKit.h"
 
-#import <FacebookSDK/FacebookSDK.h>
-#import <FBSDKShareLinkContent.h>
-#import "FBSDKShareDialog.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+//#import "FBSDKShareDialog.h"
 #import "MBProgressHUD.h"
 
 #import "CAGradientLayer+Helper.h"
