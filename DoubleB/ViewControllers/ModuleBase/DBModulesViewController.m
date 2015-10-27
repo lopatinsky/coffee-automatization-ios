@@ -7,10 +7,11 @@
 //
 
 #import "DBModulesViewController.h"
-#import "DBModuleView.h"
 
 @interface DBModulesViewController ()
 @property (strong, nonatomic) UIScrollView *scrollView;
+
+@property (weak, nonatomic) NSLayoutConstraint *constraintBottomScrollViewAlignment;
 
 @end
 
@@ -18,15 +19,80 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     self.modules = [NSMutableArray new];
     [self configLayout];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    for (DBModuleView *submodule in self.modules) {
+        [submodule viewWillAppearOnVC];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    for (DBModuleView *submodule in self.modules) {
+        [submodule viewDidAppearOnVC];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    for (DBModuleView *submodule in self.modules) {
+        [submodule viewWillDissapearFromVC];
+    }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)configLayout {
     _scrollView = [[UIScrollView alloc] init];
+    _scrollView.scrollEnabled = YES;
     [self.view addSubview:_scrollView];
     _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
-    [_scrollView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
+    [_scrollView alignTop:@"0" leading:@"0" toView:self.view];
+    [_scrollView alignTrailingEdgeWithView:self.view predicate:@"0"];
+    self.constraintBottomScrollViewAlignment = [[_scrollView alignBottomEdgeWithView:self.view predicate:@"0"] firstObject];
+}
+
+- (void)setAnalyticsCategory:(NSString *)analyticsCategory {
+    _analyticsCategory = analyticsCategory;
+    
+    for (DBModuleView *moduleView in self.modules) {
+        moduleView.analyticsCategory = _analyticsCategory;
+    }
+}
+
+- (void)addModule:(DBModuleView *)moduleView {
+    moduleView.analyticsCategory = self.analyticsCategory;
+    moduleView.ownerViewController = self;
+    moduleView.delegate = self;
+    
+    [self.modules addObject:moduleView];
+    
+    [moduleView viewAddedOnVC];
+}
+
+- (void)removeModule:(DBModuleView *)moduleView {
+    [self.modules removeObject:moduleView];
 }
 
 - (void)layoutModules {
@@ -47,14 +113,54 @@
         } else {
             UIView *topView = self.modules[i-1];
             [moduleView constrainTopSpaceToView:topView predicate:@"0"];
+            
+            if (i == self.modules.count - 1) {
+                [moduleView alignBottomEdgeWithView:_scrollView predicate:@">=0"];
+                [moduleView alignBottomEdgeWithView:_scrollView predicate:@"0@900"];
+            }
         }
     }
+    
 }
 
 - (void)reloadModules:(BOOL)animated {
     for (DBModuleView *module in self.modules){
         [module reload:animated];
     }
+}
+
+- (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view {
+    return [self containerForModuleModalComponent:view];
+}
+
+- (UIView *)containerForModuleModalComponent:(DBModuleView *)view {
+    return self.view;
+}
+
+#pragma mark - Keyboard events
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.constraintBottomScrollViewAlignment.constant = -keyboardRect.size.height;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:nil];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.constraintBottomScrollViewAlignment.constant = 0;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:nil];
 }
 
 @end

@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
 
-@interface UIViewController (DBMessage)<MFMailComposeViewControllerDelegate>
+@interface UIViewController (DBMessage)<MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
-- (void)presentMailViewControllerWithRecipients:(NSArray *)recipients callback:(void(^)(BOOL completed))callback;
+- (void)presentMailViewControllerWithRecipients:(NSArray *)recipients
+                                       callback:(void(^)(BOOL completed))callback;
 
+- (void)presentMessageViewControllerWithText:(NSString *)text
+                                  recipients:(NSArray *)recipients
+                                    callback:(void(^)(MessageComposeResult result))callback;
 @end

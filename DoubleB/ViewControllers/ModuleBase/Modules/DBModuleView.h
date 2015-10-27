@@ -8,15 +8,82 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DBModuleViewDelegate;
 
 @interface DBModuleView : UIView
+// Category for analytics
 @property (strong, nonatomic) NSString *analyticsCategory;
+
+// Controller which hold module
 @property (weak, nonatomic) UIViewController *ownerViewController;
 
+@property (weak, nonatomic) id<DBModuleViewDelegate> delegate;
+
+// Array of submodules
 @property (strong, nonatomic) NSMutableArray *submodules;
 
-- (void)reload;
+// Use only if you set modules from code;
+- (void)layoutModules;
+
+#pragma mark - Lifecicle
+
+/**
+ * Invokes when module added to VC or module
+ */
+- (void)viewAddedOnVC;
+
+/**
+ * Invokes viewWillAppear method of owner ViewController
+ */
+- (void)viewWillAppearOnVC;
+
+/**
+ * Invokes viewDidAppear method of owner ViewController
+ */
+- (void)viewDidAppearOnVC;
+
+/**
+ * Invokes viewWillDissapear method of owner ViewController
+ */
+- (void)viewWillDissapearFromVC;
+
+
+#pragma mark - Content
+/**
+ * Reload content of module and all submodules. Recalculate size
+ */
 - (void)reload:(BOOL)animated;
 
+/**
+ * Animated reload
+ * Not override this method. Use it only for react on notifications
+ */
+- (void)reload;
+
+#pragma mark - Appearance
+/**
+ * Returns content size of current module. By default returns frame size
+ * Override it to customize module size
+ */
 - (CGSize)moduleViewContentSize;
+
+/**
+ * Returns content height of current module. By default returns frame height
+ * Override it to customize module height
+ */
+- (CGFloat)moduleViewContentHeight;
+
+#pragma mark - Actions
+/**
+ * Invokes when get touch on self
+ * Override to customize touch actions
+ */
+- (void)touchAtLocation:(CGPoint)location;
+@end
+
+
+@protocol DBModuleViewDelegate <NSObject>
+
+- (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view;
+
 @end

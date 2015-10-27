@@ -234,7 +234,8 @@
             
             if(velocity.x < 0){
                 [self moveContentToLeft:YES];
-                [self.delegate db_orderItemCellSwipe:self];
+                if([self.delegate respondsToSelector:@selector(db_orderItemCellSwipe:)])
+                    [self.delegate db_orderItemCellSwipe:self];
             } else {
                 [self moveContentToOriginal:YES];
             }

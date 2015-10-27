@@ -8,17 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const kDBDefaultsAvailablePaymentTypes;
-
 extern NSString *const kDBPaymentErrorDefault;
 extern NSString *const kDBPaymentErrorCardNotUnique;
 extern NSString *const kDBPaymentErrorWrongCardData;
 extern NSString *const kDBPaymentErrorCardLimitExceeded;
 extern NSString *const kDBPaymentErrorNoInternetConnection;
 
+typedef NS_ENUM(int16_t, PaymentType) {
+    PaymentTypeNotSet = -1,
+    PaymentTypeCash = 0,
+    PaymentTypeCard = 1,
+    PaymentTypePayPal = 4,
+    PaymentTypeExtraType = 2
+};
+
 @interface IHPaymentManager : NSObject
 
 + (instancetype)sharedInstance;
+
+- (BOOL)paymentTypeAvailable:(PaymentType)type;
 
 /**
 * Check on server what payment types available -> Cash | Card

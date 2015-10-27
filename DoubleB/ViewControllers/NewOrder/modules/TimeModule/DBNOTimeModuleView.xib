@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBNOTimeModuleView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Через 15 минут" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="any-nm-M8Q">
+                    <rect key="frame" x="39" y="12.5" width="273" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="rtj-Le-qiy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock.png" translatesAutoresizingMaskIntoConstraints="NO" id="afm-05-UBr">
+                    <rect key="frame" x="8" y="12.5" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Rav-cJ-z77"/>
+                        <constraint firstAttribute="width" constant="20" id="fB3-aW-7J8"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="any-nm-M8Q" firstAttribute="centerY" secondItem="afm-05-UBr" secondAttribute="centerY" id="9F1-Hc-dxc"/>
+                <constraint firstItem="any-nm-M8Q" firstAttribute="leading" secondItem="afm-05-UBr" secondAttribute="trailing" constant="11" id="XVz-WH-lDG"/>
+                <constraint firstItem="afm-05-UBr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="cG4-Ms-vrh"/>
+                <constraint firstAttribute="trailing" secondItem="any-nm-M8Q" secondAttribute="trailing" constant="8" id="dhv-BY-toD"/>
+                <constraint firstItem="afm-05-UBr" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fhc-tf-SwZ"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="timeImageView" destination="afm-05-UBr" id="nhV-H6-z9B"/>
+                <outlet property="titleLabel" destination="any-nm-M8Q" id="jRS-QD-ovM"/>
+            </connections>
+            <point key="canvasLocation" x="348" y="22.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="clock.png" width="20" height="20"/>
+    </resources>
+</document>

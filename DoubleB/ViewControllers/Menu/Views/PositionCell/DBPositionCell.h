@@ -37,6 +37,7 @@ typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
 @property (nonatomic, weak) id<DBPositionCellDelegate> delegate;
 
 - (instancetype)initWithType:(DBPositionCellAppearanceType)type;
++ (NSString *)reuseIdentifierFor:(DBPositionCellAppearanceType)type;
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
 

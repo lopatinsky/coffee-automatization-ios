@@ -7,8 +7,11 @@
 //
 
 #import "OrderItem.h"
-#import "DBMenuPosition.h"
+
 #import "DBMenu.h"
+#import "DBMenuPosition.h"
+#import "DBMenuPositionModifier.h"
+#import "DBMenuPositionModifierItem.h"
 
 @implementation OrderItem
 
@@ -43,6 +46,34 @@
     item.count = [dict[@"quantity"] integerValue];
     
     return item;
+}
+
+- (NSDictionary *)requestJson {
+    NSMutableDictionary *itemDict = [NSMutableDictionary new];
+    
+    itemDict[@"item_id"] = _position.positionId;
+    itemDict[@"quantity"] = @(_count);
+    
+    NSMutableArray *singleModifiers = [NSMutableArray new];
+    for(DBMenuPositionModifier *modifier in _position.singleModifiers){
+        [singleModifiers addObject:@{@"single_modifier_id": modifier.modifierId,
+                                     @"quantity": @(modifier.selectedCount)}];
+    }
+    
+    NSMutableArray *groupModifiers = [NSMutableArray new];
+    for(DBMenuPositionModifier *modifier in _position.groupModifiers){
+        if(!modifier.selectedItem)
+            continue;
+        
+        [groupModifiers addObject:@{@"group_modifier_id": modifier.modifierId,
+                                    @"choice": modifier.selectedItem.itemId,
+                                    @"quantity": @1}];
+    }
+    
+    itemDict[@"single_modifiers"] = singleModifiers;
+    itemDict[@"group_modifiers"] = groupModifiers;
+    
+    return itemDict;
 }
 
 - (double)totalPrice{

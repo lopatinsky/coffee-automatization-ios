@@ -31,18 +31,16 @@
     [super awakeFromNib];
     _titleLabel.textColor = [UIColor db_defaultColor];
     _titleLabel.text = NSLocalizedString(@"Добавить карту", nil);
-    
-    @weakify(self)
-    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
-        @strongify(self)
-        [self.ownerViewController db_cardManagementBindNewCardOnScreen:self.analyticsCategory callback:nil];
-        
-        [GANHelper analyzeEvent:@"add_card_pressed" category:PAYMENT_SCREEN];
-    }]];
 }
 
 - (CGSize)moduleViewContentSize {
     return self.frame.size;
+}
+
+- (void)touchAtLocation:(CGPoint)location {
+    [self.ownerViewController db_cardManagementBindNewCardOnScreen:self.analyticsCategory callback:nil];
+    
+    [GANHelper analyzeEvent:@"add_card_pressed" category:PAYMENT_SCREEN];
 }
 
 @end

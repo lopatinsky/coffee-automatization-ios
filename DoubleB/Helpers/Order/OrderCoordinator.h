@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DBPrimaryManager.h"
+#import "OrderPartManagerProtocol.h"
 
 #import "ManagerProtocol.h"
 #import "OrderItemsManager.h"
@@ -26,13 +27,14 @@ extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
 
 extern NSString * __nonnull const CoordinatorNotificationNewPaymentType;
 extern NSString * __nonnull const CoordinatorNotificationNewVenue;
+extern NSString * __nonnull const CoordinatorNotificationNewShippingAddress;
 
 extern NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated;
 
 
-@interface OrderCoordinator : DBPrimaryManager <ManagerProtocol>
+@interface OrderCoordinator : DBPrimaryManager <ManagerProtocol, OrderParentManagerProtocol>
 
 @property (nonnull, nonatomic, strong, readonly) OrderItemsManager *itemsManager;
 @property (nonnull, nonatomic, strong, readonly) OrderBonusItemsManager *bonusItemsManager;
@@ -43,7 +45,5 @@ extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUp
 @property (nonnull, nonatomic, strong, readonly) DBPromoManager *promoManager;
 
 - (BOOL)validOrder;
-
-- (void)manager:(id<ManagerProtocol> __nonnull)manager haveChange:(NSInteger)changeType;
 
 @end

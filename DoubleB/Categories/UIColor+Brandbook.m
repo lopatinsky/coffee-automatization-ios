@@ -50,4 +50,16 @@
     return [UIColor colorWithRed:168./255 green:184./255 blue:193./255 alpha:1.];
 }
 
++ (UIColor *)db_defaultTextColor{
+    return [UIColor blackColor];
+}
+
++ (UIColor *)db_textGrayColor{
+    return  [UIColor colorWithRed:120./255 green:125./255 blue:135./255 alpha:1.];
+}
+
++ (UIColor *)db_errorColor {
+    return [UIColor orangeColor];
+}
+
 @end

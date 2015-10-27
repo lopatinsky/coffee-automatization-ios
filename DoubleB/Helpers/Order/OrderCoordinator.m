@@ -21,6 +21,7 @@ NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"Coordinato
 
 NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
 NSString * __nonnull const CoordinatorNotificationNewVenue = @"CoordinatorNotificationNewVenue";
+NSString * __nonnull const CoordinatorNotificationNewShippingAddress = @"CoordinatorNotificationNewShippingAddress";
 
 NSString * __nonnull const CoordinatorNotificationAddressSuggestionsUpdated = @"CoordinatorNotificationAddressSuggestionsUpdated";
 NSString * __nonnull const CoordinatorNotificationPromoUpdated = @"CoordinatorNotificationPromoUpdated";
@@ -69,8 +70,8 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
         result = result && _orderManager.venue;
     }
     result = result && !(_orderManager.paymentType == PaymentTypeNotSet);
-    result = result && [[DBClientInfo sharedInstance] validClientName];
-    result = result && [[DBClientInfo sharedInstance] validClientPhone];
+    result = result && [DBClientInfo sharedInstance].clientName.valid;
+    result = result && [DBClientInfo sharedInstance].clientPhone.valid;
     result = result && [[[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned] boolValue];
     result = result && (_itemsManager.totalCount + _bonusItemsManager.totalCount) > 0;
     result = result && _promoManager.validOrder;
@@ -78,7 +79,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     return result;
 }
 
-- (void)manager:(id<ManagerProtocol> __nonnull)manager haveChange:(NSInteger)changeType{
+- (void)manager:(id<OrderPartManagerProtocol>)manager haveChange:(NSInteger)changeType{
     if([manager isKindOfClass:[OrderItemsManager class]]){
         switch (changeType) {
             case ItemsManagerChangeTotalPrice:
@@ -134,6 +135,9 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             case ShippingManagerChangeSuggestions:
                 [self shippingManagerDidChangeSuggestions];
                 break;
+            case ShippingManagerChangeAddress:
+                [self shippingManagerDidChangeAddress];
+                break;
         }
     }
 }
@@ -176,6 +180,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)shippingManagerDidChangeSuggestions{
     [self notifyObserverOf:CoordinatorNotificationAddressSuggestionsUpdated];
+}
+
+- (void)shippingManagerDidChangeAddress{
+    [self notifyObserverOf:CoordinatorNotificationNewShippingAddress];
 }
 
 #pragma mark - PromoManager changes

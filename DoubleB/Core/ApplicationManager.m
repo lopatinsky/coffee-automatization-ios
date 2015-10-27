@@ -22,6 +22,7 @@
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
+#import "DBModulesManager.h"
 
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
@@ -115,6 +116,7 @@
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
         }
     }];
+    [[DBModulesManager sharedInstance] fetchModules:nil];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];

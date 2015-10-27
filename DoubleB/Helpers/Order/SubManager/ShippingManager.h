@@ -13,7 +13,8 @@
 
 
 typedef NS_ENUM(NSInteger, ShippingManagerChange) {
-    ShippingManagerChangeSuggestions = 0
+    ShippingManagerChangeSuggestions = 0,
+    ShippingManagerChangeAddress
 };
 
 typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
