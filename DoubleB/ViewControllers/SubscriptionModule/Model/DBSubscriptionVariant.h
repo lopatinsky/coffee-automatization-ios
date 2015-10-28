@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DBSubscriptionVariant : NSObject<NSCoding>
+@interface DBSubscriptionVariant : NSObject <NSCoding>
 
 @property (strong, nonatomic) NSString *variantId;
 @property (strong, nonatomic) NSString *name;

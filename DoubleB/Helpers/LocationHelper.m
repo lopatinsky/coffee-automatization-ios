@@ -9,14 +9,14 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LocationHelper.h"
 
+#import "DBGeoPushManager.h"
+
 
 NSString *const kLocationChangedNotification = @"kLocationChanged";
 
 #define LOCATION_CACHE_TIME 5*60.f
 
 @interface LocationHelper() <CLLocationManagerDelegate>
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, copy) void(^callback)(id);
 @property (nonatomic, strong) NSDate *lastLocationDate;
 @end
 
@@ -88,6 +88,10 @@ NSString *const kLocationChangedNotification = @"kLocationChanged";
     }
 
     return nil;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    [[DBGeoPushManager sharedInstance] didEnter:region];
 }
 
 - (void)updateLocationWithCallback:(void (^)(CLLocation *location))callback {

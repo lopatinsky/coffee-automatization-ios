@@ -12,12 +12,14 @@
 #import "DBSubscriptionManager.h"
 #import "DBFriendGiftHelper.h"
 #import "DBUniversalModulesManager.h"
+#import "DBGeoPushManager.h"
 
 typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeSubscription = 0,
     DBModuleTypeFriendGift = 1,
     DBModuleTypeFriendInvitation = 2,
     DBModuleTypeProfileScreenUniversal = 4,
+    DBModuleTypeGeoPush = 5,
     
     DBModuleTypeLast // Enum item for iteration, not in use
 };
@@ -73,6 +75,9 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 break;
             case DBModuleTypeSubscription:
                 [[DBSubscriptionManager sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
+            case DBModuleTypeGeoPush:
+                [[DBGeoPushManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
         }
         
