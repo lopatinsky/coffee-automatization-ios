@@ -13,7 +13,7 @@
 #import "DBPaymentViewController.h"
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
-#import "DBBeaconObserver.h"
+//#import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfoViewController.h"
 #import "DBCompaniesViewController.h"
@@ -121,12 +121,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"title": NSLocalizedString(@"Написать нам", nil),
                                     @"image": @"feedback"}];
     
-    // Company info
-//    DBCompanyInfoViewController *companyInfoVC = [DBCompanyInfoViewController new];
-//    [self.settingsItems addObject:@{@"name": @"companyInfoVC",
-//                                   @"title": NSLocalizedString(@"О компании", nil),
-//                                   @"image": @"",
-//                                   @"viewController": companyInfoVC}];
+    
 
     
     // Documents item
@@ -312,18 +307,18 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 
 #pragma mark - DBSettingsCellDelegate
 
-- (void)db_settingsCell:(DBSettingsCell *)cell didChangeSwitchValue:(BOOL)switchValue{
-    [GANHelper analyzeEvent:@"notification_switched" label:(switchValue ? @"YES" : @"NO") category:SETTINGS_SCREEN];
-    BOOL enabled = ![[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
-    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kDBSettingsNotificationsEnabled];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    if (enabled) {
-        [DBBeaconObserver createBeaconObserver];
-    } else {
-        [DBBeaconObserver stopMonitoringRegions];
-    }
-}
+//- (void)db_settingsCell:(DBSettingsCell *)cell didChangeSwitchValue:(BOOL)switchValue{
+//    [GANHelper analyzeEvent:@"notification_switched" label:(switchValue ? @"YES" : @"NO") category:SETTINGS_SCREEN];
+//    BOOL enabled = ![[NSUserDefaults standardUserDefaults] boolForKey:kDBSettingsNotificationsEnabled];
+//    [[NSUserDefaults standardUserDefaults] setBool:enabled forKey:kDBSettingsNotificationsEnabled];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    if (enabled) {
+//        [DBBeaconObserver createBeaconObserver];
+//    } else {
+//        [DBBeaconObserver stopMonitoringRegions];
+//    }
+//}
 
 #pragma mark - DBPersonalWalletViewDelegate
 

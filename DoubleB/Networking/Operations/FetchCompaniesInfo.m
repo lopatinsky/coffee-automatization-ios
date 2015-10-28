@@ -20,6 +20,7 @@
 - (void)main {
     if (self.cancelled) return;
     
+    [self setState:OperationExecuting];
     [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
         if (success) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];

@@ -16,8 +16,26 @@
 }
 
 + (UIColor *)db_defaultColor {
-    NSNumber *hex = [DBCompanyInfo db_companyDefaultColor];
-    return [UIColor fromHex:[hex intValue]];
+    id color = [DBCompanyInfo db_companyDefaultColor];
+    
+    if ([color isKindOfClass:[NSNumber class]]) {
+        return [UIColor fromHex:[color intValue]];
+    }
+    
+    if ([color isKindOfClass:[NSString class]]){
+        NSString *hexString = color;
+        if ([hexString rangeOfString:@"#"].location == 0)
+            hexString = [color stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+        if (hexString.length == 6)
+            hexString = [NSString stringWithFormat:@"ff%@", hexString];
+        
+        unsigned rgbValue = 0;
+        NSScanner *scanner = [NSScanner scannerWithString:hexString];
+        [scanner scanHexInt:&rgbValue];
+        return [UIColor fromHex:rgbValue];
+    }
+    
+    return nil;
 }
 
 + (UIColor *)db_defaultColorWithAlpha:(CGFloat)alpha{

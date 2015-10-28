@@ -60,4 +60,26 @@
     [self addOperation:operation];
 }
 
+- (void)forceAddConcurrentUniqueOperation:(NSOperation *)operation {
+//    NSLog(@"%s %@\n%@", __PRETTY_FUNCTION__, NSStringFromClass([operation class]), self.operations);
+    NSArray *ops = self.operations;
+    NSOperation *oper = nil;
+    
+    for (NSOperation *op in ops) {
+        BOOL same = object_getClassName(op) == object_getClassName(operation);
+        if (same) {
+            if (!op.executing) {
+                [op cancel];
+            } else {
+                oper = op;
+            }
+        }
+    }
+    
+    if (oper) {
+        [operation addDependency:oper];
+    }
+    [self addOperation:operation];
+}
+
 @end

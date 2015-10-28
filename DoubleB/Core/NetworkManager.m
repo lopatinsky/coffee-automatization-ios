@@ -119,6 +119,11 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
     [self.operationQueue addConcurrentOperation:operation];
 }
 
+- (void)forceAddOperation:(NetworkOperation)opType {
+    ConcurrentOperation *operation = [NetworkManager operationWithType:opType andUserInfo:nil];
+    [self.operationQueue forceAddConcurrentUniqueOperation:operation];
+}
+
 @end
 
 #import "FetchCompanyInfo.h"

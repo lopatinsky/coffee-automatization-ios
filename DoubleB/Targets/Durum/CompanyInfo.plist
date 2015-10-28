@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://durum.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<integer>4283322708</integer>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-1</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>HmzMi0ZBnk5E9xoDckoa3gIZ3cIkgVFl4Y7MHPzT</string>
+			<key>clientKey</key>
+			<string>XgUkembaojFgp4EKwI4R8AazPtdTC7iICbgpFiPp</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

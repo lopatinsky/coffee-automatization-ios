@@ -13,7 +13,7 @@
 @implementation DBTextResourcesHelper
 
 + (NSString *)db_venuesTitleString{
-    NSString *title = NSLocalizedString(@"Точки", nil);
+    NSString *title = NSLocalizedString(@"Заведения", nil);
     if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
         NSUInteger venuesCount = [[Venue storedVenues] count];
         if(venuesCount == 1){
