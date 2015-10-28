@@ -119,15 +119,13 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 }
 
 + (NSString *)db_companyParseApplicationKey {
-    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
-    
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"] ?: @{};
     NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"none";
     return appId;
 }
 
 + (NSString *)db_companyParseClientKey {
-    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
-    
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"] ?: @{};
     NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"none";
     return clientKey;
 }

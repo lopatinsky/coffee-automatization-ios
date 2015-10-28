@@ -9,10 +9,15 @@
 #import "DBModulesViewController.h"
 
 typedef NS_ENUM(NSInteger, DBPaymentViewControllerMode) {
-    DBPaymentViewControllerModeManage = 0,
+    DBPaymentViewControllerModeSettings = 0,
     DBPaymentViewControllerModeChoosePayment
 };
 
 @interface DBPaymentViewController : DBModulesViewController
 @property (nonatomic) DBPaymentViewControllerMode mode;
+
+/**
+ * List of payment types available on screen. If nothing specified, in use all types
+ */
+@property (strong, nonatomic) NSArray *paymentTypes;
 @end

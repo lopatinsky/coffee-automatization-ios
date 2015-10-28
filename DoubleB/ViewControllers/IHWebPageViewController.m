@@ -48,7 +48,7 @@
     }
     if(previousInStackVC && [previousInStackVC isKindOfClass:[DBPaymentViewController class]]){
         DBPaymentViewController *cardsVC = (DBPaymentViewController *)previousInStackVC;
-        if(cardsVC.mode == DBPaymentViewControllerModeManage){
+        if(cardsVC.mode == DBPaymentViewControllerModeSettings){
             self.screenName = @"Card_add_screen_settings";
         } else {
             self.screenName = @"Card_add_screen_payment";

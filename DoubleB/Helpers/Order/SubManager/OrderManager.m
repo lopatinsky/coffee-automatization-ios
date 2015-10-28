@@ -22,12 +22,12 @@ NSString* const kDBDefaultsPaymentType = @"kDBDefaultsPaymentType";
 NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
 
 @interface OrderManager ()
-@property (weak, nonatomic) OrderCoordinator *parentManager;
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 @end
 
 @implementation OrderManager
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
     self = [super init];
     if (self) {
         _parentManager = parentManager;
@@ -46,8 +46,7 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSNumber *pt = [defaults objectForKey:kDBDefaultsPaymentType];
     PaymentType paymentType = pt ? (PaymentType)pt.integerValue : PaymentTypeNotSet;
-    NSArray *availablePaymentTypes = [defaults objectForKey:kDBDefaultsAvailablePaymentTypes];
-    return [availablePaymentTypes containsObject:@(paymentType)] ? paymentType : PaymentTypeNotSet;
+    return [[IHPaymentManager sharedInstance] paymentTypeAvailable:paymentType] ? paymentType : PaymentTypeNotSet;
 }
 
 - (void)setPaymentType:(PaymentType)paymentType {
@@ -59,15 +58,13 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
 }
 
 - (void)selectIfPossibleDefaultPaymentType{
-    NSArray *availablePaymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
-    
-    if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeCard)]){
+    if(self.paymentType == PaymentTypeNotSet && [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard]){
         if([DBCardsManager sharedInstance].defaultCard){
             self.paymentType = PaymentTypeCard;
         }
     }
     
-    if(self.paymentType == PaymentTypeNotSet && [availablePaymentTypes containsObject:@(PaymentTypeCash)]){
+    if(self.paymentType == PaymentTypeNotSet && [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCash]){
         self.paymentType = PaymentTypeCash;
     }
 }

@@ -11,8 +11,13 @@
 #import "DBProfilePhoneModuleView.h"
 #import "DBProfileMailModuleView.h"
 
+#import "DBModuleHeaderView.h"
+
 #import "DBClientInfo.h"
 #import "DBServerAPI.h"
+
+#import "DBUniversalModulesManager.h"
+#import "DBUniversalModule.h"
 
 #import "UIBarButtonItem+BlocksKit.h"
 
@@ -26,6 +31,11 @@
     
     self.title = NSLocalizedString(@"Профиль", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
+    
+//    // Header module
+//    DBModuleHeaderView *headerModule = [DBModuleHeaderView new];
+//    headerModule.title = NSLocalizedString(@"Введите ваши контактные данные", nil);
+//    [self.modules addObject:headerModule];
     
     // Name module
     DBProfileNameModuleView *nameModule = [DBProfileNameModuleView new];
@@ -44,6 +54,13 @@
     mailModule.ownerViewController = self;
     mailModule.analyticsCategory = self.analyticsScreen;
     [self.modules addObject:mailModule];
+    
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+        DBModuleView *moduleView = [module getModuleView];
+        moduleView.ownerViewController = self;
+        moduleView.analyticsCategory = self.analyticsScreen;
+        [self.modules addObject:moduleView];
+    }
     
     [self layoutModules];
     
@@ -65,6 +82,7 @@
         }];
     }
     
+    [self reloadModules:NO];
     [self reloadDoneButton];
 }
 
@@ -83,8 +101,8 @@
 }
 
 - (BOOL)dataIsValid {
-    BOOL result = [[DBClientInfo sharedInstance] validClientName];
-    result = result && [[DBClientInfo sharedInstance] validClientPhone];
+    BOOL result = [DBClientInfo sharedInstance].clientName.valid;
+    result = result && [DBClientInfo sharedInstance].clientPhone.valid;
     
     return result;
 }

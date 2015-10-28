@@ -21,6 +21,9 @@ extern NSString * __nonnull const kDBConcurrentOperationCheckOrderStarted;
 extern NSString * __nonnull const kDBConcurrentOperationCheckOrderStartFailed;
 #pragma mark - FetchVenue Operation
 extern NSString * __nonnull const kDBConcurrentOperationFetchVenuesFinished;
+#pragma mark - Subscription Operation
+extern NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoFailure;
 
 typedef enum : NSUInteger {
     OperationReady,

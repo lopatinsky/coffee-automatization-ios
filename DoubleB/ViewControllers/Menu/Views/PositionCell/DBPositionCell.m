@@ -53,6 +53,14 @@
     return self;
 }
 
++ (NSString *)reuseIdentifierFor:(DBPositionCellAppearanceType)type {
+    if (type == DBPositionCellAppearanceTypeFull) {
+        return @"DBPositionCell";
+    } else {
+        return @"DBPositionCompactCell";
+    }
+}
+
 - (void)awakeFromNib
 {
     [self initOutlets];
@@ -114,7 +122,7 @@
 }
 
 
-- (void)reloadPriceLabel{
+- (void)reloadPriceLabel {
     if(self.contentType == DBPositionCellContentTypeBonus){
         self.priceView.title = [NSString stringWithFormat:@"%.0f", self.position.price];
     } else {

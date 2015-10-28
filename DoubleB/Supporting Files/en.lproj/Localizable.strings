@@ -90,10 +90,12 @@
 "У вас пока нет заказов.\nЗаказ можно сделать из раздела \"Меню\"" = "You don\'t have any orders yet.\nYou can place an order from \"Menu\"";
 "Для регистрации заказа вам необходимо выбрать хотя бы один напиток" = "You should choose at least one beverage to place an order";
 "Пожалуйста, добавьте новую карту или выберите одну из существующих" = "Please add new card or select one from already existed";
+"Пожалуйста, добавьте карту для оплаты" = "Please add a card";
 "Произошла ошибка на этапе оплаты" = "Sorry,there was an error during payment.";
 "Нестабильное интернет-соединение. Возможно ваш заказ был успешно создан, пожалуйста, дождитесь подтверждения по смс и обновите историю" = "Bad internet-connection. Maybe your order has been created successfully, please wait for confirmation by SMS and update history";
 "Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение" = "We can not place the order right now. Please check your Internet connection";
 "Произошла непредвиденная ошибка при регистрации заказа. Пожалуйста, попробуйте позднее" = "Unexpected error happened. Please try again later";
+"Произошла ошибка при проведении операции. Пожалуйста, попробуйте ещё раз." = "Unexpected error happened. Please try again.";
 
 "Настройки" = "Settings";
 "Профиль" = "Profile";
@@ -115,12 +117,6 @@
 
 "Для отправки сообщений необходима авторизация в Mail" = "Please authorize in Mail to send messages";
 
-"Кофе Хостел" = "Coffee Hostel";
-
-"Имя Фамилия" = "Full name";
-"Контактный номер телефона" = "Phone number";
-"Ваш e-mail для получения чеков" = "Your e-mail for receipt";
-
 "Ваш баланс:" = "Your balance:";
 "Оплатить бонусами" = "Pay with bonuses";
 
@@ -131,8 +127,16 @@
 "Номер заказа: %@" = "Order number: %@";
 "Дополнить" = "Refill";
 
+// Profile
+"ФИО" = "Name";
+"Телефон" = "Phone";
+"Имя Фамилия" = "Full name";
+"Контактный номер телефона" = "Phone number";
+"Ваш e-mail для получения чеков" = "Your e-mail for receipt";
 "Укажите, пожалуйста, номер телефона" = "Please set your phone number";
 "Представьтесь, пожалуйста" = "Please fill your profile";
+"Введите ваши контактные данные" = "Your contacts";
+"Контактные данные вашего друга" = "Your friend contacts";
 
 "Добавить карту" = "Add card";
 "Электронные платежи" = "E payment";
@@ -181,12 +185,20 @@
 
 // Gift items promo
 
+"Подарок другу" = "Gift for friend";
+"Выберите подарок" = "Choose the gift";
 "Подарок" = "Gift";
+"Подарки" = "Gifts";
+"Выберите карту для оплаты" = "Choose card for payment";
 
 // Sharing
 
 "Рассказать друзьям" = "Recommend app to friends";
 "Рассказать" = "Share";
+
+// Friend gift
+
+"Ваш подарок успешно отправлен" = "Your gift sent successfully";
 
 // promo codes
 "Промокоды" = "Promocodes";
@@ -207,3 +219,6 @@
 "Вы накопили:" = "You have accumulated:";
 "Чтобы получить напиток в подарок, измените тип оплаты на экране заказа" = "To get free beverage change payment type on the order screen";
 "Копите баллы, оплачивая покупки картой Mastercard, и получайте каждый %d напиток в подарок." = "Accumulate points by paying with Mastercard and get every %dth beverage as a gift.";
+
+// Subscription
+"Абонемент" = "Subscription";

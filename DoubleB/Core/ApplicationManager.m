@@ -22,6 +22,7 @@
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
+#import "DBModulesManager.h"
 
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
@@ -115,6 +116,7 @@
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
         }
     }];
+    [[DBModulesManager sharedInstance] fetchModules:nil];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
@@ -270,7 +272,7 @@
         return [ViewControllerManager mainViewController];
     }
     if ([self currentState] == RootStateCompanies) {
-        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
+        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewController]];
     }
     if ([self currentState] == RootStateLaunch) {
         return [ViewControllerManager launchViewController];
@@ -282,7 +284,7 @@
 
 @implementation ApplicationManager (Menu)
 - (Class<MenuListViewControllerProtocol>)rootMenuViewController{
-    if([DBMenu sharedInstance].hasNestedCategories){
+    if ([DBMenu sharedInstance].hasNestedCategories && false) {
         return [ViewControllerManager categoriesViewController];
     } else {
         return [ViewControllerManager rootMenuViewController];

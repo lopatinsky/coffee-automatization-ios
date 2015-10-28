@@ -7,7 +7,10 @@
 //
 
 #import "OrderItemsManager.h"
+#import "DBSubscriptionManager.h"
+
 #import "DBMenu.h"
+#import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 #import "OrderCoordinator.h"
@@ -15,22 +18,40 @@
 NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewTotalPriceNotification";
 
 @interface ItemsManager ()
-@property (weak, nonatomic) OrderCoordinator *parentManager;
 
+@property (weak, nonatomic) id<OrderParentManagerProtocol> parentManager;
 @property (nonatomic, strong) NSMutableArray *items;
+
 @end
 
 @implementation ItemsManager
 
-- (instancetype)initWithParentManager:(OrderCoordinator *)parentManager{
-    self = [super init];
+- (instancetype)initWithParentManager:(id<OrderParentManagerProtocol>)parentManager{
+    self = [self init];
     if (self) {
         _parentManager = parentManager;
-        _items = [NSMutableArray new];
-        [self reloadTotal];
+        
     }
     
     return self;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        _items = [NSMutableArray new];
+        [self reloadTotal];
+    }
+    return self;
+}
+
+- (NSArray *)positionIdsForSubscribers {
+    NSArray *positions = [[[DBSubscriptionManager sharedInstance] subscriptionCategory] positions];
+    NSMutableArray *positionIds = [NSMutableArray new];
+    for (DBMenuPosition *position in positions) {
+        [positionIds addObject:[position positionId]];
+    }
+    return positionIds;
 }
 
 - (OrderItem *)createItemWithPosition:(DBMenuPosition *)position{
@@ -44,6 +65,11 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     // Main logic
     DBMenuPosition *copyPosition = [position copy];
     OrderItem *itemWithSamePosition;
+    
+    NSArray *positionIds = [self positionIdsForSubscribers];
+    if ([positionIds containsObject:position.positionId]) {
+        [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder:position.positionId];
+    }
     
     for(OrderItem *item in self.items){
         if([item.position isEqual:copyPosition]){
@@ -73,6 +99,11 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     OrderItem *orderItem = self.items[index];
     orderItem.count++;
     
+    NSArray *positionIds = [self positionIdsForSubscribers];
+    if ([positionIds containsObject:orderItem.position.positionId]) {
+        [[DBSubscriptionManager sharedInstance] incrementNumberOfCupsInOrder:orderItem.position.positionId];
+    }
+    
     [self reloadTotal];
     
     return orderItem.count;
@@ -85,6 +116,12 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
     
     OrderItem *orderItem = self.items[index];
     orderItem.count--;
+    
+    NSArray *positionIds = [self positionIdsForSubscribers];
+    if ([positionIds containsObject:orderItem.position.positionId]) {
+        [[DBSubscriptionManager sharedInstance] decrementNumberOfCupsInOrder];
+    }
+    
     if(orderItem.count < 1){
         [self.items removeObject:orderItem];
     }

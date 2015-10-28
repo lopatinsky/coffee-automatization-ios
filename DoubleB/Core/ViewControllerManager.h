@@ -10,6 +10,7 @@
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
+#import "SubscriptionViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -47,5 +48,9 @@
 @end
 
 @interface ViewControllerManager(CompaniesViewControllers)
-+ (nonnull UIViewController *)companiesViewControllers;
++ (nonnull UIViewController *)companiesViewController;
+@end
+
+@interface ViewControllerManager(SubscriptionViewControllers)
++ (nonnull UIViewController<SubscriptionViewControllerProtocol> *)subscriptionViewController;
 @end

@@ -71,3 +71,9 @@ typedef NS_ENUM(NSInteger, DBUICurrencyDisplayMode){
     DBUICurrencyDisplayModeNone
 };
 
+typedef NS_ENUM(NSInteger, DBProcessState) {
+    DBProcessStateDone = 0,
+    DBProcessStateFailed,
+    DBProcessStateCancelled
+};
+

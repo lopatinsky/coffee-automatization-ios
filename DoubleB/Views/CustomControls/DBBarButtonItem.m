@@ -45,7 +45,7 @@
 }
 
 -(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
-    NSString *price = [NSString stringWithFormat:@"%.0f %@", totalPrice, [Compatibility currencySymbol]];
+    NSString *price = [NSString stringWithFormat:@"%ld | %.0f %@", count, totalPrice, [Compatibility currencySymbol]];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:
                                          [NSString stringWithFormat:@" %@", price]];
     [string addAttribute:NSFontAttributeName

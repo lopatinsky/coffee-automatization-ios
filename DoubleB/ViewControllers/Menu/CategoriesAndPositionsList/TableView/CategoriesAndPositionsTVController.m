@@ -20,7 +20,10 @@
 #import "DBNewOrderViewController.h"
 #import "DBMenuCategory.h"
 #import "DBPositionModifiersListModalView.h"
+#import "DBSubscriptionManager.h"
+#import "NetworkManager.h"
 
+#import "SubscriptionInfoTableViewCell.h"
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+DBCardManagement.h"
 #import <BlocksKit/UIControl+BlocksKit.h>
@@ -28,7 +31,7 @@
 #define TAG_POPUP_OVERLAY 333
 #define TAG_PICKER_OVERLAY 444
 
-@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate>
+@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
@@ -36,6 +39,9 @@
 @property (strong, nonatomic) NSMutableArray *rowsPerSection;
 
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
+// so bad, so fucking bad
+@property (nonatomic) NSInteger numberOfLoadings;
+
 @end
 
 @implementation CategoriesAndPositionsTVController
@@ -55,6 +61,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
+    [self.tableView registerNib:[UINib nibWithNibName:@"SubscriptionInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"SubscriptionCell"];
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
@@ -66,34 +73,60 @@
     self.categoryPicker.delegate = self;
     
     [self setupCategorySelectionBarButton];
+    [self subscribeForNotifications];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [GANHelper analyzeScreen:@"Menu_screen"];
-
+    [DBSubscriptionManager sharedInstance].delegate = self;
+    
     [self loadMenu:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
+    [DBSubscriptionManager sharedInstance].delegate = nil;
+    
     [self hideCategoryPicker];
+}
+
+- (void)subscribeForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMenu) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
 }
 
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadMenu:(UIRefreshControl *)refreshControl{
+- (void)loadMenu {
+    [self loadMenu:nil];
+}
+
+- (void)loadMenu:(UIRefreshControl *)refreshControl {
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
+    
     void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [refreshControl endRefreshing];
+        self.numberOfLoadings -= 1;
+        if (!self.numberOfLoadings) {
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            [refreshControl endRefreshing];
+        }
         
         if (success) {
-            self.categories = categories;
+            if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                    NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+                    [dict addObjectsFromArray:categories];
+                    self.categories = dict;
+                } else {
+                    self.categories = categories;
+                }
+            } else {
+                self.categories = categories;
+            }
             
             [self reloadTableView];
         }
@@ -102,7 +135,8 @@
     };
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
-    if(refreshControl){
+    if (refreshControl) {
+        self.numberOfLoadings += 1;
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
@@ -112,17 +146,36 @@
                 self.lastVenueId = venue.venueId;
                 
                 self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+                
+                if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+                    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                        NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+                        [dict addObjectsFromArray:self.categories];
+                        self.categories = dict;
+                    }
+                }
             }
         } else {
             // Load whole menu
             self.categories = [[DBMenu sharedInstance] getMenu];
+            
+            if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                    NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+                    [dict addObjectsFromArray:self.categories];
+                    self.categories = dict;
+                }
+            }
         }
         
-            
-        if (self.categories && [self.categories count] > 0){
+        
+        if (self.categories && [self.categories count] > 0) {
             [self reloadTableView];
         } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            if (!self.numberOfLoadings) {
+                self.numberOfLoadings += 1;
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            }
             [[DBMenu sharedInstance] updateMenuForVenue:venue
                                              remoteMenu:menuUpdateHandler];
         }
@@ -134,7 +187,7 @@
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 
-- (void)setupCategorySelectionBarButton{
+- (void)setupCategorySelectionBarButton {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 20)];
     button.backgroundColor = [UIColor clearColor];
     [button setTitle:@"" forState:UIControlStateNormal];
@@ -162,12 +215,22 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
+- (void)pushSubscriptionViewController {
+    UIViewController<SubscriptionViewControllerProtocol> *subscriptionVC = [ViewControllerManager subscriptionViewController];
+    subscriptionVC.delegate = self;
+    [self.navigationController pushViewController:subscriptionVC animated:YES];
+}
+
+#pragma mark - SubscriptionViewControllerDelegate methods
+- (void)subscriptionViewControllerWillDissappear {
+    [self.tableView reloadData];
+}
 
 #pragma mark - UITableView methods
 
-- (void)reloadTableView{
+- (void)reloadTableView {
     NSMutableArray *headers = [NSMutableArray new];
-    for (DBMenuCategory *category in self.categories){
+    for (DBMenuCategory *category in self.categories) {
         DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:category state:DBCategoryHeaderViewStateFull];
         headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
         headerView.delegate = self;
@@ -185,47 +248,6 @@
     [self.tableView reloadData];
 }
 
-//- (void)openTableSection:(NSInteger)section{
-//    DBCategoryHeaderView *headerView = self.categoryHeaders[section];
-//    
-//    NSMutableArray *indexPaths = [NSMutableArray new];
-//    for(int i = 0; i < [headerView.category.positions count]; i++)
-//        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:section]];
-//    
-//    self.rowsPerSection[section] = @([headerView.category.positions count]);
-//    
-//    [headerView changeState:DBCategoryHeaderViewStateCompact animated:YES];
-//    [headerView setCategoryOpened:YES animated:YES];
-//    
-//    // Animate
-//    [self.tableView beginUpdates];
-//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-//    
-//    // Animate Scroll to selected section
-//    // Dispatch helps not to get crash
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [self scrollTableViewToSection:section];
-//    });
-//    [self.tableView endUpdates];
-//}
-//
-//- (void)closeTableViewSection:(NSInteger)section{
-//    DBCategoryHeaderView *headerView = self.categoryHeaders[section];
-//    
-//    NSMutableArray *indexPaths = [NSMutableArray new];
-//    for(int i = 0; i < [headerView.category.positions count]; i++)
-//        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:section]];
-//    
-//    self.rowsPerSection[section] = @0;
-//    
-//    [headerView changeState:DBCategoryHeaderViewStateFull animated:YES];
-//    [headerView setCategoryOpened:NO animated:YES];
-//    
-//    [self.tableView beginUpdates];
-//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationFade];
-//    [self.tableView endUpdates];
-//}
-
 - (void)scrollTableViewToSection:(NSInteger)section{
     [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
@@ -238,14 +260,39 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.rowsPerSection[section] integerValue];
+    if ([[DBSubscriptionManager sharedInstance] subscriptionCategory] && section == 0) {
+        return [self.rowsPerSection[section] integerValue] + 1;
+    } else {
+        return [self.rowsPerSection[section] integerValue];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBPositionCell *cell;
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+        if (indexPath.section == 0) {
+            if (indexPath.row == 0) {
+                SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
+                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                    cell.placeholderView.hidden = YES;
+                    cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", [[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+                    cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    cell.userInteractionEnabled = NO;
+                } else {
+                    cell.placeholderView.hidden = NO;
+                    cell.delegate = self;
+                    cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                }
+                return cell;
+            }
+            indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+        }
+    }
     
+    DBPositionCell *cell;
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
-    if(category.categoryWithImages){
+    if (category.categoryWithImages){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
         if (!cell) {
             cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
@@ -296,20 +343,59 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    DBMenuPosition *position = cell.position;
-    
-    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
-    positionVC.parentNavigationController = self.navigationController;
-    [self.navigationController pushViewController:positionVC animated:YES];
-    
-    [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
+            [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
+            [self pushSubscriptionViewController];
+        } else if (indexPath.section == 0 && indexPath.row == 0) {
+            return;
+        }
+    } else {
+        DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        DBMenuPosition *position = cell.position;
+        
+        UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+        positionVC.parentNavigationController = self.navigationController;
+        [self.navigationController pushViewController:positionVC animated:YES];
+        
+        [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
+    }
 }
 
 #pragma mark - DBPositionCellDelegate
 
-- (void)positionCellDidOrder:(DBPositionCell *)cell{
-    if(cell.position.hasEmptyRequiredModifiers) {
+- (BOOL)subscriptionPositionDidOrder:(DBPositionCell *)cell {
+    if (![[DBSubscriptionManager sharedInstance] isAvailable]) {
+        [self pushSubscriptionViewController];
+        return NO;
+    } else {
+        if (![[DBSubscriptionManager sharedInstance] cupIsAvailableToPurchase]) {
+            [GANHelper analyzeEvent:@"abonement_offer" category:MENU_SCREEN];
+            [UIAlertView bk_showAlertViewWithTitle:@"Закончились кружки" message:@"Приобрести ещё?" cancelButtonTitle:@"Отмена" otherButtonTitles:@[@"Да"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (buttonIndex == 1) {
+                    [GANHelper analyzeEvent:@"abonement_offer_yes" category:MENU_SCREEN];
+                    [self pushSubscriptionViewController];
+                } else {
+                    [GANHelper analyzeEvent:@"abonement_offer_no" category:MENU_SCREEN];
+                }
+            }];
+            return NO;
+        } else {
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+            return YES;
+        }
+    }
+}
+
+- (void)positionCellDidOrder:(DBPositionCell *)cell {
+    NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
+    if (idxPath.section == 0) {
+        if(![self subscriptionPositionDidOrder:cell]) {
+            return;
+        }
+    }
+    
+    if (cell.position.hasEmptyRequiredModifiers) {
         DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
         [modifiersList configureWithMenuPosition:cell.position];
         [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
@@ -341,7 +427,7 @@
 
 - (void)showCatecoryPickerFromRect:(CGRect)fromRect onView:(UIView *)onView{
     [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
-    if(!self.categoryPicker.isOpened){
+    if (!self.categoryPicker.isOpened){
         UITableViewCell *firstVisibleCell = [[self.tableView visibleCells] firstObject];
         DBMenuCategory *topCategory;
         if(firstVisibleCell){
@@ -386,6 +472,14 @@
         } completion:^(BOOL finished) {
             [self.categoryPicker removeFromSuperview];
         }];
+    }
+}
+
+#pragma mark - DBSubscriberManagerDelegate 
+
+- (void)currentSubscriptionStateChanged {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

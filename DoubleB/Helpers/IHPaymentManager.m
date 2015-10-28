@@ -11,7 +11,6 @@
 #import "IHWebPageViewController.h"
 #import "MBProgressHUD.h"
 #import "DBAPIClient.h"
-#import "Order.h"
 #import "DBClientInfo.h"
 
 #define PAYMENT_TYPES_URL @"payment/payment_types"
@@ -46,6 +45,12 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
         instance = [IHPaymentManager new];
     });
     return instance;
+}
+
+- (BOOL)paymentTypeAvailable:(PaymentType)type{
+    NSArray *paymentTypes = [[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsAvailablePaymentTypes];
+    
+    return [paymentTypes containsObject:@(type)];
 }
 
 - (void)synchronizePaymentTypes {
@@ -110,7 +115,7 @@ NSString *const kDBPaymentErrorNoInternetConnection = @"kDBPaymentErrorNoInterne
                                             viewController.hidesBottomBarWhenPushed = YES;
                                             viewController.sourceUrl = response[@"formUrl"];
                                             
-                                            NSString *phone = [DBClientInfo sharedInstance].clientPhone;
+                                            NSString *phone = [DBClientInfo sharedInstance].clientPhone.value;
                                             if (phone) {
                                                 viewController.sourceUrl = [viewController.sourceUrl stringByAppendingFormat:@"&phone=%@",
                                                                             [phone stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
