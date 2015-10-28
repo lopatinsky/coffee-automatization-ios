@@ -20,6 +20,7 @@
 - (void)main {
     if (self.cancelled) return;
     
+    [self setState:OperationExecuting];
     BOOL started = [[OrderCoordinator sharedInstance].promoManager checkCurrentOrder:^(BOOL success) {
         [self setState:OperationFinished];
         

@@ -14,5 +14,6 @@
 - (BOOL)addConcurrentPendingUniqueOperation:(NSOperation *)operation;
 - (void)addConcurrentPendingOperation:(NSOperation *)operation;
 - (void)addConcurrentOperation:(NSOperation *)operation;
+- (void)forceAddConcurrentUniqueOperation:(NSOperation *)operation;
 
 @end

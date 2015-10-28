@@ -36,6 +36,8 @@ typedef enum : NSUInteger {
 - (void)addPendingOperation:(NetworkOperation)operation withUserInfo:(nullable NSDictionary *)userInfo;
 - (void)addOperation:(NetworkOperation)operation withUserInfo:(nullable NSDictionary *)userInfo;
 
+- (void)forceAddOperation:(NetworkOperation)operation;
+
 @end
 
 @interface NetworkManager(OperationLoader)

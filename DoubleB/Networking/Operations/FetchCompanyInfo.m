@@ -20,6 +20,7 @@
 - (void)main {
     if (self.cancelled) return;
     
+    [self setState:OperationExecuting];
     [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
         if (success) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
