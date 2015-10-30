@@ -272,6 +272,11 @@
     if ([self currentState] == RootStateCompanies) {
         return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
     }
+    
+    if ([self currentState] == RootStateDemo) {
+        return [self demoLoginViewController];
+    }
+    
     if ([self currentState] == RootStateLaunch) {
         return [ViewControllerManager launchViewController];
     }

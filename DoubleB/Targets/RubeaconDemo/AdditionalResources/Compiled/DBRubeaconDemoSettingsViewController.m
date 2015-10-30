@@ -8,6 +8,7 @@
 
 #import "DBRubeaconDemoSettingsViewController.h"
 #import "AppDelegate.h"
+#import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
 #import "DBDemoLoginViewController.h"
 #import "DBAPIClient.h"
@@ -41,10 +42,11 @@
                           duration:0.5
                            options:UIViewAnimationOptionTransitionNone
                         animations:^{
-                            [[DBAPIClient sharedClient] disableCompanyHeader];
-                            [DBCompanyInfo sharedInstance].hasAllImportantData = NO;
+                            [[ApplicationManager sharedInstance] flushStoredCache];
+                            [DBCompaniesManager selectCompany:nil];
                             
-                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBDemoLoginViewController new];
+                            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                            delegate.window.rootViewController = [ViewControllerManager mainViewController];
                         }
                         completion:nil];
     }

@@ -11,9 +11,10 @@
 #import "MenuListViewControllerProtocol.h"
 
 typedef enum : NSUInteger {
-    RootStateLaunch,
+    RootStateLaunch = 0,
     RootStateMain,
     RootStateCompanies,
+    RootStateDemo,
 } RootState;
 
 @interface ApplicationManager : NSObject<ManagerProtocol>

@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 
 #import "ApplicationManager.h"
+#import "DBDemoManager.h"
 #import "DBCompaniesManager.h"
 
 @interface DBDemoLoginViewController ()
@@ -21,9 +22,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *demoButton;
-
-@property (nonatomic) BOOL inProcess;
-
 @end
 
 @implementation DBDemoLoginViewController{
@@ -32,16 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
-                                                 name:kDBApplicationManagerInfoLoadSuccess
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadFailureNotification:)
-                                                 name:kDBApplicationManagerInfoLoadFailure
-                                               object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -57,17 +45,6 @@
     }
 }
 
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
-
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
 - (IBAction)loginButtonClick:(id)sender {
     NSString *login = self.loginTextField.text;
     NSString *password = self.passwordTextField.text;
@@ -76,57 +53,39 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [DBServerAPI demoLogin:login
                       password:password
-                      callback:^(BOOL success, NSString *result) {
-                          if(success){
-                              _inProcess = YES;
-                              
-                              [[ApplicationManager sharedInstance] flushStoredCache];
-                              [DBCompaniesManager selectCompanyName:result];
-                              
-                              [[ApplicationManager sharedInstance] updateAllInfo:nil];
-                          } else {
-                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                              
-                              NSString *message = result ?: @"Неверная пара логин/пароль";
-                              [self showError:message];
-                          }
-                      }];
+                       success:^(DBCompany *company) {
+                           [self selectCompany:company];
+                       } failure:^(NSString *description) {
+                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+                           NSString *message = description ?: @"Неверная пара логин/пароль";
+                           [self showError:message];
+                       }];
     }
 }
 
 - (IBAction)demoButtonClick:(id)sender {
-    if(![ApplicationManager sharedInstance].allInfoLoaded){
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        _inProcess = YES;
-        
-        [[ApplicationManager sharedInstance] flushStoredCache];
-        [DBCompaniesManager selectCompanyName:nil];
-        
-        [[ApplicationManager sharedInstance] updateAllInfo:nil];
-    } else {
-        [self moveForward];
-    }
+    [self selectCompany:nil];
 }
 
-- (void)moveForward {
-    [[DBTabBarController sharedInstance] moveToStartState];
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBTabBarController sharedInstance];
-}
-
-- (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification{
-    if(_inProcess){
-        _inProcess = NO;
+- (void)selectCompany:(DBCompany *)company {
+    [[ApplicationManager sharedInstance] flushStoredCache];
+    
+    [DBCompaniesManager selectCompany:company];
+    [DBDemoManager sharedInstance].state = company ? DBDemoManagerStateCompany : DBDemoManagerStateDemo;
+    
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self moveForward];
-    }
-}
-
-- (void)firstLaunchNecessaryInfoLoadFailureNotification:(NSNotification *)notification{
-    if(_inProcess){
-        _inProcess = NO;
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self showAlert:@"Не удается настроить приложение, поскольку отсутствует интернет-соединение"];
-    }
+        
+        if(success){
+            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            delegate.window.rootViewController = [ViewControllerManager mainViewController];
+        } else {
+            [self showError:@"Не удалось загрузить информацию о выбранной компании"];
+        }
+    }];
+    
+    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
 }
 
 
