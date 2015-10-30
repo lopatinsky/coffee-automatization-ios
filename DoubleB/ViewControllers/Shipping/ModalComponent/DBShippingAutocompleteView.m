@@ -7,6 +7,8 @@
 //
 
 #import "DBShippingAutocompleteView.h"
+#import "DBShippingAutocompleteCell.h"
+
 #import "OrderCoordinator.h"
 
 @interface DBShippingAutocompleteView()<UITableViewDataSource, UITableViewDelegate>
@@ -21,7 +23,7 @@
     self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 30.f;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.backgroundColor = [UIColor clearColor];
     
@@ -64,22 +66,16 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    DBShippingAutocompleteCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBShippingAutocompleteCell"];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        cell = [DBShippingAutocompleteCell new];
     }
     
     DBShippingAddress *address = [OrderCoordinator sharedInstance].shippingManager.addressSuggestions[indexPath.row];
-    cell.textLabel.text = address.street;
+    [cell configureWithAddress:address];
     
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.textLabel.font = [UIFont fontWithName:@"Helvetica-Neue" size:11.f];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.contentView.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - UITableViewDelegate

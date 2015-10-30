@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, DBShippingAddressCellType) {
 @protocol DBShippingAddressCellDelegate <NSObject>
 @optional
 - (void)db_addressCellStartEditing:(DBShippingAddressCell *)cell;
+- (void)db_addressCellEndEditing:(DBShippingAddressCell *)cell;
 - (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text;
 - (void)db_addressCellClickedAtImage:(DBShippingAddressCell *)cell;
 @end

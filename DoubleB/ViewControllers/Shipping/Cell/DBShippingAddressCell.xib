@@ -44,12 +44,23 @@
                             <constraint firstAttribute="width" constant="30" id="OPf-5L-BQw"/>
                         </constraints>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAP-Mz-Gll" customClass="DBDefaultSeparatorView">
+                        <rect key="frame" x="0.0" y="43" width="320" height="0.5"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.69999999999999996" id="v1B-4s-MeM"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <animations/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Aq2-UT-WVN" secondAttribute="trailing" constant="8" id="7VA-DT-d6S"/>
                     <constraint firstItem="ox6-RW-ZD9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9Dk-Ao-CSJ"/>
+                    <constraint firstItem="xAP-Mz-Gll" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FXS-8O-aMs"/>
+                    <constraint firstAttribute="bottom" secondItem="xAP-Mz-Gll" secondAttribute="bottom" id="KWc-pA-V98"/>
                     <constraint firstItem="Aq2-UT-WVN" firstAttribute="leading" secondItem="oct-94-mNp" secondAttribute="trailing" id="MGQ-RC-2DR"/>
+                    <constraint firstAttribute="trailing" secondItem="xAP-Mz-Gll" secondAttribute="trailing" id="Pof-5s-xDc"/>
                     <constraint firstAttribute="bottom" secondItem="oct-94-mNp" secondAttribute="bottom" id="U6P-Wl-Wjs"/>
                     <constraint firstAttribute="trailing" secondItem="ox6-RW-ZD9" secondAttribute="trailing" constant="8" id="UMH-Kl-w0p"/>
                     <constraint firstItem="oct-94-mNp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Xqq-ej-t7m"/>

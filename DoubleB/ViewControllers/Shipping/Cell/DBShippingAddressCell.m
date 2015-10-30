@@ -137,6 +137,10 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     self.anyImageView.hidden = YES;
     self.imageButton.hidden = YES;
+    
+    if ([self.delegate respondsToSelector:@selector(db_addressCellEndEditing:)]) {
+        [self.delegate db_addressCellEndEditing:self];
+    }
 }
 
 @end

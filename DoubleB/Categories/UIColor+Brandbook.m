@@ -43,7 +43,7 @@
 }
 
 + (UIColor *)db_separatorColor{
-    return [UIColor colorWithRed:224./255 green:224./255 blue:224./255 alpha:0.5f];
+    return [UIColor colorWithRed:210./255 green:210./255 blue:210./255 alpha:0.5f];
 }
 
 + (UIColor *)db_grayColor{

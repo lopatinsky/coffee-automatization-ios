@@ -32,6 +32,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = [UIView new];
     
@@ -51,6 +52,18 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+}
+
+- (void)requestSuggestions:(DBShippingAddressCell *)cell {
+    [[OrderCoordinator sharedInstance].shippingManager requestSuggestions:^(BOOL success) {
+        if (success && [OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0) {
+            cell.imageViewVisisble = YES;
+            CGRect rect = [self.tableView convertRect:cell.frame toView:self.view];
+            
+            self.tableView.scrollEnabled = NO;
+            [self.autocompleteView showOnView:self.view topOffset:rect.origin.y + rect.size.height];
+        }
+    }];
 }
 
 #pragma mark - Table view data source
@@ -78,13 +91,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
+        [self.view endEditing:YES];
+        [self.autocompleteView hide];
+        
         self.cityPickerView.title = NSLocalizedString(@"Выберите город", nil);
         [self.cityPickerView configureWithItems:[DBCompanyInfo sharedInstance].deliveryCities];
         [self.cityPickerView showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
     }
 }
 
-#pragma mark - DBShippingAddressCellDelegate 
+#pragma mark - DBShippingAddressCellDelegate
+
+- (void)db_addressCellStartEditing:(DBShippingAddressCell *)cell {
+    if (cell.type == DBShippingAddressCellTypeStreet) {
+        [self requestSuggestions:cell];
+    }
+}
+
+- (void)db_addressCellEndEditing:(DBShippingAddressCell *)cell {
+    [self.autocompleteView hide];
+}
 
 - (void)db_addressCellClickedAtImage:(DBShippingAddressCell *)cell {
     if (cell.type == DBShippingAddressCellTypeStreet) {
@@ -96,15 +122,7 @@
 
 - (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text {
     if (cell.type == DBShippingAddressCellTypeStreet) {
-        [[OrderCoordinator sharedInstance].shippingManager requestSuggestions:^(BOOL success) {
-            if (success && [OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0) {
-                cell.imageViewVisisble = YES;
-                CGRect rect = [self.tableView convertRect:cell.frame toView:self.view];
-                
-                self.tableView.scrollEnabled = NO;
-                [self.autocompleteView showOnView:self.view topOffset:rect.origin.y + rect.size.height];
-            }
-        }];
+        [self requestSuggestions:cell];
     }
 }
 
@@ -112,7 +130,7 @@
 
 - (void)db_shippingAutocompleteView:(DBShippingAutocompleteView *)view didSelectAddress:(DBShippingAddress *)address {
     [[OrderCoordinator sharedInstance].shippingManager setStreet:address.street];
-    
+    [self.tableView reloadData];
     [self.autocompleteView hide];
 }
 
