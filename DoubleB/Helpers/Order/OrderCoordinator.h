@@ -23,6 +23,8 @@ extern NSString * __nonnull const CoordinatorNotificationOrderDiscount;
 extern NSString * __nonnull const CoordinatorNotificationOrderWalletDiscount;
 extern NSString * __nonnull const CoordinatorNotificationOrderShippingPrice;
 
+extern NSString * __nonnull const CoordinatorNotificationOrderTotalCount;
+
 extern NSString * __nonnull const CoordinatorNotificationNewDeliveryType;
 extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
 extern NSString * __nonnull const CoordinatorNotificationNewPaymentType;

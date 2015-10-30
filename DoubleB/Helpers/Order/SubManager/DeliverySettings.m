@@ -147,7 +147,6 @@
     self.deliveryType = nil;
     self.selectedTimeSlot = nil;
     self.selectedTime = nil;
-    self.lastNotShippingDeliveryType = nil;
 }
 
 - (void)flushStoredCache{

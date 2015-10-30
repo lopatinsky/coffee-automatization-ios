@@ -161,6 +161,7 @@ NSString *const kDBItemsManagerNewTotalPriceNotification = @"kDBItemsManagerNewT
 
 - (void)reloadTotal{
     [_parentManager manager:self haveChange:ItemsManagerChangeTotalPrice];
+    [_parentManager manager:self haveChange:ItemsManagerChangeTotalCount];
 }
 
 - (double)totalPrice{

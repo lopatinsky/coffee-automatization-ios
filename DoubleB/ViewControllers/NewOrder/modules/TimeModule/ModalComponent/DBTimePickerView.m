@@ -150,9 +150,24 @@
 
 - (void)hideInternal {
     // Call Delegate only when view will dismiss(cause delegate vc show alert after handling)
-    if(self.type == DBTimePickerTypeTime || self.type == DBTimePickerTypeDateTime){
+    if(_type == DBTimePickerTypeTime || _type == DBTimePickerTypeDateTime){
         if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
             [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
+        }
+    }
+    
+    if(_type == DBTimePickerTypeDateAndItems){
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
+            [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
+        }
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
+            [self.delegate db_timePickerView:self didSelectRowAtIndex:self.selectedItem];
+        }
+    }
+    
+    if(_type == DBTimePickerTypeItems){
+        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
+            [self.delegate db_timePickerView:self didSelectRowAtIndex:self.selectedItem];
         }
     }
     
@@ -333,20 +348,11 @@
     if(_type == DBTimePickerTypeDateAndItems){
         if(component == 0){
             self.selectedDate = [self dateForRow:row];
-            if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectDate:)]){
-                [self.delegate db_timePickerView:self didSelectDate:self.selectedDate];
-            }
         } else {
             self.selectedItem = row;
-            if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
-                [self.delegate db_timePickerView:self didSelectRowAtIndex:row];
-            }
         }
     } else {
         self.selectedItem = row;
-        if([self.delegate respondsToSelector:@selector(db_timePickerView:didSelectRowAtIndex:)]){
-            [self.delegate db_timePickerView:self didSelectRowAtIndex:row];
-        }
     }
 }
 

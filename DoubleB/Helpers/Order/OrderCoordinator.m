@@ -17,6 +17,8 @@ NSString * __nonnull const CoordinatorNotificationOrderDiscount = @"CoordinatorN
 NSString * __nonnull const CoordinatorNotificationOrderWalletDiscount = @"CoordinatorNotificationOrderWalletDiscount";
 NSString * __nonnull const CoordinatorNotificationOrderShippingPrice = @"CoordinatorNotificationOrderShippingPrice";
 
+NSString * __nonnull const CoordinatorNotificationOrderTotalCount = @"CoordinatorNotificationOrderTotalCount";
+
 NSString * __nonnull const CoordinatorNotificationNewDeliveryType = @"CoordinatorNotificationNewDeliveryType";
 NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
 NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
@@ -89,7 +91,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
                 [self itemsManagerDidChangeTotalPrice];
                 break;
             case ItemsManagerChangeTotalCount:
-                
+                [self itemsManagerDidChangeTotalCount];
                 break;
         }
     }
@@ -154,6 +156,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     }
 }
 
+- (void)updateOrderInfo {
+    [[NetworkManager sharedManager] forceAddOperation:NetworkOperationCheckOrder];
+}
+
 #pragma mark - External changes
 
 - (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
@@ -181,11 +187,17 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 #pragma mark - ItemsManager changes
 
 - (void)itemsManagerDidChangeTotalPrice{
+    [self notifyObserverOf:CoordinatorNotificationOrderTotalPrice];
+}
+
+- (void)itemsManagerDidChangeTotalCount{
     if(_itemsManager.totalCount == 0){
         [_promoManager flushCache];
     }
     
-    [self notifyObserverOf:CoordinatorNotificationOrderTotalPrice];
+    [self updateOrderInfo];
+    
+    [self notifyObserverOf:CoordinatorNotificationOrderTotalCount];
 }
 
 #pragma mark - ShippingManager changes
@@ -195,6 +207,8 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 }
 
 - (void)shippingManagerDidChangeAddress{
+    [self updateOrderInfo];
+    
     [self notifyObserverOf:CoordinatorNotificationNewShippingAddress];
 }
 
@@ -223,10 +237,14 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 #pragma mark - OrderManager changes
 
 - (void)orderManagerDidChangePaymentType{
+    [self updateOrderInfo];
+    
     [self notifyObserverOf:CoordinatorNotificationNewPaymentType];
 }
 
 - (void)orderManagerDidChangeVenue{
+    [self updateOrderInfo];
+    
     [self notifyObserverOf:CoordinatorNotificationNewVenue];
 }
 
@@ -241,10 +259,14 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 #pragma mark - DeliverySettings changes
 
 - (void)deliverySettingsDidChangeDeliveryType{
+    [self updateOrderInfo];
+    
     [self notifyObserverOf:CoordinatorNotificationNewDeliveryType];
 }
 
 - (void)deliverySettingsDidChangeTime{
+    [self updateOrderInfo];
+    
     [self notifyObserverOf:CoordinatorNotificationNewSelectedTime];
 }
 

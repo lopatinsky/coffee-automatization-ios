@@ -12,6 +12,13 @@
 		<integer>4278214478</integer>
 		<key>CompanyGAKey</key>
 		<string>UA-65821587-48</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>3AEOHApc3gEE9aWwafr0iDIIwVpVH370auXAfqnk</string>
+			<key>clientKey</key>
+			<string>3wU53Rm7NewVVyqyfrnBcjLHaHd72K1U41RrEAi7</string>
+		</dict>
 	</dict>
 </dict>
 </plist>

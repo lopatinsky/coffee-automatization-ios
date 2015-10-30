@@ -132,21 +132,6 @@
 
 #pragma mark - DBTimePickerViewDelegate
 
-- (void)db_timePickerView:(DBTimePickerView *)view didSelectSegmentAtIndex:(NSInteger)index{
-    DeliveryTypeId deliveryTypeId;
-    if (index == 0){
-        deliveryTypeId = DeliveryTypeIdTakeaway;
-    } else {
-        deliveryTypeId = DeliveryTypeIdInRestaurant;
-    }
-    
-    [GANHelper analyzeEvent:@"delivery_type_selected" number:@(deliveryTypeId) category:ORDER_SCREEN];
-    
-    [_orderCoordinator.deliverySettings selectDeliveryType:[[DBCompanyInfo sharedInstance] deliveryTypeById:deliveryTypeId]];
-    
-    [self reloadTimePicker];
-}
-
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
     DBTimeSlot *timeSlot = _orderCoordinator.deliverySettings.deliveryType.timeSlots[index];
     _orderCoordinator.deliverySettings.selectedTimeSlot = timeSlot;

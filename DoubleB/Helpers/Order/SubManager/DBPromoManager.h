@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
     DBPromoManagerChangeWalletDiscount,
     DBPromoManagerChangeWalletBalance,
     DBPromoManagerChangeShippingPrice,
-    DBPromoManagerChangeUpdatedPromoInfo
+    DBPromoManagerChangeUpdatedPromoInfo,
 };
 
 @interface DBPromoManager : NSObject<ManagerProtocol, OrderPartManagerProtocol>
