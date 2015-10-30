@@ -25,7 +25,7 @@
     // Application settings item
     [self.settingsItems insertObject:@{@"name": @"logoutDemo",
                                        @"title": @"Выйти из демо",
-                                       @"image": @"logout_icon"}
+                                       @"image": @"exit_icon"}
                              atIndex:0];
 }
 
@@ -38,17 +38,11 @@
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"logoutDemo"]){
-        [UIView transitionWithView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
-                          duration:0.5
-                           options:UIViewAnimationOptionTransitionNone
-                        animations:^{
-                            [[ApplicationManager sharedInstance] flushStoredCache];
-                            [DBCompaniesManager selectCompany:nil];
-                            
-                            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                            delegate.window.rootViewController = [ViewControllerManager mainViewController];
-                        }
-                        completion:nil];
+        [[ApplicationManager sharedInstance] flushStoredCache];
+        [DBCompaniesManager selectCompany:nil];
+        
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        delegate.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     }
 }
 

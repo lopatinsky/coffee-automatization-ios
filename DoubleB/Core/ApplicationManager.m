@@ -23,6 +23,8 @@
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
 
+#import "DBDemoManager.h"
+
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -97,8 +99,8 @@
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
     
-    // Fetch all companies
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanies];
+//    // Fetch all companies
+//    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanies];
     
     // Init update all necessary info if company has chosen
     if ([self currentState] == RootStateMain) {
@@ -232,21 +234,21 @@
 
 + (void)applyBrandbookStyle {
 #warning Farsch legacy code
-    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                               NSForegroundColorAttributeName: [UIColor blackColor],
-                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-                                                               }];
-    } else {
+//    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
+//        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
+//        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+//        [[UINavigationBar appearance] setTitleTextAttributes:@{
+//                                                               NSForegroundColorAttributeName: [UIColor blackColor],
+//                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
+//                                                               }];
+//    } else {
         [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                                NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
-    }
+//    }
 }
 
 @end
@@ -258,28 +260,29 @@
         return RootStateMain;
     }
     
-    if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
-        return RootStateCompanies;
-    }
-    
-    return RootStateLaunch;
+//    if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
+//        return RootStateCompanies;
+//    }
+//    
+//    return RootStateLaunch;
+    return RootStateDemo;
 }
 
 - (UIViewController *)rootViewController {
     if ([self currentState] == RootStateMain) {
         return [ViewControllerManager mainViewController];
     }
-    if ([self currentState] == RootStateCompanies) {
-        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
-    }
+//    if ([self currentState] == RootStateCompanies) {
+//        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
+//    }
     
     if ([self currentState] == RootStateDemo) {
         return [self demoLoginViewController];
     }
-    
-    if ([self currentState] == RootStateLaunch) {
-        return [ViewControllerManager launchViewController];
-    }
+//    
+//    if ([self currentState] == RootStateLaunch) {
+//        return [ViewControllerManager launchViewController];
+//    }
     
     return [ViewControllerManager mainViewController];
 }

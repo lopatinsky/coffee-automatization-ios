@@ -13,6 +13,10 @@
 
 NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificationInfoUpdated";
 
+@interface DBCompanyInfo ()
+@property (nonatomic, strong) NSString *remoteColor;
+@end
+
 @implementation DBCompanyInfo
 
 - (instancetype)init{
@@ -44,7 +48,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             _companyPOS = [[response getValueForKey:@"back_end"] intValue];
             _type = [[response getValueForKey:@"screen_logic_type"] intValue];
-            _applicationName = response[@"app_name"];
+            _applicationName = [response getValueForKey:@"app_name"] ?: @"";
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
             for(NSDictionary *typeDict in response[@"delivery_types"]){
@@ -71,6 +75,9 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             _friendInvitationEnabled = [response[@"share_invitation"][@"enabled"] boolValue];
             
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
+            
+            NSString *hexString = response[@"colors"][@"action"];
+            _remoteColor = [hexString substringFromIndex:2];
             
             [self synchronize];
             
@@ -107,7 +114,13 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 }
 
 + (id)db_companyDefaultColor {
-    id colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
+    id colorHex;
+    
+    if ([DBCompanyInfo sharedInstance].remoteColor && ![[DBCompanyInfo sharedInstance].remoteColor isEqualToString:@"000000"]) {
+        colorHex = [DBCompanyInfo sharedInstance].remoteColor;
+    } else {
+        colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
+    }
     
     return colorHex;
 }
@@ -230,6 +243,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     _deliveryCities = info[@"_deliveryCities"];
     _promocodesIsEnabled = info[@"promocodeIsEnabled"] ?: @NO;
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
+    
+    _remoteColor = info[@"_remoteColor"];
 }
 
 - (void)synchronize {
@@ -247,7 +262,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
                            @"supportEmails": _supportEmails,
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
-                           @"promocodeIsEnabled": _promocodesIsEnabled};
+                           @"promocodeIsEnabled": _promocodesIsEnabled,
+                           @"_remoteColor": _remoteColor};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];

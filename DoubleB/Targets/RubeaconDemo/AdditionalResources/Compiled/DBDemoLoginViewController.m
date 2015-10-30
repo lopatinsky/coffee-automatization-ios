@@ -74,10 +74,12 @@
     [DBCompaniesManager selectCompany:company];
     [DBDemoManager sharedInstance].state = company ? DBDemoManagerStateCompany : DBDemoManagerStateDemo;
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
         if(success){
+            [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             delegate.window.rootViewController = [ViewControllerManager mainViewController];
         } else {

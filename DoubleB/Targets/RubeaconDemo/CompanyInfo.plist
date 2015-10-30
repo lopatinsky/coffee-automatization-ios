@@ -7,7 +7,7 @@
 		<key>MenuPositionIconsContentMode</key>
 		<string>Fit</string>
 		<key>MenuCategoryIconsContentMode</key>
-		<string>Fill</string>
+		<string>Fit</string>
 	</dict>
 	<key>ViewControllers</key>
 	<dict>
