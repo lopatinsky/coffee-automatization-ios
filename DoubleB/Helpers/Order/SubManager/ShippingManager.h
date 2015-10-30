@@ -56,6 +56,7 @@ extern NSString *kDBShippingManagerDidRecieveSuggestionsNotification;
 @property (nonatomic, readonly) BOOL validAddress;
 
 - (void)requestSuggestions;
+- (void)requestSuggestions:(void (^)(BOOL success))callback;
 - (NSArray *)addressSuggestions;
 
 - (NSArray *)arrayOfCities;

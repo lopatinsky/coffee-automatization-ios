@@ -56,9 +56,10 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
 }
 
 - (void)requestSuggestions {
-    // request suggestions from backend and push notification about it
-//    [self.requestSuggestionsTimer invalidate];
-//    self.requestSuggestionsTimer = nil;
+    [self requestSuggestions:nil];
+}
+
+- (void)requestSuggestions:(void (^)(BOOL success))callback {
     [DBServerAPI requestAddressSuggestions:@{@"city": _selectedAddress.city, @"street": _selectedAddress.street}
                                   callback:^(BOOL success, NSArray *response) {
                                       NSMutableArray *suggestions = [NSMutableArray new];
@@ -69,6 +70,9 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
                                       self.addressSuggestions = suggestions;
                                       
                                       [self.parentManager manager:self haveChange:ShippingManagerChangeSuggestions];
+                                      
+                                      if (callback)
+                                          callback(success);
                                   }];
 }
 

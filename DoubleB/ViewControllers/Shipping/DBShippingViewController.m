@@ -8,13 +8,16 @@
 
 #import "DBShippingViewController.h"
 #import "DBShippingAddressCell.h"
+#import "DBShippingAutocompleteView.h"
 #import "DBPickerView.h"
 
 #import "OrderCoordinator.h"
 
-@interface DBShippingViewController ()<UITableViewDataSource, UITableViewDelegate, DBPickerViewDelegate, DBPopupViewComponentDelegate>
+@interface DBShippingViewController ()<UITableViewDataSource, UITableViewDelegate, DBShippingAddressCellDelegate, DBPickerViewDelegate, DBPopupViewComponentDelegate, DBShippingAutocompleteViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewBottomAlignment;
 
+@property (strong, nonatomic) DBShippingAutocompleteView *autocompleteView;
 @property (strong, nonatomic) DBPickerView *cityPickerView;
 
 @end
@@ -32,10 +35,22 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = [UIView new];
     
+    self.autocompleteView = [DBShippingAutocompleteView new];
+    self.autocompleteView.delegate = self;
+    
     self.cityPickerView = [DBPickerView new];
     self.cityPickerView.pickerDelegate = self;
     
     [self.tableView reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 #pragma mark - Table view data source
@@ -50,6 +65,7 @@
     
     if (!cell) {
         cell = [DBShippingAddressCell new];
+        cell.delegate = self;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
@@ -68,6 +84,38 @@
     }
 }
 
+#pragma mark - DBShippingAddressCellDelegate 
+
+- (void)db_addressCellClickedAtImage:(DBShippingAddressCell *)cell {
+    if (cell.type == DBShippingAddressCellTypeStreet) {
+        [[OrderCoordinator sharedInstance].shippingManager setStreet:@""];
+        [self.tableView reloadData];
+    }
+    [self.autocompleteView hide];
+}
+
+- (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text {
+    if (cell.type == DBShippingAddressCellTypeStreet) {
+        [[OrderCoordinator sharedInstance].shippingManager requestSuggestions:^(BOOL success) {
+            if (success && [OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0) {
+                cell.imageViewVisisble = YES;
+                CGRect rect = [self.tableView convertRect:cell.frame toView:self.view];
+                
+                self.tableView.scrollEnabled = NO;
+                [self.autocompleteView showOnView:self.view topOffset:rect.origin.y + rect.size.height];
+            }
+        }];
+    }
+}
+
+#pragma mark - DBShippingAutocompleteViewDelegate
+
+- (void)db_shippingAutocompleteView:(DBShippingAutocompleteView *)view didSelectAddress:(DBShippingAddress *)address {
+    [[OrderCoordinator sharedInstance].shippingManager setStreet:address.street];
+    
+    [self.autocompleteView hide];
+}
+
 #pragma mark - DBPickerViewDelegate
 
 - (void)db_pickerView:(DBPickerView *)view didSelectRow:(NSString *)row {
@@ -81,6 +129,32 @@
     [self.tableView reloadData];
     
     [GANHelper analyzeEvent:@"city_spinner_closed" category:ADDRESS_SCREEN];
+}
+
+#pragma mark - Keyboard events
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.constraintTableViewBottomAlignment.constant = -keyboardRect.size.height;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:nil];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.constraintTableViewBottomAlignment.constant = 0;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:nil];
 }
 
 @end
