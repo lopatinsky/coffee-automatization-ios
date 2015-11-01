@@ -8,6 +8,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 extern NSString *const kLocationChangedNotification;
+extern NSString *const kLocationManagerStatusAuthorized;
 
 /**
 * Helps get location in singleton way

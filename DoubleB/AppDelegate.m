@@ -11,6 +11,7 @@
 #import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
 #import "ApplicationManager.h"
+#import "DBModulesManager.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -29,6 +30,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
     // TODO: change forceCopy to false after test
     if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeautomation"]) {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:false];
@@ -72,6 +75,16 @@
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation
                     ];
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[DBModulesManager sharedInstance] fetchModules:^(BOOL success) {
+        if (success) {
+            
+        } else {
+            
+        }
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

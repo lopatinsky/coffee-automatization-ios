@@ -13,6 +13,7 @@
 
 
 NSString *const kLocationChangedNotification = @"kLocationChanged";
+NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAuthorized";
 
 #define LOCATION_CACHE_TIME 5*60.f
 
@@ -94,6 +95,11 @@ NSString *const kLocationChangedNotification = @"kLocationChanged";
     [[DBGeoPushManager sharedInstance] didEnter:region];
 }
 
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
+    [[DBGeoPushManager sharedInstance] didEnter:region];
+}
+
 - (void)updateLocationWithCallback:(void (^)(CLLocation *location))callback {
     CLLocation *cached = [self cachedLocationIfAvailable];
     if (cached) {
@@ -104,7 +110,7 @@ NSString *const kLocationChangedNotification = @"kLocationChanged";
         self.callback = callback;
     }
 
-    [self startUpdatingLocation];
+//    [self startUpdatingLocation];
 }
 
 #pragma mark CLLocationManagerDelegate
@@ -136,7 +142,8 @@ NSString *const kLocationChangedNotification = @"kLocationChanged";
             }
             break;
         default:
-            [self.locationManager startUpdatingLocation];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kLocationManagerStatusAuthorized object:nil];
+//            [self.locationManager startUpdatingLocation];
             break;
     }
 }
@@ -148,7 +155,6 @@ NSString *const kLocationChangedNotification = @"kLocationChanged";
         self.callback = nil;
     }
 
-    [self.locationManager stopUpdatingLocation];
 }
 
 @end

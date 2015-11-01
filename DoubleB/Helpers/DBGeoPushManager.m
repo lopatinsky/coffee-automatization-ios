@@ -24,11 +24,18 @@
 - (instancetype)init {
     self = [super init];
     
-    [self loadCurrentGeoPush];
     self.enabled = [[DBGeoPushManager valueForKey:@"__enabled"] boolValue];
+    [self loadCurrentGeoPush];
+    
     self.locationManager = [[LocationHelper sharedInstance] locationManager];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableMonitoring) name:kLocationManagerStatusAuthorized object:nil];
+    
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (CLCircularRegion *)regionPointFromData:(NSDictionary *)pointInfo {
@@ -37,7 +44,7 @@
     NSString *identifier = [NSString stringWithFormat:@"%ld", [pointInfo[@"id"] integerValue]];
     CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:center radius:radius identifier:identifier];
     region.notifyOnEntry = YES;
-    region.notifyOnExit = NO;
+    region.notifyOnExit = YES;
     return region;
 }
 
@@ -58,7 +65,7 @@
         }
     }
     
-    if ([self.geoPush pushIsAvailable]) {
+    if ([self.geoPush pushIsAvailable] || YES) {
         for (NSDictionary *point in [self.geoPush points]) {
             CLCircularRegion *region = [self regionPointFromData:point];
             [self.locationManager startMonitoringForRegion:region];
@@ -69,7 +76,7 @@
 #pragma mark – LocationHelperProtocol
 - (void)didEnter:(CLRegion *)region {
     if ([region isKindOfClass:[CLCircularRegion class]]) {
-        if ([self.geoPush pushIsAvailable]) {
+        if ([self.geoPush pushIsAvailable] || YES) {
             [self.geoPush pushLocalNotification];
         }
     }
