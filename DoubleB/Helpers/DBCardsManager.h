@@ -37,4 +37,6 @@ extern NSString * const DBCardsManagerNotificationCardsChanged;
 - (BOOL)addCard:(DBPaymentCard *)card;
 - (void)removeCard:(DBPaymentCard *)card;
 - (void)removeCardAtIndex:(NSUInteger)index;
+
+- (void)fetchWithOldFormat;
 @end
