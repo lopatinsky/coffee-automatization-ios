@@ -263,7 +263,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
                            @"promocodeIsEnabled": _promocodesIsEnabled,
-                           @"_remoteColor": _remoteColor};
+                           @"_remoteColor": _remoteColor ?: @""};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];
