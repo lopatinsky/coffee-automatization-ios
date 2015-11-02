@@ -23,6 +23,10 @@ static NSString *dbAnaliticsNameScreenName;
     UIImage *image = [DBShareHelper sharedInstance].imageForShare;
     NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
     text = [text stringByAppendingString:@" %@"];
+    text = [NSString stringWithFormat:text, urls[@"other"]];
+    
+    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
+    text = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
     
     if ([[DBShareHelper sharedInstance].appUrls count] > 0) {
         NSMutableArray *activityItems = [NSMutableArray new];
