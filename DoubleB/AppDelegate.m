@@ -80,9 +80,9 @@
 - (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[DBModulesManager sharedInstance] fetchModules:^(BOOL success) {
         if (success) {
-            
+            completionHandler(UIBackgroundFetchResultNewData);
         } else {
-            
+            completionHandler(UIBackgroundFetchResultFailed);
         }
     }];
 }
