@@ -20,7 +20,7 @@ static NSString *dbAnaliticsNameScreenName;
     dbAnaliticsNameScreenName = analiticsScreenName;
     
     NSString *text = [DBShareHelper sharedInstance].textShare;
-    UIImage *image = [DBShareHelper sharedInstance].imageForShare;
+//    UIImage *image = [DBShareHelper sharedInstance].imageForShare;
     NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
     text = [text stringByAppendingString:@" %@"];
     text = [NSString stringWithFormat:text, urls[@"other"]];
@@ -32,8 +32,8 @@ static NSString *dbAnaliticsNameScreenName;
         NSMutableArray *activityItems = [NSMutableArray new];
         [activityItems addObject:[[DBActivityItemProvider alloc] initWithTextFormat:text links:urls]];
         
-        if(image)
-            [activityItems addObject:image];
+//        if(image)
+//            [activityItems addObject:image];
         
         [self shareWithActivityItems:activityItems withCallback:callback];
     } else {
@@ -46,8 +46,8 @@ static NSString *dbAnaliticsNameScreenName;
                     NSMutableArray *activityItems = [NSMutableArray new];
                     [activityItems addObject:[[DBActivityItemProvider alloc] initWithTextFormat:text links:urls]];
                     
-                    if(image)
-                        [activityItems addObject:image];
+//                    if(image)
+//                        [activityItems addObject:image];
                     
                     [self shareWithActivityItems:activityItems withCallback:callback];
                 } else {
