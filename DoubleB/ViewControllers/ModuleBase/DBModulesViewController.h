@@ -27,6 +27,12 @@
 - (void)reloadModules:(BOOL)animated;
 
 /**
+ * Offsets
+ */
+@property (nonatomic) CGFloat topInset;
+@property (nonatomic) CGFloat bottomInset;
+
+/**
  * return view where moduleView will display modal component
  * Override this method to customize appearance
  */

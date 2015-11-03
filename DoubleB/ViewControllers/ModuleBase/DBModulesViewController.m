@@ -86,6 +86,16 @@
     }
 }
 
+- (void)setTopInset:(CGFloat)topInset {
+    _topInset = topInset;
+    self.scrollView.contentInset = UIEdgeInsetsMake(_topInset, 0, _bottomInset, 0);
+}
+
+- (void)setBottomInset:(CGFloat)bottomInset {
+    _bottomInset = bottomInset;
+    self.scrollView.contentInset = UIEdgeInsetsMake(_topInset, 0, _bottomInset, 0);
+}
+
 #pragma mark - Modules
 
 - (void)addModule:(DBModuleView *)moduleView {

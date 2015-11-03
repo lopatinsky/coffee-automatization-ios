@@ -19,7 +19,7 @@
 #import "OrderManager.h"
 #import "NetworkManager.h"
 
-@interface DBVenuesTableViewController ()
+@interface DBVenuesTableViewController ()<DBVenueCellDelegate>
 
 @property (nonatomic, strong) NSArray *venues;
 @property (nonatomic, strong) UIPickerView *picker;
@@ -109,6 +109,7 @@
     DBVenueCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBVenueCell"];
     if (!cell) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBVenueCell" owner:self options:nil] firstObject];
+        cell.delegate = self;
     }
     
     [cell.venueDistanceLabel.layer setCornerRadius:5];
@@ -147,21 +148,22 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.mode == DBVenuesTableViewControllerModeList) {
-        DBVenueViewController *controller = [DBVenueViewController new];
-        Venue *venue = _venues[indexPath.row];
-        controller.venue = venue;
-        controller.hidesBottomBarWhenPushed = YES;
-        
-        [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
-        
-        [self.navigationController pushViewController:controller animated:YES];
-        return;
-    } else {
-        Venue *venue = _venues[indexPath.row];
-        [OrderCoordinator sharedInstance].orderManager.venue = venue;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
+    Venue *venue = _venues[indexPath.row];
+    [OrderCoordinator sharedInstance].orderManager.venue = venue;
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
+}
+
+#pragma mark - DBVenueCellDelegate
+
+- (void)db_venueCellDidSelectInfo:(DBVenueCell *)cell {
+    DBVenueViewController *controller = [DBVenueViewController new];
+    controller.venue = cell.venue;
+    
+    [self.navigationController pushViewController:controller animated:YES];
+    
+    [GANHelper analyzeEvent:@"venue_info_click" label:cell.venue.venueId category:self.eventsCategory];
 }
 
 @end

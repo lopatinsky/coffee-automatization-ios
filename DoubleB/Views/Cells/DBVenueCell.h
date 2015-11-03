@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class Venue;
+@class DBVenueCell;
+
+@protocol DBVenueCellDelegate <NSObject>
+- (void)db_venueCellDidSelectInfo:(DBVenueCell *)cell;
+@end
 
 @interface DBVenueCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *venueDistanceLabel;
@@ -18,6 +23,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintDistanceLabelWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintDistanceLabelAndVenueNameLabelSpace;
 
+@property (weak, nonatomic) IBOutlet UILabel *moreInfoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
+
 @property (strong, nonatomic) Venue *venue;
+@property (weak, nonatomic) id<DBVenueCellDelegate> delegate;
 
 @end

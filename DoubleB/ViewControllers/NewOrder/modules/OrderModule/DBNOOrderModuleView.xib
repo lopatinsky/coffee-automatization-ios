@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
@@ -15,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текст ошибки" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8T-JU-mrG">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текст ошибки" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8T-JU-mrG">
                     <rect key="frame" x="8" y="8" width="304" height="39"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -23,7 +24,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0g-hZ-NMQ">
-                    <rect key="frame" x="95" y="7.5" width="130" height="40"/>
+                    <rect key="frame" x="182" y="7" width="130" height="40"/>
                     <animations/>
                     <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -35,24 +36,37 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="P4y-Ae-P1Q">
-                    <rect key="frame" x="150" y="17.5" width="20" height="20"/>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="P4y-Ae-P1Q">
+                    <rect key="frame" x="70" y="17" width="20" height="20"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="60b-Mf-rzW"/>
                         <constraint firstAttribute="width" constant="20" id="f0g-gz-vod"/>
                     </constraints>
                 </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="225 rub." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lQ-e6-82j">
+                    <rect key="frame" x="30" y="17.5" width="100" height="20"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="9wi-ug-MsL"/>
+                        <constraint firstAttribute="width" constant="100" id="EIu-0U-B1B"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="P4y-Ae-P1Q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3eM-cF-2NH"/>
+                <constraint firstAttribute="trailing" secondItem="R0g-hZ-NMQ" secondAttribute="trailing" constant="8" id="4tm-Kr-29q"/>
+                <constraint firstItem="2lQ-e6-82j" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="FwT-nf-HhS"/>
                 <constraint firstAttribute="trailing" secondItem="e8T-JU-mrG" secondAttribute="trailing" constant="8" id="Gqw-EJ-9Qg"/>
                 <constraint firstItem="e8T-JU-mrG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Hag-zJ-2r9"/>
-                <constraint firstItem="P4y-Ae-P1Q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IPr-wu-CUt"/>
+                <constraint firstItem="P4y-Ae-P1Q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1:2" id="IPr-wu-CUt"/>
+                <constraint firstItem="2lQ-e6-82j" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1:2" id="KiJ-4M-azI"/>
                 <constraint firstItem="e8T-JU-mrG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="djW-xD-cm7"/>
-                <constraint firstItem="R0g-hZ-NMQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ooY-AX-ZnJ"/>
                 <constraint firstAttribute="bottom" secondItem="e8T-JU-mrG" secondAttribute="bottom" constant="8" id="uXJ-1M-ACK"/>
                 <constraint firstItem="R0g-hZ-NMQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v6R-3F-AwR"/>
             </constraints>
@@ -62,6 +76,7 @@
                 <outlet property="activityIndicator" destination="P4y-Ae-P1Q" id="Rz9-sr-dwG"/>
                 <outlet property="errorLabel" destination="e8T-JU-mrG" id="e1e-dq-c1K"/>
                 <outlet property="orderButton" destination="R0g-hZ-NMQ" id="jHz-GE-7x2"/>
+                <outlet property="totalLabel" destination="2lQ-e6-82j" id="dur-O0-U36"/>
             </connections>
             <point key="canvasLocation" x="348" y="17"/>
         </view>

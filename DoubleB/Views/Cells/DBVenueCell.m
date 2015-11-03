@@ -17,6 +17,16 @@
 @implementation DBVenueCell
 
 - (void)awakeFromNib {
+    self.moreInfoLabel.textColor = [UIColor db_defaultColor];
+    self.moreInfoLabel.text = NSLocalizedString(@"Информация", nil);
+    
+    [self.moreInfoButton addTarget:self action:@selector(moreInfoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)moreInfoButtonClick {
+    if ([self.delegate respondsToSelector:@selector(db_venueCellDidSelectInfo:)]) {
+        [self.delegate db_venueCellDidSelectInfo:self];
+    }
 }
 
 @end

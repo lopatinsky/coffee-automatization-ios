@@ -7,6 +7,8 @@
 //
 
 #import "DBNOTotalModuleView.h"
+#import "DBNOPromosModuleView.h"
+
 #import "OrderCoordinator.h"
 
 @interface DBNOTotalModuleView ()
@@ -32,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTotal;
 @property (nonatomic) NSInteger initialTotalViewHeight;
+
+@property (weak, nonatomic) IBOutlet DBNOPromosModuleView *promosModule;
 
 @property (strong, nonatomic) OrderCoordinator *orderCoordinator;
 @end
@@ -107,7 +111,7 @@
         self.constraintDiscountViewHeight.constant = self.initialDiscountViewHeight;
         self.discountView.hidden = NO;
         
-        self.discountTotal.text = [NSString stringWithFormat:@"%.0f %@", discount, [Compatibility currencySymbol]];
+        self.discountTotal.text = [NSString stringWithFormat:@"- %.0f %@", discount, [Compatibility currencySymbol]];
     }
     
     double total = _orderCoordinator.itemsManager.totalPrice + _orderCoordinator.promoManager.shippingPrice - discount;
@@ -116,6 +120,8 @@
 
 - (CGFloat)moduleViewContentHeight {
     int height = self.constraintSumViewHeight.constant + self.constraintShippingViewHeight.constant + self.constraintDiscountViewHeight.constant + self.initialTotalViewHeight;
+    
+    height += [self.promosModule moduleViewContentHeight];
     
     return height;
 }

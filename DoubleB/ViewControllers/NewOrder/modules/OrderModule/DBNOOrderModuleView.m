@@ -14,6 +14,7 @@
 @interface DBNOOrderModuleView ()
 @property (weak, nonatomic) IBOutlet UIButton *orderButton;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic) BOOL inProgress;
@@ -30,6 +31,8 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    
+    self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7f];
     
     self.errorLabel.textColor = [UIColor db_errorColor];
     
@@ -58,26 +61,41 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
+    self.errorLabel.hidden = YES;
+    self.totalLabel.hidden = YES;
+    self.orderButton.hidden = YES;
+    
     if (_inProgress) {
-        self.errorLabel.hidden = YES;
-        self.orderButton.hidden = YES;
+        self.totalLabel.hidden = NO;
+        self.orderButton.hidden = NO;
     } else {
         if (![OrderCoordinator sharedInstance].validOrder) {
             if ([OrderCoordinator sharedInstance].promoManager.errors.count > 0) {
-                [self showErrorLabel];
+                self.errorLabel.hidden = NO;
+                [self reloadErrorLabel];
             } else {
-                [self showOrderButton];
+                self.totalLabel.hidden = NO;
+                self.orderButton.hidden = NO;
+                [self reloadTotal];
+                [self reloadOrderButton];
             }
         } else {
-            [self showOrderButton];
+            self.totalLabel.hidden = NO;
+            self.orderButton.hidden = NO;
+            [self reloadTotal];
+            [self reloadOrderButton];
         }
     }
 }
 
-- (void)showOrderButton {
-    self.errorLabel.hidden = YES;
-    self.orderButton.hidden = NO;
-    
+- (void)reloadTotal {
+    double discount = [OrderCoordinator sharedInstance].promoManager.discount;
+    discount += [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder ? [OrderCoordinator sharedInstance].promoManager.walletDiscount : 0;
+    double total = [OrderCoordinator sharedInstance].itemsManager.totalPrice + [OrderCoordinator sharedInstance].promoManager.shippingPrice - discount;
+    self.totalLabel.text = [NSString stringWithFormat:@"%.0f %@", total, [Compatibility currencySymbol]];
+}
+
+- (void)reloadOrderButton {
     if (![OrderCoordinator sharedInstance].validOrder) {
         self.orderButton.backgroundColor = [UIColor db_grayColor];
         self.orderButton.alpha = 0.5f;
@@ -87,10 +105,7 @@
     }
 }
 
-- (void)showErrorLabel {
-    self.errorLabel.hidden = NO;
-    self.orderButton.hidden = YES;
-    
+- (void)reloadErrorLabel {
     self.errorLabel.text = [[OrderCoordinator sharedInstance].promoManager.errors firstObject];
 }
 

@@ -32,7 +32,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.paymentImageView templateImageWithName:@"wallet_icon"];
+    [self.paymentImageView templateImageWithName:@"wallet_icon_active"];
      
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];

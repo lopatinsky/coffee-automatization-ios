@@ -45,7 +45,12 @@
     [self setupSettingsNavigationItem];
     [self setupModules];
     
-    [self layoutModules];
+    DBNOOrderModuleView *orderModule = [DBNOOrderModuleView new];
+    orderModule.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:orderModule];
+    [orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
+    [orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
+    self.bottomInset = orderModule.frame.size.height;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -69,17 +74,18 @@
     [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
     [self addModule:[DBNOGiftItemsModuleView new] topOffset:5];
     [self addModule:[DBNOItemAdditionModuleView new]];
+    [self addModule:[DBNOProfileModuleView new] topOffset:10];
     [self addModule:[DBNODeliveryTypeModuleView new] topOffset:5];
-    [self addModule:[DBNOVenueModuleView new] topOffset:5];
+    [self addModule:[DBNOVenueModuleView new] topOffset:1];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
-    [self addModule:[DBNOProfileModuleView new] topOffset:1];
-    [self addModule:[DBNOPaymentModuleView new]topOffset:1];
-    [self addModule:[DBNOCommentModuleView new]topOffset:1];
+    [self addModule:[DBNOPaymentModuleView new]topOffset:5];
+    [self addModule:[DBNOCommentModuleView new]topOffset:5];
     [self addModule:[DBNOndaModuleView new]topOffset:5];
     [self addModule:[DBNOWalletModuleView new] topOffset:5];
     [self addModule:[DBNOTotalModuleView new] topOffset:1];
-//    [self addModule:[DBNOPromosModuleView new] topOffset:1];
-    [self addModule:[DBNOOrderModuleView new]];
+    [self addModule:[DBNOPromosModuleView new] topOffset:1];
+    
+    [self layoutModules];
 }
 
 - (void)setupSettingsNavigationItem{

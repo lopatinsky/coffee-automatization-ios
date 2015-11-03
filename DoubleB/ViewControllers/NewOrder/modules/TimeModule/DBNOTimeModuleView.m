@@ -32,7 +32,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.timeImageView templateImageWithName:@"time_icon"];
+    [self.timeImageView templateImageWithName:@"time_icon_active"];
     
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
     _orderCoordinator = [OrderCoordinator sharedInstance];

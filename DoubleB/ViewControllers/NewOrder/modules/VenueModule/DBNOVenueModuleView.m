@@ -36,7 +36,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.venueImageView templateImageWithName:@"map_icon"];
+    [self.venueImageView templateImageWithName:@"map_icon_active"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress, CoordinatorNotificationNewDeliveryType] selector:@selector(reload)];

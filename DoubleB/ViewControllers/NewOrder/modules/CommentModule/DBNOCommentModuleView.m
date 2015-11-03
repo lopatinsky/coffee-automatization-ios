@@ -29,7 +29,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [self.commentImageView templateImageWithName:@"comment_icon"];
+    [self.commentImageView templateImageWithName:@"comment_icon_active"];
     
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPath:CoordinatorNotificationNewComment selector:@selector(reload)];

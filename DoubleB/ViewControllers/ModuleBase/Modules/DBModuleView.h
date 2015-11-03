@@ -69,6 +69,12 @@
 @property (nonatomic, readonly) CGFloat actualBottomOffset; // bottom offset according to moduleHidden property
 
 /**
+ * Common initializer for module
+ * Override it to customize initialization
+ */
+- (void)commomInit;
+
+/**
  * Returns content size of current module. By default returns frame size
  * Override it to customize module size
  */

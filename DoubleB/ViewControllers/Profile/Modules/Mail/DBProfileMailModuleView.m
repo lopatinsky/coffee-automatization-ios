@@ -24,7 +24,7 @@
 }
 
 - (void)awakeFromNib{
-    [_imageView templateImageWithName:@"email_icon"];
+    [_imageView templateImageWithName:@"email_icon_active"];
     
     _textField.placeholder = NSLocalizedString(@"Ваш e-mail для получения чеков", nil);
     _textField.keyboardType = UIKeyboardTypeDefault;

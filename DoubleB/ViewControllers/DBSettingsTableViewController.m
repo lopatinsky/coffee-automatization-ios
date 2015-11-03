@@ -24,6 +24,7 @@
 #import "DBCompaniesManager.h"
 #import "DBFriendGiftHelper.h"
 #import "DBFriendGiftViewController.h"
+#import "DBOrdersTableViewController.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -73,6 +74,12 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     [self.settingsItems addObject:@{@"name": @"profileVC",
                                     @"image": @"profile_icon",
                                     @"viewController": profileVC}];
+    
+    // Profile item
+    DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
+    [self.settingsItems addObject:@{@"name": @"ordersVC",
+                                    @"image": @"history_icon",
+                                    @"viewController": ordersVC}];
     
     // Share friends item
     if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
@@ -232,6 +239,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
         event = @"profile_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"historyVC"]){
+        event = @"history_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
