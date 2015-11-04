@@ -18,11 +18,13 @@
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
 #import "DBMenu.h"
-#import "DBTabBarController.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
 #import "DBModulesManager.h"
+
+#import "DBSettingsTableViewController.h"
+#import "DBOrdersTableViewController.h"
 
 #import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
@@ -123,6 +125,18 @@
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
+}
+
+- (void)awakeFromNotification:(NSDictionary *)userInfo {
+    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+    [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
+    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+}
+
+- (void)recieveNotification:(NSDictionary *)userInfo {
+    if([UIApplication sharedApplication].applicationState != 0){
+        [self awakeFromNotification:userInfo];
+    }
 }
 
 #pragma mark - API Notification handlers
@@ -269,7 +283,7 @@
 
 - (UIViewController *)rootViewController {
     if ([self currentState] == RootStateMain) {
-        return [ViewControllerManager mainViewController];
+        return [self mainViewController];
     }
     if ([self currentState] == RootStateCompanies) {
         return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewControllers]];
@@ -278,12 +292,17 @@
         return [ViewControllerManager launchViewController];
     }
     
-    return [ViewControllerManager mainViewController];
+    return [self mainViewController];
 }
 @end
 
-@implementation ApplicationManager (Menu)
-- (Class<MenuListViewControllerProtocol>)rootMenuViewController{
+@implementation ApplicationManager (Controllers)
+
+- (UIViewController *)mainViewController {
+    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+}
+
+- (Class<MenuListViewControllerProtocol>)mainMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
@@ -292,14 +311,43 @@
 }
 @end
 
-@implementation ApplicationManager (DemoApp)
-- (UIViewController *)demoLoginViewController{
-    Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
-    
-    if(loginVCClass){
-        return [[loginVCClass alloc] init];
-    } else {
-        return nil;
+@implementation ApplicationManager (ScreenState)
+
+- (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated {
+    switch (screen) {
+        case ApplicationScreenRoot:{
+            UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+            
+            UIViewController *rootVC = window.rootViewController;
+            
+            if ([rootVC isKindOfClass:[UINavigationController class]]){
+                [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject] animated:animated];
+            }
+        } break;
+            
+        case ApplicationScreenOrder: {
+            UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+            UIViewController *rootVC = window.rootViewController;
+            
+            if ([rootVC isKindOfClass:[UINavigationController class]]){
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, newOrderVC] animated:animated];
+            }
+        } break;
+            
+        case ApplicationScreenHistory:{
+            UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+            UIViewController *rootVC = window.rootViewController;
+            
+            if ([rootVC isKindOfClass:[UINavigationController class]]){
+                DBSettingsTableViewController *settingsVC = [DBClassLoader loadSettingsViewController];
+                DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
+                [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, settingsVC, ordersVC] animated:animated];
+            }
+        }break;
+            
+        default:
+            break;
     }
 }
 

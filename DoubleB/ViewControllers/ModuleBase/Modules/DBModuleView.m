@@ -14,15 +14,6 @@
 
 @implementation DBModuleView
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    self = [super initWithCoder:aDecoder];
-    
-    self.frame = CGRectMake(0, 0, 320, 40);
-    [self commomInit];
-    
-    return self;
-}
-
 - (instancetype)init {
     self = [super initWithFrame:CGRectMake(0, 0, 320, 40)];
     

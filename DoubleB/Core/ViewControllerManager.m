@@ -24,7 +24,7 @@
 
 #pragma mark - Menu Controllers
 #import "CategoriesAndPositionsTVController.h"
-#import "CategoriesAndPositionsCVController.h"
+//#import "CategoriesAndPositionsCVController.h"
 #import "CategoriesTVController.h"
 #import "PositionsTVController.h"
 @implementation ViewControllerManager(MenuViewControllers)
@@ -33,7 +33,7 @@
     return @{
              @"default": [CategoriesAndPositionsTVController class],
              @"TableView": [CategoriesAndPositionsTVController class],
-             @"CollectionView": [CategoriesAndPositionsCVController class],
+//             @"CollectionView": [CategoriesAndPositionsCVController class],
              };
 }
 
@@ -98,24 +98,6 @@
 + (nonnull UIViewController *)launchViewController {
     Class launchViewController = [self launchViewControllerClasses][[ViewControllerManager valueFromPropertyListByKey:@"Launch"] ?: @"default"];
     return [launchViewController new];
-}
-
-@end
-
-
-#pragma mark - Main
-#import "DBTabBarController.h"
-@implementation ViewControllerManager(MainViewControllers)
-
-+ (nonnull NSDictionary *)mainViewControllerClasses {
-    return @{
-             @"default": [DBTabBarController class]
-             };
-}
-
-+ (nonnull UIViewController *)mainViewController {
-    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
-    return [mainViewController new];
 }
 
 @end

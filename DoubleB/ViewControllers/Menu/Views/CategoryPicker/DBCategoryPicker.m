@@ -54,24 +54,14 @@
     CGRect rect = self.frame;
     rect.size.height = self.tableView.contentSize.height;
     
-    if(rect.size.height > 300){
-        rect.size.height = 300;
+    if(rect.size.height > 450){
+        rect.size.height = 450;
         self.tableView.scrollEnabled = YES;
     } else {
         self.tableView.scrollEnabled = NO;
     }
     
     self.frame = rect;
-}
-
-- (void)openedOnView:(UIView *)view{
-    _isOpened = YES;
-    _owner = view;
-}
-
-- (void)closed{
-    _isOpened = NO;
-    _owner = nil;
 }
 
 #pragma mark - UITableViewDataSource
@@ -105,8 +95,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DBMenuCategory *category = self.categories[indexPath.row];
     
-    if([self.delegate respondsToSelector:@selector(db_categoryPicker:didSelectCategory:)]){
-        [self.delegate db_categoryPicker:self didSelectCategory:category];
+    if([self.pickerDelegate respondsToSelector:@selector(db_categoryPicker:didSelectCategory:)]){
+        [self.pickerDelegate db_categoryPicker:self didSelectCategory:category];
     }
 }
 

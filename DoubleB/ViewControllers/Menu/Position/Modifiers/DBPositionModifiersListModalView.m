@@ -97,13 +97,13 @@
                       label:modifier.modifierId
                    category:MENU_SCREEN];
 
-    [self.modifierPicker showOnView:self withAppearance:DBPopupViewComponentAppearancePush];
+    [self.modifierPicker showOnView:self appearance:DBPopupAppearancePush];
 
 }
 
 - (void)db_positionModifiersListDidSelectSingleModifiers:(DBPositionModifiersList *)list {
     [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
-    [self.modifierPicker showOnView:self withAppearance:DBPopupViewComponentAppearancePush];
+    [self.modifierPicker showOnView:self appearance:DBPopupAppearancePush];
 }
 
 

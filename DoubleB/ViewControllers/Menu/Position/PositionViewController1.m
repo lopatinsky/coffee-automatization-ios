@@ -70,7 +70,7 @@
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
     
     if(self.mode == PositionViewControllerModeMenuPosition){
-        self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
+        self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
     }
     
     // Configure position image
@@ -194,8 +194,8 @@
     }];
 }
 
-- (void)goToOrderViewController{
-    [self.parentNavigationController popToRootViewControllerAnimated:YES];
+- (void)moveToOrder{
+    [self.navigationController pushViewController:[DBClassLoader loadNewOrderViewController] animated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:PRODUCT_SCREEN];
 }
 
@@ -209,7 +209,7 @@
     [self.modifierPicker configureWithGroupModifier:modifier];
     self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
     
-    [self.modifierPicker showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    [self.modifierPicker showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
     
     [GANHelper analyzeEvent:@"group_modifier_show"
                       label:modifier.modifierId
@@ -220,7 +220,7 @@
     [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
     self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
     
-    [self.modifierPicker showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+    [self.modifierPicker showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
 }
 
 #pragma mark - DBPositionModifierPickerDelegate

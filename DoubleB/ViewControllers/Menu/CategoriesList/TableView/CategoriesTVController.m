@@ -9,7 +9,6 @@
 #import "CategoriesTVController.h"
 #import "DBCategoryCell.h"
 #import "PositionsTVController.h"
-#import "DBNewOrderViewController.h"
 #import "OrderCoordinator.h"
 #import "DBBarButtonItem.h"
 #import "MBProgressHUD.h"
@@ -17,6 +16,7 @@
 #import "DBMenu.h"
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
+#import "DBSettingsTableViewController.h"
 
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
@@ -52,10 +52,12 @@
     self.navigationController.navigationBar.topItem.title = @"";
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
+    
     if (self.parent) {
         [self db_setTitle:self.parent.name];
     } else {
-        self.navigationItem.leftBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
+        [self setupSettingsNavigationItem];
         [self db_setTitle:NSLocalizedString(@"Меню", nil)];
     }
     
@@ -138,6 +140,19 @@
     }
 }
 
+- (void)setupSettingsNavigationItem{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:self
+                                                                            action:@selector(clickSettings:)];
+}
+
+- (void)clickSettings:(id)sender {
+    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
+    settingsController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:settingsController animated:YES];
+}
+
 
 #pragma mark - Table view data source
 
@@ -202,9 +217,8 @@
 #pragma mark - other methods
 
 
-- (void)goToOrderViewController
-{    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (void)moveToOrder {
+    [self.navigationController pushViewController:[DBClassLoader loadNewOrderViewController] animated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 

@@ -33,7 +33,6 @@
 #import "DBOrderItemCell.h"
 #import "DBOrderItemNotesCell.h"
 #import "Reachability.h"
-#import "DBTabBarController.h"
 #import "DBTimePickerView.h"
 #import "DBClientInfo.h"
 #import "DBSettingsTableViewController.h"

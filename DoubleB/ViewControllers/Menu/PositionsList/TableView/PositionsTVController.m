@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "PositionsTVController.h"
 #import "DBPositionCell.h"
-#import "DBNewOrderViewController.h"
 #import "OrderCoordinator.h"
 #import "DBBarButtonItem.h"
 #import "DBMenu.h"
@@ -38,7 +37,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
-    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(goToOrderViewController)];
+    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
     
     [self db_setTitle:self.category.name];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
@@ -106,8 +105,8 @@
     [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];
 }
 
-- (void)goToOrderViewController {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+- (void)moveToOrder {
+    [self.navigationController pushViewController:[DBClassLoader loadNewOrderViewController] animated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 
@@ -125,7 +124,7 @@
     if(cell.position.hasEmptyRequiredModifiers) {
         DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
         [modifiersList configureWithMenuPosition:cell.position];
-        [modifiersList showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+        [modifiersList showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
     } else {
         [self.navigationController animateAddProductFromView:cell.priceView completion:^{
             [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];

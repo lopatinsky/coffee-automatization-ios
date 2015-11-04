@@ -20,7 +20,7 @@
     return [[settingsVCClass alloc] init];
 }
 
-+ (DBNewOrderViewController *)loadNewOrderViewController{
++ (UIViewController *)loadNewOrderViewController{
 //    Class newOrderVCClass = NSClassFromString(@"DBCatNewOrderViewController");
 //    
 //    if(!newOrderVCClass){
@@ -30,6 +30,16 @@
 //    return [[newOrderVCClass alloc] initWithNibName:@"DBNewOrderViewController" bundle:[NSBundle mainBundle]];
     Class newOrderVCClass = NSClassFromString(@"DBNewOrderVC");
     return [[newOrderVCClass alloc] init];
+}
+
++ (UIViewController *)loadDemoLoginViewController{
+    Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
+    
+    if(loginVCClass){
+        return [[loginVCClass alloc] init];
+    } else {
+        return nil;
+    }
 }
 
 @end

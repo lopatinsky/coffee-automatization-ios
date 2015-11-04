@@ -32,6 +32,7 @@
     
     [self.tickImageView templateImageWithName:@"tick.png"];
     [self.disclosureIndicator templateImageWithName:@"arrow_horizontal_icon" tintColor:[UIColor db_grayColor]];
+    self.disclosureIndicator.hidden = [DBCompanyInfo sharedInstance].deliveryTypes.count < 2;
     
     self.typesPopupView = [DBDeliveryTypesPopupView new];
     

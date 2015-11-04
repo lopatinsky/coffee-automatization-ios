@@ -31,7 +31,7 @@
     [self.doneButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
 }
 
-- (void)setPickerDelegate:(id<DBPickerViewDelegate,DBPopupViewComponentDelegate>)pickerDelegate {
+- (void)setPickerDelegate:(id<DBPickerViewDelegate,DBPopupComponentDelegate>)pickerDelegate {
     _pickerDelegate = pickerDelegate;
     self.delegate = pickerDelegate;
 }

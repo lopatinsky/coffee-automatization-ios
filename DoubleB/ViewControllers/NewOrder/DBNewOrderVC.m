@@ -7,12 +7,11 @@
 //
 
 #import "DBNewOrderVC.h"
-#import "DBSettingsTableViewController.h"
 
 #import "DBNOOrderItemsModuleView.h"
 #import "DBNOGiftItemsModuleView.h"
 #import "DBNOBonusItemsModuleView.h"
-#import "DBNOItemAdditionModuleView.h"
+#import "DBNOBonusItemAdditionModuleView.h"
 #import "DBNOWalletModuleView.h"
 #import "DBNOTotalModuleView.h"
 #import "DBNOPromosModuleView.h"
@@ -42,7 +41,6 @@
     
     self.analyticsCategory = ORDER_SCREEN;
     
-    [self setupSettingsNavigationItem];
     [self setupModules];
     
     DBNOOrderModuleView *orderModule = [DBNOOrderModuleView new];
@@ -71,9 +69,9 @@
 
 - (void)setupModules {
     [self addModule:[DBNOOrderItemsModuleView new]];
-    [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
     [self addModule:[DBNOGiftItemsModuleView new] topOffset:5];
-    [self addModule:[DBNOItemAdditionModuleView new]];
+    [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
+    [self addModule:[DBNOBonusItemAdditionModuleView new]];
     [self addModule:[DBNOProfileModuleView new] topOffset:10];
     [self addModule:[DBNODeliveryTypeModuleView new] topOffset:5];
     [self addModule:[DBNOVenueModuleView new] topOffset:1];
@@ -81,30 +79,17 @@
     [self addModule:[DBNOPaymentModuleView new]topOffset:5];
     [self addModule:[DBNOCommentModuleView new]topOffset:5];
     [self addModule:[DBNOndaModuleView new]topOffset:5];
-    [self addModule:[DBNOWalletModuleView new] topOffset:5];
+    [self addModule:[DBNOWalletModuleView new] topOffset:1];
     [self addModule:[DBNOTotalModuleView new] topOffset:1];
     [self addModule:[DBNOPromosModuleView new] topOffset:1];
     
     [self layoutModules];
 }
 
-- (void)setupSettingsNavigationItem{
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(clickSettings:)];
-}
-
-- (void)clickSettings:(id)sender {
-    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
-    settingsController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:settingsController animated:YES];
-}
-
 #pragma mark - DBModulesViewController
 
 - (UIView *)containerForModuleModalComponent:(DBModuleView *)view {
-    return self.tabBarController.view;
+    return self.navigationController.view;
 }
 
 @end

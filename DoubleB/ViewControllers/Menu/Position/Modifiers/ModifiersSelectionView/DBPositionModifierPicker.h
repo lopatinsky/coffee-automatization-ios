@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBPopupViewComponent.h"
+#import "DBPopupComponent.h"
 
 @class DBMenuPosition;
 @class DBMenuPositionModifier;
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, DBPositionModifierPickerDisplayType) {
 - (void)db_positionModifierPicker:(DBPositionModifierPicker *)picker didSelectNewItem:(DBMenuPositionModifierItem *)item;
 @end
 
-@interface DBPositionModifierPicker : DBPopupViewComponent
+@interface DBPositionModifierPicker : DBPopupComponent
 @property(nonatomic, readonly) DBPositionModifierPickerType type;
 @property(nonatomic) DBUICurrencyDisplayMode currencyDisplayMode;
 

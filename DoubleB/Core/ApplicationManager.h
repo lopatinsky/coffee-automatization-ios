@@ -10,16 +10,26 @@
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
-typedef enum : NSUInteger {
+typedef NS_ENUM(NSInteger, RootState) {
     RootStateLaunch,
     RootStateMain,
     RootStateCompanies,
-} RootState;
+};
+
+typedef NS_ENUM(NSInteger, ApplicationScreen) {
+    ApplicationScreenRoot = 0,
+    ApplicationScreenOrder,
+    ApplicationScreenHistory
+};
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
+
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
+
+- (void)awakeFromNotification:(NSDictionary *)userInfo;
+- (void)recieveNotification:(NSDictionary *)userInfo;
 
 - (void)fetchCompanyDependentInfo;
 
@@ -39,10 +49,11 @@ typedef enum : NSUInteger {
 - (UIViewController *)rootViewController;
 @end
 
-@interface ApplicationManager(Menu)
-- (Class<MenuListViewControllerProtocol>)rootMenuViewController;
+@interface ApplicationManager(Controllers)
+- (UIViewController *)mainViewController;
+- (Class<MenuListViewControllerProtocol>)mainMenuViewController;
 @end
 
-@interface ApplicationManager(DemoApp)
-- (UIViewController *)demoLoginViewController;
+@interface ApplicationManager(ScreenState)
+- (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
 @end

@@ -13,7 +13,7 @@
 
 #import "OrderCoordinator.h"
 
-@interface DBShippingViewController ()<UITableViewDataSource, UITableViewDelegate, DBShippingAddressCellDelegate, DBPickerViewDelegate, DBPopupViewComponentDelegate, DBShippingAutocompleteViewDelegate>
+@interface DBShippingViewController ()<UITableViewDataSource, UITableViewDelegate, DBShippingAddressCellDelegate, DBPickerViewDelegate, DBPopupComponentDelegate, DBShippingAutocompleteViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewBottomAlignment;
 
@@ -96,7 +96,7 @@
         
         self.cityPickerView.title = NSLocalizedString(@"Выберите город", nil);
         [self.cityPickerView configureWithItems:[DBCompanyInfo sharedInstance].deliveryCities];
-        [self.cityPickerView showOnView:self.navigationController.view withAppearance:DBPopupViewComponentAppearanceModal];
+        [self.cityPickerView showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
     }
 }
 
@@ -143,7 +143,7 @@
     [GANHelper analyzeEvent:@"city_spinner_selected" label:row category:ADDRESS_SCREEN];
 }
 
-- (void)db_componentWillDismiss:(DBPopupViewComponent *)component {
+- (void)db_componentWillDismiss:(DBPopupComponent *)component {
     [self.tableView reloadData];
     
     [GANHelper analyzeEvent:@"city_spinner_closed" category:ADDRESS_SCREEN];

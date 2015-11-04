@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBPopupViewComponent.h"
+#import "DBPopupComponent.h"
 
-@interface DBPositionModifiersListModalView : DBPopupViewComponent
+@interface DBPositionModifiersListModalView : DBPopupComponent
 
 - (void)configureWithMenuPosition:(DBMenuPosition *)position;
 

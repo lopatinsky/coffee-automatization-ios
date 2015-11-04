@@ -7,7 +7,6 @@
 //
 
 #import "LaunchViewController.h"
-#import "DBTabBarController.h"
 #import "DBCompaniesViewController.h"
 #import "AppDelegate.h"
 #import "ApplicationManager.h"

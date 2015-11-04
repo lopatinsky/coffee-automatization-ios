@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBPopupComponent.h"
 
 @class DBCategoryPicker;
 @class DBMenuCategory;
@@ -16,13 +17,8 @@
 
 @end
 
-@interface DBCategoryPicker : UIView
-@property (nonatomic, readonly) BOOL isOpened;
-@property (strong, nonatomic, readonly) UIView *owner;
-@property (weak, nonatomic) id<DBCategoryPickerDelegate> delegate;
+@interface DBCategoryPicker : DBPopupComponent
+@property (weak, nonatomic) id<DBCategoryPickerDelegate> pickerDelegate;
 
 - (void)configureWithCurrentCategory:(DBMenuCategory *)category categories:(NSArray *)categories;
-
-- (void)openedOnView:(UIView *)view;
-- (void)closed;
 @end

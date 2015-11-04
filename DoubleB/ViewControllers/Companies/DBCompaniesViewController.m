@@ -54,7 +54,7 @@
         
         if(success){
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            delegate.window.rootViewController = [ViewControllerManager mainViewController];
+            delegate.window.rootViewController = [[ApplicationManager sharedInstance] mainViewController];
         } else {
             [self showError:@"Не удалось загрузить информацию о выбранной компании"];
         }

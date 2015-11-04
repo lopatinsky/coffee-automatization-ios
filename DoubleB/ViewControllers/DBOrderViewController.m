@@ -22,10 +22,7 @@
 #import "DBOrderReturnView.h"
 #import "IHSecureStore.h"
 #import "OrderCoordinator.h"
-#import "DBTabBarController.h"
 #import "DBCompanyInfo.h"
-
-//#import "ShareManager.h"
 
 #import "UIAlertView+BlocksKit.h"
 
@@ -61,7 +58,7 @@
     NSMutableAttributedString *attributed = [[NSMutableAttributedString alloc] initWithString:temp];
     [attributed setAttributes:@{
             NSForegroundColorAttributeName: [UIColor whiteColor],
-            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:16]
+            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:16]
     } range:NSMakeRange(0, attributed.string.length)];
 
     [attributed addAttribute:NSForegroundColorAttributeName
@@ -254,8 +251,9 @@
     if(venue)
         [OrderCoordinator sharedInstance].orderManager.venue = venue;
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    [self showAlert:@"Позиции из заказа успешно добавлены в корзину!"];
+    [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenOrder animated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self showAlert:@"Позиции из заказа успешно добавлены в корзину!"];
 }
 
 #pragma mark - Table view data source

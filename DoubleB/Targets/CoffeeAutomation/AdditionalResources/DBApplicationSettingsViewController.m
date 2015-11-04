@@ -7,7 +7,6 @@
 //
 
 #import "DBApplicationSettingsViewController.h"
-#import "DBTabBarController.h"
 #import "AppDelegate.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
@@ -74,8 +73,7 @@
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             if(success){
-                AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-                delegate.window.rootViewController = [ViewControllerManager mainViewController];
+                [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
             } else {
                 [self showError:@"Не удалось загрузить информацию о выбранной компании"];
             }

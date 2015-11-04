@@ -6,9 +6,9 @@
 //  Copyright © 2015 Empatika. All rights reserved.
 //
 
-#import "DBPopupViewComponent.h"
+#import "DBPopupComponent.h"
 
-@interface DBDeliveryTypesPopupView : DBPopupViewComponent
+@interface DBDeliveryTypesPopupView : DBPopupComponent
 
 - (void)showFrom:(UIView *)fromView onView:(UIView *)parentView;
 

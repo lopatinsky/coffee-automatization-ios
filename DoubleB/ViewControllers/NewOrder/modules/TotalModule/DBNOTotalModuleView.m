@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIView *totalView;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalTotal;
-@property (nonatomic) NSInteger initialTotalViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTotalViewHeight;
 
 @property (weak, nonatomic) IBOutlet DBNOPromosModuleView *promosModule;
 
@@ -56,7 +56,6 @@
     self.initialSumViewHeight = self.constraintSumViewHeight.constant;
     self.initialShippingViewHeight = self.constraintShippingViewHeight.constant;
     self.initialDiscountViewHeight = self.constraintDiscountViewHeight.constant;
-    self.initialTotalViewHeight = self.totalView.frame.size.height;
     
     self.sumLabel.textColor = [UIColor db_textGrayColor];
     self.shippingLabel.textColor = [UIColor db_textGrayColor];
@@ -119,7 +118,7 @@
 }
 
 - (CGFloat)moduleViewContentHeight {
-    int height = self.constraintSumViewHeight.constant + self.constraintShippingViewHeight.constant + self.constraintDiscountViewHeight.constant + self.initialTotalViewHeight;
+    int height = self.constraintSumViewHeight.constant + self.constraintShippingViewHeight.constant + self.constraintDiscountViewHeight.constant + self.constraintTotalViewHeight.constant;
     
     height += [self.promosModule moduleViewContentHeight];
     

@@ -143,8 +143,7 @@
         self.discount = currentTotal - newTotal;
         
         // Calculate wallet points available for order
-//        self.walletDiscount = [response[@"max_wallet_payment"] doubleValue];
-        self.walletDiscount = 10;
+        self.walletDiscount = [response[@"max_wallet_payment"] doubleValue];
         
         // Assemble global promos & errors
         NSMutableArray *globalPromoMessages = [NSMutableArray new];

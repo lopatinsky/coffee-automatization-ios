@@ -72,12 +72,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBProfileViewController *profileVC = [DBProfileViewController new];
     profileVC.analyticsScreen = @"Profile_screen";
     [self.settingsItems addObject:@{@"name": @"profileVC",
-                                    @"image": @"profile_icon",
+                                    @"image": @"profile_icon_active",
                                     @"viewController": profileVC}];
     
     // Profile item
     DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
     [self.settingsItems addObject:@{@"name": @"ordersVC",
+                                    @"title": NSLocalizedString(@"Заказы", nil),
                                     @"image": @"history_icon",
                                     @"viewController": ordersVC}];
     
@@ -112,7 +113,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     // Personal wallet item
     if([OrderCoordinator sharedInstance].promoManager.walletEnabled){
         [self.settingsItems addObject:@{@"name": @"personalWalletVC",
-                                        @"image": @"wallet_icon"}];
+                                        @"image": @"wallet_icon_active"}];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
     
@@ -242,7 +243,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
-    if([settingsItemInfo[@"name"] isEqualToString:@"historyVC"]){
+    if([settingsItemInfo[@"name"] isEqualToString:@"ordersVC"]){
         event = @"history_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }

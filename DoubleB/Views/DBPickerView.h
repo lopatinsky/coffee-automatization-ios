@@ -6,7 +6,7 @@
 //  Copyright © 2015 Empatika. All rights reserved.
 //
 
-#import "DBPopupViewComponent.h"
+#import "DBPopupComponent.h"
 
 @class DBPickerView;
 @protocol DBPickerViewDelegate <NSObject>
@@ -16,8 +16,8 @@
 
 @end
 
-@interface DBPickerView : DBPopupViewComponent
-@property (weak, nonatomic) id<DBPickerViewDelegate, DBPopupViewComponentDelegate> pickerDelegate;
+@interface DBPickerView : DBPopupComponent
+@property (weak, nonatomic) id<DBPickerViewDelegate, DBPopupComponentDelegate> pickerDelegate;
 @property (strong, nonatomic) NSString *title;
 
 - (void)configureWithItems:(NSArray *)items;

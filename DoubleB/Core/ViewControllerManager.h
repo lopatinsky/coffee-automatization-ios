@@ -30,10 +30,6 @@
 + (nonnull UIViewController *)launchViewController;
 @end
 
-@interface ViewControllerManager(MainViewControllers)
-+ (nonnull UIViewController *)mainViewController;
-@end
-
 @interface ViewControllerManager(NewsViewControllers)
 + (nonnull UIViewController<PopupNewsViewControllerProtocol> *)newsViewController;
 @end

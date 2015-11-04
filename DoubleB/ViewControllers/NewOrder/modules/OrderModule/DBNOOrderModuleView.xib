@@ -24,12 +24,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R0g-hZ-NMQ">
-                    <rect key="frame" x="182" y="7" width="130" height="40"/>
+                    <rect key="frame" x="202" y="12" width="110" height="30"/>
                     <animations/>
                     <color key="backgroundColor" red="0.7843137255" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="130" id="b1s-2V-TJJ"/>
-                        <constraint firstAttribute="height" constant="40" id="jzK-1P-Obq"/>
+                        <constraint firstAttribute="width" constant="110" id="b1s-2V-TJJ"/>
+                        <constraint firstAttribute="height" constant="30" id="jzK-1P-Obq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="Заказать">

@@ -131,6 +131,7 @@
                     <constraints>
                         <constraint firstItem="g7a-8u-RQ4" firstAttribute="centerY" secondItem="c5f-JS-Kox" secondAttribute="centerY" id="FdN-cW-9Nw"/>
                         <constraint firstItem="yaN-AH-nSl" firstAttribute="centerY" secondItem="g7a-8u-RQ4" secondAttribute="centerY" id="V7u-2g-USP"/>
+                        <constraint firstAttribute="height" constant="35" id="VJ4-4C-EAP"/>
                         <constraint firstItem="g7a-8u-RQ4" firstAttribute="leading" secondItem="c5f-JS-Kox" secondAttribute="leading" constant="8" id="jgM-23-PM0"/>
                         <constraint firstAttribute="trailing" secondItem="yaN-AH-nSl" secondAttribute="trailing" constant="8" id="kpE-In-dOL"/>
                     </constraints>
@@ -146,7 +147,6 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="2fe-Gx-Dmv" secondAttribute="trailing" id="0iE-De-Pxz"/>
                 <constraint firstItem="E1h-Qt-q6E" firstAttribute="top" secondItem="3Th-oU-v3N" secondAttribute="top" id="9b7-4s-Hk4"/>
-                <constraint firstItem="c5f-JS-Kox" firstAttribute="top" secondItem="2fe-Gx-Dmv" secondAttribute="bottom" constant="25" id="ATa-o0-pLU"/>
                 <constraint firstItem="kYo-rI-IcQ" firstAttribute="top" secondItem="2fe-Gx-Dmv" secondAttribute="bottom" id="DfR-hg-2Ng"/>
                 <constraint firstItem="E1h-Qt-q6E" firstAttribute="leading" secondItem="3Th-oU-v3N" secondAttribute="leading" id="FEm-m8-xDN"/>
                 <constraint firstItem="2fe-Gx-Dmv" firstAttribute="leading" secondItem="3Th-oU-v3N" secondAttribute="leading" id="G2h-Kd-r14"/>
@@ -168,6 +168,7 @@
                 <outlet property="constraintDiscountViewHeight" destination="KtC-HQ-5bh" id="atL-KQ-mNt"/>
                 <outlet property="constraintShippingViewHeight" destination="TSR-1B-8Sk" id="eY0-oh-0iY"/>
                 <outlet property="constraintSumViewHeight" destination="dIW-5M-NtT" id="qev-6m-aPe"/>
+                <outlet property="constraintTotalViewHeight" destination="VJ4-4C-EAP" id="kGL-4y-AyT"/>
                 <outlet property="discountLabel" destination="Cu4-tC-yYg" id="g57-tb-Zab"/>
                 <outlet property="discountTotal" destination="J1r-Qt-qZJ" id="oTq-nZ-Ugl"/>
                 <outlet property="discountView" destination="2fe-Gx-Dmv" id="w00-2L-ALf"/>

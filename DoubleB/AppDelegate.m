@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "IHSecureStore.h"
-#import "DBTabBarController.h"
 #import "JRSwizzleMethods.h"
 #import "ApplicationManager.h"
 
@@ -53,12 +52,7 @@
     if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
         
-        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
-        
-        NSDictionary *userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-        [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
-        [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+        [[ApplicationManager sharedInstance] awakeFromNotification:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -133,19 +127,12 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
     
-    if([UIApplication sharedApplication].applicationState != 0){
-        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-        [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
-        [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-    }
+    [[ApplicationManager sharedInstance] recieveNotification:userInfo];
     
     NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
                                                                  object:nil
                                                                userInfo:userInfo ?: @{}];
-
     [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
-    // TODO: publish remote notification with popup view controller
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{

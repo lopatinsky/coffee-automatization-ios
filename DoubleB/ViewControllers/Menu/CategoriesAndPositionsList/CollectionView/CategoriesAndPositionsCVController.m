@@ -10,6 +10,7 @@
 #import "PositionCollectionViewCell.h"
 #import "PositionCompactCollectionViewCell.h"
 
+#import "DBNewOrderVC.h"
 #import "DBBarButtonItem.h"
 #import "DBCategoryPicker.h"
 #import "DBCategoryHeaderView.h"
@@ -67,7 +68,7 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
     [self.collectionView registerNib:[UINib nibWithNibName:@"PositionCompactCollectionViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:reuseCompactIdentifier];
     
     self.navigationItem.title = NSLocalizedString(@"Меню", nil);
-    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveBack)];
+    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = [UIColor grayColor];
@@ -101,8 +102,8 @@ static NSString * const reuseCompactIdentifier = @"PositionCompactCollectionCell
 }
 
 #pragma mark - User methods
-- (void)moveBack {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)moveToOrder {
+    [self.navigationController pushViewController:[DBNewOrderVC new] animated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 
