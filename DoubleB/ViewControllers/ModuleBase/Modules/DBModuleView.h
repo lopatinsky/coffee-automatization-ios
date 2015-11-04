@@ -72,7 +72,7 @@
  * Common initializer for module
  * Override it to customize initialization
  */
-- (void)commomInit;
+- (void)commonInit;
 
 /**
  * Returns content size of current module. By default returns frame size

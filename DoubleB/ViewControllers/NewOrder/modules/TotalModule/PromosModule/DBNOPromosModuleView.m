@@ -18,7 +18,7 @@
 @implementation DBNOPromosModuleView
 
 - (void)commonInit {
-    [super commomInit];
+    [super commonInit];
     
     self.backgroundColor = [UIColor clearColor];
     
@@ -65,9 +65,6 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBDiscountMessageCell" owner:self options:nil] firstObject];
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        cell.messageLabel.textColor = [UIColor db_defaultColor];
-        cell.messageLabel.textAlignment = NSTextAlignmentRight;
     }
     
     cell.messageLabel.text = [OrderCoordinator sharedInstance].promoManager.promos[indexPath.row];

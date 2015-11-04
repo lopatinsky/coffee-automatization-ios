@@ -11,7 +11,7 @@
 @implementation DBDiscountMessageCell
 
 - (void)awakeFromNib {
-    self.contentView.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
     self.messageLabel.textColor = [UIColor db_textGrayColor];
 }
 

@@ -81,7 +81,6 @@
     [self addModule:[DBNOndaModuleView new]topOffset:5];
     [self addModule:[DBNOWalletModuleView new] topOffset:1];
     [self addModule:[DBNOTotalModuleView new] topOffset:1];
-    [self addModule:[DBNOPromosModuleView new] topOffset:1];
     
     [self layoutModules];
 }

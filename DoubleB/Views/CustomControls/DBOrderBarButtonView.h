@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DBOrderBarButtonView : UIView
-@property (weak, nonatomic) IBOutlet UIImageView *backImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintBackImageViewWidth;
 @property (weak, nonatomic) IBOutlet UIImageView *orderImageView;
-@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end

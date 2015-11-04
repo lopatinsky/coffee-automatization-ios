@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (nonatomic) BOOL inProgress;
+@property (nonatomic) NSInteger activeTasks;
 
 @end
 
@@ -65,7 +65,7 @@
     self.totalLabel.hidden = YES;
     self.orderButton.hidden = YES;
     
-    if (_inProgress) {
+    if (_activeTasks > 0) {
         self.totalLabel.hidden = NO;
         self.orderButton.hidden = NO;
     } else {
@@ -111,16 +111,17 @@
 
 - (void)startAnimating{
     [self.activityIndicator startAnimating];
-    _inProgress = YES;
+    _activeTasks += 1;
     
     [self reload:YES];
 }
 
 - (void)endAnimating{
-    [self.activityIndicator stopAnimating];
-    _inProgress = NO;
-    
-    [self reload:YES];
+    _activeTasks -= 1;
+    if (_activeTasks <= 0) {
+        [self.activityIndicator stopAnimating];
+        [self reload:YES];
+    }
 }
 
 - (void)clickOrderButton {

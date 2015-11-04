@@ -19,13 +19,16 @@
 - (void)awakeFromNib{
     self.backgroundColor = [UIColor clearColor];
     
-    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0].CGColor)) {
-        [self.orderImageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor blackColor]];
-        self.totalLabel.textColor = [UIColor blackColor];
-    } else {
-        [self.orderImageView templateImageWithName:@"orders_icon.png" tintColor:[UIColor whiteColor]];
-        self.totalLabel.textColor = [UIColor whiteColor];
-    }
+    [self.orderImageView templateImageWithName:@"shopping_cart_icon.png" tintColor:[UIColor whiteColor]];
+    
+    self.countLabel.layer.cornerRadius = self.countLabel.frame.size.height / 2;
+//    self.countLabel.layer.borderWidth = 1.f;
+//    self.countLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.countLabel.layer.masksToBounds = YES;
+    
+    self.countLabel.textColor = [UIColor whiteColor];
+    
+//    self.countLabel.backgroundColor = [UIColor db_defaultColor];
 }
 
 @end

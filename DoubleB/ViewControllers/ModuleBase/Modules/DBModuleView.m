@@ -14,19 +14,24 @@
 
 @implementation DBModuleView
 
-- (instancetype)init {
-    self = [super initWithFrame:CGRectMake(0, 0, 320, 40)];
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
     
-    [self commomInit];
+    [self commonInit];
     
     return self;
 }
 
-- (void)awakeFromNib {
-    [self commomInit];
+- (instancetype)init {
+    self = [super initWithFrame:CGRectMake(0, 0, 320, 40)];
+    
+    [self commonInit];
+    
+    return self;
 }
 
-- (void)commomInit {
+
+- (void)commonInit {
     self.submodules = [NSMutableArray new];
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerHandler:)];

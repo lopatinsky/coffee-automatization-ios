@@ -54,8 +54,8 @@
     CGRect rect = self.frame;
     rect.size.height = self.tableView.contentSize.height;
     
-    if(rect.size.height > 450){
-        rect.size.height = 450;
+    if(rect.size.height > 350){
+        rect.size.height = 350;
         self.tableView.scrollEnabled = YES;
     } else {
         self.tableView.scrollEnabled = NO;
