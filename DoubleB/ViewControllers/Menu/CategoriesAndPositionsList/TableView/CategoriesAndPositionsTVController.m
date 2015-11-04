@@ -53,7 +53,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // Title
-    
+    [self setupTitleView];
     
     // Order button
     self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
@@ -81,6 +81,7 @@
     [GANHelper analyzeScreen:@"Menu_screen"];
 
     [self loadMenu:nil];
+    [self reloadTitleView:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -103,6 +104,7 @@
             self.categories = categories;
             
             [self reloadTableView];
+            [self reloadTitleView:[self.categories firstObject]];
         }
         
         [self.tableView reloadData];
@@ -144,16 +146,31 @@
 - (void)setupTitleView {
     _titleView = [DBDropdownTitleView new];
     _titleView.delegate = self;
-    if (self.categories.count > 0) {
-        _titleView.title = ((DBMenuCategory *)[self.categories firstObject]).name;
-    }
+    _titleView.title = NSLocalizedString(@"Меню", nil);
+    [self reloadTitleView:nil];
     
     self.navigationItem.titleView = _titleView;
 }
 
-- (void)reloadTitleView {
+- (void)reloadTitleView:(DBMenuCategory *)category {
     if (self.categories.count > 0) {
-        _titleView.title = ((DBMenuCategory *)[self.categories firstObject]).name;
+//        if (category) {
+//            _titleView.title = category.name;
+//        } else {
+//            DBMenuCategory *category = [self currentCategory];
+//            if (!category){
+//                category = [self.categories firstObject];
+//            }
+//            _titleView.title = category.name;
+//        }
+        
+        if (self.categories.count == 1)
+            _titleView.state = DBDropdownTitleViewStateNone;
+        else
+            _titleView.state = self.categoryPicker.presented ? DBDropdownTitleViewStateOpened : DBDropdownTitleViewStateClosed;
+    } else {
+//        _titleView.title = NSLocalizedString(@"Меню", nil);
+        _titleView.state = DBDropdownTitleViewStateNone;
     }
 }
 
@@ -289,58 +306,6 @@
     [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
 }
 
-//#pragma mark - DBCategoryPicker methods
-//
-//- (void)showCatecoryPickerFromRect:(CGRect)fromRect onView:(UIView *)onView{
-//    [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
-//    if(!self.categoryPicker.isOpened){
-//        UITableViewCell *firstVisibleCell = [[self.tableView visibleCells] firstObject];
-//        DBMenuCategory *topCategory;
-//        if(firstVisibleCell){
-//            NSInteger topSection = [[self.tableView indexPathForCell:firstVisibleCell] section];
-//            topCategory = [self.categories objectAtIndex:topSection];
-//        } else {
-//            topCategory = [self.categories objectAtIndex:0];
-//        }
-//
-//        [self.categoryPicker configureWithCurrentCategory:topCategory categories:self.categories];
-//        [self.categoryPicker openedOnView:onView];
-//        
-//        CGRect rect = [onView convertRect:fromRect toView:self.navigationController.view];
-//        
-//        CGRect pickerRect = self.categoryPicker.frame;
-//        pickerRect.size.width = self.tableView.frame.size.width;
-//        rect.origin.y += rect.size.height;
-//        pickerRect.origin.y = rect.origin.y - pickerRect.size.height;
-//        
-//        self.categoryPicker.frame = pickerRect;
-//        [self.navigationController.view insertSubview:self.categoryPicker belowSubview:self.navigationController.navigationBar];
-//        
-//        [UIView animateWithDuration:0.3 animations:^{
-//            CGRect pickerRect = self.categoryPicker.frame;
-//            pickerRect.origin.y = rect.origin.y;
-//           
-//            self.categoryPicker.frame = pickerRect;
-//        }];
-//    }
-//}
-//
-//- (void)hideCategoryPicker{
-//    [GANHelper analyzeEvent:@"category_spinner_closed" category:MENU_SCREEN];
-//    if(self.categoryPicker.isOpened){
-//        [self.categoryPicker closed];
-//        
-//        [UIView animateWithDuration:0.3 animations:^{
-//            CGRect pickerRect = self.categoryPicker.frame;
-//            pickerRect.origin.y = pickerRect.origin.y - pickerRect.size.height;
-//            
-//            self.categoryPicker.frame = pickerRect;
-//        } completion:^(BOOL finished) {
-//            [self.categoryPicker removeFromSuperview];
-//        }];
-//    }
-//}
-
 #pragma mark - DBCategoryPickerDelegate
 
 - (void)db_categoryPicker:(DBCategoryPicker *)picker didSelectCategory:(DBMenuCategory *)category{
@@ -348,10 +313,9 @@
     
     if(section != NSNotFound && section < [self.categories count]){
         [self scrollTableViewToSection:section];
-        self.titleView.title = category.name;
-        self.titleView.opened = NO;
         
         [self.categoryPicker hide];
+        [self reloadTitleView:category];
     }
     
     [GANHelper analyzeEvent:@"category_spinner_selected" label:category.categoryId category:MENU_SCREEN];
@@ -361,18 +325,18 @@
 
 - (void)db_dropdownTitleClick:(DBDropdownTitleView *)view {
     if(self.categoryPicker.presented){
-        self.titleView.opened = NO;
         [self.categoryPicker hide];
     } else {
         if (self.categories.count > 0){
             [self.categoryPicker configureWithCurrentCategory:[self currentCategory] categories:self.categories];
-            self.titleView.opened = YES;
             
             CGFloat offset = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
             [self.categoryPicker showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionTop offset:offset];
             [self.navigationController.view bringSubviewToFront:self.navigationController.navigationBar];
         }
     }
+    
+    [self reloadTitleView:nil];
     
     [GANHelper analyzeEvent:@"category_spinner_click" category:MENU_SCREEN];
 }

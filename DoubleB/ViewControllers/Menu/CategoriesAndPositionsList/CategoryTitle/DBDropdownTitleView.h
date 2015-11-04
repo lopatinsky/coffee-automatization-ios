@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, DBDropdownTitleViewState) {
+    DBDropdownTitleViewStateNone = 0,
+    DBDropdownTitleViewStateOpened,
+    DBDropdownTitleViewStateClosed
+};
+
 @class DBDropdownTitleView;
 
 @protocol DBMenuCategoryDropdownTitleViewDelegate <NSObject>
@@ -16,7 +22,7 @@
 
 @interface DBDropdownTitleView : UIView
 @property (strong, nonatomic) NSString *title;
-@property (nonatomic) BOOL opened;
+@property (nonatomic) DBDropdownTitleViewState state;
 
 @property (weak, nonatomic) id<DBMenuCategoryDropdownTitleViewDelegate> delegate;
 

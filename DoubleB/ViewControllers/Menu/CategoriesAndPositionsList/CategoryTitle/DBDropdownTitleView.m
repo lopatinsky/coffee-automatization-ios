@@ -14,10 +14,10 @@
 
 @end
 
-@implementation DBMenuCategoryDropdownTitleView
+@implementation DBDropdownTitleView
 
 - (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBMenuCategoryDropdownTitleView" owner:self options:nil] firstObject];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"DBDropdownTitleView" owner:self options:nil] firstObject];
     
     return self;
 }
@@ -27,7 +27,7 @@
     self.titleLabel.textColor = [UIColor whiteColor];
     
     [self.arrowImageView templateImageWithName:@"arrow_horizontal_icon.png" tintColor:[UIColor whiteColor]];
-    _opened = NO;
+    _state = DBDropdownTitleViewStateClosed;
     
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerHandler:)];
     tapRecognizer.cancelsTouchesInView = NO;
@@ -35,21 +35,28 @@
     [self addGestureRecognizer:tapRecognizer];
 }
 
-- (void)setOpened:(BOOL)opened {
-    _opened = opened;
-    [UIView animateWithDuration:0.1 animations:^{
-        self.arrowImageView.alpha = 0.f;
-    } completion:^(BOOL finished) {
-        if (_opened) {
-            [self.arrowImageView templateImageWithName:@"arrow_horizontal_top_icon.png" tintColor:[UIColor whiteColor]];
-        } else {
-            [self.arrowImageView templateImageWithName:@"arrow_horizontal_icon.png" tintColor:[UIColor whiteColor]];
-        }
+- (void)setState:(DBDropdownTitleViewState)state {
+    _state = state;
+    
+    if (state == DBDropdownTitleViewStateNone) {
+        self.arrowImageView.hidden = YES;
+    } else {
+        self.arrowImageView.hidden = NO;
         
         [UIView animateWithDuration:0.1 animations:^{
-            self.arrowImageView.alpha = 1.f;
+            self.arrowImageView.alpha = 0.f;
+        } completion:^(BOOL finished) {
+            if (state == DBDropdownTitleViewStateOpened) {
+                [self.arrowImageView templateImageWithName:@"arrow_horizontal_top_icon.png" tintColor:[UIColor whiteColor]];
+            } else {
+                [self.arrowImageView templateImageWithName:@"arrow_horizontal_icon.png" tintColor:[UIColor whiteColor]];
+            }
+            
+            [UIView animateWithDuration:0.1 animations:^{
+                self.arrowImageView.alpha = 1.f;
+            }];
         }];
-    }];
+    }
 }
 
 - (void)setTitle:(NSString *)title {
