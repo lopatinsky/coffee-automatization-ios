@@ -54,10 +54,10 @@
         if(address && address.length > 0){
             self.titleLabel.text = address;
             self.titleLabel.textColor = [UIColor blackColor];
-            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
+//            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
         } else {
             self.titleLabel.text = NSLocalizedString(@"Введите адрес доставки", nil);
-            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
+//            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
             self.titleLabel.textColor = [UIColor db_errorColor];
         }
     } else {
@@ -84,11 +84,11 @@
     if (venue) {
         self.titleLabel.text = venue.title;
         self.titleLabel.textColor = [UIColor blackColor];
-        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
+//        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
     } else {
         self.titleLabel.text = NSLocalizedString(@"Ошибка определения локации", nil);
         self.titleLabel.textColor = [UIColor db_errorColor];
-        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
+//        self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
     }
 }
 

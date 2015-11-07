@@ -16,25 +16,25 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSF-Rz-yLR">
-                    <rect key="frame" x="50" y="15" width="30.5" height="20.5"/>
+                    <rect key="frame" x="60" y="15" width="30.5" height="20.5"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_horizontal_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="tcZ-t1-YgH">
-                    <rect key="frame" x="80.5" y="17.5" width="20" height="20"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_horizontal_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="tcZ-t1-YgH">
+                    <rect key="frame" x="90.5" y="17.5" width="15" height="20"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="1r3-8n-9nN"/>
-                        <constraint firstAttribute="width" constant="20" id="666-cO-tj9"/>
+                        <constraint firstAttribute="width" constant="15" id="666-cO-tj9"/>
                     </constraints>
                 </imageView>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="LSF-Rz-yLR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-10" id="DYn-v8-EUB"/>
+                <constraint firstItem="LSF-Rz-yLR" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="DYn-v8-EUB"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tcZ-t1-YgH" secondAttribute="trailing" id="MDC-tW-u17"/>
                 <constraint firstItem="tcZ-t1-YgH" firstAttribute="centerY" secondItem="LSF-Rz-yLR" secondAttribute="centerY" constant="2" id="OgG-rw-zOv"/>
                 <constraint firstItem="LSF-Rz-yLR" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" id="X4h-al-lGl"/>

@@ -136,10 +136,25 @@
                         <constraint firstAttribute="trailing" secondItem="yaN-AH-nSl" secondAttribute="trailing" constant="8" id="kpE-In-dOL"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYo-rI-IcQ" customClass="DBNOPromosModuleView">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYo-rI-IcQ" customClass="DBNOPromosModuleView">
                     <rect key="frame" x="0.0" y="75" width="320" height="25"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlh-dL-ABk" customClass="DBDefaultSeparatorView">
+                            <rect key="frame" x="8" y="0.0" width="304" height="0.5"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.69999999999999996" id="LwW-jZ-Hg8"/>
+                            </constraints>
+                        </view>
+                    </subviews>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="wlh-dL-ABk" secondAttribute="trailing" constant="8" id="76V-OH-Jbx"/>
+                        <constraint firstItem="wlh-dL-ABk" firstAttribute="top" secondItem="kYo-rI-IcQ" secondAttribute="top" id="qir-ye-w7U"/>
+                        <constraint firstItem="wlh-dL-ABk" firstAttribute="leading" secondItem="kYo-rI-IcQ" secondAttribute="leading" constant="8" id="wXb-yC-QFu"/>
+                    </constraints>
                 </view>
             </subviews>
             <animations/>

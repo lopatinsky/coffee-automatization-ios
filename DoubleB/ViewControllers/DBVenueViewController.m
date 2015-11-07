@@ -39,6 +39,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
 
     self.view.backgroundColor = [UIColor db_backgroundColor];
 
@@ -65,8 +67,8 @@
     }
     self.labelDistance.layer.cornerRadius = 5;
     
-    [self.clockImageView templateImageWithName:@"clock.png"];
-    [self.venueImageView templateImageWithName:@"venue.png"];
+    [self.clockImageView templateImageWithName:@"time_icon_active.png"];
+    [self.venueImageView templateImageWithName:@"map_icon_active.png"];
 
     self.mapView.myLocationEnabled = YES;
     [self.mapView setCamera:[GMSCameraPosition cameraWithLatitude:self.venue.location.latitude longitude:self.venue.location.longitude zoom:16]];

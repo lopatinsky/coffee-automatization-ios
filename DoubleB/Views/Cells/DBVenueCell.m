@@ -12,15 +12,17 @@
 
 @interface DBVenueCell () <UIGestureRecognizerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *moreInfoView;
+@property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
+@property (weak, nonatomic) IBOutlet UIImageView *infoImageView;
 @end
 
 @implementation DBVenueCell
 
 - (void)awakeFromNib {
-    self.moreInfoLabel.textColor = [UIColor db_defaultColor];
-    self.moreInfoLabel.text = NSLocalizedString(@"Информация", nil);
-    
     [self.moreInfoButton addTarget:self action:@selector(moreInfoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.infoImageView templateImageWithName:@"info_icon"];
 }
 
 - (void)moreInfoButtonClick {

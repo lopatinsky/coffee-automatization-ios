@@ -56,8 +56,11 @@
     // Title
     [self setupTitleView];
     
+    // Profile button
+    self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
+    
     // Order button
-    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
     
     //styling
     self.view.backgroundColor = [UIColor whiteColor];
@@ -72,8 +75,6 @@
     
     self.categoryPicker = [DBCategoryPicker new];
     self.categoryPicker.pickerDelegate = self;
-    
-    [self setupSettingsNavigationItem];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -144,6 +145,11 @@
     [GANHelper analyzeEvent:@"order_pressed" category:MENU_SCREEN];
 }
 
+- (void)moveToSettings {
+    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
+    [self.navigationController pushViewController:settingsController animated:YES];
+}
+
 - (void)setupTitleView {
     _titleView = [DBDropdownTitleView new];
     _titleView.delegate = self;
@@ -174,20 +180,6 @@
         _titleView.state = DBDropdownTitleViewStateNone;
     }
 }
-
-- (void)setupSettingsNavigationItem{
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(clickSettings:)];
-}
-
-- (void)clickSettings:(id)sender {
-    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
-    settingsController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:settingsController animated:YES];
-}
-
 
 
 #pragma mark - UITableView methods

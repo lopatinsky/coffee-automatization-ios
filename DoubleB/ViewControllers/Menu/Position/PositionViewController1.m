@@ -72,7 +72,7 @@
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
     
     if(self.mode == PositionViewControllerModeMenuPosition){
-        self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
+        self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
     }
     
     // Configure position image

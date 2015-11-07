@@ -52,13 +52,17 @@
     self.navigationController.navigationBar.topItem.title = @"";
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = [[DBBarButtonItem alloc] initWithViewController:self action:@selector(moveToOrder)];
+    
+    // Order button
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
     
     if (self.parent) {
         [self db_setTitle:self.parent.name];
     } else {
-        [self setupSettingsNavigationItem];
         [self db_setTitle:NSLocalizedString(@"Меню", nil)];
+        
+        // Profile button
+        self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
     }
     
     //styling
@@ -140,16 +144,8 @@
     }
 }
 
-- (void)setupSettingsNavigationItem{
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings.png"]
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:self
-                                                                            action:@selector(clickSettings:)];
-}
-
-- (void)clickSettings:(id)sender {
+- (void)moveToSettings {
     DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
-    settingsController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 

@@ -23,6 +23,7 @@
 #import "DBNOCommentModuleView.h"
 #import "DBNOndaModuleView.h"
 #import "DBNOOrderModuleView.h"
+#import "DBModuleSeparatorView.h"
 
 #import "NetworkManager.h"
 
@@ -72,15 +73,21 @@
     [self addModule:[DBNOGiftItemsModuleView new] topOffset:5];
     [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
     [self addModule:[DBNOBonusItemAdditionModuleView new]];
-    [self addModule:[DBNOProfileModuleView new] topOffset:10];
-    [self addModule:[DBNODeliveryTypeModuleView new] topOffset:5];
+    
+    [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:10]];
+    
+    [self addModule:[DBNOProfileModuleView new] topOffset:0 bottomOffset:5];
+    [self addModule:[DBNODeliveryTypeModuleView new] topOffset:0];
     [self addModule:[DBNOVenueModuleView new] topOffset:1];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
     [self addModule:[DBNOPaymentModuleView new]topOffset:5];
     [self addModule:[DBNOCommentModuleView new]topOffset:5];
     [self addModule:[DBNOndaModuleView new]topOffset:5];
-    [self addModule:[DBNOWalletModuleView new] topOffset:1];
-    [self addModule:[DBNOTotalModuleView new] topOffset:1];
+    
+    [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:5]];
+    
+    [self addModule:[DBNOWalletModuleView new] topOffset:0 bottomOffset:1];
+    [self addModule:[DBNOTotalModuleView new] topOffset:0];
     
     [self layoutModules];
 }

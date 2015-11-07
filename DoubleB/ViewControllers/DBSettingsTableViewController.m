@@ -47,7 +47,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Настройки", nil);
+    [self db_setTitle:NSLocalizedString(@"Профиль", nil)];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     

@@ -12,10 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qAz-ZF-zox" customClass="DBNOWalletModuleView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
             <subviews>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C4W-FS-ZUh">
-                    <rect key="frame" x="263" y="4.5" width="51" height="31"/>
+                    <rect key="frame" x="263" y="7" width="51" height="31"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="31" id="AkV-2u-R8e"/>
@@ -23,7 +23,7 @@
                     </constraints>
                 </switch>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оплатить 125 р. бонусами" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bge-iF-UQX">
-                    <rect key="frame" x="8" y="11.5" width="245" height="17"/>
+                    <rect key="frame" x="8" y="14" width="245" height="17"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -31,7 +31,7 @@
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="0.95999999999999996" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="centerY" secondItem="Bge-iF-UQX" secondAttribute="centerY" id="IBl-eQ-lEu"/>
                 <constraint firstAttribute="trailing" secondItem="C4W-FS-ZUh" secondAttribute="trailing" constant="8" id="KS4-wY-eFi"/>

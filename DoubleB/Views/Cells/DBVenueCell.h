@@ -23,9 +23,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintDistanceLabelWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintDistanceLabelAndVenueNameLabelSpace;
 
-@property (weak, nonatomic) IBOutlet UILabel *moreInfoLabel;
-@property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
-
 @property (strong, nonatomic) Venue *venue;
 @property (weak, nonatomic) id<DBVenueCellDelegate> delegate;
 

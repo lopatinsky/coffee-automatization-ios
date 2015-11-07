@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DBBarButtonItem : UIBarButtonItem
--(instancetype)initWithViewController:(UIViewController *)viewController action:(SEL)action;
+
++ (DBBarButtonItem *)orderItem:(UIViewController *)controller action:(SEL)action;
++ (DBBarButtonItem *)profileItem:(UIViewController *)controller action:(SEL)action;
 
 @end

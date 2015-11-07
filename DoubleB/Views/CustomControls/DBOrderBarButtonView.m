@@ -7,6 +7,7 @@
 //
 
 #import "DBOrderBarButtonView.h"
+#import "OrderCoordinator.h"
 
 @implementation DBOrderBarButtonView
 
@@ -22,13 +23,25 @@
     [self.orderImageView templateImageWithName:@"shopping_cart_icon.png" tintColor:[UIColor whiteColor]];
     
     self.countLabel.layer.cornerRadius = self.countLabel.frame.size.height / 2;
-//    self.countLabel.layer.borderWidth = 1.f;
-//    self.countLabel.layer.borderColor = [UIColor whiteColor].CGColor;
     self.countLabel.layer.masksToBounds = YES;
     
     self.countLabel.textColor = [UIColor whiteColor];
     
-//    self.countLabel.backgroundColor = [UIColor db_defaultColor];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalCount] selector:@selector(reload)];
+}
+
+-(void)dealloc{
+    [[OrderCoordinator sharedInstance] removeObserver:self];
+}
+
+- (void)reload {
+    NSInteger count = [OrderCoordinator sharedInstance].itemsManager.totalCount;
+    if (count == 0) {
+        self.countLabel.hidden = YES;
+    } else {
+        self.countLabel.hidden = NO;
+        self.countLabel.text = [NSString stringWithFormat:@"%ld", (long)count];
+    }
 }
 
 @end

@@ -11,21 +11,21 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Lll-sV-Cop">
-                    <rect key="frame" x="5" y="4.5" width="25" height="26"/>
+                    <rect key="frame" x="6.5" y="6.5" width="22" height="22"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="25" id="aOd-18-NGa"/>
-                        <constraint firstAttribute="height" constant="26" id="hIT-PA-WQ3"/>
+                        <constraint firstAttribute="width" constant="22" id="aOd-18-NGa"/>
+                        <constraint firstAttribute="height" constant="22" id="hIT-PA-WQ3"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="obr-Y6-2Fl">
-                    <rect key="frame" x="10" y="-0.5" width="15" height="15"/>
+                    <rect key="frame" x="10" y="1.5" width="15" height="15"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="OXc-7m-LCh"/>
                         <constraint firstAttribute="width" constant="15" id="oqS-fm-6GW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>

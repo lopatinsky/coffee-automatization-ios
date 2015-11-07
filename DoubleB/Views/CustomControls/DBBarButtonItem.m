@@ -8,74 +8,54 @@
 
 #import "DBBarButtonItem.h"
 #import "DBOrderBarButtonView.h"
+#import "DBProfileBarButtonItem.h"
 #import "OrderCoordinator.h"
 
-@interface DBBarButtonItem ()
+typedef NS_ENUM(NSInteger, DBBarButtonType) {
+    DBBarButtonTypeOrder = 0,
+    DBBarButtonTypeProfile
+};
 
-@property (strong, nonatomic) DBOrderBarButtonView *orderView;
+@interface DBBarButtonItem ()
 @end
 
 @implementation DBBarButtonItem
 
-- (instancetype)initWithViewController:(UIViewController *)viewController
-                     action:(SEL)action{
++ (DBBarButtonItem *)orderItem:(UIViewController *)controller action:(SEL)action {
+    return [self itemWithType:DBBarButtonTypeOrder controller:controller action:action];
+}
+
++ (DBBarButtonItem *)profileItem:(UIViewController *)controller action:(SEL)action {
+    return [self itemWithType:DBBarButtonTypeProfile controller:controller action:action];
+}
+
++ (DBBarButtonItem *)itemWithType:(DBBarButtonType)type
+                       controller:(UIViewController *)controller
+                           action:(SEL)action {
     UIButton *buttonOrder = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonOrder setTitleColor:[UIColor db_defaultColor]
-                      forState:UIControlStateNormal];
     buttonOrder.frame = CGRectMake(0, 0, 35, 35);
-    [buttonOrder addTarget:viewController action:action forControlEvents:UIControlEventTouchUpInside];
+    [buttonOrder addTarget:controller action:action forControlEvents:UIControlEventTouchUpInside];
     
-    self.orderView = [DBOrderBarButtonView new];
-    self.orderView.userInteractionEnabled = NO;
-    self.orderView.exclusiveTouch = NO;
-    [buttonOrder addSubview:self.orderView];
-    self.orderView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.orderView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:buttonOrder];
-    
-    self = [super initWithCustomView:buttonOrder];
-    
-    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalCount] selector:@selector(update)];
-    
-    [self update];
-    return self;
-}
-
--(void)dealloc{
-    [[OrderCoordinator sharedInstance] removeObserver:self];
-}
-
-//-(NSAttributedString *)attributedStringWithCount:(NSInteger)count withTotalPrice:(double)totalPrice{
-//    NSString *price = [NSString stringWithFormat:@"%ld", (long)count];
-//    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:
-//                                         [NSString stringWithFormat:@" %@", price]];
-//    [string addAttribute:NSFontAttributeName
-//                   value:[UIFont fontWithName:@"HelveticaNeue-Light" size:16.f]
-//                   range:NSMakeRange(0, [string.string length])];
-//    return string;
-//}
-
--(void)update{
-//    UIButton *button = (UIButton *)self.customView;
-//    NSAttributedString *string = [self attributedStringWithCount:[OrderCoordinator sharedInstance].itemsManager.totalCount
-//                                                  withTotalPrice:[OrderCoordinator sharedInstance].itemsManager.totalPrice - [OrderCoordinator sharedInstance].promoManager.discount];
-//    [self.orderView.totalLabel setAttributedText:string];
-//    
-//    
-//    
-//    CGRect newTitleRect = self.orderView.totalLabel.frame;
-//    newTitleRect.size.width = string.size.width + 5;
-//    
-//    CGRect newButtonRect = button.frame;
-//    newButtonRect.size.width = self.orderView.orderImageView.frame.size.width + newTitleRect.size.width;
-//    button.frame = newButtonRect;
-    
-    int count = [OrderCoordinator sharedInstance].itemsManager.totalCount;
-    if (count == 0) {
-        self.orderView.countLabel.hidden = YES;
-    } else {
-        self.orderView.countLabel.hidden = NO;
-        self.orderView.countLabel.text = [NSString stringWithFormat:@"%ld", (long)count];
+    UIView *customView;
+    switch (type) {
+        case DBBarButtonTypeOrder:
+            customView = [DBOrderBarButtonView new];
+            break;
+        case DBBarButtonTypeProfile:
+            customView = [DBProfileBarButtonItem new];
+            
+        default:
+            break;
     }
+    
+    customView.userInteractionEnabled = NO;
+    customView.exclusiveTouch = NO;
+    [buttonOrder addSubview:customView];
+    customView.translatesAutoresizingMaskIntoConstraints = NO;
+    [customView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:buttonOrder];
+    
+    DBBarButtonItem *item = [[DBBarButtonItem alloc] initWithCustomView:buttonOrder];
+    return item;
 }
 
 @end
