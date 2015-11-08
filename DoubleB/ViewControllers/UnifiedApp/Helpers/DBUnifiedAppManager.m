@@ -9,13 +9,15 @@
 #import "DBUnifiedAppManager.h"
 #import "DBAPIClient.h"
 
+
 @implementation DBCity
 
 - (instancetype)initWithResponseDict:(NSDictionary *)dict {
     self = [super init];
     
-    self.cityId = [dict getValueForKey:@""] ?: @"";
-    self.cityName = [dict getValueForKey:@""] ?: @"";
+    NSNumber *cityId = [dict getValueForKey:@"id"];
+    self.cityId = [cityId stringValue] ?: @"";
+    self.cityName = [dict getValueForKey:@"city"] ?: @"";
     
     return self;
 }
@@ -41,12 +43,22 @@
 
 @implementation DBUnifiedAppManager
 
+- (NSArray *)cities {
+    return [self cities:nil];
+}
+
 - (NSArray *)cities:(NSString *)predicate {
     NSData *citiesData = [DBUnifiedAppManager valueForKey:@"cities"];
     if (![citiesData isKindOfClass:[NSData class]])
         citiesData = nil;
     
-    return [NSKeyedUnarchiver unarchiveObjectWithData:citiesData];
+     NSArray *cities = [NSKeyedUnarchiver unarchiveObjectWithData:citiesData];
+    if (predicate) {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"content BEGINSWITH[c] %@", predicate];
+        return [cities filteredArrayUsingPredicate:pred];
+    } else {
+        return cities;
+    }
 }
 
 
@@ -67,6 +79,31 @@
     } else {
         [DBAPIClient sharedClient].cityHeaderEnabled = NO;
     }
+}
+
+- (void)fetchCities:(void(^)(BOOL success))callback {
+    [[DBAPIClient sharedClient] GET:@"unified/cities"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                NSMutableArray *cities = [NSMutableArray new];
+                                
+                                for (NSDictionary *cityDict in responseObject[@"cities"]) {
+                                    [cities addObject:[[DBCity alloc] initWithResponseDict:cityDict]];
+                                }
+                                
+                                // Save cities
+                                NSData *citiesData = [NSKeyedArchiver archivedDataWithRootObject:cities];
+                                [DBUnifiedAppManager setValue:citiesData forKey:@"cities"];
+                                
+                                if (callback)
+                                    callback(YES);
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback)
+                                    callback(NO);
+                            }];
 }
 
 + (NSString *)db_managerStorageKey {

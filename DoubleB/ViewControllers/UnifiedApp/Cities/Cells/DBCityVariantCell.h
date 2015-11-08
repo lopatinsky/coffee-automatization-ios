@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class DBCity;
 @interface DBCityVariantCell : UITableViewCell
 
-@property (strong, nonatomic) NSString *city;
+@property (strong, nonatomic) DBCity *city;
 
 @end

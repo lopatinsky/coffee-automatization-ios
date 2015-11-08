@@ -7,6 +7,7 @@
 //
 
 #import "DBCityVariantCell.h"
+#import "DBUnifiedAppManager.h"
 
 @interface DBCityVariantCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -19,10 +20,10 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
-- (void)setCity:(NSString *)city {
+- (void)setCity:(DBCity *)city {
     _city = city;
     
-    self.titleLabel.text = city;
+    self.titleLabel.text = city.cityName;
 }
 
 @end

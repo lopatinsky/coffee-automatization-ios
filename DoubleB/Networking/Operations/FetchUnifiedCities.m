@@ -7,7 +7,7 @@
 //
 
 #import "FetchUnifiedCities.h"
-#import "DBAPIClient.h"
+#import "DBUnifiedAppManager.h"
 
 @interface FetchUnifiedCities()
 
@@ -27,13 +27,13 @@
     if (self.cancelled) return;
     [self setState:OperationExecuting];
     
-    [[DBAPIClient sharedClient] GET:@"unified/cities"
-                         parameters:@[]
-                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                
-                            }
-                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                            }];
+    [[DBUnifiedAppManager sharedInstance] fetchCities:nil callback:^(BOOL success) {
+        if (success) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedCitiesLoadSuccess object:nil userInfo:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedCitiesLoadFailure object:nil userInfo:nil];
+        }
+    }];
 }
 
 @end

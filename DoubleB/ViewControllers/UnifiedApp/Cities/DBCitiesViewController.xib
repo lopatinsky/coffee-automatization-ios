@@ -7,9 +7,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBCitiesViewController">
             <connections>
                 <outlet property="citiesTableView" destination="e0i-ox-ch3" id="OLF-Jh-4sB"/>
-                <outlet property="cityLabel" destination="9Ex-zf-f2H" id="tcK-1f-9yw"/>
-                <outlet property="cityTextField" destination="1Q6-BE-b2A" id="Eoh-ll-evw"/>
+                <outlet property="cityLabel" destination="1Q6-BE-b2A" id="Yo5-LR-ALJ"/>
+                <outlet property="cityTextField" destination="9Ex-zf-f2H" id="IT4-gi-Io6"/>
                 <outlet property="cityView" destination="JqT-5X-kN4" id="Ut4-vM-jOl"/>
+                <outlet property="constraintTableViewBottomAlignment" destination="TU0-95-HeE" id="erq-2p-Xhd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

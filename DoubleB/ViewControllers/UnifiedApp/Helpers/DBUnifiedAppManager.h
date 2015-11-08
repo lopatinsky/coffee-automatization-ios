@@ -7,6 +7,7 @@
 //
 
 #import "DBPrimaryManager.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface DBCity : NSObject<NSCoding>
 @property (strong, nonatomic) NSString *cityId;
@@ -14,9 +15,13 @@
 @end
 
 @interface DBUnifiedAppManager : DBPrimaryManager
+
+- (NSArray *)cities;
 - (NSArray *)cities:(NSString *)predicate;
 
 + (DBCity *)selectedCity;
 + (void)selectCity:(DBCity *)city;
+
+- (void)fetchCities:(void(^)(BOOL success))callback;
 
 @end
