@@ -27,7 +27,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citiesAreBecomeAvailable) name:kDBConcurrentOperationUnifiedCitiesLoadSuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citiesDownloadFailed) name:kDBConcurrentOperationUnifiedCitiesLoadFailure object:nil];
-    [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedCities];
+    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchUnifiedCities];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,7 +36,7 @@
 }
 
 #pragma mark - Networking
-- (void)citiesAreBecomeAvailable {
+- (void)citiesAreAvailable {
     
 }
 

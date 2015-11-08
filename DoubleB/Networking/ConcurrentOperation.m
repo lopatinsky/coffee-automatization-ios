@@ -24,6 +24,12 @@ NSString *const kDBConcurrentOperationFetchVenuesFinished = @"kDBConcurrentOpera
 #pragma mark - FetchUnifiedCities Operation
 NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadSuccess = @"kDBConcurrentOperationUnifiedCitiesLoadSuccess";
 NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadFailure = @"kDBConcurrentOperationUnifiedCitiesLoadFailure";
+#pragma mark - FetchUnifiedVenues Operation
+NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadSuccess = @"kDBConcurrentOperationUnifiedVenuesLoadSuccess";
+NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadFailure = @"kDBConcurrentOperationUnifiedVenuesLoadFailure";
+#pragma mark - FetchUnifiedMenu Operation
+NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadSuccess = @"kDBConcurrentOperationUnifiedMenuLoadSuccess";
+NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadFailure = @"kDBConcurrentOperationUnifiedMenuLoadFailure";
 
 @implementation ConcurrentOperation
 
