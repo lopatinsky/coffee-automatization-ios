@@ -232,7 +232,7 @@
 
 + (void)applyBrandbookStyle {
 #warning Farsch legacy code
-    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
+    if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"farsh"]) {
         [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{

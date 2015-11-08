@@ -93,7 +93,7 @@
     }
     self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:giftItems];
     
-    self.paymentType = [dict[@"payment_type_id"] intValue] + 1;
+    self.paymentType = [dict[@"payment_type_id"] intValue];
     self.status = [dict[@"status"] intValue];
     
     [self setAddressFromResponseDict:dict];

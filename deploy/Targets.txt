@@ -53,3 +53,8 @@ Tukano com.empatika.tukano 1032666807
 V60 com.empatika.v60 1034709674
 Voda com.empatika.vodaonline 1012336119
 VolgaCoffee com.empatika.volgacoffee 1044602119
+BanzayUfa com.empatika.banzayufa 1052594894
+Durum com.empatika.durum 1052594898
+Lepainquotidien com.empatika.lepainquotidien 1052718805
+Yarad com.empatika.yarad 1052718960
+Yaposhka com.empatika.yaposhka 1052718970
