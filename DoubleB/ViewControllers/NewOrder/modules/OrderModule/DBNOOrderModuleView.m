@@ -65,10 +65,7 @@
     self.totalLabel.hidden = YES;
     self.orderButton.hidden = YES;
     
-    if (_activeTasks > 0) {
-        self.totalLabel.hidden = NO;
-        self.orderButton.hidden = NO;
-    } else {
+    if (_activeTasks == 0) {
         if (![OrderCoordinator sharedInstance].validOrder) {
             if ([OrderCoordinator sharedInstance].promoManager.errors.count > 0) {
                 self.errorLabel.hidden = NO;

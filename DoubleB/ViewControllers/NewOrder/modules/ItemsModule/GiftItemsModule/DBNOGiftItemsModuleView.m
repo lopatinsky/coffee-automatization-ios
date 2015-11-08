@@ -11,6 +11,11 @@
 
 @implementation DBNOGiftItemsModuleView
 
+- (instancetype)init {
+    self = [super init];
+    
+}
+
 - (ItemsManager *)manager {
     return [OrderCoordinator sharedInstance].orderGiftsManager;
 }
