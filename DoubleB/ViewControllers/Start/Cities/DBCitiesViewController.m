@@ -52,7 +52,7 @@
     }
     
     if ([DBUnifiedAppManager selectedCity]) {
-        self.cityTextField = [DBUnifiedAppManager selectedCity].cityName;
+        self.cityTextField.text = [DBUnifiedAppManager selectedCity].cityName;
         [self reload];
     }
     

@@ -48,6 +48,8 @@ static DBAPIClient *_sharedClient = nil;
         
         // Locale/Language
         [self setValue:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] forHeader:@"Language"];
+        
+        [self setCityHeaderEnabled:YES];
     }
     return self;
 }
@@ -106,7 +108,7 @@ static DBAPIClient *_sharedClient = nil;
     _clientHeaderEnabled = clientHeaderEnabled;
     
     if(_clientHeaderEnabled && [IHSecureStore sharedInstance].clientId){
-        [self setValue:[IHSecureStore sharedInstance].clientId forHeader:@"Client-Id"];
+        [self setValue:@"5654313976201216" forHeader:@"Client-Id"];
     } else {
         [self disableHeader:@"Client-Id"];
     }

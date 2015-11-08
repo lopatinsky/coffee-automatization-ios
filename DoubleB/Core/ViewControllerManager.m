@@ -106,6 +106,7 @@
 
 #pragma mark - Main
 #import "DBTabBarController.h"
+#import "DBCitiesViewController.h"
 @implementation ViewControllerManager(MainViewControllers)
 
 + (nonnull NSDictionary *)mainViewControllerClasses {
@@ -115,8 +116,9 @@
 }
 
 + (nonnull UIViewController *)mainViewController {
-    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
-    return [mainViewController new];
+//    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
+//    return [mainViewController new];
+    return [[UINavigationController alloc] initWithRootViewController: [DBCitiesViewController new]];
 }
 
 @end
