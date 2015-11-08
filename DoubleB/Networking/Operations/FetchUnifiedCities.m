@@ -30,6 +30,7 @@
     [[DBAPIClient sharedClient] GET:@"unified/cities"
                          parameters:@[]
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                
                             }
                             failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             }];
