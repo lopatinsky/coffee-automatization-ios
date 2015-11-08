@@ -7,9 +7,14 @@
 //
 
 #import "DBCitiesViewController.h"
+#import "DBCityVariantCell.h"
 #import "NetworkManager.h"
 
-@interface DBCitiesViewController ()
+@interface DBCitiesViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIView *cityView;
+@property (weak, nonatomic) IBOutlet UITextField *cityLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityTextField;
+@property (weak, nonatomic) IBOutlet UITableView *citiesTableView;
 
 @end
 
@@ -17,7 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    [self db_setTitle:NSLocalizedString(@"Выберите ваш город", nil)];
+    
+    self.citiesTableView.dataSource = self;
+    self.citiesTableView.delegate = self;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -33,12 +42,32 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+#pragma mark - Table view data source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
 
 #pragma mark - Networking
 - (void)citiesAreAvailable {
     
 }
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    DBCityVariantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBCityVariantCell"];
+    
+    if (!cell) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"DBCityVariantCell" owner:self options:nil] firstObject];
+    }
+    
+    NSString *city = 
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+}
+
 
 - (void)citiesDownloadFailed {
     

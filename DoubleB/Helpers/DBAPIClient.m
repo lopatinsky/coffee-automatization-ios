@@ -10,6 +10,7 @@
 #import "IHSecureStore.h"
 #import "DBCompanyInfo.h"
 #import "DBCompaniesManager.h"
+#import "DBUnifiedAppManager.h"
 
 @interface DBAPIClient()
 
@@ -77,6 +78,16 @@ static DBAPIClient *_sharedClient = nil;
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
     if (self.reqSerializer) {
         [self.reqSerializer setValue:value forHTTPHeaderField:header];
+    }
+}
+
+- (void)setCityHeaderEnabled:(BOOL)cityHeaderEnabled {
+    _cityHeaderEnabled = cityHeaderEnabled;
+    
+    if (_cityHeaderEnabled && [DBUnifiedAppManager selectedCity].cityId) {
+        [self setValue:[DBUnifiedAppManager selectedCity].cityId forHeader:@"City-Id"];
+    } else {
+        [self disableHeader:@"City-Id"];
     }
 }
 
