@@ -7,7 +7,6 @@
 //
 
 #import "FetchVenues.h"
-
 #import "Venue.h"
 
 @interface FetchVenues()

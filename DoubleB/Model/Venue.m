@@ -11,6 +11,7 @@
 #import "DBAPIClient.h"
 
 static NSMutableArray *storedVenues;
+static NSMutableArray *unifiedStoredVenues;
 
 @implementation Venue
 @dynamic venueId, address, title, latitude, longitude, workingTime, hasTablesInside;
@@ -62,6 +63,7 @@ static NSMutableArray *storedVenues;
     return [self storedVenueForId:venueId];
 }
 
+#pragma mark - Storage
 + (void)dropAllVenues {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
     
@@ -69,46 +71,6 @@ static NSMutableArray *storedVenues;
     for (Venue *venue in venues) {
         [[CoreDataHelper sharedHelper].context deleteObject:venue];
     }
-}
-
-+ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler {
-    [self fetchVenuesForLocation:nil withCompletionHandler:completionHandler];
-}
-
-+ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (location) {
-        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-    }
-    
-    NSDate *startTime = [NSDate date];
-    [[DBAPIClient sharedClient] GET:@"venues"
-                         parameters:params
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%@", responseObject);
-                                
-                                [self syncVenues:responseObject[@"venues"]];
-                                
-                                NSDate *endTime = [NSDate date];
-                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                                
-                                [GANHelper analyzeEvent:@"venues_load_success"
-                                                 number:@(interval)
-                                               category:APPLICATION_START];
-                                
-                                if(completionHandler)
-                                    completionHandler([self storedVenues]);
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                                [GANHelper analyzeEvent:@"venues_load_failed"
-                                                  label:error.description
-                                               category:APPLICATION_START];
-                                
-                                if(completionHandler)
-                                    completionHandler(nil);
-                            }];
 }
 
 + (void)syncVenues:(NSArray *)responseVenues {
@@ -133,6 +95,7 @@ static NSMutableArray *storedVenues;
     storedVenues = nil;
 }
 
+#pragma mark - Auxiliary
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{
     NSMutableString *result = [NSMutableString stringWithString:@""];
     for(NSDictionary *scheduleItem in  schedule){
@@ -189,3 +152,75 @@ static NSMutableArray *storedVenues;
 }
 
 @end
+
+#pragma mark - API
+@implementation Venue (API)
+
++ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler {
+    [self fetchVenuesForLocation:nil withCompletionHandler:completionHandler];
+}
+
++ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (location) {
+        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+    }
+    
+    NSDate *startTime = [NSDate date];
+    [[DBAPIClient sharedClient] GET:@"venues"
+                         parameters:params
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                //NSLog(@"%@", responseObject);
+                                
+                                [self syncVenues:responseObject[@"venues"]];
+                                
+                                NSDate *endTime = [NSDate date];
+                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                
+                                [GANHelper analyzeEvent:@"venues_load_success"
+                                                 number:@(interval)
+                                               category:APPLICATION_START];
+                                
+                                if(completionHandler)
+                                    completionHandler([self storedVenues]);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                [GANHelper analyzeEvent:@"venues_load_failed"
+                                                  label:error.description
+                                               category:APPLICATION_START];
+                                
+                                if(completionHandler)
+                                    completionHandler(nil);
+                            }];
+}
+
+@end
+
+
+@implementation Venue (UnifiedAPI)
+
++ (void)fetchUnifiedVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(NSArray *))completionHandler {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (location) {
+        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+    }
+    
+    [[DBAPIClient sharedClient] GET:@"unified/venues"
+                         parameters:params
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                if (completionHandler) {
+                                    // TODO: finish it
+                                    completionHandler(@[]);
+                                }
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                if (completionHandler) {
+                                    completionHandler(nil);
+                                }
+                            }];
+}
+
+@end
+

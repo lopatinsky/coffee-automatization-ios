@@ -8,6 +8,7 @@
 
 #import "DBCitiesViewController.h"
 #import "DBCityVariantCell.h"
+#import "NetworkManager.h"
 
 @interface DBCitiesViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *cityView;
@@ -28,12 +29,29 @@
     self.citiesTableView.delegate = self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citiesAreBecomeAvailable) name:kDBConcurrentOperationUnifiedCitiesLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citiesDownloadFailed) name:kDBConcurrentOperationUnifiedCitiesLoadFailure object:nil];
+    [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedCities];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
 
+#pragma mark - Networking
+- (void)citiesAreBecomeAvailable {
+    
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DBCityVariantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBCityVariantCell"];
@@ -50,5 +68,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
+
+- (void)citiesDownloadFailed {
+    
+}
 
 @end
