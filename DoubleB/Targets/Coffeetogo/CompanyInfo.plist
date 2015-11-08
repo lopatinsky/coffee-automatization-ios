@@ -3,7 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>ViewControllers</key>
-	<dict/>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>Parse</key>
@@ -14,7 +17,9 @@
 			<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
 		</dict>
 		<key>BaseUrl</key>
-		<string>http://mycompany2.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://coffeetogo.u-app.doubleb-automation-production.appspot.com/</string>
+		<key>ApplicationType</key>
+		<string>Aggregator</string>
 		<key>CompanyColor</key>
 		<integer>4293962270</integer>
 		<key>CompanyGAKey</key>

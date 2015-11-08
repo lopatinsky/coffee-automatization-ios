@@ -27,7 +27,7 @@
     if (self.cancelled) return;
     [self setState:OperationExecuting];
     
-    [[DBUnifiedAppManager sharedInstance] fetchCities:nil callback:^(BOOL success) {
+    [[DBUnifiedAppManager sharedInstance] fetchCities:^(BOOL success) {
         if (success) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedCitiesLoadSuccess object:nil userInfo:nil];
         } else {

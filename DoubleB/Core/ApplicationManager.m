@@ -67,6 +67,25 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (ApplicationType)applicationType {
+    NSString *typeString = [DBCompanyInfo objectFromApplicationPreferencesByName:@"UnifiedApp"];
+    ApplicationType type = ApplicationTypeCommon;
+    
+    if ([typeString isEqualToString:@"Proxy"]) {
+        type = ApplicationTypeProxy;
+    }
+    
+    if ([typeString isEqualToString:@"Aggregator"]) {
+        type = ApplicationTypeAggregator;
+    }
+    
+    if ([typeString isEqualToString:@"Demo"]) {
+        type = ApplicationTypeDemo;
+    }
+    
+    return type;
+}
+
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {

@@ -55,6 +55,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 - (void)updateInfo:(void(^)(BOOL success))callback;
 
 + (id)objectFromPropertyListByName:(NSString *)name;
++ (id)objectFromApplicationPreferencesByName:(NSString *)name;
 
 + (NSString *)db_companyBaseUrl;
 + (BOOL)db_proxyApp;

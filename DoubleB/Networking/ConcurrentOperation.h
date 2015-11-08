@@ -24,6 +24,12 @@ extern NSString * __nonnull const kDBConcurrentOperationFetchVenuesFinished;
 #pragma mark - FetchUnifiedCities Operation
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadFailure;
+#pragma mark - FetchUnifiedVenues Operation
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadFailure;
+#pragma mark - FetchUnifiedMenu Operation
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadFailure;
 
 typedef enum : NSUInteger {
     OperationReady,

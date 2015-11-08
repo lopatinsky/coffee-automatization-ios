@@ -26,8 +26,9 @@
 + (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
 @end
 
+@class LaunchViewController;
 @interface ViewControllerManager(LaunchViewControllers)
-+ (nonnull UIViewController *)launchViewController;
++ (nonnull LaunchViewController *)launchViewController;
 @end
 
 @interface ViewControllerManager(MainViewControllers)
@@ -46,6 +47,7 @@
 + (nonnull UIViewController *)shareFriendInvitationViewController;
 @end
 
+@class DBCompaniesViewController;
 @interface ViewControllerManager(CompaniesViewControllers)
-+ (nonnull UIViewController *)companiesViewControllers;
++ (nonnull DBCompaniesViewController *)companiesViewControllers;
 @end

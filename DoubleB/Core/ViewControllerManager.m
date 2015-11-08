@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerManager.h"
+#import "DBCompanyInfo.h"
 
 #pragma mark - General
 
@@ -95,7 +96,7 @@
              };
 }
 
-+ (nonnull UIViewController *)launchViewController {
++ (nonnull LaunchViewController *)launchViewController {
     Class launchViewController = [self launchViewControllerClasses][[ViewControllerManager valueFromPropertyListByKey:@"Launch"] ?: @"default"];
     return [launchViewController new];
 }
@@ -184,7 +185,7 @@
              };
 }
 
-+ (nonnull UIViewController *)companiesViewControllers {
++ (nonnull DBCompaniesViewController *)companiesViewControllers {
     Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
     return [companiesViewController new];
 }

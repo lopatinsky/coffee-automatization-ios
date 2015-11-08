@@ -16,8 +16,18 @@ typedef enum : NSUInteger {
     RootStateCompanies,
 } RootState;
 
+typedef NS_ENUM(NSInteger, ApplicationType) {
+    ApplicationTypeCommon = 0,
+    ApplicationTypeProxy,
+    ApplicationTypeAggregator,
+    ApplicationTypeDemo
+};
+
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
+
+@property (nonatomic) ApplicationType applicationType;
+
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
 
