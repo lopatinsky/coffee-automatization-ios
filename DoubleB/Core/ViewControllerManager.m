@@ -105,11 +105,13 @@
 
 #pragma mark - Main
 #import "DBTabBarController.h"
+#import "DBUnifiedMenuTableViewController.h"
 @implementation ViewControllerManager(MainViewControllers)
 
 + (nonnull NSDictionary *)mainViewControllerClasses {
     return @{
-             @"default": [DBTabBarController class]
+             @"default": [DBTabBarController class],
+             @"test": [DBUnifiedMenuTableViewController class]
              };
 }
 
