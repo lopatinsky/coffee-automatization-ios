@@ -125,6 +125,9 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 #import "FetchCompaniesInfo.h"
 #import "CheckOrder.h"
 #import "FetchVenues.h"
+#import "FetchUnifiedCities.h"
+#import "FetchUnifiedMenu.h"
+#import "FetchUnifiedVenues.h"
 @implementation NetworkManager(OperationLoader)
 
 + (ConcurrentOperation *)operationWithType:(NetworkOperation)type {
@@ -136,7 +139,10 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
                                        @(NetworkOperationFetchCompanyInfo): [FetchCompanyInfo class],
                                        @(NetworkOperationFetchCompanies): [FetchCompaniesInfo class],
                                        @(NetworkOperationCheckOrder): [CheckOrder class],
-                                       @(NetworkOperationFetchVenues): [FetchVenues class]
+                                       @(NetworkOperationFetchVenues): [FetchVenues class],
+                                       @(NetworkOperationFetchUnifiedCities): [FetchUnifiedCities class],
+                                       @(NetworkOperationFetchUnifiedMenu): [FetchUnifiedMenu class],
+                                       @(NetworkOperationFetchUnifiedVenues): [FetchUnifiedVenues class]
                                        };
     ConcurrentOperation *operation = [[[operationClasses objectForKey:@(type)] alloc] initWithUserInfo:userInfo];
     operation.queue = [NetworkManager sharedManager].operationQueue;
