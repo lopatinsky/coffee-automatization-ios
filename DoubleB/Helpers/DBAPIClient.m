@@ -22,6 +22,7 @@ static DBAPIClient *_sharedClient = nil;
 
 @implementation DBAPIClient
 
+
 + (instancetype)sharedClient {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
