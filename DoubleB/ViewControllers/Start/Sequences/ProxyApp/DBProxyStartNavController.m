@@ -29,25 +29,30 @@ typedef NS_ENUM(NSInteger, DBProxyStartState) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setNavigationBarHidden:YES animated:NO];
+    
     if ([DBCompanyInfo sharedInstance].infoLoaded) {
         [self moveToMain];
+        [[DBCompaniesManager sharedInstance] requestCompanies:nil];
+        [[DBCompanyInfo sharedInstance] updateInfo:nil];
     } else if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
         [self moveToCompanies:NO];
+        [[DBCompaniesManager sharedInstance] requestCompanies:nil];
     } else {
         self.state = DBProxyStartStateLaunch;
-        LaunchViewController *launchVC = [ViewControllerManager launchViewController];
+        UIViewController<DBLaunchViewControllerProtocol> *launchVC = [ViewControllerManager launchViewController];
         
         @weakify(self)
-        launchVC.executableBlock = ^void() {
+        [launchVC setExecutableBlock:^{
             @strongify(self)
             [self fetchCompanies];
-        };
+        }];
         self.viewControllers = @[launchVC];
     }
 }
 
 - (void)fetchCompanies {
-    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+    [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
         if (success) {
             [self moveToCompanies:YES];
         } else {
@@ -62,8 +67,15 @@ typedef NS_ENUM(NSInteger, DBProxyStartState) {
 }
 
 - (void)moveToCompanies:(BOOL)animated {
-    DBCompaniesViewController *companiesVC = [ViewControllerManager companiesViewControllers];
-//    companiesVC = 
+    UIViewController<DBCompaniesViewControllerProtocol> *companiesVC = [ViewControllerManager companiesViewController];
+    
+    @weakify(self)
+    [companiesVC setFinalBlock:^{
+        @strongify(self)
+        [self moveToMain];
+    }];
+    
+    [self setNavigationBarHidden:NO animated:animated];
     [self setViewControllers:@[companiesVC] animated:animated];
     
     self.state = DBProxyStartStateCompanies;

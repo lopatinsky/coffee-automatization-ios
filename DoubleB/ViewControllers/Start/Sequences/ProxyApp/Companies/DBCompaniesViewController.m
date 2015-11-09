@@ -17,8 +17,10 @@
 #import "DBCompaniesManager.h"
 
 @interface DBCompaniesViewController () <UITableViewDelegate, UITableViewDataSource>
-
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (nonatomic) DBCompaniesViewControllerMode mode;
+@property (nonatomic, copy) void (^fBlock)();
 
 @property (strong, nonatomic) NSArray *companies;
 
@@ -43,6 +45,14 @@
     [self.tableView reloadData];
 }
 
+- (void)setVCMode:(DBCompaniesViewControllerMode)mode {
+    _mode = mode;
+}
+
+- (void)setFinalBlock:(void (^)())finalBlock {
+    _fBlock = finalBlock;
+}
+
 - (void)selectCompany:(DBCompany *)company {
     [[ApplicationManager sharedInstance] flushStoredCache];
     [DBCompaniesManager selectCompany:company];
@@ -52,8 +62,13 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
         if(success){
-            if (self.finalBlock)
-                self.finalBlock();
+            if (_mode == DBCompaniesViewControllerModeChooseCompany){
+                if (self.fBlock)
+                    self.fBlock();
+            } else {
+                UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+                [window setRootViewController:[[ApplicationManager sharedInstance] rootViewController]];
+            }
         } else {
             [self showError:@"Не удалось загрузить информацию о выбранной компании"];
         }

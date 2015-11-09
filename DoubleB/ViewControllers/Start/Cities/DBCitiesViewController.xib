@@ -7,10 +7,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBCitiesViewController">
             <connections>
                 <outlet property="citiesTableView" destination="e0i-ox-ch3" id="OLF-Jh-4sB"/>
-                <outlet property="cityLabel" destination="1Q6-BE-b2A" id="Yo5-LR-ALJ"/>
-                <outlet property="cityTextField" destination="9Ex-zf-f2H" id="IT4-gi-Io6"/>
-                <outlet property="cityView" destination="JqT-5X-kN4" id="Ut4-vM-jOl"/>
                 <outlet property="constraintTableViewBottomAlignment" destination="TU0-95-HeE" id="erq-2p-Xhd"/>
+                <outlet property="searchBar" destination="vJm-Vd-HGB" id="Yz9-c0-pGW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,63 +17,27 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JqT-5X-kN4">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
-                    <subviews>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Москва" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Ex-zf-f2H">
-                            <rect key="frame" x="63.5" y="0.0" width="248.5" height="45"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Город" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Q6-BE-b2A">
-                            <rect key="frame" x="8" y="0.0" width="40.5" height="45"/>
-                            <animations/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pz9-re-sXs">
-                            <rect key="frame" x="0.0" y="44.5" width="320" height="0.5"/>
-                            <animations/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="0.69999999999999996" id="acr-ZK-23P"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <animations/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="1Q6-BE-b2A" firstAttribute="top" secondItem="JqT-5X-kN4" secondAttribute="top" id="59H-jQ-W3W"/>
-                        <constraint firstItem="9Ex-zf-f2H" firstAttribute="leading" secondItem="1Q6-BE-b2A" secondAttribute="trailing" constant="15" id="IXU-Q6-Ry0"/>
-                        <constraint firstAttribute="bottom" secondItem="1Q6-BE-b2A" secondAttribute="bottom" id="Ml3-Sb-RCO"/>
-                        <constraint firstAttribute="bottom" secondItem="9Ex-zf-f2H" secondAttribute="bottom" id="PMm-7J-DmU"/>
-                        <constraint firstItem="Pz9-re-sXs" firstAttribute="leading" secondItem="JqT-5X-kN4" secondAttribute="leading" id="Vqq-X1-yyR"/>
-                        <constraint firstAttribute="height" constant="45" id="YdK-Tz-5Fx"/>
-                        <constraint firstAttribute="trailing" secondItem="Pz9-re-sXs" secondAttribute="trailing" id="f59-Vo-fuu"/>
-                        <constraint firstAttribute="trailing" secondItem="9Ex-zf-f2H" secondAttribute="trailing" constant="8" id="f7U-bJ-HdN"/>
-                        <constraint firstAttribute="bottom" secondItem="Pz9-re-sXs" secondAttribute="bottom" id="mVw-dI-91J"/>
-                        <constraint firstItem="1Q6-BE-b2A" firstAttribute="leading" secondItem="JqT-5X-kN4" secondAttribute="leading" constant="8" id="trh-HM-QFg"/>
-                        <constraint firstItem="9Ex-zf-f2H" firstAttribute="top" secondItem="JqT-5X-kN4" secondAttribute="top" id="wxG-uK-Na0"/>
-                    </constraints>
-                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="e0i-ox-ch3">
-                    <rect key="frame" x="0.0" y="45" width="320" height="523"/>
+                    <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search city..." translatesAutoresizingMaskIntoConstraints="NO" id="vJm-Vd-HGB">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                    <animations/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="JqT-5X-kN4" secondAttribute="trailing" id="Em4-1Q-hx8"/>
-                <constraint firstItem="e0i-ox-ch3" firstAttribute="top" secondItem="JqT-5X-kN4" secondAttribute="bottom" id="QTa-yy-H9F"/>
+                <constraint firstAttribute="trailing" secondItem="vJm-Vd-HGB" secondAttribute="trailing" id="Bnu-KK-8JX"/>
+                <constraint firstItem="vJm-Vd-HGB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PP5-oo-LW3"/>
                 <constraint firstAttribute="trailing" secondItem="e0i-ox-ch3" secondAttribute="trailing" id="RMz-Gv-Owd"/>
                 <constraint firstAttribute="bottom" secondItem="e0i-ox-ch3" secondAttribute="bottom" id="TU0-95-HeE"/>
-                <constraint firstItem="JqT-5X-kN4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eWQ-Yy-iNP"/>
+                <constraint firstItem="vJm-Vd-HGB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ekL-xb-wyR"/>
+                <constraint firstItem="e0i-ox-ch3" firstAttribute="top" secondItem="vJm-Vd-HGB" secondAttribute="bottom" id="s6Q-Hr-wuF"/>
                 <constraint firstItem="e0i-ox-ch3" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tML-Mv-QVk"/>
-                <constraint firstItem="JqT-5X-kN4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wbE-73-ksB"/>
             </constraints>
             <point key="canvasLocation" x="348" y="272"/>
         </view>

@@ -14,10 +14,9 @@
 
 #import "MBProgressHUD.h"
 
-@interface DBCitiesViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIView *cityView;
-@property (weak, nonatomic) IBOutlet UITextField *cityTextField;
-@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@interface DBCitiesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *citiesTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewBottomAlignment;
 
@@ -31,13 +30,17 @@
     [super viewDidLoad];
     
     [self db_setTitle:NSLocalizedString(@"Выберите ваш город", nil)];
+    self.view.backgroundColor = [UIColor db_backgroundColor];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.citiesTableView.tableFooterView = [UIView new];
+    self.citiesTableView.backgroundColor = [UIColor clearColor];
     self.citiesTableView.rowHeight = 44.f;
+    self.citiesTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.citiesTableView.dataSource = self;
     self.citiesTableView.delegate = self;
     
-    [self.cityTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.searchBar.delegate = self;
     
     if (![[DBUnifiedAppManager sharedInstance] cities]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -52,7 +55,7 @@
     }
     
     if ([DBUnifiedAppManager selectedCity]) {
-        self.cityTextField.text = [DBUnifiedAppManager selectedCity].cityName;
+        self.searchBar.text = [DBUnifiedAppManager selectedCity].cityName;
         [self reload];
     }
     
@@ -66,22 +69,12 @@
                                                object:nil];
 }
 
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//}
-//
-//- (void)viewWillAppear:(BOOL)animated {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citiesAreBecomeAvailable) name:kDBConcurrentOperationUnifiedCitiesLoadSuccess object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(citiesDownloadFailed) name:kDBConcurrentOperationUnifiedCitiesLoadFailure object:nil];
-//    [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedCities];
-//}
-
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)reload {
-    _cities = [[DBUnifiedAppManager sharedInstance] cities:self.cityTextField.text];
+    _cities = [[DBUnifiedAppManager sharedInstance] cities:self.searchBar.text];
     [self.citiesTableView reloadData];
 }
 
@@ -107,25 +100,17 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBCity *city = _cities[indexPath.row];
-    [DBUnifiedAppManager selectCity:city];
-    
-    [self.navigationController pushViewController:[DBUnifiedMenuTableViewController new] animated:YES];
+    if ([self.delegate respondsToSelector:@selector(db_citiesViewControllerDidSelectCity:)]) {
+        [self.delegate db_citiesViewControllerDidSelectCity:_cities[indexPath.row]];
+    }
 }
 
-- (void)textFieldDidChange:(UITextField *)sender {
-    [self reload];
-}
 
-//
-//#pragma mark - Networking
-//- (void)citiesAreBecomeAvailable {
-//    
-//}
-//
-//- (void)citiesDownloadFailed {
-//    
-//}
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+     [self reload];
+}
 
 #pragma mark - Keyboard events
 

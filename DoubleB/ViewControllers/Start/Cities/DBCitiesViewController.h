@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBCitiesViewController : UIViewController
+@class DBCity;
+@protocol DBCitiesViewControllerDelegate <NSObject>
 
+- (void)db_citiesViewControllerDidSelectCity:(DBCity *)city;
+
+@end
+
+@interface DBCitiesViewController : UIViewController
+@property (weak, nonatomic) id<DBCitiesViewControllerDelegate> delegate;
 @end

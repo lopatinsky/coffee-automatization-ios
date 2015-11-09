@@ -10,6 +10,8 @@
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
+#import "DBLaunchViewControllerProtocol.h"
+#import "DBCompaniesViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -26,9 +28,8 @@
 + (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
 @end
 
-@class LaunchViewController;
 @interface ViewControllerManager(LaunchViewControllers)
-+ (nonnull LaunchViewController *)launchViewController;
++ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController;
 @end
 
 @interface ViewControllerManager(MainViewControllers)
@@ -47,7 +48,6 @@
 + (nonnull UIViewController *)shareFriendInvitationViewController;
 @end
 
-@class DBCompaniesViewController;
 @interface ViewControllerManager(CompaniesViewControllers)
-+ (nonnull DBCompaniesViewController *)companiesViewControllers;
++ (nonnull UIViewController<DBCompaniesViewControllerProtocol> *)companiesViewController;
 @end

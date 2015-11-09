@@ -15,8 +15,7 @@
 - (instancetype)initWithResponseDict:(NSDictionary *)dict {
     self = [super init];
     
-    NSNumber *cityId = [dict getValueForKey:@"id"];
-    self.cityId = [cityId stringValue] ?: @"";
+    self.cityId = [dict getValueForKey:@"id"] ?: @"";
     self.cityName = [dict getValueForKey:@"city"] ?: @"";
     
     return self;
@@ -43,6 +42,10 @@
 
 @implementation DBUnifiedAppManager
 
+- (BOOL)citiesLoaded {
+    return [[DBUnifiedAppManager valueForKey:@"citiesLoaded"] boolValue];
+}
+
 - (NSArray *)cities {
     return [self cities:nil];
 }
@@ -53,8 +56,8 @@
         citiesData = nil;
     
      NSArray *cities = [NSKeyedUnarchiver unarchiveObjectWithData:citiesData];
-    if (predicate) {
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"content BEGINSWITH[c] %@", predicate];
+    if (predicate && predicate.length > 0) {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"cityName CONTAINS[c] %@", predicate];
         return [cities filteredArrayUsingPredicate:pred];
     } else {
         return cities;
@@ -82,7 +85,7 @@
 }
 
 - (void)fetchCities:(void(^)(BOOL success))callback {
-    [[DBAPIClient sharedClient] GET:@"unified/cities"
+    [[DBAPIClient sharedClient] GET:@"proxy/unified_app/cities"
                          parameters:nil
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                 NSMutableArray *cities = [NSMutableArray new];
@@ -91,9 +94,14 @@
                                     [cities addObject:[[DBCity alloc] initWithResponseDict:cityDict]];
                                 }
                                 
+                                if (cities.count == 1) {
+                                    [DBUnifiedAppManager selectCity:[cities firstObject]];
+                                }
+                                
                                 // Save cities
                                 NSData *citiesData = [NSKeyedArchiver archivedDataWithRootObject:cities];
                                 [DBUnifiedAppManager setValue:citiesData forKey:@"cities"];
+                                [DBUnifiedAppManager setValue:@(YES) forKey:@"citiesLoaded"];
                                 
                                 if (callback)
                                     callback(YES);

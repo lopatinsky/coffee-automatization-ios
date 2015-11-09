@@ -17,7 +17,7 @@
 @implementation DBCityVariantCell
 
 - (void)awakeFromNib {
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)setCity:(DBCity *)city {

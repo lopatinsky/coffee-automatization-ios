@@ -42,14 +42,13 @@ static DBAPIClient *_sharedClient = nil;
         
         self.companyHeaderEnabled = YES;
         self.clientHeaderEnabled = YES;
+        self.cityHeaderEnabled = YES;
         
         // API version
         [self setValue:[DBAPIClient restAPIVersion] forHeader:@"Version"];
         
         // Locale/Language
         [self setValue:[[[NSBundle mainBundle] preferredLocalizations] objectAtIndex:0] forHeader:@"Language"];
-        
-        [self setCityHeaderEnabled:YES];
     }
     return self;
 }
@@ -68,8 +67,9 @@ static DBAPIClient *_sharedClient = nil;
     // 1 - Share
     // 2 - New start logic
     // 3 - Significant bug in apps with shipping and takeout(was on 2 version)
+    // 4 - Unified application
     
-    return @"3";
+    return @"4";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
@@ -108,7 +108,7 @@ static DBAPIClient *_sharedClient = nil;
     _clientHeaderEnabled = clientHeaderEnabled;
     
     if(_clientHeaderEnabled && [IHSecureStore sharedInstance].clientId){
-        [self setValue:@"5654313976201216" forHeader:@"Client-Id"];
+        [self setValue:[IHSecureStore sharedInstance].clientId forHeader:@"Client-Id"];
     } else {
         [self disableHeader:@"Client-Id"];
     }

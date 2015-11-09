@@ -7,14 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBCompaniesViewControllerProtocol.h"
 
-typedef NS_ENUM(NSInteger, DBCompaniesViewControllerMode) {
-    DBCompaniesViewControllerModeChooseCompany = 0,
-    DBCompaniesViewControllerModeChangeCompany
-};
-
-@interface DBCompaniesViewController : UIViewController
-@property (nonatomic) DBCompaniesViewControllerMode mode;
-
-@property (nonatomic, copy) void (^finalBlock)();
+@interface DBCompaniesViewController : UIViewController<DBCompaniesViewControllerProtocol>
 @end

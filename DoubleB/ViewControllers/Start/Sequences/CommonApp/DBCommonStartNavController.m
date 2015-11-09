@@ -19,8 +19,6 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 
 @interface DBCommonStartNavController ()
 @property (nonatomic) DBCommonStartState state;
-
-@property (strong, nonatomic) UIAlertView *alertView;
 @end
 
 @implementation DBCommonStartNavController
@@ -28,17 +26,20 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self setNavigationBarHidden:YES animated:NO];
+    
     if ([DBCompanyInfo sharedInstance].infoLoaded) {
         [self moveToMain];
+        [[DBCompanyInfo sharedInstance] updateInfo:nil];
     } else {
         self.state = DBCommonStartStateLaunch;
-        LaunchViewController *launchVC = [ViewControllerManager launchViewController];
+        UIViewController<DBLaunchViewControllerProtocol> *launchVC = [ViewControllerManager launchViewController];
         
         @weakify(self)
-        launchVC.executableBlock = ^void() {
+        [launchVC setExecutableBlock:^{
             @strongify(self)
             [self fetchCompanyInfo];
-        };
+        }];
         self.viewControllers = @[launchVC];
     }
 }

@@ -15,7 +15,7 @@
 @end
 
 @interface DBUnifiedAppManager : DBPrimaryManager
-
+@property (nonatomic) BOOL citiesLoaded;
 - (NSArray *)cities;
 - (NSArray *)cities:(NSString *)predicate;
 

@@ -96,7 +96,7 @@
              };
 }
 
-+ (nonnull LaunchViewController *)launchViewController {
++ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController {
     Class launchViewController = [self launchViewControllerClasses][[ViewControllerManager valueFromPropertyListByKey:@"Launch"] ?: @"default"];
     return [launchViewController new];
 }
@@ -106,7 +106,6 @@
 
 #pragma mark - Main
 #import "DBTabBarController.h"
-#import "DBCitiesViewController.h"
 @implementation ViewControllerManager(MainViewControllers)
 
 + (nonnull NSDictionary *)mainViewControllerClasses {
@@ -116,9 +115,8 @@
 }
 
 + (nonnull UIViewController *)mainViewController {
-//    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
-//    return [mainViewController new];
-    return [[UINavigationController alloc] initWithRootViewController: [DBCitiesViewController new]];
+    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
+    return [mainViewController new];
 }
 
 @end
@@ -187,7 +185,7 @@
              };
 }
 
-+ (nonnull DBCompaniesViewController *)companiesViewControllers {
++ (nonnull UIViewController<DBCompaniesViewControllerProtocol> *)companiesViewController {
     Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
     return [companiesViewController new];
 }

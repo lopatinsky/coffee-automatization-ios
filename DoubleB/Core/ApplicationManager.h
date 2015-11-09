@@ -10,11 +10,10 @@
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
-typedef enum : NSUInteger {
-    RootStateLaunch,
-    RootStateMain,
-    RootStateCompanies,
-} RootState;
+typedef NS_ENUM(NSInteger, RootState) {
+    RootStateStart = 0,
+    RootStateMain
+};
 
 typedef NS_ENUM(NSInteger, ApplicationType) {
     ApplicationTypeCommon = 0,
@@ -44,8 +43,8 @@ typedef NS_ENUM(NSInteger, ApplicationType) {
 + (void)applyBrandbookStyle;
 @end
 
-@interface ApplicationManager(Start)
-- (RootState)currentState;
+@protocol DBStartNavControllerDelegate;
+@interface ApplicationManager(Start)<DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
 @end
 
