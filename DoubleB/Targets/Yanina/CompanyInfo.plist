@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://yanina.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#d44f66</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-13</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>OaXWbTHbsAVICMw6juzVS4T5GdhtgKD8i6MMPcX5</string>
+			<key>clientKey</key>
+			<string>zI6XvcbA4apxFlhzkE9z06EKrmGYw1bqzA8PM0KB</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict/>
+</dict>
+</plist>
