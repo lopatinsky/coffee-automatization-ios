@@ -58,3 +58,8 @@ Durum com.empatika.durum 1052594898
 Lepainquotidien com.empatika.lepainquotidien 1052718805
 Yarad com.empatika.yarad 1052718960
 Yaposhka com.empatika.yaposhka 1052718970
+Mantiest com.empatika.mantiest 1057232784
+PirogeriaGata com.empatika.pirogeriagata 1057235536
+CoffeeAcademy com.empatika.coffeeacademy 1057237030
+AntiPizza com.empatika.antipizza 1057237960
+Foody com.empatika.foody 1057236032
