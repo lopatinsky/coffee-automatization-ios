@@ -20,6 +20,7 @@ static NSString *dbAnaliticsNameScreenName;
     dbAnaliticsNameScreenName = analiticsScreenName;
     
     NSString *text = [DBShareHelper sharedInstance].textShare;
+    text = [text stringByReplacingOccurrencesOfString:@"%" withString:@"%%"];
     text = [text stringByAppendingString:@" %@"];
     text = [text stringByAppendingString: [NSString stringWithFormat:@"\nИли воспользуйтесь промокодом: %@",[DBShareHelper sharedInstance].promoCode]];
     

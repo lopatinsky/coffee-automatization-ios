@@ -62,10 +62,16 @@
     content.contentDescription = text;
     content.contentTitle = [DBShareHelper sharedInstance].titleShareScreen;
     content.imageURL = [NSURL URLWithString:[DBShareHelper sharedInstance].imageURL];
+
     
-    [FBSDKShareDialog showFromViewController:self.delegate
-                                 withContent:content
-                                    delegate:self];
+    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+    dialog.fromViewController = self.delegate;
+    dialog.shareContent = content;
+    dialog.mode = FBSDKShareDialogModeNative;
+    if (![dialog canShow]) {
+        dialog.mode = FBSDKShareDialogModeFeedBrowser;
+    }
+    [dialog show];
     
     // Track if share correct
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
