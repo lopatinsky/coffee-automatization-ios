@@ -17,7 +17,9 @@ NSString * __nonnull const CoordinatorNotificationOrderDiscount = @"CoordinatorN
 NSString * __nonnull const CoordinatorNotificationOrderWalletDiscount = @"CoordinatorNotificationOrderWalletDiscount";
 NSString * __nonnull const CoordinatorNotificationOrderShippingPrice = @"CoordinatorNotificationOrderShippingPrice";
 
-NSString * __nonnull const CoordinatorNotificationOrderTotalCount = @"CoordinatorNotificationOrderTotalCount";
+NSString * __nonnull const CoordinatorNotificationOrderItemsTotalCount = @"CoordinatorNotificationOrderItemsTotalCount";
+NSString * __nonnull const CoordinatorNotificationBonusItemsTotalCount = @"CoordinatorNotificationBonusItemsTotalCount";
+NSString * __nonnull const CoordinatorNotificationGiftItemsTotalCount = @"CoordinatorNotificationGiftItemsTotalCount";
 
 NSString * __nonnull const CoordinatorNotificationNewDeliveryType = @"CoordinatorNotificationNewDeliveryType";
 NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
@@ -36,6 +38,8 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (instancetype)init {
     self = [super init];
+    
+    self.automaticUpdate = NO;
     
     _itemsManager = [[OrderItemsManager alloc] initWithParentManager:self];
     _bonusItemsManager = [[OrderBonusItemsManager  alloc] initWithParentManager:self];
@@ -84,14 +88,40 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     return result;
 }
 
+- (void)automaticUpdateOrderInfo {
+    if (_automaticUpdate) {
+        [self updateOrderInfo];
+    }
+}
+
+- (void)updateOrderInfo {
+    [[NetworkManager sharedManager] forceAddOperation:NetworkOperationCheckOrder];
+}
+
 - (void)manager:(id<OrderPartManagerProtocol>)manager haveChange:(NSInteger)changeType{
     if([manager isKindOfClass:[OrderItemsManager class]]){
         switch (changeType) {
             case ItemsManagerChangeTotalPrice:
-                [self itemsManagerDidChangeTotalPrice];
+                [self orderItemsManagerDidChangeTotalPrice];
                 break;
             case ItemsManagerChangeTotalCount:
-                [self itemsManagerDidChangeTotalCount];
+                [self orderItemsManagerDidChangeTotalCount];
+                break;
+        }
+    }
+    
+    if([manager isKindOfClass:[OrderBonusItemsManager class]]){
+        switch (changeType) {
+            case ItemsManagerChangeTotalCount:
+                [self bonusItemsManagerDidChangeTotalCount];
+                break;
+        }
+    }
+    
+    if([manager isKindOfClass:[OrderGiftItemsManager class]]){
+        switch (changeType) {
+            case ItemsManagerChangeTotalCount:
+                [self giftItemsManagerDidChangeTotalCount];
                 break;
         }
     }
@@ -156,10 +186,6 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     }
 }
 
-- (void)updateOrderInfo {
-    [[NetworkManager sharedManager] forceAddOperation:NetworkOperationCheckOrder];
-}
-
 #pragma mark - External changes
 
 - (void)newOrderCreatedNotificationHandler:(NSNotification *)notification{
@@ -184,20 +210,30 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     }
 }
 
-#pragma mark - ItemsManager changes
+#pragma mark - OrderItemsManager changes
 
-- (void)itemsManagerDidChangeTotalPrice{
+- (void)orderItemsManagerDidChangeTotalPrice{
     [self notifyObserverOf:CoordinatorNotificationOrderTotalPrice];
 }
 
-- (void)itemsManagerDidChangeTotalCount{
+- (void)orderItemsManagerDidChangeTotalCount{
     if(_itemsManager.totalCount == 0){
         [_promoManager flushCache];
     }
     
-    [self updateOrderInfo];
+    [self automaticUpdateOrderInfo];
     
-    [self notifyObserverOf:CoordinatorNotificationOrderTotalCount];
+    [self notifyObserverOf:CoordinatorNotificationOrderItemsTotalCount];
+}
+
+#pragma mark - BonusItemsManager changes
+- (void)bonusItemsManagerDidChangeTotalCount{
+    [self notifyObserverOf:CoordinatorNotificationBonusItemsTotalCount];
+}
+
+#pragma mark - GiftItemsManager changes
+- (void)giftItemsManagerDidChangeTotalCount{
+    [self notifyObserverOf:CoordinatorNotificationGiftItemsTotalCount];
 }
 
 #pragma mark - ShippingManager changes
@@ -207,7 +243,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 }
 
 - (void)shippingManagerDidChangeAddress{
-    [self updateOrderInfo];
+    [self automaticUpdateOrderInfo];
     
     [self notifyObserverOf:CoordinatorNotificationNewShippingAddress];
 }
@@ -237,13 +273,13 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 #pragma mark - OrderManager changes
 
 - (void)orderManagerDidChangePaymentType{
-    [self updateOrderInfo];
+    [self automaticUpdateOrderInfo];
     
     [self notifyObserverOf:CoordinatorNotificationNewPaymentType];
 }
 
 - (void)orderManagerDidChangeVenue{
-    [self updateOrderInfo];
+    [self automaticUpdateOrderInfo];
     
     [self notifyObserverOf:CoordinatorNotificationNewVenue];
 }
@@ -259,13 +295,13 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 #pragma mark - DeliverySettings changes
 
 - (void)deliverySettingsDidChangeDeliveryType{
-    [self updateOrderInfo];
+    [self automaticUpdateOrderInfo];
     
     [self notifyObserverOf:CoordinatorNotificationNewDeliveryType];
 }
 
 - (void)deliverySettingsDidChangeTime{
-    [self updateOrderInfo];
+    [self automaticUpdateOrderInfo];
     
     [self notifyObserverOf:CoordinatorNotificationNewSelectedTime];
 }

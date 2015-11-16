@@ -101,8 +101,8 @@
             [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypePayPal;
             [GANHelper analyzeEvent:@"payment_selected" label:@"paypal" category:self.analyticsCategory];
             
-            if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
-                [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
+            if([self.paymentDelegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+                [self.paymentDelegate db_paymentModuleDidSelectPaymentType:PaymentTypeCard];
             }
         }
     } else {

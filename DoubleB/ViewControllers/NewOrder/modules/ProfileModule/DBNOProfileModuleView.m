@@ -59,7 +59,7 @@
 
     DBProfileViewController *profileViewController = [DBProfileViewController new];
     profileViewController.hidesBottomBarWhenPushed = YES;
-    profileViewController.analyticsScreen = @"Profile_order_screen";
+    profileViewController.analyticsCategory = PROFILE_ORDER_SCREEN;
     [self.ownerViewController.navigationController pushViewController:profileViewController animated:YES];
 }
 

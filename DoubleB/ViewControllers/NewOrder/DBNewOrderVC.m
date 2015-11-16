@@ -25,6 +25,7 @@
 #import "DBNOOrderModuleView.h"
 #import "DBModuleSeparatorView.h"
 
+#import "OrderCoordinator.h"
 #import "NetworkManager.h"
 
 @interface DBNewOrderVC ()
@@ -54,7 +55,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [GANHelper analyzeScreen:self.analyticsCategory];
     
+    [OrderCoordinator sharedInstance].automaticUpdate = YES;
     [Compatibility registerForNotifications];
     
     [self reloadModules:NO];
@@ -62,16 +65,14 @@
     [[NetworkManager sharedManager] addOperation:NetworkOperationCheckOrder];
 }
 
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    
-    [GANHelper analyzeScreen:self.analyticsCategory];
+- (void)viewWillDisappear:(BOOL)animated {
+    [OrderCoordinator sharedInstance].automaticUpdate = NO;
 }
 
 - (void)setupModules {
     [self addModule:[DBNOOrderItemsModuleView new]];
-    [self addModule:[DBNOGiftItemsModuleView new] topOffset:5];
-    [self addModule:[DBNOBonusItemsModuleView new] topOffset:5];
+    [self addModule:[DBNOGiftItemsModuleView new] topOffset:1];
+    [self addModule:[DBNOBonusItemsModuleView new] topOffset:1];
     [self addModule:[DBNOBonusItemAdditionModuleView new]];
     
     [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:10]];

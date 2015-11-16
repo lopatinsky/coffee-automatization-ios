@@ -17,7 +17,7 @@
 }
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.separator.backgroundColor = [UIColor db_backgroundColor];
 }
 
 - (void)setChecked:(BOOL)checked{

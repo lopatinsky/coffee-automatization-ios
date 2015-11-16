@@ -116,8 +116,6 @@
 - (void)reloadTime{
     if(!self.selectedTime || [self.selectedTime compare:self.minimumTime] != NSOrderedDescending){
         self.selectedTime = self.minimumTime;
-        
-        [self.parentManager manager:self haveChange:DeliverySettingsChangeNewTime];
     }
 }
 
@@ -129,16 +127,26 @@
     if(result != NSOrderedAscending){
         result = [date compare:self.deliveryType.maxDate];
         if(result != NSOrderedDescending){
-            _selectedTime = date;
+            self.selectedTime = date;
             result = NSOrderedSame;
         } else {
-            _selectedTime = self.deliveryType.maxDate;
+            self.selectedTime = self.deliveryType.maxDate;
         }
     } else {
-        _selectedTime = self.deliveryType.minDate;
+        self.selectedTime = self.deliveryType.minDate;
     }
     
     return result;
+}
+
+- (void)setSelectedTime:(NSDate *)selectedTime {
+    _selectedTime = selectedTime;
+    [self.parentManager manager:self haveChange:DeliverySettingsChangeNewTime];
+}
+
+- (void)setSelectedTimeSlot:(DBTimeSlot *)selectedTimeSlot {
+    _selectedTimeSlot = selectedTimeSlot;
+    [self.parentManager manager:self haveChange:DeliverySettingsChangeNewTime];
 }
 
 #pragma mark - DBManagerProtocol

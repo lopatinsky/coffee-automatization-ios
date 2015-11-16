@@ -14,6 +14,13 @@
 - (instancetype)init {
     self = [super init];
     
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(reload)];
+    
+    return self;
+}
+
+- (void)dealloc {
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (ItemsManager *)manager {

@@ -19,5 +19,5 @@
 @end
 
 @interface DBPaymentModuleView : DBModuleView
-@property (weak, nonatomic) id<DBPaymentModuleViewDelegate> delegate;
+@property (weak, nonatomic) id<DBModuleViewDelegate, DBPaymentModuleViewDelegate> paymentDelegate;
 @end

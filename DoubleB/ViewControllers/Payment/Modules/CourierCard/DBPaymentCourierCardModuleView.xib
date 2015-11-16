@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
@@ -25,14 +25,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A1H-D1-bvg">
-                    <rect key="frame" x="0.0" y="49.5" width="320" height="0.5"/>
-                    <animations/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="0.69999999999999996" id="nse-n6-ba8"/>
-                    </constraints>
-                </view>
                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="card.png" translatesAutoresizingMaskIntoConstraints="NO" id="msk-az-3zo">
                     <rect key="frame" x="15" y="17" width="20" height="16"/>
                     <animations/>
@@ -53,16 +45,13 @@
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="A1H-D1-bvg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4zM-lV-ILc"/>
                 <constraint firstAttribute="trailing" secondItem="7jm-Ir-Dut" secondAttribute="trailing" constant="8" id="CXt-eg-Jlb"/>
                 <constraint firstItem="7jm-Ir-Dut" firstAttribute="leading" secondItem="uuv-an-Ife" secondAttribute="trailing" constant="16" id="EDw-dp-bp4"/>
-                <constraint firstAttribute="bottom" secondItem="A1H-D1-bvg" secondAttribute="bottom" id="Hyo-tQ-MiT"/>
                 <constraint firstItem="uuv-an-Ife" firstAttribute="centerY" secondItem="msk-az-3zo" secondAttribute="centerY" constant="-0.5" id="Mwo-g9-Uep"/>
                 <constraint firstItem="uuv-an-Ife" firstAttribute="leading" secondItem="msk-az-3zo" secondAttribute="trailing" constant="9" id="ZtN-e1-IO0"/>
                 <constraint firstAttribute="centerY" secondItem="msk-az-3zo" secondAttribute="centerY" id="ddg-Fu-55R"/>
                 <constraint firstItem="uuv-an-Ife" firstAttribute="centerY" secondItem="7jm-Ir-Dut" secondAttribute="centerY" id="iDs-uA-Lmb"/>
                 <constraint firstItem="msk-az-3zo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="ihG-hk-T7b"/>
-                <constraint firstAttribute="trailing" secondItem="A1H-D1-bvg" secondAttribute="trailing" id="x2u-ge-d1g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

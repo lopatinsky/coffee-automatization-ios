@@ -70,7 +70,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     // Profile item
     DBProfileViewController *profileVC = [DBProfileViewController new];
-    profileVC.analyticsScreen = @"Profile_screen";
+    profileVC.analyticsCategory = PROFILE_SCREEN;
     [self.settingsItems addObject:@{@"name": @"profileVC",
                                     @"image": @"profile_icon_active",
                                     @"viewController": profileVC}];

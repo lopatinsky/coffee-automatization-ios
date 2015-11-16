@@ -30,8 +30,8 @@ static NSString *screenIdentifier;
         
         DBProfileViewController *profileViewController = [DBProfileViewController new];
         profileViewController.fillingMode = ProfileFillingModeFillToContinue;
-        profileViewController.delegate = self;
-        profileViewController.analyticsScreen = @"Profile_screen";
+        profileViewController.profileDelegate = self;
+        profileViewController.analyticsCategory = PROFILE_SCREEN;
         [self.navigationController presentViewController:[[UINavigationController alloc] initWithRootViewController:profileViewController]
                                                 animated:YES
                                               completion:nil];

@@ -32,34 +32,18 @@
     [self db_setTitle:NSLocalizedString(@"Профиль", nil)];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     
-//    // Header module
-//    DBModuleHeaderView *headerModule = [DBModuleHeaderView new];
-//    headerModule.title = NSLocalizedString(@"Введите ваши контактные данные", nil);
-//    [self.modules addObject:headerModule];
-    
     // Name module
-    DBProfileNameModuleView *nameModule = [DBProfileNameModuleView new];
-    nameModule.ownerViewController = self;
-    nameModule.analyticsCategory = self.analyticsScreen;
-    [self.modules addObject:nameModule];
+    [self addModule:[DBProfileNameModuleView new] bottomOffset:1];
     
     // Phone module
-    DBProfilePhoneModuleView *phoneModule = [DBProfilePhoneModuleView new];
-    phoneModule.ownerViewController = self;
-    phoneModule.analyticsCategory = self.analyticsScreen;
-    [self.modules addObject:phoneModule];
+    [self addModule:[DBProfilePhoneModuleView new] bottomOffset:1];
     
     // Mail module
-    DBProfileMailModuleView *mailModule = [DBProfileMailModuleView new];
-    mailModule.ownerViewController = self;
-    mailModule.analyticsCategory = self.analyticsScreen;
-    [self.modules addObject:mailModule];
+    [self addModule:[DBProfileMailModuleView new]];
     
+    // Universal modules
     for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
-        DBModuleView *moduleView = [module getModuleView];
-        moduleView.ownerViewController = self;
-        moduleView.analyticsCategory = self.analyticsScreen;
-        [self.modules addObject:moduleView];
+        [self addModule:[module getModuleView]];
     }
     
     [self layoutModules];
@@ -70,7 +54,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [GANHelper analyzeScreen:self.analyticsScreen];
+    [GANHelper analyzeScreen:self.analyticsCategory];
     
     if (self.fillingMode == ProfileFillingModeFillToContinue) {
         @weakify(self)
@@ -92,7 +76,7 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
     if (!parent) {
-        [GANHelper analyzeEvent:@"back_arrow_pressed" category:self.analyticsScreen];
+        [GANHelper analyzeEvent:@"back_arrow_pressed" category:self.analyticsCategory];
     }
 }
 
@@ -122,8 +106,8 @@
                 return;
             [self sendProfileInfo];
             [self.view endEditing:YES];
-            if ([self.delegate respondsToSelector:@selector(profileViewControllerDidFillAllFields:)])
-                [self.delegate profileViewControllerDidFillAllFields:self];
+            if ([self.profileDelegate respondsToSelector:@selector(profileViewControllerDidFillAllFields:)])
+                [self.profileDelegate profileViewControllerDidFillAllFields:self];
         }];
     }
 }

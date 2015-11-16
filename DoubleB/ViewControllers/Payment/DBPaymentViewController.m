@@ -12,11 +12,11 @@
 #import "OrderCoordinator.h"
 
 #import "DBPaymentCardsModuleView.h"
+#import "DBPaymentCardAdditionModuleView.h"
 #import "DBPaymentCashModuleView.h"
 #import "DBPaymentPayPalModuleView.h"
 
 @interface DBPaymentViewController ()<DBPaymentModuleViewDelegate>
-@property (strong, nonatomic) NSString *analyticsCategory;
 @end
 
 @implementation DBPaymentViewController
@@ -38,30 +38,26 @@
     // Cash module
     if([self moduleEnabled:[DBPaymentCashModuleView class]]){
         DBPaymentCashModuleView *cashModule = [DBPaymentCashModuleView new];
-        cashModule.analyticsCategory = self.analyticsCategory;
-        cashModule.ownerViewController = self;
-        cashModule.delegate = self;
-        [self.modules addObject:cashModule];
+        cashModule.paymentDelegate = self;
+        [self addModule:cashModule bottomOffset:5];
     }
     
     // PayPal module
     if([self moduleEnabled:[DBPaymentPayPalModuleView class]]){
         DBPaymentPayPalModuleView *paypalModule = [DBPaymentPayPalModuleView new];
-        paypalModule.analyticsCategory = self.analyticsCategory;
-        paypalModule.ownerViewController = self;
-        paypalModule.delegate = self;
+        paypalModule.paymentDelegate = self;
         paypalModule.mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentPayPalModuleViewModePaymentType : DBPaymentPayPalModuleViewModeManageAccount;
-        [self.modules addObject:paypalModule];
+        [self addModule:paypalModule bottomOffset:5];
     }
     
     // Cards module
     if([self moduleEnabled:[DBPaymentCardsModuleView class]]){
         DBPaymentCardsModuleViewMode mode = self.mode == DBPaymentViewControllerModeChoosePayment ? DBPaymentCardsModuleViewModeSelectPayment : DBPaymentCardsModuleViewModeManageCards;
         DBPaymentCardsModuleView *cardsModule = [[DBPaymentCardsModuleView alloc] initWithMode:mode];
-        cardsModule.analyticsCategory = self.analyticsCategory;
-        cardsModule.ownerViewController = self;
-        cardsModule.delegate = self;
-        [self.modules addObject:cardsModule];
+        cardsModule.paymentDelegate = self;
+        [self addModule:cardsModule bottomOffset:1];
+        
+        [self addModule:[DBPaymentCardAdditionModuleView new]];
     }
     
     [self layoutModules];

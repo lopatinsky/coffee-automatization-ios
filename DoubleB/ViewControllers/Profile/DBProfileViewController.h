@@ -22,8 +22,7 @@ typedef NS_ENUM(NSUInteger, ProfileFillingMode) {
 @interface DBProfileViewController : DBModulesViewController
 
 @property (nonatomic) ProfileFillingMode fillingMode;
-@property (nonatomic, strong) NSString *analyticsScreen;
 
-@property (weak, nonatomic) id<DBProfileViewControllerDelegate> delegate;
+@property (weak, nonatomic) id<DBProfileViewControllerDelegate> profileDelegate;
 
 @end

@@ -120,7 +120,8 @@
 }
 
 - (NSInteger)selectedItem{
-    return [self.pickerView selectedRowInComponent:1];
+    int component = self.type == DBTimePickerTypeDateAndItems ? 1 : 0;
+    return [self.pickerView selectedRowInComponent:component];
 }
 
 - (void)setSelectedDate:(NSDate *)selectedDate{

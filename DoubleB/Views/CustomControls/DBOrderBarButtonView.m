@@ -27,7 +27,8 @@
     
     self.countLabel.textColor = [UIColor whiteColor];
     
-    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationOrderTotalCount] selector:@selector(reload)];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationOrderItemsTotalCount] selector:@selector(reload)];
+    [self reload];
 }
 
 -(void)dealloc{

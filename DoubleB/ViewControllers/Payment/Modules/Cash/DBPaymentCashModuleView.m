@@ -59,8 +59,8 @@
     [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCash;
     [GANHelper analyzeEvent:@"payment_selected" label:@"cash" category:self.analyticsCategory];
     
-    if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
-        [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCash];
+    if([self.paymentDelegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+        [self.paymentDelegate db_paymentModuleDidSelectPaymentType:PaymentTypeCash];
     }
 }
 

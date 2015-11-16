@@ -30,6 +30,7 @@
 #define CARDS_SCREEN @"Cards_screen"
 #define SETTINGS_SCREEN @"Settings_screen"
 #define PROMOS_LIST_SCREEN @"Promos_list_screen"
+#define PROFILE_ORDER_SCREEN @"Profile_order_screen"
 #define PROFILE_SCREEN @"Profile_screen"
 #define CONFIDENCE_SCREEN @"Confidence_screen"
 #define CATEGORIES_SCREEN @"Categories_screen"

@@ -23,7 +23,9 @@ extern NSString * __nonnull const CoordinatorNotificationOrderDiscount;
 extern NSString * __nonnull const CoordinatorNotificationOrderWalletDiscount;
 extern NSString * __nonnull const CoordinatorNotificationOrderShippingPrice;
 
-extern NSString * __nonnull const CoordinatorNotificationOrderTotalCount;
+extern NSString * __nonnull const CoordinatorNotificationOrderItemsTotalCount;
+extern NSString * __nonnull const CoordinatorNotificationBonusItemsTotalCount;
+extern NSString * __nonnull const CoordinatorNotificationGiftItemsTotalCount;
 
 extern NSString * __nonnull const CoordinatorNotificationNewDeliveryType;
 extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
@@ -49,6 +51,18 @@ extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUp
 @property (nonnull, nonatomic, strong, readonly) ShippingManager *shippingManager;
 @property (nonnull, nonatomic, strong, readonly) DBPromoManager *promoManager;
 
+/**
+ * Check if all conditions of valid order are correct
+ */
 - (BOOL)validOrder;
+
+/**
+ * If YES, OrderCoordinator will invoke updateOrderInfo independantly(when it necessary). By default automaticUpdate = NO
+ */
+@property (nonatomic) BOOL automaticUpdate;
+/**
+ * Synchronise order with server
+ */
+- (void)updateOrderInfo;
 
 @end

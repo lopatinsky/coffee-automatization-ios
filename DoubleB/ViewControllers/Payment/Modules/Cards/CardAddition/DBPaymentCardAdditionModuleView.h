@@ -7,11 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBPaymentModuleView.h"
+#import "DBModuleView.h"
 
-@protocol DBPaymentCardAdditionModuleViewDelegate <NSObject>
-
-@end
-
-@interface DBPaymentCardAdditionModuleView : DBPaymentModuleView
+@interface DBPaymentCardAdditionModuleView : DBModuleView
 @end
