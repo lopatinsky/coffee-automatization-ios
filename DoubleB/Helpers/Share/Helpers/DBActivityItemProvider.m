@@ -9,6 +9,9 @@
 #import "DBActivityItemProvider.h"
 #import "DBCompanyInfo.h"
 
+NSString *const DBActivityTypePostToVK = @"com.vk.vkclient.shareextension";
+NSString *const DBActivityTypePostToWhatsApp = @"net.whatsapp.WhatsApp.ShareExtension";
+
 @interface DBActivityItemProvider ()
 @property(strong, nonatomic) NSString *textFormat;
 @property(strong, nonatomic) NSDictionary *links;
@@ -36,16 +39,20 @@
         shareUrl = self.links[@"twitter"];
     }
     
-    if ([activityType isEqualToString:UIActivityTypePostToWeibo]) {
-        shareUrl = self.links[@"vk"];
-    }
-    
     if ([activityType isEqualToString:UIActivityTypeMessage]) {
         shareUrl = self.links[@"sms"];
     }
     
     if ([activityType isEqualToString:UIActivityTypeMail]) {
         shareUrl = self.links[@"email"];
+    }
+    
+    if ([activityType isEqualToString:DBActivityTypePostToVK]) {
+        shareUrl = self.links[@"vk"];
+    }
+    
+    if ([activityType isEqualToString:DBActivityTypePostToWhatsApp]) {
+        shareUrl = self.links[@"whatsApp"];
     }
     
     shareUrl = shareUrl ?: self.links[@"other"];

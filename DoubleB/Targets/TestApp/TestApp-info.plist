@@ -71,5 +71,18 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb349173695244280</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>349173695244280</string>
+    <key>FacebookDisplayName</key>
+    <string>Ru-Beacon</string>
 </dict>
 </plist>

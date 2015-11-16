@@ -100,9 +100,9 @@
     [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
         [self.socialManager shareFacebook];
     }];
-    [self.actionSheet bk_addButtonWithTitle:@"Vk" handler:^{
-        [self.socialManager shareVk];
-    }];
+//    [self.actionSheet bk_addButtonWithTitle:@"Vk" handler:^{
+//        [self.socialManager shareVk];
+//    }];
     [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другие", nil) handler:^{
         [self.socialManager shareOther:self.screen];
     }];

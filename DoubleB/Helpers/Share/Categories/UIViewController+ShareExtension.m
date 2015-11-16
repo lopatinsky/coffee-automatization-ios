@@ -20,22 +20,25 @@ static NSString *dbAnaliticsNameScreenName;
     dbAnaliticsNameScreenName = analiticsScreenName;
     
     NSString *text = [DBShareHelper sharedInstance].textShare;
+    text = [text stringByAppendingString:@" %@"];
+    text = [text stringByAppendingString: [NSString stringWithFormat:@"\nИли воспользуйтесь промокодом: %@",[DBShareHelper sharedInstance].promoCode]];
+    
 //    UIImage *image = [DBShareHelper sharedInstance].imageForShare;
     NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
-    text = [text stringByAppendingString:@" %@"];
-    text = [NSString stringWithFormat:text, urls[@"other"]];
     
-    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
-    text = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
-    
-    if ([[DBShareHelper sharedInstance].appUrls count] > 0) {
+    void (^shareBlock)() = ^void() {
         NSMutableArray *activityItems = [NSMutableArray new];
-        [activityItems addObject:[[DBActivityItemProvider alloc] initWithTextFormat:text links:urls]];
+        DBActivityItemProvider *itemProvider = [[DBActivityItemProvider alloc] initWithTextFormat:text links:urls];
+        [activityItems addObject:itemProvider];
         
-//        if(image)
+//        if([itemProvider.activityType isEqualToString:DBActivityTypePostToVK] && image)
 //            [activityItems addObject:image];
         
         [self shareWithActivityItems:activityItems withCallback:callback];
+    };
+    
+    if ([[DBShareHelper sharedInstance].appUrls count] > 0) {
+        shareBlock();
     } else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[DBShareHelper sharedInstance] fetchShareInfo:^(BOOL success) {
@@ -43,13 +46,7 @@ static NSString *dbAnaliticsNameScreenName;
                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                 
                 if([DBShareHelper sharedInstance].appUrls && [[DBShareHelper sharedInstance].appUrls count] > 0){
-                    NSMutableArray *activityItems = [NSMutableArray new];
-                    [activityItems addObject:[[DBActivityItemProvider alloc] initWithTextFormat:text links:urls]];
-                    
-//                    if(image)
-//                        [activityItems addObject:image];
-                    
-                    [self shareWithActivityItems:activityItems withCallback:callback];
+                    shareBlock();
                 } else {
                     [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ошибка", nil)
                                                 message:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)
