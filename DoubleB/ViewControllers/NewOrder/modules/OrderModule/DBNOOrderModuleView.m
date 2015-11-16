@@ -32,11 +32,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7f];
-    
-    self.errorLabel.textColor = [UIColor db_errorColor];
-    
-    self.orderButton.backgroundColor = [UIColor db_grayColor];
     [self.orderButton setRoundedCorners];
     [self.orderButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
     [self.orderButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];
@@ -63,19 +58,23 @@
     
     if (_activeTasks == 0) {
         if (![OrderCoordinator sharedInstance].validOrder) {
-            if ([OrderCoordinator sharedInstance].promoManager.errors.count > 0) {
-                self.errorLabel.hidden = NO;
-                [self reloadErrorLabel];
-                
-                self.orderButton.hidden = YES;
-            } else {
-                self.orderButton.hidden = YES;
-                [self reloadOrderButton];
-            }
+            self.errorLabel.hidden = NO;
+            self.errorLabel.text = [OrderCoordinator sharedInstance].orderErrorReason;
+            
+            self.orderButton.hidden = YES;
+            
+            self.backgroundColor = [UIColor colorWithRed:155./255 green:155./255 blue:155./255 alpha:0.7f];
         } else {
+            self.errorLabel.hidden = YES;
             self.orderButton.hidden = NO;
             [self reloadOrderButton];
+            
+            self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7f];
         }
+    } else {
+        self.errorLabel.hidden = YES;
+        self.orderButton.hidden = YES;
+        self.backgroundColor = [UIColor colorWithRed:155./255 green:155./255 blue:155./255 alpha:0.7f];
     }
 }
 
@@ -89,26 +88,23 @@
     }
 }
 
-- (void)reloadErrorLabel {
-    if ([OrderCoordinator sharedInstance].promoManager.errors.count > 0) {
-        self.errorLabel.text = [[OrderCoordinator sharedInstance].promoManager.errors firstObject];
-    } else {
-        if ()
-    }
-}
-
 - (void)startAnimating{
-    [self.activityIndicator startAnimating];
     _activeTasks += 1;
     
-    [self reload:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicator startAnimating];
+        [self reload:YES];
+    });
 }
 
 - (void)endAnimating{
     _activeTasks -= 1;
     if (_activeTasks <= 0) {
-        [self.activityIndicator stopAnimating];
-        [self reload:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.activityIndicator stopAnimating];
+            [self reload:YES];
+        });
+        
     }
 }
 
