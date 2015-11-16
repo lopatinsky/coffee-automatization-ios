@@ -10,11 +10,11 @@
 #import "UIView+RoundedCorners.h"
 #import "OrderCoordinator.h"
 #import "NetworkManager.h"
+#import "DBClientInfo.h"
 
 @interface DBNOOrderModuleView ()
 @property (weak, nonatomic) IBOutlet UIButton *orderButton;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic) NSInteger activeTasks;
@@ -41,7 +41,7 @@
     [self.orderButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
     [self.orderButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];
     
-    NSArray *events = @[CoordinatorNotificationOrderTotalPrice, CoordinatorNotificationOrderDiscount, CoordinatorNotificationOrderWalletDiscount, CoordinatorNotificationOrderShippingPrice, CoordinatorNotificationNewDeliveryType, CoordinatorNotificationNewSelectedTime, CoordinatorNotificationNewPaymentType, CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress, CoordinatorNotificationNDAAccept];
+    NSArray *events = @[CoordinatorNotificationNewDeliveryType, CoordinatorNotificationNewSelectedTime, CoordinatorNotificationNewPaymentType, CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress, CoordinatorNotificationNDAAccept];
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:events selector:@selector(reload)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endAnimating) name:kDBConcurrentOperationCheckOrderSuccess object:nil];
@@ -61,35 +61,22 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
-    self.errorLabel.hidden = YES;
-    self.totalLabel.hidden = YES;
-    self.orderButton.hidden = YES;
-    
     if (_activeTasks == 0) {
         if (![OrderCoordinator sharedInstance].validOrder) {
             if ([OrderCoordinator sharedInstance].promoManager.errors.count > 0) {
                 self.errorLabel.hidden = NO;
                 [self reloadErrorLabel];
+                
+                self.orderButton.hidden = YES;
             } else {
-                self.totalLabel.hidden = NO;
-                self.orderButton.hidden = NO;
-                [self reloadTotal];
+                self.orderButton.hidden = YES;
                 [self reloadOrderButton];
             }
         } else {
-            self.totalLabel.hidden = NO;
             self.orderButton.hidden = NO;
-            [self reloadTotal];
             [self reloadOrderButton];
         }
     }
-}
-
-- (void)reloadTotal {
-    double discount = [OrderCoordinator sharedInstance].promoManager.discount;
-    discount += [OrderCoordinator sharedInstance].promoManager.walletActiveForOrder ? [OrderCoordinator sharedInstance].promoManager.walletDiscount : 0;
-    double total = [OrderCoordinator sharedInstance].itemsManager.totalPrice + [OrderCoordinator sharedInstance].promoManager.shippingPrice - discount;
-    self.totalLabel.text = [NSString stringWithFormat:@"%.0f %@", total, [Compatibility currencySymbol]];
 }
 
 - (void)reloadOrderButton {
@@ -103,7 +90,11 @@
 }
 
 - (void)reloadErrorLabel {
-    self.errorLabel.text = [[OrderCoordinator sharedInstance].promoManager.errors firstObject];
+    if ([OrderCoordinator sharedInstance].promoManager.errors.count > 0) {
+        self.errorLabel.text = [[OrderCoordinator sharedInstance].promoManager.errors firstObject];
+    } else {
+        if ()
+    }
 }
 
 - (void)startAnimating{

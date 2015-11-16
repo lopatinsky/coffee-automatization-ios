@@ -124,6 +124,8 @@
         return NO;
     }
     
+    double currentTotal = [OrderCoordinator sharedInstance].itemsManager.totalPrice;
+    
     NSInteger currentUpdateNumber = self.lastUpdateNumber + 1;
     self.lastUpdateNumber = currentUpdateNumber;
 
@@ -138,7 +140,6 @@
         _bonusPositionsAvailable = _bonusPointsBalance > 0;
         
         // Calculate discount
-        double currentTotal = [OrderCoordinator sharedInstance].itemsManager.totalPrice;
         double newTotal = [response[@"total_sum"] doubleValue];
         self.discount = currentTotal - newTotal;
         
