@@ -123,6 +123,7 @@
     _slotId = responseDict[@"id"];
     _slotTitle = responseDict[@"name"];
     _slotDict = responseDict;
+    _isDefaultSlot = [responseDict[@"default"] boolValue];
     
     return self;
 }
@@ -135,6 +136,7 @@
         _slotId = [aDecoder decodeObjectForKey:@"_slotId"];
         _slotTitle = [aDecoder decodeObjectForKey:@"_slotTitle"];
         _slotDict = [aDecoder decodeObjectForKey:@"_slotDict"];
+        _isDefaultSlot = [aDecoder decodeBoolForKey:@"_slotDefault"];
     }
     
     return self;
@@ -144,6 +146,7 @@
     [aCoder encodeObject:_slotId forKey:@"_slotId"];
     [aCoder encodeObject:_slotTitle forKey:@"_slotTitle"];
     [aCoder encodeObject:_slotDict forKey:@"_slotDict"];
+    [aCoder encodeBool:_isDefaultSlot forKey:@"_slotDefault"];
 }
 
 @end

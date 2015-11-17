@@ -51,6 +51,7 @@ typedef NS_ENUM(NSUInteger, TimeMode) {
 @property (strong, nonatomic) NSString *slotId;
 @property (strong, nonatomic) NSString *slotTitle;
 @property (strong, nonatomic) NSDictionary *slotDict;
+@property (nonatomic) BOOL isDefaultSlot;
 
 - (instancetype)initWithResponseDict:(NSDictionary *)responseDict;
 @end
