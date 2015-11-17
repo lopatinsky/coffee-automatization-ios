@@ -10,6 +10,8 @@
 #import "Order.h"
 #import "Venue.h"
 
+#import "UIAlertView+BlocksKit.h"
+
 @interface DBOrderViewFooter ()
 @property(strong, nonatomic) Order *order;
 
@@ -68,6 +70,24 @@
     }
     
     [self.venueImageView templateImageWithName:@"venue.png"];
+    
+    if ([Venue calledPhone:self.order.venueId]) {
+        self.phoneIconButton.hidden = NO;
+    } else {
+        self.phoneIconButton.hidden = YES;
+    }
+}
+
+- (IBAction)call:(id)sender {
+    NSString *phoneString = [NSString stringWithFormat:@"%@", [Venue calledPhone:self.order.venueId]];
+    [UIAlertView bk_showAlertViewWithTitle:self.order.venueName message:phoneString cancelButtonTitle:NSLocalizedString(@"Отменить", nil) otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)]
+                                   handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                       if (buttonIndex == 1) {
+                                           NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneString];
+                                           NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+                                           [[UIApplication sharedApplication] openURL:phoneURL];
+                                       }
+                                   }];
 }
 
 - (void)layoutSubviews{

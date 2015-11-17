@@ -57,6 +57,8 @@
 "Итого" = "Total";
 "Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
 "Скидка" = "Discount";
+"Позвонить" = "Call";
+
 
 "Ожидает подтверждения" = "Waiting";
 "Подтвержден" = "Approved";
