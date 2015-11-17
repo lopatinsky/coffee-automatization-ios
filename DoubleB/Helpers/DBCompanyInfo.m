@@ -8,6 +8,7 @@
 
 #import "DBCompanyInfo.h"
 #import "DBServerAPI.h"
+#import "IHSecureStore.h"
 
 #import <Parse/PFPush.h>
 
@@ -61,9 +62,14 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             NSString *clientPushChannel = [response[@"push_channels"] getValueForKey:@"client"] ?: @"";
             _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+            _clientPushChannel = [NSString stringWithFormat:_clientPushChannel, [IHSecureStore sharedInstance].clientId];
+            [PFPush subscribeToChannelInBackground:_clientPushChannel];
             
             NSString *venuePushChannel = [response[@"push_channels"] getValueForKey:@"venue"]  ?: @"";
             _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
+//            if (_venuePushChannel) {
+//                [PFPush subscribeToChannelInBackground:_venuePushChannel];
+//            }
             
             NSString *orderPushChannel = [response[@"push_channels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];

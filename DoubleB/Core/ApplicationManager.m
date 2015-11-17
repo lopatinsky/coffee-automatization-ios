@@ -57,7 +57,19 @@
             NSString *orderId = push[@"review"][@"order_id"];
             [[ApplicationManager sharedInstance] showReviewViewController:orderId];
         }
-    }
+    } else if ([push objectForKey:@"aps"]) {
+        [PFPush handlePush:push];
+        if ([UIApplication sharedApplication].applicationState != 0) {
+            UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+            [newsViewController setData:@{@"text": [push[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
+            [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+        }
+        
+        NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
+                                                                     object:nil
+                                                                   userInfo:push ?: @{}];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+    } 
 }
 
 - (instancetype)init {
@@ -91,6 +103,12 @@
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
     [DBVersionDependencyManager performAll];
+    
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
+        [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
+        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
+    }
     
     // Check Branch and register user
     [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
@@ -315,8 +333,9 @@
 - (void)showReviewViewController:(NSString *)orderId {
     UIViewController<ReviewViewControllerProtocol> *reviewViewController = [ViewControllerManager reviewViewController];
     [reviewViewController setOrderId:orderId];
-    [[UIViewController currentViewController] presentViewController:reviewViewController animated:YES completion:^{
-        
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:reviewViewController];
+    [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:^{
+    
     }];
 }
 @end

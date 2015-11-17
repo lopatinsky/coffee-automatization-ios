@@ -9,12 +9,12 @@
 		<key>Parse</key>
 		<dict>
 			<key>applicationId</key>
-			<string>sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe</string>
+			<string>OaXWbTHbsAVICMw6juzVS4T5GdhtgKD8i6MMPcX5</string>
 			<key>clientKey</key>
-			<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
+			<string>zI6XvcbA4apxFlhzkE9z06EKrmGYw1bqzA8PM0KB</string>
 		</dict>
 		<key>BaseUrl</key>
-		<string>http://mycompany.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://mycompany.test2.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4293962270</integer>
 		<key>CompanyGAKey</key>
