@@ -10,6 +10,7 @@
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
+#import "ReviewViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -48,4 +49,8 @@
 
 @interface ViewControllerManager(CompaniesViewControllers)
 + (nonnull UIViewController *)companiesViewControllers;
+@end
+
+@interface ViewControllerManager(ReviewViewControllers)
++ (nonnull UIViewController<ReviewViewControllerProtocol> *)reviewViewController;
 @end

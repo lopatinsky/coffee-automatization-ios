@@ -51,6 +51,15 @@
     return instance;
 }
 
++ (void)handlePush:(NSDictionary *)push {
+    if ([push objectForKey:@"type"]) {
+        if ([[push objectForKey:@"type"] integerValue] == 3) {
+            NSString *orderId = push[@"review"][@"order_id"];
+            [[ApplicationManager sharedInstance] showReviewViewController:orderId];
+        }
+    }
+}
+
 - (instancetype)init {
     self = [super init];
     
@@ -300,5 +309,14 @@
         return nil;
     }
 }
+@end
 
+@implementation ApplicationManager (Review)
+- (void)showReviewViewController:(NSString *)orderId {
+    UIViewController<ReviewViewControllerProtocol> *reviewViewController = [ViewControllerManager reviewViewController];
+    [reviewViewController setOrderId:orderId];
+    [[UIViewController currentViewController] presentViewController:reviewViewController animated:YES completion:^{
+        
+    }];
+}
 @end
