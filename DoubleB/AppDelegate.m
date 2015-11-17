@@ -134,6 +134,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    [ApplicationManager handlePush:userInfo];
     
     if([UIApplication sharedApplication].applicationState != 0){
         UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
@@ -146,8 +147,6 @@
                                                                userInfo:userInfo ?: @{}];
 
     [[NSNotificationCenter defaultCenter] postNotification:notification];
-    
-    // TODO: publish remote notification with popup view controller
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{

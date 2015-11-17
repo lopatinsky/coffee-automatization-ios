@@ -18,11 +18,12 @@ typedef enum : NSUInteger {
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
++ (void)handlePush:(NSDictionary *)push;
+
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
 
 - (void)fetchCompanyDependentInfo;
-
 @end
 
 @interface ApplicationManager(Plist)
@@ -45,4 +46,8 @@ typedef enum : NSUInteger {
 
 @interface ApplicationManager(DemoApp)
 - (UIViewController *)demoLoginViewController;
+@end
+
+@interface ApplicationManager(Review)
+- (void)showReviewViewController:(NSString *)orderId;
 @end

@@ -191,3 +191,20 @@
 
 @end
 
+
+#pragma mark - Review
+#import "ReviewViewController.h"
+@implementation ViewControllerManager(ReviewViewController)
+
++ (nonnull NSDictionary *)reviewViewControllerClasses {
+    return @{
+             @"default": [ReviewViewController class]
+             };
+}
+
++ (nonnull UIViewController<ReviewViewControllerProtocol> *)reviewViewController {
+    Class reviewViewController = [self reviewViewControllerClasses][[self valueFromPropertyListByKey:@"Review"] ?: @"default"];
+    return [reviewViewController new];
+}
+
+@end
