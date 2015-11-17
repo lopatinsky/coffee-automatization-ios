@@ -55,19 +55,23 @@
 - (void)shareFacebook {
     NSString *text = [DBShareHelper sharedInstance].textShare;
     NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
-    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
+    text = [NSString stringWithFormat:@"%@\nИли воспользуйтесь промокодом: %@", text, [DBShareHelper sharedInstance].promoCode];
     
     FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
     content.contentURL = [NSURL URLWithString:urls[@"facebook"]];
-    
-    text = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
     content.contentDescription = text;
     content.contentTitle = [DBShareHelper sharedInstance].titleShareScreen;
     content.imageURL = [NSURL URLWithString:[DBShareHelper sharedInstance].imageURL];
+
     
-    [FBSDKShareDialog showFromViewController:self.delegate
-                                 withContent:content
-                                    delegate:self];
+    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+    dialog.fromViewController = self.delegate;
+    dialog.shareContent = content;
+    dialog.mode = FBSDKShareDialogModeNative;
+    if (![dialog canShow]) {
+        dialog.mode = FBSDKShareDialogModeFeedBrowser;
+    }
+    [dialog show];
     
     // Track if share correct
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {

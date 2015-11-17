@@ -63,24 +63,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>FacebookAppID</key>
-	<string>917995138272367</string>
-	<key>FacebookDisplayName</key>
-	<string>Red Cup</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>fb</string>
-		<string>fbauth2</string>
-	</array>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
 	<key>NSLocationUsageDescription</key>
@@ -101,6 +83,24 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+    <key>FacebookAppID</key>
+    <string>917995138272367</string>
+    <key>FacebookDisplayName</key>
+    <string>Red Cup</string>
+    <key>LSApplicationCategoryType</key>
+    <string></string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fb</string>
+        <string>fbauth2</string>
+    </array>
+    <key>LSRequiresIPhoneOS</key>
+    <true/>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 	<key>VKAppId</key>
 	<string>5055279</string>
 	<key>branch_key</key>

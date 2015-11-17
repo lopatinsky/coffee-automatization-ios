@@ -20,7 +20,7 @@
 + (instancetype)sharedManagerWithDelegate:(UIViewController<SocialManagerDelegate> *)delegate;
 
 - (void)shareFacebook;
-- (void)shareVk;
+//- (void)shareVk;
 - (void)shareOther:(NSString *)screen;
 
 @end
