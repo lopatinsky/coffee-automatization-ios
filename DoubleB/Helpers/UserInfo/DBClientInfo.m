@@ -39,10 +39,8 @@ NSString *const kDBDefaultsMail = @"kDBDefaultsMail";
 {
     self = [super init];
     
-    // Clear stored info if it uses las data format
-    if([[DBClientInfo valueForKey:kDBDefaultsName] isKindOfClass:[NSString class]]) {
-        [DBClientInfo removeAllValues];
-    }
+    // Migrate data if it was saved in old format
+    [self migrateData];
     
     _clientName = [NSKeyedUnarchiver unarchiveObjectWithData:[DBClientInfo valueForKey:kDBDefaultsName]] ?: [DBUserName new];
     _clientPhone = [NSKeyedUnarchiver unarchiveObjectWithData:[DBClientInfo valueForKey:kDBDefaultsPhone]] ?: [DBUserPhone new];
@@ -79,6 +77,30 @@ NSString *const kDBDefaultsMail = @"kDBDefaultsMail";
     [self notifyObserverOf:DBClientInfoNotificationClientMail];
     
     return YES;
+}
+
+// Migrate data if it was saved in old format
+- (void)migrateData {
+    if([[DBClientInfo valueForKey:kDBDefaultsName] isKindOfClass:[NSString class]]) {
+        _clientName = [DBUserName new];
+        [self setName:[DBClientInfo valueForKey:kDBDefaultsName]];
+    }
+    
+    if([[DBClientInfo valueForKey:kDBDefaultsPhone] isKindOfClass:[NSString class]]) {
+        _clientPhone = [DBUserPhone new];
+        
+        NSString *phone = [DBClientInfo valueForKey:kDBDefaultsPhone];
+        NSMutableCharacterSet *nonDigitsSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+        [nonDigitsSet invert];
+        
+        NSString *validText = [[phone componentsSeparatedByCharactersInSet:nonDigitsSet] componentsJoinedByString:@""];
+        [self setPhone:validText];
+    }
+    
+    if([[DBClientInfo valueForKey:kDBDefaultsMail] isKindOfClass:[NSString class]]) {
+        _clientMail = [DBUserMail new];
+        [self setMail:[DBClientInfo valueForKey:kDBDefaultsMail]];
+    }
 }
 
 #pragma mark - DBPrimaryManager methods override
