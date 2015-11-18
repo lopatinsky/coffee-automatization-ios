@@ -20,5 +20,6 @@
 + (UIColor *)db_textGrayColor;
 
 + (UIColor *)db_errorColor;
++ (UIColor *)db_errorColor:(CGFloat)alpha;
 
 @end

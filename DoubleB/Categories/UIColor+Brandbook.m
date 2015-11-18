@@ -59,7 +59,12 @@
 }
 
 + (UIColor *)db_errorColor {
-    return [UIColor orangeColor];
+    return [self db_errorColor:1.f];
+    //    return [UIColor orangeColor];
+}
+
++ (UIColor *)db_errorColor:(CGFloat)alpha {
+    return [UIColor colorWithRed:255./255 green:87./255 blue:21./255 alpha:alpha];
 }
 
 @end

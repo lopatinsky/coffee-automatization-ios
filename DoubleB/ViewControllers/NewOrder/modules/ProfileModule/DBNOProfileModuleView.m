@@ -42,14 +42,14 @@
     
     if ([DBClientInfo sharedInstance].clientName.valid) {
         if (![DBClientInfo sharedInstance].clientPhone.valid) {
-            self.titleLabel.text = NSLocalizedString(@"Укажите, пожалуйста, номер телефона", nil);
+            self.titleLabel.text = NSLocalizedString(@"Ваш номер телефона", nil);
             self.titleLabel.textColor = [UIColor db_errorColor];
         } else {
             self.titleLabel.text = [DBClientInfo sharedInstance].clientName.value;
             self.titleLabel.textColor = [UIColor blackColor];
         }
     } else {
-        self.titleLabel.text = NSLocalizedString(@"Представьтесь, пожалуйста", nil);
+        self.titleLabel.text = NSLocalizedString(@"Ваше имя", nil);
         self.titleLabel.textColor = [UIColor db_errorColor];
     }
 }

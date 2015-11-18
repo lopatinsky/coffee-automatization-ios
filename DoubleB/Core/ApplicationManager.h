@@ -19,7 +19,8 @@ typedef NS_ENUM(NSInteger, RootState) {
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenRoot = 0,
     ApplicationScreenOrder,
-    ApplicationScreenHistory
+    ApplicationScreenHistory,
+    ApplicationScreenHistoryOrder
 };
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
@@ -56,4 +57,5 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(ScreenState)
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
+- (void)moveToScreen:(ApplicationScreen)screen object:(id)object animated:(BOOL)animated;
 @end

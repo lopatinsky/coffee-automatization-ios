@@ -41,6 +41,8 @@
     [super viewDidLoad];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [self db_setTitle:self.venue.title];
 
     self.view.backgroundColor = [UIColor db_backgroundColor];
 

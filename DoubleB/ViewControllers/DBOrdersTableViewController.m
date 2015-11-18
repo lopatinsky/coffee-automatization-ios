@@ -7,13 +7,11 @@
 //
 
 #import "DBOrdersTableViewController.h"
-#import "DBNewOrderViewController.h"
 #import "Order.h"
 #import "OrderItem.h"
 #import "Venue.h"
 #import "CoreDataHelper.h"
 #import "DBOrderViewController.h"
-#import "DBNewOrderViewController.h"
 #import "UIAlertView+BlocksKit.h"
 #import "OrderManager.h"
 #import "DBServerAPI.h"

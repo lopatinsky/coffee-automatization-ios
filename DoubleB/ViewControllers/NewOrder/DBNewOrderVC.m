@@ -29,6 +29,7 @@
 #import "NetworkManager.h"
 
 @interface DBNewOrderVC ()
+@property (strong, nonatomic) DBNOOrderModuleView *orderModule;
 @end
 
 @implementation DBNewOrderVC
@@ -45,12 +46,14 @@
     
     [self setupModules];
     
-    DBNOOrderModuleView *orderModule = [DBNOOrderModuleView new];
-    orderModule.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:orderModule];
-    [orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
-    [orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
-    self.bottomInset = orderModule.frame.size.height;
+    _orderModule = [DBNOOrderModuleView new];
+    _orderModule.analyticsCategory = self.analyticsCategory;
+    _orderModule.ownerViewController = self;
+    _orderModule.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addSubview:_orderModule];
+    [_orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
+    [_orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
+    self.bottomInset = _orderModule.frame.size.height;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,6 +64,7 @@
     [Compatibility registerForNotifications];
     
     [self reloadModules:NO];
+    [self.orderModule reload:NO];
     
     [[NetworkManager sharedManager] addOperation:NetworkOperationCheckOrder];
 }

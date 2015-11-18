@@ -56,7 +56,11 @@
 "Готов к %@" = "Ready at %@";
 "Итого" = "Total";
 "Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
+
+"Сумма" = "Order total";
 "Скидка" = "Discount";
+"Стоимость доставки" = "Shipping";
+"Итого к оплате" = "Total";
 
 "Ожидает подтверждения" = "Waiting";
 "Подтвержден" = "Approved";
@@ -131,8 +135,8 @@
 "Имя Фамилия" = "Full name";
 "Контактный номер телефона" = "Phone number";
 "Ваш e-mail для получения чеков" = "Your e-mail for receipt";
-"Укажите, пожалуйста, номер телефона" = "Please set your phone number";
-"Представьтесь, пожалуйста" = "Please fill your profile";
+"Ваш номер телефона" = "Please set your phone number";
+"Ваше имя" = "Please set your name";
 "Введите ваши контактные данные" = "Your contacts";
 "Контактные данные вашего друга" = "Your friend contacts";
 
@@ -173,6 +177,13 @@
 // Order errors
 "Удалить" = "Delete";
 "Заменить" = "Replace";
+"Необходимо ознакомиться с правилами оплаты" = "Please confirm payment rules";
+"Невозможно разместить пустой заказ" = "Unable to place empty order";
+"Пожалуйста, укажите ваш номер телефона" = "Please set your phone number";
+"Пожалуйста, укажите ваше имя" = "Please set your name";
+"Пожалуйста, выберите заведение" = "Please chose venue";
+"Пожалуйста, введите адрес доставки" = "Please fill shipping address information";
+"Введите адрес доставки" = "Please fill shipping address";
 
 
 // Bonus Positions promo

@@ -150,7 +150,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Venue *venue = _venues[indexPath.row];
     [OrderCoordinator sharedInstance].orderManager.venue = venue;
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
     
     [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
 }

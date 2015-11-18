@@ -91,16 +91,20 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 - (NSString *)orderErrorReason {
     NSString *reason = nil;
     
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
-        if (!_shippingManager.validAddress)
-            reason = NSLocalizedString(@"Введите адрес доставки", nil);
-    } else {
-        if (!_orderManager.venue)
-            reason = NSLocalizedString(@"Выберите заведение", nil);
+    if (!_orderManager.ndaAccepted) {
+        reason = NSLocalizedString(@"Необходимо ознакомиться с правилами оплаты", nil);
     }
     
     if (_orderManager.paymentType == PaymentTypeNotSet) {
         reason = NSLocalizedString(@"Выберите тип оплаты", nil);
+    }
+    
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+        if (!_shippingManager.validAddress)
+            reason = NSLocalizedString(@"Пожалуйста, введите адрес доставки", nil);
+    } else {
+        if (!_orderManager.venue)
+            reason = NSLocalizedString(@"Пожалуйста, выберите заведение", nil);
     }
     
     if (![DBClientInfo sharedInstance].clientName.valid) {
@@ -108,11 +112,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     }
     
     if (![DBClientInfo sharedInstance].clientPhone.valid) {
-        reason = NSLocalizedString(@"Укажите, пожалуйста, номер телефона", nil);
-    }
-    
-    if (!_orderManager.ndaAccepted) {
-        reason = NSLocalizedString(@"Необходимо согласиться с политикой конфиденциальности", nil);
+        reason = NSLocalizedString(@"Пожалуйста, укажите ваш номер телефона", nil);
     }
     
     if((_itemsManager.totalCount + _bonusItemsManager.totalCount) == 0) {

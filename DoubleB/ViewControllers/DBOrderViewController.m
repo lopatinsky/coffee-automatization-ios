@@ -16,7 +16,6 @@
 #import "DBMenuPosition.h"
 #import "MBProgressHUD.h"
 #import "DBAPIClient.h"
-#import "DBNewOrderViewController.h"
 #import "LocationHelper.h"
 #import "OrderManager.h"
 #import "DBOrderReturnView.h"
