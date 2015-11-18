@@ -106,7 +106,7 @@
         venuesVC.mode = DBVenuesTableViewControllerModeChooseVenue;
         venuesVC.eventsCategory = VENUES_ORDER_SCREEN;
         self.controllers[@"Самовывоз"] = @{@"controller": venuesVC,
-                                           @"deliveryTypeName": NSLocalizedString(@"Точки самовывоза", nil)};
+                                           @"deliveryTypeName": NSLocalizedString(@"Заведения", nil)};
     }
     
     if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]) {
