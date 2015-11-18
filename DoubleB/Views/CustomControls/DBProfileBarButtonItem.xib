@@ -11,7 +11,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3eO-Bt-ZcX">
-                    <rect key="frame" x="11.5" y="11.5" width="17" height="17"/>
+                    <rect key="frame" x="0.0" y="11.5" width="17" height="17"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="YIT-Pg-hNg"/>
@@ -22,7 +22,7 @@
             <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="3eO-Bt-ZcX" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fZg-uq-10N"/>
+                <constraint firstItem="3eO-Bt-ZcX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cmF-WF-Vkk"/>
                 <constraint firstItem="3eO-Bt-ZcX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uoM-Dw-z1r"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
