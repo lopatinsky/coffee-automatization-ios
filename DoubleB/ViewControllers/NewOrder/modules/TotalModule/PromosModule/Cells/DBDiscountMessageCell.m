@@ -12,6 +12,8 @@
 
 - (void)awakeFromNib {
     self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
+    
     self.messageLabel.textColor = [UIColor db_textGrayColor];
 }
 

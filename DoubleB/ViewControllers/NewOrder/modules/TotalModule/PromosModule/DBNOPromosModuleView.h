@@ -9,5 +9,4 @@
 #import "DBModuleView.h"
 
 @interface DBNOPromosModuleView : DBModuleView
-
 @end

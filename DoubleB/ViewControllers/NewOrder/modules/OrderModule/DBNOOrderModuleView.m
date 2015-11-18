@@ -80,7 +80,9 @@
     } else {
         self.errorLabel.hidden = YES;
         self.orderButton.hidden = YES;
-        self.backgroundColor = [UIColor db_errorColor:0.85f];
+        
+        self.activityIndicator.color = [OrderCoordinator sharedInstance].validOrder ? [UIColor grayColor] : [UIColor whiteColor];
+//        self.backgroundColor = [UIColor db_errorColor:0.85f];
     }
 }
 

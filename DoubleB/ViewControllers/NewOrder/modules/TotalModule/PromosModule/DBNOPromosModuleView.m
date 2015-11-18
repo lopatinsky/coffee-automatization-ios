@@ -12,7 +12,7 @@
 #import "OrderCoordinator.h"
 
 @interface DBNOPromosModuleView ()<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation DBNOPromosModuleView
@@ -22,19 +22,24 @@
     
     self.backgroundColor = [UIColor clearColor];
     
-    self.tableView = [UITableView new];
+    self.tableView.scrollEnabled = NO;
+    [self.tableView setBackgroundColor:[UIColor db_backgroundColor]];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 25.f;
+    
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.tableView];
     [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
     
-    self.tableView.scrollEnabled = NO;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = 25.f;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(reload)];
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
+    [self commonInit];
 }
 
 - (void)dealloc {

@@ -110,12 +110,10 @@
 
 - (void)timerTick:(NSTimer *)timer{
     self.minimumTime = [[NSDate date] dateByAddingTimeInterval:self.deliveryType.minTimeInterval];
-    [self reloadTime];
-}
-
-- (void)reloadTime{
+    
     if(!self.selectedTime || [self.selectedTime compare:self.minimumTime] != NSOrderedDescending){
-        self.selectedTime = self.minimumTime;
+        // change time without notification
+        _selectedTime = self.minimumTime;
     }
 }
 

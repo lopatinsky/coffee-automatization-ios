@@ -64,8 +64,10 @@ static DBAPIClient *_sharedClient = nil;
     // 1 - Share
     // 2 - New start logic
     // 3 - Significant bug in apps with shipping and takeout(was on 2 version)
+    // 4 -
+    // 5 - New order screen design
     
-    return @"3";
+    return @"5";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
