@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIView *topSeparator;
 
-@property (nonatomic) NSInteger activeTasks;
+@property (nonatomic) BOOL activeTasks;
 
 @end
 
@@ -101,8 +101,9 @@
     }
 }
 
-- (void)startAnimating{
-    _activeTasks += 1;
+- (void)startAnimating {
+    if (_activeTasks) { return; }
+    _activeTasks = YES;;
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.activityIndicator startAnimating];
@@ -110,15 +111,14 @@
     });
 }
 
-- (void)endAnimating{
-    _activeTasks -= 1;
-    if (_activeTasks <= 0) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.activityIndicator stopAnimating];
-            [self reload:YES];
-        });
-        
-    }
+- (void)endAnimating {
+    if (!_activeTasks) { return; }
+    _activeTasks = NO;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.activityIndicator stopAnimating];
+        [self reload:YES];
+    });
 }
 
 - (void)clickOrderButton {

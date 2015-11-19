@@ -36,6 +36,7 @@ typedef enum : NSUInteger {
 
 @interface ConcurrentOperation : NSOperation<CustomizableOperation>
 
+@property (nonatomic) BOOL notifyOnCompletion;
 @property (nonatomic) ConcurrentOperationState state;
 @property (nonatomic, weak) NSOperationQueue *queue;
 

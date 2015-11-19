@@ -27,6 +27,7 @@ NSString *const kDBConcurrentOperationFetchVenuesFinished = @"kDBConcurrentOpera
 - (instancetype)init {
     self = [super init];
     self.state = OperationReady;
+    self.notifyOnCompletion = YES;
     return self;
 }
 

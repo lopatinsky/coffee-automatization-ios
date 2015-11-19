@@ -8,6 +8,8 @@
 
 #import "NSOperation+UniqueOperation.h"
 
+#import "ConcurrentOperation.h"
+
 @implementation NSOperationQueue (UniqueOperation)
 
 - (BOOL)addConcurrentUniqueOperation:(NSOperation *)operation {
@@ -78,6 +80,8 @@
     
     if (oper) {
         [operation addDependency:oper];
+        ConcurrentOperation *cop = (ConcurrentOperation *)oper;
+        cop.notifyOnCompletion = NO;
     }
     [self addOperation:operation];
 }

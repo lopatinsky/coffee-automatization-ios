@@ -32,7 +32,9 @@
     
     [self setState:OperationExecuting];
     [Venue fetchVenuesForLocation:self.location withCompletionHandler:^(NSArray *venues) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationFetchVenuesFinished object:nil];
+        if (self.notifyOnCompletion) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationFetchVenuesFinished object:nil];
+        }
         [self setState:OperationFinished];
     }];
 }

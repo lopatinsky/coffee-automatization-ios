@@ -23,9 +23,13 @@
     [self setState:OperationExecuting];
     [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
         if (success) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            if (self.notifyOnCompletion) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            }
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompanyInfoLoadFailure object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            if (self.notifyOnCompletion) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompanyInfoLoadFailure object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            }
         }
         [self setState:OperationFinished];
     }];
