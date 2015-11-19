@@ -6,10 +6,17 @@
 	<dict/>
 	<key>Preferences</key>
 	<dict>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>sSS9VgN9K2sU3ycxzwQlwrBZPFlEe7OvSNZQDjQe</string>
+			<key>clientKey</key>
+			<string>KnJBjybsVgiVDye7pD5YfpyHNOjelIQADFMK447w</string>
+		</dict>
 		<key>BaseUrl</key>
 		<string>http://mycompany.test2.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<integer>4278214478</integer>
+		<integer>4293962270</integer>
 		<key>CompanyGAKey</key>
 		<string>UA-65821587-48</string>
 		<key>Parse</key>

@@ -55,6 +55,15 @@
     return instance;
 }
 
++ (void)handlePush:(NSDictionary *)push {
+    if ([push objectForKey:@"type"]) {
+        if ([[push objectForKey:@"type"] integerValue] == 3) {
+            NSString *orderId = push[@"review"][@"order_id"];
+            [[ApplicationManager sharedInstance] showReviewViewController:orderId];
+        }
+    }
+}
+
 - (instancetype)init {
     self = [super init];
     
@@ -249,7 +258,7 @@
 
 + (void)applyBrandbookStyle {
 #warning Farsch legacy code
-    if (CGColorEqualToColor([UIColor db_defaultColor].CGColor, [UIColor colorWithRed:0. green:0. blue:0. alpha:1.].CGColor)) {
+    if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"farsh"]) {
         [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -358,5 +367,14 @@
             break;
     }
 }
+@end
 
+@implementation ApplicationManager (Review)
+- (void)showReviewViewController:(NSString *)orderId {
+    UIViewController<ReviewViewControllerProtocol> *reviewViewController = [ViewControllerManager reviewViewController];
+    [reviewViewController setOrderId:orderId];
+    [[UIViewController currentViewController] presentViewController:reviewViewController animated:YES completion:^{
+        
+    }];
+}
 @end

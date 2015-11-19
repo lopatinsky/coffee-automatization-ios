@@ -201,7 +201,7 @@
 - (void)reloadCancelRepeatButton {
     UIButton *button = [UIButton new];
     button.contentEdgeInsets = UIEdgeInsetsMake(3, 0, 0, 0);
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:14];
     
     NSString *orderString = @"";

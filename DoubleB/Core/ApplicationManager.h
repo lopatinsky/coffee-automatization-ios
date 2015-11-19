@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
++ (void)handlePush:(NSDictionary *)push;
 
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
@@ -33,7 +34,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 - (void)recieveNotification:(NSDictionary *)userInfo;
 
 - (void)fetchCompanyDependentInfo;
-
 @end
 
 @interface ApplicationManager(Plist)
@@ -58,4 +58,10 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 @interface ApplicationManager(ScreenState)
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen object:(id)object animated:(BOOL)animated;
+@interface ApplicationManager(DemoApp)
+- (UIViewController *)demoLoginViewController;
+@end
+
+@interface ApplicationManager(Review)
+- (void)showReviewViewController:(NSString *)orderId;
 @end

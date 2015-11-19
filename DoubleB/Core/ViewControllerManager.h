@@ -11,6 +11,7 @@
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
 #import "SubscriptionViewControllerProtocol.h"
+#import "ReviewViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -49,4 +50,8 @@
 
 @interface ViewControllerManager(SubscriptionViewControllers)
 + (nonnull UIViewController<SubscriptionViewControllerProtocol> *)subscriptionViewController;
+@end
+
+@interface ViewControllerManager(ReviewViewControllers)
++ (nonnull UIViewController<ReviewViewControllerProtocol> *)reviewViewController;
 @end

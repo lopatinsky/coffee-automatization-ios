@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString *const DBActivityTypePostToVK;
+extern NSString *const DBActivityTypePostToWhatsApp;
+
 @interface DBActivityItemProvider : UIActivityItemProvider
 - (instancetype)initWithTextFormat:(NSString *)textFormat links:(NSDictionary *)links;
 @end

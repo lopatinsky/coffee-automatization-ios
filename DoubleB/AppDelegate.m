@@ -18,6 +18,7 @@
 #import <Parse/Parse.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 #import <FBSDKApplicationDelegate.h>
+#import <FBSDKAppEvents.h>
 #import <VKSdk.h>
 
 @implementation AppDelegate
@@ -103,6 +104,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [FBSDKAppEvents activateApp];
     NSString *clientId = [IHSecureStore sharedInstance].clientId;
     if(clientId){
         [GANHelper analyzeEvent:@"app_started" label:clientId category:@"Start_application"];
@@ -139,6 +141,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [PFPush handlePush:userInfo];
+    [ApplicationManager handlePush:userInfo];
     
     [[ApplicationManager sharedInstance] recieveNotification:userInfo];
     

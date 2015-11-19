@@ -21,13 +21,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сыр пармезан" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="305-Bt-sqd">
-                        <rect key="frame" x="70" y="0.0" width="92.5" height="49.5"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eyL-Q9-iUu">
                         <rect key="frame" x="270" y="0.0" width="50" height="49.5"/>
                         <subviews>
@@ -55,9 +48,9 @@
                         </variation>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xjv-1r-mcI">
-                        <rect key="frame" x="15" y="0.0" width="55" height="49.5"/>
+                        <rect key="frame" x="215" y="0.0" width="55" height="49.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 р." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eny-q6-w5L">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="999 р." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eny-q6-w5L">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="49.5"/>
                                 <animations/>
                                 <constraints>
@@ -83,6 +76,13 @@
                             <constraint firstItem="Eny-q6-w5L" firstAttribute="top" secondItem="Xjv-1r-mcI" secondAttribute="top" id="j4r-UI-6bm"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сыр пармезан" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="305-Bt-sqd">
+                        <rect key="frame" x="8" y="0.0" width="92.5" height="49.5"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <animations/>
                 <constraints>
@@ -90,17 +90,23 @@
                     <constraint firstAttribute="bottom" secondItem="Xjv-1r-mcI" secondAttribute="bottom" id="2KA-2t-YaV"/>
                     <constraint firstItem="Xjv-1r-mcI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="4pv-qG-D0n"/>
                     <constraint firstItem="Xjv-1r-mcI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="5EZ-dd-HBe"/>
+                    <constraint firstItem="eyL-Q9-iUu" firstAttribute="leading" secondItem="Xjv-1r-mcI" secondAttribute="trailing" id="Egd-qj-CM2"/>
                     <constraint firstItem="305-Bt-sqd" firstAttribute="leading" secondItem="Xjv-1r-mcI" secondAttribute="trailing" id="Hfn-pE-qnN"/>
+                    <constraint firstItem="Xjv-1r-mcI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="305-Bt-sqd" secondAttribute="trailing" constant="114" id="L5l-bL-w02"/>
                     <constraint firstItem="305-Bt-sqd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="UEc-tQ-spV"/>
                     <constraint firstAttribute="bottom" secondItem="eyL-Q9-iUu" secondAttribute="bottom" id="WK8-aU-w32"/>
                     <constraint firstItem="eyL-Q9-iUu" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="305-Bt-sqd" secondAttribute="trailing" constant="10" id="ad9-3N-U4e"/>
                     <constraint firstAttribute="trailing" secondItem="eyL-Q9-iUu" secondAttribute="trailing" id="bVL-t2-1fi"/>
+                    <constraint firstItem="305-Bt-sqd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="qm0-Vi-RKq"/>
                     <constraint firstItem="305-Bt-sqd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="sQh-Jk-Ffl"/>
                     <constraint firstAttribute="bottom" secondItem="305-Bt-sqd" secondAttribute="bottom" id="tcP-FQ-JQK"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
+                        <exclude reference="Hfn-pE-qnN"/>
                         <exclude reference="sQh-Jk-Ffl"/>
+                        <exclude reference="4pv-qG-D0n"/>
+                        <exclude reference="ad9-3N-U4e"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

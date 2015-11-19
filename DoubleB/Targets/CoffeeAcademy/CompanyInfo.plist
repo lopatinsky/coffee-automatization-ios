@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://academia.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#66999a</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-11</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>ammuTB5Dic2GDXvNnbDrCuTpf7E0ETGAgqR59rUk</string>
+			<key>clientKey</key>
+			<string>iZhqmqDctFMo3ulAjVLXjm6UlYV99MaSx75G4cqz</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>
