@@ -72,7 +72,7 @@
         button.frame = CGRectMake(0, 0, size.width, size.height + 10);
         button.contentEdgeInsets = UIEdgeInsetsMake(4, 0, 0, 0);
         [button setTitle:saveString forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [[button titleLabel] setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:14]];
         [button addTarget:self action:@selector(clickSave:) forControlEvents:UIControlEventTouchUpInside];
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
