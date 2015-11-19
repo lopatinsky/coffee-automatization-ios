@@ -145,7 +145,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.type == DBPositionModifierPickerTypeGroup){
+    if(self.type == DBPositionModifierPickerTypeGroup) {
         NSInteger shift = self.modifier.required ? 0 : 1;
         if(indexPath.row == 0 && shift == 1){
             [self.modifier selectNothing];

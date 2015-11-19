@@ -39,10 +39,20 @@
     if (item) {
         self.titleLabel.text = item.itemName;
         if (self.currencyDisplayMode == DBUICurrencyDisplayModeRub) {
-            self.priceLabel.text = [NSString stringWithFormat:@"%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
+            if (item.itemPrice > 0) {
+                self.priceLabel.text = [NSString stringWithFormat:@"+%0.f %@", item.itemPrice, [Compatibility currencySymbol]];
+            } else {
+                self.priceLabel.text = @"";
+                self.constraintPriceViewWidth.constant = 0.f;
+            }
         }
         if (self.currencyDisplayMode == DBUICurrencyDisplayModeNone) {
-            self.priceLabel.text = [NSString stringWithFormat:@"%0.f", [item.itemDictionary[@"points"] floatValue]];
+            if ([item.itemDictionary[@"points"] floatValue] > 0) {
+                self.priceLabel.text = [NSString stringWithFormat:@"+%0.f", [item.itemDictionary[@"points"] floatValue]];
+            } else {
+                self.priceLabel.text = @"";
+                self.constraintPriceViewWidth.constant = 0.f;
+            }
         }
     } else {
         self.titleLabel.text = NSLocalizedString(@"Не выбирать ничего", nil);
@@ -52,7 +62,7 @@
 
 - (void)setHavePrice:(BOOL)havePrice{
     _havePrice = havePrice;
-    if(!havePrice){
+    if (!havePrice) {
         self.constraintPriceViewWidth.constant = 0.f;
     } else {
         self.constraintPriceViewWidth.constant = self.initialPriceViewWidth;
