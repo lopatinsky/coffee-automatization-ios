@@ -33,7 +33,7 @@
 #define TAG_POPUP_OVERLAY 333
 #define TAG_PICKER_OVERLAY 444
 
-@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate>
+@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate, DBMenuCategoryDropdownTitleViewDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
 @property (strong, nonatomic) NSArray *categories;
 
@@ -82,9 +82,7 @@
     
     self.categoryPicker = [DBCategoryPicker new];
     self.categoryPicker.pickerDelegate = self;
-    self.categoryPicker.delegate = self;
     
-    [self setupCategorySelectionBarButton];
     [self subscribeForNotifications];
 }
 
@@ -103,7 +101,6 @@
     
     [DBSubscriptionManager sharedInstance].delegate = nil;
     
-    [self hideCategoryPicker];
     [self.categoryPicker hide];
 }
 
@@ -475,8 +472,6 @@
 
 #pragma mark - DBCategoryPickerDelegate
 
-- (void)db_categoryPicker:(DBCategoryPicker *)picker didSelectCategory:(DBMenuCategory *)category{
-    NSUInteger section = [self.categories indexOfObject:category];
 - (DBMenuCategory *)currentCategory {
     UITableViewCell *firstVisibleCell;
     if (self.tableView.visibleCells.count > 1) { // Choose second cell as section header hide cell for previous section
@@ -508,10 +503,6 @@
 
 
 #pragma mark - UIScrollViewDelegate
-
-//- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-//    [self hideCategoryPicker];
-//}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [GANHelper analyzeEvent:@"menu_scroll" category:MENU_SCREEN];
