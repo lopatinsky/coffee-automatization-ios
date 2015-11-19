@@ -157,6 +157,7 @@
                 <constraint firstItem="GBQ-xX-avp" firstAttribute="top" secondItem="zjB-eq-0Cq" secondAttribute="bottom" id="pAL-6x-wM9"/>
                 <constraint firstItem="jSc-x4-x37" firstAttribute="top" secondItem="Wsa-4T-pXo" secondAttribute="bottom" id="tF8-ys-Yh9"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="tF8-ys-Yh9"/>

@@ -9,6 +9,7 @@
 #import "ReviewViewController.h"
 #import "RatingBarView.h"
 #import "MBProgressHUD.h"
+#import "DBAPIClient.h"
 
 @interface ReviewViewController () <UITextViewDelegate, RatingBarViewDelegate>
 
@@ -99,7 +100,7 @@
     [self reloadDoneButton];
 }
 
-- (void)reloadDoneButton{
+- (void)reloadDoneButton {
     if(self.serviceRatingBarView.rating > 0 && self.foodRatingBarView.rating > 0){
         self.navigationItem.rightBarButtonItem.enabled = YES;
         self.navigationItem.rightBarButtonItem.customView.alpha = 1.f;
@@ -127,21 +128,19 @@
 }
 
 - (void)sendReview:(void(^)(BOOL success))callback{
-    NSString *url = [NSString stringWithFormat:@"order/%@/review", self.orderId];
-//    [[RestoAPIClient sharedClient] POST:url
-//                             parameters:@{@"meal_rate": @(self.foodRatingBarView.rating),
-//                                          @"service_rate": @(self.serviceRatingBarView.rating),
-//                                          @"comment": self.commentTextView.text}
-//                                success:^(NSURLSessionDataTask *task, id responseObject) {
-//                                    if(callback)
-//                                        callback(YES);
-//                                    
-//                                } failure:^(NSURLSessionDataTask *task, NSError *error) {
-//                                    NSLog(@"%@", error);
-//                                    
-//                                    if(callback)
-//                                        callback(NO);
-//                                }];
+    [[DBAPIClient sharedClient] POST:@"review"
+                          parameters:@{@"order_id": self.orderId,
+                                       @"meal_rate": @(self.foodRatingBarView.rating),
+                                       @"service_rate": @(self.serviceRatingBarView.rating),
+                                       @"comment": self.commentTextView.text}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSLog(@"%@", responseObject);
+                                callback(YES);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                callback(NO);
+                            }];
 }
 
 #pragma mark - RatingBarViewDelegate

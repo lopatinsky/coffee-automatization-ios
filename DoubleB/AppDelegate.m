@@ -41,9 +41,7 @@
     [[ApplicationManager sharedInstance] initializeVendorFrameworks];
     [[ApplicationManager sharedInstance] startApplicationWithOptions:launchOptions];
     
-    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
-        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
-    }
+    [self subscribeToChannels];
     
     [ApplicationManager applyBrandbookStyle];
     
@@ -133,22 +131,34 @@
         [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
     }
     
-    [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
+    [self subscribeToChannels];
+}
+
+- (void)subscribeToChannels {
+    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
+    }
+    if ([DBCompanyInfo sharedInstance].clientPushChannel) {
+        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].clientPushChannel];
+    }
+    if ([DBCompanyInfo sharedInstance].venuePushChannel) {
+//        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].venuePushChannel];
+    }
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+    
+    NSLog(@"asdASDASDASDASDASDASDASDASD");
+    NSLog(@"asdASDASDASDASDASDASDASDASD");
+    NSLog(@"USER INFO");
+    NSLog(@"asdASDASDASDASDASDASDASDASD");
+    NSLog(@"%@", userInfo);
+    NSLog(@"asdASDASDASDASDASDASDASDASD");
+    NSLog(@"asdASDASDASDASDASDASDASDASD");
     [ApplicationManager handlePush:userInfo];
-    
-    [[ApplicationManager sharedInstance] recieveNotification:userInfo];
-    
-    NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
-                                                                 object:nil
-                                                               userInfo:userInfo ?: @{}];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
