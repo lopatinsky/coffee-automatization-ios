@@ -12,13 +12,8 @@
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 
-#import <Fabric/Fabric.h>
-#import <Crashlytics/Crashlytics.h>
-#import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
-#import <PayPal-iOS-SDK/PayPalMobile.h>
-#import <FBSDKApplicationDelegate.h>
-#import <FBSDKAppEvents.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
 
 @implementation AppDelegate
@@ -40,24 +35,18 @@
     }
     [[ApplicationManager sharedInstance] initializeVendorFrameworks];
     [[ApplicationManager sharedInstance] startApplicationWithOptions:launchOptions];
+    [ApplicationManager applyBrandbookStyle];
     
     [self subscribeToChannels];
     
-    [ApplicationManager applyBrandbookStyle];
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
-    
-    if (launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
-        
-        [[ApplicationManager sharedInstance] awakeFromNotification:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
-    }
-    
-    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+
     return YES;
 }
 
@@ -150,14 +139,6 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    
-    NSLog(@"asdASDASDASDASDASDASDASDASD");
-    NSLog(@"asdASDASDASDASDASDASDASDASD");
-    NSLog(@"USER INFO");
-    NSLog(@"asdASDASDASDASDASDASDASDASD");
-    NSLog(@"%@", userInfo);
-    NSLog(@"asdASDASDASDASDASDASDASDASD");
-    NSLog(@"asdASDASDASDASDASDASDASDASD");
     [ApplicationManager handlePush:userInfo];
 }
 

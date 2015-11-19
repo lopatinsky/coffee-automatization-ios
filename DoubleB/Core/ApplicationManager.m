@@ -58,11 +58,16 @@
 + (void)handlePush:(NSDictionary *)push {
     if ([push objectForKey:@"type"]) {
         if ([[push objectForKey:@"type"] integerValue] == 3) {
-            NSString *orderId = push[@"review"][@"order_id"];
-            [[ApplicationManager sharedInstance] showReviewViewController:orderId];
+            [self showPushAlert:push buttons:@[NSLocalizedString(@"Оценить", nil), NSLocalizedString(@"Отмена", nil)] callback:^(NSUInteger buttonIndex) {
+                if (buttonIndex == 0) {
+                    NSString *orderId = push[@"review"][@"order_id"];
+                    [[ApplicationManager sharedInstance] showReviewViewController:orderId];
+                }
+            }];
         }
     } else if ([push objectForKey:@"aps"]) {
-        [PFPush handlePush:push];
+        [self showPushAlert:push buttons:nil callback:nil];
+        
         if ([UIApplication sharedApplication].applicationState != 0) {
             UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
             [newsViewController setData:@{@"text": [push[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
@@ -74,6 +79,26 @@
                                                                    userInfo:push ?: @{}];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     } 
+}
+
++ (void)showPushAlert:(NSDictionary *)info buttons:(NSArray *)buttons callback:(void (^)(NSUInteger buttonIndex))callback {
+    NSString *title = [[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:@"CFBundleDisplayName"];
+    NSString *message = info[@"aps"][@"alert"];
+    if (message.length > 0) {
+        if (buttons) {
+            [UIAlertView bk_showAlertViewWithTitle:title message:message cancelButtonTitle:nil otherButtonTitles:buttons handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (callback)
+                    callback(buttonIndex);
+            }];
+        } else {
+            [UIAlertView bk_showAlertViewWithTitle:title message:message cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                if (callback)
+                    callback(buttonIndex);
+            }];
+        }
+    }
+    
+    
 }
 
 - (instancetype)init {
@@ -100,9 +125,10 @@
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     [JRSwizzleMethods swizzleUIViewDealloc];
-    [GANHelper trackClientInfo];
 #warning PayPal legacy code
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
+    
+    [GANHelper trackClientInfo];
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
@@ -111,7 +137,6 @@
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
         [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
-        [[DBTabBarController sharedInstance] awakeFromRemoteNotification];
     }
     
     // Check Branch and register user

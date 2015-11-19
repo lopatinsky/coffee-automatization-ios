@@ -83,7 +83,7 @@
     tapGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    if ([Venue calledPhone:self.venue.venueId]) {
+    if (self.venue.phone.length > 0) {
         UIImage *image = [[UIImage imageNamed:@"phone_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         CGRect frameimg = CGRectMake(0, 0, 34, 34);
         UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
@@ -97,7 +97,7 @@
 }
 
 - (void)call {
-    NSString *phoneString = [NSString stringWithFormat:@"%@", [Venue calledPhone:self.venue.venueId]];
+    NSString *phoneString = [NSString stringWithFormat:@"%@", self.venue.phone];
     [UIAlertView bk_showAlertViewWithTitle:self.venue.title message:phoneString cancelButtonTitle:NSLocalizedString(@"Отменить", nil) otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)]
                                    handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                        if (buttonIndex == 1) {

@@ -18,14 +18,13 @@
 @property (nonatomic) double_t latitude;
 @property (nonatomic) double_t longitude;
 @property (strong, nonatomic) NSString *workingTime;
-@property (nonatomic, strong) NSNumber *hasTablesInside;
+@property (nonatomic, strong) NSString *phone;
 
 @property (nonatomic) CLLocationCoordinate2D location;
 @property (nonatomic) double distance;
 
 + (NSArray *)storedVenues;
 + (Venue *)venueById:(NSString *)venueId;
-+ (NSString *)calledPhone:(NSString *)venueId;
 
 + (void)dropAllVenues;
 //+ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler;

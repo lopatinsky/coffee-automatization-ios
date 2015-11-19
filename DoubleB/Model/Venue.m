@@ -13,7 +13,7 @@
 static NSMutableArray *storedVenues;
 
 @implementation Venue
-@dynamic venueId, address, title, latitude, longitude, workingTime, hasTablesInside;
+@dynamic venueId, address, title, latitude, longitude, workingTime, phone;
 @synthesize distance;
 
 - (void)applyDict:(NSDictionary *)dict {
@@ -22,7 +22,7 @@ static NSMutableArray *storedVenues;
     self.address = dict[@"address"];
     self.distance = [dict[@"distance"] doubleValue];
     self.location = CLLocationCoordinate2DMake([dict[@"lat"] doubleValue], [dict[@"lon"] doubleValue]);
-    self.hasTablesInside = @(![dict[@"takeout_only"] boolValue]);
+    self.phone = [dict getValueForKey:@"called_phone"] ?: @"";
     
     self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
 }
@@ -120,13 +120,8 @@ static NSMutableArray *storedVenues;
         }
     }
     
-    // TODO: add called phone to database Venue model?
-    NSMutableDictionary *calledPhones = [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"venue_called_phones"] ?: @{}];
     for (NSDictionary *dict in responseVenues) {
         Venue *venue = [self storedVenueForId:dict[@"id"]];
-        if ([dict objectForKey:@"called_phone"] && ![[dict objectForKey:@"called_phone"] isEqualToString:@""]) {
-            calledPhones[dict[@"id"]] = [dict objectForKey:@"called_phone"];
-        }
         if (venue) {
             [venue applyDict:dict];
         } else {
@@ -134,15 +129,9 @@ static NSMutableArray *storedVenues;
             [venue applyDict:dict];
         }
     }
-    [[NSUserDefaults standardUserDefaults] setObject:calledPhones forKey:@"venue_called_phones"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [[CoreDataHelper sharedHelper] save];
     storedVenues = nil;
-}
-
-+ (NSString *)calledPhone:(NSString *)venueId {
-    NSDictionary *calledPhones = [[NSUserDefaults standardUserDefaults] objectForKey:@"venue_called_phones"];
-    return [calledPhones objectForKey:venueId];
 }
 
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{

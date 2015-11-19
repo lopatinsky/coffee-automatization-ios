@@ -71,12 +71,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-<<<<<<< HEAD
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>branch_key</key>
 	<string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
-=======
     <key>CFBundleURLTypes</key>
     <array>
         <dict>
@@ -99,6 +97,5 @@
     </array>
     <key>LSRequiresIPhoneOS</key>
     <true/>
->>>>>>> 3c3dd63312904726b43fa127dde1ee1967f240cb
 </dict>
 </plist>
