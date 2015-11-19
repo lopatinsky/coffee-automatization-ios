@@ -10,6 +10,7 @@
 #import "IHSecureStore.h"
 #import "JRSwizzleMethods.h"
 #import "ApplicationManager.h"
+#import "DBModulesManager.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -28,8 +29,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
     // TODO: change forceCopy to false after test
-    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeautomation"]){
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeautomation"]) {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:false];
     } else {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
@@ -66,6 +69,16 @@
                                                 sourceApplication:sourceApplication
                                                        annotation:annotation
                     ];
+}
+
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    [[DBModulesManager sharedInstance] fetchModules:^(BOOL success) {
+        if (success) {
+            completionHandler(UIBackgroundFetchResultNewData);
+        } else {
+            completionHandler(UIBackgroundFetchResultFailed);
+        }
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

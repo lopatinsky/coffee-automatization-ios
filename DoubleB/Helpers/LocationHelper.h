@@ -8,10 +8,18 @@
 #import <CoreLocation/CoreLocation.h>
 
 extern NSString *const kLocationChangedNotification;
+extern NSString *const kLocationManagerStatusAuthorized;
 
 /**
 * Helps get location in singleton way
 */
+@protocol LocationHelperProtocol <NSObject>
+
+- (void)didEnter:(CLRegion *)region;
+
+@end
+
+
 @interface LocationHelper : NSObject
 
 + (instancetype)sharedInstance;
@@ -27,5 +35,7 @@ extern NSString *const kLocationChangedNotification;
 - (void)updateLocationWithCallback:(void(^)(CLLocation *location))callback;
 
 @property (nonatomic, strong) CLLocation *lastLocation;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, copy) void(^callback)(id);
 
 @end

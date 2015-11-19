@@ -47,6 +47,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSString *orderPushChannel;
 
 @property(strong, nonatomic, readonly) NSNumber *promocodesIsEnabled;
+@property(strong, nonatomic, readonly) NSNumber *subscriptionIsEnabled;
 
 @property(nonatomic, readonly) BOOL friendInvitationEnabled;
 

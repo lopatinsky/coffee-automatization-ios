@@ -25,6 +25,7 @@
 #import "DBFriendGiftHelper.h"
 #import "DBFriendGiftViewController.h"
 #import "DBOrdersTableViewController.h"
+#import "DBSubscriptionManager.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -139,23 +140,24 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"about",
                                     @"viewController": documentsVC}];
     
-    
-    // Notifications item
-//    [self.settingsItems addObject:@{@"name": @"notification",
-//                                    @"title": NSLocalizedString(@"Присылать уведомления", nil),
-//                                    @"image": @"alerts.png"}];
-    
     if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
         [self.settingsItems addObject:@{@"name": @"appPromoVC",
                                         @"title": NSLocalizedString(@"Промокоды", nil),
                                         @"image": @"promocodes_icon",
                                         @"viewController": [ViewControllerManager promocodeViewController]}];
     }
+    
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        [self.settingsItems addObject:@{@"name": @"subscriptionVC",
+                                        @"title": NSLocalizedString(@"Абонемент", nil),
+                                        @"image": @"subscription",
+                                        @"viewController": [ViewControllerManager subscriptionViewController]}];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    
     [GANHelper analyzeScreen:@"Settings_screen"];
     
     [self.tableView reloadData];
@@ -297,6 +299,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    if ([settingsItemInfo[@"name"] isEqualToString:@"subscriptionVC"]){
+        event = @"abonement_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     

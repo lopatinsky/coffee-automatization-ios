@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>branch_key</key>
-	<string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>
@@ -51,12 +44,21 @@
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
 	<key>NSLocationUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -65,11 +67,13 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>branch_key</key>
+	<string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
 </dict>
 </plist>

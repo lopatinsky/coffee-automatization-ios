@@ -166,10 +166,27 @@
              };
 }
 
-+ (nonnull UIViewController *)companiesViewControllers {
++ (nonnull UIViewController *)companiesViewController {
     Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
     return [companiesViewController new];
 }
 
 @end
 
+
+#pragma mark - Subscription
+#import "DBSubscriptionTableViewController.h"
+@implementation ViewControllerManager(SubscriptionViewControllers)
+
++ (nonnull NSDictionary *)subscriptionViewControllerClasses {
+    return @{
+             @"default": [DBSubscriptionTableViewController class]
+             };
+}
+
++ (nonnull UIViewController<SubscriptionViewControllerProtocol> *)subscriptionViewController {
+    Class subscriptionViewController = [self subscriptionViewControllerClasses][[self valueFromPropertyListByKey:@"Subscription"] ?: @"default"];
+    return [subscriptionViewController new];
+}
+
+@end

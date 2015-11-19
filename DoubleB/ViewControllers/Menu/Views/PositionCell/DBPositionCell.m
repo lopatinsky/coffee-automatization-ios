@@ -122,7 +122,7 @@
 }
 
 
-- (void)reloadPriceLabel{
+- (void)reloadPriceLabel {
     if(self.contentType == DBPositionCellContentTypeBonus){
         self.priceView.title = [NSString stringWithFormat:@"%.0f", self.position.price];
     } else {
