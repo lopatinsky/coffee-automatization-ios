@@ -45,7 +45,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             _companyPOS = [[response getValueForKey:@"back_end"] intValue];
             _type = [[response getValueForKey:@"screen_logic_type"] intValue];
-            _applicationName = response[@"app_name"];
+            _applicationName = [response getValueForKey:@"app_name"] ?: @"";
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
             for(NSDictionary *typeDict in response[@"delivery_types"]){
