@@ -110,7 +110,7 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
         self.callback = callback;
     }
 
-//    [self startUpdatingLocation];
+    [self startUpdatingLocation];
 }
 
 #pragma mark CLLocationManagerDelegate

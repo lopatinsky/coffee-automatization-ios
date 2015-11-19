@@ -91,35 +91,35 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 - (NSString *)orderErrorReason {
     NSString *reason = nil;
     
-    if (!_orderManager.ndaAccepted) {
-        reason = NSLocalizedString(@"Необходимо ознакомиться с правилами оплаты", nil);
-    }
-    
-    if (_orderManager.paymentType == PaymentTypeNotSet) {
-        reason = NSLocalizedString(@"Выберите тип оплаты", nil);
-    }
-    
-    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
-        if (!_shippingManager.validAddress)
-            reason = NSLocalizedString(@"Пожалуйста, введите адрес доставки", nil);
-    } else {
-        if (!_orderManager.venue)
-            reason = NSLocalizedString(@"Пожалуйста, выберите заведение", nil);
-    }
-    
-    if (![DBClientInfo sharedInstance].clientName.valid) {
-        reason = NSLocalizedString(@"Пожалуйста, укажите ваше имя", nil);
-    }
-    
-    if (![DBClientInfo sharedInstance].clientPhone.valid) {
-        reason = NSLocalizedString(@"Пожалуйста, укажите ваш номер телефона", nil);
-    }
-    
-    if((_itemsManager.totalCount + _bonusItemsManager.totalCount) == 0) {
+    if(!reason && (_itemsManager.totalCount + _bonusItemsManager.totalCount) == 0) {
         reason = NSLocalizedString(@"Невозможно разместить пустой заказ", nil);
     }
     
-    if (!_promoManager.validOrder) {
+    if (!reason && ![DBClientInfo sharedInstance].clientName.valid) {
+        reason = NSLocalizedString(@"Пожалуйста, укажите ваше имя", nil);
+    }
+    
+    if (!reason && ![DBClientInfo sharedInstance].clientPhone.valid) {
+        reason = NSLocalizedString(@"Пожалуйста, укажите ваш номер телефона", nil);
+    }
+    
+    if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
+        if (!reason && !_shippingManager.validAddress)
+            reason = NSLocalizedString(@"Пожалуйста, введите адрес доставки", nil);
+    } else {
+        if (!reason && !_orderManager.venue)
+            reason = NSLocalizedString(@"Пожалуйста, выберите заведение", nil);
+    }
+    
+    if (!reason && _orderManager.paymentType == PaymentTypeNotSet) {
+        reason = NSLocalizedString(@"Выберите тип оплаты", nil);
+    }
+    
+    if (!reason && !_orderManager.ndaAccepted) {
+        reason = NSLocalizedString(@"Необходимо ознакомиться с правилами оплаты", nil);
+    }
+    
+    if (!reason && !_promoManager.validOrder) {
         reason = _promoManager.errors.firstObject;
     }
     

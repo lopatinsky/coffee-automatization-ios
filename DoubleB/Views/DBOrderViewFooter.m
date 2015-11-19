@@ -15,6 +15,7 @@
 @interface DBOrderViewFooter ()
 @property(strong, nonatomic) Order *order;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPhoneViewHeight;
 @property (nonatomic) double initialHeight;
 @end
 
@@ -73,9 +74,12 @@
     
     Venue *venue = [Venue venueById:self.order.venueId];
     if (venue && venue.phone.length > 0) {
-        self.phoneIconButton.hidden = NO;
+        self.constraintPhoneViewHeight.constant = 40.f;
+        self.phoneView.hidden = NO;
+        [self.phoneImageView templateImageWithName:@"phone_icon" tintColor:[UIColor blackColor]];
     } else {
-        self.phoneIconButton.hidden = YES;
+        self.constraintPhoneViewHeight.constant = 0;
+        self.phoneView.hidden = YES;
     }
 }
 

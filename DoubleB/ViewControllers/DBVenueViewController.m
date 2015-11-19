@@ -79,33 +79,11 @@
     marker.icon = [UIImage imageNamed:@"venue.png"];
     marker.map = self.mapView;
     
+    [self setupPhoneButton];
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     tapGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapGestureRecognizer];
-    
-    if (self.venue.phone.length > 0) {
-        UIImage *image = [[UIImage imageNamed:@"phone_icon"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        CGRect frameimg = CGRectMake(0, 0, 34, 34);
-        UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
-//        [someButton setTintColor:[UIColor db_defaultColor]];
-        [someButton setBackgroundImage:image forState:UIControlStateNormal];
-        [someButton addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
-        [someButton setShowsTouchWhenHighlighted:YES];
-        UIBarButtonItem *button =[ [UIBarButtonItem alloc] initWithCustomView:someButton];
-        self.navigationItem.rightBarButtonItem = button;
-    }
-}
-
-- (void)call {
-    NSString *phoneString = [NSString stringWithFormat:@"%@", self.venue.phone];
-    [UIAlertView bk_showAlertViewWithTitle:self.venue.title message:phoneString cancelButtonTitle:NSLocalizedString(@"Отменить", nil) otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)]
-                                   handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                       if (buttonIndex == 1) {
-                                           NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneString];
-                                           NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
-                                           [[UIApplication sharedApplication] openURL:phoneURL];
-                                       }
-                                   }];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -124,6 +102,34 @@
     if(!parent){
         [GANHelper analyzeEvent:@"back_arrow_pressed" category:VENUE_INFO_SCREEN];
     }
+}
+
+- (void)setupPhoneButton {
+    if (self.venue.phone.length > 0) {
+        CGRect frameimg = CGRectMake(0, 0, 21, 21);
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:frameimg];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [imageView templateImageWithName:@"phone_icon" tintColor:[UIColor whiteColor]];
+        
+        UIButton *someButton = [[UIButton alloc] initWithFrame:frameimg];
+        [someButton addSubview:imageView];
+        [someButton addTarget:self action:@selector(call) forControlEvents:UIControlEventTouchUpInside];
+        [someButton setShowsTouchWhenHighlighted:YES];
+        UIBarButtonItem *button =[[UIBarButtonItem alloc] initWithCustomView:someButton];
+        self.navigationItem.rightBarButtonItem = button;
+    }
+}
+
+- (void)call {
+    NSString *phoneString = [NSString stringWithFormat:@"%@", self.venue.phone];
+    [UIAlertView bk_showAlertViewWithTitle:self.venue.title message:phoneString cancelButtonTitle:NSLocalizedString(@"Отменить", nil) otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)]
+                                   handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                       if (buttonIndex == 1) {
+                                           NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneString];
+                                           NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
+                                           [[UIApplication sharedApplication] openURL:phoneURL];
+                                       }
+                                   }];
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
