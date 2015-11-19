@@ -99,10 +99,16 @@
         }
     }
     
-    if(self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+    if (self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
         DBTimeSlot *timeSlot = [_deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
-        if(!timeSlot)
-            timeSlot = [_deliveryType.timeSlots firstObject];
+        if (!timeSlot) {
+            for (DBTimeSlot *ts in _deliveryType.timeSlots) {
+                if (ts.isDefaultSlot) {
+                    timeSlot = ts;
+                    break;
+                }
+            }
+        }
         
         self.selectedTimeSlot = timeSlot;
     }
