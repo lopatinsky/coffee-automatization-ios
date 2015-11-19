@@ -409,7 +409,7 @@
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell {
     NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
-    if (idxPath.section == 0) {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && idxPath.section == 0) {
         if(![self subscriptionPositionDidOrder:cell]) {
             return;
         }
