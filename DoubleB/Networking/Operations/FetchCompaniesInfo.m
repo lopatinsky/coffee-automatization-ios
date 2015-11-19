@@ -23,9 +23,13 @@
     [self setState:OperationExecuting];
     [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
         if (success) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            if (self.notifyOnCompletion) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadSuccess object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            }
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadFailure object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            if (self.notifyOnCompletion) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationCompaniesLoadFailure object:nil userInfo:@{@"class": NSStringFromClass([self class])}];
+            }
         }
         [self setState:OperationFinished];
     }];
