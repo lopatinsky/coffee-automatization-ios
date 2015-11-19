@@ -139,14 +139,6 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kYo-rI-IcQ" customClass="DBNOPromosModuleView">
                     <rect key="frame" x="0.0" y="75" width="320" height="25"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlh-dL-ABk" customClass="DBDefaultSeparatorView">
-                            <rect key="frame" x="8" y="0.0" width="304" height="0.5"/>
-                            <animations/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="0.69999999999999996" id="LwW-jZ-Hg8"/>
-                            </constraints>
-                        </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="g18-oN-12S">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="25"/>
                             <animations/>
@@ -156,13 +148,10 @@
                     <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="wlh-dL-ABk" secondAttribute="trailing" constant="8" id="76V-OH-Jbx"/>
                         <constraint firstItem="g18-oN-12S" firstAttribute="leading" secondItem="kYo-rI-IcQ" secondAttribute="leading" id="JBQ-jg-DdM"/>
-                        <constraint firstItem="g18-oN-12S" firstAttribute="top" secondItem="kYo-rI-IcQ" secondAttribute="top" id="eiN-K3-Qyc"/>
-                        <constraint firstItem="wlh-dL-ABk" firstAttribute="top" secondItem="kYo-rI-IcQ" secondAttribute="top" id="qir-ye-w7U"/>
+                        <constraint firstItem="g18-oN-12S" firstAttribute="top" secondItem="kYo-rI-IcQ" secondAttribute="top" id="fax-XG-mOu"/>
                         <constraint firstAttribute="bottom" secondItem="g18-oN-12S" secondAttribute="bottom" id="sJW-3d-PA0"/>
                         <constraint firstAttribute="trailing" secondItem="g18-oN-12S" secondAttribute="trailing" id="wDJ-bu-ych"/>
-                        <constraint firstItem="wlh-dL-ABk" firstAttribute="leading" secondItem="kYo-rI-IcQ" secondAttribute="leading" constant="8" id="wXb-yC-QFu"/>
                     </constraints>
                     <connections>
                         <outlet property="tableView" destination="g18-oN-12S" id="lac-W1-viD"/>

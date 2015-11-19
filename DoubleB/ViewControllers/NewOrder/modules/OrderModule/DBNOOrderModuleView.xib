@@ -31,7 +31,7 @@
                         <constraint firstAttribute="height" constant="30" id="jzK-1P-Obq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <state key="normal" title="Заказать">
+                    <state key="normal" title="Отправить заказ">
                         <color key="titleColor" red="0.32549019610000002" green="0.81176470590000005" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
@@ -43,18 +43,29 @@
                         <constraint firstAttribute="width" constant="20" id="f0g-gz-vod"/>
                     </constraints>
                 </activityIndicatorView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwr-W2-fZM">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                    <animations/>
+                    <color key="backgroundColor" red="0.32549019610000002" green="0.81176470590000005" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="ckd-w7-VFq"/>
+                    </constraints>
+                </view>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="P4y-Ae-P1Q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3eM-cF-2NH"/>
+                <constraint firstItem="Xwr-W2-fZM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="E1h-Mv-rsK"/>
                 <constraint firstAttribute="trailing" secondItem="e8T-JU-mrG" secondAttribute="trailing" constant="8" id="Gqw-EJ-9Qg"/>
                 <constraint firstItem="e8T-JU-mrG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Hag-zJ-2r9"/>
                 <constraint firstItem="P4y-Ae-P1Q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IPr-wu-CUt"/>
                 <constraint firstItem="e8T-JU-mrG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="djW-xD-cm7"/>
                 <constraint firstItem="R0g-hZ-NMQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="kuz-Br-3mH"/>
+                <constraint firstItem="Xwr-W2-fZM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="lQU-33-vwg"/>
                 <constraint firstAttribute="bottom" secondItem="e8T-JU-mrG" secondAttribute="bottom" constant="8" id="uXJ-1M-ACK"/>
                 <constraint firstItem="R0g-hZ-NMQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="v6R-3F-AwR"/>
+                <constraint firstAttribute="trailing" secondItem="Xwr-W2-fZM" secondAttribute="trailing" id="wQ6-lT-0Yf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -62,6 +73,7 @@
                 <outlet property="activityIndicator" destination="P4y-Ae-P1Q" id="Rz9-sr-dwG"/>
                 <outlet property="errorLabel" destination="e8T-JU-mrG" id="e1e-dq-c1K"/>
                 <outlet property="orderButton" destination="R0g-hZ-NMQ" id="jHz-GE-7x2"/>
+                <outlet property="topSeparator" destination="Xwr-W2-fZM" id="3uD-pN-I61"/>
             </connections>
             <point key="canvasLocation" x="348" y="17"/>
         </view>

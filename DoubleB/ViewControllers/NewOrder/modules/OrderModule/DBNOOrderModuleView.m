@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *orderButton;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIView *topSeparator;
 
 @property (nonatomic) NSInteger activeTasks;
 
@@ -38,9 +39,11 @@
     [super awakeFromNib];
     
 //    [self.orderButton setRoundedCorners];
-    [self.orderButton setTitle:NSLocalizedString(@"Заказать", nil) forState:UIControlStateNormal];
+    [self.orderButton setTitle:NSLocalizedString(@"Отправить заказ", nil) forState:UIControlStateNormal];
     [self.orderButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
     [self.orderButton addTarget:self action:@selector(clickOrderButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.topSeparator.backgroundColor = [UIColor db_defaultColor];
     
     NSArray *events = @[CoordinatorNotificationNewDeliveryType, CoordinatorNotificationNewSelectedTime, CoordinatorNotificationNewPaymentType, CoordinatorNotificationNewVenue, CoordinatorNotificationNewShippingAddress, CoordinatorNotificationNDAAccept];
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:events selector:@selector(reload)];
@@ -70,12 +73,14 @@
             self.orderButton.hidden = YES;
             
             self.backgroundColor = [UIColor db_errorColor:0.85f];
+            self.topSeparator.hidden = YES;
         } else {
             self.errorLabel.hidden = YES;
             self.orderButton.hidden = NO;
             [self reloadOrderButton];
             
             self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.85f];
+            self.topSeparator.hidden = NO;
         }
     } else {
         self.errorLabel.hidden = YES;

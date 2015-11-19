@@ -27,6 +27,7 @@
 
 #import "OrderCoordinator.h"
 #import "NetworkManager.h"
+#import "DBClientInfo.h"
 
 @interface DBNewOrderVC ()
 @property (strong, nonatomic) DBNOOrderModuleView *orderModule;
@@ -81,7 +82,9 @@
     
     [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:10]];
     
-    [self addModule:[DBNOProfileModuleView new] topOffset:0 bottomOffset:5];
+    if (![DBClientInfo sharedInstance].clientPhone.valid || ![DBClientInfo sharedInstance].clientName.valid){
+        [self addModule:[DBNOProfileModuleView new] topOffset:0 bottomOffset:5];
+    }
     [self addModule:[DBNODeliveryTypeModuleView new] topOffset:0];
     [self addModule:[DBNOVenueModuleView new] topOffset:1];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
