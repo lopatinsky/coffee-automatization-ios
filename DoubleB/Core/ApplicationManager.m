@@ -56,6 +56,7 @@
 }
 
 + (void)handlePush:(NSDictionary *)push {
+    [GANHelper analyzeEvent:@"push_received" label:[push description] category:@"push_screen"];
     if ([push objectForKey:@"type"]) {
         if ([[push objectForKey:@"type"] integerValue] == 3) {
             [self showPushAlert:push buttons:@[NSLocalizedString(@"Оценить", nil), NSLocalizedString(@"Отмена", nil)] callback:^(NSUInteger buttonIndex) {
