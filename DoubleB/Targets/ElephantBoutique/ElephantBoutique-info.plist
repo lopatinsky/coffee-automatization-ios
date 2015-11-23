@@ -29,7 +29,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb349173695244280</string>
+				<string>fb349173695244280elephantboutique</string>
 			</array>
 		</dict>
 	</array>
@@ -53,6 +53,8 @@
 	<string>349173695244280</string>
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
+    <key>FacebookUrlSchemeSuffix</key>
+    <string>elephantboutique</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
