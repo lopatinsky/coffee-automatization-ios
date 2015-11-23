@@ -103,6 +103,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
         reason = NSLocalizedString(@"Пожалуйста, укажите ваш номер телефона", nil);
     }
     
+    if (!reason && !_promoManager.validOrder) {
+        reason = _promoManager.errors.firstObject;
+    }
+    
     if(_deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping){
         if (!reason && !_shippingManager.validAddress)
             reason = NSLocalizedString(@"Пожалуйста, введите адрес доставки", nil);
@@ -117,10 +121,6 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     
     if (!reason && !_orderManager.ndaAccepted) {
         reason = NSLocalizedString(@"Необходимо ознакомиться с правилами оплаты", nil);
-    }
-    
-    if (!reason && !_promoManager.validOrder) {
-        reason = _promoManager.errors.firstObject;
     }
     
     return reason;

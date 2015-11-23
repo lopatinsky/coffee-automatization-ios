@@ -19,11 +19,9 @@
                 <outlet property="commentTextView" destination="GBQ-xX-avp" id="rYy-ow-NTd"/>
                 <outlet property="foodLabel" destination="1M5-t8-jl0" id="ra4-Vr-2Zd"/>
                 <outlet property="foodRatingBarView" destination="BYF-oH-9H0" id="UzK-E9-YGM"/>
-                <outlet property="foodSeparatorView" destination="ocn-9C-0W9" id="tg4-fd-mVX"/>
                 <outlet property="foodView" destination="jSc-x4-x37" id="Yvq-dV-lYC"/>
                 <outlet property="serviceLabel" destination="kRH-J3-aQX" id="mwE-h6-95C"/>
                 <outlet property="serviceRatingBarView" destination="s7C-HZ-zz6" id="z5s-uj-TFN"/>
-                <outlet property="serviceSeparator" destination="kf9-dV-CCQ" id="6OU-FE-e5M"/>
                 <outlet property="serviceView" destination="Wsa-4T-pXo" id="Ejs-tH-n7k"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -34,7 +32,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBQ-xX-avp">
-                    <rect key="frame" x="0.0" y="131" width="320" height="437"/>
+                    <rect key="frame" x="0.0" y="123" width="320" height="445"/>
                     <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
@@ -52,7 +50,7 @@
                                 <constraint firstAttribute="width" constant="180" id="viZ-Ef-Atm"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kf9-dV-CCQ">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kf9-dV-CCQ" customClass="DBDefaultSeparatorView">
                             <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
                             <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,7 +95,7 @@
                                 <constraint firstAttribute="width" constant="180" id="mRn-h5-oWb"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocn-9C-0W9">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocn-9C-0W9" customClass="DBDefaultSeparatorView">
                             <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
                             <animations/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -148,7 +146,7 @@
                 <constraint firstAttribute="trailing" secondItem="Wsa-4T-pXo" secondAttribute="trailing" id="43K-on-ALx"/>
                 <constraint firstItem="Wsa-4T-pXo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Td-lz-1Zb"/>
                 <constraint firstItem="GBQ-xX-avp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="F48-Wc-9vk"/>
-                <constraint firstItem="GBQ-xX-avp" firstAttribute="top" secondItem="zjB-eq-0Cq" secondAttribute="bottom" constant="8" id="GWH-ny-oeb"/>
+                <constraint firstItem="GBQ-xX-avp" firstAttribute="top" secondItem="zjB-eq-0Cq" secondAttribute="bottom" id="GWH-ny-oeb"/>
                 <constraint firstItem="zjB-eq-0Cq" firstAttribute="top" secondItem="jSc-x4-x37" secondAttribute="bottom" constant="8" id="KTv-jH-nHy"/>
                 <constraint firstAttribute="bottom" secondItem="GBQ-xX-avp" secondAttribute="bottom" id="OyC-6p-3gW"/>
                 <constraint firstItem="jSc-x4-x37" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RyP-1C-wLw"/>

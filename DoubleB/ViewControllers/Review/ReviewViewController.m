@@ -18,12 +18,10 @@
 @property (weak, nonatomic) IBOutlet UIView *serviceView;
 @property (weak, nonatomic) IBOutlet RatingBarView *serviceRatingBarView;
 @property (weak, nonatomic) IBOutlet UILabel *serviceLabel;
-@property (weak, nonatomic) IBOutlet UIView *serviceSeparator;
 
 @property (weak, nonatomic) IBOutlet UIView *foodView;
 @property (weak, nonatomic) IBOutlet RatingBarView *foodRatingBarView;
 @property (weak, nonatomic) IBOutlet UILabel *foodLabel;
-@property (weak, nonatomic) IBOutlet UIView *foodSeparatorView;
 
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
 
@@ -52,9 +50,6 @@
     self.foodRatingBarView.maxRating = 5;
     self.foodRatingBarView.editable = YES;
     self.foodRatingBarView.delegate = self;
-    
-    self.serviceSeparator.backgroundColor = [UIColor colorWithWhite:72.0 / 255 alpha:1.0];
-    self.foodSeparatorView.backgroundColor = [UIColor colorWithWhite:72.0 / 255 alpha:1.0];
     
     self.commentTextView.delegate = self;
     
@@ -134,12 +129,14 @@
                                        @"service_rate": @(self.serviceRatingBarView.rating),
                                        @"comment": self.commentTextView.text}
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSLog(@"%@", responseObject);
-                                callback(YES);
+                                if (callback)
+                                    callback(YES);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
-                                callback(NO);
+                                
+                                if (callback)
+                                    callback(NO);
                             }];
 }
 
@@ -161,15 +158,5 @@
 - (void)setOrderId:(NSString *)orderId {
     _orderId = orderId;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

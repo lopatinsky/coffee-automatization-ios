@@ -42,6 +42,7 @@
 
 @property (strong, nonatomic) DBDropdownTitleView *titleView;
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
+
 // so bad, so fucking bad
 @property (nonatomic) NSInteger numberOfLoadings;
 
