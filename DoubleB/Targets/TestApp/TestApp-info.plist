@@ -71,34 +71,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-<<<<<<< HEAD
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>branch_key</key>
 	<string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
-    <key>CFBundleURLTypes</key>
-    <array>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb349173695244280</string>
-            </array>
-        </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>349173695244280</string>
-    <key>FacebookDisplayName</key>
-    <string>Ru-Beacon</string>
-    <key>LSApplicationCategoryType</key>
-    <string></string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fb</string>
-        <string>fbauth2</string>
-    </array>
-    <key>LSRequiresIPhoneOS</key>
-    <true/>
-=======
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -119,6 +95,5 @@
 		<string>fb</string>
 		<string>fbauth2</string>
 	</array>
->>>>>>> master
 </dict>
 </plist>
