@@ -295,7 +295,7 @@
                 SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
                 if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
                     cell.placeholderView.hidden = YES;
-                    cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", [[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+                    cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
                     cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                     cell.userInteractionEnabled = NO;
@@ -450,7 +450,8 @@
         [self.categoryPicker hide];
     } else {
         if (self.categories.count > 0){
-            [self.categoryPicker configureWithCurrentCategory:[self currentCategory] categories:self.categories];
+//            [self.categoryPicker configureWithCurrentCategory:[self currentCategory] categories:self.categories];
+            [self.categoryPicker configureWithCurrentCategory:nil categories:self.categories];
             
             CGFloat offset = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
             [self.categoryPicker showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionTop offset:offset];
@@ -473,24 +474,24 @@
 
 #pragma mark - DBCategoryPickerDelegate
 
-- (DBMenuCategory *)currentCategory {
-    UITableViewCell *firstVisibleCell;
-    if (self.tableView.visibleCells.count > 1) { // Choose second cell as section header hide cell for previous section
-        firstVisibleCell = self.tableView.visibleCells[1];
-    } else {
-        firstVisibleCell = self.tableView.visibleCells.firstObject;
-    }
-    
-    DBMenuCategory *topCategory;
-    if(firstVisibleCell){
-        NSInteger topSection = [[self.tableView indexPathForCell:firstVisibleCell] section];
-        topCategory = [self.categories objectAtIndex:topSection];
-    } else {
-        topCategory = [self.categories objectAtIndex:0];
-    }
-    
-    return topCategory;
-}
+//- (DBMenuCategory *)currentCategory {
+//    UITableViewCell *firstVisibleCell;
+//    if (self.tableView.visibleCells.count > 1) { // Choose second cell as section header hide cell for previous section
+//        firstVisibleCell = self.tableView.visibleCells[1];
+//    } else {
+//        firstVisibleCell = self.tableView.visibleCells.firstObject;
+//    }
+//    
+//    DBMenuCategory *topCategory;
+//    if(firstVisibleCell){
+//        NSInteger topSection = [[self.tableView indexPathForCell:firstVisibleCell] section];
+//        topCategory = [self.categories objectAtIndex:topSection];
+//    } else {
+//        topCategory = [self.categories objectAtIndex:0];
+//    }
+//    
+//    return topCategory;
+//}
 
 - (void)db_componentWillDismiss:(DBPopupComponent *)component {
     [GANHelper analyzeEvent:@"category_spinner_closed" category:MENU_SCREEN];

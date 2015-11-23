@@ -101,7 +101,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     // Payment item
     // Cards item
-    if([[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard] || [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCash]){
+    if([[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard] || [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypePayPal]){
         DBPaymentViewController *paymentVC = [DBPaymentViewController new];
         paymentVC.mode = DBPaymentViewControllerModeSettings;
         
