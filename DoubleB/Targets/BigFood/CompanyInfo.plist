@@ -5,11 +5,11 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://krispykreme.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://bigfood.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<string>#00643b</string>
+		<string>#c41f25</string>
 		<key>CompanyGAKey</key>
-		<string>UA-69262560-18</string>
+		<string>UA-69262560-17</string>
 		<key>Parse</key>
 		<dict>
 			<key>applicationId</key>
