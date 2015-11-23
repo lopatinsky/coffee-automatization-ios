@@ -10,12 +10,12 @@
             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3eO-Bt-ZcX">
-                    <rect key="frame" x="0.0" y="11.5" width="17" height="17"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_bar_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="3eO-Bt-ZcX">
+                    <rect key="frame" x="0.0" y="9" width="22" height="22"/>
                     <animations/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="17" id="YIT-Pg-hNg"/>
-                        <constraint firstAttribute="width" constant="17" id="v7p-To-r4E"/>
+                        <constraint firstAttribute="height" constant="22" id="YIT-Pg-hNg"/>
+                        <constraint firstAttribute="width" constant="22" id="v7p-To-r4E"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="profile_icon.png" width="20" height="20"/>
+        <image name="profile_bar_icon.png" width="15" height="20"/>
     </resources>
 </document>

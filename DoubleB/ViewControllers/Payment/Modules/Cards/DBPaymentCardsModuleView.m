@@ -34,6 +34,7 @@
     self.cardsTableView.dataSource = self;
     self.cardsTableView.delegate = self;
     self.cardsTableView.rowHeight = 45.f;
+    self.cardsTableView.scrollEnabled = NO;
     self.cardsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.cardsTableView.tableFooterView = [UIView new];
     [self addSubview:self.cardsTableView];
@@ -78,8 +79,9 @@
     }
     
     DBPaymentCard *card = [[DBCardsManager sharedInstance] cardAtIndex:indexPath.row];
-    NSString *pan = [NSString stringWithFormat:@"....%@", [card.pan substringFromIndex:card.pan.length-4]];
-    cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@ - %@", card.cardIssuer, pan];
+    NSString *cardNumber = card.pan;
+    NSString *pan = [cardNumber substringFromIndex:cardNumber.length-4];
+    cell.cardTitleLabel.text = [NSString stringWithFormat:@"%@ - **** **** **** %@", card.cardIssuer, pan];
     
     [cell.cardIconImageView templateImageWithName:@"card"];
     cell.cardTitleLabel.textColor = [UIColor blackColor];

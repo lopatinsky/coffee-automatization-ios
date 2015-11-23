@@ -123,6 +123,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
         reason = NSLocalizedString(@"Необходимо ознакомиться с правилами оплаты", nil);
     }
     
+    if (!reason && ![self validOrder]) {
+        reason = NSLocalizedString(@"Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение", nil);
+    }
+    
     return reason;
 }
 

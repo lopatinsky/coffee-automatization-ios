@@ -54,7 +54,7 @@
     [self.view addSubview:_orderModule];
     [_orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
     [_orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
-    self.bottomInset = _orderModule.frame.size.height;
+    self.bottomInset = _orderModule.frame.size.height + 10;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

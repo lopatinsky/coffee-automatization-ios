@@ -257,6 +257,9 @@
         _validOrder = NO;
         
         if(self.lastUpdateNumber == currentUpdateNumber){
+            _promos = nil;
+            _errors = nil;
+            
             if(callback)
                 callback(NO);
             [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
