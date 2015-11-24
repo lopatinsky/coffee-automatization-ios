@@ -65,3 +65,5 @@ AntiPizza com.empatika.antipizza 1057237960
 Foody com.empatika.foody 1057236032
 Pomidor com.empatika.pomidor 1059777847
 SushkiFishki com.empatika.sushkifishki 1059778537
+SushiEdut com.empatika.sushiedut 1061969119
+BigFood com.empatika.bigfood 1061969132
