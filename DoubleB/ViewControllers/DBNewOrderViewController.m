@@ -103,7 +103,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.edgesForExtendedLayout = UIRectEdgeTop;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self db_setTitle:NSLocalizedString(@"Заказ", nil)];
     
 // ========= Configure Logic =========

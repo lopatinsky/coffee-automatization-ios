@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
@@ -47,7 +47,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFm-4f-GcI">
-                    <rect key="frame" x="0.0" y="109" width="320" height="459"/>
+                    <rect key="frame" x="0.0" y="45" width="320" height="523"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Vha-yP-76Z">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -716,7 +716,7 @@
                     </constraints>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UC9-I9-tSq">
-                    <rect key="frame" x="0.0" y="64" width="320" height="45"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
                     <animations/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -729,14 +729,14 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="MFm-4f-GcI" firstAttribute="leading" secondItem="a4A-9h-sFr" secondAttribute="leading" id="2cg-km-plK"/>
-                <constraint firstItem="UC9-I9-tSq" firstAttribute="top" secondItem="a4A-9h-sFr" secondAttribute="top" constant="64" id="3H4-hw-c0m"/>
+                <constraint firstItem="UC9-I9-tSq" firstAttribute="top" secondItem="a4A-9h-sFr" secondAttribute="top" id="3H4-hw-c0m"/>
                 <constraint firstItem="UC9-I9-tSq" firstAttribute="leading" secondItem="a4A-9h-sFr" secondAttribute="leading" id="3Mj-Fy-PvJ"/>
                 <constraint firstAttribute="trailing" secondItem="UC9-I9-tSq" secondAttribute="trailing" id="Iwq-hw-MQv"/>
                 <constraint firstAttribute="trailing" secondItem="MFm-4f-GcI" secondAttribute="trailing" id="Qqk-du-Czx"/>
                 <constraint firstItem="MFm-4f-GcI" firstAttribute="top" secondItem="UC9-I9-tSq" secondAttribute="bottom" id="bhq-9f-zEa"/>
                 <constraint firstAttribute="bottom" secondItem="MFm-4f-GcI" secondAttribute="bottom" id="nkI-ZC-vtj"/>
             </constraints>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <nil key="simulatedTopBarMetrics"/>
             <point key="canvasLocation" x="754" y="255"/>
         </view>
     </objects>
@@ -750,9 +750,4 @@
         <image name="profile.png" width="16" height="19"/>
         <image name="venue.png" width="16" height="22"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

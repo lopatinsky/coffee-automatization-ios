@@ -90,7 +90,7 @@
             self.frame = rect;
             
             if(state == DBCategoryHeaderViewStateCompact){
-                self.backgroundColor = [UIColor db_defaultColorWithAlpha:0.9];
+                self.backgroundColor = [UIColor db_defaultColor];
                 self.categoryTitleLabel.textColor = [UIColor whiteColor];
                 self.categoryTitleLabel.textAlignment = NSTextAlignmentCenter;
             } else {
