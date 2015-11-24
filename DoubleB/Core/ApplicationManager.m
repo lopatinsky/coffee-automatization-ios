@@ -27,7 +27,6 @@
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
 
-#import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -119,7 +118,6 @@
                   clientKey:[DBCompanyInfo db_companyParseClientKey]];
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    [JRSwizzleMethods swizzleUIViewDealloc];
 #warning PayPal legacy code
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
     

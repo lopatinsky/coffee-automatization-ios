@@ -7,7 +7,7 @@
 		<key>BaseUrl</key>
 		<string>http://redcup.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<integer>4289468992</integer>
+		<string>#960b2f</string>
 		<key>CompanyGAKey</key>
 		<string>UA-62529990-36</string>
 		<key>Parse</key>

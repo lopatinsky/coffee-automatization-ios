@@ -82,6 +82,7 @@
                     <constraint firstItem="FeX-LP-Pad" firstAttribute="top" secondItem="Ent-L4-7MF" secondAttribute="bottom" id="G31-ka-whX"/>
                     <constraint firstItem="hEz-wM-6bW" firstAttribute="leading" secondItem="7cd-Rd-R8L" secondAttribute="leading" id="GBG-lG-2cC"/>
                     <constraint firstAttribute="trailing" secondItem="SKS-Wh-Ec6" secondAttribute="trailing" constant="10" id="OO2-76-5w5"/>
+                    <constraint firstItem="SKS-Wh-Ec6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="FeX-LP-Pad" secondAttribute="bottom" id="PNV-Kx-NcE"/>
                     <constraint firstItem="FeX-LP-Pad" firstAttribute="leading" secondItem="Ent-L4-7MF" secondAttribute="leading" id="Rbe-P2-m4I"/>
                     <constraint firstItem="3Sn-ae-ayy" firstAttribute="centerY" secondItem="SKS-Wh-Ec6" secondAttribute="centerY" id="Xmp-8y-gLK"/>
                     <constraint firstAttribute="trailing" secondItem="Ent-L4-7MF" secondAttribute="trailing" constant="10" id="dbC-1n-se2"/>
