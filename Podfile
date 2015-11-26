@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.1'
 
 pod 'Parse'
+pod 'PINRemoteImage'
 pod 'AKNumericFormatter'
 pod 'AFNetworking', '~> 2.2'
 pod 'BlocksKit', '~> 2.2.2'
