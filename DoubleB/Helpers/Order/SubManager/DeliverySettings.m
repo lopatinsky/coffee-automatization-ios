@@ -53,7 +53,7 @@
     }
 }
 
-- (void)setDeliveryType:(DBDeliveryType *)deliveryType{
+- (void)setDeliveryType:(DBDeliveryType *)deliveryType {
     _deliveryType = deliveryType;
     
     if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
