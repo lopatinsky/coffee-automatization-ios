@@ -11,4 +11,6 @@
 
 @interface CategoriesAndPositionsTVController : UITableViewController <MenuListViewControllerProtocol>
 
+@property (strong, nonatomic) NSArray *categories;
+
 @end

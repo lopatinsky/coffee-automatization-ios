@@ -35,7 +35,6 @@
 
 @interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate, DBMenuCategoryDropdownTitleViewDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
-@property (strong, nonatomic) NSArray *categories;
 
 @property (strong, nonatomic) NSArray *categoryHeaders;
 @property (strong, nonatomic) NSMutableArray *rowsPerSection;
@@ -49,10 +48,23 @@
 @end
 
 @implementation CategoriesAndPositionsTVController
+static NSDictionary *_preferences;
+
+#pragma mark - MenuListViewControllerProtocol
 
 + (instancetype)createViewController {
     return [CategoriesAndPositionsTVController new];
 }
+
++ (NSDictionary *)preferences {
+    return _preferences;
+}
+
++ (void)setPreferences:(NSDictionary *)preferences {
+    _preferences = preferences;
+}
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,12 +75,6 @@
     // Title
     [self setupTitleView];
     
-    // Profile button
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
-    
-    // Order button
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
-    
     //styling
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -77,14 +83,19 @@
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refreshControl;
-    
     self.categoryPicker = [DBCategoryPicker new];
     self.categoryPicker.pickerDelegate = self;
     
-    [self subscribeForNotifications];
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
+    
+    
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
+        UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+        [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
+        self.refreshControl = refreshControl;
+        [self subscribeForNotifications];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,8 +104,13 @@
     [GANHelper analyzeScreen:@"Menu_screen"];
     [DBSubscriptionManager sharedInstance].delegate = self;
     
-    [self loadMenu:nil];
-    [self reloadTitleView:nil];
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        [self loadMenu:nil];
+        [self reloadTitleView:nil];
+    } else {
+        [self reloadTableView];
+        [self reloadTitleView:[self.categories firstObject]];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -153,7 +169,7 @@
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if(venue.venueId){
+        if (venue.venueId) {
             // Load menu for current Venue
             if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
                 self.lastVenueId = venue.venueId;
@@ -180,7 +196,6 @@
                 }
             }
         }
-        
         
         if (self.categories && [self.categories count] > 0) {
             [self reloadTableView];
