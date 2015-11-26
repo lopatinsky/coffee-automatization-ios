@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "IHSecureStore.h"
-#import "JRSwizzleMethods.h"
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 

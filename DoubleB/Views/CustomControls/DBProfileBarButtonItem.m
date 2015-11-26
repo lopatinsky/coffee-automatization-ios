@@ -22,7 +22,7 @@
 }
 
 - (void)awakeFromNib {
-    [self.iconImageView templateImageWithName:@"profile_icon_active.png" tintColor:[UIColor whiteColor]];
+    [self.iconImageView templateImageWithName:@"profile_bar_icon.png" tintColor:[UIColor whiteColor]];
 }
 
 @end

@@ -16,7 +16,8 @@ typedef enum : NSUInteger {
     NetworkOperationFetchCompanies = 0,
     NetworkOperationFetchCompanyInfo,
     NetworkOperationCheckOrder,
-    NetworkOperationFetchVenues
+    NetworkOperationFetchVenues,
+    NetworkOperationFetchSubscriptionInfo
 } NetworkOperation;
 
 @interface NetworkManager : NSObject
@@ -35,6 +36,8 @@ typedef enum : NSUInteger {
 - (void)addUniqueOperation:(NetworkOperation)operation withUserInfo:(nullable NSDictionary *)userInfo;
 - (void)addPendingOperation:(NetworkOperation)operation withUserInfo:(nullable NSDictionary *)userInfo;
 - (void)addOperation:(NetworkOperation)operation withUserInfo:(nullable NSDictionary *)userInfo;
+
+- (void)forceAddOperation:(NetworkOperation)operation;
 
 @end
 

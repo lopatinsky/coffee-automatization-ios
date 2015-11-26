@@ -27,7 +27,6 @@
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
 
-#import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -59,8 +58,8 @@
     [GANHelper analyzeEvent:@"push_received" label:[push description] category:@"push_screen"];
     if ([push objectForKey:@"type"]) {
         if ([[push objectForKey:@"type"] integerValue] == 3) {
-            [self showPushAlert:push buttons:@[NSLocalizedString(@"Оценить", nil), NSLocalizedString(@"Отмена", nil)] callback:^(NSUInteger buttonIndex) {
-                if (buttonIndex == 0) {
+            [self showPushAlert:push buttons:@[NSLocalizedString(@"Отмена", nil), NSLocalizedString(@"Оценить", nil)] callback:^(NSUInteger buttonIndex) {
+                if (buttonIndex == 1) {
                     NSString *orderId = push[@"review"][@"order_id"];
                     [[ApplicationManager sharedInstance] showReviewViewController:orderId];
                 }
@@ -68,12 +67,6 @@
         }
     } else if ([push objectForKey:@"aps"]) {
         [self showPushAlert:push buttons:nil callback:nil];
-        
-        if ([UIApplication sharedApplication].applicationState != 0) {
-            UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-            [newsViewController setData:@{@"text": [push[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
-            [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-        }
         
         NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
                                                                      object:nil
@@ -125,7 +118,6 @@
                   clientKey:[DBCompanyInfo db_companyParseClientKey]];
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    [JRSwizzleMethods swizzleUIViewDealloc];
 #warning PayPal legacy code
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
     
@@ -418,8 +410,6 @@
     UIViewController<ReviewViewControllerProtocol> *reviewViewController = [ViewControllerManager reviewViewController];
     [reviewViewController setOrderId:orderId];
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:reviewViewController];
-    [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:^{
-    
-    }];
+    [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
 }
 @end

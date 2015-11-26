@@ -35,7 +35,7 @@
     
     [self.giftAdditionImageView templateImageWithName:@"gift_icon.png"];
     
-    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(reload)];
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationPromoUpdated,CoordinatorNotificationBonusItemsTotalCount] selector:@selector(reload)];
 }
 
 - (void)dealloc {

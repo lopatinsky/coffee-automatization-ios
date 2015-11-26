@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://sushiedut.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#ff0026</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-16</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>klCcZr7mnacqTCWQtlSGHRXYkXpLsrHRERhqjaLZ</string>
+			<key>clientKey</key>
+			<string>j0o9HzZVNNBORVRkuzzRnLLXxdQ1Ero8D2lp7YI1</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>

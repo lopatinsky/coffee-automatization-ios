@@ -2,20 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TopViewController</key>
-	<string>Menu</string>
-	<key>Parse</key>
+	<key>AppConfiguration</key>
 	<dict>
-		<key>applicationId</key>
-		<string>DId4pGbcAY4eJzWqgmImEgeIKQ1PBBhXqyrGfaa4</string>
-		<key>clientKey</key>
-		<string>4555WZ33iZAk6L4iFwI16Ppp3x7IdQw93CiRsxDA</string>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
 	</dict>
-	<key>CompanyGAKey</key>
-	<string></string>
-	<key>CompanyColor</key>
-	<integer>4279789118</integer>
-	<key>BaseUrl</key>
-	<string>http://krispykreme.1.doubleb-automation-production.appspot.com/</string>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://krispykreme.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#00643b</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-18</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>klCcZr7mnacqTCWQtlSGHRXYkXpLsrHRERhqjaLZ</string>
+			<key>clientKey</key>
+			<string>j0o9HzZVNNBORVRkuzzRnLLXxdQ1Ero8D2lp7YI1</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
 </dict>
 </plist>

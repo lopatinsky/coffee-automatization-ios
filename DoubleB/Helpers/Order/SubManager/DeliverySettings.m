@@ -102,6 +102,7 @@
     if (self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
         DBTimeSlot *timeSlot = [_deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
         if (!timeSlot) {
+            timeSlot = _deliveryType.timeSlots.firstObject;
             for (DBTimeSlot *ts in _deliveryType.timeSlots) {
                 if (ts.isDefaultSlot) {
                     timeSlot = ts;

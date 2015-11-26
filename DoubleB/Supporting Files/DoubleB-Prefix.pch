@@ -31,7 +31,6 @@
 
 #import "UIViewController+DBAppearance.h"
 #import "UIView+SnapshotAdditions.h"
-#import "UIView+DBErrorAnimation.h"
 #import "UIView+FLKAutoLayout.h"
 #import "UIImage+ImageEffects.h"
 #import "UIImageView+Extension.h"

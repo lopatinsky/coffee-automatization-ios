@@ -54,7 +54,7 @@
     [self.view addSubview:_orderModule];
     [_orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
     [_orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
-    self.bottomInset = _orderModule.frame.size.height;
+    self.bottomInset = _orderModule.frame.size.height + 10;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,7 +85,10 @@
     if (![DBClientInfo sharedInstance].clientPhone.valid || ![DBClientInfo sharedInstance].clientName.valid){
         [self addModule:[DBNOProfileModuleView new] topOffset:0 bottomOffset:5];
     }
-    [self addModule:[DBNODeliveryTypeModuleView new] topOffset:0];
+    
+    if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1) {
+        [self addModule:[DBNODeliveryTypeModuleView new] topOffset:0];
+    }
     [self addModule:[DBNOVenueModuleView new] topOffset:1];
     [self addModule:[DBNOTimeModuleView new] topOffset:1];
     [self addModule:[DBNOPaymentModuleView new]topOffset:5];
