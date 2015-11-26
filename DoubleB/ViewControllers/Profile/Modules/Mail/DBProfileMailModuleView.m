@@ -27,7 +27,7 @@
     [_imageView templateImageWithName:@"email_icon_active"];
     
     _textField.placeholder = NSLocalizedString(@"Ваш e-mail для получения чеков", nil);
-    _textField.keyboardType = UIKeyboardTypeDefault;
+    _textField.keyboardType = UIKeyboardTypeEmailAddress;
     _textField.text = [DBClientInfo sharedInstance].clientMail.value;
     _textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
