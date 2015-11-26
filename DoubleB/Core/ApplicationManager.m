@@ -158,7 +158,7 @@
 
 - (void)fetchCompanyDependentInfo {
     // Update menu
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+    [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
         if(success){
             // Analyse user history to fetch selected modifiers
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];

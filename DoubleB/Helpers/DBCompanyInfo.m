@@ -112,6 +112,12 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return proxy;
 }
 
++ (DBMenuType)db_menuType {
+    NSString *menuTypeString = [[self objectFromPropertyListByName:@"AppConfiguration"] objectForKey:@"MenuType"];
+    
+    return [menuTypeString isEqualToString:@"Skeleton"] ? DBMenuTypeSkeleton : DBMenuTypeSimple;
+}
+
 + (id)db_companyDefaultColor {
     id colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
     

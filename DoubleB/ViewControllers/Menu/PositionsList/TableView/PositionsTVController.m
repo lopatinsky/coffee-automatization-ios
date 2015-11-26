@@ -47,6 +47,22 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.category.positions.count == 0 && [DBMenu type] == DBMenuTypeSkeleton) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[DBMenu sharedInstance] updateCategory:self.category callback:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            if (success) {
+                [self.tableView reloadData];
+            } else {
+                [self showError:NSLocalizedString(@"NoInternetConnectionErrorMessage", nil)];
+            }
+        }];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     

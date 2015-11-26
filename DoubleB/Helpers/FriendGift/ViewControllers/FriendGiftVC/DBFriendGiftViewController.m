@@ -14,7 +14,6 @@
 
 #import "DBFriendGiftHelper.h"
 #import "Compatibility.h"
-#import "MBProgressHUD.h"
 #import "DBSuggestionView.h"
 
 #import "UIViewController+DBMessage.h"

@@ -11,7 +11,6 @@
 #import "DBSettingsTableViewController.h"
 
 #import "DBBarButtonItem.h"
-#import "MBProgressHUD.h"
 #import "DBMenu.h"
 #import "DBMenuPosition.h"
 #import "DBPositionCell.h"
@@ -120,38 +119,91 @@
 - (void)loadMenu:(UIRefreshControl *)refreshControl {
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
     
-    void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
-        self.numberOfLoadings -= 1;
-        if (!self.numberOfLoadings) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [refreshControl endRefreshing];
-        }
-        
-        if (success) {
-            if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-                    NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
-                    [dict addObjectsFromArray:categories];
-                    self.categories = dict;
-                } else {
-                    self.categories = categories;
-                }
-            } else {
-                self.categories = categories;
-            }
-            
-            [self reloadTableView];
-            [self reloadTitleView:[self.categories firstObject]];
-        }
-        
-        [self.tableView reloadData];
-    };
+//    void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
+//        self.numberOfLoadings -= 1;
+//        if (!self.numberOfLoadings) {
+//            [MBProgressHUD hideHUDForView:self.view animated:YES];
+//            [refreshControl endRefreshing];
+//        }
+//        
+//        if (success) {
+//            if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+//                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+//                    NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+//                    [dict addObjectsFromArray:categories];
+//                    self.categories = dict;
+//                } else {
+//                    self.categories = categories;
+//                }
+//            } else {
+//                self.categories = categories;
+//            }
+//            
+//            [self reloadTableView];
+//            [self reloadTitleView:[self.categories firstObject]];
+//        }
+//        
+//        [self.tableView reloadData];
+//    };
+//    
+//    Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
+//    if (refreshControl) {
+//        self.numberOfLoadings += 1;
+//        [[DBMenu sharedInstance] updateMenuForVenue:venue
+//                                         remoteMenu:menuUpdateHandler];
+//    } else {
+//        if(venue.venueId){
+//            // Load menu for current Venue
+//            if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
+//                self.lastVenueId = venue.venueId;
+//                
+//                self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+//                
+//                if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+//                    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+//                        NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+//                        [dict addObjectsFromArray:self.categories];
+//                        self.categories = dict;
+//                    }
+//                }
+//            }
+//        } else {
+//            // Load whole menu
+//            self.categories = [[DBMenu sharedInstance] getMenu];
+//            
+//            if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+//                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+//                    NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+//                    [dict addObjectsFromArray:self.categories];
+//                    self.categories = dict;
+//                }
+//            }
+//        }
+//        
+//        
+//        if (self.categories && [self.categories count] > 0) {
+//            [self reloadTableView];
+//        } else {
+//            if (!self.numberOfLoadings) {
+//                self.numberOfLoadings += 1;
+//                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//            }
+//            [[DBMenu sharedInstance] updateMenuForVenue:venue
+//                                             remoteMenu:menuUpdateHandler];
+//        }
+//    }
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
-    if (refreshControl) {
-        self.numberOfLoadings += 1;
-        [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                         remoteMenu:menuUpdateHandler];
+    if(refreshControl){
+        [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+            [refreshControl endRefreshing];
+            
+            if (success) {
+                self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+            }
+            
+            [self.tableView reloadData];
+        }];
     } else {
         if(venue.venueId){
             // Load menu for current Venue
@@ -159,38 +211,26 @@
                 self.lastVenueId = venue.venueId;
                 
                 self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
-                
-                if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-                        NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
-                        [dict addObjectsFromArray:self.categories];
-                        self.categories = dict;
-                    }
-                }
             }
         } else {
             // Load whole menu
             self.categories = [[DBMenu sharedInstance] getMenu];
-            
-            if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-                    NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
-                    [dict addObjectsFromArray:self.categories];
-                    self.categories = dict;
-                }
-            }
         }
         
         
-        if (self.categories && [self.categories count] > 0) {
-            [self reloadTableView];
+        if (self.categories && [self.categories count] > 0){
+            [self.tableView reloadData];
         } else {
-            if (!self.numberOfLoadings) {
-                self.numberOfLoadings += 1;
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            }
-            [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                             remoteMenu:menuUpdateHandler];
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+                if (success) {
+                    self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+                }
+                
+                [self.tableView reloadData];
+            }];
         }
     }
 }

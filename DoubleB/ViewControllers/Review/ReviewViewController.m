@@ -8,7 +8,6 @@
 
 #import "ReviewViewController.h"
 #import "RatingBarView.h"
-#import "MBProgressHUD.h"
 #import "DBAPIClient.h"
 
 @interface ReviewViewController () <UITextViewDelegate, RatingBarViewDelegate>

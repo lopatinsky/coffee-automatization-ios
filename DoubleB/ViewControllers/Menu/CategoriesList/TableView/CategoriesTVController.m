@@ -11,7 +11,6 @@
 #import "PositionsTVController.h"
 #import "OrderCoordinator.h"
 #import "DBBarButtonItem.h"
-#import "MBProgressHUD.h"
 #import "Venue.h"
 #import "DBMenu.h"
 #import "DBMenuCategory.h"
@@ -96,22 +95,18 @@
 
 - (void)loadMenu:(UIRefreshControl *)refreshControl{
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
-    void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        [refreshControl endRefreshing];
-        
-        if (success) {
-            self.categories = categories;
-            [self.tableView reloadData];
-        }
-        
-        [self.tableView reloadData];
-    };
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
     if(refreshControl){
-        [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                         remoteMenu:menuUpdateHandler];
+        [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+            [refreshControl endRefreshing];
+            
+            if (success) {
+                self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+            }
+            
+            [self.tableView reloadData];
+        }];
     } else {
         if(venue.venueId){
             // Load menu for current Venue
@@ -130,8 +125,15 @@
             [self.tableView reloadData];
         } else {
             [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                             remoteMenu:menuUpdateHandler];
+            [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                
+                if (success) {
+                    self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+                }
+                
+                [self.tableView reloadData];
+            }];
         }
     }
 }

@@ -11,8 +11,6 @@
 #import "DBMenuPosition.h"
 #import "DBFriendGiftHelper.h"
 
-#import "MBProgressHUD.h"
-
 @interface DBFGItemsViewController ()<DBPositionCellDelegate>
 
 @end

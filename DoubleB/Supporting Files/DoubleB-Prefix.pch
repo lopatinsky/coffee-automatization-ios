@@ -17,6 +17,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "MBProgressHUD.h"
 #import "ApplicationManager.h"
 #import "GANHelper.h"
 #import "DBConstants.h"

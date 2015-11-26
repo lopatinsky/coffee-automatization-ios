@@ -14,7 +14,6 @@
 #import "Venue.h"
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
-#import "MBProgressHUD.h"
 #import "DBAPIClient.h"
 #import "LocationHelper.h"
 #import "OrderManager.h"

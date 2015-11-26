@@ -10,8 +10,6 @@
 #import "DBPromoCell.h"
 #import "OrderCoordinator.h"
 
-#import "MBProgressHUD.h"
-
 @interface DBPromosListViewController ()
 
 @end

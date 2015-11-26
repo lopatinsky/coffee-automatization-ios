@@ -11,7 +11,6 @@
 #import "DBTabBarController.h"
 #import "DBServerAPI+DemoLogin.h"
 #import "DBAPIClient.h"
-#import "MBProgressHUD.h"
 
 #import "ApplicationManager.h"
 #import "DBCompaniesManager.h"

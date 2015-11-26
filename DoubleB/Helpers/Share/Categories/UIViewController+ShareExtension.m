@@ -9,7 +9,6 @@
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+ShareExtension.h"
 #import "DBShareHelper.h"
-#import "MBProgressHUD.h"
 #import "DBActivityItemProvider.h"
 
 @implementation UIViewController (ShareExtension)

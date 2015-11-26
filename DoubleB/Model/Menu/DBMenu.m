@@ -42,6 +42,10 @@
     [self saveMenuToDeviceMemory];
 }
 
++ (DBMenuType)type {
+    return [DBCompanyInfo db_menuType];
+}
+
 - (BOOL)hasNestedCategories{
     BOOL result = NO;
     for(DBMenuCategory *category in self.categories){
@@ -73,36 +77,24 @@
         [self loadMenuFromDeviceMemory];
     }
     
-    return [self filterMenuForVenue:venue];
+    if (venue) {
+        return [self filterMenuForVenue:venue];
+    } else {
+        return [self getMenu];
+    }
 }
 
-- (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [self updateMenuForVenue:venue remoteMenu:remoteMenuCallback];
-    return [self getMenuForVenue:venue];
-}
-
-- (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [self fetchMenu:^(BOOL success, NSArray *categories) {
-        NSArray *filteredCategories;
-        
-        if(success){
-            if(venue){
-                filteredCategories = [self filterMenuForVenue:venue];
-            } else {
-                filteredCategories = categories;
-            }
-        }
-        
-        if(remoteMenuCallback){
-            remoteMenuCallback(success, filteredCategories);
-        }
-    }];
-}
-
-- (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+- (void)updateMenu:(void (^)(BOOL success, NSArray *categories))callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+//    [params addEntriesFromDictionary:[[DBSubscriptionManager sharedInstance] menuRequest]];
+    
+    if ([DBMenu type] == DBMenuTypeSkeleton) {
+        params[@"request_menu_frame"] = @"true";
+    }
+    
     NSDate *startTime = [NSDate date];
     [[DBAPIClient sharedClient] GET:@"menu"
-                         parameters:[[DBSubscriptionManager sharedInstance] menuRequest]
+                         parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
@@ -115,8 +107,8 @@
                                 NSDictionary *menu = [[DBSubscriptionManager sharedInstance] cutSubscriptionCategory:responseObject];
                                 [self synchronizeWithResponseMenu:menu[@"menu"]];
                                 
-                                if(remoteMenuCallback)
-                                    remoteMenuCallback(YES, self.categories);
+                                if(callback)
+                                    callback(YES, self.categories);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
@@ -124,8 +116,38 @@
                                                   label:error.description
                                                category:APPLICATION_START];
                                 
-                                if(remoteMenuCallback)
-                                    remoteMenuCallback(NO, nil);
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
+- (void)updateCategory:(DBMenuCategory *)category callback:(void(^)(BOOL success))callback {
+    NSDate *startTime = [NSDate date];
+    [[DBAPIClient sharedClient] GET:@"category"
+                         parameters:@{@"category_id": category.categoryId}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSDate *endTime = [NSDate date];
+                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                
+                                [GANHelper analyzeEvent:@"menu_category_load_success"
+                                                 number:@(interval)
+                                               category:APPLICATION_START];
+                                
+                                
+                                DBMenuCategory *remoteCategory = [DBMenuCategory categoryFromResponseDictionary:responseObject[@"category"]];
+                                category.positions = remoteCategory.positions;
+                                
+                                if(callback)
+                                    callback(YES);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                [GANHelper analyzeEvent:@"menu_category_load_failed"
+                                                  label:error.description
+                                               category:APPLICATION_START];
+                                
+                                if(callback)
+                                    callback(NO);
                             }];
 }
 

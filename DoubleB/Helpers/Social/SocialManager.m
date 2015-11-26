@@ -9,7 +9,6 @@
 #import "SocialManager.h"
 #import "DBShareHelper.h"
 
-#import "MBProgressHUD.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import "VKSdk.h"

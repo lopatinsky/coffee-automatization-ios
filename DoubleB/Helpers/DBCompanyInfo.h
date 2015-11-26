@@ -10,6 +10,7 @@
 #import "DBPrimaryManager.h"
 #import "ManagerProtocol.h"
 #import "DBDeliveryType.h"
+#import "DBMenu.h"
 
 
 extern NSString * const DBCompanyInfoNotificationInfoUpdated;
@@ -59,6 +60,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 
 + (NSString *)db_companyBaseUrl;
 + (BOOL)db_proxyApp;
++ (DBMenuType)db_menuType;
 + (id)db_companyDefaultColor;
 + (NSString *)db_companyGoogleAnalyticsKey;
 
