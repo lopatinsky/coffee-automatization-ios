@@ -7,6 +7,7 @@
 //
 
 #import "DBOrderViewFooter.h"
+#import "DBTextResourcesHelper.h"
 #import "Order.h"
 #import "Venue.h"
 
@@ -62,7 +63,7 @@
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
-    self.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
+    self.labelDate.text = [NSString stringWithFormat:[DBTextResourcesHelper db_preparationOrderCellString], self.order.formattedTimeString];
     
     if([self.order.deliveryType intValue] == DeliveryTypeIdShipping){
         self.labelAddress.text = self.order.shippingAddress;

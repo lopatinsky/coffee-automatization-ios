@@ -53,6 +53,7 @@
 
 "Заказ #%@" = "Order #%@";
 "Готов к %@" = "Ready at %@";
+"Мы постараемся приготовить к %@" = "We will try to be ready at %@";
 "Итого" = "Total";
 "Не удалось обновить сумму заказа, пожалуйста проверьте ваше интернет-соединение" = "Unable to refresh total. Please check your internet connection";
 

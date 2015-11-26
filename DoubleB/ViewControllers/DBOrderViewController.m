@@ -162,7 +162,7 @@
     }
     
 
-    self.viewFooter.labelDate.text = [NSString stringWithFormat:NSLocalizedString(@"Готов к %@", nil), self.order.formattedTimeString];
+    self.viewFooter.labelDate.text = [NSString stringWithFormat:[DBTextResourcesHelper db_preparationOrderCellString], self.order.formattedTimeString];
 }
 
 - (void)cancelOrder:(DBOrderCancelReason)reason reasonText:(NSString *)reasonText {
