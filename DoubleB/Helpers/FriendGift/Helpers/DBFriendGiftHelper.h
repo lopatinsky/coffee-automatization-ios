@@ -26,9 +26,11 @@ extern NSString * const DBFriendGiftHelperNotificationItemsPrice;
 // Friend Gift info
 @property(strong, nonatomic, readonly) NSString *titleFriendGiftScreen;
 @property(strong, nonatomic, readonly) NSString *textFriendGiftScreen;
+@property(nonatomic, strong) NSArray *giftsHistory;
 
 @property(strong, nonatomic) NSArray *items;
 - (void)fetchItems:(void(^)(BOOL success))callback;
+- (void)fetchGiftsHistory:(void(^)(BOOL success))callback;
 
 
 // Data for gift processing

@@ -11,6 +11,8 @@
 #import "DBFGItemsModuleView.h"
 #import "DBFGRecipientModuleView.h"
 #import "DBFGPaymentModule.h"
+#import "DBBarButtonItem.h"
+#import "DBFriendGiftHistoryTableViewController.h"
 
 #import "DBFriendGiftHelper.h"
 #import "Compatibility.h"
@@ -65,6 +67,9 @@
     
     [[DBFriendGiftHelper sharedInstance] addObserver:self withKeyPaths:@[DBFriendGiftHelperNotificationFriendName, DBFriendGiftHelperNotificationFriendPhone, DBFriendGiftHelperNotificationItemsPrice] selector:@selector(reloadGiftButton)];
     
+    
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem customItem:self withText:NSLocalizedString(@"История", nil) action:@selector(moveToHistory)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -103,6 +108,11 @@
     [self.giftInfoModule.submodules addObject:paymentModule];
     
     [self.giftInfoModule layoutModules];
+}
+
+- (void)moveToHistory {
+    UIViewController *vc = [DBFriendGiftHistoryTableViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)initGiftView {

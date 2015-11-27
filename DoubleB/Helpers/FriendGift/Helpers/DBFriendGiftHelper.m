@@ -31,6 +31,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
         [self.friendPhone addObserver:self forKeyPath:@"value" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) context:nil];
         
         _itemsManager = [[OrderItemsManager alloc] initWithParentManager:self];
+        _giftsHistory = @[];
     }
     return self;
 }
@@ -160,12 +161,34 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
                              }];
 }
 
+- (void)fetchGiftsHistory:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:@"gift/history"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                //NSLog(@"%@", responseObject);
+                                
+                                NSMutableArray *items = [NSMutableArray new];
+                                for (NSDictionary *itemDict in responseObject[@"items"]) {
+                                    DBMenuPosition *position = [[DBMenuPosition alloc] initWithResponseDictionary:itemDict];
+                                    [items addObject:position];
+                                }
+                                NSData *dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
+                                [DBFriendGiftHelper setValue:dataItems forKey:@"itemsData"];
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO);
+                            }];
+}
+
 - (BOOL)validData {
     BOOL result = YES;
     
     result = result && self.itemsManager.totalCount > 0;
     result = result && self.friendName.valid;
-    result = result && self.friendPhone.valid;
+//    result = result && self.friendPhone.valid;
     result = result && [DBCardsManager sharedInstance].defaultCard;
     
     return result;
