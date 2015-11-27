@@ -36,6 +36,11 @@
 "На месте" = "In restaurant";
 "Доставка" = "Shipping";
 
+"Город" = "City";
+"Улица" = "Street";
+"Дом" = "House";
+"Квартира" = "Apartment";
+
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
 "Заведения" = "Venues";
