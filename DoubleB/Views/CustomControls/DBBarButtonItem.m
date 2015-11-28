@@ -8,12 +8,14 @@
 
 #import "DBBarButtonItem.h"
 #import "DBOrderBarButtonView.h"
+#import "DBGiftBarButtonView.h"
 #import "DBProfileBarButtonItem.h"
 #import "DBCustomBarButtonView.h"
 #import "OrderCoordinator.h"
 
 typedef NS_ENUM(NSInteger, DBBarButtonType) {
     DBBarButtonTypeOrder = 0,
+    DBBarButtonTypeGift,
     DBBarButtonTypeProfile,
     DBBarButtonTypeCustom = 100
 };
@@ -25,6 +27,10 @@ typedef NS_ENUM(NSInteger, DBBarButtonType) {
 
 + (DBBarButtonItem *)orderItem:(UIViewController *)controller action:(SEL)action {
     return [self itemWithType:DBBarButtonTypeOrder controller:controller params:nil action:action];
+}
+
++ (DBBarButtonItem *)giftItem:(UIViewController *)controller action:(SEL)action {
+    return [self itemWithType:DBBarButtonTypeGift controller:controller params:nil action:action];
 }
 
 + (DBBarButtonItem *)profileItem:(UIViewController *)controller action:(SEL)action {
@@ -47,6 +53,9 @@ typedef NS_ENUM(NSInteger, DBBarButtonType) {
     switch (type) {
         case DBBarButtonTypeOrder:
             customView = [DBOrderBarButtonView new];
+            break;
+        case DBBarButtonTypeGift:
+            customView = [DBGiftBarButtonView new];
             break;
         case DBBarButtonTypeProfile:
             customView = [DBProfileBarButtonItem new];

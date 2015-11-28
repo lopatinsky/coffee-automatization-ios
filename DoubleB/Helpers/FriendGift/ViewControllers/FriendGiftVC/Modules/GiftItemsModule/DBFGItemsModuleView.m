@@ -15,8 +15,8 @@
 #import "DBModuleHeaderView.h"
 
 @interface DBFGItemsModuleView ()<UITableViewDataSource, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
-@property (weak, nonatomic) IBOutlet UIView *headerView;
 
+@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIView *addView;
@@ -130,15 +130,13 @@
     return YES;
 }
 
-- (void)removeRowAtIndex:(NSInteger)index{
-    [self reload:YES];
+- (void)removeRowAtIndex:(NSInteger)index {
+    [self.ownerViewController reloadAllModules];
 }
 
 - (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
     [[DBFriendGiftHelper sharedInstance].itemsManager increaseOrderItemCountAtIndex:index];
-    
-    [cell reloadCount];
 }
 
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{

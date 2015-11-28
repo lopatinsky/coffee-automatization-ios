@@ -10,6 +10,7 @@
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
 #import "DBFriendGiftHelper.h"
+#import "DBBarButtonItem.h"
 
 #import "MBProgressHUD.h"
 
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Подарки", nil);
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem giftItem:self action:@selector(back)];
     
     self.tableView.rowHeight = 44.f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -39,6 +41,10 @@
             [self.tableView reloadData];
         }];
     }
+}
+
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -60,7 +66,7 @@
     return cell;
 }
 
--(void)positionCellDidOrder:(id<PositionCellProtocol>)cell {
+- (void)positionCellDidOrder:(id<PositionCellProtocol>)cell {
     [[DBFriendGiftHelper sharedInstance].itemsManager addPosition:[cell position]];
 }
 

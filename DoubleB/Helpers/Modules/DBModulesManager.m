@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
         
         switch (type) {
             case DBModuleTypeFriendGift:
-                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:[moduleDict getValueForKey:@"info"]];
+                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];

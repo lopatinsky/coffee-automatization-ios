@@ -14,14 +14,16 @@
 #import "UIViewController+DBPeoplePickerController.h"
 #import "DBModuleHeaderView.h"
 
+NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDismiss";
+
 @interface DBFGRecipientModuleView ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet UILabel *profileLabel;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @property (weak, nonatomic) IBOutlet UIImageView *contactsImageView;
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
@@ -34,6 +36,10 @@
     self = [[[NSBundle mainBundle] loadNibNamed:@"DBFGRecipientModuleView" owner:self options:nil] firstObject];
     
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)awakeFromNib {
@@ -65,6 +71,26 @@
     // Initialize contacts button
     [self.contactsImageView templateImageWithName:@"contacts_icon"];
     [self.contactsButton addTarget:self action:@selector(clickContactsButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissAll) name:kDBFGRecipientModuleViewDismiss object:nil];
+    
+    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+    [keyboardDoneButtonView sizeToFit];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Готово", nil)
+                                                                   style:UIBarButtonItemStyleBordered target:self
+                                                                  action:@selector(dismissAll)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    self.nameTextField.inputAccessoryView = keyboardDoneButtonView;
+    self.phoneTextField.inputAccessoryView = keyboardDoneButtonView;
+}
+
+- (void)viewWillDissapearFromVC {
+    [self dismissAll];
+}
+
+- (void)dismissAll {
+    [self.nameTextField resignFirstResponder];
+    [self.phoneTextField resignFirstResponder];
 }
 
 - (void)reload:(BOOL)animated {
@@ -75,6 +101,7 @@
 }
 
 - (void)clickContactsButton {
+    [self dismissAll];
     [self.ownerViewController db_presentPeoplePickerController:^(DBProcessState state, NSString *name, NSString *phone) {
         if(state == DBProcessStateDone){
             [DBFriendGiftHelper sharedInstance].friendName.value = name;
@@ -95,7 +122,12 @@
     if(textField == self.nameTextField) {
         [DBFriendGiftHelper sharedInstance].friendName.value = textField.text;
     } else {
-        [DBFriendGiftHelper sharedInstance].friendPhone.value = textField.text;
+        NSString *phoneText = self.phoneTextField.text;
+        NSMutableCharacterSet *nonDigitsSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+        [nonDigitsSet invert];
+        
+        NSString *validText = [[phoneText componentsSeparatedByCharactersInSet:nonDigitsSet] componentsJoinedByString:@""];
+        [DBFriendGiftHelper sharedInstance].friendPhone.value = validText;
     }
 }
 
@@ -113,7 +145,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if(textField == self.phoneTextField){
+    if (textField == self.phoneTextField) {
         if([textField.text isEqualToString:@""] || [textField.text isEqualToString:@"+"])
             textField.text = @"+7";
         
@@ -134,6 +166,13 @@
         [GANHelper analyzeEvent:@"friend_gift_phone_entered" label:textField.text category:self.analyticsCategory];
     }
     
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.returnKeyType == UIReturnKeyNext) {
+        [self.phoneTextField becomeFirstResponder];
+    }
     return YES;
 }
 

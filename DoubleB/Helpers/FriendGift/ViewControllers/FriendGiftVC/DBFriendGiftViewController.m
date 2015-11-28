@@ -26,7 +26,8 @@
 
 @import AddressBookUI;
 
-@interface DBFriendGiftViewController ()<DBSuggestionViewDelegate>
+@interface DBFriendGiftViewController () <DBSuggestionViewDelegate, DBOwnerViewControllerProtocol>
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
@@ -35,10 +36,12 @@
 @property (weak, nonatomic) IBOutlet UIView *giftView;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *giftLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (strong, nonatomic) NSString *analyticsScreen;
-
+@property (strong, nonatomic) UITapGestureRecognizer *dismissKeyboardTap;
 @property (strong, nonatomic) DBSuggestionView *suggestionView;
+@property (nonatomic) BOOL keyboardIsVisible;
 
 @end
 
@@ -48,9 +51,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Подарок", nil);
-    
     self.view.backgroundColor = [UIColor db_backgroundColor];
-    
     self.analyticsScreen = @"Friend_gift_screen";
     
     self.titleLabel.text = [DBFriendGiftHelper sharedInstance].titleFriendGiftScreen;
@@ -59,16 +60,15 @@
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.titleLabel alignTrailingEdgeWithView:self.view predicate:@"-15"];
     
+    self.dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                      action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:self.dismissKeyboardTap];
+
     [self initModules];
-    
     [self initGiftView];
-    
     [self checkSuggestion:NO];
     
     [[DBFriendGiftHelper sharedInstance] addObserver:self withKeyPaths:@[DBFriendGiftHelperNotificationFriendName, DBFriendGiftHelperNotificationFriendPhone, DBFriendGiftHelperNotificationItemsPrice] selector:@selector(reloadGiftButton)];
-    
-    
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem customItem:self withText:NSLocalizedString(@"История", nil) action:@selector(moveToHistory)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -78,17 +78,28 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem customItem:self withText:NSLocalizedString(@"История", nil) action:@selector(moveToHistory)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+ 
     [self reload];
 }
 
-- (void)dealloc{
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
+- (void)dealloc {
     [[DBFriendGiftHelper sharedInstance] removeObserver:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)dismissKeyboard {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDBFGRecipientModuleViewDismiss object:nil];
 }
 
 - (void)initModules {
@@ -191,6 +202,12 @@
                                       }];
 }
 
+#pragma mark - DBOwnerViewControllerProtocol
+
+- (void)reloadAllModules {
+    [self.giftInfoModule reload:YES];
+}
+
 #pragma mark - DBSuggestionViewDelegate
 
 - (void)db_clickSuggestionView:(DBSuggestionView *)view {
@@ -206,12 +223,19 @@
 
 #pragma mark - Keyboard events
 
-- (void)keyboardWillShow:(NSNotification *)notification{
+- (void)keyboardWillShow:(NSNotification *)notification {
+    if ([[UIScreen mainScreen] bounds].size.height <= 600) {
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(-60.0, 0.0, 0.0, 0.0);
+        self.scrollView.contentInset = contentInsets;
+    }
 }
 
-- (void)keyboardWillHide:(NSNotification *)notification{
+- (void)keyboardWillHide:(NSNotification *)notification {
+    if ([[UIScreen mainScreen] bounds].size.height <= 600) {
+        UIEdgeInsets contentInsets = UIEdgeInsetsMake(64.0, 0.0, 0.0, 0.0);
+        self.scrollView.contentInset = contentInsets;
+    }
+    [self reloadGiftButton];
 }
-
-
 
 @end

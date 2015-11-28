@@ -14,6 +14,7 @@
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 
+#import "AKNumericFormatter.h"
 
 NSString * const DBFriendGiftHelperNotificationFriendName = @"DBFriendGiftHelperNotificationFriendName";
 NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelperNotificationFriendPhone";
@@ -21,6 +22,7 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelperNotificationItemsPrice";
 
 @implementation DBFriendGiftHelper
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -45,7 +47,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    if([keyPath isEqualToString:@"value"]){
+    if([keyPath isEqualToString:@"value"]) {
         if(object == self.friendName){
             [self notifyObserverOf:DBFriendGiftHelperNotificationFriendName];
         }
@@ -70,6 +72,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
     
+    // TODO: #288 server response with gifts info
     [DBFriendGiftHelper setValue:@"Заголовок с сервака" forKey:@"titleFriendGiftScreen"];
     [DBFriendGiftHelper setValue:@"Перепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака" forKey:@"textFriendGiftScreen"];
     
@@ -186,9 +189,15 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
 - (BOOL)validData {
     BOOL result = YES;
     
+    NSString *mask = @"+* (***) ***-**-**";
+    NSString *reformattedString = [AKNumericFormatter formatString:self.friendPhone.value
+                                                         usingMask:mask
+                                              placeholderCharacter:'*'];
+    BOOL phoneIsValid =  [[AKNumericFormatter formatterWithMask:mask placeholderCharacter:'*'] isFormatFulfilled:reformattedString];
+    
     result = result && self.itemsManager.totalCount > 0;
     result = result && self.friendName.valid;
-//    result = result && self.friendPhone.valid;
+    result = result && self.friendPhone.valid && phoneIsValid;
     result = result && [DBCardsManager sharedInstance].defaultCard;
     
     return result;
