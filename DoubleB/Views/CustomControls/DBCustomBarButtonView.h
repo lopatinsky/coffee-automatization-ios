@@ -11,8 +11,5 @@
 @interface DBCustomBarButtonView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *customTextLabel;
-@property (nonatomic, strong) NSString *customText;
-
-- (instancetype)initWithText:(NSString *)text;
 
 @end

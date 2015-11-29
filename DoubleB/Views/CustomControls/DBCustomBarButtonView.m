@@ -16,15 +16,9 @@
     return self;
 }
 
-- (instancetype)initWithText:(NSString *)text {
-    self = [super init];
-    self.customText = text;
-    return self;
-}
-
 - (void)awakeFromNib {
-    self.customTextLabel.text = self.customText;
-//    self.customTextLabel.textColor = [UIColor db_defaultColor];
+    self.customTextLabel.textColor = [UIColor whiteColor];
+    self.customTextLabel.textAlignment = NSTextAlignmentRight;
 }
 
 @end

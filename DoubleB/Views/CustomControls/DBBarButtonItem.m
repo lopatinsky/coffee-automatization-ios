@@ -61,7 +61,9 @@ typedef NS_ENUM(NSInteger, DBBarButtonType) {
             customView = [DBProfileBarButtonItem new];
             break;
         case DBBarButtonTypeCustom:
-            customView = [[DBCustomBarButtonView alloc] initWithText:params[@"text"]];
+            customView = [DBCustomBarButtonView new];
+            [(DBCustomBarButtonView *)customView customTextLabel].text = params[@"text"];
+            buttonOrder.frame = CGRectMake(0, 0, 70, 35);
         default:
             break;
     }
