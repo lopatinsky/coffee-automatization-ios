@@ -8,6 +8,8 @@
 
 #import <XCTest/XCTest.h>
 
+#import "DoubleB-swift.h"
+
 @interface UITests : XCTestCase
 
 @end
@@ -17,7 +19,10 @@
 - (void)setUp {
     [super setUp];
     self.continueAfterFailure = NO;
-    [[[XCUIApplication alloc] init] launch];
+    XCUIApplication *app = [XCUIApplication new];
+    [Snapshot setLanguage: app]
+                            
+                            
 }
 
 - (void)tearDown {
