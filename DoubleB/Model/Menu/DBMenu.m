@@ -10,11 +10,16 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBSubscriptionManager.h"
+#import "Venue.h"
 
 #import "DBAPIClient.h"
 
 @interface DBMenu ()
 @property(strong, nonatomic) NSArray *categories;
+@end
+
+@interface DBMenuPositionBalance ()
++ (DBMenuPositionBalance *)fromResponseDict:(NSDictionary *)dict;
 @end
 
 @implementation DBMenu
@@ -151,6 +156,40 @@
                             }];
 }
 
+- (void)updatePositionBalance:(DBMenuPosition *)position callback:(void (^)(BOOL, NSArray *))callback {
+    [[DBAPIClient sharedClient] GET:@"remainders"
+                         parameters:@{@"item_id": position.positionId}
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                NSMutableArray *balances = [NSMutableArray new];
+                                
+                                for (NSDictionary *balanceDict in responseObject[@"remainders"]) {
+                                    DBMenuPositionBalance *balance = [DBMenuPositionBalance fromResponseDict:balanceDict];
+                                    if (balance) {
+                                        [balances addObject:balance];
+                                    }
+                                }
+                                
+//                                for (int i = 0; i < 10; i++) {
+//                                    DBMenuPositionBalance *balance = [DBMenuPositionBalance new];
+//                                    balance.venue = [Venue storedVenues].firstObject;
+//                                    balance.balance = i;
+//                                    
+//                                    [balances addObject:balance];
+//                                }
+                                
+                                if (callback) {
+                                    callback(YES, balances);
+                                }
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback) {
+                                    callback(NO, nil);
+                                }
+                            }];
+}
+
 - (NSArray *)filterMenuForVenue:(Venue *)venue{
     NSMutableArray *categories = [NSMutableArray new];
     
@@ -244,6 +283,25 @@
     NSData *data = [NSData dataWithContentsOfFile:path];
     
     self.categories = [self sortCategories:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+}
+
+@end
+
+
+@implementation DBMenuPositionBalance
+
++ (DBMenuPositionBalance *)fromResponseDict:(NSDictionary *)dict {
+    DBMenuPositionBalance *positionBalance;
+    
+    NSString *venueId = [dict getValueForKey:@"venue_id"] ?: @"";
+    Venue *venue = [Venue venueById:venueId];
+    if (venue && [dict getValueForKey:@"value"]) {
+        positionBalance = [DBMenuPositionBalance new];
+        positionBalance.venue = venue;
+        positionBalance.balance = [[dict getValueForKey:@"value"] integerValue];
+    }
+    
+    return positionBalance;
 }
 
 @end

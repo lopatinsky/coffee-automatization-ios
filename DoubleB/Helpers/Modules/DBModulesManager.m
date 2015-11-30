@@ -14,17 +14,9 @@
 #import "DBUniversalModulesManager.h"
 #import "DBGeoPushManager.h"
 
-typedef NS_ENUM(NSInteger, DBModuleType) {
-    DBModuleTypeSubscription = 0,
-    DBModuleTypeFriendGift = 1,
-    DBModuleTypeFriendInvitation = 2,
-    DBModuleTypeProfileScreenUniversal = 4,
-    DBModuleTypeGeoPush = 5,
-    
-    DBModuleTypeLast // Enum item for iteration, not in use
-};
 
 @interface DBModulesManager ()
+@property (strong, nonatomic) NSMutableArray *availableModules;
 @end
 
 @implementation DBModulesManager
@@ -57,14 +49,16 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
 
 - (void)processResponse:(NSDictionary *)response {
     NSMutableArray *appModules = [NSMutableArray new];
-    for (int i = 0; i < DBModuleTypeLast; i++){
-
-    }
     
     // Switch on all necessary modules
     NSArray *modules = response[@"modules"];
     for (NSDictionary *moduleDict in modules) {
         NSInteger type = [moduleDict getValueForKey:@"type"] ? [[moduleDict getValueForKey:@"type"] integerValue] : -1;
+        
+        self.availableModules = [NSMutableArray new];
+        if (type != -1) {
+            [self.availableModules addObject:@(type)];
+        }
         
         switch (type) {
             case DBModuleTypeFriendGift:
@@ -98,6 +92,10 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 break;
         }
     }
+}
+
+- (BOOL)moduleEnabled:(DBModuleType)type {
+    return [self.availableModules containsObject:@(type)];
 }
 
 @end

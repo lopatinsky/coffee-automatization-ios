@@ -21,6 +21,8 @@
 "ккал" = "kcal";
 "мл" = "ml";
 
+"Проверить наличие" = "Check availability";
+
 "Адрес доставки" = "Shipping address";
 "Улица, дом" = "Street, house";
 "Кв/Офис" = "apartment";

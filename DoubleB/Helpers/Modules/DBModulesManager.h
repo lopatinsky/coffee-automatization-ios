@@ -8,10 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, DBModuleType) {
+    DBModuleTypeSubscription = 0,
+    DBModuleTypeFriendGift = 1,
+    DBModuleTypeFriendInvitation = 2,
+    DBModuleTypeProfileScreenUniversal = 4,
+    DBModuleTypeGeoPush = 5,
+    DBModuleTypePositionBalances = 10,
+    
+    DBModuleTypeLast // Enum item for iteration, not in use
+};
+
 @interface DBModulesManager : NSObject
 
 + (instancetype)sharedInstance;
 
 - (void)fetchModules:(void(^)(BOOL success))callback;
+- (BOOL)moduleEnabled:(DBModuleType)type;
 
 @end

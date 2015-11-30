@@ -17,9 +17,15 @@
 #import "DBPositionModifierPicker.h"
 #import "DBPositionModifiersList.h"
 
+#import "DBPopupViewController.h"
+#import "DBPositionBalanceView.h"
+
+#import "DBModulesManager.h"
+
 #import "UIView+RoundedCorners.h"
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
+#import "UIControl+BlocksKit.h"
 
 @interface PositionViewController1 ()<DBPositionModifierPickerDelegate, DBPositionModifiersListDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
@@ -28,6 +34,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *positionModifiersLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *positionDescriptionLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *balanceView;
+@property (weak, nonatomic) IBOutlet UIButton *balanceButton;
+@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintBalanceViewWidth;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *priceButton;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightVolumeLabel;
@@ -108,6 +121,8 @@
         self.energyAmountLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.energyAmount, NSLocalizedString(@"ккал", nil)];
     }
     
+    [self configBalanceView];
+    
     if (self.mode == PositionViewControllerModeMenuPosition){
         [self.priceLabel setRoundedCorners];
         self.priceLabel.backgroundColor = [UIColor db_defaultColor];
@@ -136,6 +151,27 @@
     
     self.modifierPicker = [DBPositionModifierPicker new];
     self.modifierPicker.delegate = self;
+}
+
+- (void)configBalanceView {
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances]) {
+        self.constraintBalanceViewWidth.constant = 80;
+        self.balanceLabel.textColor = [UIColor db_defaultColor];
+        self.balanceLabel.text = NSLocalizedString(@"Проверить наличие", nil);
+        
+        @weakify(self)
+        [self.balanceButton bk_addEventHandler:^(id sender) {
+            @strongify(self)
+            
+            DBPositionBalanceView *balanceVC = [DBPositionBalanceView new];
+            balanceVC.position = self.position;
+            DBPopupViewController *popupVC = [DBPopupViewController new];
+            popupVC.componentView = balanceVC;
+            [popupVC showOnView:self.navigationController.view];
+        } forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        self.constraintBalanceViewWidth.constant = 0;
+    }
 }
 
 - (void)reloadSelectedModifiers{
