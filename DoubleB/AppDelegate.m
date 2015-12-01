@@ -12,6 +12,8 @@
 #import "JRSwizzleMethods.h"
 #import "ApplicationManager.h"
 
+#import "DBSnapshotSDKHelper.h"
+
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <GoogleMaps/GoogleMaps.h>
@@ -60,6 +62,10 @@
         UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
         [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
         [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+    }
+    
+    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
     }
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];

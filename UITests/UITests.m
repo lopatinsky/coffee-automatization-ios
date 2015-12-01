@@ -10,6 +10,8 @@
 
 #import "UITests-Swift.h"
 
+//#import <HSTestingBackchannel/HSTestingBackchannel.h>
+
 @interface UITests : XCTestCase
 
 @end
@@ -27,6 +29,8 @@
 - (void)testTakeScreenshots {
     
     XCUIApplication *app = [XCUIApplication new];
+    
+//    [HSTestingBackchannel sendNotification:@"SnapshotTest"];
     
     [Snapshot snapshot:@"0SignIn" waitForLoadingIndicator:YES];
 }

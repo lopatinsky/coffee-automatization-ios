@@ -21,3 +21,5 @@ pod 'Crashlytics'
 pod 'Branch'
 pod 'FBSDKShareKit'
 pod 'VK-ios-sdk'
+
+pod 'HSTestingBackchannel', :configuration => ['Debug']
