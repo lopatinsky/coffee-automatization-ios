@@ -37,7 +37,8 @@
     [self.doneButton setRoundedCorners];
     [self.doneButton addTarget:self action:@selector(doneButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.contentView setRoundedCorners];
+    self.contentView.layer.cornerRadius = 6.f;
+    self.contentView.layer.masksToBounds = NO;
 }
 
 - (void)setComponentView:(UIView *)componentView {
