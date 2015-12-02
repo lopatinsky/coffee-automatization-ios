@@ -10,6 +10,7 @@
 
 #import <HSTestingBackchannel/HSTestingBackchannel.h>
 
+#import "PositionsTVController.h"
 #import "DBTabBarController.h"
 
 @implementation DBSnapshotSDKHelper
@@ -37,8 +38,8 @@
 }
 
 - (void)moveToOrder {
-    UINavigationController *navVC = [DBTabBarController sharedInstance].viewControllers.firstObject;
-    [navVC popToRootViewControllerAnimated:NO];
+    PositionsTVController *navVC = (PositionsTVController *)[UIViewController currentViewController];
+    [navVC.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

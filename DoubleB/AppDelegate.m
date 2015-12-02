@@ -64,9 +64,9 @@
         [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
     }
     
-    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+//    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
         [DBSnapshotSDKHelper sharedInstance];
-    }
+//    }
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     return YES;

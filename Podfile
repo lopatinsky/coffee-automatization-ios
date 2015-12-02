@@ -1,6 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.1'
 
+link_with 'UITests'
+
 pod 'Parse'
 pod 'AKNumericFormatter'
 pod 'AFNetworking', '~> 2.2'
