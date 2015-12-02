@@ -103,11 +103,11 @@ NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDism
 - (void)clickContactsButton {
     [self dismissAll];
     [self.ownerViewController db_presentPeoplePickerController:^(DBProcessState state, NSString *name, NSString *phone) {
-        if(state == DBProcessStateDone){
+        if (state == DBProcessStateDone) {
             [DBFriendGiftHelper sharedInstance].friendName.value = name;
             
-            [DBFriendGiftHelper sharedInstance].friendPhone.value = phone;
-            [self reload:YES];
+            [self setValidTextToPhone:phone];
+            [self.ownerViewController reloadAllModules];
             
             [GANHelper analyzeEvent:@"friend_contact_selected"
                               label:[NSString stringWithFormat:@"%@,%@", name, phone]
@@ -118,17 +118,21 @@ NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDism
     }];
 }
 
-- (void)textFieldDidChangeText:(UITextField *)textField{
-    if(textField == self.nameTextField) {
+- (void)textFieldDidChangeText:(UITextField *)textField {
+    if (textField == self.nameTextField) {
         [DBFriendGiftHelper sharedInstance].friendName.value = textField.text;
     } else {
-        NSString *phoneText = self.phoneTextField.text;
-        NSMutableCharacterSet *nonDigitsSet = [NSMutableCharacterSet decimalDigitCharacterSet];
-        [nonDigitsSet invert];
-        
-        NSString *validText = [[phoneText componentsSeparatedByCharactersInSet:nonDigitsSet] componentsJoinedByString:@""];
-        [DBFriendGiftHelper sharedInstance].friendPhone.value = validText;
+        [self setValidTextToPhone:self.phoneTextField.text];
     }
+}
+
+- (void)setValidTextToPhone:(NSString *)formattedPhone {
+    NSString *phoneText = formattedPhone;
+    NSMutableCharacterSet *nonDigitsSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+    [nonDigitsSet invert];
+    
+    NSString *validText = [[phoneText componentsSeparatedByCharactersInSet:nonDigitsSet] componentsJoinedByString:@""];
+    [DBFriendGiftHelper sharedInstance].friendPhone.value = validText;
 }
 
 #pragma mark - UITextFieldDelegate

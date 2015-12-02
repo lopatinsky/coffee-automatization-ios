@@ -165,10 +165,9 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
 }
 
 - (void)fetchGiftsHistory:(void (^)(BOOL))callback {
-    [[DBAPIClient sharedClient] GET:@"gift/history"
+    [[DBAPIClient sharedClient] GET:@"shared/gift/history"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%@", responseObject);
                                 
                                 NSMutableArray *items = [NSMutableArray new];
                                 for (NSDictionary *itemDict in responseObject[@"items"]) {
