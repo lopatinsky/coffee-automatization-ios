@@ -5,15 +5,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>
-	<string>LES</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIcons~ipad</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.empatika.coffeeacademy</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,6 +26,15 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.1.7.1</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb349173695244280coffeeacademy</string>
+			</array>
+		</dict>
+	</array>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -36,15 +43,25 @@
 		<array>
 			<dict>
 				<key>KitInfo</key>
-				<dict>
-				</dict>
+				<dict/>
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>349173695244280</string>
+	<key>FacebookDisplayName</key>
+	<string>Ru-Beacon</string>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>coffeeacademy</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb</string>
+		<string>fbauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

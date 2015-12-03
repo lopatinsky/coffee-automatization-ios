@@ -12,7 +12,7 @@
 
 @implementation DBTextResourcesHelper
 
-+ (NSString *)db_venuesTitleString{
++ (NSString *)db_venuesTitleString {
     NSString *title = NSLocalizedString(@"Заведения", nil);
     if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
         NSUInteger venuesCount = [[Venue storedVenues] count];
@@ -40,6 +40,16 @@
     } else {
         return NSLocalizedString(@"Готов к %@", nil);
     }
+}
+
++ (NSString *)db_shareBgImageName {
+    NSString *imageName = @"share2";
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
+        imageName = @"share_coffeeacademy";
+    }
+    
+    return imageName;
 }
 
 @end

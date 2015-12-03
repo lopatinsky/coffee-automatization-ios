@@ -13,4 +13,6 @@
 + (NSString *)db_venuesTitleString;
 + (NSString *)db_preparationOrderCellString;
 
++ (NSString *)db_shareBgImageName;
+
 @end
