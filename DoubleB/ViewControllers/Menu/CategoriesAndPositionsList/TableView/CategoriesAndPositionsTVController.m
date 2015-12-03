@@ -296,7 +296,7 @@ static NSDictionary *_preferences;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([[DBSubscriptionManager sharedInstance] subscriptionCategory] && section == 0) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] subscriptionCategory] && section == 0) {
         return [self.rowsPerSection[section] integerValue] + 1;
     } else {
         return [self.rowsPerSection[section] integerValue];
@@ -304,25 +304,27 @@ static NSDictionary *_preferences;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
-                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
-                    cell.placeholderView.hidden = YES;
-                    cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
-                    cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.userInteractionEnabled = NO;
-                } else {
-                    cell.placeholderView.hidden = NO;
-                    cell.delegate = self;
-                    cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        if ([[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+            if (indexPath.section == 0) {
+                if (indexPath.row == 0) {
+                    SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
+                    if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                        cell.placeholderView.hidden = YES;
+                        cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+                        cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        cell.userInteractionEnabled = NO;
+                    } else {
+                        cell.placeholderView.hidden = NO;
+                        cell.delegate = self;
+                        cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    }
+                    return cell;
                 }
-                return cell;
+                indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
             }
-            indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
         }
     }
     
@@ -379,7 +381,7 @@ static NSDictionary *_preferences;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled]) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
             [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
             [self pushSubscriptionViewController];
@@ -425,7 +427,7 @@ static NSDictionary *_preferences;
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell {
     NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && idxPath.section == 0) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled] && idxPath.section == 0) {
         if(![self subscriptionPositionDidOrder:cell]) {
             return;
         }
