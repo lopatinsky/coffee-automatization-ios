@@ -11,6 +11,8 @@
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 
+#import "DBGeoPush.h"
+
 #import <Parse/Parse.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
@@ -45,7 +47,7 @@
     self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
-
+    
     return YES;
 }
 
@@ -141,7 +143,8 @@
     [ApplicationManager handlePush:userInfo];
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [ApplicationManager handleLocalPush:notification];
 }
 
 - (void)saveContext

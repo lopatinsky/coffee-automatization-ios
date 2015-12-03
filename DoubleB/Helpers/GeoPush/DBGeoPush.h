@@ -20,6 +20,8 @@
 
 - (instancetype)initWithResponseDict:(NSDictionary *)dict;
 - (BOOL)pushIsAvailable;
+- (NSInteger)numberOfDaysAfterLastOrder;
 - (void)pushLocalNotification;
+- (void)debug_pushLocalNotification:(NSInteger)seconds;
 
 @end
