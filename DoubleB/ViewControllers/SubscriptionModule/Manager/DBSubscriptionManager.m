@@ -57,6 +57,38 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [self saveCurrentSubscription];
 }
 
+#pragma mark - Class methods
+
++ (BOOL)positionsAreAvailable {
+    return [[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory];
+}
+
++ (BOOL)categoryIsSubscription:(DBMenuCategory *)category {
+    return [[[[DBSubscriptionManager sharedInstance] subscriptionCategory] categoryId] isEqualToString:[category categoryId]];
+}
+
++ (BOOL)isSubscriptionPosition:(NSIndexPath *)indexPath {
+    return [[DBSubscriptionManager sharedInstance] isEnabled] && (indexPath.section == 0);
+}
+
++ (SubscriptionInfoTableViewCell *)subscriptionCellForIndexPath:(NSIndexPath *)indexPath andCell:(SubscriptionInfoTableViewCell *)cell {
+    if (indexPath.row == 0) {
+        if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+            cell.placeholderView.hidden = YES;
+            cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+            cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.userInteractionEnabled = NO;
+        } else {
+            cell.placeholderView.hidden = NO;
+            cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return cell;
+    }
+    return nil;
+}
+
 #pragma mark – Cache section
 
 - (void)loadCurrentSubscription {
@@ -149,6 +181,10 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
                                     self.currentSubscription = currentSubscription;
                                     [self saveCurrentSubscription];
                                 }
+                                if ([responseObject objectForKey:@"category"]) {
+                                    self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:[responseObject objectForKey:@"category"]];
+                                    [self saveSubscriptionCategory];
+                                }
                                 if(success)
                                     success(@[]);
                             }
@@ -197,11 +233,8 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     }];
     
     if (index != -1) {
-        self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:categories[index]];
         [categories removeObjectAtIndex:index];
         mutableMenu[@"menu"] = categories;
-        
-        [self saveSubscriptionCategory];
     }
     
     return mutableMenu;

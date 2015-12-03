@@ -35,7 +35,6 @@
 
 @interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate, DBMenuCategoryDropdownTitleViewDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
-@property (strong, nonatomic) NSArray *categories;
 
 @property (strong, nonatomic) NSArray *categoryHeaders;
 @property (strong, nonatomic) NSMutableArray *rowsPerSection;
@@ -49,10 +48,23 @@
 @end
 
 @implementation CategoriesAndPositionsTVController
+static NSDictionary *_preferences;
+
+#pragma mark - MenuListViewControllerProtocol
 
 + (instancetype)createViewController {
     return [CategoriesAndPositionsTVController new];
 }
+
++ (NSDictionary *)preferences {
+    return _preferences;
+}
+
++ (void)setPreferences:(NSDictionary *)preferences {
+    _preferences = preferences;
+}
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,12 +75,6 @@
     // Title
     [self setupTitleView];
     
-    // Profile button
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
-    
-    // Order button
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
-    
     //styling
     self.view.backgroundColor = [UIColor whiteColor];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -77,14 +83,19 @@
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refreshControl;
-    
     self.categoryPicker = [DBCategoryPicker new];
     self.categoryPicker.pickerDelegate = self;
     
-    [self subscribeForNotifications];
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
+    
+    
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
+        UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+        [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
+        self.refreshControl = refreshControl;
+        [self subscribeForNotifications];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -93,8 +104,13 @@
     [GANHelper analyzeScreen:@"Menu_screen"];
     [DBSubscriptionManager sharedInstance].delegate = self;
     
-    [self loadMenu:nil];
-    [self reloadTitleView:nil];
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        [self loadMenu:nil];
+        [self reloadTitleView:nil];
+    } else {
+        [self reloadTableView];
+        [self reloadTitleView:[self.categories firstObject]];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -153,7 +169,7 @@
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if(venue.venueId){
+        if (venue.venueId) {
             // Load menu for current Venue
             if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
                 self.lastVenueId = venue.venueId;
@@ -180,7 +196,6 @@
                 }
             }
         }
-        
         
         if (self.categories && [self.categories count] > 0) {
             [self reloadTableView];
@@ -281,33 +296,21 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([[DBSubscriptionManager sharedInstance] subscriptionCategory] && section == 0) {
-        return [self.rowsPerSection[section] integerValue] + 1;
-    } else {
-        return [self.rowsPerSection[section] integerValue];
-    }
+    return [self.rowsPerSection[section] integerValue] +
+        (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager positionsAreAvailable] ? 1 : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-        if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
-                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
-                    cell.placeholderView.hidden = YES;
-                    cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
-                    cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.userInteractionEnabled = NO;
-                } else {
-                    cell.placeholderView.hidden = NO;
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        if ([DBSubscriptionManager positionsAreAvailable]) {
+            if (indexPath.section == 0) {
+                SubscriptionInfoTableViewCell *cell = [DBSubscriptionManager subscriptionCellForIndexPath:indexPath andCell:[tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"]];
+                if (cell) {
                     cell.delegate = self;
-                    cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                    return cell;
                 }
-                return cell;
+                indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
             }
-            indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
         }
     }
     
@@ -364,7 +367,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled]) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
             [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
             [self pushSubscriptionViewController];
@@ -410,7 +413,7 @@
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell {
     NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && idxPath.section == 0) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager isSubscriptionPosition:idxPath]) {
         if(![self subscriptionPositionDidOrder:cell]) {
             return;
         }

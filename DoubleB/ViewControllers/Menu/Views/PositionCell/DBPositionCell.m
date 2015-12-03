@@ -11,7 +11,7 @@
 #import "DBTableItemInactivityView.h"
 
 #import "UIView+RoundedCorners.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+PINRemoteImage.h"
 
 @interface DBPositionCell()
 @property (weak, nonatomic) UIImageView *positionImageView;
@@ -111,13 +111,15 @@
         }
         
         self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
+        
+        self.positionImageView.image = nil;
         [self.positionImageView db_showDefaultImage];
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl]
-                                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                if(!error){
-                                                    [self.positionImageView db_hideDefaultImage];
-                                                }
-                                            }];
+        [self.positionImageView setPin_updateWithProgress:YES];
+        [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:position.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+            if (result.resultType != PINRemoteImageResultTypeNone) {
+                [self.positionImageView db_hideDefaultImage];
+            }
+        }];
     }
 }
 

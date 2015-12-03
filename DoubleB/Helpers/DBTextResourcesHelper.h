@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface DBTextResourcesHelper : NSObject
+
 + (NSString *)db_venuesTitleString;
++ (NSString *)db_preparationOrderCellString;
 
 @end

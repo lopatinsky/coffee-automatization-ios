@@ -21,7 +21,7 @@
 	<key>ViewControllers</key>
 	<dict>
 		<key>MenuViewControllers</key>
-		<string>Nested</string>
+		<string>Mixed</string>
 	</dict>
 </dict>
 </plist>

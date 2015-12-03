@@ -19,4 +19,7 @@
 // Initializer for nested menu controllers
 + (instancetype)createWithMenuCategory:(DBMenuCategory *)category;
 
++ (NSDictionary *)preferences;
++ (void)setPreferences:(NSDictionary *)preferences;
+
 @end

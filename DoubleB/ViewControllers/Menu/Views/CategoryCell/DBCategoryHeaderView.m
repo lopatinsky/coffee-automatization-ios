@@ -10,6 +10,7 @@
 #import "DBMenuCategory.h"
 
 #import "UIImageView+WebCache.h"
+#import "UIImageView+PINRemoteImage.h"
 
 @interface DBCategoryHeaderView ()
 @property (weak, nonatomic) IBOutlet UIView *categoryImageContainer;
@@ -50,18 +51,17 @@
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    [self.categoryImageView db_showDefaultImage];
-    
     self.categoryTitleLabel.textColor = [UIColor blackColor];
     self.categoryTitleLabel.text = self.category.name;
     
-    if(self.category.imageUrl){
-        [self.categoryImageView sd_setImageWithURL:[NSURL URLWithString:self.category.imageUrl]
-                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                             if(!error){
-                                                 [self.categoryImageView db_hideDefaultImage];
-                                             }
-                                         }];
+    if(self.category.imageUrl) {
+        self.categoryImageView.image = nil;
+        [self.categoryImageView setPin_updateWithProgress:YES];
+        [self.categoryImageView pin_setImageFromURL:[NSURL URLWithString:self.category.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+            if (result.resultType != PINRemoteImageResultTypeNone) {
+                [self.categoryImageView db_hideDefaultImage];
+            }
+        }];
     }
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];

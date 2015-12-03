@@ -9,7 +9,7 @@
 #import "DBCategoryCell.h"
 #import "DBMenuCategory.h"
 
-#import "UIImageView+WebCache.h"
+#import "UIImageView+PINRemoteImage.h"
 
 @interface DBCategoryCell ()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) UIImageView *categoryIconImageView;
@@ -74,13 +74,14 @@
 - (void)configureWithCategory:(DBMenuCategory *)category{
     _category = category;
     
+    self.categoryIconImageView.image = nil;
     [self.categoryIconImageView db_showDefaultImage];
-    [self.categoryIconImageView sd_setImageWithURL:[NSURL URLWithString:category.imageUrl]
-                                     completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                         if(!error){
-                                             [self.categoryIconImageView db_hideDefaultImage];
-                                         }
-                                     }];
+    [self.categoryIconImageView setPin_updateWithProgress:YES];
+    [self.categoryIconImageView pin_setImageFromURL:[NSURL URLWithString:category.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+        if (result.resultType != PINRemoteImageResultTypeNone) {
+            [self.categoryIconImageView db_hideDefaultImage];
+        }
+    }];
     self.categoryNameLabel.text = category.name;
 }
 
