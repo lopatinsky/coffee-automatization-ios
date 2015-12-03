@@ -72,3 +72,5 @@ FoodFusion com.empatika.foodfusion 1063716403
 MealStreet com.empatika.mealstreet 1063718726
 MaxxiCoffee com.empatika.maxiicoffee 1063718709
 Grilnica com.empatika.grilnica 1063717530
+ChaychonaTlt com.empatika.chaychonatlt 1064122943
+Buono com.empatika.buono 1063718471

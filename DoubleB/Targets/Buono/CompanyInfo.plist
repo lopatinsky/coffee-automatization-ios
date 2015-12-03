@@ -7,7 +7,7 @@
 		<key>BaseUrl</key>
 		<string>http://buono.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<string>#ffffff</string>
+		<string>#333333</string>
 		<key>CompanyGAKey</key>
 		<string>UA-69262560-22</string>
 		<key>Parse</key>
