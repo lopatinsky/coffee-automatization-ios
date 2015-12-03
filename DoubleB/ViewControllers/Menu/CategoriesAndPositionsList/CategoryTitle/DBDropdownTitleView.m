@@ -43,18 +43,9 @@
     } else {
         self.arrowImageView.hidden = NO;
         
+        CGFloat angle = state == DBDropdownTitleViewStateOpened ? -180 * (CGFloat)(M_PI/180) : 180 * (CGFloat)(M_PI/180);
         [UIView animateWithDuration:0.1 animations:^{
-            self.arrowImageView.alpha = 0.f;
-        } completion:^(BOOL finished) {
-            if (state == DBDropdownTitleViewStateOpened) {
-                [self.arrowImageView templateImageWithName:@"arrow_horizontal_top_icon.png" tintColor:[UIColor whiteColor]];
-            } else {
-                [self.arrowImageView templateImageWithName:@"arrow_horizontal_icon.png" tintColor:[UIColor whiteColor]];
-            }
-            
-            [UIView animateWithDuration:0.1 animations:^{
-                self.arrowImageView.alpha = 1.f;
-            }];
+            self.arrowImageView.transform = CGAffineTransformRotate(self.arrowImageView.transform, angle);
         }];
     }
 }
