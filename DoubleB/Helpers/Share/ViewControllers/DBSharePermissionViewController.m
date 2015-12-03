@@ -12,6 +12,7 @@
 #import "DBCompanyInfo.h"
 #import "SocialManager.h"
 #import "UIActionSheet+BlocksKit.h"
+#import "DBTextResourcesHelper.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -46,7 +47,8 @@
     if(!self.screen)
         self.screen = SHARE_PERMISSION_SCREEN;
     
-    NSString *imageName = [NSString stringWithFormat:@"share2_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
+    NSString *imageName = [DBTextResourcesHelper db_shareBgImageName];
+    imageName = [NSString stringWithFormat:@"%@_%ld.jpg", imageName, (long)[UIScreen mainScreen].bounds.size.height];
     self.shareImageView.image = [UIImage imageNamed:imageName];
     
     self.logoImageView.hidden = YES;

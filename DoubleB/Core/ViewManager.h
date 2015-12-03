@@ -13,4 +13,7 @@
 + (UIViewContentMode)defaultMenuPositionIconsContentMode;
 + (UIViewContentMode)defaultMenuCategoryIconsContentMode;
 
++ (CGFloat)menuCategoriesFullCellHeight;
++ (CGFloat)menuCategoriesCompactCellHeight;
+
 @end

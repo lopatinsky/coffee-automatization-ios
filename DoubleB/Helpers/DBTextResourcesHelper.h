@@ -11,4 +11,6 @@
 @interface DBTextResourcesHelper : NSObject
 + (NSString *)db_venuesTitleString;
 
++ (NSString *)db_shareBgImageName;
+
 @end

@@ -136,6 +136,14 @@
     }
 }
 
+- (DBCategoryCellAppearanceType)cellType {
+    if ([self hasImages]) {
+        return DBCategoryCellAppearanceTypeFull;
+    } else {
+        return DBCategoryCellAppearanceTypeCompact;
+    }
+}
+
 - (BOOL)hasImages {
     if(!self.parent){
         return [DBMenu sharedInstance].hasImages;
@@ -153,10 +161,10 @@
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self hasImages]) {
-        return 90.f;
+    if ([self cellType] == DBCategoryCellAppearanceTypeFull) {
+        return [ViewManager menuCategoriesFullCellHeight];
     } else {
-        return 65.f;
+        return [ViewManager menuCategoriesCompactCellHeight];
     }
 }
 
@@ -168,11 +176,7 @@
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
     if (!cell){
-        if ([self hasImages]){
-            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeFull];
-        } else {
-            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeCompact];
-        }
+        cell = [[DBCategoryCell alloc] initWithType:[self cellType]];
     }
     
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.row];
