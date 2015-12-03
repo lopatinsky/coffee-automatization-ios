@@ -22,6 +22,7 @@
 #import "IHSecureStore.h"
 #import "OrderCoordinator.h"
 #import "DBCompanyInfo.h"
+#import "DBSubscriptionManager.h"
 
 #import "UIAlertView+BlocksKit.h"
 
@@ -182,6 +183,11 @@
                                  [[CoreDataHelper sharedHelper] save];
                                  [self reloadCancelRepeatButton];
                                  [self reloadStatusInfo:nil];
+                                 [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray * _Nonnull info) {
+                                     
+                                 } failure:^(NSString * _Nonnull errorMessage) {
+                                     
+                                 }];
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSString *errorEventLabel = [eventLabel stringByAppendingString:[NSString stringWithFormat:@";%@", error.localizedDescription]];

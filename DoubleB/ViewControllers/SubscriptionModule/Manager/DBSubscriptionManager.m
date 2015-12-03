@@ -57,6 +57,38 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [self saveCurrentSubscription];
 }
 
+#pragma mark - Class methods
+
++ (BOOL)positionsAreAvailable {
+    return [[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory];
+}
+
++ (BOOL)categoryIsSubscription:(DBMenuCategory *)category {
+    return [[[[DBSubscriptionManager sharedInstance] subscriptionCategory] categoryId] isEqualToString:[category categoryId]];
+}
+
++ (BOOL)isSubscriptionPosition:(NSIndexPath *)indexPath {
+    return [[DBSubscriptionManager sharedInstance] isEnabled] && (indexPath.section == 0);
+}
+
++ (SubscriptionInfoTableViewCell *)subscriptionCellForIndexPath:(NSIndexPath *)indexPath andCell:(SubscriptionInfoTableViewCell *)cell {
+    if (indexPath.row == 0) {
+        if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+            cell.placeholderView.hidden = YES;
+            cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+            cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.userInteractionEnabled = NO;
+        } else {
+            cell.placeholderView.hidden = NO;
+            cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        return cell;
+    }
+    return nil;
+}
+
 #pragma mark – Cache section
 
 - (void)loadCurrentSubscription {

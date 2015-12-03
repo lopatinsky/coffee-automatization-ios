@@ -74,36 +74,21 @@ static NSDictionary *_preference;
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [self.category.categoryId isEqualToString:@"1"]) {
-        return [self.category.positions count] + 1;
-    } else {
-        return [self.category.positions count];
-    }
+    return [self.category.positions count] + ([DBSubscriptionManager positionsAreAvailable] && [DBSubscriptionManager categoryIsSubscription:self.category] ? 1 : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory] && [self.category.categoryId isEqualToString:@"1"]) {
+    if ([DBSubscriptionManager positionsAreAvailable] && [DBSubscriptionManager categoryIsSubscription:self.category]) {
         if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
-                if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
-                    cell.placeholderView.hidden = YES;
-                    cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
-                    cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                    cell.userInteractionEnabled = NO;
-                } else {
-                    cell.placeholderView.hidden = NO;
-                    cell.delegate = self;
-                    cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
-                    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                }
+            SubscriptionInfoTableViewCell *cell = [DBSubscriptionManager subscriptionCellForIndexPath:indexPath andCell:[tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"]];
+            if (cell) {
+                cell.delegate = self;
                 return cell;
             }
             indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
         }
     }
-
+    
     DBPositionCell *cell;
     if(self.category.categoryWithImages){
         cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
@@ -117,6 +102,7 @@ static NSDictionary *_preference;
         }
     }
     cell.delegate = self;
+    cell.priceAnimated = YES;
     
     DBMenuPosition *position = self.category.positions[indexPath.row];
     [cell configureWithPosition:position];
@@ -128,7 +114,7 @@ static NSDictionary *_preference;
 #pragma mark - table view delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(self.category.categoryWithImages){
+    if (self.category.categoryWithImages) {
         return 120;
     } else {
         return 50;
@@ -138,7 +124,7 @@ static NSDictionary *_preference;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [self.category.categoryId isEqualToString:@"1"]) {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:self.category]) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
             [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
             [self pushSubscriptionViewController];
@@ -176,8 +162,6 @@ static NSDictionary *_preference;
 
 #pragma mark - DBPositionCellDelegate
 
-#pragma mark - DBPositionCellDelegate
-
 - (BOOL)subscriptionPositionDidOrder:(DBPositionCell *)cell {
     if (![[DBSubscriptionManager sharedInstance] isAvailable]) {
         [self pushSubscriptionViewController];
@@ -203,8 +187,8 @@ static NSDictionary *_preference;
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell {
     NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && idxPath.section == 0) {
-        if(![self subscriptionPositionDidOrder:cell]) {
+    if ([DBSubscriptionManager isSubscriptionPosition:idxPath] && [DBSubscriptionManager categoryIsSubscription:self.category]) {
+        if (![self subscriptionPositionDidOrder:cell]) {
             return;
         }
     }

@@ -10,6 +10,8 @@
 #import "DBPrimaryManager.h"
 #import "DBModuleManagerProtocol.h"
 
+#import "SubscriptionInfoTableViewCell.h"
+
 #import "DBSubscriptionVariant.h"
 #import "DBCurrentSubscription.h"
 
@@ -35,6 +37,11 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 @property (weak, nonatomic) id<DBSubscriptionManagerProtocol> delegate;
 @property (nonatomic, strong) DBMenuCategory * __nonnull subscriptionCategory;
 @property (nonatomic) NSInteger balance;
+
++ (BOOL)positionsAreAvailable;
++ (BOOL)categoryIsSubscription:(nonnull DBMenuCategory *)category;
++ (BOOL)isSubscriptionPosition:(nonnull NSIndexPath *)indexPath;
++ (nullable SubscriptionInfoTableViewCell *)subscriptionCellForIndexPath:(nonnull NSIndexPath *)indexPath andCell:(nonnull SubscriptionInfoTableViewCell *)cell;
 
 - (void)synchWithResponseInfo:( nonnull NSDictionary *)infoDict;
 - (void)buySubscription:(nonnull DBSubscriptionVariant *)variant callback:(void(^ _Nonnull)(BOOL success, NSString * __nonnull errorMessage))callback;
