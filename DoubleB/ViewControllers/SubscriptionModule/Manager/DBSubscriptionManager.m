@@ -149,6 +149,10 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
                                     self.currentSubscription = currentSubscription;
                                     [self saveCurrentSubscription];
                                 }
+                                if ([responseObject objectForKey:@"category"]) {
+                                    self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:[responseObject objectForKey:@"category"]];
+                                    [self saveSubscriptionCategory];
+                                }
                                 if(success)
                                     success(@[]);
                             }
@@ -197,11 +201,8 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     }];
     
     if (index != -1) {
-        self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:categories[index]];
         [categories removeObjectAtIndex:index];
         mutableMenu[@"menu"] = categories;
-        
-        [self saveSubscriptionCategory];
     }
     
     return mutableMenu;

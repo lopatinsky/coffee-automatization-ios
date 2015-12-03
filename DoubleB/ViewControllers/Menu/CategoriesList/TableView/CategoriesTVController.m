@@ -17,6 +17,7 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBSettingsTableViewController.h"
+#import "DBSubscriptionManager.h"
 
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
@@ -72,7 +73,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    if(!self.parent){
+    if (!self.parent) {
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
         self.refreshControl = refreshControl;
@@ -94,6 +95,14 @@
 - (void)dealloc{
 }
 
+- (void)appendSubscriptionCategory {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:self.categories];
+        [temp insertObject:[[DBSubscriptionManager sharedInstance] subscriptionCategory] atIndex:0];
+        self.categories = [temp copy];
+    }
+}
+
 - (void)loadMenu:(UIRefreshControl *)refreshControl{
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
     void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
@@ -102,6 +111,7 @@
         
         if (success) {
             self.categories = categories;
+            [self appendSubscriptionCategory];
             [self.tableView reloadData];
         }
         
@@ -109,20 +119,22 @@
     };
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
-    if(refreshControl){
+    if (refreshControl) {
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if(venue.venueId){
+        if (venue.venueId) {
             // Load menu for current Venue
             if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
                 self.lastVenueId = venue.venueId;
                 
                 self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+                [self appendSubscriptionCategory];
             }
         } else {
             // Load whole menu
             self.categories = [[DBMenu sharedInstance] getMenu];
+            [self appendSubscriptionCategory];
         }
         
         
@@ -137,7 +149,7 @@
 }
 
 - (BOOL)hasImages {
-    if(!self.parent){
+    if (!self.parent) {
         return [DBMenu sharedInstance].hasImages;
     } else {
         return self.parent.categoryWithImages;
