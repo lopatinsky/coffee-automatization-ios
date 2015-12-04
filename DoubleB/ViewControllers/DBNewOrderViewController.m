@@ -964,7 +964,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelCard.textColor = [UIColor blackColor];
             self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
             break;
-       
+        case PaymentTypeCourierCard:
+            self.orderFooter.labelCard.textColor = [UIColor blackColor];
+            self.orderFooter.labelCard.text = NSLocalizedString(@"Картой курьеру", nil);
+            break;
         case PaymentTypePayPal:
             if([DBPayPalManager sharedInstance].loggedIn){
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];

@@ -34,9 +34,21 @@
     
     [self.tickImageView templateImageWithName:@"tick"];
     
+    @weakify(self)
+    [self addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        [OrderCoordinator sharedInstance].orderManager.paymentType = PaymentTypeCourierCard;
+        [GANHelper analyzeEvent:@"payment_selected" label:@"courier_card" category:self.analyticsCategory];
+        
+        if([self.delegate respondsToSelector:@selector(db_paymentModuleDidSelectPaymentType:)]){
+            [self.delegate db_paymentModuleDidSelectPaymentType:PaymentTypeCourierCard];
+        }
+    }]];
+    
     [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewPaymentType selector:@selector(reload)];
     
     [self reload:NO];
+
 }
 
 - (void)dealloc {
@@ -46,11 +58,11 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
-//    if([OrderCoordinator sharedInstance].orderManager.paymentType == ){
-//        self.tickImageView.hidden = NO;
-//    } else {
-//        self.tickImageView.hidden = YES;
-//    }
+    if ([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCourierCard) {
+        self.tickImageView.hidden = NO;
+    } else {
+        self.tickImageView.hidden = YES;
+    }
 }
 
 @end

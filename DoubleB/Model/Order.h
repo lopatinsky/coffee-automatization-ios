@@ -21,8 +21,9 @@ typedef NS_ENUM(int16_t, PaymentType) {
     PaymentTypeNotSet = -1,
     PaymentTypeCash = 0,
     PaymentTypeCard = 1,
+    PaymentTypeExtraType = 2,
     PaymentTypePayPal = 4,
-    PaymentTypeExtraType = 2
+    PaymentTypeCourierCard = 5
 };
 
 typedef NS_ENUM(int16_t, DBOrderCancelReason) {
