@@ -31,6 +31,8 @@ extern NSString * __nonnull const CoordinatorNotificationNewDeliveryType;
 extern NSString * __nonnull const CoordinatorNotificationNewSelectedTime;
 extern NSString * __nonnull const CoordinatorNotificationNewPaymentType;
 extern NSString * __nonnull const CoordinatorNotificationNewComment;
+extern NSString * __nonnull const CoordinatorNotificationNewOddSum;
+extern NSString * __nonnull const CoordinatorNotificationNewPersonsCount;
 extern NSString * __nonnull const CoordinatorNotificationNDAAccept;
 
 extern NSString * __nonnull const CoordinatorNotificationNewVenue;

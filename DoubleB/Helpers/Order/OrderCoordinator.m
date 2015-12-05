@@ -25,6 +25,8 @@ NSString * __nonnull const CoordinatorNotificationNewDeliveryType = @"Coordinato
 NSString * __nonnull const CoordinatorNotificationNewSelectedTime = @"CoordinatorNotificationNewSelectedTime";
 NSString * __nonnull const CoordinatorNotificationNewPaymentType = @"CoordinatorNotificationNewPaymentType";
 NSString * __nonnull const CoordinatorNotificationNewComment = @"CoordinatorNotificationNewComment";
+NSString * __nonnull const CoordinatorNotificationNewOddSum = @"CoordinatorNotificationNewOddSum";
+NSString * __nonnull const CoordinatorNotificationNewPersonsCount = @"CoordinatorNotificationNewPersonsCount";
 NSString * __nonnull const CoordinatorNotificationNDAAccept = @"CoordinatorNotificationNDAAccept";
 
 NSString * __nonnull const CoordinatorNotificationNewVenue = @"CoordinatorNotificationNewVenue";
@@ -199,6 +201,12 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             case OrderManagerChangeComment:
                 [self orderManagerDidChangeComment];
                 break;
+            case OrderManagerChangeOddSum:
+                [self orderManagerDidChangeOddSum];
+                break;
+            case OrderManagerChangePersonsCount:
+                [self orderManagerDidChangePersonsCount];
+                break;
             case OrderManagerChangeNDAAccept:
                 [self orderManagerDidChangeNDAAccept];
                 break;
@@ -328,6 +336,14 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)orderManagerDidChangeComment{
     [self notifyObserverOf:CoordinatorNotificationNewComment];
+}
+
+- (void)orderManagerDidChangeOddSum{
+    [self notifyObserverOf:CoordinatorNotificationNewOddSum];
+}
+
+- (void)orderManagerDidChangePersonsCount{
+    [self notifyObserverOf:CoordinatorNotificationNewPersonsCount];
 }
 
 - (void)orderManagerDidChangeNDAAccept{
