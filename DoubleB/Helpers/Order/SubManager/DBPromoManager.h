@@ -135,6 +135,7 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
 @interface DBPromotion : NSObject
 @property (strong, nonatomic) NSString *promotionName;
 @property (strong, nonatomic) NSString *promotionDescription;
+@property (strong, nonatomic) NSString *imageUrl;
 @end
 
 /**
