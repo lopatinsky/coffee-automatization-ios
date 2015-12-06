@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImageView (Extension)
-- (void)templateImage:(UIImage *)image;
 - (void)templateImageWithName:(NSString *)name;
 - (void)templateImageWithName:(NSString *)name tintColor:(UIColor *)color;
+- (void)templateImage:(UIImage *)image;
+- (void)templateImage:(UIImage *)image tintColor:(UIColor *)color;
 
 - (void)db_showDefaultImage;
 - (void)db_hideDefaultImage;
