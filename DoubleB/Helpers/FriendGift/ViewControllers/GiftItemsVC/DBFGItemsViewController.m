@@ -31,18 +31,6 @@
     self.tableView.tableFooterView = [UIView new];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if([DBFriendGiftHelper sharedInstance].items.count == 0) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBFriendGiftHelper sharedInstance] fetchItems:^(BOOL success) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self.tableView reloadData];
-        }];
-    }
-}
-
 - (void)back {
     [self.navigationController popViewControllerAnimated:YES];
 }

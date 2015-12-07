@@ -16,7 +16,10 @@
 
 typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeSubscription = 0,
+    
     DBModuleTypeFriendGift = 1,
+    DBModuleTypeFriendGiftMivako = 7,
+    
     DBModuleTypeFriendInvitation = 2,
     DBModuleTypeProfileScreenUniversal = 4,
     DBModuleTypeGeoPush = 5,
@@ -68,7 +71,10 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
         
         switch (type) {
             case DBModuleTypeFriendGift:
-                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:moduleDict];
+                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeCommon), @"info":moduleDict}];
+                break;
+            case DBModuleTypeFriendGiftMivako:
+                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeFree), @"info":moduleDict}];
                 break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
@@ -88,10 +94,17 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
     for (NSNumber *type in appModules) {
         switch (type.integerValue) {
             case DBModuleTypeFriendGift:
+            case DBModuleTypeFriendGiftMivako:
                 [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
                 break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeSubscription:
+                [[DBSubscriptionManager sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeGeoPush:
+                [[DBGeoPushManager sharedInstance] enableModule:NO withDict:nil];
                 break;
                 
             default:

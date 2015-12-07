@@ -10,6 +10,4 @@
 
 @interface DBFGPaymentModule : DBModuleView
 
-@property (weak, nonatomic) IBOutlet UIView *headerView;
-
 @end

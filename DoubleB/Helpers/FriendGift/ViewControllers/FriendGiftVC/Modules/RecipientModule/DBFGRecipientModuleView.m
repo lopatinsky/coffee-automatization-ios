@@ -17,7 +17,6 @@
 NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDismiss";
 
 @interface DBFGRecipientModuleView ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet UILabel *profileLabel;
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
@@ -44,12 +43,6 @@ NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDism
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    DBModuleHeaderView *header = [DBModuleHeaderView new];
-    header.title = NSLocalizedString(@"Контактные данные вашего друга", nil);
-    header.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.headerView addSubview:header];
-    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
     
     // Initialize name
     self.profileLabel.text = NSLocalizedString(@"ФИО", nil);

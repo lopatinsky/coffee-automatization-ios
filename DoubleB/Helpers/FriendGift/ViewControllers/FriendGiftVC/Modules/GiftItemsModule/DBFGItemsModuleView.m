@@ -16,14 +16,14 @@
 
 @interface DBFGItemsModuleView ()<UITableViewDataSource, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UIView *addView;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIImageView *addImage;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consraintAddViewLeadingToSuperView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAddViewWidth;
 @property (nonatomic) CGFloat initialAddViewWidth;
 
 @end
@@ -39,19 +39,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    DBModuleHeaderView *header = [DBModuleHeaderView new];
-    header.title = NSLocalizedString(@"Выберите подарок", nil);
-    header.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.headerView addSubview:header];
-    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
-    
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 44.f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled = NO;
     
-    self.initialAddViewWidth = self.addView.frame.size.width;
-    self.consraintAddViewLeadingToSuperView.constant = 0;
+    self.initialAddViewWidth = self.constraintAddViewWidth.constant;
     [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.addImage templateImageWithName:@"gift_icon"];
     
@@ -70,14 +63,24 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
+    if ([DBFriendGiftHelper sharedInstance].items.count == 1 && [DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
+        [[DBFriendGiftHelper sharedInstance].itemsManager addPosition:[DBFriendGiftHelper sharedInstance].items.firstObject];
+    }
+    
     [self.tableView reloadData];
     
     void (^block)() = ^void() {
-        if([DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
-            self.consraintAddViewLeadingToSuperView.constant = 0;
+        if ([DBFriendGiftHelper sharedInstance].items.count < 2) {
+            self.constraintAddViewWidth.constant = 0;
+            self.constraintAddViewWidth.priority = 1000;
         } else {
-            self.consraintAddViewLeadingToSuperView.constant = self.frame.size.width - self.initialAddViewWidth;
+            if([DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
+                self.constraintAddViewWidth.priority = 800;
+            } else {
+                self.constraintAddViewWidth.priority = 1000;
+            }
         }
+        
         [self layoutIfNeeded];
     };
     
@@ -89,7 +92,7 @@
 }
 
 - (CGSize)moduleViewContentSize {
-    int height = self.headerView.frame.size.height;
+    int height = 0;
     int tableHeight = [DBFriendGiftHelper sharedInstance].itemsManager.items.count * self.tableView.rowHeight;
     height += tableHeight;
     
@@ -126,8 +129,8 @@
 
 #pragma mark - DBOrderItemCellDelegate
 
-- (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
-    return YES;
+- (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell {
+    return [DBFriendGiftHelper sharedInstance].type == DBFriendGiftTypeCommon;
 }
 
 - (void)removeRowAtIndex:(NSInteger)index {

@@ -14,7 +14,6 @@
 #import "DBModuleHeaderView.h"
 
 @interface DBFGPaymentModule ()
-
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
@@ -29,12 +28,6 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    DBModuleHeaderView *header = [DBModuleHeaderView new];
-    header.title = NSLocalizedString(@"Выберите карту для оплаты", nil);
-    header.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.headerView addSubview:header];
-    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
 }
 
 - (void)reload:(BOOL)animated {
