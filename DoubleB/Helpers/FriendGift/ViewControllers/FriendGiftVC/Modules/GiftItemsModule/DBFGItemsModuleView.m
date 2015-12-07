@@ -72,12 +72,12 @@
     void (^block)() = ^void() {
         if ([DBFriendGiftHelper sharedInstance].items.count < 2) {
             self.constraintAddViewWidth.constant = 0;
-            self.constraintAddViewWidth.priority = 1000;
+            self.constraintAddViewWidth.priority = 900;
         } else {
             if([DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
                 self.constraintAddViewWidth.priority = 800;
             } else {
-                self.constraintAddViewWidth.priority = 1000;
+                self.constraintAddViewWidth.priority = 900;
             }
         }
         

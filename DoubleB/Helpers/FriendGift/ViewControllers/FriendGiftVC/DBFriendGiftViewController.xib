@@ -52,7 +52,7 @@
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="118" translatesAutoresizingMaskIntoConstraints="NO" id="GVB-6r-fwl" customClass="DBModuleView">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="118" translatesAutoresizingMaskIntoConstraints="NO" id="GVB-6r-fwl" customClass="DBModuleView">
                             <rect key="frame" x="0.0" y="138" width="320" height="118"/>
                             <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

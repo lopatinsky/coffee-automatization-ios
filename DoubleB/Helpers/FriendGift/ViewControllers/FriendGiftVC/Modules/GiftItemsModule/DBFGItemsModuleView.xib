@@ -50,7 +50,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="uh4-Rm-Q3r" firstAttribute="leading" secondItem="W56-YT-3JC" secondAttribute="leading" id="9Hy-Av-vqV"/>
-                        <constraint firstAttribute="width" constant="40" id="EvH-Ok-bEW"/>
+                        <constraint firstAttribute="width" priority="900" constant="40" id="EvH-Ok-bEW"/>
                         <constraint firstAttribute="bottom" secondItem="uh4-Rm-Q3r" secondAttribute="bottom" id="FxJ-Nc-Rt7"/>
                         <constraint firstItem="gWI-01-m2U" firstAttribute="centerX" secondItem="W56-YT-3JC" secondAttribute="centerX" id="G4X-fA-A8J"/>
                         <constraint firstItem="uh4-Rm-Q3r" firstAttribute="top" secondItem="W56-YT-3JC" secondAttribute="top" id="Mva-NB-b2f"/>

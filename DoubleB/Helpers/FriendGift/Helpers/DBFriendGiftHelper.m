@@ -75,11 +75,10 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
     DBFriendGiftType type = [moduleDict[@"type"] intValue];
     [DBFriendGiftHelper setValue:@(type) forKey:@"type"];
     
-    NSDictionary *moduleInfo = [moduleDict getValueForKey:@"info"];
+    NSDictionary *moduleInfo = [[moduleDict getValueForKey:@"info"] getValueForKey:@"info"];
     
-    // TODO: #288 server response with gifts info
-    [DBFriendGiftHelper setValue:@"Заголовок с сервака" forKey:@"titleFriendGiftScreen"];
-    [DBFriendGiftHelper setValue:@"Перепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака" forKey:@"textFriendGiftScreen"];
+    [DBFriendGiftHelper setValue:([moduleInfo getValueForKey:@"title"] ?: @"") forKey:@"titleFriendGiftScreen"];
+    [DBFriendGiftHelper setValue:([moduleInfo getValueForKey:@"text"] ?: @"") forKey:@"textFriendGiftScreen"];
     
     [self fetchItems:nil];
 }
