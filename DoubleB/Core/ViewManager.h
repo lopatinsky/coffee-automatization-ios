@@ -12,5 +12,6 @@
 
 + (UIViewContentMode)defaultMenuPositionIconsContentMode;
 + (UIViewContentMode)defaultMenuCategoryIconsContentMode;
++ (UIImage *)basketImageMenuPosition;
 
 @end

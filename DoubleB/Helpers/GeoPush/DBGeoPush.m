@@ -24,6 +24,10 @@
     return self;
 }
 
+- (NSInteger)numberOfDaysAfterLastOrder {
+    return [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]];
+}
+
 - (BOOL)pushIsAvailable {
     BOOL available = YES;
     available = self.lastOrder;
@@ -37,6 +41,17 @@
     return available;
 }
 
+- (void)debug_pushLocalNotification:(NSInteger)seconds {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertTitle = @"debug title";
+    notification.alertBody = @"debug body";
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.userInfo = @{@"type": @"geopush"};
+    
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:seconds];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
+
 - (void)pushLocalNotification {
     [[NSUserDefaults standardUserDefaults] setObject:@([[NSDate date] timeIntervalSince1970]) forKey:@"kDBGeoPushLastTimestamp"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -45,7 +60,10 @@
     notification.alertTitle = self.title;
     notification.alertBody = self.text;
     notification.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    notification.userInfo = @{@"type": @"geopush"};
+    
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:0];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (NSString *)description {
