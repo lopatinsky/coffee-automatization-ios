@@ -173,7 +173,7 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [[DBAPIClient sharedClient] GET:@"subscription/info"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                if ([responseObject objectForKey:@"amount"] && [responseObject objectForKey:@"days"]) {
+                                if ([responseObject getValueForKey:@"amount"] && [responseObject getValueForKey:@"days"]) {
                                     DBCurrentSubscription *currentSubscription = [DBCurrentSubscription new];
                                     currentSubscription.amount = [responseObject objectForKey:@"amount"];
                                     currentSubscription.creationDate = [NSDate date];
@@ -181,7 +181,7 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
                                     self.currentSubscription = currentSubscription;
                                     [self saveCurrentSubscription];
                                 }
-                                if ([responseObject objectForKey:@"category"]) {
+                                if ([responseObject getValueForKey:@"category"]) {
                                     self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:[responseObject objectForKey:@"category"]];
                                     [self saveSubscriptionCategory];
                                 }
