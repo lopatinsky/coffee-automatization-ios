@@ -33,7 +33,7 @@
 #define TAG_POPUP_OVERLAY 333
 #define TAG_PICKER_OVERLAY 444
 
-@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate, DBMenuCategoryDropdownTitleViewDelegate>
+@interface CategoriesAndPositionsTVController () <UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBPositionCellDelegate, DBCategoryHeaderViewDelegate, DBCategoryPickerDelegate, DBSubscriptionManagerProtocol, SubscriptionViewControllerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate>
 @property (strong, nonatomic) NSString *lastVenueId;
 
 @property (strong, nonatomic) NSArray *categoryHeaders;
@@ -231,22 +231,12 @@ static NSDictionary *_preferences;
 
 - (void)reloadTitleView:(DBMenuCategory *)category {
     if (self.categories.count > 0) {
-//        if (category) {
-//            _titleView.title = category.name;
-//        } else {
-//            DBMenuCategory *category = [self currentCategory];
-//            if (!category){
-//                category = [self.categories firstObject];
-//            }
-//            _titleView.title = category.name;
-//        }
         
         if (self.categories.count == 1)
             _titleView.state = DBDropdownTitleViewStateNone;
         else
             _titleView.state = self.categoryPicker.presented ? DBDropdownTitleViewStateOpened : DBDropdownTitleViewStateClosed;
     } else {
-//        _titleView.title = NSLocalizedString(@"Меню", nil);
         _titleView.state = DBDropdownTitleViewStateNone;
     }
 }
@@ -477,26 +467,9 @@ static NSDictionary *_preferences;
 
 #pragma mark - DBCategoryPickerDelegate
 
-//- (DBMenuCategory *)currentCategory {
-//    UITableViewCell *firstVisibleCell;
-//    if (self.tableView.visibleCells.count > 1) { // Choose second cell as section header hide cell for previous section
-//        firstVisibleCell = self.tableView.visibleCells[1];
-//    } else {
-//        firstVisibleCell = self.tableView.visibleCells.firstObject;
-//    }
-//    
-//    DBMenuCategory *topCategory;
-//    if(firstVisibleCell){
-//        NSInteger topSection = [[self.tableView indexPathForCell:firstVisibleCell] section];
-//        topCategory = [self.categories objectAtIndex:topSection];
-//    } else {
-//        topCategory = [self.categories objectAtIndex:0];
-//    }
-//    
-//    return topCategory;
-//}
-
 - (void)db_componentWillDismiss:(DBPopupComponent *)component {
+    [self reloadTitleView:nil];
+    
     [GANHelper analyzeEvent:@"category_spinner_closed" category:MENU_SCREEN];
 }
 

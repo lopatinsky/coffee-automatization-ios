@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
 
+@property (nonatomic) BOOL arrowBottom;
+
 @end
 
 @implementation DBDropdownTitleView
@@ -26,6 +28,7 @@
     self.backgroundColor = [UIColor clearColor];
     self.titleLabel.textColor = [UIColor whiteColor];
     
+    _arrowBottom = YES;
     [self.arrowImageView templateImageWithName:@"arrow_horizontal_icon.png" tintColor:[UIColor whiteColor]];
     _state = DBDropdownTitleViewStateClosed;
     
@@ -36,18 +39,20 @@
 }
 
 - (void)setState:(DBDropdownTitleViewState)state {
-    _state = state;
-    
     if (state == DBDropdownTitleViewStateNone) {
         self.arrowImageView.hidden = YES;
     } else {
         self.arrowImageView.hidden = NO;
         
-        CGFloat angle = state == DBDropdownTitleViewStateOpened ? -180 * (CGFloat)(M_PI/180) : 180 * (CGFloat)(M_PI/180);
-        [UIView animateWithDuration:0.1 animations:^{
-            self.arrowImageView.transform = CGAffineTransformRotate(self.arrowImageView.transform, angle);
-        }];
+        if ((state == DBDropdownTitleViewStateOpened && _arrowBottom) || (state == DBDropdownTitleViewStateClosed && !_arrowBottom)) {
+            _arrowBottom = !_arrowBottom;
+            [UIView animateWithDuration:0.1 animations:^{
+                self.arrowImageView.transform = CGAffineTransformRotate(self.arrowImageView.transform, 180 * (CGFloat)(M_PI/180));
+            }];
+        }
     }
+    
+    _state = state;
 }
 
 - (void)setTitle:(NSString *)title {

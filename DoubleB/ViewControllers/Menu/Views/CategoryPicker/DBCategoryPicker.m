@@ -41,6 +41,11 @@
     self.separatorView.backgroundColor = [UIColor db_defaultColor];
 }
 
+- (void)setPickerDelegate:(id<DBCategoryPickerDelegate,DBPopupComponentDelegate>)pickerDelegate {
+    _pickerDelegate = pickerDelegate;
+    self.delegate = pickerDelegate;
+}
+
 - (void)configureWithCurrentCategory:(DBMenuCategory *)category categories:(NSArray *)categories{
     self.categories = categories;
     self.selectedCategory = category;
