@@ -183,11 +183,14 @@
                                  [[CoreDataHelper sharedHelper] save];
                                  [self reloadCancelRepeatButton];
                                  [self reloadStatusInfo:nil];
-                                 [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray * _Nonnull info) {
-                                     
-                                 } failure:^(NSString * _Nonnull errorMessage) {
-                                     
-                                 }];
+                                 
+                                 if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                                     [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray * _Nonnull info) {
+                                         
+                                     } failure:^(NSString * _Nonnull errorMessage) {
+                                         
+                                     }];
+                                 }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSString *errorEventLabel = [eventLabel stringByAppendingString:[NSString stringWithFormat:@";%@", error.localizedDescription]];
