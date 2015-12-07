@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
 - (void)processResponse:(NSDictionary *)response {
     NSMutableArray *appModules = [NSMutableArray new];
     for (int i = 0; i < DBModuleTypeLast; i++){
-
+        [appModules addObject:@(i)];
     }
     
     // Switch on all necessary modules
