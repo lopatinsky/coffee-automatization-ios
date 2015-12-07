@@ -98,6 +98,8 @@ static NSDictionary *_preference;
     } else {
         _categories = self.parent.categories;
     }
+    
+    [self subscribeForNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -105,7 +107,12 @@ static NSDictionary *_preference;
     [GANHelper analyzeScreen:CATEGORIES_SCREEN];
 }
 
+- (void)subscribeForNotifications {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMenu:) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+}
+
 - (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)appendSubscriptionCategory {
