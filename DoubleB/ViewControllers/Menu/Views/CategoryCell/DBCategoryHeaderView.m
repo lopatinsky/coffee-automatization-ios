@@ -55,13 +55,18 @@
     self.categoryTitleLabel.text = self.category.name;
     
     if(self.category.imageUrl) {
-        self.categoryImageView.image = nil;
-        [self.categoryImageView setPin_updateWithProgress:YES];
-        [self.categoryImageView pin_setImageFromURL:[NSURL URLWithString:self.category.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
-            if (result.resultType != PINRemoteImageResultTypeNone) {
+        [self.categoryImageView sd_setImageWithURL:[NSURL URLWithString:self.category.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (!error){
                 [self.categoryImageView db_hideDefaultImage];
             }
         }];
+//        self.categoryImageView.image = nil;
+//        [self.categoryImageView setPin_updateWithProgress:YES];
+//        [self.categoryImageView pin_setImageFromURL:[NSURL URLWithString:self.category.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+//            if (result.resultType != PINRemoteImageResultTypeNone) {
+//                [self.categoryImageView db_hideDefaultImage];
+//            }
+//        }];
     }
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
