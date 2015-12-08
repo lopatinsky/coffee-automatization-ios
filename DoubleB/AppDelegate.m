@@ -11,6 +11,11 @@
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 
+#import "DBSnapshotSDKHelper.h"
+
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
@@ -46,6 +51,12 @@
     
     [self.window makeKeyAndVisible];
 
+    
+//    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
+//    }
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 
