@@ -7,7 +7,6 @@
 //
 
 #import <CoreData/CoreData.h>
-#import "IHPaymentManager.h"
 
 typedef NS_ENUM(int16_t, OrderStatus) {
     OrderStatusNew = 0,
@@ -16,6 +15,15 @@ typedef NS_ENUM(int16_t, OrderStatus) {
     OrderStatusDone = 1,
     OrderStatusCanceled = 2,
     OrderStatusCanceledBarista = 3
+};
+
+typedef NS_ENUM(int16_t, PaymentType) {
+    PaymentTypeNotSet = -1,
+    PaymentTypeCash = 0,
+    PaymentTypeCard = 1,
+    PaymentTypeExtraType = 2,
+    PaymentTypePayPal = 4,
+    PaymentTypeCourierCard = 5
 };
 
 typedef NS_ENUM(int16_t, DBOrderCancelReason) {

@@ -302,6 +302,10 @@
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
     } else {
+        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"]) {
+            [UINavigationBar appearance].translucent = NO;
+        }
+        
         [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{
