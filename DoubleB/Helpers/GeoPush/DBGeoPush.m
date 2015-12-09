@@ -43,7 +43,7 @@
 
 - (void)debug_pushLocalNotification:(NSInteger)seconds {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertTitle = @"debug title";
+//    notification.alertTitle = @"debug title";
     notification.alertBody = @"debug body";
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.userInfo = @{@"type": @"geopush"};
@@ -57,7 +57,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertTitle = self.title;
+//    notification.alertTitle = self.title;
     notification.alertBody = self.text;
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.userInfo = @{@"type": @"geopush"};
