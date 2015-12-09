@@ -281,8 +281,12 @@ static NSDictionary *_preferences;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((DBMenuCategory *)self.categories[section]).positions.count +
-        (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager positionsAreAvailable] ? 1 : 0);
+    if (section == 0) {
+        return ((DBMenuCategory *)self.categories[section]).positions.count +
+            (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager positionsAreAvailable] ? 1 : 0);
+    } else {
+        return ((DBMenuCategory *)self.categories[section]).positions.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
