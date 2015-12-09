@@ -42,7 +42,6 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertTitle = self.title;
     notification.alertBody = self.text;
     notification.soundName = UILocalNotificationDefaultSoundName;
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
