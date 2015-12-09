@@ -108,7 +108,7 @@ static NSDictionary *_preference;
 }
 
 - (void)subscribeForNotifications {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMenu:) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMenu:) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
 }
 
 - (void)dealloc{

@@ -43,6 +43,13 @@
         [self addModule:cashModule bottomOffset:5];
     }
     
+    // Courier Cards module
+    if([self moduleEnabled:[DBPaymentCourierCardModuleView class]]){
+        DBPaymentCourierCardModuleView *courierCardModule = [DBPaymentCourierCardModuleView new];
+        courierCardModule.paymentDelegate = self;
+        [self addModule:courierCardModule];
+    }
+    
     // PayPal module
     if([self moduleEnabled:[DBPaymentPayPalModuleView class]]){
         DBPaymentPayPalModuleView *paypalModule = [DBPaymentPayPalModuleView new];
@@ -59,15 +66,6 @@
         [self addModule:cardsModule bottomOffset:1];
         
         [self addModule:[DBPaymentCardAdditionModuleView new]];
-    }
-    
-    // Cards module
-    if([self.availablePaymentTypes containsObject:@(PaymentTypeCourierCard)]){
-        DBPaymentCourierCardModuleView *cardsModule = [DBPaymentCourierCardModuleView new];
-        cardsModule.analyticsCategory = self.analyticsCategory;
-        cardsModule.ownerViewController = self;
-        cardsModule.delegate = self;
-        [self.modules addObject:cardsModule];
     }
     
     [self layoutModules];
@@ -104,6 +102,11 @@
     if ([moduleClass isEqual:[DBPaymentPayPalModuleView class]]) {
         result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypePayPal];
         result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypePayPal)] : YES);
+    }
+    
+    if ([moduleClass isEqual:[DBPaymentCourierCardModuleView class]]) {
+        result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCourierCard];
+        result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypeCourierCard)] : YES);
     }
     
     return result;

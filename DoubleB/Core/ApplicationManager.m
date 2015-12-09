@@ -27,6 +27,8 @@
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
 
+#import "DBSnapshotSDKHelper.h"
+
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -154,6 +156,13 @@
         [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
         [self fetchCompanyDependentInfo];
     }
+    
+#ifdef DEBUG
+    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
+    }
+#endif
+    
 }
 
 - (void)fetchCompanyDependentInfo {

@@ -11,7 +11,6 @@
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 
-#import "DBSnapshotSDKHelper.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -51,10 +50,6 @@
     
     [self.window makeKeyAndVisible];
 
-    
-//    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
-        [DBSnapshotSDKHelper sharedInstance];
-//    }
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     return YES;

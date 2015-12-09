@@ -9,8 +9,9 @@
 #import <XCTest/XCTest.h>
 
 #import "UITests-Swift.h"
-//
+
 #import "HSTestingBackchannel/HSTestingBackchannel.h"
+
 
 @interface UITests : XCTestCase
 
@@ -22,6 +23,7 @@
     [super setUp];
     self.continueAfterFailure = NO;
     XCUIApplication *app = [XCUIApplication new];
+    app.launchEnvironment = @{@"UITest": @"1"};
     [Snapshot setLanguage: app];
     [app launch];
 }

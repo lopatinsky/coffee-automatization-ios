@@ -10,8 +10,11 @@
 
 #import <HSTestingBackchannel/HSTestingBackchannel.h>
 
-#import "PositionsTVController.h"
-#import "DBTabBarController.h"
+#import "DBNewOrderVC.h"
+
+#import "DBClientInfo.h"
+#import "OrderCoordinator.h"
+#import "DBCompanyInfo.h"
 
 @implementation DBSnapshotSDKHelper
 
@@ -30,16 +33,62 @@
     [HSTestingBackchannel installReceiver];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moveToOrder)
-                                                 name:@"SnapshotTest"
+                                             selector:@selector(toCategoriesScreen)
+                                                 name:@"UITestNotificationCategoriesScreen"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(toPositionsScreen)
+                                                 name:@"UITestNotificationPositionsScreen"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(toPositionScreen)
+                                                 name:@"UITestNotificationPositionScreen"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(toOrderScreen)
+                                                 name:@"UITestNotificationOrderScreen"
                                                object:nil];
     
     return self;
 }
 
-- (void)moveToOrder {
-    PositionsTVController *navVC = (PositionsTVController *)[UIViewController currentViewController];
-    [navVC.navigationController popToRootViewControllerAnimated:YES];
+- (UINavigationController *)navController {
+    UIViewController *currentVC = [UIViewController currentViewController];
+    
+    return currentVC.navigationController;
+}
+
+- (void)toCategoriesScreen {
+    [[self navController] setViewControllers:@[[ViewControllerManager rootMenuViewController]] animated:NO];
+}
+
+- (void)toPositionsScreen {
+    
+}
+
+- (void)toPositionScreen {
+    
+}
+
+- (void)toOrderScreen {
+    [[DBClientInfo sharedInstance] setName:@"Иван"];
+    [[DBClientInfo sharedInstance] setPhone:@"79152975079"];
+    
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdShipping]) {
+        [[OrderCoordinator sharedInstance].shippingManager setStreet:@"Ленина"];
+        [[OrderCoordinator sharedInstance].shippingManager setHome:@"15"];
+        [[OrderCoordinator sharedInstance].shippingManager setApartment:@"3"];
+    }
+    
+    [OrderCoordinator sharedInstance].orderManager.ndaAccepted = YES;
+    
+    
+    
+    DBNewOrderVC *newOrderVC = [DBNewOrderVC new];
+    [[self navController] setViewControllers:@[newOrderVC] animated:NO];
 }
 
 @end

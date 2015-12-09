@@ -37,7 +37,6 @@
 @property (strong, nonatomic) NSString *lastVenueId;
 
 @property (strong, nonatomic) NSArray *categoryHeaders;
-@property (strong, nonatomic) NSMutableArray *rowsPerSection;
 
 @property (strong, nonatomic) DBDropdownTitleView *titleView;
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
@@ -267,10 +266,6 @@ static NSDictionary *_preferences;
     }
     self.categoryHeaders = headers;
     
-    self.rowsPerSection = [NSMutableArray new];
-    for(DBMenuCategory *category in self.categories)
-        [self.rowsPerSection addObject:@([category.positions count])];
-    
     [self.tableView reloadData];
 }
 
@@ -286,7 +281,7 @@ static NSDictionary *_preferences;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.rowsPerSection[section] integerValue] +
+    return ((DBMenuCategory *)self.categories[section]).positions.count +
         (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager positionsAreAvailable] ? 1 : 0);
 }
 
@@ -318,6 +313,7 @@ static NSDictionary *_preferences;
         }
     }
     
+    NSLog(@"%ld, %ld -- %ld, %ld", self.categories.count, ((DBMenuCategory *)self.categories[indexPath.section]).positions.count, indexPath.section, indexPath.row);
     DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
     cell.contentType = DBPositionCellContentTypeRegular;
     cell.priceAnimated = YES;
