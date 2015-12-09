@@ -48,7 +48,7 @@ static NSDictionary *_preference;
 }
 
 #pragma mark - Lifecycle
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     [self db_setTitle:self.category.name];
@@ -61,8 +61,14 @@ static NSDictionary *_preference;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"SubscriptionInfoTableViewCell" bundle:nil] forCellReuseIdentifier:@"SubscriptionCell"];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
     [DBSubscriptionManager sharedInstance].delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [DBSubscriptionManager sharedInstance].delegate = nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -74,40 +80,39 @@ static NSDictionary *_preference;
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.category.positions count] + ([DBSubscriptionManager positionsAreAvailable] && [DBSubscriptionManager categoryIsSubscription:self.category] ? 1 : 0);
+    return [self.category.positions count] + [DBSubscriptionManager numberOfRowsInSection:section forCategory:self.category];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([DBSubscriptionManager positionsAreAvailable] && [DBSubscriptionManager categoryIsSubscription:self.category]) {
-        if (indexPath.section == 0) {
-            SubscriptionInfoTableViewCell *cell = [DBSubscriptionManager subscriptionCellForIndexPath:indexPath andCell:[tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"]];
-            if (cell) {
-                cell.delegate = self;
-                return cell;
-            }
-            indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
-        }
-    }
+    SubscriptionInfoTableViewCell *cell = [DBSubscriptionManager tryToDequeueSubscriptionCellForCategory:self.category
+                                                                                           withIndexPath:indexPath
+                                                                                                 andCell:[tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"]];
+    NSIndexPath *correctedIndexPath = [DBSubscriptionManager correctedIndexPath:indexPath forCategory:self.category];
     
-    DBPositionCell *cell;
-    if(self.category.categoryWithImages){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
-        if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
-        }
+    if (cell) {
+        cell.delegate = self;
+        return cell;
     } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
-        if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
+        DBPositionCell *cell;
+        if (self.category.categoryWithImages) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
+            if (!cell) {
+                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
+            }
+        } else {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
+            if (!cell) {
+                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
+            }
         }
+        cell.delegate = self;
+        cell.priceAnimated = YES;
+        
+        DBMenuPosition *position = self.category.positions[correctedIndexPath.row];
+        [cell configureWithPosition:position];
+        
+        return cell;
     }
-    cell.delegate = self;
-    cell.priceAnimated = YES;
-    
-    DBMenuPosition *position = self.category.positions[indexPath.row];
-    [cell configureWithPosition:position];
-
-    return cell;
 }
 
 

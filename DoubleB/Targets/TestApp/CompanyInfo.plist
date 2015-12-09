@@ -4,7 +4,7 @@
 <dict>
 	<key>ViewControllers</key>
 	<dict>
-		<key>MenuViewControllers2</key>
+		<key>MenuViewControllers</key>
 		<string>Mixed</string>
 	</dict>
 	<key>Preferences</key>

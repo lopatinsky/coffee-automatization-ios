@@ -64,29 +64,15 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 }
 
 + (BOOL)categoryIsSubscription:(DBMenuCategory *)category {
-    return [[[[DBSubscriptionManager sharedInstance] subscriptionCategory] categoryId] isEqualToString:[category categoryId]];
+    if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+        return [[[[DBSubscriptionManager sharedInstance] subscriptionCategory] categoryId] isEqualToString:[category categoryId]];
+    } else {
+        return NO;
+    }
 }
 
 + (BOOL)isSubscriptionPosition:(NSIndexPath *)indexPath {
     return [[DBSubscriptionManager sharedInstance] isEnabled] && (indexPath.section == 0);
-}
-
-+ (SubscriptionInfoTableViewCell *)subscriptionCellForIndexPath:(NSIndexPath *)indexPath andCell:(SubscriptionInfoTableViewCell *)cell {
-    if (indexPath.row == 0) {
-        if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
-            cell.placeholderView.hidden = YES;
-            cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
-            cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.userInteractionEnabled = NO;
-        } else {
-            cell.placeholderView.hidden = NO;
-            cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        return cell;
-    }
-    return nil;
 }
 
 #pragma mark – Cache section
@@ -291,6 +277,53 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 
 + (NSString *)db_managerStorageKey {
     return @"kDBDefaultsDBSubscriptionManager";
+}
+
+@end
+
+@implementation DBSubscriptionManager(TableViewInjection)
+
++ (NSInteger)numberOfRowsInSection:(NSInteger)section forCategory:(nonnull DBMenuCategory *)category {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && section == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
++ (SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellForCategory:(DBMenuCategory *)category withIndexPath:(NSIndexPath *)indexPath andCell:(SubscriptionInfoTableViewCell *)cell {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                cell.placeholderView.hidden = YES;
+                cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+                cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.userInteractionEnabled = NO;
+            } else {
+                cell.placeholderView.hidden = NO;
+                cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            return cell;
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
++ (NSIndexPath *)correctedIndexPath:(NSIndexPath *)indexPath forCategory:(DBMenuCategory *)category {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            return indexPath;
+        } else {
+            return [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+        }
+    } else {
+        return indexPath;
+    }
 }
 
 @end
