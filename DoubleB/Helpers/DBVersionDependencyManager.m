@@ -107,6 +107,14 @@
         }
     }
     
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"mivako"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
+    
     return needsToFlush;
 }
 

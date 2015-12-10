@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Имя Фамилия" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iGu-in-7TW">
-                    <rect key="frame" x="83" y="7" width="192" height="30"/>
+                    <rect key="frame" x="83" y="7" width="197" height="30"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="GLr-LJ-8Ef"/>
@@ -26,7 +26,7 @@
                     <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZ7-HV-okI" customClass="DBDefaultSeparatorView">
-                    <rect key="frame" x="8" y="44" width="267" height="1"/>
+                    <rect key="frame" x="8" y="44" width="272" height="1"/>
                     <animations/>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -34,7 +34,7 @@
                     </constraints>
                 </view>
                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Контактный номер телефона" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ic9-5X-Fxy">
-                    <rect key="frame" x="83" y="52" width="192" height="30"/>
+                    <rect key="frame" x="83" y="52" width="197" height="30"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="cTx-cD-VwW"/>
@@ -76,10 +76,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RxS-vj-Vho">
-                    <rect key="frame" x="275" y="1" width="45" height="88"/>
+                    <rect key="frame" x="280" y="1" width="40" height="88"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="contacts_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="No8-9Q-y1f">
-                            <rect key="frame" x="12" y="34" width="20" height="20"/>
+                            <rect key="frame" x="9.5" y="34" width="20" height="20"/>
                             <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="2vx-Ou-0UY"/>
@@ -87,7 +87,7 @@
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qg-ve-wPW">
-                            <rect key="frame" x="0.0" y="0.0" width="45" height="88"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="88"/>
                             <animations/>
                             <state key="normal">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -107,7 +107,7 @@
                     <constraints>
                         <constraint firstItem="34C-Xd-hMk" firstAttribute="leading" secondItem="RxS-vj-Vho" secondAttribute="leading" id="D72-jE-ocj"/>
                         <constraint firstItem="No8-9Q-y1f" firstAttribute="centerX" secondItem="RxS-vj-Vho" secondAttribute="centerX" id="EzD-bz-Tea"/>
-                        <constraint firstAttribute="width" constant="45" id="X2r-B0-Ftg"/>
+                        <constraint firstAttribute="width" constant="40" id="X2r-B0-Ftg"/>
                         <constraint firstAttribute="bottom" secondItem="34C-Xd-hMk" secondAttribute="bottom" id="Y5R-1B-bhy"/>
                         <constraint firstAttribute="bottom" secondItem="1qg-ve-wPW" secondAttribute="bottom" id="YEZ-HD-deG"/>
                         <constraint firstItem="No8-9Q-y1f" firstAttribute="centerY" secondItem="RxS-vj-Vho" secondAttribute="centerY" id="cfq-Na-D2i"/>
