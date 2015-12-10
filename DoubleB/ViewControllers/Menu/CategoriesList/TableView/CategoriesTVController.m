@@ -24,7 +24,7 @@
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
 
-@interface CategoriesTVController (){
+@interface CategoriesTVController () <DBSubscriptionManagerProtocol> {
     MBProgressHUD *hud;
 }
 
@@ -105,6 +105,14 @@ static NSDictionary *_preference;
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     [GANHelper analyzeScreen:CATEGORIES_SCREEN];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [DBSubscriptionManager sharedInstance].delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [DBSubscriptionManager sharedInstance].delegate = nil;
 }
 
 - (void)subscribeForNotifications {
@@ -252,6 +260,14 @@ static NSDictionary *_preference;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [GANHelper analyzeEvent:@"menu_scroll" category:CATEGORIES_SCREEN];
+}
+
+#pragma mark - DBSubscriberManagerDelegate
+
+- (void)currentSubscriptionStateChanged {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        [self.tableView reloadData];
+    }
 }
 
 

@@ -281,46 +281,62 @@ static NSDictionary *_preferences;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return ((DBMenuCategory *)self.categories[section]).positions.count +
-        (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager positionsAreAvailable] ? 1 : 0);
+//    if (section == 0) {
+//        return ((DBMenuCategory *)self.categories[section]).positions.count +
+//            (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager positionsAreAvailable] ? 1 : 0);
+//    } else {
+//        return ((DBMenuCategory *)self.categories[section]).positions.count;
+//    }
+    if ([[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
+        return ((DBMenuCategory *)self.categories[section]).positions.count;
+    } else {
+        return ((DBMenuCategory *)self.categories[section]).positions.count +
+                [DBSubscriptionManager numberOfRowsInSection:section forCategory:self.categories[section]];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    DBMenuCategory *category = self.categories[indexPath.section];
+    SubscriptionInfoTableViewCell *cell;
+    NSIndexPath *correctedIndexPath;
     if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
-        if ([DBSubscriptionManager positionsAreAvailable]) {
-            if (indexPath.section == 0) {
-                SubscriptionInfoTableViewCell *cell = [DBSubscriptionManager subscriptionCellForIndexPath:indexPath andCell:[tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"]];
-                if (cell) {
-                    cell.delegate = self;
-                    return cell;
-                }
-                indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+        cell = [DBSubscriptionManager tryToDequeueSubscriptionCellForCategory:category
+                                                                withIndexPath:indexPath
+                                                                      andCell:[tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"]];
+        correctedIndexPath = [DBSubscriptionManager correctedIndexPath:indexPath forCategory:category];
+    }
+    
+    if (cell) {
+        cell.delegate = self;
+        return cell;
+    } else {
+        if (!correctedIndexPath) {
+            correctedIndexPath = indexPath;
+        }
+        
+        DBPositionCell *cell;
+        DBMenuCategory *category = [self.categories objectAtIndex:correctedIndexPath.section];
+        if (category.categoryWithImages){
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
+            if (!cell) {
+                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
+            }
+        } else {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
+            if (!cell) {
+                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
             }
         }
+        
+        NSLog(@"%ld, %ld -- %ld, %ld", self.categories.count, ((DBMenuCategory *)self.categories[correctedIndexPath.section]).positions.count, correctedIndexPath.section, correctedIndexPath.row);
+        DBMenuPosition *position = ((DBMenuCategory *)self.categories[correctedIndexPath.section]).positions[correctedIndexPath.row];
+        cell.contentType = DBPositionCellContentTypeRegular;
+        cell.priceAnimated = YES;
+        [cell configureWithPosition:position];
+        cell.delegate = self;
+        
+        return cell;
     }
-    
-    DBPositionCell *cell;
-    DBMenuCategory *category = [self.categories objectAtIndex:indexPath.section];
-    if (category.categoryWithImages){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
-        if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
-        }
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
-        if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
-        }
-    }
-    
-    NSLog(@"%ld, %ld -- %ld, %ld", self.categories.count, ((DBMenuCategory *)self.categories[indexPath.section]).positions.count, indexPath.section, indexPath.row);
-    DBMenuPosition *position = ((DBMenuCategory *)self.categories[indexPath.section]).positions[indexPath.row];
-    cell.contentType = DBPositionCellContentTypeRegular;
-    cell.priceAnimated = YES;
-    [cell configureWithPosition:position];
-    cell.delegate = self;
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
