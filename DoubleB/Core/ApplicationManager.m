@@ -249,7 +249,7 @@
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
     } else {
-        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"]) {
+        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
             [UINavigationBar appearance].translucent = NO;
         }
         
