@@ -11,6 +11,8 @@
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 
+#import "DBGeoPush.h"
+
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -147,7 +149,8 @@
     [ApplicationManager handlePush:userInfo];
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [ApplicationManager handleLocalPush:notification];
 }
 
 - (void)saveContext

@@ -55,7 +55,7 @@ extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUp
  * Check if all conditions of valid order are correct
  */
 - (BOOL)validOrder;
-- (NSString *)orderErrorReason;
+- (nullable NSString *)orderErrorReason;
 
 /**
  * If YES, OrderCoordinator will invoke updateOrderInfo independantly(when it necessary). By default automaticUpdate = NO

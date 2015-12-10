@@ -57,4 +57,13 @@
     return height;
 }
 
++ (UIImage *)basketImageMenuPosition {
+    NSString *imageName = [self valueFromPropertyListByKey:@"MenuPositionBasketImage"];
+    if (imageName) {
+        return [UIImage imageNamed:imageName];
+    } else {
+        return nil;
+    }
+}
+
 @end

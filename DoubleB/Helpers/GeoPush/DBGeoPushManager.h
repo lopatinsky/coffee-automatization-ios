@@ -15,4 +15,6 @@
 
 @interface DBGeoPushManager : DBPrimaryManager <DBModuleManagerProtocol, LocationHelperProtocol>
 
++ (void)handleLocalPush:(UILocalNotification *)push;
+
 @end

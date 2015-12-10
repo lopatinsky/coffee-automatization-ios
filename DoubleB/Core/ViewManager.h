@@ -12,6 +12,7 @@
 
 + (UIViewContentMode)defaultMenuPositionIconsContentMode;
 + (UIViewContentMode)defaultMenuCategoryIconsContentMode;
++ (UIImage *)basketImageMenuPosition;
 
 + (CGFloat)menuCategoriesFullCellHeight;
 + (CGFloat)menuCategoriesCompactCellHeight;

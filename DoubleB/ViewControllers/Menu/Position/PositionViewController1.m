@@ -17,6 +17,8 @@
 #import "DBPositionModifierPicker.h"
 #import "DBPositionModifiersList.h"
 
+#import "ViewManager.h"
+
 #import "UIView+RoundedCorners.h"
 #import "UINavigationController+DBAnimation.h"
 
@@ -41,6 +43,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageSeparator;
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
+
+@property (weak, nonatomic) IBOutlet UIImageView *basketImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *basketImageViewWidthConstraint;
+
 
 @property (strong, nonatomic) DBPositionModifiersList *modifiersListView;
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
@@ -144,6 +150,15 @@
     
     self.modifierPicker = [DBPositionModifierPicker new];
     self.modifierPicker.delegate = self;
+    
+    UIImage *basketImage = [ViewManager basketImageMenuPosition];
+    if (basketImage) {
+        self.basketImageView.image = [basketImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.basketImageView.tintColor = [UIColor db_defaultColor];
+    } else {
+        self.basketImageView.hidden = YES;
+        self.basketImageViewWidthConstraint.constant = 0;
+    }
 }
 
 - (void)reloadSelectedModifiers{

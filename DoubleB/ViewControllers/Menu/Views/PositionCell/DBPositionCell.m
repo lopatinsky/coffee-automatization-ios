@@ -9,6 +9,7 @@
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
 #import "DBTableItemInactivityView.h"
+#import "ViewManager.h"
 
 #import "UIView+RoundedCorners.h"
 
@@ -21,6 +22,9 @@
 @property (weak, nonatomic) UILabel *descriptionLabel;
 @property (weak, nonatomic) UILabel *weightLabel;
 @property (weak, nonatomic) UIView *separatorView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *basketImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *basketImageViewWidth;
 
 
 @property (strong, nonatomic) DBTableItemInactivityView *inactivityView;
@@ -86,6 +90,17 @@
     }
     
     self.inactivityView = [DBTableItemInactivityView new];
+    
+    UIImage *basketImage = [ViewManager basketImageMenuPosition];
+    if (basketImage) {
+        self.basketImageView.hidden = NO;
+        self.basketImageViewWidth.constant = 20.0;
+        self.basketImageView.image = [basketImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.basketImageView.tintColor = [UIColor db_defaultColor];
+    } else {
+        self.basketImageView.hidden = YES;
+        self.basketImageViewWidth.constant = 0.0;
+    }
 }
 
 - (void)initOutlets {
