@@ -54,8 +54,7 @@
     NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
     [attrText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue" size:15.f] range:NSMakeRange(0, promo.promotionName.length)];
     
-//    self.titleLabel.attributedText = attrText;
-    self.titleLabel.text = @"asgsdngksd\nksjbgskjgn\nkdsbgkjg\nsdjkgksjdg\ndjksbgkjs\nkdsgjksdg\ndsjkgsdjg";
+    self.titleLabel.attributedText = attrText;
 }
 
 - (void)setImageHidden:(BOOL)imageHidden {
