@@ -567,7 +567,11 @@
             }
             payment[@"card_pan"] = cardPan ?: @"";
         }
-        payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+        if ([[IHSecureStore sharedInstance] iikoClientId]) {
+            payment[@"client_id"] = [[IHSecureStore sharedInstance] iikoClientId];
+        } else {
+            payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+        }
         payment[@"return_url"] = @"alpha-payment://return-page";
     }
     

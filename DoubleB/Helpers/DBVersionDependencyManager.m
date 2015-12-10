@@ -16,6 +16,7 @@
 
 #import "DBCompanyInfo.h"
 #import "IHSecureStore.h"
+#import "DBCardsManager.h"
 
 @implementation DBVersionDependencyManager
 
@@ -60,8 +61,13 @@
 #pragma mark - check compatibility of stored data
 + (void)checkCompatibilityOfStoredData {
     if ([self needsToFlush]) {
-        // Clear KeyChain
-        [[IHSecureStore sharedInstance] removeAll];
+        
+        DBCardsManager *cardsManager = [DBCardsManager sharedInstance];
+        [cardsManager fetchWithOldFormat];
+        
+        NSData *clientIdData = [[IHSecureStore sharedInstance] dataForKey:@"clientId"];
+        [[IHSecureStore sharedInstance] setData:clientIdData forKey:@"iikoClientId"];
+        [[IHSecureStore sharedInstance] removeForKey:@"clientId"];
         
         // Clear UserDefaults
         NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
@@ -83,6 +89,14 @@
     BOOL needsToFlush = NO;
     
     if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"tukano"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
+
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"iikohack"]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
         BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
         if (!removed) {

@@ -61,12 +61,23 @@
     }
 }
 
+- (NSString *)iikoClientId {
+    NSString *iikoClientId;
+    iikoClientId = self.secureStore[@"iikoClientId"];
+    return iikoClientId;
+}
+
 - (NSData *)dataForKey:(NSString *)key {
     return [self.secureStore dataForKey:key];
 }
 
 - (void)setData:(NSData *)data forKey:(NSString *)key {
     [self.secureStore setData:data forKey:key];
+    [self.secureStore synchronize];
+}
+
+- (void)removeForKey:(NSString *)key {
+    [self.secureStore removeItemForKey:key];
     [self.secureStore synchronize];
 }
 
