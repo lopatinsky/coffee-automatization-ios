@@ -29,10 +29,8 @@
 
 @implementation DBNOOrderModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOOrderModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOOrderModuleView";
 }
 
 - (void)awakeFromNib {

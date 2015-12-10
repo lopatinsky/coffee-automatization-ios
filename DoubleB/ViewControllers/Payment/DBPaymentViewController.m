@@ -47,7 +47,7 @@
     if([self moduleEnabled:[DBPaymentCourierCardModuleView class]]){
         DBPaymentCourierCardModuleView *courierCardModule = [DBPaymentCourierCardModuleView new];
         courierCardModule.paymentDelegate = self;
-        [self addModule:courierCardModule];
+        [self addModule:courierCardModule bottomOffset:5];
     }
     
     // PayPal module

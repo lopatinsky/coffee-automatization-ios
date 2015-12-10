@@ -20,10 +20,8 @@
 
 @implementation DBNOCommentModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOCommentModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOCommentModuleView";
 }
 
 - (void)awakeFromNib {

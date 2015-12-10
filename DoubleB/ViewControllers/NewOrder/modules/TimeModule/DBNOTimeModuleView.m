@@ -23,10 +23,8 @@
 
 @implementation DBNOTimeModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOTimeModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOTimeModuleView";
 }
 
 - (void)awakeFromNib {
@@ -37,6 +35,11 @@
     self.pickerView = [[DBTimePickerView alloc] initWithDelegate:self];
     _orderCoordinator = [OrderCoordinator sharedInstance];
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewSelectedTime, CoordinatorNotificationNewDeliveryType] selector:@selector(reload)];
+}
+
+- (void)dealloc {
+    NSLog(@"Time module dealloc");
+    [_orderCoordinator removeObserver:self];
 }
 
 - (void)reload:(BOOL)animated {

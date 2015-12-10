@@ -69,6 +69,18 @@
 @property (nonatomic, readonly) CGFloat actualBottomOffset; // bottom offset according to moduleHidden property
 
 /**
+ * initializer from xib
+ */
++ (instancetype)create;
+
+/**
+ * Override it for initialixation from xib
+ * By default it use [[alloc] init]
+ */
++ (NSString *)xibName;
+
+
+/**
  * Common initializer for module
  * Override it to customize initialization
  */

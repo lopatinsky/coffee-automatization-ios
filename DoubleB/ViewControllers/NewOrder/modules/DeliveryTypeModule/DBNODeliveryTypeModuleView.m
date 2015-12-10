@@ -21,10 +21,8 @@
 
 @implementation DBNODeliveryTypeModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNODeliveryTypeModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNODeliveryTypeModuleView";
 }
 
 - (void)awakeFromNib {
