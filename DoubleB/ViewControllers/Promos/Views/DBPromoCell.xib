@@ -22,7 +22,7 @@
                         <rect key="frame" x="46" y="3" width="266" height="73"/>
                         <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" priority="900" constant="70" id="hdh-3W-GHr"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="73" id="QAm-1d-8qI"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
