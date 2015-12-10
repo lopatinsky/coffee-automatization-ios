@@ -17,6 +17,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
 
+#import "LocationHelper.h"
+
 @implementation AppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -47,6 +49,8 @@
     self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
+    
+    [[LocationHelper sharedInstance]locationManager:nil didEnterRegion:nil];
     
     return YES;
 }

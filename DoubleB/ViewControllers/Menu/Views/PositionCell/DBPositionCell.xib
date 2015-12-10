@@ -52,15 +52,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKS-Wh-Ec6" customClass="DBPositionPriceView">
-                        <rect key="frame" x="240" y="69" width="70" height="50"/>
-                        <animations/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="50" id="ZJI-0Q-lQK"/>
-                            <constraint firstAttribute="width" constant="70" id="sq4-XZ-gRv"/>
-                        </constraints>
-                    </view>
                     <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEz-wM-6bW">
                         <rect key="frame" x="0.0" y="118" width="320" height="1"/>
                         <animations/>
@@ -77,6 +68,15 @@
                             <constraint firstAttribute="height" constant="20" id="NkF-aV-tCi"/>
                         </constraints>
                     </imageView>
+                    <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKS-Wh-Ec6" customClass="DBPositionPriceView">
+                        <rect key="frame" x="240" y="69" width="70" height="50"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="ZJI-0Q-lQK"/>
+                            <constraint firstAttribute="width" constant="70" id="sq4-XZ-gRv"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
