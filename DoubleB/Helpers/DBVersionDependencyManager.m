@@ -62,12 +62,15 @@
 + (void)checkCompatibilityOfStoredData {
     if ([self needsToFlush]) {
         
-        DBCardsManager *cardsManager = [DBCardsManager sharedInstance];
-        [cardsManager fetchWithOldFormat];
-        
+        // Fetch payment client Id from iiko app
         NSData *clientIdData = [[IHSecureStore sharedInstance] dataForKey:@"clientId"];
-        [[IHSecureStore sharedInstance] setData:clientIdData forKey:@"iikoClientId"];
+        // Save it as new payment Id
+        [[IHSecureStore sharedInstance] setData:clientIdData forKey:@"paymentClientId"];
+        
+        // Remove iiko payment client Id
         [[IHSecureStore sharedInstance] removeForKey:@"clientId"];
+        // Remove iiko client id (server return new)
+        [[IHSecureStore sharedInstance] removeForKey:@"restoClientId"];
         
         // Clear UserDefaults
         NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];

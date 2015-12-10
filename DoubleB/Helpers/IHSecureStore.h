@@ -13,7 +13,7 @@
 + (instancetype)sharedInstance;
 
 @property (nonatomic, strong) NSString *clientId;
-@property (nonatomic, strong) NSString *iikoClientId;
+@property (nonatomic, strong, readonly) NSString *paymentClientId;
 
 - (NSData *)dataForKey:(NSString *)key;
 - (void)setData:(NSData *)data forKey:(NSString *)key;

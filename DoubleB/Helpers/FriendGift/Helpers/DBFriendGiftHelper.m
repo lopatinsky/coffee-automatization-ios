@@ -100,7 +100,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
     
     if(self.type == DBFriendGiftTypeCommon && [DBCardsManager sharedInstance].defaultCard){
         params[@"payment_type_id"] = @1;
-        params[@"alpha_client_id"] = [IHSecureStore sharedInstance].clientId;
+        params[@"alpha_client_id"] = [IHSecureStore sharedInstance].paymentClientId;
         params[@"binding_id"] = [DBCardsManager sharedInstance].defaultCard.token;
         params[@"return_url"] = @"alpha-payment://return-page";
     }

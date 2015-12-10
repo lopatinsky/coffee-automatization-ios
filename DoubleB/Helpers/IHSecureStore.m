@@ -61,10 +61,21 @@
     }
 }
 
-- (NSString *)iikoClientId {
-    NSString *iikoClientId;
-    iikoClientId = self.secureStore[@"iikoClientId"];
-    return iikoClientId;
+- (NSString *)paymentClientId {
+    NSString *paymentClientId;
+    
+    paymentClientId = self.secureStore[@"paymentClientId"];
+    
+    if (paymentClientId.length == 0) {
+        NSString *clientId = self.clientId;
+        if (clientId.length > 0) {
+            [self.secureStore setString:clientId forKey:@"paymentClientId"];
+            [self.secureStore synchronize];
+        }
+        paymentClientId = self.secureStore[@"paymentClientId"];
+    }
+    
+    return paymentClientId;
 }
 
 - (NSData *)dataForKey:(NSString *)key {
