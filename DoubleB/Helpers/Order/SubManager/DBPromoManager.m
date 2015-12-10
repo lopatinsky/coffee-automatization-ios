@@ -55,6 +55,7 @@
             DBPromotion *promotion = [DBPromotion new];
             promotion.promotionName = [promotionDict getValueForKey:@"title"] ?: @"";
             promotion.promotionDescription = [promotionDict getValueForKey:@"description"] ?: @"";
+            promotion.imageUrl = [promotionDict getValueForKey:@"icon"];
             
             [promotionList addObject:promotion];
         }
