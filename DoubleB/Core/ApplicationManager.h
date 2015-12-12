@@ -22,6 +22,13 @@ typedef NS_ENUM(NSInteger, ApplicationType) {
     ApplicationTypeDemo
 };
 
+typedef NS_ENUM(NSInteger, ApplicationScreen) {
+    ApplicationScreenRoot = 0,
+    ApplicationScreenOrder,
+    ApplicationScreenHistory,
+    ApplicationScreenHistoryOrder
+};
+
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 
@@ -54,7 +61,6 @@ typedef NS_ENUM(NSInteger, ApplicationType) {
 @end
 
 @interface ApplicationManager(Controllers)
-- (UIViewController *)mainViewController;
 - (Class<MenuListViewControllerProtocol>)mainMenuViewController;
 @end
 

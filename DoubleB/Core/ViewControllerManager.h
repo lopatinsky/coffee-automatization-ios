@@ -12,6 +12,8 @@
 #import "PopupNewsViewControllerProtocol.h"
 #import "DBLaunchViewControllerProtocol.h"
 #import "DBCompaniesViewControllerProtocol.h"
+#import "SubscriptionViewControllerProtocol.h"
+#import "ReviewViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -30,10 +32,6 @@
 
 @interface ViewControllerManager(LaunchViewControllers)
 + (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController;
-@end
-
-@interface ViewControllerManager(MainViewControllers)
-+ (nonnull UIViewController *)mainViewController;
 @end
 
 @interface ViewControllerManager(NewsViewControllers)

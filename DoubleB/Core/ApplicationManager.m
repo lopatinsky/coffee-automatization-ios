@@ -30,7 +30,6 @@
 #import "DBDemoStartNavController.h"
 #import "DBAggregatorStartNavController.h"
 
-#import "JRSwizzleMethods.h"
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -323,10 +322,6 @@
 @end
 
 @implementation ApplicationManager (Controllers)
-
-- (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
-}
 
 - (Class<MenuListViewControllerProtocol>)mainMenuViewController{
 @implementation ApplicationManager (Menu)

@@ -113,24 +113,6 @@
 @end
 
 
-#pragma mark - Main
-#import "DBTabBarController.h"
-@implementation ViewControllerManager(MainViewControllers)
-
-+ (nonnull NSDictionary *)mainViewControllerClasses {
-    return @{
-             @"default": [DBTabBarController class]
-             };
-}
-
-+ (nonnull UIViewController *)mainViewController {
-    Class mainViewController = [self mainViewControllerClasses][[self valueFromPropertyListByKey:@"Main"] ?: @"default"];
-    return [mainViewController new];
-}
-
-@end
-
-
 #pragma mark - News
 #import "PopupNewsViewController.h"
 @implementation ViewControllerManager(NewsViewControllers)
