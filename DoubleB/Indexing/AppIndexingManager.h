@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <CoreSpotlight/CoreSpotlight.h>
 
 @protocol UserActivityIndexing <NSObject>

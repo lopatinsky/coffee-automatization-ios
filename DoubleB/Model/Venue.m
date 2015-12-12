@@ -10,6 +10,8 @@
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
 
+#import "NSDate+Difference.h"
+
 static NSMutableArray *storedVenues;
 
 @implementation Venue
@@ -96,6 +98,7 @@ static NSMutableArray *storedVenues;
                                                  number:@(interval)
                                                category:APPLICATION_START];
                                 
+                                [Venue updateUserActivities];
                                 if(completionHandler)
                                     completionHandler([self storedVenues]);
                             }
@@ -187,6 +190,40 @@ static NSMutableArray *storedVenues;
     }
     
     return result;
+}
+
++ (void)updateUserActivities {
+    NSArray *venues = [Venue storedVenues];
+    for (Venue *venue in venues) {
+        if ([venue activityIsAvailable]) {
+            [[AppIndexingManager sharedManager] postActivity:venue withParams:@{@"type": @"venue", @"expirationDate": [[NSDate date] dateByAddingTimeInterval:60 * 60 * 24 * 7], @"eligibleForPublicIndexing": @"YES"}];
+        }
+    }
+}
+
+#pragma mark - UserActivityIndexing protocol
+- (CSSearchableItemAttributeSet *)activityAttributes {
+    CSSearchableItemAttributeSet *set = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString *)kUTTypeImage];
+    set.contentDescription = [NSString stringWithFormat:@"%@\n%@\n%.2f m", self.address, self.workingTime, self.distance];
+    return set;
+}
+
+- (NSString *)activityTitle {
+    return self.title;
+}
+
+- (NSDictionary *)activityUserInfo {
+    return @{@"venue_id": self.venueId};
+}
+
+- (void)activityDidAppear {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"last_indexing_venue_%@", [self venueId]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)activityIsAvailable {
+    NSDate *lastPublicationDate = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"last_indexing_venue_%@", [self venueId]]] ?: [NSDate dateWithTimeIntervalSince1970:0];
+    return [[NSDate date] numberOfDaysUntil:lastPublicationDate] > 7;
 }
 
 @end

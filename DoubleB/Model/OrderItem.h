@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AppIndexingManager.h"
+
 @class DBMenuPosition;
-@interface OrderItem : NSObject <NSCoding, NSCopying>
+@interface OrderItem : NSObject <NSCoding, NSCopying, UserActivityIndexing>
 
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic, readonly) double totalPrice;

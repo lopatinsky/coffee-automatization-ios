@@ -7,6 +7,7 @@
 //
 
 #import <CoreData/CoreData.h>
+#import "AppIndexingManager.h"
 #import "IHPaymentManager.h"
 
 typedef NS_ENUM(int16_t, OrderStatus) {
@@ -27,7 +28,7 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 
 @class Venue;
 
-@interface Order : NSManagedObject
+@interface Order : NSManagedObject<UserActivityIndexing>
 
 //stored
 @property (nonatomic, strong) NSString *orderId;

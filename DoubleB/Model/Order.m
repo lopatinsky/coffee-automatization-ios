@@ -15,6 +15,9 @@
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
 
+#import <SDWebImage/SDWebImageManager.h>
+#import "NSDate+Difference.h"
+
 @implementation Order {
     NSArray *_items;
     NSArray *_bonusItems;
@@ -274,5 +277,63 @@
     }
 }
 
+
+#pragma mark - UserActivityIndexing
+- (void)activityDidAppear {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"activity_order_%@", self.orderId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)activityIsAvailable {
+    NSDate *lastPublicationDate = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"activity_order_%@", self.orderId]] ?: [NSDate dateWithTimeIntervalSince1970:0];
+    return [[NSDate date] numberOfDaysUntil:lastPublicationDate] > 7;
+}
+
+- (NSString *)activityTitle {
+    return [NSString stringWithFormat:@"%@ #%@", NSLocalizedString(@"Заказ", nil), self.orderId];
+}
+
+- (NSDictionary *)activityUserInfo {
+    return @{@"order_id": [self orderId]};
+}
+
+- (CSSearchableItemAttributeSet *)activityAttributes {
+    CSSearchableItemAttributeSet *set = [[CSSearchableItemAttributeSet alloc] init];
+    
+    NSMutableString *description = [NSMutableString new];
+    __block OrderItem *oi = nil;
+    [self.items enumerateObjectsUsingBlock:^(OrderItem *orderItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([orderItem activityIsAvailable]) {
+            [[AppIndexingManager sharedManager] postActivity:orderItem withParams:@{@"type": @"position", @"expirationDate": [[NSDate date] dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+        }
+        if (!oi) { oi = orderItem; }
+        if ([[oi position] price] < [[orderItem position] price]) {
+            oi = orderItem;
+        }
+        NSString *positionName = [[orderItem position] name];
+        NSInteger totalPrice = [orderItem totalPrice];
+        NSString *desc = [NSString stringWithFormat:@"%@ x%ld", positionName, (long)totalPrice];
+        if (idx != 0) {
+            [description appendFormat:@", %@", desc];
+        } else {
+            [description appendString:desc];
+        }
+    }];
+    if (oi.position.imageUrl) {
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:[NSURL URLWithString:oi.position.imageUrl]
+                              options:0
+                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                 // progression tracking code
+                             }
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                if (image) {
+                                    set.thumbnailData = UIImagePNGRepresentation(image);
+                                }
+                            }];
+    }
+    set.contentDescription = description;
+    return set;
+}
 
 @end

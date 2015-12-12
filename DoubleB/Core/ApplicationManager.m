@@ -7,6 +7,7 @@
 //
 
 #import "ApplicationManager.h"
+#import "AppIndexingManager.h"
 #import "NetworkManager.h"
 
 #import "OrderCoordinator.h"
@@ -27,6 +28,8 @@
 #import "DBSettingsTableViewController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
+#import "DBVenuesTableViewController.h"
+#import "DBVenueViewController.h"
 
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -321,6 +324,19 @@
 
 @end
 
+
+@implementation ApplicationManager (Indexing)
+
++ (void)continueUserActivity:(NSUserActivity *)activity {
+    if ([activity.activityType hasPrefix:@"com.empatika."]) {
+//        [[DBWatchInteractionManager sharedInstance] continueUserActivity:activity];
+    } else {
+        [[AppIndexingManager sharedManager] continueUserActivity:activity];
+    }
+}
+
+@end
+
 @implementation ApplicationManager (Start)
 
 - (RootState)currentState {
@@ -402,10 +418,21 @@
                 DBSettingsTableViewController *settingsVC = [DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
                 DBOrderViewController *orderVC = [DBOrderViewController new];
-                orderVC.order = object;
+                orderVC.order = [Order orderById:object];
                 [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, settingsVC, ordersVC, orderVC] animated:animated];
             }
         }break;
+        
+        case ApplicationScreenVenue: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                UIViewController *venuesVC = [DBVenuesTableViewController new];
+                DBVenueViewController *venueVC = [DBVenueViewController new];
+                venueVC.venue = [Venue venueById:object];
+                [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, newOrderVC, venuesVC, venueVC] animated:animated];
+            }
+            break;
+        }
             
         default:
             break;

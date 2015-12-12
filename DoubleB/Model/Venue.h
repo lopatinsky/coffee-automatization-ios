@@ -10,7 +10,9 @@
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface Venue : NSManagedObject
+#import "AppIndexingManager.h"
+
+@interface Venue : NSManagedObject<UserActivityIndexing>
 
 @property (nonatomic, strong) NSString *venueId;
 @property (nonatomic, strong) NSString *title;
