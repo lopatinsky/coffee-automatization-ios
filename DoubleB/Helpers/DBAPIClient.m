@@ -10,6 +10,7 @@
 #import "IHSecureStore.h"
 #import "DBCompanyInfo.h"
 #import "DBCompaniesManager.h"
+#import "DBUnifiedAppManager.h"
 
 @interface DBAPIClient()
 
@@ -20,6 +21,7 @@
 static DBAPIClient *_sharedClient = nil;
 
 @implementation DBAPIClient
+
 
 + (instancetype)sharedClient {
     static dispatch_once_t onceToken;
@@ -40,6 +42,7 @@ static DBAPIClient *_sharedClient = nil;
         
         self.companyHeaderEnabled = YES;
         self.clientHeaderEnabled = YES;
+        self.cityHeaderEnabled = YES;
         
         // API version
         [self setValue:[DBAPIClient restAPIVersion] forHeader:@"Version"];
@@ -65,7 +68,7 @@ static DBAPIClient *_sharedClient = nil;
     // 2 - New start logic
     // 3 - Significant bug in apps with shipping and takeout(was on 2 version)
     // 4 - Review
-    // 4 -
+    // 4 - Unified application
     // 5 - New order screen design
     
     return @"5";
@@ -80,6 +83,16 @@ static DBAPIClient *_sharedClient = nil;
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header {
     if (self.reqSerializer) {
         [self.reqSerializer setValue:value forHTTPHeaderField:header];
+    }
+}
+
+- (void)setCityHeaderEnabled:(BOOL)cityHeaderEnabled {
+    _cityHeaderEnabled = cityHeaderEnabled;
+    
+    if (_cityHeaderEnabled && [DBUnifiedAppManager selectedCity].cityId) {
+        [self setValue:[DBUnifiedAppManager selectedCity].cityId forHeader:@"City-Id"];
+    } else {
+        [self disableHeader:@"City-Id"];
     }
 }
 

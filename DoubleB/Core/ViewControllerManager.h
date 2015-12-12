@@ -10,8 +10,8 @@
 #import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
-#import "SubscriptionViewControllerProtocol.h"
-#import "ReviewViewControllerProtocol.h"
+#import "DBLaunchViewControllerProtocol.h"
+#import "DBCompaniesViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -29,7 +29,11 @@
 @end
 
 @interface ViewControllerManager(LaunchViewControllers)
-+ (nonnull UIViewController *)launchViewController;
++ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController;
+@end
+
+@interface ViewControllerManager(MainViewControllers)
++ (nonnull UIViewController *)mainViewController;
 @end
 
 @interface ViewControllerManager(NewsViewControllers)

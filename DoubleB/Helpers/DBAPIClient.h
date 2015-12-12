@@ -21,6 +21,7 @@
 - (void)setValue:(nonnull NSString *)value forHeader:(nonnull NSString *)header;
 - (void)disableHeader:(nonnull NSString *)header;
 
+@property(nonatomic) BOOL cityHeaderEnabled;
 @property(nonatomic) BOOL companyHeaderEnabled;
 @property(nonatomic) BOOL clientHeaderEnabled;
 

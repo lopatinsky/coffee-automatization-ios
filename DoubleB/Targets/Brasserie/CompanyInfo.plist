@@ -9,6 +9,8 @@
 	</dict>
 	<key>Preferences</key>
 	<dict>
+		<key>ApplicationType</key>
+		<string>Proxy</string>
 		<key>BaseUrl</key>
 		<string>http://brasserieproxy.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>

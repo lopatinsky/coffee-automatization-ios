@@ -22,6 +22,7 @@
 @end
 
 @interface DBCompaniesManager : DBPrimaryManager
+
 @property (nonatomic, readonly) BOOL companiesLoaded;
 
 @property (nonatomic, readonly) BOOL hasCompanies;
