@@ -14,6 +14,8 @@
 
 #import "UIAlertView+BlocksKit.h"
 
+#import "MBProgressHUD.h"
+
 typedef NS_ENUM(NSInteger, DBProxyStartState) {
     DBProxyStartStateLaunch = 0,
     DBProxyStartStateCompanies,
@@ -67,12 +69,26 @@ typedef NS_ENUM(NSInteger, DBProxyStartState) {
 }
 
 - (void)moveToCompanies:(BOOL)animated {
-    UIViewController<DBCompaniesViewControllerProtocol> *companiesVC = [ViewControllerManager companiesViewController];
+    UIViewController<DBCompaniesViewControllerProtocol> *companiesVC = [DBCompaniesViewController new];
     
     @weakify(self)
     [companiesVC setFinalBlock:^{
         @strongify(self)
-        [self moveToMain];
+        
+        // Get selected company
+        DBCompany *selectedCompany = [DBCompaniesManager selectedCompany];
+        
+        [[ApplicationManager sharedInstance] flushStoredCache];
+        
+        [DBCompaniesManager selectCompany:selectedCompany];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+            [self moveToMain];
+        }];
+        [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
     }];
     
     [self setNavigationBarHidden:NO animated:animated];

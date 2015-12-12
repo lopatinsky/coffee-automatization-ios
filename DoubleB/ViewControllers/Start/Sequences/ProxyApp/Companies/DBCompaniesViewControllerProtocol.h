@@ -14,6 +14,9 @@ typedef NS_ENUM(NSInteger, DBCompaniesViewControllerMode) {
 };
 
 @protocol DBCompaniesViewControllerProtocol <NSObject>
+@optional
 - (void)setVCMode:(DBCompaniesViewControllerMode)mode;
+
+@required
 - (void)setFinalBlock:(void (^)())finalBlock;
 @end

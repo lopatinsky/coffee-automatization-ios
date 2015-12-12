@@ -22,6 +22,8 @@
 
 @property (strong, nonatomic) NSArray *companies;
 
+@property (nonatomic, copy) void(^block)();
+
 @end
 
 @implementation DBCompaniesViewController
@@ -43,23 +45,16 @@
     [self.tableView reloadData];
 }
 
+- (void)setFinalBlock:(void (^)())finalBlock {
+    self.block = finalBlock;
+}
+
 - (void)selectCompany:(DBCompany *)company {
-    [[ApplicationManager sharedInstance] flushStoredCache];
-    
     [DBCompaniesManager selectCompany:company];
     
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        
-        if(success){
-            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            delegate.window.rootViewController = [[ApplicationManager sharedInstance] mainViewController];
-        } else {
-            [self showError:@"Не удалось загрузить информацию о выбранной компании"];
-        }
-    }];
-    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+    if (self.block) {
+        self.block();
+    }
 }
 
 #pragma mark - UITableViewDataSource
