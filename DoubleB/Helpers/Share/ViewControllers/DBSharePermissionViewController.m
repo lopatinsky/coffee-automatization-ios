@@ -99,6 +99,12 @@
 - (void)initializeActionViewSheet {
     self.actionSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Поделиться", nil)];
     
+    if ([self.socialManager vkIsAvailable]) {
+        [self.actionSheet bk_addButtonWithTitle:@"Вконтакте" handler:^{
+            [self.socialManager shareVk];
+        }];
+    }
+    
     [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
         [self.socialManager shareFacebook];
     }];
