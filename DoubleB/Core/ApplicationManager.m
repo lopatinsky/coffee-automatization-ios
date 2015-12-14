@@ -30,6 +30,9 @@
 #import "DBDemoStartNavController.h"
 #import "DBAggregatorStartNavController.h"
 
+#import "DBOrdersTableViewController.h"
+#import "DBOrderViewController.h"
+
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -309,7 +312,7 @@
         }
     }
     
-    return [ViewControllerManager mainViewController];
+    return [self mainViewController];
 }
 
 - (void)db_startNavVCNeedsMoveToMain:(UIViewController *)controller {
@@ -323,9 +326,12 @@
 
 @implementation ApplicationManager (Controllers)
 
+- (UIViewController *)mainViewController {
+    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+}
+
+
 - (Class<MenuListViewControllerProtocol>)mainMenuViewController{
-@implementation ApplicationManager (Menu)
-- (Class<MenuListViewControllerProtocol>)rootMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {

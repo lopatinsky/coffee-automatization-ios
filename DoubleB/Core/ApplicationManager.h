@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 @end
 
 @interface ApplicationManager(Controllers)
+- (UIViewController *)mainViewController;
 - (Class<MenuListViewControllerProtocol>)mainMenuViewController;
 @end
 

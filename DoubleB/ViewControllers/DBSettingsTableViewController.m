@@ -60,7 +60,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     // Companies item
     if([DBCompaniesManager sharedInstance].hasCompanies){
-        id<DBCompaniesViewControllerProtocol> companiesVC = [ViewControllerManager companiesViewController];
+        id<DBCompaniesViewControllerProtocol> companiesVC = [DBCompaniesViewController new];
         [companiesVC setVCMode:DBCompaniesViewControllerModeChangeCompany];
         [self.settingsItems addObject:@{@"name": @"companiesVC",
                                            @"title": NSLocalizedString(@"Список ресторанов", nil),

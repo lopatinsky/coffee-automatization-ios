@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSArray *companies;
 
 @property (nonatomic, copy) void(^block)();
+@property (nonatomic) DBCompaniesViewControllerMode mode;
 
 @end
 
@@ -49,12 +50,28 @@
     self.block = finalBlock;
 }
 
+- (void)setVCMode:(DBCompaniesViewControllerMode)mode {
+    self.mode = mode;
+}
+
 - (void)selectCompany:(DBCompany *)company {
+    [[ApplicationManager sharedInstance] flushStoredCache];
+    
     [DBCompaniesManager selectCompany:company];
     
-    if (self.block) {
-        self.block();
-    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        if (self.mode == DBCompaniesViewControllerModeChooseCompany) {
+            if (self.block) {
+                self.block();
+            }
+        } else {
+            [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
+        }
+    }];
+    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
 }
 
 #pragma mark - UITableViewDataSource

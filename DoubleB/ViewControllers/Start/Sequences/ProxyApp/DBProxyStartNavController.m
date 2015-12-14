@@ -74,21 +74,7 @@ typedef NS_ENUM(NSInteger, DBProxyStartState) {
     @weakify(self)
     [companiesVC setFinalBlock:^{
         @strongify(self)
-        
-        // Get selected company
-        DBCompany *selectedCompany = [DBCompaniesManager selectedCompany];
-        
-        [[ApplicationManager sharedInstance] flushStoredCache];
-        
-        [DBCompaniesManager selectCompany:selectedCompany];
-        
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
-            [self moveToMain];
-        }];
-        [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+        [self moveToMain];
     }];
     
     [self setNavigationBarHidden:NO animated:animated];
