@@ -39,6 +39,10 @@
     [_orderCoordinator addObserver:self withKeyPaths:@[CoordinatorNotificationNewSelectedTime, CoordinatorNotificationNewDeliveryType] selector:@selector(reload)];
 }
 
+- (void)dealloc {
+    [_orderCoordinator removeObserver:self];
+}
+
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     self.titleLabel.text = [self selectedTimeString];
