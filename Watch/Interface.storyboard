@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bmd-Fn-Igz">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+    </dependencies>
+    <scenes>
+        <!--Add Order Interface Controller-->
+        <scene sceneID="iIS-jV-cLu">
+            <objects>
+                <controller identifier="AddOrder" hidesWhenLoading="NO" id="bmd-Fn-Igz" userLabel="Add Order Interface Controller" customClass="AddOrderInterfaceController">
+                    <items>
+                        <label width="1" alignment="left" verticalAlignment="center" text="Create new order" textAlignment="center" id="O8i-RM-EFq"/>
+                        <label width="1" alignment="left" verticalAlignment="bottom" text="More on iPhone" textAlignment="center" id="0Cn-lt-rgO">
+                            <fontDescription key="font" type="system" pointSize="12"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="informationLabel" destination="O8i-RM-EFq" id="JRS-lU-1s5"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="235" y="358"/>
+        </scene>
+        <!--Create Order Interface Controller-->
+        <scene sceneID="3Fh-3b-mT7">
+            <objects>
+                <controller identifier="CreateOrder" hidesWhenLoading="NO" id="vt7-KB-0PY" userLabel="Create Order Interface Controller" customClass="CreateOrderInterfaceController">
+                    <items>
+                        <group width="1" height="108" alignment="left" id="dSj-qG-quP">
+                            <items>
+                                <picker width="58" height="41" alignment="center" verticalAlignment="center" accessibilityHint="time" focusStyle="sequence" id="2IY-ad-O17">
+                                    <connections>
+                                        <action selector="pickerChanged:" destination="vt7-KB-0PY" id="0EO-gE-0rJ"/>
+                                    </connections>
+                                </picker>
+                            </items>
+                        </group>
+                        <button width="1" height="34" alignment="left" title="Create Order" id="2jS-xD-0yf">
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="createOrder" destination="vt7-KB-0PY" id="vLw-ar-uC6"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="g0T-9L-d0B">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </separator>
+                    </items>
+                    <connections>
+                        <outlet property="timePicker" destination="2IY-ad-O17" id="vfG-Hm-5HT"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="402" y="129"/>
+        </scene>
+        <!--Last Order Interface Controller-->
+        <scene sceneID="81y-Da-dnF">
+            <objects>
+                <controller identifier="LastOrder" hidesWhenLoading="NO" id="Uoc-1J-bYx" userLabel="Last Order Interface Controller" customClass="LastOrderInterfaceController">
+                    <items>
+                        <label width="1" height="26.5" alignment="left" text="Где-то там" textAlignment="center" id="cxg-A5-ukc"/>
+                        <table alignment="left" id="x8g-4f-hld">
+                            <items>
+                                <tableRow identifier="PositionRow" id="WDy-f1-myJ" customClass="OrderPositionRowType">
+                                    <group key="rootItem" width="1" height="44" alignment="left" id="Q8m-Xd-YSO">
+                                        <items>
+                                            <label width="79.5" height="44" alignment="center" verticalAlignment="center" text="Coffee " numberOfLines="0" id="Idj-uF-Qnn">
+                                                <fontDescription key="font" type="system" pointSize="14"/>
+                                            </label>
+                                            <label width="43" height="44" alignment="center" verticalAlignment="center" text="230р (x2)" textAlignment="center" numberOfLines="0" id="Vck-aq-ACu">
+                                                <fontDescription key="font" type="system" weight="thin" pointSize="12"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="positionName" destination="Idj-uF-Qnn" id="e3s-0U-MFd"/>
+                                        <outlet property="positionPrice" destination="Vck-aq-ACu" id="yRV-Ez-AcR"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <separator alignment="left" id="56X-Va-7M7">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </separator>
+                        <button width="1" height="34" alignment="left" title="Reorder" id="9iX-JI-OzW">
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="createNewOrder" destination="Uoc-1J-bYx" id="2Yu-K0-Sub"/>
+                            </connections>
+                        </button>
+                        <separator alignment="left" id="KeA-Nz-LWl">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </separator>
+                        <label width="1" alignment="left" verticalAlignment="bottom" text="More on iPhone" textAlignment="center" id="ogL-aG-D93">
+                            <fontDescription key="font" type="system" pointSize="12"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="orderPositionTable" destination="x8g-4f-hld" id="7mG-PH-yLx"/>
+                        <outlet property="placeLabel" destination="cxg-A5-ukc" id="Sc1-aj-E5K"/>
+                        <outlet property="reorderButton" destination="9iX-JI-OzW" id="yWy-0r-28h"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="402" y="357.25"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="235" y="1001"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController"/>
+            </objects>
+            <point key="canvasLocation" x="553" y="1001"/>
+        </scene>
+        <!--Current Order Interface Controller-->
+        <scene sceneID="xDK-6C-U1d">
+            <objects>
+                <controller identifier="CurrentOrder" hidesWhenLoading="NO" id="EOB-Bs-FPe" userLabel="Current Order Interface Controller" customClass="CurrentOrderInterfaceController">
+                    <items>
+                        <group width="1" alignment="left" id="dhW-RM-mWe">
+                            <items>
+                                <label width="83" height="42.5" alignment="left" numberOfLines="0" id="tJi-8d-meF">
+                                    <string key="text">Order #13 
+14:34</string>
+                                    <fontDescription key="font" type="system" pointSize="14"/>
+                                </label>
+                                <label width="51" height="1" alignment="right" verticalAlignment="center" text="200Р" textAlignment="center" id="I7y-k9-KdP">
+                                    <fontDescription key="font" type="system" pointSize="12"/>
+                                </label>
+                            </items>
+                        </group>
+                        <label width="1" height="26.5" alignment="left" text="Где-то там" id="Ma1-Ek-xiJ"/>
+                        <table alignment="left" id="ghZ-ld-ed1">
+                            <items>
+                                <tableRow identifier="PositionRow" id="WYs-N7-67j" customClass="OrderPositionRowType">
+                                    <group key="rootItem" width="1" height="44" alignment="left" id="JpJ-q0-K3M">
+                                        <items>
+                                            <label width="79.5" height="44" alignment="center" verticalAlignment="center" text="Coffee " numberOfLines="0" id="Ddr-Qr-b15">
+                                                <fontDescription key="font" type="system" pointSize="14"/>
+                                            </label>
+                                            <label width="43" height="44" alignment="center" verticalAlignment="center" text="230р (x2)" textAlignment="center" numberOfLines="0" id="oSF-cf-QWZ">
+                                                <fontDescription key="font" type="system" weight="thin" pointSize="12"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="positionName" destination="Ddr-Qr-b15" id="OvW-Ww-ayh"/>
+                                        <outlet property="positionPrice" destination="oSF-cf-QWZ" id="bz8-Yh-eO3"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                        <separator alignment="left" id="EMx-ZI-Noq">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </separator>
+                        <button width="1" height="34" alignment="left" title="Cancel Order" id="Mvb-KM-vdU">
+                            <color key="backgroundColor" red="0.80452388743455494" green="0.043057388859068825" blue="0.059580611240729331" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelOrderButton" destination="EOB-Bs-FPe" id="hib-jr-Q1Y"/>
+                            </connections>
+                        </button>
+                        <label width="1" alignment="left" verticalAlignment="bottom" text="More on iPhone" textAlignment="center" id="DNb-el-ghB">
+                            <fontDescription key="font" type="system" pointSize="12"/>
+                        </label>
+                        <separator alignment="left" id="WOc-5m-kDm">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </separator>
+                    </items>
+                    <connections>
+                        <outlet property="cancenOrderButton" destination="Mvb-KM-vdU" id="Fnh-TI-sVo"/>
+                        <outlet property="orderInfoLabel" destination="tJi-8d-meF" id="jPs-Qb-AQG"/>
+                        <outlet property="orderPositionsTable" destination="ghZ-ld-ed1" id="Dto-fQ-K1J"/>
+                        <outlet property="placeLabel" destination="Ma1-Ek-xiJ" id="LCL-x2-VZE"/>
+                        <outlet property="priceLabel" destination="I7y-k9-KdP" id="cWp-9W-vDt"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="576" y="366.75"/>
+        </scene>
+    </scenes>
+</document>

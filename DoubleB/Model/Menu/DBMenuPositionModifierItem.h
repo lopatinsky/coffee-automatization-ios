@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WatchAppModelProtocol.h"
+
 @class DBMenuPositionModifier;
 
-@interface DBMenuPositionModifierItem : NSObject<NSCopying, NSCoding>
+@interface DBMenuPositionModifierItem : NSObject<NSCopying, NSCoding, WatchAppModelProtocol>
 
 @property (strong, nonatomic) NSString *itemId;
 @property (strong, nonatomic) NSString *itemName;

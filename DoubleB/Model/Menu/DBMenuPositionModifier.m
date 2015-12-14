@@ -291,4 +291,59 @@
     return copyModifier;
 }
 
+
+#pragma mark - WatchAppModelProtocol
+
+- (NSDictionary *)plistRepresentation {
+    NSMutableDictionary *plist = [NSMutableDictionary new];
+    
+    plist[@"modifierType"] = @(self.modifierType);
+    plist[@"modifierId"] = self.modifierId;
+    plist[@"modifierName"] = self.modifierName;
+    
+    if(self.modifierType == ModifierTypeSingle){
+        plist[@"modifierPrice"] = @(self.modifierPrice);
+        plist[@"selectedCount"] = @(self.selectedCount);
+    }
+    
+    if(self.modifierType == ModifierTypeGroup){
+        NSMutableArray *items = [NSMutableArray new];
+        for (DBMenuPositionModifierItem *item in self.items){
+            [items addObject:[item plistRepresentation]];
+        }
+        plist[@"items"] = items;
+        
+        plist[@"defaultItem"] = [self.defaultItem plistRepresentation];
+        plist[@"userSelectedItem"] = [self.userSelectedItem plistRepresentation];
+    }
+    
+    return plist;
+}
+
++ (id)createWithPlistRepresentation:(NSDictionary *)plistDict {
+    DBMenuPositionModifier *modifier = [DBMenuPositionModifier new];
+    
+    modifier.modifierType = [plistDict[@"modifierType"] integerValue];
+    modifier.modifierId = plistDict[@"modifierId"];
+    modifier.modifierName = plistDict[@"modifierName"];
+    
+    if(modifier.modifierType == ModifierTypeSingle){
+        modifier.modifierPrice = [plistDict[@"modifierPrice"] doubleValue];
+        modifier.selectedCount = [plistDict[@"selectedCount"] intValue];
+    }
+    
+    if(modifier.modifierType == ModifierTypeGroup){
+        NSMutableArray *items = [NSMutableArray new];
+        for (NSDictionary *itemDict in plistDict[@"items"]){
+            [items addObject:[DBMenuPositionModifierItem createWithPlistRepresentation:itemDict]];
+        }
+        modifier.items = items;
+        
+        modifier.defaultItem = [DBMenuPositionModifierItem createWithPlistRepresentation:plistDict[@"defaultItem"]];
+        modifier.userSelectedItem = [DBMenuPositionModifierItem createWithPlistRepresentation:plistDict[@"userSelectedItem"]];
+    }
+    
+    return modifier;
+}
+
 @end

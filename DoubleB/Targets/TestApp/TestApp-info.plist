@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.empatika.neworder</string>
+		<string>com.empatika.openorder</string>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>

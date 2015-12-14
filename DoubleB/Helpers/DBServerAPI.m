@@ -26,6 +26,7 @@
 #import "DBPayPalManager.h"
 
 #import "AppIndexingManager.h"
+#import "WatchInteractionManager.h"
 #import "DBUniversalModulesManager.h"
 #import "DBUniversalModule.h"
 
@@ -256,6 +257,7 @@
                                      }
                                  }
                                  
+                                 [[WatchInteractionManager sharedInstance] updateLastOrActiveOrder];
                                  if(success)
                                      success(ord);
                                  

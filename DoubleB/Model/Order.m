@@ -15,6 +15,8 @@
 #import "OrderItem.h"
 #import "DBMenuPosition.h"
 
+#import "OrderWatch.h"
+
 #import <SDWebImage/SDWebImageManager.h>
 #import "NSDate+Difference.h"
 
@@ -55,6 +57,7 @@
     self.dataGiftItems = [NSKeyedArchiver archivedDataWithRootObject:[OrderCoordinator sharedInstance].orderGiftsManager.items];
     self.paymentType = [[OrderCoordinator sharedInstance].orderManager paymentType];
     self.status = OrderStatusNew;
+    self.creationTime = [NSDate date];
     
     // Delivery
     self.deliveryType = @([OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId);
@@ -169,6 +172,37 @@
     }
 }
 
+- (BOOL)isActive {
+    if (self.status == OrderStatusNew || self.status == OrderStatusConfirmed || self.status == OrderStatusOnWay) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (Order *)lastOrderForWatch:(BOOL)active {
+    NSArray *orders = [Order allOrders];
+    orders = [orders sortedArrayUsingComparator:^NSComparisonResult(Order *  _Nonnull obj1, Order *  _Nonnull obj2) {
+        NSInteger int1 = [obj1.orderId integerValue];
+        NSInteger int2 = [obj2.orderId integerValue];
+        if (int1 == int2) {
+            return NSOrderedSame;
+        } else if (int1 > int2) {
+            return NSOrderedDescending;
+        } else {
+            return NSOrderedAscending;
+        }
+    }];
+    if (active) {
+        NSArray *activeOrders = [orders objectsAtIndexes:[orders indexesOfObjectsPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            return [obj isActive];
+        }]];
+        return [activeOrders lastObject];
+    } else {
+        return [orders lastObject];
+    }
+}
+
 + (void)dropAllOrders{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Order"];
     
@@ -237,6 +271,15 @@
 
 - (double)actualDiscount {
     return self.discount.doubleValue + self.walletDiscount.doubleValue;
+}
+
+- (void)setCreationTime:(NSDate *)creationTime {
+    [[NSUserDefaults standardUserDefaults] setObject:creationTime forKey:[NSString stringWithFormat:@"order_%@_creationtime", self.orderId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDate *)creationTime {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"order_%@_creationtime", self.orderId]];
 }
 
 - (NSArray *)items {
@@ -334,6 +377,97 @@
     }
     set.contentDescription = description;
     return set;
+}
+
+#pragma mark - WatchAppModelProtocol
+
+- (NSDictionary *)plistRepresentation {
+    NSMutableDictionary *plist = [NSMutableDictionary new];
+    
+    plist[@"orderId"] = self.orderId;
+    plist[@"total"] = self.total;
+    
+    plist[@"venueId"] = self.venueId;
+    plist[@"venueName"] = self.venueName;
+    
+    plist[@"time"] = @((int)[self.time timeIntervalSince1970]);
+    plist[@"creationTime"] = @((int)[self.creationTime timeIntervalSince1970]);
+    plist[@"requestObject"] = self.requestObject;
+    
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in self.items) {
+        [items addObject:[item plistRepresentation]];
+    }
+    plist[@"items"] = items;
+    
+    return plist;
+}
+
++ (id)createWithPlistRepresentation:(NSDictionary *)plistDict {
+    Order *order = [Order new];
+    
+    order.orderId = plistDict[@"orderId"];
+    order.total = plistDict[@"total"];
+    
+    order.venueId = plistDict[@"venueId"];
+    order.venueName = plistDict[@"venueName"];
+    
+    order.time = [NSDate dateWithTimeIntervalSince1970:[plistDict[@"time"] integerValue]];
+    NSInteger creationTimeInterval = [plistDict[@"creationTime"] integerValue];
+    if (creationTimeInterval > 0)
+        order.creationTime = [NSDate dateWithTimeIntervalSince1970:creationTimeInterval];
+    
+    NSMutableArray *items = [NSMutableArray new];
+    for (NSDictionary *itemDict in plistDict[@"items"]) {
+        [items addObject:[OrderItem createWithPlistRepresentation:itemDict]];
+    }
+    order.dataItems = [NSKeyedArchiver archivedDataWithRootObject:items];
+    
+    return order;
+}
+
+#pragma mark - Not good way
+
+- (OrderWatch *)watchInstance {
+    OrderWatch *order = [OrderWatch new];
+    
+    order.active = [self isActive];
+    
+    order.orderId = self.orderId;
+    order.total = self.total;
+    
+    order.time = self.time;
+    order.creationTime = self.creationTime;
+    
+    order.venueId = self.venueId;
+    order.venueName = self.venueName;
+    order.requestObject = [self requestObject];
+    
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in self.items) {
+        OrderItemWatch *watchItem = [OrderItemWatch new];
+        watchItem.count = item.count;
+        
+        MenuPositionWatch *positionWatch = [MenuPositionWatch new];
+        positionWatch.positionId = item.position.positionId;
+        positionWatch.name = item.position.name;
+        positionWatch.price = item.position.price;
+        
+        watchItem.position = positionWatch;
+        [items addObject:watchItem];
+    }
+    order.items = items;
+    
+    return order;
+}
+
+- (void)setRequestObject:(NSMutableDictionary *)requestObject {
+    [[NSUserDefaults standardUserDefaults] setObject:requestObject forKey:[NSString stringWithFormat:@"request_object_order_%@", self.orderId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSMutableDictionary *)requestObject {
+    return [NSMutableDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"request_object_order_%@", self.orderId]]];
 }
 
 @end

@@ -285,6 +285,52 @@
     return copyPosition;
 }
 
+#pragma mark - WatchAppModelProtocol
+
+- (NSDictionary *)plistRepresentation {
+    NSMutableDictionary *plist = [NSMutableDictionary new];
+    
+    plist[@"positionId"] = self.positionId ?: @"";
+    plist[@"name"] = self.name ?: @"";
+    plist[@"price"] = @(self.price);
+    
+    NSMutableArray *groupModifiers = [NSMutableArray new];
+    for (DBMenuPositionModifier *groupModifier in self.groupModifiers){
+        [groupModifiers addObject:[groupModifier plistRepresentation]];
+    }
+    plist[@"groupModifiers"] = groupModifiers;
+    
+    NSMutableArray *singleModifiers = [NSMutableArray new];
+    for (DBMenuPositionModifier *singleModifier in self.singleModifiers){
+        [singleModifiers addObject:[singleModifier plistRepresentation]];
+    }
+    plist[@"singleModifiers"] = singleModifiers;
+    
+    return plist;
+}
+
++ (id)createWithPlistRepresentation:(NSDictionary *)plistDict {
+    DBMenuPosition *position = [DBMenuPosition new];
+    
+    position.positionId = plistDict[@"positionId"];
+    position.name = plistDict[@"name"];
+    position.price = [plistDict[@"price"] doubleValue];
+    
+    NSMutableArray *groupModifiers = [NSMutableArray new];
+    for (NSDictionary *modifierDict in plistDict[@"groupModifiers"]){
+        [groupModifiers addObject:[DBMenuPositionModifier createWithPlistRepresentation:modifierDict]];
+    }
+    position.groupModifiers = groupModifiers;
+    
+    NSMutableArray *singleModifiers = [NSMutableArray new];
+    for (NSDictionary *modifierDict in plistDict[@"singleModifiers"]){
+        [singleModifiers addObject:[DBMenuPositionModifier createWithPlistRepresentation:modifierDict]];
+    }
+    position.singleModifiers = singleModifiers;
+    
+    return position;
+}
+
 @end
 
 @implementation DBMenuPosition (HistoryResponse)

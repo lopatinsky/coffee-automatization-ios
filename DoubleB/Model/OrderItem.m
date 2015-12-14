@@ -158,4 +158,25 @@
     return orderItem;
 }
 
+
+#pragma mark - DBWatchAppModelProtocol
+
+- (NSDictionary *)plistRepresentation {
+    NSMutableDictionary *plist = [NSMutableDictionary new];
+    
+    plist[@"position"] = [self.position plistRepresentation];
+    plist[@"count"] = @(self.count);
+    
+    return plist;
+}
+
++ (id)createWithPlistRepresentation:(NSDictionary *)plistDict {
+    OrderItem *item = [OrderItem new];
+    
+    item.position = [DBMenuPosition createWithPlistRepresentation:plistDict[@"position"]];
+    item.count = [plistDict[@"count"] integerValue];
+    
+    return item;
+}
+
 @end
