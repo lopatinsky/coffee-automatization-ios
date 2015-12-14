@@ -38,7 +38,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"Time module dealloc");
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [_orderCoordinator removeObserver:self];
 }
 

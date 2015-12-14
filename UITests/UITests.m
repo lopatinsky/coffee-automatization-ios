@@ -33,13 +33,27 @@
     
     XCUIApplication *app = [XCUIApplication new];
     [Snapshot setLanguage:app];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [HSTestingBackchannel sendNotification:@"SnapshotTest"];
-        [Snapshot snapshot:@"0SignIn" waitForLoadingIndicator:NO];
-        [expectation fulfill];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [HSTestingBackchannel sendNotification:@"UITestNotificationCategoriesScreen"];
+        [Snapshot snapshot:@"0Categories" waitForLoadingIndicator:NO];
+        
+        [HSTestingBackchannel sendNotification:@"UITestNotificationPositionsScreen"];
+        [Snapshot snapshot:@"1Positions" waitForLoadingIndicator:NO];
+        
+        [HSTestingBackchannel sendNotification:@"UITestNotificationPositionScreen"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [Snapshot snapshot:@"2Position" waitForLoadingIndicator:NO];
+            
+            [HSTestingBackchannel sendNotification:@"UITestNotificationOrderScreen"];
+            [Snapshot snapshot:@"3Order" waitForLoadingIndicator:NO];
+            
+            [expectation fulfill];
+            
+        });
     });
     
-    [self waitForExpectationsWithTimeout:7 handler:nil];
+    [self waitForExpectationsWithTimeout:15 handler:nil];
 }
 
 @end
