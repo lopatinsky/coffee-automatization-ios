@@ -15,6 +15,18 @@
 
 @implementation DBNOOrderItemsModuleView
 
+- (instancetype)init {
+    self = [super init];
+    
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPromoUpdated selector:@selector(reloadItemsErrors)];
+    
+    return self;
+}
+
+- (void)dealloc {
+    [[OrderCoordinator sharedInstance] removeObserver:self];
+}
+
 - (ItemsManager *)manager {
     return [OrderCoordinator sharedInstance].itemsManager;
 }
@@ -40,6 +52,17 @@
     positionVC.parentNavigationController = self.ownerViewController.navigationController;
     positionVC.hidesBottomBarWhenPushed = YES;
     [self.ownerViewController.navigationController pushViewController:positionVC animated:YES];
+}
+
+- (void)reloadItemsErrors {
+    for (int i = 0; i < [self manager].items.count; i++) {
+        OrderItem *orderItem = [self manager].items[i];
+        DBPromoItem *promoItem = [[OrderCoordinator sharedInstance].promoManager promosForOrderItem:orderItem];
+        
+        if (promoItem.errors > 0) {
+            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+    }
 }
 
 @end
