@@ -19,8 +19,10 @@
 
 + (instancetype)sharedManagerWithDelegate:(UIViewController<SocialManagerDelegate> *)delegate;
 
+- (BOOL)vkIsAvailable;
+
 - (void)shareFacebook;
-//- (void)shareVk;
+- (void)shareVk;
 - (void)shareMessage:(UIViewController *)vc;
 - (void)shareOther:(NSString *)screen;
 
