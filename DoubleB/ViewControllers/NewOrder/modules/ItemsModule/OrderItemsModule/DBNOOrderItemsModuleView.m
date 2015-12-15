@@ -59,7 +59,7 @@
         OrderItem *orderItem = [self manager].items[i];
         DBPromoItem *promoItem = [[OrderCoordinator sharedInstance].promoManager promosForOrderItem:orderItem];
         
-        if (promoItem.errors > 0) {
+        if (promoItem.errors.count > 0) {
             [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:i inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
     }

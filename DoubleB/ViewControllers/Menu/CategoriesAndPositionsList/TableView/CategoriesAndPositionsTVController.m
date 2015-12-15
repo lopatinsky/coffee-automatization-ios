@@ -328,7 +328,6 @@ static NSDictionary *_preferences;
             }
         }
         
-        NSLog(@"%ld, %ld -- %ld, %ld", self.categories.count, ((DBMenuCategory *)self.categories[correctedIndexPath.section]).positions.count, correctedIndexPath.section, correctedIndexPath.row);
         DBMenuPosition *position = ((DBMenuCategory *)self.categories[correctedIndexPath.section]).positions[correctedIndexPath.row];
         cell.contentType = DBPositionCellContentTypeRegular;
         cell.priceAnimated = YES;

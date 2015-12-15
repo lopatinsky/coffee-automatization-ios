@@ -43,7 +43,11 @@
 }
 
 + (NSString *)db_shareBgImageName {
-    NSString *imageName = @"share2";
+    NSString *imageName = @"share";
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"]) {
+        imageName = @"share_redcup";
+    }
     
     if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
         imageName = @"share_coffeeacademy";
