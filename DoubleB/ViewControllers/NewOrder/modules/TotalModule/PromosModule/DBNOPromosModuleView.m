@@ -27,8 +27,9 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 25.f;
-    
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 100;
+
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.tableView];
     [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
@@ -53,7 +54,11 @@
 }
 
 - (CGFloat)moduleViewContentHeight {
-    double height = [OrderCoordinator sharedInstance].promoManager.promos.count * self.tableView.rowHeight;
+    int height = 0;
+    for (int i = 0; i < [self.tableView numberOfRowsInSection:0]; i++) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+        height += cell.frame.size.height;
+    }
     
     return height;
 }

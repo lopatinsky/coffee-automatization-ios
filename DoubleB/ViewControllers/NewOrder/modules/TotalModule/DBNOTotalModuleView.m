@@ -122,6 +122,8 @@
     
     height += [self.promosModule moduleViewContentHeight];
     
+    NSLog(@"%ld", (long)height);
+    
     return height;
 }
 
