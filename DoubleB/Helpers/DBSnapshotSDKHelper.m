@@ -8,7 +8,9 @@
 
 #import "DBSnapshotSDKHelper.h"
 
+#ifdef DEBUG
 #import <HSTestingBackchannel/HSTestingBackchannel.h>
+#endif
 
 #import "DBNewOrderVC.h"
 #import "DBMenu.h"
@@ -46,7 +48,9 @@
 - (instancetype)init {
     self = [super init];
     
+#ifdef DEBUG
     [HSTestingBackchannel installReceiver];
+#endif
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(toCategoriesScreen)
