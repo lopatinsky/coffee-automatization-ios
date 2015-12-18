@@ -16,10 +16,12 @@
     NSMutableDictionary *plist = [NSMutableDictionary new];
     
     plist[@"active"] = @(self.active);
+    plist[@"reordered"] = @(self.reorderedFromWatches);
     
     plist[@"orderId"] = self.orderId;
     plist[@"total"] = self.total;
     
+    plist[@"status"] = @(self.status);
     plist[@"venueId"] = self.venueId;
     plist[@"venueName"] = self.venueName;
     
@@ -42,10 +44,12 @@
     OrderWatch *order = [OrderWatch new];
     
     order.active = [plistDict[@"active"] boolValue];
+    order.reorderedFromWatches = [plistDict[@"reordered"] boolValue];
     
     order.orderId = plistDict[@"orderId"];
     order.total = plistDict[@"total"];
     
+    order.status = [plistDict[@"status"] integerValue];
     order.venueId = plistDict[@"venueId"];
     order.venueName = plistDict[@"venueName"];
     order.requestObject = plistDict[@"requestObject"];

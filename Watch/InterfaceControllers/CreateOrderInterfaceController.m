@@ -64,7 +64,8 @@
 }
 
 - (void)updateInfo {
-    if ([[ApplicationInteractionManager sharedManager] currentOrder].active) {
+    if ([[ApplicationInteractionManager sharedManager] currentOrder].status == 0 || [[ApplicationInteractionManager sharedManager] currentOrder].status == 5 ||
+        [[ApplicationInteractionManager sharedManager] currentOrder].status == 6) {
         [WKInterfaceController reloadRootControllersWithNames:@[@"CurrentOrder"] contexts:nil];
     } else {
         [WKInterfaceController reloadRootControllersWithNames:@[@"LastOrder"] contexts:nil];

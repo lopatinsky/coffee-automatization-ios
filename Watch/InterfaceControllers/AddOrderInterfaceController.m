@@ -30,7 +30,7 @@
 - (void)updateInfo {
     OrderWatch *order = [[ApplicationInteractionManager sharedManager] currentOrder];
     if (order) {
-        if (order.active) {
+        if (order.status == 0 || order.status == 5 || order.status == 6) {
             [WKInterfaceController reloadRootControllersWithNames:@[@"CurrentOrder"] contexts:nil];
         } else {
             [WKInterfaceController reloadRootControllersWithNames:@[@"LastOrder"] contexts:nil];

@@ -52,7 +52,14 @@
         [self.session sendMessage:msg replyHandler:^(NSDictionary<NSString *,id> * _Nonnull replyMessage) {
             if ([replyMessage objectForKey:@"order"] && [[replyMessage objectForKey:@"order"] isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *orderDictionary = replyMessage[@"order"];
-                self.currentOrder = [OrderWatch createWithPlistRepresentation:orderDictionary];
+                OrderWatch *newOrder = [OrderWatch createWithPlistRepresentation:orderDictionary];
+                if (self.currentOrder.reorderedFromWatches) {
+                    if ([self.currentOrder.orderId compare:newOrder.orderId] == NSOrderedAscending) {
+                        self.currentOrder = newOrder;
+                    }
+                } else {
+                    self.currentOrder = newOrder;
+                }
                 [[NSNotificationCenter defaultCenter] postNotificationName:kWatchNetworkManagerOrderUpdated object:nil];
             }
         } errorHandler:^(NSError * _Nonnull error) {

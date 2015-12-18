@@ -47,10 +47,19 @@
     [self configureTableWithData:self.order.items];
 }
 
+//typedef NS_ENUM(int16_t, OrderStatus) {
+//    OrderStatusNew = 0,
+//    OrderStatusConfirmed = 5,
+//    OrderStatusOnWay = 6,
+//    OrderStatusDone = 1,
+//    OrderStatusCanceled = 2,
+//    OrderStatusCanceledBarista = 3
+//};
 - (void)updateInfo {
     if (![[ApplicationInteractionManager sharedManager] currentOrder]) {
         [WKInterfaceController reloadRootControllersWithNames:@[@"AddOrder"] contexts:nil];
-    } else if (![[ApplicationInteractionManager sharedManager] currentOrder].active) {
+    } else if ([[ApplicationInteractionManager sharedManager] currentOrder].status == 1 || [[ApplicationInteractionManager sharedManager] currentOrder].status == 2 ||
+               [[ApplicationInteractionManager sharedManager] currentOrder].status == 3) {
         [WKInterfaceController reloadRootControllersWithNames:@[@"LastOrder"] contexts:nil];
     } else if (![[self.order orderId] isEqualToString:[[[ApplicationInteractionManager sharedManager] currentOrder] orderId]]) {
         [self updateView];
@@ -61,11 +70,7 @@
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
     [self updateUserActivity:@"com.empatika.openorder" userInfo:@{@"order_id": [self.order orderId]} webpageURL:nil];
-    if ([self.order.time compare:[NSDate date]] == NSOrderedAscending) {
-        self.order.active = NO;
-        [[ApplicationInteractionManager sharedManager] saveOrder:self.order];
-        [WKInterfaceController reloadRootControllersWithNames:@[@"LastOrder"] contexts:nil];
-    }
+    [WatchNetworkManager updateState:self.order];
     [self updateInfo];
 }
 

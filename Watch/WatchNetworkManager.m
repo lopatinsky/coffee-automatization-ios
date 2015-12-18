@@ -8,6 +8,7 @@
 
 #import "ApplicationInteractionManager.h"
 #import "WatchNetworkManager.h"
+#import "NSDictionary+NSNullRepresentation.h"
 
 #import "OrderWatch.h"
 
@@ -23,7 +24,7 @@
                              @"application/json": @"Accept"
                              };
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mycompany.test1.doubleb-automation-production.appspot.com/api/order"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mycompany.1.doubleb-automation-production.appspot.com/api/order"]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[self httpBodyForParamsDictionary:params]];
     request.timeoutInterval = 30;
@@ -31,9 +32,10 @@
     NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSDictionary *resp = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
         NSLog(@"%@", resp);
-        if (![[resp objectForKey:@"error"] boolValue]) {
+        if (resp && ![[resp objectForKey:@"error"] boolValue] && [resp objectForKey:@"order_id"]) {
             OrderWatch *currentOrder = [[ApplicationInteractionManager sharedManager] currentOrder];
             currentOrder.orderId = [NSString stringWithFormat:@"%@", [resp objectForKey:@"order_id"]];
+            currentOrder.status = 0;
             NSDateFormatter *formatter = [NSDateFormatter new];
             formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
             currentOrder.time = [formatter dateFromString:[resp objectForKey:@"delivery_time"]];
@@ -57,7 +59,27 @@
 
     }];
     
-    [task resume];}
+    [task resume];
+}
+
++ (void)updateState:(OrderWatch *)order {
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://mycompany.1.doubleb-automation-production.appspot.com/api/status?order_id=%@", order.orderId]]];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSDictionary *resp = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        if ([resp getValueForKey:@"order"]) {
+            NSInteger status = [[[resp objectForKey:@"order"] objectForKey:@"status"] integerValue];
+            if (order.status != status) {
+                order.status = status;
+                [[ApplicationInteractionManager sharedManager] updateComplications];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kWatchNetworkManagerOrderUpdated object:nil];
+            }
+        }
+    }];
+    
+    [task resume];
+}
 
 + (void)cancelOrder:(OrderWatch *)order onController:(WKInterfaceController *)controller {
     NSDictionary *params = @{@"order_id": order.orderId,
@@ -67,7 +89,7 @@
                              @"application/json": @"Accept"
                              };
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mycompany.test1.doubleb-automation-production.appspot.com/api/return"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mycompany.1.doubleb-automation-production.appspot.com/api/return"]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[self httpBodyForParamsDictionary:params]];
     

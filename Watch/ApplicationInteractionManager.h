@@ -25,4 +25,6 @@
 - (void)cancelOrder;
 - (void)makeReorder:(nonnull NSString *)newOrderId;
 
+- (void)updateComplications;
+
 @end

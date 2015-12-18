@@ -15,5 +15,6 @@
 
 + (void)makeReorder:(NSDictionary *)order onController:(WKInterfaceController *)controller;
 + (void)cancelOrder:(OrderWatch *)order onController:(WKInterfaceController *)controller;
++ (void)updateState:(OrderWatch *)order;
 
 @end

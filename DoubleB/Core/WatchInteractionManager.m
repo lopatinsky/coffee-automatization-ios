@@ -8,9 +8,13 @@
 
 #import "WatchInteractionManager.h"
 #import "Order.h"
+#import "OrderItem.h"
 #import "OrderWatch.h"
 #import "OrderCoordinator.h"
 #import "DeliverySettings.h"
+#import "NSDictionary+NSNullRepresentation.h"
+
+#import "DBServerAPI.h"
 
 @import WatchConnectivity;
 
@@ -37,42 +41,58 @@
 - (void)updateLastOrActiveOrder {
     if (![WCSession isSupported]) { return; }
     
-    Order *lastOrder = [Order lastOrderForWatch:NO];
-    if (lastOrder) {
-        [self sendData:[self orderDictionary]];
-    }
+    [self sendData:[self completeOrderDictionary]];
 }
 
-- (NSDictionary *)orderDictionary {
-    Order *lastOrder = [Order lastOrderForWatch:NO];
-    if ([lastOrder isActive]) {
-        return [self lastActiveOrderInfo];
+- (NSDictionary *)completeOrderDictionary {
+    Order *lastActiveOrder = [Order lastOrderForWatch:YES];
+    if (lastActiveOrder) {
+        return [self orderDictionary:lastActiveOrder];
     } else {
-        return [self lastOrderInfo];
+        Order *lastOrder = [Order lastOrderForWatch:NO];
+        return [self orderDictionary:lastOrder];
     }
 }
 
-- (NSDictionary *)lastActiveOrderInfo {
-    NSMutableDictionary *activeOrder = [NSMutableDictionary dictionaryWithDictionary:[[[Order lastOrderForWatch:YES] watchInstance] plistRepresentation]];
+- (NSDictionary *)orderDictionary:(Order *)order {
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[[order watchInstance] plistRepresentation]];
+    
+    if (![dictionary getValueForKey:@"requestObject"] || ![[dictionary getValueForKey:@"requestObject"] count]) {
+        [dictionary setObject:[self assembleOrderInfo:order] forKey:@"requestObject"];
+    }
     NSArray *timeSlots = [[[[OrderCoordinator sharedInstance] deliverySettings] deliveryType] timeSlots];
     NSMutableArray *temp = [NSMutableArray new];
     for (DBTimeSlot *slot in timeSlots) {
         [temp addObject:@{@"id": slot.slotId, @"title": slot.slotTitle, @"dict": slot.slotDict}];
     }
-    activeOrder[@"delivery_slots"] = temp;
-    return activeOrder;
+    dictionary[@"delivery_slots"] = temp;
+    
+    return dictionary;
 }
 
-- (NSDictionary *)lastOrderInfo {
-    Order *lastOrder = [Order lastOrderForWatch:NO];
-    NSMutableDictionary *lastOrderDictionary = [NSMutableDictionary dictionaryWithDictionary:[lastOrder plistRepresentation]];
-    NSArray *timeSlots = [[[[OrderCoordinator sharedInstance] deliverySettings] deliveryType] timeSlots];
-    NSMutableArray *temp = [NSMutableArray new];
-    for (DBTimeSlot *slot in timeSlots) {
-        [temp addObject:@{@"id": slot.slotId, @"title": slot.slotTitle, @"dict": slot.slotDict}];
+- (NSDictionary *)assembleOrderInfo:(Order *)order {
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"client"] = [DBServerAPI assembleClientInfo];
+    params[@"items"] = [self assembleOrderItems:order];
+    params[@"total_sum"] = [order total];
+    params[@"delivery_sum"] = [order shippingTotal];
+    params[@"payment"] = [DBServerAPI assemblyPaymentInfo];
+    params[@"comment"] = @"Reorder from apple watch";
+    params[@"device_type"] = @(0);
+    [DBServerAPI assembleTimeIntoParams:params];
+    [DBServerAPI assembleDeliveryInfoIntoParams:params encode:NO];
+    
+    return  params;
+}
+
+- (NSArray *)assembleOrderItems:(Order *)order {
+    NSMutableArray *items = [NSMutableArray new];
+    for (OrderItem *item in [order items]) {
+        [items addObject:[item requestJson]];
     }
-    lastOrderDictionary[@"delivery_slots"] = temp;
-    return lastOrderDictionary;
+    
+    return items;
 }
 
 - (void)continueUserActivity:(NSUserActivity *)activity {
@@ -112,7 +132,7 @@
 - (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message
                                           replyHandler:(void (^)(NSDictionary<NSString *,id> * _Nonnull))replyHandler {
     if ([message objectForKey:@"request"]) {
-        replyHandler(@{@"order": [self orderDictionary] ?: @""});
+        replyHandler(@{@"order": [self completeOrderDictionary] ?: @""});
     }
 }
 
@@ -126,7 +146,7 @@
 
 - (void)session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *,id> *)applicationContext {
     if ([applicationContext objectForKey:@"request"]) {
-        [self sendData:@{@"order": [self orderDictionary] ?: @""}];
+        [self sendData:@{@"order": [self completeOrderDictionary] ?: @""}];
     }
 }
 

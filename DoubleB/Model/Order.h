@@ -68,6 +68,8 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 @property (nonatomic, strong) NSDate *creationTime;
 @property (nonatomic, readonly) NSString *formattedTimeString;
 
+@property (nonatomic, strong) NSMutableDictionary *requestObject;
+
 - (instancetype)init:(BOOL)stored;
 - (instancetype)initNewOrderWithDict:(NSDictionary *)dict;
 - (instancetype)initWithResponseDict:(NSDictionary *)dict;

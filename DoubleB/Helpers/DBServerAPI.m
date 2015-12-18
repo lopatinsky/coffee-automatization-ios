@@ -249,6 +249,7 @@
                                  
                                  // Save order
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
+                                 ord.requestObject = order;
                                  
                                  [[AppIndexingManager sharedManager] postActivity:ord withParams:@{@"type": @"order", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
                                  for (OrderItem *item in [ord items]) {
@@ -542,7 +543,7 @@
     return items;
 }
 
-+ (NSDictionary *)assembleClientInfo{
++ (NSDictionary *)assembleClientInfo {
     NSMutableDictionary *clientInfo = [NSMutableDictionary new];
     clientInfo[@"id"] = [[IHSecureStore sharedInstance] clientId];
     clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName.value;
@@ -558,7 +559,7 @@
     return clientInfo;
 }
 
-+ (NSDictionary *)assemblyPaymentInfo{
++ (NSDictionary *)assemblyPaymentInfo {
     NSMutableDictionary *payment = [NSMutableDictionary new];
     
     PaymentType paymentType = [OrderCoordinator sharedInstance].orderManager.paymentType;
@@ -591,7 +592,7 @@
     return payment;
 }
 
-+ (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
++ (void)assembleTimeIntoParams:(NSMutableDictionary *)params {
     DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
     if(settings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         NSDateFormatter *formatter = [NSDateFormatter new];
@@ -604,7 +605,7 @@
     }
 }
 
-+ (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
++ (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode {
     DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
     params[@"delivery_type"] = @(settings.deliveryType.typeId);
     if(settings.deliveryType.typeId == DeliveryTypeIdShipping){

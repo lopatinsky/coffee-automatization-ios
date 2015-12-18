@@ -41,7 +41,7 @@
     CLKComplicationTimelineEntry *entry = nil;
     
     OrderWatch *order = [[ApplicationInteractionManager sharedManager] currentOrder];
-    if (order && order.active && ([order.time compare:[NSDate date]] == NSOrderedDescending)) {
+    if (order && order.status == 0 && order.status == 5 && order.status == 6) {
         CLKComplicationTemplateModularSmallStackImage *stackTemplate = [[CLKComplicationTemplateModularSmallStackImage alloc] init];
         stackTemplate.line1ImageProvider = [CLKImageProvider imageProviderWithOnePieceImage:[UIImage imageNamed:@"mug"]];
         

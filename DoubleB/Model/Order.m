@@ -436,6 +436,7 @@
     order.orderId = self.orderId;
     order.total = self.total;
     
+    order.status = self.status;
     order.time = self.time;
     order.creationTime = self.creationTime;
     

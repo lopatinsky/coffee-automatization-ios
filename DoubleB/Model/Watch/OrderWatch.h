@@ -25,12 +25,13 @@
 
 @end
 
-
 @interface OrderWatch : NSObject<WatchAppModelProtocol>
 
 @property (nonatomic) BOOL active;
+@property (nonatomic) BOOL reorderedFromWatches;
 
 @property (nonatomic, strong) NSString *orderId;
+@property (nonatomic) NSInteger status;
 
 @property (nonatomic, strong) NSNumber *total;
 

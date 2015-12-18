@@ -33,7 +33,7 @@
 }
 
 - (void)updateView {
-    if (self.order.active) {
+    if (self.order.status == 0 || self.order.status == 5 || self.order.status == 6) {
         [WKInterfaceController reloadRootControllersWithNames:@[@"CurrentOrder"] contexts:nil];
     } else {
         [self.placeLabel setText:self.order.venueName];
