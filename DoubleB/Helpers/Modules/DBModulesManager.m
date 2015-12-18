@@ -93,7 +93,9 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
             case DBModuleTypeProfileScreenUniversal:
                 [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
                 break;
-                
+            case DBModuleTypeGeoPush:
+                [[DBGeoPushManager sharedInstance] enableModule:NO withDict:nil];
+                break;
             default:
                 break;
         }

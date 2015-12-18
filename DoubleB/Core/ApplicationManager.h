@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import "ManagerProtocol.h"
 #import "MenuListViewControllerProtocol.h"
 
@@ -26,6 +28,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
 + (void)handlePush:(NSDictionary *)push;
++ (void)handleLocalPush:(UILocalNotification *)push;
 
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;

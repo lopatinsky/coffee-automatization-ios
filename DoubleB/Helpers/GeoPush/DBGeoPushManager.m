@@ -9,6 +9,8 @@
 #import "DBGeoPushManager.h"
 #import "DBGeoPush.h"
 
+#import "DBAPIClient.h"
+
 #import <CoreLocation/CoreLocation.h>
 
 @interface DBGeoPushManager()
@@ -38,6 +40,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++ (void)handleLocalPush:(UILocalNotification *)push {
+    [GANHelper analyzeEvent:@"geo_push_opened" category:@"Geo_push_screen"];
+    [[DBAPIClient sharedClient] POST:@"geo_push/add"
+                          parameters:nil
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 [GANHelper analyzeEvent:@"geo_push_add_success" category:@"Geo_push_screen"];
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 [GANHelper analyzeEvent:@"geo_push_add_failure" category:@"Geo_push_screen"];
+                             }];
+}
+
 - (CLCircularRegion *)regionPointFromData:(NSDictionary *)pointInfo {
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake([pointInfo[@"lat"] doubleValue], [pointInfo[@"lon"] doubleValue]);
     CLLocationDistance radius = [pointInfo[@"radius"] doubleValue];
@@ -65,7 +79,7 @@
         }
     }
     
-    if ([self.geoPush pushIsAvailable] || YES) {
+    if ([self.geoPush pushIsAvailable]) {
         for (NSDictionary *point in [self.geoPush points]) {
             CLCircularRegion *region = [self regionPointFromData:point];
             [self.locationManager startMonitoringForRegion:region];
@@ -76,7 +90,10 @@
 #pragma mark – LocationHelperProtocol
 - (void)didEnter:(CLRegion *)region {
     if ([region isKindOfClass:[CLCircularRegion class]]) {
-        if ([self.geoPush pushIsAvailable] || YES) {
+        if ([self.geoPush pushIsAvailable]) {
+            NSInteger numberOfDays = [self.geoPush numberOfDaysAfterLastOrder];
+            [GANHelper analyzeEvent:@"geo_push_may_be" label:[NSString stringWithFormat:@"%ld", numberOfDays] category:@"Geo_push_screen"];
+            
             [self.geoPush pushLocalNotification];
         }
     }

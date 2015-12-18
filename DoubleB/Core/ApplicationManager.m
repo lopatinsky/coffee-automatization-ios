@@ -17,6 +17,7 @@
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
+#import "DBGeoPushManager.h"
 #import "DBMenu.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
@@ -73,6 +74,13 @@
                                                                    userInfo:push ?: @{}];
         [[NSNotificationCenter defaultCenter] postNotification:notification];
     } 
+}
+
++ (void)handleLocalPush:(UILocalNotification *)push {
+    [GANHelper analyzeEvent:@"local_push_received" label:[push description] category:@"push_screen"];
+    if ([[[push userInfo] objectForKey:@"type"] isEqualToString:@"geopush"]) {
+        [DBGeoPushManager handleLocalPush:push];
+    }
 }
 
 + (void)showPushAlert:(NSDictionary *)info buttons:(NSArray *)buttons callback:(void (^)(NSUInteger buttonIndex))callback {

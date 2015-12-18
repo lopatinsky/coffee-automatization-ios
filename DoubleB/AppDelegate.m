@@ -141,7 +141,8 @@
     [ApplicationManager handlePush:userInfo];
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [ApplicationManager handleLocalPush:notification];
 }
 
 - (void)saveContext

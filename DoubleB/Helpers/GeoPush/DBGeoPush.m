@@ -14,7 +14,7 @@
     self = [super init];
     
     self.orderDelayDays = [dict getIntForKey:@"days_without_order"] ?: 0;
-    self.pushDelayDays = [dict getIntForKey:@"days_wuthout_push"] ?: 0;
+    self.pushDelayDays = [dict getIntForKey:@"days_without_push"] ?: 0;
     self.title = [dict getValueForKey:@"head"] ?: @"";
     self.lastOrder = [[dict getValueForKey:@"last_order"] boolValue];
     self.lastOrderTimestamp = [dict getIntForKey:@"last_order_timestamp"];
@@ -24,6 +24,10 @@
     return self;
 }
 
+- (NSInteger)numberOfDaysAfterLastOrder {
+    return [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]];
+}
+
 - (BOOL)pushIsAvailable {
     BOOL available = YES;
     available = self.lastOrder;
@@ -31,10 +35,21 @@
     if (available) {
         NSDate *lastPushDate = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"kDBGeoPushLastTimestamp"] floatValue]];
         available = [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]] >= self.orderDelayDays &&
-                    [DBGeoPush daysBetweenDate:[NSDate date] andDate:lastPushDate] >= self.pushDelayDays;
+        [DBGeoPush daysBetweenDate:[NSDate date] andDate:lastPushDate] >= self.pushDelayDays;
     }
     
     return available;
+}
+
+- (void)debug_pushLocalNotification:(NSInteger)seconds {
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+//    notification.alertTitle = @"debug title";
+    notification.alertBody = @"debug body";
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    notification.userInfo = @{@"type": @"geopush"};
+    
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:seconds];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (void)pushLocalNotification {
@@ -42,10 +57,12 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertTitle = self.title;
     notification.alertBody = self.text;
     notification.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    notification.userInfo = @{@"type": @"geopush"};
+    
+    notification.fireDate = [[NSDate date] dateByAddingTimeInterval:0];
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 }
 
 - (NSString *)description {
@@ -71,7 +88,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [[DBGeoPush alloc] init];
     if (self) {
-        _orderDelayDays = [[aDecoder decodeObjectForKey:@"_orderDelayDays"] integerValue];
+        _orderDelayDays = [[aDecoder decodeObjectForKey:@"__orderDelayDays"] integerValue];
         _pushDelayDays = [[aDecoder decodeObjectForKey:@"__pushDelayDays"] integerValue];
         _title = [aDecoder decodeObjectForKey:@"__title"];
         _lastOrder = [[aDecoder decodeObjectForKey:@"__lastOrder"] boolValue];
