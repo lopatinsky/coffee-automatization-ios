@@ -43,13 +43,13 @@
 + (void)handleLocalPush:(UILocalNotification *)push {
     [GANHelper analyzeEvent:@"geo_push_opened" category:@"Geo_push_screen"];
     [[DBAPIClient sharedClient] POST:@"geo_push/add"
-                         parameters:nil
+                          parameters:nil
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  [GANHelper analyzeEvent:@"geo_push_add_success" category:@"Geo_push_screen"];
-                            }
+                             }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  [GANHelper analyzeEvent:@"geo_push_add_failure" category:@"Geo_push_screen"];
-                            }];
+                             }];
 }
 
 - (CLCircularRegion *)regionPointFromData:(NSDictionary *)pointInfo {
@@ -79,7 +79,7 @@
         }
     }
     
-    if ([self.geoPush pushIsAvailable] || YES) {
+    if ([self.geoPush pushIsAvailable]) {
         for (NSDictionary *point in [self.geoPush points]) {
             CLCircularRegion *region = [self regionPointFromData:point];
             [self.locationManager startMonitoringForRegion:region];

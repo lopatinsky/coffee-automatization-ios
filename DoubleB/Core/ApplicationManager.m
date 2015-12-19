@@ -17,6 +17,7 @@
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
+#import "DBGeoPushManager.h"
 #import "DBMenu.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"

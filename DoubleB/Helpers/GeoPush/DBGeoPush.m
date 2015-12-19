@@ -35,7 +35,7 @@
     if (available) {
         NSDate *lastPushDate = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"kDBGeoPushLastTimestamp"] floatValue]];
         available = [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]] >= self.orderDelayDays &&
-                    [DBGeoPush daysBetweenDate:[NSDate date] andDate:lastPushDate] >= self.pushDelayDays;
+        [DBGeoPush daysBetweenDate:[NSDate date] andDate:lastPushDate] >= self.pushDelayDays;
     }
     
     return available;
@@ -43,7 +43,7 @@
 
 - (void)debug_pushLocalNotification:(NSInteger)seconds {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertTitle = @"debug title";
+//    notification.alertTitle = @"debug title";
     notification.alertBody = @"debug body";
     notification.soundName = UILocalNotificationDefaultSoundName;
     notification.userInfo = @{@"type": @"geopush"};
