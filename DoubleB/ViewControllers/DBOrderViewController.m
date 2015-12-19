@@ -161,9 +161,6 @@
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Не оплачен", nil);
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"not_paid"];
     }
-    
-
-    self.viewFooter.labelDate.text = [NSString stringWithFormat:[DBTextResourcesHelper db_preparationOrderCellString], self.order.formattedTimeString];
 }
 
 - (void)cancelOrder:(DBOrderCancelReason)reason reasonText:(NSString *)reasonText {

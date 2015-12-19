@@ -35,11 +35,15 @@
 }
 
 + (NSString *)db_preparationOrderCellString {
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"] || [[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"testapp"]) {
         return NSLocalizedString(@"Мы постараемся приготовить к %@", nil);
     } else {
         return NSLocalizedString(@"Готов к %@", nil);
     }
+}
+
++ (NSString *)db_readyOrderCellString {
+    return NSLocalizedString(@"Готов к %@", nil);
 }
 
 + (NSString *)db_shareBgImageName {

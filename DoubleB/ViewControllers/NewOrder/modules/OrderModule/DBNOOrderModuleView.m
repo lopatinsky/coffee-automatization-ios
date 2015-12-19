@@ -127,8 +127,13 @@
         [MBProgressHUD hideHUDForView:self.ownerViewController.view animated:YES];
         
         [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenHistoryOrder object:order animated:YES];
+        
+        NSString *message = NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil);
+        if (order.deliveryType.integerValue == DeliveryTypeIdShipping) {
+            message = NSLocalizedString(@"Заказ отправлен. Мы с вами свяжемся для подтверждения!", nil);
+        }
         [UIAlertView bk_showAlertViewWithTitle:order.venueName
-                                       message:NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil)
+                                       message:message
                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
                              otherButtonTitles:nil
                                        handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
