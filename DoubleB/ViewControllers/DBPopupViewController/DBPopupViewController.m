@@ -41,12 +41,14 @@
     if (_controller) {
         [self addChildViewController:_controller];
         [self.contentView addSubview:_controller.view];
-        
+        [_controller didMoveToParentViewController:self];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [_controller beginAppearanceTransition:YES animated:YES];
 }
 
 - (void)configLayout:(CGRect)rect {
@@ -103,7 +105,6 @@
     
     if (_controller) {
         _controller.view.frame = self.contentView.bounds;
-        [_controller didMoveToParentViewController:self];
     }
 }
 
