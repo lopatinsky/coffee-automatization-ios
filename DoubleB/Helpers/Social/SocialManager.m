@@ -16,7 +16,9 @@
 #import "UIAlertView+BlocksKit.h"
 #import "UIViewController+ShareExtension.h"
 
-@interface SocialManager () <VKSdkDelegate, FBSDKSharingDelegate>
+#import <MessageUI/MessageUI.h>
+
+@interface SocialManager () <MFMessageComposeViewControllerDelegate, VKSdkDelegate, FBSDKSharingDelegate>
 
 @property (nonatomic, strong) UIViewController<SocialManagerDelegate> *delegate;
 
@@ -132,6 +134,24 @@
     }];
     
     [self.delegate presentViewController:shareDialog animated:YES completion:nil];
+}
+
+- (void)shareMessage:(UIViewController *)vc {
+    NSString *text = [DBShareHelper sharedInstance].textShare;
+    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.view.tintColor = vc.view.tintColor;
+    messageController.messageComposeDelegate = self;
+    messageController.body = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
+    [vc presentViewController:messageController animated:YES completion:nil];
+}
+
+#pragma mark - MFMessageViewControllerDelegate
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [controller dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark - Other

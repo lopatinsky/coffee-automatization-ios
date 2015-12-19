@@ -7,8 +7,10 @@
 //
 
 #import "CategoriesTVController.h"
-#import "DBCategoryCell.h"
 #import "PositionsTVController.h"
+#import "CategoriesAndPositionsTVController.h"
+
+#import "DBCategoryCell.h"
 #import "OrderCoordinator.h"
 #import "DBBarButtonItem.h"
 #import "Venue.h"
@@ -32,7 +34,9 @@
 @end
 
 @implementation CategoriesTVController
+static NSDictionary *_preference;
 
+#pragma mark - MenuListViewControllerProtocol
 + (instancetype)createViewController{
     return [CategoriesTVController new];
 }
@@ -44,6 +48,15 @@
     return categoriesTVC;
 }
 
++ (NSDictionary *)preference {
+    return _preference;
+}
+
++ (void)setPreferences:(NSDictionary *)preferences {
+    _preference = preferences;
+}
+
+#pragma mark - Lifecycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -191,11 +204,20 @@
     [GANHelper analyzeEvent:@"item_category_click" label:category.categoryId category:CATEGORIES_SCREEN];
 
     if (category.type == DBMenuCategoryTypeParent) {
-        CategoriesTVController *categoriesVC = [CategoriesTVController new];
-        categoriesVC.parent = category;
-        categoriesVC.categories = category.categories;
-        categoriesVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:categoriesVC animated:YES];
+        BOOL mixed = [[_preference objectForKey:@"is_mixed_type"] boolValue] && [category.categories count];
+        DBMenuCategory *firstCategory = [category.categories firstObject];
+        if (firstCategory && mixed && firstCategory.type == DBMenuCategoryTypeStandart) {
+            CategoriesAndPositionsTVController *categoriesAndPositionsVC = [CategoriesAndPositionsTVController new];
+            categoriesAndPositionsVC.categories = category.categories;
+            [CategoriesAndPositionsTVController setPreferences:_preference];
+            [self.navigationController pushViewController:categoriesAndPositionsVC animated:YES];
+        } else {
+            CategoriesTVController *categoriesVC = [CategoriesTVController new];
+            categoriesVC.parent = category;
+            categoriesVC.categories = category.categories;
+            categoriesVC.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:categoriesVC animated:YES];
+        }
     } else {
         PositionsTVController *tableVC = [PositionsTVController new];
         tableVC.category = category;

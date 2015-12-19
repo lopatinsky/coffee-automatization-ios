@@ -34,4 +34,12 @@
     return title;
 }
 
++ (NSString *)db_preparationOrderCellString {
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
+        return NSLocalizedString(@"Мы постараемся приготовить к %@", nil);
+    } else {
+        return NSLocalizedString(@"Готов к %@", nil);
+    }
+}
+
 @end

@@ -74,7 +74,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             NSString *orderPushChannel = [response[@"push_channels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            _friendInvitationEnabled = [response[@"share_invitation"][@"enabled"] boolValue];
+            _friendInvitationEnabled = [[response[@"share_invitation"] getValueForKey:@"enabled"] boolValue];
             
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
             

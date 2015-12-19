@@ -7,6 +7,7 @@
 //
 
 #import "ViewControllerManager.h"
+#import "DBCompanyInfo.h"
 
 #pragma mark - General
 
@@ -37,21 +38,30 @@
              };
 }
 
-+ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)rootMenuViewController {
     NSString *menuControllersMode = [self valueFromPropertyListByKey:@"MenuViewControllers"];
-    if([menuControllersMode isEqualToString:@"Nested"]){
-        return [self categoriesViewController];
+    if ([menuControllersMode isEqualToString:@"Mixed"]) {
+        Class<MenuListViewControllerProtocol> menuVCClass = [self categoriesViewController];
+        [menuVCClass setPreferences:@{@"is_mixed_type": @(YES)}];
+        return menuVCClass;
+    } if ([menuControllersMode isEqualToString:@"Nested"]) {
+        Class<MenuListViewControllerProtocol> menuVCClass = [self categoriesViewController];
+        return menuVCClass;
     } else {
         return [self categoriesAndPositionsViewController];
     }
 }
 
-+ (nonnull Class<MenuListViewControllerProtocol>)categoriesViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)categoriesViewController {
+    NSString *menuControllersMode = [self valueFromPropertyListByKey:@"MenuViewControllers"];
     Class<MenuListViewControllerProtocol> categoriesVCClass = [CategoriesTVController class];
+    if ([menuControllersMode isEqualToString:@"Mixed"]) {
+        [categoriesVCClass setPreferences:@{@"is_mixed_type": @(YES)}];
+    }
     return categoriesVCClass;
 }
 
-+ (nonnull Class<MenuListViewControllerProtocol>)positionsViewController{
++ (nonnull Class<MenuListViewControllerProtocol>)positionsViewController {
     Class<MenuListViewControllerProtocol> positionsVCClass = [PositionsTVController class];
     return positionsVCClass;
 }
@@ -95,7 +105,7 @@
              };
 }
 
-+ (nonnull UIViewController *)launchViewController {
++ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController {
     Class launchViewController = [self launchViewControllerClasses][[ViewControllerManager valueFromPropertyListByKey:@"Launch"] ?: @"default"];
     return [launchViewController new];
 }
@@ -166,7 +176,7 @@
              };
 }
 
-+ (nonnull UIViewController *)companiesViewController {
++ (nonnull UIViewController<DBCompaniesViewControllerProtocol> *)companiesViewController {
     Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
     return [companiesViewController new];
 }

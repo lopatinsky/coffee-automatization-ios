@@ -10,7 +10,7 @@
 
 #import "DBMenuPosition.h"
 
-#import "UIImageView+WebCache.h"
+#import "UIImageView+PINRemoteImage.h"
 
 @implementation PositionCollectionViewCell
 
@@ -19,12 +19,8 @@
     self.positionNameLabel.text = position.name;
     
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
-    [self.positionImageView db_showDefaultImage];
-    [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (!error) {
-            [self.positionImageView db_hideDefaultImage];
-        }
-    }];
+    self.positionImageView.image = nil;
+    [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:position.imageUrl]];
 }
 
 - (DBMenuPosition *)position {

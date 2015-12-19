@@ -9,6 +9,8 @@
 #import "PromocodeViewController.h"
 #import "DBServerAPI.h"
 
+#import "GANHelper.h"
+
 @interface PromocodeViewController () <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *activationButton;
 @property (weak, nonatomic) IBOutlet UITableView *activatedPromosTableView;
@@ -31,6 +33,7 @@
     self.activationButton.layer.cornerRadius = 4.f;
     self.activationButton.clipsToBounds = YES;
     
+    [self.promoTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.activationButton setTitle:NSLocalizedString(@"Активировать", nil) forState:UIControlStateNormal];
     
     self.activatedPromosTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -38,13 +41,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self reloadhistory];
+    
+    [GANHelper analyzeScreen:@"Promocode_screen"];
+}
+
+- (void)textFieldDidChange:(UITextField *)textField {
+    [GANHelper analyzeEvent:@"promocode_text_changed" label:self.promoTextField.text category:@"Promocode_screen"];
 }
 
 - (void)reloadhistory {
     [DBServerAPI fetchActivatedPromoCodesWithCallback:^(BOOL success, NSDictionary *response) {
         if (success) {
+            [GANHelper analyzeEvent:@"load_promocodes_success" category:@"Promocode_screen"];
             self.activatedPromos = [response objectForKey:@"history"];
             [self.activatedPromosTableView reloadData];
+        } else {
+            [GANHelper analyzeEvent:@"load_promocodes_failure" category:@"Promocode_screen"];
         }
     }];
 }
@@ -61,11 +73,16 @@
 - (IBAction)activateButtonPressed:(id)sender {
     [self.promoTextField resignFirstResponder];
     NSString *promocodeInput = self.promoTextField.text;
+    
+    [GANHelper analyzeEvent:@"activate_click" label:promocodeInput category:@"Promocode_screen"];
+    
     [DBServerAPI activatePromoCode:promocodeInput withCallback:^(BOOL success, NSDictionary *response) {
         if (success) {
             if (![[response objectForKey:@"success"] boolValue]) {
+                [GANHelper analyzeEvent:@"code_activation_success" label:promocodeInput category:@"Promocode_screen"];
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Ошибка", nil) message:[response objectForKey:@"description"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
             } else {
+                [GANHelper analyzeEvent:@"code_activation_failure" label:promocodeInput category:@"Promocode_screen"];
                 [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Успех", nil) message:[response objectForKey:@"message"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
                 [self reloadhistory];
             }

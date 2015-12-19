@@ -17,15 +17,11 @@
 #import "DBPositionModifierPicker.h"
 #import "DBPositionModifiersList.h"
 
-#import "DBPopupViewController.h"
-#import "DBPositionBalanceView.h"
-
-#import "DBModulesManager.h"
+#import "ViewManager.h"
 
 #import "UIView+RoundedCorners.h"
 #import "UINavigationController+DBAnimation.h"
-#import "UIImageView+WebCache.h"
-#import "UIControl+BlocksKit.h"
+#import "UIImageView+PINRemoteImage.h"
 
 @interface PositionViewController1 ()<DBPositionModifierPickerDelegate, DBPositionModifiersListDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
@@ -34,13 +30,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *positionModifiersLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *positionDescriptionLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *balanceView;
-@property (weak, nonatomic) IBOutlet UIButton *balanceButton;
-@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintBalanceViewWidth;
-
-
 @property (weak, nonatomic) IBOutlet UIButton *priceButton;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightVolumeLabel;
@@ -52,6 +41,10 @@
 
 @property (weak, nonatomic) IBOutlet UIView *imageSeparator;
 @property (weak, nonatomic) IBOutlet UIView *tableTopSeparator;
+
+@property (weak, nonatomic) IBOutlet UIImageView *basketImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *basketImageViewWidthConstraint;
+
 
 @property (strong, nonatomic) DBPositionModifiersList *modifiersListView;
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
@@ -91,14 +84,14 @@
     // Configure position image
     self.positionImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
     self.defaultPositionImageView.hidden = NO;
-    if(self.position.imageUrl){
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:self.position.imageUrl]
-                                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                             if(!error){
-                                                 self.positionImageView.backgroundColor = [UIColor clearColor];
-                                                 self.defaultPositionImageView.hidden = YES;
-                                             }
-                                         }];
+    if (self.position.imageUrl) {
+        [self.positionImageView setPin_updateWithProgress:YES];
+        [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:self.position.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+            if (result.resultType != PINRemoteImageResultTypeNone) {
+                self.positionImageView.backgroundColor = [UIColor clearColor];
+                self.defaultPositionImageView.hidden = YES;
+            }
+        }];
     }
     
     self.positionTitleLabel.text = self.position.name;
@@ -120,8 +113,6 @@
     if(self.position.energyAmount > 0){
         self.energyAmountLabel.text = [NSString stringWithFormat:@"%.0f %@", self.position.energyAmount, NSLocalizedString(@"ккал", nil)];
     }
-    
-    [self configBalanceView];
     
     if (self.mode == PositionViewControllerModeMenuPosition){
         [self.priceLabel setRoundedCorners];
@@ -151,26 +142,14 @@
     
     self.modifierPicker = [DBPositionModifierPicker new];
     self.modifierPicker.delegate = self;
-}
-
-- (void)configBalanceView {
-    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances]) {
-        self.constraintBalanceViewWidth.constant = 80;
-        self.balanceLabel.textColor = [UIColor db_defaultColor];
-        self.balanceLabel.text = NSLocalizedString(@"Проверить наличие", nil);
-        
-        @weakify(self)
-        [self.balanceButton bk_addEventHandler:^(id sender) {
-            @strongify(self)
-            
-            DBPositionBalanceView *balanceVC = [DBPositionBalanceView new];
-            balanceVC.position = self.position;
-            DBPopupViewController *popupVC = [DBPopupViewController new];
-            popupVC.componentView = balanceVC;
-            [popupVC showOnView:self.navigationController.view];
-        } forControlEvents:UIControlEventTouchUpInside];
+    
+    UIImage *basketImage = [ViewManager basketImageMenuPosition];
+    if (basketImage) {
+        self.basketImageView.image = [basketImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        self.basketImageView.tintColor = [UIColor db_defaultColor];
     } else {
-        self.constraintBalanceViewWidth.constant = 0;
+        self.basketImageView.hidden = YES;
+        self.basketImageViewWidthConstraint.constant = 0;
     }
 }
 

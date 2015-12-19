@@ -99,10 +99,10 @@
     [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
         [self.socialManager shareFacebook];
     }];
-//    [self.actionSheet bk_addButtonWithTitle:@"Vk" handler:^{
-//        [self.socialManager shareVk];
-//    }];
-    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другие", nil) handler:^{
+    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Сообщение", nil) handler:^{
+        [self.socialManager shareMessage:self];
+    }];
+    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другое", nil) handler:^{
         [self.socialManager shareOther:self.screen];
     }];
     [self.actionSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{

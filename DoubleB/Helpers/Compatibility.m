@@ -11,7 +11,7 @@
 @implementation Compatibility
 
 + (NSString *)currencySymbol {
-    if([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
         return @"₽";
     } else {
         return NSLocalizedString(@"р.", nil);
@@ -19,10 +19,8 @@
 }
 
 + (void)registerForNotifications {
-    if([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]){
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound
-                                          categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     } else {
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];

@@ -21,6 +21,7 @@
 
 - (void)shareFacebook;
 //- (void)shareVk;
+- (void)shareMessage:(UIViewController *)vc;
 - (void)shareOther:(NSString *)screen;
 
 @end

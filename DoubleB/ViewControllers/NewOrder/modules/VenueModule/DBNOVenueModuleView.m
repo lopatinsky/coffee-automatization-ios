@@ -8,6 +8,8 @@
 
 #import "DBNOVenueModuleView.h"
 #import "DBShippingViewController.h"
+
+#import "UIViewController+DBPopupContainer.h"
 #import "DBVenuesTableViewController.h"
 
 #import "OrderCoordinator.h"
@@ -101,9 +103,9 @@
     } else {
         vc = [DBVenuesTableViewController new];
     }
-    vc.hidesBottomBarWhenPushed = YES;
     
-    [self.ownerViewController.navigationController pushViewController:vc animated:YES];
+    [self.ownerViewController present:vc];
+//    [self.ownerViewController.navigationController pushViewController:vc animated:YES];
 }
 
 @end

@@ -26,7 +26,9 @@
 @end
 
 @implementation PositionsTVController
+static NSDictionary *_preference;
 
+#pragma mark - MenuListViewControllerProtocol
 + (instancetype)createWithMenuCategory:(DBMenuCategory *)category{
     PositionsTVController *positionsTVC = [PositionsTVController new];
     positionsTVC.category = category;
@@ -34,6 +36,15 @@
     return positionsTVC;
 }
 
++ (NSDictionary *)preference {
+    return _preference;
+}
+
++ (void)setPreferences:(NSDictionary *)preferences {
+    _preference = preferences;
+}
+
+#pragma mark - Lifecycle
 - (void)viewDidLoad{
     [super viewDidLoad];
     

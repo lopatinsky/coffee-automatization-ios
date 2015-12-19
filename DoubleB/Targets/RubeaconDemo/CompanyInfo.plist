@@ -4,6 +4,8 @@
 <dict>
 	<key>Preferences</key>
 	<dict>
+		<key>ApplicationType</key>
+		<string>Demo</string>
 		<key>BaseUrl</key>
 		<string>http://automation-demo.appspot.com/</string>
 		<key>CompanyColor</key>

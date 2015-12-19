@@ -29,6 +29,8 @@ extern NSString *const kLocationManagerStatusAuthorized;
 - (void)requestPermission;
 - (void)startUpdatingLocation;
 
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region;
+
 /**
 * Async get location
 */

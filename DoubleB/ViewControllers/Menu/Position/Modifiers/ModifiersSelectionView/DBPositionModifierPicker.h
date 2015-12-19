@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, DBPositionModifierPickerDisplayType) {
 @property(nonatomic, readonly) DBPositionModifierPickerType type;
 @property(nonatomic) DBUICurrencyDisplayMode currencyDisplayMode;
 
+// TODO: rename it?
 @property(weak, nonatomic) id<DBPositionModifierPickerDelegate> delegate;
 
 - (void)configureWithGroupModifier:(DBMenuPositionModifier *)modifier;

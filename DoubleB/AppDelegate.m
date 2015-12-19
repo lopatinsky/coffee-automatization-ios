@@ -11,9 +11,13 @@
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
 
+#import "DBGeoPush.h"
+
 #import <Parse/Parse.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
+
+#import "LocationHelper.h"
 
 @implementation AppDelegate
 
@@ -45,7 +49,9 @@
     self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
-
+    
+    [[LocationHelper sharedInstance]locationManager:nil didEnterRegion:nil];
+    
     return YES;
 }
 
@@ -141,7 +147,8 @@
     [ApplicationManager handlePush:userInfo];
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    [ApplicationManager handleLocalPush:notification];
 }
 
 - (void)saveContext

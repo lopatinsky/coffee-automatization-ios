@@ -10,6 +10,8 @@
 #import "RatingBarView.h"
 #import "DBAPIClient.h"
 
+#import "GANHelper.h"
+
 @interface ReviewViewController () <UITextViewDelegate, RatingBarViewDelegate>
 
 @property (nonatomic, strong) NSString *orderId;
@@ -23,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *foodLabel;
 
 @property (weak, nonatomic) IBOutlet UITextView *commentTextView;
+@property (nonatomic) BOOL cancelWithoutAnalytics;
 
 @end
 
@@ -56,6 +59,10 @@
     [self setupDoneButton];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [GANHelper analyzeScreen:@"Review_screen"];
+}
+
 - (void)setupCancelButton{
     UIButton *button = [UIButton new];
     button.contentEdgeInsets = UIEdgeInsetsMake(3, 0, 0, 0);
@@ -72,7 +79,12 @@
     [button addTarget:self action:@selector(clickCancel) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)clickCancel{
+- (void)clickCancel {
+    if (self.cancelWithoutAnalytics) {
+        NSString *label = [NSString stringWithFormat:@"food: %d service: %d comment: %@", (int)self.foodRatingBarView.rating, (int)self.serviceRatingBarView.rating, self.commentTextView.text];
+        [GANHelper analyzeEvent:@"cancel_click" label:label category:@"Review_screen"];
+        self.cancelWithoutAnalytics = NO;
+    }
     [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -108,14 +120,18 @@
     [self.view endEditing:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
+    NSString *label = [NSString stringWithFormat:@"food: %d service: %d comment: %@", (int)self.foodRatingBarView.rating, (int)self.serviceRatingBarView.rating, self.commentTextView.text];
+    [GANHelper analyzeEvent:@"send_click" label:label category:@"Review_screen"];
+    
     [self sendReview:^(BOOL success) {
         if(success){
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
+            [GANHelper analyzeEvent:@"send_review_ok" label:label category:@"Review_screen"];
+            self.cancelWithoutAnalytics = YES;
             [self clickCancel];
         } else {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
+            [GANHelper analyzeEvent:@"send_review_failed" label:label category:@"Review_screen"];
             [[[UIAlertView alloc] initWithTitle:@"" message:@"Не удалось отправить ваш отзыв, пожалуйста, попробуйте еще раз" delegate:nil cancelButtonTitle:@"ОК" otherButtonTitles:nil] show];
         }
     }];

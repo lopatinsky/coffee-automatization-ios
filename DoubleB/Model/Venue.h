@@ -27,7 +27,13 @@
 + (Venue *)venueById:(NSString *)venueId;
 
 + (void)dropAllVenues;
-//+ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler;
-+ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler;
 
+@end
+
+@interface Venue(API)
++ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler;
+@end
+
+@interface Venue(UnifiedAPI)
++ (void)fetchUnifiedVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler;
 @end

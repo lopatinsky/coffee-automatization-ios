@@ -97,7 +97,7 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-    [[DBGeoPushManager sharedInstance] didEnter:region];
+//    [[DBGeoPushManager sharedInstance] didEnter:region];
 }
 
 - (void)updateLocationWithCallback:(void (^)(CLLocation *location))callback {

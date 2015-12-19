@@ -64,6 +64,7 @@ static NSString *dbAnaliticsNameScreenName;
                                                                           applicationActivities:nil];
     shareVC.excludedActivityTypes = @[UIActivityTypeAirDrop,
                                       UIActivityTypePrint,
+                                      UIActivityTypeMessage,
                                       UIActivityTypeAssignToContact,
                                       UIActivityTypeCopyToPasteboard,
                                       UIActivityTypeSaveToCameraRoll,
