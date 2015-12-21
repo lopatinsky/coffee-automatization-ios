@@ -129,12 +129,22 @@ typedef NS_ENUM(NSInteger, DBPromoManagerChange) {
 @end
 
 
+typedef NS_ENUM(NSInteger, DBPromotionImageType) {
+    DBPromotionImageTypePic = 0,
+    DBPromotionImageTypeImage
+};
+
 /**
  * Class for holding info about each promotion
  */
 @interface DBPromotion : NSObject
 @property (strong, nonatomic) NSString *promotionName;
 @property (strong, nonatomic) NSString *promotionDescription;
+
+@property (nonatomic) DBPromotionImageType imageType;
+@property (strong, nonatomic) NSString *imageUrl;
+
+- (instancetype)initWithDict:(NSDictionary *)dict;
 @end
 
 /**
