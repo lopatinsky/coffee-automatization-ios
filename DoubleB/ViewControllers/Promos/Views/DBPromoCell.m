@@ -58,7 +58,11 @@
 }
 
 - (void)configureWithPromo:(DBPromotion *)promo {
-    [self.picImageView sd_setImageWithURL:[NSURL URLWithString:promo.imageUrl]];
+    [self.picImageView sd_setImageWithURL:[NSURL URLWithString:promo.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (_type == DBPromoCellTypePic) {
+            [self.picImageView templateImage:image];
+        }
+    }];
     
     NSMutableString *text = [[NSMutableString alloc] initWithString:promo.promotionName];
     if (promo.promotionName.length > 0 && promo.promotionDescription.length > 0) {

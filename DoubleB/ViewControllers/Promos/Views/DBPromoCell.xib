@@ -19,9 +19,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4Z-VJ-X1m">
-                        <rect key="frame" x="8" y="3" width="304" height="62"/>
+                        <rect key="frame" x="8" y="5" width="304" height="48"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="73" id="QAm-1d-8qI"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="900" constant="70" id="QAm-1d-8qI"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,11 +38,11 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Wh6-qf-bT7" secondAttribute="bottom" id="One-NK-2pf"/>
                     <constraint firstAttribute="trailing" secondItem="Wh6-qf-bT7" secondAttribute="trailing" id="Z79-bD-MFS"/>
-                    <constraint firstItem="Wh6-qf-bT7" firstAttribute="top" secondItem="q4Z-VJ-X1m" secondAttribute="bottom" constant="3" id="cOb-30-x0u"/>
+                    <constraint firstItem="Wh6-qf-bT7" firstAttribute="top" secondItem="q4Z-VJ-X1m" secondAttribute="bottom" constant="15" id="cOb-30-x0u"/>
                     <constraint firstItem="Wh6-qf-bT7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eCM-ld-ZwK"/>
                     <constraint firstItem="q4Z-VJ-X1m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="iIl-uo-nNv"/>
                     <constraint firstAttribute="trailing" secondItem="q4Z-VJ-X1m" secondAttribute="trailing" constant="8" id="mOe-4G-NB6"/>
-                    <constraint firstItem="q4Z-VJ-X1m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="3" id="tfQ-RG-jgB"/>
+                    <constraint firstItem="q4Z-VJ-X1m" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="tfQ-RG-jgB"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="351" y="264.5"/>
