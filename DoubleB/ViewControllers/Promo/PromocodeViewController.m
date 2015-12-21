@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.edgesForExtendedLayout = UIRectEdgeTop;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.activatedPromosTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"promo_cell"];
     

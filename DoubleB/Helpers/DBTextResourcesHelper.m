@@ -57,7 +57,21 @@
         imageName = @"share_coffeeacademy";
     }
     
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"voda"]) {
+        imageName = @"share_voda";
+    }
+    
     return imageName;
+}
+
++ (UIColor *)db_shareScreenTextColor {
+    UIColor *color = [UIColor whiteColor];
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"voda"]) {
+        color = [UIColor blackColor];
+    }
+    
+    return color;
 }
 
 @end

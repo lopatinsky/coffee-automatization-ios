@@ -53,6 +53,7 @@
     
     self.logoImageView.hidden = YES;
     self.logoLabel.text = [DBCompanyInfo sharedInstance].applicationName;
+    self.logoLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
     
     self.closeButton.imageView.image = [UIImage imageNamed:@"close_white.png"];
     
@@ -73,7 +74,10 @@
     [self.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel.text = [DBShareHelper sharedInstance].titleShareScreen;
+    self.titleLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
+    
     self.descriptionLabel.text = [DBShareHelper sharedInstance].textShareScreen;
+    self.descriptionLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
 
     self.socialManager = [SocialManager sharedManagerWithDelegate:self];
     [self initializeActionViewSheet];
