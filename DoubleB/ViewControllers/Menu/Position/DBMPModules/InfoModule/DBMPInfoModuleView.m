@@ -60,7 +60,27 @@
 }
 
 - (CGFloat)moduleViewContentHeight {
-    return 100.f;
+    int height = self.frame.size.height - self.titleLabel.frame.size.height - self.descriptionLabel.frame.size.height;
+    
+    CGSize titleSize = [self.titleLabel.text boundingRectWithSize:CGSizeMake(self.titleLabel.frame.size.width, MAXFLOAT)
+                                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                                       attributes:@{NSFontAttributeName : self.titleLabel.font}
+                                                          context:nil].size;
+    if (self.titleLabel.text.length == 0){
+        titleSize = CGSizeZero;
+    }
+    
+    CGSize descriptionSize = [self.descriptionLabel.text boundingRectWithSize:CGSizeMake(self.descriptionLabel.frame.size.width, MAXFLOAT)
+                                                                      options:NSStringDrawingUsesLineFragmentOrigin
+                                                                   attributes:@{NSFontAttributeName : self.descriptionLabel.font}
+                                                                      context:nil].size;
+    if (self.descriptionLabel.text.length == 0){
+        descriptionSize = CGSizeZero;
+    }
+    
+    height += titleSize.height + descriptionSize.height + 5;
+    
+    return height;
 }
 
 @end

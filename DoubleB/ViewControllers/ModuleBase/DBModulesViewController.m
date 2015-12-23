@@ -9,8 +9,6 @@
 #import "DBModulesViewController.h"
 
 @interface DBModulesViewController ()
-@property (strong, nonatomic) UIScrollView *scrollView;
-
 @property (weak, nonatomic) NSLayoutConstraint *constraintBottomScrollViewAlignment;
 
 @end
@@ -71,6 +69,7 @@
 - (void)configLayout {
     _scrollView = [[UIScrollView alloc] init];
     _scrollView.scrollEnabled = YES;
+    _scrollView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_scrollView];
     _scrollView.translatesAutoresizingMaskIntoConstraints = NO;
     [_scrollView alignTop:@"0" leading:@"0" toView:self.view];

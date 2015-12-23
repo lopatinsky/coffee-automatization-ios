@@ -38,17 +38,21 @@
     self.contentView.layer.cornerRadius = 6.f;
     self.contentView.layer.masksToBounds = YES;
     
-    if (_controller) {
-        [self addChildViewController:_controller];
-        [self.contentView addSubview:_controller.view];
-        [_controller didMoveToParentViewController:self];
+    if (_displayController) {
+        [self addChildViewController:_displayController];
+        [self.contentView addSubview:_displayController.view];
+        [_displayController didMoveToParentViewController:self];
+    } else if (_displayView) {
+        [self.contentView addSubview:_displayView];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [_controller beginAppearanceTransition:YES animated:YES];
+    if (_displayController) {
+        [_displayController beginAppearanceTransition:YES animated:YES];
+    }
 }
 
 - (void)configLayout:(CGRect)rect {
@@ -65,6 +69,16 @@
         self.headerFooterView = header;
         
         int height = rect.size.height - 50 - self.headerFooterView.frame.size.height;
+        
+        if (_displayController) {
+            if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
+                height = [_displayController db_popupContentContentHeight];
+            }
+        } else if (_displayView) {
+            if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
+                height = [_displayView db_popupContentContentHeight];
+            }
+        }
         
         [self.view addSubview:self.contentView];
         self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -94,17 +108,32 @@
         [self.view addSubview:self.headerFooterView];
         self.headerFooterView.translatesAutoresizingMaskIntoConstraints = NO;
         
+        int height = rect.size.height - 60 - self.headerFooterView.frame.size.height;
+        if (_displayController) {
+            if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
+                height = [_displayController db_popupContentContentHeight];
+            }
+        } else if (_displayView) {
+            if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
+                height = [_displayView db_popupContentContentHeight];
+            }
+        }
+        
         [self.contentView alignLeading:@"5" trailing:@"-5" toView:self.view];
-        [self.contentView alignTopEdgeWithView:self.view predicate:@"35"];
+        [self.contentView alignCenterYWithView:self.view predicate:@"0"];
+//        [self.contentView alignTopEdgeWithView:self.view predicate:@"35"];
         [self.contentView constrainBottomSpaceToView:self.headerFooterView predicate:@"0"];
+        [self.contentView constrainHeight:[NSString stringWithFormat:@"%ld", (long)height]];
         
         [self.headerFooterView alignLeading:@"5" trailing:@"-5" toView:self.view];
         [self.headerFooterView constrainHeight:[NSString stringWithFormat:@"%ld", (long)self.headerFooterView.frame.size.height]];
-        [self.headerFooterView alignBottomEdgeWithView:self.view predicate:@"-25"];
+//        [self.headerFooterView alignBottomEdgeWithView:self.view predicate:@"-25"];
     }
     
-    if (_controller) {
-        _controller.view.frame = self.contentView.bounds;
+    if (_displayController) {
+        _displayController.view.frame = self.contentView.bounds;
+    } else if (_displayView) {
+        _displayView.frame = self.contentView.bounds;
     }
 }
 
@@ -130,10 +159,13 @@
             self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
             self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
         } completion:^(BOOL finished) {
-            if (_controller) {
-                [_controller removeFromParentViewController];
-                [_controller.view removeFromSuperview];
+            if (_displayController) {
+                [_displayController removeFromParentViewController];
+                [_displayController.view removeFromSuperview];
+            } else if (_displayView) {
+                [_displayView removeFromSuperview];
             }
+            
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     } else {

@@ -23,9 +23,21 @@ static char INSTANCE_KEY;
     objc_setAssociatedObject(self, &INSTANCE_KEY, instance, OBJC_ASSOCIATION_RETAIN);
 }
 
-- (void)present:(UIViewController *)controller {
+- (void)presentController:(UIViewController *)controller {
     DBPopupViewController *popupVC = [DBPopupViewController new];
-    popupVC.controller = controller;
+    popupVC.displayController = controller;
+    popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;
+    popupVC.transitioningDelegate = self;
+    popupVC.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [self setInstance:popupVC];
+    
+    [self presentViewController:popupVC animated:YES completion:nil];
+}
+
+- (void)presentView:(UIView *)view {
+    DBPopupViewController *popupVC = [DBPopupViewController new];
+    popupVC.displayView = view;
     popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;
     popupVC.transitioningDelegate = self;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;

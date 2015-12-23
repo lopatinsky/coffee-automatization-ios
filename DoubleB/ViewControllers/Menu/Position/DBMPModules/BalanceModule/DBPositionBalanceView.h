@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBPopupViewController.h"
 
-@interface DBPositionBalanceView : UIView
+@interface DBPositionBalanceView : UIView<DBPopupViewControllerContent>
 
 @property (strong, nonatomic) DBMenuPosition *position;
 

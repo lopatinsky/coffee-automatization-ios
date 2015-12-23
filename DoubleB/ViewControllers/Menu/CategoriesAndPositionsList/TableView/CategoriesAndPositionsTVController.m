@@ -166,8 +166,7 @@ static NSDictionary *_preferences;
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
     if (refreshControl) {
         self.numberOfLoadings += 1;
-        [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                         remoteMenu:menuUpdateHandler];
+        [[DBMenu sharedInstance] updateMenu:menuUpdateHandler];
     } else {
         if (venue.venueId) {
             // Load menu for current Venue
@@ -204,8 +203,7 @@ static NSDictionary *_preferences;
                 self.numberOfLoadings += 1;
                 [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             }
-            [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                             remoteMenu:menuUpdateHandler];
+            [[DBMenu sharedInstance] updateMenu:menuUpdateHandler];
         }
     }
 }
@@ -391,7 +389,7 @@ static NSDictionary *_preferences;
         DBMenuPosition *position = cell.position;
         
         UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
-        positionVC.parentNavigationController = self.navigationController;
+//        positionVC.parentNavigationController = self.navigationController;
         [self.navigationController pushViewController:positionVC animated:YES];
         
         [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];

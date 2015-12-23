@@ -26,6 +26,7 @@
 - (void)layoutModules;
 - (void)reloadModules:(BOOL)animated;
 
+@property (strong, nonatomic) UIScrollView *scrollView;
 /**
  * Offsets
  */

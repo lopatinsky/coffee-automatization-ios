@@ -104,7 +104,7 @@
         vc = [DBVenuesTableViewController new];
     }
     
-    [self.ownerViewController present:vc];
+    [self.ownerViewController presentController:vc];
 //    [self.ownerViewController.navigationController pushViewController:vc animated:YES];
 }
 

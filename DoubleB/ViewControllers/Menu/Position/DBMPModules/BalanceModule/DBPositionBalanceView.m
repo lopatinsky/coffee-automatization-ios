@@ -77,5 +77,11 @@
     return cell;
 }
 
+#pragma mark - DBPopupViewControllerContent
+
+- (CGFloat)db_popupContentContentHeight {
+    return 400.f;
+}
+
 
 @end

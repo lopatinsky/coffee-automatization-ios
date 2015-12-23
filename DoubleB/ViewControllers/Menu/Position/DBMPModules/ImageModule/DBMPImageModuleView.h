@@ -9,7 +9,6 @@
 #import "DBModuleView.h"
 
 @interface DBMPImageModuleView : DBModuleView
-
 @property (strong, nonatomic) DBMenuPosition *position;
 
 @end

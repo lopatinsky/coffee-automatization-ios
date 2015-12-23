@@ -30,6 +30,14 @@
     return self;
 }
 
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    
+    [self commonInit];
+    
+    return self;
+}
+
 
 - (void)commonInit {
     self.submodules = [NSMutableArray new];

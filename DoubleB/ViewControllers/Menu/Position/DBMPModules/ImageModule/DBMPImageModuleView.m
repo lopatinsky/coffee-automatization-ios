@@ -21,8 +21,11 @@
     self = [super init];
     
     self.positionImageView = [DBImageView new];
+    self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.positionImageView.clipsToBounds = YES;
     [self addSubview:self.positionImageView];
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.positionImageView constrainHeight:@"220"];
     [self.positionImageView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
     
     return self;

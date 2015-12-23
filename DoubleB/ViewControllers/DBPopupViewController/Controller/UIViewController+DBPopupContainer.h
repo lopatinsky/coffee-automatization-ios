@@ -11,6 +11,7 @@
 
 @interface UIViewController (DBPopupContainer) <UIViewControllerTransitioningDelegate>
 
-- (void)present:(UIViewController *)controller;
+- (void)presentController:(UIViewController *)controller;
+- (void)presentView:(UIView *)view;
 
 @end

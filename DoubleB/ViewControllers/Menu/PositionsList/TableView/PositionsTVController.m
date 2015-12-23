@@ -126,7 +126,7 @@ static NSDictionary *_preference;
     DBMenuPosition *position = cell.position;
     
     UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
-    positionVC.parentNavigationController = self.navigationController;
+//    positionVC.parentNavigationController = self.navigationController;
     [self.navigationController pushViewController:positionVC animated:YES];
     
     [GANHelper analyzeEvent:@"product_selected" label:position.positionId category:MENU_SCREEN];

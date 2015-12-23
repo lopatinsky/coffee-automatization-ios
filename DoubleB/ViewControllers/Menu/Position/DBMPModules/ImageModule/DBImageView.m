@@ -35,6 +35,7 @@
 
 - (void)commonInit {
     self.noImageView = [UIImageView new];
+    self.noImageView.image = [UIImage imageNamed:@"noimage_icon.png"];
     self.noImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:self.noImageView];
     self.noImageView.translatesAutoresizingMaskIntoConstraints = NO;

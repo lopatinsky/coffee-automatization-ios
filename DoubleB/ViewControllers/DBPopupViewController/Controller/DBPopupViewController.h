@@ -23,8 +23,8 @@ typedef NS_ENUM(NSInteger, DBPopupVCAppearanceMode) {
 
 @interface DBPopupViewController : UIViewController<UIViewControllerAnimatedTransitioning>
 
-@property (strong, nonatomic) UIViewController *controller;
-//@property (strong, nonatomic) UIView *view;
+@property (strong, nonatomic) UIViewController<DBPopupViewControllerContent> *displayController;
+@property (strong, nonatomic) UIView<DBPopupViewControllerContent> *displayView;
 
 @property (nonatomic) DBPopupVCAppearanceMode appearanceMode;
 
