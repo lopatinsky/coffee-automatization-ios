@@ -26,6 +26,8 @@
 #import "DBPayPalManager.h"
 #import "DBUnifiedAppManager.h"
 
+#import "AppIndexingManager.h"
+#import "WatchInteractionManager.h"
 #import "DBUniversalModulesManager.h"
 #import "DBUniversalModule.h"
 
@@ -276,6 +278,15 @@
                                  
                                  // Save order
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
+                                 
+                                 [[AppIndexingManager sharedManager] postActivity:ord withParams:@{@"type": @"order", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+                                 for (OrderItem *item in [ord items]) {
+                                     if ([item activityIsAvailable]) {
+                                         [[AppIndexingManager sharedManager] postActivity:item withParams:@{@"type": @"position", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+                                     }
+                                 }
+                                 
+                                 [[WatchInteractionManager sharedInstance] updateLastOrActiveOrder];
                                  if(success)
                                      success(ord);
                                  

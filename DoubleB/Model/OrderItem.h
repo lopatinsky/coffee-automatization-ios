@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "AppIndexingManager.h"
+#import "WatchAppModelProtocol.h"
+
 @class DBMenuPosition;
-@interface OrderItem : NSObject <NSCoding, NSCopying>
+@interface OrderItem : NSObject <NSCoding, NSCopying, UserActivityIndexing, WatchAppModelProtocol>
 
 @property (strong, nonatomic) DBMenuPosition *position;
 @property (nonatomic, readonly) double totalPrice;

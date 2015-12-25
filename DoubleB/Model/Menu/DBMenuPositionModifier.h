@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WatchAppModelProtocol.h"
+
 @class DBMenuPositionModifierItem;
 
 typedef NS_ENUM(NSInteger, ModifierType) {
@@ -15,7 +17,7 @@ typedef NS_ENUM(NSInteger, ModifierType) {
     ModifierTypeSingle = 1
 };
 
-@interface DBMenuPositionModifier : NSObject<NSCopying>
+@interface DBMenuPositionModifier : NSObject<NSCopying, WatchAppModelProtocol>
 
 @property (nonatomic, readonly) double actualPrice;
 

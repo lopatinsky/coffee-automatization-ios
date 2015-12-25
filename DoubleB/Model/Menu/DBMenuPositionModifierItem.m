@@ -85,4 +85,27 @@
     return copyItem;
 }
 
+
+#pragma mark - WatchAppModelProtocol
+
+- (NSDictionary *)plistRepresentation {
+    NSMutableDictionary *plist = [NSMutableDictionary new];
+    
+    plist[@"itemId"] = self.itemId ?: @"";
+    plist[@"itemName"] = self.itemName ?: @"";
+    plist[@"itemsPrice"] = @(self.itemPrice);
+    
+    return plist;
+}
+
++ (id)createWithPlistRepresentation:(NSDictionary *)plistDict {
+    DBMenuPositionModifierItem *item = [DBMenuPositionModifierItem new];
+    
+    item.itemId = plistDict[@"itemId"];
+    item.itemName = plistDict[@"itemName"];
+    item.itemPrice = [plistDict[@"itemPrice"] doubleValue];
+    
+    return item;
+}
+
 @end

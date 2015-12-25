@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WatchAppModelProtocol.h"
+
 @class Venue;
 
 typedef NS_ENUM(NSInteger, DBMenuPositionMode){
@@ -16,7 +18,7 @@ typedef NS_ENUM(NSInteger, DBMenuPositionMode){
     DBMenuPositionModeGift
 };
 
-@interface DBMenuPosition : NSObject<NSCopying, NSCoding>
+@interface DBMenuPosition : NSObject<NSCopying, NSCoding, WatchAppModelProtocol>
 
 // mutable data(stored)
 @property(nonatomic) DBMenuPositionMode mode;

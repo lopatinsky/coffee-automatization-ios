@@ -13,6 +13,10 @@
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
 
+#import "NSDate+Difference.h"
+
+#import "SDWebImageManager.h"
+
 @implementation OrderItem
 
 - (instancetype)initWithPosition:(DBMenuPosition *)position{
@@ -87,6 +91,47 @@
 }
 
 
+#pragma mark – UserActivityIndexing protocol
+- (NSString *)activityTitle {
+    return self.position.name;
+}
+
+- (NSDictionary *)activityUserInfo {
+    return @{@"position_id": [[self position] positionId]};
+}
+
+- (CSSearchableItemAttributeSet *)activityAttributes {
+    CSSearchableItemAttributeSet *set = [[CSSearchableItemAttributeSet alloc] init];
+    double totalPrice = [self totalPrice];
+    NSString *desc = [[self position] positionDescription];
+    NSString *finalDescription = [NSString stringWithFormat:@"%@\n%0.2f₽", desc, totalPrice];
+    if ([[self position] imageUrl]) {
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:[NSURL URLWithString:[[self position] imageUrl]]
+                              options:0
+                             progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                                 // progression tracking code
+                             }
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                                if (image) {
+                                    set.thumbnailData = UIImagePNGRepresentation(image);
+                                }
+                            }];
+    }
+    set.contentDescription = finalDescription;
+    return set;
+}
+
+- (void)activityDidAppear {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"activity_position_%@", [[self position] positionId]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)activityIsAvailable {
+    NSDate *lastPublicationDate = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"activity_position_%@", [[self position] positionId]]] ?: [NSDate dateWithTimeIntervalSince1970:0];
+    return [[NSDate date] numberOfDaysUntil:lastPublicationDate] > 7;
+}
+
 #pragma mark - NSCoding methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder{
@@ -111,6 +156,27 @@
     orderItem.count = self.count;
     
     return orderItem;
+}
+
+
+#pragma mark - DBWatchAppModelProtocol
+
+- (NSDictionary *)plistRepresentation {
+    NSMutableDictionary *plist = [NSMutableDictionary new];
+    
+    plist[@"position"] = [self.position plistRepresentation];
+    plist[@"count"] = @(self.count);
+    
+    return plist;
+}
+
++ (id)createWithPlistRepresentation:(NSDictionary *)plistDict {
+    OrderItem *item = [OrderItem new];
+    
+    item.position = [DBMenuPosition createWithPlistRepresentation:plistDict[@"position"]];
+    item.count = [plistDict[@"count"] integerValue];
+    
+    return item;
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ApplicationManager.h"
+#import "AppIndexingManager.h"
 #import "NetworkManager.h"
 
 #import "OrderCoordinator.h"
@@ -23,6 +24,7 @@
 #import "DBVersionDependencyManager.h"
 #import "DBModulesManager.h"
 #import "DBGeoPushManager.h"
+#import "WatchInteractionManager.h"
 
 #import "DBStartNavController.h"
 #import "DBCommonStartNavController.h"
@@ -32,6 +34,8 @@
 
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
+#import "DBVenuesTableViewController.h"
+#import "DBVenueViewController.h"
 
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -289,6 +293,19 @@
 
 @end
 
+
+@implementation ApplicationManager (Indexing)
+
++ (void)continueUserActivity:(NSUserActivity *)activity {
+    if ([activity.activityType hasPrefix:@"com.empatika."]) {
+        [[WatchInteractionManager sharedInstance] continueUserActivity:activity];
+    } else {
+        [[AppIndexingManager sharedManager] continueUserActivity:activity];
+    }
+}
+
+@end
+
 @implementation ApplicationManager (Start)
 
 - (UIViewController *)rootViewController {
@@ -377,10 +394,29 @@
                 DBSettingsTableViewController *settingsVC = [DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
                 DBOrderViewController *orderVC = [DBOrderViewController new];
-                orderVC.order = object;
+                if ([object isKindOfClass:[Order class]]) {
+                    orderVC.order = object;
+                } else if ([object isKindOfClass:[NSString class]]) {
+                    orderVC.order = [Order orderById:object];
+                }
                 [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, settingsVC, ordersVC, orderVC] animated:animated];
             }
         }break;
+        
+        case ApplicationScreenVenue: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                UIViewController *venuesVC = [DBVenuesTableViewController new];
+                DBVenueViewController *venueVC = [DBVenueViewController new];
+                if ([object isKindOfClass:[Venue class]]) {
+                    venueVC.venue = object;
+                } else if ([object isKindOfClass:[NSString class]]) {
+                    venueVC.venue = [Venue venueById:object];
+                }
+                [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, newOrderVC, venuesVC, venueVC] animated:animated];
+            }
+            break;
+        }
             
         default:
             break;
