@@ -68,7 +68,7 @@ static DBAPIClient *_sharedClient = nil;
     // 4 -
     // 5 - New order screen design
     
-    return @"5";
+    return @"6";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {

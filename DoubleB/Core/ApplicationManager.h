@@ -32,9 +32,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
 
-- (void)awakeFromNotification:(NSDictionary *)userInfo;
-- (void)recieveNotification:(NSDictionary *)userInfo;
-
 - (void)fetchCompanyDependentInfo;
 @end
 

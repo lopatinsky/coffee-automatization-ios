@@ -43,6 +43,14 @@
 
 #pragma mark - General
 
+typedef NS_ENUM(NSUInteger, RemotePushType) {
+    RemotePushOrderType = 1,
+    RemotePushTextType,
+    RemotePushReviewType,
+    RemotePushNewsType,
+    RemotePushInvalidType = 999999
+};
+
 @interface ApplicationManager()
 
 @property (nonatomic, strong) UIAlertView *alertView;
@@ -61,23 +69,51 @@
 
 + (void)handlePush:(NSDictionary *)push {
     [GANHelper analyzeEvent:@"push_received" label:[push description] category:@"push_screen"];
-    if ([push objectForKey:@"type"]) {
-        if ([[push objectForKey:@"type"] integerValue] == 3) {
+    
+    NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
+    switch (pushType) {
+        case RemotePushOrderType: {
+            NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
+                                                                         object:nil
+                                                                       userInfo:push ?: @{}];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            [self showPushAlert:push buttons:nil callback:nil];
+            break;
+        }
+        case RemotePushTextType: {
+            if ([([push objectForKey:@"should_popup"] ?: @(0)) boolValue]) {
+                UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+                [newsViewController setData:@{@"title": [push getValueForKey:@"title"] ?: @"",
+                                              @"text": [push getValueForKey:@"full_text"] ?: @"",
+                                              @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
+                [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+                break;
+            }
+        }
+        case RemotePushReviewType: {
             [self showPushAlert:push buttons:@[NSLocalizedString(@"Отмена", nil), NSLocalizedString(@"Оценить", nil)] callback:^(NSUInteger buttonIndex) {
                 if (buttonIndex == 1) {
                     NSString *orderId = push[@"review"][@"order_id"];
                     [[ApplicationManager sharedInstance] showReviewViewController:orderId];
                 }
             }];
+            break;
         }
-    } else if ([push objectForKey:@"aps"]) {
-        [self showPushAlert:push buttons:nil callback:nil];
-        
-        NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
-                                                                     object:nil
-                                                                   userInfo:push ?: @{}];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-    } 
+        case RemotePushNewsType: {
+            if ([UIApplication sharedApplication].applicationState != 0) {
+                UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+                [newsViewController setData:@{@"title": [push getValueForKey:@"title"],
+                                              @"text": [push getValueForKey:@"full_text"],
+                                              @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
+                [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+            }
+            break;
+        }
+        case RemotePushInvalidType:
+            break;
+        default:
+            break;
+    }
 }
 
 + (void)handleLocalPush:(UILocalNotification *)push {
@@ -183,18 +219,6 @@
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
-}
-
-- (void)awakeFromNotification:(NSDictionary *)userInfo {
-    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-    [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
-    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-}
-
-- (void)recieveNotification:(NSDictionary *)userInfo {
-    if([UIApplication sharedApplication].applicationState != 0){
-        [self awakeFromNotification:userInfo];
-    }
 }
 
 #pragma mark - API Notification handlers
