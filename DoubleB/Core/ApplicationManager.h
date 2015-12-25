@@ -79,3 +79,8 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 @interface ApplicationManager(Review)
 - (void)showReviewViewController:(NSString *)orderId;
 @end
+
+@interface ApplicationManager(AppConfig)
+- (void)fetchAppConfiguration:(void(^)(BOOL success))callback;
+- (void)reloadAppWithAppConfig;
+@end

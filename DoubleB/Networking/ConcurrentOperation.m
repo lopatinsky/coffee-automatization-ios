@@ -9,21 +9,26 @@
 #import "ConcurrentOperation.h"
 
 #pragma mark - CompanyInfo Operation
-NSString *const kDBConcurrentOperationCompanyInfoLoadSuccess = @"kDBConcurrentOperationCompanyInfoLoadSuccess";
-NSString *const kDBConcurrentOperationCompanyInfoLoadFailure = @"kDBConcurrentOperationCompanyInfoLoadFailure";
+NSString * __nonnull const kDBConcurrentOperationCompanyInfoLoadSuccess = @"kDBConcurrentOperationCompanyInfoLoadSuccess";
+NSString * __nonnull const kDBConcurrentOperationCompanyInfoLoadFailure = @"kDBConcurrentOperationCompanyInfoLoadFailure";
 #pragma mark - Companies Operation
-NSString *const kDBConcurrentOperationCompaniesLoadSuccess = @"kDBConcurrentOperationCompaniesLoadSuccess";
-NSString *const kDBConcurrentOperationCompaniesLoadFailure = @"kDBConcurrentOperationCompaniesLoadFailure";
+NSString * __nonnull const kDBConcurrentOperationCompaniesLoadSuccess = @"kDBConcurrentOperationCompaniesLoadSuccess";
+NSString * __nonnull const kDBConcurrentOperationCompaniesLoadFailure = @"kDBConcurrentOperationCompaniesLoadFailure";
 #pragma mark - Checkorder Operation
-NSString *const kDBConcurrentOperationCheckOrderSuccess = @"kDBConcurrentOperationCheckOrderSuccess";
-NSString *const kDBConcurrentOperationCheckOrderFailure = @"kDBConcurrentOperationCheckOrderFailure";
-NSString *const kDBConcurrentOperationCheckOrderStarted = @"kDBConcurrentOperationCheckOrderStarted";
-NSString *const kDBConcurrentOperationCheckOrderStartFailed = @"kDBConcurrentOperationCheckOrderStartFailed";
+NSString * __nonnull const kDBConcurrentOperationCheckOrderSuccess = @"kDBConcurrentOperationCheckOrderSuccess";
+NSString * __nonnull const kDBConcurrentOperationCheckOrderFailure = @"kDBConcurrentOperationCheckOrderFailure";
+NSString * __nonnull const kDBConcurrentOperationCheckOrderStarted = @"kDBConcurrentOperationCheckOrderStarted";
+NSString * __nonnull const kDBConcurrentOperationCheckOrderStartFailed = @"kDBConcurrentOperationCheckOrderStartFailed";
 #pragma mark - FetchVenue Operation
-NSString *const kDBConcurrentOperationFetchVenuesFinished = @"kDBConcurrentOperationFetchVenuesFinished";
+NSString * __nonnull const kDBConcurrentOperationFetchVenuesFinished = @"kDBConcurrentOperationFetchVenuesFinished";
 #pragma mark - Subscription Operation
-NSString *const kDBConcurrentOperationFetchSubscriptionInfoSuccess = @"kDBConcurrentOperationFetchSubscriptionInfoSuccess";
-NSString *const kDBConcurrentOperationFetchSubscriptionInfoFailure = @"kDBConcurrentOperationFetchSubscriptionInfoFailure";
+NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoSuccess = @"kDBConcurrentOperationFetchSubscriptionInfoSuccess";
+NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoFailure = @"kDBConcurrentOperationFetchSubscriptionInfoFailure";
+#pragma mark - FetchAppConfig Operation
+NSString * __nonnull const kDBConcurrentOperationAppConfigLoadSuccess = @"kDBConcurrentOperationAppConfigLoadSuccess";
+NSString * __nonnull const kDBConcurrentOperationAppConfigLoadFailure = @"kDBConcurrentOperationAppConfigLoadFailure";
+
+
 #pragma mark - FetchUnifiedCities Operation
 NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadSuccess = @"kDBConcurrentOperationUnifiedCitiesLoadSuccess";
 NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadFailure = @"kDBConcurrentOperationUnifiedCitiesLoadFailure";

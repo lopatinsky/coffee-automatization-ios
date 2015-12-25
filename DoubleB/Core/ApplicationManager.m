@@ -26,6 +26,7 @@
 #import "DBGeoPushManager.h"
 #import "WatchInteractionManager.h"
 
+#import "DBAPIClient.h"
 #import "DBStartNavController.h"
 #import "DBCommonStartNavController.h"
 #import "DBProxyStartNavController.h"
@@ -463,4 +464,29 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:reviewViewController];
     [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
 }
+@end
+
+@implementation ApplicationManager (AppConfig)
+
+- (void)fetchAppConfiguration:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:@"app/config"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                
+                                if (callback)
+                                    callback(YES);
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback)
+                                    callback(NO);
+                            }];
+    
+}
+
+- (void)reloadAppWithAppConfig {
+    
+}
+
 @end
