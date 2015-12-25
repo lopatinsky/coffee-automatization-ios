@@ -22,6 +22,9 @@
 
 @property (strong, nonatomic) NSArray *companies;
 
+@property (nonatomic, copy) void(^block)();
+@property (nonatomic) DBCompaniesViewControllerMode mode;
+
 @end
 
 @implementation DBCompaniesViewController
@@ -43,6 +46,14 @@
     [self.tableView reloadData];
 }
 
+- (void)setFinalBlock:(void (^)())finalBlock {
+    self.block = finalBlock;
+}
+
+- (void)setVCMode:(DBCompaniesViewControllerMode)mode {
+    self.mode = mode;
+}
+
 - (void)selectCompany:(DBCompany *)company {
     [[ApplicationManager sharedInstance] flushStoredCache];
     
@@ -52,11 +63,12 @@
     [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
-        if(success){
-            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            delegate.window.rootViewController = [[ApplicationManager sharedInstance] mainViewController];
+        if (self.mode == DBCompaniesViewControllerModeChooseCompany) {
+            if (self.block) {
+                self.block();
+            }
         } else {
-            [self showError:@"Не удалось загрузить информацию о выбранной компании"];
+            [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
         }
     }];
     [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];

@@ -11,7 +11,7 @@
 @implementation Compatibility
 
 + (NSString *)currencySymbol {
-    if([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
         return @"₽";
     } else {
         return NSLocalizedString(@"р.", nil);

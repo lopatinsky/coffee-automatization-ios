@@ -9,12 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "Order.h"
 
+#import <CoreLocation/CoreLocation.h>
+
+@class DBCity;
+
 @interface DBServerAPI : NSObject
 
 + (void)requestCompanies:(void(^)(NSArray *companies))success
                  failure:(void(^)(NSError *error))failure;
 
 + (void)registerUser:(void(^)(BOOL success))callback;
+
++ (void)registerUser:(CLLocation *)location callback:(void (^)(BOOL, DBCity *))callback;
 
 + (void)registerUserWithBranchParams:(NSDictionary *)branchParams callback:(void(^)(BOOL success))callback;
 

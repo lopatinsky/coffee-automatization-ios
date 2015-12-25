@@ -17,7 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 @property (weak, nonatomic) IBOutlet UIView *tipView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, copy) void (^exBlock)();
 
 @end
 
@@ -35,14 +36,19 @@
     }
     
     self.backImageView.image = image;
-    
-    self.titleLabel.text = NSLocalizedString(@"Настройка приложения", nil);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self.activityIndicator startAnimating];
-    
     [GANHelper analyzeScreen:LAUNCH_PLACEHOLDER_SCREEN];
+    
+    [self.activityIndicator startAnimating];
+    if (self.exBlock){
+        self.exBlock();
+    }
+}
+
+- (void)setExecutableBlock:(void (^)())executableBlock {
+    _exBlock = executableBlock;
 }
 
 @end

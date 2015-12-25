@@ -11,9 +11,15 @@
 #import "MenuListViewControllerProtocol.h"
 
 typedef NS_ENUM(NSInteger, RootState) {
-    RootStateLaunch,
-    RootStateMain,
-    RootStateCompanies,
+    RootStateStart = 0,
+    RootStateMain
+};
+
+typedef NS_ENUM(NSInteger, ApplicationType) {
+    ApplicationTypeCommon = 0,
+    ApplicationTypeProxy,
+    ApplicationTypeAggregator,
+    ApplicationTypeDemo
 };
 
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
@@ -26,6 +32,9 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
+
+@property (nonatomic) ApplicationType applicationType;
+
 + (void)handlePush:(NSDictionary *)push;
 + (void)handleLocalPush:(UILocalNotification *)push;
 
@@ -44,8 +53,8 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 + (void)applyBrandbookStyle;
 @end
 
-@interface ApplicationManager(Start)
-- (RootState)currentState;
+@protocol DBStartNavControllerDelegate;
+@interface ApplicationManager(Start)<DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
 @end
 

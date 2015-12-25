@@ -26,7 +26,12 @@
 #import "DBGeoPushManager.h"
 #import "WatchInteractionManager.h"
 
-#import "DBSettingsTableViewController.h"
+#import "DBStartNavController.h"
+#import "DBCommonStartNavController.h"
+#import "DBProxyStartNavController.h"
+#import "DBDemoStartNavController.h"
+#import "DBAggregatorStartNavController.h"
+
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBVenuesTableViewController.h"
@@ -52,8 +57,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 };
 
 @interface ApplicationManager()
-
-@property (nonatomic, strong) UIAlertView *alertView;
 @property (nonatomic) RootState state;
 
 @end
@@ -146,17 +149,28 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 - (instancetype)init {
     self = [super init];
     
-    self.state = [self currentState];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companiesLoadedSuccess) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companyInfoLoadedSuccess) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
+    self.state = RootStateStart;
     
     return self;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (ApplicationType)applicationType {
+    NSString *typeString = [DBCompanyInfo objectFromApplicationPreferencesByName:@"ApplicationType"];
+    ApplicationType type = ApplicationTypeCommon;
+    
+    if ([typeString isEqualToString:@"Proxy"]) {
+        type = ApplicationTypeProxy;
+    }
+    
+    if ([typeString isEqualToString:@"Aggregator"]) {
+        type = ApplicationTypeAggregator;
+    }
+    
+    if ([typeString isEqualToString:@"Demo"]) {
+        type = ApplicationTypeDemo;
+    }
+    
+    return type;
 }
 
 
@@ -193,15 +207,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
-    
-    // Fetch all companies
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanies];
-    
-    // Init update all necessary info if company has chosen
-    if ([self currentState] == RootStateMain) {
-        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
-        [self fetchCompanyDependentInfo];
-    }
 }
 
 - (void)fetchCompanyDependentInfo {
@@ -230,38 +235,9 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     }
 }
 
-- (void)companyInfoLoadedSuccess {
-    if (self.state != [self currentState]){
-        [self fetchCompanyDependentInfo];
-    }
-    
-    [self changeRoot];
-}
-
-- (void)showAlertViewWithInternetError {
-    BOOL show = YES;
-    show = show && ![self.alertView isVisible];
-    show = show && ([ApplicationManager sharedInstance].state == RootStateLaunch);
-    if (show) {
-        if(!self.alertView){
-            self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
-                                                  cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                          [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
-                                                      });
-                                                  }];
-        }
-        
-        [self.alertView show];
-    }
-}
-
 - (void)changeRoot {
-    if (self.state != [self currentState]) {
-        self.state = [self currentState];
-        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        [window setRootViewController:[self rootViewController]];
-    }
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    [window setRootViewController:[self rootViewController]];
 }
 
 #pragma mark - ManagerProtocol
@@ -364,31 +340,37 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 @implementation ApplicationManager (Start)
 
-- (RootState)currentState {
-    if ([DBCompanyInfo sharedInstance].infoLoaded) {
-        return RootStateMain;
-    }
-    
-    if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
-        return RootStateCompanies;
-    }
-    
-    return RootStateLaunch;
-}
-
 - (UIViewController *)rootViewController {
-    if ([self currentState] == RootStateMain) {
-        return [self mainViewController];
-    }
-    if ([self currentState] == RootStateCompanies) {
-        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewController]];
-    }
-    if ([self currentState] == RootStateLaunch) {
-        return [ViewControllerManager launchViewController];
+    if (self.state == RootStateStart) {
+        switch (self.applicationType) {
+            case ApplicationTypeCommon:
+                return [[DBCommonStartNavController alloc] initWithDelegate:self];
+                break;
+            case ApplicationTypeProxy:
+                return [[DBProxyStartNavController alloc] initWithDelegate:self];
+                break;
+            case ApplicationTypeDemo:
+                return [[DBDemoStartNavController alloc] initWithDelegate:self];
+                break;
+            case ApplicationTypeAggregator:
+                return [[DBAggregatorStartNavController alloc] initWithDelegate:self];
+                break;
+                
+            default:
+                break;
+        }
     }
     
     return [self mainViewController];
 }
+
+- (void)db_startNavVCNeedsMoveToMain:(UIViewController *)controller {
+    self.state = RootStateMain;
+    
+    [self fetchCompanyDependentInfo];
+    [self changeRoot];
+}
+
 @end
 
 @implementation ApplicationManager (Controllers)
@@ -396,6 +378,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 - (UIViewController *)mainViewController {
     return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
 }
+
 
 - (Class<MenuListViewControllerProtocol>)mainMenuViewController{
     if([DBMenu sharedInstance].hasNestedCategories){
