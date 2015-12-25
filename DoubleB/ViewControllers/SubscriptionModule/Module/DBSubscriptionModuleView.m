@@ -18,10 +18,10 @@
 
 @implementation DBSubscriptionModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBSubscriptionModuleView" owner:self options:nil] firstObject];
++ (DBSubscriptionModuleView *)create {
+    DBSubscriptionModuleView *view = [[[NSBundle mainBundle] loadNibNamed:@"DBSubscriptionModuleView" owner:self options:nil] firstObject];
     
-    return self;
+    return view;
 }
 - (void)awakeFromNib {
     

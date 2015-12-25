@@ -37,6 +37,7 @@
 #import "DBOrderViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBVenueViewController.h"
+#import "DBMenuViewController.h"
 
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -377,7 +378,8 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+//    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
 }
 
 

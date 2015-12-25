@@ -96,7 +96,7 @@
 
 
 @protocol DBModuleViewDelegate <NSObject>
-
+@optional
 - (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view;
 
 - (void(^)())db_additonalAnimationFroModuleAnimation:(DBModuleView *)view;

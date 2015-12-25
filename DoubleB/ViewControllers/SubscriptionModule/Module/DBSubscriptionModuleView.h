@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "DBModuleView.h"
 
-@interface DBSubscriptionModuleView : DBModuleView
+typedef NS_ENUM(NSInteger, DBSubscriptionModuleViewMode) {
+    DBSubscriptionModuleViewModeCategory = 0,
+    DBSubscriptionModuleViewModeCategoriesAndPositions,
+    DBSubscriptionModuleViewModePositions
+};
 
+@interface DBSubscriptionModuleView : DBModuleView
+@property (nonatomic) DBSubscriptionModuleViewMode mode;
+
++ (DBSubscriptionModuleView*)create;
 @end
