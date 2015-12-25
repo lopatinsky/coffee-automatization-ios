@@ -9,6 +9,7 @@
 #import "DBUnifiedAppManager.h"
 #import "DBAPIClient.h"
 
+#import "DBMenuPosition.h"
 
 @implementation DBCity
 
@@ -46,6 +47,48 @@
     return [[DBUnifiedAppManager valueForKey:@"citiesLoaded"] boolValue];
 }
 
+- (NSArray *)allPositions {
+    NSData *menuData = [DBUnifiedAppManager valueForKey:@"menu"];
+    if (menuData) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:menuData];
+    } else {
+        return @[];
+    }
+}
+
+- (NSDictionary *)positionsForItem:(NSNumber *)stringId {
+    NSData *positionsData = [DBUnifiedAppManager valueForKey:[NSString stringWithFormat:@"positions_%@", stringId]];
+    if (positionsData) {
+        NSArray *positionsInfo = [NSKeyedUnarchiver unarchiveObjectWithData:positionsData];
+        
+        NSMutableDictionary *result = [NSMutableDictionary new];
+        for (NSDictionary *positionInfo in positionsInfo) {
+            NSString *companyId = positionInfo[@"company"][@"name"];
+            
+            if ([result objectForKey:companyId]) {
+                NSMutableArray *items = result[companyId][@"items"];
+                for (NSDictionary *item in positionInfo[@"items"]) {
+                    [items addObject:@{@"item": [[DBMenuPosition alloc] initWithResponseDictionary:item],
+                                       @"venue_info": positionInfo[@"venue_info"]}];
+                }
+            } else {
+                NSMutableDictionary *newCompany = [NSMutableDictionary new];
+                NSMutableArray *items = [NSMutableArray new];
+                newCompany[@"company"] = positionInfo[@"company"];
+                for (NSDictionary *item in positionInfo[@"items"]) {
+                    [items addObject:@{@"item": [[DBMenuPosition alloc] initWithResponseDictionary:item],
+                                       @"venue_info": positionInfo[@"venue_info"]}];
+                }
+                newCompany[@"items"] = items;
+                result[companyId] = newCompany;
+            }
+        }
+        return result;
+    } else {
+        return @{};
+    }
+}
+
 - (NSArray *)cities {
     return [self cities:nil];
 }
@@ -63,7 +106,6 @@
         return cities;
     }
 }
-
 
 + (DBCity *)selectedCity {
     NSData *cityData = [DBUnifiedAppManager valueForKey:@"selectedCity"];
@@ -111,6 +153,49 @@
                                 
                                 if (callback)
                                     callback(NO);
+                            }];
+}
+
+- (void)fetchMenu:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:@"proxy/unified_app/menu"
+                         parameters:@{}
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                NSLog(@"%@", responseObject);
+                                NSData *menuData = [NSKeyedArchiver archivedDataWithRootObject:responseObject[@"items"]];
+                                [DBUnifiedAppManager setValue:menuData forKey:@"menu"];
+                                [DBUnifiedAppManager setValue:@(YES) forKey:@"menuLoaded"];
+                                
+                                if (callback) {
+                                    callback(YES);
+                                }
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback) {
+                                    callback(NO);
+                                }
+                            }];
+}
+
+- (void)fetchPositionsWithId:(NSNumber *)itemId withCallback:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:[NSString stringWithFormat:@"proxy/unified_app/product?product_id=%@", itemId]
+                         parameters:@{}
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                NSLog(@"%@", responseObject);
+                                NSData *positionsData = [NSKeyedArchiver archivedDataWithRootObject:responseObject[@"venues"]];
+                                [DBUnifiedAppManager setValue:positionsData forKey:[NSString stringWithFormat:@"positions_%@", itemId]];
+                                
+                                if (callback) {
+                                    callback(YES);
+                                }
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback) {
+                                    callback(NO);
+                                }
                             }];
 }
 

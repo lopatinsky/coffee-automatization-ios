@@ -18,10 +18,14 @@
 @property (nonatomic) BOOL citiesLoaded;
 - (NSArray *)cities;
 - (NSArray *)cities:(NSString *)predicate;
+- (NSArray *)allPositions;
+- (NSDictionary *)positionsForItem:(NSNumber *)stringId;
 
 + (DBCity *)selectedCity;
 + (void)selectCity:(DBCity *)city;
 
 - (void)fetchCities:(void(^)(BOOL success))callback;
+- (void)fetchMenu:(void(^)(BOOL success))callback;
+- (void)fetchPositionsWithId:(NSString *)itemId withCallback:(void (^)(BOOL))callback;
 
 @end

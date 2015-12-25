@@ -83,7 +83,9 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 - (void)db_citiesViewControllerDidSelectCity:(DBCity *)city {
     [DBUnifiedAppManager selectCity:city];
     
-    [self pushViewController:[DBUnifiedMenuTableViewController new] animated:YES];
+    DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
+    menuVC.type = UnifiedMenu;
+    [self pushViewController:menuVC animated:YES];
 }
 
 @end
