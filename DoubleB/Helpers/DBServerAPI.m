@@ -52,7 +52,7 @@
                             }];
 }
 
-+ (void)registerUser:(void(^)(BOOL success))callback{
++ (void)registerUser:(void(^)(BOOL success))callback {
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
 }
 

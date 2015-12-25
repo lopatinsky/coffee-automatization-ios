@@ -100,6 +100,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.delegate respondsToSelector:@selector(db_citiesViewControllerDidSelectCity:)]) {
         [self.delegate db_citiesViewControllerDidSelectCity:_cities[indexPath.row]];
     }

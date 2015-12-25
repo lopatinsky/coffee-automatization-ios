@@ -144,7 +144,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         }
     }
     
-    
 }
 
 - (instancetype)init {
@@ -177,8 +176,14 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    NSDictionary *appConfig = [self appConfig];
+    if ([appConfig getValueForKey:@"parse"]) {
+        [Parse setApplicationId:appConfig[@"parse"][@"app_key"]
+                      clientKey:appConfig[@"parse"][@"client_key"]];
+    } else {
+        [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                      clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    }
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
 #warning PayPal legacy code
@@ -195,15 +200,8 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
     
-    // Check Branch and register user
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
+    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
@@ -225,6 +223,15 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
+}
+
+- (void)setAppConfig:(NSDictionary *)appConfig {
+    [[NSUserDefaults standardUserDefaults] setObject:appConfig forKey:@"ApplicationManager_AppConfig"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDictionary *)appConfig {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ApplicationManager_AppConfig"] ?: @{};
 }
 
 #pragma mark - API Notification handlers
@@ -472,7 +479,8 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [[DBAPIClient sharedClient] GET:@"app/config"
                          parameters:nil
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                
+                                [self setAppConfig:responseObject];
+                                [self initializeVendorFrameworks];
                                 if (callback)
                                     callback(YES);
                             }

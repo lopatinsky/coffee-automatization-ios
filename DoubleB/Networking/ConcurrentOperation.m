@@ -27,6 +27,9 @@ NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoFailure = 
 #pragma mark - FetchAppConfig Operation
 NSString * __nonnull const kDBConcurrentOperationAppConfigLoadSuccess = @"kDBConcurrentOperationAppConfigLoadSuccess";
 NSString * __nonnull const kDBConcurrentOperationAppConfigLoadFailure = @"kDBConcurrentOperationAppConfigLoadFailure";
+#pragma mark - Register Operation
+NSString * __nonnull const kDBConcurrentOperationRegisterSuccess = @"kDBConcurrentOperationRegisterSuccess";
+NSString * __nonnull const kDBConcurrentOperationRegisterFailure = @"kDBConcurrentOperationRegisterFailure";
 
 
 #pragma mark - FetchUnifiedCities Operation

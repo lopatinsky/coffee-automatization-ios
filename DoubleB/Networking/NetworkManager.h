@@ -21,7 +21,8 @@ typedef enum : NSUInteger {
     NetworkOperationFetchUnifiedCities,
     NetworkOperationFetchUnifiedVenues,
     NetworkOperationFetchUnifiedMenu,
-    NetworkOperationFetchAppConfig
+    NetworkOperationFetchAppConfig,
+    NetworkOperationRegister
 } NetworkOperation;
 
 @interface NetworkManager : NSObject
