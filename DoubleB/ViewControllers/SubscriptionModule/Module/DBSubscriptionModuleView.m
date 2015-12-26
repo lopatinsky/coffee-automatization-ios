@@ -54,6 +54,8 @@
         [self addSubview:self.tableView];
         self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
+        
+        [self.tableView reloadData];
     }
 }
 
@@ -122,18 +124,22 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    DBCategoryHeaderView *header = [DBCategoryHeaderView new];
-    
-    return header.viewHeight;
+    if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
+        return 40.f;
+    } else {
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory state:DBCategoryHeaderViewStateFull];
-    headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
-    [headerView changeState:DBCategoryHeaderViewStateCompact animated:NO];
-    [headerView setCategoryOpened:YES animated:NO];
-    
-    return headerView;
+    if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
+        DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
+        headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
+        
+        return headerView;
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - UITableViewDelegate

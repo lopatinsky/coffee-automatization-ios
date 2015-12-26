@@ -9,7 +9,7 @@
 #import "DBMenuModuleView.h"
 
 @class DBMenuCategory;
-@interface DBCategoriesMenuModuleView : DBMenuModuleView
+@interface DBCategoriesMenuModuleView : DBMenuTableModuleView
 
 @property (strong, nonatomic) DBMenuCategory *parent;
 @property (strong, nonatomic) NSArray *categories;

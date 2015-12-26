@@ -207,15 +207,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     
     [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
-    // Check Branch and register user
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
