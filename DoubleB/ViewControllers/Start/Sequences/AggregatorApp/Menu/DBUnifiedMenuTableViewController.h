@@ -17,6 +17,6 @@ typedef enum : NSUInteger {
 @interface DBUnifiedMenuTableViewController : UIViewController
 
 @property (nonatomic) UnifiedTableViewType type;
-@property (nonatomic, strong) NSMutableDictionary *data;
+@property (nonatomic) NSDictionary *product;
 
 @end

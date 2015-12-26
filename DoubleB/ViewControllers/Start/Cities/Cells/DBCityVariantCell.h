@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class DBCity;
+@class DBUnifiedCity;
+
 @interface DBCityVariantCell : UITableViewCell
 
-@property (strong, nonatomic) DBCity *city;
+@property (strong, nonatomic) DBUnifiedCity *city;
 
 @end

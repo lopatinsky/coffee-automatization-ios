@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, ApplicationType) {
 
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenRoot = 0,
+    ApplicationScreenMenu,
     ApplicationScreenOrder,
     ApplicationScreenHistory,
     ApplicationScreenHistoryOrder,

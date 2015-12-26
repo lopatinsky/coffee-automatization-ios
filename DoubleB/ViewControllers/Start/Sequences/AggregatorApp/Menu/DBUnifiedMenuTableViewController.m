@@ -8,13 +8,19 @@
 
 #import "DBUnifiedMenuTableViewController.h"
 #import "DBUnifiedMenuTableViewCell.h"
+#import "DBUnifiedVenueTableViewCell.h"
 
+#import "OrderCoordinator.h"
+#import "ApplicationManager.h"
 #import "DBUnifiedAppManager.h"
 #import "NetworkManager.h"
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedController;
+@property (weak, nonatomic) IBOutlet UIView *segmentHolderView;
+
 @property (nonatomic, strong) NSArray *keys;
 
 @end
@@ -22,38 +28,48 @@
 @implementation DBUnifiedMenuTableViewController
 
 - (void)viewDidLoad {
-    if (!self.data) {
-        self.data = [NSMutableDictionary new];
-    }
+    self.segmentHolderView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
+    self.segmentedController.tintColor = [UIColor db_defaultColor];
+    self.segmentedController.backgroundColor = [UIColor whiteColor];
+    self.segmentedController.clipsToBounds = YES;
+    self.segmentedController.layer.cornerRadius = 5.;
     
-    switch (self.type) {
-        case UnifiedMenu:
-            self.data[@"positions"] = [[DBUnifiedAppManager sharedInstance] allPositions];
-            break;
-        case UnifiedPosition:
-            self.data[@"available_positions"] = [[DBUnifiedAppManager sharedInstance] positionsForItem:self.data[@"product_id"]];
-            self.keys = [self.data[@"available_positions"] allKeys];
-            break;
-        default:
-            break;
-    }
+    [self.segmentedController setTitle:NSLocalizedString(@"Заведения", nil) forSegmentAtIndex:0];
+    [self.segmentedController setTitle:NSLocalizedString(@"Кофе", nil) forSegmentAtIndex:1];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView registerNib:[UINib nibWithNibName:@"DBUnifiedMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"DBUnifiedMenuTableViewCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"DBUnifiedVenueTableViewCell" bundle:nil] forCellReuseIdentifier:@"DBUnifiedVenueTableViewCell"];
+    
+    if (self.type == UnifiedPosition) {
+        [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+        self.segmentedController.hidden = YES;
+    } else {
+        [self.tableView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
+        self.segmentedController.hidden = NO;
+    }
+    
+    [self db_setTitle:[[DBUnifiedAppManager selectedCity] cityName]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     switch (self.type) {
         case UnifiedMenu: {
-            [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchUnifiedMenu];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuIsAvailable) name:kDBConcurrentOperationUnifiedMenuLoadSuccess object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuIsAvailable) name:kDBConcurrentOperationUnifiedMenuLoadFailure object:nil];
+            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedMenu];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchMenuSuccess) name:kDBConcurrentOperationUnifiedMenuLoadSuccess object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchMenuFailure) name:kDBConcurrentOperationUnifiedMenuLoadFailure object:nil];
+            break;
+        }
+        case UnifiedVenue: {
+            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedVenues];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchVenueSuccess) name:kDBConcurrentOperationUnifiedVenuesLoadSuccess object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchVenueFailure) name:kDBConcurrentOperationUnifiedVenuesLoadFailure object:nil];
             break;
         }
         case UnifiedPosition: {
-            [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchUnifiedPositions withUserInfo:@{@"product_id": self.data[@"product_id"]}];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(positionsAreAvailable) name:kDBConcurrentOperationUnifiedPositionsLoadSuccess object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(positionsDownloadFailed) name:kDBConcurrentOperationUnifiedPositionsLoadFailure object:nil];
+            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedPositions withUserInfo:@{@"product_id": @([[self.product objectForKey:@"id"] integerValue])}];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchPositionsSuccess) name:kDBConcurrentOperationUnifiedPositionsLoadSuccess object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchPositionsFailure) name:kDBConcurrentOperationUnifiedPositionsLoadFailure object:nil];
             break;
         }
         default:
@@ -74,40 +90,65 @@
             ];
 }
 
-#pragma mark - Networking 
-- (void)menuIsAvailable {
-    switch (self.type) {
-        case UnifiedMenu:
-            self.data[@"positions"] = [[DBUnifiedAppManager sharedInstance] allPositions];
-            break;
-        case UnifiedPosition:
-            self.data[@"available_positions"] = [[DBUnifiedAppManager sharedInstance] positionsForItem:self.data[@"product_id"]];
-            self.keys = [self.data[@"available_positions"] allKeys];
-            break;
-        default:
-            break;
+- (IBAction)segmentedControlValueChanged:(id)sender {
+    if (self.segmentedController.selectedSegmentIndex == 0) {
+        self.type = UnifiedVenue;
+    } else {
+        self.type = UnifiedMenu;
     }
     [self.tableView reloadData];
 }
 
-- (void)menuDownloadFailed {
-    // analtics about fail
+#pragma mark - Networking 
+- (void)fetchMenuSuccess {
+    if (self.type == UnifiedMenu) {
+        [self.tableView reloadData];
+    }
 }
 
-- (void)positionsAreAvailable {
+- (void)fetchMenuFailure {
     
 }
 
-- (void)positionsDownloadFailed {
+- (void)fetchVenueSuccess {
+    if (self.type == UnifiedVenue) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)fetchVenueFailure {
+    
+}
+
+- (void)fetchPositionsSuccess {
+    if (self.type == UnifiedPosition) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)fetchPositionsFailure {
     
 }
 
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBUnifiedMenuTableViewController *viewController = [DBUnifiedMenuTableViewController new];
-    viewController.data = [NSMutableDictionary  dictionaryWithDictionary:@{@"product_id": self.data[@"positions"][indexPath.row][@"id"]}];
-    viewController.type = UnifiedPosition;
-    [self.navigationController pushViewController:viewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    switch (self.type) {
+        case UnifiedVenue: {
+            [OrderCoordinator sharedInstance].orderManager.venue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
+            [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
+            break;
+        }
+        case UnifiedMenu: {
+            DBUnifiedMenuTableViewController *newVC = [DBUnifiedMenuTableViewController new];
+            newVC.type = UnifiedPosition;
+            newVC.product = [[[DBUnifiedAppManager sharedInstance] menu] objectAtIndex:indexPath.row];
+            [self showViewController:newVC sender:nil];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -117,56 +158,47 @@
             return 1;
         case UnifiedPosition:
             return [self.keys count];
+        case UnifiedVenue:
+            return 1;
         default:
             return 0;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    switch (self.type) {
-        case UnifiedMenu:
-            return [[UIView alloc] initWithFrame:CGRectZero];
-        case UnifiedPosition: {
-            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 18)];
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, tableView.frame.size.width, 18)];
-            [label setFont:[UIFont boldSystemFontOfSize:12]];
-            NSString *string = [self.data[@"available_positions"] allKeys][section];
-            [label setText:string];
-            [view addSubview:label];
-            [view setBackgroundColor:[UIColor colorWithRed:166/255.0 green:177/255.0 blue:186/255.0 alpha:1.0]];
-            return view;
-        }
-        default:
-            return nil;
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (self.type) {
         case UnifiedMenu:
-            return [self.data[@"positions"] count];
+            return [[[DBUnifiedAppManager sharedInstance] menu] count];
         case UnifiedPosition:
-            return [self.data[@"available_positions"][self.keys[section]][@"items"] count];
+            return [[[DBUnifiedAppManager sharedInstance] positionsForItem:@([[self.product objectForKey:@"id"] integerValue])] count];
+        case UnifiedVenue:
+            return [[[DBUnifiedAppManager sharedInstance] venues] count];
         default:
             return 0;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBUnifiedMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBUnifiedMenuTableViewCell" forIndexPath:indexPath];
-    
+    UITableViewCell *cell;
     switch (self.type) {
-        case UnifiedMenu:
-            [cell setData:self.data[@"positions"][indexPath.row] withType:self.type];
+        case UnifiedMenu: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBUnifiedMenuTableViewCell" forIndexPath:indexPath];
+            [(DBUnifiedMenuTableViewCell *)cell setData:[[[DBUnifiedAppManager sharedInstance] menu] objectAtIndex:indexPath.row] withType:self.type];
             break;
-        case UnifiedPosition:
-            [cell setData:self.data[@"available_positions"][self.keys[indexPath.section]][@"items"][indexPath.row] withType:self.type];
+        }
+        case UnifiedPosition: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBUnifiedMenuTableViewCell" forIndexPath:indexPath];
+            [(DBUnifiedMenuTableViewCell *)cell setData:[[[DBUnifiedAppManager sharedInstance] menu] objectAtIndex:indexPath.row] withType:self.type];
             break;
+        }
+        case UnifiedVenue: {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBUnifiedVenueTableViewCell" forIndexPath:indexPath];
+            [(DBUnifiedVenueTableViewCell *)cell setVenue:[[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row]];
+            break;
+        }
         default:
             return 0;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 

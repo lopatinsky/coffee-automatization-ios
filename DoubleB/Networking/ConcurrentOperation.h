@@ -37,6 +37,9 @@ extern NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadFailure
 #pragma mark - FetchUnifiedVenues Operation
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadFailure;
+#pragma mark - FetchUnifiedPositions Operation
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedPositionsLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedPositionsLoadFailure;
 #pragma mark - FetchUnifiedMenu Operation
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadFailure;

@@ -33,8 +33,7 @@
     [self setState:OperationExecuting];
     
     [[Branch getInstance] initSessionWithLaunchOptions:self.launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
+        if (error) {
             [DBServerAPI registerUser:^(BOOL success) {
                 if (success) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationRegisterSuccess object:nil];

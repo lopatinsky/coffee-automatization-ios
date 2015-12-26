@@ -7,7 +7,7 @@
 //
 
 #import "FetchUnifiedMenu.h"
-#import "DBAPIClient.h"
+#import "DBUnifiedAppManager.h"
 
 @interface FetchUnifiedMenu()
 
@@ -27,12 +27,14 @@
     if (self.cancelled) return;
     [self setState:OperationExecuting];
     
-    [[DBAPIClient sharedClient] GET:@"unified/menu"
-                         parameters:@[]
-                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                            }
-                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                            }];
+    [[DBUnifiedAppManager sharedInstance] fetchMenu:^(BOOL success) {
+        if (success) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedMenuLoadSuccess object:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedMenuLoadFailure object:nil];
+        }
+        [self setState:OperationFinished];
+    }];
 }
 
 @end

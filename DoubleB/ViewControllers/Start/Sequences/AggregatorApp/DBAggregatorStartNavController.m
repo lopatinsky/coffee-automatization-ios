@@ -30,7 +30,6 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
     [super viewDidLoad];
     
     [self setNavigationBarHidden:YES animated:NO];
-    
     if (![DBUnifiedAppManager sharedInstance].citiesLoaded) {
         self.state = DBAggregatorStartStateLaunch;
         UIViewController<DBLaunchViewControllerProtocol> *launchVC = [ViewControllerManager launchViewController];
@@ -42,9 +41,7 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
         }];
         self.viewControllers = @[launchVC];
     } else {
-        if ([DBUnifiedAppManager sharedInstance].cities.count <= 1) {
-            [self moveToUnifiedMenu:NO];
-        } else if (![DBUnifiedAppManager selectedCity]) {
+        if (![DBUnifiedAppManager selectedCity] && [DBUnifiedAppManager sharedInstance].cities.count > 1) {
             [self moveToCities:NO];
         } else {
             [self moveToUnifiedMenu:NO];
@@ -75,16 +72,18 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 }
 
 - (void)moveToUnifiedMenu:(BOOL)animated {
+    DBUnifiedMenuTableViewController *unifiedVC = [DBUnifiedMenuTableViewController new];
+    unifiedVC.type = UnifiedVenue;
     [self setNavigationBarHidden:NO animated:animated];
-    [self setViewControllers:@[[DBUnifiedMenuTableViewController new]] animated:animated];
+    [self setViewControllers:@[unifiedVC] animated:animated];
 }
 
 #pragma mark - DBCitiesViewControllerDelegate
-- (void)db_citiesViewControllerDidSelectCity:(DBCity *)city {
+- (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {
     [DBUnifiedAppManager selectCity:city];
     
     DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
-    menuVC.type = UnifiedMenu;
+    menuVC.type = UnifiedVenue;
     [self pushViewController:menuVC animated:YES];
 }
 

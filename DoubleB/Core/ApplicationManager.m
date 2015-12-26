@@ -388,7 +388,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 }
 
 
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController{
+- (Class<MenuListViewControllerProtocol>)mainMenuViewController {
     if([DBMenu sharedInstance].hasNestedCategories){
         return [ViewControllerManager categoriesViewController];
     } else {
@@ -457,7 +457,14 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
             }
             break;
         }
-            
+        case ApplicationScreenMenu: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                UIViewController *positionsVC = [[ViewControllerManager rootMenuViewController] createViewController];
+                [((UINavigationController*)rootVC) setViewControllers:@[newOrderVC, positionsVC] animated:animated];
+            }
+            break;
+        }
         default:
             break;
     }
@@ -479,7 +486,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [[DBAPIClient sharedClient] GET:@"app/config"
                          parameters:nil
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                [self setAppConfig:responseObject];
+//                                [self setAppConfig:responseObject];
                                 [self initializeVendorFrameworks];
                                 if (callback)
                                     callback(YES);

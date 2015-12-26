@@ -91,7 +91,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBCityVariantCell" owner:self options:nil] firstObject];
     }
     
-    DBCity *city = _cities[indexPath.row];
+    DBUnifiedCity *city = _cities[indexPath.row];
     cell.city = city;
     
     return cell;

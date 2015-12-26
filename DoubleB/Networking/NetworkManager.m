@@ -134,6 +134,7 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 #import "FetchUnifiedCities.h"
 #import "FetchUnifiedMenu.h"
 #import "FetchUnifiedVenues.h"
+#import "FetchUnifiedPositions.h"
 #import "FetchAppConfig.h"
 #import "Register.h"
 @implementation NetworkManager(OperationLoader)
@@ -152,6 +153,7 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
                                        @(NetworkOperationFetchUnifiedCities): [FetchUnifiedCities class],
                                        @(NetworkOperationFetchUnifiedMenu): [FetchUnifiedMenu class],
                                        @(NetworkOperationFetchUnifiedVenues): [FetchUnifiedVenues class],
+                                       @(NetworkOperationFetchUnifiedPositions): [FetchUnifiedPositions class],
                                        @(NetworkOperationFetchAppConfig): [FetchAppConfig class],
                                        @(NetworkOperationRegister): [Register class]
                                        };
