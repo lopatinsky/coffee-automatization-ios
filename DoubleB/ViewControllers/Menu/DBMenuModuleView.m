@@ -21,8 +21,6 @@
     [super commonInit];
     
     self.tableView = [UITableView new];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
     
@@ -38,20 +36,6 @@
     _tableHeaderModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [_tableHeaderModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:header];
     self.tableView.tableHeaderView = header;
-}
-
-#pragma mark - UITableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
 }
 
 

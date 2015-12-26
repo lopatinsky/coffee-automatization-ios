@@ -32,16 +32,17 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 @property (strong, nonatomic) NSString * __nonnull subscriptionScreenText;
 @property (strong, nonatomic) NSString * __nonnull subscriptionMenuTitle;
 @property (strong, nonatomic) NSString * __nonnull subscriptionMenuText;
+
 @property (strong, nonatomic) DBSubscriptionVariant * __nonnull selectedVariant;
 @property (strong, nonatomic) DBCurrentSubscription * __nonnull currentSubscription;
-@property (weak, nonatomic) id<DBSubscriptionManagerProtocol> delegate;
 @property (nonatomic, strong) DBMenuCategory * __nonnull subscriptionCategory;
 @property (nonatomic) NSInteger balance;
+
+@property (weak, nonatomic) id<DBSubscriptionManagerProtocol> delegate;
 
 + (BOOL)categoryIsSubscription:(nonnull DBMenuCategory *)category;
 + (BOOL)isSubscriptionPosition:(nonnull NSIndexPath *)indexPath;
 
-- (void)synchWithResponseInfo:( nonnull NSDictionary *)infoDict;
 - (void)buySubscription:(nonnull DBSubscriptionVariant *)variant callback:(void(^ _Nonnull)(BOOL success, NSString * __nonnull errorMessage))callback;
 - (void)checkSubscriptionVariants:(void(^ _Nonnull)(NSArray * __nonnull variants))success failure:(void(^ _Nonnull)(NSString * __nonnull errorMessage))failure;
 - (void)subscriptionInfo:(void(^ _Nonnull)(NSArray * __nonnull info))success failure:(void(^ _Nonnull)(NSString * __nonnull errorMessage))failure;
@@ -50,7 +51,11 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 - (nonnull NSDictionary *)cutSubscriptionCategory:(nonnull NSDictionary *)menu;
 - (nonnull NSDictionary *)menuRequest;
 - (nonnull DBMenuCategory *)subscriptionCategory;
+
+// User has active subscription
 - (BOOL)isAvailable;
+
+// User can buy subscription
 - (BOOL)isEnabled;
 
 - (BOOL)cupIsAvailableToPurchase;

@@ -26,12 +26,17 @@
 #import "DBCategoriesMenuModuleView.h"
 #import "DBPositionsMenuModuleView.h"
 
+#import "DBSubscriptionManager.h"
+#import "DBSubscriptionModuleView.h"
+
 @interface DBMenuViewController ()<DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate>
 @property (strong, nonatomic) NSString *analyticsCategory;
 @property (strong, nonatomic) DBMenuModuleView *menuModuleView;
 
 @property (strong, nonatomic) DBDropdownTitleView *titleView;
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
+
+@property (strong, nonatomic) DBSubscriptionModuleView *subscriptionModuleView;
 @end
 
 @implementation DBMenuViewController
@@ -44,6 +49,8 @@
     
     
     self.analyticsCategory = @"Menu_screen";
+    
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
         [self setupInitial];
@@ -65,6 +72,8 @@
     [self.view addSubview:self.menuModuleView];
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
+    
+    [self setupSubscription];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,6 +93,10 @@
     if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
         [self.categoryPicker hide];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (DBMenuViewControllerMode)mode {
@@ -122,6 +135,11 @@
     }
     
     return mode;
+}
+
+- (void)moveToOrder {
+    [self.navigationController pushViewController:[DBClassLoader loadNewOrderViewController] animated:YES];
+    [GANHelper analyzeEvent:@"order_pressed" category:self.analyticsCategory];
 }
 
 
@@ -174,7 +192,6 @@
 #pragma mark - Initial
 - (void)setupInitial {
     self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
 }
 
 - (void)loadMenu{
@@ -215,11 +232,6 @@
                                              [self reloadTitleView:nil];
                                          }];
     }
-}
-
-- (void)moveToOrder {
-    [self.navigationController pushViewController:[DBClassLoader loadNewOrderViewController] animated:YES];
-    [GANHelper analyzeEvent:@"order_pressed" category:self.analyticsCategory];
 }
 
 - (void)moveToSettings {
@@ -342,6 +354,36 @@
 
 - (void)db_componentWillDismiss:(DBPopupComponent *)component {
     [GANHelper analyzeEvent:@"category_spinner_closed" category:self.analyticsCategory];
+}
+
+#pragma mark - Subscription
+
+- (void)setupSubscription {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupSubscriptionModule) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+    
+    [self setupSubscriptionModule];
+}
+
+- (void)setupSubscriptionModule {
+    if (self.type == DBMenuViewControllerTypeInitial && !_subscriptionModuleView && [DBSubscriptionManager sharedInstance].isEnabled) {
+        DBSubscriptionModuleViewMode mode;
+        switch (self.mode) {
+            case DBMenuViewControllerModeCategoriesAndPositions:
+                mode = DBSubscriptionModuleViewModeCategoriesAndPositions;
+                break;
+            case DBMenuViewControllerModeCategories:
+                mode = DBSubscriptionModuleViewModeCategory;
+                break;
+            case DBMenuViewControllerModePositions:
+                mode = DBSubscriptionModuleViewModePositions;
+                break;
+        }
+        _subscriptionModuleView = [DBSubscriptionModuleView create:mode];
+        
+        DBModuleView *module = [DBModuleView create];
+        [module.submodules addObject:_subscriptionModuleView];
+        ((DBMenuTableModuleView *)self.menuModuleView).tableHeaderModuleView = module;
+    }
 }
 
 @end

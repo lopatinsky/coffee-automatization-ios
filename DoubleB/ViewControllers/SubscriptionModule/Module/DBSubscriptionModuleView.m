@@ -26,21 +26,19 @@
 
 @implementation DBSubscriptionModuleView
 
-+ (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode type:(int)type{
++ (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode{
     DBSubscriptionModuleView *view = [DBSubscriptionModuleView new];
     view.mode = mode;
-    if (mode == DBSubscriptionModuleViewModeCategory) {
-        view.categoryType = type;
-    } else {
-        view.positionType = type;
-    }
     
     return view;
 }
 
 - (void)commonInit {
+    self.clipsToBounds = YES;
+    
     if (_mode == DBSubscriptionModuleViewModeCategory) {
-        DBCategoryCell *cell = [[DBCategoryCell alloc] initWithType:self.categoryType];
+        DBCategoryCellAppearanceType type = [DBSubscriptionManager sharedInstance].subscriptionCategory.hasImage ? DBCategoryCellAppearanceTypeFull : DBCategoryCellAppearanceTypeCompact;
+        DBCategoryCell *cell = [[DBCategoryCell alloc] initWithType:type];
         [cell configureWithCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
         [self addSubview:cell];
         cell.translatesAutoresizingMaskIntoConstraints = NO;
@@ -148,12 +146,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-//        if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
-//            [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
-//            [self pushSubscriptionViewController];
-//        } else if (indexPath.section == 0 && indexPath.row == 0) {
-//            return;
-//        }
+        if (indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
+            [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
+            [self pushSubscriptionViewController];
+        }
     } else {
         DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         DBMenuPosition *position = cell.position;

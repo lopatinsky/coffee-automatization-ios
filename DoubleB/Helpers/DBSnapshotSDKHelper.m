@@ -24,9 +24,7 @@
 
 #import "DBSettingsTableViewController.h"
 
-#import "CategoriesAndPositionsTVController.h"
-#import "CategoriesTVController.h"
-#import "PositionsTVController.h"
+#import "DBMenuViewController.h"
 
 @interface DBSnapshotSDKHelper()
 
@@ -82,47 +80,47 @@
 }
 
 - (void)toCategoriesScreen {
-    [self.pickerView dismiss];
-    [[self navController] setViewControllers:@[[[[ApplicationManager sharedInstance] mainMenuViewController] createViewController]] animated:NO];
+//    [self.pickerView dismiss];
+//    [[self navController] setViewControllers:@[[[[ApplicationManager sharedInstance] mainMenuViewController] createViewController]] animated:NO];
 }
 
 - (void)toPositionsScreen {
-    [self.pickerView dismiss];
-    UIViewController *mainMenuVC = [[[ApplicationManager sharedInstance] mainMenuViewController] createViewController];
-    if ([mainMenuVC isKindOfClass:[CategoriesAndPositionsTVController class]]) {
-        [[self navController] setViewControllers:@[[DBSettingsTableViewController new]] animated:NO];
-    } else if ([mainMenuVC isKindOfClass:[CategoriesTVController class]]) {
-        if ([[[CategoriesTVController preference] objectForKey:@"is_mixed_type"] boolValue]) {
-            DBMenu *menu = [DBMenu sharedInstance];
-            NSArray *categories = [menu getMenu];
-            while (true) {
-                for (DBMenuCategory *category in categories) {
-                    if (category.type == DBMenuCategoryTypeStandart) {
-                        CategoriesAndPositionsTVController *categoriesAndPositionsVC = [CategoriesAndPositionsTVController new];
-                        categoriesAndPositionsVC.categories = category.categories;
-                        [CategoriesAndPositionsTVController setPreferences:[CategoriesTVController preference]];
-                        [[self navController] setViewControllers:@[categoriesAndPositionsVC] animated:NO];
-                        break;
-                    }
-                }
-                categories = [categories firstObject];
-            }
-        } else {
-            DBMenu *menu = [DBMenu sharedInstance];
-            NSArray *categories = [menu getMenu];
-            while (true) {
-                for (DBMenuCategory *category in categories) {
-                    if (category.type == DBMenuCategoryTypeStandart) {
-                        PositionsTVController *positionsVC = [PositionsTVController new];
-                        positionsVC.category = category;
-                        [[self navController] setViewControllers:@[positionsVC] animated:NO];
-                        break;
-                    }
-                }
-                categories = [categories firstObject];
-            }
-        }
-    }
+//    [self.pickerView dismiss];
+//    UIViewController *mainMenuVC = [[[ApplicationManager sharedInstance] mainMenuViewController] createViewController];
+//    if ([mainMenuVC isKindOfClass:[CategoriesAndPositionsTVController class]]) {
+//        [[self navController] setViewControllers:@[[DBSettingsTableViewController new]] animated:NO];
+//    } else if ([mainMenuVC isKindOfClass:[CategoriesTVController class]]) {
+//        if ([[[CategoriesTVController preference] objectForKey:@"is_mixed_type"] boolValue]) {
+//            DBMenu *menu = [DBMenu sharedInstance];
+//            NSArray *categories = [menu getMenu];
+//            while (true) {
+//                for (DBMenuCategory *category in categories) {
+//                    if (category.type == DBMenuCategoryTypeStandart) {
+//                        CategoriesAndPositionsTVController *categoriesAndPositionsVC = [CategoriesAndPositionsTVController new];
+//                        categoriesAndPositionsVC.categories = category.categories;
+//                        [CategoriesAndPositionsTVController setPreferences:[CategoriesTVController preference]];
+//                        [[self navController] setViewControllers:@[categoriesAndPositionsVC] animated:NO];
+//                        break;
+//                    }
+//                }
+//                categories = [categories firstObject];
+//            }
+//        } else {
+//            DBMenu *menu = [DBMenu sharedInstance];
+//            NSArray *categories = [menu getMenu];
+//            while (true) {
+//                for (DBMenuCategory *category in categories) {
+//                    if (category.type == DBMenuCategoryTypeStandart) {
+//                        PositionsTVController *positionsVC = [PositionsTVController new];
+//                        positionsVC.category = category;
+//                        [[self navController] setViewControllers:@[positionsVC] animated:NO];
+//                        break;
+//                    }
+//                }
+//                categories = [categories firstObject];
+//            }
+//        }
+//    }
 }
 
 - (void)toPositionOrNeworderScreen {

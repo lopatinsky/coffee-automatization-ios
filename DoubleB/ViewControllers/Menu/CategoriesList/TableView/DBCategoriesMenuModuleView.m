@@ -16,7 +16,7 @@
 #import "DBMenuPosition.h"
 #import "Venue.h"
 
-@interface DBCategoriesMenuModuleView ()
+@interface DBCategoriesMenuModuleView ()<UITableViewDataSource, UITableViewDelegate>
 @end
 
 @implementation DBCategoriesMenuModuleView
@@ -25,6 +25,13 @@
     DBCategoriesMenuModuleView *view = [DBCategoriesMenuModuleView new];
     
     return view;
+}
+
+- (void)commonInit {
+    [super commonInit];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)setUpdateEnabled:(BOOL)updateEnabled {

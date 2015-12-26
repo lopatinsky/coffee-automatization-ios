@@ -36,7 +36,6 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [self saveCurrentSubscription];
     
     [self loadSubscriptionCategory];
-    self.enable = [[DBSubscriptionManager valueForKey:@"__available"] boolValue];
     
     self.subscriptionScreenTitle = [DBSubscriptionManager valueForKey:@"__subscriptionScreenTitle"];
     self.subscriptionScreenText = [DBSubscriptionManager valueForKey:@"__subscriptionScreenText"];
@@ -121,8 +120,32 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     }
 }
 
-- (void)synchWithResponseInfo:(NSDictionary *)infoDict {
-    
+- (void)subscriptionInfo:(void(^)(NSArray *info))success
+                 failure:(void(^)(NSString *errorMessage))failure {
+    [[DBAPIClient sharedClient] GET:@"subscription/info"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                if ([responseObject getValueForKey:@"amount"] && [responseObject getValueForKey:@"days"]) {
+                                    DBCurrentSubscription *currentSubscription = [DBCurrentSubscription new];
+                                    currentSubscription.amount = [responseObject objectForKey:@"amount"];
+                                    currentSubscription.creationDate = [NSDate date];
+                                    currentSubscription.days = [responseObject objectForKey:@"days"];
+                                    self.currentSubscription = currentSubscription;
+                                    [self saveCurrentSubscription];
+                                }
+                                if ([responseObject getValueForKey:@"category"]) {
+                                    self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:[responseObject objectForKey:@"category"]];
+                                    [self saveSubscriptionCategory];
+                                }
+                                if(success)
+                                    success(@[]);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(failure)
+                                    failure(nil);
+                            }];
 }
 
 - (void)buySubscription:(DBSubscriptionVariant *)variant
@@ -152,34 +175,6 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
                                  if(callback)
                                      callback(NO, errorMessage);
                              }];
-}
-
-- (void)subscriptionInfo:(void(^)(NSArray *info))success
-                 failure:(void(^)(NSString *errorMessage))failure {
-    [[DBAPIClient sharedClient] GET:@"subscription/info"
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                if ([responseObject getValueForKey:@"amount"] && [responseObject getValueForKey:@"days"]) {
-                                    DBCurrentSubscription *currentSubscription = [DBCurrentSubscription new];
-                                    currentSubscription.amount = [responseObject objectForKey:@"amount"];
-                                    currentSubscription.creationDate = [NSDate date];
-                                    currentSubscription.days = [responseObject objectForKey:@"days"];
-                                    self.currentSubscription = currentSubscription;
-                                    [self saveCurrentSubscription];
-                                }
-                                if ([responseObject getValueForKey:@"category"]) {
-                                    self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:[responseObject objectForKey:@"category"]];
-                                    [self saveSubscriptionCategory];
-                                }
-                                if(success)
-                                    success(@[]);
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                                if(failure)
-                                    failure(nil);
-                            }];
 }
 
 - (void)checkSubscriptionVariants:(void(^)(NSArray *variants))success
@@ -239,7 +234,7 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 }
 
 - (BOOL)isEnabled {
-    return _enable;
+    return [[DBSubscriptionManager valueForKey:@"__available"] boolValue];
 }
 
 - (BOOL)isAvailable {

@@ -412,18 +412,9 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
-//    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
 }
 
-
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController {
-    if([DBMenu sharedInstance].hasNestedCategories){
-        return [ViewControllerManager categoriesViewController];
-    } else {
-        return [ViewControllerManager rootMenuViewController];
-    }
-}
 @end
 
 @implementation ApplicationManager (ScreenState)
@@ -488,9 +479,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         }
         case ApplicationScreenMenu: {
             if ([rootVC isKindOfClass:[UINavigationController class]]) {
-                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
-                UIViewController *positionsVC = [[ViewControllerManager rootMenuViewController] createViewController];
-                [((UINavigationController*)rootVC) setViewControllers:@[newOrderVC, positionsVC] animated:animated];
+                [((UINavigationController*)rootVC) setViewControllers:@[[DBMenuViewController new]] animated:animated];
             }
             break;
         }

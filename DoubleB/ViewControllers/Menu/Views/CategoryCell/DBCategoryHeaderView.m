@@ -26,11 +26,11 @@
 }
 
 - (void)commonInit{
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor db_defaultColor];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
-    self.categoryTitleLabel.textColor = [UIColor blackColor];
+    self.categoryTitleLabel.textColor = [UIColor whiteColor];
     self.categoryTitleLabel.text = self.category.name;
 }
 

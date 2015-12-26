@@ -17,7 +17,7 @@
 #import "DBMenuCategory.h"
 
 
-@interface DBMixedMenuModuleView ()<DBPositionCellDelegate>
+@interface DBMixedMenuModuleView ()<DBPositionCellDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *categoryHeaders;
 @end
 
@@ -27,6 +27,13 @@
     DBMixedMenuModuleView *view = [DBMixedMenuModuleView new];
     
     return view;
+}
+
+- (void)commonInit {
+    [super commonInit];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
 - (void)setUpdateEnabled:(BOOL)updateEnabled {
