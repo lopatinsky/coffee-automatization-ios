@@ -307,7 +307,7 @@ static NSDictionary *_preferences;
     }
     
     if (cell) {
-        cell.delegate = self;
+//        cell.delegate = self;
         return cell;
     } else {
         if (!correctedIndexPath) {

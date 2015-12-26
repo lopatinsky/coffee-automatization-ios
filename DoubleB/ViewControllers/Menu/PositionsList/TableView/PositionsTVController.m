@@ -90,7 +90,7 @@ static NSDictionary *_preference;
     NSIndexPath *correctedIndexPath = [DBSubscriptionManager correctedIndexPath:indexPath forCategory:self.category];
     
     if (cell) {
-        cell.delegate = self;
+//        cell.delegate = self;
         return cell;
     } else {
         DBPositionCell *cell;
