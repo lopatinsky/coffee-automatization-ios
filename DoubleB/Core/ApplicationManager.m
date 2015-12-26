@@ -378,8 +378,8 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-//    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
-    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+//    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
 }
 
 

@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *numberOfCupsLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *cupImage;
 @property (weak, nonatomic) IBOutlet UIView *placeholderView;
-@property (weak, nonatomic) UIViewController *delegate;
 @property (weak, nonatomic) IBOutlet UILabel *subscriptionAds;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 

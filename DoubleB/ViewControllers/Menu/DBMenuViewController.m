@@ -20,6 +20,7 @@
 #import "DBBarButtonItem.h"
 #import "DBCategoryPicker.h"
 #import "DBDropdownTitleView.h"
+#import "DBPositionModifiersListModalView.h"
 
 #import "DBMixedMenuModuleView.h"
 #import "DBCategoriesMenuModuleView.h"
@@ -149,6 +150,19 @@
         UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:object mode:PositionViewControllerModeMenuPosition];
         [self.navigationController pushViewController:positionVC animated:YES];
     }
+}
+
+- (void)db_menuModuleViewNeedsToAddPosition:(DBMenuModuleView *)module position:(DBMenuPosition *)position {
+    if (position.hasEmptyRequiredModifiers) {
+        DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
+        [modifiersList configureWithMenuPosition:position];
+        
+        [modifiersList showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+    } else {
+        [[OrderCoordinator sharedInstance].itemsManager addPosition:position];
+    }
+    
+    [GANHelper analyzeEvent:@"product_added" label:position.positionId category:self.analyticsCategory];
 }
 
 #pragma mark - DBModuleViewDelegate

@@ -316,7 +316,7 @@ static NSDictionary *_preferences;
                     cell.userInteractionEnabled = NO;
                 } else {
                     cell.placeholderView.hidden = NO;
-                    cell.delegate = self;
+//                    cell.delegate = self;
                     cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
                     cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 }

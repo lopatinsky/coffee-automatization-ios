@@ -115,17 +115,10 @@
 - (void)positionCellDidOrder:(DBPositionCell *)cell{
     [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
     
-    if(cell.position.hasEmptyRequiredModifiers) {
-        DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
-        [modifiersList configureWithMenuPosition:cell.position];
-        if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]){
-            [modifiersList showOnView:[self.delegate db_moduleViewModalComponentContainer:self] appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
-        }
-    } else {
-//        [self.navigationController animateAddProductFromView:cell.priceView completion:^{
-            [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
-//        }];
+    if ([self.menuModuleDelegate respondsToSelector:@selector(db_menuModuleViewNeedsToAddPosition:position:)]) {
+        [self.menuModuleDelegate db_menuModuleViewNeedsToAddPosition:self position:cell.position];
     }
+    [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:self.analyticsCategory];
 }
 
 @end

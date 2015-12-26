@@ -14,6 +14,7 @@
 
 - (void)db_menuModuleViewDidReloadContent:(DBMenuModuleView *)module;
 - (void)db_menuModuleViewNeedsToMoveForward:(DBMenuModuleView *)module object:(id)object;
+- (void)db_menuModuleViewNeedsToAddPosition:(DBMenuModuleView *)module position:(DBMenuPosition *)position;
 
 @end
 
