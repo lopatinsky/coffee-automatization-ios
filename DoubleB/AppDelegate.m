@@ -50,7 +50,7 @@
     
     [self.window makeKeyAndVisible];
     
-    [[LocationHelper sharedInstance]locationManager:nil didEnterRegion:nil];
+    [[LocationHelper sharedInstance] locationManager:nil didEnterRegion:nil];
     
     return YES;
 }

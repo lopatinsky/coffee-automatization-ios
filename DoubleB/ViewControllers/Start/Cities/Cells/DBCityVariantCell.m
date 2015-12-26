@@ -10,6 +10,7 @@
 #import "DBUnifiedAppManager.h"
 
 @interface DBCityVariantCell ()
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end
@@ -20,7 +21,7 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
-- (void)setCity:(DBCity *)city {
+- (void)setCity:(DBUnifiedCity *)city {
     _city = city;
     
     self.titleLabel.text = city.cityName;

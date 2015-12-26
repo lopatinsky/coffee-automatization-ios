@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBUnifiedMenuTableViewController.h"
 
 @interface DBUnifiedMenuTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *photoImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
 
-- (void)setData:(NSDictionary *)info;
+- (void)setData:(NSDictionary *)info withType:(UnifiedTableViewType)type;
 
 @end

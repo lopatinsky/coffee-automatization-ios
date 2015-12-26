@@ -27,6 +27,9 @@ NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoFailure = 
 #pragma mark - FetchAppConfig Operation
 NSString * __nonnull const kDBConcurrentOperationAppConfigLoadSuccess = @"kDBConcurrentOperationAppConfigLoadSuccess";
 NSString * __nonnull const kDBConcurrentOperationAppConfigLoadFailure = @"kDBConcurrentOperationAppConfigLoadFailure";
+#pragma mark - Register Operation
+NSString * __nonnull const kDBConcurrentOperationRegisterSuccess = @"kDBConcurrentOperationRegisterSuccess";
+NSString * __nonnull const kDBConcurrentOperationRegisterFailure = @"kDBConcurrentOperationRegisterFailure";
 
 
 #pragma mark - FetchUnifiedCities Operation
@@ -35,6 +38,9 @@ NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadFailure = @"kD
 #pragma mark - FetchUnifiedVenues Operation
 NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadSuccess = @"kDBConcurrentOperationUnifiedVenuesLoadSuccess";
 NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadFailure = @"kDBConcurrentOperationUnifiedVenuesLoadFailure";
+#pragma mark - FetchUnifiedPositions Operation
+NSString * __nonnull const kDBConcurrentOperationUnifiedPositionsLoadSuccess = @"kDBConcurrentOperationUnifiedPositionsLoadSuccess";
+NSString * __nonnull const kDBConcurrentOperationUnifiedPositionsLoadFailure = @"kDBConcurrentOperationUnifiedPositionsLoadFailure";
 #pragma mark - FetchUnifiedMenu Operation
 NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadSuccess = @"kDBConcurrentOperationUnifiedMenuLoadSuccess";
 NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadFailure = @"kDBConcurrentOperationUnifiedMenuLoadFailure";
