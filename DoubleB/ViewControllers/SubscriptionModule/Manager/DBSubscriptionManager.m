@@ -57,6 +57,24 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [self saveCurrentSubscription];
 }
 
+#pragma mark - Class methods
+
++ (BOOL)positionsAreAvailable {
+    return [[DBSubscriptionManager sharedInstance] isEnabled] && [[DBSubscriptionManager sharedInstance] subscriptionCategory];
+}
+
++ (BOOL)categoryIsSubscription:(DBMenuCategory *)category {
+    if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+        return [[[[DBSubscriptionManager sharedInstance] subscriptionCategory] categoryId] isEqualToString:[category categoryId]];
+    } else {
+        return NO;
+    }
+}
+
++ (BOOL)isSubscriptionPosition:(NSIndexPath *)indexPath {
+    return [[DBSubscriptionManager sharedInstance] isEnabled] && (indexPath.section == 0);
+}
+
 #pragma mark – Cache section
 
 - (void)loadCurrentSubscription {
@@ -141,13 +159,17 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [[DBAPIClient sharedClient] GET:@"subscription/info"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                if ([responseObject objectForKey:@"amount"] && [responseObject objectForKey:@"days"]) {
+                                if ([responseObject getValueForKey:@"amount"] && [responseObject getValueForKey:@"days"]) {
                                     DBCurrentSubscription *currentSubscription = [DBCurrentSubscription new];
                                     currentSubscription.amount = [responseObject objectForKey:@"amount"];
                                     currentSubscription.creationDate = [NSDate date];
                                     currentSubscription.days = [responseObject objectForKey:@"days"];
                                     self.currentSubscription = currentSubscription;
                                     [self saveCurrentSubscription];
+                                }
+                                if ([responseObject getValueForKey:@"category"]) {
+                                    self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:[responseObject objectForKey:@"category"]];
+                                    [self saveSubscriptionCategory];
                                 }
                                 if(success)
                                     success(@[]);
@@ -197,11 +219,8 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     }];
     
     if (index != -1) {
-        self.subscriptionCategory = [DBMenuCategory categoryFromResponseDictionary:categories[index]];
         [categories removeObjectAtIndex:index];
         mutableMenu[@"menu"] = categories;
-        
-        [self saveSubscriptionCategory];
     }
     
     return mutableMenu;
@@ -258,6 +277,53 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 
 + (NSString *)db_managerStorageKey {
     return @"kDBDefaultsDBSubscriptionManager";
+}
+
+@end
+
+@implementation DBSubscriptionManager(TableViewInjection)
+
++ (NSInteger)numberOfRowsInSection:(NSInteger)section forCategory:(nonnull DBMenuCategory *)category {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && section == 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
++ (SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellForCategory:(DBMenuCategory *)category withIndexPath:(NSIndexPath *)indexPath andCell:(SubscriptionInfoTableViewCell *)cell {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
+                cell.placeholderView.hidden = YES;
+                cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
+                cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.userInteractionEnabled = NO;
+            } else {
+                cell.placeholderView.hidden = NO;
+                cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            return cell;
+        } else {
+            return nil;
+        }
+    } else {
+        return nil;
+    }
+}
+
++ (NSIndexPath *)correctedIndexPath:(NSIndexPath *)indexPath forCategory:(DBMenuCategory *)category {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            return indexPath;
+        } else {
+            return [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+        }
+    } else {
+        return indexPath;
+    }
 }
 
 @end

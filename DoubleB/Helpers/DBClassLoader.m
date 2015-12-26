@@ -42,4 +42,15 @@
     }
 }
 
+#pragma mark - Views
++ (Class)menuCategoryCell {
+    Class categoryCellClass = NSClassFromString(@"DBCategoryCellCoffeeAcademy");
+    
+    if(!categoryCellClass){
+        categoryCellClass = NSClassFromString(@"DBCategoryCell");
+    }
+    
+    return categoryCellClass;
+}
+
 @end

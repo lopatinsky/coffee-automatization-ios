@@ -47,7 +47,7 @@
     
     [self setupModules];
     
-    _orderModule = [DBNOOrderModuleView new];
+    _orderModule = [DBNOOrderModuleView create];
     _orderModule.analyticsCategory = self.analyticsCategory;
     _orderModule.ownerViewController = self;
     _orderModule.translatesAutoresizingMaskIntoConstraints = NO;
@@ -75,30 +75,30 @@
 }
 
 - (void)setupModules {
-    [self addModule:[DBNOOrderItemsModuleView new]];
-    [self addModule:[DBNOGiftItemsModuleView new] topOffset:1];
-    [self addModule:[DBNOBonusItemsModuleView new] topOffset:1];
-    [self addModule:[DBNOBonusItemAdditionModuleView new]];
+    [self addModule:[DBNOOrderItemsModuleView create]];
+    [self addModule:[DBNOGiftItemsModuleView create] topOffset:1];
+    [self addModule:[DBNOBonusItemsModuleView create] topOffset:1];
+    [self addModule:[DBNOBonusItemAdditionModuleView create]];
     
     [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:10]];
     
     if (![DBClientInfo sharedInstance].clientPhone.valid || ![DBClientInfo sharedInstance].clientName.valid){
-        [self addModule:[DBNOProfileModuleView new] topOffset:0 bottomOffset:5];
+        [self addModule:[DBNOProfileModuleView create] topOffset:0 bottomOffset:5];
     }
     
     if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1) {
-        [self addModule:[DBNODeliveryTypeModuleView new] topOffset:0];
+        [self addModule:[DBNODeliveryTypeModuleView create] topOffset:0];
     }
-    [self addModule:[DBNOVenueModuleView new] topOffset:1];
-    [self addModule:[DBNOTimeModuleView new] topOffset:1];
-    [self addModule:[DBNOPaymentModuleView new]topOffset:5];
-    [self addModule:[DBNOCommentModuleView new]topOffset:5];
-    [self addModule:[DBNOndaModuleView new]topOffset:5];
+    [self addModule:[DBNOVenueModuleView create] topOffset:1];
+    [self addModule:[DBNOTimeModuleView create] topOffset:1];
+    [self addModule:[DBNOPaymentModuleView create]topOffset:5];
+    [self addModule:[DBNOCommentModuleView create]topOffset:5];
+    [self addModule:[DBNOndaModuleView create]topOffset:5];
     
     [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:5]];
     
-    [self addModule:[DBNOWalletModuleView new] topOffset:0 bottomOffset:1];
-    [self addModule:[DBNOTotalModuleView new] topOffset:0];
+    [self addModule:[DBNOWalletModuleView create] topOffset:0 bottomOffset:1];
+    [self addModule:[DBNOTotalModuleView create] topOffset:0];
     
     [self layoutModules];
 }

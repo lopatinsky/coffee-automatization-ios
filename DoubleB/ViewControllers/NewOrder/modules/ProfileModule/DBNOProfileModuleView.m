@@ -19,10 +19,8 @@
 
 @implementation DBNOProfileModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOProfileModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOProfileModuleView";
 }
 
 - (void)awakeFromNib {

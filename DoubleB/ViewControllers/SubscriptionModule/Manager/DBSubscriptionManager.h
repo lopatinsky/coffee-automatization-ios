@@ -10,6 +10,8 @@
 #import "DBPrimaryManager.h"
 #import "DBModuleManagerProtocol.h"
 
+#import "SubscriptionInfoTableViewCell.h"
+
 #import "DBSubscriptionVariant.h"
 #import "DBCurrentSubscription.h"
 
@@ -36,6 +38,9 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 @property (nonatomic, strong) DBMenuCategory * __nonnull subscriptionCategory;
 @property (nonatomic) NSInteger balance;
 
++ (BOOL)categoryIsSubscription:(nonnull DBMenuCategory *)category;
++ (BOOL)isSubscriptionPosition:(nonnull NSIndexPath *)indexPath;
+
 - (void)synchWithResponseInfo:( nonnull NSDictionary *)infoDict;
 - (void)buySubscription:(nonnull DBSubscriptionVariant *)variant callback:(void(^ _Nonnull)(BOOL success, NSString * __nonnull errorMessage))callback;
 - (void)checkSubscriptionVariants:(void(^ _Nonnull)(NSArray * __nonnull variants))success failure:(void(^ _Nonnull)(NSString * __nonnull errorMessage))failure;
@@ -53,5 +58,14 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 - (void)incrementNumberOfCupsInOrder:(NSString * __nonnull)productId;
 - (void)incrementNumberOfCupsInOrder;
 - (void)decrementNumberOfCupsInOrder;
+
+@end
+
+@interface DBSubscriptionManager(TableViewInjection)
+
++ (NSInteger)numberOfRowsInSection:(NSInteger)section forCategory:(nonnull DBMenuCategory *)category;
++ (nullable SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellForCategory:(nonnull DBMenuCategory *) category withIndexPath:(nonnull NSIndexPath *)indexPath andCell:(nonnull SubscriptionInfoTableViewCell *)cell;
++ (nonnull NSIndexPath *)correctedIndexPath:(nonnull NSIndexPath *)indexPath forCategory:(nonnull DBMenuCategory *)category;
+
 
 @end

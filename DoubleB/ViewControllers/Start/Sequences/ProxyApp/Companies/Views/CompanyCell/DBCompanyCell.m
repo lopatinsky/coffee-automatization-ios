@@ -39,13 +39,14 @@
 }
 
 - (void)configure:(DBCompany *)company {
-    [self.photoImageView db_showDefaultImage];
-    [self.photoImageView setPin_updateWithProgress:YES];
-    [self.photoImageView pin_setImageFromURL:[NSURL URLWithString:company.companyImageUrl] completion:^(PINRemoteImageManagerResult *result) {
-        if (result.resultType != PINRemoteImageResultTypeNone) {
-            [self.photoImageView db_hideDefaultImage];
-        }
+    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:company.companyImageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     }];
+//    [self.photoImageView setPin_updateWithProgress:YES];
+//    [self.photoImageView pin_setImageFromURL:[NSURL URLWithString:company.companyImageUrl] completion:^(PINRemoteImageManagerResult *result) {
+//        if (result.resultType != PINRemoteImageResultTypeNone) {
+//            [self.photoImageView db_hideDefaultImage];
+//        }
+//    }];
     
     self.titleLabel.text = company.companyName;
 }

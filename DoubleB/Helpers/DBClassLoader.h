@@ -10,9 +10,15 @@
 
 @class DBSettingsTableViewController;
 
+@class DBCategoryCell;
+
 @interface DBClassLoader : NSObject
 
 + (UIViewController *)loadNewOrderViewController;
 + (DBSettingsTableViewController *)loadSettingsViewController;
+
+
+#pragma mark - Views
++ (Class)menuCategoryCell;
 
 @end

@@ -42,10 +42,8 @@
 
 @implementation DBNOTotalModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOTotalModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOTotalModuleView";
 }
 
 - (void)awakeFromNib{
@@ -101,7 +99,7 @@
         self.shippingTotal.text = [NSString stringWithFormat:@"%.0f %@", _orderCoordinator.promoManager.shippingPrice, [Compatibility currencySymbol]];
     }
     
-    double discount = _orderCoordinator.promoManager.discount;
+    double discount = _orderCoordinator.promoManager.discount > 0 ? _orderCoordinator.promoManager.discount : 0;
     discount += _orderCoordinator.promoManager.walletActiveForOrder ? _orderCoordinator.promoManager.walletDiscount : 0;
     if (discount == 0) {
         self.constraintDiscountViewHeight.constant = 0;
@@ -113,7 +111,9 @@
         self.discountTotal.text = [NSString stringWithFormat:@"- %.0f %@", discount, [Compatibility currencySymbol]];
     }
     
-    double total = _orderCoordinator.itemsManager.totalPrice + _orderCoordinator.promoManager.shippingPrice - discount;
+    double total = _orderCoordinator.itemsManager.totalPrice + _orderCoordinator.promoManager.shippingPrice;
+    total -= _orderCoordinator.promoManager.discount;
+    total -= _orderCoordinator.promoManager.walletActiveForOrder ? _orderCoordinator.promoManager.walletDiscount : 0;
     self.totalTotal.text = [NSString stringWithFormat:@"%.0f %@", total, [Compatibility currencySymbol]];
 }
 

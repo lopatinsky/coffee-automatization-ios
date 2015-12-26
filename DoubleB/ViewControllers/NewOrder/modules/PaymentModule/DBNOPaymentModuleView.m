@@ -23,10 +23,8 @@
 
 @implementation DBNOPaymentModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOPaymentModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOPaymentModuleView";
 }
 
 - (void)awakeFromNib {
@@ -68,6 +66,11 @@
                 self.titleLabel.textColor = [UIColor db_errorColor];
             }
         }break;
+            
+        case PaymentTypeCourierCard:
+            self.titleLabel.textColor = [UIColor blackColor];
+            self.titleLabel.text = NSLocalizedString(@"Картой курьеру", nil);
+            break;
             
         case PaymentTypeCash:
             self.titleLabel.textColor = [UIColor blackColor];

@@ -18,7 +18,7 @@
 @end
 
 @interface DBCategoryPicker : DBPopupComponent
-@property (weak, nonatomic) id<DBCategoryPickerDelegate> pickerDelegate;
+@property (weak, nonatomic) id<DBCategoryPickerDelegate, DBPopupComponentDelegate> pickerDelegate;
 
 - (void)configureWithCurrentCategory:(DBMenuCategory *)category categories:(NSArray *)categories;
 @end

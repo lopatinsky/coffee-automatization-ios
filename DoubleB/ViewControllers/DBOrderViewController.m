@@ -22,6 +22,7 @@
 #import "IHSecureStore.h"
 #import "OrderCoordinator.h"
 #import "DBCompanyInfo.h"
+#import "DBSubscriptionManager.h"
 
 #import "UIAlertView+BlocksKit.h"
 
@@ -160,9 +161,6 @@
         self.viewHeader.labelPaymentStatus.text = NSLocalizedString(@"Не оплачен", nil);
         self.viewHeader.imageViewPaymentStatus.image = [UIImage imageNamed:@"not_paid"];
     }
-    
-
-    self.viewFooter.labelDate.text = [NSString stringWithFormat:[DBTextResourcesHelper db_preparationOrderCellString], self.order.formattedTimeString];
 }
 
 - (void)cancelOrder:(DBOrderCancelReason)reason reasonText:(NSString *)reasonText {
@@ -182,6 +180,14 @@
                                  [[CoreDataHelper sharedHelper] save];
                                  [self reloadCancelRepeatButton];
                                  [self reloadStatusInfo:nil];
+                                 
+                                 if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                                     [[DBSubscriptionManager sharedInstance] subscriptionInfo:^(NSArray * _Nonnull info) {
+                                         
+                                     } failure:^(NSString * _Nonnull errorMessage) {
+                                         
+                                     }];
+                                 }
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSString *errorEventLabel = [eventLabel stringByAppendingString:[NSString stringWithFormat:@";%@", error.localizedDescription]];

@@ -53,6 +53,22 @@
     return self;
 }
 
+- (BOOL)vkIsAvailable {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"VKAppId"] != nil;
+}
+
+- (void)shareDidFail {
+    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+    }];
+}
+
+- (void)shareDidSuccess {
+    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+    }];
+}
+
 #pragma mark - Facebook
 - (void)shareFacebook {
     NSString *text = [DBShareHelper sharedInstance].textShare;
@@ -69,6 +85,7 @@
     FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
     dialog.fromViewController = self.delegate;
     dialog.shareContent = content;
+    dialog.delegate = self;
     dialog.mode = FBSDKShareDialogModeNative;
     if (![dialog canShow]) {
         dialog.mode = FBSDKShareDialogModeFeedBrowser;
@@ -85,16 +102,14 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     [GANHelper analyzeEvent:@"share_success" label:@"facebook" category:SHARE_PERMISSION_SCREEN];
+    [self shareDidSuccess];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
     [GANHelper analyzeEvent:@"share_failure"
                       label:[NSString stringWithFormat:@"facebook, %@", error.description]
                    category:SHARE_PERMISSION_SCREEN];
-
-    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        
-    }];
+    [self shareDidFail];
 }
 
 - (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
@@ -128,6 +143,7 @@
     [shareDialog setCompletionHandler:^(VKShareDialogControllerResult result) {
         if (result == VKShareDialogControllerResultDone) {
             [GANHelper analyzeEvent:@"share_success" label:@"vk" category:SHARE_PERMISSION_SCREEN];
+            [self shareDidSuccess];
         } else {
             [GANHelper analyzeEvent:@"share_dialog_cancelled" label:@"vk" category:SHARE_PERMISSION_SCREEN];
         }
