@@ -1,8 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '7.1'
 
+link_with 'UITests'
+
 pod 'Parse'
 pod 'PINRemoteImage'
+pod 'DZNEmptyDataSet'
 pod 'AKNumericFormatter'
 pod 'AFNetworking', '~> 2.2'
 pod 'BlocksKit', '~> 2.2.2'
@@ -22,3 +25,5 @@ pod 'Crashlytics'
 pod 'Branch'
 pod 'FBSDKShareKit'
 pod 'VK-ios-sdk'
+
+pod 'HSTestingBackchannel', :configuration => ['Debug']

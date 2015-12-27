@@ -14,9 +14,18 @@
 #import "DBUniversalModulesManager.h"
 #import "DBGeoPushManager.h"
 
+typedef NS_ENUM(NSInteger, DBModuleType) {
+    DBModuleTypeSubscription = 0,
+    DBModuleTypeFriendGift = 1,
+    DBModuleTypeFriendInvitation = 2,
+    DBModuleTypeProfileScreenUniversal = 4,
+    DBModuleTypeGeoPush = 5,
+    DBModuleTypeFriendGiftMivako = 7,
+    
+    DBModuleTypeLast // Enum item for iteration, not in use
+};
 
 @interface DBModulesManager ()
-@property (strong, nonatomic) NSMutableArray *availableModules;
 @end
 
 @implementation DBModulesManager
@@ -58,15 +67,17 @@
     for (NSDictionary *moduleDict in modules) {
         NSInteger type = [moduleDict getValueForKey:@"type"] ? [[moduleDict getValueForKey:@"type"] integerValue] : -1;
         
-        self.availableModules = [NSMutableArray new];
-        if (type != -1) {
-            [self.availableModules addObject:@(type)];
-        }
-        
         switch (type) {
-            case DBModuleTypeFriendGift:
-                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:[moduleDict getValueForKey:@"info"]];
-                break;
+            case DBModuleTypeFriendGift: {
+                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeCommon), @"info":moduleDict}];
+                [appModules removeObject:@(DBModuleTypeFriendGift)];
+                [appModules removeObject:@(DBModuleTypeFriendGiftMivako)];
+            } break;
+            case DBModuleTypeFriendGiftMivako: {
+                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeFree), @"info":moduleDict}];
+                [appModules removeObject:@(DBModuleTypeFriendGift)];
+                [appModules removeObject:@(DBModuleTypeFriendGiftMivako)];
+            } break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
@@ -85,20 +96,23 @@
     for (NSNumber *type in appModules) {
         switch (type.integerValue) {
             case DBModuleTypeFriendGift:
+            case DBModuleTypeFriendGiftMivako:
                 [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
                 break;
             case DBModuleTypeProfileScreenUniversal:
-                [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
+                [[DBUniversalModulesManager sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeSubscription:
+                [[DBSubscriptionManager sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeGeoPush:
+                [[DBGeoPushManager sharedInstance] enableModule:NO withDict:nil];
                 break;
                 
             default:
                 break;
         }
     }
-}
-
-- (BOOL)moduleEnabled:(DBModuleType)type {
-    return [self.availableModules containsObject:@(type)];
 }
 
 @end

@@ -26,6 +26,8 @@
 #import "DBPayPalManager.h"
 #import "DBUnifiedAppManager.h"
 
+#import "AppIndexingManager.h"
+#import "WatchInteractionManager.h"
 #import "DBUniversalModulesManager.h"
 #import "DBUniversalModule.h"
 
@@ -50,7 +52,7 @@
                             }];
 }
 
-+ (void)registerUser:(void(^)(BOOL success))callback{
++ (void)registerUser:(void(^)(BOOL success))callback {
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
 }
 
@@ -276,6 +278,16 @@
                                  
                                  // Save order
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
+                                 ord.requestObject = order;
+                                 
+                                 [[AppIndexingManager sharedManager] postActivity:ord withParams:@{@"type": @"order", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+                                 for (OrderItem *item in [ord items]) {
+                                     if ([item activityIsAvailable]) {
+                                         [[AppIndexingManager sharedManager] postActivity:item withParams:@{@"type": @"position", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+                                     }
+                                 }
+                                 
+                                 [[WatchInteractionManager sharedInstance] updateLastOrActiveOrder];
                                  if(success)
                                      success(ord);
                                  
@@ -560,7 +572,7 @@
     return items;
 }
 
-+ (NSDictionary *)assembleClientInfo{
++ (NSDictionary *)assembleClientInfo {
     NSMutableDictionary *clientInfo = [NSMutableDictionary new];
     clientInfo[@"id"] = [[IHSecureStore sharedInstance] clientId];
     clientInfo[@"name"] =  [DBClientInfo sharedInstance].clientName.value;
@@ -576,7 +588,7 @@
     return clientInfo;
 }
 
-+ (NSDictionary *)assemblyPaymentInfo{
++ (NSDictionary *)assemblyPaymentInfo {
     NSMutableDictionary *payment = [NSMutableDictionary new];
     
     PaymentType paymentType = [OrderCoordinator sharedInstance].orderManager.paymentType;
@@ -596,7 +608,8 @@
             }
             payment[@"card_pan"] = cardPan ?: @"";
         }
-        payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+        
+        payment[@"client_id"] = [IHSecureStore sharedInstance].paymentClientId;
         payment[@"return_url"] = @"alpha-payment://return-page";
     }
     
@@ -609,7 +622,7 @@
     return payment;
 }
 
-+ (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
++ (void)assembleTimeIntoParams:(NSMutableDictionary *)params {
     DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
     if(settings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
         NSDateFormatter *formatter = [NSDateFormatter new];
@@ -622,7 +635,7 @@
     }
 }
 
-+ (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
++ (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode {
     DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
     params[@"delivery_type"] = @(settings.deliveryType.typeId);
     if(settings.deliveryType.typeId == DeliveryTypeIdShipping){

@@ -13,6 +13,10 @@
 
 #import "DBGeoPush.h"
 
+
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
@@ -49,8 +53,9 @@
     self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
+
     
-    [[LocationHelper sharedInstance]locationManager:nil didEnterRegion:nil];
+    [[LocationHelper sharedInstance] locationManager:nil didEnterRegion:nil];
     
     return YES;
 }
@@ -138,6 +143,11 @@
     if ([DBCompanyInfo sharedInstance].venuePushChannel) {
 //        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].venuePushChannel];
     }
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+    [ApplicationManager continueUserActivity:userActivity];
+    return YES;
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

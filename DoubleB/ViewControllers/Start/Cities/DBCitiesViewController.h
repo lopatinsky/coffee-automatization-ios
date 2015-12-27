@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class DBCity;
+@class DBUnifiedCity;
 @protocol DBCitiesViewControllerDelegate <NSObject>
 
-- (void)db_citiesViewControllerDidSelectCity:(DBCity *)city;
+- (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city;
 
 @end
 

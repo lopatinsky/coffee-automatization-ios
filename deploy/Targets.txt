@@ -65,3 +65,12 @@ AntiPizza com.empatika.antipizza 1057237960
 Foody com.empatika.foody 1057236032
 Pomidor com.empatika.pomidor 1059777847
 SushkiFishki com.empatika.sushkifishki 1059778537
+SushiEdut com.empatika.sushiedut 1061969119
+BigFood com.empatika.bigfood 1061969132
+Perepechki com.empatika.perepechki 1063695118
+FoodFusion com.empatika.foodfusion 1063716403
+MealStreet com.empatika.mealstreet 1063718726
+MaxxiCoffee com.empatika.maxiicoffee 1063718709
+Grilnica com.empatika.grilnica 1063717530
+ChaychonaTlt com.empatika.chaychonatlt 1064122943
+Buono com.empatika.buono 1063718471

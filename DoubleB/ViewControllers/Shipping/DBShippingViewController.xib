@@ -6,7 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBShippingViewController">
             <connections>
-                <outlet property="constraintTableViewBottomAlignment" destination="gkb-Tt-TSx" id="Oj8-l0-3Sx"/>
+                <outlet property="constraintContentViewBottomAlignment" destination="IPa-S3-6mo" id="lOI-d0-su7"/>
+                <outlet property="contentView" destination="DjX-3J-wdn" id="90y-wg-hc7"/>
                 <outlet property="tableView" destination="nYK-HG-7VP" id="ZQh-QR-AUV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -16,17 +17,29 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nYK-HG-7VP">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjX-3J-wdn">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nYK-HG-7VP">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </tableView>
+                    <constraints>
+                        <constraint firstItem="nYK-HG-7VP" firstAttribute="top" secondItem="DjX-3J-wdn" secondAttribute="top" id="A9S-tu-si9"/>
+                        <constraint firstAttribute="bottom" secondItem="nYK-HG-7VP" secondAttribute="bottom" id="S9a-7g-eGS"/>
+                        <constraint firstAttribute="trailing" secondItem="nYK-HG-7VP" secondAttribute="trailing" id="eAX-t8-Okj"/>
+                        <constraint firstItem="nYK-HG-7VP" firstAttribute="leading" secondItem="DjX-3J-wdn" secondAttribute="leading" id="vZr-q2-hff"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="nYK-HG-7VP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1mf-rJ-0J6"/>
-                <constraint firstItem="nYK-HG-7VP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Fwf-jx-JMX"/>
-                <constraint firstAttribute="trailing" secondItem="nYK-HG-7VP" secondAttribute="trailing" id="Qqf-zS-tnv"/>
-                <constraint firstAttribute="bottom" secondItem="nYK-HG-7VP" secondAttribute="bottom" id="gkb-Tt-TSx"/>
+                <constraint firstAttribute="bottom" secondItem="DjX-3J-wdn" secondAttribute="bottom" id="IPa-S3-6mo"/>
+                <constraint firstItem="DjX-3J-wdn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NMa-pA-pgS"/>
+                <constraint firstItem="DjX-3J-wdn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tle-8k-aBn"/>
+                <constraint firstAttribute="trailing" secondItem="DjX-3J-wdn" secondAttribute="trailing" id="upw-Sq-EX8"/>
             </constraints>
             <point key="canvasLocation" x="348" y="298"/>
         </view>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://foodfusion.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#73b51c</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-20</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>rJJp9njJGTrumDcwyAw6G5hJ6efZRQfp3rdQ8P9L</string>
+			<key>clientKey</key>
+			<string>QgifJN9mEaccF0Bp4FSy2Uzs7KeLh8pl8yZfqHWg</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>

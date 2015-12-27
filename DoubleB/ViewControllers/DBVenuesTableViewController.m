@@ -32,6 +32,7 @@
     [super viewDidLoad];
     
     [self db_setTitle:[DBTextResourcesHelper db_venuesTitleString]];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];

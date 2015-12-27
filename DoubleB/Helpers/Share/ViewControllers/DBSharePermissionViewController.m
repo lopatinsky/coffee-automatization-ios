@@ -12,6 +12,7 @@
 #import "DBCompanyInfo.h"
 #import "SocialManager.h"
 #import "UIActionSheet+BlocksKit.h"
+#import "DBTextResourcesHelper.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
@@ -45,11 +46,13 @@
     if(!self.screen)
         self.screen = SHARE_PERMISSION_SCREEN;
     
-    NSString *imageName = [NSString stringWithFormat:@"share2_%ld.jpg", (long)[UIScreen mainScreen].bounds.size.height];
+    NSString *imageName = [DBTextResourcesHelper db_shareBgImageName];
+    imageName = [NSString stringWithFormat:@"%@_%ld.jpg", imageName, (long)[UIScreen mainScreen].bounds.size.height];
     self.shareImageView.image = [UIImage imageNamed:imageName];
     
     self.logoImageView.hidden = YES;
     self.logoLabel.text = [DBCompanyInfo sharedInstance].applicationName;
+    self.logoLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
     
     self.closeButton.imageView.image = [UIImage imageNamed:@"close_white.png"];
     
@@ -70,7 +73,10 @@
     [self.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel.text = [DBShareHelper sharedInstance].titleShareScreen;
+    self.titleLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
+    
     self.descriptionLabel.text = [DBShareHelper sharedInstance].textShareScreen;
+    self.descriptionLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
 
     self.socialManager = [SocialManager sharedManagerWithDelegate:self];
     [self initializeActionViewSheet];
@@ -95,6 +101,12 @@
 
 - (void)initializeActionViewSheet {
     self.actionSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Поделиться", nil)];
+    
+    if ([self.socialManager vkIsAvailable]) {
+        [self.actionSheet bk_addButtonWithTitle:@"Вконтакте" handler:^{
+            [self.socialManager shareVk];
+        }];
+    }
     
     [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
         [self.socialManager shareFacebook];

@@ -12,7 +12,7 @@
 
 @implementation DBTextResourcesHelper
 
-+ (NSString *)db_venuesTitleString{
++ (NSString *)db_venuesTitleString {
     NSString *title = NSLocalizedString(@"Заведения", nil);
     if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
         NSUInteger venuesCount = [[Venue storedVenues] count];
@@ -35,11 +35,43 @@
 }
 
 + (NSString *)db_preparationOrderCellString {
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"] || [[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"testapp"]) {
         return NSLocalizedString(@"Мы постараемся приготовить к %@", nil);
     } else {
         return NSLocalizedString(@"Готов к %@", nil);
     }
+}
+
++ (NSString *)db_readyOrderCellString {
+    return NSLocalizedString(@"Готов к %@", nil);
+}
+
++ (NSString *)db_shareBgImageName {
+    NSString *imageName = @"share";
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"]) {
+        imageName = @"share_redcup";
+    }
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
+        imageName = @"share_coffeeacademy";
+    }
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"voda"]) {
+        imageName = @"share_voda";
+    }
+    
+    return imageName;
+}
+
++ (UIColor *)db_shareScreenTextColor {
+    UIColor *color = [UIColor whiteColor];
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"voda"]) {
+        color = [UIColor blackColor];
+    }
+    
+    return color;
 }
 
 + (NSString *)db_initialMenuTitle {

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum : NSUInteger {
+    UnifiedMenu,
+    UnifiedVenue,
+    UnifiedPosition,
+} UnifiedTableViewType;
+
 @interface DBUnifiedMenuTableViewController : UIViewController
+
+@property (nonatomic) UnifiedTableViewType type;
+@property (nonatomic) NSDictionary *product;
 
 @end

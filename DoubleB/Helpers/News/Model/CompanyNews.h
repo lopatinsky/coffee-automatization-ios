@@ -13,5 +13,7 @@
 @property (nonatomic, strong) NSNumber *newsId;
 @property (nonatomic, strong) NSString *imageURL;
 @property (nonatomic, strong) NSString *text;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSDate *date;
 
 @end

@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "DBModuleView.h"
 
+extern NSString * __nonnull const kDBFGRecipientModuleViewDismiss;
+
 @interface DBFGRecipientModuleView : DBModuleView
 
 @end

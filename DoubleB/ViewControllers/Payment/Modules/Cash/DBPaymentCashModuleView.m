@@ -48,7 +48,7 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
-    if([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCash){
+    if ([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCash){
         self.tickImageView.hidden = NO;
     } else {
         self.tickImageView.hidden = YES;

@@ -91,7 +91,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"DBCityVariantCell" owner:self options:nil] firstObject];
     }
     
-    DBCity *city = _cities[indexPath.row];
+    DBUnifiedCity *city = _cities[indexPath.row];
     cell.city = city;
     
     return cell;
@@ -100,6 +100,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.delegate respondsToSelector:@selector(db_citiesViewControllerDidSelectCity:)]) {
         [self.delegate db_citiesViewControllerDidSelectCity:_cities[indexPath.row]];
     }

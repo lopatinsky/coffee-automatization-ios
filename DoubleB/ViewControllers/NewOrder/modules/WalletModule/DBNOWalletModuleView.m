@@ -17,10 +17,8 @@
 
 @implementation DBNOWalletModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOWalletModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOWalletModuleView";
 }
 
 - (void)awakeFromNib {

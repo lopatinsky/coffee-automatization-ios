@@ -24,12 +24,22 @@ extern NSString * __nonnull const kDBConcurrentOperationFetchVenuesFinished;
 #pragma mark - Subscription Operation
 extern NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationFetchSubscriptionInfoFailure;
+#pragma mark - FetchAppConfig Operation
+extern NSString * __nonnull const kDBConcurrentOperationAppConfigLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationAppConfigLoadFailure;
+#pragma mark - Register Operation
+extern NSString * __nonnull const kDBConcurrentOperationRegisterSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationRegisterFailure;
+
 #pragma mark - FetchUnifiedCities Operation
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedCitiesLoadFailure;
 #pragma mark - FetchUnifiedVenues Operation
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedVenuesLoadFailure;
+#pragma mark - FetchUnifiedPositions Operation
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedPositionsLoadSuccess;
+extern NSString * __nonnull const kDBConcurrentOperationUnifiedPositionsLoadFailure;
 #pragma mark - FetchUnifiedMenu Operation
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadSuccess;
 extern NSString * __nonnull const kDBConcurrentOperationUnifiedMenuLoadFailure;

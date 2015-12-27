@@ -10,6 +10,8 @@
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
 
+#import "NSDate+Difference.h"
+
 static NSMutableArray *storedVenues;
 static NSMutableArray *unifiedStoredVenues;
 
@@ -24,8 +26,21 @@ static NSMutableArray *unifiedStoredVenues;
     self.distance = [dict[@"distance"] doubleValue];
     self.location = CLLocationCoordinate2DMake([dict[@"lat"] doubleValue], [dict[@"lon"] doubleValue]);
     self.phone = [dict getValueForKey:@"called_phone"] ?: @"";
-    
     self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
+    
+    NSMutableDictionary *_dict = [dict mutableCopy];
+    NSArray *keysForNullValues = [_dict allKeysForObject:[NSNull null]];
+    [_dict removeObjectsForKeys:keysForNullValues];
+    
+    NSDictionary *companyDictionary = [_dict objectForKey:@"company"];
+    if (companyDictionary) {
+        NSMutableDictionary *prune = [companyDictionary mutableCopy];
+        NSArray *keysForNullValues = [prune allKeysForObject:[NSNull null]];
+        [prune removeObjectsForKeys:keysForNullValues];
+        _dict[@"company"] = prune;
+    }
+    
+    self.venueDictionary = _dict;
 }
 
 - (void)setLocation:(CLLocationCoordinate2D)location {
@@ -63,6 +78,15 @@ static NSMutableArray *unifiedStoredVenues;
     return [self storedVenueForId:venueId];
 }
 
+- (void)setVenueDictionary:(NSDictionary *)venueDictionary {
+    [[NSUserDefaults standardUserDefaults] setObject:venueDictionary forKey:[NSString stringWithFormat:@"venue_dict_%@", self.venueId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDictionary *)venueDictionary {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"venue_dict_%@", self.venueId]];
+}
+
 #pragma mark - Storage
 + (void)dropAllVenues {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
@@ -96,12 +120,30 @@ static NSMutableArray *unifiedStoredVenues;
     storedVenues = nil;
 }
 
++ (NSArray *)venuesFromDict:(NSArray *)responseVenues {
+    NSMutableArray *venues = [NSMutableArray new];
+    
+    for (NSDictionary *dict in responseVenues) {
+        Venue *venue = [self storedVenueForId:dict[@"id"]];
+        if (venue) {
+            [venue applyDict:dict];
+        } else {
+            venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
+            [venue applyDict:dict];
+        }
+        [venues addObject:venue];
+    }
+    
+    return venues;
+}
+
 #pragma mark - Auxiliary
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{
     NSMutableString *result = [NSMutableString stringWithString:@""];
-    for(NSDictionary *scheduleItem in  schedule){
+    for (NSDictionary *scheduleItem in  schedule){
         NSArray *days = scheduleItem[@"days"];
         NSString *hours = scheduleItem[@"hours"];
+        NSString *minutes = scheduleItem[@"minutes"];
         
         [result appendString:[self dayByNumber:[[days firstObject] intValue]]];
         if([days count] > 1){
@@ -109,7 +151,16 @@ static NSMutableArray *unifiedStoredVenues;
             [result appendString:[self dayByNumber:[[days lastObject] intValue]]];
         }
         [result appendString:@" "];
-        [result appendString:hours];
+        
+        NSArray *hoursArray = [hours componentsSeparatedByString:@"-"];
+        NSArray *minutesArray = [minutes componentsSeparatedByString:@"-"];
+        [result appendString:hoursArray[0]];
+        [result appendString:@":"];
+        [result appendString:minutesArray[0]];
+        [result appendString:@"-"];
+        [result appendString:hoursArray[1]];
+        [result appendString:@":"];
+        [result appendString:minutesArray[1]];
         
         if(scheduleItem != [schedule lastObject]){
             [result appendString:@", "];
@@ -150,6 +201,40 @@ static NSMutableArray *unifiedStoredVenues;
     }
     
     return result;
+}
+
++ (void)updateUserActivities {
+    NSArray *venues = [Venue storedVenues];
+    for (Venue *venue in venues) {
+        if ([venue activityIsAvailable]) {
+            [[AppIndexingManager sharedManager] postActivity:venue withParams:@{@"type": @"venue", @"expirationDate": [[NSDate date] dateByAddingTimeInterval:60 * 60 * 24 * 7], @"eligibleForPublicIndexing": @"YES"}];
+        }
+    }
+}
+
+#pragma mark - UserActivityIndexing protocol
+- (CSSearchableItemAttributeSet *)activityAttributes {
+    CSSearchableItemAttributeSet *set = [[CSSearchableItemAttributeSet alloc] initWithItemContentType:(NSString *)kUTTypeImage];
+    set.contentDescription = [NSString stringWithFormat:@"%@\n%@\n%.2f m", self.address, self.workingTime, self.distance];
+    return set;
+}
+
+- (NSString *)activityTitle {
+    return self.title;
+}
+
+- (NSDictionary *)activityUserInfo {
+    return @{@"venue_id": self.venueId};
+}
+
+- (void)activityDidAppear {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"last_indexing_venue_%@", [self venueId]]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)activityIsAvailable {
+    NSDate *lastPublicationDate = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"last_indexing_venue_%@", [self venueId]]] ?: [NSDate dateWithTimeIntervalSince1970:0];
+    return [[NSDate date] numberOfDaysUntil:lastPublicationDate] > 7;
 }
 
 @end
@@ -194,32 +279,6 @@ static NSMutableArray *unifiedStoredVenues;
                                 
                                 if(completionHandler)
                                     completionHandler(nil);
-                            }];
-}
-
-@end
-
-
-@implementation Venue (UnifiedAPI)
-
-+ (void)fetchUnifiedVenuesForLocation:(CLLocation *)location withCompletionHandler:(void (^)(NSArray *))completionHandler {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (location) {
-        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-    }
-    
-    [[DBAPIClient sharedClient] GET:@"unified/venues"
-                         parameters:params
-                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                if (completionHandler) {
-                                    // TODO: finish it
-                                    completionHandler(@[]);
-                                }
-                            }
-                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                                if (completionHandler) {
-                                    completionHandler(nil);
-                                }
                             }];
 }
 

@@ -40,7 +40,7 @@ static NSString *screenIdentifier;
 
 - (void)bindNewCard:(void(^)(BOOL success))completionHandler{
     [[IHPaymentManager sharedInstance] setNavigationController:self.navigationController];
-    [[IHPaymentManager sharedInstance] bindNewCardForClient:[IHSecureStore sharedInstance].clientId
+    [[IHPaymentManager sharedInstance] bindNewCardForClient:[IHSecureStore sharedInstance].paymentClientId
                                           completionHandler:^(BOOL success, NSString *message, NSDictionary *items) {
                                               if (success) {
                                                   

@@ -40,6 +40,11 @@
 "На месте" = "In restaurant";
 "Доставка" = "Shipping";
 
+"Город" = "City";
+"Улица" = "Street";
+"Дом" = "House";
+"Квартира" = "Apartment";
+
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
 "Заведения" = "Venues";
@@ -90,12 +95,15 @@
 "Выберите ресторан" = "Choose a restaurant";
 "Список ресторанов" = "List of the restaurants";
 
+"Кофе" = "Coffee";
+
 "Ошибка" = "Error";
 "Успех" = "Success";
 
 "OK" = "OK";
 
 "Заказ отправлен. Мы вас ждем!" = "Order has been placed. We are waiting for you!";
+"Заказ отправлен. Мы с вами свяжемся для подтверждения!" = "Order has been placed. We will contact you to confirm!";
 
 "Заказы" = "Orders";
 
@@ -108,6 +116,7 @@
 "Невозможно разместить заказ. Пожалуйста, проверьте интернет-соединение" = "We can not place the order right now. Please check your Internet connection";
 "Произошла непредвиденная ошибка при регистрации заказа. Пожалуйста, попробуйте позднее" = "Unexpected error happened. Please try again later";
 "Произошла ошибка при проведении операции. Пожалуйста, попробуйте ещё раз." = "Unexpected error happened. Please try again.";
+"Номера телефонов" = "Phone numbers";
 
 "Настройки" = "Settings";
 "Профиль" = "Profile";
@@ -118,6 +127,7 @@
 "Об акции" = "About promo";
 "Справка" = "Documents";
 "Политика" = "Policy";
+"Новости" = "News";
 "Присылать уведомления" = "Receive notificaions";
 "Список акций" = "Promos";
 "О компании" = "About company";

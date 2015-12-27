@@ -16,9 +16,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPriceLabelWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintPriceLabelHeight;
 
-@property (weak, nonatomic) IBOutlet UIImageView *basketImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *basketImageWidth;
-
 @end
 
 @implementation DBPositionPriceView
@@ -47,17 +44,6 @@
     [self.priceLabel setRoundedCorners];
     
     [self.priceButton addTarget:self action:@selector(priceButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIImage *basketImage = [ViewManager basketImageMenuPosition];
-    if (basketImage) {
-        self.basketImageView.hidden = NO;
-        self.basketImageWidth.constant = 24.0;
-        self.basketImageView.image = [basketImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-        self.basketImageView.tintColor = [UIColor db_defaultColor];
-    } else {
-        self.basketImageView.hidden = YES;
-        self.basketImageWidth.constant = 0.0;
-    }
 }
 
 - (void)priceButtonClick {

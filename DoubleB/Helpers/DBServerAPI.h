@@ -48,4 +48,9 @@
 + (void)fetchActivatedPromoCodesWithCallback:(void (^)(BOOL, NSDictionary *))callback;
 + (void)activatePromoCode:(NSString *)code withCallback:(void (^)(BOOL, NSDictionary *))callback;
 
++ (NSDictionary *)assembleClientInfo;
++ (NSDictionary *)assemblyPaymentInfo;
++ (void)assembleTimeIntoParams:(NSMutableDictionary *)params;
++ (void)assembleDeliveryInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode;
+
 @end

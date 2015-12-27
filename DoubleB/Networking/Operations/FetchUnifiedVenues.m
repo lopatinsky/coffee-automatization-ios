@@ -7,7 +7,8 @@
 //
 
 #import "FetchUnifiedVenues.h"
-#import "Venue.h"
+
+#import "DBUnifiedAppManager.h"
 
 @interface FetchUnifiedVenues()
 
@@ -29,10 +30,13 @@
     if (self.cancelled) return;
     [self setState:OperationExecuting];
     
-    [Venue fetchUnifiedVenuesForLocation:self.location withCompletionHandler:^(NSArray *venues) {
-        if (venues) {
-            
+    [[DBUnifiedAppManager sharedInstance] fetchVenues:^(BOOL success) {
+        if (success) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedVenuesLoadSuccess object:nil];
+        } else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedVenuesLoadFailure object:nil];
         }
+        [self setState:OperationFinished];
     }];
 }
 

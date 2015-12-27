@@ -24,7 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self.activatedPromosTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"promo_cell"];
     
@@ -59,11 +60,6 @@
             [GANHelper analyzeEvent:@"load_promocodes_failure" category:@"Promocode_screen"];
         }
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

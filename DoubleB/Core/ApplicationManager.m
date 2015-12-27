@@ -7,23 +7,31 @@
 //
 
 #import "ApplicationManager.h"
+#import "AppIndexingManager.h"
 #import "NetworkManager.h"
 
 #import "OrderCoordinator.h"
 #import "DBMenu.h"
 #import "Order.h"
 #import "Venue.h"
+#import "DBCardsManager.h"
+#import "IHSecureStore.h"
+#import "UICKeyChainStore.h"
 
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
+#import "DBGeoPushManager.h"
 #import "DBMenu.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
 #import "DBVersionDependencyManager.h"
 #import "DBModulesManager.h"
 #import "DBGeoPushManager.h"
+#import "WatchInteractionManager.h"
+#import "CompanyNewsManager.h"
 
+#import "DBAPIClient.h"
 #import "DBStartNavController.h"
 #import "DBCommonStartNavController.h"
 #import "DBProxyStartNavController.h"
@@ -32,6 +40,12 @@
 
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
+#import "DBVenuesTableViewController.h"
+#import "DBVenueViewController.h"
+#import "DBMenuViewController.h"
+#import "DBSettingsTableViewController.h"
+
+#import "DBSnapshotSDKHelper.h"
 
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -43,6 +57,14 @@
 #import "UIAlertView+BlocksKit.h"
 
 #pragma mark - General
+
+typedef NS_ENUM(NSUInteger, RemotePushType) {
+    RemotePushOrderType = 1,
+    RemotePushTextType,
+    RemotePushReviewType,
+    RemotePushNewsType,
+    RemotePushInvalidType = 999999
+};
 
 @interface ApplicationManager()
 @property (nonatomic) RootState state;
@@ -60,23 +82,51 @@
 
 + (void)handlePush:(NSDictionary *)push {
     [GANHelper analyzeEvent:@"push_received" label:[push description] category:@"push_screen"];
-    if ([push objectForKey:@"type"]) {
-        if ([[push objectForKey:@"type"] integerValue] == 3) {
+    
+    NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
+    switch (pushType) {
+        case RemotePushOrderType: {
+            NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
+                                                                         object:nil
+                                                                       userInfo:push ?: @{}];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            [self showPushAlert:push buttons:nil callback:nil];
+            break;
+        }
+        case RemotePushTextType: {
+            if ([([push objectForKey:@"should_popup"] ?: @(0)) boolValue]) {
+                UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+                [newsViewController setData:@{@"title": [push getValueForKey:@"title"] ?: @"",
+                                              @"text": [push getValueForKey:@"full_text"] ?: @"",
+                                              @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
+                [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+                break;
+            }
+        }
+        case RemotePushReviewType: {
             [self showPushAlert:push buttons:@[NSLocalizedString(@"Отмена", nil), NSLocalizedString(@"Оценить", nil)] callback:^(NSUInteger buttonIndex) {
                 if (buttonIndex == 1) {
                     NSString *orderId = push[@"review"][@"order_id"];
                     [[ApplicationManager sharedInstance] showReviewViewController:orderId];
                 }
             }];
+            break;
         }
-    } else if ([push objectForKey:@"aps"]) {
-        [self showPushAlert:push buttons:nil callback:nil];
-        
-        NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
-                                                                     object:nil
-                                                                   userInfo:push ?: @{}];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-    } 
+        case RemotePushNewsType: {
+            if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
+                UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+                [newsViewController setData:@{@"title": [push[@"news_data"] getValueForKey:@"title"] ?: @"",
+                                              @"text": [push[@"news_data"] getValueForKey:@"text"] ?: @"",
+                                              @"image_url": [push[@"news_data"] getValueForKey:@"image_url"] ?: @""}];
+                [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+            }
+            break;
+        }
+        case RemotePushInvalidType:
+            break;
+        default:
+            break;
+    }
 }
 
 + (void)handleLocalPush:(UILocalNotification *)push {
@@ -102,7 +152,6 @@
             }];
         }
     }
-    
     
 }
 
@@ -136,8 +185,14 @@
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    NSDictionary *appConfig = [self appConfig];
+    if ([appConfig getValueForKey:@"parse"]) {
+        [Parse setApplicationId:appConfig[@"parse"][@"app_key"]
+                      clientKey:appConfig[@"parse"][@"client_key"]];
+    } else {
+        [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                      clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    }
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
 #warning PayPal legacy code
@@ -154,19 +209,20 @@
         [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
     
-    // Check Branch and register user
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
+    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
+    
+#ifdef DEBUG
+    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
+    }
+#endif
+    
 }
 
 - (void)fetchCompanyDependentInfo {
@@ -192,12 +248,29 @@
     [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
 }
 
+- (void)setAppConfig:(NSDictionary *)appConfig {
+    [[NSUserDefaults standardUserDefaults] setObject:appConfig forKey:@"ApplicationManager_AppConfig"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)recieveNotification:(NSDictionary *)userInfo {
     if([UIApplication sharedApplication].applicationState != 0){
         [self awakeFromNotification:userInfo];
     }
 }
 
+- (NSDictionary *)appConfig {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ApplicationManager_AppConfig"] ?: @{};
+}
+
+#pragma mark - API Notification handlers
+- (void)companiesLoadedSuccess {
+    if([DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen){
+        [self changeRoot];
+    } else {
+        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
+    }
+}
 
 - (void)changeRoot {
     UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
@@ -278,12 +351,29 @@
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
     } else {
+        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+            [UINavigationBar appearance].translucent = NO;
+        }
+        
         [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                                NSForegroundColorAttributeName: [UIColor whiteColor],
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
+    }
+}
+
+@end
+
+
+@implementation ApplicationManager (Indexing)
+
++ (void)continueUserActivity:(NSUserActivity *)activity {
+    if ([activity.activityType hasPrefix:@"com.empatika."]) {
+        [[WatchInteractionManager sharedInstance] continueUserActivity:activity];
+    } else {
+        [[AppIndexingManager sharedManager] continueUserActivity:activity];
     }
 }
 
@@ -327,17 +417,9 @@
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
 }
 
-
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController{
-    if([DBMenu sharedInstance].hasNestedCategories){
-        return [ViewControllerManager categoriesViewController];
-    } else {
-        return [ViewControllerManager rootMenuViewController];
-    }
-}
 @end
 
 @implementation ApplicationManager (ScreenState)
@@ -377,11 +459,35 @@
                 DBSettingsTableViewController *settingsVC = [DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
                 DBOrderViewController *orderVC = [DBOrderViewController new];
-                orderVC.order = object;
+                if ([object isKindOfClass:[Order class]]) {
+                    orderVC.order = object;
+                } else if ([object isKindOfClass:[NSString class]]) {
+                    orderVC.order = [Order orderById:object];
+                }
                 [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, settingsVC, ordersVC, orderVC] animated:animated];
             }
         }break;
-            
+        
+        case ApplicationScreenVenue: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                UIViewController *venuesVC = [DBVenuesTableViewController new];
+                DBVenueViewController *venueVC = [DBVenueViewController new];
+                if ([object isKindOfClass:[Venue class]]) {
+                    venueVC.venue = object;
+                } else if ([object isKindOfClass:[NSString class]]) {
+                    venueVC.venue = [Venue venueById:object];
+                }
+                [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, newOrderVC, venuesVC, venueVC] animated:animated];
+            }
+            break;
+        }
+        case ApplicationScreenMenu: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                [((UINavigationController*)rootVC) setViewControllers:@[[DBMenuViewController new]] animated:animated];
+            }
+            break;
+        }
         default:
             break;
     }
@@ -395,4 +501,30 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:reviewViewController];
     [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
 }
+@end
+
+@implementation ApplicationManager (AppConfig)
+
+- (void)fetchAppConfiguration:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:@"app/config"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//                                [self setAppConfig:responseObject];
+                                [self initializeVendorFrameworks];
+                                if (callback)
+                                    callback(YES);
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback)
+                                    callback(NO);
+                            }];
+    
+}
+
+- (void)reloadAppWithAppConfig {
+    
+}
+
 @end

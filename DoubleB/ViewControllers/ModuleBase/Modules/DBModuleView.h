@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol DBModuleViewDelegate;
+@protocol DBOwnerViewControllerProtocol;
 
 @interface DBModuleView : UIView
 // Category for analytics
 @property (strong, nonatomic) NSString *analyticsCategory;
 
 // Controller which hold module
-@property (weak, nonatomic) UIViewController *ownerViewController;
+@property (weak, nonatomic) UIViewController<DBOwnerViewControllerProtocol> *ownerViewController;
 
 @property (weak, nonatomic) id<DBModuleViewDelegate> delegate;
 
@@ -69,6 +70,18 @@
 @property (nonatomic, readonly) CGFloat actualBottomOffset; // bottom offset according to moduleHidden property
 
 /**
+ * initializer from xib
+ */
++ (instancetype)create;
+
+/**
+ * Override it for initialixation from xib
+ * By default it use [[alloc] init]
+ */
++ (NSString *)xibName;
+
+
+/**
  * Common initializer for module
  * Override it to customize initialization
  */
@@ -94,9 +107,15 @@
 - (void)touchAtLocation:(CGPoint)location;
 @end
 
+@protocol DBOwnerViewControllerProtocol <NSObject>
+
+@optional
+- (void)reloadAllModules;
+
+@end
 
 @protocol DBModuleViewDelegate <NSObject>
-
+@optional
 - (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view;
 
 - (void(^)())db_additonalAnimationFroModuleAnimation:(DBModuleView *)view;

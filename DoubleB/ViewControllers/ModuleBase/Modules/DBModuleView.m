@@ -30,12 +30,18 @@
     return self;
 }
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
++ (instancetype)create {
+    NSString *xibName = [self xibName];
     
-    [self commonInit];
-    
-    return self;
+    if (xibName.length > 0) {
+        return [[[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil] firstObject];
+    } else {
+        return [[self class] new];
+    }
+}
+
++ (NSString *)xibName {
+    return nil;
 }
 
 

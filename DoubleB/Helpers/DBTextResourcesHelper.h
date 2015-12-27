@@ -11,7 +11,12 @@
 @interface DBTextResourcesHelper : NSObject
 
 + (NSString *)db_venuesTitleString;
+
 + (NSString *)db_preparationOrderCellString;
++ (NSString *)db_readyOrderCellString;
+
++ (NSString *)db_shareBgImageName;
++ (UIColor *)db_shareScreenTextColor;
 
 + (NSString *)db_initialMenuTitle;
 

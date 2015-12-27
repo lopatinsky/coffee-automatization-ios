@@ -8,6 +8,10 @@
 
 #import <CoreData/CoreData.h>
 #import "IHPaymentManager.h"
+#import "OrderWatch.h"
+
+#import "AppIndexingManager.h"
+#import "WatchAppModelProtocol.h"
 
 typedef NS_ENUM(int16_t, OrderStatus) {
     OrderStatusNew = 0,
@@ -27,7 +31,7 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 
 @class Venue;
 
-@interface Order : NSManagedObject
+@interface Order : NSManagedObject<UserActivityIndexing, WatchAppModelProtocol>
 
 //stored
 @property (nonatomic, strong) NSString *orderId;
@@ -61,17 +65,24 @@ typedef NS_ENUM(int16_t, DBOrderCancelReason) {
 @property (nonatomic, readonly) NSArray *bonusItems;
 @property (nonatomic, readonly) NSArray *giftItems;
 
+@property (nonatomic, strong) NSDate *creationTime;
 @property (nonatomic, readonly) NSString *formattedTimeString;
+
+@property (nonatomic, strong) NSMutableDictionary *requestObject;
 
 - (instancetype)init:(BOOL)stored;
 - (instancetype)initNewOrderWithDict:(NSDictionary *)dict;
 - (instancetype)initWithResponseDict:(NSDictionary *)dict;
 - (void)synchronizeWithResponseDict:(NSDictionary *)dict;
 
+- (BOOL)isActive;
+
 + (NSArray *)allOrders;
 + (Order *)orderById:(NSString *)orderId;
-
++ (Order *)lastOrderForWatch:(BOOL)active;
 + (void)dropAllOrders;
+
+- (OrderWatch *)watchInstance;
 
 /**
 * Fetch statuses for given Order objects

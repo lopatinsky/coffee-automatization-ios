@@ -8,13 +8,16 @@
 
 #import "DBFriendGiftViewController.h"
 #import "DBModuleView.h"
+#import "DBModuleHeaderView.h"
 #import "DBFGItemsModuleView.h"
 #import "DBFGRecipientModuleView.h"
 #import "DBFGPaymentModule.h"
+#import "DBBarButtonItem.h"
+#import "DBFriendGiftHistoryTableViewController.h"
 
 #import "DBFriendGiftHelper.h"
 #import "Compatibility.h"
-#import "DBSuggestionView.h"
+#import "MBProgressHUD.h"
 
 #import "UIViewController+DBMessage.h"
 
@@ -23,7 +26,8 @@
 
 @import AddressBookUI;
 
-@interface DBFriendGiftViewController ()<DBSuggestionViewDelegate>
+@interface DBFriendGiftViewController () <DBOwnerViewControllerProtocol>
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
@@ -32,10 +36,12 @@
 @property (weak, nonatomic) IBOutlet UIView *giftView;
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *giftLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintBottomScrollViewAlignment;
 
 @property (strong, nonatomic) NSString *analyticsScreen;
-
-@property (strong, nonatomic) DBSuggestionView *suggestionView;
+@property (strong, nonatomic) UITapGestureRecognizer *dismissKeyboardTap;
+@property (nonatomic) BOOL keyboardIsVisible;
 
 @end
 
@@ -45,9 +51,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Подарок", nil);
-    
     self.view.backgroundColor = [UIColor db_backgroundColor];
-    
     self.analyticsScreen = @"Friend_gift_screen";
     
     self.titleLabel.text = [DBFriendGiftHelper sharedInstance].titleFriendGiftScreen;
@@ -56,11 +60,12 @@
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.titleLabel alignTrailingEdgeWithView:self.view predicate:@"-15"];
     
+    self.dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                      action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:self.dismissKeyboardTap];
+
     [self initModules];
-    
     [self initGiftView];
-    
-    [self checkSuggestion:NO];
     
     [[DBFriendGiftHelper sharedInstance] addObserver:self withKeyPaths:@[DBFriendGiftHelperNotificationFriendName, DBFriendGiftHelperNotificationFriendPhone, DBFriendGiftHelperNotificationItemsPrice] selector:@selector(reloadGiftButton)];
     
@@ -72,36 +77,76 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    
+//    self.navigationItem.rightBarButtonItem = [DBBarButtonItem customItem:self withText:NSLocalizedString(@"История", nil) action:@selector(moveToHistory)];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    if([DBFriendGiftHelper sharedInstance].items.count == 0) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[DBFriendGiftHelper sharedInstance] fetchItems:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            [self reload];
+        }];
+    }
+ 
     [self reload];
 }
 
-- (void)dealloc{
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
+- (void)dealloc {
     [[DBFriendGiftHelper sharedInstance] removeObserver:self];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)dismissKeyboard {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDBFGRecipientModuleViewDismiss object:nil];
+}
+
 - (void)initModules {
+    DBModuleHeaderView *recipientHeader = [DBModuleHeaderView new];
+    recipientHeader.title = NSLocalizedString(@"Контактные данные вашего друга", nil);
+    [self.giftInfoModule.submodules addObject:recipientHeader];
+    
     DBFGRecipientModuleView *recipientModule = [DBFGRecipientModuleView new];
     recipientModule.analyticsCategory = self.analyticsScreen;
     recipientModule.ownerViewController = self;
     [self.giftInfoModule.submodules addObject:recipientModule];
+    
+    
+    DBModuleHeaderView *itemsHeader = [DBModuleHeaderView new];
+    itemsHeader.title = [DBFriendGiftHelper sharedInstance].type == DBFriendGiftTypeCommon ? NSLocalizedString(@"Выберите подарок", nil) : NSLocalizedString(@"Подарок", nil);
+    [self.giftInfoModule.submodules addObject:itemsHeader];
     
     DBFGItemsModuleView *itemsModule = [DBFGItemsModuleView new];
     itemsModule.analyticsCategory = self.analyticsScreen;
     itemsModule.ownerViewController = self;
     [self.giftInfoModule.submodules addObject:itemsModule];
     
-    DBFGPaymentModule *paymentModule = [DBFGPaymentModule new];
-    paymentModule.analyticsCategory = self.analyticsScreen;
-    paymentModule.ownerViewController = self;
-    [self.giftInfoModule.submodules addObject:paymentModule];
+    
+    if ([DBFriendGiftHelper sharedInstance].type == DBFriendGiftTypeCommon) {
+        DBModuleHeaderView *paymentHeader = [DBModuleHeaderView new];
+        paymentHeader.title = NSLocalizedString(@"Выберите карту для оплаты", nil);
+        [self.giftInfoModule.submodules addObject:paymentHeader];
+        
+        DBFGPaymentModule *paymentModule = [DBFGPaymentModule new];
+        paymentModule.analyticsCategory = self.analyticsScreen;
+        paymentModule.ownerViewController = self;
+        [self.giftInfoModule.submodules addObject:paymentModule];
+    }
     
     [self.giftInfoModule layoutModules];
+}
+
+- (void)moveToHistory {
+    UIViewController *vc = [DBFriendGiftHistoryTableViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)initGiftView {
@@ -123,7 +168,14 @@
     [[DBFriendGiftHelper sharedInstance] processGift:^(NSString *smsText) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
-        [self showMessageVC];
+        [self presentMessageViewControllerWithText:smsText
+                                        recipients:@[[DBFriendGiftHelper sharedInstance].friendPhone.value]
+                                          callback:^(MessageComposeResult result) {
+                                              if(result == MessageComposeResultSent){
+                                                  [self.navigationController popViewControllerAnimated:YES];
+                                                  [self showAlert:NSLocalizedString(@"Ваш подарок успешно отправлен", nil)];
+                                              }
+                                          }];
         
         [GANHelper analyzeEvent:@"gift_payment_success" category:self.analyticsScreen];
     } failure:^(NSString *errorDescription) {
@@ -153,54 +205,37 @@
     self.giftView.alpha = [DBFriendGiftHelper sharedInstance].validData ? 1.0 : 0.5;
 }
 
-- (void)checkSuggestion:(BOOL)animated {
-    if([DBFriendGiftHelper sharedInstance].smsText.length > 0){
-        if(!self.suggestionView){
-            self.suggestionView = [DBSuggestionView new];
-            self.suggestionView.title = @"";
-            self.suggestionView.delegate = self;
-            
-            [self.suggestionView showOnView:self.view animated:animated];
-        }
-    }
-}
+#pragma mark - DBOwnerViewControllerProtocol
 
-- (void)showMessageVC {
-    [self presentMessageViewControllerWithText:[DBFriendGiftHelper sharedInstance].smsText
-                                    recipients:@[[DBFriendGiftHelper sharedInstance].friendPhone.value]
-                                      callback:^(MessageComposeResult result) {
-                                          if(result == MessageComposeResultSent){
-                                              [self.navigationController popViewControllerAnimated:YES];
-                                              [self showAlert:NSLocalizedString(@"Ваш подарок успешно отправлен", nil)];
-                                          }
-                                          if(result == MessageComposeResultFailed || result == MessageComposeResultCancelled){
-                                          }
-                                          
-                                          [self checkSuggestion:YES];
-                                      }];
-}
-
-#pragma mark - DBSuggestionViewDelegate
-
-- (void)db_clickSuggestionView:(DBSuggestionView *)view {
-    [self showMessageVC];
-}
-
-- (void)db_closeSuggestionView:(DBSuggestionView *)view {
-    [DBFriendGiftHelper sharedInstance].smsText = nil;
-    [self.suggestionView hide:YES completion:^{
-        self.suggestionView = nil;
-    }];
+- (void)reloadAllModules {
+    [self.giftInfoModule reload:YES];
 }
 
 #pragma mark - Keyboard events
 
 - (void)keyboardWillShow:(NSNotification *)notification{
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.constraintBottomScrollViewAlignment.constant = keyboardRect.size.height;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:nil];
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         self.constraintBottomScrollViewAlignment.constant = 0;
+                         [self.view layoutIfNeeded];
+                     }
+                     completion:nil];
+    [self reloadGiftButton];
 }
-
-
 
 @end

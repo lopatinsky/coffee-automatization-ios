@@ -34,6 +34,18 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return [[DBCompanyInfo valueForKey:@"infoLoaded"] boolValue];
 }
 
+- (NSString *)companyDescription {
+    return [DBCompanyInfo valueForKey:@"companyDescription"] ?: @"";
+}
+
+- (NSString *)webSiteUrl {
+    return [DBCompanyInfo valueForKey:@"webSiteUrl"] ?: @"";
+}
+
+- (NSString *)phoneNumber {
+    return [DBCompanyInfo valueForKey:@"phoneNumber"] ?: @"";
+}
+
 - (void)updateInfo {
     [self updateInfo:nil];
 }
@@ -46,6 +58,10 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             _companyPOS = [[response getValueForKey:@"back_end"] intValue];
             _type = [[response getValueForKey:@"screen_logic_type"] intValue];
             _applicationName = [response getValueForKey:@"app_name"] ?: @"";
+            
+            [DBCompanyInfo setValue:([response getValueForKey:@"site"] ?: @"") forKey:@"webSiteUrl"];
+            [DBCompanyInfo setValue:([response getValueForKey:@"phone"] ?: @"") forKey:@"phoneNumber"];
+            [DBCompanyInfo setValue:([response getValueForKey:@"description"] ?: @"") forKey:@"companyDescription"];
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
             for(NSDictionary *typeDict in response[@"delivery_types"]){
@@ -67,9 +83,6 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             NSString *venuePushChannel = [response[@"push_channels"] getValueForKey:@"venue"]  ?: @"";
             _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
-//            if (_venuePushChannel) {
-//                [PFPush subscribeToChannelInBackground:_venuePushChannel];
-//            }
             
             NSString *orderPushChannel = [response[@"push_channels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
@@ -131,14 +144,16 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 }
 
 + (NSString *)db_companyParseApplicationKey {
-    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"] ?: @{};
-    NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"none";
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
+    
+    NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"_";
     return appId;
 }
 
 + (NSString *)db_companyParseClientKey {
-    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"] ?: @{};
-    NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"none";
+    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
+    
+    NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"_";
     return clientKey;
 }
 

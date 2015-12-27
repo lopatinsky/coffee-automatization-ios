@@ -9,8 +9,6 @@
 #import "DBCategoryCell.h"
 #import "DBMenuCategory.h"
 
-#import "UIImageView+PINRemoteImage.h"
-
 @interface DBCategoryCell ()<UIGestureRecognizerDelegate>
 @property (weak, nonatomic) DBImageView *categoryIconImageView;
 @property (weak, nonatomic) UILabel *categoryNameLabel;

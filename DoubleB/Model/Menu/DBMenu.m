@@ -108,7 +108,6 @@
                                                  number:@(interval)
                                                category:APPLICATION_START];
                                 
-                                
                                 NSDictionary *menu = [[DBSubscriptionManager sharedInstance] cutSubscriptionCategory:responseObject];
                                 [self synchronizeWithResponseMenu:menu[@"menu"]];
                                 

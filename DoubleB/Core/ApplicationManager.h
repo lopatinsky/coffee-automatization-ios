@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import "ManagerProtocol.h"
-#import "MenuListViewControllerProtocol.h"
 
 typedef NS_ENUM(NSInteger, RootState) {
     RootStateStart = 0,
@@ -24,9 +25,11 @@ typedef NS_ENUM(NSInteger, ApplicationType) {
 
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenRoot = 0,
+    ApplicationScreenMenu,
     ApplicationScreenOrder,
     ApplicationScreenHistory,
-    ApplicationScreenHistoryOrder
+    ApplicationScreenHistoryOrder,
+    ApplicationScreenVenue
 };
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
@@ -39,9 +42,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
-
-- (void)awakeFromNotification:(NSDictionary *)userInfo;
-- (void)recieveNotification:(NSDictionary *)userInfo;
 
 - (void)fetchCompanyDependentInfo;
 @end
@@ -62,12 +62,15 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Controllers)
 - (UIViewController *)mainViewController;
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController;
 @end
 
 @interface ApplicationManager(ScreenState)
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen object:(id)object animated:(BOOL)animated;
+@end
+
+@interface ApplicationManager(Indexing)
++ (void)continueUserActivity:(NSUserActivity *)activity;
 @end
 
 @interface ApplicationManager(DemoApp)
@@ -76,4 +79,9 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Review)
 - (void)showReviewViewController:(NSString *)orderId;
+@end
+
+@interface ApplicationManager(AppConfig)
+- (void)fetchAppConfiguration:(void(^)(BOOL success))callback;
+- (void)reloadAppWithAppConfig;
 @end
