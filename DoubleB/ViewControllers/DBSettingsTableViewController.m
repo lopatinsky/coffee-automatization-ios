@@ -142,7 +142,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBCompanyInfoViewController *infoVC = [DBCompanyInfoViewController new];
     [self.settingsItems addObject:@{@"name": @"aboutCompany",
                                     @"title": NSLocalizedString(@"О компании", nil),
-                                    @"image": @"nil",
+                                    @"image": @"about_icon",
                                     @"viewController": infoVC}];
 
     

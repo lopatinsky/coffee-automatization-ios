@@ -45,9 +45,15 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     float screenHeight = [[UIScreen mainScreen] bounds].size.height - self.navigationController.navigationBar.frame.size.height - [UIApplication sharedApplication].statusBarFrame.size.height;
     self.constraintWebSiteTopSpace.constant = screenHeight - self.websiteButton.frame.size.height - 5;
     
-    self.navigationItem.title = NSLocalizedString(@"О компании", nil);
+    [self db_setTitle:NSLocalizedString(@"О компании", nil)];
+    
     [self setBackground];
     [self setContactUsViews];
+    
+    NSString *imageName = [[[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIcons"] objectForKey:@"CFBundlePrimaryIcon"] objectForKey:@"CFBundleIconFiles"] lastObject];
+    self.logoImageView.image = [UIImage imageNamed:imageName];
+    self.logoImageView.layer.cornerRadius = 5.;
+    self.logoImageView.clipsToBounds = YES;
     
     self.companyNameLabel.text = [DBCompanyInfo sharedInstance].applicationName;
     self.companyDescriptionLabel.text = [DBCompanyInfo sharedInstance].companyDescription;
@@ -88,7 +94,7 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     self.callUsView.backgroundColor = [UIColor clearColor];
     DBContactUsView *callUs = [[DBContactUsView alloc] init];
     [callUs setIconImage:[UIImage imageNamed:@"call"]];
-    [callUs setText:@"ПОЗВОНИ НАМ"];
+    [callUs setText:@"ПОЗВОНИТЬ НАМ"];
     UITapGestureRecognizer *callTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(callUsGestureAction:)];
     callTapRecognizer.cancelsTouchesInView = NO;
     [self.callUsView addGestureRecognizer:callTapRecognizer];
@@ -97,12 +103,11 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     callUs.translatesAutoresizingMaskIntoConstraints = NO;
     [callUs alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.callUsView];
     
-    
     // Mail
     self.mailUsView.backgroundColor = [UIColor clearColor];
     DBContactUsView *mailUs = [[DBContactUsView alloc] init];
     [mailUs setIconImage:[UIImage imageNamed:@"email"]];
-    [mailUs setText:@"НАПИШИ НАМ"];
+    [mailUs setText:@"НАПИСАТЬ НАМ"];
     UITapGestureRecognizer *mailTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mailUsGestureAction:)];
     mailTapRecognizer.cancelsTouchesInView = NO;
     [self.mailUsView addGestureRecognizer:mailTapRecognizer];

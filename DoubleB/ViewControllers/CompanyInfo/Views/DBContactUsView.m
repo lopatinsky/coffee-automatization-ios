@@ -26,7 +26,7 @@
 }
 
 - (void)awakeFromNib{
-    self.layer.cornerRadius = 18.f;
+    self.layer.cornerRadius = 6.f;
     self.layer.masksToBounds = YES;
     
     const CGFloat *initialColor = CGColorGetComponents([[UIColor db_defaultColor] CGColor]);
