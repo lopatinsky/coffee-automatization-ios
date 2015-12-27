@@ -19,11 +19,12 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBSettingsTableViewController.h"
+#import "DBSubscriptionManager.h"
 
 #import "UINavigationController+DBAnimation.h"
 #import "UIImageView+WebCache.h"
 
-@interface CategoriesTVController (){
+@interface CategoriesTVController () <DBSubscriptionManagerProtocol> {
     MBProgressHUD *hud;
 }
 
@@ -85,7 +86,7 @@ static NSDictionary *_preference;
     
     self.automaticallyAdjustsScrollViewInsets = YES;
     
-    if(!self.parent){
+    if (!self.parent) {
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
         [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
         self.refreshControl = refreshControl;
@@ -97,6 +98,8 @@ static NSDictionary *_preference;
     } else {
         _categories = self.parent.categories;
     }
+    
+    [self subscribeForNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -104,7 +107,28 @@ static NSDictionary *_preference;
     [GANHelper analyzeScreen:CATEGORIES_SCREEN];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [DBSubscriptionManager sharedInstance].delegate = self;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [DBSubscriptionManager sharedInstance].delegate = nil;
+}
+
+- (void)subscribeForNotifications {
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadMenu:) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+}
+
 - (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)appendSubscriptionCategory {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        NSMutableArray *temp = [NSMutableArray arrayWithArray:self.categories];
+        [temp insertObject:[[DBSubscriptionManager sharedInstance] subscriptionCategory] atIndex:0];
+        self.categories = [temp copy];
+    }
 }
 
 - (void)loadMenu:(UIRefreshControl *)refreshControl{
@@ -115,6 +139,7 @@ static NSDictionary *_preference;
         
         if (success) {
             self.categories = categories;
+            [self appendSubscriptionCategory];
             [self.tableView reloadData];
         }
         
@@ -122,20 +147,22 @@ static NSDictionary *_preference;
     };
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
-    if(refreshControl){
+    if (refreshControl) {
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if(venue.venueId){
+        if (venue.venueId) {
             // Load menu for current Venue
             if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
                 self.lastVenueId = venue.venueId;
                 
                 self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+                [self appendSubscriptionCategory];
             }
         } else {
             // Load whole menu
             self.categories = [[DBMenu sharedInstance] getMenu];
+            [self appendSubscriptionCategory];
         }
         
         
@@ -149,8 +176,16 @@ static NSDictionary *_preference;
     }
 }
 
+- (DBCategoryCellAppearanceType)cellType {
+    if ([self hasImages]) {
+        return DBCategoryCellAppearanceTypeFull;
+    } else {
+        return DBCategoryCellAppearanceTypeCompact;
+    }
+}
+
 - (BOOL)hasImages {
-    if(!self.parent){
+    if (!self.parent) {
         return [DBMenu sharedInstance].hasImages;
     } else {
         return self.parent.categoryWithImages;
@@ -166,10 +201,10 @@ static NSDictionary *_preference;
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self hasImages]) {
-        return 90.f;
+    if ([self cellType] == DBCategoryCellAppearanceTypeFull) {
+        return [ViewManager menuCategoriesFullCellHeight];
     } else {
-        return 65.f;
+        return [ViewManager menuCategoriesCompactCellHeight];
     }
 }
 
@@ -181,11 +216,7 @@ static NSDictionary *_preference;
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
     if (!cell){
-        if ([self hasImages]){
-            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeFull];
-        } else {
-            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeCompact];
-        }
+        cell = [[DBCategoryCell alloc] initWithType:[self cellType]];
     }
     
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.row];
@@ -229,6 +260,14 @@ static NSDictionary *_preference;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     [GANHelper analyzeEvent:@"menu_scroll" category:CATEGORIES_SCREEN];
+}
+
+#pragma mark - DBSubscriberManagerDelegate
+
+- (void)currentSubscriptionStateChanged {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        [self.tableView reloadData];
+    }
 }
 
 

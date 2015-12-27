@@ -18,6 +18,7 @@
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
+#import "DBGeoPushManager.h"
 #import "DBMenu.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
@@ -38,6 +39,9 @@
 #import "DBVenuesTableViewController.h"
 #import "DBVenueViewController.h"
 #import "DBMenuViewController.h"
+#import "DBSettingsTableViewController.h"
+
+#import "DBSnapshotSDKHelper.h"
 
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -203,10 +207,26 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     
     [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
+    // Check Branch and register user
+    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        if(error){
+            NSLog(@"error %@", error);
+            [DBServerAPI registerUser:nil];
+        } else {
+            [DBServerAPI registerUserWithBranchParams:params callback:nil];
+        }
+    }];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
+    
+#ifdef DEBUG
+    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
+    }
+#endif
+    
 }
 
 - (void)fetchCompanyDependentInfo {
@@ -226,9 +246,21 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
 
+- (void)awakeFromNotification:(NSDictionary *)userInfo {
+    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+    [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
+    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+}
+
 - (void)setAppConfig:(NSDictionary *)appConfig {
     [[NSUserDefaults standardUserDefaults] setObject:appConfig forKey:@"ApplicationManager_AppConfig"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)recieveNotification:(NSDictionary *)userInfo {
+    if([UIApplication sharedApplication].applicationState != 0){
+        [self awakeFromNotification:userInfo];
+    }
 }
 
 - (NSDictionary *)appConfig {
@@ -323,6 +355,10 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
     } else {
+        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+            [UINavigationBar appearance].translucent = NO;
+        }
+        
         [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{

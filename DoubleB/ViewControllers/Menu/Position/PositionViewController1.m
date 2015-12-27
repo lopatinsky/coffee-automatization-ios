@@ -21,6 +21,8 @@
 
 #import "UIView+RoundedCorners.h"
 #import "UINavigationController+DBAnimation.h"
+
+#import "UIImageView+WebCache.h"
 #import "UIImageView+PINRemoteImage.h"
 
 @interface PositionViewController1 ()<DBPositionModifierPickerDelegate, DBPositionModifiersListDelegate>
@@ -85,13 +87,19 @@
     self.positionImageView.backgroundColor = [UIColor colorWithRed:200./255 green:200./255 blue:200./255 alpha:0.3f];
     self.defaultPositionImageView.hidden = NO;
     if (self.position.imageUrl) {
-        [self.positionImageView setPin_updateWithProgress:YES];
-        [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:self.position.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
-            if (result.resultType != PINRemoteImageResultTypeNone) {
+        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:self.position.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (!error){
                 self.positionImageView.backgroundColor = [UIColor clearColor];
                 self.defaultPositionImageView.hidden = YES;
             }
         }];
+//        [self.positionImageView setPin_updateWithProgress:YES];
+//        [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:self.position.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+//            if (result.resultType != PINRemoteImageResultTypeNone) {
+//                self.positionImageView.backgroundColor = [UIColor clearColor];
+//                self.defaultPositionImageView.hidden = YES;
+//            }
+//        }];
     }
     
     self.positionTitleLabel.text = self.position.name;

@@ -141,6 +141,8 @@
 }
 
 - (void)hide {
+    _presented = NO;
+    
     if ([self.delegate respondsToSelector:@selector(db_componentWillDismiss:)]) {
         [self.delegate db_componentWillDismiss:self];
     }
@@ -150,8 +152,6 @@
     } else {
         [self hideModal];
     }
-    
-    _presented = NO;
 }
 
 - (void)hideModal:(UITapGestureRecognizer *)sender{

@@ -22,10 +22,8 @@
 
 @implementation DBNOBonusItemAdditionModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOBonusItemAdditionModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOBonusItemAdditionModuleView";
 }
 
 - (void)awakeFromNib {

@@ -270,6 +270,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 #pragma mark - BonusItemsManager changes
 - (void)bonusItemsManagerDidChangeTotalCount{
+    [self automaticUpdateOrderInfo];
     [self notifyObserverOf:CoordinatorNotificationBonusItemsTotalCount];
 }
 

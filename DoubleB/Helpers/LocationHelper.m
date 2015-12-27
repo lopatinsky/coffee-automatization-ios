@@ -64,11 +64,11 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 
 -(void)startUpdatingLocation {
     /*if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]
-        && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-        [self.locationManager requestWhenInUseAuthorization];
-    } else {
-        [self.locationManager startUpdatingLocation];
-    }*/
+     && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+     [self.locationManager requestWhenInUseAuthorization];
+     } else {
+     [self.locationManager startUpdatingLocation];
+     }*/
     
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]
         && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
@@ -79,15 +79,15 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 }
 
 /**
-* Check if last location < 5 min ago
-*/
+ * Check if last location < 5 min ago
+ */
 - (CLLocation *)cachedLocationIfAvailable {
     NSDate *now = [NSDate date];
-
+    
     if ([now timeIntervalSinceDate:self.lastLocationDate] < LOCATION_CACHE_TIME && self.lastLocation) {
         return self.lastLocation;
     }
-
+    
     return nil;
 }
 
@@ -97,7 +97,7 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region {
-//    [[DBGeoPushManager sharedInstance] didEnter:region];
+    //    [[DBGeoPushManager sharedInstance] didEnter:region];
 }
 
 - (void)updateLocationWithCallback:(void (^)(CLLocation *location))callback {
@@ -109,7 +109,7 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
     } else {
         self.callback = callback;
     }
-
+    
     [self startUpdatingLocation];
 }
 
@@ -118,14 +118,14 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     self.lastLocation = [locations lastObject];
     self.lastLocationDate = [NSDate date];
-
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kLocationChangedNotification object:self.lastLocation];
-
+    
     if (self.callback) {
         self.callback(self.lastLocation);
         self.callback = nil;
     }
-
+    
     [self.locationManager stopUpdatingLocation];
 }
 
@@ -143,18 +143,18 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
             break;
         default:
             [[NSNotificationCenter defaultCenter] postNotificationName:kLocationManagerStatusAuthorized object:nil];
-//            [self.locationManager startUpdatingLocation];
+            //            [self.locationManager startUpdatingLocation];
             break;
     }
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-
+    
     if (self.callback) {
         self.callback(nil);
         self.callback = nil;
     }
-
+    
 }
 
 @end

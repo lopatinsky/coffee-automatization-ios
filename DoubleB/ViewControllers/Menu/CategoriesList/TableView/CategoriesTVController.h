@@ -12,4 +12,7 @@
 
 @interface CategoriesTVController : UITableViewController<MenuListViewControllerProtocol>
 
++ (NSDictionary *)preference;
++ (void)setPreferences:(NSDictionary *)preferences;
+
 @end

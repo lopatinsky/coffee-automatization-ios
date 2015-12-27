@@ -27,10 +27,8 @@
 
 @implementation DBNOVenueModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOVenueModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOVenueModuleView";
 }
 
 - (void)awakeFromNib {

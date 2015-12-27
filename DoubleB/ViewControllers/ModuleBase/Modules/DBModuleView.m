@@ -30,6 +30,20 @@
     return self;
 }
 
++ (instancetype)create {
+    NSString *xibName = [self xibName];
+    
+    if (xibName.length > 0) {
+        return [[[NSBundle mainBundle] loadNibNamed:xibName owner:self options:nil] firstObject];
+    } else {
+        return [[self class] new];
+    }
+}
+
++ (NSString *)xibName {
+    return nil;
+}
+
 
 - (void)commonInit {
     self.submodules = [NSMutableArray new];

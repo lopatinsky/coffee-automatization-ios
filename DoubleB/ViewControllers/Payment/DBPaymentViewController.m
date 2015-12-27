@@ -14,6 +14,7 @@
 #import "DBPaymentCardsModuleView.h"
 #import "DBPaymentCardAdditionModuleView.h"
 #import "DBPaymentCashModuleView.h"
+#import "DBPaymentCourierCardModuleView.h"
 #import "DBPaymentPayPalModuleView.h"
 
 @interface DBPaymentViewController ()<DBPaymentModuleViewDelegate>
@@ -40,6 +41,13 @@
         DBPaymentCashModuleView *cashModule = [DBPaymentCashModuleView new];
         cashModule.paymentDelegate = self;
         [self addModule:cashModule bottomOffset:5];
+    }
+    
+    // Courier Cards module
+    if([self moduleEnabled:[DBPaymentCourierCardModuleView class]]){
+        DBPaymentCourierCardModuleView *courierCardModule = [DBPaymentCourierCardModuleView new];
+        courierCardModule.paymentDelegate = self;
+        [self addModule:courierCardModule bottomOffset:5];
     }
     
     // PayPal module
@@ -96,13 +104,18 @@
         result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypePayPal)] : YES);
     }
     
+    if ([moduleClass isEqual:[DBPaymentCourierCardModuleView class]]) {
+        result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCourierCard];
+        result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypeCourierCard)] : YES);
+    }
+    
     return result;
 }
 
 #pragma mark - DBPaymentModuleViewDelegate
 
 - (void)db_paymentModuleDidSelectPaymentType:(PaymentType)paymentType {
-    if(self.mode == DBPaymentCardsModuleViewModeSelectPayment){
+    if (self.mode == DBPaymentCardsModuleViewModeSelectPayment) {
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

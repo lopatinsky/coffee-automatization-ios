@@ -8,6 +8,7 @@
 
 #import "PopupNewsViewController.h"
 
+#import "UIImageView+WebCache.h"
 #import "UIImageView+PINRemoteImage.h"
 
 @interface PopupNewsViewController ()
@@ -35,8 +36,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     self.popupTextLabel.text = self.data[@"text"];
     if ([self.data objectForKey:@"image_url"]) {
-        [self.popupImageView setPin_updateWithProgress:YES];
-        [self.popupImageView pin_setImageFromURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]]];
+        [self.popupImageView sd_setImageWithURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        }];
+//        [self.popupImageView setPin_updateWithProgress:YES];
+//        [self.popupImageView pin_setImageFromURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]]];
     }
 }
 

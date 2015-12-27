@@ -14,8 +14,10 @@
 #import "OrderCoordinator.h"
 
 @interface DBShippingViewController ()<UITableViewDataSource, UITableViewDelegate, DBShippingAddressCellDelegate, DBPickerViewDelegate, DBPopupComponentDelegate, DBShippingAutocompleteViewDelegate>
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewBottomAlignment;
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintContentViewBottomAlignment;
 
 @property (strong, nonatomic) DBShippingAutocompleteView *autocompleteView;
 @property (strong, nonatomic) DBPickerView *cityPickerView;
@@ -58,10 +60,10 @@
     [[OrderCoordinator sharedInstance].shippingManager requestSuggestions:^(BOOL success) {
         if (success && [OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0) {
             cell.imageViewVisisble = YES;
-            CGRect rect = [self.tableView convertRect:cell.frame toView:self.view];
+            CGRect rect = [self.tableView convertRect:cell.frame toView:self.contentView];
             
             self.tableView.scrollEnabled = NO;
-            [self.autocompleteView showOnView:self.view topOffset:rect.origin.y + rect.size.height];
+            [self.autocompleteView showOnView:self.contentView topOffset:rect.origin.y + rect.size.height];
         }
     }];
 }
@@ -158,7 +160,7 @@
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.constraintTableViewBottomAlignment.constant = -keyboardRect.size.height;
+                         self.constraintContentViewBottomAlignment.constant = keyboardRect.size.height;
                          [self.view layoutIfNeeded];
                      }
                      completion:nil];
@@ -169,7 +171,7 @@
                           delay:0.0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
-                         self.constraintTableViewBottomAlignment.constant = 0;
+                         self.constraintContentViewBottomAlignment.constant = 0;
                          [self.view layoutIfNeeded];
                      }
                      completion:nil];

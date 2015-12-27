@@ -101,7 +101,7 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.edgesForExtendedLayout = UIRectEdgeTop;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     [self db_setTitle:NSLocalizedString(@"Заказ", nil)];
     
 // ========= Configure Logic =========
@@ -957,7 +957,10 @@ NSString *const kDBDefaultsFaves = @"kDBDefaultsFaves";
             self.orderFooter.labelCard.textColor = [UIColor blackColor];
             self.orderFooter.labelCard.text = NSLocalizedString(@"Наличные", nil);
             break;
-       
+        case PaymentTypeCourierCard:
+            self.orderFooter.labelCard.textColor = [UIColor blackColor];
+            self.orderFooter.labelCard.text = NSLocalizedString(@"Картой курьеру", nil);
+            break;
         case PaymentTypePayPal:
             if([DBPayPalManager sharedInstance].loggedIn){
                 self.orderFooter.labelCard.textColor = [UIColor blackColor];
