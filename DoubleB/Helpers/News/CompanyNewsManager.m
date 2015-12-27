@@ -11,6 +11,7 @@
 #import "DBServerAPI.h"
 
 NSString *const CompanyNewsManagerDidFetchActualNews = @"CompanyNewsManagerDidFetchActualNews";
+NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidReceiveNewsPush";
 
 @interface CompanyNewsManager()
 
@@ -51,7 +52,7 @@ NSString *const CompanyNewsManagerDidFetchActualNews = @"CompanyNewsManagerDidFe
         [news addObject:companyNews];
     }
     self.allNews = news;
-    self.actualNews = [news lastObject];
+    self.actualNews = [news firstObject];
 }
 
 - (void)fetchUpdates {

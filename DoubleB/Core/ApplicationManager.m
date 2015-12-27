@@ -112,11 +112,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
             break;
         }
         case RemotePushNewsType: {
-            if ([UIApplication sharedApplication].applicationState != 0) {
+            if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
                 UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-                [newsViewController setData:@{@"title": [push getValueForKey:@"title"],
-                                              @"text": [push getValueForKey:@"full_text"],
-                                              @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
+                [newsViewController setData:@{@"title": [push[@"news_data"] getValueForKey:@"title"] ?: @"",
+                                              @"text": [push[@"news_data"] getValueForKey:@"text"] ?: @"",
+                                              @"image_url": [push[@"news_data"] getValueForKey:@"image_url"] ?: @""}];
                 [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
             }
             break;

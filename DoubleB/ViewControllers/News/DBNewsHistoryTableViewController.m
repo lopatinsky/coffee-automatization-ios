@@ -31,6 +31,8 @@
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 160;
+    } else {
+        self.tableView.rowHeight = 120;
     }
     [self.tableView registerNib:[UINib nibWithNibName:@"NewsHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"HistoryNewsCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"NewsImageHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"HistoryNewsImageCell"];
@@ -90,7 +92,7 @@
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
         return UITableViewAutomaticDimension;
     } else {
-        return 90;
+        return 120;
     }
 }
 
