@@ -12,7 +12,7 @@
 #import "UIImageView+PINRemoteImage.h"
 
 @interface DBCategoryCell ()<UIGestureRecognizerDelegate>
-@property (weak, nonatomic) UIImageView *categoryIconImageView;
+@property (weak, nonatomic) DBImageView *categoryIconImageView;
 @property (weak, nonatomic) UILabel *categoryNameLabel;
 @property (weak, nonatomic) UIImageView *disclosureIndicator;
 @property (weak, nonatomic) UIView *separatorView;
@@ -53,6 +53,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.categoryIconImageView.contentMode = [ViewManager defaultMenuCategoryIconsContentMode];
+    self.categoryIconImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     
     self.disclosureIndicator.tintColor = [UIColor db_defaultColor];
     [self.disclosureIndicator templateImageWithName:@"right_arrow_icon.png"];
@@ -65,7 +66,7 @@
 }
 
 - (void)initOutlets {
-    self.categoryIconImageView = (UIImageView *)[self.contentView viewWithTag:1];
+    self.categoryIconImageView = (DBImageView *)[self.contentView viewWithTag:1];
     self.categoryNameLabel = (UILabel *)[self.contentView viewWithTag:2];
     self.disclosureIndicator = (UIImageView *)[self.contentView viewWithTag:3];
     self.separatorView = [self.contentView viewWithTag:4];
@@ -74,14 +75,15 @@
 - (void)configureWithCategory:(DBMenuCategory *)category{
     _category = category;
     
-    self.categoryIconImageView.image = nil;
-    [self.categoryIconImageView db_showDefaultImage];
-    [self.categoryIconImageView setPin_updateWithProgress:YES];
-    [self.categoryIconImageView pin_setImageFromURL:[NSURL URLWithString:category.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
-        if (result.resultType != PINRemoteImageResultTypeNone) {
-            [self.categoryIconImageView db_hideDefaultImage];
-        }
-    }];
+    self.categoryIconImageView.dbImageUrl = [NSURL URLWithString:category.imageUrl];
+//    self.categoryIconImageView.image = nil;
+//    [self.categoryIconImageView db_showDefaultImage];
+//    [self.categoryIconImageView setPin_updateWithProgress:YES];
+//    [self.categoryIconImageView pin_setImageFromURL:[NSURL URLWithString:category.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
+//        if (result.resultType != PINRemoteImageResultTypeNone) {
+//            [self.categoryIconImageView db_hideDefaultImage];
+//        }
+//    }];
     self.categoryNameLabel.text = category.name;
 }
 

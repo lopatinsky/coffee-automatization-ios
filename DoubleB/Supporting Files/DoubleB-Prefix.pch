@@ -24,6 +24,7 @@
 #import "DBCompanyInfo.h"
 #import "DBClassLoader.h"
 #import "DBTextResourcesHelper.h"
+#import "DBImageView.h"
 
 #import "ViewManager.h"
 #import "ViewControllerManager.h"

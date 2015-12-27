@@ -101,7 +101,14 @@
 - (void)orderClick {
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     
-    [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
+    [UIView animateWithDuration:0.1 animations:^{
+        self.orderView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
+        [UIView animateWithDuration:0.05 animations:^{
+            self.orderView.alpha = 1;
+        }];
+    }];
 }
 
 @end

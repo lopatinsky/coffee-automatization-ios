@@ -48,24 +48,34 @@
     
     self.noImageLabel = [UILabel new];
     self.noImageLabel.numberOfLines = 0;
-    self.noImageLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.f];
-    self.noImageLabel.textColor = [UIColor blackColor];
-    self.noImageLabel.text = NSLocalizedString(@"нет фото", nil);
+    self.noImageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.f];
+    self.noImageLabel.textColor = [UIColor whiteColor];
+    self.noImageLabel.textAlignment = NSTextAlignmentCenter;
+    self.noImageLabel.text = NSLocalizedString(@"Нет изображения", nil);
     [self addSubview:self.noImageLabel];
     self.noImageLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.noImageLabel alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
     self.noImageLabel.hidden = YES;
     
     self.backgroundColor = [UIColor colorWithRed:235./255 green:235./255 blue:235./255 alpha:1.0f];
+//    self.backgroundColor = [UIColor db_grayColor];
 }
 
 - (void)setHasImage:(BOOL)hasImage {
     _hasImage = hasImage;
     if (!hasImage) {
-        self.noImageView.hidden = NO;
+        if (_noImageType == DBImageViewNoImageTypeImage) {
+            self.noImageView.hidden = NO;
+        } else {
+            self.noImageLabel.hidden = NO;
+        }
         self.image = nil;
     } else {
-        self.noImageView.hidden = YES;
+        if (_noImageType == DBImageViewNoImageTypeImage) {
+            self.noImageView.hidden = YES;
+        } else {
+            self.noImageLabel.hidden = YES;
+        }
     }
 }
 
