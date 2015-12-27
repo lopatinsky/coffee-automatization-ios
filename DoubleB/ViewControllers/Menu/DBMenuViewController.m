@@ -73,7 +73,7 @@
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
     
-    [self setupSubscription];
+//    [self setupSubscription];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -353,6 +353,8 @@
 }
 
 - (void)db_componentWillDismiss:(DBPopupComponent *)component {
+    [self reloadTitleView:nil];
+    
     [GANHelper analyzeEvent:@"category_spinner_closed" category:self.analyticsCategory];
 }
 
