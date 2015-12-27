@@ -130,7 +130,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     DBNewsHistoryTableViewController *newsHistoryVC = [DBNewsHistoryTableViewController new];
     [self.settingsItems addObject:@{@"name": @"newsHistoryVC",
                                     @"title": NSLocalizedString(@"Новости", nil),
-                                    @"image": @"",
+                                    @"image": @"news_icon",
                                     @"viewController": newsHistoryVC}];
     
     // Contact us item
