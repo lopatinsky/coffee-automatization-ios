@@ -138,6 +138,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"title": NSLocalizedString(@"Написать нам", nil),
                                     @"image": @"feedback"}];
     
+    // About
+    DBCompanyInfoViewController *infoVC = [DBCompanyInfoViewController new];
+    [self.settingsItems addObject:@{@"name": @"aboutCompany",
+                                    @"title": NSLocalizedString(@"О компании", nil),
+                                    @"image": @"nil",
+                                    @"viewController": infoVC}];
+
+    
     // Documents item
     DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];
     [self.settingsItems addObject:@{@"name": @"documentsVC",
@@ -263,6 +271,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     if([settingsItemInfo[@"name"] isEqualToString:@"mailer"]){
         event = @"contact_us_click";
         [self presentMailViewControllerWithRecipients:nil callback:nil];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"aboutCompany"]){
+        event = @"about_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"shareVC"]) {

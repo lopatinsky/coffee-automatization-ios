@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBContactUsView">
+            <rect key="frame" x="0.0" y="0.0" width="255" height="35"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WFI-5Z-frU">
+                    <rect key="frame" x="0.0" y="0.0" width="45" height="35"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="call.png" translatesAutoresizingMaskIntoConstraints="NO" id="SK2-qs-aTB">
+                            <rect key="frame" x="12.5" y="8" width="20" height="20"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="ijK-LO-niX"/>
+                                <constraint firstAttribute="height" constant="20" id="mGp-Po-PDe"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" red="0.066666666669999999" green="0.34901960780000002" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="SK2-qs-aTB" firstAttribute="centerX" secondItem="WFI-5Z-frU" secondAttribute="centerX" id="7LP-yK-hQA"/>
+                        <constraint firstItem="SK2-qs-aTB" firstAttribute="centerY" secondItem="WFI-5Z-frU" secondAttribute="centerY" id="LJe-Jv-LcL"/>
+                        <constraint firstAttribute="width" constant="45" id="TsR-mE-RfF"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ЗВОНИТЕ НАМ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne5-BD-sP8">
+                    <rect key="frame" x="53" y="0.0" width="194" height="35"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" red="0.1450980392" green="0.45882352939999999" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="ne5-BD-sP8" firstAttribute="leading" secondItem="WFI-5Z-frU" secondAttribute="trailing" constant="8" id="E5m-ym-qMx"/>
+                <constraint firstAttribute="bottom" secondItem="WFI-5Z-frU" secondAttribute="bottom" id="LTk-jP-4fE"/>
+                <constraint firstItem="ne5-BD-sP8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QMt-0Z-FCp"/>
+                <constraint firstItem="WFI-5Z-frU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VJL-Lf-cW3"/>
+                <constraint firstAttribute="trailing" secondItem="ne5-BD-sP8" secondAttribute="trailing" constant="8" id="ZeR-4m-aUS"/>
+                <constraint firstItem="WFI-5Z-frU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uRI-DN-oQm"/>
+                <constraint firstAttribute="bottom" secondItem="ne5-BD-sP8" secondAttribute="bottom" id="ym9-AH-FdS"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="callUsLabel" destination="ne5-BD-sP8" id="lK6-xO-gnU"/>
+                <outlet property="iconImageView" destination="SK2-qs-aTB" id="zZB-Ff-xws"/>
+                <outlet property="smallBackgroundView" destination="WFI-5Z-frU" id="sTd-0c-qZG"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="call.png" width="21" height="21"/>
+    </resources>
+</document>

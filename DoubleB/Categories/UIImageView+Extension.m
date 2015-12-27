@@ -12,18 +12,22 @@
 
 @implementation UIImageView (Extension)
 
-- (void)templateImage:(UIImage *)image {
-    self.tintColor = [UIColor db_defaultColor];
-    self.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-}
-
 - (void)templateImageWithName:(NSString *)name {
     [self templateImage:[UIImage imageNamed:name]];
 }
 
 - (void)templateImageWithName:(NSString *)name tintColor:(UIColor *)color {
+    [self templateImage:[UIImage imageNamed:name] tintColor:color];
+}
+
+- (void)templateImage:(UIImage *)image {
+    self.tintColor = [UIColor db_defaultColor];
+    self.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+}
+
+- (void)templateImage:(UIImage *)image tintColor:(UIColor *)color {
     self.tintColor = color;
-    self.image = [[UIImage imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    self.image = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 }
 
 - (void)db_showDefaultImage{
