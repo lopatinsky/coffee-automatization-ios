@@ -14,6 +14,7 @@ extern NSString *const CompanyNewsManagerDidFetchActualNews;
 @interface CompanyNewsManager : NSObject
 
 @property (nonatomic, strong) CompanyNews *actualNews;
+@property (nonatomic, strong) NSArray *allNews;
 
 + (instancetype)sharedManager;
 

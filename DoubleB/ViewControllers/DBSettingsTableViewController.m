@@ -26,6 +26,7 @@
 #import "DBFriendGiftViewController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBSubscriptionManager.h"
+#import "DBNewsHistoryTableViewController.h"
 
 
 #import "UIViewController+ShareExtension.h"
@@ -125,13 +126,17 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"promos_icon",
                                     @"viewController": promosVC}];
     
+    // News history list
+    DBNewsHistoryTableViewController *newsHistoryVC = [DBNewsHistoryTableViewController new];
+    [self.settingsItems addObject:@{@"name": @"newsHistoryVC",
+                                    @"title": NSLocalizedString(@"Новости", nil),
+                                    @"image": @"",
+                                    @"viewController": newsHistoryVC}];
+    
     // Contact us item
     [self.settingsItems addObject:@{@"name": @"mailer",
                                     @"title": NSLocalizedString(@"Написать нам", nil),
                                     @"image": @"feedback"}];
-    
-    
-
     
     // Documents item
     DBDocumentsViewController *documentsVC = [DBDocumentsViewController new];
