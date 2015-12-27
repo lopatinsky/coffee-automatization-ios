@@ -57,18 +57,17 @@
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
     
-    [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                     remoteMenu:^(BOOL success, NSArray *categories) {
-                                         [refreshControl endRefreshing];
-                                         if (success) {
-                                             self.categories = categories;
-                                             [self.tableView reloadData];
-                                         }
-                                         
-                                         if ([self.menuModuleDelegate respondsToSelector:@selector(db_menuModuleViewDidReloadContent:)]) {
-                                             [self.menuModuleDelegate db_menuModuleViewDidReloadContent:self];
-                                         }
-                                     }];
+    [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+        [refreshControl endRefreshing];
+        if (success) {
+            self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+            [self.tableView reloadData];
+        }
+        
+        if ([self.menuModuleDelegate respondsToSelector:@selector(db_menuModuleViewDidReloadContent:)]) {
+            [self.menuModuleDelegate db_menuModuleViewDidReloadContent:self];
+        }
+    }];
 }
 
 - (BOOL)hasImages {

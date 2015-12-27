@@ -18,6 +18,5 @@ typedef NS_ENUM(NSUInteger, PositionViewControllerMode) {
 @protocol PositionViewControllerProtocol <NSObject>
 
 + (instancetype)initWithPosition:(DBMenuPosition *)position mode:(PositionViewControllerMode)mode;
-- (void)setParentNavigationController:(UINavigationController *)controller;
 
 @end

@@ -56,6 +56,7 @@
     self.orderCellContentView.backgroundColor = [UIColor whiteColor];
     
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
+    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
@@ -142,19 +143,7 @@
     self.modifiersLabel.text = modifiersString;
     
     if(self.type == DBOrderItemCellTypeFull){
-        self.positionImageView.image = nil;
-        [self.positionImageView db_showDefaultImage];
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:_orderItem.position.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if (!error){
-                [self.positionImageView db_hideDefaultImage];
-            }
-        }];
-//        [self.positionImageView setPin_updateWithProgress:YES];
-//        [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:_orderItem.position.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
-//            if (result.resultType != PINRemoteImageResultTypeNone) {
-//                [self.positionImageView db_hideDefaultImage];
-//            }
-//        }];
+        self.positionImageView.dbImageUrl = [NSURL URLWithString:_orderItem.position.imageUrl];
     }
     
     
@@ -213,15 +202,6 @@
         CGPoint translation = [recognizer translationInView:self.contentView];
 
         CGPoint velocity = [recognizer velocityInView:self.contentView];
-//        if(fabs(velocity.x) > fabs(velocity.y) && fabs(velocity.x) > 50){
-//            if([self.delegate respondsToSelector:@selector(db_orderItemCellDidStartSwipe:)]){
-//                [self.delegate db_orderItemCellDidStartSwipe:self];
-//            }
-//        } else {
-//            if(recognizer.state != UIGestureRecognizerStateEnded && recognizer.state != UIGestureRecognizerStateCancelled && recognizer.state != UIGestureRecognizerStateFailed ){
-//                return;
-//            }
-//        }
         
         double leftPositionX = recognizer.view.frame.origin.x + translation.x;
 
@@ -237,7 +217,6 @@
         [recognizer.view layoutIfNeeded];
         
         if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled || recognizer.state == UIGestureRecognizerStateFailed) {
-            //            CGPoint velocity = [recognizer velocityInView:self.contentView];
             
             if(velocity.x < 0){
                 [self moveContentToLeft:YES];

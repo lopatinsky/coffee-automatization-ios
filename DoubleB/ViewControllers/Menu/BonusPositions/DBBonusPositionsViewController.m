@@ -122,7 +122,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DBMenuPosition *position =_promoManager.positionsAvailableAsBonuses[indexPath.row];
     UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
-    positionVC.parentNavigationController = self.navigationController;
     positionVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:positionVC animated:YES];
 }

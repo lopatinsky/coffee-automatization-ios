@@ -40,8 +40,6 @@
 
 - (void)awakeFromNib {
     self.backgroundColor = [UIColor clearColor];
-    self.priceLabel.backgroundColor = [UIColor db_defaultColor];
-    [self.priceLabel setRoundedCorners];
     
     [self.priceButton addTarget:self action:@selector(priceButtonClick) forControlEvents:UIControlEventTouchUpInside];
 }

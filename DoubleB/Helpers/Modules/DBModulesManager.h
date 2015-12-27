@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeFriendInvitation = 2,
     DBModuleTypeProfileScreenUniversal = 4,
     DBModuleTypeGeoPush = 5,
+    DBModuleTypeFriendGiftMivako = 7,
     DBModuleTypePositionBalances = 10,
     
     DBModuleTypeLast // Enum item for iteration, not in use
