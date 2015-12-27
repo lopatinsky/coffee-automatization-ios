@@ -11,6 +11,7 @@
 #import "DBContactUsView.h"
 #import "UIViewController+DBMessage.h"
 #import "UIAlertView+BlocksKit.h"
+#import "UIActionSheet+BlocksKit.h"
 
 #import <CoreImage/CoreImage.h>
 #import <MessageUI/MessageUI.h>
@@ -28,6 +29,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintWebSiteTopSpace;
+
+@property (nonatomic, strong) NSArray *phoneNumbers;
 
 @end
 
@@ -67,12 +70,33 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
 }
 
 - (void)callUsGestureAction:(UITapGestureRecognizer *)sender {
-    [UIAlertView bk_showAlertViewWithTitle:nil message:[DBCompanyInfo sharedInstance].phoneNumber cancelButtonTitle:@"Отменить" otherButtonTitles:@[@"Позвонить"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        if (buttonIndex == 1) {
-            NSString *phone = [NSString stringWithFormat:@"tel:+%@", [DBCompanyInfo sharedInstance].phoneNumber];
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
+    if ([self.phoneNumbers count] > 1) {
+        UIActionSheet *phoneSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Номера телефонов", nil)];
+        for (NSString *number in self.phoneNumbers) {
+            [phoneSheet bk_addButtonWithTitle:number handler:^{
+                [UIAlertView bk_showAlertViewWithTitle:nil message:number
+                                     cancelButtonTitle:NSLocalizedString(@"Отменить", nil)
+                                     otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)]
+                                               handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    if (buttonIndex == 1) {
+                        NSString *phone = [NSString stringWithFormat:@"tel:+%@", number];
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
+                    }
+                }];
+            }];
         }
-    }];
+        [phoneSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{
+            
+        }];
+        [phoneSheet showInView:self.view];
+    } else {
+        [UIAlertView bk_showAlertViewWithTitle:nil message:[DBCompanyInfo sharedInstance].phoneNumber cancelButtonTitle:@"Отменить" otherButtonTitles:@[@"Позвонить"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 1) {
+                NSString *phone = [NSString stringWithFormat:@"tel:+%@", [DBCompanyInfo sharedInstance].phoneNumber];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
+            }
+        }];
+    }
 }
 
 - (void)websiteButtonClick {
@@ -91,6 +115,7 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
 
 - (void)setContactUsViews {
     // Call
+    self.phoneNumbers = [[DBCompanyInfo sharedInstance].phoneNumber componentsSeparatedByString:@","];
     self.callUsView.backgroundColor = [UIColor clearColor];
     DBContactUsView *callUs = [[DBContactUsView alloc] init];
     [callUs setIconImage:[UIImage imageNamed:@"call"]];

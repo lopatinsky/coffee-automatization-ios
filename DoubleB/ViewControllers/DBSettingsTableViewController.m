@@ -133,10 +133,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"news_icon",
                                     @"viewController": newsHistoryVC}];
     
-    // Contact us item
-    [self.settingsItems addObject:@{@"name": @"mailer",
-                                    @"title": NSLocalizedString(@"Написать нам", nil),
-                                    @"image": @"feedback"}];
+//    // Contact us item
+//    [self.settingsItems addObject:@{@"name": @"mailer",
+//                                    @"title": NSLocalizedString(@"Написать нам", nil),
+//                                    @"image": @"feedback"}];
     
     // About
     DBCompanyInfoViewController *infoVC = [DBCompanyInfoViewController new];
