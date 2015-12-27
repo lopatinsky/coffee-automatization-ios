@@ -29,6 +29,7 @@
 #import "DBModulesManager.h"
 #import "DBGeoPushManager.h"
 #import "WatchInteractionManager.h"
+#import "CompanyNewsManager.h"
 
 #import "DBAPIClient.h"
 #import "DBStartNavController.h"
@@ -214,6 +215,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
     
 #ifdef DEBUG
     if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {

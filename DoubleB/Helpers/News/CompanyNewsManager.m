@@ -41,6 +41,7 @@ NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidRe
 }
 
 - (void)updateNews:(NSArray *)newsArray {
+    NSArray *oldNews = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCompanyNewsManager_allNews"] ?: @[];
     NSMutableArray *news = [NSMutableArray new];
     for (NSDictionary *newsDictionary in newsArray) {
         CompanyNews *companyNews = [CompanyNews new];
@@ -51,6 +52,33 @@ NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidRe
         companyNews.date = [NSDate dateWithTimeIntervalSince1970:[[newsDictionary objectForKey:@"start"] longLongValue]];
         [news addObject:companyNews];
     }
+    
+    NSMutableArray *newNews = [NSMutableArray new];
+    for (CompanyNews *cNews in news) {
+        BOOL hasNews = NO;
+        for (NSDictionary *_news in oldNews) {
+            if ([[_news objectForKey:@"id"] compare:[cNews newsId]] == NSOrderedSame) {
+                hasNews = YES;
+            }
+        }
+        if (!hasNews) {
+            [newNews addObject:cNews];
+        }
+    }
+    
+    if ([newNews count] > 0) {
+        NSArray *_newNews = [newNews sortedArrayUsingComparator:^NSComparisonResult(CompanyNews * _Nonnull obj1, CompanyNews * _Nonnull obj2) {
+            return [[obj2 date] compare:[obj1 date]];
+        }];
+        
+        CompanyNews *actualNews = [_newNews firstObject];
+        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+        [newsViewController setData:@{@"title": [actualNews title] ?: @"",
+                                      @"text": [actualNews text] ?: @"",
+                                      @"image_url": [actualNews imageURL] ?: @""}];
+        [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+    }
+    
     self.allNews = news;
     self.actualNews = [news firstObject];
 }
