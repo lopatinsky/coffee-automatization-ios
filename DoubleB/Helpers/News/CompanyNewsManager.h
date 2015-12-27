@@ -10,10 +10,12 @@
 #import "CompanyNews.h"
 
 extern NSString *const CompanyNewsManagerDidFetchActualNews;
+extern NSString *const CompanyNewsManagerDidReceiveNewsPush;
 
 @interface CompanyNewsManager : NSObject
 
 @property (nonatomic, strong) CompanyNews *actualNews;
+@property (nonatomic, strong) NSArray *allNews;
 
 + (instancetype)sharedManager;
 

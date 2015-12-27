@@ -13,9 +13,11 @@
 
 @interface PopupNewsViewController ()
 
+@property (weak, nonatomic) IBOutlet UILabel *popupTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *popupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *popupTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *okButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleHeightConstraint;
 @property (strong, nonatomic) NSDictionary *data;
 
 @end
@@ -34,7 +36,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    if ([self.data[@"title"] isEqualToString:@""]) {
+        self.titleHeightConstraint.constant = 0;
+        self.popupTitleLabel.hidden = YES;
+    } 
+    
     self.popupTextLabel.text = self.data[@"text"];
+    self.popupTitleLabel.text = self.data[@"title"];
     if ([self.data objectForKey:@"image_url"]) {
         [self.popupImageView sd_setImageWithURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];

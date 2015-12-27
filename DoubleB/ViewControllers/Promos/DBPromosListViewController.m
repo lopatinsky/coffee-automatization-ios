@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Список акций", nil);
+    [self db_setTitle:NSLocalizedString(@"Список акций", nil)];
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.tableView.tableFooterView = [UIView new];
