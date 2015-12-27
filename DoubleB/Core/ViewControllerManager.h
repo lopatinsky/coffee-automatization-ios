@@ -7,29 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MenuListViewControllerProtocol.h"
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
+#import "DBLaunchViewControllerProtocol.h"
+#import "DBCompaniesViewControllerProtocol.h"
 #import "SubscriptionViewControllerProtocol.h"
 #import "ReviewViewControllerProtocol.h"
 
 @interface ViewControllerManager : NSObject
 @end
 
-@interface ViewControllerManager(MenuViewControllers)
-+ (Class<MenuListViewControllerProtocol> __nonnull)rootMenuViewController;
-
-+ (Class<MenuListViewControllerProtocol> __nonnull)categoriesViewController;
-+ (Class<MenuListViewControllerProtocol> __nonnull)positionsViewController;
-+ (Class<MenuListViewControllerProtocol> __nonnull)categoriesAndPositionsViewController;
-@end
 
 @interface ViewControllerManager(PositionViewControllers)
 + (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
 @end
 
 @interface ViewControllerManager(LaunchViewControllers)
-+ (nonnull UIViewController *)launchViewController;
++ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController;
 @end
 
 @interface ViewControllerManager(NewsViewControllers)

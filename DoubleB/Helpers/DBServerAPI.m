@@ -24,6 +24,7 @@
 #import "CoreDataHelper.h"
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
+#import "DBUnifiedAppManager.h"
 
 #import "AppIndexingManager.h"
 #import "WatchInteractionManager.h"
@@ -37,7 +38,6 @@
 #pragma mark - User
 
 + (void)requestCompanies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {
-//    [[DBAPIClient sharedClient] setCompanyHeaderEnabled:NO];
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/companies"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -50,11 +50,40 @@
                                 if(failure)
                                     failure(error);
                             }];
-//    [[DBAPIClient sharedClient] setCompanyHeaderEnabled:YES];
 }
 
-+ (void)registerUser:(void(^)(BOOL success))callback{
++ (void)registerUser:(void(^)(BOOL success))callback {
     [DBServerAPI registerUserWithBranchParams:nil callback:callback];
+}
+
++ (void)registerUser:(CLLocation *)location callback:(void (^)(BOOL, DBCity *))callback {
+    NSString *clientId = [IHSecureStore sharedInstance].clientId;
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if(clientId){
+        params[@"client_id"] = clientId;
+    }
+    
+    if (location) {
+        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+    }
+    
+    [[DBAPIClient sharedClient] POST:@"register"
+                          parameters:params
+                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                 //NSLog(@"%@", responseObject);
+                                 
+                                 [[IHSecureStore sharedInstance] setClientId:[NSString stringWithFormat:@"%lld", (long long)[responseObject[@"client_id"] longLongValue]]];                             [[NSUserDefaults standardUserDefaults] synchronize];
+                                 
+                                 if(callback)
+                                     callback(YES, nil);
+                             }
+                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                 NSLog(@"%@", error);
+                                 
+                                 if(callback)
+                                     callback(NO, nil);
+                             }];
 }
 
 + (void)registerUserWithBranchParams:(NSDictionary *)branchParams callback:(void(^)(BOOL success))callback{
@@ -579,7 +608,8 @@
             }
             payment[@"card_pan"] = cardPan ?: @"";
         }
-        payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+        
+        payment[@"client_id"] = [IHSecureStore sharedInstance].paymentClientId;
         payment[@"return_url"] = @"alpha-payment://return-page";
     }
     

@@ -9,6 +9,10 @@
 #import "DBNewsHistoryTableViewController.h"
 
 #import "CompanyNewsManager.h"
+#import "NewsHistoryTableViewCell.h"
+#import "NewsImageHistoryTableViewCell.h"
+
+#import "UIImageView+WebCache.h"
 
 @interface DBNewsHistoryTableViewController ()
 
@@ -22,9 +26,25 @@
     [super viewDidLoad];
     
     [self db_setTitle:NSLocalizedString(@"Новости", nil)];
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    self.companyNews = [[CompanyNewsManager sharedManager] allNews];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 160;
+    }
+    [self.tableView registerNib:[UINib nibWithNibName:@"NewsHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"HistoryNewsCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"NewsImageHistoryTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"HistoryNewsImageCell"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:CompanyNewsManagerDidFetchActualNews object:nil];
+    [self reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[CompanyNewsManager sharedManager] fetchUpdates];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,86 +52,50 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)reloadData {
+    self.companyNews = [[CompanyNewsManager sharedManager] allNews];
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return [self.companyNews count];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+    if (![[self.companyNews[indexPath.row] imageURL] isEqualToString:@""]) {
+        NewsImageHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryNewsImageCell" forIndexPath:indexPath];
+        
+        [cell.newsImageView sd_setImageWithURL:[NSURL URLWithString:[self.companyNews[indexPath.row] imageURL]]];
+        cell.newsTextLabel.text = [self.companyNews[indexPath.row] text];
+        cell.titleLabel.text = [self.companyNews[indexPath.row] title];
+        
+        return cell;
+    } else {
+        NewsHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryNewsCell" forIndexPath:indexPath];
+        
+        cell.newsTextLabel.text = [self.companyNews[indexPath.row] text];
+        cell.titleLabel.text = [self.companyNews[indexPath.row] title];
+        
+        return cell;
+    }
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
+        return UITableViewAutomaticDimension;
+    } else {
+        return 90;
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Table view delegate
-
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

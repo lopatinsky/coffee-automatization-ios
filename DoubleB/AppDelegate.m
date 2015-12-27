@@ -13,6 +13,10 @@
 
 #import "DBGeoPush.h"
 
+
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+#import <GoogleMaps/GoogleMaps.h>
 #import <Parse/Parse.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
@@ -49,8 +53,9 @@
     self.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
     
     [self.window makeKeyAndVisible];
+
     
-    [[LocationHelper sharedInstance]locationManager:nil didEnterRegion:nil];
+    [[LocationHelper sharedInstance] locationManager:nil didEnterRegion:nil];
     
     return YES;
 }

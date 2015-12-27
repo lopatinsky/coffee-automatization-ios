@@ -61,8 +61,8 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     // Companies item
     if([DBCompaniesManager sharedInstance].hasCompanies){
-        DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
-        companiesVC.mode = DBCompaniesViewControllerModeChangeCompany;
+        id<DBCompaniesViewControllerProtocol> companiesVC = [DBCompaniesViewController new];
+        [companiesVC setVCMode:DBCompaniesViewControllerModeChangeCompany];
         [self.settingsItems addObject:@{@"name": @"companiesVC",
                                            @"title": NSLocalizedString(@"Список ресторанов", nil),
                                            @"image": @"venue_gray",
@@ -274,6 +274,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"promosVC"]) {
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
+    if ([settingsItemInfo[@"name"] isEqualToString:@"newsHistoryVC"]) {
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     

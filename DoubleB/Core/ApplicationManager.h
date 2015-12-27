@@ -7,17 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 #import "ManagerProtocol.h"
-#import "MenuListViewControllerProtocol.h"
 
 typedef NS_ENUM(NSInteger, RootState) {
-    RootStateLaunch,
-    RootStateMain,
-    RootStateCompanies,
+    RootStateStart = 0,
+    RootStateMain
+};
+
+typedef NS_ENUM(NSInteger, ApplicationType) {
+    ApplicationTypeCommon = 0,
+    ApplicationTypeProxy,
+    ApplicationTypeAggregator,
+    ApplicationTypeDemo
 };
 
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenRoot = 0,
+    ApplicationScreenMenu,
     ApplicationScreenOrder,
     ApplicationScreenHistory,
     ApplicationScreenHistoryOrder,
@@ -26,14 +34,14 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
 + (instancetype)sharedInstance;
+
+@property (nonatomic) ApplicationType applicationType;
+
 + (void)handlePush:(NSDictionary *)push;
 + (void)handleLocalPush:(UILocalNotification *)push;
 
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
-
-- (void)awakeFromNotification:(NSDictionary *)userInfo;
-- (void)recieveNotification:(NSDictionary *)userInfo;
 
 - (void)fetchCompanyDependentInfo;
 @end
@@ -47,14 +55,13 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 + (void)applyBrandbookStyle;
 @end
 
-@interface ApplicationManager(Start)
-- (RootState)currentState;
+@protocol DBStartNavControllerDelegate;
+@interface ApplicationManager(Start)<DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
 @end
 
 @interface ApplicationManager(Controllers)
 - (UIViewController *)mainViewController;
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController;
 @end
 
 @interface ApplicationManager(ScreenState)
@@ -72,4 +79,9 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Review)
 - (void)showReviewViewController:(NSString *)orderId;
+@end
+
+@interface ApplicationManager(AppConfig)
+- (void)fetchAppConfiguration:(void(^)(BOOL success))callback;
+- (void)reloadAppWithAppConfig;
 @end

@@ -40,6 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     self.orderCoordinator = [OrderCoordinator sharedInstance];
     
     self.controllers = [NSMutableDictionary new];

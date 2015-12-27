@@ -25,13 +25,13 @@ NSString *const CompanyNewsManagerDidFetchActualNews = @"CompanyNewsManagerDidFe
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [CompanyNewsManager new];
+        [instance updateNews:[[NSUserDefaults standardUserDefaults] objectForKey:@"kCompanyNewsManager_allNews"] ?: @[]];
     });
     return instance;
 }
 
 - (instancetype)init {
     self = [super init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showNews) name:CompanyNewsManagerDidFetchActualNews object:nil];
     return self;
 }
 
@@ -39,25 +39,34 @@ NSString *const CompanyNewsManagerDidFetchActualNews = @"CompanyNewsManagerDidFe
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)updateNews:(NSArray *)newsArray {
+    NSMutableArray *news = [NSMutableArray new];
+    for (NSDictionary *newsDictionary in newsArray) {
+        CompanyNews *companyNews = [CompanyNews new];
+        companyNews.newsId = [newsDictionary objectForKey:@"id"];
+        companyNews.imageURL = [newsDictionary objectForKey:@"image_url"];
+        companyNews.text = [newsDictionary objectForKey:@"text"];
+        companyNews.title = [newsDictionary objectForKey:@"title"];
+        companyNews.date = [NSDate dateWithTimeIntervalSince1970:[[newsDictionary objectForKey:@"start"] longLongValue]];
+        [news addObject:companyNews];
+    }
+    self.allNews = news;
+    self.actualNews = [news lastObject];
+}
+
 - (void)fetchUpdates {
     [DBServerAPI fetchCompanyNewsWithCallback:^(BOOL success, NSDictionary *response) {
         NSArray *news = [response objectForKey:@"news"];
+        
+        news = [news sortedArrayUsingComparator:^NSComparisonResult(NSDictionary * _Nonnull obj1, NSDictionary * _Nonnull obj2) {
+            return [obj2[@"start"] compare:obj1[@"start"]];
+        }];
         if ([news count] > 0) {
-            NSDictionary *newsDictionary = [news firstObject];
-            NSNumber *fetchedNewsId = @([[newsDictionary objectForKey:@"id"] integerValue]);
-            NSNumber *lastNewsId = [[NSUserDefaults standardUserDefaults] objectForKey:@"ACTUAL_NEWS_ID"] ?: @(-1);
-            if (![fetchedNewsId isEqualToNumber:lastNewsId]) {
-                [[NSUserDefaults standardUserDefaults] setObject:fetchedNewsId forKey:@"ACTUAL_NEWS_ID"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                self.actualNews = [CompanyNews new];
-                self.actualNews.newsId = fetchedNewsId;
-                self.actualNews.imageURL = [newsDictionary objectForKey:@"image_url"];
-                self.actualNews.text = [newsDictionary objectForKey:@"text"];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:CompanyNewsManagerDidFetchActualNews object:nil];
-            }
+            [self updateNews:news];
+            [[NSNotificationCenter defaultCenter] postNotificationName:CompanyNewsManagerDidFetchActualNews object:nil];
         }
+        [[NSUserDefaults standardUserDefaults] setObject:news forKey:@"kCompanyNewsManager_allNews"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }];
 }
 

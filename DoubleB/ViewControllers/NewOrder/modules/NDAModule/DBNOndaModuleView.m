@@ -21,10 +21,8 @@
 
 @implementation DBNOndaModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOndaModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOndaModuleView";
 }
 
 - (void)awakeFromNib{

@@ -13,6 +13,7 @@
 #import "NSDate+Difference.h"
 
 static NSMutableArray *storedVenues;
+static NSMutableArray *unifiedStoredVenues;
 
 @implementation Venue
 @dynamic venueId, address, title, latitude, longitude, workingTime, phone;
@@ -25,8 +26,21 @@ static NSMutableArray *storedVenues;
     self.distance = [dict[@"distance"] doubleValue];
     self.location = CLLocationCoordinate2DMake([dict[@"lat"] doubleValue], [dict[@"lon"] doubleValue]);
     self.phone = [dict getValueForKey:@"called_phone"] ?: @"";
-    
     self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
+    
+    NSMutableDictionary *_dict = [dict mutableCopy];
+    NSArray *keysForNullValues = [_dict allKeysForObject:[NSNull null]];
+    [_dict removeObjectsForKeys:keysForNullValues];
+    
+    NSDictionary *companyDictionary = [_dict objectForKey:@"company"];
+    if (companyDictionary) {
+        NSMutableDictionary *prune = [companyDictionary mutableCopy];
+        NSArray *keysForNullValues = [prune allKeysForObject:[NSNull null]];
+        [prune removeObjectsForKeys:keysForNullValues];
+        _dict[@"company"] = prune;
+    }
+    
+    self.venueDictionary = _dict;
 }
 
 - (void)setLocation:(CLLocationCoordinate2D)location {
@@ -64,6 +78,16 @@ static NSMutableArray *storedVenues;
     return [self storedVenueForId:venueId];
 }
 
+- (void)setVenueDictionary:(NSDictionary *)venueDictionary {
+    [[NSUserDefaults standardUserDefaults] setObject:venueDictionary forKey:[NSString stringWithFormat:@"venue_dict_%@", self.venueId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (NSDictionary *)venueDictionary {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"venue_dict_%@", self.venueId]];
+}
+
+#pragma mark - Storage
 + (void)dropAllVenues {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
     
@@ -71,47 +95,6 @@ static NSMutableArray *storedVenues;
     for (Venue *venue in venues) {
         [[CoreDataHelper sharedHelper].context deleteObject:venue];
     }
-}
-
-+ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler {
-    [self fetchVenuesForLocation:nil withCompletionHandler:completionHandler];
-}
-
-+ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    if (location) {
-        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
-    }
-    
-    NSDate *startTime = [NSDate date];
-    [[DBAPIClient sharedClient] GET:@"venues"
-                         parameters:params
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                //NSLog(@"%@", responseObject);
-                                
-                                [self syncVenues:responseObject[@"venues"]];
-                                
-                                NSDate *endTime = [NSDate date];
-                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
-                                
-                                [GANHelper analyzeEvent:@"venues_load_success"
-                                                 number:@(interval)
-                                               category:APPLICATION_START];
-                                
-                                [Venue updateUserActivities];
-                                if(completionHandler)
-                                    completionHandler([self storedVenues]);
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                                [GANHelper analyzeEvent:@"venues_load_failed"
-                                                  label:error.description
-                                               category:APPLICATION_START];
-                                
-                                if(completionHandler)
-                                    completionHandler(nil);
-                            }];
 }
 
 + (void)syncVenues:(NSArray *)responseVenues {
@@ -137,11 +120,30 @@ static NSMutableArray *storedVenues;
     storedVenues = nil;
 }
 
++ (NSArray *)venuesFromDict:(NSArray *)responseVenues {
+    NSMutableArray *venues = [NSMutableArray new];
+    
+    for (NSDictionary *dict in responseVenues) {
+        Venue *venue = [self storedVenueForId:dict[@"id"]];
+        if (venue) {
+            [venue applyDict:dict];
+        } else {
+            venue = [NSEntityDescription insertNewObjectForEntityForName:@"Venue" inManagedObjectContext:[CoreDataHelper sharedHelper].context];
+            [venue applyDict:dict];
+        }
+        [venues addObject:venue];
+    }
+    
+    return venues;
+}
+
+#pragma mark - Auxiliary
 - (NSString *)parseWorkTimeFromSchedule:(NSArray *)schedule{
     NSMutableString *result = [NSMutableString stringWithString:@""];
-    for(NSDictionary *scheduleItem in  schedule){
+    for (NSDictionary *scheduleItem in  schedule){
         NSArray *days = scheduleItem[@"days"];
         NSString *hours = scheduleItem[@"hours"];
+        NSString *minutes = scheduleItem[@"minutes"];
         
         [result appendString:[self dayByNumber:[[days firstObject] intValue]]];
         if([days count] > 1){
@@ -149,7 +151,16 @@ static NSMutableArray *storedVenues;
             [result appendString:[self dayByNumber:[[days lastObject] intValue]]];
         }
         [result appendString:@" "];
-        [result appendString:hours];
+        
+        NSArray *hoursArray = [hours componentsSeparatedByString:@"-"];
+        NSArray *minutesArray = [minutes componentsSeparatedByString:@"-"];
+        [result appendString:hoursArray[0]];
+        [result appendString:@":"];
+        [result appendString:minutesArray[0]];
+        [result appendString:@"-"];
+        [result appendString:hoursArray[1]];
+        [result appendString:@":"];
+        [result appendString:minutesArray[1]];
         
         if(scheduleItem != [schedule lastObject]){
             [result appendString:@", "];
@@ -227,3 +238,49 @@ static NSMutableArray *storedVenues;
 }
 
 @end
+
+#pragma mark - API
+@implementation Venue (API)
+
++ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler {
+    [self fetchVenuesForLocation:nil withCompletionHandler:completionHandler];
+}
+
++ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    if (location) {
+        params[@"ll"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
+    }
+    
+    NSDate *startTime = [NSDate date];
+    [[DBAPIClient sharedClient] GET:@"venues"
+                         parameters:params
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                //NSLog(@"%@", responseObject);
+                                
+                                [self syncVenues:responseObject[@"venues"]];
+                                
+                                NSDate *endTime = [NSDate date];
+                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                
+                                [GANHelper analyzeEvent:@"venues_load_success"
+                                                 number:@(interval)
+                                               category:APPLICATION_START];
+                                
+                                if(completionHandler)
+                                    completionHandler([self storedVenues]);
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                [GANHelper analyzeEvent:@"venues_load_failed"
+                                                  label:error.description
+                                               category:APPLICATION_START];
+                                
+                                if(completionHandler)
+                                    completionHandler(nil);
+                            }];
+}
+
+@end
+

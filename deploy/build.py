@@ -6,7 +6,7 @@ import json
 import glob
 import subprocess
  
-DEV_ACCOUNT = "isoschepkov@gmail.com"
+DEV_ACCOUNT = "isoschepkov+empatika@gmail.com"
 PASSWORD = ""
 
 PROJECT_NAME = 'DoubleB'

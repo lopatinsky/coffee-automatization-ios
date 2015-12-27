@@ -14,10 +14,14 @@
 #import "DBMenu.h"
 #import "Order.h"
 #import "Venue.h"
+#import "DBCardsManager.h"
+#import "IHSecureStore.h"
+#import "UICKeyChainStore.h"
 
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
+#import "DBGeoPushManager.h"
 #import "DBMenu.h"
 #import "DBServerAPI.h"
 #import "DBShareHelper.h"
@@ -26,11 +30,21 @@
 #import "DBGeoPushManager.h"
 #import "WatchInteractionManager.h"
 
-#import "DBSettingsTableViewController.h"
+#import "DBAPIClient.h"
+#import "DBStartNavController.h"
+#import "DBCommonStartNavController.h"
+#import "DBProxyStartNavController.h"
+#import "DBDemoStartNavController.h"
+#import "DBAggregatorStartNavController.h"
+
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBVenuesTableViewController.h"
 #import "DBVenueViewController.h"
+#import "DBMenuViewController.h"
+#import "DBSettingsTableViewController.h"
+
+#import "DBSnapshotSDKHelper.h"
 
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
@@ -43,9 +57,15 @@
 
 #pragma mark - General
 
-@interface ApplicationManager()
+typedef NS_ENUM(NSUInteger, RemotePushType) {
+    RemotePushOrderType = 1,
+    RemotePushTextType,
+    RemotePushReviewType,
+    RemotePushNewsType,
+    RemotePushInvalidType = 999999
+};
 
-@property (nonatomic, strong) UIAlertView *alertView;
+@interface ApplicationManager()
 @property (nonatomic) RootState state;
 
 @end
@@ -61,23 +81,51 @@
 
 + (void)handlePush:(NSDictionary *)push {
     [GANHelper analyzeEvent:@"push_received" label:[push description] category:@"push_screen"];
-    if ([push objectForKey:@"type"]) {
-        if ([[push objectForKey:@"type"] integerValue] == 3) {
+    
+    NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
+    switch (pushType) {
+        case RemotePushOrderType: {
+            NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
+                                                                         object:nil
+                                                                       userInfo:push ?: @{}];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            [self showPushAlert:push buttons:nil callback:nil];
+            break;
+        }
+        case RemotePushTextType: {
+            if ([([push objectForKey:@"should_popup"] ?: @(0)) boolValue]) {
+                UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+                [newsViewController setData:@{@"title": [push getValueForKey:@"title"] ?: @"",
+                                              @"text": [push getValueForKey:@"full_text"] ?: @"",
+                                              @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
+                [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+                break;
+            }
+        }
+        case RemotePushReviewType: {
             [self showPushAlert:push buttons:@[NSLocalizedString(@"Отмена", nil), NSLocalizedString(@"Оценить", nil)] callback:^(NSUInteger buttonIndex) {
                 if (buttonIndex == 1) {
                     NSString *orderId = push[@"review"][@"order_id"];
                     [[ApplicationManager sharedInstance] showReviewViewController:orderId];
                 }
             }];
+            break;
         }
-    } else if ([push objectForKey:@"aps"]) {
-        [self showPushAlert:push buttons:nil callback:nil];
-        
-        NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
-                                                                     object:nil
-                                                                   userInfo:push ?: @{}];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-    } 
+        case RemotePushNewsType: {
+            if ([UIApplication sharedApplication].applicationState != 0) {
+                UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+                [newsViewController setData:@{@"title": [push getValueForKey:@"title"],
+                                              @"text": [push getValueForKey:@"full_text"],
+                                              @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
+                [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+            }
+            break;
+        }
+        case RemotePushInvalidType:
+            break;
+        default:
+            break;
+    }
 }
 
 + (void)handleLocalPush:(UILocalNotification *)push {
@@ -104,30 +152,46 @@
         }
     }
     
-    
 }
 
 - (instancetype)init {
     self = [super init];
     
-    self.state = [self currentState];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showAlertViewWithInternetError) name:kDBNetworkManagerConnectionFailed object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companiesLoadedSuccess) name:kDBConcurrentOperationCompaniesLoadSuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(companyInfoLoadedSuccess) name:kDBConcurrentOperationCompanyInfoLoadSuccess object:nil];
+    self.state = RootStateStart;
     
     return self;
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (ApplicationType)applicationType {
+    NSString *typeString = [DBCompanyInfo objectFromApplicationPreferencesByName:@"ApplicationType"];
+    ApplicationType type = ApplicationTypeCommon;
+    
+    if ([typeString isEqualToString:@"Proxy"]) {
+        type = ApplicationTypeProxy;
+    }
+    
+    if ([typeString isEqualToString:@"Aggregator"]) {
+        type = ApplicationTypeAggregator;
+    }
+    
+    if ([typeString isEqualToString:@"Demo"]) {
+        type = ApplicationTypeDemo;
+    }
+    
+    return type;
 }
 
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                  clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    NSDictionary *appConfig = [self appConfig];
+    if ([appConfig getValueForKey:@"parse"]) {
+        [Parse setApplicationId:appConfig[@"parse"][@"app_key"]
+                      clientKey:appConfig[@"parse"][@"client_key"]];
+    } else {
+        [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
+                      clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    }
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
 #warning PayPal legacy code
@@ -144,28 +208,19 @@
         [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
     
-    // Check Branch and register user
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
+    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
     
-    // Fetch all companies
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchCompanies];
-    
-    // Init update all necessary info if company has chosen
-    if ([self currentState] == RootStateMain) {
-        [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchCompanyInfo];
-        [self fetchCompanyDependentInfo];
+#ifdef DEBUG
+    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
     }
+#endif
+    
 }
 
 - (void)fetchCompanyDependentInfo {
@@ -191,10 +246,19 @@
     [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
 }
 
+- (void)setAppConfig:(NSDictionary *)appConfig {
+    [[NSUserDefaults standardUserDefaults] setObject:appConfig forKey:@"ApplicationManager_AppConfig"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)recieveNotification:(NSDictionary *)userInfo {
     if([UIApplication sharedApplication].applicationState != 0){
         [self awakeFromNotification:userInfo];
     }
+}
+
+- (NSDictionary *)appConfig {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ApplicationManager_AppConfig"] ?: @{};
 }
 
 #pragma mark - API Notification handlers
@@ -206,38 +270,9 @@
     }
 }
 
-- (void)companyInfoLoadedSuccess {
-    if (self.state != [self currentState]){
-        [self fetchCompanyDependentInfo];
-    }
-    
-    [self changeRoot];
-}
-
-- (void)showAlertViewWithInternetError {
-    BOOL show = YES;
-    show = show && ![self.alertView isVisible];
-    show = show && ([ApplicationManager sharedInstance].state == RootStateLaunch);
-    if (show) {
-        if(!self.alertView){
-            self.alertView = [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
-                                                  cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                                      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                                                          [[NSNotificationCenter defaultCenter] postNotificationName:kDBNetworkManagerShouldRetryToRequest object:nil];
-                                                      });
-                                                  }];
-        }
-        
-        [self.alertView show];
-    }
-}
-
 - (void)changeRoot {
-    if (self.state != [self currentState]) {
-        self.state = [self currentState];
-        UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-        [window setRootViewController:[self rootViewController]];
-    }
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    [window setRootViewController:[self rootViewController]];
 }
 
 #pragma mark - ManagerProtocol
@@ -314,6 +349,10 @@
                                                                NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                                }];
     } else {
+        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+            [UINavigationBar appearance].translucent = NO;
+        }
+        
         [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -340,46 +379,45 @@
 
 @implementation ApplicationManager (Start)
 
-- (RootState)currentState {
-    if ([DBCompanyInfo sharedInstance].infoLoaded) {
-        return RootStateMain;
-    }
-    
-    if ([[DBCompaniesManager sharedInstance] companiesLoaded] && [DBCompaniesManager sharedInstance].hasCompanies && ![DBCompaniesManager sharedInstance].companyIsChosen) {
-        return RootStateCompanies;
-    }
-    
-    return RootStateLaunch;
-}
-
 - (UIViewController *)rootViewController {
-    if ([self currentState] == RootStateMain) {
-        return [self mainViewController];
-    }
-    if ([self currentState] == RootStateCompanies) {
-        return[[UINavigationController alloc] initWithRootViewController:[ViewControllerManager companiesViewController]];
-    }
-    if ([self currentState] == RootStateLaunch) {
-        return [ViewControllerManager launchViewController];
+    if (self.state == RootStateStart) {
+        switch (self.applicationType) {
+            case ApplicationTypeCommon:
+                return [[DBCommonStartNavController alloc] initWithDelegate:self];
+                break;
+            case ApplicationTypeProxy:
+                return [[DBProxyStartNavController alloc] initWithDelegate:self];
+                break;
+            case ApplicationTypeDemo:
+                return [[DBDemoStartNavController alloc] initWithDelegate:self];
+                break;
+            case ApplicationTypeAggregator:
+                return [[DBAggregatorStartNavController alloc] initWithDelegate:self];
+                break;
+                
+            default:
+                break;
+        }
     }
     
     return [self mainViewController];
 }
+
+- (void)db_startNavVCNeedsMoveToMain:(UIViewController *)controller {
+    self.state = RootStateMain;
+    
+    [self fetchCompanyDependentInfo];
+    [self changeRoot];
+}
+
 @end
 
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
+    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
 }
 
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController{
-    if([DBMenu sharedInstance].hasNestedCategories){
-        return [ViewControllerManager categoriesViewController];
-    } else {
-        return [ViewControllerManager rootMenuViewController];
-    }
-}
 @end
 
 @implementation ApplicationManager (ScreenState)
@@ -442,7 +480,12 @@
             }
             break;
         }
-            
+        case ApplicationScreenMenu: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                [((UINavigationController*)rootVC) setViewControllers:@[[DBMenuViewController new]] animated:animated];
+            }
+            break;
+        }
         default:
             break;
     }
@@ -456,4 +499,30 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:reviewViewController];
     [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
 }
+@end
+
+@implementation ApplicationManager (AppConfig)
+
+- (void)fetchAppConfiguration:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:@"app/config"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//                                [self setAppConfig:responseObject];
+                                [self initializeVendorFrameworks];
+                                if (callback)
+                                    callback(YES);
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback)
+                                    callback(NO);
+                            }];
+    
+}
+
+- (void)reloadAppWithAppConfig {
+    
+}
+
 @end

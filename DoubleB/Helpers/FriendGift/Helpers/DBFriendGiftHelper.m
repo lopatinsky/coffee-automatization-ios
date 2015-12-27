@@ -14,6 +14,7 @@
 #import "DBMenuPosition.h"
 #import "OrderItem.h"
 
+#import "AKNumericFormatter.h"
 
 NSString * const DBFriendGiftHelperNotificationFriendName = @"DBFriendGiftHelperNotificationFriendName";
 NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelperNotificationFriendPhone";
@@ -21,6 +22,7 @@ NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelpe
 NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelperNotificationItemsPrice";
 
 @implementation DBFriendGiftHelper
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -31,6 +33,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
         [self.friendPhone addObserver:self forKeyPath:@"value" options:(NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew) context:nil];
         
         _itemsManager = [[OrderItemsManager alloc] initWithParentManager:self];
+        _giftsHistory = @[];
     }
     return self;
 }
@@ -44,7 +47,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
                       ofObject:(id)object
                         change:(NSDictionary *)change
                        context:(void *)context {
-    if([keyPath isEqualToString:@"value"]){
+    if([keyPath isEqualToString:@"value"]) {
         if(object == self.friendName){
             [self notifyObserverOf:DBFriendGiftHelperNotificationFriendName];
         }
@@ -69,12 +72,16 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
     
-    [DBFriendGiftHelper setValue:@"Заголовок с сервака" forKey:@"titleFriendGiftScreen"];
-    [DBFriendGiftHelper setValue:@"Перепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака\nПерепиши, чтобы текст брался с сервака" forKey:@"textFriendGiftScreen"];
+    DBFriendGiftType type = [moduleDict[@"type"] intValue];
+    [DBFriendGiftHelper setValue:@(type) forKey:@"type"];
+    
+    NSDictionary *moduleInfo = [[moduleDict getValueForKey:@"info"] getValueForKey:@"info"];
+    
+    [DBFriendGiftHelper setValue:([moduleInfo getValueForKey:@"title"] ?: @"") forKey:@"titleFriendGiftScreen"];
+    [DBFriendGiftHelper setValue:([moduleInfo getValueForKey:@"text"] ?: @"") forKey:@"textFriendGiftScreen"];
     
     [self fetchItems:nil];
 }
-
 
 - (void)processGift:(void(^)(NSString *smsText))success
             failure:(void(^)(NSString *errorDescription))failure {
@@ -91,9 +98,9 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
     if(self.friendPhone)
         params[@"recipient_phone"] = self.friendPhone.value;
     
-    if([DBCardsManager sharedInstance].defaultCard){
+    if(self.type == DBFriendGiftTypeCommon && [DBCardsManager sharedInstance].defaultCard){
         params[@"payment_type_id"] = @1;
-        params[@"alpha_client_id"] = [IHSecureStore sharedInstance].clientId;
+        params[@"alpha_client_id"] = [IHSecureStore sharedInstance].paymentClientId;
         params[@"binding_id"] = [DBCardsManager sharedInstance].defaultCard.token;
         params[@"return_url"] = @"alpha-payment://return-page";
     }
@@ -113,15 +120,16 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
     params[@"total_sum"] = @(self.itemsManager.totalPrice);
     
     
-    [[DBAPIClient sharedClient] POST:@"shared/gift/get_url"
+    NSString *url = self.type == DBFriendGiftTypeCommon ? @"shared/gift/get_url" : @"shared/gift/get_mivako_url";
+    [[DBAPIClient sharedClient] POST:url
                           parameters:params
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  //NSLog(@"%@", responseObject);
                                  
-                                 self.smsText = responseObject[@"sms_text"];
+                                 NSString *smsText = [responseObject getValueForKey:@"sms_text"];
                                  
                                  if(success)
-                                     success(self.smsText);
+                                     success(smsText);
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
@@ -160,19 +168,46 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
                              }];
 }
 
+- (void)fetchGiftsHistory:(void (^)(BOOL))callback {
+    [[DBAPIClient sharedClient] GET:@"shared/gift/history"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                
+                            }
+                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                if(callback)
+                                    callback(NO);
+                            }];
+}
+
 - (BOOL)validData {
     BOOL result = YES;
     
+    NSString *mask = @"+* (***) ***-**-**";
+    NSString *reformattedString = [AKNumericFormatter formatString:self.friendPhone.value
+                                                         usingMask:mask
+                                              placeholderCharacter:'*'];
+    BOOL phoneIsValid =  [[AKNumericFormatter formatterWithMask:mask placeholderCharacter:'*'] isFormatFulfilled:reformattedString];
+    
     result = result && self.itemsManager.totalCount > 0;
     result = result && self.friendName.valid;
-    result = result && self.friendPhone.valid;
-    result = result && [DBCardsManager sharedInstance].defaultCard;
+    result = result && self.friendPhone.valid && phoneIsValid;
+    
+    if (self.type == DBFriendGiftTypeCommon) {
+        result = result && [DBCardsManager sharedInstance].defaultCard;
+    }
     
     return result;
 }
 
 - (BOOL)enabled {
     return [[DBFriendGiftHelper valueForKey:@"enabled"] boolValue];
+}
+
+- (DBFriendGiftType)type {
+    return [[DBFriendGiftHelper valueForKey:@"type"] intValue];
 }
 
 - (NSString *)titleFriendGiftScreen {
@@ -192,14 +227,6 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
     }
     
     return items;
-}
-
-- (NSString *)smsText {
-    return [DBFriendGiftHelper valueForKey:@"smsText"];
-}
-
-- (void)setSmsText:(NSString *)smsText {
-    [DBFriendGiftHelper setValue:smsText forKey:@"smsText"];
 }
 
 #pragma mark - DBPrimaryManager

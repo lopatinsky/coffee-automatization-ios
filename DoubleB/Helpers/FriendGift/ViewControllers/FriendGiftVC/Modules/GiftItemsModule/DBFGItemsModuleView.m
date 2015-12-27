@@ -10,12 +10,12 @@
 #import "DBOrderItemCell.h"
 #import "DBFriendGiftHelper.h"
 #import "OrderItem.h"
+#import "DBMenuPosition.h"
 
 #import "DBFGItemsViewController.h"
 #import "DBModuleHeaderView.h"
 
-@interface DBFGItemsModuleView ()<UITableViewDataSource, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
-@property (weak, nonatomic) IBOutlet UIView *headerView;
+@interface DBFGItemsModuleView ()<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate, DBOrderItemCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -23,7 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIImageView *addImage;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *consraintAddViewLeadingToSuperView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintAddViewWidth;
 @property (nonatomic) CGFloat initialAddViewWidth;
 
 @end
@@ -39,19 +40,12 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    DBModuleHeaderView *header = [DBModuleHeaderView new];
-    header.title = NSLocalizedString(@"Выберите подарок", nil);
-    header.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.headerView addSubview:header];
-    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
-    
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 44.f;
+    self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.scrollEnabled = NO;
     
-    self.initialAddViewWidth = self.addView.frame.size.width;
-    self.consraintAddViewLeadingToSuperView.constant = 0;
+    self.initialAddViewWidth = self.constraintAddViewWidth.constant;
     [self.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.addImage templateImageWithName:@"gift_icon"];
     
@@ -70,14 +64,24 @@
 - (void)reload:(BOOL)animated {
     [super reload:animated];
     
+    if ([DBFriendGiftHelper sharedInstance].items.count == 1 && [DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
+        [[DBFriendGiftHelper sharedInstance].itemsManager addPosition:[DBFriendGiftHelper sharedInstance].items.firstObject];
+    }
+    
     [self.tableView reloadData];
     
     void (^block)() = ^void() {
-        if([DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
-            self.consraintAddViewLeadingToSuperView.constant = 0;
+        if ([DBFriendGiftHelper sharedInstance].items.count < 2) {
+            self.constraintAddViewWidth.constant = 0;
+            self.constraintAddViewWidth.priority = 950;
         } else {
-            self.consraintAddViewLeadingToSuperView.constant = self.frame.size.width - self.initialAddViewWidth;
+            if([DBFriendGiftHelper sharedInstance].itemsManager.items.count == 0) {
+                self.constraintAddViewWidth.priority = 800;
+            } else {
+                self.constraintAddViewWidth.priority = 900;
+            }
         }
+        
         [self layoutIfNeeded];
     };
     
@@ -89,11 +93,13 @@
 }
 
 - (CGSize)moduleViewContentSize {
-    int height = self.headerView.frame.size.height;
-    int tableHeight = [DBFriendGiftHelper sharedInstance].itemsManager.items.count * self.tableView.rowHeight;
-    height += tableHeight;
+    int height = 0;
     
-    if(tableHeight == 0) {
+    for (int i = 0; i < [DBFriendGiftHelper sharedInstance].itemsManager.items.count; i++) {
+        height += [self tableView:self.tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
+    }
+    
+    if(height == 0) {
         height += 40;
     }
     
@@ -107,15 +113,27 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBOrderItemCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCompactCell"];
-    
-    if (!cell) {
-        cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeCompact];
-        cell.delegate = self;
-        cell.panGestureRecognizer.delegate = self;
-    }
+    DBOrderItemCell *cell;
     
     OrderItem *item = [[DBFriendGiftHelper sharedInstance].itemsManager itemAtIndex:indexPath.row];
+    if (item.position.hasImage){
+        if(indexPath.section == 0)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCell"];
+        
+        if (!cell) {
+            cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeFull];
+        }
+    } else {
+        if(indexPath.section == 0)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBOrderItemCompactCell"];
+        
+        if (!cell) {
+            cell = [[DBOrderItemCell alloc] initWithType:DBOrderItemCellTypeCompact];
+        }
+    }
+    
+    cell.delegate = self;
+    cell.panGestureRecognizer.delegate = self;
     
     cell.orderItem = item;
     [cell configure];
@@ -123,22 +141,30 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    OrderItem *item = [[DBFriendGiftHelper sharedInstance].itemsManager itemAtIndex:indexPath.row];
+    
+    if(item.position.hasImage){
+        return 100;
+    } else {
+        return 60;
+    }
+}
+
 
 #pragma mark - DBOrderItemCellDelegate
 
-- (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell{
-    return YES;
+- (BOOL)db_orderItemCellCanEdit:(DBOrderItemCell *)cell {
+    return [DBFriendGiftHelper sharedInstance].type == DBFriendGiftTypeCommon;
 }
 
-- (void)removeRowAtIndex:(NSInteger)index{
-    [self reload:YES];
+- (void)removeRowAtIndex:(NSInteger)index {
+    [self.ownerViewController reloadAllModules];
 }
 
 - (void)db_orderItemCellIncreaseItemCount:(DBOrderItemCell *)cell{
     NSInteger index = [self.tableView indexPathForCell:cell].row;
     [[DBFriendGiftHelper sharedInstance].itemsManager increaseOrderItemCountAtIndex:index];
-    
-    [cell reloadCount];
 }
 
 - (void)db_orderItemCellDecreaseItemCount:(DBOrderItemCell *)cell{

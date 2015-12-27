@@ -36,6 +36,11 @@
 "На месте" = "In restaurant";
 "Доставка" = "Shipping";
 
+"Город" = "City";
+"Улица" = "Street";
+"Дом" = "House";
+"Квартира" = "Apartment";
+
 "Комментарий" = "Comment";
 "Сохранить" = "Save";
 "Заведения" = "Venues";
@@ -86,12 +91,15 @@
 "Выберите ресторан" = "Choose a restaurant";
 "Список ресторанов" = "List of the restaurants";
 
+"Кофе" = "Coffee";
+
 "Ошибка" = "Error";
 "Успех" = "Success";
 
 "OK" = "OK";
 
 "Заказ отправлен. Мы вас ждем!" = "Order has been placed. We are waiting for you!";
+"Заказ отправлен. Мы с вами свяжемся для подтверждения!" = "Order has been placed. We will contact you to confirm!";
 
 "Заказы" = "Orders";
 
@@ -114,6 +122,7 @@
 "Об акции" = "About promo";
 "Справка" = "Documents";
 "Политика" = "Policy";
+"Новости" = "News";
 "Присылать уведомления" = "Receive notificaions";
 "Список акций" = "Promos";
 "О компании" = "About company";

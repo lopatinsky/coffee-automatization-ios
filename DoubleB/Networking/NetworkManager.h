@@ -17,7 +17,13 @@ typedef enum : NSUInteger {
     NetworkOperationFetchCompanyInfo,
     NetworkOperationCheckOrder,
     NetworkOperationFetchVenues,
-    NetworkOperationFetchSubscriptionInfo
+    NetworkOperationFetchSubscriptionInfo,
+    NetworkOperationFetchUnifiedCities,
+    NetworkOperationFetchUnifiedVenues,
+    NetworkOperationFetchUnifiedMenu,
+    NetworkOperationFetchUnifiedPositions,
+    NetworkOperationFetchAppConfig,
+    NetworkOperationRegister
 } NetworkOperation;
 
 @interface NetworkManager : NSObject

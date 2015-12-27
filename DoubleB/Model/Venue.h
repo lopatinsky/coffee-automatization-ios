@@ -25,11 +25,15 @@
 @property (nonatomic) CLLocationCoordinate2D location;
 @property (nonatomic) double distance;
 
+@property (nonatomic, strong) NSDictionary *venueDictionary;
+
 + (NSArray *)storedVenues;
 + (Venue *)venueById:(NSString *)venueId;
-
 + (void)dropAllVenues;
-//+ (void)fetchAllVenuesWithCompletionHandler:(void(^)(NSArray *venues))completionHandler;
-+ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler;
++ (NSArray *)venuesFromDict:(NSArray *)responseVenues;
 
+@end
+
+@interface Venue(API)
++ (void)fetchVenuesForLocation:(CLLocation *)location withCompletionHandler:(void(^)(NSArray *venues))completionHandler;
 @end

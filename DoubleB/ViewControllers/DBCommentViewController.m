@@ -26,8 +26,8 @@
     self.textView.font = [UIFont fontWithName:@"HelveticaNeue" size:14];
     self.textView.backgroundColor = [UIColor db_backgroundColor];
     self.textView.delegate = self;
-    [self.view addSubview:self.textView];
     
+    [self.view addSubview:self.textView];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification

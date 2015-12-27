@@ -121,11 +121,11 @@ static void (^dbMessageViewControllerCallBack)(MessageComposeResult result);
             break;
     }
     
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
     if(dbMessageViewControllerCallBack){
         dbMessageViewControllerCallBack(result);
     }
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

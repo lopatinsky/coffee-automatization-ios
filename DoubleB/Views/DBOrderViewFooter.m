@@ -63,7 +63,14 @@
     NSDateFormatter *formatter = [NSDateFormatter new];
     formatter.dateStyle = NSDateFormatterShortStyle;
     formatter.timeStyle = NSDateFormatterShortStyle;
-    self.labelDate.text = [NSString stringWithFormat:[DBTextResourcesHelper db_preparationOrderCellString], self.order.formattedTimeString];
+    
+    NSString *readyTitle;
+    if (self.order.status == OrderStatusNew || self.order.status == OrderStatusConfirmed || self.order.status == OrderStatusOnWay) {
+        readyTitle = [DBTextResourcesHelper db_preparationOrderCellString];
+    } else {
+        readyTitle = [DBTextResourcesHelper db_readyOrderCellString];
+    }
+    self.labelDate.text = [NSString stringWithFormat:readyTitle, self.order.formattedTimeString];
     
     if([self.order.deliveryType intValue] == DeliveryTypeIdShipping){
         self.labelAddress.text = self.order.shippingAddress;

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBUnifiedMenuTableViewController">
+            <connections>
+                <outlet property="segmentHolderView" destination="Peo-7v-ZcA" id="Djc-QS-2dH"/>
+                <outlet property="segmentedController" destination="pOo-PK-guT" id="NHq-XM-1fy"/>
+                <outlet property="tableView" destination="Ul3-Rr-H3m" id="ylY-ze-XHv"/>
+                <outlet property="view" destination="iN0-l3-epB" id="t4H-jN-spM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="154" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ul3-Rr-H3m">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="4hB-0C-IGJ"/>
+                        <outlet property="delegate" destination="-1" id="03Y-43-FtC"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Peo-7v-ZcA">
+                    <rect key="frame" x="0.0" y="64" width="600" height="40"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="pOo-PK-guT">
+                            <rect key="frame" x="200" y="6" width="200" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="28" id="Ltq-Ht-jSv"/>
+                                <constraint firstAttribute="width" constant="200" id="d5H-yX-p9F"/>
+                            </constraints>
+                            <segments>
+                                <segment title="First"/>
+                                <segment title="Second"/>
+                            </segments>
+                            <connections>
+                                <action selector="segmentedControlValueChanged:" destination="-1" eventType="valueChanged" id="C5h-bf-dlp"/>
+                            </connections>
+                        </segmentedControl>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GRs-Mt-hSX"/>
+                        <constraint firstItem="pOo-PK-guT" firstAttribute="centerX" secondItem="Peo-7v-ZcA" secondAttribute="centerX" id="M51-9e-JKG"/>
+                        <constraint firstItem="pOo-PK-guT" firstAttribute="centerY" secondItem="Peo-7v-ZcA" secondAttribute="centerY" id="yAy-XY-R4j"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Peo-7v-ZcA" secondAttribute="trailing" id="H1c-cQ-qz2"/>
+                <constraint firstItem="Peo-7v-ZcA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f8d-1M-SL9"/>
+                <constraint firstAttribute="bottom" secondItem="Ul3-Rr-H3m" secondAttribute="bottom" id="ftb-vY-bi9"/>
+                <constraint firstItem="Ul3-Rr-H3m" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="hKk-jM-LM6"/>
+                <constraint firstAttribute="trailing" secondItem="Ul3-Rr-H3m" secondAttribute="trailing" id="iSb-Jg-TxW"/>
+                <constraint firstItem="Peo-7v-ZcA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="xde-BI-UoD"/>
+                <constraint firstItem="Ul3-Rr-H3m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="y4j-AA-fR2"/>
+                <constraint firstItem="Ul3-Rr-H3m" firstAttribute="top" secondItem="Peo-7v-ZcA" secondAttribute="bottom" constant="2" id="yMV-uS-hNP"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="yMV-uS-hNP"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="696" y="539"/>
+        </view>
+    </objects>
+</document>

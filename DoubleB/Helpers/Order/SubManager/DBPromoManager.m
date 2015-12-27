@@ -52,9 +52,7 @@
         // List of promos
         NSMutableArray *promotionList = [NSMutableArray new];
         for(NSDictionary *promotionDict in response[@"promos"]){
-            DBPromotion *promotion = [DBPromotion new];
-            promotion.promotionName = [promotionDict getValueForKey:@"title"] ?: @"";
-            promotion.promotionDescription = [promotionDict getValueForKey:@"description"] ?: @"";
+            DBPromotion *promotion = [[DBPromotion alloc] initWithDict:promotionDict];
             
             [promotionList addObject:promotion];
         }
@@ -363,6 +361,18 @@
 
 
 @implementation DBPromotion
+
+- (instancetype)initWithDict:(NSDictionary *)dict {
+    self = [super init];
+    
+    self.promotionName = [dict getValueForKey:@"title"] ?: @"";
+    self.promotionDescription = [dict getValueForKey:@"description"] ?: @"";
+    self.imageUrl = [dict getValueForKey:@"icon"];
+    self.imageType = [[dict getValueForKey:@"is_icon"] boolValue] ? DBPromotionImageTypePic : DBPromotionImageTypeImage;
+    
+    return self;
+}
+
 @end
 
 @implementation DBPromoItem

@@ -16,6 +16,7 @@
 
 #import "DBCompanyInfo.h"
 #import "IHSecureStore.h"
+#import "DBCardsManager.h"
 
 @implementation DBVersionDependencyManager
 
@@ -60,8 +61,16 @@
 #pragma mark - check compatibility of stored data
 + (void)checkCompatibilityOfStoredData {
     if ([self needsToFlush]) {
-        // Clear KeyChain
-        [[IHSecureStore sharedInstance] removeAll];
+        
+        // Fetch payment client Id from iiko app
+        NSData *clientIdData = [[IHSecureStore sharedInstance] dataForKey:@"clientId"];
+        // Save it as new payment Id
+        [[IHSecureStore sharedInstance] setData:clientIdData forKey:@"paymentClientId"];
+        
+        // Remove iiko payment client Id
+        [[IHSecureStore sharedInstance] removeForKey:@"clientId"];
+        // Remove iiko client id (server return new)
+        [[IHSecureStore sharedInstance] removeForKey:@"restoClientId"];
         
         // Clear UserDefaults
         NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
@@ -83,6 +92,22 @@
     BOOL needsToFlush = NO;
     
     if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"tukano"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
+
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"iikohack"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"mivako"]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
         BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
         if (!removed) {
