@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol DBModuleViewDelegate;
+@protocol DBOwnerViewControllerProtocol;
 
 @interface DBModuleView : UIView
 // Category for analytics
 @property (strong, nonatomic) NSString *analyticsCategory;
 
 // Controller which hold module
-@property (weak, nonatomic) UIViewController *ownerViewController;
+@property (weak, nonatomic) UIViewController<DBOwnerViewControllerProtocol> *ownerViewController;
 
 @property (weak, nonatomic) id<DBModuleViewDelegate> delegate;
 
@@ -106,6 +107,12 @@
 - (void)touchAtLocation:(CGPoint)location;
 @end
 
+@protocol DBOwnerViewControllerProtocol <NSObject>
+
+@optional
+- (void)reloadAllModules;
+
+@end
 
 @protocol DBModuleViewDelegate <NSObject>
 @optional

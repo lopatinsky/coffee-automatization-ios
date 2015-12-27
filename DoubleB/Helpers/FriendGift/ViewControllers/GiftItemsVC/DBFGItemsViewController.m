@@ -10,6 +10,7 @@
 #import "DBPositionCell.h"
 #import "DBMenuPosition.h"
 #import "DBFriendGiftHelper.h"
+#import "DBBarButtonItem.h"
 
 #import "MBProgressHUD.h"
 
@@ -23,22 +24,14 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Подарки", nil);
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem giftItem:self action:@selector(back)];
     
-    self.tableView.rowHeight = 44.f;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if([DBFriendGiftHelper sharedInstance].items.count == 0) {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBFriendGiftHelper sharedInstance] fetchItems:^(BOOL success) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            [self.tableView reloadData];
-        }];
-    }
+- (void)back {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -46,21 +39,40 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBPositionCell *cell = [tableView dequeueReusableCellWithIdentifier:[DBPositionCell reuseIdentifierFor:DBPositionCellAppearanceTypeCompact]];
-    
-    if(!cell){
-        cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
-        cell.delegate = self;
-        cell.priceAnimated = YES;
-    }
+    DBPositionCell *cell;
     
     DBMenuPosition *position = [DBFriendGiftHelper sharedInstance].items[indexPath.row];
+    if (position.hasImage){
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
+        if (!cell) {
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
+        }
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
+        if (!cell) {
+            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
+        }
+    }
+    
+    cell.contentType = DBPositionCellContentTypeRegular;
+    cell.priceAnimated = YES;
     [cell configureWithPosition:position];
+    cell.delegate = self;
     
     return cell;
 }
 
--(void)positionCellDidOrder:(id<PositionCellProtocol>)cell {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    DBMenuPosition *position = [DBFriendGiftHelper sharedInstance].items[indexPath.row];
+    if(position.hasImage){
+        return 120;
+    } else {
+        return 50;
+    }
+}
+
+
+- (void)positionCellDidOrder:(id<PositionCellProtocol>)cell {
     [[DBFriendGiftHelper sharedInstance].itemsManager addPosition:[cell position]];
 }
 

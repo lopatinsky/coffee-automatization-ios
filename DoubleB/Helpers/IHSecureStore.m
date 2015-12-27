@@ -61,12 +61,34 @@
     }
 }
 
+- (NSString *)paymentClientId {
+    NSString *paymentClientId;
+    
+    paymentClientId = self.secureStore[@"paymentClientId"];
+    
+    if (paymentClientId.length == 0) {
+        NSString *clientId = self.clientId;
+        if (clientId.length > 0) {
+            [self.secureStore setString:clientId forKey:@"paymentClientId"];
+            [self.secureStore synchronize];
+        }
+        paymentClientId = self.secureStore[@"paymentClientId"];
+    }
+    
+    return paymentClientId;
+}
+
 - (NSData *)dataForKey:(NSString *)key {
     return [self.secureStore dataForKey:key];
 }
 
 - (void)setData:(NSData *)data forKey:(NSString *)key {
     [self.secureStore setData:data forKey:key];
+    [self.secureStore synchronize];
+}
+
+- (void)removeForKey:(NSString *)key {
+    [self.secureStore removeItemForKey:key];
     [self.secureStore synchronize];
 }
 

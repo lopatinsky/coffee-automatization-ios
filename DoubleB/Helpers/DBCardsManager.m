@@ -7,6 +7,7 @@
 //
 
 #import "DBCardsManager.h"
+#import "IHSecureStore.h"
 #import "UICKeyChainStore.h"
 
 NSString *const kDBCardTypeMasterCard = @"MasterCard";

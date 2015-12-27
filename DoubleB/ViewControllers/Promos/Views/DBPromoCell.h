@@ -10,18 +10,8 @@
 
 @class DBPromotion;
 
-typedef NS_ENUM(NSInteger, DBPromoCellType) {
-    DBPromoCellTypeGeneral = 0,
-    DBPromoCellTypePic,
-    DBPromoCellTypeImage
-};
-
 @interface DBPromoCell : UITableViewCell
-@property (nonatomic) DBPromoCellType type;
-
-+ (NSString *)reuseIdentifier:(DBPromoCellType)type;
-+ (DBPromoCell *)create:(DBPromoCellType)type;
-
-
 - (void)configureWithPromo:(DBPromotion *)promo;
+
+//- (CGFloat *)contentHeight;
 @end

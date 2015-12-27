@@ -8,6 +8,11 @@
 
 #import "DBModuleView.h"
 
-@interface DBFGItemsModuleView : DBModuleView
+typedef NS_ENUM(NSInteger, DBFGItemsModuleViewType) {
+    DBFGItemsModuleViewTypeCommon,
+    DBFGItemsModuleViewTypeSingleItem
+};
 
+@interface DBFGItemsModuleView : DBModuleView
+@property (nonatomic) DBFGItemsModuleViewType *type;
 @end
