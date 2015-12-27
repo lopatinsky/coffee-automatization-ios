@@ -205,7 +205,7 @@
     if (clicked) { return; }
     clicked = true;
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
-    [self.parentNavigationController animateAddProductFromView:self.priceLabel completion:^{
+    [self.navigationController animateAddProductFromView:self.priceLabel completion:^{
         if (self.position.mode == DBMenuPositionModeBonus) {
             [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:self.position];
             if (self.position.price > [self totalPoints]) {

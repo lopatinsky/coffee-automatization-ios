@@ -26,3 +26,8 @@
 - (void)reloadContent;
 
 @end
+
+@interface DBMenuTableModuleView : DBMenuModuleView
+@property (strong, nonatomic) DBModuleView *tableHeaderModuleView;
+@property (strong, nonatomic) UITableView *tableView;
+@end

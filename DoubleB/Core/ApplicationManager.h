@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 
 #import "ManagerProtocol.h"
-#import "MenuListViewControllerProtocol.h"
 
 typedef NS_ENUM(NSInteger, RootState) {
     RootStateStart = 0,
@@ -63,7 +62,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Controllers)
 - (UIViewController *)mainViewController;
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController;
 @end
 
 @interface ApplicationManager(ScreenState)

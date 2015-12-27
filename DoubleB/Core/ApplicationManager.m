@@ -14,6 +14,9 @@
 #import "DBMenu.h"
 #import "Order.h"
 #import "Venue.h"
+#import "DBCardsManager.h"
+#import "IHSecureStore.h"
+#import "UICKeyChainStore.h"
 
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"
@@ -207,15 +210,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     
     [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
-    // Check Branch and register user
-    [[Branch getInstance] initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
-        if(error){
-            NSLog(@"error %@", error);
-            [DBServerAPI registerUser:nil];
-        } else {
-            [DBServerAPI registerUserWithBranchParams:params callback:nil];
-        }
-    }];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
@@ -421,18 +415,9 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[[self mainMenuViewController] createViewController]];
-//    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
 }
 
-
-- (Class<MenuListViewControllerProtocol>)mainMenuViewController {
-    if([DBMenu sharedInstance].hasNestedCategories){
-        return [ViewControllerManager categoriesViewController];
-    } else {
-        return [ViewControllerManager rootMenuViewController];
-    }
-}
 @end
 
 @implementation ApplicationManager (ScreenState)
@@ -497,9 +482,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         }
         case ApplicationScreenMenu: {
             if ([rootVC isKindOfClass:[UINavigationController class]]) {
-                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
-                UIViewController *positionsVC = [[ViewControllerManager rootMenuViewController] createViewController];
-                [((UINavigationController*)rootVC) setViewControllers:@[newOrderVC, positionsVC] animated:animated];
+                [((UINavigationController*)rootVC) setViewControllers:@[[DBMenuViewController new]] animated:animated];
             }
             break;
         }

@@ -19,16 +19,24 @@ extern NSString * const DBFriendGiftHelperNotificationFriendPhone;
 
 extern NSString * const DBFriendGiftHelperNotificationItemsPrice;
 
+typedef NS_ENUM(NSInteger, DBFriendGiftType) {
+    DBFriendGiftTypeCommon,
+    DBFriendGiftTypeFree
+};
+
 @interface DBFriendGiftHelper : DBPrimaryManager<DBModuleManagerProtocol, OrderParentManagerProtocol>
 
 @property (nonatomic, readonly) BOOL enabled;
+@property (nonatomic, readonly) DBFriendGiftType type;
 
 // Friend Gift info
 @property(strong, nonatomic, readonly) NSString *titleFriendGiftScreen;
 @property(strong, nonatomic, readonly) NSString *textFriendGiftScreen;
+@property(nonatomic, strong) NSArray *giftsHistory;
 
 @property(strong, nonatomic) NSArray *items;
 - (void)fetchItems:(void(^)(BOOL success))callback;
+- (void)fetchGiftsHistory:(void(^)(BOOL success))callback;
 
 
 // Data for gift processing
@@ -41,7 +49,5 @@ extern NSString * const DBFriendGiftHelperNotificationItemsPrice;
 - (void)processGift:(void(^)(NSString *smsText))success
             failure:(void(^)(NSString *errorDescription))failure;
 
-// Data after processing gift
-@property (strong, nonatomic) NSString *smsText;
 
 @end

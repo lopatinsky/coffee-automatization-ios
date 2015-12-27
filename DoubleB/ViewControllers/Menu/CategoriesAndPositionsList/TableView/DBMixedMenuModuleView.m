@@ -17,9 +17,7 @@
 #import "DBMenuCategory.h"
 
 
-@interface DBMixedMenuModuleView ()<UITableViewDataSource, UITableViewDelegate, DBPositionCellDelegate>
-@property (strong, nonatomic) UITableView *tableView;
-
+@interface DBMixedMenuModuleView ()<DBPositionCellDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) NSArray *categoryHeaders;
 @end
 
@@ -34,15 +32,8 @@
 - (void)commonInit {
     [super commonInit];
     
-    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [UIView new];
-    
-    [self addSubview:self.tableView];
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
 }
 
 - (void)setUpdateEnabled:(BOOL)updateEnabled {
@@ -95,10 +86,8 @@
 - (void)reloadTableView {
     NSMutableArray *headers = [NSMutableArray new];
     for (DBMenuCategory *category in self.categories) {
-        DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:category state:DBCategoryHeaderViewStateFull];
+        DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:category];
         headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
-        [headerView changeState:DBCategoryHeaderViewStateCompact animated:NO];
-        [headerView setCategoryOpened:YES animated:NO];
         
         [headers addObject:headerView];
     }
@@ -157,9 +146,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    DBCategoryHeaderView *header = self.categoryHeaders[section];
-    
-    return header.viewHeight;
+    return 40.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{

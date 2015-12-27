@@ -17,8 +17,6 @@
 #import "Venue.h"
 
 @interface DBCategoriesMenuModuleView ()<UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UITableView *tableView;
-
 @end
 
 @implementation DBCategoriesMenuModuleView
@@ -32,15 +30,8 @@
 - (void)commonInit {
     [super commonInit];
     
-    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [UIView new];
-    
-    [self addSubview:self.tableView];
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
 }
 
 - (void)setUpdateEnabled:(BOOL)updateEnabled {

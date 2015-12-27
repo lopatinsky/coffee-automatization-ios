@@ -24,4 +24,6 @@ typedef NS_ENUM(NSInteger, DBPromoCellType) {
 
 
 - (void)configureWithPromo:(DBPromotion *)promo;
+
 @end
+

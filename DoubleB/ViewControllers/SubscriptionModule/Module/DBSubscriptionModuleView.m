@@ -26,21 +26,19 @@
 
 @implementation DBSubscriptionModuleView
 
-+ (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode type:(int)type{
++ (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode{
     DBSubscriptionModuleView *view = [DBSubscriptionModuleView new];
     view.mode = mode;
-    if (mode == DBSubscriptionModuleViewModeCategory) {
-        view.categoryType = type;
-    } else {
-        view.positionType = type;
-    }
     
     return view;
 }
 
 - (void)commonInit {
+    self.clipsToBounds = YES;
+    
     if (_mode == DBSubscriptionModuleViewModeCategory) {
-        DBCategoryCell *cell = [[DBCategoryCell alloc] initWithType:self.categoryType];
+        DBCategoryCellAppearanceType type = [DBSubscriptionManager sharedInstance].subscriptionCategory.hasImage ? DBCategoryCellAppearanceTypeFull : DBCategoryCellAppearanceTypeCompact;
+        DBCategoryCell *cell = [[DBCategoryCell alloc] initWithType:type];
         [cell configureWithCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
         [self addSubview:cell];
         cell.translatesAutoresizingMaskIntoConstraints = NO;
@@ -54,6 +52,8 @@
         [self addSubview:self.tableView];
         self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
+        
+        [self.tableView reloadData];
     }
 }
 
@@ -122,18 +122,22 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    DBCategoryHeaderView *header = [DBCategoryHeaderView new];
-    
-    return header.viewHeight;
+    if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
+        return 40.f;
+    } else {
+        return 0;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory state:DBCategoryHeaderViewStateFull];
-    headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
-    [headerView changeState:DBCategoryHeaderViewStateCompact animated:NO];
-    [headerView setCategoryOpened:YES animated:NO];
-    
-    return headerView;
+    if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
+        DBCategoryHeaderView *headerView = [[DBCategoryHeaderView alloc] initWithMenuCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
+        headerView.frame = CGRectMake(0, 0, self.tableView.frame.size.width, headerView.frame.size.height);
+        
+        return headerView;
+    } else {
+        return nil;
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -142,12 +146,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-//        if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
-//            [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
-//            [self pushSubscriptionViewController];
-//        } else if (indexPath.section == 0 && indexPath.row == 0) {
-//            return;
-//        }
+        if (indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
+            [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
+            [self pushSubscriptionViewController];
+        }
     } else {
         DBPositionCell *cell = (DBPositionCell *)[self.tableView cellForRowAtIndexPath:indexPath];
         DBMenuPosition *position = cell.position;

@@ -16,8 +16,7 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 
-@interface DBPositionsMenuModuleView ()<UITableViewDataSource, UITableViewDelegate, DBPositionCellDelegate>
-@property (strong, nonatomic) UITableView *tableView;
+@interface DBPositionsMenuModuleView ()<DBPositionCellDelegate, UITableViewDataSource, UITableViewDelegate>
 @end
 
 @implementation DBPositionsMenuModuleView
@@ -31,15 +30,8 @@
 - (void)commonInit {
     [super commonInit];
     
-    self.tableView = [UITableView new];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [UIView new];
-    
-    [self addSubview:self.tableView];
-    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
 }
 
 - (void)setCategory:(DBMenuCategory *)category {
@@ -74,6 +66,7 @@
         }
     }
     cell.delegate = self;
+    cell.priceAnimated = YES;
     
     DBMenuPosition *position = self.category.positions[indexPath.row];
     [cell configureWithPosition:position];

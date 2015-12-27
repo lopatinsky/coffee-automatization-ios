@@ -14,14 +14,15 @@
 #import "UIViewController+DBPeoplePickerController.h"
 #import "DBModuleHeaderView.h"
 
+NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDismiss";
+
 @interface DBFGRecipientModuleView ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (weak, nonatomic) IBOutlet UILabel *profileLabel;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *nameTextField;
 
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @property (weak, nonatomic) IBOutlet UIImageView *contactsImageView;
 @property (weak, nonatomic) IBOutlet UIButton *contactsButton;
@@ -36,14 +37,12 @@
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    DBModuleHeaderView *header = [DBModuleHeaderView new];
-    header.title = NSLocalizedString(@"Контактные данные вашего друга", nil);
-    header.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.headerView addSubview:header];
-    [header alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.headerView];
     
     // Initialize name
     self.profileLabel.text = NSLocalizedString(@"ФИО", nil);
@@ -65,6 +64,26 @@
     // Initialize contacts button
     [self.contactsImageView templateImageWithName:@"contacts_icon"];
     [self.contactsButton addTarget:self action:@selector(clickContactsButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dismissAll) name:kDBFGRecipientModuleViewDismiss object:nil];
+    
+    UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
+    [keyboardDoneButtonView sizeToFit];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Готово", nil)
+                                                                   style:UIBarButtonItemStyleBordered target:self
+                                                                  action:@selector(dismissAll)];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
+    self.nameTextField.inputAccessoryView = keyboardDoneButtonView;
+    self.phoneTextField.inputAccessoryView = keyboardDoneButtonView;
+}
+
+- (void)viewWillDissapearFromVC {
+    [self dismissAll];
+}
+
+- (void)dismissAll {
+    [self.nameTextField resignFirstResponder];
+    [self.phoneTextField resignFirstResponder];
 }
 
 - (void)reload:(BOOL)animated {
@@ -75,12 +94,13 @@
 }
 
 - (void)clickContactsButton {
+    [self dismissAll];
     [self.ownerViewController db_presentPeoplePickerController:^(DBProcessState state, NSString *name, NSString *phone) {
-        if(state == DBProcessStateDone){
+        if (state == DBProcessStateDone) {
             [DBFriendGiftHelper sharedInstance].friendName.value = name;
             
-            [DBFriendGiftHelper sharedInstance].friendPhone.value = phone;
-            [self reload:YES];
+            [self setValidTextToPhone:phone];
+            [self.ownerViewController reloadAllModules];
             
             [GANHelper analyzeEvent:@"friend_contact_selected"
                               label:[NSString stringWithFormat:@"%@,%@", name, phone]
@@ -91,12 +111,21 @@
     }];
 }
 
-- (void)textFieldDidChangeText:(UITextField *)textField{
-    if(textField == self.nameTextField) {
+- (void)textFieldDidChangeText:(UITextField *)textField {
+    if (textField == self.nameTextField) {
         [DBFriendGiftHelper sharedInstance].friendName.value = textField.text;
     } else {
-        [DBFriendGiftHelper sharedInstance].friendPhone.value = textField.text;
+        [self setValidTextToPhone:self.phoneTextField.text];
     }
+}
+
+- (void)setValidTextToPhone:(NSString *)formattedPhone {
+    NSString *phoneText = formattedPhone;
+    NSMutableCharacterSet *nonDigitsSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+    [nonDigitsSet invert];
+    
+    NSString *validText = [[phoneText componentsSeparatedByCharactersInSet:nonDigitsSet] componentsJoinedByString:@""];
+    [DBFriendGiftHelper sharedInstance].friendPhone.value = validText;
 }
 
 #pragma mark - UITextFieldDelegate
@@ -113,7 +142,7 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    if(textField == self.phoneTextField){
+    if (textField == self.phoneTextField) {
         if([textField.text isEqualToString:@""] || [textField.text isEqualToString:@"+"])
             textField.text = @"+7";
         
@@ -134,6 +163,13 @@
         [GANHelper analyzeEvent:@"friend_gift_phone_entered" label:textField.text category:self.analyticsCategory];
     }
     
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.returnKeyType == UIReturnKeyNext) {
+        [self.phoneTextField becomeFirstResponder];
+    }
     return YES;
 }
 

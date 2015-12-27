@@ -11,9 +11,7 @@ devices([
 ])
 
 languages([
-  "ru",
-#  "de-DE",
-#  "it-IT"
+  "ru"
 ])
 
 # The name of the scheme which contains the UI Tests

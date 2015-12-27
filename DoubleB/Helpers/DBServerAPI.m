@@ -608,7 +608,8 @@
             }
             payment[@"card_pan"] = cardPan ?: @"";
         }
-        payment[@"client_id"] = [[IHSecureStore sharedInstance] clientId];
+        
+        payment[@"client_id"] = [IHSecureStore sharedInstance].paymentClientId;
         payment[@"return_url"] = @"alpha-payment://return-page";
     }
     

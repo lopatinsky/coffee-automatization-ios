@@ -10,7 +10,7 @@
 
 @class DBMenuCategory;
 
-@interface DBMixedMenuModuleView : DBMenuModuleView
+@interface DBMixedMenuModuleView : DBMenuTableModuleView
 @property (strong, nonatomic) NSArray *categories;
 
 + (DBMixedMenuModuleView *)create;

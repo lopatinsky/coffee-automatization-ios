@@ -9,7 +9,7 @@
 #import "DBMenuModuleView.h"
 
 @class DBMenuCategory;
-@interface DBPositionsMenuModuleView : DBMenuModuleView
+@interface DBPositionsMenuModuleView : DBMenuTableModuleView
 @property (strong, nonatomic) DBMenuCategory *category;
 
 + (DBPositionsMenuModuleView *)create;
