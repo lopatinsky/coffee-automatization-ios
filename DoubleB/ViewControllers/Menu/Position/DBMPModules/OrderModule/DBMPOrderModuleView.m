@@ -11,6 +11,8 @@
 #import "DBMenuPosition.h"
 
 #import "OrderCoordinator.h"
+#import "DBModulesManager.h"
+#import "DBMenu.h"
 
 #import "UIViewController+DBPopupContainer.h"
 
@@ -25,6 +27,8 @@
 @property (weak, nonatomic) UIView *separatorView;
 
 @property (strong, nonatomic) DBPositionBalanceView *balanceView;
+
+@property (strong, nonatomic) NSArray *balance;
 @end
 
 @implementation DBMPOrderModuleView
@@ -32,10 +36,10 @@
 + (DBMPOrderModuleView *)create {
     DBMPOrderModuleView *view;
     
-    if (false) {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderModuleView" owner:self options:nil] firstObject];
-    } else {
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances]) {
         view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderBalanceModuleView" owner:self options:nil] firstObject];
+    } else {
+        view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderModuleView" owner:self options:nil] firstObject];
     }
     
     return view;
@@ -87,12 +91,20 @@
 - (void)setPosition:(DBMenuPosition *)position {
     _position = position;
     
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances]) {
+        [[DBMenu sharedInstance] updatePositionBalance:self.position callback:^(BOOL success, NSArray *balance) {
+            self.balance = balance;
+        }];
+    }
+    
     [self reload:NO];
 }
 
 - (void)balanceClick {
     self.balanceView = [DBPositionBalanceView new];
+    self.balanceView.mode = DBPositionBalanceViewModeBalance;
     self.balanceView.position = self.position;
+    self.balanceView.balance = self.balance;
 
     [self.balanceView reload];
     [self.ownerViewController presentView:self.balanceView];
@@ -101,14 +113,44 @@
 - (void)orderClick {
     [GANHelper analyzeEvent:@"product_price_click" label:[NSString stringWithFormat:@"%f", self.position.actualPrice] category:PRODUCT_SCREEN];
     
-    [UIView animateWithDuration:0.1 animations:^{
-        self.orderView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
-        [UIView animateWithDuration:0.05 animations:^{
-            self.orderView.alpha = 1;
+    void (^addBlock)() = ^void() {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.orderView.alpha = 0;
+        } completion:^(BOOL finished) {
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
+            [UIView animateWithDuration:0.05 animations:^{
+                self.orderView.alpha = 1;
+            }];
         }];
-    }];
+    };
+    
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances] && ![self positionAvailable]) {
+        self.balanceView = [DBPositionBalanceView new];
+        self.balanceView.mode = DBPositionBalanceViewModeChooseVenue;
+        self.balanceView.position = self.position;
+        self.balanceView.balance = self.balance;
+        
+        self.balanceView.venueSelectedBlock = ^void(Venue *venue) {
+            [OrderCoordinator sharedInstance].orderManager.venue = venue;
+            addBlock();
+        };
+        
+        [self.balanceView reload];
+        [self.ownerViewController presentView:self.balanceView];
+    } else {
+        addBlock();
+    }
+}
+
+- (BOOL)positionAvailable {
+    BOOL available = NO;
+    for (DBMenuPositionBalance *balance in self.balance) {
+        if (balance.venue == [OrderCoordinator sharedInstance].orderManager.venue) {
+            available = YES;
+        }
+    }
+    
+    return available;
 }
 
 @end

@@ -9,7 +9,6 @@
 #import "DBNOVenueModuleView.h"
 #import "DBShippingViewController.h"
 
-#import "UIViewController+DBPopupContainer.h"
 #import "DBVenuesTableViewController.h"
 
 #import "OrderCoordinator.h"
@@ -101,9 +100,8 @@
     } else {
         vc = [DBVenuesTableViewController new];
     }
-    
-    [self.ownerViewController presentController:vc];
-//    [self.ownerViewController.navigationController pushViewController:vc animated:YES];
+
+    [self.ownerViewController.navigationController pushViewController:vc animated:YES];
 }
 
 @end

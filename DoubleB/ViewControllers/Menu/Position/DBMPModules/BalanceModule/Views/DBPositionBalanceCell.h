@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DBPositionBalanceCell : UITableViewCell
+@property (nonatomic) BOOL tickAvailable;
+@property (nonatomic) BOOL tickSelected;
 - (void)configure:(DBMenuPositionBalance *)balance;
 @end

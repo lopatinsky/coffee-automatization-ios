@@ -9,9 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "DBPopupViewController.h"
 
-@interface DBPositionBalanceView : UIView<DBPopupViewControllerContent>
+typedef NS_ENUM(NSInteger, DBPositionBalanceViewMode) {
+    DBPositionBalanceViewModeBalance = 0,
+    DBPositionBalanceViewModeChooseVenue
+};
 
+@class Venue;
+
+@interface DBPositionBalanceView : UIView<DBPopupViewControllerContent>
 @property (strong, nonatomic) DBMenuPosition *position;
+@property (strong, nonatomic) NSArray *balance;
+@property (nonatomic) DBPositionBalanceViewMode mode;
+
+@property (nonatomic, copy) void (^venueSelectedBlock)(Venue *);
 
 - (void)reload;
 

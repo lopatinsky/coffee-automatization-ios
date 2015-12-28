@@ -15,6 +15,7 @@
 #import "DBGeoPushManager.h"
 
 @interface DBModulesManager ()
+@property (strong, nonatomic) NSMutableArray *availableModules;
 @end
 
 @implementation DBModulesManager
@@ -51,11 +52,16 @@
         [appModules addObject:@(i)];
     }
     
+    self.availableModules = [NSMutableArray new];
     // Switch on all necessary modules
     NSArray *modules = response[@"modules"];
     for (NSDictionary *moduleDict in modules) {
         NSInteger type = [moduleDict getValueForKey:@"type"] ? [[moduleDict getValueForKey:@"type"] integerValue] : -1;
         
+        if (type != -1) {
+            [self.availableModules addObject:@(type)];
+        }
+
         switch (type) {
             case DBModuleTypeFriendGift: {
                 [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeCommon), @"info":moduleDict}];
@@ -103,5 +109,10 @@
         }
     }
 }
+
+- (BOOL)moduleEnabled:(DBModuleType)type {
+    return [self.availableModules containsObject:@(type)];
+}
+
 
 @end

@@ -13,6 +13,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *tickImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTickImageViewWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTickImageTrailingSpace;
+@property (nonatomic) double initialTickImageViewWidth;
+@property (nonatomic) double initialTickImageTrailingSpace;
+
 @end
 
 @implementation DBPositionBalanceCell
@@ -27,11 +33,29 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.balanceLabel.textColor = [UIColor db_defaultColor];
+    [self.tickImageView templateImageWithName:@"tick.png"];
+    self.tickImageView.hidden = YES;
+    
+    self.initialTickImageViewWidth = self.constraintTickImageViewWidth.constant;
+    self.initialTickImageTrailingSpace = self.constraintTickImageTrailingSpace.constant;
 }
 
 - (void)configure:(DBMenuPositionBalance *)balance {
     self.titleLabel.text = balance.venue.title;
     self.balanceLabel.text = [NSString stringWithFormat:@"x %ld", (long)balance.balance];
+}
+
+- (void)setTickAvailable:(BOOL)tickAvailable {
+    _tickAvailable = tickAvailable;
+    
+    self.constraintTickImageViewWidth.constant = _tickAvailable ? self.initialTickImageViewWidth : 0;
+    self.constraintTickImageTrailingSpace.constant = _tickAvailable ? self.initialTickImageTrailingSpace: 0;
+}
+
+- (void)setTickSelected:(BOOL)tickSelected {
+    _tickSelected = tickSelected;
+    
+    self.tickImageView.hidden = !_tickSelected;
 }
 
 @end

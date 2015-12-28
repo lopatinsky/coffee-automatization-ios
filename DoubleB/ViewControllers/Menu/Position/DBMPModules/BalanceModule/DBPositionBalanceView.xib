@@ -6,6 +6,7 @@
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeueLights.ttc">
             <string>HelveticaNeue-Light</string>
+            <string>HelveticaNeue-Light</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -15,15 +16,44 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eDW-R2-p7V">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E6p-mw-c13">
+                            <rect key="frame" x="8" y="0.0" width="304" height="50"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5M-FZ-9Y7" customClass="DBDefaultSeparatorView">
+                            <rect key="frame" x="0.0" y="49.5" width="320" height="0.5"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.69999999999999996" id="dML-6P-4Yn"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="E6p-mw-c13" firstAttribute="leading" secondItem="eDW-R2-p7V" secondAttribute="leading" constant="8" id="QMZ-Er-EVn"/>
+                        <constraint firstAttribute="bottom" secondItem="E6p-mw-c13" secondAttribute="bottom" id="Tlz-iY-H6W"/>
+                        <constraint firstAttribute="trailing" secondItem="s5M-FZ-9Y7" secondAttribute="trailing" id="YEi-JX-wbb"/>
+                        <constraint firstAttribute="height" constant="50" id="a2f-IC-cCt"/>
+                        <constraint firstItem="E6p-mw-c13" firstAttribute="top" secondItem="eDW-R2-p7V" secondAttribute="top" id="abh-wZ-xOk"/>
+                        <constraint firstAttribute="trailing" secondItem="E6p-mw-c13" secondAttribute="trailing" constant="8" id="bbr-J2-FcE"/>
+                        <constraint firstItem="s5M-FZ-9Y7" firstAttribute="leading" secondItem="eDW-R2-p7V" secondAttribute="leading" id="g2k-zW-p6L"/>
+                        <constraint firstAttribute="bottom" secondItem="s5M-FZ-9Y7" secondAttribute="bottom" id="ikz-DS-YVG"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9VU-bm-36d">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                    <rect key="frame" x="0.0" y="50" width="320" height="250"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e2k-9c-PgM">
                     <rect key="frame" x="150" y="140" width="20" height="20"/>
                 </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нет данных по остаткам" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RSt-uW-hLv">
-                    <rect key="frame" x="15" y="141.5" width="290" height="18"/>
+                    <rect key="frame" x="15" y="141" width="290" height="18"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -31,20 +61,26 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="eDW-R2-p7V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1aH-GB-Wac"/>
+                <constraint firstItem="9VU-bm-36d" firstAttribute="top" secondItem="eDW-R2-p7V" secondAttribute="bottom" id="3bJ-rU-KLR"/>
                 <constraint firstItem="e2k-9c-PgM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="7G9-8v-pu3"/>
+                <constraint firstItem="eDW-R2-p7V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="BfR-Mx-aUs"/>
                 <constraint firstAttribute="bottom" secondItem="9VU-bm-36d" secondAttribute="bottom" id="FTH-Ab-1ca"/>
                 <constraint firstAttribute="trailing" secondItem="9VU-bm-36d" secondAttribute="trailing" id="GiB-gQ-oyK"/>
                 <constraint firstItem="9VU-bm-36d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RTU-tA-zm3"/>
-                <constraint firstItem="9VU-bm-36d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="azo-Zx-Hxn"/>
                 <constraint firstItem="RSt-uW-hLv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="fKe-NM-4gq"/>
                 <constraint firstAttribute="trailing" secondItem="RSt-uW-hLv" secondAttribute="trailing" constant="15" id="pac-Wt-9pg"/>
                 <constraint firstItem="RSt-uW-hLv" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="sN9-Fm-fdl"/>
+                <constraint firstAttribute="trailing" secondItem="eDW-R2-p7V" secondAttribute="trailing" id="usV-TJ-Tvq"/>
                 <constraint firstItem="e2k-9c-PgM" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="zL3-uO-ghN"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityIndicator" destination="e2k-9c-PgM" id="XUP-jY-rP6"/>
+                <outlet property="constraintHeaderViewHeight" destination="a2f-IC-cCt" id="Ca3-iZ-7B6"/>
+                <outlet property="headerLabel" destination="E6p-mw-c13" id="CeG-nb-2aL"/>
+                <outlet property="headerView" destination="eDW-R2-p7V" id="rQR-si-ZrY"/>
                 <outlet property="label" destination="RSt-uW-hLv" id="IBu-Si-k7G"/>
                 <outlet property="tableView" destination="9VU-bm-36d" id="S1s-GV-hRh"/>
             </connections>
