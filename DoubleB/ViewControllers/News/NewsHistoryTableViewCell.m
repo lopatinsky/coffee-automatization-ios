@@ -12,6 +12,13 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
+    singleTap.numberOfTapsRequired = 1;
+    [self.newsTextLabel addGestureRecognizer:singleTap];
+}
+
+- (void)tapped {
+    [self.delegate tapOnCell:self.index];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

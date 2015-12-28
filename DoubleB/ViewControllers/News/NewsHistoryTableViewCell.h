@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol HistoryCellTextViewDelegate <NSObject>
+
+- (void)tapOnCell:(NSInteger)index;
+
+@end
+
 @interface NewsHistoryTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) id<HistoryCellTextViewDelegate> delegate;
+@property (nonatomic) NSInteger index;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *newsTextLabel;
+@property (weak, nonatomic) IBOutlet UITextView *newsTextLabel;
 
 @end

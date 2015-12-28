@@ -14,7 +14,7 @@
 
 #import "UIImageView+WebCache.h"
 
-@interface DBNewsHistoryTableViewController ()
+@interface DBNewsHistoryTableViewController () <HistoryCellTextViewDelegate>
 
 @property (nonatomic, strong) NSArray *companyNews;
 
@@ -70,22 +70,21 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NewsImageHistoryTableViewCell *cell;
+    
     if (![[self.companyNews[indexPath.row] imageURL] isEqualToString:@""]) {
-        NewsImageHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryNewsImageCell" forIndexPath:indexPath];
-        
+        cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryNewsImageCell" forIndexPath:indexPath];
         [cell.newsImageView sd_setImageWithURL:[NSURL URLWithString:[self.companyNews[indexPath.row] imageURL]]];
-        cell.newsTextLabel.text = [self.companyNews[indexPath.row] text];
-        cell.titleLabel.text = [self.companyNews[indexPath.row] title];
-        
-        return cell;
     } else {
-        NewsHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryNewsCell" forIndexPath:indexPath];
-        
-        cell.newsTextLabel.text = [self.companyNews[indexPath.row] text];
-        cell.titleLabel.text = [self.companyNews[indexPath.row] title];
-        
-        return cell;
+        cell = [tableView dequeueReusableCellWithIdentifier:@"HistoryNewsCell" forIndexPath:indexPath];
     }
+    
+    cell.newsTextLabel.text = [self.companyNews[indexPath.row] text];
+    cell.newsTextLabel.dataDetectorTypes = UIDataDetectorTypeAll;
+    cell.titleLabel.text = [self.companyNews[indexPath.row] title];
+    cell.index = indexPath.row;
+    cell.delegate = self;
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -98,6 +97,22 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self showNewsInPopupWithIndex:indexPath.row];
+}
+
+- (void)showNewsInPopupWithIndex:(NSInteger)index {
+    CompanyNews *selectedNews = self.companyNews[index];
+    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+    [newsViewController setData:@{@"title": [selectedNews title] ?: @"",
+                                  @"text": [selectedNews text] ?: @"",
+                                  @"image_url": [selectedNews imageURL] ?: @""}];
+    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+    
+}
+
+#pragma mark - HistoryCellTextViewDelegate
+- (void)tapOnCell:(NSInteger)index {
+    [self showNewsInPopupWithIndex:index];
 }
 
 @end

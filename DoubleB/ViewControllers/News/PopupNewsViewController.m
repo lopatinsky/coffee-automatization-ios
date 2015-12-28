@@ -15,7 +15,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *popupTitleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *popupImageView;
-@property (weak, nonatomic) IBOutlet UILabel *popupTextLabel;
+@property (weak, nonatomic) IBOutlet UITextView *popupTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *okButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleHeightConstraint;
 @property (strong, nonatomic) NSDictionary *data;
@@ -29,8 +29,6 @@
     
     // Do any additional setup after loading the view.
     self.popupImageView.clipsToBounds = YES;
-    self.popupImageView.layer.cornerRadius = 70.;
-    
     self.okButton.backgroundColor = [UIColor db_defaultColor];
     self.okButton.layer.cornerRadius = 5.;
 }

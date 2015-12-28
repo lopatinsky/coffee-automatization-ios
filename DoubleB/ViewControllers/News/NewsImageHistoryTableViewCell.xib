@@ -15,15 +15,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMM-8R-ncg">
-                        <rect key="frame" x="96" y="8" width="216" height="20"/>
+                        <rect key="frame" x="101" y="10" width="211" height="20"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJN-U9-rAT">
-                        <rect key="frame" x="96" y="36" width="216" height="16.5"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIS-P8-eBk">
@@ -33,27 +27,30 @@
                             <constraint firstAttribute="width" priority="999" constant="80" id="guw-8a-ZyD"/>
                         </constraints>
                     </imageView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="VpU-cv-DmZ">
+                        <rect key="frame" x="96" y="30" width="216" height="54.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                    </textView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="HJN-U9-rAT" secondAttribute="trailing" constant="8" id="5OA-fl-ebY"/>
                     <constraint firstItem="DMM-8R-ncg" firstAttribute="leading" secondItem="ywV-D7-2wg" secondAttribute="leading" constant="8" id="8a7-Ud-wX8"/>
                     <constraint firstItem="DMM-8R-ncg" firstAttribute="leading" secondItem="ywV-D7-2wg" secondAttribute="leadingMargin" id="9UO-Kl-pLA"/>
-                    <constraint firstItem="DMM-8R-ncg" firstAttribute="leading" secondItem="oIS-P8-eBk" secondAttribute="trailing" constant="8" id="Ctk-dj-QRu"/>
+                    <constraint firstItem="DMM-8R-ncg" firstAttribute="leading" secondItem="oIS-P8-eBk" secondAttribute="trailing" constant="13" id="Ctk-dj-QRu"/>
                     <constraint firstItem="DMM-8R-ncg" firstAttribute="trailing" secondItem="ywV-D7-2wg" secondAttribute="trailingMargin" id="EbU-RJ-C6W"/>
-                    <constraint firstItem="HJN-U9-rAT" firstAttribute="leading" secondItem="oIS-P8-eBk" secondAttribute="trailing" constant="8" id="FF9-2d-FNb"/>
                     <constraint firstItem="oIS-P8-eBk" firstAttribute="leading" secondItem="ywV-D7-2wg" secondAttribute="leading" constant="8" id="HoX-L3-NrU"/>
-                    <constraint firstItem="HJN-U9-rAT" firstAttribute="top" secondItem="DMM-8R-ncg" secondAttribute="bottom" constant="8" id="JiW-d6-PB5"/>
+                    <constraint firstAttribute="bottom" secondItem="VpU-cv-DmZ" secondAttribute="bottom" constant="8" id="Ik6-AR-SnU"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oIS-P8-eBk" secondAttribute="bottom" priority="999" constant="8" id="Kjk-ir-r70"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="HJN-U9-rAT" secondAttribute="bottom" id="RXG-AU-MUh"/>
                     <constraint firstItem="DMM-8R-ncg" firstAttribute="top" secondItem="ywV-D7-2wg" secondAttribute="topMargin" id="Rfa-fE-PUG"/>
-                    <constraint firstItem="HJN-U9-rAT" firstAttribute="leading" secondItem="ywV-D7-2wg" secondAttribute="leading" constant="8" id="Xrz-w1-uY9"/>
-                    <constraint firstItem="HJN-U9-rAT" firstAttribute="leading" secondItem="ywV-D7-2wg" secondAttribute="leadingMargin" id="aD3-nM-bbw"/>
+                    <constraint firstItem="VpU-cv-DmZ" firstAttribute="leading" secondItem="oIS-P8-eBk" secondAttribute="trailing" constant="8" id="XSc-Jo-yjx"/>
                     <constraint firstItem="oIS-P8-eBk" firstAttribute="top" secondItem="ywV-D7-2wg" secondAttribute="top" constant="8" id="azj-Ke-aTm"/>
+                    <constraint firstAttribute="trailing" secondItem="VpU-cv-DmZ" secondAttribute="trailing" constant="8" id="beq-rw-RtD"/>
                     <constraint firstAttribute="trailing" secondItem="DMM-8R-ncg" secondAttribute="trailing" constant="8" id="dDM-SP-Rqj"/>
-                    <constraint firstItem="HJN-U9-rAT" firstAttribute="trailing" secondItem="ywV-D7-2wg" secondAttribute="trailingMargin" id="gww-8K-cld"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HJN-U9-rAT" secondAttribute="bottom" constant="8" id="l4e-8S-hbw"/>
-                    <constraint firstItem="HJN-U9-rAT" firstAttribute="top" secondItem="DMM-8R-ncg" secondAttribute="bottom" constant="7" id="mxI-ux-bFh"/>
-                    <constraint firstItem="DMM-8R-ncg" firstAttribute="top" secondItem="ywV-D7-2wg" secondAttribute="top" constant="8" id="t8X-tq-Jli"/>
+                    <constraint firstItem="VpU-cv-DmZ" firstAttribute="top" secondItem="DMM-8R-ncg" secondAttribute="bottom" id="jXw-9N-ijv"/>
+                    <constraint firstItem="DMM-8R-ncg" firstAttribute="top" secondItem="ywV-D7-2wg" secondAttribute="top" constant="10" id="t8X-tq-Jli"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="oIS-P8-eBk" secondAttribute="bottom" priority="999" constant="8" id="vKP-F3-hbG"/>
                 </constraints>
                 <variation key="default">
@@ -63,17 +60,12 @@
                         <exclude reference="9UO-Kl-pLA"/>
                         <exclude reference="EbU-RJ-C6W"/>
                         <exclude reference="Rfa-fE-PUG"/>
-                        <exclude reference="RXG-AU-MUh"/>
-                        <exclude reference="Xrz-w1-uY9"/>
-                        <exclude reference="aD3-nM-bbw"/>
-                        <exclude reference="gww-8K-cld"/>
-                        <exclude reference="mxI-ux-bFh"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="newsImageView" destination="oIS-P8-eBk" id="gmv-dr-8lO"/>
-                <outlet property="newsTextLabel" destination="HJN-U9-rAT" id="X85-o3-xEH"/>
+                <outlet property="newsTextLabel" destination="VpU-cv-DmZ" id="jJp-jK-rjf"/>
                 <outlet property="titleLabel" destination="DMM-8R-ncg" id="WhD-eH-C5y"/>
             </connections>
             <point key="canvasLocation" x="507" y="433.5"/>

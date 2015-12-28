@@ -14,33 +14,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OP-vO-g2B">
-                        <rect key="frame" x="8" y="8" width="304" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OP-vO-g2B">
+                        <rect key="frame" x="13" y="8" width="299" height="20"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sxA-2Y-Np6">
-                        <rect key="frame" x="8" y="63" width="304" height="21"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aKw-tI-bLJ">
+                        <rect key="frame" x="8" y="28" width="304" height="56"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                    </textView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="aKw-tI-bLJ" secondAttribute="bottom" constant="8" id="26w-0k-E8R"/>
                     <constraint firstItem="3OP-vO-g2B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="57t-Qm-r3I"/>
-                    <constraint firstItem="sxA-2Y-Np6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5eE-Iy-Kfs"/>
                     <constraint firstItem="3OP-vO-g2B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7gh-Og-yeD"/>
                     <constraint firstAttribute="trailing" secondItem="3OP-vO-g2B" secondAttribute="trailing" constant="8" id="9mY-RP-iBR"/>
-                    <constraint firstAttribute="bottom" secondItem="sxA-2Y-Np6" secondAttribute="bottom" constant="8" id="DR2-me-M3N"/>
-                    <constraint firstItem="sxA-2Y-Np6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="FVs-v0-KR9"/>
-                    <constraint firstItem="sxA-2Y-Np6" firstAttribute="top" secondItem="3OP-vO-g2B" secondAttribute="bottom" constant="7" id="KWb-0r-651"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="sxA-2Y-Np6" secondAttribute="bottom" id="dCO-mC-57x"/>
-                    <constraint firstItem="sxA-2Y-Np6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="eDH-p3-Y2p"/>
-                    <constraint firstItem="sxA-2Y-Np6" firstAttribute="top" secondItem="3OP-vO-g2B" secondAttribute="bottom" constant="34" id="kQC-ka-m6W"/>
+                    <constraint firstItem="aKw-tI-bLJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="CQj-sP-rx3"/>
+                    <constraint firstAttribute="trailing" secondItem="aKw-tI-bLJ" secondAttribute="trailing" constant="8" id="IGx-Vb-Oi2"/>
                     <constraint firstItem="3OP-vO-g2B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nJj-ZA-XS9"/>
-                    <constraint firstAttribute="trailing" secondItem="sxA-2Y-Np6" secondAttribute="trailing" constant="8" id="pDA-6i-VCG"/>
-                    <constraint firstItem="3OP-vO-g2B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sBI-wl-PAG"/>
+                    <constraint firstItem="3OP-vO-g2B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="sBI-wl-PAG"/>
+                    <constraint firstItem="aKw-tI-bLJ" firstAttribute="top" secondItem="3OP-vO-g2B" secondAttribute="bottom" id="uCl-ep-O0h"/>
                     <constraint firstItem="3OP-vO-g2B" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="w33-K5-yuQ"/>
                 </constraints>
                 <variation key="default">
@@ -48,15 +46,11 @@
                         <exclude reference="57t-Qm-r3I"/>
                         <exclude reference="7gh-Og-yeD"/>
                         <exclude reference="w33-K5-yuQ"/>
-                        <exclude reference="5eE-Iy-Kfs"/>
-                        <exclude reference="FVs-v0-KR9"/>
-                        <exclude reference="KWb-0r-651"/>
-                        <exclude reference="dCO-mC-57x"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="newsTextLabel" destination="sxA-2Y-Np6" id="v9j-VM-upx"/>
+                <outlet property="newsTextLabel" destination="aKw-tI-bLJ" id="VPf-Es-qUf"/>
                 <outlet property="titleLabel" destination="3OP-vO-g2B" id="WU6-iO-4sb"/>
             </connections>
             <point key="canvasLocation" x="507" y="433.5"/>
