@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, OrderManagerChange) {
     OrderManagerChangePaymentType = 0,
     OrderManagerChangeVenue,
     OrderManagerChangeComment,
+    OrderManagerChangeOddSum,
+    OrderManagerChangePersonsCount,
     OrderManagerChangeNDAAccept
 };
 
@@ -41,6 +43,16 @@ typedef NS_ENUM(NSInteger, OrderManagerChange) {
 * Selected comment
 */
 @property (nonatomic, strong) NSString *comment;
+
+/**
+ * Selected odd sum
+ */
+@property (nonatomic, strong) NSString *oddSum;
+
+/**
+ * Selected persons count
+ */
+@property (nonatomic) NSInteger personsCount;
 
 /**
 * User's location

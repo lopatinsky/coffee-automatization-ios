@@ -21,6 +21,8 @@
 #import "DBNOProfileModuleView.h"
 #import "DBNOPaymentModuleView.h"
 #import "DBNOCommentModuleView.h"
+#import "DBNOOddModuleView.h"
+#import "DBNOPersonsModuleView.h"
 #import "DBNOndaModuleView.h"
 #import "DBNOOrderModuleView.h"
 #import "DBModuleSeparatorView.h"
@@ -93,6 +95,9 @@
     [self addModule:[DBNOTimeModuleView create] topOffset:1];
     [self addModule:[DBNOPaymentModuleView create]topOffset:5];
     [self addModule:[DBNOCommentModuleView create]topOffset:5];
+	[self addModule:[DBNOOddModuleView create]topOffset:1];
+    [self addModule:[DBNOPersonsModuleView create]topOffset:1];
+
     [self addModule:[DBNOndaModuleView create]topOffset:5];
     
     [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:5]];

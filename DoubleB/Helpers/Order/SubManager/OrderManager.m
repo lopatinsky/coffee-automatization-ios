@@ -84,6 +84,18 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     [self.parentManager manager:self haveChange:OrderManagerChangeComment];
 }
 
+- (void)setOddSum:(NSString *)oddSum {
+    _oddSum = oddSum;
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangeOddSum];
+}
+
+- (void)setPersonsCount:(NSInteger)personsCount {
+    _personsCount = personsCount;
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangePersonsCount];
+}
+
 - (BOOL)ndaAccepted {
     BOOL ndaSigned;
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned]){
