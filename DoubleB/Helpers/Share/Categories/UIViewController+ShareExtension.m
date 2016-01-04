@@ -76,7 +76,7 @@ static NSString *dbAnaliticsNameScreenName;
                                     ];
     
     
-    if([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]){
+    if([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]){
         shareVC.completionWithItemsHandler = ^void(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError){
             if(completed){
                 [GANHelper analyzeEvent:@"share_success" label:activityType category:dbAnaliticsNameScreenName];
@@ -102,21 +102,40 @@ static NSString *dbAnaliticsNameScreenName;
                 callback(completed);
         };
     } else {
-        shareVC.completionHandler = ^void(NSString *activityType, BOOL completed){
-            if(completed){
-                [GANHelper analyzeEvent:@"share_success" label:activityType category:dbAnaliticsNameScreenName];
-                [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {}];
-            } else {
-                if(activityType){
-                    [GANHelper analyzeEvent:@"share_dialog_cancelled" label:activityType category:dbAnaliticsNameScreenName];
+        if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
+            [shareVC setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+                if (completed) {
+                    [GANHelper analyzeEvent:@"share_success" label:activityType category:dbAnaliticsNameScreenName];
+                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {}];
                 } else {
-                    [GANHelper analyzeEvent:@"share_cancelled" category:dbAnaliticsNameScreenName];
+                    if (activityType) {
+                        [GANHelper analyzeEvent:@"share_dialog_cancelled" label:activityType category:dbAnaliticsNameScreenName];
+                    } else {
+                        [GANHelper analyzeEvent:@"share_cancelled" category:dbAnaliticsNameScreenName];
+                    }
                 }
-            }
-            
-            if(callback)
-                callback(completed);
-        };
+                if(callback)
+                    callback(completed);
+            }];
+        } else {
+            SILENCE_IOS8_DEPRECATION(
+            [shareVC setCompletionHandler:^void(NSString *activityType, BOOL completed) {
+                if(completed){
+                    [GANHelper analyzeEvent:@"share_success" label:activityType category:dbAnaliticsNameScreenName];
+                    [UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Успешно!", nil) message:@"" cancelButtonTitle:@"OK" otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {}];
+                } else {
+                    if(activityType){
+                        [GANHelper analyzeEvent:@"share_dialog_cancelled" label:activityType category:dbAnaliticsNameScreenName];
+                    } else {
+                        [GANHelper analyzeEvent:@"share_cancelled" category:dbAnaliticsNameScreenName];
+                    }
+                }
+                
+                if(callback)
+                    callback(completed);
+            }];
+                                     );
+        }
     }
     
     [self presentViewController:shareVC animated:YES completion:nil];

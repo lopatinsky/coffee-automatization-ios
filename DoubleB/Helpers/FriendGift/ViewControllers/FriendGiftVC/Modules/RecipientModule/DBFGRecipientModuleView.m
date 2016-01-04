@@ -70,7 +70,7 @@ NSString *const kDBFGRecipientModuleViewDismiss = @"kDBFGRecipientModuleViewDism
     UIToolbar *keyboardDoneButtonView = [[UIToolbar alloc] init];
     [keyboardDoneButtonView sizeToFit];
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Готово", nil)
-                                                                   style:UIBarButtonItemStyleBordered target:self
+                                                                   style:UIBarButtonItemStylePlain target:self
                                                                   action:@selector(dismissAll)];
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:doneButton, nil]];
     self.nameTextField.inputAccessoryView = keyboardDoneButtonView;

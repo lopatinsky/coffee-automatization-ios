@@ -8,7 +8,7 @@
 
 #import "DBModulesViewController.h"
 
-@interface DBModulesViewController ()
+@interface DBModulesViewController () <DBOwnerViewControllerProtocol>
 @property (strong, nonatomic) UIScrollView *scrollView;
 
 @property (weak, nonatomic) NSLayoutConstraint *constraintBottomScrollViewAlignment;

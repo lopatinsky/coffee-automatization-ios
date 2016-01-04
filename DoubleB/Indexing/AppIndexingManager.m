@@ -47,7 +47,7 @@
 }
 
 - (BOOL)isAvailable {
-    return [UIDevice systemVersionGreaterThanOrEquals:@"9.0"];
+    return [UIDevice systemVersionGreaterOrEqualsThan:@"9.0"];
 }
 
 #pragma mark - Continue Activity
@@ -55,7 +55,7 @@
 - (void)continueUserActivity:(NSUserActivity *)activity {
     if ([UIDevice systemVersionLessThan:@"9.0"]) { return; }
     if (activity.activityType == CSSearchableItemActionType) {
-        NSString *uniqueIdentifier = [[activity userInfo] objectForKey:CSSearchableItemActivityIdentifier];
+//        NSString *uniqueIdentifier = [[activity userInfo] objectForKey:CSSearchableItemActivityIdentifier];
         // handle spotlight API
     } else {
         if ([activity.activityType isEqualToString:@"order"]) {

@@ -18,7 +18,7 @@
     return [[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] == NSOrderedDescending;
 }
 
-+ (BOOL)systemVersionGreaterThanOrEquals:(NSString *)version {
++ (BOOL)systemVersionGreaterOrEqualsThan:(NSString *)version {
     return [[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] != NSOrderedAscending;
 }
 
@@ -26,7 +26,7 @@
     return [[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] == NSOrderedAscending;
 }
 
-+ (BOOL)systemVersionLessThanOrEquals:(NSString *)version {
++ (BOOL)systemVersionLessOrEqualsThan:(NSString *)version {
     return [[[UIDevice currentDevice] systemVersion] compare:version options:NSNumericSearch] != NSOrderedDescending;
 }
 

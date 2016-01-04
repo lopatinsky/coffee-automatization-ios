@@ -29,7 +29,7 @@
 #import "DBSubscriptionManager.h"
 #import "DBSubscriptionModuleView.h"
 
-@interface DBMenuViewController ()<DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate>
+@interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol>
 @property (strong, nonatomic) NSString *analyticsCategory;
 @property (strong, nonatomic) DBMenuModuleView *menuModuleView;
 

@@ -52,7 +52,13 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 }
 
 -(BOOL)isAuthorized {
-    return [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized;
+    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
+        return [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways;
+    } else {
+        SILENCE_IOS8_DEPRECATION(
+             return [CLLocationManager authorizationStatus] == kCLAuthorizationStatusAuthorized;
+        );
+    }
 }
 
 - (void)requestPermission {

@@ -12,8 +12,8 @@
 
 + (BOOL)systemVersionEqualsTo:(NSString *)version;
 + (BOOL)systemVersionGreaterThan:(NSString *)version;
-+ (BOOL)systemVersionGreaterThanOrEquals:(NSString *)version;
++ (BOOL)systemVersionGreaterOrEqualsThan:(NSString *)version;
 + (BOOL)systemVersionLessThan:(NSString *)version;
-+ (BOOL)systemVersionLessThanOrEquals:(NSString *)version;
++ (BOOL)systemVersionLessOrEqualsThan:(NSString *)version;
 
 @end

@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+#define SILENCE_DEPRECATION(expr)                                   \
+do {                                                                \
+_Pragma("clang diagnostic push")                                    \
+_Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\"")   \
+expr;                                                               \
+_Pragma("clang diagnostic pop")                                     \
+} while(0)
+
+#define SILENCE_IOS7_DEPRECATION(expr) SILENCE_DEPRECATION(expr)
+#define SILENCE_IOS8_DEPRECATION(expr) SILENCE_DEPRECATION(expr)
+
 /**
 * iOS8 -> iOS7
 */
@@ -15,7 +26,5 @@
 
 + (void)registerForNotifications;
 + (NSString *)currencySymbol;
-
-+ (BOOL)systemVersionGreaterOrEqualThan:(NSString *)version;
 
 @end

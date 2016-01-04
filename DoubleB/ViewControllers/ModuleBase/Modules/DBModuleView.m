@@ -167,10 +167,10 @@
     }
 }
 
-- (void)setOwnerViewController:(UIViewController *)ownerViewController{
+- (void)setOwnerViewController:(UIViewController<DBOwnerViewControllerProtocol> *)ownerViewController {
     _ownerViewController = ownerViewController;
     
-    for(DBModuleView *submodule in _submodules){
+    for (DBModuleView *submodule in _submodules) {
         submodule.ownerViewController = ownerViewController;
     }
 }

@@ -233,9 +233,7 @@
 
 - (NSDate *)dateForRow:(NSInteger)row{
     NSDate *date = [NSDate dateWithTimeInterval:60 * 60 * 24 * row sinceDate:self.minDate];
-    
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-    
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:(NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear) fromDate:date];
     return [[NSCalendar currentCalendar] dateFromComponents:components];
 }
 

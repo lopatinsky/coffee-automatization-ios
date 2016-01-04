@@ -29,6 +29,7 @@
 
 #import "Compatibility.h"
 
+#import "UIDevice+OSVersion.h"
 #import "UIViewController+DBAppearance.h"
 #import "UIView+SnapshotAdditions.h"
 #import "UIView+FLKAutoLayout.h"

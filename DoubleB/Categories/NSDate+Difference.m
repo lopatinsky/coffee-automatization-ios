@@ -10,16 +10,19 @@
 
 @implementation NSDate (Difference)
 
+- (NSDateComponents *)getComponents:(NSDate *)another {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitDay fromDate:another toDate:self options:NSCalendarWrapComponents];
+    return components;
+    
+}
+
 - (NSInteger)numberOfDaysUntil:(NSDate *)another {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:NSDayCalendarUnit fromDate:another toDate:self options:NSCalendarWrapComponents];
-    return [components day];
+    return [[self getComponents:another] day];
 }
 
 - (NSInteger)numberOfSecondsUntil:(NSDate *)another {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components = [calendar components:NSDayCalendarUnit fromDate:another toDate:self options:NSCalendarWrapComponents];
-    return [components second];
+    return [[self getComponents:another] second];
 }
 
 @end

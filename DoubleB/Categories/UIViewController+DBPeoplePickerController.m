@@ -30,7 +30,7 @@ static char DB_PEOPLEPICKERCONTROLLER_CALLBACK_KEY;
     
     peoplePicker.displayedProperties = @[@(kABPersonPhoneProperty)];
     
-    if([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]){
+    if([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]){
         peoplePicker.predicateForEnablingPerson = [NSPredicate predicateWithFormat:@"phoneNumbers.@count > 0"];
     }
     

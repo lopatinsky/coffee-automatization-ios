@@ -28,7 +28,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 100;
     } else {
@@ -61,7 +61,7 @@
 - (CGFloat)moduleViewContentHeight {
     int height = 0;
     
-    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
         for (int i = 0; i < [self.tableView numberOfRowsInSection:0]; i++) {
             UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
             height += cell.frame.size.height;

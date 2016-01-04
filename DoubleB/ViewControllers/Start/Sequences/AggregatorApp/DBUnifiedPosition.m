@@ -10,4 +10,8 @@
 
 @implementation DBUnifiedPosition
 
+- (instancetype)initWithResponseDict:(NSDictionary *)response {
+    return [DBUnifiedPosition new];
+}
+
 @end

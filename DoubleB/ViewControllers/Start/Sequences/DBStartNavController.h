@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class DBStartNavController;
 @protocol DBStartNavControllerDelegate <NSObject>
 - (void)db_startNavVCNeedsMoveToMain:(UIViewController *)controller;
 @end
 
 @interface DBStartNavController : UINavigationController
-@property (weak, nonatomic) id<DBStartNavControllerDelegate> navDelegate;
 
+@property (weak, nonatomic) id<DBStartNavControllerDelegate> navDelegate;
 - (instancetype)initWithDelegate:(id<DBStartNavControllerDelegate>)navDelegate;
 
 @end

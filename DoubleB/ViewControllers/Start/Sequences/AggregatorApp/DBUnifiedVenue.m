@@ -10,4 +10,8 @@
 
 @implementation DBUnifiedVenue
 
+- (instancetype)initWithResponseDict:(NSDictionary *)response {
+    return [DBUnifiedVenue new];
+}
+
 @end

@@ -111,6 +111,9 @@
         case PaymentTypeExtraType:
             label = @"extra_type";
             break;
+        case PaymentTypeCourierCard:
+            label = @"courier_card";
+            break;
     }
     
     [GANHelper analyzeEvent:@"payment_click" label:label category:self.analyticsCategory];

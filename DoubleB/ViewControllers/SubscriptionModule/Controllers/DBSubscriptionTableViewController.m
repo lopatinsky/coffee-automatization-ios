@@ -20,7 +20,7 @@
 #import "GANHelper.h"
 #import "IHSecureStore.h"
 
-@interface DBSubscriptionTableViewController ()
+@interface DBSubscriptionTableViewController () <DBOwnerViewControllerProtocol>
 
 @property (weak, nonatomic) IBOutlet DBModuleView *cardsModuleContainer;
 @property (strong, nonatomic) DBFGPaymentModule *cardsModuleView;

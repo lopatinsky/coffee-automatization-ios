@@ -11,7 +11,7 @@
 @implementation Compatibility
 
 + (NSString *)currencySymbol {
-    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
         return @"₽";
     } else {
         return NSLocalizedString(@"р.", nil);
@@ -19,17 +19,14 @@
 }
 
 + (void)registerForNotifications {
-    if ([Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
+    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     } else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+        SILENCE_IOS7_DEPRECATION(
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
+        );
     }
-}
-
-+ (BOOL)systemVersionGreaterOrEqualThan:(NSString *)version{
-    NSString *currentSystemVersion = [[UIDevice currentDevice] systemVersion];
-    return [currentSystemVersion compare:version] != NSOrderedAscending;
 }
 
 @end

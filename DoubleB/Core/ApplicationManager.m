@@ -195,7 +195,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     }
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-#warning PayPal legacy code
+    
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
     
     [GANHelper trackClientInfo];
@@ -342,26 +342,16 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager(Style)
 
 + (void)applyBrandbookStyle {
-#warning Farsch legacy code
-    if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"farsh"]) {
-        [[UINavigationBar appearance] setBarTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                               NSForegroundColorAttributeName: [UIColor blackColor],
-                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-                                                               }];
-    } else {
-        if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [Compatibility systemVersionGreaterOrEqualThan:@"8.0"]) {
-            [UINavigationBar appearance].translucent = NO;
-        }
-        
-        [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                               NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                               NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
-                                                               }];
+    if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
+        [UINavigationBar appearance].translucent = NO;
     }
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
+                                                           }];
 }
 
 @end

@@ -29,7 +29,7 @@
 #import "NetworkManager.h"
 #import "DBClientInfo.h"
 
-@interface DBNewOrderVC ()
+@interface DBNewOrderVC () <DBOwnerViewControllerProtocol>
 @property (strong, nonatomic) DBNOOrderModuleView *orderModule;
 @end
 
