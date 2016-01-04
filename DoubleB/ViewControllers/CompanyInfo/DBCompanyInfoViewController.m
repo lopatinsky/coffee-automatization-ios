@@ -8,6 +8,7 @@
 
 #import "DBCompanyInfoViewController.h"
 #import "Venue.h"
+#import "DBTextResourcesHelper.h"
 #import "DBContactUsView.h"
 #import "UIViewController+DBMessage.h"
 #import "UIAlertView+BlocksKit.h"
@@ -21,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *companyDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UITextView *companyDescriptionLabel;
 @property (weak, nonatomic) IBOutlet UIView *callUsView;
 @property (weak, nonatomic) IBOutlet UIView *mailUsView;
 @property (weak, nonatomic) IBOutlet UIButton *websiteButton;
@@ -104,13 +105,8 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
 }
 
 - (void)setBackground {
-    float screenHeight = [UIScreen mainScreen].nativeBounds.size.height;
-    UIImage *backImage = [UIImage imageNamed:[NSString stringWithFormat:@"bg%.0f.jpg", screenHeight]];
-    if (backImage) {
-        self.backgroundImageView.image = backImage;
-    } else {
-        self.backgroundImageView.image = [UIImage imageNamed:@"bg.jpg"];
-    }
+    UIImage *backImage = [UIImage imageNamed:[DBTextResourcesHelper db_bgImageName]];
+    self.backgroundImageView.image = backImage;
 }
 
 - (void)setContactUsViews {

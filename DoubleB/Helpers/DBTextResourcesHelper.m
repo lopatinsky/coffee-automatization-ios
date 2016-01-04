@@ -46,6 +46,21 @@
     return NSLocalizedString(@"Готов к %@", nil);
 }
 
++ (NSString *)db_bgImageName {
+    float screenHeight = [UIScreen mainScreen].nativeBounds.size.height;
+    NSString *backImage = [NSString stringWithFormat:@"bg%.0f.jpg", screenHeight];
+    
+    if (![UIImage imageNamed:backImage]) {
+        backImage = @"bg.jpg";
+    }
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"osteriabianka"]) {
+        backImage = @"osteria_bg.jpg";
+    }
+    
+    return backImage;
+}
+
 + (NSString *)db_shareBgImageName {
     NSString *imageName = @"share";
     

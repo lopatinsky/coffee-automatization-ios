@@ -15,6 +15,7 @@
 + (NSString *)db_preparationOrderCellString;
 + (NSString *)db_readyOrderCellString;
 
++ (NSString *)db_bgImageName;
 + (NSString *)db_shareBgImageName;
 + (UIColor *)db_shareScreenTextColor;
 
