@@ -23,7 +23,7 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     } else {
-        SILENCE_IOS7_DEPRECATION(
+        SILENCE_IOS8_DEPRECATION(
             [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound];
         );
     }

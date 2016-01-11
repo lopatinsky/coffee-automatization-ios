@@ -20,6 +20,4 @@
  */
 - (void)flushStoredCache;
 
-
-
 @end

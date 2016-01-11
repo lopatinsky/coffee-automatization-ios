@@ -13,7 +13,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>com.empatika.elephantboutique</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -53,8 +53,8 @@
 	<string>349173695244280</string>
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
-    <key>FacebookUrlSchemeSuffix</key>
-    <string>elephantboutique</string>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>elephantboutique</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

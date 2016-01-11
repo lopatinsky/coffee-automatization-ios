@@ -9,13 +9,11 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIcons~ipad</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>com.empatika.pirogeriagata</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -36,8 +34,7 @@
 		<array>
 			<dict>
 				<key>KitInfo</key>
-				<dict>
-				</dict>
+				<dict/>
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>

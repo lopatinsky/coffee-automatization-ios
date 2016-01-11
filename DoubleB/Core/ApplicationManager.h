@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ManagerProtocol.h"
+#import "DBStartNavController.h"
 
 typedef NS_ENUM(NSInteger, RootState) {
     RootStateStart = 0,
@@ -33,17 +34,16 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 };
 
 @interface ApplicationManager : NSObject<ManagerProtocol>
-+ (instancetype)sharedInstance;
-
 @property (nonatomic) ApplicationType applicationType;
 
++ (instancetype)sharedInstance;
 + (void)handlePush:(NSDictionary *)push;
 + (void)handleLocalPush:(UILocalNotification *)push;
 
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
-
 - (void)fetchCompanyDependentInfo;
+
 @end
 
 @interface ApplicationManager(Plist)
@@ -55,7 +55,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 + (void)applyBrandbookStyle;
 @end
 
-@protocol DBStartNavControllerDelegate;
 @interface ApplicationManager(Start) <DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
 @end

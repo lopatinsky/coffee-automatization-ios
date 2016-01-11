@@ -149,7 +149,7 @@
     [self.scrollView layoutIfNeeded];
     
     self.modifierPicker = [DBPositionModifierPicker new];
-    self.modifierPicker.delegate = self;
+    self.modifierPicker.modifierDelegate = self;
     
     UIImage *basketImage = [ViewManager basketImageMenuPosition];
     if (basketImage) {

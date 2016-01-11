@@ -32,7 +32,6 @@
 #import "CompanyNewsManager.h"
 
 #import "DBAPIClient.h"
-#import "DBStartNavController.h"
 #import "DBCommonStartNavController.h"
 #import "DBProxyStartNavController.h"
 #import "DBDemoStartNavController.h"
@@ -67,6 +66,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 };
 
 @interface ApplicationManager()
+
 @property (nonatomic) RootState state;
 
 @end

@@ -58,7 +58,7 @@
     [self.modifiersListView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.modifiersListContainer];
     
     self.modifierPicker = [DBPositionModifierPicker new];
-    self.modifierPicker.delegate = self;
+    self.modifierPicker.modifierDelegate = self;
     
     self.separatorView.backgroundColor = [UIColor db_defaultColor];
     

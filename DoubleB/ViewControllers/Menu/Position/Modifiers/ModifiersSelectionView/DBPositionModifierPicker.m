@@ -159,8 +159,8 @@
             [cell select:select animated:YES];
         }
         
-        if([self.delegate respondsToSelector:@selector(db_positionModifierPicker:didSelectNewItem:)]){
-            [self.delegate db_positionModifierPicker:self didSelectNewItem:self.modifier.selectedItem];
+        if([self.modifierDelegate respondsToSelector:@selector(db_positionModifierPicker:didSelectNewItem:)]){
+            [self.modifierDelegate db_positionModifierPicker:self didSelectNewItem:self.modifier.selectedItem];
         }
         
         [GANHelper analyzeEvent:@"modifier_selected"
@@ -172,16 +172,16 @@
 #pragma mark - DBPositionSingleModifierCellDelegate
 
 - (void)db_singleModifierCellDidIncreaseModifierItemCount:(DBMenuPositionModifier *)modifier{
-    if([self.delegate respondsToSelector:@selector(db_positionModifierPickerDidChangeItemCount:)]){
-        [self.delegate db_positionModifierPickerDidChangeItemCount:self];
+    if ([self.modifierDelegate respondsToSelector:@selector(db_positionModifierPickerDidChangeItemCount:)]) {
+        [self.modifierDelegate db_positionModifierPickerDidChangeItemCount:self];
     }
     
     [GANHelper analyzeEvent:@"product_single_modifier_plus" label:modifier.modifierId category:SINGLE_MODIFIER_PICKER];
 }
 
 - (void)db_singleModifierCellDidDecreaseModifierItemCount:(DBMenuPositionModifier *)modifier{
-    if([self.delegate respondsToSelector:@selector(db_positionModifierPickerDidChangeItemCount:)]){
-        [self.delegate db_positionModifierPickerDidChangeItemCount:self];
+    if ([self.modifierDelegate respondsToSelector:@selector(db_positionModifierPickerDidChangeItemCount:)]) {
+        [self.modifierDelegate db_positionModifierPickerDidChangeItemCount:self];
     }
     
     [GANHelper analyzeEvent:@"product_single_modifier_minus" label:modifier.modifierId category:SINGLE_MODIFIER_PICKER];
