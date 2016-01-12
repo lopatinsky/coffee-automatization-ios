@@ -86,9 +86,12 @@
         [self addModule:[DBNOProfileModuleView create] topOffset:0 bottomOffset:5];
     }
     
-    if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1) {
-        [self addModule:[DBNODeliveryTypeModuleView create] topOffset:0];
+    if (![[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"cosmotheca"]) {
+        if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1) {
+            [self addModule:[DBNODeliveryTypeModuleView create] topOffset:0];
+        }
     }
+    
     [self addModule:[DBNOVenueModuleView create] topOffset:1];
     
     if (![[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"cosmotheca"]) {
