@@ -23,6 +23,6 @@ pod 'Fabric'
 pod 'Crashlytics'
 pod 'Branch'
 pod 'FBSDKShareKit'
-pod 'VK-ios-sdk'
+pod 'VK-ios-sdk', '~> 1.2.0'
 
 pod 'HSTestingBackchannel', :configuration => ['Debug']

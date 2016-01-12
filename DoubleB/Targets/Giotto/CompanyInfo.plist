@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Default</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Default</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://giotto.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#cc2528</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-40</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>omWxwNaKub1hK8ywiVNHgGKI6MdxSI2tZ44ZNm9j</string>
+			<key>clientKey</key>
+			<string>awZWsrNOxj12vAqaisdfJgbWc1tyuUSOi59uqBfQ</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>

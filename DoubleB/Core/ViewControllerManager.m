@@ -57,7 +57,8 @@
     if ([menuControllersMode isEqualToString:@"Mixed"]) {
         [categoriesVCClass setPreferences:@{@"is_mixed_type": @(YES)}];
     }
-    return categoriesVCClass;
+    //return categoriesVCClass;
+    return [self categoriesAndPositionsViewController];
 }
 
 + (nonnull Class<MenuListViewControllerProtocol>)positionsViewController {
