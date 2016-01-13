@@ -21,9 +21,15 @@
 #import "DBNOProfileModuleView.h"
 #import "DBNOPaymentModuleView.h"
 #import "DBNOCommentModuleView.h"
+#import "DBNOOddModuleView.h"
+#import "DBNOPersonsModuleView.h"
 #import "DBNOndaModuleView.h"
 #import "DBNOOrderModuleView.h"
 #import "DBModuleSeparatorView.h"
+
+#import "DBModulesManager.h"
+#import "DBUniversalModulesManager.h"
+#import "DBUniversalModule.h"
 
 #import "OrderCoordinator.h"
 #import "NetworkManager.h"
@@ -91,8 +97,23 @@
     }
     [self addModule:[DBNOVenueModuleView create] topOffset:1];
     [self addModule:[DBNOTimeModuleView create] topOffset:1];
+    
     [self addModule:[DBNOPaymentModuleView create]topOffset:5];
+    
     [self addModule:[DBNOCommentModuleView create]topOffset:5];
+    
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeOddSum]) {
+        [self addModule:[DBNOOddModuleView create]topOffset:1];
+    }
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePersonsCount]) {
+        [self addModule:[DBNOPersonsModuleView create]topOffset:1];
+    }
+    
+    // Universal modules
+    for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
+        [self addModule:[module getModuleView] topOffset:0];
+    }
+
     [self addModule:[DBNOndaModuleView create]topOffset:5];
     
     [self addModule:[[DBModuleSeparatorView alloc] initWithHeight:5]];
@@ -102,6 +123,7 @@
     
     [self layoutModules];
 }
+
 
 #pragma mark - DBModulesViewController
 

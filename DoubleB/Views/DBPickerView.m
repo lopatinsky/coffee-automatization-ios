@@ -87,6 +87,7 @@
 #pragma mark - UIPickerViewDelegate
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    _selectedIndex = row;
     [self notifyDelegate];
 }
 

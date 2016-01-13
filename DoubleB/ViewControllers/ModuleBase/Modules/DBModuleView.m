@@ -8,7 +8,7 @@
 
 #import "DBModuleView.h"
 
-@interface DBModuleView ()
+@interface DBModuleView ()<DBModuleViewDelegate>
 @property (nonatomic) BOOL moduleHidden;
 @end
 
@@ -126,7 +126,6 @@
             [self.delegate db_additonalAnimationFroModuleAnimation:self]();
         }
     }
-
 }
 
 #pragma mark - Lifecicle
@@ -175,6 +174,13 @@
     }
 }
 
+- (void)setDelegate:(id<DBModuleViewDelegate>)delegate {
+    _delegate = delegate;
+    for(DBModuleView *submodule in _submodules){
+        submodule.delegate = self;
+    }
+}
+
 #pragma mark - Appearance
 
 - (CGFloat)actualTopOffset {
@@ -214,6 +220,16 @@
 
 - (void)touchAtLocation:(CGPoint)location {
     
+}
+
+#pragma mark - DBModuleViewDelegate
+
+- (UIView *)db_moduleViewModalComponentContainer:(DBModuleView *)view {
+    if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
+        return [self.delegate db_moduleViewModalComponentContainer:self];
+    } else {
+        return nil;
+    }
 }
 
 @end

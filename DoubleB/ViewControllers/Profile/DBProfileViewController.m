@@ -42,7 +42,7 @@
     [self addModule:[DBProfileMailModuleView new]];
     
     // Universal modules
-    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+    for (DBUniversalModule *module in [DBUniversalProfileModulesManager sharedInstance].modules) {
         [self addModule:[module getModuleView]];
     }
     

@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSString *title;
 
 @property (strong, nonatomic) NSString *jsonField;
+@property (nonatomic, readonly) BOOL availableAccordingRestrictions;
 
 @property (weak, nonatomic) id<DBUniversalModuleDelegate> delegate;
 

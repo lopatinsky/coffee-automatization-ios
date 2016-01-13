@@ -10,7 +10,14 @@
 #import "DBModuleManagerProtocol.h"
 
 @interface DBUniversalModulesManager : DBPrimaryManager<DBModuleManagerProtocol>
+/**
+ * All universal modules
+ */
+@property (strong, nonatomic, readonly) NSArray *modules;
+@end
 
-@property (strong, nonatomic, readonly) NSArray *availableModules;
+@interface DBUniversalProfileModulesManager : DBUniversalModulesManager
+@end
 
+@interface DBUniversalOrderModulesManager : DBUniversalModulesManager
 @end
