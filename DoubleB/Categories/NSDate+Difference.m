@@ -18,11 +18,11 @@
 }
 
 - (NSInteger)numberOfDaysUntil:(NSDate *)another {
-    return [[self getComponents:another] day];
+    return [[another getComponents:self] day];
 }
 
 - (NSInteger)numberOfSecondsUntil:(NSDate *)another {
-    return [[self getComponents:another] second];
+    return [[another getComponents:self] second];
 }
 
 @end
