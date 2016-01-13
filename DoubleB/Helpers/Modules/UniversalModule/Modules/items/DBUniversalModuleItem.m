@@ -19,7 +19,7 @@
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
-    _restrictions = [dict getValueForKey:@"restrictions"] ?: @"";
+    _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
     
     return self;
 }
@@ -29,7 +29,7 @@
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
-    _restrictions = [dict getValueForKey:@"restrictions"] ?: @"";
+    _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
 }
 
 - (void)save {
