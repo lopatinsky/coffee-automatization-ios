@@ -8,13 +8,16 @@
 
 #import "DBNOOddModuleView.h"
 #import "OrderCoordinator.h"
+#import "DBNOOddPopupView.h"
+#import "OrderCoordinator.h"
 
 #import "UIAlertView+BlocksKit.h"
 
-@interface DBNOOddModuleView () <UITextFieldDelegate>
+@interface DBNOOddModuleView () <DBPopupComponentDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
+@property (strong, nonatomic) DBNOOddPopupView *popupView;
 @end
 
 @implementation DBNOOddModuleView
@@ -30,39 +33,34 @@
     
     [self.iconImageView templateImageWithName:@"coins_icon"];
     
-    self.textField.placeholder = NSLocalizedString(@"Нужна сдача с", nil);
-    self.textField.delegate = self;
-    [self.textField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
-}
-
-- (void)reload:(BOOL)animated {
-    [super reload:animated];
+    self.popupView = [DBNOOddPopupView new];
+    self.popupView.placeholder = NSLocalizedString(@"Нужна сдача с", nil);
+    self.popupView.keyboardType = UIKeyboardTypeDecimalPad;
+    self.popupView.delegate = self;
     
-    self.textField.text = [OrderCoordinator sharedInstance].orderManager.oddSum;
+    [self reloadTitle];
 }
 
-- (void)textFieldDidChange {
-    [OrderCoordinator sharedInstance].orderManager.oddSum = self.textField.text;
+- (void)reloadTitle {
+    if ([OrderCoordinator sharedInstance].orderManager.oddSum.length == 0) {
+        self.titleLabel.textColor = [UIColor db_grayColor];
+        self.titleLabel.text = NSLocalizedString(@"Нужна сдача с", nil);
+    } else {
+        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.text = [NSString stringWithFormat:@"%@ %@ %@", NSLocalizedString(@"Нужна сдача с", nil), [OrderCoordinator sharedInstance].orderManager.oddSum, [Compatibility currencySymbol]];
+    };
 }
 
-//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Save"
-//                                                        message:@"Enter File Name"
-//                                                       delegate:self
-//                                              cancelButtonTitle:@"Cancel"
-//                                              otherButtonTitles:@"OK", nil];
-//    
-//    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-//    
-//    [alertView show];
-//
-//    
-//    return NO;
-//}
+- (void)db_componentWillDismiss:(DBPopupComponent *)component {
+    [OrderCoordinator sharedInstance].orderManager.oddSum = self.popupView.text;
+    [self reloadTitle];
+}
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [self.textField resignFirstResponder];
-    return YES;
+- (void)touchAtLocation:(CGPoint)location {
+    if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
+        self.popupView.text = [OrderCoordinator sharedInstance].orderManager.oddSum;
+        [self.popupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+    }
 }
 
 @end
