@@ -8,6 +8,8 @@
 
 #import "DBGeoPush.h"
 
+#import "NSDate+Difference.h"
+
 @implementation DBGeoPush
 
 - (instancetype)initWithResponseDict:(NSDictionary *)dict {
@@ -25,7 +27,7 @@
 }
 
 - (NSInteger)numberOfDaysAfterLastOrder {
-    return [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]];
+    return [[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp] numberOfDaysUntil:[NSDate date]] ;
 }
 
 - (BOOL)pushIsAvailable {
@@ -34,8 +36,10 @@
     
     if (available) {
         NSDate *lastPushDate = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"kDBGeoPushLastTimestamp"] floatValue]];
-        available = [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]] >= self.orderDelayDays &&
-        [DBGeoPush daysBetweenDate:[NSDate date] andDate:lastPushDate] >= self.pushDelayDays;
+        NSLog(@"%ld", (long)[[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp] numberOfDaysUntil:[NSDate date]]);
+        NSLog(@"%ld", (long)[lastPushDate numberOfDaysUntil:[NSDate date]]);
+        available = [self numberOfDaysAfterLastOrder] >= self.orderDelayDays &&
+                    [lastPushDate numberOfDaysUntil:[NSDate date]] >= self.pushDelayDays;
     }
     
     return available;
@@ -68,19 +72,6 @@
 - (NSString *)description {
     return [NSString stringWithFormat:@"<DBGeoPush>: OrderDelayDays: %ld, PushDelayDays: %ld, Title: %@, Text: %@, Points count: %lu",
             self.orderDelayDays, self.pushDelayDays, self.title, self.text, (unsigned long)[self.points count]];
-}
-
-// TODO: remove it after merge with iOS9
-+ (NSInteger)daysBetweenDate:(NSDate *)fromDateTime andDate:(NSDate *)toDateTime {
-    NSDate *fromDate;
-    NSDate *toDate;
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&fromDate interval:NULL forDate:fromDateTime];
-    [calendar rangeOfUnit:NSCalendarUnitDay startDate:&toDate interval:NULL forDate:toDateTime];
-    NSDateComponents *difference = [calendar components:NSCalendarUnitDay fromDate:fromDate toDate:toDate options:0];
-    
-    return [difference day];
 }
 
 #pragma mark - NSCoding methods
