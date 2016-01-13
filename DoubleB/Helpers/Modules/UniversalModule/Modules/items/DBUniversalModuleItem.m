@@ -13,6 +13,7 @@
 - (instancetype)initWithResponseDict:(NSDictionary *)dict{
     self = [super init];
     
+    _type = [[dict getValueForKey:@"type"] integerValue];
     _itemId = [dict getValueForKey:@"field"] ?: @"";
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
@@ -23,6 +24,7 @@
 }
 
 - (void)syncWithResponseDict:(NSDictionary *)dict{
+    _type = [[dict getValueForKey:@"type"] integerValue];
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
@@ -44,6 +46,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder{
     self = [[[self class] alloc] init];
     if(self != nil){
+        _type = [[aDecoder decodeObjectForKey:@"_type"] integerValue];
         _itemId = [aDecoder decodeObjectForKey:@"_itemId"];
         _placeholder = [aDecoder decodeObjectForKey:@"_placeholder"];
         _jsonField = [aDecoder decodeObjectForKey:@"_jsonField"];
@@ -56,6 +59,7 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:@(_type) forKey:@"_type"];
     [aCoder encodeObject:_itemId forKey:@"_itemId"];
     [aCoder encodeObject:_placeholder forKey:@"_placeholder"];
     [aCoder encodeObject:_jsonField forKey:@"_jsonField"];
