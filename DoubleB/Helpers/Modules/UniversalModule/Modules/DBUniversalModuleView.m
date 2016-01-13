@@ -10,6 +10,8 @@
 #import "DBUniversalModule.h"
 #import "DBUniversalModuleItem.h"
 
+#import "OrderCoordinator.h"
+
 #import "DBModuleHeaderView.h"
 #import "DBUniversalModuleTextItemView.h"
 
@@ -32,6 +34,8 @@
 - (void)commonInit {
     [super commonInit];
     
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPaths:@[CoordinatorNotificationNewDeliveryType, CoordinatorNotificationNewPaymentType] selector:@selector(reload)];
+    
     if (_module.title.length > 0) {
         DBModuleHeaderView *headerView = [DBModuleHeaderView new];
         headerView.title = _module.title;
@@ -45,6 +49,18 @@
     }
     
     [self layoutModules];
+}
+
+- (void)dealloc {
+    [[OrderCoordinator sharedInstance] removeObserver:self];
+}
+
+- (CGFloat)moduleViewContentHeight {
+    if (_module.availableAccordingRestrictions) {
+        return [super moduleViewContentHeight];
+    } else {
+        return 0;
+    }
 }
 
 

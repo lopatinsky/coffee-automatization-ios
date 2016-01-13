@@ -81,6 +81,14 @@
     return [[DBUniversalModuleView alloc] initWithModule:self];
 }
 
+- (BOOL)availableAccordingRestrictions {
+    BOOL available = NO;
+    for (DBUniversalModuleItem *item in _items) {
+        available = available || item.availableAccordingRestrictions;
+    }
+    return available;
+}
+
 
 #pragma mark - DBUniversalModuleDelegate
 

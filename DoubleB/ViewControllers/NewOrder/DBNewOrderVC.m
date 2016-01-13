@@ -27,6 +27,9 @@
 #import "DBNOOrderModuleView.h"
 #import "DBModuleSeparatorView.h"
 
+#import "DBUniversalModulesManager.h"
+#import "DBUniversalModule.h"
+
 #import "OrderCoordinator.h"
 #import "NetworkManager.h"
 #import "DBClientInfo.h"
@@ -99,6 +102,11 @@
     [self addModule:[DBNOCommentModuleView create]topOffset:5];
 	[self addModule:[DBNOOddModuleView create]topOffset:1];
     [self addModule:[DBNOPersonsModuleView create]topOffset:1];
+    
+    // Universal modules
+    for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
+        [self addModule:[module getModuleView] topOffset:0];
+    }
 
     [self addModule:[DBNOndaModuleView create]topOffset:5];
     

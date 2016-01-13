@@ -6,15 +6,15 @@
 //  Copyright © 2016 Empatika. All rights reserved.
 //
 
-#import "DBNOOddPopupView.h"
+#import "DBPopupTextFieldView.h"
 
-@interface DBNOOddPopupView ()<UITextFieldDelegate>
+@interface DBPopupTextFieldView ()<UITextFieldDelegate>
 @property (weak, nonatomic) UIView *fromView;
 
 @property (strong, nonatomic) UITextField *textField;
 @end
 
-@implementation DBNOOddPopupView
+@implementation DBPopupTextFieldView
 
 - (instancetype)init {
     self = [super init];

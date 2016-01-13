@@ -147,7 +147,7 @@
     params[@"client_email"] = [DBClientInfo sharedInstance].clientMail.value;
     
     NSMutableDictionary *universalModules = [NSMutableDictionary new];
-    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].modules) {
+    for (DBUniversalModule *module in [DBUniversalProfileModulesManager sharedInstance].modules) {
         universalModules[module.jsonField] = [module jsonRepresentation];
     }
     params[@"groups"] = [universalModules encodedString];
@@ -505,7 +505,7 @@
         params[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
     }
     
-    [self assembleExtraOrderInfoIntoParams:params];
+    [self assembleExtraOrderInfoIntoParams:params encode:NO];
     
     // Device type
     params[@"device_type"] = @(0);
@@ -541,7 +541,7 @@
     // Delivery Type
     [self assembleDeliveryInfoIntoParams:params encode:YES];
     
-    [self assembleExtraOrderInfoIntoParams:params];
+    [self assembleExtraOrderInfoIntoParams:params encode:YES];
     
     // Device type
     params[@"device_type"] = @(0);
@@ -584,7 +584,7 @@
     clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail.value;
     
     NSMutableDictionary *universalModules = [NSMutableDictionary new];
-    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].modules) {
+    for (DBUniversalModule *module in [DBUniversalProfileModulesManager sharedInstance].modules) {
         universalModules[module.jsonField] = [module jsonRepresentation];
     }
     clientInfo[@"groups"] = universalModules;
@@ -658,9 +658,15 @@
     }
 }
 
-+ (void)assembleExtraOrderInfoIntoParams:(NSMutableDictionary *)params {
++ (void)assembleExtraOrderInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
     params[@"num_people"] = [NSString stringWithFormat:@"%ld", (long)[OrderCoordinator sharedInstance].orderManager.personsCount];
     params[@"cash_change"] = [OrderCoordinator sharedInstance].orderManager.oddSum ?: @"";
+    
+    NSMutableDictionary *extraInfo = [NSMutableDictionary new];
+    for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
+        extraInfo[module.jsonField] = [module jsonRepresentation];
+    }
+    params[@"extra_order_field"] = encode ? [extraInfo encodedString] : extraInfo;
 }
             
 

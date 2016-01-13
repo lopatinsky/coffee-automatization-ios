@@ -8,10 +8,13 @@
 
 #import "DBUniversalModuleTextItemView.h"
 #import "DBUniversalModuleItem.h"
+#import "DBPopupTextFieldView.h"
 
-@interface DBUniversalModuleTextItemView ()<UITextFieldDelegate>
+@interface DBUniversalModuleTextItemView ()<UITextFieldDelegate, DBPopupComponentDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
+
+@property (strong, nonatomic) DBPopupTextFieldView *popupView;
 
 @end
 
@@ -34,23 +37,51 @@
 
 - (void)commonInit {
     self.textField.placeholder = _item.placeholder;
-    _textField.keyboardType = UIKeyboardTypeDefault;
+//    _textField.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     self.textField.text = _item.text;
     
-    [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
+    self.popupView = [DBPopupTextFieldView new];
+    self.popupView.placeholder = _item.placeholder;
+    self.popupView.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
+    self.popupView.delegate = self;
+    
+//    [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
 }
 
-- (void)textFieldDidChangeText:(UITextField *)textField{
-    _item.text = textField.text;
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
+        self.popupView.text = _item.text;
+        [self.popupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+    }
+    
+    return NO;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
+//- (void)textFieldDidChangeText:(UITextField *)textField{
+//    _item.text = textField.text;
+//}
+//
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    [_item save];
+//}
+
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+//    [textField resignFirstResponder];
+//    return YES;
+//}
+
+- (void)db_componentWillDismiss:(DBPopupComponent *)component {
+    _item.text = self.popupView.text;
+    self.textField.text = _item.text;
     [_item save];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    [textField resignFirstResponder];
-    return YES;
+- (CGFloat)moduleViewContentHeight {
+    if (_item.availableAccordingRestrictions) {
+        return 40.f;
+    } else {
+        return 0.f;
+    }
 }
 
 

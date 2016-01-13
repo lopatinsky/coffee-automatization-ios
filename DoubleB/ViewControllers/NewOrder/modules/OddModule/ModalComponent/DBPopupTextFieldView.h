@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DBPopupComponent.h"
 
-@interface DBNOOddPopupView : DBPopupComponent
+@interface DBPopupTextFieldView : DBPopupComponent
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSString *placeholder;
 @property (nonatomic) UIKeyboardType keyboardType;

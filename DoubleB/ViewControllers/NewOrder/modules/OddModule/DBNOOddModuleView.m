@@ -8,7 +8,7 @@
 
 #import "DBNOOddModuleView.h"
 #import "OrderCoordinator.h"
-#import "DBNOOddPopupView.h"
+#import "DBPopupTextFieldView.h"
 #import "OrderCoordinator.h"
 
 #import "UIAlertView+BlocksKit.h"
@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (strong, nonatomic) DBNOOddPopupView *popupView;
+@property (strong, nonatomic) DBPopupTextFieldView *popupView;
 @end
 
 @implementation DBNOOddModuleView
@@ -31,9 +31,9 @@
     
     [self.iconImageView templateImageWithName:@"coins_icon"];
     
-    self.popupView = [DBNOOddPopupView new];
+    self.popupView = [DBPopupTextFieldView new];
     self.popupView.placeholder = NSLocalizedString(@"Нужна сдача с", nil);
-    self.popupView.keyboardType = UIKeyboardTypeDecimalPad;
+    self.popupView.keyboardType = UIKeyboardTypeNumberPad;
     self.popupView.delegate = self;
     
     [self reloadTitle];
@@ -70,7 +70,7 @@
     if ([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCash) {
         return 45.f;
     } else {
-        self.titleLabel.text = @"";
+//        self.titleLabel.text = @"";
         return 0.f;
     }
 }

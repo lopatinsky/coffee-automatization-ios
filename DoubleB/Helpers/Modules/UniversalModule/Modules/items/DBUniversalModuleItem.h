@@ -25,7 +25,9 @@ typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
 @property (nonatomic) NSInteger order;
 
 @property (strong, nonatomic) NSString *jsonField;
+
 @property (strong, nonatomic) NSArray *restrictions;
+@property (nonatomic, readonly) BOOL availableAccordingRestrictions;
 
 @property (weak, nonatomic) id<DBUniversalModuleDelegate> delegate;
 

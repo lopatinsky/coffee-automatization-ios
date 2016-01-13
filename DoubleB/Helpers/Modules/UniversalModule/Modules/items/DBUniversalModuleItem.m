@@ -7,6 +7,7 @@
 //
 
 #import "DBUniversalModuleItem.h"
+#import "OrderCoordinator.h"
 
 @implementation DBUniversalModuleItem
 
@@ -39,6 +40,22 @@
 
 - (void)setText:(NSString *)text {
     _text = text;
+}
+
+- (BOOL)availableAccordingRestrictions {
+    BOOL available = YES;
+    
+    for (NSDictionary *restriction in _restrictions) {
+        if ([restriction[@"type"] integerValue] == 0 && [OrderCoordinator sharedInstance].orderManager.paymentType == [restriction[@"value"] integerValue]) {
+            available = NO;
+        }
+        
+        if ([restriction[@"type"] integerValue] == 1 && [OrderCoordinator sharedInstance].deliverySettings.deliveryType.typeId == [restriction[@"value"] integerValue]) {
+            available = NO;
+        }
+    }
+    
+    return available;
 }
 
 #pragma mark - NSCoding
