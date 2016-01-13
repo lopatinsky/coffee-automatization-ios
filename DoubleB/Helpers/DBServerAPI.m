@@ -505,6 +505,8 @@
         params[@"coordinates"] = [NSString stringWithFormat:@"%f,%f", location.coordinate.latitude, location.coordinate.longitude];
     }
     
+    [self assembleExtraOrderInfoIntoParams:params];
+    
     // Device type
     params[@"device_type"] = @(0);
     
@@ -538,6 +540,8 @@
     
     // Delivery Type
     [self assembleDeliveryInfoIntoParams:params encode:YES];
+    
+    [self assembleExtraOrderInfoIntoParams:params];
     
     // Device type
     params[@"device_type"] = @(0);
@@ -652,6 +656,11 @@
             params[@"venue_id"] = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
         }
     }
+}
+
++ (void)assembleExtraOrderInfoIntoParams:(NSMutableDictionary *)params {
+    params[@"num_people"] = [NSString stringWithFormat:@"%ld", (long)[OrderCoordinator sharedInstance].orderManager.personsCount];
+    params[@"cash_change"] = [OrderCoordinator sharedInstance].orderManager.oddSum ?: @"";
 }
             
 
