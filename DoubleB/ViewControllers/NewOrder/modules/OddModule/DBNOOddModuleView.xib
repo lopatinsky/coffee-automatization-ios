@@ -22,26 +22,27 @@
                         <constraint firstAttribute="width" constant="15" id="oTG-es-gtm"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Нужна сдача с" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2rZ-ad-M5s">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHn-CJ-LvU">
                     <rect key="frame" x="31" y="8" width="281" height="29"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                </textField>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="zhX-kX-SZb" firstAttribute="leading" secondItem="vg2-tT-4FL" secondAttribute="leading" constant="8" id="2ud-tv-NuD"/>
                 <constraint firstItem="zhX-kX-SZb" firstAttribute="centerY" secondItem="vg2-tT-4FL" secondAttribute="centerY" id="C3k-Ux-SIc"/>
-                <constraint firstItem="2rZ-ad-M5s" firstAttribute="leading" secondItem="zhX-kX-SZb" secondAttribute="trailing" constant="8" id="CnR-8r-nvy"/>
-                <constraint firstItem="2rZ-ad-M5s" firstAttribute="top" secondItem="vg2-tT-4FL" secondAttribute="top" constant="8" id="IXr-WU-sBK"/>
-                <constraint firstAttribute="bottom" secondItem="2rZ-ad-M5s" secondAttribute="bottom" constant="8" id="pWJ-P4-tlU"/>
-                <constraint firstAttribute="trailing" secondItem="2rZ-ad-M5s" secondAttribute="trailing" constant="8" id="wYV-jy-ZFa"/>
+                <constraint firstItem="RHn-CJ-LvU" firstAttribute="leading" secondItem="zhX-kX-SZb" secondAttribute="trailing" constant="8" id="GwI-hD-yzD"/>
+                <constraint firstAttribute="trailing" secondItem="RHn-CJ-LvU" secondAttribute="trailing" constant="8" id="ORF-AL-Uv6"/>
+                <constraint firstItem="RHn-CJ-LvU" firstAttribute="top" secondItem="vg2-tT-4FL" secondAttribute="top" constant="8" id="bdg-MR-1iD"/>
+                <constraint firstAttribute="bottom" secondItem="RHn-CJ-LvU" secondAttribute="bottom" constant="8" id="e0Y-he-ncb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="iconImageView" destination="zhX-kX-SZb" id="8ki-Zf-bIC"/>
-                <outlet property="textField" destination="2rZ-ad-M5s" id="aEl-A6-zqJ"/>
+                <outlet property="titleLabel" destination="RHn-CJ-LvU" id="Cnq-sZ-FvL"/>
             </connections>
             <point key="canvasLocation" x="348" y="9.5"/>
         </view>
