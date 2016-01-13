@@ -27,6 +27,7 @@
 #import "DBNOOrderModuleView.h"
 #import "DBModuleSeparatorView.h"
 
+#import "DBModulesManager.h"
 #import "DBUniversalModulesManager.h"
 #import "DBUniversalModule.h"
 
@@ -100,8 +101,13 @@
     [self addModule:[DBNOPaymentModuleView create]topOffset:5];
     
     [self addModule:[DBNOCommentModuleView create]topOffset:5];
-	[self addModule:[DBNOOddModuleView create]topOffset:1];
-    [self addModule:[DBNOPersonsModuleView create]topOffset:1];
+    
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeOddSum]) {
+        [self addModule:[DBNOOddModuleView create]topOffset:1];
+    }
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePersonsCount]) {
+        [self addModule:[DBNOPersonsModuleView create]topOffset:1];
+    }
     
     // Universal modules
     for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
