@@ -216,7 +216,7 @@
                              }];
 }
 
-+ (void)createNewOrder:(void(^)(Order *order))success
++ (void)createNewOrder:(void(^)(Order *order, NSDictionary *responce))success
                failure:(void(^)(NSString *errorTitle, NSString *errorMessage))failure {
 
     // Check if network connection is reachable
@@ -248,7 +248,7 @@
                                  // Save order
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
                                  if(success)
-                                     success(ord);
+                                     success(ord, responseObject);
                                  
                                  // Send confirmation of success
                                  [self confirmOrderSuccess:ord.orderId];
