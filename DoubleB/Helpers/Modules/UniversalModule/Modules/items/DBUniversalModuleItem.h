@@ -18,6 +18,7 @@
 @property (nonatomic) NSInteger order;
 
 @property (strong, nonatomic) NSString *jsonField;
+@property (strong, nonatomic) NSArray *restrictions;
 
 @property (weak, nonatomic) id<DBUniversalModuleDelegate> delegate;
 

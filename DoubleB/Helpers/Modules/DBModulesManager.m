@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeProfileScreenUniversal = 4,
     DBModuleTypeGeoPush = 5,
     DBModuleTypeFriendGiftMivako = 7,
+    DBModuleTypeOrderScreenUniversal = 11,
     
     DBModuleTypeLast // Enum item for iteration, not in use
 };
@@ -79,7 +80,10 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 [appModules removeObject:@(DBModuleTypeFriendGiftMivako)];
             } break;
             case DBModuleTypeProfileScreenUniversal:
-                [[DBUniversalModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
+                [[DBUniversalProfileModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
+            case DBModuleTypeOrderScreenUniversal:
+                [[DBUniversalOrderModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
             case DBModuleTypeSubscription:
                 [[DBSubscriptionManager sharedInstance] enableModule:YES withDict:moduleDict];
@@ -100,7 +104,10 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
                 [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
                 break;
             case DBModuleTypeProfileScreenUniversal:
-                [[DBUniversalModulesManager sharedInstance] enableModule:NO withDict:nil];
+                [[DBUniversalProfileModulesManager sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeOrderScreenUniversal:
+                [[DBUniversalOrderModulesManager sharedInstance] enableModule:NO withDict:nil];
                 break;
             case DBModuleTypeSubscription:
                 [[DBSubscriptionManager sharedInstance] enableModule:NO withDict:nil];

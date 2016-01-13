@@ -21,9 +21,9 @@
 - (instancetype)init {
     self = [super init];
     
-    NSData *modulesData = [DBUniversalModulesManager valueForKey:@"clientInfoModulesData"];
-    _availableModules = [NSKeyedUnarchiver unarchiveObjectWithData:modulesData];
-    for (DBUniversalModule *module in _availableModules){
+    NSData *modulesData = [DBUniversalModulesManager valueForKey:@"modulesData"];
+    _modules = [NSKeyedUnarchiver unarchiveObjectWithData:modulesData];
+    for (DBUniversalModule *module in _modules){
         module.delegate = self;
     }
     
@@ -36,7 +36,7 @@
         for (NSDictionary *groupDict in moduleDict[@"groups"]) {
             NSString *groupId = groupDict[@"group_field"];
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moduleId == %@", groupId];
-            DBUniversalModule *module = [[_availableModules filteredArrayUsingPredicate:predicate] firstObject];
+            DBUniversalModule *module = [[_modules filteredArrayUsingPredicate:predicate] firstObject];
             
             if(module) {
                 [module syncWithResponseDict:groupDict];
@@ -47,17 +47,17 @@
                 [availableModules addObject:newModule];
             }
         }
-        _availableModules = availableModules;
+        _modules = availableModules;
     } else {
-        _availableModules = @[];
+        _modules = @[];
     }
     
     [self save];
 }
 
 - (void)save {
-    NSData *modulesData = [NSKeyedArchiver archivedDataWithRootObject:_availableModules];
-    [DBUniversalModulesManager setValue:modulesData forKey:@"clientInfoModulesData"];
+    NSData *modulesData = [NSKeyedArchiver archivedDataWithRootObject:_modules];
+    [DBUniversalModulesManager setValue:modulesData forKey:@"modulesData"];
 }
 
 #pragma mark - DBPrimaryManager
@@ -70,6 +70,22 @@
 
 - (void)db_universalModuleHaveChange {
     [self save];
+}
+
+@end
+
+@implementation DBUniversalProfileModulesManager
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsProfleUniversalModulesManager";
+}
+
+@end
+
+@implementation DBUniversalOrderModulesManager
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsOrderUniversalModulesManager";
 }
 
 @end

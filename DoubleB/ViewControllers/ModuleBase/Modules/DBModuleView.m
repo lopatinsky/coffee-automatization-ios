@@ -126,7 +126,6 @@
             [self.delegate db_additonalAnimationFroModuleAnimation:self]();
         }
     }
-
 }
 
 #pragma mark - Lifecicle

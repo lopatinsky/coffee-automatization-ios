@@ -17,6 +17,7 @@
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
+    _restrictions = [dict getValueForKey:@"restrictions"] ?: @"";
     
     return self;
 }
@@ -25,6 +26,7 @@
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
+    _restrictions = [dict getValueForKey:@"restrictions"] ?: @"";
 }
 
 - (void)save {
@@ -47,6 +49,7 @@
         _jsonField = [aDecoder decodeObjectForKey:@"_jsonField"];
         _text = [aDecoder decodeObjectForKey:@"_text"];
         _order = [[aDecoder decodeObjectForKey:@"_order"] integerValue];
+        _restrictions = [aDecoder decodeObjectForKey:@"_resctrictions"];
     }
     
     return self;
@@ -58,6 +61,7 @@
     [aCoder encodeObject:_jsonField forKey:@"_jsonField"];
     [aCoder encodeObject:_text forKey:@"_text"];
     [aCoder encodeObject:@(_order) forKey:@"_order"];
+    [aCoder encodeObject:_restrictions forKey:@"_restrictions"];
 }
 
 @end

@@ -29,11 +29,9 @@
     return self;
 }
 
-- (void)awakeFromNib {
-    
-}
-
 - (void)commonInit {
+    [super commonInit];
+    
     if (_module.title.length > 0) {
         DBModuleHeaderView *headerView = [DBModuleHeaderView new];
         headerView.title = _module.title;

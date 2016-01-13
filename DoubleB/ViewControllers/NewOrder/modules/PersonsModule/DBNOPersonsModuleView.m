@@ -22,10 +22,8 @@
 
 @implementation DBNOPersonsModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOPersonsModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOPersonsModuleView";
 }
 
 - (void)awakeFromNib {

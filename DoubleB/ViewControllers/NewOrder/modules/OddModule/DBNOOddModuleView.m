@@ -22,10 +22,8 @@
 
 @implementation DBNOOddModuleView
 
-- (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBNOOddModuleView" owner:self options:nil] firstObject];
-    
-    return self;
++ (NSString *)xibName {
+    return @"DBNOOddModuleView";
 }
 
 - (void)awakeFromNib {
@@ -39,6 +37,11 @@
     self.popupView.delegate = self;
     
     [self reloadTitle];
+}
+
+- (void)reload:(BOOL)animated {
+    [self reloadTitle];
+    [super reload:animated];
 }
 
 - (void)reloadTitle {
@@ -60,6 +63,15 @@
     if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
         self.popupView.text = [OrderCoordinator sharedInstance].orderManager.oddSum;
         [self.popupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+    }
+}
+
+- (CGFloat)moduleViewContentHeight {
+    if ([OrderCoordinator sharedInstance].orderManager.paymentType == PaymentTypeCash) {
+        return 45.f;
+    } else {
+        self.titleLabel.text = @"";
+        return 0.f;
     }
 }
 

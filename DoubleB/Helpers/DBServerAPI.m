@@ -147,7 +147,7 @@
     params[@"client_email"] = [DBClientInfo sharedInstance].clientMail.value;
     
     NSMutableDictionary *universalModules = [NSMutableDictionary new];
-    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].modules) {
         universalModules[module.jsonField] = [module jsonRepresentation];
     }
     params[@"groups"] = [universalModules encodedString];
@@ -580,7 +580,7 @@
     clientInfo[@"email"] = [DBClientInfo sharedInstance].clientMail.value;
     
     NSMutableDictionary *universalModules = [NSMutableDictionary new];
-    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].availableModules) {
+    for (DBUniversalModule *module in [DBUniversalModulesManager sharedInstance].modules) {
         universalModules[module.jsonField] = [module jsonRepresentation];
     }
     clientInfo[@"groups"] = universalModules;

@@ -93,7 +93,9 @@
     }
     [self addModule:[DBNOVenueModuleView create] topOffset:1];
     [self addModule:[DBNOTimeModuleView create] topOffset:1];
+    
     [self addModule:[DBNOPaymentModuleView create]topOffset:5];
+    
     [self addModule:[DBNOCommentModuleView create]topOffset:5];
 	[self addModule:[DBNOOddModuleView create]topOffset:1];
     [self addModule:[DBNOPersonsModuleView create]topOffset:1];
@@ -107,6 +109,7 @@
     
     [self layoutModules];
 }
+
 
 #pragma mark - DBModulesViewController
 
