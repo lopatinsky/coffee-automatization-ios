@@ -5,9 +5,9 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue</string>
             <string>HelveticaNeue-Bold</string>
-            <string>HelveticaNeue</string>
-            <string>HelveticaNeue</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -25,8 +25,8 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="BvS-Bw-mME"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="close">
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <state key="normal" title="CLOSE">
                                 <color key="titleColor" red="0.48627450980392156" green="0.48627450980392156" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
@@ -136,7 +136,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="0.69999999999999996" id="fbA-PR-DEf"/>
+                                <constraint firstAttribute="height" priority="900" constant="1" id="fbA-PR-DEf"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kev-rk-lUt">

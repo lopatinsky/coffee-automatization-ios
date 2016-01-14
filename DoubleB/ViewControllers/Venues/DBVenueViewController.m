@@ -32,12 +32,6 @@
 
 @implementation DBVenueViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:@"VenueViewController" bundle:nibBundleOrNil];
-
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -76,7 +70,7 @@
     self.mapView.myLocationEnabled = YES;
     [self.mapView setCamera:[GMSCameraPosition cameraWithLatitude:self.venue.location.latitude longitude:self.venue.location.longitude zoom:16]];
     GMSMarker *marker = [GMSMarker markerWithPosition:self.venue.location];
-    marker.icon = [UIImage imageNamed:@"venue.png"];
+    marker.icon = [UIImage imageNamed:@"map_icon_active.png"];
     marker.map = self.mapView;
     
     [self setupPhoneButton];

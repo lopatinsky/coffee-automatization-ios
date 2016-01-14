@@ -11,6 +11,8 @@
 #import "LocationHelper.h"
 #import "CoreDataHelper.h"
 
+#import "UIGestureRecognizer+BlocksKit.h"
+
 @interface DBVenueInfoView ()
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
@@ -40,25 +42,41 @@
 }
 
 - (void)awakeFromNib {
-    [self.closeButton setTitle:NSLocalizedString(@"Закрыть", nil) forState:UIControlStateNormal];
+    [self.closeButton setTitle:NSLocalizedString(@"Закрыть", nil).uppercaseString forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
     
     [self.distanceLabel.layer setCornerRadius:5];
     
+    @weakify(self)
+    [self.venueContentView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        if ([self.delegate respondsToSelector:@selector(db_venueViewInfo:clickedVenue:)]) {
+            [self.delegate db_venueViewInfo:self clickedVenue:_venue];
+        }
+    }]];
+    
     [self.chooseVenueButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
     [self.chooseVenueButton setTitle:NSLocalizedString(@"Выбрать для оформления заказа", nil) forState:UIControlStateNormal];
+    [self.chooseVenueButton addTarget:self action:@selector(chooseButtonClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)chooseButtonClick {
+    if ([self.delegate respondsToSelector:@selector(db_venueViewInfo:didSelectVenue:)]) {
+        [self.delegate db_venueViewInfo:self didSelectVenue:_venue];
+    }
 }
 
 - (void)configure:(Venue *)venue {
     _venue = venue;
     
     [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-        double dist = [location distanceFromLocation:[[CLLocation alloc] initWithLatitude:_venue.latitude longitude:_venue.longitude]];
+        double dist = [location distanceFromLocation:[[CLLocation alloc] initWithLatitude:_venue.latitude longitude:_venue.longitude]] / 1000;
         _venue.distance = dist;
         [[CoreDataHelper sharedHelper] save];
         
         [self reloadDistanceLabel:dist];
     }];
+    
     double dist = venue.distance;
     [self reloadDistanceLabel:dist];
     
@@ -88,18 +106,18 @@
     }
 }
 
-- (void)setChoiceEnabled:(BOOL)choiceEnabled {
-    _choiceEnabled = choiceEnabled;
+- (void)setSelectionEnabled:(BOOL)selectionEnabled {
+    _selectionEnabled = selectionEnabled;
     
-    if (_choiceEnabled) {
-        self.constraintChooseVenueView.constant = 30.f;
+    if (_selectionEnabled) {
+        self.constraintChooseVenueView.constant = 40.f;
         CGRect rect = self.frame;
-        rect.size.height = 125.f;
+        rect.size.height = 140.f;
         self.frame = rect;
     } else {
         self.constraintChooseVenueView.constant = 0;
         CGRect rect = self.frame;
-        rect.size.height = 95.f;
+        rect.size.height = 100.f;
         self.frame = rect;
     }
 }

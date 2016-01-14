@@ -107,8 +107,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Venue *venue = _venues[indexPath.row];
-    [OrderCoordinator sharedInstance].orderManager.venue = venue;
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    if (_mode == DBVenuesViewControllerModeChooseVenue) {
+        [OrderCoordinator sharedInstance].orderManager.venue = venue;
+        [self.parentViewController.navigationController popViewControllerAnimated:YES];
+    } else {
+        DBVenueViewController *controller = [DBVenueViewController new];
+        controller.venue = venue;
+        [self.parentViewController.navigationController pushViewController:controller animated:YES];
+    }
     
     [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
 }
@@ -119,7 +126,7 @@
     DBVenueViewController *controller = [DBVenueViewController new];
     controller.venue = cell.venue;
     
-    [self.navigationController pushViewController:controller animated:YES];
+    [self.parentViewController.navigationController pushViewController:controller animated:YES];
     
     [GANHelper analyzeEvent:@"venue_info_click" label:cell.venue.venueId category:self.eventsCategory];
 }
