@@ -20,25 +20,14 @@
 #import "NetworkManager.h"
 
 @interface DBVenuesTableViewController ()<DBVenueCellDelegate>
-
 @property (nonatomic, strong) NSArray *venues;
-@property (nonatomic, strong) UIPickerView *picker;
-
 @end
 
 @implementation DBVenuesTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self db_setTitle:[DBTextResourcesHelper db_venuesTitleString]];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    self.picker = [UIPickerView new];
-    
+
     self.tableView.rowHeight = 73;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -54,15 +43,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
-    [GANHelper analyzeScreen:@"Coffee_houses_screen"];
+    [GANHelper analyzeScreen:self.eventsCategory];
     [GANHelper analyzeEvent:@"all_venues_show" category:self.eventsCategory];
 
     [self reloadVenues:nil];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)dealloc {
@@ -113,7 +97,8 @@
         cell.delegate = self;
     }
     
-    
+    Venue *venue = [self.venues objectAtIndex:indexPath.row];
+    [cell configure:venue];
     
     return cell;
 }

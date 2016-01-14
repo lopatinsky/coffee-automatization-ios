@@ -24,7 +24,8 @@ static NSMutableArray *storedVenues;
     self.location = CLLocationCoordinate2DMake([dict[@"lat"] doubleValue], [dict[@"lon"] doubleValue]);
     self.phone = [dict getValueForKey:@"called_phone"] ?: @"";
     
-    self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
+//    self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
+    self.workingTime = [dict getValueForKey:@"schedule_str"] ?: [self parseWorkTimeFromSchedule:dict[@"schedule"]];
 }
 
 - (void)setLocation:(CLLocationCoordinate2D)location {

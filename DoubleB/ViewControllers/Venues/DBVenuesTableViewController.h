@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSUInteger, DBVenuesTableViewControllerMode) {
-    DBVenuesTableViewControllerModeChooseVenue = 0,
-    DBVenuesTableViewControllerModeList
-};
+#import "DBVenuesViewController.h"
 
 @interface DBVenuesTableViewController : UITableViewController
-@property (nonatomic) DBVenuesTableViewControllerMode mode;
+@property (nonatomic) DBVenuesViewControllerMode mode;
 @property (nonatomic, strong) NSString *eventsCategory;
 
 @end

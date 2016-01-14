@@ -49,7 +49,7 @@
         }
         self.venueDistanceLabel.hidden = NO;
         self.constraintDistanceLabelWidth.constant = 55;
-        self.constraintDistanceLabelAndVenueNameLabelSpace.constant = 10;
+        self.constraintDistanceLabelAndVenueNameLabelSpace.constant = 5;
     } else {
         self.venueDistanceLabel.hidden = YES;
         self.constraintDistanceLabelWidth.constant = 0;
