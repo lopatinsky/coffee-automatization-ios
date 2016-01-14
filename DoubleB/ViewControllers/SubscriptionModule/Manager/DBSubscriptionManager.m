@@ -156,9 +156,11 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 
 - (void)subscriptionInfo:(void(^)(NSArray *info))success
                  failure:(void(^)(NSString *errorMessage))failure {
+    [[DBAPIClient sharedClient] setClientHeaderEnabled:YES];
     [[DBAPIClient sharedClient] GET:@"subscription/info"
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                [[DBAPIClient sharedClient] setClientHeaderEnabled:NO];
                                 if ([responseObject getValueForKey:@"amount"] && [responseObject getValueForKey:@"days"]) {
                                     DBCurrentSubscription *currentSubscription = [DBCurrentSubscription new];
                                     currentSubscription.amount = [responseObject objectForKey:@"amount"];
@@ -175,6 +177,7 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
                                     success(@[]);
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                [[DBAPIClient sharedClient] setClientHeaderEnabled:NO];
                                 NSLog(@"%@", error);
                                 
                                 if(failure)

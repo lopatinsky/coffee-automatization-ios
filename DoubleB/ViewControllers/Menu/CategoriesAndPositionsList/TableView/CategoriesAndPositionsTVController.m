@@ -329,10 +329,15 @@ static NSDictionary *_preferences;
         }
         
         DBMenuPosition *position = ((DBMenuCategory *)self.categories[correctedIndexPath.section]).positions[correctedIndexPath.row];
-        cell.contentType = DBPositionCellContentTypeRegular;
         cell.priceAnimated = YES;
         [cell configureWithPosition:position];
         cell.delegate = self;
+        
+        if ([DBSubscriptionManager categoryIsSubscription:category]) {
+            cell.contentType = DBPositionCellContentTypeSubscription;
+        } else {
+            cell.contentType = DBPositionCellContentTypeRegular;
+        }
         
         return cell;
     }
@@ -368,7 +373,9 @@ static NSDictionary *_preferences;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled]) {
+    DBPositionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled] &&
+        (([cell isKindOfClass:[DBPositionCell class]] && cell.contentType == DBPositionCellContentTypeSubscription) || [cell isKindOfClass:[SubscriptionInfoTableViewCell class]])) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
             [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
             [self pushSubscriptionViewController];
@@ -414,7 +421,7 @@ static NSDictionary *_preferences;
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell {
     NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
-    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager isSubscriptionPosition:idxPath]) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager isSubscriptionPosition:idxPath] && cell.contentType == DBPositionCellContentTypeSubscription) {
         if(![self subscriptionPositionDidOrder:cell]) {
             return;
         }

@@ -21,9 +21,9 @@ typedef NS_ENUM(NSUInteger, DBPositionCellAppearanceType) {
 
 typedef NS_ENUM(NSUInteger, DBPositionCellContentType) {
     DBPositionCellContentTypeRegular = 0,
+    DBPositionCellContentTypeSubscription,
     DBPositionCellContentTypeBonus
 };
-
 
 @interface DBPositionCell : UITableViewCell <PositionCellProtocol>
 @property (weak, nonatomic) DBPositionPriceView *priceView;
