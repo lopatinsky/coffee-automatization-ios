@@ -10,10 +10,10 @@
 #import "DBSettingsCell.h"
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
+#import "DBVenuesViewController.h"
 #import "DBPaymentViewController.h"
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
-//#import "DBBeaconObserver.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfoViewController.h"
 #import "DBCompaniesViewController.h"
@@ -78,12 +78,20 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"profile_icon_active",
                                     @"viewController": profileVC}];
     
-    // Profile item
+    // Orders item
     DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
     [self.settingsItems addObject:@{@"name": @"ordersVC",
                                     @"title": NSLocalizedString(@"Заказы", nil),
                                     @"image": @"history_icon",
                                     @"viewController": ordersVC}];
+    
+    // Venues item
+    DBVenuesViewController *venuesVC = [DBVenuesViewController new];
+    venuesVC.mode = DBVenuesViewControllerModeList;
+    [self.settingsItems addObject:@{@"name": @"venuesVC",
+                                    @"title": [DBTextResourcesHelper db_venuesTitleString],
+                                    @"image": @"map_icon_active",
+                                    @"viewController": venuesVC}];
     
     // Share friends item
     if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
@@ -256,6 +264,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if([settingsItemInfo[@"name"] isEqualToString:@"ordersVC"]){
         event = @"history_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
+    if([settingsItemInfo[@"name"] isEqualToString:@"venuesVC"]){
+        event = @"venues_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
