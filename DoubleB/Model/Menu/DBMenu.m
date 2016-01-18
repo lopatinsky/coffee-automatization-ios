@@ -13,6 +13,7 @@
 
 #import "DBAPIClient.h"
 
+
 @interface DBMenu ()
 @property(strong, nonatomic) NSArray *categories;
 @end
@@ -116,6 +117,7 @@
                                 
                                 if(remoteMenuCallback)
                                     remoteMenuCallback(YES, self.categories);
+                                
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 

@@ -11,6 +11,7 @@
 @class Venue;
 @class DBMenuPosition;
 
+
 @interface DBMenu : NSObject
 
 @property(nonatomic, readonly) BOOL hasNestedCategories;
