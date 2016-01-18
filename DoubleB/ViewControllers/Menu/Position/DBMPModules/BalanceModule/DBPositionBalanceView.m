@@ -124,7 +124,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     DBMenuPositionBalance *balance = self.balance[indexPath.row];
     if (_mode == DBPositionBalanceViewModeChooseVenue) {
-        
         if (_venueSelectedBlock) {
             _venueSelectedBlock(balance.venue);
         }

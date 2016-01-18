@@ -294,10 +294,13 @@
     
     NSString *venueId = [dict getValueForKey:@"venue_id"] ?: @"";
     Venue *venue = [Venue venueById:venueId];
-    if (venue && [dict getValueForKey:@"value"]) {
-        positionBalance = [DBMenuPositionBalance new];
-        positionBalance.venue = venue;
-        positionBalance.balance = [[dict getValueForKey:@"value"] integerValue];
+    if (venue) {
+        NSInteger count = [dict getValueForKey:@"value"] ? [[dict getValueForKey:@"value"] integerValue] : -1;
+        if (count != 0) {
+            positionBalance = [DBMenuPositionBalance new];
+            positionBalance.venue = venue;
+            positionBalance.balance = count;
+        }
     }
     
     return positionBalance;

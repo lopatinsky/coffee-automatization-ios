@@ -42,7 +42,12 @@
 
 - (void)configure:(DBMenuPositionBalance *)balance {
     self.titleLabel.text = balance.venue.title;
-    self.balanceLabel.text = [NSString stringWithFormat:@"x %ld", (long)balance.balance];
+    
+    NSString *balanceString = [NSString stringWithFormat:@"x %ld", (long)balance.balance];
+    if (balance.balance == -1) {
+        balanceString = NSLocalizedString(@"Неизвестно", nil);
+    }
+    self.balanceLabel.text = balanceString;
 }
 
 - (void)setTickAvailable:(BOOL)tickAvailable {
