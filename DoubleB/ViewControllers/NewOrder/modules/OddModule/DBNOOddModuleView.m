@@ -31,7 +31,7 @@
     
     [self.iconImageView templateImageWithName:@"coins_icon"];
     
-    self.popupView = [DBPopupTextFieldView new];
+    self.popupView = [DBPopupTextFieldView create];
     self.popupView.placeholder = NSLocalizedString(@"Нужна сдача с", nil);
     self.popupView.keyboardType = UIKeyboardTypeNumberPad;
     self.popupView.delegate = self;

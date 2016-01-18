@@ -40,7 +40,7 @@
 //    _textField.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     self.textField.text = _item.text;
     
-    self.popupView = [DBPopupTextFieldView new];
+    self.popupView = [DBPopupTextFieldView create];
     self.popupView.placeholder = _item.placeholder;
     self.popupView.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
     self.popupView.delegate = self;
