@@ -7,7 +7,7 @@
 //
 
 #import "DBCityVariantCell.h"
-#import "DBUnifiedAppManager.h"
+#import "DBCitiesManager.h"
 
 @interface DBCityVariantCell ()
 

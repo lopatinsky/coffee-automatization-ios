@@ -9,7 +9,7 @@
 #import "DBCitiesViewController.h"
 #import "DBCityVariantCell.h"
 #import "DBUnifiedMenuTableViewController.h"
-#import "DBUnifiedAppManager.h"
+#import "DBCitiesManager.h"
 #import "NetworkManager.h"
 
 #import "MBProgressHUD.h"
@@ -42,20 +42,20 @@
     
     self.searchBar.delegate = self;
     
-    if (![[DBUnifiedAppManager sharedInstance] cities]) {
+    if (![[DBCitiesManager sharedInstance] cities]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBUnifiedAppManager sharedInstance] fetchCities:^(BOOL success) {
+        [[DBCitiesManager sharedInstance] fetchCities:^(BOOL success) {
             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
             
             [self reload];
         }];
     } else {
-        [[DBUnifiedAppManager sharedInstance] fetchCities:nil];
+        [[DBCitiesManager sharedInstance] fetchCities:nil];
         [self reload];
     }
     
-    if ([DBUnifiedAppManager selectedCity]) {
-        self.searchBar.text = [DBUnifiedAppManager selectedCity].cityName;
+    if ([DBCitiesManager selectedCity]) {
+        self.searchBar.text = [DBCitiesManager selectedCity].cityName;
         [self reload];
     }
     
@@ -74,7 +74,7 @@
 }
 
 - (void)reload {
-    _cities = [[DBUnifiedAppManager sharedInstance] cities:self.searchBar.text];
+    _cities = [[DBCitiesManager sharedInstance] cities:self.searchBar.text];
     [self.citiesTableView reloadData];
 }
 
