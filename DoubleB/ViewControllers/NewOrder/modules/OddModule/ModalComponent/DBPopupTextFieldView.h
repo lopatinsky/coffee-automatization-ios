@@ -14,6 +14,7 @@
 @property (strong, nonatomic) NSString *placeholder;
 @property (nonatomic) UIKeyboardType keyboardType;
 
++ (DBPopupTextFieldView *)create;
 - (void)showFrom:(UIView *)fromView onView:(UIView *)parentView;
 
 @end

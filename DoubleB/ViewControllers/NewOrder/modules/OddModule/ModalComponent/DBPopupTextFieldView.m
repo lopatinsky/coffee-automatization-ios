@@ -10,24 +10,30 @@
 
 @interface DBPopupTextFieldView ()<UITextFieldDelegate>
 @property (weak, nonatomic) UIView *fromView;
+@property (weak, nonatomic) IBOutlet UIView *closeView;
 
-@property (strong, nonatomic) UITextField *textField;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 @end
 
 @implementation DBPopupTextFieldView
 
-- (instancetype)init {
-    self = [super init];
++ (DBPopupTextFieldView *)create {
+    DBPopupTextFieldView *view = [[[NSBundle mainBundle] loadNibNamed:@"DBPopupTextFieldView" owner:self options:nil] firstObject];
     
-    self.backgroundColor = [UIColor whiteColor];
+    return view;
+}
+
+- (void)awakeFromNib {
+    self.backgroundColor = [UIColor clearColor];
     
-    self.textField = [UITextField new];
+    @weakify(self)
+    [self.closeView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        [self hide];
+    }]];
+    
     self.textField.delegate = self;
-    self.textField.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
     [self.textField addTarget:self action:@selector(textFieldDidChange) forControlEvents:UIControlEventEditingChanged];
-    [self addSubview:self.textField];
-    self.textField.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.textField alignTop:@"8" leading:@"8" bottom:@"-8" trailing:@"-8" toView:self];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -37,8 +43,6 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
-    
-    return self;
 }
 
 - (void)setText:(NSString *)text {
@@ -66,13 +70,21 @@
     return YES;
 }
 
+- (void)moveY:(double)origin {
+    CGRect rect = self.frame;
+    rect.origin.y = origin - self.textField.frame.origin.y;
+    self.frame = rect;
+}
+
 - (void)showFrom:(UIView *)fromView onView:(UIView *)parentView {
     self.parentView = parentView;
     self.fromView = fromView;
     [self configOverlay];
     
     CGRect rect = [parentView convertRect:fromView.frame fromView:fromView.superview];
-    self.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, 45);
+    self.frame = CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, self.frame.size.height);
+    [self moveY:rect.origin.y];
+    
     [parentView addSubview:self];
     
     [UIView animateWithDuration:0.2 animations:^{
@@ -108,7 +120,7 @@
                      animations:^{
                          CGRect rect = self.frame;
                          rect.origin.y = self.parentView.frame.size.height - keyboardRect.size.height - self.frame.size.height - 1;
-                         self.frame = rect;
+                         [self moveY:rect.origin.y];
                      }
                      completion:nil];
 }
@@ -119,7 +131,7 @@
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          CGRect rect = [self.parentView convertRect:self.fromView.frame fromView:self.fromView.superview];
-                         self.frame = rect;
+                         [self moveY:rect.origin.y];
                      }
                      completion:nil];
 }

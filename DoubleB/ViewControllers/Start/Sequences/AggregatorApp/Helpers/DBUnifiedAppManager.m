@@ -9,15 +9,12 @@
 #import "DBUnifiedAppManager.h"
 #import "DBAPIClient.h"
 #import "NetworkManager.h"
+#import "DBCitiesManager.h"
 #import "Venue.h"
 
 #import "DBMenuPosition.h"
 
 @implementation DBUnifiedAppManager
-
-- (BOOL)citiesLoaded {
-    return [[DBUnifiedAppManager valueForKey:@"citiesLoaded"] boolValue];
-}
 
 - (NSArray *)allPositions {
     NSData *menuData = [DBUnifiedAppManager valueForKey:@"menu"];
@@ -61,24 +58,6 @@
     }
 }
 
-- (NSArray *)cities {
-    return [self cities:nil];
-}
-
-- (NSArray *)cities:(NSString *)predicate {
-    NSData *citiesData = [DBUnifiedAppManager valueForKey:@"cities"];
-    if (![citiesData isKindOfClass:[NSData class]])
-        citiesData = nil;
-    
-     NSArray *cities = [NSKeyedUnarchiver unarchiveObjectWithData:citiesData];
-    if (predicate && predicate.length > 0) {
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"cityName CONTAINS[c] %@", predicate];
-        return [cities filteredArrayUsingPredicate:pred];
-    } else {
-        return cities;
-    }
-}
-
 - (NSArray *)menu {
     return [DBUnifiedAppManager valueForKey:@"menu"] ?: @[];
 }
@@ -86,58 +65,6 @@
 - (NSArray *)venues {
     NSArray *venuesData = [DBUnifiedAppManager valueForKey:@"venues"] ?: @[];
     return [Venue venuesFromDict:venuesData];
-}
-
-+ (DBUnifiedCity *)selectedCity {
-    NSData *cityData = [DBUnifiedAppManager valueForKey:@"selectedCity"];
-    if (![cityData isKindOfClass:[NSData class]])
-        cityData = nil;
-    
-    return [NSKeyedUnarchiver unarchiveObjectWithData:cityData];
-}
-
-+ (void)selectCity:(DBUnifiedCity *)city {
-    NSData *cityData = [NSKeyedArchiver archivedDataWithRootObject:city];
-    [DBUnifiedAppManager setValue:cityData forKey:@"selectedCity"];
-    
-    if (city) {
-        [DBAPIClient sharedClient].cityHeaderEnabled = YES;
-    } else {
-        [DBAPIClient sharedClient].cityHeaderEnabled = NO;
-    }
-    
-    [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
-    [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
-}
-
-- (void)fetchCities:(void(^)(BOOL success))callback {
-    [[DBAPIClient sharedClient] GET:@"proxy/unified_app/cities"
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                NSMutableArray *cities = [NSMutableArray new];
-                                
-                                for (NSDictionary *cityDict in responseObject[@"cities"]) {
-                                    [cities addObject:[[DBUnifiedCity alloc] initWithResponseDict:cityDict]];
-                                }
-                                
-                                if (cities.count == 1) {
-                                    [DBUnifiedAppManager selectCity:[cities firstObject]];
-                                }
-                                
-                                // Save cities
-                                NSData *citiesData = [NSKeyedArchiver archivedDataWithRootObject:cities];
-                                [DBUnifiedAppManager setValue:citiesData forKey:@"cities"];
-                                [DBUnifiedAppManager setValue:@(YES) forKey:@"citiesLoaded"];
-                                
-                                if (callback)
-                                    callback(YES);
-                            }
-                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                                NSLog(@"%@", error);
-                                
-                                if (callback)
-                                    callback(NO);
-                            }];
 }
 
 - (void)fetchMenu:(void (^)(BOOL))callback {
@@ -172,7 +99,7 @@
 
 - (void)fetchVenues:(void (^)(BOOL))callback {
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/venues"
-                         parameters:@{@"City-Id": [[DBUnifiedAppManager selectedCity] cityId]}
+                         parameters:@{@"City-Id": [[DBCitiesManager selectedCity] cityId]}
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                 NSArray *venues = [Venue venuesFromDict:responseObject[@"venues"]];
                                 NSMutableArray *venuesDictionaries = [NSMutableArray new];

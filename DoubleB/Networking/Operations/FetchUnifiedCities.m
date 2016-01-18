@@ -7,7 +7,7 @@
 //
 
 #import "FetchUnifiedCities.h"
-#import "DBUnifiedAppManager.h"
+#import "DBCitiesManager.h"
 
 @interface FetchUnifiedCities()
 
@@ -27,7 +27,7 @@
     if (self.cancelled) return;
     [self setState:OperationExecuting];
     
-    [[DBUnifiedAppManager sharedInstance] fetchCities:^(BOOL success) {
+    [[DBCitiesManager sharedInstance] fetchCities:^(BOOL success) {
         if (success) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationUnifiedCitiesLoadSuccess object:nil userInfo:nil];
         } else {

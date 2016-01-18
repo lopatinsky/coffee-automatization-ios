@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DBSettingsItem : NSObject
+@protocol DBSettingsItemProtocol <NSObject>
+
+@end
+
+@interface DBSettingsItem : NSObject <DBSettingsItemProtocol>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *title;

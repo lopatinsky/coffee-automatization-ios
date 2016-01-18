@@ -13,6 +13,7 @@
 #import "OrderCoordinator.h"
 #import "ApplicationManager.h"
 #import "DBUnifiedAppManager.h"
+#import "DBCitiesManager.h"
 #import "NetworkManager.h"
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
@@ -49,7 +50,7 @@
         self.segmentedController.hidden = NO;
     }
     
-    [self db_setTitle:[[DBUnifiedAppManager selectedCity] cityName]];
+    [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

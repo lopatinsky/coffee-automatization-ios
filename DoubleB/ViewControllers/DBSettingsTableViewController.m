@@ -182,7 +182,7 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
 }
 
-- (void)dealloc{
+- (void)dealloc {
     [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
