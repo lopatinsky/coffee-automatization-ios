@@ -35,7 +35,7 @@
     if (available) {
         NSDate *lastPushDate = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"kDBGeoPushLastTimestamp"] floatValue]];
         available = [DBGeoPush daysBetweenDate:[NSDate date] andDate:[NSDate dateWithTimeIntervalSince1970:self.lastOrderTimestamp]] >= self.orderDelayDays &&
-        [DBGeoPush daysBetweenDate:[NSDate date] andDate:lastPushDate] >= self.pushDelayDays;
+        [DBGeoPush daysBetweenDate:lastPushDate andDate:[NSDate date]] >= self.pushDelayDays;
     }
     
     return available;
@@ -72,6 +72,9 @@
 
 // TODO: remove it after merge with iOS9
 + (NSInteger)daysBetweenDate:(NSDate *)fromDateTime andDate:(NSDate *)toDateTime {
+    if (!fromDateTime || !toDateTime) {
+        return INT32_MAX;
+    }
     NSDate *fromDate;
     NSDate *toDate;
     
