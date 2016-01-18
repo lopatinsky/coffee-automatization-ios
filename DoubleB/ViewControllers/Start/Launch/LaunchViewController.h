@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBLaunchViewControllerProtocol.h"
 
-@interface LaunchViewController : UIViewController<DBLaunchViewControllerProtocol>
+@interface LaunchViewController : UIViewController
+
+@property (strong, nonatomic) NSMutableArray *executionBlocks;
 
 @end

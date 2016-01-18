@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
-#import "DBLaunchViewControllerProtocol.h"
 #import "DBCompaniesViewControllerProtocol.h"
 #import "SubscriptionViewControllerProtocol.h"
 #import "ReviewViewControllerProtocol.h"
@@ -20,10 +19,6 @@
 
 @interface ViewControllerManager(PositionViewControllers)
 + (__nonnull Class<PositionViewControllerProtocol>)positionViewController;
-@end
-
-@interface ViewControllerManager(LaunchViewControllers)
-+ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController;
 @end
 
 @interface ViewControllerManager(NewsViewControllers)
