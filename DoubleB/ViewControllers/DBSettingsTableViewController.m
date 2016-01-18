@@ -27,6 +27,8 @@
 #import "DBOrdersTableViewController.h"
 #import "DBSubscriptionManager.h"
 
+#import "DBCustomViewManager.h"
+#import "DBCustomTableViewController.h"
 
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
@@ -152,6 +154,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"title": NSLocalizedString(@"Абонемент", nil),
                                         @"image": @"subscription",
                                         @"viewController": [ViewControllerManager subscriptionViewController]}];
+    }
+    
+    if ([[DBCustomViewManager sharedInstance] available]) {
+        [self.settingsItems addObject:@{@"name": @"otherVC",
+                                        @"title": NSLocalizedString(@"Другое", nil),
+                                        @"image": @"ic_launch",
+                                        @"viewController": [DBCustomTableViewController new]}];
     }
 }
 
@@ -303,6 +312,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     if ([settingsItemInfo[@"name"] isEqualToString:@"subscriptionVC"]){
         event = @"abonement_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    if ([settingsItemInfo[@"name"] isEqualToString:@"otherVC"]){
+        event = @"other_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     

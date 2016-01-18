@@ -41,6 +41,7 @@
 #define SINGLE_MODIFIER_PICKER @"Single_modifier_popup"
 
 #define DOCS_SCREEN @"Documents_screen"
+#define OTHER_SCREEN @"Other_screen"
 #define NDA_SCREEN @"NDA_Screen"
 #define LICENCE_AGREEMENT_SCREEN @"Licence_agreement_screen"
 #define PAYMENT_RULES_SCREEN @"Payment_rules_screen"
