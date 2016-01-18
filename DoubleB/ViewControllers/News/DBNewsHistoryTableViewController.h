@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBBaseSettingsTableViewController.h"
 
-@interface DBNewsHistoryTableViewController : UITableViewController
+@interface DBNewsHistoryTableViewController : UITableViewController <DBSettingsProtocol>
 
 @end

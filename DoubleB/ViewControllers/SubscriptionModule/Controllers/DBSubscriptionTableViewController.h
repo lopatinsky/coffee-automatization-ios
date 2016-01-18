@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SubscriptionViewControllerProtocol.h"
 
-@interface DBSubscriptionTableViewController : UITableViewController<SubscriptionViewControllerProtocol>
+@interface DBSubscriptionTableViewController : UITableViewController<SubscriptionViewControllerProtocol, DBSettingsProtocol>
 
 @property (nonatomic, strong) UIViewController<SubscriptionViewControllerDelegate> *delegate;
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBBaseSettingsTableViewController.h"
 #import "DBPrimaryManager.h"
 #import "OrderPartManagerProtocol.h"
 
@@ -43,7 +44,7 @@ extern NSString * __nonnull const CoordinatorNotificationPromoUpdated;
 extern NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated;
 
 
-@interface OrderCoordinator : DBPrimaryManager <ManagerProtocol, OrderParentManagerProtocol>
+@interface OrderCoordinator : DBPrimaryManager <ManagerProtocol, OrderParentManagerProtocol, DBSettingsProtocol>
 
 @property (nonnull, nonatomic, strong, readonly) OrderItemsManager *itemsManager;
 @property (nonnull, nonatomic, strong, readonly) OrderBonusItemsManager *bonusItemsManager;

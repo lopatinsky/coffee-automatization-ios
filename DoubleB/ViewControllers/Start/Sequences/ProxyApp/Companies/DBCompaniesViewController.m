@@ -99,5 +99,29 @@
     [self selectCompany:self.companies[indexPath.row]];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    settingsItem.name = @"companiesVC";
+    settingsItem.title = NSLocalizedString(@"Список ресторанов", nil);
+    settingsItem.iconName = @"venue_gray";
+    settingsItem.viewController = viewController;
+    settingsItem.eventLabel = @"companies_click";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    return settingsItem;
+}
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    UIViewController<DBCompaniesViewControllerProtocol> *companiesVC = [DBCompaniesViewController new];
+    [companiesVC setVCMode:DBCompaniesViewControllerModeChangeCompany];
+    return [DBCompaniesViewController settingsItemForViewController:companiesVC];
+}
+
+- (id<DBSettingsItemProtocol>)settingsItem {
+    [self setVCMode:DBCompaniesViewControllerModeChangeCompany];
+    return [DBCompaniesViewController settingsItemForViewController:self];
+}
+
 @end
 

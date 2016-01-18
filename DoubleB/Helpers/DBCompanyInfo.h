@@ -11,7 +11,6 @@
 #import "ManagerProtocol.h"
 #import "DBDeliveryType.h"
 
-
 extern NSString * const DBCompanyInfoNotificationInfoUpdated;
 
 typedef NS_ENUM(NSUInteger, DBCompanyPOS) {

@@ -146,4 +146,24 @@
     self.shareButton.enabled = NO;
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController {
+    DBSettingsItem *item = [DBSettingsItem new];
+    item.name =  @"shareVC";
+    item.title =  NSLocalizedString(@"Рассказать друзьям", nil);
+    item.iconName = @"share_icon";
+    item.viewController = viewController;
+    item.navigationType = DBSettingsItemNavigationPresent;
+    return item;
+}
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    return [DBSharePermissionViewController settingsItemForViewController:[ViewControllerManager shareFriendInvitationViewController]];
+}
+
+- (id<DBSettingsItemProtocol>)settingsItem {
+    return [DBSharePermissionViewController settingsItemForViewController:self];
+}
+
 @end

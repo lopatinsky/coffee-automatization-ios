@@ -313,4 +313,19 @@
                                    }];
 }*/
 
+#pragma mark - DBSettingsProtocol
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
+    
+    DBSettingsItem *item = [DBSettingsItem new];
+    item.name = @"ordersVC";
+    item.title = NSLocalizedString(@"Заказы", nil);
+    item.iconName = @"history_icon";
+    item.viewController = ordersVC;
+    item.eventLabel = @"history_click";
+    item.navigationType = DBSettingsItemNavigationPush;
+    
+    return item;
+}
+
 @end

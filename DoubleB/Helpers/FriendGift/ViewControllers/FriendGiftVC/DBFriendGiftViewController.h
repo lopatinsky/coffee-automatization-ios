@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBFriendGiftViewController : UIViewController
+#import "DBSettingsTableViewController.h"
+
+@interface DBFriendGiftViewController : UIViewController <DBSettingsProtocol>
 
 @end

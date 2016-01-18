@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "DBCompaniesViewControllerProtocol.h"
 
-@interface DBCompaniesViewController : UIViewController<DBCompaniesViewControllerProtocol>
+@interface DBCompaniesViewController : UIViewController<DBCompaniesViewControllerProtocol, DBSettingsProtocol>
 @end

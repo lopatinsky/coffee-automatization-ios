@@ -7,13 +7,14 @@
 //
 
 #import "DBModulesViewController.h"
+#import "DBBaseSettingsTableViewController.h"
 
 typedef NS_ENUM(NSInteger, DBPaymentViewControllerMode) {
     DBPaymentViewControllerModeSettings = 0,
     DBPaymentViewControllerModeChoosePayment
 };
 
-@interface DBPaymentViewController : DBModulesViewController
+@interface DBPaymentViewController : DBModulesViewController <DBSettingsProtocol>
 @property (nonatomic) DBPaymentViewControllerMode mode;
 
 /**

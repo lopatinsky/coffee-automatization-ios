@@ -9,6 +9,7 @@
 #import "OrderCoordinator.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfo.h"
+#import "DBPersonalWalletView.h"
 #import "NetworkManager.h"
 #import "Venue.h"
 
@@ -383,6 +384,29 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     [_deliverySettings flushStoredCache];
     [_shippingManager flushStoredCache];
     [_promoManager flushStoredCache];
+}
+
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    NSString *profileText = [DBClientInfo sharedInstance].clientName.value;
+    
+    settingsItem.name = @"personalWalletVC";
+    settingsItem.iconName = @"wallet_icon_active";
+    
+    if ([[[OrderCoordinator sharedInstance] promoManager] walletBalance] > 0) {
+        profileText = [NSString stringWithFormat:@"%@: %.1f", NSLocalizedString(@"Личный счет", nil), [OrderCoordinator sharedInstance].promoManager.walletBalance];
+    } else {
+        profileText = NSLocalizedString(@"Личный счет", nil);
+    }
+    
+    settingsItem.title = profileText;
+    settingsItem.eventLabel = @"profile_click";
+    settingsItem.view = [DBPersonalWalletView new];
+    settingsItem.navigationType = DBSettingsItemNavigationShowView;
+    
+    return settingsItem;
 }
 
 @end

@@ -106,4 +106,19 @@
     [self.activatedPromosTableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - DBSettingsProtocol
+
+- (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"appPromoVC";
+    settingsItem.iconName = @"promos_icon";
+    settingsItem.title = NSLocalizedString(@"Промокоды", nil);
+    settingsItem.eventLabel = @"promos_click";
+    settingsItem.viewController = self;
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

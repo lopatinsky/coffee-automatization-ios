@@ -138,4 +138,19 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     [mailUs alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.mailUsView];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"aboutCompany";
+    settingsItem.iconName = @"about_icon";
+    settingsItem.title = NSLocalizedString(@"О компании", nil);
+    settingsItem.eventLabel = @"about_click";
+    settingsItem.viewController = [DBCompanyInfoViewController new];
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

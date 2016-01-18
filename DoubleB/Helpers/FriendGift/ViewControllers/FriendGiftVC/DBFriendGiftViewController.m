@@ -238,4 +238,19 @@
     [self reloadGiftButton];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBFriendGiftViewController *vc = [DBFriendGiftViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"friendGiftVC";
+    settingsItem.title = NSLocalizedString(@"Подарок другу", nil);
+    settingsItem.iconName = @"gift_icon";
+    settingsItem.viewController = vc;
+    settingsItem.eventLabel = @"friend_gift";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
 @end

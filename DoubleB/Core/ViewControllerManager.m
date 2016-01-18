@@ -6,7 +6,7 @@
 //
 //
 
-#import "ViewControllerManager.h"
+#import "ViewControllerManager.h" d
 #import "DBCompanyInfo.h"
 
 #pragma mark - General
@@ -90,7 +90,7 @@
              };
 }
 
-+ (nonnull UIViewController *)promocodeViewController {
++ (nonnull UIViewController<DBSettingsProtocol> *)promocodeViewController {
     Class promocodeViewControllerr = [self promocodesViewControllerClasses][[self valueFromPropertyListByKey:@"Promocode"] ?: @"default"];
     return [promocodeViewControllerr new];
 }
@@ -107,7 +107,7 @@
              };
 }
 
-+ (nonnull UIViewController *)shareFriendInvitationViewController {
++ (nonnull UIViewController<DBSettingsProtocol> *)shareFriendInvitationViewController {
     Class shareFriendInvitation = [self shareFriendInvitationViewControllerClasses][[self valueFromPropertyListByKey:@"ShareFriendInvitation"] ?: @"default"];
     return [shareFriendInvitation new];
 }
@@ -125,7 +125,7 @@
              };
 }
 
-+ (nonnull UIViewController<DBCompaniesViewControllerProtocol> *)companiesViewController {
++ (nonnull UIViewController<DBCompaniesViewControllerProtocol, DBSettingsProtocol> *)companiesViewController {
     Class companiesViewController = [self companiesViewControllerClasses][[self valueFromPropertyListByKey:@"Company"] ?: @"default"];
     return [companiesViewController new];
 }
@@ -143,7 +143,7 @@
              };
 }
 
-+ (nonnull UIViewController<SubscriptionViewControllerProtocol> *)subscriptionViewController {
++ (nonnull UIViewController<SubscriptionViewControllerProtocol, DBSettingsProtocol> *)subscriptionViewController {
     Class subscriptionViewController = [self subscriptionViewControllerClasses][[self valueFromPropertyListByKey:@"Subscription"] ?: @"default"];
     return [subscriptionViewController new];
 }

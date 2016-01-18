@@ -10,6 +10,7 @@
 #import "DBServerAPI.h"
 #import "DBCompanyInfo.h"
 #import "DBAPIClient.h"
+#import "DBCompaniesViewController.h"
 
 #import "NetworkManager.h"
 

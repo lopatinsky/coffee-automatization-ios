@@ -65,4 +65,19 @@
     return cell;
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"promosVC";
+    settingsItem.iconName = @"promos_icon";
+    settingsItem.title = NSLocalizedString(@"Список акций", nil);
+    settingsItem.eventLabel = @"promos_click";
+    settingsItem.viewController = [DBPromosListViewController new];
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

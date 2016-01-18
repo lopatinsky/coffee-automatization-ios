@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PromocodeViewController : UIViewController
+@interface PromocodeViewController : UIViewController <DBSettingsProtocol>
 
 @end

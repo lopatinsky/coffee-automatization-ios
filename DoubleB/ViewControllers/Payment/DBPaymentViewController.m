@@ -120,4 +120,21 @@
     }
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBPaymentViewController *vc = [DBPaymentViewController new];
+    vc.mode = DBPaymentViewControllerModeSettings;
+    
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    settingsItem.name = @"cardsVC";
+    settingsItem.title = NSLocalizedString(@"Оплата", nil);
+    settingsItem.iconName = @"card";
+    settingsItem.viewController = vc;
+    settingsItem.eventLabel = @"cards_click";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBBaseSettingsTableViewController.h"
+
 #import "PositionViewControllerProtocol.h"
 #import "PopupNewsViewControllerProtocol.h"
 #import "DBLaunchViewControllerProtocol.h"
@@ -31,19 +33,19 @@
 @end
 
 @interface ViewControllerManager(PromocodeViewControllers)
-+ (nonnull UIViewController *)promocodeViewController;
++ (nonnull UIViewController<DBSettingsProtocol> *)promocodeViewController;
 @end
 
 @interface ViewControllerManager(ShareFriendInvitationViewControllers)
-+ (nonnull UIViewController *)shareFriendInvitationViewController;
++ (nonnull UIViewController<DBSettingsProtocol> *)shareFriendInvitationViewController;
 @end
 
 @interface ViewControllerManager(CompaniesViewControllers)
-+ (nonnull UIViewController *)companiesViewController;
++ (nonnull UIViewController<DBCompaniesViewControllerProtocol, DBSettingsProtocol> *)companiesViewController;
 @end
 
 @interface ViewControllerManager(SubscriptionViewControllers)
-+ (nonnull UIViewController<SubscriptionViewControllerProtocol> *)subscriptionViewController;
++ (nonnull UIViewController<SubscriptionViewControllerProtocol, DBSettingsProtocol> *)subscriptionViewController;
 @end
 
 @interface ViewControllerManager(ReviewViewControllers)

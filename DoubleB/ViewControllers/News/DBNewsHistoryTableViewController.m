@@ -115,4 +115,19 @@
     [self showNewsInPopupWithIndex:index];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"newsHistoryVC";
+    settingsItem.iconName = @"news_icon";
+    settingsItem.title = NSLocalizedString(@"Новости", nil);
+    settingsItem.eventLabel = @"news_click";
+    settingsItem.viewController = [DBNewsHistoryTableViewController new];
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

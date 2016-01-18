@@ -247,4 +247,19 @@
     [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+#pragma mark - DBSettingsProtocol
+
+- (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"subscriptionVC";
+    settingsItem.iconName = @"subscription";
+    settingsItem.title = NSLocalizedString(@"Абонемент", nil);
+    settingsItem.eventLabel = @"subscription_clock";
+    settingsItem.viewController = self;
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

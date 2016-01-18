@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBOrdersTableViewController : UITableViewController
+#import "DBBaseSettingsTableViewController.h"
+
+@interface DBOrdersTableViewController : UITableViewController <DBSettingsProtocol>
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DBModulesViewController.h"
-#import "DBSettingsBaseTableViewController.h"
+#import "DBBaseSettingsTableViewController.h"
 
 typedef NS_ENUM(NSUInteger, ProfileFillingMode) {
     ProfileFillingModeNoRestrictions = 0,

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBBaseSettingsTableViewController.h"
 
-@interface DBCompanyInfoViewController : UIViewController
+@interface DBCompanyInfoViewController : UIViewController <DBSettingsProtocol>
 
 @end

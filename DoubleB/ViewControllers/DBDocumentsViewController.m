@@ -92,4 +92,19 @@
     [self.navigationController pushViewController:itemDict[@"viewController"] animated:YES];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"documentsVC";
+    settingsItem.iconName = @"about";
+    settingsItem.title = NSLocalizedString(@"Справка", nil);
+    settingsItem.eventLabel = @"documents_click";
+    settingsItem.viewController = [DBDocumentsViewController new];
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end

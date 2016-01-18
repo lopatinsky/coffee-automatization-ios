@@ -122,4 +122,23 @@
     [DBServerAPI sendUserInfo:nil];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBProfileViewController *profileVC = [DBProfileViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    NSString *profileText = [DBClientInfo sharedInstance].clientName.value;
+    
+    settingsItem.name = @"profileVC";
+    settingsItem.title = NSLocalizedString(@"Личный счет", nil);
+    settingsItem.iconName = @"profile_icon_active";
+    settingsItem.viewController = profileVC;
+    settingsItem.reachTitle = profileText && profileText.length ? profileText : nil;
+    settingsItem.eventLabel = @"profile_click";
+    profileVC.analyticsCategory = PROFILE_SCREEN;
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
+
 @end
