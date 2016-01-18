@@ -40,7 +40,7 @@
     } else {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     }
-    [[ApplicationManager sharedInstance] initializeVendorFrameworks];
+    
     [[ApplicationManager sharedInstance] startApplicationWithOptions:launchOptions];
     [ApplicationManager applyBrandbookStyle];
     

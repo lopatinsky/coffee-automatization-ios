@@ -7,8 +7,7 @@
 //
 
 #import "FetchAppConfig.h"
-
-#import "ApplicationManager.h"
+#import "DBServerAPI.h"
 
 @implementation FetchAppConfig
 
@@ -23,7 +22,7 @@
     if (self.cancelled) return;
     
     [self setState:OperationExecuting];
-    [[ApplicationManager sharedInstance] fetchAppConfiguration:^(BOOL success) {
+    [DBServerAPI fetchAppConfiguration:^(BOOL success, NSDictionary *response) {
         if (self.notifyOnCompletion) {
             if (success) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:kDBConcurrentOperationAppConfigLoadSuccess object:nil];
@@ -36,3 +35,4 @@
 }
 
 @end
+ 

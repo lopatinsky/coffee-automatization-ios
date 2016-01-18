@@ -35,6 +35,23 @@
 
 @implementation DBServerAPI
 
+#pragma mark - App
++ (void)fetchAppConfiguration:(void (^)(BOOL, NSDictionary* response))callback {
+    [[DBAPIClient sharedClient] GET:@"app/config"
+                         parameters:nil
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                if (callback)
+                                    callback(YES, responseObject);
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback)
+                                    callback(NO, nil);
+                            }];
+    
+}
+
 #pragma mark - User
 
 + (void)requestCompanies:(void (^)(NSArray *))success failure:(void (^)(NSError *))failure {

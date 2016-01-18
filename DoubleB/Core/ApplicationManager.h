@@ -33,8 +33,24 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenVenue
 };
 
+/**
+ * Configuration for application
+ */
+@interface ApplicationConfig : NSObject
+@property (strong, nonatomic) NSString *parseAppKey;
+@property (strong, nonatomic) NSString *parseClientKey;
+
+@property (strong, nonatomic) NSString *branchKey;
+
++ (void)sync:(NSDictionary *)remoteConfig;
+@end
+
+/**
+ * Manager for whole application
+ */
 @interface ApplicationManager : NSObject<ManagerProtocol>
 @property (nonatomic) ApplicationType applicationType;
+@property (strong, nonatomic) ApplicationConfig *configuration;
 
 + (instancetype)sharedInstance;
 + (void)handlePush:(NSDictionary *)push;
@@ -78,9 +94,4 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Review)
 - (void)showReviewViewController:(NSString *)orderId;
-@end
-
-@interface ApplicationManager(AppConfig)
-- (void)fetchAppConfiguration:(void(^)(BOOL success))callback;
-- (void)reloadAppWithAppConfig;
 @end
