@@ -10,6 +10,6 @@
 
 @interface LaunchViewController : UIViewController
 
-@property (strong, nonatomic) NSMutableArray *executionBlocks;
+@property (nonatomic, copy) void (^executionBlock)();
 
 @end

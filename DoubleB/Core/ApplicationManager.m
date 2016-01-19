@@ -33,7 +33,6 @@
 
 #import "DBAPIClient.h"
 #import "DBCommonStartNavController.h"
-#import "DBProxyStartNavController.h"
 #import "DBDemoStartNavController.h"
 #import "DBAggregatorStartNavController.h"
 
@@ -90,12 +89,26 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     return key;
 }
 
+- (BOOL)hasCities {
+    NSDictionary *config = [self appConfig];
+    
+    return [[config getValueForKey:@"has_cities"] boolValue];
+}
+
+- (BOOL)hasCompanies {
+    NSDictionary *config = [self appConfig];
+    
+    return [[config getValueForKey:@"has_companies"] boolValue];
+}
+
 - (NSDictionary *)appConfig {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ApplicationManager_AppConfig"] ?: @{};
+    NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"ApplicationManager_AppConfig"];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
 
 + (void)sync:(NSDictionary *)remoteConfig {
-    [[NSUserDefaults standardUserDefaults] setObject:remoteConfig forKey:@"ApplicationManager_AppConfig"];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:remoteConfig];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ApplicationManager_AppConfig"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -207,10 +220,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     NSString *typeString = [DBCompanyInfo objectFromApplicationPreferencesByName:@"ApplicationType"];
     ApplicationType type = ApplicationTypeCommon;
     
-    if ([typeString isEqualToString:@"Proxy"]) {
-        type = ApplicationTypeProxy;
-    }
-    
     if ([typeString isEqualToString:@"Aggregator"]) {
         type = ApplicationTypeAggregator;
     }
@@ -225,8 +234,10 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    [Parse setApplicationId:self.configuration.parseAppKey
-                  clientKey:self.configuration.parseClientKey];
+    if (self.configuration.parseAppKey && self.configuration.parseClientKey) {
+        [Parse setApplicationId:self.configuration.parseAppKey
+                      clientKey:self.configuration.parseClientKey];
+    }
     
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
@@ -237,7 +248,9 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
-    [self initializeVendorFrameworks];
+    if (self.configuration.appConfig != nil) {
+        [self initializeVendorFrameworks];
+    }
     
     [DBVersionDependencyManager performAll];
     
@@ -246,13 +259,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
     
-    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
-    [[CompanyNewsManager sharedManager] fetchUpdates];
     
 #ifdef DEBUG
     if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
@@ -275,6 +286,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
@@ -404,9 +416,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         switch (self.applicationType) {
             case ApplicationTypeCommon:
                 return [[DBCommonStartNavController alloc] initWithDelegate:self];
-                break;
-            case ApplicationTypeProxy:
-                return [[DBProxyStartNavController alloc] initWithDelegate:self];
                 break;
             case ApplicationTypeDemo:
                 return [[DBDemoStartNavController alloc] initWithDelegate:self];

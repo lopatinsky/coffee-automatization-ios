@@ -9,15 +9,24 @@
 #import "DBCommonStartNavController.h"
 #import "LaunchViewController.h"
 
+#import "DBCompaniesManager.h"
+#import "DBCompaniesViewController.h"
+
+#import "DBCitiesManager.h"
+#import "DBCitiesViewController.h"
+#import "ApplicationManager.h"
+
 #import "UIAlertView+BlocksKit.h"
+#import "MBProgressHUD.h"
 
 typedef NS_ENUM(NSInteger, DBCommonStartState) {
     DBCommonStartStateLaunch = 0,
     DBCommonStartStateCities,
+    DBCommonStartStateCompanies,
     DBCommonStartStateMain
 };
 
-@interface DBCommonStartNavController ()
+@interface DBCommonStartNavController ()<DBCompaniesViewControllerDelegate, DBCitiesViewControllerDelegate>
 @property (nonatomic) DBCommonStartState state;
 @end
 
@@ -26,26 +35,48 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationBarHidden:YES animated:NO];
-    
-    if ([DBCompanyInfo sharedInstance].infoLoaded) {
-        [self moveToMain];
-        [[DBCompanyInfo sharedInstance] updateInfo:nil];
-    } else {
+    if ([self needLaunchScreen]) {
         self.state = DBCommonStartStateLaunch;
-        UIViewController<DBLaunchViewControllerProtocol> *launchVC = [ViewControllerManager launchViewController];
-        
-        @weakify(self)
-        [launchVC setExecutableBlock:^{
-            @strongify(self)
-            [self fetchCompanyInfo];
-        }];
-        self.viewControllers = @[launchVC];
+    } else {
+        [self moveNext];
     }
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (BOOL)needLaunchScreen {
+    BOOL result = [super needLaunchScreen];
+    
+    result = result || ![DBCompanyInfo sharedInstance].infoLoaded;
+    
+    return result;
+}
+
+- (void)additionalLaunchScreenActions {
+    BOOL additionalActions = NO;
+    if ([ApplicationManager sharedInstance].configuration.hasCities) {
+        if ([DBCitiesManager selectedCity]) {
+            if ([ApplicationManager sharedInstance].configuration.hasCompanies) {
+                if ([DBCompaniesManager selectedCompany]) {
+                    additionalActions = YES;
+                }
+            } else {
+                additionalActions = YES;
+            }
+        }
+    } else {
+        if ([ApplicationManager sharedInstance].configuration.hasCompanies) {
+            if ([DBCompaniesManager selectedCompany]) {
+                additionalActions = YES;
+            }
+        } else {
+            additionalActions = YES;
+        }
+    }
+    
+    if (additionalActions) {
+        [self fetchCompanyInfo];
+    } else {
+        [self moveNext];
+    }
 }
 
 - (void)fetchCompanyInfo {
@@ -63,6 +94,61 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
     }];
 }
 
+- (void)moveNext {
+    if (self.state == DBCommonStartStateLaunch) {
+        if ([ApplicationManager sharedInstance].configuration.hasCities && ![DBCitiesManager selectedCity]) {
+            [self moveToCities];
+            return;
+        } else {
+            self.state = DBCommonStartStateCities;
+        }
+    }
+    
+    if (self.state == DBCommonStartStateCities) {
+        if ([ApplicationManager sharedInstance].configuration.hasCompanies && ![DBCompaniesManager selectedCompany]) {
+            [self moveToCompanies];
+            return;
+        } else {
+            self.state = DBCommonStartStateCompanies;
+        }
+    }
+    
+    if (self.state == DBCommonStartStateCompanies) {
+        if ([DBCompanyInfo sharedInstance].infoLoaded) {
+            [self moveToMain];
+            [[DBCompanyInfo sharedInstance] updateInfo:nil];
+            return;
+        } else {
+            [MBProgressHUD showHUDAddedTo:self.topViewController.view animated:YES];
+            [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+                [MBProgressHUD hideAllHUDsForView:self.topViewController.view animated:YES];
+                if (success) {
+                    [self moveToMain];
+                }
+            }];
+        }
+    }
+}
+
+- (void)moveToCities {
+    DBCitiesViewController *citiesVC = [DBCitiesViewController new];
+    citiesVC.delegate = self;
+    
+    [self setNavigationBarHidden:NO animated:YES];
+    [self setViewControllers:@[citiesVC] animated:YES];
+    self.state = DBCommonStartStateCities;
+}
+
+- (void)moveToCompanies {
+    UIViewController<DBCompaniesViewControllerProtocol> *companiesVC = [DBCompaniesViewController new];
+    [companiesVC setVCMode:DBCompaniesViewControllerModeChooseCompany];
+    [companiesVC setVCDelegate:self];
+    
+    [self setNavigationBarHidden:NO animated:YES];
+    [self setViewControllers:@[companiesVC] animated:YES];
+    self.state = DBCommonStartStateCompanies;
+}
+
 - (void)moveToMain {
     if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
         self.state = DBCommonStartStateMain;
@@ -70,5 +156,18 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
     }
 }
 
+#pragma mark - DBCitiesViewControllerDelegate
+
+- (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {
+    [DBCitiesManager selectCity:city];
+    
+    [self moveNext];
+}
+
+#pragma mark - DBCompaniesViewControllerDelegate
+
+- (void)db_companiesVC:(DBCompaniesViewController *)controller didSelectCompany:(DBCompany *)company {
+    [self moveNext];
+}
 
 @end

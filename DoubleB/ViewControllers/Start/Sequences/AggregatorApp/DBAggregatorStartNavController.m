@@ -29,25 +29,6 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self setNavigationBarHidden:YES animated:NO];
-    if (![DBCitiesManager sharedInstance].citiesLoaded) {
-        self.state = DBAggregatorStartStateLaunch;
-        UIViewController<DBLaunchViewControllerProtocol> *launchVC = [ViewControllerManager launchViewController];
-        
-        @weakify(self)
-        [launchVC setExecutableBlock:^{
-            @strongify(self)
-            [self fetchCitiesOnLaunch];
-        }];
-        self.viewControllers = @[launchVC];
-    } else {
-        if (![DBCitiesManager selectedCity] && [DBCitiesManager sharedInstance].cities.count > 1) {
-            [self moveToCities:NO];
-        } else {
-            [self moveToUnifiedMenu:NO];
-        }
-    }
 }
 
 - (void)fetchCitiesOnLaunch {
@@ -72,12 +53,7 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
     [self setViewControllers:@[citiesVC] animated:animated];
 }
 
-- (void)moveToUnifiedMenu:(BOOL)animated {
-    DBUnifiedMenuTableViewController *unifiedVC = [DBUnifiedMenuTableViewController new];
-    unifiedVC.type = UnifiedVenue;
-    [self setNavigationBarHidden:NO animated:animated];
-    [self setViewControllers:@[unifiedVC] animated:animated];
-}
+
 
 #pragma mark - DBCitiesViewControllerDelegate
 - (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {

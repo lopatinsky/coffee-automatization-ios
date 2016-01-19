@@ -17,4 +17,7 @@
 @property (weak, nonatomic) id<DBStartNavControllerDelegate> navDelegate;
 - (instancetype)initWithDelegate:(id<DBStartNavControllerDelegate>)navDelegate;
 
+- (BOOL)needLaunchScreen;
+- (void)additionalLaunchScreenActions;
+
 @end

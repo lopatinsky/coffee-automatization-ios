@@ -40,9 +40,8 @@
     [GANHelper analyzeScreen:LAUNCH_PLACEHOLDER_SCREEN];
     
     [self.activityIndicator startAnimating];
-    
-    for (id block in self.executionBlocks) {
-        
+    if (self.executionBlock){
+        self.executionBlock();
     }
 }
 

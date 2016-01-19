@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger, RootState) {
 
 typedef NS_ENUM(NSInteger, ApplicationType) {
     ApplicationTypeCommon = 0,
-    ApplicationTypeProxy,
     ApplicationTypeAggregator,
     ApplicationTypeDemo
 };
@@ -42,7 +41,11 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @property (strong, nonatomic) NSString *branchKey;
 
+@property (nonatomic) BOOL hasCities;
+@property (nonatomic) BOOL hasCompanies;
+
 + (void)sync:(NSDictionary *)remoteConfig;
+- (NSDictionary *)appConfig;
 @end
 
 /**

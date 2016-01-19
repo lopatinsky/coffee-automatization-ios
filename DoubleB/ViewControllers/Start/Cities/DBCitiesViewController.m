@@ -15,7 +15,6 @@
 #import "MBProgressHUD.h"
 
 @interface DBCitiesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *citiesTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewBottomAlignment;
@@ -50,14 +49,16 @@
             [self reload];
         }];
     } else {
-        [[DBCitiesManager sharedInstance] fetchCities:nil];
-        [self reload];
+        [[DBCitiesManager sharedInstance] fetchCities:^(BOOL success) {
+            [self reload];
+        }];
     }
     
     if ([DBCitiesManager selectedCity]) {
         self.searchBar.text = [DBCitiesManager selectedCity].cityName;
-        [self reload];
     }
+    
+    [self reload];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
