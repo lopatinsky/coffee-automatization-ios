@@ -14,6 +14,8 @@
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
 //#import "DBBeaconObserver.h"
+#import "DBCitiesManager.h"
+#import "DBCitiesViewController.h"
 #import "DBClientInfo.h"
 #import "DBCompanyInfoViewController.h"
 #import "DBCompaniesViewController.h"
@@ -58,6 +60,17 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     self.tableView.rowHeight = 50;
     
     self.settingsItems = [[NSMutableArray alloc] init];
+    
+    // Cities item
+    if ([DBCitiesManager sharedInstance].cities.count > 1) {
+        DBCitiesViewController *citiesVC = [DBCitiesViewController new];
+        citiesVC.mode = DBCitiesViewControllerModeChangeCity;
+        [self.settingsItems addObject:@{@"name": @"citiesVC",
+                                        @"title": NSLocalizedString(@"Город", nil),
+                                        @"image": @"city_icon",
+                                        @"viewController": citiesVC
+                                        }];
+    }
     
     // Companies item
     if([DBCompaniesManager sharedInstance].hasCompanies){
@@ -253,6 +266,16 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     NSString *event;
     
+    if ([settingsItemInfo[@"name"] isEqualToString:@"companiesVC"]) {
+        event = @"companies_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
+    if ([settingsItemInfo[@"name"] isEqualToString:@"citiesVC"]) {
+        event = @"cities_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
     if([settingsItemInfo[@"name"] isEqualToString:@"profileVC"]){
         event = @"profile_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
@@ -314,10 +337,6 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     
     if ([settingsItemInfo[@"name"] isEqualToString: @"companyInfoVC"]) {
         event = @"about_app_click";
-        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
-    }
-    if ([settingsItemInfo[@"name"] isEqualToString:@"companiesVC"]) {
-        event = @"companies_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     if ([settingsItemInfo[@"name"] isEqualToString:@"appPromoVC"]){

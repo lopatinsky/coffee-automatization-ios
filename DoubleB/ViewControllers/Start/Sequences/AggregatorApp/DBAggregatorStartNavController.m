@@ -29,6 +29,24 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if ([self needLaunchScreen]) {
+        self.state = DBAggregatorStartStateLaunch;
+    } else {
+        [self moveToMain];
+    }
+}
+
+- (BOOL)needLaunchScreen {
+    BOOL result = [super needLaunchScreen];
+    
+    result = result || ([ApplicationManager sharedInstance].configuration.hasCities && ![DBCitiesManager selectedCity]);
+    
+    return result;
+}
+
+- (void)additionalLaunchScreenActions {
+    [self fetchCitiesOnLaunch];
 }
 
 - (void)fetchCitiesOnLaunch {
@@ -47,23 +65,25 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 }
 
 - (void)moveToCities:(BOOL)animated {
-    [self setNavigationBarHidden:NO animated:animated];
     DBCitiesViewController *citiesVC = [DBCitiesViewController new];
     citiesVC.delegate = self;
+    citiesVC.mode = DBCitiesViewControllerModeChooseCity;
+    
+    [self setNavigationBarHidden:NO animated:animated];
     [self setViewControllers:@[citiesVC] animated:animated];
 }
 
-
+- (void)moveToMain {
+    if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
+        self.state = DBAggregatorStartStateMain;
+        [self.navDelegate db_startNavVCNeedsMoveToMain:self];
+    }
+}
 
 #pragma mark - DBCitiesViewControllerDelegate
 - (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {
     [DBCitiesManager selectCity:city];
-    [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
-    [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
-    
-    DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
-    menuVC.type = UnifiedVenue;
-    [self pushViewController:menuVC animated:YES];
+    [self moveToMain];
 }
 
 @end

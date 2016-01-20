@@ -36,6 +36,9 @@
 #import "DBDemoStartNavController.h"
 #import "DBAggregatorStartNavController.h"
 
+#import "DBUnifiedMenuTableViewController.h"
+#import "DBUnifiedAppManager.h"
+
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
 #import "DBVenuesTableViewController.h"
@@ -444,7 +447,16 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeetogo"]) {
+        [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
+        [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
+        
+        DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
+        menuVC.type = UnifiedVenue;
+        return [[UINavigationController alloc] initWithRootViewController:menuVC];
+    } else {
+        return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    }
 }
 
 @end

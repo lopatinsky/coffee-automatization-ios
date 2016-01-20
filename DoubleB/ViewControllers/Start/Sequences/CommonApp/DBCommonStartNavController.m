@@ -133,6 +133,7 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 - (void)moveToCities {
     DBCitiesViewController *citiesVC = [DBCitiesViewController new];
     citiesVC.delegate = self;
+    citiesVC.mode = DBCitiesViewControllerModeChooseCity;
     
     [self setNavigationBarHidden:NO animated:YES];
     [self setViewControllers:@[citiesVC] animated:YES];
