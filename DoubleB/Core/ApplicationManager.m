@@ -33,7 +33,6 @@
 
 #import "DBAPIClient.h"
 #import "DBCommonStartNavController.h"
-#import "DBDemoStartNavController.h"
 #import "DBAggregatorStartNavController.h"
 
 #import "DBUnifiedMenuTableViewController.h"
@@ -227,10 +226,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         type = ApplicationTypeAggregator;
     }
     
-    if ([typeString isEqualToString:@"Demo"]) {
-        type = ApplicationTypeDemo;
-    }
-    
     return type;
 }
 
@@ -417,11 +412,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 - (UIViewController *)rootViewController {
     if (self.state == RootStateStart) {
         switch (self.applicationType) {
-            case ApplicationTypeCommon:
-                return [[DBCommonStartNavController alloc] initWithDelegate:self];
-                break;
-            case ApplicationTypeDemo:
-                return [[DBDemoStartNavController alloc] initWithDelegate:self];
+            case ApplicationTypeCommon: {
+                DBStartNavController *startNavVC = [DBClassLoader loadStartNavigationController];
+                startNavVC.navDelegate = self;
+                return startNavVC;
+            }
                 break;
             case ApplicationTypeAggregator:
                 return [[DBAggregatorStartNavController alloc] initWithDelegate:self];

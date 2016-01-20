@@ -79,9 +79,9 @@
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
         if(success){
-            [[UINavigationBar appearance] setBarTintColor:[UIColor db_defaultColor]];
-            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-            delegate.window.rootViewController = [ViewControllerManager mainViewController];
+            if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
+                [self.navDelegate db_startNavVCNeedsMoveToMain:self];
+            }
         } else {
             [self showError:@"Не удалось загрузить информацию о выбранной компании"];
         }

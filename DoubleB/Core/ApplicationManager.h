@@ -19,8 +19,7 @@ typedef NS_ENUM(NSInteger, RootState) {
 
 typedef NS_ENUM(NSInteger, ApplicationType) {
     ApplicationTypeCommon = 0,
-    ApplicationTypeAggregator,
-    ApplicationTypeDemo
+    ApplicationTypeAggregator
 };
 
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
@@ -89,10 +88,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Indexing)
 + (void)continueUserActivity:(NSUserActivity *)activity;
-@end
-
-@interface ApplicationManager(DemoApp)
-- (UIViewController *)demoLoginViewController;
 @end
 
 @interface ApplicationManager(Review)
