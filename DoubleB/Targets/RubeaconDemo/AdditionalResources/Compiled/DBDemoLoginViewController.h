@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBDemoLoginViewController : UIViewController
+@class DBDemoLoginViewController;
+@protocol DBDemoLoginViewControllerDelegate <NSObject>
+- (void)db_demoLoginVCLoggedIn:(DBDemoLoginViewController *)controller;
+@end
 
+@interface DBDemoLoginViewController : UIViewController
+@property (weak, nonatomic) id<DBDemoLoginViewControllerDelegate> delegate;
 @end

@@ -41,8 +41,7 @@
         [[ApplicationManager sharedInstance] flushStoredCache];
         [DBCompaniesManager selectCompany:nil];
         
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        delegate.window.rootViewController = [[ApplicationManager sharedInstance] rootViewController];
+        [[ApplicationManager sharedInstance] moveToStartState:YES];
     }
 }
 

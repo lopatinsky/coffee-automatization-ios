@@ -8,7 +8,6 @@
 
 #import "DBDemoLoginViewController.h"
 #import "AppDelegate.h"
-#import "DBTabBarController.h"
 #import "DBServerAPI+DemoLogin.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
@@ -17,7 +16,7 @@
 #import "DBDemoManager.h"
 #import "DBCompaniesManager.h"
 
-@interface DBDemoLoginViewController ()
+@interface DBDemoLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *loginTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
@@ -35,6 +34,9 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
+    self.loginTextField.delegate = self;
+    self.passwordTextField.delegate = self;
+    
     if (!_gradientLayer) {
         _gradientLayer = [CAGradientLayer layer];
         _gradientLayer.frame = self.view.bounds;
@@ -43,6 +45,11 @@
         _gradientLayer.endPoint = CGPointMake(0.5, 1.0);
         [self.view.layer insertSublayer:_gradientLayer atIndex:0];
     }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
+    return YES;
 }
 
 - (IBAction)loginButtonClick:(id)sender {
@@ -72,15 +79,16 @@
     [[ApplicationManager sharedInstance] flushStoredCache];
     
     [DBCompaniesManager selectCompany:company];
-    [DBDemoManager sharedInstance].state = company ? DBDemoManagerStateCompany : DBDemoManagerStateDemo;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
+        [ApplicationManager applyBrandbookStyle];
+        
         if(success){
-            if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
-                [self.navDelegate db_startNavVCNeedsMoveToMain:self];
+            if ([self.delegate respondsToSelector:@selector(db_demoLoginVCLoggedIn:)]) {
+                [self.delegate db_demoLoginVCLoggedIn:self];
             }
         } else {
             [self showError:@"Не удалось загрузить информацию о выбранной компании"];

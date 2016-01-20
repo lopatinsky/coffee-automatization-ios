@@ -458,6 +458,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 @implementation ApplicationManager (ScreenState)
 
+- (void)moveToStartState:(BOOL)animated {
+    self.state = RootStateStart;
+    [self changeRoot];
+}
+
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated {
     [self moveToScreen:screen object:nil animated:animated];
 }
