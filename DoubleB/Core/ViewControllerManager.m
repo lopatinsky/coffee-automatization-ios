@@ -6,7 +6,7 @@
 //
 //
 
-#import "ViewControllerManager.h" d
+#import "ViewControllerManager.h"
 #import "DBCompanyInfo.h"
 
 #pragma mark - General
@@ -165,4 +165,18 @@
     return [reviewViewController new];
 }
 
+@end
+
+#pragma mark - Settings
+#import "DBGeneralSettingsTableViewController.h"
+#import "DBCompanySettingsTableViewController.h"
+@implementation ViewControllerManager(SettingsViewControllers)
+
++ (nonnull DBBaseSettingsTableViewController *)generalSettingsViewController {
+    return [DBGeneralSettingsTableViewController new];
+}
+
++ (nonnull DBBaseSettingsTableViewController *)companySettingsViewController {
+    return [DBCompanySettingsTableViewController new];
+}
 @end

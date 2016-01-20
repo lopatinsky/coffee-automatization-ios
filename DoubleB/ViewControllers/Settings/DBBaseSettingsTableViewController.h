@@ -12,6 +12,7 @@
 extern NSString *const kDBSettingsNotificationsEnabled2;
 
 @protocol DBSettingsProtocol <NSObject>
+@optional
 + (id<DBSettingsItemProtocol>)settingsItem;
 - (id<DBSettingsItemProtocol>)settingsItem;
 @end
@@ -19,5 +20,7 @@ extern NSString *const kDBSettingsNotificationsEnabled2;
 @interface DBBaseSettingsTableViewController : UITableViewController
 
 @property (nonatomic, strong) NSMutableArray<DBSettingsItemProtocol> *settingsItems;
+
+- (void)reload;
 
 @end

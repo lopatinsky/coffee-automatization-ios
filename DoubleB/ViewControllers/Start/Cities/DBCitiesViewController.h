@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBBaseSettingsTableViewController.h"
 
 @class DBUnifiedCity;
 @protocol DBCitiesViewControllerDelegate <NSObject>
@@ -15,6 +16,6 @@
 
 @end
 
-@interface DBCitiesViewController : UIViewController
+@interface DBCitiesViewController : UIViewController <DBSettingsProtocol>
 @property (weak, nonatomic) id<DBCitiesViewControllerDelegate> delegate;
 @end

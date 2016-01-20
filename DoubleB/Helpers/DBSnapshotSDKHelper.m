@@ -22,7 +22,7 @@
 #import "OrderCoordinator.h"
 #import "DBCompanyInfo.h"
 
-#import "DBSettingsTableViewController.h"
+#import "DBCompanySettingsTableViewController.h"
 
 #import "DBMenuViewController.h"
 

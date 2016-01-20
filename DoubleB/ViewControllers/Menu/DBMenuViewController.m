@@ -14,7 +14,7 @@
 #import "OrderCoordinator.h"
 #import "Venue.h"
 
-#import "DBSettingsTableViewController.h"
+#import "DBCompanySettingsTableViewController.h"
 
 #import "MBProgressHUD.h"
 #import "DBBarButtonItem.h"
@@ -235,7 +235,7 @@
 }
 
 - (void)moveToSettings {
-    DBSettingsTableViewController *settingsController = [DBClassLoader loadSettingsViewController];
+    DBBaseSettingsTableViewController *settingsController = [ViewControllerManager companySettingsViewController];
     [self.navigationController pushViewController:settingsController animated:YES];
 }
 

@@ -67,8 +67,4 @@
     }
 }
 
-- (void)reload {
-    [self.tableView reloadData];
-}
-
 @end

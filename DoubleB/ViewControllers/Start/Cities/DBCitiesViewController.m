@@ -8,6 +8,7 @@
 
 #import "DBCitiesViewController.h"
 #import "DBCityVariantCell.h"
+#import "DBGeneralSettingsTableViewController.h"
 #import "DBUnifiedMenuTableViewController.h"
 #import "DBCitiesManager.h"
 #import "NetworkManager.h"
@@ -54,10 +55,10 @@
         [self reload];
     }
     
-    if ([DBCitiesManager selectedCity]) {
-        self.searchBar.text = [DBCitiesManager selectedCity].cityName;
-        [self reload];
-    }
+//    if ([DBCitiesManager selectedCity]) {
+//        self.searchBar.text = [DBCitiesManager selectedCity].cityName;
+//        [self reload];
+//    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -103,6 +104,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.delegate respondsToSelector:@selector(db_citiesViewControllerDidSelectCity:)]) {
         [self.delegate db_citiesViewControllerDidSelectCity:_cities[indexPath.row]];
+        if ([self.delegate isKindOfClass:[DBGeneralSettingsTableViewController class]]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 
@@ -137,6 +141,23 @@
                          [self.view layoutIfNeeded];
                      }
                      completion:nil];
+}
+
+#pragma mark - DBSettignsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBCitiesViewController *vc = [DBCitiesViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"citiesVC";
+    settingsItem.title = NSLocalizedString(@"Города", nil);
+    settingsItem.iconName = @"ic_location_city";
+    settingsItem.viewController = vc;
+    settingsItem.reachTitle = [[DBCitiesManager selectedCity] cityName];
+    settingsItem.eventLabel = @"cities_click";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
 }
 
 @end

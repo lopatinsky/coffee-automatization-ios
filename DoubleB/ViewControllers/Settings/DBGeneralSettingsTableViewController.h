@@ -8,6 +8,8 @@
 
 #import "DBBaseSettingsTableViewController.h"
 
-@interface DBGeneralSettingsTableViewController : DBBaseSettingsTableViewController
+#import "DBCitiesViewController.h"
+
+@interface DBGeneralSettingsTableViewController : DBBaseSettingsTableViewController <DBCitiesViewControllerDelegate>
 
 @end

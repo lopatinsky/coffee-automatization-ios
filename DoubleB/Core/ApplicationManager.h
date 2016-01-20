@@ -57,6 +57,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Start) <DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
+- (void)fetchCompanyDependentInfo;
 @end
 
 @interface ApplicationManager(Controllers)

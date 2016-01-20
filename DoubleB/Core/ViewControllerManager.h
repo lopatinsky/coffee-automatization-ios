@@ -15,6 +15,7 @@
 #import "DBCompaniesViewControllerProtocol.h"
 #import "SubscriptionViewControllerProtocol.h"
 #import "ReviewViewControllerProtocol.h"
+#import "DBBaseSettingsTableViewController.h"
 
 @interface ViewControllerManager : NSObject
 @end
@@ -50,4 +51,9 @@
 
 @interface ViewControllerManager(ReviewViewControllers)
 + (nonnull UIViewController<ReviewViewControllerProtocol> *)reviewViewController;
+@end
+
+@interface ViewControllerManager(SettingsViewControllers)
++ (nonnull DBBaseSettingsTableViewController *)generalSettingsViewController;
++ (nonnull DBBaseSettingsTableViewController *)companySettingsViewController;
 @end

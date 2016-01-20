@@ -9,12 +9,18 @@
 #import "DBUnifiedMenuTableViewController.h"
 #import "DBUnifiedMenuTableViewCell.h"
 #import "DBUnifiedVenueTableViewCell.h"
+#import "DBGeneralSettingsTableViewController.h"
 
+#import "DBUnifiedVenue.h"
 #import "OrderCoordinator.h"
+#import "DBAPIClient.h"
 #import "ApplicationManager.h"
 #import "DBUnifiedAppManager.h"
 #import "DBCitiesManager.h"
 #import "NetworkManager.h"
+
+#import "DBBarButtonItem.h"
+#import "UIAlertView+BlocksKit.h"
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
 
@@ -29,7 +35,7 @@
 @implementation DBUnifiedMenuTableViewController
 
 - (void)viewDidLoad {
-    self.segmentHolderView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.4];
+    [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
     self.segmentedController.tintColor = [UIColor db_defaultColor];
     self.segmentedController.backgroundColor = [UIColor whiteColor];
     self.segmentedController.clipsToBounds = YES;
@@ -42,18 +48,18 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"DBUnifiedMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"DBUnifiedMenuTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"DBUnifiedVenueTableViewCell" bundle:nil] forCellReuseIdentifier:@"DBUnifiedVenueTableViewCell"];
     
-    if (self.type == UnifiedPosition) {
-        [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-        self.segmentedController.hidden = YES;
-    } else {
-        [self.tableView setContentInset:UIEdgeInsetsMake(40, 0, 0, 0)];
-        self.segmentedController.hidden = NO;
-    }
+    self.segmentedController.hidden = self.type == UnifiedPosition;
     
+    [self setupInitial];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self db_setTitle:@""];
+    [self.tableView reloadData];
     switch (self.type) {
         case UnifiedMenu: {
             [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedMenu];
@@ -82,6 +88,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)setupInitial {
+    self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+}
+
+
 - (NSArray *)mockData {
     return @[
              @{@"image": @"http://uashota.lg.ua/media/product/original/кофе%20латте%20макиато.jpg", @"name": @"Латте", @"info": @"14", @"price": @130},
@@ -89,6 +101,11 @@
              @{@"image": @"http://kofe-inn.ru/wp-content/uploads/2015/07/американо.jpg", @"name": @"Американо", @"info": @"3", @"price": @110},
              @{@"image": @"http://express-f.ru/image/cache/data/Menu/kofe/good_4a83db8539f02-900x900.jpg", @"name": @"Эспрессо", @"info": @"21", @"price": @60},
             ];
+}
+
+- (void)moveToSettings {
+    DBBaseSettingsTableViewController *settingsController = [ViewControllerManager generalSettingsViewController];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 - (IBAction)segmentedControlValueChanged:(id)sender {
@@ -131,13 +148,20 @@
     
 }
 
+- (void)fetchCompanyInfo {
+    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+    [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
+}
+
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (self.type) {
         case UnifiedVenue: {
-            [OrderCoordinator sharedInstance].orderManager.venue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
-            [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
+            DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
+            [OrderCoordinator sharedInstance].orderManager.venue = [unifiedVenue venueObject];
+            [[DBAPIClient sharedClient] setValue:[unifiedVenue venueCompanyNamespace] forHeader:@"namespace"];
+            [self fetchCompanyInfo];
             break;
         }
         case UnifiedMenu: {
@@ -200,6 +224,7 @@
         default:
             return 0;
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 

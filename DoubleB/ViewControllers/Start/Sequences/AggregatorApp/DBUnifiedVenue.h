@@ -8,8 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+#import "Venue.h"
+
 @interface DBUnifiedVenue : NSObject
 
-- (instancetype)initWithResponseDict:(NSDictionary *)response;
+@property (nonatomic, strong) NSString *venueAddress;
+@property (nonatomic, strong) NSString *venueCalledPhone;
+@property (nonatomic, strong) NSString *venueCompanyNamespace;
+@property (nonatomic, strong) NSString *venueCoordinates;
+@property (nonatomic, strong) NSNumber *venueId;
+@property (nonatomic, strong) NSString *venuePicture;
+@property (nonatomic, strong) NSString *venueScheduleString;
+@property (nonatomic, strong) NSString *venueTitle;
+@property (nonatomic) BOOL venueIsOpen;
+@property (nonatomic, strong) NSDictionary *venueDictionary;
+@property (nonatomic, strong) Venue *venueObject;
+
++ (NSArray *)venuesFromDictionary:(NSArray *)venues;
+- (instancetype)initWithDictionary:(NSDictionary *)venue;
 
 @end

@@ -42,7 +42,7 @@
 #import "DBVenuesTableViewController.h"
 #import "DBVenueViewController.h"
 #import "DBMenuViewController.h"
-#import "DBSettingsTableViewController.h"
+#import "DBCompanySettingsTableViewController.h"
 
 #import "DBSnapshotSDKHelper.h"
 
@@ -438,7 +438,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
             
         case ApplicationScreenHistory:{
             if ([rootVC isKindOfClass:[UINavigationController class]]){
-                DBSettingsTableViewController *settingsVC = [DBClassLoader loadSettingsViewController];
+                DBCompanySettingsTableViewController *settingsVC = (DBCompanySettingsTableViewController *)[DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
                 [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, settingsVC, ordersVC] animated:animated];
             }
@@ -446,7 +446,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
             
         case ApplicationScreenHistoryOrder:{
             if ([rootVC isKindOfClass:[UINavigationController class]]){
-                DBSettingsTableViewController *settingsVC = [DBClassLoader loadSettingsViewController];
+                DBCompanySettingsTableViewController *settingsVC = (DBCompanySettingsTableViewController *)[DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
                 DBOrderViewController *orderVC = [DBOrderViewController new];
                 if ([object isKindOfClass:[Order class]]) {

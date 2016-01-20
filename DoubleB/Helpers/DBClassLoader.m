@@ -10,7 +10,7 @@
 
 @implementation DBClassLoader
 
-+ (DBSettingsTableViewController *)loadSettingsViewController{
++ (UIViewController *)loadSettingsViewController{
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
     if (!settingsVCClass) {

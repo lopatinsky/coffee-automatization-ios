@@ -7,6 +7,7 @@
 //
 
 #import "DBUnifiedAppManager.h"
+#import "DBUnifiedVenue.h"
 #import "DBAPIClient.h"
 #import "NetworkManager.h"
 #import "DBCitiesManager.h"
@@ -64,7 +65,7 @@
 
 - (NSArray *)venues {
     NSArray *venuesData = [DBUnifiedAppManager valueForKey:@"venues"] ?: @[];
-    return [Venue venuesFromDict:venuesData];
+    return [DBUnifiedVenue venuesFromDictionary:venuesData];
 }
 
 - (void)fetchMenu:(void (^)(BOOL))callback {
@@ -101,9 +102,9 @@
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/venues"
                          parameters:@{@"City-Id": [[DBCitiesManager selectedCity] cityId]}
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                NSArray *venues = [Venue venuesFromDict:responseObject[@"venues"]];
+                                NSArray *venues = [DBUnifiedVenue venuesFromDictionary:responseObject[@"venues"]];
                                 NSMutableArray *venuesDictionaries = [NSMutableArray new];
-                                for (Venue *venue in venues) {
+                                for (DBUnifiedVenue *venue in venues) {
                                     [venuesDictionaries addObject:venue.venueDictionary];
                                 }
                                 [DBUnifiedAppManager setValue:venuesDictionaries forKey:@"venues"];

@@ -20,7 +20,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
 
 - (instancetype)init {
     if (self = [super init]) {
-        _settingsItems = [NSMutableArray new];
+        _settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
     }
     return self;
 }
@@ -61,7 +61,9 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
-- (void)reload{
+- (void)reload {
+    _settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
+    [self loadAllSettingsItems];
     [self.tableView reloadData];
 }
 

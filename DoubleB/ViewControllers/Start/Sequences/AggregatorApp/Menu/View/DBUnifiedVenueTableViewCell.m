@@ -8,6 +8,7 @@
 
 #import "DBUnifiedVenueTableViewCell.h"
 #import "DBMenuPosition.h"
+#import "DBUnifiedVenue.h"
 #import "UIImageView+WebCache.h"
 
 @interface DBUnifiedVenueTableViewCell()
@@ -39,17 +40,17 @@
     // Configure the view for the selected state
 }
 
-- (void)setVenue:(Venue *)venue {
-    self.nameLabel.text = venue.title;
-    self.infoLabel.text = venue.address;
-    self.priceLabel.text = venue.workingTime;
+- (void)setVenue:(DBUnifiedVenue *)venue {
+    self.nameLabel.text = venue.venueTitle;
+    self.infoLabel.text = venue.venueAddress;
+    self.priceLabel.text = venue.venueScheduleString;
     
     self.positionImageView.backgroundColor = [UIColor clearColor];
     self.positionImageView.opaque = NO;
     self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.positionImageView.clipsToBounds = YES;
     
-    [self.positionImageView sd_setImageWithURL:venue.venueDictionary[@"pic"] ?: @""];
+    [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:venue.venuePicture]];
 }
 
 @end
