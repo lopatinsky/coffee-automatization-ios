@@ -8,10 +8,12 @@
 
 #import "DBServerAPI.h"
 
+@class DBCompany;
 @interface DBServerAPI (DemoLogin)
 
 + (void)demoLogin:(NSString *)login
          password:(NSString *)password
-         callback:(void(^)(BOOL success, NSString *result))callback;
+          success:(void(^)(DBCompany *company))success
+          failure:(void(^)(NSString *description))failure;
 
 @end
