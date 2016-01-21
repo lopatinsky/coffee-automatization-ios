@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBLaunchViewControllerProtocol.h"
 
-@interface LaunchViewController : UIViewController<DBLaunchViewControllerProtocol>
+@interface LaunchViewController : UIViewController
+
+@property (nonatomic, copy) void (^executionBlock)();
 
 @end

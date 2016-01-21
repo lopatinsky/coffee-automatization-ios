@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class DBSettingsTableViewController;
+@class DBStartNavController;
 @class DBCategoryCell;
 
 @interface DBClassLoader : NSObject
 
++ (DBStartNavController *)loadStartNavigationController;
 + (UIViewController *)loadNewOrderViewController;
-+ (UIViewController *)loadSettingsViewController;
++ (DBSettingsTableViewController *)loadSettingsViewController;
 
 
 #pragma mark - Views

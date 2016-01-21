@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "DBBaseSettingsTableViewController.h"
 
+typedef NS_ENUM(NSInteger, DBCitiesViewControllerMode) {
+    DBCitiesViewControllerModeChooseCity = 0,
+    DBCitiesViewControllerModeChangeCity
+};
+
 @class DBUnifiedCity;
 @protocol DBCitiesViewControllerDelegate <NSObject>
 
@@ -17,5 +22,6 @@
 @end
 
 @interface DBCitiesViewController : UIViewController <DBSettingsProtocol>
+@property (nonatomic) DBCitiesViewControllerMode mode;
 @property (weak, nonatomic) id<DBCitiesViewControllerDelegate> delegate;
 @end

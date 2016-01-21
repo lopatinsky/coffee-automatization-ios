@@ -8,6 +8,7 @@
 
 #import "DBRubeaconDemoSettingsViewController.h"
 #import "AppDelegate.h"
+#import "DBCompaniesManager.h"
 #import "DBCompanyInfo.h"
 #import "DBDemoLoginViewController.h"
 #import "DBAPIClient.h"
@@ -24,7 +25,7 @@
     // Application settings item
     [self.settingsItems insertObject:@{@"name": @"logoutDemo",
                                        @"title": @"Выйти из демо",
-                                       @"image": @"logout_icon"}
+                                       @"image": @"exit_icon"}
                              atIndex:0];
 }
 
@@ -37,16 +38,10 @@
     }
     
     if([settingsItemInfo[@"name"] isEqualToString:@"logoutDemo"]){
-        [UIView transitionWithView:[(AppDelegate *)[[UIApplication sharedApplication] delegate] window]
-                          duration:0.5
-                           options:UIViewAnimationOptionTransitionNone
-                        animations:^{
-                            [[DBAPIClient sharedClient] disableCompanyHeader];
-                            [DBCompanyInfo sharedInstance].hasAllImportantData = NO;
-                            
-                            [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBDemoLoginViewController new];
-                        }
-                        completion:nil];
+        [[ApplicationManager sharedInstance] flushStoredCache];
+        [DBCompaniesManager selectCompany:nil];
+        
+        [[ApplicationManager sharedInstance] moveToStartState:YES];
     }
 }
 

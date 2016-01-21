@@ -15,6 +15,8 @@
 
 @interface DBServerAPI : NSObject
 
++ (void)fetchAppConfiguration:(void (^)(BOOL, NSDictionary* response))callback;
+
 + (void)requestCompanies:(void(^)(NSArray *companies))success
                  failure:(void(^)(NSError *error))failure;
 

@@ -10,13 +10,26 @@
 
 @implementation DBClassLoader
 
-+ (UIViewController *)loadSettingsViewController{
++ (DBStartNavController *)loadStartNavigationController{
+    Class navVCClass = NSClassFromString(@"DBDemoStartNavController");
+    
+    if (!navVCClass) {
+        NSClassFromString(@"DBCommonStartNavController");
+    }
+    
+    return [[navVCClass alloc] init];
+}
+
++ (DBSettingsTableViewController *)loadSettingsViewController{
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
     if (!settingsVCClass) {
-        settingsVCClass = NSClassFromString(@"DBCompanySettingsTableViewController");
+        settingsVCClass = NSClassFromString(@"DBRubeaconDemoSettingsViewController");
     }
     
+    if (!settingsVCClass) {
+        settingsVCClass = NSClassFromString(@"DBSettingsTableViewController");
+    }
     
     return [[settingsVCClass alloc] init];
 }
@@ -31,16 +44,6 @@
 //    return [[newOrderVCClass alloc] initWithNibName:@"DBNewOrderViewController" bundle:[NSBundle mainBundle]];
     Class newOrderVCClass = NSClassFromString(@"DBNewOrderVC");
     return [[newOrderVCClass alloc] init];
-}
-
-+ (UIViewController *)loadDemoLoginViewController{
-    Class loginVCClass = NSClassFromString(@"DBDemoLoginViewController");
-    
-    if(loginVCClass){
-        return [[loginVCClass alloc] init];
-    } else {
-        return nil;
-    }
 }
 
 #pragma mark - Views
