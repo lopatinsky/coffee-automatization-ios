@@ -179,11 +179,12 @@
 
 + (id<DBSettingsItemProtocol>)settingsItem {
     DBCitiesViewController *vc = [DBCitiesViewController new];
+    vc.mode = DBCitiesViewControllerModeChangeCity;
     DBSettingsItem *settingsItem = [DBSettingsItem new];
     
     settingsItem.name = @"citiesVC";
-    settingsItem.title = NSLocalizedString(@"Города", nil);
-    settingsItem.iconName = @"ic_location_city";
+    settingsItem.title = NSLocalizedString(@"Город", nil);
+    settingsItem.iconName = @"city_icon";
     settingsItem.viewController = vc;
     settingsItem.reachTitle = [[DBCitiesManager selectedCity] cityName];
     settingsItem.eventLabel = @"cities_click";

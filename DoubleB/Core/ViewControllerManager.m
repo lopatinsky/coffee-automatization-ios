@@ -159,6 +159,6 @@
 }
 
 + (nonnull DBBaseSettingsTableViewController *)companySettingsViewController {
-    return [DBCompanySettingsTableViewController new];
+    return [DBClassLoader loadSettingsViewController];
 }
 @end

@@ -27,44 +27,48 @@
 
 @implementation DBCompanySettingsTableViewController
 
-- (void)loadAllSettingsItems {
+- (NSMutableArray *)settingsItems {
+    NSMutableArray *settingsItems = [NSMutableArray new];
+    
     if ([DBCompaniesManager sharedInstance].hasCompanies) {
-        [self.settingsItems addObject:[[ViewControllerManager companiesViewController] settingsItem]];
+        [settingsItems addObject:[[ViewControllerManager companiesViewController] settingsItem]];
     }
     
-    [self.settingsItems addObject:[DBProfileViewController settingsItem]];
-    [self.settingsItems addObject:[DBOrdersTableViewController settingsItem]];
+    [settingsItems addObject:[DBProfileViewController settingsItem]];
+    [settingsItems addObject:[DBOrdersTableViewController settingsItem]];
     
     if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
-        [self.settingsItems addObject:[[ViewControllerManager shareFriendInvitationViewController] settingsItem]];
+        [settingsItems addObject:[[ViewControllerManager shareFriendInvitationViewController] settingsItem]];
     }
     
     if ([[DBFriendGiftHelper sharedInstance] enabled]) {
-        [self.settingsItems addObject:[DBFriendGiftViewController settingsItem]];
+        [settingsItems addObject:[DBFriendGiftViewController settingsItem]];
     }
     
     if ([[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCard] ||
         [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypePayPal]) {
-        [self.settingsItems addObject:[DBPaymentViewController settingsItem]];
+        [settingsItems addObject:[DBPaymentViewController settingsItem]];
     }
     
     if ([[[OrderCoordinator sharedInstance] promoManager] walletEnabled]) {
-        [self.settingsItems addObject:[OrderCoordinator settingsItem]];
+        [settingsItems addObject:[OrderCoordinator settingsItem]];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
     
-    [self.settingsItems addObject:[DBPromosListViewController settingsItem]];
-    [self.settingsItems addObject:[DBNewsHistoryTableViewController settingsItem]];
-    [self.settingsItems addObject:[DBCompanyInfoViewController settingsItem]];
-    [self.settingsItems addObject:[DBDocumentsViewController settingsItem]];
+    [settingsItems addObject:[DBPromosListViewController settingsItem]];
+    [settingsItems addObject:[DBNewsHistoryTableViewController settingsItem]];
+    [settingsItems addObject:[DBCompanyInfoViewController settingsItem]];
+    [settingsItems addObject:[DBDocumentsViewController settingsItem]];
     
     if ([[[DBCompanyInfo sharedInstance] promocodesIsEnabled] boolValue]) {
-        [self.settingsItems addObject:[[ViewControllerManager promocodeViewController] settingsItem]];
+        [settingsItems addObject:[[ViewControllerManager promocodeViewController] settingsItem]];
     }
     
     if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-        [self.settingsItems addObject:[[ViewControllerManager subscriptionViewController] settingsItem]];
+        [settingsItems addObject:[[ViewControllerManager subscriptionViewController] settingsItem]];
     }
+    
+    return settingsItems;
 }
 
 @end

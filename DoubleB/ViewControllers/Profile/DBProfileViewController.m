@@ -130,7 +130,7 @@
     NSString *profileText = [DBClientInfo sharedInstance].clientName.value;
     
     settingsItem.name = @"profileVC";
-    settingsItem.title = NSLocalizedString(@"Личный счет", nil);
+    settingsItem.title = NSLocalizedString(@"Профиль", nil);
     settingsItem.iconName = @"profile_icon_active";
     settingsItem.viewController = profileVC;
     settingsItem.reachTitle = profileText && profileText.length ? profileText : nil;

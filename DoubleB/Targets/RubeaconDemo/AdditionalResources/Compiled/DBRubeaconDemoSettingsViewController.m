@@ -19,31 +19,12 @@
 
 @implementation DBRubeaconDemoSettingsViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+- (NSMutableArray *)settingsItems {
+    NSMutableArray *settingsItems = [super settingsItems];
     
-    // Application settings item
-    [self.settingsItems insertObject:@{@"name": @"logoutDemo",
-                                       @"title": @"Выйти из демо",
-                                       @"image": @"exit_icon"}
-                             atIndex:0];
+    [settingsItems insertObject:[DBDemoLoginViewController settingsItem] atIndex:0];
+    
+    return settingsItems;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [super tableView:tableView didSelectRowAtIndexPath:indexPath];
-    
-    NSDictionary *settingsItemInfo;
-    if(indexPath.row < [self.settingsItems count]){
-        settingsItemInfo = self.settingsItems[indexPath.row];
-    }
-    
-    if([settingsItemInfo[@"name"] isEqualToString:@"logoutDemo"]){
-        [[ApplicationManager sharedInstance] flushStoredCache];
-        [DBCompaniesManager selectCompany:nil];
-        
-        [[ApplicationManager sharedInstance] moveToStartState:YES];
-    }
-}
-
 
 @end

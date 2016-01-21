@@ -98,5 +98,26 @@
     [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBDemoLoginViewController *loginVC = [DBDemoLoginViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"profileVC";
+    settingsItem.title = NSLocalizedString(@"Выйти из демо", nil);
+    settingsItem.iconName = @"exit_icon";
+    settingsItem.viewController = loginVC;
+    settingsItem.eventLabel = @"logout_click";
+    settingsItem.block = ^void() {
+        [[ApplicationManager sharedInstance] flushStoredCache];
+        [DBCompaniesManager selectCompany:nil];
+        
+        [[ApplicationManager sharedInstance] moveToStartState:YES];
+    };
+    
+    return settingsItem;
+}
+
 
 @end

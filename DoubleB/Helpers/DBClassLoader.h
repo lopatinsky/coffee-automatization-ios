@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class DBSettingsTableViewController;
+@class DBCompanySettingsViewController;
 @class DBStartNavController;
 @class DBCategoryCell;
 
@@ -16,7 +16,7 @@
 
 + (DBStartNavController *)loadStartNavigationController;
 + (UIViewController *)loadNewOrderViewController;
-+ (DBSettingsTableViewController *)loadSettingsViewController;
++ (DBCompanySettingsViewController *)loadSettingsViewController;
 
 
 #pragma mark - Views

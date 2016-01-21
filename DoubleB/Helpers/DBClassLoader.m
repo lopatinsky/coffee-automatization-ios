@@ -10,17 +10,17 @@
 
 @implementation DBClassLoader
 
-+ (DBStartNavController *)loadStartNavigationController{
++ (DBCompaniesViewController *)loadStartNavigationController{
     Class navVCClass = NSClassFromString(@"DBDemoStartNavController");
     
     if (!navVCClass) {
-        NSClassFromString(@"DBCommonStartNavController");
+        navVCClass = NSClassFromString(@"DBCommonStartNavController");
     }
     
     return [[navVCClass alloc] init];
 }
 
-+ (DBSettingsTableViewController *)loadSettingsViewController{
++ (DBCompanySettingsViewController *)loadSettingsViewController{
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
     if (!settingsVCClass) {
