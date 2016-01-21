@@ -73,7 +73,7 @@
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
     
-//    [self setupSubscription];
+    [self setupSubscription];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -376,15 +376,20 @@
             case DBMenuViewControllerModeCategories:
                 mode = DBSubscriptionModuleViewModeCategory;
                 break;
-            case DBMenuViewControllerModePositions:
-                mode = DBSubscriptionModuleViewModePositions;
+            default:
+                mode = DBSubscriptionModuleViewModeCategory;
                 break;
         }
         _subscriptionModuleView = [DBSubscriptionModuleView create:mode];
         
         DBModuleView *module = [DBModuleView create];
         [module.submodules addObject:_subscriptionModuleView];
+        module.ownerViewController = self;
+        module.analyticsCategory = self.analyticsCategory;
+        [module layoutModules];
+        module.frame = CGRectMake(0, 0, module.frame.size.width, [module moduleViewContentHeight]);
         ((DBMenuTableModuleView *)self.menuModuleView).tableHeaderModuleView = module;
+        [module reload:NO];
     }
 }
 
