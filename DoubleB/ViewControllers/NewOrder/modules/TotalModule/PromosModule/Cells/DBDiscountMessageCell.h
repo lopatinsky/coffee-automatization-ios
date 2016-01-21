@@ -11,4 +11,5 @@
 @interface DBDiscountMessageCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 
++ (CGFloat)labelHeight:(NSString *)text;
 @end

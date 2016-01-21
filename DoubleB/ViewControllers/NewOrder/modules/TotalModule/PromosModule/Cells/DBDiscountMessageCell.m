@@ -17,4 +17,13 @@
     self.messageLabel.textColor = [UIColor db_textGrayColor];
 }
 
++ (CGFloat)labelHeight:(NSString *)text {
+    CGSize titleSize = [text boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 16, MAXFLOAT)
+                                          options:NSStringDrawingUsesLineFragmentOrigin
+                                       attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:13.f]}
+                                          context:nil].size;
+    
+    return titleSize.height;
+}
+
 @end
