@@ -5,7 +5,7 @@
 	<key>AppConfiguration</key>
 	<dict>
 		<key>MenuPositionIconsContentMode</key>
-		<string>Default</string>
+		<string>Fit</string>
 		<key>MenuCategoryIconsContentMode</key>
 		<string>Default</string>
 	</dict>
@@ -28,7 +28,7 @@
 	<key>ViewControllers</key>
 	<dict>
 		<key>MenuViewControllers</key>
-		<string>Mixed</string>
+		<string>Mixedр</string>
 	</dict>
 </dict>
 </plist>
