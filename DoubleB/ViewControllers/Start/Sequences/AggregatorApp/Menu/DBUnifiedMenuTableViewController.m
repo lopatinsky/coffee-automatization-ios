@@ -149,7 +149,7 @@
 }
 
 - (void)fetchCompanyInfo {
-    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
     [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
 }
 

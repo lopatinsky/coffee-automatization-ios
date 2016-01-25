@@ -95,7 +95,7 @@
             [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
         }
     }];
-    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
 }
 
 #pragma mark - UITableViewDataSource

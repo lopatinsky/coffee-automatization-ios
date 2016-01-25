@@ -314,24 +314,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     
 }
 
-- (void)fetchCompanyDependentInfo {
-    // Update menu
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
-        if(success){
-            // Analyse user history to fetch selected modifiers
-            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
-        }
-    }];
-    [[DBModulesManager sharedInstance] fetchModules:nil];
-    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    [[OrderCoordinator sharedInstance].promoManager updateInfo];
-    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
-    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
-    [[CompanyNewsManager sharedManager] fetchUpdates];
-    
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
-}
-
 - (void)awakeFromNotification:(NSDictionary *)userInfo {
     UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
     [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
@@ -476,7 +458,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 - (void)db_startNavVCNeedsMoveToMain:(UIViewController *)controller {
     self.state = RootStateMain;
     
-    [self fetchCompanyDependentInfo];
+    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
     [self changeRoot];
 }
 

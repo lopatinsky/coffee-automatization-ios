@@ -10,6 +10,14 @@
 #import "DBServerAPI.h"
 #import "IHSecureStore.h"
 
+#import "DBMenu.h"
+#import "DBModulesManager.h"
+#import "OrderCoordinator.h"
+#import "DBShareHelper.h"
+#import "CompanyNewsManager.h"
+#import "DBVersionDependencyManager.h"
+#import "NetworkManager.h"
+
 #import <Parse/PFPush.h>
 
 NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificationInfoUpdated";
@@ -102,7 +110,23 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     }];
 }
 
-
+- (void)fetchDependentInfo {
+    // Update menu
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+        if(success){
+            // Analyse user history to fetch selected modifiers
+            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
+        }
+    }];
+    [[DBModulesManager sharedInstance] fetchModules:nil];
+    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
+    [[OrderCoordinator sharedInstance].promoManager updateInfo];
+    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
+    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
+    
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
+}
 
 
 + (NSURL *)db_aboutAppUrl{

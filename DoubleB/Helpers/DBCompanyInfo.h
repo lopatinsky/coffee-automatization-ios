@@ -52,6 +52,8 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 - (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");
 - (void)updateInfo:(void(^)(BOOL success))callback;
 
+- (void)fetchDependentInfo;
+
 + (NSURL *)db_aboutAppUrl;
 + (NSURL *)db_licenceUrl;
 + (NSURL *)db_paymentRulesUrl;

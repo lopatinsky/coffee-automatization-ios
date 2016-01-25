@@ -127,7 +127,7 @@
                         
                         [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
                     }];
-                    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+                    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
                 }
             }];
         } else {
@@ -137,7 +137,7 @@
                 
                 [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
             }];
-            [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+            [[DBCompanyInfo sharedInstance] fetchDependentInfo];
         }
     }
 }
