@@ -35,6 +35,20 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
  * Configuration for application
  */
 @interface ApplicationConfig : NSObject
++ (instancetype)sharedInstance;
+
+// LOCAL
++ (id)objectFromPropertyListByName:(NSString *)name;
++ (id)objectFromApplicationPreferencesByName:(NSString *)name;
+
++ (ApplicationType)db_appType;
++ (NSString *)db_bundleName;
+
++ (NSString *)db_AppBaseUrl;
++ (id)db_AppDefaultColor;
++ (NSString *)db_AppGoogleAnalyticsKey;
+
+// REMOTE
 @property (strong, nonatomic) NSString *parseAppKey;
 @property (strong, nonatomic) NSString *parseClientKey;
 
@@ -43,16 +57,15 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 @property (nonatomic) BOOL hasCities;
 @property (nonatomic) BOOL hasCompanies;
 
+
 + (void)sync:(NSDictionary *)remoteConfig;
-- (NSDictionary *)appConfig;
++ (NSDictionary *)remoteConfig;
 @end
 
 /**
  * Manager for whole application
  */
 @interface ApplicationManager : NSObject<ManagerProtocol>
-@property (nonatomic) ApplicationType applicationType;
-@property (strong, nonatomic) ApplicationConfig *configuration;
 
 + (instancetype)sharedInstance;
 + (void)handlePush:(NSDictionary *)push;
@@ -75,7 +88,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Start) <DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
-- (void)fetchCompanyDependentInfo;
 @end
 
 @interface ApplicationManager(Controllers)

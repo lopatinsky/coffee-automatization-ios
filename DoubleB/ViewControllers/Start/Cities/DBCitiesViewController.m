@@ -115,7 +115,7 @@
         [[ApplicationManager sharedInstance] flushStoredCache];
         
         [DBCitiesManager selectCity:_cities[indexPath.row]];
-        if ([ApplicationManager sharedInstance].configuration.hasCompanies) {
+        if ([ApplicationConfig sharedInstance].hasCompanies) {
             [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
                 if (companies.count > 1) {
                     DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];

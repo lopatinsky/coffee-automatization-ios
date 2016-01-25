@@ -33,8 +33,8 @@
     [self setState:OperationExecuting];
     
     Branch *branchInstance = [Branch getInstance];
-    if ([ApplicationManager sharedInstance].configuration.branchKey) {
-        branchInstance = [Branch getInstance:[ApplicationManager sharedInstance].configuration.branchKey];
+    if ([ApplicationConfig sharedInstance].branchKey) {
+        branchInstance = [Branch getInstance:[ApplicationConfig sharedInstance].branchKey];
     }
     
     [[Branch getInstance] initSessionWithLaunchOptions:self.launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {

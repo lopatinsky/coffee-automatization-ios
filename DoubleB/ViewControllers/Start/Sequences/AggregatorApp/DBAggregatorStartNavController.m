@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 - (BOOL)needLaunchScreen {
     BOOL result = [super needLaunchScreen];
     
-    result = result || ([ApplicationManager sharedInstance].configuration.hasCities && ![DBCitiesManager selectedCity]);
+    result = result || ([ApplicationConfig sharedInstance].hasCities && ![DBCitiesManager selectedCity]);
     
     return result;
 }

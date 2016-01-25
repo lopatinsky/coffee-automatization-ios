@@ -57,7 +57,7 @@
 }
 
 - (BOOL)needLaunchScreen {
-    return [[ApplicationManager sharedInstance].configuration appConfig] == nil;
+    return [ApplicationConfig remoteConfig] == nil;
 }
 
 - (void)additionalLaunchScreenActions {

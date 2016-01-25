@@ -91,7 +91,7 @@
 + (BOOL)needsToFlush {
     BOOL needsToFlush = NO;
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"tukano"]){
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"tukano"]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
         BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
         if (!removed) {
@@ -99,7 +99,7 @@
         }
     }
 
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"iikohack"]){
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"iikohack"]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
         BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
         if (!removed) {
@@ -107,7 +107,7 @@
         }
     }
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"mivako"]){
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"mivako"]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
         BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
         if (!removed) {

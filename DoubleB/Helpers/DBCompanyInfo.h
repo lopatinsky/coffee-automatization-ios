@@ -25,8 +25,6 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 };
 
 @interface DBCompanyInfo : DBPrimaryManager<ManagerProtocol>
-@property(strong, nonatomic, readonly) NSString *bundleName;
-
 @property(nonatomic, readonly) DBCompanyPOS companyPOS;
 @property(nonatomic, readonly) DBCompanyType type;
 @property(strong, nonatomic, readonly) NSString *applicationName;
@@ -53,17 +51,6 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property (nonatomic) BOOL infoLoaded;
 - (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");
 - (void)updateInfo:(void(^)(BOOL success))callback;
-
-+ (id)objectFromPropertyListByName:(NSString *)name;
-+ (id)objectFromApplicationPreferencesByName:(NSString *)name;
-
-+ (NSString *)db_companyBaseUrl;
-+ (BOOL)db_proxyApp;
-+ (id)db_companyDefaultColor;
-+ (NSString *)db_companyGoogleAnalyticsKey;
-
-+ (NSString *)db_companyParseApplicationKey;
-+ (NSString *)db_companyParseClientKey;
 
 + (NSURL *)db_aboutAppUrl;
 + (NSURL *)db_licenceUrl;

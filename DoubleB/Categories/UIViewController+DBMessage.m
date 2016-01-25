@@ -20,7 +20,7 @@ static void (^dbMessageViewControllerCallBack)(MessageComposeResult result);
     [emails addObject:[self getCompanySupportMail]];
     if([MFMailComposeViewController canSendMail]){
         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
-        [mailer setSubject:[DBCompanyInfo sharedInstance].bundleName];
+        [mailer setSubject:[ApplicationConfig db_bundleName]];
         [mailer setToRecipients:emails];
         if(recipients)
             [mailer setToRecipients:recipients];

@@ -70,40 +70,95 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 @implementation ApplicationConfig
 
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static ApplicationConfig *instance = nil;
+    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    return instance;
+}
+
++ (id)objectFromPropertyListByName:(NSString *)name {
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    return [companyInfo objectForKey:name];
+}
+
++ (id)objectFromApplicationPreferencesByName:(NSString *)name {
+    return [[self objectFromPropertyListByName:@"Preferences"] objectForKey:name];
+}
+
++ (NSString *)db_bundleName {
+    NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    
+    return bundleName;
+}
+
++ (ApplicationType)db_appType {
+    NSString *typeString = [self objectFromApplicationPreferencesByName:@"ApplicationType"];
+    ApplicationType type = ApplicationTypeCommon;
+    
+    if ([typeString isEqualToString:@"Aggregator"]) {
+        type = ApplicationTypeAggregator;
+    }
+    
+    return type;
+}
+
++ (NSString *)db_AppBaseUrl {
+    NSString *baseUrl = [self objectFromApplicationPreferencesByName:@"BaseUrl"];
+    
+    return baseUrl;
+}
+
++ (id)db_AppDefaultColor {
+    id colorHex = colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
+
+    return colorHex;
+}
+
++ (NSString *)db_AppGoogleAnalyticsKey {
+    NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
+    
+    return GAKeyString ?: @"";
+}
+
+
 - (NSString *)parseAppKey {
-    NSDictionary *config = [self appConfig];
+    NSDictionary *config = [ApplicationConfig remoteConfig];
     
     NSString *key = [[[config getValueForKey:@"keys"] getValueForKey:@"parse"] getValueForKey:@"app_key"];
     return key;
 }
 
 - (NSString *)parseClientKey {
-    NSDictionary *config = [self appConfig];
+    NSDictionary *config = [ApplicationConfig remoteConfig];
     
     NSString *key = [[[config getValueForKey:@"keys"] getValueForKey:@"parse"] getValueForKey:@"client_key"];
     return key;
 }
 
 - (NSString *)branchKey {
-    NSDictionary *config = [self appConfig];
+    NSDictionary *config = [ApplicationConfig remoteConfig];
     
     NSString *key = [[config getValueForKey:@"keys"] getValueForKey:@"branch"];
     return key;
 }
 
 - (BOOL)hasCities {
-    NSDictionary *config = [self appConfig];
+    NSDictionary *config = [ApplicationConfig remoteConfig];
     
     return [[config getValueForKey:@"has_cities"] boolValue];
 }
 
 - (BOOL)hasCompanies {
-    NSDictionary *config = [self appConfig];
+    NSDictionary *config = [ApplicationConfig remoteConfig];
     
     return [[config getValueForKey:@"has_companies"] boolValue];
 }
 
-- (NSDictionary *)appConfig {
++ (NSDictionary *)remoteConfig {
     NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"ApplicationManager_AppConfig"];
     return [NSKeyedUnarchiver unarchiveObjectWithData:data];
 }
@@ -212,29 +267,17 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 - (instancetype)init {
     self = [super init];
     
-    self.configuration = [ApplicationConfig new];
     self.state = RootStateStart;
     
     return self;
 }
 
-- (ApplicationType)applicationType {
-    NSString *typeString = [DBCompanyInfo objectFromApplicationPreferencesByName:@"ApplicationType"];
-    ApplicationType type = ApplicationTypeCommon;
-    
-    if ([typeString isEqualToString:@"Aggregator"]) {
-        type = ApplicationTypeAggregator;
-    }
-    
-    return type;
-}
-
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    if (self.configuration.parseAppKey && self.configuration.parseClientKey) {
-        [Parse setApplicationId:self.configuration.parseAppKey
-                      clientKey:self.configuration.parseClientKey];
+    if ([ApplicationConfig sharedInstance].parseAppKey && [ApplicationConfig sharedInstance].parseClientKey) {
+        [Parse setApplicationId:[ApplicationConfig sharedInstance].parseAppKey
+                      clientKey:[ApplicationConfig sharedInstance].parseClientKey];
     }
     
     [Fabric with:@[CrashlyticsKit]];
@@ -246,7 +289,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
-    if (self.configuration.appConfig != nil) {
+    if ([ApplicationConfig remoteConfig] != nil) {
         [self initializeVendorFrameworks];
     }
     
@@ -380,7 +423,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager(Style)
 
 + (void)applyBrandbookStyle {
-    if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"redcup"] && [UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
         [UINavigationBar appearance].translucent = NO;
     }
     
@@ -411,7 +454,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 - (UIViewController *)rootViewController {
     if (self.state == RootStateStart) {
-        switch (self.applicationType) {
+        switch ([ApplicationConfig db_appType]) {
             case ApplicationTypeCommon: {
                 DBStartNavController *startNavVC = [DBClassLoader loadStartNavigationController];
                 startNavVC.navDelegate = self;
@@ -442,7 +485,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeetogo"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"]) {
         [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
         [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
         

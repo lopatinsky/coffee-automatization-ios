@@ -52,9 +52,9 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 
 - (void)additionalLaunchScreenActions {
     BOOL additionalActions = NO;
-    if ([ApplicationManager sharedInstance].configuration.hasCities) {
+    if ([ApplicationConfig sharedInstance].hasCities) {
         if ([DBCitiesManager selectedCity]) {
-            if ([ApplicationManager sharedInstance].configuration.hasCompanies) {
+            if ([ApplicationConfig sharedInstance].hasCompanies) {
                 if ([DBCompaniesManager selectedCompany]) {
                     additionalActions = YES;
                 }
@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
             }
         }
     } else {
-        if ([ApplicationManager sharedInstance].configuration.hasCompanies) {
+        if ([ApplicationConfig sharedInstance].hasCompanies) {
             if ([DBCompaniesManager selectedCompany]) {
                 additionalActions = YES;
             }
@@ -96,7 +96,7 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 
 - (void)moveNext {
     if (self.state == DBCommonStartStateLaunch) {
-        if ([ApplicationManager sharedInstance].configuration.hasCities && ![DBCitiesManager selectedCity]) {
+        if ([ApplicationConfig sharedInstance].hasCities && ![DBCitiesManager selectedCity]) {
             [self moveToCities];
             return;
         } else {
@@ -105,7 +105,7 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
     }
     
     if (self.state == DBCommonStartStateCities) {
-        if ([ApplicationManager sharedInstance].configuration.hasCompanies && ![DBCompaniesManager selectedCompany]) {
+        if ([ApplicationConfig sharedInstance].hasCompanies && ![DBCompaniesManager selectedCompany]) {
             [self moveToCompanies];
             return;
         } else {
