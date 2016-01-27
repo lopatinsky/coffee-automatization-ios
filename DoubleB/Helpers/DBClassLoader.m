@@ -20,7 +20,7 @@
     return [[navVCClass alloc] init];
 }
 
-+ (DBCompanySettingsViewController *)loadSettingsViewController{
++ (DBBaseSettingsTableViewController *)loadSettingsViewController{
     Class settingsVCClass = NSClassFromString(@"DBCoffeeAutomationSettingsViewController");
     
     if (!settingsVCClass) {
@@ -28,7 +28,7 @@
     }
     
     if (!settingsVCClass) {
-        settingsVCClass = NSClassFromString(@"DBSettingsTableViewController");
+        settingsVCClass = NSClassFromString(@"DBCompanySettingsTableViewController");
     }
     
     return [[settingsVCClass alloc] init];

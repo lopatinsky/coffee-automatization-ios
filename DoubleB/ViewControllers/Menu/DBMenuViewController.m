@@ -80,6 +80,7 @@
     [super viewWillAppear:animated];
     
     [GANHelper analyzeScreen:self.analyticsCategory];
+    [self.subscriptionModuleView reload:YES];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
         [self loadMenu];

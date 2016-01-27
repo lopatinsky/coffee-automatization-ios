@@ -20,4 +20,8 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
+- (IBAction)buySubscription:(id)sender {
+    [self.delegate pushSubscriptionViewController];
+}
+
 @end

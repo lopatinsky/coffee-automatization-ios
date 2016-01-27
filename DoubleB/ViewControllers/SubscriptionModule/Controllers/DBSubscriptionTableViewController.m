@@ -11,6 +11,7 @@
 #import "DBFGPaymentModule.h"
 #import "DBSubscriptionTableViewCell.h"
 #import "DBCardsManager.h"
+#import "DBModuleHeaderView.h"
 
 #import "DBModuleView.h"
 #import "DBSubscriptionVariant.h"
@@ -56,6 +57,12 @@
     [self.cardsModuleContainer reload:YES];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.footerView layoutIfNeeded];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -80,6 +87,9 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100.0;
     
+    DBModuleHeaderView *header = [DBModuleHeaderView new];
+    header.title = NSLocalizedString(@"Выберите карту для оплаты", nil);
+    [self.cardsModuleContainer.submodules addObject:header];
     self.cardsModuleView = [DBFGPaymentModule new];
     [self.cardsModuleContainer.submodules addObject:self.cardsModuleView];
     self.cardsModuleView.ownerViewController = self;
@@ -134,8 +144,8 @@
     self.headerView.frame = frame;
     [self.headerView layoutIfNeeded];
     
-    NSInteger footerSize = 58;
-    footerSize += self.cardsModuleView.bounds.size.height;
+    NSInteger footerSize = 96;
+    footerSize += self.cardsModuleView.moduleViewContentHeight;
     frame = self.footerView.frame;
     frame.size.height = footerSize;
     self.footerView.frame = frame;

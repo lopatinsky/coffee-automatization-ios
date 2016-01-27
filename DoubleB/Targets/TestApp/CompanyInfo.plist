@@ -10,7 +10,7 @@
 	<key>ViewControllers</key>
 	<dict>
 		<key>MenuViewControllers</key>
-		<string>Mixed</string>
+		<string>Nested</string>
 	</dict>
 	<key>Preferences</key>
 	<dict>

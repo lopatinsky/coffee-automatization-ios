@@ -286,9 +286,10 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     }
 }
 
-+ (SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellForCategory:(DBMenuCategory *)category withIndexPath:(NSIndexPath *)indexPath andCell:(SubscriptionInfoTableViewCell *)cell {
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && indexPath.section == 0) {
++ (SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellWithIndexPath:(NSIndexPath *)indexPath {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && indexPath.section == 0) {
         if (indexPath.row == 0) {
+            SubscriptionInfoTableViewCell *cell = [[[NSBundle mainBundle] loadNibNamed:@"SubscriptionInfoTableViewCell" owner:self options:nil] firstObject];
             if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
                 cell.placeholderView.hidden = YES;
                 cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
@@ -309,8 +310,8 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     }
 }
 
-+ (NSIndexPath *)correctedIndexPath:(NSIndexPath *)indexPath forCategory:(DBMenuCategory *)category {
-    if ([[DBSubscriptionManager sharedInstance] isEnabled] && [DBSubscriptionManager categoryIsSubscription:category] && indexPath.section == 0) {
++ (NSIndexPath *)correctedIndexPath:(NSIndexPath *)indexPath {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled] && indexPath.section == 0) {
         if (indexPath.row == 0) {
             return indexPath;
         } else {

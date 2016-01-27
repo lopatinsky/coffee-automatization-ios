@@ -16,12 +16,15 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 
+#import "DBPositionModifiersListModalView.h"
 #import "DBMenuViewController.h"
 #import "DBSubscriptionPositionsViewController.h"
 
+#import "OrderCoordinator.h"
+
 #import "UIAlertView+BlocksKit.h"
 
-@interface DBSubscriptionModuleView ()<UITableViewDataSource, UITableViewDelegate, DBPositionCellDelegate>
+@interface DBSubscriptionModuleView ()<UITableViewDataSource, UITableViewDelegate, DBPositionCellDelegate, DBSubscriptionManagerProtocol>
 @property (strong, nonatomic) DBCategoryCell *cell;
 @property (strong, nonatomic) UITableView *tableView;
 
@@ -35,6 +38,10 @@
     [view config];
     
     return view;
+}
+
+- (void)viewWillAppearOnVC {
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)config {
@@ -59,6 +66,8 @@
         
         [self.tableView reloadData];
     }
+    
+    [DBSubscriptionManager sharedInstance].delegate = self;
 }
 
 - (void)pushSubscriptionViewController {
@@ -70,7 +79,7 @@
     if (_mode == DBSubscriptionModuleViewModeCategory) {
         return self.cell.frame.size.height;
     } else {
-        return [DBSubscriptionManager sharedInstance].subscriptionCategory.positions.count * [self heightForRow:0] + [self heightForHeader:0];
+        return ([DBSubscriptionManager sharedInstance].subscriptionCategory.positions.count + 1) * [self heightForRow:0] + [self heightForHeader:0];
     }
 }
 
@@ -89,50 +98,37 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [DBSubscriptionManager sharedInstance].subscriptionCategory.positions.count;
+    return [DBSubscriptionManager sharedInstance].subscriptionCategory.positions.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
-        
-        if (!cell) {
-            cell = [[[NSBundle mainBundle] loadNibNamed:@"SubscriptionInfoTableViewCell" owner:self options:nil] firstObject];
-        }
-        
-        if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
-            cell.placeholderView.hidden = YES;
-            cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
-            cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
-            cell.userInteractionEnabled = NO;
+    SubscriptionInfoTableViewCell *cell = [DBSubscriptionManager tryToDequeueSubscriptionCellWithIndexPath:indexPath];
+    NSIndexPath *correctedIndexPath = [DBSubscriptionManager correctedIndexPath:indexPath];
+    
+    if (cell) {
+        cell.delegate = self;
+        return cell;
+    } else {
+        DBPositionCell *cell;
+        if ([[[DBSubscriptionManager sharedInstance] subscriptionCategory] categoryWithImages]) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
+            if (!cell) {
+                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
+            }
         } else {
-            cell.placeholderView.hidden = NO;
-            cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
+            if (!cell) {
+                cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
+            }
         }
+        cell.delegate = self;
+        cell.priceAnimated = YES;
+        
+        DBMenuPosition *position = [[DBSubscriptionManager sharedInstance] subscriptionCategory].positions[correctedIndexPath.row];
+        [cell configureWithPosition:position];
+        
         return cell;
     }
-    
-    DBPositionCell *cell;
-    DBMenuCategory *category = [DBSubscriptionManager sharedInstance].subscriptionCategory;
-    if (category.categoryWithImages){
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCell"];
-        if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeFull];
-        }
-    } else {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DBPositionCompactCell"];
-        if (!cell) {
-            cell = [[DBPositionCell alloc] initWithType:DBPositionCellAppearanceTypeCompact];
-        }
-    }
-    
-    DBMenuPosition *position = category.positions[indexPath.row];
-    cell.contentType = DBPositionCellContentTypeRegular;
-    cell.priceAnimated = YES;
-    [cell configureWithPosition:position];
-    cell.delegate = self;
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -154,7 +150,7 @@
     }
 }
 
-- (CGFloat)heightForRow:(int)row {
+- (CGFloat)heightForRow:(NSInteger)row {
     if([DBSubscriptionManager sharedInstance].subscriptionCategory.categoryWithImages){
         return 120;
     } else {
@@ -162,7 +158,7 @@
     }
 }
 
-- (CGFloat)heightForHeader:(int)section {
+- (CGFloat)heightForHeader:(NSInteger)section {
     if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
         return 40.f;
     } else {
@@ -212,7 +208,25 @@
                                                    [GANHelper analyzeEvent:@"abonement_offer_no" category:MENU_SCREEN];
                                                }
                                            }];
+        } else {
+            if (cell.position.hasEmptyRequiredModifiers) {
+                DBPositionModifiersListModalView *modifiersList = [DBPositionModifiersListModalView new];
+                [modifiersList configureWithMenuPosition:cell.position];
+                [modifiersList showOnView:self.ownerViewController.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+            } else {
+                [[OrderCoordinator sharedInstance].itemsManager addPosition:cell.position];
+            }
+            [GANHelper analyzeEvent:@"product_added" label:cell.position.positionId category:MENU_SCREEN];
+            [GANHelper analyzeEvent:@"product_price_click" label:cell.position.positionId category:MENU_SCREEN];
         }
+    }
+}
+
+#pragma mark - DBSubscriberManagerDelegate
+
+- (void)currentSubscriptionStateChanged {
+    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

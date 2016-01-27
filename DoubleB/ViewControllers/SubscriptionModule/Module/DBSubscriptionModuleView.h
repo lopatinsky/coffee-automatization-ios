@@ -22,4 +22,6 @@ typedef NS_ENUM(NSInteger, DBSubscriptionModuleViewMode) {
 @property (nonatomic) DBSubscriptionModuleViewMode mode;
 
 + (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode;
+- (void)pushSubscriptionViewController;
+
 @end

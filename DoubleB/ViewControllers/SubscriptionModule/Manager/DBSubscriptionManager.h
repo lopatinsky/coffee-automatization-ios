@@ -69,8 +69,7 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 @interface DBSubscriptionManager(TableViewInjection)
 
 + (NSInteger)numberOfRowsInSection:(NSInteger)section forCategory:(nonnull DBMenuCategory *)category;
-+ (nullable SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellForCategory:(nonnull DBMenuCategory *) category withIndexPath:(nonnull NSIndexPath *)indexPath andCell:(nonnull SubscriptionInfoTableViewCell *)cell;
-+ (nonnull NSIndexPath *)correctedIndexPath:(nonnull NSIndexPath *)indexPath forCategory:(nonnull DBMenuCategory *)category;
-
++ (nullable SubscriptionInfoTableViewCell *)tryToDequeueSubscriptionCellWithIndexPath:(nonnull NSIndexPath *)indexPath;
++ (nonnull NSIndexPath *)correctedIndexPath:(nonnull NSIndexPath *)indexPath;
 
 @end

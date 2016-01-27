@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBSubscriptionModuleView.h"
 
 @interface SubscriptionInfoTableViewCell : UITableViewCell
 
@@ -16,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIView *placeholderView;
 @property (weak, nonatomic) IBOutlet UILabel *subscriptionAds;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
+
+@property (weak, nonatomic) DBSubscriptionModuleView *delegate;
 
 @end
