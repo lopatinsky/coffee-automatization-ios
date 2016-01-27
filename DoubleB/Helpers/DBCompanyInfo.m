@@ -10,9 +10,21 @@
 #import "DBServerAPI.h"
 #import "IHSecureStore.h"
 
+#import "DBMenu.h"
+#import "DBModulesManager.h"
+#import "OrderCoordinator.h"
+#import "DBShareHelper.h"
+#import "CompanyNewsManager.h"
+#import "DBVersionDependencyManager.h"
+#import "NetworkManager.h"
+
 #import <Parse/PFPush.h>
 
 NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificationInfoUpdated";
+
+@interface DBCompanyInfo ()
+@property (nonatomic, strong) NSString *remoteColor;
+@end
 
 @implementation DBCompanyInfo
 
@@ -22,12 +34,6 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     [self loadFromMemory];
     
     return self;
-}
-
-- (NSString *)bundleName{
-    NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-    
-    return bundleName;
 }
 
 - (BOOL)infoLoaded {
@@ -91,6 +97,9 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
             
+            NSString *hexString = response[@"colors"][@"action"];
+            _remoteColor = [hexString substringFromIndex:2];
+            
             [self synchronize];
             
             [self notifyObserverOf:DBCompanyInfoNotificationInfoUpdated];
@@ -101,71 +110,39 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     }];
 }
 
-+ (id)objectFromPropertyListByName:(NSString *)name {
-    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
-    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+- (void)fetchDependentInfo {
+    // Update menu
+    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+        if(success){
+            // Analyse user history to fetch selected modifiers
+            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
+        }
+    }];
+    [[DBModulesManager sharedInstance] fetchModules:nil];
+    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
+    [[OrderCoordinator sharedInstance].promoManager updateInfo];
+    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
+    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
     
-    return [companyInfo objectForKey:name];
-}
-
-+ (id)objectFromApplicationPreferencesByName:(NSString *)name {
-    return [[self objectFromPropertyListByName:@"Preferences"] objectForKey:name];
-}
-
-+ (NSString *)db_companyBaseUrl {
-    NSString *baseUrl = [self objectFromApplicationPreferencesByName:@"BaseUrl"];
-    
-    return baseUrl;
-}
-
-+ (BOOL)db_proxyApp{
-    BOOL proxy = [[self objectFromApplicationPreferencesByName:@"Proxy"] boolValue];
-    
-    return proxy;
-}
-
-+ (id)db_companyDefaultColor {
-    id colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
-    
-    return colorHex;
-}
-
-+ (NSString *)db_companyGoogleAnalyticsKey {
-    NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
-    
-    return GAKeyString ?: @"";
-}
-
-+ (NSString *)db_companyParseApplicationKey {
-    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
-    
-    NSString *appId = [parseInfo getValueForKey:@"applicationId"] ?: @"_";
-    return appId;
-}
-
-+ (NSString *)db_companyParseClientKey {
-    NSDictionary *parseInfo = [self objectFromApplicationPreferencesByName:@"Parse"];
-    
-    NSString *clientKey = [parseInfo getValueForKey:@"clientKey"] ?: @"_";
-    return clientKey;
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
 
 
 + (NSURL *)db_aboutAppUrl{
-    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/about.html"];
+    NSString *urlString = [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"/docs/about.html"];
     
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)db_licenceUrl{
-    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/licence_agreement.html"];
+    NSString *urlString = [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"/docs/licence_agreement.html"];
     
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)db_paymentRulesUrl{
-    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"/docs/payment_rules.html"];
+    NSString *urlString = [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"/docs/payment_rules.html"];
     
     return [NSURL URLWithString:urlString];
 }
@@ -173,13 +150,13 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 #pragma mark - PayPal
 
 + (NSURL *)db_payPalPrivacyPolicy{
-    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"docs/paypal_privacy_policy.html"];
+    NSString *urlString = [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"docs/paypal_privacy_policy.html"];
     
     return [NSURL URLWithString:urlString];
 }
 
 + (NSURL *)db_payPalUserAgreement{
-    NSString *urlString = [[self db_companyBaseUrl] stringByAppendingString:@"docs/paypal_user_agreement.html"];
+    NSString *urlString = [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"docs/paypal_user_agreement.html"];
     
     return [NSURL URLWithString:urlString];
 }
@@ -249,6 +226,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     _deliveryCities = info[@"_deliveryCities"];
     _promocodesIsEnabled = info[@"promocodeIsEnabled"] ?: @NO;
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
+    
+    _remoteColor = info[@"_remoteColor"];
 }
 
 - (void)synchronize {
@@ -266,7 +245,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
                            @"supportEmails": _supportEmails,
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
-                           @"promocodeIsEnabled": _promocodesIsEnabled};
+                           @"promocodeIsEnabled": _promocodesIsEnabled,
+                           @"_remoteColor": _remoteColor ?: @""};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];

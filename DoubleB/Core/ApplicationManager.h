@@ -19,9 +19,7 @@ typedef NS_ENUM(NSInteger, RootState) {
 
 typedef NS_ENUM(NSInteger, ApplicationType) {
     ApplicationTypeCommon = 0,
-    ApplicationTypeProxy,
-    ApplicationTypeAggregator,
-    ApplicationTypeDemo
+    ApplicationTypeAggregator
 };
 
 typedef NS_ENUM(NSInteger, ApplicationScreen) {
@@ -33,8 +31,41 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenVenue
 };
 
+/**
+ * Configuration for application
+ */
+@interface ApplicationConfig : NSObject
++ (instancetype)sharedInstance;
+
+// LOCAL
++ (id)objectFromPropertyListByName:(NSString *)name;
++ (id)objectFromApplicationPreferencesByName:(NSString *)name;
+
++ (ApplicationType)db_appType;
++ (NSString *)db_bundleName;
+
++ (NSString *)db_AppBaseUrl;
++ (id)db_AppDefaultColor;
++ (NSString *)db_AppGoogleAnalyticsKey;
+
+// REMOTE
+@property (strong, nonatomic) NSString *parseAppKey;
+@property (strong, nonatomic) NSString *parseClientKey;
+
+@property (strong, nonatomic) NSString *branchKey;
+
+@property (nonatomic) BOOL hasCities;
+@property (nonatomic) BOOL hasCompanies;
+
+
++ (void)sync:(NSDictionary *)remoteConfig;
++ (NSDictionary *)remoteConfig;
+@end
+
+/**
+ * Manager for whole application
+ */
 @interface ApplicationManager : NSObject<ManagerProtocol>
-@property (nonatomic) ApplicationType applicationType;
 
 + (instancetype)sharedInstance;
 + (void)handlePush:(NSDictionary *)push;
@@ -42,7 +73,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 - (void)initializeVendorFrameworks;
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions;
-- (void)fetchCompanyDependentInfo;
 
 @end
 
@@ -57,7 +87,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Start) <DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
-- (void)fetchCompanyDependentInfo;
 @end
 
 @interface ApplicationManager(Controllers)
@@ -65,6 +94,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 @end
 
 @interface ApplicationManager(ScreenState)
+- (void)moveToStartState:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen object:(id)object animated:(BOOL)animated;
 @end
@@ -73,15 +103,6 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 + (void)continueUserActivity:(NSUserActivity *)activity;
 @end
 
-@interface ApplicationManager(DemoApp)
-- (UIViewController *)demoLoginViewController;
-@end
-
 @interface ApplicationManager(Review)
 - (void)showReviewViewController:(NSString *)orderId;
-@end
-
-@interface ApplicationManager(AppConfig)
-- (void)fetchAppConfiguration:(void(^)(BOOL success))callback;
-- (void)reloadAppWithAppConfig;
 @end

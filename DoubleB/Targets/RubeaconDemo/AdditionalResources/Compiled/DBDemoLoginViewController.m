@@ -8,22 +8,19 @@
 
 #import "DBDemoLoginViewController.h"
 #import "AppDelegate.h"
-#import "DBTabBarController.h"
 #import "DBServerAPI+DemoLogin.h"
 #import "DBAPIClient.h"
 #import "MBProgressHUD.h"
 
 #import "ApplicationManager.h"
+#import "DBDemoManager.h"
 #import "DBCompaniesManager.h"
 
-@interface DBDemoLoginViewController ()
+@interface DBDemoLoginViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *loginTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *demoButton;
-
-@property (nonatomic) BOOL inProcess;
-
 @end
 
 @implementation DBDemoLoginViewController{
@@ -32,20 +29,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadSuccessNotification:)
-                                                 name:kDBApplicationManagerInfoLoadSuccess
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(firstLaunchNecessaryInfoLoadFailureNotification:)
-                                                 name:kDBApplicationManagerInfoLoadFailure
-                                               object:nil];
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    
+    self.loginTextField.delegate = self;
+    self.passwordTextField.delegate = self;
     
     if (!_gradientLayer) {
         _gradientLayer = [CAGradientLayer layer];
@@ -57,14 +47,8 @@
     }
 }
 
-
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
-
-- (BOOL)prefersStatusBarHidden{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.view endEditing:YES];
     return YES;
 }
 
@@ -76,57 +60,63 @@
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [DBServerAPI demoLogin:login
                       password:password
-                      callback:^(BOOL success, NSString *result) {
-                          if(success){
-                              _inProcess = YES;
-                              
-                              [[ApplicationManager sharedInstance] flushStoredCache];
-                              [DBCompaniesManager selectCompany:[[DBCompany alloc] initWithResponseDict:result]];
-                              
-                              [[ApplicationManager sharedInstance] updateAllInfo:nil];
-                          } else {
-                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                              
-                              NSString *message = result ?: @"Неверная пара логин/пароль";
-                              [self showError:message];
-                          }
-                      }];
+                       success:^(DBCompany *company) {
+                           [self selectCompany:company];
+                       } failure:^(NSString *description) {
+                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+                           NSString *message = description ?: @"Неверная пара логин/пароль";
+                           [self showError:message];
+                       }];
     }
 }
 
 - (IBAction)demoButtonClick:(id)sender {
-    if(![ApplicationManager sharedInstance].allInfoLoaded){
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        _inProcess = YES;
+    [self selectCompany:nil];
+}
+
+- (void)selectCompany:(DBCompany *)company {
+    [[ApplicationManager sharedInstance] flushStoredCache];
+    
+    [DBCompaniesManager selectCompany:company];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
         
+        [ApplicationManager applyBrandbookStyle];
+        
+        if(success){
+            if ([self.delegate respondsToSelector:@selector(db_demoLoginVCLoggedIn:)]) {
+                [self.delegate db_demoLoginVCLoggedIn:self];
+            }
+        } else {
+            [self showError:@"Не удалось загрузить информацию о выбранной компании"];
+        }
+    }];
+    
+    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+}
+
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBDemoLoginViewController *loginVC = [DBDemoLoginViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"profileVC";
+    settingsItem.title = NSLocalizedString(@"Выйти из демо", nil);
+    settingsItem.iconName = @"exit_icon";
+    settingsItem.viewController = loginVC;
+    settingsItem.eventLabel = @"logout_click";
+    settingsItem.block = ^void() {
         [[ApplicationManager sharedInstance] flushStoredCache];
-        [DBCompaniesManager selectCompanyName:nil];
+        [DBCompaniesManager selectCompany:nil];
         
-        [[ApplicationManager sharedInstance] updateAllInfo:nil];
-    } else {
-        [self moveForward];
-    }
-}
-
-- (void)moveForward {
-    [[DBTabBarController sharedInstance] moveToStartState];
-    [(AppDelegate *)[[UIApplication sharedApplication] delegate] window].rootViewController = [DBTabBarController sharedInstance];
-}
-
-- (void)firstLaunchNecessaryInfoLoadSuccessNotification:(NSNotification *)notification{
-    if(_inProcess){
-        _inProcess = NO;
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self moveForward];
-    }
-}
-
-- (void)firstLaunchNecessaryInfoLoadFailureNotification:(NSNotification *)notification{
-    if(_inProcess){
-        _inProcess = NO;
-        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-        [self showAlert:@"Не удается настроить приложение, поскольку отсутствует интернет-соединение"];
-    }
+        [[ApplicationManager sharedInstance] moveToStartState:YES];
+    };
+    
+    return settingsItem;
 }
 
 

@@ -54,7 +54,7 @@ static DBAPIClient *_sharedClient = nil;
 }
 
 + (NSString *)baseUrl {
-    return [[DBCompanyInfo db_companyBaseUrl] stringByAppendingString:@"api/"];
+    return [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"api/"];
 }
 
 // Dirty way to change base url

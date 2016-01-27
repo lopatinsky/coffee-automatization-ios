@@ -12,11 +12,12 @@
 @implementation SubscriptionInfoTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
     [self.cupImage templateImageWithName:@"mug" tintColor:[UIColor db_defaultColor]];
     [self.buyButton setBackgroundColor:[UIColor db_defaultColor]];
     self.buyButton.layer.cornerRadius = 5.;
     self.buyButton.clipsToBounds = YES;
+    
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 @end

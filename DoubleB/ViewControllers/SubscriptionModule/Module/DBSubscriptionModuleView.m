@@ -16,6 +16,9 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 
+#import "DBMenuViewController.h"
+#import "DBSubscriptionPositionsViewController.h"
+
 #import "UIAlertView+BlocksKit.h"
 
 @interface DBSubscriptionModuleView ()<UITableViewDataSource, UITableViewDelegate, DBPositionCellDelegate>
@@ -27,22 +30,23 @@
 @implementation DBSubscriptionModuleView
 
 + (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode{
-    DBSubscriptionModuleView *view = [DBSubscriptionModuleView new];
+    DBSubscriptionModuleView *view = [DBSubscriptionModuleView create];
     view.mode = mode;
+    [view config];
     
     return view;
 }
 
-- (void)commonInit {
+- (void)config {
     self.clipsToBounds = YES;
     
     if (_mode == DBSubscriptionModuleViewModeCategory) {
         DBCategoryCellAppearanceType type = [DBSubscriptionManager sharedInstance].subscriptionCategory.hasImage ? DBCategoryCellAppearanceTypeFull : DBCategoryCellAppearanceTypeCompact;
-        DBCategoryCell *cell = [[DBCategoryCell alloc] initWithType:type];
-        [cell configureWithCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
-        [self addSubview:cell];
-        cell.translatesAutoresizingMaskIntoConstraints = NO;
-        [cell alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
+        self.cell = [[DBCategoryCell alloc] initWithType:type];
+        [self.cell configureWithCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
+        [self addSubview:self.cell];
+        self.cell.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.cell alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
     } else {
         self.tableView = [UITableView new];
         self.tableView.delegate = self;
@@ -62,6 +66,21 @@
     [self.ownerViewController.navigationController pushViewController:subscriptionVC animated:YES];
 }
 
+- (CGFloat)moduleViewContentHeight {
+    if (_mode == DBSubscriptionModuleViewModeCategory) {
+        return self.cell.frame.size.height;
+    } else {
+        return [DBSubscriptionManager sharedInstance].subscriptionCategory.positions.count * [self heightForRow:0] + [self heightForHeader:0];
+    }
+}
+
+- (void)touchAtLocation:(CGPoint)location {
+    if (_mode == DBSubscriptionModuleViewModeCategory) {
+        DBSubscriptionPositionsViewController *positionsVC = [DBSubscriptionPositionsViewController new];
+        [self.ownerViewController.navigationController pushViewController:positionsVC animated:YES];
+    }
+}
+
 
 #pragma mark - UITableViewDataSource
 
@@ -76,16 +95,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
         SubscriptionInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SubscriptionCell"];
+        
+        if (!cell) {
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"SubscriptionInfoTableViewCell" owner:self options:nil] firstObject];
+        }
+        
         if ([[DBSubscriptionManager sharedInstance] isAvailable]) {
             cell.placeholderView.hidden = YES;
             cell.numberOfCupsLabel.text = [NSString stringWithFormat:@"x %ld", (long)[[DBSubscriptionManager sharedInstance] numberOfAvailableCups]];
             cell.numberOfDaysLabel.text = [NSString stringWithFormat:@"%@", [[[DBSubscriptionManager sharedInstance] currentSubscription] days]];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.userInteractionEnabled = NO;
         } else {
             cell.placeholderView.hidden = NO;
             cell.subscriptionAds.text = [DBSubscriptionManager sharedInstance].subscriptionMenuTitle;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return cell;
     }
@@ -114,19 +136,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if([DBSubscriptionManager sharedInstance].subscriptionCategory.categoryWithImages){
-        return 120;
-    } else {
-        return 50;
-    }
+    return [self heightForRow:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
-        return 40.f;
-    } else {
-        return 0;
-    }
+    return [self heightForHeader:section];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -137,6 +151,22 @@
         return headerView;
     } else {
         return nil;
+    }
+}
+
+- (CGFloat)heightForRow:(int)row {
+    if([DBSubscriptionManager sharedInstance].subscriptionCategory.categoryWithImages){
+        return 120;
+    } else {
+        return 50;
+    }
+}
+
+- (CGFloat)heightForHeader:(int)section {
+    if (self.mode == DBSubscriptionModuleViewModeCategoriesAndPositions) {
+        return 40.f;
+    } else {
+        return 0;
     }
 }
 

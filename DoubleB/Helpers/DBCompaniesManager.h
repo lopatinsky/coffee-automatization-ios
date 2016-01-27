@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "DBPrimaryManager.h"
-#import "DBBaseSettingsTableViewController.h"
 
 @interface DBCompany : NSObject<NSCoding>
 
@@ -22,7 +21,7 @@
 
 @end
 
-@interface DBCompaniesManager : DBPrimaryManager <DBSettingsProtocol>
+@interface DBCompaniesManager : DBPrimaryManager
 
 @property (nonatomic, readonly) BOOL companiesLoaded;
 

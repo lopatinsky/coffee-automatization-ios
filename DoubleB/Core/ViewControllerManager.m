@@ -44,24 +44,6 @@
 @end
 
 
-#pragma mark - Launch
-#import "LaunchViewController.h"
-@implementation ViewControllerManager(LaunchViewControllers)
-
-+ (nonnull NSDictionary *)launchViewControllerClasses {
-    return @{
-             @"default": [LaunchViewController class]
-             };
-}
-
-+ (nonnull UIViewController<DBLaunchViewControllerProtocol> *)launchViewController {
-    Class launchViewController = [self launchViewControllerClasses][[ViewControllerManager valueFromPropertyListByKey:@"Launch"] ?: @"default"];
-    return [launchViewController new];
-}
-
-@end
-
-
 #pragma mark - News
 #import "PopupNewsViewController.h"
 @implementation ViewControllerManager(NewsViewControllers)
@@ -177,6 +159,6 @@
 }
 
 + (nonnull DBBaseSettingsTableViewController *)companySettingsViewController {
-    return [DBCompanySettingsTableViewController new];
+    return [DBClassLoader loadSettingsViewController];
 }
 @end

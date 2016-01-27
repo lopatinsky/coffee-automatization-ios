@@ -30,24 +30,23 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setNavigationBarHidden:YES animated:NO];
-    if (![DBCitiesManager sharedInstance].citiesLoaded) {
+    if ([self needLaunchScreen]) {
         self.state = DBAggregatorStartStateLaunch;
-        UIViewController<DBLaunchViewControllerProtocol> *launchVC = [ViewControllerManager launchViewController];
-        
-        @weakify(self)
-        [launchVC setExecutableBlock:^{
-            @strongify(self)
-            [self fetchCitiesOnLaunch];
-        }];
-        self.viewControllers = @[launchVC];
     } else {
-        if (![DBCitiesManager selectedCity] && [DBCitiesManager sharedInstance].cities.count > 1) {
-            [self moveToCities:NO];
-        } else {
-            [self moveToUnifiedMenu:NO];
-        }
+        [self moveToMain];
     }
+}
+
+- (BOOL)needLaunchScreen {
+    BOOL result = [super needLaunchScreen];
+    
+    result = result || ([ApplicationConfig sharedInstance].hasCities && ![DBCitiesManager selectedCity]);
+    
+    return result;
+}
+
+- (void)additionalLaunchScreenActions {
+    [self fetchCitiesOnLaunch];
 }
 
 - (void)fetchCitiesOnLaunch {
@@ -66,28 +65,25 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 }
 
 - (void)moveToCities:(BOOL)animated {
-    [self setNavigationBarHidden:NO animated:animated];
     DBCitiesViewController *citiesVC = [DBCitiesViewController new];
     citiesVC.delegate = self;
+    citiesVC.mode = DBCitiesViewControllerModeChooseCity;
+    
+    [self setNavigationBarHidden:NO animated:animated];
     [self setViewControllers:@[citiesVC] animated:animated];
 }
 
-- (void)moveToUnifiedMenu:(BOOL)animated {
-    DBUnifiedMenuTableViewController *unifiedVC = [DBUnifiedMenuTableViewController new];
-    unifiedVC.type = UnifiedVenue;
-    [self setNavigationBarHidden:NO animated:animated];
-    [self setViewControllers:@[unifiedVC] animated:animated];
+- (void)moveToMain {
+    if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
+        self.state = DBAggregatorStartStateMain;
+        [self.navDelegate db_startNavVCNeedsMoveToMain:self];
+    }
 }
 
 #pragma mark - DBCitiesViewControllerDelegate
 - (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {
     [DBCitiesManager selectCity:city];
-    [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
-    [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
-    
-    DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
-    menuVC.type = UnifiedVenue;
-    [self pushViewController:menuVC animated:YES];
+    [self moveToMain];
 }
 
 @end

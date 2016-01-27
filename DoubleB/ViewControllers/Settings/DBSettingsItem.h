@@ -38,4 +38,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIView *view;
 @property (nonatomic) DBSettingsItemNavigation navigationType;
 
+@property (copy, nonatomic) void (^block)();
+
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DBSettingsTableViewController.h"
+#import "DBCompanySettingsTableViewController.h"
 
-@interface DBRubeaconDemoSettingsViewController : DBSettingsTableViewController
+@interface DBRubeaconDemoSettingsViewController : DBCompanySettingsTableViewController
 
-@end
+@end 

@@ -32,6 +32,11 @@
     
     [self setState:OperationExecuting];
     
+    Branch *branchInstance = [Branch getInstance];
+    if ([ApplicationConfig sharedInstance].branchKey) {
+        branchInstance = [Branch getInstance:[ApplicationConfig sharedInstance].branchKey];
+    }
+    
     [[Branch getInstance] initSessionWithLaunchOptions:self.launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         if (error) {
             [DBServerAPI registerUser:^(BOOL success) {

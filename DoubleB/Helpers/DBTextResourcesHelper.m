@@ -23,11 +23,11 @@
         }
     }
     
-    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"sushimarket"]){
+    if([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"sushimarket"]){
         title = NSLocalizedString(@"Магазины", nil);
     }
     
-    if([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"pastadeli"]){
+    if([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"pastadeli"]){
         title = NSLocalizedString(@"Пастерии", nil);
     }
     
@@ -35,7 +35,7 @@
 }
 
 + (NSString *)db_preparationOrderCellString {
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"] || [[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"testapp"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeeacademy"] || [[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"testapp"]) {
         return NSLocalizedString(@"Мы постараемся приготовить к %@", nil);
     } else {
         return NSLocalizedString(@"Готов к %@", nil);
@@ -54,7 +54,7 @@
         backImage = @"bg.jpg";
     }
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"osteriabianka"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"osteriabianka"]) {
         backImage = @"osteria_bg.jpg";
     }
     
@@ -64,15 +64,15 @@
 + (NSString *)db_shareBgImageName {
     NSString *imageName = @"share";
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"redcup"]) {
         imageName = @"share_redcup";
     }
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeacademy"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeeacademy"]) {
         imageName = @"share_coffeeacademy";
     }
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"voda"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"voda"]) {
         imageName = @"share_voda";
     }
     
@@ -82,7 +82,7 @@
 + (UIColor *)db_shareScreenTextColor {
     UIColor *color = [UIColor whiteColor];
     
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"voda"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"voda"]) {
         color = [UIColor blackColor];
     }
     

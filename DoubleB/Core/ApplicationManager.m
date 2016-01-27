@@ -33,9 +33,10 @@
 
 #import "DBAPIClient.h"
 #import "DBCommonStartNavController.h"
-#import "DBProxyStartNavController.h"
-#import "DBDemoStartNavController.h"
 #import "DBAggregatorStartNavController.h"
+
+#import "DBUnifiedMenuTableViewController.h"
+#import "DBUnifiedAppManager.h"
 
 #import "DBOrdersTableViewController.h"
 #import "DBOrderViewController.h"
@@ -64,6 +65,114 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     RemotePushNewsType,
     RemotePushInvalidType = 999999
 };
+
+
+
+@implementation ApplicationConfig
+
++ (instancetype)sharedInstance {
+    static dispatch_once_t once;
+    static ApplicationConfig *instance = nil;
+    dispatch_once(&once, ^{ instance = [[self alloc] init]; });
+    return instance;
+}
+
++ (id)objectFromPropertyListByName:(NSString *)name {
+    NSString *documentDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"CompanyInfo.plist"];
+    NSDictionary *companyInfo = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    return [companyInfo objectForKey:name];
+}
+
++ (id)objectFromApplicationPreferencesByName:(NSString *)name {
+    return [[self objectFromPropertyListByName:@"Preferences"] objectForKey:name];
+}
+
++ (NSString *)db_bundleName {
+    NSString *bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+    
+    return bundleName;
+}
+
++ (ApplicationType)db_appType {
+    NSString *typeString = [self objectFromApplicationPreferencesByName:@"ApplicationType"];
+    ApplicationType type = ApplicationTypeCommon;
+    
+    if ([typeString isEqualToString:@"Aggregator"]) {
+        type = ApplicationTypeAggregator;
+    }
+    
+    return type;
+}
+
++ (NSString *)db_AppBaseUrl {
+    NSString *baseUrl = [self objectFromApplicationPreferencesByName:@"BaseUrl"];
+    
+    return baseUrl;
+}
+
++ (id)db_AppDefaultColor {
+    id colorHex = colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
+
+    return colorHex;
+}
+
++ (NSString *)db_AppGoogleAnalyticsKey {
+    NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
+    
+    return GAKeyString ?: @"";
+}
+
+
+- (NSString *)parseAppKey {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    NSString *key = [[[config getValueForKey:@"keys"] getValueForKey:@"parse"] getValueForKey:@"app_key"];
+    return key;
+}
+
+- (NSString *)parseClientKey {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    NSString *key = [[[config getValueForKey:@"keys"] getValueForKey:@"parse"] getValueForKey:@"client_key"];
+    return key;
+}
+
+- (NSString *)branchKey {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    NSString *key = [[config getValueForKey:@"keys"] getValueForKey:@"branch"];
+    return key;
+}
+
+- (BOOL)hasCities {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    return [[config getValueForKey:@"has_cities"] boolValue];
+}
+
+- (BOOL)hasCompanies {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    return [[config getValueForKey:@"has_companies"] boolValue];
+}
+
++ (NSDictionary *)remoteConfig {
+    NSData *data = [[NSUserDefaults standardUserDefaults] dataForKey:@"ApplicationManager_AppConfig"];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+}
+
++ (void)sync:(NSDictionary *)remoteConfig {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:remoteConfig];
+    [[NSUserDefaults standardUserDefaults] setObject:data forKey:@"ApplicationManager_AppConfig"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+@end
+
+
+
 
 @interface ApplicationManager()
 
@@ -163,36 +272,14 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     return self;
 }
 
-- (ApplicationType)applicationType {
-    NSString *typeString = [DBCompanyInfo objectFromApplicationPreferencesByName:@"ApplicationType"];
-    ApplicationType type = ApplicationTypeCommon;
-    
-    if ([typeString isEqualToString:@"Proxy"]) {
-        type = ApplicationTypeProxy;
-    }
-    
-    if ([typeString isEqualToString:@"Aggregator"]) {
-        type = ApplicationTypeAggregator;
-    }
-    
-    if ([typeString isEqualToString:@"Demo"]) {
-        type = ApplicationTypeDemo;
-    }
-    
-    return type;
-}
-
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    NSDictionary *appConfig = [self appConfig];
-    if ([appConfig getValueForKey:@"parse"]) {
-        [Parse setApplicationId:appConfig[@"parse"][@"app_key"]
-                      clientKey:appConfig[@"parse"][@"client_key"]];
-    } else {
-        [Parse setApplicationId:[DBCompanyInfo db_companyParseApplicationKey]
-                      clientKey:[DBCompanyInfo db_companyParseClientKey]];
+    if ([ApplicationConfig sharedInstance].parseAppKey && [ApplicationConfig sharedInstance].parseClientKey) {
+        [Parse setApplicationId:[ApplicationConfig sharedInstance].parseAppKey
+                      clientKey:[ApplicationConfig sharedInstance].parseClientKey];
     }
+    
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     
@@ -202,6 +289,10 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+    if ([ApplicationConfig remoteConfig] != nil) {
+        [self initializeVendorFrameworks];
+    }
+    
     [DBVersionDependencyManager performAll];
     
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
@@ -209,13 +300,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
     }
     
-    [[NetworkManager sharedManager] addUniqueOperation:NetworkOperationFetchAppConfig];
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
     
     [IHPaymentManager sharedInstance];
     [DBShareHelper sharedInstance];
     [OrderCoordinator sharedInstance];
-    [[CompanyNewsManager sharedManager] fetchUpdates];
     
 #ifdef DEBUG
     if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
@@ -225,42 +314,16 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     
 }
 
-- (void)fetchCompanyDependentInfo {
-    // Update menu
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
-        if(success){
-            // Analyse user history to fetch selected modifiers
-            [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
-        }
-    }];
-    [[DBModulesManager sharedInstance] fetchModules:nil];
-    [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
-    [[OrderCoordinator sharedInstance].promoManager updateInfo];
-    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
-    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
-    
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
-}
-
 - (void)awakeFromNotification:(NSDictionary *)userInfo {
     UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
     [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
     [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
 }
 
-- (void)setAppConfig:(NSDictionary *)appConfig {
-    [[NSUserDefaults standardUserDefaults] setObject:appConfig forKey:@"ApplicationManager_AppConfig"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
 - (void)recieveNotification:(NSDictionary *)userInfo {
     if([UIApplication sharedApplication].applicationState != 0){
         [self awakeFromNotification:userInfo];
     }
-}
-
-- (NSDictionary *)appConfig {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:@"ApplicationManager_AppConfig"] ?: @{};
 }
 
 #pragma mark - API Notification handlers
@@ -342,7 +405,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager(Style)
 
 + (void)applyBrandbookStyle {
-    if ([[DBCompanyInfo  sharedInstance].bundleName.lowercaseString isEqualToString:@"redcup"] && [UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"redcup"] && [UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
         [UINavigationBar appearance].translucent = NO;
     }
     
@@ -373,15 +436,12 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 - (UIViewController *)rootViewController {
     if (self.state == RootStateStart) {
-        switch (self.applicationType) {
-            case ApplicationTypeCommon:
-                return [[DBCommonStartNavController alloc] initWithDelegate:self];
-                break;
-            case ApplicationTypeProxy:
-                return [[DBProxyStartNavController alloc] initWithDelegate:self];
-                break;
-            case ApplicationTypeDemo:
-                return [[DBDemoStartNavController alloc] initWithDelegate:self];
+        switch ([ApplicationConfig db_appType]) {
+            case ApplicationTypeCommon: {
+                DBStartNavController *startNavVC = [DBClassLoader loadStartNavigationController];
+                startNavVC.navDelegate = self;
+                return startNavVC;
+            }
                 break;
             case ApplicationTypeAggregator:
                 return [[DBAggregatorStartNavController alloc] initWithDelegate:self];
@@ -398,7 +458,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 - (void)db_startNavVCNeedsMoveToMain:(UIViewController *)controller {
     self.state = RootStateMain;
     
-    [self fetchCompanyDependentInfo];
+    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
     [self changeRoot];
 }
 
@@ -407,12 +467,26 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 @implementation ApplicationManager (Controllers)
 
 - (UIViewController *)mainViewController {
-    return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"]) {
+        [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
+        [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
+        
+        DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
+        menuVC.type = UnifiedVenue;
+        return [[UINavigationController alloc] initWithRootViewController:menuVC];
+    } else {
+        return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
+    }
 }
 
 @end
 
 @implementation ApplicationManager (ScreenState)
+
+- (void)moveToStartState:(BOOL)animated {
+    self.state = RootStateStart;
+    [self changeRoot];
+}
 
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated {
     [self moveToScreen:screen object:nil animated:animated];
@@ -491,30 +565,4 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:reviewViewController];
     [[UIViewController currentViewController] presentViewController:navigationController animated:YES completion:nil];
 }
-@end
-
-@implementation ApplicationManager (AppConfig)
-
-- (void)fetchAppConfiguration:(void (^)(BOOL))callback {
-    [[DBAPIClient sharedClient] GET:@"app/config"
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//                                [self setAppConfig:responseObject];
-                                [self initializeVendorFrameworks];
-                                if (callback)
-                                    callback(YES);
-                            }
-                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                                NSLog(@"%@", error);
-                                
-                                if (callback)
-                                    callback(NO);
-                            }];
-    
-}
-
-- (void)reloadAppWithAppConfig {
-    
-}
-
 @end

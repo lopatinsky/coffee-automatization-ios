@@ -12,11 +12,12 @@
 #import "DBUnifiedMenuTableViewController.h"
 #import "DBCitiesManager.h"
 #import "NetworkManager.h"
+#import "DBCompaniesManager.h"
+#import "DBCompaniesViewController.h"
 
 #import "MBProgressHUD.h"
 
 @interface DBCitiesViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
-
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *citiesTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTableViewBottomAlignment;
@@ -51,14 +52,16 @@
             [self reload];
         }];
     } else {
-        [[DBCitiesManager sharedInstance] fetchCities:nil];
-        [self reload];
+        [[DBCitiesManager sharedInstance] fetchCities:^(BOOL success) {
+            [self reload];
+        }];
     }
     
-//    if ([DBCitiesManager selectedCity]) {
-//        self.searchBar.text = [DBCitiesManager selectedCity].cityName;
-//        [self reload];
-//    }
+    if ([DBCitiesManager selectedCity] && self.mode == DBCitiesViewControllerModeChooseCity) {
+        self.searchBar.text = [DBCitiesManager selectedCity].cityName;
+    }
+    
+    [self reload];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -102,10 +105,39 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([self.delegate respondsToSelector:@selector(db_citiesViewControllerDidSelectCity:)]) {
-        [self.delegate db_citiesViewControllerDidSelectCity:_cities[indexPath.row]];
-        if ([self.delegate isKindOfClass:[DBGeneralSettingsTableViewController class]]) {
-            [self.navigationController popViewControllerAnimated:YES];
+    
+    if (self.mode == DBCitiesViewControllerModeChooseCity) {
+        if ([self.delegate respondsToSelector:@selector(db_citiesViewControllerDidSelectCity:)]) {
+            [self.delegate db_citiesViewControllerDidSelectCity:_cities[indexPath.row]];
+        }
+    } else {
+        // REALY REALY DIRTY
+        [[ApplicationManager sharedInstance] flushStoredCache];
+        
+        [DBCitiesManager selectCity:_cities[indexPath.row]];
+        if ([ApplicationConfig sharedInstance].hasCompanies) {
+            [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
+                if (companies.count > 1) {
+                    DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
+                    [companiesVC setVCMode:DBCompaniesViewControllerModeChangeCompany];
+                } else {
+                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                        
+                        [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
+                    }];
+                    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+                }
+            }];
+        } else {
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                
+                [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
+            }];
+            [[DBCompanyInfo sharedInstance] fetchDependentInfo];
         }
     }
 }
@@ -147,11 +179,12 @@
 
 + (id<DBSettingsItemProtocol>)settingsItem {
     DBCitiesViewController *vc = [DBCitiesViewController new];
+    vc.mode = DBCitiesViewControllerModeChangeCity;
     DBSettingsItem *settingsItem = [DBSettingsItem new];
     
     settingsItem.name = @"citiesVC";
-    settingsItem.title = NSLocalizedString(@"Города", nil);
-    settingsItem.iconName = @"ic_location_city";
+    settingsItem.title = NSLocalizedString(@"Город", nil);
+    settingsItem.iconName = @"city_icon";
     settingsItem.viewController = vc;
     settingsItem.reachTitle = [[DBCitiesManager selectedCity] cityName];
     settingsItem.eventLabel = @"cities_click";

@@ -35,12 +35,12 @@
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
     // TODO: change forceCopy to false after test
-    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"coffeeautomation"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeeautomation"]) {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:false];
     } else {
         [ApplicationManager copyPlistWithName:@"CompanyInfo" forceCopy:true];
     }
-    [[ApplicationManager sharedInstance] initializeVendorFrameworks];
+    
     [[ApplicationManager sharedInstance] startApplicationWithOptions:launchOptions];
     [ApplicationManager applyBrandbookStyle];
     

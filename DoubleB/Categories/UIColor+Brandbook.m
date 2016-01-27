@@ -16,7 +16,7 @@
 }
 
 + (UIColor *)db_defaultColor {
-    id color = [DBCompanyInfo db_companyDefaultColor];
+    id color = [ApplicationConfig db_AppDefaultColor];
     
     if ([color isKindOfClass:[NSNumber class]]) {
         return [UIColor fromHex:[color intValue]];

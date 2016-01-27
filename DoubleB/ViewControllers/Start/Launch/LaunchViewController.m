@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *tipView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (nonatomic, copy) void (^exBlock)();
-
 @end
 
 @implementation LaunchViewController
@@ -42,13 +40,9 @@
     [GANHelper analyzeScreen:LAUNCH_PLACEHOLDER_SCREEN];
     
     [self.activityIndicator startAnimating];
-    if (self.exBlock){
-        self.exBlock();
+    if (self.executionBlock){
+        self.executionBlock();
     }
-}
-
-- (void)setExecutableBlock:(void (^)())executableBlock {
-    _exBlock = executableBlock;
 }
 
 @end

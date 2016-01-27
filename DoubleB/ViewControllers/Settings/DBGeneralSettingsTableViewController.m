@@ -20,20 +20,17 @@
     [super viewWillAppear:animated];
 }
 
-- (void)loadAllSettingsItems {
-    [self.settingsItems addObject:[DBProfileViewController settingsItem]];
+- (NSMutableArray *)settingsItems {
+    NSMutableArray *settingsItems = [NSMutableArray new];
     
-    if ([[DBCitiesManager sharedInstance] cities]) {
+    if ([[DBCitiesManager sharedInstance] cities].count > 1) {
         DBSettingsItem *item = [DBCitiesViewController settingsItem];
-        [(DBCitiesViewController *)[item viewController] setDelegate:self];
-        [self.settingsItems addObject:item];
+        [settingsItems addObject:item];
     }
-}
-
-- (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {
-    [DBCitiesManager selectCity:city];
-    [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
-    [[DBUnifiedAppManager sharedInstance] fetchVenues:nil];
+    
+    [settingsItems addObject:[DBProfileViewController settingsItem]];
+    
+    return settingsItems;
 }
 
 @end
