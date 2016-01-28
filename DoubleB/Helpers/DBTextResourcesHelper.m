@@ -89,4 +89,12 @@
     return color;
 }
 
++ (NSString *)db_initialMenuTitle {
+    if ([DBCompanyInfo sharedInstance].type == DBCompanyTypeOther) {
+        return NSLocalizedString(@"Каталог", nil);
+    } else {
+        return NSLocalizedString(@"Меню", nil);
+    }
+}
+
 @end

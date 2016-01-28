@@ -17,7 +17,7 @@
 #import "UIImageView+PINRemoteImage.h"
 
 @interface DBPositionCell()
-@property (weak, nonatomic) UIImageView *positionImageView;
+@property (weak, nonatomic) DBImageView *positionImageView;
 @property (weak, nonatomic) UILabel *titleLabel;
 @property (weak, nonatomic) UILabel *descriptionLabel;
 @property (weak, nonatomic) UILabel *weightLabel;
@@ -76,12 +76,19 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.priceView.mode = DBPositionPriceViewModeInteracted;
-    self.priceView.touchAction = ^void(){
-        [self.delegate positionCellDidOrder:self];
-        if (self.priceAnimated)
-            [self.priceView animatePositionAdditionWithCompletion:nil];
-    };
+    self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
+    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
+    
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"cosmotheca"]) {
+        self.priceView.mode = DBPositionPriceViewModeStatic;
+    } else {
+        self.priceView.mode = DBPositionPriceViewModeInteracted;
+        self.priceView.touchAction = ^void(){
+            [self.delegate positionCellDidOrder:self];
+            if (self.priceAnimated)
+                [self.priceView animatePositionAdditionWithCompletion:nil];
+        };
+    }
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
@@ -104,7 +111,7 @@
 }
 
 - (void)initOutlets {
-    self.positionImageView = (UIImageView *)[self.contentView viewWithTag:1];
+    self.positionImageView = (DBImageView *)[self.contentView viewWithTag:1];
     self.titleLabel = (UILabel *)[self.contentView viewWithTag:2];
     self.descriptionLabel = (UILabel *)[self.contentView viewWithTag:3];
     self.weightLabel = (UILabel *)[self.contentView viewWithTag:4];
@@ -127,21 +134,7 @@
             self.weightLabel.hidden = NO;
         }
         
-        self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
-        
-        self.positionImageView.image = nil;
-        [self.positionImageView db_showDefaultImage];
-        [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:position.imageUrl] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if (!error){
-                [self.positionImageView db_hideDefaultImage];
-            }
-        }];
-//        [self.positionImageView setPin_updateWithProgress:YES];
-//        [self.positionImageView pin_setImageFromURL:[NSURL URLWithString:position.imageUrl] completion:^(PINRemoteImageManagerResult *result) {
-//            if (result.resultType != PINRemoteImageResultTypeNone) {
-//                [self.positionImageView db_hideDefaultImage];
-//            }
-//        }];
+        self.positionImageView.dbImageUrl = [NSURL URLWithString:position.imageUrl];
     }
 }
 

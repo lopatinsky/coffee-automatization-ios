@@ -19,4 +19,6 @@
 + (NSString *)db_shareBgImageName;
 + (UIColor *)db_shareScreenTextColor;
 
++ (NSString *)db_initialMenuTitle;
+
 @end

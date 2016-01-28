@@ -64,11 +64,6 @@
         [self setupPositionsMode];
     }
     
-    self.menuModuleView.analyticsCategory = self.analyticsCategory;
-    self.menuModuleView.ownerViewController = self;
-    self.menuModuleView.delegate = self;
-    self.menuModuleView.menuModuleDelegate = self;
-    
     [self.view addSubview:self.menuModuleView];
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
@@ -219,19 +214,19 @@
         [self reloadTitleView:nil];
     } else {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                         remoteMenu:^(BOOL success, NSArray *categories) {
-                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                             
-                                             if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
-                                                 ((DBMixedMenuModuleView *)self.menuModuleView).categories = categories;
-                                             } else if (self.mode == DBMenuViewControllerModeCategories) {
-                                                 ((DBCategoriesMenuModuleView *)self.menuModuleView).categories = categories;
-                                             }
-                                             
-                                             [self.menuModuleView reloadContent];
-                                             [self reloadTitleView:nil];
-                                         }];
+        [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+            NSArray *venueMenu = [[DBMenu sharedInstance] getMenuForVenue:venue];
+            if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
+                ((DBMixedMenuModuleView *)self.menuModuleView).categories = venueMenu;
+            } else if (self.mode == DBMenuViewControllerModeCategories) {
+                ((DBCategoriesMenuModuleView *)self.menuModuleView).categories = venueMenu;
+            }
+            
+            [self.menuModuleView reloadContent];
+            [self reloadTitleView:nil];
+        }];
     }
 }
 
@@ -244,6 +239,11 @@
 
 - (void)setupCategoriesMode {
     DBCategoriesMenuModuleView *module = [DBCategoriesMenuModuleView create];
+    module.analyticsCategory = self.analyticsCategory;
+    module.ownerViewController = self;
+    module.delegate = self;
+    module.menuModuleDelegate = self;
+    
     if (self.type == DBMenuViewControllerTypeInitial) {
         module.updateEnabled = YES;
     } else {
@@ -253,7 +253,7 @@
     self.menuModuleView = module;
     
     if (self.type == DBMenuViewControllerTypeInitial) {
-        [self db_setTitle:NSLocalizedString(@"Меню", nil)];
+        [self db_setTitle:[DBTextResourcesHelper db_initialMenuTitle]];
     } else {
         [self db_setTitle:self.category.name];
     }
@@ -263,11 +263,16 @@
 
 - (void)setupPositionsMode {
     DBPositionsMenuModuleView *module = [DBPositionsMenuModuleView create];
+    module.analyticsCategory = self.analyticsCategory;
+    module.ownerViewController = self;
+    module.delegate = self;
+    module.menuModuleDelegate = self;
+    
     module.category = self.category;
     self.menuModuleView = module;
     
     if (self.type == DBMenuViewControllerTypeInitial) {
-        [self db_setTitle:NSLocalizedString(@"Меню", nil)];
+        [self db_setTitle:[DBTextResourcesHelper db_initialMenuTitle]];
     } else {
         [self db_setTitle:self.category.name];
     }
@@ -281,6 +286,11 @@
 
 - (void)setupCategoriesAndPositionsMode {
     DBMixedMenuModuleView *module = [DBMixedMenuModuleView create];
+    module.analyticsCategory = self.analyticsCategory;
+    module.ownerViewController = self;
+    module.delegate = self;
+    module.menuModuleDelegate = self;
+    
     if (self.type == DBMenuViewControllerTypeInitial) {
         module.updateEnabled = YES;
     } else {
@@ -302,7 +312,7 @@
     _titleView.delegate = self;
     
     if (self.type == DBMenuViewControllerTypeInitial) {
-        _titleView.title = NSLocalizedString(@"Меню", nil);
+        _titleView.title = [DBTextResourcesHelper db_initialMenuTitle];
     } else {
         _titleView.title = self.category.name;
     }

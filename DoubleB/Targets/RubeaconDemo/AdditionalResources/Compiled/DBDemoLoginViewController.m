@@ -10,7 +10,6 @@
 #import "AppDelegate.h"
 #import "DBServerAPI+DemoLogin.h"
 #import "DBAPIClient.h"
-#import "MBProgressHUD.h"
 
 #import "ApplicationManager.h"
 #import "DBDemoManager.h"

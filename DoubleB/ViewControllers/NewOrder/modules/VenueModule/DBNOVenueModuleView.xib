@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeueLights.ttc">
@@ -17,7 +17,6 @@
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-ib-dI5">
                     <rect key="frame" x="33" y="12" width="279" height="21"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="o5D-iA-has"/>
                     </constraints>
@@ -26,7 +25,6 @@
                 </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g8d-ji-iPN">
                     <rect key="frame" x="36" y="12" width="20" height="20"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="CgF-sp-NWf"/>
                         <constraint firstAttribute="height" constant="20" id="oXf-f9-pUr"/>
@@ -34,14 +32,12 @@
                 </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
                     <rect key="frame" x="8" y="13" width="15" height="18"/>
-                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="Xkx-XR-X2N"/>
                         <constraint firstAttribute="height" constant="18" id="rCs-CM-2VH"/>
                     </constraints>
                 </imageView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="WI0-ib-dI5" firstAttribute="centerY" secondItem="kNg-g0-2zK" secondAttribute="centerY" id="Kqx-zN-zcu"/>

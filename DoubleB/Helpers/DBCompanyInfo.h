@@ -10,6 +10,7 @@
 #import "DBPrimaryManager.h"
 #import "ManagerProtocol.h"
 #import "DBDeliveryType.h"
+#import "DBMenu.h"
 
 extern NSString * const DBCompanyInfoNotificationInfoUpdated;
 
@@ -53,6 +54,8 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 - (void)updateInfo:(void(^)(BOOL success))callback;
 
 - (void)fetchDependentInfo;
+
++ (DBMenuType)db_menuType;
 
 + (NSURL *)db_aboutAppUrl;
 + (NSURL *)db_licenceUrl;

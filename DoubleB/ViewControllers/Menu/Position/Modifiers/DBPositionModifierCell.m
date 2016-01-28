@@ -33,10 +33,12 @@
 - (void)awakeFromNib {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    [self.arrowImageView templateImageWithName:@"right_arrow_icon"];
+    [self.arrowImageView templateImageWithName:@"right_arrow_icon" tintColor:[UIColor blackColor]];
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
-    self.choiceLabel.textColor = [UIColor db_defaultColor];
+    self.titleLabel.textColor = [UIColor db_defaultColor];
+    self.choiceLabel.textColor = [UIColor colorWithWhite:0.f alpha:0.7f];
+    self.priceLabel.textColor = [UIColor db_defaultColor];
 }
 
 - (void)configureWithGroupModifier:(DBMenuPositionModifier *)modifier {

@@ -37,7 +37,15 @@
 - (void)setCategory:(DBMenuCategory *)category {
     _category = category;
     
-    [self.tableView reloadData];
+    if (DBMenu.type == DBMenuTypeSimple || category.positions.count > 0) {
+        [self.tableView reloadData];
+    } else {
+        [MBProgressHUD showHUDAddedTo:self animated:YES];
+        [[DBMenu sharedInstance] updateCategory:category callback:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self animated:YES];
+            [self.tableView reloadData];
+        }];
+    }
 }
 
 - (void)reloadContent {

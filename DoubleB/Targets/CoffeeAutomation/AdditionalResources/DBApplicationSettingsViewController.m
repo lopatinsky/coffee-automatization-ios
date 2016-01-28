@@ -9,7 +9,6 @@
 #import "DBApplicationSettingsViewController.h"
 #import "AppDelegate.h"
 #import "DBAPIClient.h"
-#import "MBProgressHUD.h"
 
 @interface DBApplicationSettingsViewController ()
 @property (strong, nonatomic) NSArray *applications;

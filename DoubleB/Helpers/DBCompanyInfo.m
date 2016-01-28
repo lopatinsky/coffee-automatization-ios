@@ -93,7 +93,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             NSString *orderPushChannel = [response[@"push_channels"] getValueForKey:@"order"]  ?: @"";
             _orderPushChannel = [orderPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             
-            _friendInvitationEnabled = [response[@"share_invitation"][@"enabled"] boolValue];
+            _friendInvitationEnabled = [[response[@"share_invitation"] getValueForKey:@"enabled"] boolValue];
             
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
             
@@ -128,6 +128,11 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
 
++ (DBMenuType)db_menuType {
+    NSString *menuTypeString = [[self objectFromPropertyListByName:@"AppConfiguration"] objectForKey:@"MenuType"];
+    
+    return [menuTypeString isEqualToString:@"Skeleton"] ? DBMenuTypeSkeleton : DBMenuTypeSimple;
+}
 
 + (NSURL *)db_aboutAppUrl{
     NSString *urlString = [[ApplicationConfig db_AppBaseUrl] stringByAppendingString:@"/docs/about.html"];

@@ -10,11 +10,16 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "DBSubscriptionManager.h"
+#import "Venue.h"
 
 #import "DBAPIClient.h"
 
 @interface DBMenu ()
 @property(strong, nonatomic) NSArray *categories;
+@end
+
+@interface DBMenuPositionBalance ()
++ (DBMenuPositionBalance *)fromResponseDict:(NSDictionary *)dict;
 @end
 
 @implementation DBMenu
@@ -40,6 +45,10 @@
 
 - (void)dealloc {
     [self saveMenuToDeviceMemory];
+}
+
++ (DBMenuType)type {
+    return [DBCompanyInfo db_menuType];
 }
 
 - (BOOL)hasNestedCategories{
@@ -73,36 +82,24 @@
         [self loadMenuFromDeviceMemory];
     }
     
-    return [self filterMenuForVenue:venue];
+    if (venue) {
+        return [self filterMenuForVenue:venue];
+    } else {
+        return [self getMenu];
+    }
 }
 
-- (NSArray *)getMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [self updateMenuForVenue:venue remoteMenu:remoteMenuCallback];
-    return [self getMenuForVenue:venue];
-}
-
-- (void)updateMenuForVenue:(Venue *)venue remoteMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
-    [self fetchMenu:^(BOOL success, NSArray *categories) {
-        NSArray *filteredCategories;
-        
-        if(success){
-            if(venue){
-                filteredCategories = [self filterMenuForVenue:venue];
-            } else {
-                filteredCategories = categories;
-            }
-        }
-        
-        if(remoteMenuCallback){
-            remoteMenuCallback(success, filteredCategories);
-        }
-    }];
-}
-
-- (void)fetchMenu:(void (^)(BOOL success, NSArray *categories))remoteMenuCallback{
+- (void)updateMenu:(void (^)(BOOL success, NSArray *categories))callback{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+//    [params addEntriesFromDictionary:[[DBSubscriptionManager sharedInstance] menuRequest]];
+    
+    if ([DBMenu type] == DBMenuTypeSkeleton) {
+        params[@"request_menu_frame"] = @"true";
+    }
+    
     NSDate *startTime = [NSDate date];
     [[DBAPIClient sharedClient] GET:@"menu"
-                         parameters:[[DBSubscriptionManager sharedInstance] menuRequest]
+                         parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 NSDate *endTime = [NSDate date];
                                 int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
@@ -114,8 +111,8 @@
                                 NSDictionary *menu = [[DBSubscriptionManager sharedInstance] cutSubscriptionCategory:responseObject];
                                 [self synchronizeWithResponseMenu:menu[@"menu"]];
                                 
-                                if(remoteMenuCallback)
-                                    remoteMenuCallback(YES, self.categories);
+                                if(callback)
+                                    callback(YES, self.categories);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
                                 
@@ -123,8 +120,72 @@
                                                   label:error.description
                                                category:APPLICATION_START];
                                 
-                                if(remoteMenuCallback)
-                                    remoteMenuCallback(NO, nil);
+                                if(callback)
+                                    callback(NO, nil);
+                            }];
+}
+
+- (void)updateCategory:(DBMenuCategory *)category callback:(void(^)(BOOL success))callback {
+    NSDate *startTime = [NSDate date];
+    [[DBAPIClient sharedClient] GET:@"category"
+                         parameters:@{@"category_id": category.categoryId}
+                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                NSDate *endTime = [NSDate date];
+                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                
+                                [GANHelper analyzeEvent:@"menu_category_load_success"
+                                                 number:@(interval)
+                                               category:APPLICATION_START];
+                                
+                                
+                                DBMenuCategory *remoteCategory = [DBMenuCategory categoryFromResponseDictionary:responseObject[@"category"]];
+                                category.positions = remoteCategory.positions;
+                                
+                                if(callback)
+                                    callback(YES);
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"%@", error);
+                                
+                                [GANHelper analyzeEvent:@"menu_category_load_failed"
+                                                  label:error.description
+                                               category:APPLICATION_START];
+                                
+                                if(callback)
+                                    callback(NO);
+                            }];
+}
+
+- (void)updatePositionBalance:(DBMenuPosition *)position callback:(void (^)(BOOL, NSArray *))callback {
+    [[DBAPIClient sharedClient] GET:@"remainders"
+                         parameters:@{@"item_id": position.positionId}
+                            success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                NSMutableArray *balances = [NSMutableArray new];
+                                
+                                for (NSDictionary *balanceDict in responseObject[@"remainders"]) {
+                                    DBMenuPositionBalance *balance = [DBMenuPositionBalance fromResponseDict:balanceDict];
+                                    if (balance) {
+                                        [balances addObject:balance];
+                                    }
+                                }
+                                
+//                                for (int i = 0; i < 10; i++) {
+//                                    DBMenuPositionBalance *balance = [DBMenuPositionBalance new];
+//                                    balance.venue = [Venue storedVenues].firstObject;
+//                                    balance.balance = i;
+//                                    
+//                                    [balances addObject:balance];
+//                                }
+                                
+                                if (callback) {
+                                    callback(YES, balances);
+                                }
+                            }
+                            failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                NSLog(@"%@", error);
+                                
+                                if (callback) {
+                                    callback(NO, nil);
+                                }
                             }];
 }
 
@@ -221,6 +282,28 @@
     NSData *data = [NSData dataWithContentsOfFile:path];
     
     self.categories = [self sortCategories:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+}
+
+@end
+
+
+@implementation DBMenuPositionBalance
+
++ (DBMenuPositionBalance *)fromResponseDict:(NSDictionary *)dict {
+    DBMenuPositionBalance *positionBalance;
+    
+    NSString *venueId = [dict getValueForKey:@"venue_id"] ?: @"";
+    Venue *venue = [Venue venueById:venueId];
+    if (venue) {
+        NSInteger count = [dict getValueForKey:@"value"] ? [[dict getValueForKey:@"value"] integerValue] : -1;
+        if (count != 0) {
+            positionBalance = [DBMenuPositionBalance new];
+            positionBalance.venue = venue;
+            positionBalance.balance = count;
+        }
+    }
+    
+    return positionBalance;
 }
 
 @end

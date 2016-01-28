@@ -49,8 +49,6 @@
     OrderItem *item = cell.orderItem;
     
     UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
-    positionVC.parentNavigationController = self.ownerViewController.navigationController;
-    positionVC.hidesBottomBarWhenPushed = YES;
     [self.ownerViewController.navigationController pushViewController:positionVC animated:YES];
 }
 

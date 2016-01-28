@@ -16,7 +16,6 @@
 #import "DBModuleView.h"
 #import "DBSubscriptionVariant.h"
 #import "UIColor+Brandbook.h"
-#import "MBProgressHUD.h"
 #import "UIAlertView+BlocksKit.h"
 #import "GANHelper.h"
 #import "IHSecureStore.h"

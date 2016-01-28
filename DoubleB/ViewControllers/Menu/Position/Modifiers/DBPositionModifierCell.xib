@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="HelveticaNeue.ttc">
@@ -22,10 +22,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_arrow_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="6XU-zE-T3x">
-                        <rect key="frame" x="292" y="22.5" width="20" height="20"/>
+                        <rect key="frame" x="297" y="25" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="J2d-2c-5vB"/>
-                            <constraint firstAttribute="width" constant="20" id="vnE-yB-7q7"/>
+                            <constraint firstAttribute="height" constant="15" id="J2d-2c-5vB"/>
+                            <constraint firstAttribute="width" constant="15" id="vnE-yB-7q7"/>
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pYx-7h-knC">
@@ -36,40 +36,39 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Стандартная порция (350 гр)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0b-lt-bpg">
-                        <rect key="frame" x="10" y="22.5" width="225.5" height="20"/>
+                        <rect key="frame" x="8" y="22.5" width="232.5" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="AVN-el-wES"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="размер" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3BF-Sh-JCj">
-                        <rect key="frame" x="10" y="7.5" width="300" height="15"/>
+                        <rect key="frame" x="8" y="7.5" width="302" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="FDn-I9-qLH"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="+ 65 руб." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dGQ-rM-FSX">
-                        <rect key="frame" x="240.5" y="25.5" width="46.5" height="15"/>
+                        <rect key="frame" x="245.5" y="25.5" width="46.5" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="z2e-Hq-d4d"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="G0b-lt-bpg" secondAttribute="centerY" constant="-5" id="2FV-78-DkT"/>
                     <constraint firstItem="pYx-7h-knC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="5Va-yp-DBe"/>
-                    <constraint firstItem="G0b-lt-bpg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="7PJ-ix-g4u"/>
+                    <constraint firstItem="G0b-lt-bpg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="7PJ-ix-g4u"/>
                     <constraint firstItem="6XU-zE-T3x" firstAttribute="leading" secondItem="dGQ-rM-FSX" secondAttribute="trailing" constant="5" id="9q9-Bg-srU"/>
                     <constraint firstItem="6XU-zE-T3x" firstAttribute="centerY" secondItem="G0b-lt-bpg" secondAttribute="centerY" id="Fmh-tU-CPr"/>
-                    <constraint firstItem="3BF-Sh-JCj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Iuq-bV-CMk"/>
+                    <constraint firstItem="3BF-Sh-JCj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="Iuq-bV-CMk"/>
                     <constraint firstItem="dGQ-rM-FSX" firstAttribute="leading" secondItem="G0b-lt-bpg" secondAttribute="trailing" constant="5" id="NLC-2e-u2C"/>
                     <constraint firstItem="dGQ-rM-FSX" firstAttribute="centerY" secondItem="G0b-lt-bpg" secondAttribute="centerY" id="Ra4-a3-Hrw"/>
                     <constraint firstAttribute="bottom" secondItem="pYx-7h-knC" secondAttribute="bottom" id="T3h-r4-PtO"/>

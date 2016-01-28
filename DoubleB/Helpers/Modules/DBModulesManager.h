@@ -15,9 +15,10 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeProfileScreenUniversal = 4,
     DBModuleTypeGeoPush = 5,
     DBModuleTypeFriendGiftMivako = 7,
+	DBModuleTypePositionBalances = 10,
+	DBModuleTypeOrderScreenUniversal = 11,
     DBModuleTypePersonsCount = 12,
     DBModuleTypeOddSum = 13,
-    DBModuleTypeOrderScreenUniversal = 11,
     
     DBModuleTypeLast // Enum item for iteration, not in use
 };

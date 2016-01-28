@@ -8,7 +8,6 @@
 
 #import "UIViewController+DBPayPalManagement.h"
 #import "DBPayPalManager.h"
-#import "MBProgressHUD.h"
 
 @implementation UIViewController (DBPayPalManagement)
 

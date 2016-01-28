@@ -14,7 +14,6 @@
 #import "DBShareHelper.h"
 
 #import "DBServerAPI.h"
-#import "MBProgressHUD.h"
 #import "UIAlertView+BlocksKit.h"
 
 @interface DBNOOrderModuleView ()

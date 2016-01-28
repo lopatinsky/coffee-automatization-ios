@@ -34,7 +34,7 @@ typedef NS_ENUM(NSUInteger, DBOrderItemCellType) {
 @interface DBOrderItemCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *orderCellContentView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
+@property (weak, nonatomic) IBOutlet DBImageView *positionImageView;
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;

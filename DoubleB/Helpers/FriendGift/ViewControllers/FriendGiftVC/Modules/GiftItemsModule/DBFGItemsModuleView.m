@@ -182,7 +182,6 @@
     OrderItem *item = cell.orderItem;
     
     UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:item.position mode:PositionViewControllerModeOrderPosition];
-    positionVC.parentNavigationController = self.ownerViewController.navigationController;
     [self.ownerViewController.navigationController pushViewController:positionVC animated:YES];
 }
 

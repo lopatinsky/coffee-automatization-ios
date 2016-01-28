@@ -9,7 +9,6 @@
 #import "IHPaymentManager.h"
 #import "DBCardsManager.h"
 #import "IHWebPageViewController.h"
-#import "MBProgressHUD.h"
 #import "DBAPIClient.h"
 #import "DBClientInfo.h"
 

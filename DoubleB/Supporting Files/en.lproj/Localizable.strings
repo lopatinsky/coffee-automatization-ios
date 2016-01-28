@@ -21,6 +21,10 @@
 "ккал" = "kcal";
 "мл" = "ml";
 
+"Проверить наличие" = "Check availability";
+
+"Нет изображения" = "No image";
+
 "Адрес доставки" = "Shipping address";
 "Улица, дом" = "Street, house";
 "Кв/Офис" = "apartment";
@@ -177,6 +181,7 @@
 "Добавление карты" = "Card binding";
 
 "Меню" = "Menu";
+"Каталог" = "Catalog";
 "История" = "History";
 "Заказ" = "Order";
 "Заказ | %lu" = "Order | %lu";
