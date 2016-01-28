@@ -78,7 +78,7 @@
     result = result && value.length > 0;
     
     NSString *onlyDecimal = [value stringContainingOnlyDecimalDigits];
-    result = result && onlyDecimal.length > 0;
+    result = result && onlyDecimal.length == 11;
     
     return result;
 }

@@ -86,12 +86,14 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"viewController": ordersVC}];
     
     // Venues item
-    DBVenuesViewController *venuesVC = [DBVenuesViewController new];
-    venuesVC.mode = DBVenuesViewControllerModeList;
-    [self.settingsItems addObject:@{@"name": @"venuesVC",
-                                    @"title": [DBTextResourcesHelper db_venuesTitleString],
-                                    @"image": @"map_icon_active",
-                                    @"viewController": venuesVC}];
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] || [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
+        DBVenuesViewController *venuesVC = [DBVenuesViewController new];
+        venuesVC.mode = DBVenuesViewControllerModeList;
+        [self.settingsItems addObject:@{@"name": @"venuesVC",
+                                        @"title": [DBTextResourcesHelper db_venuesTitleString],
+                                        @"image": @"map_icon_active",
+                                        @"viewController": venuesVC}];
+    }
     
     // Share friends item
     if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
