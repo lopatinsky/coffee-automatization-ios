@@ -68,6 +68,7 @@
         } else {
             self.noImageLabel.hidden = NO;
         }
+        self.backgroundColor = [UIColor colorWithRed:235./255 green:235./255 blue:235./255 alpha:1.0f];
         self.image = nil;
     } else {
         if (_noImageType == DBImageViewNoImageTypeImage) {
@@ -75,6 +76,7 @@
         } else {
             self.noImageLabel.hidden = YES;
         }
+        self.backgroundColor = [UIColor clearColor];
     }
 }
 

@@ -202,9 +202,9 @@ static NSDictionary *_preference;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self cellType] == DBCategoryCellAppearanceTypeFull) {
-        return [ViewManager menuCategoriesFullCellHeight];
+        return [[DBClassLoader loadCategoryCell] height:DBCategoryCellAppearanceTypeFull];
     } else {
-        return [ViewManager menuCategoriesCompactCellHeight];
+        return [[DBClassLoader loadCategoryCell] height:DBCategoryCellAppearanceTypeCompact];
     }
 }
 
@@ -216,7 +216,12 @@ static NSDictionary *_preference;
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
     if (!cell){
-        cell = [[DBCategoryCell alloc] initWithType:[self cellType]];
+        Class<DBCategoryCellProtocol> cellClass = [DBClassLoader loadCategoryCell];
+        if ([self hasImages]){
+            cell = [cellClass create:DBCategoryCellAppearanceTypeFull];
+        } else {
+            cell = [cellClass create:DBCategoryCellAppearanceTypeCompact];
+        }
     }
     
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.row];

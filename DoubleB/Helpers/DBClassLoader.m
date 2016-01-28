@@ -43,10 +43,15 @@
 }
 
 #pragma mark - Views
-+ (Class)menuCategoryCell {
+
++ (Class<DBCategoryCellProtocol>)loadCategoryCell {
     Class categoryCellClass = NSClassFromString(@"DBCategoryCellCoffeeAcademy");
     
-    if(!categoryCellClass){
+    if (!categoryCellClass) {
+        categoryCellClass = NSClassFromString(@"DBSushilarCategoryCell");
+    }
+    
+    if (!categoryCellClass) {
         categoryCellClass = NSClassFromString(@"DBCategoryCell");
     }
     

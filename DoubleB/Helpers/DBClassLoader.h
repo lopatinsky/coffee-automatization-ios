@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "DBNewOrderVC.h"
+#import "DBCategoryCell.h"
 
 @class DBCompanySettingsViewController;
 @class DBStartNavController;
 @class DBNewOrderVC;
 @class DBCategoryCell;
+
 
 @interface DBClassLoader : NSObject
 
@@ -20,8 +22,6 @@
 + (DBNewOrderVC *)loadNewOrderVC;
 + (DBCompanySettingsViewController *)loadSettingsViewController;
 
-
-#pragma mark - Views
-+ (Class)menuCategoryCell;
++ (Class<DBCategoryCellProtocol>)loadCategoryCell;
 
 @end

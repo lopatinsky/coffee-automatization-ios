@@ -2,6 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
+	</dict>
 	<key>ViewControllers</key>
 	<dict>
 		<key>MenuViewControllers</key>
@@ -10,7 +17,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://sushilar.resto.doubleb-automation-production.appspot.com/</string>
+		<string>http://sushilar.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<integer>4288661069</integer>
 		<key>CompanyGAKey</key>
@@ -18,9 +25,9 @@
 		<key>Parse</key>
 		<dict>
 			<key>applicationId</key>
-			<string>8EdzRDGVxjOqnHzv7WU7S6XbhIUBsgzqPk6ax77m</string>
+			<string>cNj2NYzRp5h6YN2xJ8zQKIjxOajLeLxv6DBdbTA7</string>
 			<key>clientKey</key>
-			<string>CSxzgKDGJwUv7GVySEpkti7nOiHYFJMHR3RYxnU0</string>
+			<string>vqJdIVhrpTUgphFX2Rpbhbd6qJcwWKn35ReuOdYS</string>
 		</dict>
 	</dict>
 </dict>

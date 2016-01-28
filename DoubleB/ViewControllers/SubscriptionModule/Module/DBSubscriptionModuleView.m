@@ -49,7 +49,10 @@
     
     if (_mode == DBSubscriptionModuleViewModeCategory) {
         DBCategoryCellAppearanceType type = [DBSubscriptionManager sharedInstance].subscriptionCategory.hasImage ? DBCategoryCellAppearanceTypeFull : DBCategoryCellAppearanceTypeCompact;
-        self.cell = [[DBCategoryCell alloc] initWithType:type];
+        
+        Class<DBCategoryCellProtocol> cellClass = [DBClassLoader loadCategoryCell];
+        self.cell = [cellClass create:type];
+        
         [self.cell configureWithCategory:[DBSubscriptionManager sharedInstance].subscriptionCategory];
         [self addSubview:self.cell];
         self.cell.translatesAutoresizingMaskIntoConstraints = NO;

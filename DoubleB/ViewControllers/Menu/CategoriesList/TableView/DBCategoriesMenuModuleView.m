@@ -78,14 +78,23 @@
     }
 }
 
+- (DBCategoryCellAppearanceType)cellType {
+    if ([self hasImages]) {
+        return DBCategoryCellAppearanceTypeFull;
+    } else {
+        return DBCategoryCellAppearanceTypeCompact;
+    }
+}
+
 #pragma mark - Table view data source
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self hasImages]) {
-        return 90.f;
+    if ([self cellType] == DBCategoryCellAppearanceTypeFull) {
+        return [[DBClassLoader loadCategoryCell] height:DBCategoryCellAppearanceTypeFull];
     } else {
-        return 65.f;
+        return [[DBClassLoader loadCategoryCell] height:DBCategoryCellAppearanceTypeCompact];
     }
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -96,10 +105,11 @@
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
     if (!cell){
+        Class<DBCategoryCellProtocol> cellClass = [DBClassLoader loadCategoryCell];
         if ([self hasImages]){
-            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeFull];
+            cell = [cellClass create:DBCategoryCellAppearanceTypeFull];
         } else {
-            cell = [[DBCategoryCell alloc] initWithType:DBCategoryCellAppearanceTypeCompact];
+            cell = [cellClass create:DBCategoryCellAppearanceTypeCompact];
         }
     }
     
