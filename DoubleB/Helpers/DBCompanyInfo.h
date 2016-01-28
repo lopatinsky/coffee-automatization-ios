@@ -22,7 +22,8 @@ typedef NS_ENUM(NSUInteger, DBCompanyPOS) {
 typedef NS_ENUM(NSUInteger, DBCompanyType) {
     DBCompanyTypeCafe = 0,
     DBCompanyTypeRestaurant = 1,
-    DBCompanyTypeOther = 2
+    DBCompanyTypeOther = 2,
+    DBCompanyTypeMobileShop = 3
 };
 
 @interface DBCompanyInfo : DBPrimaryManager<ManagerProtocol>

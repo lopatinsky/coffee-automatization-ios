@@ -56,7 +56,7 @@
     self.orderCellContentView.backgroundColor = [UIColor whiteColor];
     
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
-    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
+    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     
     self.separatorView.backgroundColor = [UIColor db_separatorColor];
     

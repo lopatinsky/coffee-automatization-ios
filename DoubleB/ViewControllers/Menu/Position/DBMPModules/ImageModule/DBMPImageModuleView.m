@@ -23,7 +23,7 @@
     self.positionImageView = [DBImageView new];
     self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.positionImageView.clipsToBounds = YES;
-    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
+    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     [self addSubview:self.positionImageView];
     self.positionImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.positionImageView constrainHeight:@"220"];

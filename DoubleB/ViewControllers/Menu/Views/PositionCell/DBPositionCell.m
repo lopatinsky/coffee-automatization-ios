@@ -77,7 +77,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
-    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
+    self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     
     if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"cosmotheca"]) {
         self.priceView.mode = DBPositionPriceViewModeStatic;

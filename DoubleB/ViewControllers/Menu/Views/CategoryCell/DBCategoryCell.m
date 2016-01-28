@@ -51,7 +51,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.categoryIconImageView.contentMode = [ViewManager defaultMenuCategoryIconsContentMode];
-    self.categoryIconImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeOther ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
+    self.categoryIconImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     
     self.disclosureIndicator.tintColor = [UIColor db_defaultColor];
     [self.disclosureIndicator templateImageWithName:@"right_arrow_icon.png"];
