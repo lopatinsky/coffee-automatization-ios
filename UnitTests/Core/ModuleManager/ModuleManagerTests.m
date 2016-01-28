@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-#import "ModuleManager.h"
+//#import "ModuleManager.h"
 
 #import "Module.h"
 

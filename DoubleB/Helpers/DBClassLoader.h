@@ -7,15 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBNewOrderVC.h"
 
 @class DBCompanySettingsViewController;
 @class DBStartNavController;
+@class DBNewOrderVC;
 @class DBCategoryCell;
 
 @interface DBClassLoader : NSObject
 
 + (DBStartNavController *)loadStartNavigationController;
-+ (UIViewController *)loadNewOrderViewController;
++ (DBNewOrderVC *)loadNewOrderVC;
 + (DBCompanySettingsViewController *)loadSettingsViewController;
 
 

@@ -10,4 +10,6 @@
 
 @interface DBNewOrderVC : DBModulesViewController
 
+- (void)setupModules;
+
 @end

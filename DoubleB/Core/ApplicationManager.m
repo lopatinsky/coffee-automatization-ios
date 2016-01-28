@@ -505,7 +505,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
             
         case ApplicationScreenOrder: {
             if ([rootVC isKindOfClass:[UINavigationController class]]){
-                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderVC];
                 [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject, newOrderVC] animated:animated];
             }
         } break;
@@ -534,7 +534,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
         
         case ApplicationScreenVenue: {
             if ([rootVC isKindOfClass:[UINavigationController class]]) {
-                UIViewController *newOrderVC = [DBClassLoader loadNewOrderViewController];
+                UIViewController *newOrderVC = [DBClassLoader loadNewOrderVC];
                 UIViewController *venuesVC = [DBVenuesTableViewController new];
                 DBVenueViewController *venueVC = [DBVenueViewController new];
                 if ([object isKindOfClass:[Venue class]]) {

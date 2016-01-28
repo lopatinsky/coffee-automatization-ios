@@ -112,7 +112,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 
 - (void)fetchDependentInfo {
     // Update menu
-    [[DBMenu sharedInstance] updateMenuForVenue:nil remoteMenu:^(BOOL success, NSArray *categories) {
+    [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
         if(success){
             // Analyse user history to fetch selected modifiers
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
@@ -129,7 +129,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 }
 
 + (DBMenuType)db_menuType {
-    NSString *menuTypeString = [[self objectFromPropertyListByName:@"AppConfiguration"] objectForKey:@"MenuType"];
+    NSString *menuTypeString = [[ApplicationConfig objectFromPropertyListByName:@"AppConfiguration"] objectForKey:@"MenuType"];
     
     return [menuTypeString isEqualToString:@"Skeleton"] ? DBMenuTypeSkeleton : DBMenuTypeSimple;
 }

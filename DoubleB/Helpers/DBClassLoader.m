@@ -33,16 +33,12 @@
     
     return [[settingsVCClass alloc] init];
 }
-
-+ (UIViewController *)loadNewOrderViewController{
-//    Class newOrderVCClass = NSClassFromString(@"DBCatNewOrderViewController");
-//    
-//    if(!newOrderVCClass){
-//        newOrderVCClass = NSClassFromString(@"DBNewOrderViewController");
-//    }
-//    
-//    return [[newOrderVCClass alloc] initWithNibName:@"DBNewOrderViewController" bundle:[NSBundle mainBundle]];
-    Class newOrderVCClass = NSClassFromString(@"DBNewOrderVC");
++ (DBNewOrderVC *)loadNewOrderVC {
+    Class newOrderVCClass = NSClassFromString(@"DBCosmothecaNewOrderVC");
+    
+    if (!newOrderVCClass) {
+        newOrderVCClass = NSClassFromString(@"DBNewOrderVC");
+    }
     return [[newOrderVCClass alloc] init];
 }
 

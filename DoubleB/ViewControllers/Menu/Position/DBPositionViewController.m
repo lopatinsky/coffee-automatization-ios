@@ -86,7 +86,7 @@
 }
 
 - (void)moveToOrder{
-    [self.navigationController pushViewController:[DBClassLoader loadNewOrderViewController] animated:YES];
+    [self.navigationController pushViewController:[DBClassLoader loadNewOrderVC] animated:YES];
     [GANHelper analyzeEvent:@"order_pressed" category:self.analyticsCategory];
 }
 

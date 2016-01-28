@@ -58,7 +58,6 @@
     self.noImageLabel.hidden = YES;
     
     self.backgroundColor = [UIColor colorWithRed:235./255 green:235./255 blue:235./255 alpha:1.0f];
-//    self.backgroundColor = [UIColor db_grayColor];
 }
 
 - (void)setHasImage:(BOOL)hasImage {
