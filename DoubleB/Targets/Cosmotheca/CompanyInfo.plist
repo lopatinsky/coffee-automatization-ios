@@ -4,8 +4,6 @@
 <dict>
 	<key>AppConfiguration</key>
 	<dict>
-		<key>AppType</key>
-		<string>MobileShop</string>
 		<key>MenuType</key>
 		<string>Skeleton</string>
 	</dict>

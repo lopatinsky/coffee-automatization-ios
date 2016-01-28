@@ -90,7 +90,7 @@
 }
 
 + (NSString *)db_initialMenuTitle {
-    if ([DBCompanyInfo sharedInstance].type == DBCompanyTypeOther) {
+    if ([DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop) {
         return NSLocalizedString(@"Каталог", nil);
     } else {
         return NSLocalizedString(@"Меню", nil);
