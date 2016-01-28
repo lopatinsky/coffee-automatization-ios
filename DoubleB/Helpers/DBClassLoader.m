@@ -42,4 +42,14 @@
     }
 }
 
++ (Class<DBCategoryCellProtocol>)loadCategoryCell {
+    Class categoryCellClass = NSClassFromString(@"DBSushilarCategoryCell");
+    
+    if (!categoryCellClass) {
+        categoryCellClass = NSClassFromString(@"DBCategoryCell");
+    }
+    
+    return categoryCellClass;
+}
+
 @end

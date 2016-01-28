@@ -12,40 +12,18 @@
 #import "UIImageView+PINRemoteImage.h"
 
 @interface DBCategoryCell ()<UIGestureRecognizerDelegate>
-@property (weak, nonatomic) UIImageView *categoryIconImageView;
-@property (weak, nonatomic) UILabel *categoryNameLabel;
-@property (weak, nonatomic) UIImageView *disclosureIndicator;
-@property (weak, nonatomic) UIView *separatorView;
 @end
 
 @implementation DBCategoryCell
 
-- (instancetype)initWithType:(DBCategoryCellAppearanceType)type {
++ (instancetype)create:(DBCategoryCellAppearanceType)type {
     if (type == DBCategoryCellAppearanceTypeFull)
-        self = [self initFullCell];
+        return [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCell" owner:self options:nil] firstObject];
     else
-        self = [self initCompactCell];
-    
-    return self;
+        return [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCompactCell" owner:self options:nil] firstObject];
 }
 
-- (instancetype)init{
-    self = [self initFullCell];
-    return self;
-}
-
-- (instancetype)initFullCell {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCell" owner:self options:nil] firstObject];
-    return self;
-}
-
-- (instancetype)initCompactCell {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCompactCell" owner:self options:nil] firstObject];
-    return self;
-}
-
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [self initOutlets];
     
     self.backgroundColor = [UIColor whiteColor];
@@ -57,7 +35,6 @@
     self.disclosureIndicator.tintColor = [UIColor db_defaultColor];
     [self.disclosureIndicator templateImageWithName:@"right_arrow_icon.png"];
     
-    self.separatorView.backgroundColor = [UIColor db_separatorColor];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] init];
     tapGestureRecognizer.delegate = self;
@@ -68,7 +45,6 @@
     self.categoryIconImageView = (UIImageView *)[self.contentView viewWithTag:1];
     self.categoryNameLabel = (UILabel *)[self.contentView viewWithTag:2];
     self.disclosureIndicator = (UIImageView *)[self.contentView viewWithTag:3];
-    self.separatorView = [self.contentView viewWithTag:4];
 }
 
 - (void)configureWithCategory:(DBMenuCategory *)category{
@@ -83,6 +59,14 @@
         }
     }];
     self.categoryNameLabel.text = category.name;
+}
+
++ (CGFloat)height:(DBCategoryCellAppearanceType)type {
+    if (type == DBCategoryCellAppearanceTypeFull) {
+        return 90.f;
+    } else {
+        return 65.f;
+    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{

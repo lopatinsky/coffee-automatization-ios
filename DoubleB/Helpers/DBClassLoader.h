@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBCategoryCell.h"
 
 @class DBSettingsTableViewController;
+
 
 @interface DBClassLoader : NSObject
 
 + (UIViewController *)loadNewOrderViewController;
 + (DBSettingsTableViewController *)loadSettingsViewController;
+
++ (Class<DBCategoryCellProtocol>)loadCategoryCell;
 
 @end

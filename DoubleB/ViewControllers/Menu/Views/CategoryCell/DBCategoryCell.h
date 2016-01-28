@@ -15,10 +15,21 @@ typedef NS_ENUM(NSUInteger, DBCategoryCellAppearanceType) {
 
 @class DBMenuCategory;
 
-@interface DBCategoryCell : UITableViewCell
+@protocol DBCategoryCellProtocol <NSObject>
+
++ (instancetype)create:(DBCategoryCellAppearanceType)type;
+- (void)configureWithCategory:(DBMenuCategory *)category;
+
++ (CGFloat)height:(DBCategoryCellAppearanceType)type;
+
+@end
+
+@interface DBCategoryCell : UITableViewCell<DBCategoryCellProtocol>
+@property (weak, nonatomic) UIImageView *categoryIconImageView;
+@property (weak, nonatomic) UILabel *categoryNameLabel;
+@property (weak, nonatomic) UIImageView *disclosureIndicator;
+
 @property (strong, nonatomic, readonly) DBMenuCategory *category;
 
-- (instancetype)initWithType:(DBCategoryCellAppearanceType)type;
-- (void)configureWithCategory:(DBMenuCategory *)category;
 
 @end
