@@ -109,6 +109,9 @@
     Venue *venue = _venues[indexPath.row];
     
     if (_mode == DBVenuesViewControllerModeChooseVenue) {
+        if ([OrderCoordinator sharedInstance].orderManager.venue != venue) {
+            [[ApplicationManager sharedInstance] moveMenuToStartState:NO];
+        }
         [OrderCoordinator sharedInstance].orderManager.venue = venue;
         [self.parentViewController.navigationController popViewControllerAnimated:YES];
     } else {
