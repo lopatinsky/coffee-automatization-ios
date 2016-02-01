@@ -21,7 +21,7 @@ typedef NS_ENUM(NSUInteger, TimeMode) {
     TimeModeDateTime = 1 << 1,
     TimeModeSlots = 1 << 2,
     TimeModeDateSlots = 1 << 3,
-    TimeModeDual = 1 << 4,
+    TimeModeDual = 3,
 };
 
 
