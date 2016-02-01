@@ -23,6 +23,7 @@
 
 @property (weak, nonatomic) id<DBPositionModifiersListDelegate> delegate;
 @property (nonatomic, readonly) NSInteger contentHeight;
+@property (nonatomic) BOOL scrollEnabled;
 
 - (void)configureWithPosition:(DBMenuPosition *)position;
 - (void)reload;

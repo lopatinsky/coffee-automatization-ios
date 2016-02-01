@@ -29,6 +29,7 @@
 
 - (void)commonInit {
     self.modifiersList = [DBPositionModifiersList new];
+    self.modifiersList.scrollEnabled = NO;
     self.modifiersList.delegate = self;
     [self addSubview:self.modifiersList];
     self.modifiersList.translatesAutoresizingMaskIntoConstraints = NO;

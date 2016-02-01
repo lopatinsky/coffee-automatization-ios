@@ -47,17 +47,21 @@
     
     self.analyticsCategory = PRODUCT_SCREEN;
     
-    _orderModule = [DBMPOrderModuleView create];
-    _orderModule.analyticsCategory = self.analyticsCategory;
-    _orderModule.ownerViewController = self;
-    _orderModule.position = self.position;
-    
-    _orderModule.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addSubview:_orderModule];
-    [_orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
-    [_orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
-    
-    self.bottomInset = _orderModule.frame.size.height + 5;
+    if (self.mode == PositionViewControllerModeMenuPosition) {
+        _orderModule = [DBMPOrderModuleView create];
+        _orderModule.analyticsCategory = self.analyticsCategory;
+        _orderModule.ownerViewController = self;
+        _orderModule.position = self.position;
+        
+        _orderModule.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:_orderModule];
+        [_orderModule alignLeading:@"0" trailing:@"0" toView:self.view];
+        [_orderModule alignBottomEdgeWithView:self.view predicate:@"0"];
+        
+        self.bottomInset = _orderModule.frame.size.height + 5;
+    } else {
+        self.bottomInset = 5;
+    }
     self.scrollView.bounces = NO;
     
     [self setupModules];

@@ -49,6 +49,12 @@
     return height;
 }
 
+- (void)setScrollEnabled:(BOOL)scrollEnabled {
+    _scrollEnabled = scrollEnabled;
+    
+    self.tableView.scrollEnabled = _scrollEnabled;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
