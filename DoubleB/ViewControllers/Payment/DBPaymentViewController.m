@@ -106,6 +106,7 @@
     
     if ([moduleClass isEqual:[DBPaymentCourierCardModuleView class]]) {
         result = [[IHPaymentManager sharedInstance] paymentTypeAvailable:PaymentTypeCourierCard];
+        result = result && self.mode == DBPaymentViewControllerModeChoosePayment;
         result = result && (self.paymentTypes ? [self.paymentTypes containsObject:@(PaymentTypeCourierCard)] : YES);
     }
     

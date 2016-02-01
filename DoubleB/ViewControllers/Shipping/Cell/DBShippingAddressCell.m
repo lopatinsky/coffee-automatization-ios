@@ -70,6 +70,11 @@
             self.textField.text = _shippingManager.selectedAddress.apartment;
         }
             break;
+        case DBShippingAddressCellTypeEntranceNumber:{
+            self.titleLabel.text = NSLocalizedString(@"Подъезд", nil);
+            self.textField.text = _shippingManager.selectedAddress.entranceNumber;
+            break;
+        }
         case DBShippingAddressCellTypeComment:{
             self.titleLabel.text = NSLocalizedString(@"Комментарий", nil);
             self.textField.text = _shippingManager.selectedAddress.comment;
@@ -110,7 +115,9 @@
         case DBShippingAddressCellTypeComment:
             [_shippingManager setComment:sender.text];
             break;
-            
+        case DBShippingAddressCellTypeEntranceNumber:
+            [_shippingManager setEntranceNumber:sender.text];
+            break;
         default:
             break;
     }

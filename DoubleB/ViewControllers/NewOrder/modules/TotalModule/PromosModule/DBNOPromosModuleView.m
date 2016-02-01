@@ -27,13 +27,6 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 100;
-    } else {
-        self.tableView.rowHeight = 25.f;
-    }
 
     self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:self.tableView];
@@ -61,16 +54,18 @@
 - (CGFloat)moduleViewContentHeight {
     int height = 0;
     
-    if ([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
-        for (int i = 0; i < [self.tableView numberOfRowsInSection:0]; i++) {
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0]];
-            height += cell.frame.size.height;
-        }
-    } else {
-        height = [[OrderCoordinator sharedInstance].promoManager.promos count] * self.tableView.rowHeight;
+    for (int i = 0; i < [OrderCoordinator sharedInstance].promoManager.promos.count; i++) {
+        height += [self heightForRow:i];
     }
     
     return height;
+}
+
+- (CGFloat)heightForRow:(int)row {
+    CGFloat h = [DBDiscountMessageCell labelHeight:[OrderCoordinator sharedInstance].promoManager.promos[row]] + 5;
+    if (h < 25)
+        h = 25.f;
+    return h;
 }
 
 #pragma mark UITableViewDataSource
@@ -90,6 +85,10 @@
     cell.messageLabel.text = [OrderCoordinator sharedInstance].promoManager.promos[indexPath.row];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self heightForRow:indexPath.row];
 }
 
 @end

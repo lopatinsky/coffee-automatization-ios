@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Default</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://sushitake.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#D45443</string>
+		<key>CompanyGAKey</key>
+		<string>UA-69262560-43</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>TMow4UV5lj2SGcr0wbfj6lMlFVBitsRzg62QellS</string>
+			<key>clientKey</key>
+			<string>Vbc3JliG6voh6YxwuPh5SlIE77u8d4oVMMccFe6D</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Mixed</string>
+	</dict>
+</dict>
+</plist>

@@ -15,7 +15,8 @@ typedef NS_ENUM(NSUInteger, DBTimePickerType) {
     DBTimePickerTypeItems = 0,
     DBTimePickerTypeDateTime,
     DBTimePickerTypeTime,
-    DBTimePickerTypeDateAndItems
+    DBTimePickerTypeDateAndItems,
+    DBTimePickerTypeDual
 };
 
 @protocol DBTimePickerViewDelegate <NSObject>
@@ -26,11 +27,15 @@ typedef NS_ENUM(NSUInteger, DBTimePickerType) {
 - (NSInteger)db_timePickerView:(DBTimePickerType *)view selectedRowForComponent:(NSInteger)selectedRow;
 
 - (BOOL)db_shouldHideTimePickerView;
+- (void)db_updateDualMode:(BOOL)isSlots;
 @end
 
 @interface DBTimePickerView : UIView
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePickerView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentController;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timePickerTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *datePickerTopConstraint;
 
 @property (nonatomic) DBTimePickerType type;
 @property (strong, nonatomic) NSDate *minDate;

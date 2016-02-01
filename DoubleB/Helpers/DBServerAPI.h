@@ -36,7 +36,7 @@
 + (void)checkNewOrder:(void(^)(NSDictionary *response))success
               failure:(void(^)(NSError *error))failure;
 
-+ (void)createNewOrder:(void(^)(Order *order))success
++ (void)createNewOrder:(void(^)(Order *order, NSDictionary *responce))success
                failure:(void(^)(NSString *errorTitle, NSString *errorMessage))failure;
 
 + (void)fetchOrdersHistory:(void(^)(BOOL success, NSError *error))callback;

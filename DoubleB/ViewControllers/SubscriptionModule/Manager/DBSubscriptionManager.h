@@ -42,6 +42,7 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 
 + (BOOL)categoryIsSubscription:(nonnull DBMenuCategory *)category;
 + (BOOL)isSubscriptionPosition:(nonnull NSIndexPath *)indexPath;
++ (BOOL)positionsAreAvailable;
 
 - (void)buySubscription:(nonnull DBSubscriptionVariant *)variant callback:(void(^ _Nonnull)(BOOL success, NSString * __nonnull errorMessage))callback;
 - (void)checkSubscriptionVariants:(void(^ _Nonnull)(NSArray * __nonnull variants))success failure:(void(^ _Nonnull)(NSString * __nonnull errorMessage))failure;

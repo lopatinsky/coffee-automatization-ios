@@ -122,14 +122,17 @@
     [GANHelper analyzeEvent:@"order_button_click" category:ORDER_SCREEN];
     
     [MBProgressHUD showHUDAddedTo:self.ownerViewController.view animated:YES];
-    [DBServerAPI createNewOrder:^(Order *order) {
+    [DBServerAPI createNewOrder:^(Order *order, NSDictionary *response) {
         [MBProgressHUD hideHUDForView:self.ownerViewController.view animated:YES];
         
         [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenHistoryOrder object:order animated:YES];
         
-        NSString *message = NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil);
-        if (order.deliveryType.integerValue == DeliveryTypeIdShipping) {
-            message = NSLocalizedString(@"Заказ отправлен. Мы с вами свяжемся для подтверждения!", nil);
+        NSString *message =  [response getValueForKey:@"message"];
+        if (!message) {
+            message = NSLocalizedString(@"Заказ отправлен. Мы вас ждем!", nil);
+            if (order.deliveryType.integerValue == DeliveryTypeIdShipping) {
+                message = NSLocalizedString(@"Заказ отправлен. Мы с вами свяжемся для подтверждения!", nil);
+            }
         }
         [UIAlertView bk_showAlertViewWithTitle:order.venueName
                                        message:message
@@ -137,7 +140,7 @@
                              otherButtonTitles:nil
                                        handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                            // Show suggestion to share
-                                           if ([DBShareHelper sharedInstance].shareSuggestionIsAvailable) {
+                                           if ([DBShareHelper sharedInstance].shareSuggestionIsAvailable && [response[@"show_share"] boolValue]) {
                                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                                                    [[DBShareHelper sharedInstance] showShareSuggestion:YES];
                                                });

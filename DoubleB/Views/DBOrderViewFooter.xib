@@ -59,7 +59,7 @@
                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="venue.png" translatesAutoresizingMaskIntoConstraints="NO" id="TkB-R1-e36">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_icon_active.png" translatesAutoresizingMaskIntoConstraints="NO" id="TkB-R1-e36">
                             <rect key="frame" x="20" y="66" width="16" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="IKk-af-D8k"/>
@@ -169,7 +169,7 @@
         </view>
     </objects>
     <resources>
+        <image name="map_icon_active.png" width="20" height="29"/>
         <image name="phone_icon.png" width="50" height="50"/>
-        <image name="venue.png" width="16" height="22"/>
     </resources>
 </document>

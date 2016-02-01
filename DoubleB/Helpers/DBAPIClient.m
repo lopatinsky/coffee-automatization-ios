@@ -109,7 +109,7 @@ static DBAPIClient *_sharedClient = nil;
 - (void)setClientHeaderEnabled:(BOOL)clientHeaderEnabled {
     _clientHeaderEnabled = clientHeaderEnabled;
     
-    if(_clientHeaderEnabled && [IHSecureStore sharedInstance].clientId){
+    if (_clientHeaderEnabled && [IHSecureStore sharedInstance].clientId) {
         [self setValue:[IHSecureStore sharedInstance].clientId forHeader:@"Client-Id"];
     } else {
         [self disableHeader:@"Client-Id"];

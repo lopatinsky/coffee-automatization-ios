@@ -10,10 +10,10 @@
 #import "DBSettingsCell.h"
 #import "DBDocumentsViewController.h"
 #import "DBProfileViewController.h"
+#import "DBVenuesViewController.h"
 #import "DBPaymentViewController.h"
 #import "DBPromosListViewController.h"
 #import "IHSecureStore.h"
-//#import "DBBeaconObserver.h"
 #import "DBCitiesManager.h"
 #import "DBCitiesViewController.h"
 #import "DBClientInfo.h"
@@ -30,6 +30,8 @@
 #import "DBSubscriptionManager.h"
 #import "DBNewsHistoryTableViewController.h"
 
+#import "DBCustomViewManager.h"
+#import "DBCustomTableViewController.h"
 
 #import "UIViewController+ShareExtension.h"
 #import "UIViewController+DBMessage.h"
@@ -90,14 +92,24 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                     @"image": @"profile_icon_active",
                                     @"viewController": profileVC}];
     
-   //  Profile item
+    // Orders item
     DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
     [self.settingsItems addObject:@{@"name": @"ordersVC",
                                     @"title": NSLocalizedString(@"Заказы", nil),
                                     @"image": @"history_icon",
                                     @"viewController": ordersVC}];
     
-  //   Share friends item
+    // Venues item
+    if ([[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdInRestaurant] || [[DBCompanyInfo sharedInstance] isDeliveryTypeEnabled:DeliveryTypeIdTakeaway]) {
+        DBVenuesViewController *venuesVC = [DBVenuesViewController new];
+        venuesVC.mode = DBVenuesViewControllerModeList;
+        [self.settingsItems addObject:@{@"name": @"venuesVC",
+                                        @"title": [DBTextResourcesHelper db_venuesTitleString],
+                                        @"image": @"map_icon_active",
+                                        @"viewController": venuesVC}];
+    }
+    
+    // Share friends item
     if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
         [self.settingsItems addObject:@{@"name": @"shareVC",
                                         @"title": NSLocalizedString(@"Рассказать друзьям", nil),
@@ -178,6 +190,13 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
                                         @"title": NSLocalizedString(@"Абонемент", nil),
                                         @"image": @"subscription",
                                         @"viewController": [ViewControllerManager subscriptionViewController]}];
+    }
+    
+    if ([[DBCustomViewManager sharedInstance] available]) {
+        [self.settingsItems addObject:@{@"name": @"otherVC",
+                                        @"title": NSLocalizedString(@"Другое", nil),
+                                        @"image": @"ic_launch",
+                                        @"viewController": [DBCustomTableViewController new]}];
     }
 }
 
@@ -286,6 +305,11 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     
+    if([settingsItemInfo[@"name"] isEqualToString:@"venuesVC"]){
+        event = @"venues_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    
     if([settingsItemInfo[@"name"] isEqualToString:@"cardsVC"]){
         event = @"cards_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
@@ -344,6 +368,10 @@ NSString *const kDBSettingsNotificationsEnabled = @"kDBSettingsNotificationsEnab
     }
     if ([settingsItemInfo[@"name"] isEqualToString:@"subscriptionVC"]){
         event = @"abonement_click";
+        [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
+    }
+    if ([settingsItemInfo[@"name"] isEqualToString:@"otherVC"]){
+        event = @"other_click";
         [self.navigationController pushViewController:settingsItemInfo[@"viewController"] animated:YES];
     }
     

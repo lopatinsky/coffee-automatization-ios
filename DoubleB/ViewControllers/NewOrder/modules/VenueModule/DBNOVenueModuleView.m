@@ -8,8 +8,7 @@
 
 #import "DBNOVenueModuleView.h"
 #import "DBShippingViewController.h"
-
-#import "DBVenuesTableViewController.h"
+#import "DBVenuesViewController.h"
 
 #import "OrderCoordinator.h"
 #import "LocationHelper.h"
@@ -94,7 +93,8 @@
     if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
         vc = [DBShippingViewController new];
     } else {
-        vc = [DBVenuesTableViewController new];
+        vc = [DBVenuesViewController new];
+        ((DBVenuesViewController *)vc).mode = DBVenuesViewControllerModeChooseVenue;
     }
 
     [self.ownerViewController.navigationController pushViewController:vc animated:YES];

@@ -71,7 +71,7 @@
                 </constraints>
             </view>
             <view key="tableFooterView" contentMode="scaleToFill" id="32f-6X-O4q">
-                <rect key="frame" x="0.0" y="368" width="320" height="200"/>
+                <rect key="frame" x="0.0" y="478" width="320" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1c0-67-FQc" userLabel="separator">
@@ -81,12 +81,12 @@
                             <constraint firstAttribute="height" constant="1" id="vaT-82-BGf"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tyz-hU-x2r" customClass="DBModuleView">
-                        <rect key="frame" x="0.0" y="1" width="320" height="71"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tyz-hU-x2r" customClass="DBModuleView">
+                        <rect key="frame" x="0.0" y="1" width="320" height="31"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Os2-u8-EdV">
-                        <rect key="frame" x="100" y="82" width="120" height="40"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Os2-u8-EdV">
+                        <rect key="frame" x="100" y="42" width="120" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="CMd-j9-2rV"/>
                             <constraint firstAttribute="height" constant="40" id="ZRw-sO-rS8"/>
@@ -102,11 +102,11 @@
                     <constraint firstItem="1c0-67-FQc" firstAttribute="top" secondItem="32f-6X-O4q" secondAttribute="top" id="BNu-pf-pAa"/>
                     <constraint firstItem="Tyz-hU-x2r" firstAttribute="top" secondItem="1c0-67-FQc" secondAttribute="bottom" id="IRa-Vm-CRH"/>
                     <constraint firstItem="1c0-67-FQc" firstAttribute="leading" secondItem="32f-6X-O4q" secondAttribute="leading" id="Q6Q-d5-2Rg"/>
-                    <constraint firstAttribute="bottom" secondItem="Os2-u8-EdV" secondAttribute="bottom" constant="8" id="Uxd-Tr-ikr"/>
+                    <constraint firstItem="Os2-u8-EdV" firstAttribute="top" secondItem="Tyz-hU-x2r" secondAttribute="bottom" constant="10" id="Sk7-45-Ry1"/>
+                    <constraint firstAttribute="bottom" secondItem="Os2-u8-EdV" secondAttribute="bottom" priority="800" constant="8" id="YH3-S0-Rcf"/>
                     <constraint firstAttribute="trailing" secondItem="Tyz-hU-x2r" secondAttribute="trailing" id="ZFh-T9-N3X"/>
                     <constraint firstItem="Tyz-hU-x2r" firstAttribute="leading" secondItem="32f-6X-O4q" secondAttribute="leading" id="egF-Kz-RA5"/>
                     <constraint firstItem="Os2-u8-EdV" firstAttribute="centerX" secondItem="32f-6X-O4q" secondAttribute="centerX" id="he3-03-XTj"/>
-                    <constraint firstItem="Os2-u8-EdV" firstAttribute="top" secondItem="Tyz-hU-x2r" secondAttribute="bottom" constant="10" id="jPd-Zh-OIw"/>
                 </constraints>
             </view>
             <connections>

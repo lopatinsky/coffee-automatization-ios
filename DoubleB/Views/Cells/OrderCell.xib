@@ -26,38 +26,38 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="5" contentMode="left" text="350 руб." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5t-bs-Syh">
-                        <rect key="frame" x="246" y="15" width="64" height="20"/>
+                        <rect key="frame" x="246.5" y="15" width="63.5" height="19.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="16"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#213124" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L84-ew-GwL">
-                        <rect key="frame" x="15" y="15" width="63" height="20"/>
+                        <rect key="frame" x="15" y="15" width="62.5" height="19.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Ожидает подтверждения" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84X-VV-TLd">
-                        <rect key="frame" x="202" y="42" width="108" height="33"/>
+                        <rect key="frame" x="202" y="41.5" width="108" height="33"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.07.14, 18:00 - 19:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Jq-No-EFx">
-                        <rect key="frame" x="15" y="50" width="146" height="17"/>
+                        <rect key="frame" x="15" y="50" width="146" height="16.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Милютинский переулок, 3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pt3-3b-UTu">
-                        <rect key="frame" x="39" y="90" width="271" height="17"/>
+                        <rect key="frame" x="39" y="87" width="271" height="16.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="venue.png" translatesAutoresizingMaskIntoConstraints="NO" id="py9-9l-3xd">
-                        <rect key="frame" x="15" y="87" width="16" height="22"/>
+                    <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="map_icon_active.png" translatesAutoresizingMaskIntoConstraints="NO" id="py9-9l-3xd">
+                        <rect key="frame" x="15" y="80" width="16" height="29"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="16" id="Hrj-XL-mJ4"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" tag="6" contentMode="center" image="cash.png" translatesAutoresizingMaskIntoConstraints="NO" id="vO3-Vy-1B5">
-                        <rect key="frame" x="214" y="16" width="25" height="19"/>
+                        <rect key="frame" x="214.5" y="16" width="25" height="19"/>
                     </imageView>
                 </subviews>
                 <constraints>
@@ -84,6 +84,6 @@
     </objects>
     <resources>
         <image name="cash.png" width="25" height="19"/>
-        <image name="venue.png" width="16" height="22"/>
+        <image name="map_icon_active.png" width="20" height="29"/>
     </resources>
 </document>

@@ -20,7 +20,8 @@ typedef NS_ENUM(NSUInteger, TimeMode) {
     TimeModeTime = 1 << 0,
     TimeModeDateTime = 1 << 1,
     TimeModeSlots = 1 << 2,
-    TimeModeDateSlots = 1 << 3
+    TimeModeDateSlots = 1 << 3,
+    TimeModeDual = 1 << 4,
 };
 
 
@@ -40,6 +41,8 @@ typedef NS_ENUM(NSUInteger, TimeMode) {
 
 @property (strong, nonatomic) NSArray *timeSlots;
 @property (strong, nonatomic) NSArray *timeSlotsNames;
+
+@property (nonatomic) TimeMode dualCurrentMode;
 
 - (instancetype)initWithResponseDict:(NSDictionary *)responseDict;
 

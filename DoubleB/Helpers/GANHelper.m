@@ -103,22 +103,22 @@
 #if TARGET_IPHONE_SIMULATOR
     return;
 #else
-    if([IHSecureStore sharedInstance].clientId){
+    if ([IHSecureStore sharedInstance].clientId) {
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:1]
                                              value:[IHSecureStore sharedInstance].clientId];
     }
     
-    if([DBClientInfo sharedInstance].clientPhone.valid){
+    if ([DBClientInfo sharedInstance].clientPhone.valid) {
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:2]
                                              value:[DBClientInfo sharedInstance].clientPhone.value];
     }
     
-    if([DBClientInfo sharedInstance].clientName.valid){
+    if ([DBClientInfo sharedInstance].clientName.valid) {
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:3]
                                              value:[DBClientInfo sharedInstance].clientName.value];
     }
     
-    if([DBClientInfo sharedInstance].clientMail.valid){
+    if ([DBClientInfo sharedInstance].clientMail.valid) {
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:4]
                                              value:[DBClientInfo sharedInstance].clientMail.value];
     }

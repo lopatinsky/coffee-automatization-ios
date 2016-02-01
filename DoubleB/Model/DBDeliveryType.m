@@ -28,14 +28,9 @@
     _timeSlots = timeSlots;
     
     // Define time mode
-    if(![[responseDict getValueForKey:@"time_required"] boolValue]){
-        _timeMode = TimeModeSlots;
-    } else {
-        if([_timeSlots count] > 0){
-            _timeMode = TimeModeDateSlots;
-        } else {
-            _timeMode = self.maxTimeInterval <= 60*60*24 ? TimeModeTime : TimeModeDateTime;
-        }
+    _timeMode = [[responseDict getValueForKey:@"mode"] integerValue];
+    if (_timeMode == TimeModeTime) {
+        _timeMode = _maxTimeInterval <= 60 * 60 * 24 ? TimeModeTime : TimeModeDateTime;
     }
     
     return self;
@@ -44,7 +39,7 @@
 - (NSArray *)timeSlotsNames{
     NSMutableArray *names = [NSMutableArray new];
     
-    for(DBTimeSlot *timeSlot in _timeSlots){
+    for (DBTimeSlot *timeSlot in _timeSlots) {
         [names addObject:timeSlot.slotTitle];
     }
     
@@ -88,6 +83,7 @@
         _minOrderSum = [[aDecoder decodeObjectForKey:@"_minOrderSum"] doubleValue];
         
         _timeMode = [[aDecoder decodeObjectForKey:@"_timeMode"] intValue];
+        _dualCurrentMode = [[aDecoder decodeObjectForKey:@"_dualCurrentMode"] intValue];
         
         _minTimeInterval = [[aDecoder decodeObjectForKey:@"_minTimeInterval"] doubleValue];
         _maxTimeInterval = [[aDecoder decodeObjectForKey:@"_maxTimeInterval"] doubleValue];
@@ -105,6 +101,7 @@
     [aCoder encodeObject:@(_minOrderSum) forKey:@"_minOrderSum"];
     
     [aCoder encodeObject:@(_timeMode) forKey:@"_timeMode"];
+    [aCoder encodeObject:@(_dualCurrentMode) forKey:@"_dualCurrentMode"];
     
     [aCoder encodeObject:@(_minTimeInterval) forKey:@"_minTimeInterval"];
     [aCoder encodeObject:@(_maxTimeInterval) forKey:@"_maxTimeInterval"];

@@ -88,13 +88,14 @@ static NSDictionary *_preference;
     
     if (!self.parent) {
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
+        [refreshControl addTarget:self action:@selector(fetchMenu:) forControlEvents:UIControlEventValueChanged];
         self.refreshControl = refreshControl;
     
         hud = [[MBProgressHUD alloc] init];
         [self.navigationController.view addSubview:hud];
         
-        [self loadMenu:nil];
+        [self updateMenu];
+        [self fetchMenu:nil];
     } else {
         _categories = self.parent.categories;
     }
@@ -109,6 +110,10 @@ static NSDictionary *_preference;
 
 - (void)viewWillAppear:(BOOL)animated {
     [DBSubscriptionManager sharedInstance].delegate = self;
+    
+    if (!self.parent) {
+        [self updateMenu];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -131,7 +136,7 @@ static NSDictionary *_preference;
     }
 }
 
-- (void)loadMenu:(UIRefreshControl *)refreshControl{
+- (void)fetchMenu:(UIRefreshControl *)refreshControl {
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
     void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -151,29 +156,31 @@ static NSDictionary *_preference;
         [[DBMenu sharedInstance] updateMenuForVenue:venue
                                          remoteMenu:menuUpdateHandler];
     } else {
-        if (venue.venueId) {
-            // Load menu for current Venue
-            if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
-                self.lastVenueId = venue.venueId;
-                
-                self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
-                [self appendSubscriptionCategory];
-            }
-        } else {
-            // Load whole menu
-            self.categories = [[DBMenu sharedInstance] getMenu];
+        if (!(self.categories && [self.categories count] > 0)){
+            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        }
+        [[DBMenu sharedInstance] updateMenuForVenue:venue
+                                         remoteMenu:menuUpdateHandler];
+    }
+}
+
+- (void)updateMenu{
+    Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
+    if (venue.venueId) {
+        // Load menu for current Venue
+        if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
+            self.lastVenueId = venue.venueId;
+            
+            self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
             [self appendSubscriptionCategory];
         }
-        
-        
-        if (self.categories && [self.categories count] > 0){
-            [self.tableView reloadData];
-        } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[DBMenu sharedInstance] updateMenuForVenue:venue
-                                             remoteMenu:menuUpdateHandler];
-        }
+    } else {
+        // Load whole menu
+        self.categories = [[DBMenu sharedInstance] getMenu];
+        [self appendSubscriptionCategory];
     }
+    
+    [self.tableView reloadData];
 }
 
 - (DBCategoryCellAppearanceType)cellType {

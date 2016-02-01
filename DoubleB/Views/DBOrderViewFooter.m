@@ -78,7 +78,7 @@
         self.labelAddress.text = self.order.venueName;
     }
     
-    [self.venueImageView templateImageWithName:@"venue.png"];
+    [self.venueImageView templateImageWithName:@"map_icon_active"];
     
     Venue *venue = [Venue venueById:self.order.venueId];
     if (venue && venue.phone.length > 0) {

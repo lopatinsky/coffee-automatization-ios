@@ -13,6 +13,18 @@
 #import "DBFriendGiftHelper.h"
 #import "DBUniversalModulesManager.h"
 #import "DBGeoPushManager.h"
+#import "DBCustomViewManager.h"
+
+typedef NS_ENUM(NSInteger, DBModuleType) {
+    DBModuleTypeSubscription = 0,
+    DBModuleTypeFriendGift = 1,
+    DBModuleTypeFriendInvitation = 2,
+    DBModuleTypeProfileScreenUniversal = 4,
+    DBModuleTypeGeoPush = 5,
+    DBModuleTypeCustomView = 14,
+    
+    DBModuleTypeLast // Enum item for iteration, not in use
+};
 
 @interface DBModulesManager ()
 @property (strong, nonatomic) NSMutableArray *availableModules;
@@ -86,6 +98,9 @@
             case DBModuleTypeGeoPush:
                 [[DBGeoPushManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
+            case DBModuleTypeCustomView:
+                [[DBCustomViewManager sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
         }
         
         [appModules removeObject:@(type)];
@@ -110,7 +125,8 @@
             case DBModuleTypeGeoPush:
                 [[DBGeoPushManager sharedInstance] enableModule:NO withDict:nil];
                 break;
-                
+            case DBModuleTypeCustomView:
+                [[DBCustomViewManager sharedInstance] enableModule:NO withDict:nil];
             default:
                 break;
         }

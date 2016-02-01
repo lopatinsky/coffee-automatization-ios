@@ -13,8 +13,8 @@ typedef NS_ENUM(NSInteger, DBShippingAddressCellType) {
     DBShippingAddressCellTypeStreet,
     DBShippingAddressCellTypeHome,
     DBShippingAddressCellTypeApartment,
+    DBShippingAddressCellTypeEntranceNumber,
     DBShippingAddressCellTypeComment
-    
 };
 
 @class DBShippingAddressCell;

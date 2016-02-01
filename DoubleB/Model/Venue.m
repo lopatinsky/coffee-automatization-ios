@@ -28,6 +28,9 @@ static NSMutableArray *unifiedStoredVenues;
     self.phone = [dict getValueForKey:@"called_phone"] ?: @"";
     self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
     
+//    self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
+    self.workingTime = [dict getValueForKey:@"schedule_str"] ?: [self parseWorkTimeFromSchedule:dict[@"schedule"]];
+
     NSMutableDictionary *_dict = [dict mutableCopy];
     NSArray *keysForNullValues = [_dict allKeysForObject:[NSNull null]];
     [_dict removeObjectsForKeys:keysForNullValues];

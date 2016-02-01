@@ -45,6 +45,11 @@
 #import "DBMenuViewController.h"
 #import "DBCompanySettingsTableViewController.h"
 
+#import "CategoriesTVController.h"
+#import "CategoriesAndPositionsTVController.h"
+#import "PositionsTVController.h"
+#import "PositionViewController1.h"
+
 #import "DBSnapshotSDKHelper.h"
 
 #import <Branch/Branch.h>
@@ -556,6 +561,23 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
             break;
     }
 }
+
+- (void)moveMenuToStartState:(BOOL)animated {
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    UIViewController *rootVC = window.rootViewController;
+    
+    if ([rootVC isKindOfClass:[UINavigationController class]]){
+        UINavigationController *rootNavVC = (UINavigationController *)rootVC;
+        NSMutableArray *controllers = [[NSMutableArray alloc] initWithArray:rootNavVC.viewControllers];
+        
+        while (controllers.count > 1 && ([controllers[1] isKindOfClass:[CategoriesTVController class]] || [controllers[1] isKindOfClass:[CategoriesAndPositionsTVController class]] || [controllers[1] isKindOfClass:[PositionViewController1 class]] || [controllers[1] isKindOfClass:[PositionsTVController class]])) {
+            [controllers removeObjectAtIndex:1];
+        }
+        
+        [rootNavVC setViewControllers:controllers animated:animated];
+    }
+}
+
 @end
 
 @implementation ApplicationManager (Review)

@@ -18,6 +18,7 @@ typedef NS_ENUM(NSInteger, DBMenuType) {
     DBMenuTypeSkeleton
 };
 
+
 @interface DBMenu : NSObject
 
 @property(nonatomic, readonly) BOOL hasNestedCategories;

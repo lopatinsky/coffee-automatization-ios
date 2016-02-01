@@ -91,9 +91,13 @@ static NSDictionary *_preferences;
     if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
         self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
         UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-        [refreshControl addTarget:self action:@selector(loadMenu:) forControlEvents:UIControlEventValueChanged];
+        [refreshControl addTarget:self action:@selector(fetchMenu:) forControlEvents:UIControlEventValueChanged];
         self.refreshControl = refreshControl;
         [self subscribeForNotifications];
+        
+        [self updateMenu];
+        [self fetchMenu:nil];
+        [self reloadTitleView:nil];
     }
 }
 
@@ -104,7 +108,7 @@ static NSDictionary *_preferences;
     [DBSubscriptionManager sharedInstance].delegate = self;
     
     if (![[_preferences objectForKey:@"is_mixed_type"] boolValue]) {
-        [self loadMenu:nil];
+        [self updateMenu];
         [self reloadTitleView:nil];
     } else {
         [self reloadTableView];
@@ -129,10 +133,10 @@ static NSDictionary *_preferences;
 }
 
 - (void)loadMenu {
-    [self loadMenu:nil];
+    [self fetchMenu:nil];
 }
 
-- (void)loadMenu:(UIRefreshControl *)refreshControl {
+- (void)fetchMenu:(UIRefreshControl *)refreshControl {
     [GANHelper analyzeEvent:@"menu_update" category:MENU_SCREEN];
     
     void (^menuUpdateHandler)(BOOL, NSArray*) = ^void(BOOL success, NSArray *categories) {
@@ -167,24 +171,26 @@ static NSDictionary *_preferences;
         self.numberOfLoadings += 1;
         [[DBMenu sharedInstance] updateMenu:menuUpdateHandler];
     } else {
-        if (venue.venueId) {
-            // Load menu for current Venue
-            if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
-                self.lastVenueId = venue.venueId;
-                
-                self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
-                
-                if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
-                    if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
-                        NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
-                        [dict addObjectsFromArray:self.categories];
-                        self.categories = dict;
-                    }
-                }
+        if (!(self.categories && [self.categories count] > 0)){
+            if (!self.numberOfLoadings) {
+                self.numberOfLoadings += 1;
+                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             }
-        } else {
-            // Load whole menu
-            self.categories = [[DBMenu sharedInstance] getMenu];
+        }
+        [[DBMenu sharedInstance] updateMenuForVenue:venue
+                                         remoteMenu:menuUpdateHandler];
+    }
+}
+
+- (void)updateMenu {
+    Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
+
+    if (venue.venueId) {
+        // Load menu for current Venue
+        if(!self.lastVenueId || ![self.lastVenueId isEqualToString:venue.venueId]){
+            self.lastVenueId = venue.venueId;
+            
+            self.categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
             
             if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
                 if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
@@ -194,17 +200,20 @@ static NSDictionary *_preferences;
                 }
             }
         }
+    } else {
+        // Load whole menu
+        self.categories = [[DBMenu sharedInstance] getMenu];
         
-        if (self.categories && [self.categories count] > 0) {
-            [self reloadTableView];
-        } else {
-            if (!self.numberOfLoadings) {
-                self.numberOfLoadings += 1;
-                [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        if ([[DBSubscriptionManager sharedInstance] subscriptionCategory]) {
+            if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
+                NSMutableArray *dict = [NSMutableArray arrayWithArray:@[[[DBSubscriptionManager sharedInstance] subscriptionCategory]]];
+                [dict addObjectsFromArray:self.categories];
+                self.categories = dict;
             }
-            [[DBMenu sharedInstance] updateMenu:menuUpdateHandler];
         }
     }
+
+    [self reloadTableView];
 }
 
 - (void)moveToOrder {
@@ -327,10 +336,15 @@ static NSDictionary *_preferences;
         }
         
         DBMenuPosition *position = ((DBMenuCategory *)self.categories[correctedIndexPath.section]).positions[correctedIndexPath.row];
-        cell.contentType = DBPositionCellContentTypeRegular;
         cell.priceAnimated = YES;
         [cell configureWithPosition:position];
         cell.delegate = self;
+        
+        if ([DBSubscriptionManager categoryIsSubscription:category]) {
+            cell.contentType = DBPositionCellContentTypeSubscription;
+        } else {
+            cell.contentType = DBPositionCellContentTypeRegular;
+        }
         
         return cell;
     }
@@ -366,7 +380,9 @@ static NSDictionary *_preferences;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled]) {
+    DBPositionCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [[DBSubscriptionManager sharedInstance] isEnabled] &&
+        (([cell isKindOfClass:[DBPositionCell class]] && cell.contentType == DBPositionCellContentTypeSubscription) || [cell isKindOfClass:[SubscriptionInfoTableViewCell class]])) {
         if (indexPath.section == 0 && indexPath.row != 0 && ![[DBSubscriptionManager sharedInstance] isAvailable]) {
             [GANHelper analyzeEvent:@"abonement_product_select" category:MENU_SCREEN];
             [self pushSubscriptionViewController];
@@ -412,7 +428,7 @@ static NSDictionary *_preferences;
 
 - (void)positionCellDidOrder:(DBPositionCell *)cell {
     NSIndexPath *idxPath = [self.tableView indexPathForCell:cell];
-    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager isSubscriptionPosition:idxPath]) {
+    if (![[_preferences objectForKey:@"is_mixed_type"] boolValue] && [DBSubscriptionManager isSubscriptionPosition:idxPath] && cell.contentType == DBPositionCellContentTypeSubscription) {
         if(![self subscriptionPositionDidOrder:cell]) {
             return;
         }

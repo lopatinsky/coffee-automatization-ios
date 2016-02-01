@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
 @property (nonatomic, strong) NSString *street;
 @property (nonatomic, strong) NSString *home;
 @property (nonatomic, strong) NSString *apartment;
+@property (nonatomic, strong) NSString *entranceNumber;
 @property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *comment;
 
@@ -52,6 +53,7 @@ extern NSString *kDBShippingManagerDidRecieveSuggestionsNotification;
 - (void)setHome:(NSString *)home;
 - (void)setApartment:(NSString *)apartment;
 - (void)setComment:(NSString *)comment;
+- (void)setEntranceNumber:(NSString *)entranceNumber;
 
 @property (nonatomic, readonly) BOOL validAddress;
 

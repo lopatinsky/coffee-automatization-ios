@@ -97,6 +97,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 - (void)moveToStartState:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen object:(id)object animated:(BOOL)animated;
+- (void)moveMenuToStartState:(BOOL)animated;
 @end
 
 @interface ApplicationManager(Indexing)
