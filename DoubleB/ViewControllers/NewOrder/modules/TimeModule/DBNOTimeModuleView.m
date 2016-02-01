@@ -49,29 +49,37 @@
 
 - (void)reloadTimePicker {
     switch (_orderCoordinator.deliverySettings.deliveryType.timeMode) {
-        case TimeModeTime:{
+        case TimeModeTime: {
             self.pickerView.type = DBTimePickerTypeTime;
             self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
         }
             break;
-        case TimeModeDateTime:{
+        case TimeModeDateTime: {
             self.pickerView.type = DBTimePickerTypeDateTime;
             self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
         }
             break;
-        case TimeModeSlots:{
+        case TimeModeSlots: {
             self.pickerView.type = DBTimePickerTypeItems;
             self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
             self.pickerView.selectedItem = [_orderCoordinator.deliverySettings.deliveryType.timeSlots indexOfObject:_orderCoordinator.deliverySettings.selectedTimeSlot];
         }
             break;
-        case TimeModeDateSlots:{
+        case TimeModeDateSlots: {
             self.pickerView.type = DBTimePickerTypeDateAndItems;
             self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
             self.pickerView.minDate = _orderCoordinator.deliverySettings.deliveryType.minDate;
             self.pickerView.maxDate = _orderCoordinator.deliverySettings.deliveryType.maxDate;
+            break;
         }
-            
+        case TimeModeDual: {
+            self.pickerView.type = DBTimePickerTypeDual;
+            self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
+            self.pickerView.minDate = _orderCoordinator.deliverySettings.deliveryType.minDate;
+            self.pickerView.maxDate = _orderCoordinator.deliverySettings.deliveryType.maxDate;
+            self.pickerView.selectedItem = [_orderCoordinator.deliverySettings.deliveryType.timeSlots indexOfObject:_orderCoordinator.deliverySettings.selectedTimeSlot];
+            break;
+        }
         default:
             break;
     }
@@ -115,6 +123,15 @@
             timeString = [NSString stringWithFormat:@"%@, %@", [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime], _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle];
             break;
         }
+        case TimeModeDual: {
+            if (_orderCoordinator.deliverySettings.deliveryType.dualCurrentMode == TimeModeSlots) {
+                timeString = _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle;
+            } else {
+                formatter.dateFormat = @"HH:mm";
+                timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
+            }
+            break;
+        }
         default:
             break;
     }
@@ -135,6 +152,14 @@
 
 #pragma mark - DBTimePickerViewDelegate
 
+- (void)db_updateDualMode:(BOOL)isSlots {
+    if (isSlots) {
+        _orderCoordinator.deliverySettings.deliveryType.dualCurrentMode = TimeModeSlots;
+    } else {
+        _orderCoordinator.deliverySettings.deliveryType.dualCurrentMode = TimeModeTime;
+    }
+}
+
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectRowAtIndex:(NSInteger)index{
     DBTimeSlot *timeSlot = _orderCoordinator.deliverySettings.deliveryType.timeSlots[index];
     _orderCoordinator.deliverySettings.selectedTimeSlot = timeSlot;
@@ -146,7 +171,9 @@
 - (void)db_timePickerView:(DBTimePickerView *)view didSelectDate:(NSDate *)date{
     NSInteger comparisonResult = [_orderCoordinator.deliverySettings setNewSelectedTime:date];
     
-    if(_orderCoordinator.deliverySettings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
+    if (_orderCoordinator.deliverySettings.deliveryType.timeMode == TimeModeTime ||
+        _orderCoordinator.deliverySettings.deliveryType.timeMode == TimeModeDateTime ||
+        _orderCoordinator.deliverySettings.deliveryType.timeMode == TimeModeDual) {
         NSString *message;
         if(comparisonResult == NSOrderedAscending){
             message = [NSString stringWithFormat:@"Минимальное время для выбора - %@", [self stringFromTime:_orderCoordinator.deliverySettings.deliveryType.minDate]];

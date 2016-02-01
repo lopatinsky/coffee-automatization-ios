@@ -48,7 +48,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             _applicationName = [response getValueForKey:@"app_name"] ?: @"";
             
             NSMutableArray *deliveryTypes = [NSMutableArray new];
-            for(NSDictionary *typeDict in response[@"delivery_types"]){
+            for (NSDictionary *typeDict in response[@"delivery_types"]) {
                 [deliveryTypes addObject:[[DBDeliveryType alloc] initWithResponseDict:typeDict]];
             }
             _deliveryTypes = deliveryTypes;
