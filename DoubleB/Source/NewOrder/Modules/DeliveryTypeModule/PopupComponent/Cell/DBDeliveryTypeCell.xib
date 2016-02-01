@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DBDeliveryTypeCell" id="KGk-i7-Jjw" customClass="DBDeliveryTypeCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick.png" translatesAutoresizingMaskIntoConstraints="NO" id="xGn-kF-O20">
+                        <rect key="frame" x="8" y="13" width="15" height="18"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="gSf-SE-0Kw"/>
+                            <constraint firstAttribute="width" constant="15" id="qfy-zj-xrE"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pb4-9g-pvu">
+                        <rect key="frame" x="33" y="0.0" width="279" height="43.5"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RM1-fu-M7k" customClass="DBDefaultSeparatorView">
+                        <rect key="frame" x="33" y="43" width="287" height="0.5"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.69999999999999996" id="kHa-dr-RvC"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <animations/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Pb4-9g-pvu" secondAttribute="trailing" constant="8" id="5gg-eI-PJS"/>
+                    <constraint firstItem="RM1-fu-M7k" firstAttribute="leading" secondItem="Pb4-9g-pvu" secondAttribute="leading" id="8Nb-9E-169"/>
+                    <constraint firstAttribute="bottom" secondItem="RM1-fu-M7k" secondAttribute="bottom" id="A1d-Fs-lio"/>
+                    <constraint firstItem="Pb4-9g-pvu" firstAttribute="leading" secondItem="xGn-kF-O20" secondAttribute="trailing" constant="10" id="Hon-U9-Nhw"/>
+                    <constraint firstItem="Pb4-9g-pvu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Kr9-Yw-tTd"/>
+                    <constraint firstAttribute="bottom" secondItem="Pb4-9g-pvu" secondAttribute="bottom" id="ME1-SZ-6il"/>
+                    <constraint firstAttribute="trailing" secondItem="RM1-fu-M7k" secondAttribute="trailing" id="Xrd-ay-PRy"/>
+                    <constraint firstItem="xGn-kF-O20" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YCW-pc-L9h"/>
+                    <constraint firstItem="xGn-kF-O20" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="cfQ-ol-XlT"/>
+                </constraints>
+            </tableViewCellContentView>
+            <animations/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="tickImageView" destination="xGn-kF-O20" id="bkx-nR-0H9"/>
+                <outlet property="titleLabel" destination="Pb4-9g-pvu" id="YhI-2a-RLa"/>
+            </connections>
+            <point key="canvasLocation" x="348" y="228"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="tick.png" width="50" height="50"/>
+    </resources>
+</document>

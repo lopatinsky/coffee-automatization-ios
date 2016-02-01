@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBNOVenueModuleView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="223" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-ib-dI5">
+                    <rect key="frame" x="33" y="12" width="279" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="o5D-iA-has"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="g8d-ji-iPN">
+                    <rect key="frame" x="36" y="12" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="CgF-sp-NWf"/>
+                        <constraint firstAttribute="height" constant="20" id="oXf-f9-pUr"/>
+                    </constraints>
+                </activityIndicatorView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="kNg-g0-2zK">
+                    <rect key="frame" x="8" y="13" width="15" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="Xkx-XR-X2N"/>
+                        <constraint firstAttribute="height" constant="18" id="rCs-CM-2VH"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="WI0-ib-dI5" firstAttribute="centerY" secondItem="kNg-g0-2zK" secondAttribute="centerY" id="Kqx-zN-zcu"/>
+                <constraint firstItem="g8d-ji-iPN" firstAttribute="leading" secondItem="kNg-g0-2zK" secondAttribute="trailing" constant="13" id="Owh-md-tea"/>
+                <constraint firstItem="WI0-ib-dI5" firstAttribute="leading" secondItem="kNg-g0-2zK" secondAttribute="trailing" constant="10" id="XVn-eq-XEH"/>
+                <constraint firstAttribute="trailing" secondItem="WI0-ib-dI5" secondAttribute="trailing" constant="8" id="Z3J-Wk-XeC"/>
+                <constraint firstItem="kNg-g0-2zK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="fKG-fw-8RG"/>
+                <constraint firstItem="g8d-ji-iPN" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="paG-eD-VBu"/>
+                <constraint firstItem="kNg-g0-2zK" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wMv-Cy-u3c"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="titleLabel" destination="WI0-ib-dI5" id="Ckr-ew-bSi"/>
+                <outlet property="venueImageView" destination="kNg-g0-2zK" id="FdQ-5o-Bzr"/>
+            </connections>
+            <point key="canvasLocation" x="348" y="271"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="map_icon.png" width="20" height="29"/>
+    </resources>
+</document>

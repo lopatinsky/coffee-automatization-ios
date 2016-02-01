@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="83" id="KGk-i7-Jjw" customClass="NewsHistoryTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OP-vO-g2B">
+                        <rect key="frame" x="13" y="8" width="299" height="20"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="aKw-tI-bLJ">
+                        <rect key="frame" x="8" y="28" width="304" height="56"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="aKw-tI-bLJ" secondAttribute="bottom" constant="8" id="26w-0k-E8R"/>
+                    <constraint firstItem="3OP-vO-g2B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="57t-Qm-r3I"/>
+                    <constraint firstItem="3OP-vO-g2B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7gh-Og-yeD"/>
+                    <constraint firstAttribute="trailing" secondItem="3OP-vO-g2B" secondAttribute="trailing" constant="8" id="9mY-RP-iBR"/>
+                    <constraint firstItem="aKw-tI-bLJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="CQj-sP-rx3"/>
+                    <constraint firstAttribute="trailing" secondItem="aKw-tI-bLJ" secondAttribute="trailing" constant="8" id="IGx-Vb-Oi2"/>
+                    <constraint firstItem="3OP-vO-g2B" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="nJj-ZA-XS9"/>
+                    <constraint firstItem="3OP-vO-g2B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="sBI-wl-PAG"/>
+                    <constraint firstItem="aKw-tI-bLJ" firstAttribute="top" secondItem="3OP-vO-g2B" secondAttribute="bottom" id="uCl-ep-O0h"/>
+                    <constraint firstItem="3OP-vO-g2B" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="w33-K5-yuQ"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="57t-Qm-r3I"/>
+                        <exclude reference="7gh-Og-yeD"/>
+                        <exclude reference="w33-K5-yuQ"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="newsTextLabel" destination="aKw-tI-bLJ" id="VPf-Es-qUf"/>
+                <outlet property="titleLabel" destination="3OP-vO-g2B" id="WU6-iO-4sb"/>
+            </connections>
+            <point key="canvasLocation" x="507" y="433.5"/>
+        </tableViewCell>
+    </objects>
+</document>

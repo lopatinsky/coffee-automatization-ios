@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LaunchViewController">
+            <connections>
+                <outlet property="activityIndicator" destination="8zZ-MB-Wza" id="G5b-0n-jM1"/>
+                <outlet property="backImageView" destination="zcv-6Y-gvx" id="BAH-ud-7Lm"/>
+                <outlet property="tipView" destination="2jt-8i-0B8" id="lUk-NL-ijh"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zcv-6Y-gvx">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2jt-8i-0B8">
+                    <rect key="frame" x="10" y="503" width="300" height="40"/>
+                    <subviews>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="8zZ-MB-Wza">
+                            <rect key="frame" x="140.5" y="10" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="8zZ-MB-Wza" firstAttribute="centerX" secondItem="2jt-8i-0B8" secondAttribute="centerX" id="4Lx-P2-KwW"/>
+                        <constraint firstAttribute="height" constant="40" id="Wyh-eL-PdX"/>
+                        <constraint firstItem="8zZ-MB-Wza" firstAttribute="centerY" secondItem="2jt-8i-0B8" secondAttribute="centerY" id="xfg-NP-qtS"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="2jt-8i-0B8" secondAttribute="trailing" constant="10" id="6FS-KX-gFU"/>
+                <constraint firstAttribute="bottom" secondItem="2jt-8i-0B8" secondAttribute="bottom" constant="25" id="D2n-D6-kdZ"/>
+                <constraint firstAttribute="bottom" secondItem="zcv-6Y-gvx" secondAttribute="bottom" id="GwH-d7-HX6"/>
+                <constraint firstItem="2jt-8i-0B8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="kwe-Xo-yk9"/>
+                <constraint firstItem="zcv-6Y-gvx" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pRl-zA-qlP"/>
+                <constraint firstItem="zcv-6Y-gvx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xa1-V5-9GH"/>
+                <constraint firstAttribute="trailing" secondItem="zcv-6Y-gvx" secondAttribute="trailing" id="yXE-Mr-eRY"/>
+            </constraints>
+            <point key="canvasLocation" x="351" y="312"/>
+        </view>
+    </objects>
+</document>

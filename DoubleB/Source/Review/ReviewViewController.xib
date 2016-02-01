@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </mutableArray>
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+            <string>HelveticaNeue-Light</string>
+            <string>HelveticaNeue-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReviewViewController">
+            <connections>
+                <outlet property="commentTextView" destination="GBQ-xX-avp" id="rYy-ow-NTd"/>
+                <outlet property="foodLabel" destination="1M5-t8-jl0" id="ra4-Vr-2Zd"/>
+                <outlet property="foodRatingBarView" destination="BYF-oH-9H0" id="UzK-E9-YGM"/>
+                <outlet property="foodView" destination="jSc-x4-x37" id="Yvq-dV-lYC"/>
+                <outlet property="serviceLabel" destination="kRH-J3-aQX" id="mwE-h6-95C"/>
+                <outlet property="serviceRatingBarView" destination="s7C-HZ-zz6" id="z5s-uj-TFN"/>
+                <outlet property="serviceView" destination="Wsa-4T-pXo" id="Ejs-tH-n7k"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GBQ-xX-avp">
+                    <rect key="frame" x="0.0" y="123" width="320" height="445"/>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wsa-4T-pXo">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s7C-HZ-zz6" customClass="RatingBarView">
+                            <rect key="frame" x="70" y="8" width="180" height="20"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="9AB-aq-VNT"/>
+                                <constraint firstAttribute="width" constant="180" id="viZ-Ef-Atm"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kf9-dV-CCQ" customClass="DBDefaultSeparatorView">
+                            <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.69999999999999996" id="bxV-QY-kee"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оцените сервис ресторана" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kRH-J3-aQX">
+                            <rect key="frame" x="8" y="28" width="304" height="15"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="yoe-nX-aEd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="kRH-J3-aQX" firstAttribute="leading" secondItem="Wsa-4T-pXo" secondAttribute="leading" constant="8" id="BEc-Lj-WrW"/>
+                        <constraint firstItem="kRH-J3-aQX" firstAttribute="top" secondItem="s7C-HZ-zz6" secondAttribute="bottom" id="Bca-pJ-Sjk"/>
+                        <constraint firstItem="s7C-HZ-zz6" firstAttribute="top" secondItem="Wsa-4T-pXo" secondAttribute="top" constant="8" id="FdG-Iy-3nF"/>
+                        <constraint firstAttribute="bottom" secondItem="kf9-dV-CCQ" secondAttribute="bottom" id="NQX-RU-gy7"/>
+                        <constraint firstAttribute="trailing" secondItem="kRH-J3-aQX" secondAttribute="trailing" constant="8" id="ToH-Bx-sbc"/>
+                        <constraint firstAttribute="trailing" secondItem="kf9-dV-CCQ" secondAttribute="trailing" id="ZxJ-CG-WTI"/>
+                        <constraint firstAttribute="centerX" secondItem="s7C-HZ-zz6" secondAttribute="centerX" id="aYC-dg-oNw"/>
+                        <constraint firstItem="kf9-dV-CCQ" firstAttribute="leading" secondItem="Wsa-4T-pXo" secondAttribute="leading" id="c4C-9L-CAx"/>
+                        <constraint firstAttribute="height" constant="50" id="nil-pi-6cG"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jSc-x4-x37">
+                    <rect key="frame" x="0.0" y="50" width="320" height="50"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYF-oH-9H0" customClass="RatingBarView">
+                            <rect key="frame" x="70" y="8" width="180" height="20"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="SbC-wp-gZh"/>
+                                <constraint firstAttribute="width" constant="180" id="mRn-h5-oWb"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocn-9C-0W9" customClass="DBDefaultSeparatorView">
+                            <rect key="frame" x="0.0" y="49" width="320" height="0.5"/>
+                            <animations/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.69999999999999996" id="uHM-VA-Cho"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оцените еду ресторана" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1M5-t8-jl0">
+                            <rect key="frame" x="8" y="28" width="304" height="15"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="2y8-Vz-ggT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <animations/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="BYF-oH-9H0" secondAttribute="centerX" id="6bi-81-Qxd"/>
+                        <constraint firstItem="1M5-t8-jl0" firstAttribute="leading" secondItem="jSc-x4-x37" secondAttribute="leading" constant="8" id="79k-XE-hSu"/>
+                        <constraint firstItem="ocn-9C-0W9" firstAttribute="leading" secondItem="jSc-x4-x37" secondAttribute="leading" id="RlI-VU-gp9"/>
+                        <constraint firstAttribute="bottom" secondItem="ocn-9C-0W9" secondAttribute="bottom" id="V9d-oJ-jE5"/>
+                        <constraint firstAttribute="trailing" secondItem="1M5-t8-jl0" secondAttribute="trailing" constant="8" id="YFQ-x7-Msg"/>
+                        <constraint firstItem="BYF-oH-9H0" firstAttribute="top" secondItem="jSc-x4-x37" secondAttribute="top" constant="8" id="ZRR-nj-wPc"/>
+                        <constraint firstItem="1M5-t8-jl0" firstAttribute="top" secondItem="BYF-oH-9H0" secondAttribute="bottom" id="f3c-g5-Jtf"/>
+                        <constraint firstAttribute="height" constant="50" id="fu0-sf-k7g"/>
+                        <constraint firstAttribute="trailing" secondItem="ocn-9C-0W9" secondAttribute="trailing" id="h2P-uI-W8B"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Отзыв(по желанию)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zjB-eq-0Cq">
+                    <rect key="frame" x="8" y="108" width="304" height="15"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="304" id="h0x-OX-Slw"/>
+                        <constraint firstAttribute="height" constant="15" id="xca-n8-FNy"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Wsa-4T-pXo" secondAttribute="trailing" id="43K-on-ALx"/>
+                <constraint firstItem="Wsa-4T-pXo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9Td-lz-1Zb"/>
+                <constraint firstItem="GBQ-xX-avp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="F48-Wc-9vk"/>
+                <constraint firstItem="GBQ-xX-avp" firstAttribute="top" secondItem="zjB-eq-0Cq" secondAttribute="bottom" id="GWH-ny-oeb"/>
+                <constraint firstItem="zjB-eq-0Cq" firstAttribute="top" secondItem="jSc-x4-x37" secondAttribute="bottom" constant="8" id="KTv-jH-nHy"/>
+                <constraint firstAttribute="bottom" secondItem="GBQ-xX-avp" secondAttribute="bottom" id="OyC-6p-3gW"/>
+                <constraint firstItem="jSc-x4-x37" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RyP-1C-wLw"/>
+                <constraint firstAttribute="trailing" secondItem="GBQ-xX-avp" secondAttribute="trailing" id="UrT-Vr-kEa"/>
+                <constraint firstAttribute="trailing" secondItem="jSc-x4-x37" secondAttribute="trailing" id="cVF-p4-QO4"/>
+                <constraint firstItem="zjB-eq-0Cq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="gBR-ed-Etq"/>
+                <constraint firstItem="Wsa-4T-pXo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gnJ-nu-1aY"/>
+                <constraint firstItem="jSc-x4-x37" firstAttribute="top" secondItem="Wsa-4T-pXo" secondAttribute="bottom" id="oBn-L1-Y3F"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="382" y="362"/>
+        </view>
+    </objects>
+</document>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DBOrderItemNotesCell" rowHeight="50" id="KGk-i7-Jjw" customClass="DBOrderItemNotesCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="277" translatesAutoresizingMaskIntoConstraints="NO" id="ap5-aJ-fbn">
+                        <rect key="frame" x="35" y="0.0" width="277" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="3vE-4v-tBT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="ap5-aJ-fbn" secondAttribute="trailing" constant="8" id="1bh-EJ-0AL"/>
+                    <constraint firstAttribute="centerY" secondItem="ap5-aJ-fbn" secondAttribute="centerY" constant="-0.5" id="9O6-ZN-B02"/>
+                    <constraint firstItem="ap5-aJ-fbn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="htu-Nz-iNU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="itemDescriptionLabel" destination="ap5-aJ-fbn" id="QqL-J4-rg0"/>
+            </connections>
+            <point key="canvasLocation" x="365" y="306"/>
+        </tableViewCell>
+    </objects>
+</document>
