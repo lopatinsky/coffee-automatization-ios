@@ -83,7 +83,7 @@
         _minOrderSum = [[aDecoder decodeObjectForKey:@"_minOrderSum"] doubleValue];
         
         _timeMode = [[aDecoder decodeObjectForKey:@"_timeMode"] intValue];
-        _dualCurrentMode = [[aDecoder decodeObjectForKey:@"_dualCurrentMode"] intValue];
+        _dualCurrentMode = [[aDecoder decodeObjectForKey:@"_dualCurrentMode"] intValue] ?: TimeModeTime;
         
         _minTimeInterval = [[aDecoder decodeObjectForKey:@"_minTimeInterval"] doubleValue];
         _maxTimeInterval = [[aDecoder decodeObjectForKey:@"_maxTimeInterval"] doubleValue];
