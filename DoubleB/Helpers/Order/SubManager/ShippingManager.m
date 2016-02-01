@@ -126,6 +126,13 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
 }
 
+- (void)setEntranceNumber:(NSString *)entranceNumber {
+    _selectedAddress.entranceNumber = entranceNumber ?: @"";
+    
+    [self synchronize];
+    
+    [self.parentManager manager:self haveChange:ShippingManagerChangeAddress];
+}
 
 - (void)synchronize {
     if(self.selectedAddress){
@@ -173,6 +180,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     _home = @"";
     _apartment = @"";
     _comment = @"";
+    _entranceNumber = @"";
     
     _location = nil;
     
@@ -187,6 +195,7 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     _street = [dict[@"address"] getValueForKey:@"street"] ?: @"";
     _home = [dict[@"address"] getValueForKey:@"home"] ?: @"";
     _apartment = [dict[@"address"] getValueForKey:@"flat"] ?: @"";
+    _entranceNumber = [dict[@"address"] getValueForKey:@"entranceNumber"] ?: @"";
     
     NSDictionary *coordinates = [dict getValueForKey:@"coordinates"];
     if(coordinates){
@@ -211,7 +220,8 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
                               @"city": _city ?: @"",
                               @"street": _street ?: @"",
                               @"home": _home ?: @"",
-                              @"flat": _apartment ?: @""};
+                              @"flat": _apartment ?: @"",
+                              @"entranceNumber": _entranceNumber ?: @""};
     
     return @{@"address": address, @"coordinates": coordinates, @"comment": _comment ?: @""};
 }

@@ -33,8 +33,8 @@
     [super viewWillAppear:animated];
     
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    CGRect webViewRect = CGRectMake(screenBounds.origin.x, screenBounds.origin.y + 66, screenBounds.size.width, screenBounds.size.width - 66);
-    _webView = [[UIWebView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    CGRect webViewRect = CGRectMake(screenBounds.origin.x, screenBounds.origin.y, screenBounds.size.width, screenBounds.size.height);
+    _webView = [[UIWebView alloc] initWithFrame:webViewRect];
     [self.view addSubview:_webView];
     [self displayURL:[NSURL URLWithString:self.urlString]];
 }
