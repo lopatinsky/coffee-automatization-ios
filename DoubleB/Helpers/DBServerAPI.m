@@ -582,13 +582,18 @@
 
 + (void)assembleTimeIntoParams:(NSMutableDictionary *)params{
     DeliverySettings *settings = [OrderCoordinator sharedInstance].deliverySettings;
-    if(settings.deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
+    if (settings.deliveryType.timeMode == TimeModeTime ||
+        settings.deliveryType.timeMode == TimeModeDateTime ||
+        settings.deliveryType.timeMode == TimeModeDateSlots ||
+        (settings.deliveryType.timeMode == TimeModeDual && settings.deliveryType.dualCurrentMode == TimeModeTime)) {
         NSDateFormatter *formatter = [NSDateFormatter new];
         formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
         params[@"time_picker_value"] = [formatter stringFromDate:settings.selectedTime];
     }
     
-    if(settings.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+    if (settings.deliveryType.timeMode == TimeModeSlots ||
+        settings.deliveryType.timeMode == TimeModeDateSlots ||
+        (settings.deliveryType.timeMode == TimeModeDual && settings.deliveryType.dualCurrentMode == TimeModeSlots)) {
         params[@"delivery_slot_id"] = settings.selectedTimeSlot.slotId;
     }
 }
