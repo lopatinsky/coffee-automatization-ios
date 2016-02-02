@@ -68,6 +68,9 @@
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
     
+    if (self.type == DBMenuViewControllerTypeInitial) {
+        [self fetchMenu];
+    }
     [self setupSubscription];
 }
 
@@ -78,9 +81,8 @@
     [self.subscriptionModuleView reload:YES];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
-        [self loadMenu];
+        [self updateMenu];
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -190,9 +192,7 @@
     self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
 }
 
-- (void)loadMenu{
-    [GANHelper analyzeEvent:@"menu_update" category:self.analyticsCategory];
-    
+- (void)updateMenu {
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
     NSArray *categories;
     if (venue.venueId) {
@@ -212,22 +212,39 @@
         
         [self.menuModuleView reloadContent];
         [self reloadTitleView:nil];
-    } else {
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-            
-            NSArray *venueMenu = [[DBMenu sharedInstance] getMenuForVenue:venue];
-            if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
-                ((DBMixedMenuModuleView *)self.menuModuleView).categories = venueMenu;
-            } else if (self.mode == DBMenuViewControllerModeCategories) {
-                ((DBCategoriesMenuModuleView *)self.menuModuleView).categories = venueMenu;
-            }
-            
-            [self.menuModuleView reloadContent];
-            [self reloadTitleView:nil];
-        }];
     }
+}
+
+- (void)fetchMenu {
+    [GANHelper analyzeEvent:@"menu_update" category:self.analyticsCategory];
+    
+    Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
+    NSArray *categories;
+    if (venue.venueId) {
+        // Load menu for current Venue
+        categories = [[DBMenu sharedInstance] getMenuForVenue:venue];
+    } else {
+        // Load whole menu
+        categories = [[DBMenu sharedInstance] getMenu];
+    }
+    
+    if (categories.count == 0) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    }
+    
+    [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        NSArray *venueMenu = [[DBMenu sharedInstance] getMenuForVenue:venue];
+        if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
+            ((DBMixedMenuModuleView *)self.menuModuleView).categories = venueMenu;
+        } else if (self.mode == DBMenuViewControllerModeCategories) {
+            ((DBCategoriesMenuModuleView *)self.menuModuleView).categories = venueMenu;
+        }
+        
+        [self.menuModuleView reloadContent];
+        [self reloadTitleView:nil];
+    }];
 }
 
 - (void)moveToSettings {

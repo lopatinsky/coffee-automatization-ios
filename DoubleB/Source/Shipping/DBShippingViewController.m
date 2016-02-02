@@ -19,6 +19,7 @@
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *constraintContentViewBottomAlignment;
 
+@property (strong, nonatomic) DBShippingAddressCell *currentlyModifyingCell;
 @property (strong, nonatomic) DBShippingAutocompleteView *autocompleteView;
 @property (strong, nonatomic) DBPickerView *cityPickerView;
 
@@ -58,12 +59,13 @@
 
 - (void)requestSuggestions:(DBShippingAddressCell *)cell {
     [[OrderCoordinator sharedInstance].shippingManager requestSuggestions:^(BOOL success) {
-        if (success && [OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0) {
-            cell.imageViewVisisble = YES;
-            CGRect rect = [self.tableView convertRect:cell.frame toView:self.contentView];
-            
-            self.tableView.scrollEnabled = NO;
-            [self.autocompleteView showOnView:self.contentView topOffset:rect.origin.y + rect.size.height];
+        if (success && self.currentlyModifyingCell.type == DBShippingAddressCellTypeStreet) {
+            if ([OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0 && !self.autocompleteView.visible) {
+                CGRect rect = [self.tableView convertRect:cell.frame toView:self.contentView];
+                
+                self.tableView.scrollEnabled = NO;
+                [self.autocompleteView showOnView:self.contentView topOffset:rect.origin.y + rect.size.height];
+            }
         }
     }];
 }
@@ -85,6 +87,7 @@
     }
     
     [cell configureWithType:indexPath.row];
+    cell.editingEnabled = indexPath.row == DBShippingAddressCellTypeStreet;
     
     return cell;
 }
@@ -108,24 +111,28 @@
     if (cell.type == DBShippingAddressCellTypeStreet) {
         [self requestSuggestions:cell];
     }
+    
+    self.currentlyModifyingCell = cell;
 }
 
 - (void)db_addressCellEndEditing:(DBShippingAddressCell *)cell {
     [self.autocompleteView hide];
-}
-
-- (void)db_addressCellClickedAtImage:(DBShippingAddressCell *)cell {
-    if (cell.type == DBShippingAddressCellTypeStreet) {
-        [[OrderCoordinator sharedInstance].shippingManager setStreet:@""];
-        [self.tableView reloadData];
-    }
-    [self.autocompleteView hide];
+    
+    self.currentlyModifyingCell = nil;
 }
 
 - (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text {
     if (cell.type == DBShippingAddressCellTypeStreet) {
-        [self requestSuggestions:cell];
+        if (text.length > 0) {
+            [self requestSuggestions:cell];
+        } else {
+            [self.autocompleteView hide];
+        }
     }
+}
+
+- (BOOL)db_addressCellShouldClear:(DBShippingAddressCell *)cell {
+    return cell.type == DBShippingAddressCellTypeStreet;
 }
 
 #pragma mark - DBShippingAutocompleteViewDelegate

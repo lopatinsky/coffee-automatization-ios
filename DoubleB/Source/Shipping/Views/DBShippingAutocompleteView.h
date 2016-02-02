@@ -18,6 +18,7 @@
 
 @interface DBShippingAutocompleteView : UIView
 @property (weak, nonatomic) id<DBShippingAutocompleteViewDelegate> delegate;
+@property (nonatomic, readonly) BOOL visible;
 
 - (void)showOnView:(UIView *)view topOffset:(NSInteger)offset;
 - (void)hide;

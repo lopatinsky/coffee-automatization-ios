@@ -24,14 +24,15 @@ typedef NS_ENUM(NSInteger, DBShippingAddressCellType) {
 - (void)db_addressCellStartEditing:(DBShippingAddressCell *)cell;
 - (void)db_addressCellEndEditing:(DBShippingAddressCell *)cell;
 - (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text;
-- (void)db_addressCellClickedAtImage:(DBShippingAddressCell *)cell;
+
+- (BOOL)db_addressCellShouldClear:(DBShippingAddressCell *)cell;
 @end
 
 @interface DBShippingAddressCell : UITableViewCell
 
 @property (nonatomic, readonly) DBShippingAddressCellType type;
 @property (weak, nonatomic) id<DBShippingAddressCellDelegate> delegate;
-@property (nonatomic) BOOL imageViewVisisble;
+@property (nonatomic) BOOL editingEnabled;
 
 - (void)configureWithType:(DBShippingAddressCellType)type;
 

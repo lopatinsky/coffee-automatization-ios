@@ -14,9 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
-@property (weak, nonatomic) IBOutlet UIButton *imageButton;
-@property (weak, nonatomic) IBOutlet UIImageView *anyImageView;
-
 @property (strong, nonatomic) ShippingManager *shippingManager;
 
 @end
@@ -33,19 +30,10 @@
     self.shippingManager = [OrderCoordinator sharedInstance].shippingManager;
     self.textField.delegate = self;
     [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    
-    [self.imageButton addTarget:self action:@selector(imageButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    self.imageButton.hidden = YES;
-    
-    [self.anyImageView templateImageWithName:@"close_circle_icon" tintColor:[UIColor db_grayColor]];
-    self.anyImageView.hidden = YES;
 }
 
 - (void)configureWithType:(DBShippingAddressCellType)type {
     _type = type;
-    
-    self.anyImageView.hidden = YES;
-    self.imageButton.hidden = YES;
     self.textField.userInteractionEnabled = YES;
     
     switch (_type) {
@@ -86,19 +74,14 @@
     }
 }
 
-- (void)setImageViewVisisble:(BOOL)imageViewVisisble {
-    _imageViewVisisble = imageViewVisisble;
+- (void)setEditingEnabled:(BOOL)editingEnabled {
+    _editingEnabled = editingEnabled;
     
-    self.anyImageView.hidden = !_imageViewVisisble;
-    self.imageButton.hidden = !_imageViewVisisble;
-}
-
-- (void)imageButtonClick {
-    if ([self.delegate respondsToSelector:@selector(db_addressCellClickedAtImage:)]) {
-        [self.delegate db_addressCellClickedAtImage:self];
+    if (_editingEnabled) {
+        self.textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    } else {
+        self.textField.clearButtonMode = UITextFieldViewModeNever;
     }
-    
-    self.textField.text = @"";
 }
 
 - (void)textFieldDidChange:(UITextField *)sender {
@@ -128,9 +111,6 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    self.anyImageView.hidden = NO;
-    self.imageButton.hidden = NO;
-    
     if ([self.delegate respondsToSelector:@selector(db_addressCellStartEditing:)]) {
         [self.delegate db_addressCellStartEditing:self];
     }
@@ -142,11 +122,16 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    self.anyImageView.hidden = YES;
-    self.imageButton.hidden = YES;
-    
     if ([self.delegate respondsToSelector:@selector(db_addressCellEndEditing:)]) {
         [self.delegate db_addressCellEndEditing:self];
+    }
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(db_addressCellShouldClear:)]) {
+        return [self.delegate db_addressCellShouldClear:self];
+    } else {
+        return NO;
     }
 }
 

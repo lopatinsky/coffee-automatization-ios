@@ -51,11 +51,15 @@
            leading:@"0" bottom:@"0" trailing:@"0" toView:view];
     [view layoutIfNeeded];
     
-    self.backgroundColor = view.backgroundColor;
+    self.backgroundColor = [UIColor db_backgroundColor];
+    
+    _visible = YES;
 }
 
 - (void)hide {
     [self removeFromSuperview];
+    
+    _visible = NO;
 }
 
 #pragma mark - Table view data source

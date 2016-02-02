@@ -125,7 +125,7 @@
 - (void)show:(UIView *)holder {
     _holder = holder;
     
-    self.frame = CGRectMake(0, _holder.frame.size.height, self.frame.size.width, self.frame.size.height);
+    self.frame = CGRectMake(0, _holder.frame.size.height, _holder.frame.size.width, self.frame.size.height);
     [_holder addSubview:self];
     [UIView animateWithDuration:0.2 animations:^{
         CGRect rect = self.frame;
