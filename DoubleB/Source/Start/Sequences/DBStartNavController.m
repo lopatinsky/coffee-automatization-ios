@@ -36,6 +36,20 @@
             [self fetchAppConfiguretion];
         };
         self.viewControllers = @[launchVC];
+    } else {
+        [DBServerAPI fetchAppConfiguration:^(BOOL result, NSDictionary *response) {
+            if (result) {
+                UIColor *oldColor = [ApplicationManager applicationColor];
+                
+                [ApplicationConfig sync:response];
+                [[ApplicationManager sharedInstance] initializeVendorFrameworks];
+                [ApplicationManager applyBrandbookStyle];
+                
+                if (![oldColor isEqual:[ApplicationManager applicationColor]]) {
+                    [self.navDelegate db_startNavVCNeedsMoveToMain:self];
+                }
+            }
+        }];
     }
 }
 
@@ -44,6 +58,7 @@
         if (result) {
             [ApplicationConfig sync:response];
             [[ApplicationManager sharedInstance] initializeVendorFrameworks];
+            [ApplicationManager applyBrandbookStyle];
             [self additionalLaunchScreenActions];
         } else {
             [[UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)

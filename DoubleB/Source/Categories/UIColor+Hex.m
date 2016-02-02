@@ -16,6 +16,13 @@
     return [[UIColor alloc] initWithRed:red green:green blue:blue alpha:alpha];
 }
 
++ (UIColor *)fromHexString:(NSString *)hexString {
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:hexString];
+    [scanner scanHexInt:&rgbValue];
+    return [UIColor fromHex:rgbValue];
+}
+
 - (CGFloat)getBrightness {
     CGFloat hue;
     CGFloat saturation;

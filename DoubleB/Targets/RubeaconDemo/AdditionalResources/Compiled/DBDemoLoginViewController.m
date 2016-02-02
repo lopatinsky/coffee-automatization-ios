@@ -94,7 +94,7 @@
         }
     }];
     
-    [[ApplicationManager sharedInstance] fetchCompanyDependentInfo];
+    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
 }
 
 #pragma mark - DBSettingsProtocol

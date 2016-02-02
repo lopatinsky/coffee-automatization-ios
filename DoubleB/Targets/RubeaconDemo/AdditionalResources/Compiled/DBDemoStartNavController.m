@@ -18,6 +18,8 @@
     [super viewDidLoad];
     
     if (![self needLaunchScreen]) {
+        [[DBCompanyInfo sharedInstance] updateInfo:nil];
+        
         [self moveNext];
     }
 }

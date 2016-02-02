@@ -115,18 +115,43 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     return baseUrl;
 }
 
-+ (id)db_AppDefaultColor {
-    id colorHex = colorHex = [self objectFromApplicationPreferencesByName:@"CompanyColor"];
-
-    return colorHex;
-}
-
 + (NSString *)db_AppGoogleAnalyticsKey {
     NSString *GAKeyString = [self objectFromApplicationPreferencesByName:@"CompanyGAKey"];
     
     return GAKeyString ?: @"";
 }
 
+- (UIColor *)appColor {
+    UIColor *color;
+    
+    // Remote config
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    NSString *remoteColorString = [[config getValueForKey:@"colors"] getValueForKey:@"main"];
+    if (remoteColorString.length > 0 && ![remoteColorString isEqualToString:@"FF000000"]) {
+        color = [UIColor fromHexString:remoteColorString.lowercaseString];
+    }
+    
+    // Local config
+    if (!color) {
+        id colorHex = [ApplicationConfig objectFromApplicationPreferencesByName:@"CompanyColor"];
+        
+        if ([colorHex isKindOfClass:[NSNumber class]]) {
+            color = [UIColor fromHex:[colorHex intValue]];
+        }
+        
+        if ([colorHex isKindOfClass:[NSString class]]){
+            NSString *hexString = colorHex;
+            if ([hexString rangeOfString:@"#"].location == 0)
+                hexString = [hexString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
+            if (hexString.length == 6)
+                hexString = [NSString stringWithFormat:@"ff%@", hexString];
+            
+            color = [UIColor fromHexString:hexString];
+        }
+    }
+    
+    return color;
+}
 
 - (NSString *)parseAppKey {
     NSDictionary *config = [ApplicationConfig remoteConfig];
@@ -423,6 +448,18 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
                                                            NSForegroundColorAttributeName: [UIColor whiteColor],
                                                            NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
                                                            }];
+}
+
++ (UIColor *)applicationColor {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"rubeacondemo"]) {
+        if ([DBCompanyInfo sharedInstance].companyColor) {
+            return [DBCompanyInfo sharedInstance].companyColor;
+        } else {
+            return [[ApplicationConfig sharedInstance] appColor];
+        }
+    } else {
+        return [[ApplicationConfig sharedInstance] appColor];
+    }
 }
 
 @end

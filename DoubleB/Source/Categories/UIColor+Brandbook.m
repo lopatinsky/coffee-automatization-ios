@@ -16,26 +16,7 @@
 }
 
 + (UIColor *)db_defaultColor {
-    id color = [ApplicationConfig db_AppDefaultColor];
-    
-    if ([color isKindOfClass:[NSNumber class]]) {
-        return [UIColor fromHex:[color intValue]];
-    }
-    
-    if ([color isKindOfClass:[NSString class]]){
-        NSString *hexString = color;
-        if ([hexString rangeOfString:@"#"].location == 0)
-            hexString = [color stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:@""];
-        if (hexString.length == 6)
-            hexString = [NSString stringWithFormat:@"ff%@", hexString];
-        
-        unsigned rgbValue = 0;
-        NSScanner *scanner = [NSScanner scannerWithString:hexString];
-        [scanner scanHexInt:&rgbValue];
-        return [UIColor fromHex:rgbValue];
-    }
-    
-    return nil;
+    return [ApplicationManager applicationColor];
 }
 
 + (UIColor *)db_defaultColorWithAlpha:(CGFloat)alpha{
@@ -60,7 +41,6 @@
 
 + (UIColor *)db_errorColor {
     return [self db_errorColor:1.f];
-    //    return [UIColor orangeColor];
 }
 
 + (UIColor *)db_errorColor:(CGFloat)alpha {

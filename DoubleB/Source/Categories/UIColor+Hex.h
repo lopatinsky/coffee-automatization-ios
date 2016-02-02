@@ -8,6 +8,7 @@
 @interface UIColor (Hex)
 
 + (UIColor *)fromHex:(uint)hex;
++ (UIColor *)fromHexString:(NSString *)hexString;
 - (CGFloat)getBrightness;
 
 @end

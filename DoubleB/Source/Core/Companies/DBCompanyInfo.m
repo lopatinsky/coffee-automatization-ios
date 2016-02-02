@@ -23,7 +23,6 @@
 NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificationInfoUpdated";
 
 @interface DBCompanyInfo ()
-@property (nonatomic, strong) NSString *remoteColor;
 @end
 
 @implementation DBCompanyInfo
@@ -50,6 +49,11 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
 
 - (NSString *)phoneNumber {
     return [DBCompanyInfo valueForKey:@"phoneNumber"] ?: @"";
+}
+
+- (UIColor *)companyColor {
+    NSString *hexString = [DBCompanyInfo valueForKey:@"companyDefaultColor"];
+    return [UIColor fromHexString:hexString];
 }
 
 - (void)updateInfo {
@@ -98,7 +102,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
             
             NSString *hexString = response[@"colors"][@"action"];
-            _remoteColor = [hexString substringFromIndex:2];
+            [DBCompanyInfo setValue:hexString forKey:@"companyDefaultColor"];
             
             [self synchronize];
             
@@ -231,8 +235,6 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     _deliveryCities = info[@"_deliveryCities"];
     _promocodesIsEnabled = info[@"promocodeIsEnabled"] ?: @NO;
     _friendInvitationEnabled = [info[@"_friendInvitationEnabled"] boolValue];
-    
-    _remoteColor = info[@"_remoteColor"];
 }
 
 - (void)synchronize {
@@ -250,8 +252,7 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
                            @"supportEmails": _supportEmails,
                            @"_deliveryCities": _deliveryCities,
                            @"_friendInvitationEnabled": @(_friendInvitationEnabled),
-                           @"promocodeIsEnabled": _promocodesIsEnabled,
-                           @"_remoteColor": _remoteColor ?: @""};
+                           @"promocodeIsEnabled": _promocodesIsEnabled};
     
     [[NSUserDefaults standardUserDefaults] setObject:info forKey:kDBDefaultsCompanyInfo];
     [[NSUserDefaults standardUserDefaults] synchronize];

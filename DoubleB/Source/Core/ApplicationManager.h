@@ -83,6 +83,7 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 
 @interface ApplicationManager(Appearance)
 + (void)applyBrandbookStyle;
++ (UIColor *)applicationColor;
 @end
 
 @interface ApplicationManager(Start) <DBStartNavControllerDelegate>
