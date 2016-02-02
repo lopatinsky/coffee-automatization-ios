@@ -287,8 +287,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-    
-    [GANHelper trackClientInfo];
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
@@ -297,6 +295,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     }
     
     [DBVersionDependencyManager performAll];
+    [GANHelper trackClientInfo];
     
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
         [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];

@@ -122,6 +122,14 @@
         [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:4]
                                              value:[DBClientInfo sharedInstance].clientMail.value];
     }
+    
+    if ([IHSecureStore sharedInstance].clientId.length == 0) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy.MM.dd";
+        [[[GAI sharedInstance] defaultTracker] set:[GAIFields customDimensionForIndex:5]
+                                             value:[formatter stringFromDate:[NSDate date]]];
+    }
+    
 #endif
 }
 
