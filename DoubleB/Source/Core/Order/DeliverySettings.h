@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBDataManager.h"
 #import "ManagerProtocol.h"
 #import "OrderPartManagerProtocol.h"
 
@@ -15,7 +16,7 @@ typedef NS_ENUM(NSInteger, DeliverySettingsChange) {
     DeliverySettingsChangeNewTime
 };
 
-@interface DeliverySettings : NSObject<ManagerProtocol, OrderPartManagerProtocol>
+@interface DeliverySettings : DBDataManager<ManagerProtocol, OrderPartManagerProtocol>
 
 /**
  * Selected type of delivery

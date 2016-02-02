@@ -23,10 +23,23 @@
     if (self) {
         _parentManager = parentManager;
         
-        [self selectDeliveryType:[[DBCompanyInfo sharedInstance] defaultDeliveryType]];
+        DBDeliveryType *type;
+        if ([DeliverySettings valueForKey:@"_selectedDeliveryType"]) {
+            type = [[DBCompanyInfo sharedInstance] deliveryTypeById:[[DeliverySettings valueForKey:@"_selectedDeliveryType"] integerValue]];
+            if (!type) {
+                type = [[DBCompanyInfo sharedInstance] defaultDeliveryType];
+            }
+        } else {
+            type = [[DBCompanyInfo sharedInstance] defaultDeliveryType];
+        }
+        [self selectDeliveryType:type];
     }
     
     return self;
+}
+
++ (NSString *)db_managerStorageKey {
+    return @"DBDefaultsDeliverySettings";
 }
 
 - (void)updateAfterDeliveryTypesUpdate{
@@ -55,6 +68,7 @@
 
 - (void)setDeliveryType:(DBDeliveryType *)deliveryType {
     _deliveryType = deliveryType;
+    [DeliverySettings setValue:@(_deliveryType.typeId) forKey:@"_selectedDeliveryType"];
     
     if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime)){
         [self launchTimer];
