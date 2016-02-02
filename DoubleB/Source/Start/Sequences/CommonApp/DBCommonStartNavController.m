@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 
 @interface DBCommonStartNavController ()<DBCompaniesViewControllerDelegate, DBCitiesViewControllerDelegate>
 @property (nonatomic) DBCommonStartState state;
+
+@property (strong, nonatomic) NSDate *startDate;
 @end
 
 @implementation DBCommonStartNavController
@@ -40,6 +42,8 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
     } else {
         [self moveNext];
     }
+    
+    self.startDate = [NSDate date];
 }
 
 - (BOOL)needLaunchScreen {
@@ -152,6 +156,9 @@ typedef NS_ENUM(NSInteger, DBCommonStartState) {
 
 - (void)moveToMain {
     if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
+        double interval = [[NSDate date] timeIntervalSinceDate:self.startDate];
+        [GANHelper analyzeTiming:@"Start_application" interval:@(interval) name:@"app_started"];
+        
         self.state = DBCommonStartStateMain;
         [self.navDelegate db_startNavVCNeedsMoveToMain:self];
     }

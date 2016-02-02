@@ -247,17 +247,32 @@
 
 + (void)checkNewOrder:(void(^)(NSDictionary *response))success
               failure:(void(^)(NSError *error))failure {
+    NSDate *startDate = [NSDate date];
     // TODO: check unused vars in checkNewOrder
     [[DBAPIClient sharedClient] POST:@"check_order"
                           parameters:[self assembleCheckOrderParams]
                              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                  //NSLog(@"%@", responseObject);
                                  
+                                 // Track timing
+                                 double interval = [[NSDate date] timeIntervalSinceDate:startDate];
+                                 [GANHelper analyzeTiming:@"Order_Screen" interval:@(interval) name:@"price_loaded" label:[IHSecureStore sharedInstance].clientId ?: @""];
+                                 
+                                 
                                  if(success)
                                      success(responseObject);
                              }
                              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                  NSLog(@"%@", error);
+                                 
+                                 //analytics
+                                 NSString *label;
+                                 if (operation.response.statusCode == 400) {
+                                     label = operation.responseObject[@"description"];
+                                 } else {
+                                     label = [NSString stringWithFormat:@"%@", error.localizedDescription];
+                                 }
+                                 [GANHelper analyzeEvent:@"check_order_fail" label:label category:ORDER_SCREEN];
                                  
                                  if(failure)
                                      failure(error);
@@ -287,11 +302,16 @@
     
     [GANHelper analyzeEvent:@"order_submit" category:ORDER_SCREEN];
 
+    NSDate *startDate = [NSDate date];
     [[DBAPIClient sharedClient] POST:@"order"
                           parameters:@{@"order": jsonString}
                              timeout:30
                              success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                  //NSLog(@"%@", responseObject);
+                                 
+                                 // Track timing
+                                 double interval = [[NSDate date] timeIntervalSinceDate:startDate];
+                                 [GANHelper analyzeTiming:@"Place_Order" interval:@(interval) name:@"order_placed" label:[IHSecureStore sharedInstance].clientId ?: @""];
                                  
                                  // Save order
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];

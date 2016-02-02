@@ -31,7 +31,7 @@
                             <constraint firstAttribute="height" constant="14" id="jwM-TP-iOA"/>
                         </constraints>
                     </imageView>
-                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-kH-aUo">
+                    <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-kH-aUo" customClass="DBDefaultSeparatorView">
                         <rect key="frame" x="0.0" y="49" width="320" height="0.0"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

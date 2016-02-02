@@ -11,6 +11,7 @@
 #import "DBMenuPosition.h"
 #import "DBSubscriptionManager.h"
 #import "Venue.h"
+#import "IHSecureStore.h"
 
 #import "DBAPIClient.h"
 
@@ -102,8 +103,12 @@
     [[DBAPIClient sharedClient] GET:@"menu"
                          parameters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                NSDate *endTime = [NSDate date];
-                                int interval = [endTime timeIntervalSince1970] - [startTime timeIntervalSince1970];
+                                double interval = [[NSDate date] timeIntervalSinceDate:startTime];
+                                
+                                [GANHelper analyzeTiming:@"Load_Menu"
+                                                interval:@(interval)
+                                                    name:@"menu_loading"
+                                                   label:[IHSecureStore sharedInstance].clientId ?: @""];
                                 
                                 [GANHelper analyzeEvent:@"menu_load_success"
                                                  number:@(interval)

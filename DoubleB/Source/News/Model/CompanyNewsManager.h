@@ -13,6 +13,7 @@ extern NSString *const CompanyNewsManagerDidFetchActualNews;
 extern NSString *const CompanyNewsManagerDidReceiveNewsPush;
 
 @interface CompanyNewsManager : NSObject
+@property (nonatomic) BOOL available;
 
 @property (nonatomic, strong) CompanyNews *actualNews;
 @property (nonatomic, strong) NSArray *allNews;

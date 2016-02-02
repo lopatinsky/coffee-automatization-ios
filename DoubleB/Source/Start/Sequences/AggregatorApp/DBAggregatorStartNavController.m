@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 
 @interface DBAggregatorStartNavController ()<DBCitiesViewControllerDelegate>
 @property (nonatomic) DBAggregatorStartState state;
+
+@property (strong, nonatomic) NSDate *startDate;
 @end
 
 @implementation DBAggregatorStartNavController
@@ -35,6 +37,8 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
     } else {
         [self moveToMain];
     }
+    
+    self.startDate = [NSDate date];
 }
 
 - (BOOL)needLaunchScreen {
@@ -75,6 +79,9 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 
 - (void)moveToMain {
     if ([self.navDelegate respondsToSelector:@selector(db_startNavVCNeedsMoveToMain:)]) {
+        double interval = [[NSDate date] timeIntervalSinceDate:self.startDate];
+        [GANHelper analyzeTiming:@"Start_application" interval:@(interval) name:@"app_started"];
+        
         self.state = DBAggregatorStartStateMain;
         [self.navDelegate db_startNavVCNeedsMoveToMain:self];
     }

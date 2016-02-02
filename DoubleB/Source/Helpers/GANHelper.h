@@ -18,6 +18,10 @@
 + (void)analyzeEvent:(NSString *)eventName label:(NSString *)label category:(NSString *)category;
 + (void)analyzeEvent:(NSString *)eventName number:(NSNumber *)number category:(NSString *)category;
 
++ (void)analyzeTiming:(NSString *)category interval:(NSNumber *)interval name:(NSString *)name;
+
++ (void)analyzeTiming:(NSString *)category interval:(NSNumber *)interval name:(NSString *)name label:(NSString *)label;
+
 + (void)trackNewOrderInfo:(Order *)order;
 
 + (void)trackClientInfo;

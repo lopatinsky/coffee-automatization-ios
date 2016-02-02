@@ -40,6 +40,10 @@ NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidRe
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (BOOL)available {
+    return self.allNews.count > 0;
+}
+
 - (void)updateNews:(NSArray *)newsArray {
     NSArray *oldNews = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCompanyNewsManager_allNews"] ?: @[];
     NSMutableArray *news = [NSMutableArray new];

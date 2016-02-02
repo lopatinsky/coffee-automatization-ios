@@ -262,10 +262,6 @@
                 callback(NO);
             [_parentManager manager:self haveChange:DBPromoManagerChangeUpdatedPromoInfo];
         }
-        
-        //analytics
-        NSString *label = [NSString stringWithFormat:@"%@", error.localizedDescription];
-        [GANHelper analyzeEvent:@"check_order_fail" label:label category:ORDER_SCREEN];
     }];
     
     return YES;

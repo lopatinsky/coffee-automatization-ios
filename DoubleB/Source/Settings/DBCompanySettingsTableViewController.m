@@ -18,6 +18,7 @@
 #import "DBPaymentViewController.h"
 #import "OrderCoordinator.h"
 #import "DBPromosListViewController.h"
+#import "CompanyNewsManager.h"
 #import "DBNewsHistoryTableViewController.h"
 #import "DBCompanyInfoViewController.h"
 #import "DBDocumentsViewController.h"
@@ -56,7 +57,11 @@
     }
     
     [settingsItems addObject:[DBPromosListViewController settingsItem]];
-    [settingsItems addObject:[DBNewsHistoryTableViewController settingsItem]];
+    
+    if ([CompanyNewsManager sharedManager].available) {
+        [settingsItems addObject:[DBNewsHistoryTableViewController settingsItem]];
+    }
+    
     [settingsItems addObject:[DBCompanyInfoViewController settingsItem]];
     [settingsItems addObject:[DBDocumentsViewController settingsItem]];
     

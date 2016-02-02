@@ -193,9 +193,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 }
 
 + (void)handlePush:(NSDictionary *)push {
-    [GANHelper analyzeEvent:@"push_received" label:[push description] category:@"push_screen"];
-    
     NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
+    
+    NSString *pushLabel = [NSString stringWithFormat:@"%@|%ld", [IHSecureStore sharedInstance].clientId ?: @"", (long)pushType];
+    [GANHelper analyzeEvent:@"return_push_inapp" label:pushLabel category:@"Return_Push_Screen"];
+    
     switch (pushType) {
         case RemotePushOrderType: {
             NSNotification *notification = [NSNotification notificationWithName:kDBStatusUpdatedNotification
@@ -298,8 +300,12 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     [GANHelper trackClientInfo];
     
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        [GANHelper analyzeEvent:@"swipe" label:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] category:@"Notification"];
-        [ApplicationManager handlePush:launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey]];
+        NSDictionary *push = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+        NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
+        NSString *pushLabel = [NSString stringWithFormat:@"%@|%ld", [IHSecureStore sharedInstance].clientId ?: @"", (long)pushType];
+        [GANHelper analyzeEvent:@"return_push_opened" label:pushLabel category:@"Return_Push_Screen"];
+        
+        [ApplicationManager handlePush:push];
     }
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];

@@ -53,6 +53,23 @@
     [self analyzeEvent:eventName label:[number stringValue] category:category];
 }
 
++ (void)analyzeTiming:(NSString *)category
+             interval:(NSNumber *)interval
+                 name:(NSString *)name{
+    [self analyzeTiming:category interval:interval name:name label:nil];
+}
+
++ (void)analyzeTiming:(NSString *)category
+             interval:(NSNumber *)interval
+                 name:(NSString *)name
+                label:(NSString *)label{
+    double intervalMillis = [interval doubleValue] * 1000;
+    [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createTimingWithCategory:category
+                                                                                       interval:@(intervalMillis)
+                                                                                           name:name
+                                                                                          label:label] build]];
+}
+
 
 + (void)trackNewOrderInfo:(Order *)order{
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createTransactionWithId:order.orderId
