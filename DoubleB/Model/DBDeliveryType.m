@@ -27,8 +27,23 @@
     }
     _timeSlots = timeSlots;
     
-    // Define time mode
-    _timeMode = [[responseDict getValueForKey:@"mode"] integerValue];
+    
+    //    TimeModeSlots = 0,
+    //    TimeModeTime = 1,
+    //    TimeModeDateSlots = 2,
+    //    TimeModeDual = 3,
+    //    TimeModeDateTime = 10000
+    NSInteger modeValue = [[responseDict getValueForKey:@"mode"] integerValue];
+    if (modeValue == 0) {
+        _timeMode = TimeModeSlots;
+    } else if (modeValue == 1) {
+        _timeMode = TimeModeTime;
+    } else if (modeValue == 2) {
+        _timeMode = TimeModeDateSlots;
+    } else if (modeValue == 3) {
+        _timeMode = TimeModeDual;
+    }
+    
     if (_timeMode == TimeModeTime) {
         _timeMode = _maxTimeInterval <= 60 * 60 * 24 ? TimeModeTime : TimeModeDateTime;
     }
@@ -83,7 +98,7 @@
         _minOrderSum = [[aDecoder decodeObjectForKey:@"_minOrderSum"] doubleValue];
         
         _timeMode = [[aDecoder decodeObjectForKey:@"_timeMode"] intValue];
-        _dualCurrentMode = [[aDecoder decodeObjectForKey:@"_dualCurrentMode"] intValue] ?: TimeModeTime;
+        _dualCurrentMode = [[aDecoder decodeObjectForKey:@"_dualCurrentMode"] intValue] ?: TimeModeSlots;
         
         _minTimeInterval = [[aDecoder decodeObjectForKey:@"_minTimeInterval"] doubleValue];
         _maxTimeInterval = [[aDecoder decodeObjectForKey:@"_maxTimeInterval"] doubleValue];
