@@ -25,13 +25,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *launchScreenName = [NSString stringWithFormat:@"launch_%.f.jpg", [UIScreen mainScreen].bounds.size.height];
-    UIImage *image = [UIImage imageNamed:launchScreenName];
-    
-    if(!image){
-        launchScreenName = [NSString stringWithFormat:@"launch_%.f.png", [UIScreen mainScreen].bounds.size.height];
-        image = [UIImage imageNamed:launchScreenName];
+    long screenHeight = [UIScreen mainScreen].bounds.size.height;
+    long screenWidth = [UIScreen mainScreen].bounds.size.width;
+    NSArray *launchArray = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"UILaunchImages"];
+    NSString *launchName;
+    for (NSDictionary *launchDict in launchArray) {
+        if ([launchDict[@"UILaunchImageSize"] isEqualToString:[NSString stringWithFormat:@"{%ld, %ld}", screenWidth, screenHeight]]) {
+            launchName = launchDict[@"UILaunchImageName"];
+        }
     }
+    
+    UIImage *image = [UIImage imageNamed:launchName];
+
     
     self.backImageView.image = image;
 }
