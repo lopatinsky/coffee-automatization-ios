@@ -120,6 +120,7 @@ static NSMutableArray *unifiedStoredVenues;
     }
     
     [[CoreDataHelper sharedHelper] save];
+    [Venue updateUserActivities];
     storedVenues = nil;
 }
 
@@ -210,7 +211,10 @@ static NSMutableArray *unifiedStoredVenues;
     NSArray *venues = [Venue storedVenues];
     for (Venue *venue in venues) {
         if ([venue activityIsAvailable]) {
-            [[AppIndexingManager sharedManager] postActivity:venue withParams:@{@"type": @"venue", @"expirationDate": [[NSDate date] dateByAddingTimeInterval:60 * 60 * 24 * 7], @"eligibleForPublicIndexing": @"YES"}];
+            [[AppIndexingManager sharedManager] postActivity:venue withParams:@{@"type": @"venue",
+                                                                                @"expirationDate": [[NSDate date] dateByAddingTimeInterval:60 * 60 * 24 * 7],
+                                                                                @"eligibleForSearch": @(YES),
+                                                                                @"eligibleForPublicIndexing": @(YES)}];
         }
     }
 }
@@ -237,7 +241,7 @@ static NSMutableArray *unifiedStoredVenues;
 
 - (BOOL)activityIsAvailable {
     NSDate *lastPublicationDate = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"last_indexing_venue_%@", [self venueId]]] ?: [NSDate dateWithTimeIntervalSince1970:0];
-    return [[NSDate date] numberOfDaysUntil:lastPublicationDate] > 7;
+    return [lastPublicationDate numberOfDaysUntil:[NSDate date]] > 7;
 }
 
 @end

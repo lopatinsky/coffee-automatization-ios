@@ -23,7 +23,6 @@
     _userActivity = [userInfo objectForKey:@"activity"];
     _obj = [userInfo objectForKey:@"obj"];
     return self;
-    
 }
 
 - (void)main {
