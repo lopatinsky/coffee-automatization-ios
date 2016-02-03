@@ -32,16 +32,24 @@
 
 @implementation DBSubscriptionModuleView
 
-+ (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode{
++ (DBSubscriptionModuleView*)create:(DBSubscriptionModuleViewMode)mode {
     DBSubscriptionModuleView *view = [DBSubscriptionModuleView create];
     view.mode = mode;
     [view config];
-    
     return view;
+}
+
+- (void)update {
+    [self reload:YES];
 }
 
 - (void)viewWillAppearOnVC {
     [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(update) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
+}
+
+- (void)viewWillDissapearFromVC {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)config {
