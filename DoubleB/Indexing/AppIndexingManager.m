@@ -82,9 +82,9 @@
     userActivity.contentAttributeSet = [obj activityAttributes];
     userActivity.expirationDate = [params objectForKey:@"expirationDate"] ?: [NSDate distantFuture];
     
-    userActivity.eligibleForSearch = [params objectForKey:@"eligibleForSearch"] ?: @(YES);
-    userActivity.eligibleForHandoff = [params objectForKey:@"eligibleForHandoff"] ?: @(NO);
-    userActivity.eligibleForPublicIndexing = [params objectForKey:@"eligibleForPublicIndexing"] ?: @(NO);
+    userActivity.eligibleForSearch = [[params objectForKey:@"eligibleForSearch"] boolValue];
+    userActivity.eligibleForHandoff = [[params objectForKey:@"eligibleForHandoff"] boolValue];
+    userActivity.eligibleForPublicIndexing = [[params objectForKey:@"eligibleForPublicIndexing"] boolValue];
     
     [self.activities addObject:userActivity];
     [self.activitiesQueue addConcurrentPendingOperation:[[UserActivityOperation alloc] initWithUserInfo:@{@"activity": userActivity, @"obj": obj}]];
