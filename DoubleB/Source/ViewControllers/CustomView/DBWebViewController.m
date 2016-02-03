@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self db_setTitle:self.title];
+    [self db_setTitle:self.webViewTitle];
 }
 
 - (void)didReceiveMemoryWarning {

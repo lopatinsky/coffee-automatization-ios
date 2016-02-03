@@ -38,7 +38,7 @@
     self.items = [NSMutableArray new];
     for (DBCustomItem *item in [[DBCustomViewManager sharedInstance] items]) {
         DBWebViewController *webVC = [DBWebViewController new];
-        webVC.title = item.title;
+        webVC.webViewTitle = item.title;
         webVC.urlString = item.urlString;
         [self.items addObject:@{@"title": item.title, @"viewController": webVC}];
     }
@@ -81,5 +81,21 @@
     [self.navigationController pushViewController:itemDict[@"viewController"] animated:YES];
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBCustomTableViewController *customVC = [DBCustomTableViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    
+    settingsItem.name = @"otherVC";
+    settingsItem.title = NSLocalizedString(@"Другое", nil);
+    settingsItem.iconName = @"ic_launch";
+    settingsItem.viewController = customVC;
+    settingsItem.reachTitle = nil;
+    settingsItem.eventLabel = @"other_click";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
+}
 
 @end

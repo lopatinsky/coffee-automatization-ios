@@ -17,7 +17,7 @@
 
 #import "DBMenuPosition.h"
 
-@interface DBPositionViewController ()
+@interface DBPositionViewController () <DBOwnerViewControllerProtocol>
 @property (strong, nonatomic) DBMPOrderModuleView *orderModule;
 @end
 

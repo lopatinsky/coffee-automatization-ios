@@ -23,6 +23,8 @@
 #import "DBCompanyInfoViewController.h"
 #import "DBDocumentsViewController.h"
 #import "DBSubscriptionManager.h"
+#import "DBCustomViewManager.h"
+#import "DBCustomTableViewController.h"
 
 #import "ViewControllerManager.h"
 
@@ -71,6 +73,10 @@
     
     if ([[DBSubscriptionManager sharedInstance] isEnabled]) {
         [settingsItems addObject:[[ViewControllerManager subscriptionViewController] settingsItem]];
+    }
+    
+    if ([[DBCustomViewManager sharedInstance] available]) {
+        [settingsItems addObject:[DBCustomTableViewController settingsItem]];
     }
     
     return settingsItems;

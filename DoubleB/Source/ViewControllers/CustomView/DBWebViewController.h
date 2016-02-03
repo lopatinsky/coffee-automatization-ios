@@ -10,7 +10,7 @@
 
 @interface DBWebViewController : UIViewController
 
-@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *webViewTitle;
 @property (nonatomic, strong) NSString *urlString;
 
 @end

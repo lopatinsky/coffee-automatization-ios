@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DBCustomTableViewController : UITableViewController
+@interface DBCustomTableViewController : UITableViewController <DBSettingsProtocol>
 
 @end
