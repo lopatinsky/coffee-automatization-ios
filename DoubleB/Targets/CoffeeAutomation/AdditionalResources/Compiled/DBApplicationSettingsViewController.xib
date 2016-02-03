@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBApplicationSettingsViewController">
+            <connections>
+                <outlet property="magicButton" destination="Iqh-64-SNN" id="jv6-Yk-ZkC"/>
+                <outlet property="tableView" destination="WZu-o3-oZe" id="bcI-J9-QZu"/>
+                <outlet property="urlTextField" destination="1vH-Qv-oWI" id="CYl-0M-I54"/>
+                <outlet property="view" destination="iN0-l3-epB" id="9vu-O8-M6P"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1vH-Qv-oWI">
+                    <rect key="frame" x="10" y="8" width="300" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="rt5-tx-EBX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WZu-o3-oZe">
+                    <rect key="frame" x="0.0" y="46" width="320" height="482"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqh-64-SNN">
+                    <rect key="frame" x="0.0" y="528" width="320" height="40"/>
+                    <color key="backgroundColor" red="0.29803921570000003" green="0.45882352939999999" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="3Hj-Yj-CzJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="Click here and You will see some MAGIC">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Iqh-64-SNN" secondAttribute="bottom" id="3T6-nG-Zu4"/>
+                <constraint firstAttribute="trailing" secondItem="Iqh-64-SNN" secondAttribute="trailing" id="A1X-Xe-G35"/>
+                <constraint firstItem="1vH-Qv-oWI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="MbS-5v-uyT"/>
+                <constraint firstAttribute="trailing" secondItem="WZu-o3-oZe" secondAttribute="trailing" id="MbT-4f-z26"/>
+                <constraint firstItem="1vH-Qv-oWI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Qym-rN-lUI"/>
+                <constraint firstItem="Iqh-64-SNN" firstAttribute="top" secondItem="WZu-o3-oZe" secondAttribute="bottom" id="T8B-fh-k9b"/>
+                <constraint firstItem="WZu-o3-oZe" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cDp-37-Lxa"/>
+                <constraint firstItem="Iqh-64-SNN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dsk-rX-FPs"/>
+                <constraint firstItem="WZu-o3-oZe" firstAttribute="top" secondItem="1vH-Qv-oWI" secondAttribute="bottom" constant="8" id="f7Z-eZ-IWg"/>
+                <constraint firstAttribute="trailing" secondItem="1vH-Qv-oWI" secondAttribute="trailing" constant="10" id="p25-pU-b8f"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <point key="canvasLocation" x="348" y="300"/>
+        </view>
+    </objects>
+</document>

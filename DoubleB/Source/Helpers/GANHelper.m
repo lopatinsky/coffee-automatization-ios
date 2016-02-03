@@ -23,7 +23,7 @@
 //    [GAI sharedInstance].trackUncaughtExceptions = YES;
 //    [[GAI sharedInstance] setDefaultTracker:tracker];
 #else
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[DBCompanyInfo db_companyGoogleAnalyticsKey]];
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:[ApplicationConfig db_AppGoogleAnalyticsKey]];
     [GAI sharedInstance].trackUncaughtExceptions = YES;
     [[GAI sharedInstance] setDefaultTracker:tracker];
 #endif
