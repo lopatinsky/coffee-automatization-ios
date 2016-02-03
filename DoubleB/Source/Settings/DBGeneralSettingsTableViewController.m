@@ -20,7 +20,7 @@
     [super viewWillAppear:animated];
 }
 
-- (NSMutableArray *)settingsItems {
+- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
     NSMutableArray *settingsItems = [NSMutableArray new];
     
     if ([[DBCitiesManager sharedInstance] cities].count > 1) {

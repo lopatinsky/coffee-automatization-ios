@@ -51,7 +51,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     [self.tableView reloadData];
 }
 
-- (NSMutableArray *)settingsItems {
+- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
     return nil;
 }
 

@@ -19,8 +19,8 @@
 
 @implementation DBRubeaconDemoSettingsViewController
 
-- (NSMutableArray *)settingsItems {
-    NSMutableArray *settingsItems = [super settingsItems];
+- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
+    NSMutableArray<DBSettingsItemProtocol> *settingsItems = [super settingsItems];
     
     [settingsItems insertObject:[DBDemoLoginViewController settingsItem] atIndex:0];
     

@@ -91,7 +91,7 @@
 
 #pragma mark - Map Camera Settings
 
-- (void)setupCamera {
+- (BOOL)setupCamera {
     void (^cameraForLocation)(CLLocation *) = ^void(CLLocation *location) {
         NSArray *venues = [self venuesInRadius:3000 of:location];
         if (venues.count > 0) {
@@ -128,6 +128,8 @@
             cameraForLocation(location);
         }];
     }
+    
+    return YES;
 }
 
 - (NSArray *)venuesInRadius:(double)rad of:(CLLocation *)location{

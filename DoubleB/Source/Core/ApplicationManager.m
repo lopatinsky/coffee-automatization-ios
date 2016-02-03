@@ -121,6 +121,10 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     return GAKeyString ?: @"";
 }
 
++ (id)db_AppDefaultColor {
+    return nil;
+}
+
 - (UIColor *)appColor {
     UIColor *color;
     

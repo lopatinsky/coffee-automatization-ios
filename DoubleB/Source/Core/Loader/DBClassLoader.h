@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "DBNewOrderVC.h"
 #import "DBCategoryCell.h"
+#import "DBBaseSettingsTableViewController.h"
 
 @class DBCompanySettingsViewController;
 @class DBStartNavController;
@@ -20,7 +21,7 @@
 
 + (DBStartNavController *)loadStartNavigationController;
 + (DBNewOrderVC *)loadNewOrderVC;
-+ (DBCompanySettingsViewController *)loadSettingsViewController;
++ (DBBaseSettingsTableViewController *)loadSettingsViewController;
 
 + (Class<DBCategoryCellProtocol>)loadCategoryCell;
 

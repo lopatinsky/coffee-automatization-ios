@@ -19,7 +19,7 @@ extern NSString *const kDBSettingsNotificationsEnabled2;
 
 @interface DBBaseSettingsTableViewController : UITableViewController
 
-- (NSMutableArray *)settingsItems;
+- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems;
 - (void)reload;
 
 @end

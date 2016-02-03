@@ -15,7 +15,7 @@
 #import "DBMenuPositionModifier.h"
 #import "DBMenuPositionModifierItem.h"
 
-@interface DBMPModifiersModuleView ()<DBPositionModifierPickerDelegate, DBPositionModifiersListDelegate>
+@interface DBMPModifiersModuleView () <DBPositionModifierPickerDelegate, DBPositionModifiersListDelegate, DBPopupComponentDelegate>
 @property (strong, nonatomic) DBPositionModifiersList *modifiersList;
 @property (strong, nonatomic) DBPositionModifierPicker *modifierPicker;
 

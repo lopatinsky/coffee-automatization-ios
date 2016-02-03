@@ -61,7 +61,7 @@
     return height;
 }
 
-- (CGFloat)heightForRow:(int)row {
+- (CGFloat)heightForRow:(NSInteger)row {
     CGFloat h = [DBDiscountMessageCell labelHeight:[OrderCoordinator sharedInstance].promoManager.promos[row]] + 5;
     if (h < 25)
         h = 25.f;

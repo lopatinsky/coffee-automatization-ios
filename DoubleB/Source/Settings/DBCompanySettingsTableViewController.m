@@ -30,8 +30,8 @@
 
 @implementation DBCompanySettingsTableViewController
 
-- (NSMutableArray *)settingsItems {
-    NSMutableArray *settingsItems = [NSMutableArray new];
+- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
+    NSMutableArray<DBSettingsItemProtocol> *settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
     
     if ([DBCompaniesManager sharedInstance].hasCompanies) {
         [settingsItems addObject:[[ViewControllerManager companiesViewController] settingsItem]];
