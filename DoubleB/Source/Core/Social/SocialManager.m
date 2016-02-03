@@ -154,12 +154,13 @@
 
 - (void)shareMessage:(UIViewController *)vc {
     NSString *text = [DBShareHelper sharedInstance].textShare;
-    text = [text stringByAppendingString:@"\nИли воспользуйтесь промокодом: %@"];
+    text = [text stringByAppendingString:@"\n%@\nИли воспользуйтесь промокодом: %@"];
+    NSDictionary *urls = [DBShareHelper sharedInstance].appUrls;
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.view.tintColor = vc.view.tintColor;
     messageController.messageComposeDelegate = self;
-    messageController.body = [NSString stringWithFormat:text, [DBShareHelper sharedInstance].promoCode];
+    messageController.body = [NSString stringWithFormat:text, [NSURL URLWithString:urls[@"sms"]], [DBShareHelper sharedInstance].promoCode];
     [vc presentViewController:messageController animated:YES completion:nil];
 }
 

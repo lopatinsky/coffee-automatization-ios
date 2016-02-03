@@ -103,7 +103,8 @@
 }
 
 - (void)updateTimeAccordingToDeliveryType {
-    if(_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)){
+    if ((_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)) ||
+        (_deliveryType.timeMode == TimeModeDual && _deliveryType.dualCurrentMode == TimeModeTime)) {
         if(!self.selectedTime || [self.selectedTime compare:_deliveryType.minDate] == NSOrderedAscending){
             self.selectedTime = _deliveryType.minDate;
         }
@@ -113,7 +114,8 @@
         }
     }
     
-    if (self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)){
+    if ((self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)) ||
+        (_deliveryType.timeMode == TimeModeDual && _deliveryType.dualCurrentMode == TimeModeSlots)) {
         DBTimeSlot *timeSlot = [_deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
         if (!timeSlot) {
             timeSlot = _deliveryType.timeSlots.firstObject;
@@ -170,7 +172,7 @@
 
 #pragma mark - DBManagerProtocol
 
-- (void)flushCache{
+- (void)flushCache {
     self.deliveryType = nil;
     self.selectedTimeSlot = nil;
     self.selectedTime = nil;

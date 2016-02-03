@@ -52,19 +52,19 @@
         case TimeModeTime: {
             self.pickerView.type = DBTimePickerTypeTime;
             self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
-        }
             break;
+        }
         case TimeModeDateTime: {
             self.pickerView.type = DBTimePickerTypeDateTime;
             self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
-        }
             break;
+        }
         case TimeModeSlots: {
             self.pickerView.type = DBTimePickerTypeItems;
             self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
             self.pickerView.selectedItem = [_orderCoordinator.deliverySettings.deliveryType.timeSlots indexOfObject:_orderCoordinator.deliverySettings.selectedTimeSlot];
-        }
             break;
+        }
         case TimeModeDateSlots: {
             self.pickerView.type = DBTimePickerTypeDateAndItems;
             self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;

@@ -129,7 +129,7 @@
 
 - (BOOL)activityIsAvailable {
     NSDate *lastPublicationDate = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"activity_position_%@", [[self position] positionId]]] ?: [NSDate dateWithTimeIntervalSince1970:0];
-    return [[NSDate date] numberOfDaysUntil:lastPublicationDate] > 7;
+    return [lastPublicationDate numberOfDaysUntil:[NSDate date]] > 7;
 }
 
 #pragma mark - NSCoding methods
