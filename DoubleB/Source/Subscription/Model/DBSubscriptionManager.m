@@ -91,6 +91,7 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 
 - (void)saveSubscriptionCategory {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.subscriptionCategory];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDBSubscriptionManagerCategoryIsAvailable object:nil];
     [DBSubscriptionManager setValue:data forKey:@"__subscriptionCategory"];
 }
 
@@ -100,8 +101,6 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     self.enable = enabled;
     [DBSubscriptionManager setValue:@(enabled) forKey:@"__available"];
     if (self.enable) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDBSubscriptionManagerCategoryIsAvailable object:nil];
-        
         self.subscriptionScreenText = moduleDict[@"info"][@"screen"][@"description"];
         self.subscriptionScreenTitle = moduleDict[@"info"][@"screen"][@"title"];
         self.subscriptionMenuText = moduleDict[@"info"][@"menu"][@"description"];
