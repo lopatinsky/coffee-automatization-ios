@@ -317,10 +317,18 @@
                                  Order *ord = [[Order alloc] initNewOrderWithDict:responseObject];
                                  ord.requestObject = order;
                                  
-                                 [[AppIndexingManager sharedManager] postActivity:ord withParams:@{@"type": @"order", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+                                 if ([ord activityIsAvailable]) {
+                                     [[AppIndexingManager sharedManager] postActivity:ord withParams:@{@"type": @"order",
+                                                                                                       @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7],
+                                                                                                       @"eligibleForSearch": @(YES),
+                                                                                                       @"eligibleForPublicIndexing": @(YES)}];
+                                 }
                                  for (OrderItem *item in [ord items]) {
                                      if ([item activityIsAvailable]) {
-                                         [[AppIndexingManager sharedManager] postActivity:item withParams:@{@"type": @"position", @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7]}];
+                                         [[AppIndexingManager sharedManager] postActivity:item withParams:@{@"type": @"position",
+                                                                                                            @"expirationDate": [ord.time dateByAddingTimeInterval:60 * 60 * 24 * 7],
+                                                                                                            @"eligibleForSearch": @(YES),
+                                                                                                            @"eligibleForPublicIndexing": @(YES)}];
                                      }
                                  }
                                  
