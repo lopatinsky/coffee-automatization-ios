@@ -21,7 +21,7 @@
 }
 
 - (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
-    NSMutableArray *settingsItems = [NSMutableArray new];
+    NSMutableArray<DBSettingsItemProtocol> *settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
     
     if ([[DBCitiesManager sharedInstance] cities].count > 1) {
         DBSettingsItem *item = [DBCitiesViewController settingsItem];
