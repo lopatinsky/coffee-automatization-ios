@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBModuleManagerProtocol.h"
 
-@interface DBShareHelper : NSObject
+@interface DBShareHelper : DBPrimaryManager<DBModuleManagerProtocol>
+@property(nonatomic) BOOL enabled;
+@property(nonatomic) BOOL infoLoaded;
 
 @property(strong, nonatomic, readonly) UIImage *imageForShare;
 @property(strong, nonatomic) NSString *imageURL;
@@ -19,14 +22,10 @@
 @property(strong, nonatomic, readonly) NSString *textShareScreen;
 @property(strong, nonatomic, readonly) NSString *promoCode;
 
-+ (instancetype)sharedInstance;
-
-- (void)fetchShareSupportInfo;
 - (void)fetchShareInfo:(void(^)(BOOL success))callback;
 
 // Small view on bottom of screen for share permission
 @property (nonatomic) BOOL shareSuggestionIsAvailable;
-
 - (void)showShareSuggestion:(BOOL)animated;
 
 @end

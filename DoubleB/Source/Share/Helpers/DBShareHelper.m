@@ -25,7 +25,6 @@ typedef NS_ENUM(NSUInteger, ShareType) {
     ShareTypeOther
 };
 
-NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
 
 @interface DBShareHelper ()<ShareSuggestionViewDelegate>
 @property (nonatomic, strong) ShareSuggestionView *shareView;
@@ -42,25 +41,31 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
 
 - (instancetype)init {
     self = [super init];
-    if (self) {
-    }
+    
     return self;
 }
 
-#pragma mark - Logic
-
-- (void)fetchShareSupportInfo{
-    [[DBAPIClient sharedClient] GET:@"shared/invitation/info"
-                         parameters:nil
-                            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                [DBShareHelper saveValue:[responseObject getValueForKey:@"description"] ?: @"" forKey:@"textShareScreen"];
-                                [DBShareHelper saveValue:[responseObject getValueForKey:@"title"] ?: @"" forKey:@"titleShareScreen"];
-                            }
-                            failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                NSLog(@"%@", error);
-                                
-                            }];
+- (BOOL)enabled {
+    return [[DBShareHelper valueForKey:@"enabled"] boolValue];
 }
+
+- (BOOL)infoLoaded {
+    return [[DBShareHelper valueForKey:@"infoLoaded"] boolValue];
+}
+
+- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
+    [DBShareHelper setValue:@(enabled) forKey:@"enabled"];
+    
+    NSDictionary *info = [moduleDict getValueForKey:@"info"];
+    [DBShareHelper setValue:[[info getValueForKey:@"about"] getValueForKey:@"title"] ?: @"" forKey:@"titleShareScreen"];
+    [DBShareHelper setValue:[[info getValueForKey:@"about"] getValueForKey:@"description"] ?: @"" forKey:@"textShareScreen"];
+    
+    if (self.enabled) {
+        [self fetchShareInfo:nil];
+    }
+}
+
+#pragma mark - Logic
 
 - (void)fetchShareInfo:(void(^)(BOOL success))callback{
     if(![IHSecureStore sharedInstance].clientId){
@@ -71,6 +76,7 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                 //NSLog(@"%@", responseObject);
+                                [DBShareHelper setValue:@(YES) forKey:@"infoLoaded"];
                                 
                                 NSString *imageUrl = [responseObject getValueForKey:@"image"];
                                 
@@ -78,15 +84,17 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
                                     dispatch_async(dispatch_queue_create("image_load_queue", NULL), ^{
                                         NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]];
                                         dispatch_async(dispatch_get_main_queue(), ^{
-                                            [DBShareHelper saveValue:imageData forKey:@"shareImageData"];
+                                            [DBShareHelper setValue:imageData forKey:@"shareImageData"];
                                         });
                                     });
                                 }
                                 
-                                [DBShareHelper saveValue:[responseObject getValueForKey:@"text"] ?: @"" forKey:@"shareText"];
-                                [DBShareHelper saveValue:imageUrl forKey:@"imageURL"];
-                                [DBShareHelper saveValue:[responseObject getValueForKey:@"promo_code"] ?: @"" forKey:@"promoCode"];
-                                _appUrls = [self processShareLinks:responseObject[@"urls"]];
+                                [DBShareHelper setValue:[responseObject getValueForKey:@"text"] ?: @"" forKey:@"shareText"];
+                                [DBShareHelper setValue:imageUrl forKey:@"imageURL"];
+                                [DBShareHelper setValue:[responseObject getValueForKey:@"promo_code"] ?: @"" forKey:@"promoCode"];
+                                
+                                NSDictionary *urls = [self processShareLinks:[responseObject getValueForKey:@"urls"]];
+                                [DBShareHelper setValue:urls ?: @[] forKey:@"urls"];
                                 
                                 if(callback)
                                     callback(YES);
@@ -107,6 +115,10 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
 
 - (NSString *)imageURL {
     return [DBShareHelper valueForKey:@"imageURL"];
+}
+
+- (NSDictionary *)appUrls {
+    return [DBShareHelper valueForKey:@"urls"];
 }
 
 - (UIImage *)imageForShare{
@@ -193,7 +205,6 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
     }
     
     [self.shareView showOnView:[UIViewController currentViewController].view animated:animated];
-    //    self.status = ShareManagerShareIsNotAvailable;
 }
 
 #pragma mark - ShareSuggestionViewDelegate
@@ -207,25 +218,8 @@ NSString *const kDBShareHelperDefaultsInfo = @"kDBShareHelperDefaultsInfo";
 }
 
 
-#pragma mark - Helper methods
-
-+ (id)valueForKey:(NSString *)key{
-    NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBShareHelperDefaultsInfo];
-    return info[key];
-}
-
-+ (void)saveValue:(id)value forKey:(NSString *)key {
-    NSDictionary *info = [[NSUserDefaults standardUserDefaults] objectForKey:kDBShareHelperDefaultsInfo];
-    NSMutableDictionary *mutableInfo = [NSMutableDictionary dictionaryWithDictionary:info];
-    
-    if(value){
-        mutableInfo[key] = value;
-    } else {
-        [mutableInfo removeObjectForKey:key];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:mutableInfo forKey:kDBShareHelperDefaultsInfo];
-    [[NSUserDefaults standardUserDefaults] synchronize];
++ (NSString *)db_managerStorageKey {
+    return @"kDBShareHelperDefaultsInfo";
 }
 
 @end

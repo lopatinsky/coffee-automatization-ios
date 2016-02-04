@@ -12,6 +12,7 @@
 #import "DBProfileViewController.h"
 #import "DBOrdersTableViewController.h"
 #import "DBCompanyInfo.h"
+#import "DBShareHelper.h"
 #import "DBFriendGiftHelper.h"
 #import "DBFriendGiftViewController.h"
 #import "IHPaymentManager.h"
@@ -40,8 +41,8 @@
     [settingsItems addObject:[DBProfileViewController settingsItem]];
     [settingsItems addObject:[DBOrdersTableViewController settingsItem]];
     
-    if ([[DBCompanyInfo sharedInstance] friendInvitationEnabled]) {
-        [settingsItems addObject:[[ViewControllerManager shareFriendInvitationViewController] settingsItem]];
+    if ([DBShareHelper sharedInstance].enabled) {
+        [settingsItems addObject:[[ViewControllerManager shareFriendInvitationViewController] settingsItem:self]];
     }
     
     if ([[DBFriendGiftHelper sharedInstance] enabled]) {

@@ -125,8 +125,6 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     [[DBModulesManager sharedInstance] fetchModules:nil];
     [[IHPaymentManager sharedInstance] synchronizePaymentTypes];
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
-    [[DBShareHelper sharedInstance] fetchShareSupportInfo];
-    [[DBShareHelper sharedInstance] fetchShareInfo:nil];
     [[CompanyNewsManager sharedManager] fetchUpdates];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];

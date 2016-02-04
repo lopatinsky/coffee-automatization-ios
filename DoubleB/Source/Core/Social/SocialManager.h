@@ -8,16 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol SocialManagerDelegate <NSObject>
-
-- (void)socialManagerDidBeginFetchShareInfo;
-- (void)socialManagerDidEndFetchShareInfo;
-
+@protocol DBSocialManagerDelegate <NSObject>
+- (UIViewController*)db_socialManagerContainer;
 @end
 
 @interface SocialManager : NSObject
-
-+ (instancetype)sharedManagerWithDelegate:(UIViewController<SocialManagerDelegate> *)delegate;
+@property (nonatomic) id<DBSocialManagerDelegate> delegate;
++ (instancetype)sharedManager;
 
 - (BOOL)vkIsAvailable;
 

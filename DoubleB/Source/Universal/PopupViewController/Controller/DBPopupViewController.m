@@ -12,7 +12,7 @@
 
 #import "UIGestureRecognizer+BlocksKit.h"
 
-@interface DBPopupViewController ()
+@interface DBPopupViewController ()<UIViewControllerTransitioningDelegate>
 @property (strong, nonatomic) UIImageView *bgImageView;
 @property (strong, nonatomic) UIView *contentView;
 @property (strong, nonatomic) UIView *headerFooterView;
@@ -47,11 +47,13 @@
     }
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     if (_displayController) {
-        [_displayController beginAppearanceTransition:YES animated:YES];
+        [_displayController viewWillAppear:animated];
+//        [_displayController beginAppearanceTransition:YES animated:YES];
     }
 }
 
@@ -72,11 +74,13 @@
         
         if (_displayController) {
             if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                height = [_displayController db_popupContentContentHeight];
+                if (height > [_displayController db_popupContentContentHeight])
+                    height = [_displayController db_popupContentContentHeight];
             }
         } else if (_displayView) {
             if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                height = [_displayView db_popupContentContentHeight];
+                if (height > [_displayView db_popupContentContentHeight])
+                    height = [_displayView db_popupContentContentHeight];
             }
         }
         
@@ -111,11 +115,13 @@
         int height = rect.size.height - 60 - self.headerFooterView.frame.size.height;
         if (_displayController) {
             if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                height = [_displayController db_popupContentContentHeight];
+                if (height > [_displayController db_popupContentContentHeight])
+                    height = [_displayController db_popupContentContentHeight];
             }
         } else if (_displayView) {
             if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                height = [_displayView db_popupContentContentHeight];
+                if (height > [_displayView db_popupContentContentHeight])
+                    height = [_displayView db_popupContentContentHeight];
             }
         }
         
@@ -138,6 +144,37 @@
 }
 
 
++ (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller
+              inContainer:(UIViewController *)container
+                     mode:(DBPopupVCAppearanceMode)mode {
+    DBPopupViewController *popupVC = [DBPopupViewController new];
+    popupVC.displayController = controller;
+    popupVC.appearanceMode = mode;
+    popupVC.transitioningDelegate = popupVC;
+    popupVC.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [popupVC beginAppearanceTransition:YES animated:YES];
+    [container presentViewController:popupVC animated:YES completion:^{
+        [popupVC endAppearanceTransition];
+    }];
+}
+
+
++ (void)presentView:(UIView<DBPopupViewControllerContent> *)view
+        inContainer:(UIViewController *)container
+               mode:(DBPopupVCAppearanceMode)mode {
+    DBPopupViewController *popupVC = [DBPopupViewController new];
+    popupVC.displayView = view;
+    popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;
+    popupVC.transitioningDelegate = popupVC;
+    popupVC.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [popupVC beginAppearanceTransition:YES animated:YES];
+    [container presentViewController:popupVC animated:YES completion:^{
+        [popupVC endAppearanceTransition];
+    }];
+}
+
 #pragma mark - UIViewControllerAnimatedTransitioning
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
@@ -156,8 +193,8 @@
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             fromViewController.view.alpha = 0;
             
-            self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-            self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+//            self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+//            self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
         } completion:^(BOOL finished) {
             if (_displayController) {
                 [_displayController removeFromParentViewController];
@@ -176,18 +213,29 @@
         
         UIImage *snapshot = [fromViewController.view snapshotImage];
         self.bgImageView.image = [snapshot applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.3 alpha:0.6] saturationDeltaFactor:1.5 maskImage:nil];
-        self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+//        self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+//        self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             toViewController.view.alpha = 1;
             
-            self.contentView.transform = CGAffineTransformIdentity;
-            self.headerFooterView.transform = CGAffineTransformIdentity;
+//            self.contentView.transform = CGAffineTransformIdentity;
+//            self.headerFooterView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     }
+}
+
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    return self;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return self;
 }
 
 @end

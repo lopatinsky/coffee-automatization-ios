@@ -14,6 +14,7 @@
 #import "DBUniversalModulesManager.h"
 #import "DBGeoPushManager.h"
 #import "DBCustomViewManager.h"
+#import "DBShareHelper.h"
 
 @interface DBModulesManager ()
 @property (strong, nonatomic) NSMutableArray *availableModules;
@@ -75,6 +76,9 @@
                 [appModules removeObject:@(DBModuleTypeFriendGift)];
                 [appModules removeObject:@(DBModuleTypeFriendGiftMivako)];
             } break;
+            case DBModuleTypeFriendInvitation:
+                [[DBShareHelper sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalProfileModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
@@ -101,6 +105,9 @@
             case DBModuleTypeFriendGift:
             case DBModuleTypeFriendGiftMivako:
                 [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
+                break;
+            case DBModuleTypeFriendInvitation:
+                [[DBShareHelper sharedInstance] enableModule:NO withDict:nil];
                 break;
             case DBModuleTypeProfileScreenUniversal:
                 [[DBUniversalProfileModulesManager sharedInstance] enableModule:NO withDict:nil];

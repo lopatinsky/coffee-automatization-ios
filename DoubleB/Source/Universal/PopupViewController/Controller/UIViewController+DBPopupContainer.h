@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DBPopupViewController.h"
 
 @interface UIViewController (DBPopupContainer) <UIViewControllerTransitioningDelegate>
 
-- (void)presentController:(UIViewController *)controller;
-- (void)presentView:(UIView *)view;
+- (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller;
+- (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller mode:(DBPopupVCAppearanceMode)mode;
+
+- (void)presentView:(UIView<DBPopupViewControllerContent> *)view;
+- (void)presentView:(UIView<DBPopupViewControllerContent> *)view mode:(DBPopupVCAppearanceMode)mode;
 
 @end

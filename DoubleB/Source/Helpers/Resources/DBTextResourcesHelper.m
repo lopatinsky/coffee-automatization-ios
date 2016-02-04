@@ -80,11 +80,11 @@
 }
 
 + (UIColor *)db_shareScreenTextColor {
-    UIColor *color = [UIColor whiteColor];
+    UIColor *color = [UIColor blackColor];
     
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"voda"]) {
-        color = [UIColor blackColor];
-    }
+//    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"voda"]) {
+//        color = [UIColor blackColor];
+//    }
     
     return color;
 }
