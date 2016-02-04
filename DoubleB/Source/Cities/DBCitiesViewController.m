@@ -35,6 +35,8 @@
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    self.searchBar.placeholder = NSLocalizedString(@"Поиск", nil);
+    
     self.citiesTableView.tableFooterView = [UIView new];
     self.citiesTableView.backgroundColor = [UIColor clearColor];
     self.citiesTableView.rowHeight = 44.f;

@@ -56,19 +56,20 @@
     self.orderLabel = [self.orderView viewWithTag:112];
     self.separatorView = [self.orderView viewWithTag:113];
     
-    
     self.backgroundColor = [UIColor db_defaultColorWithAlpha:0.9];
     
     self.balanceLabel.layer.cornerRadius = 6.f;
     self.balanceLabel.layer.borderWidth = 1.f;
     self.balanceLabel.layer.borderColor = self.balanceLabel.textColor.CGColor;
     self.balanceLabel.layer.masksToBounds = YES;
+    self.balanceLabel.text = [DBTextResourcesHelper db_venueBalanceString];
     
     self.orderView.layer.cornerRadius = 6.f;
     self.orderView.layer.masksToBounds = YES;
-    
     self.priceLabel.textColor = [UIColor db_defaultColor];
     self.orderLabel.textColor = [UIColor db_defaultColor];
+    self.orderLabel.text = NSLocalizedString(@"Добавить", nil);
+    
     self.separatorView.backgroundColor = [UIColor db_defaultColor];
     
     @weakify(self)

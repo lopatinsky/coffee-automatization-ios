@@ -34,6 +34,12 @@
     return title;
 }
 
++ (NSString *)db_venueBalanceString {
+    NSString *title = NSLocalizedString(@"Наличие в магазинах", nil);
+    
+    return title;
+}
+
 + (NSString *)db_preparationOrderCellString {
     if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeeacademy"] || [[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"testapp"]) {
         return NSLocalizedString(@"Мы постараемся приготовить к %@", nil);
