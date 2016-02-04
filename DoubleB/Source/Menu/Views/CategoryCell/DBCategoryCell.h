@@ -30,6 +30,7 @@ typedef NS_ENUM(NSUInteger, DBCategoryCellAppearanceType) {
 @property (weak, nonatomic) UILabel *categoryNameLabel;
 @property (weak, nonatomic) UIImageView *disclosureIndicator;
 
+@property (nonatomic) DBCategoryCellAppearanceType appearanceType;
 @property (strong, nonatomic, readonly) DBMenuCategory *category;
 
 

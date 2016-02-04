@@ -15,10 +15,15 @@
 @implementation DBCategoryCell
 
 + (instancetype)create:(DBCategoryCellAppearanceType)type {
+    DBCategoryCell *cell = nil;
+    
     if (type == DBCategoryCellAppearanceTypeFull)
-        return [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCell" owner:self options:nil] firstObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCell" owner:self options:nil] firstObject];
     else
-        return [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCompactCell" owner:self options:nil] firstObject];
+        cell =  [[[NSBundle mainBundle] loadNibNamed:@"DBCategoryCompactCell" owner:self options:nil] firstObject];
+    cell.appearanceType = type;
+    
+    return cell;
 }
 
 - (void)awakeFromNib {

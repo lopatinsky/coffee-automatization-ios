@@ -18,19 +18,28 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 //#import "FBSDKShareDialog.h"
 
-#import "CAGradientLayer+Helper.h"
+#import "UIView+RoundedCorners.h"
 
 @interface DBSharePermissionViewController () <SocialManagerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *shareImageView;
-
-@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
-@property (weak, nonatomic) IBOutlet UILabel *logoLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *closeButton;
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UILabel *promocodeTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *promocodeLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *facebookShareView;
+@property (weak, nonatomic) IBOutlet UILabel *facebookShareLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *vkShareView;
+@property (weak, nonatomic) IBOutlet UILabel *vkShareLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintVkShareViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintVkShareViewTopSpace;
+
+@property (weak, nonatomic) IBOutlet UIView *smsShareView;
+@property (weak, nonatomic) IBOutlet UILabel *smsShareLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *otherButton;
+
 
 @property (nonatomic, strong) UIActionSheet *actionSheet;
 
@@ -46,31 +55,23 @@
     if(!self.screen)
         self.screen = SHARE_PERMISSION_SCREEN;
     
-    NSString *imageName = [DBTextResourcesHelper db_shareBgImageName];
-    imageName = [NSString stringWithFormat:@"%@_%ld.jpg", imageName, (long)[UIScreen mainScreen].bounds.size.height];
-    self.shareImageView.image = [UIImage imageNamed:imageName];
+    [self.facebookShareView setRoundedCorners];
+    self.facebookShareLabel.text = NSLocalizedString(@"Поделиться в Facebook", nil).uppercaseString;
     
-    self.logoImageView.hidden = YES;
-    self.logoLabel.text = [DBCompanyInfo sharedInstance].applicationName;
-    self.logoLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
+    [self.vkShareView setRoundedCorners];
+    self.vkShareLabel.text = NSLocalizedString(@"Поделиться в Vk", nil).uppercaseString;
+    if (![self.socialManager vkIsAvailable]) {
+        self.constraintVkShareViewHeight.constant = 0;
+        self.constraintVkShareViewTopSpace.constant = 0;
+    }
     
-    self.closeButton.imageView.image = [UIImage imageNamed:@"close_white.png"];
+    [self.smsShareView setRoundedCorners];
+    self.smsShareView.backgroundColor = [UIColor db_defaultColor];
+    self.smsShareLabel.text = NSLocalizedString(@"Поделиться через смс", nil).uppercaseString;
     
-    self.shareButton.backgroundColor = [UIColor db_defaultColor];
-    [self.shareButton setTitle:NSLocalizedString(@"Поделиться", nil) forState:UIControlStateNormal];
+    [self.otherButton setTitle:NSLocalizedString(@"Другое", nil) forState:UIControlStateNormal];
+    [self.otherButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
     
-//    CAGradientLayer *gradient = [CAGradientLayer gradientForFrame:self.shareButton.bounds
-//                                                        fromColor:[UIColor colorWithRed:175./255 green:231./255 blue:231./255 alpha:1.f]
-//                                                            point:CGPointMake(0.5, 0.0)
-//                                                          toColor:[UIColor colorWithRed:83./255 green:207./255 blue:205./255 alpha:1.f]
-//                                                            point:CGPointMake(0.5, 1.0)];
-//    [self.shareButton.layer addSublayer:gradient];
-    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height / 2;
-    self.shareButton.layer.masksToBounds = YES;
-    self.shareButton.enabled = YES;
-    
-    [self.closeButton addTarget:self action:@selector(closeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel.text = [DBShareHelper sharedInstance].titleShareScreen;
     self.titleLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
@@ -79,13 +80,13 @@
     self.descriptionLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
 
     self.socialManager = [SocialManager sharedManagerWithDelegate:self];
-    [self initializeActionViewSheet];
+//    [self initializeActionViewSheet];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -96,31 +97,31 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 
-- (void)initializeActionViewSheet {
-    self.actionSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Поделиться", nil)];
-    
-    if ([self.socialManager vkIsAvailable]) {
-        [self.actionSheet bk_addButtonWithTitle:@"Вконтакте" handler:^{
-            [self.socialManager shareVk];
-        }];
-    }
-    
-    [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
-        [self.socialManager shareFacebook];
-    }];
-    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Сообщение", nil) handler:^{
-        [self.socialManager shareMessage:self];
-    }];
-    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другое", nil) handler:^{
-        [self.socialManager shareOther:self.screen];
-    }];
-    [self.actionSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{
-        
-    }];
-}
+//- (void)initializeActionViewSheet {
+//    self.actionSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Поделиться", nil)];
+//    
+//    if ([self.socialManager vkIsAvailable]) {
+//        [self.actionSheet bk_addButtonWithTitle:@"Вконтакте" handler:^{
+//            [self.socialManager shareVk];
+//        }];
+//    }
+//    
+//    [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
+//        [self.socialManager shareFacebook];
+//    }];
+//    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Сообщение", nil) handler:^{
+//        [self.socialManager shareMessage:self];
+//    }];
+//    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другое", nil) handler:^{
+//        [self.socialManager shareOther:self.screen];
+//    }];
+//    [self.actionSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{
+//        
+//    }];
+//}
 
 - (IBAction)closeButtonClick:(id)sender{
     [self dismissViewControllerAnimated:YES completion:nil];

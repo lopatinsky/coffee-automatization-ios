@@ -231,7 +231,7 @@ static NSMutableArray *unifiedStoredVenues;
 }
 
 - (NSDictionary *)activityUserInfo {
-    return @{@"venue_id": self.venueId};
+    return @{@"venue_id": self.venueId ?: @""};
 }
 
 - (void)activityDidAppear {

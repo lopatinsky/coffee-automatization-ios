@@ -104,13 +104,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DBCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CategoryTableViewCell"];
-    if (!cell){
+    if (!cell || cell.appearanceType != [self cellType]){
         Class<DBCategoryCellProtocol> cellClass = [DBClassLoader loadCategoryCell];
-        if ([self hasImages]){
-            cell = [cellClass create:DBCategoryCellAppearanceTypeFull];
-        } else {
-            cell = [cellClass create:DBCategoryCellAppearanceTypeCompact];
-        }
+        cell = [cellClass create:[self cellType]];
     }
     
     DBMenuCategory *category = [self.categories objectAtIndex:indexPath.row];
