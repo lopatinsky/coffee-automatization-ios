@@ -236,6 +236,11 @@
 "Рассказать друзьям" = "Recommend app to friends";
 "Рассказать" = "Share";
 "Поделиться" = "Share";
+"Поделиться в Facebook" = "Share to Facebook";
+"Поделиться в Vk" = "Share to Vk";
+"Поделиться через смс" = "Share via sms";
+"Поделитесь своим промо-кодом" = "Send your promo-code";
+"Нет данных" = "No data";
 
 // Friend gift
 

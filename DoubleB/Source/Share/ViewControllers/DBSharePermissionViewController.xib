@@ -181,7 +181,6 @@
                 <constraint firstItem="BiX-gD-loF" firstAttribute="top" secondItem="uQa-Ga-4Ep" secondAttribute="bottom" constant="8" id="xhq-fN-Hne"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="310" y="287"/>
         </view>
     </objects>
