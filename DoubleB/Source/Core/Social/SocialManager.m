@@ -20,32 +20,21 @@
 
 @interface SocialManager () <MFMessageComposeViewControllerDelegate, VKSdkDelegate, FBSDKSharingDelegate>
 
-@property (nonatomic, strong) UIViewController<SocialManagerDelegate> *delegate;
-
 @end
 
 @implementation SocialManager
 
-+ (instancetype)sharedManagerWithDelegate:(UIViewController<SocialManagerDelegate> *)delegate {
++ (instancetype)sharedManager {
     static SocialManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[SocialManager alloc] initWithDelegate:delegate];
+        instance = [[SocialManager alloc] init];
     });
     return instance;
 }
 
-- (instancetype)initWithDelegate:(UIViewController<SocialManagerDelegate> *)delegate
-{
+- (instancetype)init {
     self = [super init];
-    self.delegate = delegate;
-    
-    if ([[DBShareHelper sharedInstance].appUrls count] == 0) {
-        [self.delegate socialManagerDidBeginFetchShareInfo];
-        [[DBShareHelper sharedInstance] fetchShareInfo:^(BOOL success) {
-            [self.delegate socialManagerDidEndFetchShareInfo];
-        }];
-    }
 
     [VKSdk initializeWithDelegate:self andAppId:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"VKAppId"] ?: @""];
     
@@ -82,7 +71,10 @@
 
     
     FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
-    dialog.fromViewController = self.delegate;
+    if ([self.delegate respondsToSelector:@selector(db_socialManagerContainer)]) {
+        dialog.fromViewController = [self.delegate db_socialManagerContainer];
+    }
+    
     dialog.shareContent = content;
     dialog.delegate = self;
     dialog.mode = FBSDKShareDialogModeNative;
@@ -146,10 +138,10 @@
         } else {
             [GANHelper analyzeEvent:@"share_dialog_cancelled" label:@"vk" category:SHARE_PERMISSION_SCREEN];
         }
-        [self.delegate dismissViewControllerAnimated:YES completion:nil];
+        [[self.delegate db_socialManagerContainer] dismissViewControllerAnimated:YES completion:nil];
     }];
     
-    [self.delegate presentViewController:shareDialog animated:YES completion:nil];
+    [[self.delegate db_socialManagerContainer] presentViewController:shareDialog animated:YES completion:nil];
 }
 
 - (void)shareMessage:(UIViewController *)vc {
@@ -173,11 +165,13 @@
 
 #pragma mark - Other
 - (void)shareOther:(NSString *)screen {
-    [self.delegate sharePermissionOnScreen:screen callback:^(BOOL completed) {
-        if (completed) {
-            [self.delegate dismissViewControllerAnimated:YES completion:nil];
-        }
-    }];
+    if ([self.delegate respondsToSelector:@selector(db_socialManagerContainer)]) {
+        [[self.delegate db_socialManagerContainer] sharePermissionOnScreen:screen callback:^(BOOL completed) {
+            if (completed) {
+                [[self.delegate db_socialManagerContainer] dismissViewControllerAnimated:YES completion:nil];
+            }
+        }];
+    }
 }
 
 #pragma mark - VK SDK delegate
@@ -191,11 +185,11 @@
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError {
     VKCaptchaViewController *captchaVC = [VKCaptchaViewController captchaControllerWithError:captchaError];
-    [captchaVC presentIn:self.delegate];
+    [captchaVC presentIn:[self.delegate db_socialManagerContainer]];
 }
 
 - (void)vkSdkShouldPresentViewController:(UIViewController *)controller {
-    [self.delegate presentViewController:controller animated:YES completion:nil];
+    [[self.delegate db_socialManagerContainer] presentViewController:controller animated:YES completion:nil];
 }
 
 @end

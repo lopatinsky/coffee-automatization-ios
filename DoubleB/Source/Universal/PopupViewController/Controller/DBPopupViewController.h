@@ -28,4 +28,12 @@ typedef NS_ENUM(NSInteger, DBPopupVCAppearanceMode) {
 
 @property (nonatomic) DBPopupVCAppearanceMode appearanceMode;
 
++ (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller
+              inContainer:(UIViewController *)container
+                     mode:(DBPopupVCAppearanceMode)mode;
+
++ (void)presentView:(UIView<DBPopupViewControllerContent> *)view
+        inContainer:(UIViewController *)container
+               mode:(DBPopupVCAppearanceMode)mode;
+
 @end

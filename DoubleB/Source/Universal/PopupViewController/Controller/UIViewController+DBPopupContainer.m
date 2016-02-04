@@ -8,7 +8,6 @@
 
 #import "UIViewController+DBPopupContainer.h"
 
-#import "DBPopupViewController.h"
 #import <objc/runtime.h>
 
 static char INSTANCE_KEY;
@@ -24,9 +23,13 @@ static char INSTANCE_KEY;
 }
 
 - (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller {
+    [self presentController:controller mode:DBPopupVCAppearanceModeFooter];
+}
+
+- (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayController = controller;
-    popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;
+    popupVC.appearanceMode = mode;
     popupVC.transitioningDelegate = self;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
     
@@ -36,6 +39,10 @@ static char INSTANCE_KEY;
 }
 
 - (void)presentView:(UIView<DBPopupViewControllerContent> *)view {
+    [self presentView:view mode:DBPopupVCAppearanceModeFooter];
+}
+
+- (void)presentView:(UIView<DBPopupViewControllerContent> *)view mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayView = view;
     popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;

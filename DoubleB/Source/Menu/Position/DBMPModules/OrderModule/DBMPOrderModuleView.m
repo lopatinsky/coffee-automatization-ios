@@ -14,7 +14,7 @@
 #import "DBModulesManager.h"
 #import "DBMenu.h"
 
-#import "UIViewController+DBPopupContainer.h"
+#import "DBPopupViewController.h"
 #import "UIView+RoundedCorners.h"
 
 @interface DBMPOrderModuleView ()
@@ -108,7 +108,7 @@
     self.balanceView.balance = self.balance;
 
     [self.balanceView reload];
-    [self.ownerViewController presentView:self.balanceView];
+    [DBPopupViewController presentView:self.balanceView inContainer:self.ownerViewController mode:DBPopupVCAppearanceModeFooter];
 }
 
 - (void)orderClick {
@@ -119,7 +119,7 @@
         [view setRoundedCorners];
         view.backgroundColor = [UIColor whiteColor];
         
-        [self addSubview:view];
+        [self.orderHolderView addSubview:view];
         
         self.orderView.alpha = 0;
         [UIView animateWithDuration:0.3
@@ -158,7 +158,8 @@
         };
         
         [self.balanceView reload];
-        [self.ownerViewController presentView:self.balanceView];
+        
+        [DBPopupViewController presentView:self.balanceView inContainer:self.ownerViewController mode:DBPopupVCAppearanceModeFooter];
     } else {
         addBlock();
     }

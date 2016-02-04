@@ -11,21 +11,24 @@
 #import "DBShareHelper.h"
 #import "DBCompanyInfo.h"
 #import "SocialManager.h"
-#import "UIActionSheet+BlocksKit.h"
+#import "DBProgressBackgroundView.h"
 #import "DBTextResourcesHelper.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 //#import "FBSDKShareDialog.h"
 
+#import "DBPopupViewController.h"
 #import "UIView+RoundedCorners.h"
+#import "UIGestureRecognizer+BlocksKit.h"
+#import "UIControl+BlocksKit.h"
+#import "UIAlertView+BlocksKit.h"
 
-@interface DBSharePermissionViewController () <SocialManagerDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@interface DBSharePermissionViewController () <DBSocialManagerDelegate, DBPopupViewControllerContent>
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *promocodeTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *promocodeLabel;
+@property (weak, nonatomic) IBOutlet UITextView *promocodeTextView;
 
 @property (weak, nonatomic) IBOutlet UIView *facebookShareView;
 @property (weak, nonatomic) IBOutlet UILabel *facebookShareLabel;
@@ -41,7 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *otherButton;
 
 
-@property (nonatomic, strong) UIActionSheet *actionSheet;
+@property (nonatomic, strong) DBProgressBackgroundView *progressView;
 
 @property (nonatomic, strong) SocialManager *socialManager;
 
@@ -55,8 +58,15 @@
     if(!self.screen)
         self.screen = SHARE_PERMISSION_SCREEN;
     
+    self.socialManager = [SocialManager sharedManager];
+    self.socialManager.delegate = self;
+    
     [self.facebookShareView setRoundedCorners];
     self.facebookShareLabel.text = NSLocalizedString(@"Поделиться в Facebook", nil).uppercaseString;
+    
+    self.promocodeTitleLabel.text = NSLocalizedString(@"Поделитесь своим промо-кодом", nil).uppercaseString;
+    self.promocodeTextView.contentInset = UIEdgeInsetsMake(-5, 0, 0, 0);
+    [self reload];
     
     [self.vkShareView setRoundedCorners];
     self.vkShareLabel.text = NSLocalizedString(@"Поделиться в Vk", nil).uppercaseString;
@@ -72,21 +82,42 @@
     [self.otherButton setTitle:NSLocalizedString(@"Другое", nil) forState:UIControlStateNormal];
     [self.otherButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
     
+    @weakify(self)
+    [self.facebookShareView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        [self.socialManager shareFacebook];
+    }]];
     
-    self.titleLabel.text = [DBShareHelper sharedInstance].titleShareScreen;
-    self.titleLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
+    [self.vkShareView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        [self.socialManager shareVk];
+    }]];
     
-    self.descriptionLabel.text = [DBShareHelper sharedInstance].textShareScreen;
-    self.descriptionLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
+    [self.smsShareView addGestureRecognizer:[UITapGestureRecognizer bk_recognizerWithHandler:^(UIGestureRecognizer *sender, UIGestureRecognizerState state, CGPoint location) {
+        @strongify(self)
+        [self.socialManager shareMessage:self];
+    }]];
+    
+    [self.otherButton bk_addEventHandler:^(id sender) {
+        [self.socialManager shareOther:self.screen];
+    } forControlEvents:UIControlEventTouchUpInside];
 
-    self.socialManager = [SocialManager sharedManagerWithDelegate:self];
-//    [self initializeActionViewSheet];
+    self.progressView = [DBProgressBackgroundView new];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    if (![DBShareHelper sharedInstance].infoLoaded) {
+        [self.progressView showOnView:self.view color:[UIColor whiteColor]];
+        [[DBShareHelper sharedInstance] fetchShareInfo:^(BOOL success) {
+            if (success) {
+                [self reload];
+                [self.progressView hide];
+            } else {
+                [self.progressView stopAnimating];
+                [self.progressView showMessage:NSLocalizedString(@"Нет данных", nil)];
+            }
+        }];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -94,76 +125,51 @@
     [GANHelper analyzeScreen:self.screen];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+- (void)reload {
+    self.promocodeTextView.text = [DBShareHelper sharedInstance].promoCode;
+    [self configTitle];
 }
 
-//- (void)initializeActionViewSheet {
-//    self.actionSheet = [UIActionSheet bk_actionSheetWithTitle:NSLocalizedString(@"Поделиться", nil)];
-//    
-//    if ([self.socialManager vkIsAvailable]) {
-//        [self.actionSheet bk_addButtonWithTitle:@"Вконтакте" handler:^{
-//            [self.socialManager shareVk];
-//        }];
-//    }
-//    
-//    [self.actionSheet bk_addButtonWithTitle:@"Facebook" handler:^{
-//        [self.socialManager shareFacebook];
-//    }];
-//    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Сообщение", nil) handler:^{
-//        [self.socialManager shareMessage:self];
-//    }];
-//    [self.actionSheet bk_addButtonWithTitle:NSLocalizedString(@"Другое", nil) handler:^{
-//        [self.socialManager shareOther:self.screen];
-//    }];
-//    [self.actionSheet bk_setCancelButtonWithTitle:NSLocalizedString(@"Отменить", nil) handler:^{
-//        
-//    }];
-//}
+- (void)configTitle {
+    NSMutableString *text = [[NSMutableString alloc] initWithString:[DBShareHelper sharedInstance].titleShareScreen];
+    [text appendString:@"\n\n"];
 
-- (IBAction)closeButtonClick:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [text appendString:[DBShareHelper sharedInstance].textShareScreen];
     
-    [GANHelper analyzeEvent:@"close_click" category:self.screen];
-}
-
-- (IBAction)shareButtonClick:(id)sender{
-    [GANHelper analyzeEvent:@"share_click" category:self.screen];
+    NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
+    [attrText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue" size:17.f] range:NSMakeRange(0, [DBShareHelper sharedInstance].titleShareScreen.length)];
     
-    [self.actionSheet showInView:self.view];
+    self.descriptionLabel.attributedText = attrText;
+    self.descriptionLabel.textColor = [DBTextResourcesHelper db_shareScreenTextColor];
 }
 
-#pragma mark - SocialManagerDelegate
-- (void)socialManagerDidEndFetchShareInfo {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    self.shareButton.enabled = YES;
-}
 
-- (void)socialManagerDidBeginFetchShareInfo {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    self.shareButton.enabled = NO;
+#pragma mark - DBSocialManagerDelegate
+- (UIViewController *)db_socialManagerContainer {
+    return self;
 }
 
 #pragma mark - DBSettingsProtocol
 
-+ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController {
++ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController settingsController:(DBBaseSettingsTableViewController*)settingsVC{
     DBSettingsItem *item = [DBSettingsItem new];
     item.name =  @"shareVC";
     item.title =  NSLocalizedString(@"Рассказать друзьям", nil);
     item.iconName = @"share_icon";
-    item.viewController = viewController;
+    item.block = ^(){
+        [DBPopupViewController presentController:viewController inContainer:settingsVC mode:DBPopupVCAppearanceModeHeader];
+    };
+    
     item.navigationType = DBSettingsItemNavigationPresent;
     return item;
 }
 
-+ (id<DBSettingsItemProtocol>)settingsItem {
-    return [DBSharePermissionViewController settingsItemForViewController:[ViewControllerManager shareFriendInvitationViewController]];
++ (id<DBSettingsItemProtocol>)settingsItem:(DBBaseSettingsTableViewController *)settingsVC{
+    return [DBSharePermissionViewController settingsItemForViewController:[ViewControllerManager shareFriendInvitationViewController] settingsController:settingsVC];
 }
 
-- (id<DBSettingsItemProtocol>)settingsItem {
-    return [DBSharePermissionViewController settingsItemForViewController:self];
+- (id<DBSettingsItemProtocol>)settingsItem:(DBBaseSettingsTableViewController *)settingsVC {
+    return [DBSharePermissionViewController settingsItemForViewController:self settingsController:settingsVC];
 }
 
 @end
