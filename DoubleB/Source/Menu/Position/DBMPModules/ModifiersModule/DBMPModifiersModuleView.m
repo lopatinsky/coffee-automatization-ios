@@ -36,6 +36,7 @@
     [self.modifiersList alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
     
     self.modifierPicker = [DBPositionModifierPicker new];
+    self.modifierPicker.modifierDelegate = self;
     self.modifierPicker.delegate = self;
 }
 
