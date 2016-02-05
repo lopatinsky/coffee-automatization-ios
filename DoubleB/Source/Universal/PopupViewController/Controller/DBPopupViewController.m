@@ -40,10 +40,15 @@
     
     if (_displayController) {
         [self addChildViewController:_displayController];
+        _displayController.view.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_displayController.view];
+        [_displayController.view alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.contentView];
+        
         [_displayController didMoveToParentViewController:self];
     } else if (_displayView) {
+        _displayView.translatesAutoresizingMaskIntoConstraints = NO;
         [self.contentView addSubview:_displayView];
+        [_displayView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.contentView];
     }
 }
 
@@ -127,19 +132,11 @@
         
         [self.contentView alignLeading:@"5" trailing:@"-5" toView:self.view];
         [self.contentView alignCenterYWithView:self.view predicate:@"0"];
-//        [self.contentView alignTopEdgeWithView:self.view predicate:@"35"];
         [self.contentView constrainBottomSpaceToView:self.headerFooterView predicate:@"0"];
         [self.contentView constrainHeight:[NSString stringWithFormat:@"%ld", (long)height]];
         
         [self.headerFooterView alignLeading:@"5" trailing:@"-5" toView:self.view];
         [self.headerFooterView constrainHeight:[NSString stringWithFormat:@"%ld", (long)self.headerFooterView.frame.size.height]];
-//        [self.headerFooterView alignBottomEdgeWithView:self.view predicate:@"-25"];
-    }
-    
-    if (_displayController) {
-        _displayController.view.frame = self.contentView.bounds;
-    } else if (_displayView) {
-        _displayView.frame = self.contentView.bounds;
     }
 }
 
@@ -193,8 +190,8 @@
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             fromViewController.view.alpha = 0;
             
-//            self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-//            self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
         } completion:^(BOOL finished) {
             if (_displayController) {
                 [_displayController removeFromParentViewController];
@@ -213,14 +210,14 @@
         
         UIImage *snapshot = [fromViewController.view snapshotImage];
         self.bgImageView.image = [snapshot applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.3 alpha:0.6] saturationDeltaFactor:1.5 maskImage:nil];
-//        self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-//        self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             toViewController.view.alpha = 1;
             
-//            self.contentView.transform = CGAffineTransformIdentity;
-//            self.headerFooterView.transform = CGAffineTransformIdentity;
+            self.contentView.transform = CGAffineTransformIdentity;
+            self.headerFooterView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];

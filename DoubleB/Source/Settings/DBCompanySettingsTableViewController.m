@@ -26,6 +26,8 @@
 #import "DBSubscriptionManager.h"
 #import "DBCustomViewManager.h"
 #import "DBCustomTableViewController.h"
+#import "DBCitiesManager.h"
+#import "DBCitiesViewController.h"
 
 #import "ViewControllerManager.h"
 
@@ -33,6 +35,11 @@
 
 - (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
     NSMutableArray<DBSettingsItemProtocol> *settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
+    
+    if ([[DBCitiesManager sharedInstance] cities].count > 1) {
+        DBSettingsItem *item = [DBCitiesViewController settingsItem];
+        [settingsItems addObject:item];
+    }
     
     if ([DBCompaniesManager sharedInstance].hasCompanies) {
         [settingsItems addObject:[[ViewControllerManager companiesViewController] settingsItem]];

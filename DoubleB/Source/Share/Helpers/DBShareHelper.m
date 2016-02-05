@@ -11,6 +11,7 @@
 #import "IHSecureStore.h"
 
 #import "ShareSuggestionView.h"
+#import "DBPopupViewController.h"
 #import "UIView+NIBInit.h"
 
 typedef NS_ENUM(NSUInteger, ShareType) {
@@ -210,7 +211,8 @@ typedef NS_ENUM(NSUInteger, ShareType) {
 #pragma mark - ShareSuggestionViewDelegate
 - (void)showShareViewController {
     [self.shareView hide:YES];
-    [[UIViewController currentViewController] presentViewController:[ViewControllerManager shareFriendInvitationViewController] animated:YES completion:nil];
+    
+    [DBPopupViewController presentController:[ViewControllerManager shareFriendInvitationViewController] inContainer:[UIViewController currentViewController] mode:DBPopupVCAppearanceModeHeader];
 }
 
 - (void)hideShareSuggestionView {

@@ -159,6 +159,12 @@
 "Номер заказа: %@" = "Order number: %@";
 "Дополнить" = "Refill";
 
+"Наличие в магазинах" = "Left in stock";
+
+// Citites
+"Поиск" = "Search";
+"Выберите ваш город" = "Choose your city";
+
 // Profile
 "ФИО" = "Name";
 "Телефон" = "Phone";
@@ -171,6 +177,7 @@
 "Контактные данные вашего друга" = "Your friend contacts";
 
 "Добавить карту" = "Add card";
+"Добавить" = "Add";
 "Электронные платежи" = "E payment";
 
 "Выберите тип оплаты" = "Please select payment type";
@@ -236,6 +243,11 @@
 "Рассказать друзьям" = "Recommend app to friends";
 "Рассказать" = "Share";
 "Поделиться" = "Share";
+"Поделиться в Facebook" = "Share to Facebook";
+"Поделиться в Vk" = "Share to Vk";
+"Поделиться через смс" = "Share via sms";
+"Поделитесь своим промо-кодом" = "Send your promo-code";
+"Нет данных" = "No data";
 
 // Friend gift
 

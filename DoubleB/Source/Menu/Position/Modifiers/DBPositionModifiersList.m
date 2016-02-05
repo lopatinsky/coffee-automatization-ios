@@ -12,7 +12,7 @@
 #import "DBMenuPositionModifier.h"
 
 @interface DBPositionModifiersList ()<UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) UITableView *tableView;
 
 @property (strong, nonatomic) DBMenuPosition *position;
 
@@ -21,12 +21,19 @@
 @implementation DBPositionModifiersList
 
 - (instancetype)init {
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBPositionModifiersList" owner:self options:nil] firstObject];
+    self = [super init];
+    
+    [self commonInit];
     
     return self;
 }
 
-- (void)awakeFromNib {
+- (void)commonInit {
+    self.tableView = [UITableView new];
+    [self addSubview:self.tableView];
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.tableView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.rowHeight = 55.f;

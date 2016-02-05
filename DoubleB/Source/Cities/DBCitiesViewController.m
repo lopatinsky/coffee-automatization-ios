@@ -35,6 +35,8 @@
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
+    self.searchBar.placeholder = NSLocalizedString(@"Поиск", nil);
+    
     self.citiesTableView.tableFooterView = [UIView new];
     self.citiesTableView.backgroundColor = [UIColor clearColor];
     self.citiesTableView.rowHeight = 44.f;
@@ -115,30 +117,31 @@
         [[ApplicationManager sharedInstance] flushStoredCache];
         
         [DBCitiesManager selectCity:_cities[indexPath.row]];
-        if ([ApplicationConfig sharedInstance].hasCompanies) {
-            [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
-                if (companies.count > 1) {
-                    DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
-                    [companiesVC setVCMode:DBCompaniesViewControllerModeChangeCompany];
-                } else {
-                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-                    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
-                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                        
-                        [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
-                    }];
-                    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
-                }
-            }];
-        } else {
-            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-            [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
-                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                
-                [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
-            }];
-            [[DBCompanyInfo sharedInstance] fetchDependentInfo];
-        }
+        [[ApplicationManager sharedInstance] moveToStartState:YES];
+//        if ([ApplicationConfig sharedInstance].hasCompanies) {
+//            [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
+//                if (companies.count > 1) {
+//                    DBCompaniesViewController *companiesVC = [DBCompaniesViewController new];
+//                    [companiesVC setVCMode:DBCompaniesViewControllerModeChangeCompany];
+//                } else {
+//                    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//                    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+//                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                        
+//                        [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
+//                    }];
+//                    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+//                }
+//            }];
+//        } else {
+//            [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//            [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+//                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+//                
+//                [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
+//            }];
+//            [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+//        }
     }
 }
 
