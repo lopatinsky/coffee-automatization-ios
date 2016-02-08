@@ -24,6 +24,7 @@
 #import "DBVersionDependencyManager.h"
 #import "DBModulesManager.h"
 #import "DBGeoPushManager.h"
+#import "CompanyNewsManager.h"
 
 #import "DBSettingsTableViewController.h"
 #import "DBOrdersTableViewController.h"
@@ -199,6 +200,7 @@
     [[OrderCoordinator sharedInstance].promoManager updateInfo];
     [[DBShareHelper sharedInstance] fetchShareSupportInfo];
     [[DBShareHelper sharedInstance] fetchShareInfo:nil];
+    [[CompanyNewsManager sharedManager] fetchUpdates];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
 }
