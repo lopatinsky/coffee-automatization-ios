@@ -61,6 +61,10 @@
         imageName = @"share_voda";
     }
     
+    if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"sushitake"]) {
+        imageName = @"share_sushitake";
+    }
+    
     return imageName;
 }
 
