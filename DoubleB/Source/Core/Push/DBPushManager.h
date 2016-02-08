@@ -14,6 +14,6 @@
 - (void)applicationDidRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 
 - (void)registerForNotifications;
-- (void)subscribeToChannel:(NSString *)channel;
+- (void)subscribeToChannel:(NSString *)channel force:(BOOL)force;
 
 @end

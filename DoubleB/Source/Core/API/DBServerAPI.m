@@ -347,7 +347,7 @@
                                  
                                  hasOrderErrorInSession = NO;
                                  
-                                 [[DBPushManager sharedInstance] subscribeToChannel:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                 [[DBPushManager sharedInstance] subscribeToChannel:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId] force:YES];
                                  
                                  NSString *event;
                                  if(ord.paymentType == PaymentTypeCard){
@@ -417,7 +417,7 @@
                                         } else {
                                             Order *ord = [[Order alloc] initWithResponseDict:orderDict];
                                             
-                                            [[DBPushManager sharedInstance] subscribeToChannel:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                            [[DBPushManager sharedInstance] subscribeToChannel:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId] force:NO];
                                         }
                                     }
                                     

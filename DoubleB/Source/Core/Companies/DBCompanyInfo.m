@@ -83,12 +83,12 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             
             _companyPushChannel = [response[@"push_channels"] getValueForKey:@"company"] ?: @"";
-            [[DBPushManager sharedInstance] subscribeToChannel:_companyPushChannel];
+            [[DBPushManager sharedInstance] subscribeToChannel:_companyPushChannel force:NO];
             
             NSString *clientPushChannel = [response[@"push_channels"] getValueForKey:@"client"] ?: @"";
             _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             _clientPushChannel = [NSString stringWithFormat:_clientPushChannel, [IHSecureStore sharedInstance].clientId];
-            [[DBPushManager sharedInstance] subscribeToChannel:_clientPushChannel];
+            [[DBPushManager sharedInstance] subscribeToChannel:_clientPushChannel force:NO];
             
             NSString *venuePushChannel = [response[@"push_channels"] getValueForKey:@"venue"]  ?: @"";
             _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];

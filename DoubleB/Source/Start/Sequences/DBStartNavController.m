@@ -37,14 +37,9 @@
         };
         self.viewControllers = @[launchVC];
     } else {
-        [DBServerAPI fetchAppConfiguration:^(BOOL result, NSDictionary *response) {
-            if (result) {
-                UIColor *oldColor = [ApplicationManager applicationColor];
-                
-                [ApplicationConfig sync:response];
-                [[ApplicationManager sharedInstance] initializeVendorFrameworks];
-                [ApplicationManager applyBrandbookStyle];
-                
+        UIColor *oldColor = [ApplicationManager applicationColor];
+        [ApplicationConfig update:^(BOOL success) {
+            if (success) {
                 if (![oldColor isEqual:[ApplicationManager applicationColor]]) {
                     [self.navDelegate db_startNavVCNeedsMoveToMain:self];
                 }
@@ -54,11 +49,8 @@
 }
 
 - (void)fetchAppConfiguretion {
-    [DBServerAPI fetchAppConfiguration:^(BOOL result, NSDictionary *response) {
-        if (result) {
-            [ApplicationConfig sync:response];
-            [[ApplicationManager sharedInstance] initializeVendorFrameworks];
-            [ApplicationManager applyBrandbookStyle];
+    [ApplicationConfig update:^(BOOL success) {
+        if (success) {
             [self additionalLaunchScreenActions];
         } else {
             [[UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)

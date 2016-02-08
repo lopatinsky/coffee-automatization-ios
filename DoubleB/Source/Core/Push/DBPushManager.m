@@ -90,8 +90,10 @@
     [Compatibility registerForNotifications];
 }
 
-- (void)subscribeToChannel:(NSString *)channel {
-    [Compatibility registerForNotifications];
+- (void)subscribeToChannel:(NSString *)channel force:(BOOL)force {
+    if (force) {
+        [Compatibility registerForNotifications];
+    }
     
     if ([self sdkInitialized] && [Compatibility isRegisteredForRemoteNotification]) {
         [PFPush subscribeToChannelInBackground:channel block:^(BOOL succeeded, NSError * _Nullable error) {
@@ -112,8 +114,6 @@
 
 - (void)subscribePending {
     if ([self pendingChannels].count > 0) {
-        [Compatibility registerForNotifications];
-        
         if ([self sdkInitialized] && [Compatibility isRegisteredForRemoteNotification]) {
             NSArray *pendingChannels = [self pendingChannels];
             for (NSString *channel in pendingChannels) {
