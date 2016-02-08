@@ -102,6 +102,7 @@ extern NSString *const kDBApplicationConfigDidLoadNotification;
 
 @interface ApplicationManager(ScreenState)
 - (void)moveToStartState:(BOOL)animated;
+- (void)moveToMainState:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated;
 - (void)moveToScreen:(ApplicationScreen)screen object:(id)object animated:(BOOL)animated;
 - (void)moveMenuToStartState:(BOOL)animated;

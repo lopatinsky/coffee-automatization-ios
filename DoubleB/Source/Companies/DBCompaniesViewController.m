@@ -91,7 +91,7 @@
                 [self.delegate db_companiesVC:self didSelectCompany:company];
             }
         } else {
-            [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenRoot animated:YES];
+            [[ApplicationManager sharedInstance] moveToMainState:YES];
         }
     }];
     [[DBCompanyInfo sharedInstance] fetchDependentInfo];

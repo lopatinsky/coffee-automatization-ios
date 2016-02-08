@@ -203,16 +203,15 @@
         categories = [[DBMenu sharedInstance] getMenu];
     }
     
-    if (categories && categories.count > 0) {
-        if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
-            ((DBMixedMenuModuleView *)self.menuModuleView).categories = categories;
-        } else if (self.mode == DBMenuViewControllerModeCategories) {
-            ((DBCategoriesMenuModuleView *)self.menuModuleView).categories = categories;
-        }
-        
-        [self.menuModuleView reloadContent];
-        [self reloadTitleView:nil];
+
+    if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
+        ((DBMixedMenuModuleView *)self.menuModuleView).categories = categories;
+    } else if (self.mode == DBMenuViewControllerModeCategories) {
+        ((DBCategoriesMenuModuleView *)self.menuModuleView).categories = categories;
     }
+    
+    [self.menuModuleView reloadContent];
+    [self reloadTitleView:nil];
 }
 
 - (void)fetchMenu {

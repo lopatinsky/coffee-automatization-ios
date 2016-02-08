@@ -547,6 +547,11 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     [self changeRoot];
 }
 
+- (void)moveToMainState:(BOOL)animated {
+    self.state = RootStateMain;
+    [self changeRoot];
+}
+
 - (void)moveToScreen:(ApplicationScreen)screen animated:(BOOL)animated {
     [self moveToScreen:screen object:nil animated:animated];
 }
