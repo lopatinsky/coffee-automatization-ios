@@ -104,7 +104,7 @@
 
 - (void)updateTimeAccordingToDeliveryType {
     if ((_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)) ||
-        (_deliveryType.timeMode == TimeModeDual && _deliveryType.dualCurrentMode == TimeModeTime)) {
+        (_deliveryType.timeMode == TimeModeDual && (_deliveryType.dualCurrentMode & (TimeModeTime | TimeModeDateTime)))) {
         if(!self.selectedTime || [self.selectedTime compare:_deliveryType.minDate] == NSOrderedAscending){
             self.selectedTime = _deliveryType.minDate;
         }
