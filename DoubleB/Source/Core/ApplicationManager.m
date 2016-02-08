@@ -53,7 +53,6 @@
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
 
@@ -70,6 +69,7 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 };
 
 
+NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfigDidLoadNotification";
 
 @implementation ApplicationConfig
 
@@ -78,6 +78,21 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
     static ApplicationConfig *instance = nil;
     dispatch_once(&once, ^{ instance = [[self alloc] init]; });
     return instance;
+}
+
++ (void)update:(void (^)(BOOL success))callback {
+    [DBServerAPI fetchAppConfiguration:^(BOOL result, NSDictionary *response) {
+        if (result) {
+            [ApplicationConfig sync:response];
+            [[ApplicationManager sharedInstance] initializeVendorFrameworks];
+            [ApplicationManager applyBrandbookStyle];
+            
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBApplicationConfigDidLoadNotification object:nil]];
+        }
+        
+        if (callback)
+            callback(result);
+    }];
 }
 
 + (id)objectFromPropertyListByName:(NSString *)name {
@@ -309,11 +324,6 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 #pragma mark - Frameworks initialization
 - (void)initializeVendorFrameworks {
-    if ([ApplicationConfig sharedInstance].parseAppKey && [ApplicationConfig sharedInstance].parseClientKey) {
-        [Parse setApplicationId:[ApplicationConfig sharedInstance].parseAppKey
-                      clientKey:[ApplicationConfig sharedInstance].parseClientKey];
-    }
-    
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     
@@ -534,6 +544,11 @@ typedef NS_ENUM(NSUInteger, RemotePushType) {
 
 - (void)moveToStartState:(BOOL)animated {
     self.state = RootStateStart;
+    [self changeRoot];
+}
+
+- (void)moveToMainState:(BOOL)animated {
+    self.state = RootStateMain;
     [self changeRoot];
 }
 

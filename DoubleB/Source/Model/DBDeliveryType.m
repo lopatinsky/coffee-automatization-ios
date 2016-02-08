@@ -27,11 +27,6 @@
     }
     _timeSlots = timeSlots;
     
-    //    TimeModeSlots = 0,
-    //    TimeModeTime = 1,
-    //    TimeModeDateSlots = 2,
-    //    TimeModeDual = 3,
-    //    TimeModeDateTime = 10000
     NSInteger modeValue = [[responseDict getValueForKey:@"mode"] integerValue];
     if (modeValue == 0) {
         _timeMode = TimeModeSlots;
@@ -41,6 +36,7 @@
         _timeMode = TimeModeDateSlots;
     } else if (modeValue == 3) {
         _timeMode = TimeModeDual;
+        _dualCurrentMode = TimeModeSlots;
     }
     
     if (_timeMode == TimeModeTime) {

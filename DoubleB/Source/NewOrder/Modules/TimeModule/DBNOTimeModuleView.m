@@ -129,9 +129,10 @@
             } else if (_orderCoordinator.deliverySettings.deliveryType.dualCurrentMode == TimeModeTime) {
                 formatter.dateFormat = @"HH:mm";
                 timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
+            } else if (_orderCoordinator.deliverySettings.deliveryType.dualCurrentMode == TimeModeDateTime) {
+                formatter.dateFormat = @"dd/MM/yy HH:mm";
+                timeString = [formatter stringFromDate:_orderCoordinator.deliverySettings.selectedTime];
             } else {
-                // TODO: fix it
-                _orderCoordinator.deliverySettings.deliveryType.dualCurrentMode = TimeModeSlots;
                 timeString = _orderCoordinator.deliverySettings.selectedTimeSlot.slotTitle;
             }
             break;

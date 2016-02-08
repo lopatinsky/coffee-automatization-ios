@@ -29,4 +29,14 @@
     }
 }
 
++ (BOOL)isRegisteredForRemoteNotification {
+    if([UIDevice systemVersionGreaterOrEqualsThan:@"8.0"]) {
+        return [UIApplication sharedApplication].isRegisteredForRemoteNotifications;
+    } else {
+        SILENCE_IOS8_DEPRECATION(
+            return [UIApplication sharedApplication].enabledRemoteNotificationTypes == (UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound);
+        );
+    }
+}
+
 @end

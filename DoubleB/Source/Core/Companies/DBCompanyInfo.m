@@ -17,8 +17,7 @@
 #import "CompanyNewsManager.h"
 #import "DBVersionDependencyManager.h"
 #import "NetworkManager.h"
-
-#import <Parse/PFPush.h>
+#import "DBPushManager.h"
 
 NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificationInfoUpdated";
 
@@ -84,12 +83,12 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             
             
             _companyPushChannel = [response[@"push_channels"] getValueForKey:@"company"] ?: @"";
-            [PFPush subscribeToChannelInBackground:_companyPushChannel];
+            [[DBPushManager sharedInstance] subscribeToChannel:_companyPushChannel force:NO];
             
             NSString *clientPushChannel = [response[@"push_channels"] getValueForKey:@"client"] ?: @"";
             _clientPushChannel = [clientPushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];
             _clientPushChannel = [NSString stringWithFormat:_clientPushChannel, [IHSecureStore sharedInstance].clientId];
-            [PFPush subscribeToChannelInBackground:_clientPushChannel];
+            [[DBPushManager sharedInstance] subscribeToChannel:_clientPushChannel force:NO];
             
             NSString *venuePushChannel = [response[@"push_channels"] getValueForKey:@"venue"]  ?: @"";
             _venuePushChannel = [venuePushChannel stringByReplacingOccurrencesOfString:@"%s" withString:@"%@"];

@@ -25,13 +25,13 @@
 #import "DBClientInfo.h"
 #import "DBPayPalManager.h"
 #import "DBUnifiedAppManager.h"
+#import "DBPushManager.h"
 
 #import "AppIndexingManager.h"
 #import "WatchInteractionManager.h"
 #import "DBUniversalModulesManager.h"
 #import "DBUniversalModule.h"
 
-#import <Parse/Parse.h>
 
 @implementation DBServerAPI
 
@@ -347,11 +347,7 @@
                                  
                                  hasOrderErrorInSession = NO;
                                  
-                                 [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
-                                 [[NSUserDefaults standardUserDefaults] synchronize];
-                                 
-                                 [Compatibility registerForNotifications];
-                                 [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                 [[DBPushManager sharedInstance] subscribeToChannel:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId] force:YES];
                                  
                                  NSString *event;
                                  if(ord.paymentType == PaymentTypeCard){
@@ -421,11 +417,7 @@
                                         } else {
                                             Order *ord = [[Order alloc] initWithResponseDict:orderDict];
                                             
-                                            [[NSUserDefaults standardUserDefaults] setObject:ord.orderId forKey:@"lastOrderId"];
-                                            [[NSUserDefaults standardUserDefaults] synchronize];
-                                            
-                                            [Compatibility registerForNotifications];
-                                            [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId]];
+                                            [[DBPushManager sharedInstance] subscribeToChannel:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, ord.orderId] force:NO];
                                         }
                                     }
                                     

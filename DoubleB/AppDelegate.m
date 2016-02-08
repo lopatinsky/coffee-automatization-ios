@@ -10,6 +10,7 @@
 #import "IHSecureStore.h"
 #import "ApplicationManager.h"
 #import "DBModulesManager.h"
+#import "DBPushManager.h"
 
 #import "DBGeoPush.h"
 
@@ -17,7 +18,6 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <GoogleMaps/GoogleMaps.h>
-#import <Parse/Parse.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <VKSdk.h>
 
@@ -44,7 +44,7 @@
     [[ApplicationManager sharedInstance] startApplicationWithOptions:launchOptions];
     [ApplicationManager applyBrandbookStyle];
     
-    [self subscribeToChannels];
+    [[DBPushManager sharedInstance] applicationDidFinishLaunchingWithOptions:launchOptions];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
@@ -121,28 +121,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [GANHelper analyzeEvent:@"push" label:@"success" category:@"Notification"];
     
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    [currentInstallation saveInBackground];
-    
-    NSNumber *lastOrderId = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastOrderId"];
-    if (lastOrderId) {
-        [PFPush subscribeToChannelInBackground:[NSString stringWithFormat:[DBCompanyInfo sharedInstance].orderPushChannel, lastOrderId]];
-    }
-    
-    [self subscribeToChannels];
-}
-
-- (void)subscribeToChannels {
-    if ([DBCompanyInfo sharedInstance].companyPushChannel) {
-        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].companyPushChannel];
-    }
-    if ([DBCompanyInfo sharedInstance].clientPushChannel) {
-        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].clientPushChannel];
-    }
-    if ([DBCompanyInfo sharedInstance].venuePushChannel) {
-//        [PFPush subscribeToChannelInBackground:[DBCompanyInfo sharedInstance].venuePushChannel];
-    }
+    [[DBPushManager sharedInstance] applicationDidRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
