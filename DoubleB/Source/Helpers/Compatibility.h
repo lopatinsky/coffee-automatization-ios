@@ -24,6 +24,8 @@ _Pragma("clang diagnostic pop")                                     \
 @interface Compatibility : NSObject
 
 + (void)registerForNotifications;
++ (BOOL)isRegisteredForRemoteNotification;
+
 + (NSString *)currencySymbol;
 
 @end

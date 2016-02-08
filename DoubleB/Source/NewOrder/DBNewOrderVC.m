@@ -34,6 +34,7 @@
 #import "OrderCoordinator.h"
 #import "NetworkManager.h"
 #import "DBClientInfo.h"
+#import "DBPushManager.h"
 
 @interface DBNewOrderVC () <DBOwnerViewControllerProtocol>
 @property (strong, nonatomic) DBNOOrderModuleView *orderModule;
@@ -68,7 +69,8 @@
     [GANHelper analyzeScreen:self.analyticsCategory];
     
     [OrderCoordinator sharedInstance].automaticUpdate = YES;
-    [Compatibility registerForNotifications];
+    
+    [[DBPushManager sharedInstance] registerForNotifications];
     
     [self reloadModules:NO];
     [self.orderModule reload:NO];

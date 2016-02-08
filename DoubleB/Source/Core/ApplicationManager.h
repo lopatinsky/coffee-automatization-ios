@@ -31,11 +31,15 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenVenue
 };
 
+extern NSString *const kDBApplicationConfigDidLoadNotification;
+
 /**
  * Configuration for application
  */
 @interface ApplicationConfig : NSObject
 + (instancetype)sharedInstance;
+
++ (void)update:(void (^)(BOOL success))callback;
 
 // LOCAL
 + (id)objectFromPropertyListByName:(NSString *)name;
@@ -61,6 +65,8 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
 + (void)sync:(NSDictionary *)remoteConfig;
 + (NSDictionary *)remoteConfig;
 @end
+
+
 
 /**
  * Manager for whole application
