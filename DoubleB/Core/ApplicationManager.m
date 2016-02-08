@@ -74,6 +74,13 @@
                 }
             }];
         }
+        if ([[push objectForKey:@"type"] integerValue] == 4) {
+            UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+            [newsViewController setData:@{@"title": [push[@"news_data"] getValueForKey:@"title"] ?: @"",
+                                          @"text": [push[@"news_data"] getValueForKey:@"text"] ?: @"",
+                                          @"image_url": [push[@"news_data"] getValueForKey:@"image_url"] ?: @""}];
+            [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+        }
     } else if ([push objectForKey:@"aps"]) {
         [self showPushAlert:push buttons:nil callback:nil];
         
