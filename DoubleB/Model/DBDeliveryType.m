@@ -42,6 +42,7 @@
         _timeMode = TimeModeDateSlots;
     } else if (modeValue == 3) {
         _timeMode = TimeModeDual;
+        _dualCurrentMode = TimeModeSlots;
     }
     
     if (_timeMode == TimeModeTime) {
