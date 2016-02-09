@@ -115,6 +115,14 @@
         }
     }
     
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"omnomnom"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
+    
     return needsToFlush;
 }
 
