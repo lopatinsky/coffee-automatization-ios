@@ -701,8 +701,13 @@
 }
 
 + (void)assembleExtraOrderInfoIntoParams:(NSMutableDictionary *)params encode:(BOOL)encode{
-    params[@"num_people"] = [NSString stringWithFormat:@"%ld", (long)[OrderCoordinator sharedInstance].orderManager.personsCount];
-    params[@"cash_change"] = [OrderCoordinator sharedInstance].orderManager.oddSum ?: @"";
+    if ([OrderCoordinator sharedInstance].orderManager.personsCount > 0){
+        params[@"num_people"] = [NSString stringWithFormat:@"%ld", (long)[OrderCoordinator sharedInstance].orderManager.personsCount];
+    }
+    
+    if ([OrderCoordinator sharedInstance].orderManager.oddSum.length > 0){
+        params[@"cash_change"] = [OrderCoordinator sharedInstance].orderManager.oddSum ?: @"";
+    }
     
     NSMutableDictionary *extraInfo = [NSMutableDictionary new];
     for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {

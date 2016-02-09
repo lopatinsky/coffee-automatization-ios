@@ -174,9 +174,7 @@
         [cell.promoItem clear];
         
         if(index != -1){
-            [self.tableView beginUpdates];
-            [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [self.tableView endUpdates];
+            [self reload:YES];
         }
         [cell reload];
     }

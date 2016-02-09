@@ -70,6 +70,7 @@
             self.pickerView.items = _orderCoordinator.deliverySettings.deliveryType.timeSlotsNames;
             self.pickerView.minDate = _orderCoordinator.deliverySettings.deliveryType.minDate;
             self.pickerView.maxDate = _orderCoordinator.deliverySettings.deliveryType.maxDate;
+            self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
             break;
         }
         case TimeModeDual: {

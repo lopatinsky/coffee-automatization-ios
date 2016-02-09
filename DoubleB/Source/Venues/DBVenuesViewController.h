@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBBaseSettingsTableViewController.h"
 
 typedef NS_ENUM(NSUInteger, DBVenuesViewControllerMode) {
     DBVenuesViewControllerModeChooseVenue = 0,
     DBVenuesViewControllerModeList
 };
 
-@interface DBVenuesViewController : UIViewController
+@interface DBVenuesViewController : UIViewController<DBSettingsProtocol>
 @property (nonatomic) DBVenuesViewControllerMode mode;
 @property (nonatomic, strong) NSString *eventsCategory;
 @end

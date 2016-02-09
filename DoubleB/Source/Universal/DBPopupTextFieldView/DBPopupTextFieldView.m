@@ -66,6 +66,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [self.textField resignFirstResponder];
+    [self hide];
     
     return YES;
 }
