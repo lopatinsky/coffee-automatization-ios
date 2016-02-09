@@ -209,6 +209,40 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
     return self;
 }
 
++ (BOOL)required:(DBAddressAttribute)attribute {
+    switch (attribute) {
+        case DBAddressAttributeCountry:
+            return NO;
+            break;
+        case DBAddressAttributeCity:
+            return YES;
+            break;
+        case DBAddressAttributeStreet:
+            return YES;
+            break;
+        case DBAddressAttributeHome:
+            return YES;
+            break;
+        case DBAddressAttributeEntranceNumber:{
+            if ([[DBCompanyInfo sharedInstance].bundleName.lowercaseString isEqualToString:@"chaychonatlt"]) {
+                return YES;
+            } else {
+                return NO;
+            }
+        }
+            break;
+        case DBAddressAttributeApartment:
+            return YES;
+            break;
+        case DBAddressAttributeComment:
+            return NO;
+            break;
+            
+        default:
+            break;
+    }
+}
+
 - (NSDictionary *)jsonRepresentation{
     NSDictionary *coordinates = @{};
     if(_location){
@@ -270,10 +304,26 @@ NSString *kDBShippingManagerDidRecieveSuggestionsNotification = @"kDBShippingMan
 
 - (BOOL)valid{
     BOOL valid = YES;
-    valid = valid && _city && _city.length > 0;
-    valid = valid && _street && _street.length > 0;
-    valid = valid && _home && _home.length > 0;
-    valid = valid && _apartment && _apartment.length > 0;
+    
+    if ([DBShippingAddress required:DBAddressAttributeCity]){
+        valid = valid && _city && _city.length > 0;
+    }
+    
+    if ([DBShippingAddress required:DBAddressAttributeStreet]){
+        valid = valid && _street && _street.length > 0;
+    }
+        
+    if ([DBShippingAddress required:DBAddressAttributeHome]){
+        valid = valid && _home && _home.length > 0;
+    }
+        
+    if ([DBShippingAddress required:DBAddressAttributeApartment]){
+        valid = valid && _apartment && _apartment.length > 0;
+    }
+    
+    if ([DBShippingAddress required:DBAddressAttributeEntranceNumber]){
+        valid = valid && _entranceNumber && _entranceNumber.length > 0;
+    }
     
     return valid;
 }

@@ -84,7 +84,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    [cell configureWithType:indexPath.row];
+    DBAddressAttribute attribute = indexPath.row + 1;
+    [cell configureWithType:attribute];
     
     return cell;
 }
@@ -96,16 +97,18 @@
         [self.view endEditing:YES];
         [self.autocompleteView hide];
         
-        self.cityPickerView.title = NSLocalizedString(@"Выберите город", nil);
-        [self.cityPickerView configureWithItems:[DBCompanyInfo sharedInstance].deliveryCities];
-        [self.cityPickerView showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+        if ([DBCompanyInfo sharedInstance].deliveryCities.count > 1) {
+            self.cityPickerView.title = NSLocalizedString(@"Выберите город", nil);
+            [self.cityPickerView configureWithItems:[DBCompanyInfo sharedInstance].deliveryCities];
+            [self.cityPickerView showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+        }
     }
 }
 
 #pragma mark - DBShippingAddressCellDelegate
 
 - (void)db_addressCellStartEditing:(DBShippingAddressCell *)cell {
-    if (cell.type == DBShippingAddressCellTypeStreet) {
+    if (cell.type == DBAddressAttributeStreet) {
         [self requestSuggestions:cell];
     }
 }
@@ -115,7 +118,7 @@
 }
 
 - (void)db_addressCellClickedAtImage:(DBShippingAddressCell *)cell {
-    if (cell.type == DBShippingAddressCellTypeStreet) {
+    if (cell.type == DBAddressAttributeStreet) {
         [[OrderCoordinator sharedInstance].shippingManager setStreet:@""];
         [self.tableView reloadData];
     }
@@ -123,7 +126,7 @@
 }
 
 - (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text {
-    if (cell.type == DBShippingAddressCellTypeStreet) {
+    if (cell.type == DBAddressAttributeStreet) {
         [self requestSuggestions:cell];
     }
 }

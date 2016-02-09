@@ -41,48 +41,56 @@
     self.anyImageView.hidden = YES;
 }
 
-- (void)configureWithType:(DBShippingAddressCellType)type {
+- (void)configureWithType:(DBAddressAttribute)type {
     _type = type;
-    
     self.anyImageView.hidden = YES;
     self.imageButton.hidden = YES;
     self.textField.userInteractionEnabled = YES;
     
+    NSString *title = @"";
     switch (_type) {
-        case DBShippingAddressCellTypeCity:{
-            self.titleLabel.text = NSLocalizedString(@"Город", nil);
+        case DBAddressAttributeCity:{
+            title = NSLocalizedString(@"Город", nil);
             self.textField.userInteractionEnabled = NO;
             self.textField.text = _shippingManager.selectedAddress.city;
         }
             break;
-        case DBShippingAddressCellTypeStreet:{
-            self.titleLabel.text = NSLocalizedString(@"Улица", nil);
+        case DBAddressAttributeStreet:{
+            title = NSLocalizedString(@"Улица", nil);
             self.textField.text = _shippingManager.selectedAddress.street;
         }
             break;
-        case DBShippingAddressCellTypeHome:{
-            self.titleLabel.text = NSLocalizedString(@"Дом", nil);
+        case DBAddressAttributeHome:{
+            title = NSLocalizedString(@"Дом", nil);
             self.textField.text = _shippingManager.selectedAddress.home;
         }
             break;
-        case DBShippingAddressCellTypeApartment:{
-            self.titleLabel.text = NSLocalizedString(@"Квартира", nil);
+        case DBAddressAttributeApartment:{
+            title = NSLocalizedString(@"Квартира", nil);
             self.textField.text = _shippingManager.selectedAddress.apartment;
         }
             break;
-        case DBShippingAddressCellTypeEntranceNumber:{
-            self.titleLabel.text = NSLocalizedString(@"Подъезд", nil);
+        case DBAddressAttributeEntranceNumber:{
+            title = NSLocalizedString(@"Подъезд", nil);
             self.textField.text = _shippingManager.selectedAddress.entranceNumber;
             break;
         }
-        case DBShippingAddressCellTypeComment:{
-            self.titleLabel.text = NSLocalizedString(@"Комментарий", nil);
+        case DBAddressAttributeComment:{
+            title = NSLocalizedString(@"Комментарий", nil);
             self.textField.text = _shippingManager.selectedAddress.comment;
         }
             break;
             
         default:
             break;
+    }
+    
+    if ([DBShippingAddress required:_type]){
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@*", title]];
+        [attrString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(title.length, 1)];
+        self.titleLabel.attributedText = attrString;
+    } else {
+        self.titleLabel.text = title;
     }
 }
 
@@ -103,19 +111,19 @@
 
 - (void)textFieldDidChange:(UITextField *)sender {
     switch (_type) {
-        case DBShippingAddressCellTypeStreet:
+        case DBAddressAttributeStreet:
             [_shippingManager setStreet:sender.text];
             break;
-        case DBShippingAddressCellTypeHome:
+        case DBAddressAttributeHome:
             [_shippingManager setHome:sender.text];
             break;
-        case DBShippingAddressCellTypeApartment:
+        case DBAddressAttributeApartment:
             [_shippingManager setApartment:sender.text];
             break;
-        case DBShippingAddressCellTypeComment:
+        case DBAddressAttributeComment:
             [_shippingManager setComment:sender.text];
             break;
-        case DBShippingAddressCellTypeEntranceNumber:
+        case DBAddressAttributeEntranceNumber:
             [_shippingManager setEntranceNumber:sender.text];
             break;
         default:

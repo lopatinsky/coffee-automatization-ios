@@ -7,15 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSInteger, DBShippingAddressCellType) {
-    DBShippingAddressCellTypeCity = 0,
-    DBShippingAddressCellTypeStreet,
-    DBShippingAddressCellTypeHome,
-    DBShippingAddressCellTypeApartment,
-    DBShippingAddressCellTypeEntranceNumber,
-    DBShippingAddressCellTypeComment
-};
+#import "ShippingManager.h"
 
 @class DBShippingAddressCell;
 
@@ -29,10 +21,10 @@ typedef NS_ENUM(NSInteger, DBShippingAddressCellType) {
 
 @interface DBShippingAddressCell : UITableViewCell
 
-@property (nonatomic, readonly) DBShippingAddressCellType type;
+@property (nonatomic, readonly) DBAddressAttribute type;
 @property (weak, nonatomic) id<DBShippingAddressCellDelegate> delegate;
 @property (nonatomic) BOOL imageViewVisisble;
 
-- (void)configureWithType:(DBShippingAddressCellType)type;
+- (void)configureWithType:(DBAddressAttribute)type;
 
 @end

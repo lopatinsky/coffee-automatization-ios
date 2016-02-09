@@ -49,13 +49,11 @@
     
     if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
         NSString *address = [_orderCoordinator.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeNormal];
-        if(address && address.length > 0){
+        if(_orderCoordinator.shippingManager.selectedAddress.valid){
             self.titleLabel.text = address;
             self.titleLabel.textColor = [UIColor blackColor];
-//            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:14.f];
         } else {
             self.titleLabel.text = NSLocalizedString(@"Введите адрес доставки", nil);
-//            self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.f];
             self.titleLabel.textColor = [UIColor db_errorColor];
         }
     } else {
