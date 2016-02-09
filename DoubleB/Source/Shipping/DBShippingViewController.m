@@ -59,7 +59,7 @@
 
 - (void)requestSuggestions:(DBShippingAddressCell *)cell {
     [[OrderCoordinator sharedInstance].shippingManager requestSuggestions:^(BOOL success) {
-        if (success && self.currentlyModifyingCell.type == DBShippingAddressCellTypeStreet) {
+        if (success && self.currentlyModifyingCell.type == DBAddressAttributeStreet) {
             if ([OrderCoordinator sharedInstance].shippingManager.addressSuggestions.count > 0 && !self.autocompleteView.visible) {
                 CGRect rect = [self.tableView convertRect:cell.frame toView:self.contentView];
                 
@@ -86,8 +86,10 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    [cell configureWithType:indexPath.row];
-    cell.editingEnabled = indexPath.row == DBShippingAddressCellTypeStreet;
+    DBAddressAttribute attribute = indexPath.row + 1;
+    [cell configureWithType:attribute];
+
+    cell.editingEnabled = attribute == DBAddressAttributeStreet;
     
     return cell;
 }
@@ -99,16 +101,18 @@
         [self.view endEditing:YES];
         [self.autocompleteView hide];
         
-        self.cityPickerView.title = NSLocalizedString(@"Выберите город", nil);
-        [self.cityPickerView configureWithItems:[DBCompanyInfo sharedInstance].deliveryCities];
-        [self.cityPickerView showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+        if ([DBCompanyInfo sharedInstance].deliveryCities.count > 1) {
+            self.cityPickerView.title = NSLocalizedString(@"Выберите город", nil);
+            [self.cityPickerView configureWithItems:[DBCompanyInfo sharedInstance].deliveryCities];
+            [self.cityPickerView showOnView:self.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+        }
     }
 }
 
 #pragma mark - DBShippingAddressCellDelegate
 
 - (void)db_addressCellStartEditing:(DBShippingAddressCell *)cell {
-    if (cell.type == DBShippingAddressCellTypeStreet) {
+    if (cell.type == DBAddressAttributeStreet) {
         [self requestSuggestions:cell];
     }
     
@@ -122,7 +126,7 @@
 }
 
 - (void)db_addressCell:(DBShippingAddressCell *)cell textChanged:(NSString *)text {
-    if (cell.type == DBShippingAddressCellTypeStreet) {
+    if (cell.type == DBAddressAttributeStreet) {
         if (text.length > 0) {
             [self requestSuggestions:cell];
         } else {
@@ -132,7 +136,7 @@
 }
 
 - (BOOL)db_addressCellShouldClear:(DBShippingAddressCell *)cell {
-    return cell.type == DBShippingAddressCellTypeStreet;
+    return cell.type == DBAddressAttributeStreet;
 }
 
 #pragma mark - DBShippingAutocompleteViewDelegate
