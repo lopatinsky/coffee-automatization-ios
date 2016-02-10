@@ -73,5 +73,23 @@
     }
 }
 
+#pragma mark - DBSettingsProtocol
+
++ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    settingsItem.name = @"venuesVC";
+    settingsItem.title = [DBTextResourcesHelper db_venuesTitleString];
+    settingsItem.iconName = @"map_icon_active";
+    settingsItem.viewController = viewController;
+    settingsItem.eventLabel = @"venues_click";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    return settingsItem;
+}
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBVenuesViewController *venuesVC = [DBVenuesViewController new];
+    venuesVC.mode = DBVenuesViewControllerModeList;
+    return [DBVenuesViewController settingsItemForViewController:venuesVC];
+}
 
 @end

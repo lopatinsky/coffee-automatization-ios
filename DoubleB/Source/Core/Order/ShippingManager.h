@@ -24,6 +24,16 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
     DBAddressStringModeFull
 };
 
+typedef NS_ENUM(NSUInteger, DBAddressAttribute) {
+    DBAddressAttributeCountry = 0,
+    DBAddressAttributeCity,
+    DBAddressAttributeStreet,
+    DBAddressAttributeHome,
+    DBAddressAttributeApartment,
+    DBAddressAttributeEntranceNumber,
+    DBAddressAttributeComment
+};
+
 @interface DBShippingAddress : NSObject
 @property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSString *city;
@@ -31,8 +41,9 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
 @property (nonatomic, strong) NSString *home;
 @property (nonatomic, strong) NSString *apartment;
 @property (nonatomic, strong) NSString *entranceNumber;
-@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *comment;
+
+@property (nonatomic, strong) CLLocation *location;
 
 @property (nonatomic) BOOL valid;
 @property (nonatomic, strong) NSDictionary *jsonRepresentation;
@@ -40,6 +51,7 @@ typedef NS_ENUM(NSUInteger, DBAddressStringMode) {
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 - (NSString *)formattedAddressString:(DBAddressStringMode)mode;
++ (BOOL)required:(DBAddressAttribute)attribute;
 @end;
 
 

@@ -44,6 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -54,23 +55,22 @@
     
     if (self.type == DBMenuViewControllerTypeInitial) {
         [self setupInitial];
-    }
-    
-    if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
-        [self setupCategoriesAndPositionsMode];
-    } else if (self.mode == DBMenuViewControllerModeCategories) {
-        [self setupCategoriesMode];
+        
+        if ([[DBMenu sharedInstance] getMenu].count > 0) {
+            [self setupMenuModule];
+            [self fetchMenu:nil];
+        } else {
+            [self fetchMenu:^(BOOL success) {
+                if (success) {
+                    [self setupMenuModule];
+                    [self updateMenu];
+                }
+            }];
+        }
     } else {
-        [self setupPositionsMode];
+        [self setupMenuModule];
     }
-    
-    [self.view addSubview:self.menuModuleView];
-    self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
-    
-    if (self.type == DBMenuViewControllerTypeInitial) {
-        [self fetchMenu];
-    }
+
     [self setupSubscription];
 }
 
@@ -95,6 +95,20 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setupMenuModule {
+    if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
+        [self setupCategoriesAndPositionsMode];
+    } else if (self.mode == DBMenuViewControllerModeCategories) {
+        [self setupCategoriesMode];
+    } else {
+        [self setupPositionsMode];
+    }
+    
+    [self.view addSubview:self.menuModuleView];
+    self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
 }
 
 - (DBMenuViewControllerMode)mode {
@@ -214,7 +228,7 @@
     [self reloadTitleView:nil];
 }
 
-- (void)fetchMenu {
+- (void)fetchMenu:(void (^)(BOOL success))callback {
     [GANHelper analyzeEvent:@"menu_update" category:self.analyticsCategory];
     
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
@@ -243,6 +257,9 @@
         
         [self.menuModuleView reloadContent];
         [self reloadTitleView:nil];
+        
+        if (callback)
+            callback(success);
     }];
 }
 
@@ -264,6 +281,7 @@
         module.updateEnabled = YES;
     } else {
         module.updateEnabled = NO;
+        module.parent = self.category;
         module.categories = self.category.categories;
     }
     self.menuModuleView = module;

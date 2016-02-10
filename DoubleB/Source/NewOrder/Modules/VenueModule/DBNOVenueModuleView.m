@@ -49,7 +49,7 @@
     
     if (_orderCoordinator.deliverySettings.deliveryType.typeId == DeliveryTypeIdShipping) {
         NSString *address = [_orderCoordinator.shippingManager.selectedAddress formattedAddressString:DBAddressStringModeNormal];
-        if(address && address.length > 0){
+        if(_orderCoordinator.shippingManager.selectedAddress.valid){
             self.titleLabel.text = address;
             self.titleLabel.textColor = [UIColor blackColor];
         } else {

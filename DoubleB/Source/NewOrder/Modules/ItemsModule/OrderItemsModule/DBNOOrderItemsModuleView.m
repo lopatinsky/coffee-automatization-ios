@@ -35,6 +35,12 @@
     DBOrderItemCell *cell = (DBOrderItemCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     
     DBPromoItem *promoItem = [[OrderCoordinator sharedInstance].promoManager promosForOrderItem:cell.orderItem];
+    
+    if (promoItem.substitute && promoItem.replaceToSubstituteAutomatic) {
+        [self.manager replaceOrderItem:cell.orderItem withPosition:promoItem.substitute];
+        [promoItem clear];
+    }
+    
     cell.promoItem = promoItem;
     [cell configure];
     

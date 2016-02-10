@@ -45,13 +45,18 @@
 }
 
 - (void)reload:(BOOL)animated {
+    [self reloadTitle];
     [super reload:animated];
-    
-    NSString *title = @"Буду один";
-    if ([OrderCoordinator sharedInstance].orderManager.personsCount > 0) {
-        title = self.titles[[OrderCoordinator sharedInstance].orderManager.personsCount - 1];
-    }
-    self.titleLabel.text = title;
+}
+
+- (void)reloadTitle {
+    if ([OrderCoordinator sharedInstance].orderManager.personsCount == 0) {
+        self.titleLabel.textColor = [UIColor db_grayColor];
+        self.titleLabel.text = NSLocalizedString(@"Количество персон", nil);
+    } else {
+        self.titleLabel.textColor = [UIColor blackColor];
+        self.titleLabel.text = self.titles[[OrderCoordinator sharedInstance].orderManager.personsCount - 1];
+    };
 }
 
 - (void)touchAtLocation:(CGPoint)location {

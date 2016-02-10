@@ -52,22 +52,27 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(toCategoriesScreen)
-                                                 name:@"UITestNotificationCategoriesScreen"
+                                                 name:@"UITestNotificationFirstScreen"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(toPositionsScreen)
-                                                 name:@"UITestNotificationPositionsScreen"
+                                                 name:@"UITestNotificationSecondScreen"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(toPositionOrNeworderScreen)
-                                                 name:@"UITestNotificationPositionScreen"
+                                                 name:@"UITestNotificationThirdScreen"
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(toOrderScreen)
-                                                 name:@"UITestNotificationOrderScreen"
+                                                 name:@"UITestNotificationFourthScreen"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(toOrderScreen)
+                                                 name:@"UITestNotificationFifthScreen"
                                                object:nil];
     
     return self;
@@ -77,6 +82,10 @@
     UIViewController *currentVC = [UIViewController currentViewController];
     
     return currentVC.navigationController;
+}
+
+- (void)toFirstScreen {
+    
 }
 
 - (void)toCategoriesScreen {
