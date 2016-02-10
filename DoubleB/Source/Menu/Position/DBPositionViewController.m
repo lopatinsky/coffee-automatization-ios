@@ -42,7 +42,7 @@
     [self db_setTitle:self.position.name];
     
     if(self.mode == PositionViewControllerModeMenuPosition){
-        self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
+        self.navigationItem.rightBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
             [self moveToOrder];
         }];
     }

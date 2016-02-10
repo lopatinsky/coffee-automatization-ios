@@ -21,6 +21,7 @@
 }
 
 - (void)awakeFromNib {
+    self.backgroundColor = [UIColor colorWithRed:248./255 green:248./255 blue:248./255 alpha:1.0];
     [self.cancelButton setTitle:NSLocalizedString(@"Отмена", nil) forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
 }

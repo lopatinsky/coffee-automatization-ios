@@ -39,6 +39,8 @@
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
 
 @property (strong, nonatomic) DBSubscriptionModuleView *subscriptionModuleView;
+
+@property (strong, nonatomic) DBMenuSearchVC *searchVC;
 @end
 
 @implementation DBMenuViewController
@@ -58,6 +60,7 @@
         @strongify(self)
         [self searchClick];
     }];
+    self.searchVC = [DBMenuSearchVC new];
     DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
         @strongify(self)
         [self moveToOrder];
@@ -166,8 +169,7 @@
 }
 
 - (void)searchClick {
-    DBMenuSearchVC *searchVC = [DBMenuSearchVC new];
-    [DBMenuSearchVC present:searchVC inContainer:self];
+    [self.searchVC presentInContainer:self.navigationController];
 }
 
 

@@ -8,24 +8,31 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBMenuSearchBarView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="ggz-C4-uOv">
-                    <rect key="frame" x="0.0" y="15" width="254" height="44"/>
+                    <rect key="frame" x="0.0" y="15" width="244" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="ukp-Fd-oga"/>
                     </constraints>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLY-NB-dGL">
-                    <rect key="frame" x="262" y="17" width="50" height="40"/>
+                    <rect key="frame" x="252" y="17" width="60" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="n9k-fF-9Ya"/>
+                        <constraint firstAttribute="width" constant="60" id="n9k-fF-9Ya"/>
                         <constraint firstAttribute="height" constant="40" id="zkz-1Y-KYE"/>
                     </constraints>
                     <state key="normal" title="Cancel"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mNR-HK-TyQ" customClass="DBDefaultSeparatorView">
+                    <rect key="frame" x="0.0" y="63" width="320" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="qlW-qv-Lqw"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -34,6 +41,9 @@
                 <constraint firstAttribute="trailing" secondItem="ZLY-NB-dGL" secondAttribute="trailing" constant="8" id="ReX-tm-WmV"/>
                 <constraint firstItem="ggz-C4-uOv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="RnM-wu-69Y"/>
                 <constraint firstItem="ZLY-NB-dGL" firstAttribute="leading" secondItem="ggz-C4-uOv" secondAttribute="trailing" constant="8" id="Yv7-RS-59Y"/>
+                <constraint firstAttribute="bottom" secondItem="mNR-HK-TyQ" secondAttribute="bottom" id="h8h-7X-Dhu"/>
+                <constraint firstItem="mNR-HK-TyQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="huF-cq-UvC"/>
+                <constraint firstAttribute="trailing" secondItem="mNR-HK-TyQ" secondAttribute="trailing" id="kIE-NV-zU8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

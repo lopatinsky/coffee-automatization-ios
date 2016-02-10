@@ -52,6 +52,11 @@ typedef NS_ENUM(NSInteger, DBMenuType) {
 
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
 
+/**
+ * Filter menu (search in categories and positions names) and return [DBMenuPositionSearchResult]
+ */
+- (NSArray *)filterPositions:(NSString *)text venue:(Venue *)venue;
+
 - (void)saveMenuToDeviceMemory;
 - (void)clearMenu;
 
@@ -60,4 +65,9 @@ typedef NS_ENUM(NSInteger, DBMenuType) {
 @interface DBMenuPositionBalance: NSObject
 @property (strong, nonatomic) Venue *venue;
 @property (nonatomic) NSInteger balance;
+@end
+
+@interface DBMenuPositionSearchResult: NSObject
+@property (strong, nonatomic) NSMutableArray *pathCategories;
+@property (strong, nonatomic) NSMutableArray *positions;
 @end

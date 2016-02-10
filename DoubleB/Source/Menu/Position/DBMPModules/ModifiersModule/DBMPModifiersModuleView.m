@@ -65,7 +65,11 @@
     [self.modifierPicker configureWithGroupModifier:modifier];
     self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
     
-    [self.modifierPicker showOnView:self.ownerViewController.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+    UIViewController *container = self.ownerViewController.navigationController;
+    if (!container) {
+        container = self.ownerViewController;
+    }
+    [self.modifierPicker showOnView:container.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
     
     [GANHelper analyzeEvent:@"group_modifier_show"
                       label:modifier.modifierId
@@ -76,7 +80,11 @@
     [self.modifierPicker configureWithSingleModifiers:self.position.singleModifiers];
     self.modifierPicker.currencyDisplayMode = (self.position.mode == DBMenuPositionModeBonus) ? DBUICurrencyDisplayModeNone : DBUICurrencyDisplayModeRub;
     
-    [self.modifierPicker showOnView:self.ownerViewController.navigationController.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+    UIViewController *container = self.ownerViewController.navigationController;
+    if (!container) {
+        container = self.ownerViewController;
+    }
+    [self.modifierPicker showOnView:container.view appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
 }
 
 #pragma mark - DBPositionModifierPickerDelegate

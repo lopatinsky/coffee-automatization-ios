@@ -10,6 +10,7 @@
 
 @class Venue;
 @class DBMenuPosition;
+@class DBMenuPositionSearchResult;
 
 typedef NS_ENUM(NSInteger, DBMenuCategoryType) {
     DBMenuCategoryTypeParent = 0,
@@ -41,5 +42,7 @@ typedef NS_ENUM(NSInteger, DBMenuCategoryType) {
 - (NSMutableArray *)filterPositionsForVenue:(Venue *)venue;
 - (NSMutableArray *)filterCategoriesForVenue:(Venue *)venue;
 - (DBMenuPosition *)findPositionWithId:(NSString *)positionId;
+
+- (NSArray *)filterPositions:(NSString *)text venue:(Venue *)venue currentResult:(DBMenuPositionSearchResult *)searchResult;
 
 @end
