@@ -98,6 +98,14 @@
             needsToFlush = YES;
         }
     }
+    
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"sushilar"]){
+        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
+        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
+        if (!removed) {
+            needsToFlush = YES;
+        }
+    }
 
     if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"iikohack"]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
