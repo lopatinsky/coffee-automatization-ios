@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface DBMenuSearchVC : UIViewController<UIViewControllerAnimatedTransitioning>
-
++ (void)present:(DBMenuSearchVC *)controller inContainer:(UIViewController *)container;
 @end

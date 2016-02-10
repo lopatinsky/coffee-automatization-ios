@@ -11,14 +11,35 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ggz-C4-uOv">
-                    <rect key="frame" x="0.0" y="8" width="320" height="44"/>
+                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="ggz-C4-uOv">
+                    <rect key="frame" x="0.0" y="15" width="254" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="ukp-Fd-oga"/>
+                    </constraints>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZLY-NB-dGL">
+                    <rect key="frame" x="262" y="17" width="50" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="n9k-fF-9Ya"/>
+                        <constraint firstAttribute="height" constant="40" id="zkz-1Y-KYE"/>
+                    </constraints>
+                    <state key="normal" title="Cancel"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <nil key="simulatedStatusBarMetrics"/>
+            <constraints>
+                <constraint firstItem="ggz-C4-uOv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GDo-qP-iNM"/>
+                <constraint firstItem="ZLY-NB-dGL" firstAttribute="centerY" secondItem="ggz-C4-uOv" secondAttribute="centerY" id="QGw-5d-ZDv"/>
+                <constraint firstAttribute="trailing" secondItem="ZLY-NB-dGL" secondAttribute="trailing" constant="8" id="ReX-tm-WmV"/>
+                <constraint firstItem="ggz-C4-uOv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="RnM-wu-69Y"/>
+                <constraint firstItem="ZLY-NB-dGL" firstAttribute="leading" secondItem="ggz-C4-uOv" secondAttribute="trailing" constant="8" id="Yv7-RS-59Y"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancelButton" destination="ZLY-NB-dGL" id="PeL-DU-lWs"/>
+                <outlet property="searchBar" destination="ggz-C4-uOv" id="TMa-3c-Hfm"/>
+            </connections>
             <point key="canvasLocation" x="338" y="294"/>
         </view>
     </objects>

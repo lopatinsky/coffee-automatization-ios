@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DBMenuSearchBarView : UIView
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
++ (DBMenuSearchBarView *)create;
 @end

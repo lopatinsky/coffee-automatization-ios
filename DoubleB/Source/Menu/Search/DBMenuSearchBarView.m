@@ -8,14 +8,21 @@
 
 #import "DBMenuSearchBarView.h"
 
+@interface DBMenuSearchBarView ()
+
+@end
+
 @implementation DBMenuSearchBarView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
++ (DBMenuSearchBarView *)create {
+    DBMenuSearchBarView *view = [[[NSBundle mainBundle] loadNibNamed:@"DBMenuSearchBarView" owner:self options:nil] firstObject];
+    
+    return view;
 }
-*/
+
+- (void)awakeFromNib {
+    [self.cancelButton setTitle:NSLocalizedString(@"Отмена", nil) forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
+}
 
 @end

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="lm9-wy-h3q" customClass="DBSearchBarButtonView">
+            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="HuE-aI-sOo">
+                    <rect key="frame" x="9" y="9" width="22" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="22" id="olU-be-0jp"/>
+                        <constraint firstAttribute="height" constant="22" id="w69-e7-TkJ"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="HuE-aI-sOo" firstAttribute="centerX" secondItem="lm9-wy-h3q" secondAttribute="centerX" id="E9I-Es-cGo"/>
+                <constraint firstItem="HuE-aI-sOo" firstAttribute="centerY" secondItem="lm9-wy-h3q" secondAttribute="centerY" id="Uh6-bq-xEI"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="iconImageView" destination="HuE-aI-sOo" id="pAm-AZ-1ml"/>
+            </connections>
+            <point key="canvasLocation" x="348" y="272"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="search_icon.png" width="50" height="50"/>
+    </resources>
+</document>

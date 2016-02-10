@@ -7,8 +7,11 @@
 //
 
 #import "DBMenuSearchVC.h"
+#import "DBMenuSearchBarView.h"
 
-@interface DBMenuSearchVC ()<UIViewControllerTransitioningDelegate>
+@interface DBMenuSearchVC ()<UIViewControllerTransitioningDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) DBMenuSearchBarView *searchView;
+@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
@@ -16,24 +19,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.view.backgroundColor = [UIColor clearColor];
+    
+    self.searchView = [DBMenuSearchBarView create];
+    [self.searchView.cancelButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    self.searchView.searchBar.delegate = self;
+    [self.view addSubview:self.searchView];
+    
+    self.tableView = [UITableView new];
+//    self.tableView.dataSource = self;
+//    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.tableFooterView = [UIView new];
+    [self.view addSubview:self.tableView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
-//+ (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller
-//              inContainer:(UIViewController *)container
-//                     mode:(DBPopupVCAppearanceMode)mode {
-//    DBPopupViewController *popupVC = [DBPopupViewController new];
-//    popupVC.displayController = controller;
-//    popupVC.appearanceMode = mode;
-//    popupVC.transitioningDelegate = popupVC;
-//    popupVC.modalPresentationStyle = UIModalPresentationCustom;
-//    
-//    [popupVC beginAppearanceTransition:YES animated:YES];
-//    [container presentViewController:popupVC animated:YES completion:^{
-//        [popupVC endAppearanceTransition];
-//    }];
-//}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
++ (void)present:(DBMenuSearchVC *)controller inContainer:(UIViewController *)container {
+    controller.transitioningDelegate = controller;
+    controller.modalPresentationStyle = UIModalPresentationCustom;
+    
+    [controller beginAppearanceTransition:YES animated:YES];
+    [container presentViewController:controller animated:YES completion:^{
+        [controller endAppearanceTransition];
+    }];
+}
+
+- (void)cancelButtonClick {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UISearchBarDelegate
+
+#pragma mark - UITableViewDataSource
+
+#pragma mark - UITableViewDelegate
 
 #pragma mark - UIViewControllerAnimatedTransitioning
 
@@ -51,36 +84,36 @@
     
     if (reversed) {
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-            fromViewController.view.alpha = 0;
+            CGRect rect = self.searchView.frame;
+            rect.origin.y = -rect.size.height;
+            self.searchView.frame = rect;
             
-            self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-            self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            self.tableView.alpha = 0;
         } completion:^(BOOL finished) {
-            if (_displayController) {
-                [_displayController removeFromParentViewController];
-                [_displayController.view removeFromSuperview];
-            } else if (_displayView) {
-                [_displayView removeFromSuperview];
-            }
-            
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
     } else {
-        [self configLayout:toViewController.view.frame];
+        CGRect searchViewRect = self.searchView.frame;
+        searchViewRect.size.width = fromViewController.view.frame.size.width;
+        searchViewRect.origin.y = -searchViewRect.size.height;
+        self.searchView.frame = searchViewRect;
+        
+        CGRect tableRect = self.tableView.frame;
+        tableRect.size.width = fromViewController.view.frame.size.width;
+        tableRect.origin.y = self.searchView.frame.size.height;
+        tableRect.size.height = fromViewController.view.frame.size.height - tableRect.origin.y;
+        self.tableView.frame = tableRect;
         
         [[transitionContext containerView] addSubview:toViewController.view];
-        toViewController.view.alpha = 0;
         
-        UIImage *snapshot = [fromViewController.view snapshotImage];
-        self.bgImageView.image = [snapshot applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.3 alpha:0.6] saturationDeltaFactor:1.5 maskImage:nil];
-        self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        self.tableView.alpha = 0;
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-            toViewController.view.alpha = 1;
+            CGRect rect = self.searchView.frame;
+            rect.origin.y = 0;
+            self.searchView.frame = rect;
             
-            self.contentView.transform = CGAffineTransformIdentity;
-            self.headerFooterView.transform = CGAffineTransformIdentity;
+            self.tableView.alpha = 1;
         } completion:^(BOOL finished) {
             [transitionContext completeTransition:![transitionContext transitionWasCancelled]];
         }];
@@ -96,6 +129,34 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     return self;
+}
+
+#pragma mark - Keyboard events
+
+- (void)keyboardWillShow:(NSNotification *)notification{
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         CGRect rect = self.tableView.frame;
+                         rect.size.height = self.view.frame.size.height - self.searchView.frame.size.height - keyboardRect.size.height;
+                         self.tableView.frame = rect;
+                     }
+                     completion:nil];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification{
+    [UIView animateWithDuration:0.25
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         CGRect rect = self.tableView.frame;
+                         rect.size.height = self.view.frame.size.height - self.searchView.frame.size.height;
+                         self.tableView.frame = rect;
+                     }
+                     completion:nil];
 }
 
 @end

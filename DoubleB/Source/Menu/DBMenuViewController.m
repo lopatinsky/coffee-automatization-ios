@@ -29,6 +29,8 @@
 #import "DBSubscriptionManager.h"
 #import "DBSubscriptionModuleView.h"
 
+#import "DBMenuSearchVC.h"
+
 @interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol>
 @property (strong, nonatomic) NSString *analyticsCategory;
 @property (strong, nonatomic) DBMenuModuleView *menuModuleView;
@@ -51,7 +53,16 @@
     
     self.analyticsCategory = @"Menu_screen";
     
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
+    @weakify(self);
+    DBBarButtonItemComponent *searchComp = [DBBarButtonItemComponent create:DBBarButtonTypeSearch handler:^{
+        @strongify(self)
+        [self searchClick];
+    }];
+    DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
+        @strongify(self)
+        [self moveToOrder];
+    }];
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem itemWithComponents:@[searchComp, orderComp]];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
         [self setupInitial];
@@ -154,6 +165,11 @@
     [GANHelper analyzeEvent:@"order_pressed" category:self.analyticsCategory];
 }
 
+- (void)searchClick {
+    DBMenuSearchVC *searchVC = [DBMenuSearchVC new];
+    [DBMenuSearchVC present:searchVC inContainer:self];
+}
+
 
 #pragma mark - DBMenuModuleViewDelegate
 
@@ -203,7 +219,9 @@
 
 #pragma mark - Initial
 - (void)setupInitial {
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
+    self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
+        [self moveToSettings];
+    }];
 }
 
 - (void)updateMenu {

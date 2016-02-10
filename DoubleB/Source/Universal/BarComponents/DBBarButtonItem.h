@@ -8,11 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, DBBarButtonType) {
+    DBBarButtonTypeOrder = 0,
+    DBBarButtonTypeProfile,
+    DBBarButtonTypeSearch,
+    DBBarButtonTypeCustom
+};
+
 @interface DBBarButtonItem : UIBarButtonItem
 
-+ (DBBarButtonItem *)orderItem:(UIViewController *)controller action:(SEL)action;
-+ (DBBarButtonItem *)giftItem:(UIViewController *)controller action:(SEL)action;
-+ (DBBarButtonItem *)profileItem:(UIViewController *)controller action:(SEL)action;
++ (DBBarButtonItem *)itemWithComponents:(NSArray *)components;
++ (DBBarButtonItem *)item:(DBBarButtonType)type handler:(void (^)())handler;
+
 + (DBBarButtonItem *)customItem:(UIViewController *)controller withText:(NSString *)text action:(SEL)action;
 
+@end
+
+@interface DBBarButtonItemComponent : NSObject
+@property (copy, nonatomic) void (^handlerBlock)();
+@property (nonatomic) DBBarButtonType type;
+
++ (DBBarButtonItemComponent *)create:(DBBarButtonType)type handler:(void (^)())handler;
 @end
