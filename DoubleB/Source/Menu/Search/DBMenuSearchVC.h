@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class DBMenuSearchVC;
+@class DBMenuPosition;
+@protocol DBMenuSearchVCDelegate <NSObject>
+
+- (void)db_menuSearchVC:(DBMenuSearchVC*)controller didSelectPosition:(DBMenuPosition *)position;
+
+@end
+
 @interface DBMenuSearchVC : UIViewController
+@property (weak, nonatomic) id<DBMenuSearchVCDelegate> delegate;
 - (void)presentInContainer:(UIViewController *)container;
+- (void)hide;
 @end

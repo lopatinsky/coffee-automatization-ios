@@ -8,6 +8,7 @@
 
 #import "DBSearchPositionTableCell.h"
 #import "DBMenuPosition.h"
+#import "UIView+RoundedCorners.h"
 
 @interface DBSearchPositionTableCell ()
 @property (weak, nonatomic) IBOutlet DBImageView *positionImageView;
@@ -33,6 +34,7 @@
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    [self.positionImageView setRoundedCornersWithRadius:self.positionImageView.frame.size.width / 2];
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
     self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
 }
@@ -44,8 +46,11 @@
     
     if (position.imageUrl) {
         self.positionImageView.dbImageUrl = [NSURL URLWithString:position.imageUrl];
+        self.constraintImageViewWidth.constant = 35;
+        self.constraintTitleLabelLeading.constant = 8;
     } else {
-        self.positionImageView.dbImageUrl = nil;
+        self.constraintImageViewWidth.constant = 0;
+        self.constraintTitleLabelLeading.constant = 0;
     }
     
     self.priceLabel.text = [NSString stringWithFormat:@"%.0f %@", position.price, [Compatibility currencySymbol]];

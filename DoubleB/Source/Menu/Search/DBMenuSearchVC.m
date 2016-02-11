@@ -9,8 +9,7 @@
 #import "DBMenuSearchVC.h"
 #import "DBMenuSearchBarView.h"
 #import "DBSearchPositionTableCell.h"
-#import "DBMenu.h"
-#import "OrderCoordinator.h"
+#import "DBSearchManager.h"
 #import "DBPopupViewController.h"
 
 @interface DBMenuSearchVC ()<UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -58,7 +57,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    self.searchView.searchBar.text = [[DBSearchManager sharedInstance] searchText];
     [self.searchView.searchBar becomeFirstResponder];
+    
+    self.searchResults = [[DBSearchManager sharedInstance] filterPositions:self.searchView.searchBar.text];
+    [self.tableView reloadData];
     
     [self showSearchView];
 }
@@ -78,7 +82,10 @@
 - (void)presentInContainer:(UIViewController *)container {
     _container = container;
     
+    self.view.frame = _container.view.bounds;
     [_container.view addSubview:self.view];
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:_container.view];
     [_container addChildViewController:self];
     [self beginAppearanceTransition:YES animated:YES];
     
@@ -141,7 +148,7 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    self.searchResults = [[DBMenu sharedInstance] filterPositions:searchText venue:[OrderCoordinator sharedInstance].orderManager.venue];
+    self.searchResults = [[DBSearchManager sharedInstance] filterPositions:searchText];
     
     [self.tableView reloadData];
 }
@@ -206,8 +213,9 @@
     DBMenuPositionSearchResult *searchResult = self.searchResults[indexPath.section];
     DBMenuPosition *position = searchResult.positions[indexPath.row];
     
-    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
-    [(UINavigationController *)_container pushViewController:positionVC animated:YES];
+    if ([self.delegate respondsToSelector:@selector(db_menuSearchVC:didSelectPosition:)]) {
+        [self.delegate db_menuSearchVC:self didSelectPosition:position];
+    }
 }
 
 #pragma mark - Keyboard events
@@ -215,27 +223,15 @@
 - (void)keyboardWillShow:(NSNotification *)notification{
     CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         CGRect rect = self.tableView.frame;
-                         rect.size.height = self.view.frame.size.height - self.searchView.frame.size.height - keyboardRect.size.height;
-                         self.tableView.frame = rect;
-                     }
-                     completion:nil];
+    CGRect rect = self.tableView.frame;
+    rect.size.height = self.view.frame.size.height - self.searchView.frame.size.height - keyboardRect.size.height;
+    self.tableView.frame = rect;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification{
-    [UIView animateWithDuration:0.25
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                         CGRect rect = self.tableView.frame;
-                         rect.size.height = self.view.frame.size.height - self.searchView.frame.size.height;
-                         self.tableView.frame = rect;
-                     }
-                     completion:nil];
+    CGRect rect = self.tableView.frame;
+    rect.size.height = self.view.frame.size.height - self.searchView.frame.size.height;
+    self.tableView.frame = rect;
 }
 
 @end

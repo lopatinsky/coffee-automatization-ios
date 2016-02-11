@@ -21,6 +21,7 @@
 
 @interface DBVenuesTableViewController ()<DBVenueCellDelegate>
 @property (nonatomic, strong) NSArray *venues;
+@property (strong, nonatomic) CLLocation *userLocation;
 @end
 
 @implementation DBVenuesTableViewController
@@ -37,7 +38,6 @@
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
     
     self.venues = [Venue storedVenues];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVenuesState) name:kDBConcurrentOperationFetchVenuesFinished object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,27 +56,26 @@
 - (void)reloadVenues:(UIRefreshControl *)refreshControl {
     [GANHelper analyzeEvent:@"venue_update" category:self.eventsCategory];
 
-    if ([[LocationHelper sharedInstance] isDenied]) {
-        [self fetchVenues:nil];
-    } else {
+    if (![[LocationHelper sharedInstance] isDenied]) {
         [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
-            [self fetchVenues:location];
+            _userLocation = location;
+            
+            [Venue fetchVenuesForLocation:nil withCompletionHandler:^(NSArray *venues) {
+                for (Venue *venue in venues) {
+                    venue.distance = [_userLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:venue.latitude longitude:venue.longitude]] / 1000;
+                }
+                
+                NSMutableArray *mutVenues = [NSMutableArray arrayWithArray:venues];
+                [mutVenues sortUsingComparator:^NSComparisonResult(Venue  *obj1, Venue *obj2) {
+                    return [@(obj1.distance) compare:@(obj2.distance)];
+                }];
+                
+                self.venues = mutVenues;
+                [self.tableView reloadData];
+                [self.refreshControl endRefreshing];
+            }];
         }];
     }
-}
-
-- (void)fetchVenues:(CLLocation *)location {
-    if (location) {
-        [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues withUserInfo:@{@"location": location}];
-    } else {
-        [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
-    }
-}
-
-- (void)updateVenuesState {
-    self.venues = [Venue storedVenues];
-    [self.tableView reloadData];
-    [self.refreshControl endRefreshing];
 }
 
 #pragma mark - Table view data source

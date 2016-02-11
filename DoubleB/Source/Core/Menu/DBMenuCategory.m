@@ -182,6 +182,26 @@
     return resultPosition;
 }
 
+- (NSArray *)traceForPosition:(DBMenuPosition *)position {
+    NSArray *result;
+    if (self.type == DBMenuCategoryTypeParent) {
+        for(DBMenuCategory *category in self.categories){
+            NSArray *trace = [category traceForPosition:position];
+            if (trace.count > 0) {
+                result = [@[self] arrayByAddingObjectsFromArray:trace];
+            }
+        }
+    } else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", position.positionId];
+        DBMenuPosition *filteredPosition = [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+        if (filteredPosition) {
+            result = @[self];
+        }
+    }
+    
+    return result;
+}
+
 - (NSArray *)filterPositions:(NSString *)text venue:(Venue *)venue currentResult:(DBMenuPositionSearchResult *)searchResult {
     NSMutableArray *result = [NSMutableArray new];
     

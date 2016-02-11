@@ -253,6 +253,18 @@
     return resultPosition;
 }
 
+- (NSArray *)traceForPosition:(DBMenuPosition *)position {
+    NSArray *result;
+    for(DBMenuCategory *category in self.categories){
+        NSArray *trace = [category traceForPosition:position];
+        if (trace.count > 0) {
+            result = trace;
+        }
+    }
+    
+    return result;
+}
+
 - (NSArray *)filterPositions:(NSString *)text venue:(Venue *)venue {
     NSMutableArray *result = [NSMutableArray new];
     

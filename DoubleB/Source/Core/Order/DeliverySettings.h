@@ -40,6 +40,9 @@ typedef NS_ENUM(NSInteger, DeliverySettingsChange) {
  */
 @property (nonatomic, strong) NSDate *selectedTime;
 - (NSInteger)setNewSelectedTime:(NSDate *)date;
+- (NSInteger)setSelectedMinimumTime;
+- (NSInteger)setSelectedMaximumTime;
+
 
 /**
  * Minimum time for new order

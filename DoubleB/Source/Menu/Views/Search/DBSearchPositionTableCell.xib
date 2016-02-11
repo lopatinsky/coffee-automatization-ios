@@ -46,7 +46,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfr-zX-6nY">
                         <rect key="frame" x="277" y="8" width="34.5" height="33.5"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l3h-9L-jL6" customClass="DBDefaultSeparatorView">
@@ -74,6 +74,7 @@
                     <constraint firstItem="ZDx-6g-keq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fe8-mL-bhe"/>
                     <constraint firstAttribute="bottom" secondItem="ZDx-6g-keq" secondAttribute="bottom" id="fic-Cl-lAc"/>
                     <constraint firstItem="Yfr-zX-6nY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="gBg-LW-gRI"/>
+                    <constraint firstItem="ZDx-6g-keq" firstAttribute="leading" secondItem="JJM-Na-AhM" secondAttribute="trailing" constant="8" id="gw6-ir-94T"/>
                     <constraint firstAttribute="bottom" secondItem="Yfr-zX-6nY" secondAttribute="bottom" constant="8" id="lqJ-Yw-i1B"/>
                     <constraint firstItem="ZDx-6g-keq" firstAttribute="leading" secondItem="JJM-Na-AhM" secondAttribute="trailing" constant="8" symbolic="YES" id="mWN-Wd-dTT"/>
                     <constraint firstItem="JJM-Na-AhM" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ucD-3a-47r"/>
@@ -84,6 +85,7 @@
                         <exclude reference="JQm-zm-rml"/>
                         <exclude reference="DFt-o0-09U"/>
                         <exclude reference="FNO-z2-JNs"/>
+                        <exclude reference="mWN-Wd-dTT"/>
                         <exclude reference="Veg-pa-8Lb"/>
                         <exclude reference="WIo-nF-W0P"/>
                         <exclude reference="gBg-LW-gRI"/>
@@ -92,7 +94,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="constraintImageViewWidth" destination="bpO-lB-Aya" id="I8C-X6-eyt"/>
-                <outlet property="constraintTitleLabelLeading" destination="mWN-Wd-dTT" id="T5k-6O-XgL"/>
+                <outlet property="constraintTitleLabelLeading" destination="gw6-ir-94T" id="LIj-h8-jna"/>
                 <outlet property="positionImageView" destination="JJM-Na-AhM" id="f7z-px-eH6"/>
                 <outlet property="priceLabel" destination="Yfr-zX-6nY" id="Z0i-z9-qtT"/>
                 <outlet property="titleLabel" destination="ZDx-6g-keq" id="azV-Ax-JhE"/>

@@ -28,7 +28,7 @@
     
     self.analyticsCategory = @"Menu_subscription_positions_screen";
     
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
         [self moveToOrder];
     }];
     

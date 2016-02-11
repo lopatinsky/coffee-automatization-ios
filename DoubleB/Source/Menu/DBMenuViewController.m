@@ -31,7 +31,7 @@
 
 #import "DBMenuSearchVC.h"
 
-@interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol>
+@interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol, DBMenuSearchVCDelegate>
 @property (strong, nonatomic) NSString *analyticsCategory;
 @property (strong, nonatomic) DBMenuModuleView *menuModuleView;
 
@@ -61,6 +61,8 @@
         [self searchClick];
     }];
     self.searchVC = [DBMenuSearchVC new];
+    self.searchVC.delegate = self;
+    
     DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
         @strongify(self)
         [self moveToOrder];
@@ -170,6 +172,31 @@
 
 - (void)searchClick {
     [self.searchVC presentInContainer:self.navigationController];
+}
+
+#pragma mark - DBMenuSearchVCDelegate
+
+- (void)db_menuSearchVC:(DBMenuSearchVC *)controller didSelectPosition:(DBMenuPosition *)position {
+    NSArray *trace = [[DBMenu sharedInstance] traceForPosition:position];
+    
+    NSMutableArray *controllers = [NSMutableArray arrayWithArray:@[[DBMenuViewController new]]];
+    
+    for (DBMenuCategory *category in trace) {
+        DBMenuViewControllerMode mode = ((DBMenuViewController*)(controllers.lastObject)).mode;
+        if (mode == DBMenuViewControllerModeCategories) {
+            DBMenuViewController *menuVC = [DBMenuViewController new];
+            menuVC.type = DBMenuViewControllerTypeSecond;
+            menuVC.category = category;
+            
+            [controllers addObject:menuVC];
+        }
+    }
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+    [controllers addObject:positionVC];
+    
+    [self.navigationController setViewControllers:controllers animated:NO];
+    
+    [self.searchVC hide];
 }
 
 
