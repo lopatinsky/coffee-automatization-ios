@@ -151,7 +151,7 @@
 
 #pragma mark - DBSettingsProtocol
 
-+ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController settingsController:(DBBaseSettingsTableViewController*)settingsVC{
++ (DBSettingsItem *)settingsItemForViewController:(UIViewController<DBPopupViewControllerContent> *)viewController settingsController:(DBBaseSettingsTableViewController*)settingsVC{
     DBSettingsItem *item = [DBSettingsItem new];
     item.name =  @"shareVC";
     item.title =  NSLocalizedString(@"Рассказать друзьям", nil);
