@@ -64,9 +64,7 @@
         view.exclusiveTouch = NO;
         [button addSubview:view];
         view.translatesAutoresizingMaskIntoConstraints = NO;
-        [view constrainHeight:[NSString stringWithFormat:@"%.0f", button.frame.size.height]];
-        [view constrainWidth:[NSString stringWithFormat:@"%.0f", button.frame.size.width]];
-        [view alignCenterWithView:button];
+        [view alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:button];
         
         offset += width;
         

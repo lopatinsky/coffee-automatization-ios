@@ -37,7 +37,7 @@
     self.refreshControl = refreshControl;
     [refreshControl addTarget:self action:@selector(reloadVenues:) forControlEvents:UIControlEventValueChanged];
     
-    self.venues = [Venue storedVenues];
+    [self reload];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,23 +59,28 @@
     if (![[LocationHelper sharedInstance] isDenied]) {
         [[LocationHelper sharedInstance] updateLocationWithCallback:^(CLLocation *location) {
             _userLocation = location;
+            [self reload];
             
             [Venue fetchVenuesForLocation:nil withCompletionHandler:^(NSArray *venues) {
-                for (Venue *venue in venues) {
-                    venue.distance = [_userLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:venue.latitude longitude:venue.longitude]] / 1000;
-                }
-                
-                NSMutableArray *mutVenues = [NSMutableArray arrayWithArray:venues];
-                [mutVenues sortUsingComparator:^NSComparisonResult(Venue  *obj1, Venue *obj2) {
-                    return [@(obj1.distance) compare:@(obj2.distance)];
-                }];
-                
-                self.venues = mutVenues;
-                [self.tableView reloadData];
+                [self reload];
                 [self.refreshControl endRefreshing];
             }];
         }];
     }
+}
+
+- (void)reload {
+    NSMutableArray *mutVenues = [NSMutableArray arrayWithArray:[Venue storedVenues]];
+    for (Venue *venue in mutVenues) {
+        venue.distance = [_userLocation distanceFromLocation:[[CLLocation alloc] initWithLatitude:venue.latitude longitude:venue.longitude]] / 1000;
+    }
+    
+    [mutVenues sortUsingComparator:^NSComparisonResult(Venue  *obj1, Venue *obj2) {
+        return [@(obj1.distance) compare:@(obj2.distance)];
+    }];
+    
+    self.venues = mutVenues;
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
