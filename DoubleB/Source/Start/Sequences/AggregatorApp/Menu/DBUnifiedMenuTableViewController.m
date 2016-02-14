@@ -21,6 +21,7 @@
 
 #import "DBBarButtonItem.h"
 #import "UIAlertView+BlocksKit.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
 
@@ -82,6 +83,7 @@
         default:
             break;
     }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -119,36 +121,43 @@
 
 #pragma mark - Networking 
 - (void)fetchMenuSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedMenu) {
         [self.tableView reloadData];
     }
 }
 
 - (void)fetchMenuFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 
 - (void)fetchVenueSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedVenue) {
         [self.tableView reloadData];
     }
 }
 
 - (void)fetchVenueFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 
 - (void)fetchPositionsSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedPosition) {
         [self.tableView reloadData];
     }
 }
 
 - (void)fetchPositionsFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 
 - (void)fetchCompanyInfo {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [[DBCompanyInfo sharedInstance] fetchDependentInfo];
     [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
 }
