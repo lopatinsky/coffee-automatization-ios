@@ -182,6 +182,62 @@
     return resultPosition;
 }
 
+- (NSArray *)traceForPosition:(DBMenuPosition *)position {
+    NSArray *result;
+    if (self.type == DBMenuCategoryTypeParent) {
+        for(DBMenuCategory *category in self.categories){
+            NSArray *trace = [category traceForPosition:position];
+            if (trace.count > 0) {
+                result = [@[self] arrayByAddingObjectsFromArray:trace];
+            }
+        }
+    } else {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"positionId == %@", position.positionId];
+        DBMenuPosition *filteredPosition = [[_positions filteredArrayUsingPredicate:predicate] firstObject];
+        if (filteredPosition) {
+            result = @[self];
+        }
+    }
+    
+    return result;
+}
+
+- (NSArray *)filterPositions:(NSString *)text venue:(Venue *)venue currentResult:(DBMenuPositionSearchResult *)searchResult {
+    NSMutableArray *result = [NSMutableArray new];
+    
+    DBMenuPositionSearchResult *newSearchResult = [DBMenuPositionSearchResult new];
+    newSearchResult.pathCategories = [NSMutableArray arrayWithArray:searchResult.pathCategories];
+    [newSearchResult.pathCategories addObject:self.name];
+    
+    if (self.type == DBMenuCategoryTypeStandart){
+        NSArray *filtered;
+        if ([self.name containsString:text]) { // Get all positions from category
+            filtered = [NSArray arrayWithArray:self.positions];
+        } else { // Get only positions that contains search string
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name CONTAINS[cd] %@", text];
+            filtered = [self.positions filteredArrayUsingPredicate:predicate];
+        }
+        
+        for (DBMenuPosition *position in filtered) {
+            if ([position availableInVenue:venue]) {
+                [newSearchResult.positions addObject:position];
+            }
+        }
+        
+        if (newSearchResult.positions.count > 0) {
+            [result addObject:newSearchResult];
+        }
+    } else {
+        for(DBMenuCategory *category in self.categories){
+            if ([category availableInVenue:venue]) {
+                [result addObjectsFromArray:[category filterPositions:text venue:venue currentResult:newSearchResult]];
+            }
+        }
+    }
+    
+    return result;
+}
+
 #pragma mark - NSCoding methods
 
 - (id)initWithCoder:(NSCoder *)aDecoder{

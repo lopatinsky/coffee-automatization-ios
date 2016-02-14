@@ -23,7 +23,6 @@ static NSMutableArray *unifiedStoredVenues;
     self.venueId = dict[@"id"];
     self.title = dict[@"title"];
     self.address = dict[@"address"];
-    self.distance = [dict[@"distance"] doubleValue];
     self.location = CLLocationCoordinate2DMake([dict[@"lat"] doubleValue], [dict[@"lon"] doubleValue]);
     self.phone = [dict getValueForKey:@"called_phone"] ?: @"";
     self.workingTime = [self parseWorkTimeFromSchedule:dict[@"schedule"]];
@@ -68,10 +67,6 @@ static NSMutableArray *unifiedStoredVenues;
     if(!storedVenues){
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Venue"];
         storedVenues = [NSMutableArray arrayWithArray:[[CoreDataHelper sharedHelper].context executeFetchRequest:request error:nil]];
-        
-        [storedVenues sortUsingComparator:^NSComparisonResult(Venue *obj1, Venue *obj2) {
-            return [@(obj1.distance) compare:@(obj2.distance)];
-        }];
     }
 
     return storedVenues;

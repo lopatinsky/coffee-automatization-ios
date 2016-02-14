@@ -22,7 +22,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Подарки", nil);
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem giftItem:self action:@selector(back)];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.tableFooterView = [UIView new];

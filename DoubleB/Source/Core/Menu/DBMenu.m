@@ -253,6 +253,31 @@
     return resultPosition;
 }
 
+- (NSArray *)traceForPosition:(DBMenuPosition *)position {
+    NSArray *result;
+    for(DBMenuCategory *category in self.categories){
+        NSArray *trace = [category traceForPosition:position];
+        if (trace.count > 0) {
+            result = trace;
+        }
+    }
+    
+    return result;
+}
+
+- (NSArray *)filterPositions:(NSString *)text venue:(Venue *)venue {
+    NSMutableArray *result = [NSMutableArray new];
+    
+    DBMenuPositionSearchResult *searchResult = [DBMenuPositionSearchResult new];
+    for(DBMenuCategory *category in self.categories){
+        if([category availableInVenue:venue]){
+            [result addObjectsFromArray:[category filterPositions:text venue:venue currentResult:searchResult]];
+        }
+    }
+    
+    return result;
+}
+
 - (NSArray *)sortCategories:(NSArray *)categories{
     NSMutableArray *mutableCategories = [[NSMutableArray alloc] initWithArray:categories];
     [mutableCategories sortUsingComparator:^NSComparisonResult(DBMenuCategory *obj1, DBMenuCategory *obj2) {
@@ -310,6 +335,19 @@
     }
     
     return positionBalance;
+}
+
+@end
+
+@implementation DBMenuPositionSearchResult
+
+- (instancetype)init {
+    self = [super init];
+    
+    self.pathCategories = [NSMutableArray new];
+    self.positions = [NSMutableArray new];
+    
+    return self;
 }
 
 @end

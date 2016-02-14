@@ -29,7 +29,9 @@
 #import "DBSubscriptionManager.h"
 #import "DBSubscriptionModuleView.h"
 
-@interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol>
+#import "DBMenuSearchVC.h"
+
+@interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol, DBMenuSearchVCDelegate>
 @property (strong, nonatomic) NSString *analyticsCategory;
 @property (strong, nonatomic) DBMenuModuleView *menuModuleView;
 
@@ -37,6 +39,8 @@
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
 
 @property (strong, nonatomic) DBSubscriptionModuleView *subscriptionModuleView;
+
+@property (strong, nonatomic) DBMenuSearchVC *searchVC;
 @end
 
 @implementation DBMenuViewController
@@ -51,7 +55,19 @@
     
     self.analyticsCategory = @"Menu_screen";
     
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
+    @weakify(self);
+    DBBarButtonItemComponent *searchComp = [DBBarButtonItemComponent create:DBBarButtonTypeSearch handler:^{
+        @strongify(self)
+        [self searchClick];
+    }];
+    self.searchVC = [DBMenuSearchVC new];
+    self.searchVC.delegate = self;
+    
+    DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
+        @strongify(self)
+        [self moveToOrder];
+    }];
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem itemWithComponents:@[searchComp, orderComp]];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
         [self setupInitial];
@@ -154,6 +170,35 @@
     [GANHelper analyzeEvent:@"order_pressed" category:self.analyticsCategory];
 }
 
+- (void)searchClick {
+    [self.searchVC presentInContainer:self.navigationController];
+}
+
+#pragma mark - DBMenuSearchVCDelegate
+
+- (void)db_menuSearchVC:(DBMenuSearchVC *)controller didSelectPosition:(DBMenuPosition *)position {
+    NSArray *trace = [[DBMenu sharedInstance] traceForPosition:position];
+    
+    NSMutableArray *controllers = [NSMutableArray arrayWithArray:@[[DBMenuViewController new]]];
+    
+    for (DBMenuCategory *category in trace) {
+        DBMenuViewControllerMode mode = ((DBMenuViewController*)(controllers.lastObject)).mode;
+        if (mode == DBMenuViewControllerModeCategories) {
+            DBMenuViewController *menuVC = [DBMenuViewController new];
+            menuVC.type = DBMenuViewControllerTypeSecond;
+            menuVC.category = category;
+            
+            [controllers addObject:menuVC];
+        }
+    }
+    UIViewController<PositionViewControllerProtocol> *positionVC = [[ViewControllerManager positionViewController] initWithPosition:position mode:PositionViewControllerModeMenuPosition];
+    [controllers addObject:positionVC];
+    
+    [self.navigationController setViewControllers:controllers animated:NO];
+    
+    [self.searchVC hide];
+}
+
 
 #pragma mark - DBMenuModuleViewDelegate
 
@@ -203,7 +248,9 @@
 
 #pragma mark - Initial
 - (void)setupInitial {
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem profileItem:self action:@selector(moveToSettings)];
+    self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
+        [self moveToSettings];
+    }];
 }
 
 - (void)updateMenu {

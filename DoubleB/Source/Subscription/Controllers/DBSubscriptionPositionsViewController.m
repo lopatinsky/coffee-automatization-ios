@@ -28,7 +28,9 @@
     
     self.analyticsCategory = @"Menu_subscription_positions_screen";
     
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem orderItem:self action:@selector(moveToOrder)];
+    self.navigationItem.rightBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
+        [self moveToOrder];
+    }];
     
     DBSubscriptionModuleView *moduleView = [DBSubscriptionModuleView create:DBSubscriptionModuleViewModePositions];
     [self addModule:moduleView];
