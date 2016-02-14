@@ -20,17 +20,21 @@
     [super viewWillAppear:animated];
 }
 
-- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
-    NSMutableArray<DBSettingsItemProtocol> *settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
+- (NSMutableArray *)settingsSections {
+    NSMutableArray *settingsSections = [NSMutableArray new];
+
+    DBSettingsSection *userSection = [[DBSettingsSection alloc] init:DBSettingsSectionTypeUser];
     
     if ([[DBCitiesManager sharedInstance] cities].count > 1) {
         DBSettingsItem *item = [DBCitiesViewController settingsItem];
-        [settingsItems addObject:item];
+        [userSection.items addObject:item];
     }
     
-    [settingsItems addObject:[DBProfileViewController settingsItem]];
+    [userSection.items addObject:[DBProfileViewController settingsItem]];
     
-    return settingsItems;
+    [settingsSections addObject:userSection];
+    
+    return settingsSections;
 }
 
 @end

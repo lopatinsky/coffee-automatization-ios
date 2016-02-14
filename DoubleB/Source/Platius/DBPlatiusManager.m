@@ -14,16 +14,14 @@
 
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBPlatiusManager setValue:@(enabled) forKey:@"enabled"];
-    
-    
 }
 
 - (BOOL)enabled {
-    return [DBPlatiusManager valueForKey:@"enabled"];
+    return [[DBPlatiusManager valueForKey:@"enabled"] boolValue];
 }
 
 - (BOOL)authorized {
-    return [DBPlatiusManager valueForKey:@"authorized"];
+    return [[DBPlatiusManager valueForKey:@"authorized"] boolValue];
 }
 
 - (DBUserPhone *)confirmedPhone {
