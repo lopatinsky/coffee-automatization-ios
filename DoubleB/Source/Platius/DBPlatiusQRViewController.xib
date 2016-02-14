@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBPlatiusQRViewController">
+            <connections>
+                <outlet property="activityIndicator" destination="tvC-Y6-PEE" id="vKF-2y-Kn4"/>
+                <outlet property="barcodeImageView" destination="flo-II-rMH" id="Nsx-Xl-8mb"/>
+                <outlet property="titleLabel" destination="jFY-hG-Got" id="oC5-yj-JLN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="flo-II-rMH">
+                    <rect key="frame" x="35" y="234" width="250" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="TYG-3r-KAY"/>
+                        <constraint firstAttribute="height" constant="100" id="puM-yS-nhu"/>
+                    </constraints>
+                </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tvC-Y6-PEE">
+                    <rect key="frame" x="150" y="274" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="e3j-5f-NJa"/>
+                        <constraint firstAttribute="width" constant="20" id="mqU-Gp-6Sa"/>
+                    </constraints>
+                </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFY-hG-Got">
+                    <rect key="frame" x="10" y="10" width="300" height="214"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="jFY-hG-Got" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="0EF-oZ-4ci"/>
+                <constraint firstItem="tvC-Y6-PEE" firstAttribute="centerY" secondItem="flo-II-rMH" secondAttribute="centerY" id="4xG-LM-iPF"/>
+                <constraint firstItem="tvC-Y6-PEE" firstAttribute="centerX" secondItem="flo-II-rMH" secondAttribute="centerX" id="Ag5-NY-n58"/>
+                <constraint firstAttribute="trailing" secondItem="jFY-hG-Got" secondAttribute="trailing" constant="10" id="had-l1-oNM"/>
+                <constraint firstItem="flo-II-rMH" firstAttribute="top" secondItem="jFY-hG-Got" secondAttribute="bottom" constant="10" id="hgh-uz-X5s"/>
+                <constraint firstItem="jFY-hG-Got" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="iVf-lb-fYM"/>
+                <constraint firstItem="flo-II-rMH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="lMD-2b-owP"/>
+                <constraint firstItem="flo-II-rMH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vaT-Im-7nk"/>
+            </constraints>
+            <point key="canvasLocation" x="338" y="272"/>
+        </view>
+    </objects>
+</document>

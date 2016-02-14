@@ -8,29 +8,39 @@
 
 #import "DBCompanySettingsTableViewController.h"
 
+#import "DBCitiesManager.h"
+#import "DBCitiesViewController.h"
+
+#import "ViewControllerManager.h"
+#import "DBCompanyInfo.h"
 #import "DBCompaniesManager.h"
 #import "DBProfileViewController.h"
 #import "DBOrdersTableViewController.h"
-#import "DBCompanyInfo.h"
+#import "DBVenuesViewController.h"
+#import "DBCompanyInfoViewController.h"
+#import "DBDocumentsViewController.h"
+
 #import "DBShareHelper.h"
 #import "DBFriendGiftHelper.h"
 #import "DBFriendGiftViewController.h"
+
 #import "IHPaymentManager.h"
 #import "DBPaymentViewController.h"
+
 #import "OrderCoordinator.h"
 #import "DBPromosListViewController.h"
+
 #import "CompanyNewsManager.h"
 #import "DBNewsHistoryTableViewController.h"
-#import "DBCompanyInfoViewController.h"
-#import "DBDocumentsViewController.h"
+
 #import "DBSubscriptionManager.h"
+
 #import "DBCustomViewManager.h"
 #import "DBCustomTableViewController.h"
-#import "DBCitiesManager.h"
-#import "DBCitiesViewController.h"
-#import "DBVenuesViewController.h"
 
-#import "ViewControllerManager.h"
+#import "DBPlatiusQRViewController.h"
+#import "DBPlatiusManager.h"
+
 
 @implementation DBCompanySettingsTableViewController
 
@@ -79,6 +89,11 @@
     if ([[[OrderCoordinator sharedInstance] promoManager] walletEnabled]) {
         [settingsItems addObject:[OrderCoordinator settingsItem]];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
+    }
+    
+    // Platius barcode
+    if ([DBPlatiusManager sharedInstance].enabled) {
+        [settingsItems addObject:[DBPlatiusQRViewController settingsItem]];
     }
     
     // Promos
