@@ -49,9 +49,12 @@
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"Helvetica Light" size:17];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17];
     titleLabel.numberOfLines = 2;
     titleLabel.text = title;
+    
+    titleLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin & UIViewAutoresizingFlexibleRightMargin;
     
     [self.navigationItem setTitleView:titleLabel];
 }

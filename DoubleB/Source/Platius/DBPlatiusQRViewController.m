@@ -15,8 +15,10 @@
 
 @interface DBPlatiusQRViewController ()<DBPhoneConfirmationViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *barcodeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *barcodeImageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *confirmPhoneButton;
 
 @property (strong, nonatomic) DBPhoneConfirmationView *phoneConfirmationView;
 @end
@@ -28,6 +30,8 @@
     
     [self db_setTitle:@"Заголовок"];
     
+    [_confirmPhoneButton setTitle:NSLocalizedString(@"", nil) forState:UIControlStateNormal];
+    
     self.phoneConfirmationView = [DBPhoneConfirmationView create];
     self.phoneConfirmationView.delegate = self;
 }
@@ -36,33 +40,34 @@
     [super viewWillAppear:animated];
     
     if ([DBPlatiusManager sharedInstance].authorized) {
-        if ([[DBPlatiusManager sharedInstance] barcodeUrl].length > 0) {
-            [_barcodeImageView sd_setImageWithURL:[NSURL URLWithString:[[DBPlatiusManager sharedInstance] barcodeUrl]]];
-            
-            [[DBPlatiusManager sharedInstance] checkStatus:^(BOOL result) {
-                if ([[DBPlatiusManager sharedInstance] barcodeUrl].length > 0) {
-                    [_barcodeImageView sd_setImageWithURL:[NSURL URLWithString:[[DBPlatiusManager sharedInstance] barcodeUrl]]];
-                }
-            }];
-        } else {
-            [_activityIndicator startAnimating];
-            [[DBPlatiusManager sharedInstance] checkStatus:^(BOOL result) {
-                if ([[DBPlatiusManager sharedInstance] barcodeUrl].length > 0) {
-                    [_barcodeImageView sd_setImageWithURL:[NSURL URLWithString:[[DBPlatiusManager sharedInstance] barcodeUrl]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                        [_activityIndicator stopAnimating];
-                    }];
-                }
-            }];
-        }
+        [self reload];
     } else {
         [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
     }
 }
 
+- (void)reload {
+    _barcodeLabel.hidden = YES;
+    _barcodeImageView.hidden = YES;
+    [_activityIndicator startAnimating];
+    [[DBPlatiusManager sharedInstance] checkStatus:^(BOOL result) {
+        if (result) {
+            _barcodeLabel.hidden = NO;
+            _barcodeImageView.hidden = NO;
+            _barcodeLabel.text = [DBPlatiusManager sharedInstance].barcode;
+            if ([[DBPlatiusManager sharedInstance] barcodeUrl].length > 0) {
+                [_barcodeImageView sd_setImageWithURL:[NSURL URLWithString:[[DBPlatiusManager sharedInstance] barcodeUrl]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    [_activityIndicator stopAnimating];
+                }];
+            }
+        }
+    }];
+}
+
 #pragma mark - DBPhoneConfirmationViewDelegate
 
 - (void)db_phoneConfirmationViewConfirmedPhone:(DBPhoneConfirmationView *)view {
-    
+    [self reload];
 }
 
 #pragma mark - DBSettingsProtocol

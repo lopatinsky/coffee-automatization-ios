@@ -460,7 +460,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Medium" size:16.f]
+                                                           NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:16.f]
                                                            }];
 }
 

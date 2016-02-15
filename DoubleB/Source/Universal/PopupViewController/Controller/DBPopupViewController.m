@@ -17,6 +17,12 @@
 @property (strong, nonatomic) UIView *contentView;
 @property (strong, nonatomic) UIView *headerFooterView;
 
+@property (weak, nonatomic) NSLayoutConstraint *constraintTopSpace;
+@property (weak, nonatomic) NSLayoutConstraint *constraintBottomSpace;
+@property (weak, nonatomic) NSLayoutConstraint *constraintCenterYAlignment;
+
+@property (nonatomic) CGFloat minTopOffset;
+@property (nonatomic) CGFloat minBottomOffset;
 @end
 
 @implementation DBPopupViewController
@@ -50,6 +56,15 @@
         [self.contentView addSubview:_displayView];
         [_displayView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.contentView];
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
 }
 
 
@@ -60,6 +75,10 @@
         [_displayController viewWillAppear:animated];
 //        [_displayController beginAppearanceTransition:YES animated:YES];
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)configLayout:(CGRect)rect {
@@ -108,7 +127,10 @@
     [self.headerFooterView constrainHeight:[NSString stringWithFormat:@"%ld", (long)self.headerFooterView.frame.size.height]];
     
     if (self.appearanceMode == DBPopupVCAppearanceModeHeader) {
-        maxHeight = rect.size.height - 50 - self.headerFooterView.frame.size.height;
+        self.minTopOffset = 40.f;
+        self.minBottomOffset = 10.f;
+        
+        maxHeight = rect.size.height - self.headerFooterView.frame.size.height - self.minTopOffset - self.minBottomOffset;
         if (height == 0)
             height = maxHeight;
         
@@ -117,22 +139,77 @@
         [self.headerFooterView constrainBottomSpaceToView:self.contentView predicate:@"0"];
         
         if (height != maxHeight) {
-            [self.contentView alignCenterYWithView:self.view predicate:@"20"];
+            self.constraintCenterYAlignment = [[self.contentView alignCenterYWithView:self.view predicate:@"20"] firstObject];
         } else {
-            [self.contentView alignBottomEdgeWithView:self.view predicate:@"-10"];
+            self.constraintBottomSpace = [[self.contentView alignBottomEdgeWithView:self.view predicate:[NSString stringWithFormat:@"-%.0f", self.minBottomOffset]] firstObject];
         }
     }
     
     if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
-        maxHeight = rect.size.height - 60 - self.headerFooterView.frame.size.height;
+        maxHeight = rect.size.height - self.headerFooterView.frame.size.height - self.minTopOffset - self.minBottomOffset;
         if (height == 0)
             height = maxHeight;
         
-        [self.contentView alignCenterYWithView:self.view predicate:@"0"];
+        self.constraintCenterYAlignment = [[self.contentView alignCenterYWithView:self.view predicate:@"0"] firstObject];
         [self.contentView constrainBottomSpaceToView:self.headerFooterView predicate:@"0"];
         [self.contentView constrainHeight:[NSString stringWithFormat:@"%ld", (long)height]];
     }
 }
+
+- (void)moveToInitialPosition:(double)time {
+    if (self.appearanceMode == DBPopupVCAppearanceModeHeader) {
+        if (self.constraintCenterYAlignment && self.constraintCenterYAlignment.constant != 20) {
+            [UIView animateWithDuration:time animations:^{
+                self.constraintCenterYAlignment.constant = 20;
+                [self.view layoutIfNeeded];
+            }];
+        }
+    }
+    
+    if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
+        if (self.constraintCenterYAlignment && self.constraintCenterYAlignment.constant != 0) {
+            [UIView animateWithDuration:time animations:^{
+                self.constraintCenterYAlignment.constant = 0;
+                [self.view layoutIfNeeded];
+            }];
+        }
+    }
+}
+
+- (void)moveToPositionHigherThan:(CGFloat)bottomOffset time:(double)time {
+    if (self.appearanceMode == DBPopupVCAppearanceModeHeader) {
+        BOOL canMove = self.constraintCenterYAlignment != nil;
+        
+        CGFloat difference = bottomOffset - (self.view.frame.size.height - (self.contentView.frame.origin.y + self.contentView.frame.size.height));
+        canMove = canMove && difference > 0;
+        
+        CGFloat possibleDifference = self.headerFooterView.frame.origin.y - difference >= self.minTopOffset ? difference : self.headerFooterView.frame.origin.y - self.minTopOffset;
+        canMove = canMove && possibleDifference > 0;
+        
+        if (canMove) {
+            [UIView animateWithDuration:time animations:^{
+                self.constraintCenterYAlignment.constant = 20 - possibleDifference;
+                [self.view layoutIfNeeded];
+            }];
+        }
+    }
+    
+    if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
+        CGFloat difference = bottomOffset - (self.view.frame.size.height - (self.headerFooterView.frame.origin.y + self.headerFooterView.frame.size.height));
+        BOOL canMove = difference > 0;
+        
+        CGFloat possibleDifference = self.contentView.frame.origin.y - difference >= self.minTopOffset ? difference : self.contentView.frame.origin.y - self.minTopOffset;
+        canMove = canMove && possibleDifference > 0;
+        
+        if (canMove) {
+            [UIView animateWithDuration:time animations:^{
+                self.constraintCenterYAlignment.constant = -possibleDifference;
+                [self.view layoutIfNeeded];
+            }];
+        }
+    }
+}
+
 
 
 + (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller
@@ -227,6 +304,18 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     return self;
+}
+
+#pragma mark - Keyboard events
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    [self moveToPositionHigherThan:keyboardRect.size.height + 5 time:0.25];
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [self moveToInitialPosition:0.25];
 }
 
 @end

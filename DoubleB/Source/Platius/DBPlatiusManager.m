@@ -60,7 +60,7 @@
     [DBPlatiusManager setValue:@([[responseObject getValueForKey:@"authorized"] boolValue]) forKey:@"authorized"];
     
     if (self.authorized) {
-        _barcode = [[responseObject getValueForKey:@"payment_code"] integerValue];
+        _barcode = [responseObject getValueForKey:@"payment_code"] ?: @"";
         _barcodeUrl = [[responseObject getValueForKey:@"barcode_info"] getValueForKey:@"image_url"] ?: @"";
     }
 }

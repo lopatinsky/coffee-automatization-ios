@@ -15,7 +15,7 @@
 @property (nonatomic) BOOL authorized;
 @property (strong, nonatomic,readonly) DBUserPhone *confirmedPhone;
 
-@property (nonatomic) NSInteger barcode;
+@property (nonatomic) NSString barcode;
 @property (strong, nonatomic) NSString *barcodeUrl;
 
 
