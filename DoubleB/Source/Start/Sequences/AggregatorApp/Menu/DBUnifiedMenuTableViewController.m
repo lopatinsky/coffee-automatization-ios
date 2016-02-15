@@ -174,9 +174,6 @@
             DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
             [OrderCoordinator sharedInstance].orderManager.venue = [unifiedVenue venueObject];
             [DBCompaniesManager selectCompany:unifiedVenue.company];
-            [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
-                [DBCompaniesManager selectCompany:unifiedVenue.company];
-            }];
             [self fetchCompanyInfo];
             break;
         }

@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *positionImageView;
+@property (weak, nonatomic) IBOutlet DBImageView *positionImageView;
 
 - (void)setVenue:(Venue *)info;
 
