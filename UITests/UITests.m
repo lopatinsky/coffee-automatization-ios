@@ -33,26 +33,41 @@
     
     XCUIApplication *app = [XCUIApplication new];
     [Snapshot setLanguage:app];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [HSTestingBackchannel sendNotification:@"UITestNotificationFirstScreen"];
-        [Snapshot snapshot:@"0Screen" waitForLoadingIndicator:NO];
+    
+//    [app.alerts[@"Allow \U201cT-App (auto)\U201d to access your location even when you are not using the app?"].collectionViews.buttons[@"Allow"] tap];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [HSTestingBackchannel sendNotification:@"UITestNotificationPrepareFirstLaunch"];
         
-        [HSTestingBackchannel sendNotification:@"UITestNotificationSecondScreen"];
-        [Snapshot snapshot:@"1Screen" waitForLoadingIndicator:NO];
-        
-        [HSTestingBackchannel sendNotification:@"UITestNotificationThirdScreen"];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [HSTestingBackchannel sendNotification:@"UITestNotificationFirstScreen"];
+            [Snapshot snapshot:@"0Screen" waitForLoadingIndicator:NO];
             
-            [Snapshot snapshot:@"2Screen" waitForLoadingIndicator:NO];
+            [HSTestingBackchannel sendNotification:@"UITestNotificationSecondScreen"];
+            [Snapshot snapshot:@"1Screen" waitForLoadingIndicator:NO];
             
-            [HSTestingBackchannel sendNotification:@"UITestNotificationFourthScreen"];
-            [Snapshot snapshot:@"3Screen" waitForLoadingIndicator:NO];
+            [HSTestingBackchannel sendNotification:@"UITestNotificationThirdScreen"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                [Snapshot snapshot:@"2Screen" waitForLoadingIndicator:NO];
+                
+                [HSTestingBackchannel sendNotification:@"UITestNotificationFourthScreen"];
+                [Snapshot snapshot:@"3Screen" waitForLoadingIndicator:NO];
+                
+                [HSTestingBackchannel sendNotification:@"UITestNotificationFifthScreen"];
+                [Snapshot snapshot:@"4Screen" waitForLoadingIndicator:NO];
+                
+                [expectation fulfill];
+            });
             
             [expectation fulfill];
         });
+        
+        [expectation fulfill];
     });
     
     [self waitForExpectationsWithTimeout:15 handler:nil];
 }
+
 
 @end
