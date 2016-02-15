@@ -72,6 +72,10 @@
                                  BOOL success = [[responseObject getValueForKey:@"success"] boolValue];
                                  NSString *description = [responseObject getValueForKey:@"description"] ?: @"";
                                  
+                                 if (success) {
+                                     [[DBClientInfo sharedInstance] setPhone:self.confirmedPhone.value];
+                                 }
+                                 
                                  if (callback)
                                      callback(success, description);
                              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {

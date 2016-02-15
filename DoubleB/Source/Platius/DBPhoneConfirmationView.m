@@ -14,12 +14,15 @@
 
 
 @interface DBPhoneConfirmationView ()<UITextFieldDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *textFieldBottomView;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintTextFieldWidth;
+
+@property (strong, nonatomic) NSString *errorMessage;
 @end
 
 @implementation DBPhoneConfirmationView
@@ -37,12 +40,16 @@
     [_continueButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
     [_continueButton addTarget:self action:@selector(continueButtonClick) forControlEvents:UIControlEventTouchUpInside];
     
-    self.mode = DBPhoneConfirmationViewModePhone;
+    _errorLabel.textColor = [UIColor db_errorColor];
 }
 
 - (void)setMode:(DBPhoneConfirmationViewMode)mode {
     _mode = mode;
     if (mode == DBPhoneConfirmationViewModePhone) {
+        // Text
+        _descriptionLabel.text = NSLocalizedString(@"Введите номер телефона, нажмите продолжить и дождитесь смс с Вашим кодом", nil);
+        
+        // TextField
         _textField.keyboardType = UIKeyboardTypePhonePad;
         _textField.secureTextEntry = NO;
         _textField.text = [DBPlatiusManager sharedInstance].confirmedPhone.value;
@@ -54,9 +61,14 @@
         
         _constraintTextFieldWidth.constant = 150.f;
         
+        // Continue Button
         _continueButton.hidden = NO;
-        [_continueButton setTitle:NSLocalizedString(@"Получить код", nil) forState:UIControlStateNormal];
+        [_continueButton setTitle:NSLocalizedString(@"Продолжить", nil) forState:UIControlStateNormal];
     } else {
+        // Text
+        _descriptionLabel.text = NSLocalizedString(@"Введите полученный код", nil);
+        
+        // TextField
         _textField.keyboardType = UIKeyboardTypeDecimalPad;
         _textField.secureTextEntry = YES;
         _textField.text = @"";
@@ -64,9 +76,12 @@
         
         _constraintTextFieldWidth.constant = 50.f;
         
+        // Continue Button
         _continueButton.hidden = YES;
         [_continueButton setTitle:NSLocalizedString(@"Отправить", nil) forState:UIControlStateNormal];
     }
+    
+    _errorLabel.text = self.errorMessage;
 }
 
 - (void)continueButtonClick {
@@ -84,9 +99,11 @@
         [_activityIndicator stopAnimating];
         
         if (success) {
+            self.errorMessage = nil;
             self.mode = DBPhoneConfirmationViewModeCode;
         } else {
-            
+            self.errorMessage = description;
+            self .mode = DBPhoneConfirmationViewModePhone;
         }
     }];
 }
@@ -102,6 +119,8 @@
             }
         } else {
             _continueButton.hidden = NO;
+            
+            [_continueButton setTitle:NSLocalizedString(@"Повторить", nil) forState:UIControlStateNormal];
         }
     }];
 }
