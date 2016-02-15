@@ -37,6 +37,10 @@
 
 #import "DBCustomViewManager.h"
 #import "DBCustomTableViewController.h"
+#import "DBCitiesManager.h"
+#import "DBCitiesViewController.h"
+#import "DBVenuesViewController.h"
+#import "DBUnifiedMenuTableViewController.h"
 
 #import "DBPlatiusQRViewController.h"
 #import "DBPlatiusManager.h"
@@ -54,12 +58,23 @@
     DBSettingsSection *companySection = [[DBSettingsSection alloc] init:DBSettingsSectionTypeCompany];
     
     // Cities
-    if ([[DBCitiesManager sharedInstance] cities].count > 1) {
+    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"] &&
+        [[DBCitiesManager sharedInstance] cities].count > 1) {
         DBSettingsItem *item = [DBCitiesViewController settingsItem];
         [companySection.items addObject:item];
     }
     
     // Companies
+    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"] &&
+         [DBCompaniesManager sharedInstance].hasCompanies) {
+        [companySection.items addObject:[[ViewControllerManager companiesViewController] settingsItem]];
+    }
+    
+    // Unified app
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"]) {
+        [companySection.items addObject:[DBUnifiedMenuTableViewController settingsItem]];
+    }
+    
     if ([DBCompaniesManager sharedInstance].hasCompanies) {
         [companySection.items addObject:[[ViewControllerManager companiesViewController] settingsItem]];
     }

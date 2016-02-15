@@ -391,6 +391,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 
 - (void)flushCache {
     [[OrderCoordinator sharedInstance] flushCache];
+    [[DBCompaniesManager sharedInstance] flushCache];
     [[DBCompanyInfo sharedInstance] flushCache];
     [[DBMenu sharedInstance] clearMenu];
     [Venue dropAllVenues];
@@ -400,6 +401,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 - (void)flushStoredCache {
     [[OrderCoordinator sharedInstance] flushStoredCache];
     [[DBCompanyInfo sharedInstance] flushStoredCache];
+    [[DBCompaniesManager sharedInstance] flushStoredCache];
     [[DBMenu sharedInstance] clearMenu];
     [Venue dropAllVenues];
     [Order dropAllOrders];
@@ -561,7 +563,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     UIViewController *rootVC = window.rootViewController;
     
     switch (screen) {
-        case ApplicationScreenRoot:{
+        case ApplicationScreenRoot: {
             if ([rootVC isKindOfClass:[UINavigationController class]]){
                 [((UINavigationController*)rootVC) setViewControllers:@[((UINavigationController*)rootVC).viewControllers.firstObject] animated:animated];
             }
@@ -574,7 +576,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
             }
         } break;
             
-        case ApplicationScreenHistory:{
+        case ApplicationScreenHistory: {
             if ([rootVC isKindOfClass:[UINavigationController class]]){
                 DBCompanySettingsTableViewController *settingsVC = (DBCompanySettingsTableViewController *)[DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
@@ -582,7 +584,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
             }
         }break;
             
-        case ApplicationScreenHistoryOrder:{
+        case ApplicationScreenHistoryOrder: {
             if ([rootVC isKindOfClass:[UINavigationController class]]){
                 DBCompanySettingsTableViewController *settingsVC = (DBCompanySettingsTableViewController *)[DBClassLoader loadSettingsViewController];
                 DBOrdersTableViewController *ordersVC = [DBOrdersTableViewController new];
@@ -615,6 +617,12 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
                 [((UINavigationController*)rootVC) setViewControllers:@[[DBMenuViewController new]] animated:animated];
             }
             break;
+        }
+        case ApplicationScreenUnified: {
+            if ([rootVC isKindOfClass:[UINavigationController class]]) {
+                UIViewController *mainVC = [self mainViewController];
+                [window setRootViewController:mainVC];
+            }
         }
         default:
             break;

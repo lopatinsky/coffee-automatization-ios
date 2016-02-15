@@ -124,6 +124,17 @@
     }
 }
 
+#pragma mark - DBManagerProtocol
+- (void)flushCache {
+    [DBAPIClient sharedClient].companyHeaderEnabled = NO;
+    [DBCompaniesManager removeAllValues];
+}
+
+- (void)flushStoredCache {
+    [DBAPIClient sharedClient].companyHeaderEnabled = NO;
+    [DBCompaniesManager removeAllValues];
+}
+
 #pragma mark - DBDataManager
 
 + (NSString *)db_managerStorageKey{

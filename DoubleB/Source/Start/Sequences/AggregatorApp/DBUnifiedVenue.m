@@ -21,9 +21,15 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)venue {
     if (self = [super init]) {
+        DBCompany *company = [DBCompany new];
+        company.companyNamespace = [venue getValueForKey:@"company_namespace"] ?: @"";
+        company.companyName = [venue getValueForKey:@"title"] ?: @"";
+        company.companyDescription = @"";
+        company.companyImageUrl = @"";
+        
         self.venueAddress = [venue getValueForKey:@"address"] ?: @"";
         self.venueCalledPhone = [venue getValueForKey:@"called_phone"] ?: @"";
-        self.venueCompanyNamespace = [venue getValueForKey:@"company_namespace"] ?: @"";
+        self.company = company;
         self.venueCoordinates = [venue getValueForKey:@"coordinates"] ?: @"";
         self.venueId = [venue getValueForKey:@"id"] ?: @(0);
         self.venuePicture = [venue getValueForKey:@"pic"] ?: @"";
@@ -40,14 +46,14 @@
         self.venueDictionary = @{
                                  @"address": self.venueAddress,
                                  @"called_phone": self.venueCalledPhone,
-                                 @"company_namespace": self.venueCompanyNamespace,
                                  @"coordinates": self.venueCoordinates,
                                  @"id": self.venueId,
                                  @"pic": self.venuePicture,
                                  @"schedule_str": self.venueScheduleString,
                                  @"title": self.venueTitle,
                                  @"is_open": @(self.venueIsOpen),
-                                 @"venue_object": self.venueObject.venueDictionary
+                                 @"venue_object": self.venueObject.venueDictionary,
+                                 @"company_namespace": self.company.companyNamespace
                                  };
     }
     return self;

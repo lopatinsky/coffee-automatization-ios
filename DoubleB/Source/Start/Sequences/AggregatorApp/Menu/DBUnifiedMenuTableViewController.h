@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView+Gradient.h"
+#import "DBSettingsItem.h"
 
 typedef enum : NSUInteger {
     UnifiedMenu,
@@ -15,7 +16,7 @@ typedef enum : NSUInteger {
     UnifiedPosition,
 } UnifiedTableViewType;
 
-@interface DBUnifiedMenuTableViewController : UIViewController
+@interface DBUnifiedMenuTableViewController : UIViewController <DBSettingsProtocol>
 
 @property (nonatomic) UnifiedTableViewType type;
 @property (nonatomic) NSDictionary *product;

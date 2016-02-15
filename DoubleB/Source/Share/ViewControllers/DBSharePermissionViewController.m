@@ -151,13 +151,13 @@
 
 #pragma mark - DBSettingsProtocol
 
-+ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController settingsController:(DBBaseSettingsTableViewController*)settingsVC{
++ (DBSettingsItem *)settingsItemForViewController:(UIViewController<DBSettingsProtocol, DBPopupViewControllerContent> *)viewController settingsController:(DBBaseSettingsTableViewController*)settingsVC{
     DBSettingsItem *item = [DBSettingsItem new];
     item.name =  @"shareVC";
     item.title =  NSLocalizedString(@"Рассказать друзьям", nil);
     item.iconName = @"share_icon";
-    item.block = ^(){
-        [DBPopupViewController presentController:viewController inContainer:settingsVC mode:DBPopupVCAppearanceModeHeader];
+    item.block = ^(UIViewController *vc){
+        [DBPopupViewController presentController:viewController inContainer:vc mode:DBPopupVCAppearanceModeHeader];
     };
     
     item.navigationType = DBSettingsItemNavigationPresent;

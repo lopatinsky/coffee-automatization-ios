@@ -132,7 +132,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];
     
     if (item.block) {
-        item.block();
+        item.block(self);
     } else {
         DBSettingsItemNavigation navigationType = [item navigationType];
         switch (navigationType) {

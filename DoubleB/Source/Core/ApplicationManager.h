@@ -28,7 +28,8 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenOrder,
     ApplicationScreenHistory,
     ApplicationScreenHistoryOrder,
-    ApplicationScreenVenue
+    ApplicationScreenVenue,
+    ApplicationScreenUnified
 };
 
 extern NSString *const kDBApplicationConfigDidLoadNotification;
