@@ -24,4 +24,5 @@ typedef NS_ENUM(NSInteger, DBPhoneConfirmationViewMode) {
 @property (weak, nonatomic) id<DBPhoneConfirmationViewDelegate> delegate;
 
 + (DBPhoneConfirmationView *)create;
+- (void)reload;
 @end

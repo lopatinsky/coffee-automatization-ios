@@ -44,7 +44,7 @@
     if ([DBPlatiusManager sharedInstance].authorized) {
         [self updateStatus:YES];
     } else {
-        _phoneConfirmationView.mode = DBPhoneConfirmationViewModePhone;
+        [_phoneConfirmationView reload];
         [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
     }
 }
@@ -84,6 +84,7 @@
 }
 
 - (void)confirmPhoneButtonClick {
+    [_phoneConfirmationView reload];
     [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
 }
 

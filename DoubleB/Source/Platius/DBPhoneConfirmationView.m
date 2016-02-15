@@ -43,9 +43,8 @@
     _errorLabel.textColor = [UIColor db_errorColor];
 }
 
-- (void)setMode:(DBPhoneConfirmationViewMode)mode {
-    _mode = mode;
-    if (mode == DBPhoneConfirmationViewModePhone) {
+- (void)reload {
+    if (_mode == DBPhoneConfirmationViewModePhone) {
         // Text
         _descriptionLabel.text = NSLocalizedString(@"Введите номер телефона, нажмите продолжить и дождитесь смс с Вашим кодом", nil);
         
@@ -101,9 +100,10 @@
         if (success) {
             self.errorMessage = nil;
             self.mode = DBPhoneConfirmationViewModeCode;
+            [self reload];
         } else {
             self.errorMessage = description;
-            self .mode = DBPhoneConfirmationViewModePhone;
+            [self reload];
         }
     }];
 }
