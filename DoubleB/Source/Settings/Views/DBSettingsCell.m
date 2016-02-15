@@ -30,7 +30,7 @@
     self.switchView.onTintColor = [UIColor db_defaultColor];
     [self.switchView addTarget:self action:@selector(switchViewDidChangeValue:) forControlEvents:UIControlEventValueChanged];
     
-    [self.disclosureIndicator templateImageWithName:@"arrow"];
+    [self.disclosureIndicator templateImageWithName:@"right_arrow_icon"];
 }
 
 - (void)setHasIcon:(BOOL)hasIcon{

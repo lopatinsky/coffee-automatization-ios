@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DBSettingsItem.h"
+#import "DBSettingsSection.h"
 
 extern NSString *const kDBSettingsNotificationsEnabled2;
 
@@ -24,7 +24,7 @@ extern NSString *const kDBSettingsNotificationsEnabled2;
 
 @interface DBBaseSettingsTableViewController : UITableViewController
 
-- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems;
+- (NSMutableArray *)settingsSections;
 - (void)reload;
 
 @end

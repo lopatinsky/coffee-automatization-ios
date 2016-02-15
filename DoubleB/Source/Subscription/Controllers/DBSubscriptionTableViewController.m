@@ -264,7 +264,7 @@
     settingsItem.name = @"subscriptionVC";
     settingsItem.iconName = @"subscription";
     settingsItem.title = NSLocalizedString(@"Абонемент", nil);
-    settingsItem.eventLabel = @"subscription_clock";
+    settingsItem.eventLabel = @"subscription_click";
     settingsItem.viewController = self;
     settingsItem.navigationType = DBSettingsItemNavigationPush;
     

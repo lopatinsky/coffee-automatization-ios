@@ -248,7 +248,7 @@
     settingsItem.title = NSLocalizedString(@"Подарок другу", nil);
     settingsItem.iconName = @"gift_icon";
     settingsItem.viewController = vc;
-    settingsItem.eventLabel = @"friend_gift";
+    settingsItem.eventLabel = @"friend_gift_click";
     settingsItem.navigationType = DBSettingsItemNavigationPush;
     
     return settingsItem;

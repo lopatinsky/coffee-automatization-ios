@@ -19,12 +19,15 @@
 
 @implementation DBRubeaconDemoSettingsViewController
 
-- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
-    NSMutableArray<DBSettingsItemProtocol> *settingsItems = [super settingsItems];
+- (NSMutableArray *)settingsSections {
+    NSMutableArray *settingsSections = [super settingsSections];
     
-    [settingsItems insertObject:[DBDemoLoginViewController settingsItem] atIndex:0];
+    DBSettingsSection *section = [[DBSettingsSection alloc] init:DBSettingsSectionTypeOther];
+    [section.items addObject:[DBDemoLoginViewController settingsItem]];
     
-    return settingsItems;
+    [settingsSections insertObject:section atIndex:0];
+    
+    return settingsSections;
 }
 
 @end

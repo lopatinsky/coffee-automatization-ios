@@ -74,35 +74,9 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         };
         self.headerFooterView = header;
-        
-        int height = rect.size.height - 50 - self.headerFooterView.frame.size.height;
-        
-        if (_displayController) {
-            if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayController db_popupContentContentHeight])
-                    height = [_displayController db_popupContentContentHeight];
-            }
-        } else if (_displayView) {
-            if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayView db_popupContentContentHeight])
-                    height = [_displayView db_popupContentContentHeight];
-            }
-        }
-        
-        [self.view addSubview:self.contentView];
-        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.contentView alignLeading:@"5" trailing:@"-5" toView:self.view];
-        [self.contentView alignBottomEdgeWithView:self.view predicate:@"-10"];
-        [self.contentView constrainHeight:[NSString stringWithFormat:@"%ld", (long)height]];
-        
-        [self.view addSubview:self.headerFooterView];
-        self.headerFooterView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.headerFooterView alignLeading:@"5" trailing:@"-5" toView:self.view];
-        [self.headerFooterView constrainBottomSpaceToView:self.contentView predicate:@"0"];
-        [self.headerFooterView constrainHeight:[NSString stringWithFormat:@"%ld", (long)self.headerFooterView.frame.size.height]];
     }
     
-    if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
+     if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
         DBPopupFooterView *footer = [DBPopupFooterView create];
         @weakify(self)
         footer.doneBlock = ^void() {
@@ -110,33 +84,53 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         };
         self.headerFooterView = footer;
-        
-        [self.view addSubview:self.contentView];
-        self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        [self.view addSubview:self.headerFooterView];
-        self.headerFooterView.translatesAutoresizingMaskIntoConstraints = NO;
-        
-        int height = rect.size.height - 60 - self.headerFooterView.frame.size.height;
-        if (_displayController) {
-            if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayController db_popupContentContentHeight])
-                    height = [_displayController db_popupContentContentHeight];
-            }
-        } else if (_displayView) {
-            if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayView db_popupContentContentHeight])
-                    height = [_displayView db_popupContentContentHeight];
-            }
+    }
+    
+    int maxHeight = 0;
+    int height = 0;
+    if (_displayController) {
+        if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
+            height = [_displayController db_popupContentContentHeight];
         }
+    } else if (_displayView) {
+        if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
+            height = [_displayView db_popupContentContentHeight];
+        }
+    }
+    
+    [self.view addSubview:self.contentView];
+    self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.contentView alignLeading:@"5" trailing:@"-5" toView:self.view];
+    
+    [self.view addSubview:self.headerFooterView];
+    self.headerFooterView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.headerFooterView alignLeading:@"5" trailing:@"-5" toView:self.view];
+    [self.headerFooterView constrainHeight:[NSString stringWithFormat:@"%ld", (long)self.headerFooterView.frame.size.height]];
+    
+    if (self.appearanceMode == DBPopupVCAppearanceModeHeader) {
+        maxHeight = rect.size.height - 50 - self.headerFooterView.frame.size.height;
+        if (height == 0)
+            height = maxHeight;
         
-        [self.contentView alignLeading:@"5" trailing:@"-5" toView:self.view];
+        
+        [self.contentView constrainHeight:[NSString stringWithFormat:@"%ld", (long)height]];
+        [self.headerFooterView constrainBottomSpaceToView:self.contentView predicate:@"0"];
+        
+        if (height != maxHeight) {
+            [self.contentView alignCenterYWithView:self.view predicate:@"20"];
+        } else {
+            [self.contentView alignBottomEdgeWithView:self.view predicate:@"-10"];
+        }
+    }
+    
+    if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
+        maxHeight = rect.size.height - 60 - self.headerFooterView.frame.size.height;
+        if (height == 0)
+            height = maxHeight;
+        
         [self.contentView alignCenterYWithView:self.view predicate:@"0"];
         [self.contentView constrainBottomSpaceToView:self.headerFooterView predicate:@"0"];
         [self.contentView constrainHeight:[NSString stringWithFormat:@"%ld", (long)height]];
-        
-        [self.headerFooterView alignLeading:@"5" trailing:@"-5" toView:self.view];
-        [self.headerFooterView constrainHeight:[NSString stringWithFormat:@"%ld", (long)self.headerFooterView.frame.size.height]];
     }
 }
 
@@ -162,7 +156,7 @@
                mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayView = view;
-    popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;
+    popupVC.appearanceMode = mode;
     popupVC.transitioningDelegate = popupVC;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
     
@@ -191,7 +185,7 @@
             fromViewController.view.alpha = 0;
             
             self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-            self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+            self.headerFooterView.transform = CGAffineTransformMakeScale(0.6, 0.6);
         } completion:^(BOOL finished) {
             if (_displayController) {
                 [_displayController removeFromParentViewController];
@@ -211,7 +205,7 @@
         UIImage *snapshot = [fromViewController.view snapshotImage];
         self.bgImageView.image = [snapshot applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.3 alpha:0.6] saturationDeltaFactor:1.5 maskImage:nil];
         self.contentView.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        self.headerFooterView.transform = CGAffineTransformMakeScale(0.8, 0.8);
+        self.headerFooterView.transform = CGAffineTransformMakeScale(0.6, 0.6);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
             toViewController.view.alpha = 1;

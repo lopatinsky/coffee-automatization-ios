@@ -17,14 +17,13 @@
 NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEnabled";
 
 @interface DBBaseSettingsTableViewController ()
-@property (nonatomic, strong) NSMutableArray<DBSettingsItemProtocol> *items;
+@property (nonatomic, strong) NSMutableArray *sections;
 @end
 
 @implementation DBBaseSettingsTableViewController
 
 - (instancetype)init {
     if (self = [super init]) {
-        _items = [NSMutableArray<DBSettingsItemProtocol> new];
     }
     return self;
 }
@@ -38,9 +37,9 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     
     self.tableView.tableFooterView = [UIView new];
     self.tableView.separatorInset = UIEdgeInsetsZero;
-    self.tableView.rowHeight = 50;
+    self.tableView.rowHeight = 45;
     
-    self.items = [self settingsItems];
+    self.sections = [self settingsSections];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -51,8 +50,8 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     [self.tableView reloadData];
 }
 
-- (NSMutableArray<DBSettingsItemProtocol> *)settingsItems {
-    return nil;
+- (NSMutableArray *)settingsSections {
+    return [NSMutableArray new];
 }
 
 - (void)didMoveToParentViewController:(UIViewController *)parent {
@@ -66,18 +65,19 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
 }
 
 - (void)reload {
-    _items = [self settingsItems];
+    _sections = [self settingsSections];
     [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return _sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.settingsItems count];
+    DBSettingsSection *settingsSection = _sections[section];
+    return settingsSection.items.count;
 }
 
 
@@ -90,7 +90,8 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
         cell.hasIcon = YES;
     }
     
-    id<DBSettingsItemProtocol> settingsItemInfo = self.settingsItems[indexPath.row];
+    DBSettingsSection *settingsSection = _sections[indexPath.section];
+    id<DBSettingsItemProtocol> settingsItemInfo = settingsSection.items[indexPath.row];
     [cell.settingsImageView templateImageWithName:[settingsItemInfo iconName]];
     [cell.titleLabel setText:[settingsItemInfo title]];
     cell.hasSwitch = NO;
@@ -105,8 +106,28 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0.1f;
+    } else {
+        return 30.f;
+    }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return nil;
+    } else {
+        UIView *view = [UIView new];
+        view.backgroundColor = [UIColor clearColor];
+        return view;
+    }
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    DBSettingsItem *item = self.items[indexPath.row];
+    DBSettingsSection *settingsSection = _sections[indexPath.section];
+    DBSettingsItem *item = settingsSection.items[indexPath.row];
+    
     NSString *event = [item eventLabel];
     [GANHelper analyzeEvent:event category:SETTINGS_SCREEN];
     
@@ -116,14 +137,14 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
         DBSettingsItemNavigation navigationType = [item navigationType];
         switch (navigationType) {
             case DBSettingsItemNavigationPresent:
-                [self presentViewController:[self.settingsItems[indexPath.row] viewController] animated:YES completion:nil];
+                [self presentViewController:[item viewController] animated:YES completion:nil];
                 break;
             case DBSettingsItemNavigationPush:
-                [self.navigationController pushViewController:[self.settingsItems[indexPath.row] viewController] animated:YES];
+                [self.navigationController pushViewController:[item viewController] animated:YES];
                 break;
             case DBSettingsItemNavigationShowView:
                 // TODO: protocol
-                [(DBPersonalWalletView *)[self.settingsItems[indexPath.row] view] showOnView:self.navigationController.view];
+                [(DBPersonalWalletView *)[item view] showOnView:self.navigationController.view];
                 break;
             default:
                 break;

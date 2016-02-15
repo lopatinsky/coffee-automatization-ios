@@ -15,6 +15,7 @@
 #import "DBGeoPushManager.h"
 #import "DBCustomViewManager.h"
 #import "DBShareHelper.h"
+#import "DBPlatiusManager.h"
 
 @interface DBModulesManager ()
 @property (strong, nonatomic) NSMutableArray *availableModules;
@@ -94,6 +95,9 @@
             case DBModuleTypeCustomView:
                 [[DBCustomViewManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
+            case DBModuleTypePlatiusBarcode:
+                [[DBPlatiusManager sharedInstance] enableModule:YES withDict:moduleDict];
+                break;
         }
         
         [appModules removeObject:@(type)];
@@ -123,6 +127,8 @@
                 break;
             case DBModuleTypeCustomView:
                 [[DBCustomViewManager sharedInstance] enableModule:NO withDict:nil];
+            case DBModuleTypePlatiusBarcode:
+                [[DBPlatiusManager sharedInstance] enableModule:NO withDict:nil];
             default:
                 break;
         }
