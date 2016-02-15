@@ -9,11 +9,9 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIcons~ipad</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.empatika.magnolia</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,21 +26,6 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>1.1.7.1</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>0546255b59ac9c3f96da6d8cee29c2d591e1fe8d</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-				</dict>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -72,7 +55,55 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>branch_key</key>
-	<string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
+    
+    <key>NSUserActivityTypes</key>
+    <array>
+        <string>com.empatika.neworder</string>
+        <string>com.empatika.openorder</string>
+    </array>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+    </array>
+    
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fb</string>
+        <string>fbauth2</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb349173695244280magnolia</string>
+            </array>
+        </dict>
+    </array>
+    
+    <key>FacebookAppID</key>
+    <string>349173695244280</string>
+    <key>FacebookDisplayName</key>
+    <string>Ru-Beacon</string>
+    <key>FacebookUrlSchemeSuffix</key>
+    <string>magnolia</string>
+    
+    <key>Fabric</key>
+    <dict>
+        <key>APIKey</key>
+        <string>0546255b59ac9c3f96da6d8cee29c2d591e1fe8d</string>
+        <key>Kits</key>
+        <array>
+            <dict>
+                <key>KitInfo</key>
+                <dict/>
+                <key>KitName</key>
+                <string>Crashlytics</string>
+            </dict>
+        </array>
+    </dict>
+    
+    <key>branch_key</key>
+    <string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
 </dict>
 </plist>
