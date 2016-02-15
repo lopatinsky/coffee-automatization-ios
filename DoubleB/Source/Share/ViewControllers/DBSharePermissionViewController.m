@@ -156,8 +156,8 @@
     item.name =  @"shareVC";
     item.title =  NSLocalizedString(@"Рассказать друзьям", nil);
     item.iconName = @"share_icon";
-    item.block = ^(){
-        [DBPopupViewController presentController:viewController inContainer:settingsVC mode:DBPopupVCAppearanceModeHeader];
+    item.block = ^(UIViewController *vc){
+        [DBPopupViewController presentController:viewController inContainer:vc mode:DBPopupVCAppearanceModeHeader];
     };
     
     item.navigationType = DBSettingsItemNavigationPresent;

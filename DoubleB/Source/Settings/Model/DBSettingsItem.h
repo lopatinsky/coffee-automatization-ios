@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^DBSettingsItemBlock)(UIViewController *);
+
 @protocol DBSettingsItemProtocol <NSObject>
 
 - (NSString *)name;
@@ -17,13 +19,15 @@
 - (NSString *)eventLabel;
 - (UIViewController *)viewController;
 - (NSDictionary *)params;
+- (DBSettingsItemBlock *)block;
 
 @end
 
 typedef enum : NSUInteger {
     DBSettingsItemNavigationPresent,
     DBSettingsItemNavigationPush,
-    DBSettingsItemNavigationShowView
+    DBSettingsItemNavigationShowView,
+    DBSettingsItemNavigationBlock,
 } DBSettingsItemNavigation;
 
 @interface DBSettingsItem : NSObject <DBSettingsItemProtocol>
@@ -37,7 +41,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UIViewController *viewController;
 @property (nonatomic, strong) UIView *view;
 @property (nonatomic) DBSettingsItemNavigation navigationType;
-
-@property (copy, nonatomic) void (^block)();
+@property (copy, nonatomic) DBSettingsItemBlock block;
 
 @end

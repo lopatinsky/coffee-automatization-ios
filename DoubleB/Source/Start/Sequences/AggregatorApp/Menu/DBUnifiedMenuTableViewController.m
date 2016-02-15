@@ -16,11 +16,13 @@
 #import "DBAPIClient.h"
 #import "ApplicationManager.h"
 #import "DBUnifiedAppManager.h"
+#import "DBCompaniesManager.h"
 #import "DBCitiesManager.h"
 #import "NetworkManager.h"
 
 #import "DBBarButtonItem.h"
 #import "UIAlertView+BlocksKit.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
 
@@ -82,6 +84,7 @@
         default:
             break;
     }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -121,38 +124,46 @@
 
 #pragma mark - Networking 
 - (void)fetchMenuSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedMenu) {
         [self.tableView reloadData];
     }
 }
 
 - (void)fetchMenuFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 
 - (void)fetchVenueSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedVenue) {
         [self.tableView reloadData];
     }
 }
 
 - (void)fetchVenueFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 
 - (void)fetchPositionsSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedPosition) {
         [self.tableView reloadData];
     }
 }
 
 - (void)fetchPositionsFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     
 }
 
 - (void)fetchCompanyInfo {
-    [[DBCompanyInfo sharedInstance] fetchDependentInfo];
-    [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
+    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+        [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+        [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -162,7 +173,7 @@
         case UnifiedVenue: {
             DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
             [OrderCoordinator sharedInstance].orderManager.venue = [unifiedVenue venueObject];
-            [[DBAPIClient sharedClient] setValue:[unifiedVenue venueCompanyNamespace] forHeader:@"namespace"];
+            [DBCompaniesManager selectCompany:unifiedVenue.company];
             [self fetchCompanyInfo];
             break;
         }
@@ -176,6 +187,24 @@
         default:
             break;
     }
+}
+
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBUnifiedMenuTableViewController *unifiedVC = [DBUnifiedMenuTableViewController new];
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    NSString *profileText = [[DBCompaniesManager selectedCompany] companyName];
+    
+    settingsItem.name = @"profileVC";
+    settingsItem.title = NSLocalizedString(@"Профиль", nil);
+    settingsItem.iconName = @"profile_icon_active";
+    settingsItem.viewController = unifiedVC;
+    settingsItem.reachTitle = profileText && profileText.length ? profileText : nil;
+    settingsItem.eventLabel = @"profile_click";
+    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    
+    return settingsItem;
 }
 
 #pragma mark - UITableViewDataSource
