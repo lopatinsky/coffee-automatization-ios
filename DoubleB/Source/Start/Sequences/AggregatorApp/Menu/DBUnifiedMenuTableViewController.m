@@ -174,6 +174,9 @@
             DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
             [OrderCoordinator sharedInstance].orderManager.venue = [unifiedVenue venueObject];
             [DBCompaniesManager selectCompany:unifiedVenue.company];
+            [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
+                [DBCompaniesManager selectCompany:unifiedVenue.company];
+            }];
             [self fetchCompanyInfo];
             break;
         }
@@ -196,13 +199,25 @@
     DBSettingsItem *settingsItem = [DBSettingsItem new];
     NSString *profileText = [[DBCompaniesManager selectedCompany] companyName];
     
-    settingsItem.name = @"profileVC";
+    settingsItem.name = @"unifiedVC";
     settingsItem.title = NSLocalizedString(@"Профиль", nil);
-    settingsItem.iconName = @"profile_icon_active";
+    settingsItem.iconName = @"city_icon";
     settingsItem.viewController = unifiedVC;
     settingsItem.reachTitle = profileText && profileText.length ? profileText : nil;
     settingsItem.eventLabel = @"profile_click";
-    settingsItem.navigationType = DBSettingsItemNavigationPush;
+    settingsItem.navigationType = DBSettingsItemNavigationBlock;
+    settingsItem.block = ^(UIViewController *vc) {
+        [UIAlertView bk_showAlertViewWithTitle:@"Выход"
+                                       message:@"При выходе в основное меню все данные корзины будут удалены. Продолжить?"
+                             cancelButtonTitle:NSLocalizedString(@"Отмена", nil) otherButtonTitles:@[@"OK"]
+                                       handler:^(UIAlertView *alertVчiew, NSInteger buttonIndex) {
+                                           if (buttonIndex == 1) {
+                                               [[ApplicationManager sharedInstance] flushCache];
+                                               [[ApplicationManager sharedInstance] flushStoredCache];
+                                               [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenUnified animated:YES];
+                                           }
+        }];
+    };
     
     return settingsItem;
 }

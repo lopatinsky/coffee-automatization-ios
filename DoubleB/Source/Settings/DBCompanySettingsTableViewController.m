@@ -29,6 +29,7 @@
 #import "DBCitiesManager.h"
 #import "DBCitiesViewController.h"
 #import "DBVenuesViewController.h"
+#import "DBUnifiedMenuTableViewController.h"
 
 #import "ViewControllerManager.h"
 
@@ -38,14 +39,21 @@
     NSMutableArray<DBSettingsItemProtocol> *settingsItems = [NSMutableArray<DBSettingsItemProtocol> new];
     
     // Cities
-    if ([[DBCitiesManager sharedInstance] cities].count > 1) {
+    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"] &&
+        [[DBCitiesManager sharedInstance] cities].count > 1) {
         DBSettingsItem *item = [DBCitiesViewController settingsItem];
         [settingsItems addObject:item];
     }
     
     // Companies
-    if ([DBCompaniesManager sharedInstance].hasCompanies) {
+    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"] &&
+         [DBCompaniesManager sharedInstance].hasCompanies) {
         [settingsItems addObject:[[ViewControllerManager companiesViewController] settingsItem]];
+    }
+    
+    // Unified app
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"]) {
+        [settingsItems addObject:[DBUnifiedMenuTableViewController settingsItem]];
     }
     
     // Profile

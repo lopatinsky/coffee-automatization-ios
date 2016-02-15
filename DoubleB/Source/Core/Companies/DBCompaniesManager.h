@@ -21,7 +21,7 @@
 
 @end
 
-@interface DBCompaniesManager : DBPrimaryManager
+@interface DBCompaniesManager : DBPrimaryManager <ManagerProtocol>
 
 @property (nonatomic, readonly) BOOL companiesLoaded;
 
