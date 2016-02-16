@@ -18,9 +18,9 @@ languages([
 scheme "TestApp"
 
 # Where should the resulting screenshots be stored?
-output_directory "./screenshots"
+output_directory "/Users/ivanoschepkov/Desktop/Screenshots"
 
-# clear_previous_screenshots # remove the '#' to clear all previously generated screenshots before creating new ones
+clear_previous_screenshots # remove the '#' to clear all previously generated screenshots before creating new ones
 
 # Choose which project/workspace to use
 # project "./Project.xcodeproj"

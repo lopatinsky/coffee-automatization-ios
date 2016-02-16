@@ -164,6 +164,9 @@
         [[DBCompanyInfo sharedInstance] fetchDependentInfo];
         [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
     }];
+   // [MBProgressHUD hideHUDForView:self.view animated:YES];
+   // [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+   // [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
 }
 
 #pragma mark - UITableViewDelegate
