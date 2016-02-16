@@ -212,7 +212,7 @@
 
 
 
-+ (void)presentController:(UIViewController<DBPopupViewControllerContent> *)controller
++ (DBPopupViewController *)presentController:(UIViewController<DBPopupViewControllerContent> *)controller
               inContainer:(UIViewController *)container
                      mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
@@ -225,10 +225,12 @@
     [container presentViewController:popupVC animated:YES completion:^{
         [popupVC endAppearanceTransition];
     }];
+    
+    return popupVC;
 }
 
 
-+ (void)presentView:(UIView<DBPopupViewControllerContent> *)view
++ (DBPopupViewController *)presentView:(UIView<DBPopupViewControllerContent> *)view
         inContainer:(UIViewController *)container
                mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
@@ -241,6 +243,8 @@
     [container presentViewController:popupVC animated:YES completion:^{
         [popupVC endAppearanceTransition];
     }];
+    
+    return popupVC;
 }
 
 #pragma mark - UIViewControllerAnimatedTransitioning

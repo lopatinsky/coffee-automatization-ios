@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSString *barcode;
 @property (strong, nonatomic) NSString *barcodeUrl;
 
+@property (strong, nonatomic) NSString *screenAboutDescription;
+
 
 - (void)setPhone:(NSString *)phone;
 

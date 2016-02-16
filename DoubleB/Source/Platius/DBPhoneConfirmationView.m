@@ -145,6 +145,16 @@
             return NO;
         }
     }
+    
+    if (_mode == DBPhoneConfirmationViewModeCode) {
+        NSString *text = [_textField.text stringByReplacingCharactersInRange:range withString:string];
+        if (text.length <= 4){
+            return YES;
+        } else {
+            return NO;
+        }
+    }
+    
     return YES;
 }
 
@@ -158,6 +168,10 @@
 }
 
 - (void)textFieldEditingChanged {
+    if (_mode == DBPhoneConfirmationViewModePhone) {
+        [self savePhone];
+    }
+    
     if (_mode == DBPhoneConfirmationViewModeCode) {
         if (_textField.text.length == 4) {
             [self sendCode];

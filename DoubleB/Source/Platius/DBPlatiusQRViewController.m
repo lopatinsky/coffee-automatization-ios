@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *confirmPhoneButton;
 
 @property (strong, nonatomic) DBPhoneConfirmationView *phoneConfirmationView;
+@property (strong, nonatomic) DBPopupViewController *popupVC;
 @end
 
 @implementation DBPlatiusQRViewController
@@ -29,6 +30,7 @@
     [super viewDidLoad];
     
     [self db_setTitle:@"Заголовок"];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [_confirmPhoneButton addTarget:self action:@selector(confirmPhoneButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [_confirmPhoneButton setTitleColor:[UIColor db_defaultColor] forState:UIControlStateNormal];
@@ -45,11 +47,13 @@
         [self updateStatus:YES];
     } else {
         [_phoneConfirmationView reload];
-        [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
+        self.popupVC = [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
     }
 }
 
 - (void)reload {
+    _titleLabel.text = [DBPlatiusManager sharedInstance].screenAboutDescription;
+    
     if ([DBPlatiusManager sharedInstance].authorized) {
          _barcodeLabel.text = [DBPlatiusManager sharedInstance].barcode;
         [_confirmPhoneButton setTitle:NSLocalizedString(@"Сменить телефон", nil) forState:UIControlStateNormal];
@@ -57,8 +61,6 @@
         _barcodeLabel.text = @"";
         [_confirmPhoneButton setTitle:NSLocalizedString(@"Подтвердить телефон", nil) forState:UIControlStateNormal];
     }
-    
-    
 }
 
 - (void)updateStatus:(BOOL)animated {
@@ -85,7 +87,7 @@
 
 - (void)confirmPhoneButtonClick {
     [_phoneConfirmationView reload];
-    [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
+    self.popupVC = [DBPopupViewController presentView:_phoneConfirmationView inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
 }
 
 #pragma mark - DBPhoneConfirmationViewDelegate
@@ -93,6 +95,8 @@
 - (void)db_phoneConfirmationViewConfirmedPhone:(DBPhoneConfirmationView *)view {
     [self reload];
     [self updateStatus:YES];
+    
+    [self.popupVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - DBSettingsProtocol
@@ -101,8 +105,8 @@
     DBSettingsItem *settingsItem = [DBSettingsItem new];
     
     settingsItem.name = @"platiusBarcodeVC";
-    settingsItem.title = NSLocalizedString(@"Код лояльности", nil);
-    settingsItem.iconName = @"";
+    settingsItem.title = NSLocalizedString(@"Код для оплаты", nil);
+    settingsItem.iconName = @"promocodes_icon";
     settingsItem.viewController = vc;
     settingsItem.eventLabel = @"platius_barcode_click";
     settingsItem.navigationType = DBSettingsItemNavigationPush;

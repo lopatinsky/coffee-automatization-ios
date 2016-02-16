@@ -14,6 +14,9 @@
 
 - (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
     [DBPlatiusManager setValue:@(enabled) forKey:@"enabled"];
+    
+    NSString *description = [[[moduleDict getValueForKey:@"info"] getValueForKey:@"about"] getValueForKey:@"description"] ?: @"";
+    [DBPlatiusManager setValue:description forKey:@"about_screen_description"];
 }
 
 - (BOOL)enabled {
@@ -38,6 +41,10 @@
 
 - (void)setPhone:(NSString *)phone {
     [DBPlatiusManager setValue:phone forKey:@"confirmedPhone"];
+}
+
+- (NSString *)screenAboutDescription {
+    return [DBPlatiusManager valueForKey:@"about_screen_description"];
 }
 
 - (void)checkStatus:(void(^)(BOOL result))callback {
@@ -67,7 +74,7 @@
 
 - (void)requestSms:(void(^)(BOOL success, NSString *description))callback {
     [[DBAPIClient sharedClient] POST:@"platius/send_sms"
-                          parameters:nil
+                          parameters:@{@"client_phone": self.confirmedPhone.value}
                              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                  BOOL success = [[responseObject getValueForKey:@"success"] boolValue];
                                  NSString *description = [responseObject getValueForKey:@"description"] ?: @"";
