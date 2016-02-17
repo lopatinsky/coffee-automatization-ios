@@ -129,6 +129,10 @@ static NSMutableArray *unifiedStoredVenues;
         
         [[CoreDataHelper sharedHelper].context insertObject:newVenue];
     }
+    
+    [[CoreDataHelper sharedHelper] save];
+    [Venue updateUserActivities];
+    storedVenues = nil;
 }
 
 + (NSArray *)venuesFromDict:(NSArray *)responseVenues {

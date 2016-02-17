@@ -63,8 +63,7 @@
         for (NSDictionary *companyDict in companies) {
             [array addObject:[[DBCompany alloc] initWithResponseDict:companyDict]];
         }
-        NSData *companiesData = [NSKeyedArchiver archivedDataWithRootObject:array];
-        [DBCompaniesManager setValue:companiesData forKey:@"companies"];
+        [DBCompaniesManager overrideCompanies:array];
         
         if (!self.companiesLoaded){
             if (companies.count == 1) {
@@ -84,6 +83,11 @@
         if(callback)
             callback(NO, nil);
     }];
+}
+
++ (void)overrideCompanies:(NSArray *)companies {
+    NSData *companiesData = [NSKeyedArchiver archivedDataWithRootObject:companies];
+    [DBCompaniesManager setValue:companiesData forKey:@"companies"];
 }
 
 - (BOOL)hasCompanies {
