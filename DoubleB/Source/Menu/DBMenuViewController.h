@@ -24,4 +24,13 @@ typedef NS_ENUM(NSInteger, DBMenuViewControllerMode) {
 @property (nonatomic) DBMenuViewControllerType type;
 @property (nonatomic, readonly) DBMenuViewControllerMode mode;
 @property (strong, nonatomic) DBMenuCategory *category;
+
+@property (strong, nonatomic) NSString *analyticsCategory;
+
+@property (strong, nonatomic, readonly) NSArray *topModules;
+- (NSArray *)setupTopModules;
+
+- (UIBarButtonItem *)leftBarButtonItem;
+- (UIBarButtonItem *)rightBarButtonItem;
+
 @end

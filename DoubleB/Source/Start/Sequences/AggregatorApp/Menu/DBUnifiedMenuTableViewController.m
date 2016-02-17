@@ -10,6 +10,7 @@
 #import "DBUnifiedMenuTableViewCell.h"
 #import "DBUnifiedVenueTableViewCell.h"
 #import "DBGeneralSettingsTableViewController.h"
+#import "DBAAMenuViewController.h"
 
 #import "DBUnifiedVenue.h"
 #import "OrderCoordinator.h"
@@ -22,7 +23,6 @@
 
 #import "DBBarButtonItem.h"
 #import "UIAlertView+BlocksKit.h"
-#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
 
@@ -159,14 +159,34 @@
     
 }
 
-- (void)fetchCompanyInfo {
-    [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+- (void)selectVenue:(DBUnifiedVenue *)venue {
+    [Venue dropAllVenues];
+    [Venue saveVenues:@[[venue venueObject]]];
+    
+    if (![[DBCompaniesManager selectedCompany].companyNamespace isEqualToString:venue.company.companyNamespace]) {
+        [[OrderCoordinator sharedInstance] flushCache];
+        [[DBCompanyInfo sharedInstance] flushCache];
+        [[DBMenu sharedInstance] clearMenu];
+        [Order dropAllOrders];
+        
+        [DBCompaniesManager selectCompany:venue.company];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[DBCompanyInfo sharedInstance] updateInfo:^(BOOL success) {
+            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+            
+            [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+            
+            DBAAMenuViewController *menuVC = [DBAAMenuViewController new];
+            [self.navigationController pushViewController:menuVC animated:YES];
+        }];
+    } else {
+        [[DBCompanyInfo sharedInstance] updateInfo:nil];
         [[DBCompanyInfo sharedInstance] fetchDependentInfo];
-        [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
-    }];
-   // [MBProgressHUD hideHUDForView:self.view animated:YES];
-   // [[DBCompanyInfo sharedInstance] fetchDependentInfo];
-   // [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenMenu animated:YES];
+        
+        DBAAMenuViewController *menuVC = [DBAAMenuViewController new];
+        [self.navigationController pushViewController:menuVC animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -175,12 +195,8 @@
     switch (self.type) {
         case UnifiedVenue: {
             DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
-            [OrderCoordinator sharedInstance].orderManager.venue = [unifiedVenue venueObject];
-            [DBCompaniesManager selectCompany:unifiedVenue.company];
-            [[DBCompaniesManager sharedInstance] requestCompanies:^(BOOL success, NSArray *companies) {
-                [DBCompaniesManager selectCompany:unifiedVenue.company];
-            }];
-            [self fetchCompanyInfo];
+            [self selectVenue:unifiedVenue];
+            
             break;
         }
         case UnifiedMenu: {

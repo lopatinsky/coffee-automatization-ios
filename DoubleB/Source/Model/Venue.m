@@ -119,6 +119,18 @@ static NSMutableArray *unifiedStoredVenues;
     storedVenues = nil;
 }
 
++ (void)saveVenues:(NSArray *)venues {
+    for (Venue *newVenue in venues) {
+        Venue *venue = [self venueById:newVenue.venueId];
+        
+        if (venue) {
+            [[CoreDataHelper sharedHelper].context deleteObject:venue];
+        }
+        
+        [[CoreDataHelper sharedHelper].context insertObject:newVenue];
+    }
+}
+
 + (NSArray *)venuesFromDict:(NSArray *)responseVenues {
     NSMutableArray *venues = [NSMutableArray new];
     

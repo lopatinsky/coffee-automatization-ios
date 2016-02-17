@@ -29,7 +29,9 @@
 
 + (NSArray *)storedVenues;
 + (Venue *)venueById:(NSString *)venueId;
+
 + (void)dropAllVenues;
++ (void)saveVenues:(NSArray *)venues;
 + (NSArray *)venuesFromDict:(NSArray *)responseVenues;
 
 @end

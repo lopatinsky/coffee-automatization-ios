@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBUnifiedSegmentViewController"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="Ehy-wj-FXW">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-Eb-acu" userLabel="Segment Holder">
-                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                    <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0Wv-Uh-Mqh">
-                            <rect key="frame" x="8" y="8" width="584" height="29"/>
+                            <rect key="frame" x="8" y="8" width="304" height="29"/>
                             <segments>
                                 <segment title="First"/>
                                 <segment title="Second"/>
@@ -32,7 +32,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aoi-fM-uCd" userLabel="Content View">
-                    <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                    <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
@@ -45,14 +45,8 @@
                 <constraint firstItem="Aoi-fM-uCd" firstAttribute="top" secondItem="sbh-Eb-acu" secondAttribute="bottom" id="qq9-ks-cNr"/>
                 <constraint firstAttribute="bottom" secondItem="Aoi-fM-uCd" secondAttribute="bottom" id="ueI-4g-k7G"/>
                 <constraint firstAttribute="trailing" secondItem="Aoi-fM-uCd" secondAttribute="trailing" id="ugk-jA-v71"/>
-                <constraint firstItem="Aoi-fM-uCd" firstAttribute="top" secondItem="sbh-Eb-acu" secondAttribute="bottom" id="vsE-iX-ibY"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="vsE-iX-ibY"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="1050" y="252"/>
         </view>
     </objects>
