@@ -14,6 +14,8 @@
             <connections>
                 <outlet property="activityIndicator" destination="tvC-Y6-PEE" id="vKF-2y-Kn4"/>
                 <outlet property="barcodeImageView" destination="flo-II-rMH" id="Nsx-Xl-8mb"/>
+                <outlet property="barcodeLabel" destination="ypO-1X-ji8" id="vey-CU-SjV"/>
+                <outlet property="confirmPhoneButton" destination="92A-Zg-mFF" id="C5T-X0-PVb"/>
                 <outlet property="titleLabel" destination="jFY-hG-Got" id="oC5-yj-JLN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,10 +26,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="flo-II-rMH">
-                    <rect key="frame" x="35" y="234" width="250" height="100"/>
+                    <rect key="frame" x="35" y="219" width="250" height="130"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="TYG-3r-KAY"/>
-                        <constraint firstAttribute="height" constant="100" id="puM-yS-nhu"/>
+                        <constraint firstAttribute="height" constant="130" id="puM-yS-nhu"/>
                     </constraints>
                 </imageView>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tvC-Y6-PEE">
@@ -38,21 +40,44 @@
                     </constraints>
                 </activityIndicatorView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jFY-hG-Got">
-                    <rect key="frame" x="10" y="10" width="300" height="214"/>
+                    <rect key="frame" x="10" y="10" width="300" height="174"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypO-1X-ji8">
+                    <rect key="frame" x="35" y="194" width="250" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="nsW-Cu-t0o"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92A-Zg-mFF">
+                    <rect key="frame" x="60" y="530" width="200" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="2kr-K1-dMw"/>
+                        <constraint firstAttribute="width" constant="200" id="WDu-Il-JV8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="Button"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="jFY-hG-Got" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="0EF-oZ-4ci"/>
+                <constraint firstAttribute="bottom" secondItem="92A-Zg-mFF" secondAttribute="bottom" constant="8" id="3bO-D6-3Pt"/>
                 <constraint firstItem="tvC-Y6-PEE" firstAttribute="centerY" secondItem="flo-II-rMH" secondAttribute="centerY" id="4xG-LM-iPF"/>
+                <constraint firstItem="ypO-1X-ji8" firstAttribute="trailing" secondItem="flo-II-rMH" secondAttribute="trailing" id="8Uz-gy-yTc"/>
                 <constraint firstItem="tvC-Y6-PEE" firstAttribute="centerX" secondItem="flo-II-rMH" secondAttribute="centerX" id="Ag5-NY-n58"/>
+                <constraint firstItem="ypO-1X-ji8" firstAttribute="top" secondItem="jFY-hG-Got" secondAttribute="bottom" constant="10" id="EqG-W1-uV2"/>
+                <constraint firstItem="flo-II-rMH" firstAttribute="top" secondItem="ypO-1X-ji8" secondAttribute="bottom" id="SPG-fE-uFw"/>
                 <constraint firstAttribute="trailing" secondItem="jFY-hG-Got" secondAttribute="trailing" constant="10" id="had-l1-oNM"/>
-                <constraint firstItem="flo-II-rMH" firstAttribute="top" secondItem="jFY-hG-Got" secondAttribute="bottom" constant="10" id="hgh-uz-X5s"/>
                 <constraint firstItem="jFY-hG-Got" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="iVf-lb-fYM"/>
+                <constraint firstItem="92A-Zg-mFF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kF2-he-Z0l"/>
                 <constraint firstItem="flo-II-rMH" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="lMD-2b-owP"/>
+                <constraint firstItem="ypO-1X-ji8" firstAttribute="leading" secondItem="flo-II-rMH" secondAttribute="leading" id="mNx-tA-hiJ"/>
                 <constraint firstItem="flo-II-rMH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="vaT-Im-7nk"/>
             </constraints>
             <point key="canvasLocation" x="338" y="272"/>

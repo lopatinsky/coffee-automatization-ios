@@ -152,7 +152,7 @@
 }
 
 - (BOOL)availableInVenue:(Venue *)venue{
-    return venue && ![_venuesRestrictions containsObject:venue.venueId];
+    return (venue && ![_venuesRestrictions containsObject:venue.venueId]) || !venue;
 }
 
 - (double)actualPrice{

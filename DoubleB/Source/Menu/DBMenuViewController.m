@@ -1,4 +1,4 @@
-//
+ //
 //  DBMenuViewController.m
 //  DoubleB
 //
@@ -32,15 +32,15 @@
 #import "DBMenuSearchVC.h"
 
 @interface DBMenuViewController () <DBModuleViewDelegate, DBMenuModuleViewDelegate, DBCategoryPickerDelegate, DBMenuCategoryDropdownTitleViewDelegate, DBPopupComponentDelegate, DBOwnerViewControllerProtocol, DBMenuSearchVCDelegate>
-@property (strong, nonatomic) NSString *analyticsCategory;
 @property (strong, nonatomic) DBMenuModuleView *menuModuleView;
 
 @property (strong, nonatomic) DBDropdownTitleView *titleView;
 @property (strong, nonatomic) DBCategoryPicker *categoryPicker;
 
-@property (strong, nonatomic) DBSubscriptionModuleView *subscriptionModuleView;
-
 @property (strong, nonatomic) DBMenuSearchVC *searchVC;
+
+@property (strong, nonatomic) DBModuleView *topModulesHolder;
+@property (strong, nonatomic) NSArray *topModules;
 @end
 
 @implementation DBMenuViewController
@@ -55,23 +55,10 @@
     
     self.analyticsCategory = @"Menu_screen";
     
-    @weakify(self);
-    DBBarButtonItemComponent *searchComp = [DBBarButtonItemComponent create:DBBarButtonTypeSearch handler:^{
-        @strongify(self)
-        [self searchClick];
-    }];
-    self.searchVC = [DBMenuSearchVC new];
-    self.searchVC.delegate = self;
-    
-    DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
-        @strongify(self)
-        [self moveToOrder];
-    }];
-    self.navigationItem.rightBarButtonItem = [DBBarButtonItem itemWithComponents:@[searchComp, orderComp]];
+    self.navigationItem.leftBarButtonItem = [self leftBarButtonItem];
+    self.navigationItem.rightBarButtonItem = [self rightBarButtonItem];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
-        [self setupInitial];
-        
         if ([[DBMenu sharedInstance] getMenu].count > 0) {
             [self setupMenuModule];
             [self fetchMenu:nil];
@@ -86,15 +73,16 @@
     } else {
         [self setupMenuModule];
     }
-
-    [self setupSubscription];
+    
+    // Top Modules
+    [self setupTopModuleHolder];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [GANHelper analyzeScreen:self.analyticsCategory];
-    [self.subscriptionModuleView reload:YES];
+    [self.topModulesHolder reload:YES];
     
     if (self.type == DBMenuViewControllerTypeInitial) {
         [self updateMenu];
@@ -113,6 +101,21 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)setupTopModuleHolder {
+    _topModulesHolder = [DBModuleView create];
+    _topModulesHolder.ownerViewController = self;
+    _topModulesHolder.analyticsCategory = self.analyticsCategory;
+    
+    [_topModulesHolder.submodules addObjectsFromArray:[self setupTopModules]];
+    
+    [_topModulesHolder layoutModules];
+    
+    CGFloat height = _topModulesHolder.submodules.count > 0 ? [_topModulesHolder moduleViewContentHeight] : 0;
+    _topModulesHolder.frame = CGRectMake(0, 0, _topModulesHolder.frame.size.width, height);
+    ((DBMenuTableModuleView *)self.menuModuleView).tableHeaderModuleView = _topModulesHolder;
+    [_topModulesHolder reload:NO];
+}
+
 - (void)setupMenuModule {
     if (self.mode == DBMenuViewControllerModeCategoriesAndPositions) {
         [self setupCategoriesAndPositionsMode];
@@ -125,6 +128,19 @@
     [self.view addSubview:self.menuModuleView];
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
+}
+
+- (NSArray *)setupTopModules {
+    NSMutableArray *result = [NSMutableArray new];
+    
+    DBModuleView *subscriptionModule = [self setupSubscriptionModule];
+    if (subscriptionModule){
+        [result addObject:subscriptionModule];
+    }
+    
+    _topModules = result;
+    
+    return result;
 }
 
 - (DBMenuViewControllerMode)mode {
@@ -163,6 +179,37 @@
     }
     
     return mode;
+}
+
+- (UIBarButtonItem *)leftBarButtonItem {
+    if (self.type == DBMenuViewControllerTypeInitial) {
+        return [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
+            [self moveToSettings];
+        }];
+    }
+    
+    return nil;
+}
+
+- (UIBarButtonItem *)rightBarButtonItem {
+    @weakify(self);
+    DBBarButtonItemComponent *searchComp = [DBBarButtonItemComponent create:DBBarButtonTypeSearch handler:^{
+        @strongify(self)
+        [self searchClick];
+    }];
+    self.searchVC = [DBMenuSearchVC new];
+    self.searchVC.delegate = self;
+    
+    DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
+        @strongify(self)
+        [self moveToOrder];
+    }];
+    return [DBBarButtonItem itemWithComponents:@[searchComp, orderComp]];
+}
+
+- (void)moveToSettings {
+    DBBaseSettingsTableViewController *settingsController = [ViewControllerManager companySettingsViewController];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 - (void)moveToOrder {
@@ -247,11 +294,6 @@
 }
 
 #pragma mark - Initial
-- (void)setupInitial {
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
-        [self moveToSettings];
-    }];
-}
 
 - (void)updateMenu {
     Venue *venue = [OrderCoordinator sharedInstance].orderManager.venue;
@@ -308,11 +350,6 @@
         if (callback)
             callback(success);
     }];
-}
-
-- (void)moveToSettings {
-    DBBaseSettingsTableViewController *settingsController = [ViewControllerManager companySettingsViewController];
-    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 #pragma mark - Categories
@@ -452,37 +489,32 @@
 
 #pragma mark - Subscription
 
-- (void)setupSubscription {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupSubscriptionModule) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
-    
-    [self setupSubscriptionModule];
-}
-
-- (void)setupSubscriptionModule {
-    if (self.type == DBMenuViewControllerTypeInitial && !_subscriptionModuleView && [DBSubscriptionManager sharedInstance].isEnabled) {
-        DBSubscriptionModuleViewMode mode;
-        switch (self.mode) {
-            case DBMenuViewControllerModeCategoriesAndPositions:
-                mode = DBSubscriptionModuleViewModeCategoriesAndPositions;
-                break;
-            case DBMenuViewControllerModeCategories:
-                mode = DBSubscriptionModuleViewModeCategory;
-                break;
-            default:
-                mode = DBSubscriptionModuleViewModeCategory;
-                break;
-        }
-        _subscriptionModuleView = [DBSubscriptionModuleView create:mode];
+- (DBModuleView *)setupSubscriptionModule {
+    if (self.type == DBMenuViewControllerTypeInitial) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupTopModuleHolder) name:kDBSubscriptionManagerCategoryIsAvailable object:nil];
         
-        DBModuleView *module = [DBModuleView create];
-        [module.submodules addObject:_subscriptionModuleView];
-        module.ownerViewController = self;
-        module.analyticsCategory = self.analyticsCategory;
-        [module layoutModules];
-        module.frame = CGRectMake(0, 0, module.frame.size.width, [module moduleViewContentHeight]);
-        ((DBMenuTableModuleView *)self.menuModuleView).tableHeaderModuleView = module;
-        [module reload:NO];
+        if ([DBSubscriptionManager sharedInstance].isEnabled) {
+            DBSubscriptionModuleViewMode mode;
+            switch (self.mode) {
+                case DBMenuViewControllerModeCategoriesAndPositions:
+                    mode = DBSubscriptionModuleViewModeCategoriesAndPositions;
+                    break;
+                case DBMenuViewControllerModeCategories:
+                    mode = DBSubscriptionModuleViewModeCategory;
+                    break;
+                default:
+                    mode = DBSubscriptionModuleViewModeCategory;
+                    break;
+            }
+            DBModuleView *subscriptionModule = [DBSubscriptionModuleView create:mode];
+            subscriptionModule.ownerViewController = self;
+            subscriptionModule.analyticsCategory = self.analyticsCategory;
+            
+            return subscriptionModule;
+        }
     }
+    
+    return nil;
 }
 
 @end

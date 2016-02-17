@@ -127,8 +127,10 @@
                 break;
             case DBModuleTypeCustomView:
                 [[DBCustomViewManager sharedInstance] enableModule:NO withDict:nil];
+                break;
             case DBModuleTypePlatiusBarcode:
                 [[DBPlatiusManager sharedInstance] enableModule:NO withDict:nil];
+                break;
             default:
                 break;
         }

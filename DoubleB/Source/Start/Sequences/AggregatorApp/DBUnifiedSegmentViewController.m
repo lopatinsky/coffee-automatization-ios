@@ -37,7 +37,8 @@
 - (void)initializeControllers {
     DBUnifiedMenuTableViewController *menuVC = [DBUnifiedMenuTableViewController new];
     [self.controllers addObject:menuVC];
-    [self.controllers addObject:menuVC];    [self.segmentedControl insertSegmentWithTitle:@"Menu" atIndex:0 animated:NO];
+    [self.controllers addObject:menuVC];
+    [self.segmentedControl insertSegmentWithTitle:@"Menu" atIndex:0 animated:NO];
     [self.segmentedControl insertSegmentWithTitle:@"NeMenu" atIndex:0 animated:NO];
     self.segmentedControl.selectedSegmentIndex = 0;
 }

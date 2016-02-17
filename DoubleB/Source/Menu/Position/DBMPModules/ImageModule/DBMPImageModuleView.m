@@ -21,7 +21,7 @@
     self = [super init];
     
     self.positionImageView = [DBImageView new];
-    self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
     self.positionImageView.clipsToBounds = YES;
     self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     [self addSubview:self.positionImageView];

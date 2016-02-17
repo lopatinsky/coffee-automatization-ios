@@ -126,7 +126,7 @@
                         <constraint firstAttribute="width" constant="150" id="7Rg-u3-gIH"/>
                         <constraint firstAttribute="height" constant="20" id="ceQ-Ek-tf9"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Другое"/>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jy7-3S-Dp5">

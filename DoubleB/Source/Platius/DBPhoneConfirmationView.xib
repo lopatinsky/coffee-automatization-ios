@@ -22,17 +22,17 @@
                         <constraint firstAttribute="width" constant="150" id="CiB-b0-3iQ"/>
                         <constraint firstAttribute="height" constant="30" id="bTd-4n-ue9"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7D-ff-e02">
-                    <rect key="frame" x="10" y="10" width="300" height="65"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нажмите Продолжить и дождитесь смс в Сашим кодом" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q7D-ff-e02">
+                    <rect key="frame" x="25" y="10" width="270" height="65"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="13"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XqU-tJ-0Dn">
-                    <rect key="frame" x="139.5" y="130" width="41" height="30"/>
+                    <rect key="frame" x="139" y="162" width="41" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Hvm-Ls-aim"/>
                     </constraints>
@@ -47,27 +47,37 @@
                     </constraints>
                 </view>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="7r6-SW-OoQ">
-                    <rect key="frame" x="150" y="135" width="20" height="20"/>
+                    <rect key="frame" x="150" y="167" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="L2b-QG-Noc"/>
                         <constraint firstAttribute="width" constant="20" id="tut-vE-DcN"/>
                     </constraints>
                 </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WmI-PW-GgH">
+                    <rect key="frame" x="15" y="124" width="290" height="30"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="q7D-ff-e02" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="0wI-Pe-v4r"/>
                 <constraint firstItem="7Lv-qp-UiA" firstAttribute="top" secondItem="q7D-ff-e02" secondAttribute="bottom" constant="10" id="1aw-dB-BbX"/>
-                <constraint firstItem="XqU-tJ-0Dn" firstAttribute="top" secondItem="7Lv-qp-UiA" secondAttribute="bottom" constant="15" id="BOD-dj-Lg7"/>
-                <constraint firstItem="q7D-ff-e02" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="IFg-2N-Vxs"/>
+                <constraint firstItem="WmI-PW-GgH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="1ix-B6-OOB"/>
+                <constraint firstItem="WmI-PW-GgH" firstAttribute="top" secondItem="ZqY-E1-YW7" secondAttribute="bottom" constant="8" id="BM1-PM-pnP"/>
+                <constraint firstItem="q7D-ff-e02" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="IFg-2N-Vxs"/>
                 <constraint firstItem="7Lv-qp-UiA" firstAttribute="trailing" secondItem="ZqY-E1-YW7" secondAttribute="trailing" id="K9B-5f-0XB"/>
                 <constraint firstItem="7Lv-qp-UiA" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LO4-4g-tB9"/>
                 <constraint firstItem="7r6-SW-OoQ" firstAttribute="centerY" secondItem="XqU-tJ-0Dn" secondAttribute="centerY" id="Pqe-1O-41v"/>
-                <constraint firstItem="q7D-ff-e02" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="RxR-P6-Jza"/>
                 <constraint firstItem="7r6-SW-OoQ" firstAttribute="centerX" secondItem="XqU-tJ-0Dn" secondAttribute="centerX" id="TLw-Zt-P6D"/>
                 <constraint firstItem="ZqY-E1-YW7" firstAttribute="top" secondItem="7Lv-qp-UiA" secondAttribute="bottom" id="WIA-Sv-jiZ"/>
+                <constraint firstItem="XqU-tJ-0Dn" firstAttribute="top" secondItem="WmI-PW-GgH" secondAttribute="bottom" constant="8" id="Z2m-u7-YRt"/>
                 <constraint firstItem="7Lv-qp-UiA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ZaG-bY-Iax"/>
                 <constraint firstItem="XqU-tJ-0Dn" firstAttribute="centerX" secondItem="7Lv-qp-UiA" secondAttribute="centerX" id="anG-m7-k8A"/>
-                <constraint firstAttribute="trailing" secondItem="q7D-ff-e02" secondAttribute="trailing" constant="10" id="dwN-pl-rKf"/>
+                <constraint firstAttribute="bottom" secondItem="XqU-tJ-0Dn" secondAttribute="bottom" constant="8" id="ckw-of-pti"/>
+                <constraint firstAttribute="trailing" secondItem="q7D-ff-e02" secondAttribute="trailing" constant="25" id="dwN-pl-rKf"/>
+                <constraint firstAttribute="trailing" secondItem="WmI-PW-GgH" secondAttribute="trailing" constant="15" id="eGF-hs-4dR"/>
                 <constraint firstItem="7Lv-qp-UiA" firstAttribute="leading" secondItem="ZqY-E1-YW7" secondAttribute="leading" id="im2-fu-95J"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -76,9 +86,10 @@
                 <outlet property="activityIndicator" destination="7r6-SW-OoQ" id="yED-3V-1XD"/>
                 <outlet property="constraintTextFieldWidth" destination="CiB-b0-3iQ" id="UGd-oW-6hz"/>
                 <outlet property="continueButton" destination="XqU-tJ-0Dn" id="YTB-Wj-Nih"/>
+                <outlet property="descriptionLabel" destination="q7D-ff-e02" id="f2o-ph-fuD"/>
+                <outlet property="errorLabel" destination="WmI-PW-GgH" id="e9T-n2-zog"/>
                 <outlet property="textField" destination="7Lv-qp-UiA" id="wWI-Hc-EJZ"/>
                 <outlet property="textFieldBottomView" destination="ZqY-E1-YW7" id="KMu-aC-0Ak"/>
-                <outlet property="titleLabel" destination="q7D-ff-e02" id="1Qb-Je-hHo"/>
             </connections>
             <point key="canvasLocation" x="338" y="155"/>
         </view>

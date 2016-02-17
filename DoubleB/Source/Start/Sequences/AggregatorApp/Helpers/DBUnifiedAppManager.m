@@ -100,7 +100,7 @@
 
 - (void)fetchVenues:(void (^)(BOOL))callback {
     [[DBAPIClient sharedClient] GET:@"proxy/unified_app/venues"
-                         parameters:@{@"City-Id": [[DBCitiesManager selectedCity] cityId]}
+                         parameters:nil
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                 NSArray *venues = [DBUnifiedVenue venuesFromDictionary:responseObject[@"venues"]];
                                 NSMutableArray *venuesDictionaries = [NSMutableArray new];
@@ -125,7 +125,7 @@
 
 - (void)fetchPositionsWithId:(NSNumber *)itemId withCallback:(void (^)(BOOL))callback {
     [[DBAPIClient sharedClient] GET:[NSString stringWithFormat:@"proxy/unified_app/product?product_id=%@", itemId]
-                         parameters:@{}
+                         parameters:nil
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                 NSLog(@"%@", responseObject);
                                 
