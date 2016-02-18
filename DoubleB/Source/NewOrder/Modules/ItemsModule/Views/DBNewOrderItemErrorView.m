@@ -94,8 +94,8 @@
 
 - (void)showOnView:(UIView *)view inFrame:(CGRect)rect{
     if(self.superview == nil){
-        UIImage *backImage = [view snapshotImageOfFrame:rect];
-        self.backImageView.image = backImage;
+//        UIImage *backImage = [view snapshotImageOfFrame:rect];
+//        self.backImageView.image = backImage;
         
         self.frame = rect;
         [self moveContentRight];

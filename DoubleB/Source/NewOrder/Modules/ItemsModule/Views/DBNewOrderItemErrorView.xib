@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUY-zI-Iyw">
-                    <rect key="frame" x="250" y="0.0" width="70" height="70"/>
+                    <rect key="frame" x="320" y="0.0" width="70" height="70"/>
                     <color key="backgroundColor" red="0.74117647060000003" green="0.2784313725" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="uEj-e3-fQs"/>
@@ -25,7 +25,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMy-6q-v2Z">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U1K-k9-kod">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U1K-k9-kod">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                         </imageView>
                         <view alpha="0.79999999999999982" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uAv-Vb-qRY">
@@ -57,7 +57,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="uAv-Vb-qRY" secondAttribute="bottom" id="1S9-nb-dG3"/>
                         <constraint firstItem="uAv-Vb-qRY" firstAttribute="leading" secondItem="dMy-6q-v2Z" secondAttribute="leading" constant="20" id="9xO-5I-udY"/>
@@ -77,13 +77,13 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="iUY-zI-Iyw" secondAttribute="bottom" id="Kfc-om-obf"/>
+                <constraint firstItem="iUY-zI-Iyw" firstAttribute="leading" secondItem="dMy-6q-v2Z" secondAttribute="trailing" id="Rzl-JS-mUq"/>
                 <constraint firstAttribute="trailing" secondItem="dMy-6q-v2Z" secondAttribute="trailing" id="a1d-Bh-ZEc"/>
                 <constraint firstItem="iUY-zI-Iyw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bOO-Xb-k20"/>
                 <constraint firstAttribute="bottom" secondItem="dMy-6q-v2Z" secondAttribute="bottom" id="qaB-1k-tNY"/>
-                <constraint firstAttribute="trailing" secondItem="iUY-zI-Iyw" secondAttribute="trailing" id="r5l-Qd-DcW"/>
                 <constraint firstItem="dMy-6q-v2Z" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v13-Qa-Xfx"/>
                 <constraint firstItem="dMy-6q-v2Z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="yac-tv-1Ut"/>
             </constraints>
@@ -106,9 +106,4 @@
     <resources>
         <image name="alarm_icon.png" width="60" height="60"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
 </document>

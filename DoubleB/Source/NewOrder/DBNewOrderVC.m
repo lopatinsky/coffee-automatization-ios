@@ -78,6 +78,10 @@
     [[NetworkManager sharedManager] addOperation:NetworkOperationCheckOrder];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [OrderCoordinator sharedInstance].automaticUpdate = NO;
 }
