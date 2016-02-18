@@ -108,7 +108,7 @@
     settingsItem.iconName = @"exit_icon";
     settingsItem.viewController = loginVC;
     settingsItem.eventLabel = @"logout_click";
-    settingsItem.block = ^void() {
+    settingsItem.block = ^(UIViewController *vc) {
         [[ApplicationManager sharedInstance] flushStoredCache];
         [DBCompaniesManager selectCompany:nil];
         
