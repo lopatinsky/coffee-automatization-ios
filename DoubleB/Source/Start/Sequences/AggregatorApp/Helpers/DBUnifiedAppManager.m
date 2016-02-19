@@ -8,12 +8,20 @@
 
 #import "DBUnifiedAppManager.h"
 #import "DBUnifiedVenue.h"
+#import "DBUnifiedPosition.h"
+
 #import "DBAPIClient.h"
 #import "NetworkManager.h"
 #import "DBCitiesManager.h"
 #import "Venue.h"
 
 #import "DBMenuPosition.h"
+
+@interface DBUnifiedAppManager()
+
+@property (nonatomic, strong) NSMutableDictionary *positions;
+
+@end
 
 @implementation DBUnifiedAppManager
 
@@ -26,37 +34,9 @@
     }
 }
 
-- (NSDictionary *)positionsForItem:(NSNumber *)stringId {
-    NSData *positionsData = [DBUnifiedAppManager valueForKey:[NSString stringWithFormat:@"positions_%@", stringId]];
-    if (positionsData) {
-        NSArray *positionsInfo = [NSKeyedUnarchiver unarchiveObjectWithData:positionsData];
-        
-        NSMutableDictionary *result = [NSMutableDictionary new];
-        for (NSDictionary *positionInfo in positionsInfo) {
-            NSString *companyId = positionInfo[@"company"][@"name"];
-            
-            if ([result objectForKey:companyId]) {
-                NSMutableArray *items = result[companyId][@"items"];
-                for (NSDictionary *item in positionInfo[@"items"]) {
-                    [items addObject:@{@"item": [[DBMenuPosition alloc] initWithResponseDictionary:item],
-                                       @"venue_info": positionInfo[@"venue_info"]}];
-                }
-            } else {
-                NSMutableDictionary *newCompany = [NSMutableDictionary new];
-                NSMutableArray *items = [NSMutableArray new];
-                newCompany[@"company"] = positionInfo[@"company"];
-                for (NSDictionary *item in positionInfo[@"items"]) {
-                    [items addObject:@{@"item": [[DBMenuPosition alloc] initWithResponseDictionary:item],
-                                       @"venue_info": positionInfo[@"venue_info"]}];
-                }
-                newCompany[@"items"] = items;
-                result[companyId] = newCompany;
-            }
-        }
-        return result;
-    } else {
-        return @{};
-    }
+- (NSArray *)positionsForItem:(NSNumber *)stringId {
+    NSArray *allPositions = [self.positions getValueForKey:[NSString stringWithFormat:@"positions_%@", stringId]] ?: @[];
+    return allPositions;
 }
 
 - (NSArray *)menu {
@@ -129,13 +109,17 @@
                             success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                 NSLog(@"%@", responseObject);
                                 
-                                NSArray *venues = [Venue venuesFromDict:responseObject[@"venues"]];
-                                NSMutableArray *venuesDictionaries = [NSMutableArray new];
-                                for (Venue *venue in venues) {
-                                    [venuesDictionaries addObject:venue.venueDictionary];
+                                if (!self.positions) {
+                                    self.positions = [NSMutableDictionary new];
                                 }
-
-                                [DBUnifiedAppManager setValue:venues forKey:[NSString stringWithFormat:@"positions_%@", itemId]];
+                                
+                                NSMutableArray *allPositions = [NSMutableArray new];
+                                for (NSDictionary *item in responseObject[@"venues"]) {
+                                    DBUnifiedPosition *position = [[DBUnifiedPosition alloc] initWithResponseDict:item];
+                                    [allPositions addObject:position];
+                                    
+                                }
+                                self.positions[[NSString stringWithFormat:@"positions_%@", itemId]] = allPositions;
                                 
                                 if (callback) {
                                     callback(YES);

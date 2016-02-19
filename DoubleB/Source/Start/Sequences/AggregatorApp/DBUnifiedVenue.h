@@ -27,5 +27,6 @@
 
 + (NSArray *)venuesFromDictionary:(NSArray *)venues;
 - (instancetype)initWithDictionary:(NSDictionary *)venue;
+- (instancetype)initWithDictionary:(NSDictionary *)venue andCompanyDictionary:(NSDictionary *)companyDictionary;
 
 @end

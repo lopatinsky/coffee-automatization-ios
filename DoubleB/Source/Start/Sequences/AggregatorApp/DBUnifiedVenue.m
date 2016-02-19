@@ -19,13 +19,13 @@
     return [venueObjects copy];
 }
 
-- (instancetype)initWithDictionary:(NSDictionary *)venue {
+- (instancetype)initWithDictionary:(NSDictionary *)venue andCompanyDictionary:(NSDictionary *)companyDictionary {
     if (self = [super init]) {
         DBCompany *company = [DBCompany new];
-        company.companyNamespace = [venue getValueForKey:@"company_namespace"] ?: @"";
-        company.companyName = [venue getValueForKey:@"title"] ?: @"";
-        company.companyDescription = @"";
-        company.companyImageUrl = @"";
+        company.companyNamespace = [companyDictionary getValueForKey:@"company_namespace"] ?: @"";
+        company.companyName = [companyDictionary getValueForKey:@"title"] ?: @"";
+        company.companyDescription = [companyDictionary getValueForKey:@"description"] ?: @"";
+        company.companyImageUrl = [companyDictionary getValueForKey:@"image"] ?: @"";
         
         self.venueAddress = [venue getValueForKey:@"address"] ?: @"";
         self.venueCalledPhone = [venue getValueForKey:@"called_phone"] ?: @"";
@@ -57,6 +57,17 @@
                                  };
     }
     return self;
+    
+}
+
+- (instancetype)initWithDictionary:(NSDictionary *)venue {
+    NSDictionary *companyDictionary = @{
+                                        @"namespace": [venue getValueForKey:@"company_namespace"] ?: @"",
+                                        @"name": [venue getValueForKey:@"title"] ?: @"",
+                                        @"description": @"",
+                                        @"image": @""
+                                        };
+    return [self initWithDictionary:venue andCompanyDictionary:companyDictionary];
 }
 
 @end

@@ -13,6 +13,7 @@
 #import "DBAAMenuViewController.h"
 
 #import "DBUnifiedVenue.h"
+#import "DBUnifiedPosition.h"
 #import "OrderCoordinator.h"
 #import "DBAPIClient.h"
 #import "ApplicationManager.h"
@@ -30,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentedController;
 @property (weak, nonatomic) IBOutlet UIView *segmentHolderView;
 
-@property (nonatomic, strong) NSArray *keys;
+@property (nonatomic, strong) NSArray<DBUnifiedPosition *> *positions;
 
 @end
 
@@ -50,13 +51,17 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"DBUnifiedMenuTableViewCell" bundle:nil] forCellReuseIdentifier:@"DBUnifiedMenuTableViewCell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"DBUnifiedVenueTableViewCell" bundle:nil] forCellReuseIdentifier:@"DBUnifiedVenueTableViewCell"];
     
-    self.segmentedController.hidden = self.type == UnifiedPosition;
+    self.segmentHolderView.hidden = self.type == UnifiedPosition;
     
     [self setupInitial];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
+    if (self.type == UnifiedPosition) {
+        [self db_setTitle:[self.product objectForKey:@"title"]];
+    } else {
+        [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -92,9 +97,11 @@
 }
 
 - (void)setupInitial {
-    self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
-        [self moveToSettings];
-    }];
+    if (self.type != UnifiedPosition) {
+        self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
+            [self moveToSettings];
+        }];
+    }
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
@@ -149,6 +156,7 @@
 
 - (void)fetchPositionsSuccess {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    self.positions = [[DBUnifiedAppManager sharedInstance] positionsForItem:@([[self.product objectForKey:@"id"] integerValue])];
     if (self.type == UnifiedPosition) {
         [self.tableView reloadData];
     }
@@ -195,9 +203,7 @@
     switch (self.type) {
         case UnifiedVenue: {
             DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
-            [OrderCoordinator sharedInstance].orderManager.venue = [unifiedVenue venueObject];
-            [DBCompaniesManager selectCompany:unifiedVenue.company];
-            [self fetchCompanyInfo];
+            [self selectVenue:unifiedVenue];
             break;
         }
         case UnifiedMenu: {
@@ -206,6 +212,12 @@
             newVC.product = [[[DBUnifiedAppManager sharedInstance] menu] objectAtIndex:indexPath.row];
             [self showViewController:newVC sender:nil];
             break;
+        }
+        case UnifiedPosition: {
+            DBUnifiedVenue *unifiedVenue = [self.positions[indexPath.section] venue];
+            DBMenuPosition *position = [self.positions[indexPath.section] positions][indexPath.row];
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:position];
+            [self selectVenue:unifiedVenue];
         }
         default:
             break;
@@ -248,7 +260,7 @@
         case UnifiedMenu:
             return 1;
         case UnifiedPosition:
-            return [self.keys count];
+            return [self.positions count];
         case UnifiedVenue:
             return 1;
         default:
@@ -261,7 +273,7 @@
         case UnifiedMenu:
             return [[[DBUnifiedAppManager sharedInstance] menu] count];
         case UnifiedPosition:
-            return [[[DBUnifiedAppManager sharedInstance] positionsForItem:@([[self.product objectForKey:@"id"] integerValue])] count];
+            return [[[self.positions objectAtIndex:section] positions] count];
         case UnifiedVenue:
             return [[[DBUnifiedAppManager sharedInstance] venues] count];
         default:
@@ -279,7 +291,11 @@
         }
         case UnifiedPosition: {
             cell = [tableView dequeueReusableCellWithIdentifier:@"DBUnifiedMenuTableViewCell" forIndexPath:indexPath];
-            [(DBUnifiedMenuTableViewCell *)cell setData:[[[DBUnifiedAppManager sharedInstance] menu] objectAtIndex:indexPath.row] withType:self.type];
+            [(DBUnifiedMenuTableViewCell *)cell setData:@{
+                                                          @"position": [self.positions[indexPath.section] positions][indexPath.row],
+                                                          @"venue_info": [self.positions[indexPath.section] venue]
+                                                        }
+                                               withType:self.type];
             break;
         }
         case UnifiedVenue: {

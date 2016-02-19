@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "DBUnifiedVenue.h"
+#import "DBMenuPosition.h"
+
 @interface DBUnifiedPosition : NSObject
+
+@property (nonatomic, strong) DBUnifiedVenue *venue;
+@property (nonatomic, strong) NSArray<DBMenuPosition *> *positions;
 
 - (instancetype)initWithResponseDict:(NSDictionary *)response;
 

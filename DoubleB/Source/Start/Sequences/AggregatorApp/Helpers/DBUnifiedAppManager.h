@@ -15,7 +15,7 @@
 - (NSArray *)venues;
 - (NSArray *)menu;
 - (NSArray *)allPositions;
-- (NSDictionary *)positionsForItem:(NSNumber *)stringId;
+- (NSArray *)positionsForItem:(NSNumber *)stringId;
 
 - (void)fetchMenu:(void(^)(BOOL success))callback;
 - (void)fetchVenues:(void (^)(BOOL success))callback;
