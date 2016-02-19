@@ -38,7 +38,6 @@
 @implementation DBUnifiedMenuTableViewController
 
 - (void)viewDidLoad {
-    [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
     self.segmentedController.tintColor = [UIColor db_defaultColor];
     self.segmentedController.backgroundColor = [UIColor whiteColor];
     self.segmentedController.clipsToBounds = YES;
@@ -54,19 +53,20 @@
     self.segmentHolderView.hidden = self.type == UnifiedPosition;
     
     [self setupInitial];
+    [self fetchData];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     if (self.type == UnifiedPosition) {
         [self db_setTitle:[self.product objectForKey:@"title"]];
     } else {
         [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
     }
+    [self.tableView reloadData];
+    [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self db_setTitle:@""];
-    [self.tableView reloadData];
+- (void)fetchData {
     switch (self.type) {
         case UnifiedMenu: {
             [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedMenu];
