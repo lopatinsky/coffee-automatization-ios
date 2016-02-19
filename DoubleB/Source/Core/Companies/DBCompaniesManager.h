@@ -26,7 +26,7 @@
 @property (nonatomic, readonly) BOOL companiesLoaded;
 
 @property (nonatomic, readonly) BOOL hasCompanies;
-@property (strong, nonatomic) NSArray *companies;
+@property (strong, nonatomic, readonly) NSArray *companies;
 
 // Selected company (Using for apps, that aggregate more than 1 company)
 + (DBCompany *)selectedCompany;
@@ -35,5 +35,6 @@
 
 - (BOOL)companyIsChosen;
 - (void)requestCompanies:(void(^)(BOOL success, NSArray *companies))callback;
++ (void)overrideCompanies:(NSArray *)companies;
                          
 @end

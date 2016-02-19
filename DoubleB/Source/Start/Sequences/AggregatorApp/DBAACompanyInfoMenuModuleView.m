@@ -33,7 +33,13 @@
     CAGradientLayer *_gradientLayer;
 }
 
-- (void)commonInit {
++ (NSString *)xibName {
+    return @"DBAACompanyInfoMenuModuleView";
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    
     if (!_gradientLayer) {
         _gradientLayer = [CAGradientLayer layer];
         _gradientLayer.frame = self.topBarView.bounds;

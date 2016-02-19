@@ -29,7 +29,7 @@
 
 - (DBModuleView *)setupCompanyInfoModule {
     if (self.type == DBMenuViewControllerTypeInitial) {
-        DBAACompanyInfoMenuModuleView *infoModule = [DBAACompanyInfoMenuModuleView new];
+        DBAACompanyInfoMenuModuleView *infoModule = [DBAACompanyInfoMenuModuleView create];
         infoModule.ownerViewController = self;
         infoModule.analyticsCategory = self.analyticsCategory;
         return infoModule;

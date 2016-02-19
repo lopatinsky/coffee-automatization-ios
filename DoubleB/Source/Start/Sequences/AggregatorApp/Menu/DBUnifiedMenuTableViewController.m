@@ -171,12 +171,13 @@
     [Venue dropAllVenues];
     [Venue saveVenues:@[[venue venueObject]]];
     
-    if (![[DBCompaniesManager selectedCompany].companyNamespace isEqualToString:venue.company.companyNamespace]) {
+    if (![[DBCompaniesManager selectedCompanyNamespace] isEqualToString:venue.company.companyNamespace]) {
         [[OrderCoordinator sharedInstance] flushCache];
         [[DBCompanyInfo sharedInstance] flushCache];
         [[DBMenu sharedInstance] clearMenu];
         [Order dropAllOrders];
         
+        [DBCompaniesManager overrideCompanies:@[venue.company]];
         [DBCompaniesManager selectCompany:venue.company];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];

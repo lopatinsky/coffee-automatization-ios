@@ -73,9 +73,6 @@
     } else {
         [self setupMenuModule];
     }
-    
-    // Top Modules
-    [self setupTopModuleHolder];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -128,6 +125,9 @@
     [self.view addSubview:self.menuModuleView];
     self.menuModuleView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.menuModuleView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
+    
+    // Top modules
+    [self setupTopModuleHolder];
 }
 
 - (NSArray *)setupTopModules {
