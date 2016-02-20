@@ -91,7 +91,7 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
         }];
         [phoneSheet showInView:self.view];
     } else {
-        [UIAlertView bk_showAlertViewWithTitle:nil message:[DBCompanyInfo sharedInstance].phoneNumber cancelButtonTitle:@"Отменить" otherButtonTitles:@[@"Позвонить"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [UIAlertView bk_showAlertViewWithTitle:nil message:[DBCompanyInfo sharedInstance].phoneNumber cancelButtonTitle:NSLocalizedString(@"Отменить", nil) otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
             if (buttonIndex == 1) {
                 NSString *phone = [NSString stringWithFormat:@"tel:+%@", [DBCompanyInfo sharedInstance].phoneNumber];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phone]];
@@ -115,7 +115,7 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     self.callUsView.backgroundColor = [UIColor clearColor];
     DBContactUsView *callUs = [[DBContactUsView alloc] init];
     [callUs setIconImage:[UIImage imageNamed:@"call"]];
-    [callUs setText:@"ПОЗВОНИТЬ НАМ"];
+    [callUs setText:NSLocalizedString(@"Позвонить нам", nil).uppercaseString];
     UITapGestureRecognizer *callTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(callUsGestureAction:)];
     callTapRecognizer.cancelsTouchesInView = NO;
     [self.callUsView addGestureRecognizer:callTapRecognizer];
@@ -128,7 +128,7 @@ static void (^dbMailViewControllerCallBack)(BOOL completed);
     self.mailUsView.backgroundColor = [UIColor clearColor];
     DBContactUsView *mailUs = [[DBContactUsView alloc] init];
     [mailUs setIconImage:[UIImage imageNamed:@"email"]];
-    [mailUs setText:@"НАПИСАТЬ НАМ"];
+    [mailUs setText:NSLocalizedString(@"Написать нам", nil).uppercaseString];
     UITapGestureRecognizer *mailTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mailUsGestureAction:)];
     mailTapRecognizer.cancelsTouchesInView = NO;
     [self.mailUsView addGestureRecognizer:mailTapRecognizer];

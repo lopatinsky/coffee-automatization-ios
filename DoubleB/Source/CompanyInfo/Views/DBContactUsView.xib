@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,15 +15,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="45" height="35"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="call.png" translatesAutoresizingMaskIntoConstraints="NO" id="SK2-qs-aTB">
-                            <rect key="frame" x="12.5" y="8" width="20" height="20"/>
-                            <animations/>
+                            <rect key="frame" x="12" y="8" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="ijK-LO-niX"/>
                                 <constraint firstAttribute="height" constant="20" id="mGp-Po-PDe"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" red="0.066666666669999999" green="0.34901960780000002" blue="0.29803921570000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="SK2-qs-aTB" firstAttribute="centerX" secondItem="WFI-5Z-frU" secondAttribute="centerX" id="7LP-yK-hQA"/>
@@ -31,17 +30,16 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ЗВОНИТЕ НАМ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ne5-BD-sP8">
-                    <rect key="frame" x="53" y="0.0" width="194" height="35"/>
-                    <animations/>
+                    <rect key="frame" x="8" y="0.0" width="239" height="35"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="0.1450980392" green="0.45882352939999999" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="ne5-BD-sP8" firstAttribute="leading" secondItem="WFI-5Z-frU" secondAttribute="trailing" constant="8" id="E5m-ym-qMx"/>
+                <constraint firstItem="ne5-BD-sP8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Gdr-rV-k0n"/>
                 <constraint firstAttribute="bottom" secondItem="WFI-5Z-frU" secondAttribute="bottom" id="LTk-jP-4fE"/>
                 <constraint firstItem="ne5-BD-sP8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QMt-0Z-FCp"/>
                 <constraint firstItem="WFI-5Z-frU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VJL-Lf-cW3"/>
@@ -51,6 +49,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="E5m-ym-qMx"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="callUsLabel" destination="ne5-BD-sP8" id="lK6-xO-gnU"/>
                 <outlet property="iconImageView" destination="SK2-qs-aTB" id="zZB-Ff-xws"/>
