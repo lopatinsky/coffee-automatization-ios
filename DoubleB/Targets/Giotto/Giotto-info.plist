@@ -26,6 +26,15 @@
 	<string>1.12.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb349173695244280giotto</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.12.2.1</string>
 	<key>Fabric</key>
@@ -43,8 +52,19 @@
 			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>349173695244280</string>
+	<key>FacebookDisplayName</key>
+	<string>Ru-Beacon</string>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>giotto</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fb</string>
+		<string>fbauth2</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -58,6 +78,15 @@
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.empatika.neworder</string>
+		<string>com.empatika.openorder</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

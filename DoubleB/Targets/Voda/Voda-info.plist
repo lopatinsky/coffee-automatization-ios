@@ -31,7 +31,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb349173695244280voda</string>
+				<string>fb349173695244280vodaonline</string>
 			</array>
 		</dict>
 	</array>
@@ -57,7 +57,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
 	<key>FacebookUrlSchemeSuffix</key>
-	<string>voda</string>
+	<string>vodaonline</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -78,6 +78,15 @@
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.empatika.neworder</string>
+		<string>com.empatika.openorder</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
