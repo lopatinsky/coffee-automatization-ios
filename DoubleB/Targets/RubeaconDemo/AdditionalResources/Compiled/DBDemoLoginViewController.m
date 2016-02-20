@@ -28,6 +28,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.loginButton setTitle:NSLocalizedString(@"Войти", nil) forState:UIControlStateNormal];
+    [self.demoButton setTitle:NSLocalizedString(@"Пропустить", nil) forState:UIControlStateNormal];
+    
+    self.loginTextField.placeholder = NSLocalizedString(@"Логин", nil);
+    self.passwordTextField.placeholder = NSLocalizedString(@"Пароль", nil);
 }
 
 - (void)viewDidLayoutSubviews {
@@ -104,7 +110,7 @@
     DBSettingsItem *settingsItem = [DBSettingsItem new];
     
     settingsItem.name = @"profileVC";
-    settingsItem.title = NSLocalizedString(@"Выйти из демо", nil);
+    settingsItem.title = NSLocalizedString(@"Выйти", nil);
     settingsItem.iconName = @"exit_icon";
     settingsItem.viewController = loginVC;
     settingsItem.eventLabel = @"logout_click";

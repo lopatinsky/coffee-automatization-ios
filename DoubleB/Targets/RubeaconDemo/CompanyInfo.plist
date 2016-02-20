@@ -21,7 +21,7 @@
 		<key>BaseUrl</key>
 		<string>http://automation-demo.appspot.com/</string>
 		<key>CompanyColor</key>
-		<integer>4285150221</integer>
+		<string>#783105</string>
 		<key>CompanyGAKey</key>
 		<string>UA-62529990-41</string>
 		<key>Parse</key>
