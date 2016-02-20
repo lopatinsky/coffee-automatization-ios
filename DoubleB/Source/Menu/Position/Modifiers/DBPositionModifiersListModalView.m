@@ -41,8 +41,9 @@
 }
 
 - (void)awakeFromNib {
-    self.totalPriceView.mode = DBPositionPriceViewModeInteracted;
+    self.totalTitleLabel.text = NSLocalizedString(@"Итоговая цена", nil);
     
+    self.totalPriceView.mode = DBPositionPriceViewModeInteracted;
     self.totalPriceView.touchAction = ^void(){
         [self.totalPriceView animatePositionAdditionWithCompletion:^{
             [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
