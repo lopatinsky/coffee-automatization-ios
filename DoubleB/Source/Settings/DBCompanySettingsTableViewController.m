@@ -75,10 +75,6 @@
         [companySection.items addObject:[DBUnifiedMenuTableViewController settingsItem]];
     }
     
-    if ([DBCompaniesManager sharedInstance].hasCompanies) {
-        [companySection.items addObject:[[ViewControllerManager companiesViewController] settingsItem]];
-    }
-    
     if (companySection.items.count > 0) {
         [settingsSections addObject:companySection];
     }

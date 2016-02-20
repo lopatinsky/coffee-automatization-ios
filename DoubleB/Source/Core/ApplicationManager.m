@@ -391,7 +391,6 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 
 - (void)flushCache {
     [[OrderCoordinator sharedInstance] flushCache];
-    [[DBCompaniesManager sharedInstance] flushCache];
     [[DBCompanyInfo sharedInstance] flushCache];
     [[DBMenu sharedInstance] clearMenu];
     [Venue dropAllVenues];
@@ -401,7 +400,6 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 - (void)flushStoredCache {
     [[OrderCoordinator sharedInstance] flushStoredCache];
     [[DBCompanyInfo sharedInstance] flushStoredCache];
-    [[DBCompaniesManager sharedInstance] flushStoredCache];
     [[DBMenu sharedInstance] clearMenu];
     [Venue dropAllVenues];
     [Order dropAllOrders];
