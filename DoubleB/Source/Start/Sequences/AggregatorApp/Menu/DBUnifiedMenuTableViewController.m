@@ -24,6 +24,7 @@
 
 #import "DBBarButtonItem.h"
 #import "UIAlertView+BlocksKit.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DBUnifiedMenuTableViewController() <UITableViewDataSource, UITableViewDelegate>
 
@@ -59,7 +60,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -100,13 +101,23 @@
 }
 
 #pragma mark - Auixiliary
+- (void)reloadTable {
+    CATransition *transition = [CATransition animation];
+    transition.type = kCATransitionFade;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.duration = 0.1;
+    
+    [[self.tableView layer] addAnimation:transition forKey:@"UITableViewReloadDataAnimationKey"];
+    [self.tableView reloadData];
+}
+
 - (IBAction)segmentedControlValueChanged:(id)sender {
     if (self.segmentedController.selectedSegmentIndex == 0) {
         self.type = UnifiedVenue;
     } else {
         self.type = UnifiedMenu;
     }
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 
 - (void)selectVenue:(DBUnifiedVenue *)venue {
@@ -247,14 +258,14 @@
 - (void)fetchMenuSuccess {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedMenu) {
-        [self.tableView reloadData];
+        [self reloadTable];
     }
 }
 
 - (void)fetchVenueSuccess {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.type == UnifiedVenue) {
-        [self.tableView reloadData];
+        [self reloadTable];
     }
 }
 
@@ -262,7 +273,7 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.positions = [[DBUnifiedAppManager sharedInstance] positionsForItem:@([[self.product objectForKey:@"id"] integerValue])];
     if (self.type == UnifiedPosition) {
-        [self.tableView reloadData];
+        [self reloadTable];
     }
 }
 
