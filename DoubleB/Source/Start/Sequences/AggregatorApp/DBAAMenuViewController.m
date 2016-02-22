@@ -9,7 +9,7 @@
 #import "DBAAMenuViewController.h"
 #import "DBAACompanyInfoMenuModuleView.h"
 
-@interface DBAAMenuViewController ()
+@interface DBAAMenuViewController () <DBOwnerViewControllerProtocol>
 
 @end
 
@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
+
 
 - (NSArray *)setupTopModules {
     NSMutableArray *modules = [[NSMutableArray alloc] initWithArray:[super setupTopModules]];
@@ -40,6 +41,13 @@
 
 - (UIBarButtonItem *)leftBarButtonItem {
     return nil;
+}
+
+#pragma mark - DBOwnerViewControllerProtocol
+- (void)reloadAllModules {
+    for (DBModuleView *module in self.topModules) {
+        [module reload:YES];
+    }
 }
 
 @end

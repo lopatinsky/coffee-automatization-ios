@@ -86,6 +86,12 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    for (DBModuleView *moduleView in self.topModulesHolder.submodules) {
+        [moduleView viewDidAppearOnVC];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     

@@ -11,11 +11,25 @@
 @implementation UIView (Gradient)
 
 - (void)setGradientWithColors:(NSArray *)colors {
-    CAGradientLayer *gradientLayer = [CAGradientLayer new];
-    gradientLayer.frame = self.bounds;
-    gradientLayer.colors = colors;
-    gradientLayer.zPosition = -10;
-    [self.layer addSublayer:gradientLayer];
+    BOOL layerIsAlreadyExists = NO;
+    for (CALayer *layer in self.layer.sublayers) {
+        if ([layer isKindOfClass:[CAGradientLayer class]]) {
+            if (!CGRectEqualToRect(self.bounds, layer.frame)) {
+                [layer removeFromSuperlayer];
+            } else {
+                layerIsAlreadyExists = YES;
+            }
+            break;
+        }
+    }
+   
+    if (!layerIsAlreadyExists) {
+        CAGradientLayer *gradientLayer = [CAGradientLayer new];
+        gradientLayer.frame = self.bounds;
+        gradientLayer.colors = colors;
+        gradientLayer.zPosition = -10;
+        [self.layer addSublayer:gradientLayer];
+    }
 }
 
 @end
