@@ -35,6 +35,7 @@
 }
 
 - (void)uiview_dealloc {
+    // TODO: infinite loop?
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self uiview_dealloc];
 }

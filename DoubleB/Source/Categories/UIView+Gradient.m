@@ -12,7 +12,7 @@
 
 - (void)setGradientWithColors:(NSArray *)colors {
     CAGradientLayer *gradientLayer = [CAGradientLayer new];
-    gradientLayer.frame = self.frame;
+    gradientLayer.frame = self.bounds;
     gradientLayer.colors = colors;
     gradientLayer.zPosition = -10;
     [self.layer addSublayer:gradientLayer];

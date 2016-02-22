@@ -63,7 +63,13 @@
         [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
     }
     [self.tableView reloadData];
-    [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
+    });
 }
 
 - (void)fetchData {
