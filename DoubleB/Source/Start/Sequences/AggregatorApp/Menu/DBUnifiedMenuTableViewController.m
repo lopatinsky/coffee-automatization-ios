@@ -71,6 +71,8 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        // dirty hack to handle layout on first launch
+        [self.segmentHolderView layoutIfNeeded];
         [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
     });
 }

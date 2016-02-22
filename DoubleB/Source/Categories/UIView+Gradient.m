@@ -12,6 +12,7 @@
 
 - (void)setGradientWithColors:(NSArray *)colors {
     CAGradientLayer *gradientLayer = [CAGradientLayer new];
+    NSLog(@"%@", NSStringFromCGRect(self.bounds));
     gradientLayer.frame = self.bounds;
     gradientLayer.colors = colors;
     gradientLayer.zPosition = -10;
