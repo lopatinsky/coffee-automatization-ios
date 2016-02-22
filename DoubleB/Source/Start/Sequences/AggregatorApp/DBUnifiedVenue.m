@@ -25,7 +25,7 @@
         company.companyNamespace = [companyDictionary getValueForKey:@"namespace"] ?: @"";
         company.companyName = [companyDictionary getValueForKey:@"title"] ?: @"";
         company.companyDescription = [companyDictionary getValueForKey:@"description"] ?: @"";
-        company.companyImageUrl = [companyDictionary getValueForKey:@"image"] ?: @"";
+        company.companyImageUrl = [companyDictionary getValueForKey:@"image"] ?: [venue getValueForKey:@"pic"] ?: @"";
         
         self.venueAddress = [venue getValueForKey:@"address"] ?: @"";
         self.venueCalledPhone = [venue getValueForKey:@"called_phone"] ?: @"";

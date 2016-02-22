@@ -120,7 +120,7 @@
     [self reloadTable];
 }
 
-- (void)selectVenue:(DBUnifiedVenue *)venue {
+- (void)selectVenue:(DBUnifiedVenue *)venue withPosition:(DBMenuPosition *)position {
     [Venue dropAllVenues];
     [Venue saveVenues:@[[venue venueObject]]];
     
@@ -140,12 +140,23 @@
             
             [[DBCompanyInfo sharedInstance] fetchDependentInfo];
             
+            [[DBCompanyInfo sharedInstance] fetchDependentInfo:^(BOOL success, NSArray *categories) {
+                if (success) {
+                    if (position) {
+                        [[OrderCoordinator sharedInstance].itemsManager addPosition:position];
+                    }
+                }
+            }];
+            
             DBAAMenuViewController *menuVC = [DBAAMenuViewController new];
             [self.navigationController pushViewController:menuVC animated:YES];
         }];
     } else {
         [[DBCompanyInfo sharedInstance] updateInfo:nil];
         [[DBCompanyInfo sharedInstance] fetchDependentInfo];
+        if (position) {
+            [[OrderCoordinator sharedInstance].itemsManager addPosition:position];
+        }
         
         DBAAMenuViewController *menuVC = [DBAAMenuViewController new];
         [self.navigationController pushViewController:menuVC animated:YES];
@@ -158,7 +169,7 @@
     switch (self.type) {
         case UnifiedVenue: {
             DBUnifiedVenue *unifiedVenue = [[[DBUnifiedAppManager sharedInstance] venues] objectAtIndex:indexPath.row];
-            [self selectVenue:unifiedVenue];
+            [self selectVenue:unifiedVenue withPosition:nil];
             break;
         }
         case UnifiedMenu: {
@@ -171,8 +182,7 @@
         case UnifiedPosition: {
             DBUnifiedVenue *unifiedVenue = [self.positions[indexPath.section] venue];
             DBMenuPosition *position = [self.positions[indexPath.section] positions][indexPath.row];
-            [[OrderCoordinator sharedInstance].itemsManager addPosition:position];
-            [self selectVenue:unifiedVenue];
+            [self selectVenue:unifiedVenue withPosition:position];
         }
         default:
             break;

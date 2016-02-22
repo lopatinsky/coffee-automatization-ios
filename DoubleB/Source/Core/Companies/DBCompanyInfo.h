@@ -57,6 +57,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 - (void)updateInfo:(void(^)(BOOL success))callback;
 
 - (void)fetchDependentInfo;
+- (void)fetchDependentInfo:(void (^)(BOOL success, NSArray *categories))menuUpdate;
 
 + (DBMenuType)db_menuType;
 

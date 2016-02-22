@@ -113,11 +113,14 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     }];
 }
 
-- (void)fetchDependentInfo {
+- (void)fetchDependentInfo:(void (^)(BOOL success, NSArray *categories))menuUpdate {
     // Update menu
     [[DBMenu sharedInstance] updateMenu:^(BOOL success, NSArray *categories) {
         if(success){
             // Analyse user history to fetch selected modifiers
+            if (menuUpdate) {
+                menuUpdate(success, categories);
+            }
             [DBVersionDependencyManager analyzeUserModifierChoicesFromHistory];
         }
     }];
@@ -127,6 +130,11 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     [[CompanyNewsManager sharedManager] fetchUpdates];
     
     [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationFetchVenues];
+    
+}
+
+- (void)fetchDependentInfo {
+    [self fetchDependentInfo:nil];
 }
 
 + (DBMenuType)db_menuType {
