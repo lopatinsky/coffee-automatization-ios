@@ -14,6 +14,7 @@
 #import "DBCompaniesManager.h"
 
 #import "UIView+Gradient.h"
+#import "UIImageView+WebCache.h"
 #import "UIGestureRecognizer+BlocksKit.h"
 
 @interface DBAACompanyInfoMenuModuleView ()
@@ -54,8 +55,11 @@
         DBCompanyInfoViewController *infoVC = [DBCompanyInfoViewController new];
         [self.ownerViewController.navigationController pushViewController:infoVC animated:YES];
     }]];
-    
-    _companyTitle.text = [DBCompaniesManager selectedCompany].companyName;
+    [_bgImageView sd_setImageWithURL:[NSURL URLWithString:[DBCompaniesManager selectedCompany].companyImageUrl]];
+    // TODO: decide about company logo
+    [_companyImageView sd_setImageWithURL:[NSURL URLWithString:@"yandex.ru"] placeholderImage:[UIImage imageNamed:@"coffee_logo_placeholder"]];
+    _companyImageView.layer.cornerRadius = 5.f;
+    _companyTitle.text = [[DBCompanyInfo sharedInstance] applicationName];
     
     [self.topBarView addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
 }

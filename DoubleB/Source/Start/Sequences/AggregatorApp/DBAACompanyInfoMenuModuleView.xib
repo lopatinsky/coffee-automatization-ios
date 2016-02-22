@@ -7,12 +7,15 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="DBAACompanyInfoMenuModuleView">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="184"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QVG-ex-vOg">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QVG-ex-vOg">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                     <color key="backgroundColor" white="0.0" alpha="0.14999999999999999" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="180" id="vKP-bd-qtC"/>
+                    </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zq5-JB-Din">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
@@ -55,9 +58,9 @@
                         <constraint firstItem="2Ff-NK-MHA" firstAttribute="top" secondItem="zq5-JB-Din" secondAttribute="top" id="zKr-Nt-pvs"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l4d-rF-9SB">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l4d-rF-9SB">
                     <rect key="frame" x="125" y="55" width="70" height="70"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="HeI-4s-Szr"/>
                         <constraint firstAttribute="width" constant="70" id="geW-gN-lcr"/>
@@ -65,11 +68,12 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Сушилар" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4r-if-5ll">
                     <rect key="frame" x="15" y="125" width="290" height="24"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.020029920212765957" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="290" id="HEY-EN-Woo"/>
                         <constraint firstAttribute="height" constant="24" id="WFD-Cf-iI9"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -83,7 +87,7 @@
                 <constraint firstItem="QVG-ex-vOg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="EPo-JR-qMe"/>
                 <constraint firstItem="zq5-JB-Din" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Gzs-Xy-5Cy"/>
                 <constraint firstAttribute="trailing" secondItem="zq5-JB-Din" secondAttribute="trailing" id="Xf1-6a-gYs"/>
-                <constraint firstAttribute="bottom" secondItem="QVG-ex-vOg" secondAttribute="bottom" id="a20-Dy-lt4"/>
+                <constraint firstAttribute="bottom" secondItem="QVG-ex-vOg" secondAttribute="bottom" constant="4" id="a20-Dy-lt4"/>
                 <constraint firstItem="q4r-if-5ll" firstAttribute="top" secondItem="l4d-rF-9SB" secondAttribute="bottom" id="dEH-cd-srV"/>
                 <constraint firstItem="l4d-rF-9SB" firstAttribute="top" secondItem="zq5-JB-Din" secondAttribute="bottom" constant="25" id="g1j-lQ-8pv"/>
                 <constraint firstItem="l4d-rF-9SB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="g99-VZ-RNT"/>
@@ -100,7 +104,7 @@
                 <outlet property="promosView" destination="2Ff-NK-MHA" id="Tcd-fb-sJa"/>
                 <outlet property="topBarView" destination="zq5-JB-Din" id="COO-Ny-YGa"/>
             </connections>
-            <point key="canvasLocation" x="338" y="81.5"/>
+            <point key="canvasLocation" x="338" y="81"/>
         </view>
     </objects>
     <resources>
