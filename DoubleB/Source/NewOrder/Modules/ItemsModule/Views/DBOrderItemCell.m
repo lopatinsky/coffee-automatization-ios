@@ -94,8 +94,8 @@
 }
 
 - (void)configure {
-    [self reload];
     [self moveContentToOriginal:NO];
+    [self reload];
 }
 
 - (void)reload {
@@ -145,7 +145,6 @@
     if(self.type == DBOrderItemCellTypeFull){
         self.positionImageView.dbImageUrl = [NSURL URLWithString:_orderItem.position.imageUrl];
     }
-    
     
     if([_promoItem.errors count] > 0){
         self.errorView.mode = _promoItem.substitute ? DBNewOrderItemErrorViewModeReplace : DBNewOrderItemErrorViewModeDelete;

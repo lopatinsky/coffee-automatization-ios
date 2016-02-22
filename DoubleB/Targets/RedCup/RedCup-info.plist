@@ -9,9 +9,11 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict/>
+	<dict>
+	</dict>
 	<key>CFBundleIcons~ipad</key>
-	<dict/>
+	<dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>com.empatika.redcup</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -21,34 +23,20 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.10</string>
+	<string>1.12.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>fb917995138272367</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb917995138272367</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>vk5055279</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>vk5055279</string>
+				<string>fb349173695244280redcup</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.1.10.1</string>
+	<string>1.12.2.1</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -57,16 +45,19 @@
 		<array>
 			<dict>
 				<key>KitInfo</key>
-				<dict/>
+				<dict>
+				</dict>
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
 		</array>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>917995138272367</string>
+	<string>349173695244280</string>
 	<key>FacebookDisplayName</key>
-	<string>Red Cup</string>
+	<string>Ru-Beacon</string>
+	<key>FacebookUrlSchemeSuffix</key>
+	<string>redcup</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -87,6 +78,15 @@
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Мы используем Ваше местоположение для поиска ближайших кофеен</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.empatika.neworder</string>
+		<string>com.empatika.openorder</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -101,8 +101,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>VKAppId</key>
-	<string>5055279</string>
 	<key>branch_key</key>
 	<string>key_live_flnRnSyTTWGpWkIH03vEjofdqxnQQiS6</string>
 </dict>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict/>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://blackpearl.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#373435</string>
+		<key>CompanyGAKey</key>
+		<string>UA-73114524-14</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>mYoF3zh3Hcn5EJlUY66RK4DqUbg0nC7NbPSVrUNv</string>
+			<key>clientKey</key>
+			<string>Gb7hIuewI6P5SeN63ssuyMrTj5qsI4FRbil55r0x</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>
