@@ -22,7 +22,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)venue andCompanyDictionary:(NSDictionary *)companyDictionary {
     if (self = [super init]) {
         DBCompany *company = [DBCompany new];
-        company.companyNamespace = [companyDictionary getValueForKey:@"company_namespace"] ?: @"";
+        company.companyNamespace = [companyDictionary getValueForKey:@"namespace"] ?: @"";
         company.companyName = [companyDictionary getValueForKey:@"title"] ?: @"";
         company.companyDescription = [companyDictionary getValueForKey:@"description"] ?: @"";
         company.companyImageUrl = [companyDictionary getValueForKey:@"image"] ?: @"";
@@ -62,10 +62,10 @@
 
 - (instancetype)initWithDictionary:(NSDictionary *)venue {
     NSDictionary *companyDictionary = @{
-                                        @"namespace": [venue getValueForKey:@"company_namespace"] ?: @"",
-                                        @"name": [venue getValueForKey:@"title"] ?: @"",
+                                        @"namespace": [[venue getValueForKey:@"venue_object"] getValueForKey:@"company_namespace"] ?: @"",
+                                        @"name": [[venue getValueForKey:@"venue_object"] getValueForKey:@"title"] ?: @"",
                                         @"description": @"",
-                                        @"image": @""
+                                        @"image": [[venue getValueForKey:@"venue_object"] getValueForKey:@"pic"] ?: @""
                                         };
     return [self initWithDictionary:venue andCompanyDictionary:companyDictionary];
 }

@@ -124,7 +124,8 @@
     [Venue dropAllVenues];
     [Venue saveVenues:@[[venue venueObject]]];
     
-    if (![[DBCompaniesManager selectedCompanyNamespace] isEqualToString:venue.company.companyNamespace]) {
+    if ([[DBCompaniesManager selectedCompanyNamespace] isEqualToString:@""] ||
+        ![[DBCompaniesManager selectedCompanyNamespace] isEqualToString:venue.company.companyNamespace]) {
         [[OrderCoordinator sharedInstance] flushCache];
         [[DBCompanyInfo sharedInstance] flushCache];
         [[DBMenu sharedInstance] clearMenu];

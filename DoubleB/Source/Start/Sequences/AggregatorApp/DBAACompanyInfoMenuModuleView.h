@@ -9,4 +9,5 @@
 #import "DBModuleView.h"
 
 @interface DBAACompanyInfoMenuModuleView : DBModuleView
+
 @end

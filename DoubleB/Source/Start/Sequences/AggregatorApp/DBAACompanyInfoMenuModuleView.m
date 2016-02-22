@@ -13,6 +13,7 @@
 #import "DBPromosListViewController.h"
 #import "DBCompaniesManager.h"
 
+#import "UIView+Gradient.h"
 #import "UIGestureRecognizer+BlocksKit.h"
 
 @interface DBAACompanyInfoMenuModuleView ()
@@ -41,12 +42,14 @@
     [super awakeFromNib];
     
     if (!_gradientLayer) {
-        _gradientLayer = [CAGradientLayer layer];
-        _gradientLayer.frame = self.topBarView.bounds;
-        _gradientLayer.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
-        _gradientLayer.startPoint = CGPointMake(0.5, 0.0);
-        _gradientLayer.endPoint = CGPointMake(0.5, 1.0);
-        [self.topBarView.layer insertSublayer:_gradientLayer atIndex:0];
+        [self.topBarView layoutIfNeeded];
+        [self.topBarView setGradientWithColors:[NSArray arrayWithObjects:(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor, nil]];
+//        _gradientLayer = [CAGradientLayer layer];
+//        _gradientLayer.frame = self.topBarView.bounds;
+//        _gradientLayer.colors = @[(id)[UIColor blackColor].CGColor, (id)[UIColor clearColor].CGColor];
+//        _gradientLayer.startPoint = CGPointMake(0.5, 0.0);
+//        _gradientLayer.endPoint = CGPointMake(0.5, 1.0);
+//        [self.topBarView.layer insertSublayer:_gradientLayer atIndex:0];
     }
     
     [_promosImageView templateImageWithName:@"promos_icon" tintColor:[UIColor whiteColor]];
