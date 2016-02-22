@@ -52,22 +52,35 @@
 - (void)viewWillAppear:(BOOL)animated {
     [GANHelper analyzeScreen:self.screenName];
     
-    [self updateView];
     [self.cardsModuleContainer reload:YES];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self.footerView layoutIfNeeded];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self sizeHeaderToFit];
 }
 
 #pragma mark - User methods
+- (void)sizeHeaderToFit {
+    UIView *headerView = self.tableView.tableHeaderView;
+    [headerView setNeedsLayout];
+    [headerView layoutIfNeeded];
+    
+    CGFloat height = [headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    CGRect frame = headerView.frame;
+    frame.size.height = height;
+    headerView.frame = frame;
+    
+    self.tableView.tableHeaderView = headerView;
+    
+    UIView *footerView = self.tableView.tableFooterView;
+    [footerView setNeedsLayout];
+    [footerView layoutIfNeeded];
+    
+    height = [footerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    frame = footerView.frame;
+    frame.size.height = height;
+    footerView.frame = frame;
+    
+    self.tableView.tableFooterView = footerView;
+}
+
 - (void)configureViews {
     self.screenName = @"Abonement_screen";
     
@@ -79,7 +92,6 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"DBSubscriptionVariantCell" bundle:nil]
          forCellReuseIdentifier:@"variantCell"];
-    self.tableView.bounces = NO;
     UIView *backgroundView = [UIView new];
     backgroundView.backgroundColor = [UIColor db_backgroundColor];
     self.tableView.backgroundView = backgroundView;
@@ -132,30 +144,6 @@
                                  }
                              }];
     }];
-}
-
-- (void)updateView {
-    NSInteger headerSize = 2 * 10 + 30; // borders + gap between title and description
-    CGFloat height = [self heightForText:[DBSubscriptionManager sharedInstance].subscriptionScreenText font:[UIFont systemFontOfSize:15.0f] withinWidth:320];
-    headerSize += height;
-    CGRect frame = self.headerView.frame;
-    frame.size.height = headerSize;
-    self.headerView.frame = frame;
-    [self.headerView layoutIfNeeded];
-    
-    NSInteger footerSize = 96;
-    footerSize += self.cardsModuleView.moduleViewContentHeight;
-    frame = self.footerView.frame;
-    frame.size.height = footerSize;
-    self.footerView.frame = frame;
-    [self.footerView layoutIfNeeded];
-}
-
-- (CGFloat)heightForText:(NSString*)text font:(UIFont*)font withinWidth:(CGFloat)width {
-    CGSize size = [text sizeWithAttributes:@{NSFontAttributeName:font}];
-    CGFloat area = size.height * size.width;
-    CGFloat height = roundf(area / width);
-    return ceilf(height / font.lineHeight) * font.lineHeight;
 }
 
 - (void)clickOrderButton {
@@ -222,7 +210,7 @@
     [attrInfo addAttribute:NSForegroundColorAttributeName value:[[UIColor blackColor] colorWithAlphaComponent:0.5]
                      range:NSMakeRange(0, [[self.variants[indexPath.row] variantDescription] length])];
     NSString *info = [NSString stringWithFormat:@"\n\nСтоимость: %0.0f%@ Дней: %ld Кружек: %ld", [self.variants[indexPath.row] price],
-                      [Compatibility currencySymbol],[self.variants[indexPath.row] period], [self.variants[indexPath.row] count]];
+                      [Compatibility currencySymbol],(long)[self.variants[indexPath.row] period], (unsigned long)[self.variants[indexPath.row] count]];
     NSMutableAttributedString *attrInfo2 = [[NSMutableAttributedString alloc] initWithString:info];
     [attrInfo2 addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor]
                      range:NSMakeRange(0, [info length])];
