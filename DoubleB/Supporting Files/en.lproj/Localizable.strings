@@ -291,3 +291,14 @@
 
 // Subscription
 "Абонемент" = "Subscription";
+
+// Platius
+"Код для оплаты" = "Payment code";
+"Сменить телефон" = "Change phone";
+"Подтвердить телефон" = "Confirm phone";
+"Введите номер телефона, нажмите продолжить и дождитесь смс с Вашим кодом" = "Please, enter your phone number, press to continue and wait for the sms with your code";
+"Продолжить" = "Continue";
+"Введите полученный код" = "Please, enter code from sms";
+"Отправить" = "Send";
+"Повторить" = "Repeat";
+

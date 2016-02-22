@@ -97,10 +97,14 @@
     [[DBAPIClient sharedClient] POST:@"platius/check_sms"
                           parameters:@{@"code": code ?: @""}
                              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                                 [self parseStatusResponse:responseObject];
+                                 BOOL authorized = [[responseObject getValueForKey:@"authorized"] boolValue];
+                                 
+                                 if (authorized) {
+                                     [self parseStatusResponse:responseObject];
+                                 }
                                  
                                  if (callback)
-                                     callback (YES);
+                                     callback (authorized);
                              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                                  NSLog(@"%@", error);
                                  

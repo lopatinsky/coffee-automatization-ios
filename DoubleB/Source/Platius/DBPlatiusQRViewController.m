@@ -29,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self db_setTitle:@"Заголовок"];
+    [self db_setTitle:NSLocalizedString(@"Код для оплаты", nil)];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [_confirmPhoneButton addTarget:self action:@selector(confirmPhoneButtonClick) forControlEvents:UIControlEventTouchUpInside];
