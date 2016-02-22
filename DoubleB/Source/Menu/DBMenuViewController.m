@@ -198,19 +198,27 @@
 }
 
 - (UIBarButtonItem *)rightBarButtonItem {
+    NSMutableArray *components = [NSMutableArray new];
+    
     @weakify(self);
-    DBBarButtonItemComponent *searchComp = [DBBarButtonItemComponent create:DBBarButtonTypeSearch handler:^{
-        @strongify(self)
-        [self searchClick];
-    }];
-    self.searchVC = [DBMenuSearchVC new];
-    self.searchVC.delegate = self;
+    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"cosmotheca"]) {
+        DBBarButtonItemComponent *searchComp = [DBBarButtonItemComponent create:DBBarButtonTypeSearch handler:^{
+            @strongify(self)
+            [self searchClick];
+        }];
+        self.searchVC = [DBMenuSearchVC new];
+        self.searchVC.delegate = self;
+        
+        [components addObject:searchComp];
+    }
     
     DBBarButtonItemComponent *orderComp = [DBBarButtonItemComponent create:DBBarButtonTypeOrder handler:^{
         @strongify(self)
         [self moveToOrder];
     }];
-    return [DBBarButtonItem itemWithComponents:@[searchComp, orderComp]];
+    [components addObject:orderComp];
+    
+    return [DBBarButtonItem itemWithComponents:components];
 }
 
 - (void)moveToSettings {

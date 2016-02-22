@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://noodles.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#000000</string>
+		<key>CompanyGAKey</key>
+		<string>UA-65821587-48</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>OaXWbTHbsAVICMw6juzVS4T5GdhtgKD8i6MMPcX5</string>
+			<key>clientKey</key>
+			<string>zI6XvcbA4apxFlhzkE9z06EKrmGYw1bqzA8PM0KB</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>
