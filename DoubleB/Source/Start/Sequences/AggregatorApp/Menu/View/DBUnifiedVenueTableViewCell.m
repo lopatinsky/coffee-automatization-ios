@@ -49,8 +49,6 @@
     self.positionImageView.opaque = NO;
     self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
     self.positionImageView.clipsToBounds = YES;
-    
-    [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:venue.venuePicture]];
-}
+    self.positionImageView.dbImageUrl = [NSURL URLWithString:venue.venuePicture];}
 
 @end

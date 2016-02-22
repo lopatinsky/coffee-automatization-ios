@@ -52,9 +52,7 @@
             self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
             self.positionImageView.clipsToBounds = YES;
             if (![info[@"pic"] isKindOfClass:[NSNull class]]) {
-                [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:info[@"pic"]]];
-            } else {
-                [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:@"http://coffeegid.ru/wp-content/uploads/2014/12/vanilnyj-kapuchino-recept.jpg"]];
+                self.positionImageView.dbImageUrl = [NSURL URLWithString:info[@"pic"]];
             }
             break;
         case UnifiedPosition: {
@@ -68,10 +66,8 @@
             self.positionImageView.opaque = NO;
             self.positionImageView.contentMode = UIViewContentModeScaleAspectFill;
             self.positionImageView.clipsToBounds = YES;
-            if ([position imageUrl]) {
-                [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:[position imageUrl]]];
-            } else {
-                [self.positionImageView sd_setImageWithURL:[NSURL URLWithString:@"http://express-f.ru/image/cache/data/Menu/kofe/good_4a83db8539f02-900x900.jpg"]];
+            if (![info[@"pic"] isKindOfClass:[NSNull class]]) {
+                self.positionImageView.dbImageUrl = [NSURL URLWithString:info[@"pic"]];
             }
         }
         default:
