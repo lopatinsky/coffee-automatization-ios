@@ -58,22 +58,16 @@
     DBSettingsSection *companySection = [[DBSettingsSection alloc] init:DBSettingsSectionTypeCompany];
     
     // Cities
-    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"] &&
-        [[DBCitiesManager sharedInstance] cities].count > 1) {
+    if ([[DBCitiesManager sharedInstance] cities].count > 1) {
         DBSettingsItem *item = [DBCitiesViewController settingsItem];
         [companySection.items addObject:item];
     }
     
     // Companies
-    if (![[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"] &&
-         [DBCompaniesManager sharedInstance].hasCompanies) {
+    if ([DBCompaniesManager sharedInstance].hasCompanies) {
         [companySection.items addObject:[[ViewControllerManager companiesViewController] settingsItem]];
     }
     
-    // Unified app
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"]) {
-        [companySection.items addObject:[DBUnifiedMenuTableViewController settingsItem]];
-    }
     
     if (companySection.items.count > 0) {
         [settingsSections addObject:companySection];

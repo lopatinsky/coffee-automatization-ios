@@ -51,6 +51,10 @@ NSString *const kDBNetworkManagerShouldRetryToRequest = @"kDBNetworkManagerShoul
 - (void)subscribeOnNetworkFailureEvents {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationCompaniesLoadFailure object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationCompanyInfoLoadFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationUnifiedCitiesLoadFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationUnifiedVenuesLoadFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationUnifiedPositionsLoadFailure object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailed:) name:kDBConcurrentOperationUnifiedMenuLoadFailure object:nil];
 }
 
 - (void)retryOperations {

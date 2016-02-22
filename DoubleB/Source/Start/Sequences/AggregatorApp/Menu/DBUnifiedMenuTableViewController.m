@@ -37,6 +37,7 @@
 
 @implementation DBUnifiedMenuTableViewController
 
+#pragma mark - Life-cycle
 - (void)viewDidLoad {
     self.segmentedController.tintColor = [UIColor db_defaultColor];
     self.segmentedController.backgroundColor = [UIColor whiteColor];
@@ -52,56 +53,34 @@
     
     self.segmentHolderView.hidden = self.type == UnifiedPosition;
     
+    [self addObservers];
     [self setupInitial];
     [self fetchData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
     if (self.type == UnifiedPosition) {
         [self db_setTitle:[self.product objectForKey:@"title"]];
     } else {
         [self db_setTitle:[[DBCitiesManager selectedCity] cityName]];
     }
-    [self.tableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+    
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         [self.segmentHolderView setGradientWithColors:[NSArray arrayWithObjects:(id)[[UIColor grayColor] colorWithAlphaComponent:0.4].CGColor, (id)[UIColor clearColor].CGColor, nil]];
     });
 }
 
-- (void)fetchData {
-    switch (self.type) {
-        case UnifiedMenu: {
-            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedMenu];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchMenuSuccess) name:kDBConcurrentOperationUnifiedMenuLoadSuccess object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchMenuFailure) name:kDBConcurrentOperationUnifiedMenuLoadFailure object:nil];
-            break;
-        }
-        case UnifiedVenue: {
-            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedVenues];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchVenueSuccess) name:kDBConcurrentOperationUnifiedVenuesLoadSuccess object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchVenueFailure) name:kDBConcurrentOperationUnifiedVenuesLoadFailure object:nil];
-            break;
-        }
-        case UnifiedPosition: {
-            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedPositions withUserInfo:@{@"product_id": @([[self.product objectForKey:@"id"] integerValue])}];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchPositionsSuccess) name:kDBConcurrentOperationUnifiedPositionsLoadSuccess object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchPositionsFailure) name:kDBConcurrentOperationUnifiedPositionsLoadFailure object:nil];
-            break;
-        }
-        default:
-            break;
-    }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - Initialization
 - (void)setupInitial {
     if (self.type != UnifiedPosition) {
         self.navigationItem.leftBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
@@ -111,21 +90,14 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
-
-- (NSArray *)mockData {
-    return @[
-             @{@"image": @"http://uashota.lg.ua/media/product/original/кофе%20латте%20макиато.jpg", @"name": @"Латте", @"info": @"14", @"price": @130},
-             @{@"image": @"http://coffeegid.ru/wp-content/uploads/2014/12/vanilnyj-kapuchino-recept.jpg", @"name": @"Капучино", @"info": @"24", @"price": @80},
-             @{@"image": @"http://kofe-inn.ru/wp-content/uploads/2015/07/американо.jpg", @"name": @"Американо", @"info": @"3", @"price": @110},
-             @{@"image": @"http://express-f.ru/image/cache/data/Menu/kofe/good_4a83db8539f02-900x900.jpg", @"name": @"Эспрессо", @"info": @"21", @"price": @60},
-            ];
+- (void)addObservers {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchMenuSuccess) name:kDBConcurrentOperationUnifiedMenuLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchVenueSuccess) name:kDBConcurrentOperationUnifiedVenuesLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchPositionsSuccess) name:kDBConcurrentOperationUnifiedPositionsLoadSuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionFailure) name:kDBNetworkManagerConnectionFailed object:nil];
 }
 
-- (void)moveToSettings {
-    DBBaseSettingsTableViewController *settingsController = [ViewControllerManager generalSettingsViewController];
-    [self.navigationController pushViewController:settingsController animated:YES];
-}
-
+#pragma mark - Auixiliary
 - (IBAction)segmentedControlValueChanged:(id)sender {
     if (self.segmentedController.selectedSegmentIndex == 0) {
         self.type = UnifiedVenue;
@@ -133,44 +105,6 @@
         self.type = UnifiedMenu;
     }
     [self.tableView reloadData];
-}
-
-#pragma mark - Networking 
-- (void)fetchMenuSuccess {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    if (self.type == UnifiedMenu) {
-        [self.tableView reloadData];
-    }
-}
-
-- (void)fetchMenuFailure {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
-}
-
-- (void)fetchVenueSuccess {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    if (self.type == UnifiedVenue) {
-        [self.tableView reloadData];
-    }
-}
-
-- (void)fetchVenueFailure {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
-}
-
-- (void)fetchPositionsSuccess {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    self.positions = [[DBUnifiedAppManager sharedInstance] positionsForItem:@([[self.product objectForKey:@"id"] integerValue])];
-    if (self.type == UnifiedPosition) {
-        [self.tableView reloadData];
-    }
-}
-
-- (void)fetchPositionsFailure {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    
 }
 
 - (void)selectVenue:(DBUnifiedVenue *)venue {
@@ -231,36 +165,6 @@
     }
 }
 
-#pragma mark - DBSettingsProtocol
-
-+ (id<DBSettingsItemProtocol>)settingsItem {
-    DBUnifiedMenuTableViewController *unifiedVC = [DBUnifiedMenuTableViewController new];
-    DBSettingsItem *settingsItem = [DBSettingsItem new];
-    NSString *profileText = [[DBCompaniesManager selectedCompany] companyName];
-    
-    settingsItem.name = @"unifiedVC";
-    settingsItem.title = NSLocalizedString(@"Профиль", nil);
-    settingsItem.iconName = @"city_icon";
-    settingsItem.viewController = unifiedVC;
-    settingsItem.reachTitle = profileText && profileText.length ? profileText : nil;
-    settingsItem.eventLabel = @"profile_click";
-    settingsItem.navigationType = DBSettingsItemNavigationBlock;
-    settingsItem.block = ^(UIViewController *vc) {
-        [UIAlertView bk_showAlertViewWithTitle:@"Выход"
-                                       message:@"При выходе в основное меню все данные корзины будут удалены. Продолжить?"
-                             cancelButtonTitle:NSLocalizedString(@"Отмена", nil) otherButtonTitles:@[@"OK"]
-                                       handler:^(UIAlertView *alertVчiew, NSInteger buttonIndex) {
-                                           if (buttonIndex == 1) {
-                                               [[ApplicationManager sharedInstance] flushCache];
-                                               [[ApplicationManager sharedInstance] flushStoredCache];
-                                               [[ApplicationManager sharedInstance] moveToScreen:ApplicationScreenUnified animated:YES];
-                                           }
-        }];
-    };
-    
-    return settingsItem;
-}
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     switch (self.type) {
@@ -315,6 +219,66 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
+}
+
+#pragma mark - Networking
+- (void)fetchData {
+    switch (self.type) {
+        case UnifiedMenu: {
+            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedMenu];
+            break;
+        }
+        case UnifiedVenue: {
+            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedVenues];
+            break;
+        }
+        case UnifiedPosition: {
+            [[NetworkManager sharedManager] addPendingOperation:NetworkOperationFetchUnifiedPositions withUserInfo:@{@"product_id": @([[self.product objectForKey:@"id"] integerValue])}];
+            break;
+        }
+        default:
+            break;
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)fetchMenuSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (self.type == UnifiedMenu) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)fetchVenueSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    if (self.type == UnifiedVenue) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)fetchPositionsSuccess {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    self.positions = [[DBUnifiedAppManager sharedInstance] positionsForItem:@([[self.product objectForKey:@"id"] integerValue])];
+    if (self.type == UnifiedPosition) {
+        [self.tableView reloadData];
+    }
+}
+
+- (void)connectionFailure {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [[UIAlertView bk_showAlertViewWithTitle:NSLocalizedString(@"Ошибка", nil) message:NSLocalizedString(@"Проверьте соединение с интернетом и попробуйте ещё раз", nil)
+                          cancelButtonTitle:NSLocalizedString(@"Повторить", nil) otherButtonTitles:nil handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                  [self fetchData];
+                              });
+                          }] show];
+}
+
+
+#pragma mark - Navigation
+- (void)moveToSettings {
+    DBBaseSettingsTableViewController *settingsController = [ViewControllerManager generalSettingsViewController];
+    [self.navigationController pushViewController:settingsController animated:YES];
 }
 
 @end
