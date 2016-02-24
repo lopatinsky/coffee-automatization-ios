@@ -55,6 +55,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import <PayPal-iOS-SDK/PayPalMobile.h>
+#import <YandexMobileMetrica/YandexMobileMetrica.h>
 
 #import "UIAlertView+BlocksKit.h"
 
@@ -184,6 +185,14 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     
     NSString *key = [[[config getValueForKey:@"keys"] getValueForKey:@"parse"] getValueForKey:@"client_key"];
     return key;
+}
+
+- (NSString *)yandexMetricsKey {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    NSString *key = [[config getValueForKey:@"keys"] getValueForKey:@"yandex_metrics"];
+    return key;
+    
 }
 
 - (NSString *)branchKey {
@@ -317,16 +326,26 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     self = [super init];
     
     self.state = RootStateStart;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(initializeConfigurableFrameworks) name:kDBApplicationConfigDidLoadNotification object:nil];
     
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 #pragma mark - Frameworks initialization
+- (void)initializeConfigurableFrameworks {
+    if ([[ApplicationConfig sharedInstance] yandexMetricsKey]) {
+        [YMMYandexMetrica activateWithApiKey:[[ApplicationConfig sharedInstance] yandexMetricsKey]];
+    }
+}
+
 - (void)initializeVendorFrameworks {
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
 }
 

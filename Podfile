@@ -25,5 +25,6 @@ pod 'Crashlytics'
 pod 'Branch'
 pod 'FBSDKShareKit'
 pod 'VK-ios-sdk', '~> 1.2.0'
+pod 'YandexMobileMetrica'
 
 pod 'HSTestingBackchannel', :configuration => ['Debug']
