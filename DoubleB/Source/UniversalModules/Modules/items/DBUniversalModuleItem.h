@@ -11,16 +11,14 @@
 
 typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
     DBUniversalModuleItemTypeString = 0,
-    DBUniversalModuleItemTypeInteger
+    DBUniversalModuleItemTypeInteger,
+    DBUniversalModuleItemTypeDate
 };
 
 @interface DBUniversalModuleItem : NSObject<NSCoding>
-
-
 @property (nonatomic, readonly) DBUniversalModuleItemType type;
 @property (strong, nonatomic) NSString *itemId;
 @property (strong, nonatomic) NSString *placeholder;
-@property (strong, nonatomic) NSString *text;
 
 @property (nonatomic) NSInteger order;
 
@@ -35,5 +33,13 @@ typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
 - (void)syncWithResponseDict:(NSDictionary *)dict;
 
 - (void)save;
+
+// String and Integer type
+@property (strong, nonatomic) NSString *text;
+
+// Date type
+@property (strong, nonatomic) NSDate *selectedDate;
+@property (strong, nonatomic) NSDate *minDate;
+@property (strong, nonatomic) NSDate *maxDate;
 
 @end

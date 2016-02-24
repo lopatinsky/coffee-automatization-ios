@@ -42,7 +42,7 @@
     self.autocompleteView = [DBShippingAutocompleteView new];
     self.autocompleteView.delegate = self;
     
-    self.cityPickerView = [DBPickerView new];
+    self.cityPickerView = [DBPickerView create:DBPickerViewModeItems];
     self.cityPickerView.pickerDelegate = self;
     
     [self.tableView reloadData];

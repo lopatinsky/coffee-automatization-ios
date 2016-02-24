@@ -9,12 +9,16 @@
 #import "DBUniversalModuleTextItemView.h"
 #import "DBUniversalModuleItem.h"
 #import "DBPopupTextFieldView.h"
+#import "DBPickerView.h"
 
-@interface DBUniversalModuleTextItemView ()<UITextFieldDelegate, DBPopupComponentDelegate>
+@interface DBUniversalModuleTextItemView ()<UITextFieldDelegate, DBPopupComponentDelegate, DBPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @property (strong, nonatomic) DBPopupTextFieldView *popupView;
+
+@property (strong, nonatomic) NSDateFormatter *formatter;
+@property (strong, nonatomic) DBPickerView *pickerView;
 
 @end
 
@@ -38,20 +42,43 @@
 - (void)commonInit {
     self.textField.placeholder = _item.placeholder;
 //    _textField.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
-    self.textField.text = _item.text;
     
-    self.popupView = [DBPopupTextFieldView create];
-    self.popupView.placeholder = _item.placeholder;
-    self.popupView.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
-    self.popupView.delegate = self;
+    if (_item.type == DBUniversalModuleItemTypeString || _item.type == DBUniversalModuleItemTypeInteger) {
+        self.popupView = [DBPopupTextFieldView create];
+        self.popupView.placeholder = _item.placeholder;
+        self.popupView.keyboardType = _item.type == DBUniversalModuleItemTypeString ? UIKeyboardTypeDefault : UIKeyboardTypeNumberPad;
+        self.popupView.delegate = self;
+        
+        self.textField.text = _item.text;
+    }
+    
+    if (_item.type == DBUniversalModuleItemTypeDate) {
+        self.pickerView = [DBPickerView create:DBPickerViewModeDate];
+        self.pickerView.pickerDelegate = self;
+        self.pickerView.title = _item.placeholder;
+        self.pickerView.minDate = _item.minDate;
+        self.pickerView.maxDate = _item.maxDate;
+        
+        self.formatter = [NSDateFormatter new];
+        self.formatter.dateFormat = @"dd.MM.yyyy";
+        if (_item.selectedDate)
+            self.textField.text = [self.formatter stringFromDate:_item.selectedDate];
+    }
     
 //    [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
-        self.popupView.text = _item.text;
-        [self.popupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+        if (_item.type == DBUniversalModuleItemTypeString || _item.type == DBUniversalModuleItemTypeInteger) {
+            self.popupView.text = _item.text;
+            [self.popupView showFrom:self onView:[self.delegate db_moduleViewModalComponentContainer:self]];
+        }
+        
+        if (_item.type == DBUniversalModuleItemTypeDate) {
+            self.pickerView.selectedDate = _item.selectedDate;
+            [self.pickerView showOnView:[self.delegate db_moduleViewModalComponentContainer:self] appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+        }
     }
     
     return NO;
@@ -71,8 +98,18 @@
 //}
 
 - (void)db_componentWillDismiss:(DBPopupComponent *)component {
-    _item.text = self.popupView.text;
-    self.textField.text = _item.text;
+    if (_item.type == DBUniversalModuleItemTypeString || _item.type == DBUniversalModuleItemTypeInteger) {
+        _item.text = self.popupView.text;
+        self.textField.text = _item.text;
+    }
+    
+    if (_item.type == DBUniversalModuleItemTypeDate) {
+        _item.selectedDate = self.pickerView.selectedDate;
+        
+        if (_item.selectedDate)
+            self.textField.text = [self.formatter stringFromDate:_item.selectedDate];
+    }
+    
     [_item save];
 }
 
