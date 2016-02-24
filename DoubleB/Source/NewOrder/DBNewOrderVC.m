@@ -25,6 +25,7 @@
 #import "DBNOPersonsModuleView.h"
 #import "DBNOndaModuleView.h"
 #import "DBNOOrderModuleView.h"
+#import "DBNOOrderApprovalModuleView.h"
 #import "DBModuleSeparatorView.h"
 
 #import "DBModulesManager.h"
@@ -115,6 +116,9 @@
     }
     if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePersonsCount]) {
         [self addModule:[DBNOPersonsModuleView create]topOffset:1];
+    }
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeOrderApproval]) {
+        [self addModule:[DBNOOrderApprovalModuleView create] topOffset:1];
     }
     
     // Universal modules

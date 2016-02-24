@@ -25,7 +25,14 @@ typedef NS_ENUM(NSInteger, OrderManagerChange) {
     OrderManagerChangeComment,
     OrderManagerChangeOddSum,
     OrderManagerChangePersonsCount,
-    OrderManagerChangeNDAAccept
+    OrderManagerChangeNDAAccept,
+    OrderManagerChangeConfirmationType
+};
+
+typedef NS_ENUM(NSInteger, ConfirmationType) {
+    ConfirmationTypeUndefined = 0,
+    ConfirmationTypePhone = 1,
+    ConfirmationTypeSms = 2
 };
 
 /**
@@ -53,6 +60,11 @@ typedef NS_ENUM(NSInteger, OrderManagerChange) {
  * Selected persons count
  */
 @property (nonatomic) NSInteger personsCount;
+
+/**
+ * Confirmation type of the order if applicable
+ */
+@property (nonatomic) ConfirmationType confirmationType;
 
 /**
 * User's location
