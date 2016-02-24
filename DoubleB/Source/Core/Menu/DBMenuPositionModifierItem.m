@@ -10,6 +10,7 @@
 #import "DBMenuPositionModifier.h"
 
 @interface DBMenuPositionModifierItem ()
+@property (nonatomic) double itemPrice;
 @end
 
 @implementation DBMenuPositionModifierItem
@@ -36,6 +37,10 @@
     if([key isEqualToString:@"order"]){
         self.order = value ? [value integerValue] : 0;
     }
+}
+
+- (double)itemPrice:(NSString *)venueId {
+    
 }
 
 #pragma mark - NSCoding methods
