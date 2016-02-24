@@ -40,7 +40,16 @@
 }
 
 - (double)itemPrice:(NSString *)venueId {
+    NSArray *prices = [self.itemDictionary getValueForKey:@"prices"] ?: @[];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
+    NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
     
+    double price = self.itemPrice;
+    if (priceDict) {
+        price = [[priceDict getValueForKey:@"price"] doubleValue];
+    }
+    
+    return price;
 }
 
 #pragma mark - NSCoding methods

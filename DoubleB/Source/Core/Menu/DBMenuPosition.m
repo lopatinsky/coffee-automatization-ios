@@ -14,6 +14,7 @@
 @interface DBMenuPosition ()
 @property(strong, nonatomic) NSString *positionId;
 @property(strong, nonatomic) NSString *name;
+@property(nonatomic) double price;
 @property(nonatomic) NSInteger order;
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *positionDescription;
@@ -143,6 +144,32 @@
 
 #pragma mark - Dynamic properties
 
+- (double)price:(NSString *)venueId {
+    NSArray *prices = [self.productDictionary getValueForKey:@"prices"] ?: @[];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
+    NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
+    
+    double price = self.price;
+    if (priceDict) {
+        price = [[priceDict getValueForKey:@"price"] doubleValue];
+    }
+    
+    return price;
+}
+
+- (double)actualPrice:(NSString *)venueId {
+    double price = [self price:venueId];
+    for(DBMenuPositionModifier *modifier in self.groupModifiers){
+        price += [modifier actualPrice:venueId];;
+    }
+    
+    for(DBMenuPositionModifier *modifier in self.singleModifiers){
+        price += [modifier actualPrice:venueId];
+    }
+    
+    return price;
+}
+
 - (BOOL)hasImage{
     BOOL result = self.imageUrl != nil;
     if(result){
@@ -153,19 +180,6 @@
 
 - (BOOL)availableInVenue:(Venue *)venue{
     return (venue && ![_venuesRestrictions containsObject:venue.venueId]) || !venue;
-}
-
-- (double)actualPrice{
-    double price = self.price;
-    for(DBMenuPositionModifier *modifier in self.groupModifiers){
-        price += modifier.actualPrice;
-    }
-    
-    for(DBMenuPositionModifier *modifier in self.singleModifiers){
-        price += modifier.actualPrice;
-    }
-    
-    return price;
 }
 
 - (BOOL)hasEmptyRequiredModifiers {

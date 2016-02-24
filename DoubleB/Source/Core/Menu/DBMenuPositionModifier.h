@@ -18,8 +18,7 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 };
 
 @interface DBMenuPositionModifier : NSObject<NSCopying, WatchAppModelProtocol>
-
-@property (nonatomic, readonly) double actualPrice;
+//@property (nonatomic, readonly) double actualPrice;
 
 @property (nonatomic, readonly) ModifierType modifierType;
 @property (strong, nonatomic, readonly) NSString *modifierId;
@@ -27,7 +26,7 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 @property (strong, nonatomic, readonly) NSDictionary *modifierDictionary;
 
 // Only for Single modifier
-@property (nonatomic, readonly) double modifierPrice;
+//@property (nonatomic, readonly) double modifierPrice;
 @property (nonatomic, readonly) NSInteger maxAmount;
 @property (nonatomic, readonly) NSInteger minAmount;
 @property (nonatomic, readonly) NSInteger order;
@@ -39,6 +38,9 @@ typedef NS_ENUM(NSInteger, ModifierType) {
 
 @property (strong, nonatomic, readonly) DBMenuPositionModifierItem *selectedItem;
 @property (nonatomic, readonly) BOOL itemSelectedByUser;
+
+- (double)price:(NSString *)venueId;
+- (double)actualPrice:(NSString *)venueId;
 
 // Single
 + (DBMenuPositionModifier *)singleModifierFromDictionary:(NSDictionary *)modifierDictionary;

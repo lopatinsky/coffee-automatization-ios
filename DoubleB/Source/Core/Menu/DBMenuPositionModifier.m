@@ -48,16 +48,29 @@
 
 #pragma mark - Dynamic data
 
-- (double)actualPrice{
+- (double)price:(NSString *)venueId {
+    NSArray *prices = [self.modifierDictionary getValueForKey:@"prices"] ?: @[];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
+    NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
+    
+    double price = self.modifierPrice;
+    if (priceDict) {
+        price = [[priceDict getValueForKey:@"price"] doubleValue];
+    }
+    
+    return price;
+}
+
+- (double)actualPrice:(NSString *)venueId {
     if(self.modifierType == ModifierTypeGroup){
-        double actualPrice = self.defaultItem.itemPrice;
+        double actualPrice = [self.defaultItem itemPrice:venueId];
         
         if(self.selectedItem)
-            actualPrice = self.selectedItem.itemPrice;
+            actualPrice = [self.selectedItem itemPrice:venueId];
         
         return actualPrice;
     } else {
-        return self.selectedCount * self.modifierPrice;
+        return self.selectedCount * [self price:venueId];
     }
 }
 
