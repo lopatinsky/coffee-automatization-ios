@@ -14,7 +14,6 @@
 @interface DBMenuPosition ()
 @property(strong, nonatomic) NSString *positionId;
 @property(strong, nonatomic) NSString *name;
-@property(nonatomic) double price;
 @property(nonatomic) NSInteger order;
 @property(strong, nonatomic) NSString *imageUrl;
 @property(strong, nonatomic) NSString *positionDescription;
@@ -144,12 +143,13 @@
 
 #pragma mark - Dynamic properties
 
-- (double)price:(NSString *)venueId {
+- (double)price{
+    NSString *venueId = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
     NSArray *prices = [self.productDictionary getValueForKey:@"prices"] ?: @[];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
     NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
     
-    double price = self.price;
+    double price = _price;
     if (priceDict) {
         price = [[priceDict getValueForKey:@"price"] doubleValue];
     }
@@ -157,14 +157,14 @@
     return price;
 }
 
-- (double)actualPrice:(NSString *)venueId {
-    double price = [self price:venueId];
+- (double)actualPrice {
+    double price = self.price;
     for(DBMenuPositionModifier *modifier in self.groupModifiers){
-        price += [modifier actualPrice:venueId];;
+        price += modifier.actualPrice;
     }
     
     for(DBMenuPositionModifier *modifier in self.singleModifiers){
-        price += [modifier actualPrice:venueId];
+        price += modifier.actualPrice;
     }
     
     return price;

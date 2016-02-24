@@ -10,7 +10,6 @@
 #import "DBMenuPositionModifier.h"
 
 @interface DBMenuPositionModifierItem ()
-@property (nonatomic) double itemPrice;
 @end
 
 @implementation DBMenuPositionModifierItem
@@ -39,12 +38,13 @@
     }
 }
 
-- (double)itemPrice:(NSString *)venueId {
+- (double)itemPrice {
+    NSString *venueId = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
     NSArray *prices = [self.itemDictionary getValueForKey:@"prices"] ?: @[];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
     NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
     
-    double price = self.itemPrice;
+    double price = _itemPrice;
     if (priceDict) {
         price = [[priceDict getValueForKey:@"price"] doubleValue];
     }

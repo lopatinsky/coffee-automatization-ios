@@ -27,8 +27,8 @@ typedef NS_ENUM(NSInteger, DBMenuPositionMode){
 @property(strong, nonatomic, readonly) NSString *positionId;
 @property(strong, nonatomic, readonly) NSString *name;
 @property(nonatomic, readonly) NSInteger order;
-//@property(nonatomic) double price;
-//@property(nonatomic, readonly) double actualPrice;
+@property(nonatomic) double price;
+@property(nonatomic, readonly) double actualPrice;
 @property(strong, nonatomic, readonly) NSString *imageUrl;
 @property(strong, nonatomic, readonly) NSString *positionDescription;
 @property(nonatomic, readonly) double energyAmount;
@@ -45,9 +45,6 @@ typedef NS_ENUM(NSInteger, DBMenuPositionMode){
 - (void)synchronizeWithResponseDictionary:(NSDictionary *)positionDictionary;
 
 - (void)syncWithPosition:(DBMenuPosition *)position;
-
-- (double)price:(NSString *)venueId;
-- (double)actualPrice:(NSString *)venueId;
 
 // dynamic data(not stored)
 @property(nonatomic, readonly) BOOL hasImage;

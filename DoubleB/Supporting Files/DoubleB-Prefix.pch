@@ -29,6 +29,9 @@
 #import "ViewManager.h"
 #import "ViewControllerManager.h"
 
+#import "Venue.h"
+#import "OrderCoordinator.h"
+
 #import "Compatibility.h"
 
 #import "UIDevice+OSVersion.h"
