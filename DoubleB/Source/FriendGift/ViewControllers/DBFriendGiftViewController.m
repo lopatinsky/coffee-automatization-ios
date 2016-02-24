@@ -50,7 +50,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = NSLocalizedString(@"Подарок", nil);
     self.view.backgroundColor = [UIColor db_backgroundColor];
     self.analyticsScreen = @"Friend_gift_screen";
     
@@ -84,6 +83,8 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.navigationItem.title = NSLocalizedString(@"Подарок", nil);
+    
     if([DBFriendGiftHelper sharedInstance].items.count == 0) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[DBFriendGiftHelper sharedInstance] fetchItems:^(BOOL success) {
@@ -97,7 +98,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
     [self.view endEditing:YES];
+    self.navigationItem.title = @"";
 }
 
 - (void)dealloc {

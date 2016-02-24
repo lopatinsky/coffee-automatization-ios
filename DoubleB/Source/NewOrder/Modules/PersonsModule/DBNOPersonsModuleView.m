@@ -31,7 +31,7 @@
     
     self.titles = @[@"Буду один", @"На двоих", @"3 человека", @"4 человека", @"5 человек", @"6 человек", @"Нас много"];
     
-    self.pickerView = [DBPickerView new];
+    self.pickerView = [DBPickerView create:DBPickerViewModeItems];
     self.pickerView.pickerDelegate = self;
     self.pickerView.title = NSLocalizedString(@"Количество персон", nil);
     [self.pickerView configureWithItems:self.titles];

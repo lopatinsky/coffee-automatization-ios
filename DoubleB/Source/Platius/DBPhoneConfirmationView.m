@@ -12,6 +12,8 @@
 #import "AKNumericFormatter.h"
 #import "UITextField+AKNumericFormatter.h"
 
+#import "UIAlertView+BlocksKit.h"
+
 
 @interface DBPhoneConfirmationView ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
@@ -118,9 +120,15 @@
                 [_delegate db_phoneConfirmationViewConfirmedPhone:self];
             }
         } else {
-            _continueButton.hidden = NO;
+            _continueButton.hidden = YES;
+            _errorLabel.hidden = NO;
+            _errorLabel.text = NSLocalizedString(@"Неверный код", nil);
             
-            [_continueButton setTitle:NSLocalizedString(@"Повторить", nil) forState:UIControlStateNormal];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ([_delegate respondsToSelector:@selector(db_phoneConfirmationViewConfirmedPhone:)]) {
+                    [_delegate db_phoneConfirmationViewConfirmedPhone:self];
+                }
+            });
         }
     }];
 }

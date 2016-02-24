@@ -13,6 +13,7 @@
 #import "OrderCoordinator.h"
 #import "DBModulesManager.h"
 #import "DBMenu.h"
+#import "OrderItem.h"
 
 #import "DBPopupViewController.h"
 #import "UIView+RoundedCorners.h"
@@ -168,8 +169,14 @@
 
 - (BOOL)positionAvailable {
     BOOL available = NO;
+    
+    NSInteger positionsInOrder = 0;
+    for (OrderItem *item in [OrderCoordinator sharedInstance].itemsManager.items) {
+        positionsInOrder += [item.position.positionId isEqualToString:self.position.positionId] ? item.count : 0;
+    }
+    
     for (DBMenuPositionBalance *balance in self.balance) {
-        if (balance.venue == [OrderCoordinator sharedInstance].orderManager.venue) {
+        if (balance.venue == [OrderCoordinator sharedInstance].orderManager.venue && positionsInOrder < balance.balance) {
             available = YES;
         }
     }

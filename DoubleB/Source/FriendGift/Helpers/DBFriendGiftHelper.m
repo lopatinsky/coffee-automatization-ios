@@ -20,6 +20,7 @@ NSString * const DBFriendGiftHelperNotificationFriendName = @"DBFriendGiftHelper
 NSString * const DBFriendGiftHelperNotificationFriendPhone = @"DBFriendGiftHelperNotificationFriendPhone";
 
 NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelperNotificationItemsPrice";
+NSString * const DBFriendGiftHelperNotificationItemsCount = @"DBFriendGiftHelperNotificationItemsCount";
 
 @implementation DBFriendGiftHelper
 
@@ -59,11 +60,16 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
 }
 
 - (void)manager:(id<OrderPartManagerProtocol>)manager haveChange:(NSInteger)changeType {
+    // TODO: logic is not clear
     switch (changeType) {
-        case ItemsManagerChangeTotalPrice:{
+        case ItemsManagerChangeTotalPrice: {
             [self notifyObserverOf:DBFriendGiftHelperNotificationItemsPrice];
-        }break;
-            
+            break;
+        }
+        case ItemsManagerChangeTotalCount: {
+            [[NSNotificationCenter defaultCenter] postNotificationName:DBFriendGiftHelperNotificationItemsCount object:nil];
+            break;
+        }
         default:
             break;
     }
