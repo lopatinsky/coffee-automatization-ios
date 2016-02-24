@@ -709,6 +709,10 @@
         params[@"cash_change"] = [OrderCoordinator sharedInstance].orderManager.oddSum ?: @"";
     }
     
+    if ([OrderCoordinator sharedInstance].orderManager.confirmationType != ConfirmationTypeUndefined) {
+        params[@"confirmation_type"] = @([OrderCoordinator sharedInstance].orderManager.confirmationType);
+    }
+    
     NSMutableDictionary *extraInfo = [NSMutableDictionary new];
     for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
         extraInfo[module.jsonField] = [module jsonRepresentation];

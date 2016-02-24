@@ -29,6 +29,7 @@ NSString * __nonnull const CoordinatorNotificationNewComment = @"CoordinatorNoti
 NSString * __nonnull const CoordinatorNotificationNewOddSum = @"CoordinatorNotificationNewOddSum";
 NSString * __nonnull const CoordinatorNotificationNewPersonsCount = @"CoordinatorNotificationNewPersonsCount";
 NSString * __nonnull const CoordinatorNotificationNDAAccept = @"CoordinatorNotificationNDAAccept";
+NSString * __nonnull const CoordinatorNotificationNewConfirmationType = @"CoordinatorNotificationNewConfirmationType";
 
 NSString * __nonnull const CoordinatorNotificationNewVenue = @"CoordinatorNotificationNewVenue";
 NSString * __nonnull const CoordinatorNotificationNewShippingAddress = @"CoordinatorNotificationNewShippingAddress";
@@ -211,6 +212,9 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             case OrderManagerChangeNDAAccept:
                 [self orderManagerDidChangeNDAAccept];
                 break;
+            case OrderManagerChangeConfirmationType:
+                [self orderManagerDidChangeConfirmationType];
+                break;
         }
     }
     
@@ -350,6 +354,10 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
 
 - (void)orderManagerDidChangeNDAAccept{
     [self notifyObserverOf:CoordinatorNotificationNDAAccept];
+}
+
+- (void)orderManagerDidChangeConfirmationType {
+    [self notifyObserverOf:CoordinatorNotificationNewConfirmationType];
 }
 
 #pragma mark - DeliverySettings changes

@@ -96,6 +96,12 @@ NSString *const kDBDefaultsLastSelectedVenue = @"kDBDefaultsLastSelectedVenue";
     [self.parentManager manager:self haveChange:OrderManagerChangePersonsCount];
 }
 
+- (void)setConfirmationType:(ConfirmationType)confirmationType {
+    _confirmationType = confirmationType;
+    
+    [self.parentManager manager:self haveChange:OrderManagerChangeConfirmationType];
+}
+
 - (BOOL)ndaAccepted {
     BOOL ndaSigned;
     if (![[NSUserDefaults standardUserDefaults] objectForKey:kDBDefaultsNDASigned]){

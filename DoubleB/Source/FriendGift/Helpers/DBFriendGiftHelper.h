@@ -18,6 +18,7 @@ extern NSString * const DBFriendGiftHelperNotificationFriendName;
 extern NSString * const DBFriendGiftHelperNotificationFriendPhone;
 
 extern NSString * const DBFriendGiftHelperNotificationItemsPrice;
+extern NSString * const DBFriendGiftHelperNotificationItemsCount;
 
 typedef NS_ENUM(NSInteger, DBFriendGiftType) {
     DBFriendGiftTypeCommon,

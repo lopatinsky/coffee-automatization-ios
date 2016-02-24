@@ -98,6 +98,8 @@
             case DBModuleTypePlatiusBarcode:
                 [[DBPlatiusManager sharedInstance] enableModule:YES withDict:moduleDict];
                 break;
+            default:
+                break;
         }
         
         [appModules removeObject:@(type)];

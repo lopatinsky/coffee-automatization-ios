@@ -27,8 +27,26 @@
     self.tableView.tableFooterView = [UIView new];
 }
 
-- (void)back {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCount) name:DBFriendGiftHelperNotificationItemsCount object:nil];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self updateCount];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)updateCount {
+    self.navigationController.navigationBar.backItem.title = [NSString stringWithFormat:@"%ld %@", [[[DBFriendGiftHelper sharedInstance] itemsManager] totalCount], NSLocalizedString(@"п.", nil)];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
