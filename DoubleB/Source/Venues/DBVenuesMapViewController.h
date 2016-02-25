@@ -10,8 +10,8 @@
 #import "DBVenuesViewController.h"
 
 @interface DBVenuesMapViewController : UIViewController
-@property (nonatomic) DBVenuesViewControllerMode mode;
 @property (nonatomic, strong) NSString *eventsCategory;
+@property (weak, nonatomic) id<DBVenuesControllerContainerDelegate> delegate;
 
 - (void)update;
 @end

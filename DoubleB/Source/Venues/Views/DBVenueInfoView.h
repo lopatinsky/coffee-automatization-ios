@@ -13,13 +13,15 @@
 
 @protocol DBVenueInfoViewDelegate <NSObject>
 
+- (BOOL)db_venueViewInfoSelectionEnabled:(DBVenueInfoView *)view;
+- (BOOL)db_venueViewInfoSelectionInfoEnabled:(DBVenueInfoView *)view;
+
 - (void)db_venueViewInfo:(DBVenueInfoView *)view clickedVenue:(Venue *)venue;
 - (void)db_venueViewInfo:(DBVenueInfoView *)view didSelectVenue:(Venue *)venue;
 
 @end
 
 @interface DBVenueInfoView : UIView
-@property (nonatomic) BOOL selectionEnabled;
 @property (strong, nonatomic) Venue *venue;
 @property (weak, nonatomic) id<DBVenueInfoViewDelegate> delegate;
 

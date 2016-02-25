@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UIView *moreInfoView;
 @property (weak, nonatomic) IBOutlet UIButton *moreInfoButton;
 @property (weak, nonatomic) IBOutlet UIImageView *infoImageView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintInfoViewWidth;
+@property (nonatomic) double initialInfoViewWidth;
 @end
 
 @implementation DBVenueCell
@@ -23,6 +26,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     [self.venueDistanceLabel.layer setCornerRadius:5];
     [self.moreInfoButton addTarget:self action:@selector(moreInfoButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    self.initialInfoViewWidth = self.constraintInfoViewWidth.constant;
     
     [self.infoImageView templateImageWithName:@"info_icon"];
 }
@@ -58,6 +62,12 @@
     self.venueNameLabel.text = venue.title;
     self.venueAddressLabel.text = venue.address;
     self.venueWorkTimeLabel.text = venue.workingTime ?: NSLocalizedString(@"Пн-пт 8:00-20:00, сб-вс 11:00-18:00", nil);
+}
+
+- (void)setInfoButtonEnabled:(BOOL)infoButtonEnabled {
+    _infoButtonEnabled = infoButtonEnabled;
+    
+    self.constraintInfoViewWidth.constant = _infoButtonEnabled ? self.initialInfoViewWidth : 0.f;
 }
 
 @end

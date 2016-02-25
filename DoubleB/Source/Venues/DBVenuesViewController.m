@@ -10,7 +10,12 @@
 #import "DBVenuesTableViewController.h"
 #import "DBVenuesMapViewController.h"
 
-@interface DBVenuesViewController ()
+#import "DBVenueViewController.h"
+
+#import "OrderCoordinator.h"
+#import "OrderManager.h"
+
+@interface DBVenuesViewController ()<DBVenuesControllerContainerDelegate>
 @property (strong, nonatomic) DBVenuesTableViewController *venuesTableVC;
 @property (strong, nonatomic) DBVenuesMapViewController *venuesMapVC;
 @end
@@ -30,7 +35,7 @@
     
     self.venuesTableVC = [DBVenuesTableViewController new];
     self.venuesTableVC.eventsCategory = self.eventsCategory;
-    self.venuesTableVC.mode = self.mode;
+    self.venuesTableVC.delegate = self;
     [self addChildViewController:self.venuesTableVC];
     [self.view addSubview:self.venuesTableVC.view];
     self.venuesTableVC.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -38,7 +43,7 @@
     
     self.venuesMapVC = [DBVenuesMapViewController new];
     self.venuesMapVC.eventsCategory = self.eventsCategory;
-    self.venuesMapVC.mode = self.mode;
+    self.venuesMapVC.delegate = self;
     [self addChildViewController:self.venuesMapVC];
     [self.view addSubview:self.venuesMapVC.view];
     self.venuesMapVC.view.translatesAutoresizingMaskIntoConstraints = NO;
@@ -71,6 +76,37 @@
     } else {
         [button setTitle:NSLocalizedString(@"Карта", nil) forState:UIControlStateNormal];
     }
+}
+
+#pragma mark - DBVenuesControllerContentDelegate
+
+- (BOOL)db_venuesControllerContentSelectEnabled {
+    return YES;
+}
+
+- (BOOL)db_venuesControllerContentSelectInfoEnabled {
+    return _mode == DBVenuesViewControllerModeChooseVenue;
+}
+
+- (void)db_venuesControllerContentDidSelectVenue:(Venue *)venue {
+    if (_mode == DBVenuesViewControllerModeChooseVenue) {
+        if ([OrderCoordinator sharedInstance].orderManager.venue != venue) {
+            [[ApplicationManager sharedInstance] moveMenuToStartState:NO];
+        }
+        [OrderCoordinator sharedInstance].orderManager.venue = venue;
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        DBVenueViewController *controller = [DBVenueViewController new];
+        controller.venue = venue;
+        [self.navigationController pushViewController:controller animated:YES];
+    }
+}
+
+- (void)db_venuesControllerContentDidSelectVenueInfo:(Venue *)venue {
+    DBVenueViewController *controller = [DBVenueViewController new];
+    controller.venue = venue;
+    
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - DBSettingsProtocol

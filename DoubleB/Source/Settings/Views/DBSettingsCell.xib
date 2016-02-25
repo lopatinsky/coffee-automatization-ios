@@ -27,7 +27,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JX1-uk-lnX">
-                        <rect key="frame" x="34" y="11" width="224" height="25"/>
+                        <rect key="frame" x="34" y="11" width="261" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Wsj-RD-U61"/>
                         </constraints>
@@ -42,31 +42,21 @@
                             <constraint firstAttribute="height" constant="13" id="vNu-XE-TV6"/>
                         </constraints>
                     </imageView>
-                    <switch opaque="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i2j-ut-QA3">
-                        <rect key="frame" x="263" y="9" width="51" height="31"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="31" id="4CT-E9-DKw"/>
-                            <constraint firstAttribute="width" constant="49" id="yPu-Tp-yIv"/>
-                        </constraints>
-                    </switch>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="pDR-gA-fXB" secondAttribute="centerY" constant="0.5" id="2UF-g4-6hj"/>
                     <constraint firstAttribute="centerY" secondItem="evb-2g-bOd" secondAttribute="centerY" id="BYk-HS-dTE"/>
-                    <constraint firstItem="i2j-ut-QA3" firstAttribute="leading" secondItem="JX1-uk-lnX" secondAttribute="trailing" constant="5" id="IX8-XB-B8a"/>
                     <constraint firstAttribute="centerY" secondItem="JX1-uk-lnX" secondAttribute="centerY" constant="1" id="Jt0-Zo-XeT"/>
-                    <constraint firstAttribute="centerY" secondItem="i2j-ut-QA3" secondAttribute="centerY" id="NV4-k8-cpY"/>
                     <constraint firstAttribute="trailing" secondItem="evb-2g-bOd" secondAttribute="trailing" constant="8" id="P5B-B9-9pv"/>
                     <constraint firstItem="JX1-uk-lnX" firstAttribute="leading" secondItem="pDR-gA-fXB" secondAttribute="trailing" constant="8" id="QD4-do-4AP"/>
-                    <constraint firstAttribute="trailing" secondItem="i2j-ut-QA3" secondAttribute="trailing" constant="8" id="aeG-sk-hAS"/>
                     <constraint firstItem="pDR-gA-fXB" firstAttribute="leading" secondItem="Q5t-WU-IPw" secondAttribute="leading" constant="8" id="ip1-NQ-VNp"/>
+                    <constraint firstItem="evb-2g-bOd" firstAttribute="leading" secondItem="JX1-uk-lnX" secondAttribute="trailing" constant="8" id="zIw-Cg-wFz"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="constraintImageViewWidth" destination="2ad-g5-1Sg" id="zCf-28-h31"/>
                 <outlet property="disclosureIndicator" destination="evb-2g-bOd" id="0mo-QT-M6f"/>
                 <outlet property="settingsImageView" destination="pDR-gA-fXB" id="X9R-nU-uj1"/>
-                <outlet property="switchView" destination="i2j-ut-QA3" id="2Eg-fH-GSS"/>
                 <outlet property="titleLabel" destination="JX1-uk-lnX" id="2CW-wh-aif"/>
             </connections>
         </tableViewCell>

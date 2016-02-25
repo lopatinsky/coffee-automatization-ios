@@ -19,6 +19,8 @@ typedef NS_ENUM(NSInteger, DBPopupVCAppearanceMode) {
 - (CGFloat)db_popupContentContentHeight;
 - (CGSize)db_popupContentContentSize;
 
+- (UIView *)db_popupContentRightNavigationItem;
+
 @end
 
 @interface DBPopupViewController : UIViewController<UIViewControllerAnimatedTransitioning>
@@ -36,4 +38,12 @@ typedef NS_ENUM(NSInteger, DBPopupVCAppearanceMode) {
         inContainer:(UIViewController *)container
                mode:(DBPopupVCAppearanceMode)mode;
 
+@end
+
+@interface UIViewController (DBPopupViewControllerContent)
+@property (weak, nonatomic) DBPopupViewController *popupViewController;
+@end
+
+@interface UIView (DBPopupViewControllerContent)
+@property (weak, nonatomic) DBPopupViewController *popupViewController;
 @end

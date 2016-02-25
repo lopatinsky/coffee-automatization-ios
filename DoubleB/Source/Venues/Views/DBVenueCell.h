@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) Venue *venue;
 @property (weak, nonatomic) id<DBVenueCellDelegate> delegate;
+@property (nonatomic) BOOL infoButtonEnabled;
 
 - (void)configure:(Venue *)venue;
 

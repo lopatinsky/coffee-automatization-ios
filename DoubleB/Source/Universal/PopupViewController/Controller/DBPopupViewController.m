@@ -12,6 +12,8 @@
 
 #import "UIGestureRecognizer+BlocksKit.h"
 
+#import <objc/runtime.h>
+
 @interface DBPopupViewController ()<UIViewControllerTransitioningDelegate>
 @property (strong, nonatomic) UIImageView *bgImageView;
 @property (strong, nonatomic) UIView *contentView;
@@ -92,10 +94,16 @@
             @strongify(self)
             [self dismissViewControllerAnimated:YES completion:nil];
         };
+        
+        id<DBPopupViewControllerContent> content = _displayController ?: _displayView;
+        if ([content respondsToSelector:@selector(db_popupContentRightNavigationItem)]) {
+            header.rightNavigationItem = [content db_popupContentRightNavigationItem];
+        }
+        
         self.headerFooterView = header;
     }
     
-     if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
+    if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
         DBPopupFooterView *footer = [DBPopupFooterView create];
         @weakify(self)
         footer.doneBlock = ^void() {
@@ -107,14 +115,9 @@
     
     int maxHeight = 0;
     int height = 0;
-    if (_displayController) {
-        if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-            height = [_displayController db_popupContentContentHeight];
-        }
-    } else if (_displayView) {
-        if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-            height = [_displayView db_popupContentContentHeight];
-        }
+    id<DBPopupViewControllerContent> content = _displayController ?: _displayView;
+    if ([content respondsToSelector:@selector(db_popupContentContentHeight)]) {
+        height = [content db_popupContentContentHeight];
     }
     
     [self.view addSubview:self.contentView];
@@ -217,7 +220,9 @@
                      mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayController = controller;
+    controller.popupViewController = popupVC;
     popupVC.appearanceMode = mode;
+    
     popupVC.transitioningDelegate = popupVC;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
     
@@ -235,6 +240,7 @@
                mode:(DBPopupVCAppearanceMode)mode {
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayView = view;
+    view.popupViewController = popupVC;
     popupVC.appearanceMode = mode;
     popupVC.transitioningDelegate = popupVC;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
@@ -320,6 +326,48 @@
 
 - (void)keyboardWillHide:(NSNotification *)notification {
     [self moveToInitialPosition:0.25];
+}
+
+@end
+
+
+static char DB_POPUP_VIEW_CONTROLLER_KEY;
+@implementation UIViewController (DBPopupViewControllerContent)
+
++ (id)get_DBPopupViewControllerInstance {
+    return objc_getAssociatedObject(self, &DB_POPUP_VIEW_CONTROLLER_KEY);
+}
+
++ (void)set_DBPopupViewControllerInstance:(id)instance {
+    objc_setAssociatedObject(self, &DB_POPUP_VIEW_CONTROLLER_KEY, instance, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)setPopupViewController:(DBPopupViewController *)popupViewController {
+    [UIViewController set_DBPopupViewControllerInstance:popupViewController];
+}
+
+- (DBPopupViewController *)popupViewController {
+    return [UIViewController get_DBPopupViewControllerInstance];
+}
+
+@end
+
+@implementation UIView (DBPopupViewControllerContent)
+
++ (id)get_DBPopupViewControllerInstance {
+    return objc_getAssociatedObject(self, &DB_POPUP_VIEW_CONTROLLER_KEY);
+}
+
++ (void)set_DBPopupViewControllerInstance:(id)instance {
+    objc_setAssociatedObject(self, &DB_POPUP_VIEW_CONTROLLER_KEY, instance, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)setPopupViewController:(DBPopupViewController *)popupViewController {
+    [UIViewController set_DBPopupViewControllerInstance:popupViewController];
+}
+
+- (DBPopupViewController *)popupViewController {
+    return [UIViewController get_DBPopupViewControllerInstance];
 }
 
 @end

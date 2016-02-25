@@ -51,6 +51,7 @@ typedef NS_ENUM(NSUInteger, DBCompanyType) {
 @property(strong, nonatomic, readonly) NSNumber *subscriptionIsEnabled;
 
 @property(nonatomic, readonly) BOOL friendInvitationEnabled;
+//@property(nonatomic, readonly) BOOL chooseVenueAtStart;
 
 @property (nonatomic) BOOL infoLoaded;
 - (void)updateInfo DEPRECATED_MSG_ATTRIBUTE("updateInfo is under NetworkManager control");

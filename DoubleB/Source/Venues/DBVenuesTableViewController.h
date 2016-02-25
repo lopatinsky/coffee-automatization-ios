@@ -10,7 +10,7 @@
 #import "DBVenuesViewController.h"
 
 @interface DBVenuesTableViewController : UITableViewController
-@property (nonatomic) DBVenuesViewControllerMode mode;
 @property (nonatomic, strong) NSString *eventsCategory;
 
+@property (weak, nonatomic) id<DBVenuesControllerContainerDelegate> delegate;
 @end

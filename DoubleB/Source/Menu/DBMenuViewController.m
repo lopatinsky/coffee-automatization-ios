@@ -15,6 +15,8 @@
 #import "Venue.h"
 
 #import "DBCompanySettingsTableViewController.h"
+#import "DBVenuesPopupContentController.h"
+#import "DBPopupViewController.h"
 
 #import "MBProgressHUD.h"
 #import "DBBarButtonItem.h"
@@ -190,7 +192,9 @@
 - (UIBarButtonItem *)leftBarButtonItem {
     if (self.type == DBMenuViewControllerTypeInitial) {
         return [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
-            [self moveToSettings];
+//            [self moveToSettings];
+            DBVenuesPopupContentController *venueVC = [DBVenuesPopupContentController new];
+            [DBPopupViewController presentController:venueVC inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
         }];
     }
     

@@ -55,6 +55,10 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
     return [UIColor fromHexString:hexString];
 }
 
+//- (BOOL)chooseVenueAtStart {
+//    return [[DBCompanyInfo valueForKey:@"chooseVenueAtStart"] boolValue];
+//}
+
 - (void)updateInfo {
     [self updateInfo:nil];
 }
@@ -99,6 +103,8 @@ NSString * const DBCompanyInfoNotificationInfoUpdated = @"DBCompanyInfoNotificat
             _friendInvitationEnabled = [[response[@"share_invitation"] getValueForKey:@"enabled"] boolValue];
             
             _promocodesIsEnabled = response[@"promo_code_active"] ?: @(NO);
+            
+//            [DBCompanyInfo setValue:@([[response getValueForKey:@"pick_venue_at_startup"] boolValue]) forKey:@"chooseVenueAtStart"];
             
             NSString *hexString = response[@"colors"][@"action"];
             [DBCompanyInfo setValue:hexString forKey:@"companyDefaultColor"];

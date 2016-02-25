@@ -14,6 +14,15 @@ typedef NS_ENUM(NSUInteger, DBVenuesViewControllerMode) {
     DBVenuesViewControllerModeList
 };
 
+@protocol DBVenuesControllerContainerDelegate <NSObject>
+@required
+- (BOOL)db_venuesControllerContentSelectEnabled;
+- (BOOL)db_venuesControllerContentSelectInfoEnabled;
+
+- (void)db_venuesControllerContentDidSelectVenue:(Venue *)venue;
+- (void)db_venuesControllerContentDidSelectVenueInfo:(Venue *)venue;
+@end
+
 @interface DBVenuesViewController : UIViewController<DBSettingsProtocol>
 @property (nonatomic) DBVenuesViewControllerMode mode;
 @property (nonatomic, strong) NSString *eventsCategory;

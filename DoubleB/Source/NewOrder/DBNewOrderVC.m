@@ -120,7 +120,7 @@
     if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeOrderApproval]) {
         [self addModule:[DBNOOrderApprovalModuleView create] topOffset:1];
     }
-    
+
     // Universal modules
     for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
         [self addModule:[module getModuleView] topOffset:0];

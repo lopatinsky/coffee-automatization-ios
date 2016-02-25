@@ -12,7 +12,6 @@
 #import "DBVenueInfoView.h"
 #import "LocationHelper.h"
 #import "DBVenueViewController.h"
-#import "OrderCoordinator.h"
 
 #import <GoogleMaps/GoogleMaps.h>
 
@@ -35,7 +34,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateVenuesState) name:kDBConcurrentOperationFetchVenuesFinished object:nil];
     
     self.venueInfoView = [DBVenueInfoView create];
-    self.venueInfoView.selectionEnabled = self.mode == DBVenuesViewControllerModeChooseVenue;
     self.venueInfoView.delegate = self;
 }
 
@@ -156,21 +154,26 @@
 
 #pragma mark - DBVenueInfoViewDelegate
 
+- (BOOL)db_venueViewInfoSelectionInfoEnabled:(DBVenueInfoView *)view {
+    return [self.delegate db_venuesControllerContentSelectInfoEnabled];
+}
+
+- (BOOL)db_venueViewInfoSelectionEnabled:(DBVenueInfoView *)view {
+    return [self.delegate db_venuesControllerContentSelectEnabled];
+}
+
 - (void)db_venueViewInfo:(DBVenueInfoView *)view clickedVenue:(Venue *)venue {
-    DBVenueViewController *controller = [DBVenueViewController new];
-    controller.venue = venue;
-    
-    [self.parentViewController.navigationController pushViewController:controller animated:YES];
+    if ([self.delegate db_venuesControllerContentSelectInfoEnabled]){
+        [self.delegate db_venuesControllerContentDidSelectVenueInfo:venue];
+    }
     
     [GANHelper analyzeEvent:@"venue_info_click" label:venue.venueId category:self.eventsCategory];
 }
 
 - (void)db_venueViewInfo:(DBVenueInfoView *)view didSelectVenue:(Venue *)venue {
-    if ([OrderCoordinator sharedInstance].orderManager.venue != venue) {
-        [[ApplicationManager sharedInstance] moveMenuToStartState:NO];
+    if ([self.delegate db_venuesControllerContentSelectEnabled]) {
+        [self.delegate db_venuesControllerContentDidSelectVenue:venue];
     }
-    [OrderCoordinator sharedInstance].orderManager.venue = venue;
-    [self.parentViewController.navigationController popViewControllerAnimated:YES];
     
     [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
 }

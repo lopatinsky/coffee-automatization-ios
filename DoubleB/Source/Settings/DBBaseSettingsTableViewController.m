@@ -94,7 +94,6 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     id<DBSettingsItemProtocol> settingsItemInfo = settingsSection.items[indexPath.row];
     [cell.settingsImageView templateImageWithName:[settingsItemInfo iconName]];
     [cell.titleLabel setText:[settingsItemInfo title]];
-    cell.hasSwitch = NO;
     
     if ([settingsItemInfo reachTitle]) {
         [cell.titleLabel setText:[settingsItemInfo reachTitle]];

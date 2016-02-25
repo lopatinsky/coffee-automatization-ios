@@ -27,9 +27,6 @@
 - (void)awakeFromNib {
     self.initialImageViewWidth = self.constraintImageViewWidth.constant;
     
-    self.switchView.onTintColor = [UIColor db_defaultColor];
-    [self.switchView addTarget:self action:@selector(switchViewDidChangeValue:) forControlEvents:UIControlEventValueChanged];
-    
     [self.disclosureIndicator templateImageWithName:@"right_arrow_icon"];
 }
 
@@ -40,17 +37,5 @@
     [self.contentView layoutIfNeeded];
 }
 
-- (void)setHasSwitch:(BOOL)hasSwitch{
-    _hasSwitch = hasSwitch;
-    
-    self.switchView.hidden = !hasSwitch;
-    self.disclosureIndicator.hidden = hasSwitch;
-}
-
-- (void)switchViewDidChangeValue:(UISwitch *)sender{
-    if([self.delegate respondsToSelector:@selector(db_settingsCell:didChangeSwitchValue:)]){
-        [self.delegate db_settingsCell:self didChangeSwitchValue:self.switchView.isOn];
-    }
-}
 
 @end

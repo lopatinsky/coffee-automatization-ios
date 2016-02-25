@@ -8,12 +8,9 @@
 
 #import <CoreLocation/CoreLocation.h>
 #import "DBVenuesTableViewController.h"
-#import "OrderCoordinator.h"
-#import "OrderManager.h"
 #import "LocationHelper.h"
 #import "Venue.h"
 #import "DBVenueCell.h"
-#import "DBVenueViewController.h"
 #import "MBProgressHUD/MBProgressHUD.h"
 
 #import "OrderManager.h"
@@ -104,6 +101,8 @@
     Venue *venue = [self.venues objectAtIndex:indexPath.row];
     [cell configure:venue];
     
+    cell.infoButtonEnabled = [self.delegate db_venuesControllerContentSelectInfoEnabled];
+    
     return cell;
 }
 
@@ -112,16 +111,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Venue *venue = _venues[indexPath.row];
     
-    if (_mode == DBVenuesViewControllerModeChooseVenue) {
-        if ([OrderCoordinator sharedInstance].orderManager.venue != venue) {
-            [[ApplicationManager sharedInstance] moveMenuToStartState:NO];
-        }
-        [OrderCoordinator sharedInstance].orderManager.venue = venue;
-        [self.parentViewController.navigationController popViewControllerAnimated:YES];
-    } else {
-        DBVenueViewController *controller = [DBVenueViewController new];
-        controller.venue = venue;
-        [self.parentViewController.navigationController pushViewController:controller animated:YES];
+    if ([self.delegate db_venuesControllerContentSelectEnabled]) {
+        [self.delegate db_venuesControllerContentDidSelectVenue:venue];
     }
     
     [GANHelper analyzeEvent:@"venue_click" label:venue.venueId category:self.eventsCategory];
@@ -130,10 +121,7 @@
 #pragma mark - DBVenueCellDelegate
 
 - (void)db_venueCellDidSelectInfo:(DBVenueCell *)cell {
-    DBVenueViewController *controller = [DBVenueViewController new];
-    controller.venue = cell.venue;
-    
-    [self.parentViewController.navigationController pushViewController:controller animated:YES];
+    [self.delegate db_venuesControllerContentDidSelectVenueInfo:cell.venue];
     
     [GANHelper analyzeEvent:@"venue_info_click" label:cell.venue.venueId category:self.eventsCategory];
 }

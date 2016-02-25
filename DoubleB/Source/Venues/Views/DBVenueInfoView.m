@@ -83,6 +83,30 @@
     self.venueTitleLabel.text = venue.title;
     self.venueAddressLabel.text = venue.address;
     self.venueWorkingTimeLabel.text = venue.workingTime ?: NSLocalizedString(@"Пн-пт 8:00-20:00, сб-вс 11:00-18:00", nil);
+    
+    if ([self.delegate respondsToSelector:@selector(db_venueViewInfoSelectionInfoEnabled:)]) {
+        if ([self.delegate db_venueViewInfoSelectionInfoEnabled:self]) {
+            self.disclosureIndicator.hidden = NO;
+            self.venueContentView.userInteractionEnabled = YES;
+        } else {
+            self.disclosureIndicator.hidden = YES;
+            self.venueContentView.userInteractionEnabled = NO;
+        }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(db_venueViewInfoSelectionEnabled:)]) {
+        if ([self.delegate db_venueViewInfoSelectionEnabled:self]) {
+            self.constraintChooseVenueView.constant = 40.f;
+            CGRect rect = self.frame;
+            rect.size.height = 140.f;
+            self.frame = rect;
+        } else {
+            self.constraintChooseVenueView.constant = 0;
+            CGRect rect = self.frame;
+            rect.size.height = 100.f;
+            self.frame = rect;
+        }
+    }
 }
 
 - (void)reloadDistanceLabel:(double)dist {
@@ -106,21 +130,6 @@
     }
 }
 
-- (void)setSelectionEnabled:(BOOL)selectionEnabled {
-    _selectionEnabled = selectionEnabled;
-    
-    if (_selectionEnabled) {
-        self.constraintChooseVenueView.constant = 40.f;
-        CGRect rect = self.frame;
-        rect.size.height = 140.f;
-        self.frame = rect;
-    } else {
-        self.constraintChooseVenueView.constant = 0;
-        CGRect rect = self.frame;
-        rect.size.height = 100.f;
-        self.frame = rect;
-    }
-}
 
 - (void)show:(UIView *)holder {
     _holder = holder;

@@ -67,7 +67,6 @@
         cell = [DBSettingsCell new];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.hasIcon = NO;
-        cell.hasSwitch = NO;
     }
     
     NSDictionary *itemDict = self.items[indexPath.row];
