@@ -15,6 +15,8 @@
 #import "Venue.h"
 
 #import "DBCompanySettingsTableViewController.h"
+#import "DBVenuesPopupContentController.h"
+#import "DBPopupViewController.h"
 
 #import "MBProgressHUD.h"
 #import "DBBarButtonItem.h"

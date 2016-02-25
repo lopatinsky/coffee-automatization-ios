@@ -73,20 +73,18 @@
             @strongify(self)
             [self dismissViewControllerAnimated:YES completion:nil];
         };
+        
+        id<DBPopupViewControllerContent> content = _displayController ?: _displayView;
+        if ([content respondsToSelector:@selector(db_popupContentRightNavigationItem)]) {
+            header.rightNavigationItem = [content db_popupContentRightNavigationItem];
+        }
         self.headerFooterView = header;
         
-        int height = rect.size.height - 50 - self.headerFooterView.frame.size.height;
         
-        if (_displayController) {
-            if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayController db_popupContentContentHeight])
-                    height = [_displayController db_popupContentContentHeight];
-            }
-        } else if (_displayView) {
-            if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayView db_popupContentContentHeight])
-                    height = [_displayView db_popupContentContentHeight];
-            }
+        int height = rect.size.height - 50 - self.headerFooterView.frame.size.height;
+        if ([content respondsToSelector:@selector(db_popupContentContentHeight)]) {
+            if (height > [content db_popupContentContentHeight])
+                height = [content db_popupContentContentHeight];
         }
         
         [self.view addSubview:self.contentView];
@@ -117,17 +115,11 @@
         [self.view addSubview:self.headerFooterView];
         self.headerFooterView.translatesAutoresizingMaskIntoConstraints = NO;
         
+        id<DBPopupViewControllerContent> content = _displayController ?: _displayView;
         int height = rect.size.height - 60 - self.headerFooterView.frame.size.height;
-        if (_displayController) {
-            if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayController db_popupContentContentHeight])
-                    height = [_displayController db_popupContentContentHeight];
-            }
-        } else if (_displayView) {
-            if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-                if (height > [_displayView db_popupContentContentHeight])
-                    height = [_displayView db_popupContentContentHeight];
-            }
+        if ([content respondsToSelector:@selector(db_popupContentContentHeight)]) {
+            if (height > [content db_popupContentContentHeight])
+                height = [content db_popupContentContentHeight];
         }
         
         [self.contentView alignLeading:@"5" trailing:@"-5" toView:self.view];
@@ -147,6 +139,7 @@
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayController = controller;
     popupVC.appearanceMode = mode;
+    
     popupVC.transitioningDelegate = popupVC;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
     
@@ -163,6 +156,7 @@
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayView = view;
     popupVC.appearanceMode = DBPopupVCAppearanceModeFooter;
+    
     popupVC.transitioningDelegate = popupVC;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
     
