@@ -92,10 +92,16 @@
             @strongify(self)
             [self dismissViewControllerAnimated:YES completion:nil];
         };
+        
+        id<DBPopupViewControllerContent> content = _displayController ?: _displayView;
+        if ([content respondsToSelector:@selector(db_popupContentRightNavigationItem)]) {
+            header.rightNavigationItem = [content db_popupContentRightNavigationItem];
+        }
+        
         self.headerFooterView = header;
     }
     
-     if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
+    if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
         DBPopupFooterView *footer = [DBPopupFooterView create];
         @weakify(self)
         footer.doneBlock = ^void() {
@@ -107,14 +113,9 @@
     
     int maxHeight = 0;
     int height = 0;
-    if (_displayController) {
-        if ([_displayController respondsToSelector:@selector(db_popupContentContentHeight)]) {
-            height = [_displayController db_popupContentContentHeight];
-        }
-    } else if (_displayView) {
-        if ([_displayView respondsToSelector:@selector(db_popupContentContentHeight)]) {
-            height = [_displayView db_popupContentContentHeight];
-        }
+    id<DBPopupViewControllerContent> content = _displayController ?: _displayView;
+    if ([content respondsToSelector:@selector(db_popupContentContentHeight)]) {
+        height = [content db_popupContentContentHeight];
     }
     
     [self.view addSubview:self.contentView];
@@ -218,6 +219,7 @@
     DBPopupViewController *popupVC = [DBPopupViewController new];
     popupVC.displayController = controller;
     popupVC.appearanceMode = mode;
+    
     popupVC.transitioningDelegate = popupVC;
     popupVC.modalPresentationStyle = UIModalPresentationCustom;
     
