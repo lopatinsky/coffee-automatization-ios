@@ -192,9 +192,9 @@
 - (UIBarButtonItem *)leftBarButtonItem {
     if (self.type == DBMenuViewControllerTypeInitial) {
         return [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
-//            [self moveToSettings];
-            DBVenuesPopupContentController *venueVC = [DBVenuesPopupContentController new];
-            [DBPopupViewController presentController:venueVC inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
+            [self moveToSettings];
+//            DBVenuesPopupContentController *venueVC = [DBVenuesPopupContentController new];
+//            [DBPopupViewController presentController:venueVC inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
         }];
     }
     

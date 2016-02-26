@@ -14,8 +14,8 @@
 - (instancetype)initWithResponseDict:(NSDictionary *)dict{
     self = [super init];
     
-//    _type = [[dict getValueForKey:@"type"] integerValue];
-    _type = DBUniversalModuleItemTypeDate;
+    _type = [[dict getValueForKey:@"type"] integerValue];
+//    _type = DBUniversalModuleItemTypeDate;
     _itemId = [dict getValueForKey:@"field"] ?: @"";
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
@@ -31,8 +31,8 @@
 }
 
 - (void)syncWithResponseDict:(NSDictionary *)dict{
-//    _type = [[dict getValueForKey:@"type"] integerValue];
-    _type = DBUniversalModuleItemTypeDate;
+    _type = [[dict getValueForKey:@"type"] integerValue];
+//    _type = DBUniversalModuleItemTypeDate;
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
