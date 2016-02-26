@@ -10,6 +10,7 @@
 
 @interface DBPopupHeaderView : UIView
 @property (nonatomic, copy) void(^doneBlock)();
+@property (strong, nonatomic) UIView *rightNavigationItem;
 
 + (DBPopupHeaderView *)create;
 @end
