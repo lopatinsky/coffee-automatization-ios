@@ -7,7 +7,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://sushinson.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://sushison.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<string>#82c4cd</string>
 		<key>CompanyGAKey</key>
