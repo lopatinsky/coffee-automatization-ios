@@ -50,6 +50,7 @@
 
 #import "DBSnapshotSDKHelper.h"
 
+#import <Appsee/Appsee.h>
 #import <Branch/Branch.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -333,6 +334,10 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
     if ([ApplicationConfig remoteConfig] != nil) {
         [self initializeVendorFrameworks];
+    }
+    
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"rollandwok"]) {
+        [Appsee start:@"963a618f5fa94189bda0ad521d23f2dd"];
     }
     
     [DBVersionDependencyManager performAll];
