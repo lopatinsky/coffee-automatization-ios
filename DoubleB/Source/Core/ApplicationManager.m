@@ -348,6 +348,8 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     [Fabric with:@[CrashlyticsKit]];
     [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
     [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
+    
+    [self initializeConfigurableFrameworks];
 }
 
 - (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
