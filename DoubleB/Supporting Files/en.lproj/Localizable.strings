@@ -53,11 +53,6 @@
 "Нужна сдача с" = "Needs change from";
 
 "Сохранить" = "Save";
-"Заведения" = "Venues";
-"Магазины" = "Shops";
-"Пастерии" = "Pasterias";
-"Кофейни" = "Venues";
-"Кофейня" = "Venue";
 
 "Можно выбрать один вариант" = "You can select one option";
 "Можно выбрать несколько" = "You can select multiple options";
@@ -213,6 +208,22 @@
 "Нет, спасибо" = "No, thanks";
 "Да, пожалуйста" = "Yes";
 
+// Venue
+"Заведения" = "Venues";
+"Магазины" = "Shops";
+"Пастерии" = "Pasterias";
+"Кофейни" = "Venues";
+
+"Заведение" = "Venue";
+"Магазин" = "Shop";
+"Пастерия" = "Pasteria";
+"Кофейня" = "Venue";
+
+"Выберите %@ для заказа" = "Please, choose %@ for order";
+"Запоминать выбор %@" = "Save %@ choice";
+"Запомнить мой выбор" = "Save my choice";
+"Запоминать %@ и не показывать всплывающее окно при запуске приложения" = "Save chosen %@ and not show popup view when application starts";
+
 // Month subscription
 "Абонемент" = "Subscription";
 "Купить" = "Buy";
@@ -224,7 +235,7 @@
 "Невозможно разместить пустой заказ" = "Unable to place empty order";
 "Пожалуйста, укажите ваш номер телефона" = "Please set your phone number";
 "Пожалуйста, укажите ваше имя" = "Please set your name";
-"Пожалуйста, выберите заведение" = "Please chose venue";
+"Пожалуйста, выберите" = "Please chose";
 "Пожалуйста, введите адрес доставки" = "Please fill shipping address information";
 "Введите адрес доставки" = "Please fill shipping address";
 

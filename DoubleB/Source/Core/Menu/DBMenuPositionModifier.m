@@ -256,19 +256,19 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:@(self.modifierType) forKey:@"modifierType"];
-    [aCoder encodeObject:self.modifierId forKey:@"modifierId"];
-    [aCoder encodeObject:self.modifierName forKey:@"modifierName"];
-    [aCoder encodeObject:self.modifierDictionary forKey:@"modifierDictionary"];
+    [aCoder encodeObject:@(_modifierType) forKey:@"modifierType"];
+    [aCoder encodeObject:_modifierId forKey:@"modifierId"];
+    [aCoder encodeObject:_modifierName forKey:@"modifierName"];
+    [aCoder encodeObject:_modifierDictionary forKey:@"modifierDictionary"];
     
-    [aCoder encodeObject:@(self.minAmount) forKey:@"minAmount"];
-    [aCoder encodeObject:@(self.maxAmount) forKey:@"maxAmount"];
-    [aCoder encodeObject:@(self.modifierPrice) forKey:@"modifierPrice"];
-    [aCoder encodeObject:@(self.order) forKey:@"order"];
-    [aCoder encodeObject:@(self.selectedCount) forKey:@"selectedCount"];
+    [aCoder encodeObject:@(_minAmount) forKey:@"minAmount"];
+    [aCoder encodeObject:@(_maxAmount) forKey:@"maxAmount"];
+    [aCoder encodeObject:@(_modifierPrice) forKey:@"modifierPrice"];
+    [aCoder encodeObject:@(_order) forKey:@"order"];
+    [aCoder encodeObject:@(_selectedCount) forKey:@"selectedCount"];
     
-    [aCoder encodeObject:@(self.required) forKey:@"required"];
-    [aCoder encodeObject:self.items forKey:@"items"];
+    [aCoder encodeObject:@(_required) forKey:@"required"];
+    [aCoder encodeObject:_items forKey:@"items"];
     
     if(self.defaultItem)
         [aCoder encodeObject:self.defaultItem forKey:@"defaultItem"];
@@ -282,20 +282,20 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     DBMenuPositionModifier *copyModifier = [[[self class] allocWithZone:zone] init];
-    copyModifier.modifierType = self.modifierType;
-    copyModifier.modifierId = [self.modifierId copy];
-    copyModifier.modifierName = [self.modifierName copy];
-    copyModifier.modifierDictionary = [self.modifierDictionary copy];
+    copyModifier.modifierType = _modifierType;
+    copyModifier.modifierId = [_modifierId copy];
+    copyModifier.modifierName = [_modifierName copy];
+    copyModifier.modifierDictionary = [_modifierDictionary copy];
     
-    copyModifier.modifierPrice = self.modifierPrice;
-    copyModifier.maxAmount = self.maxAmount;
-    copyModifier.minAmount = self.minAmount;
-    copyModifier.selectedCount = self.selectedCount;
-    copyModifier.order = self.order;
+    copyModifier.modifierPrice = _modifierPrice;
+    copyModifier.maxAmount = _maxAmount;
+    copyModifier.minAmount = _minAmount;
+    copyModifier.selectedCount = _selectedCount;
+    copyModifier.order = _order;
     
-    copyModifier.required = self.required;
+    copyModifier.required = _required;
     copyModifier.items = [NSMutableArray new];
-    for(DBMenuPositionModifierItem *item in self.items)
+    for(DBMenuPositionModifierItem *item in _items)
         [copyModifier.items addObject:[item copyWithZone:zone]];
     
     copyModifier.defaultItem = [self.defaultItem copyWithZone:zone];
@@ -311,13 +311,13 @@
 - (NSDictionary *)plistRepresentation {
     NSMutableDictionary *plist = [NSMutableDictionary new];
     
-    plist[@"modifierType"] = @(self.modifierType);
-    plist[@"modifierId"] = self.modifierId;
-    plist[@"modifierName"] = self.modifierName;
+    plist[@"modifierType"] = @(_modifierType);
+    plist[@"modifierId"] = _modifierId;
+    plist[@"modifierName"] = _modifierName;
     
     if(self.modifierType == ModifierTypeSingle){
-        plist[@"modifierPrice"] = @(self.modifierPrice);
-        plist[@"selectedCount"] = @(self.selectedCount);
+        plist[@"modifierPrice"] = @(_modifierPrice);
+        plist[@"selectedCount"] = @(_selectedCount);
     }
     
     if(self.modifierType == ModifierTypeGroup){

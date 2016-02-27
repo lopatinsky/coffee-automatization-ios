@@ -18,10 +18,12 @@
 
 #import "DBUniversalModulesManager.h"
 #import "DBUniversalModule.h"
+#import "DBUniversalModuleView.h"
+#import "DBUniversalModuleTextItemView.h"
 
 #import "UIBarButtonItem+BlocksKit.h"
 
-@interface DBProfileViewController ()
+@interface DBProfileViewController ()<DBOwnerViewControllerProtocol>
 @end
 
 @implementation DBProfileViewController
@@ -120,6 +122,18 @@
     [GANHelper trackClientInfo];
     
     [DBServerAPI sendUserInfo:nil];
+}
+
+#pragma mark - DBModulesViewController
+
+- (UIView *)containerForModuleModalComponent:(DBModuleView *)view {
+    return self.navigationController.view;
+}
+
+- (void)db_moduleViewStartEditing:(DBModuleView *)view {
+    if ([view isKindOfClass:[DBUniversalModuleView class]]) {
+        [self.view endEditing:YES];
+    }
 }
 
 #pragma mark - DBSettingsProtocol

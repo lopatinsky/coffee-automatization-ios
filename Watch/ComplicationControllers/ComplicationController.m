@@ -9,7 +9,7 @@
 #import "ComplicationController.h"
 
 #import "ApplicationInteractionManager.h"
-#import "NSDate+Difference.h"
+#import "NSDate+Extension.h"
 
 @interface ComplicationController ()
 

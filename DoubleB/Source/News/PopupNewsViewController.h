@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBPopupViewController.h"
 
 #import "PopupNewsViewControllerProtocol.h"
 
-@interface PopupNewsViewController : UIViewController <PopupNewsViewControllerProtocol>
+@interface PopupNewsViewController : UIViewController <PopupNewsViewControllerProtocol, DBPopupViewControllerContent>
 
 @end

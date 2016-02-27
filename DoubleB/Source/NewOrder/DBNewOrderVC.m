@@ -37,7 +37,7 @@
 #import "DBClientInfo.h"
 #import "DBPushManager.h"
 
-@interface DBNewOrderVC () <DBOwnerViewControllerProtocol>
+@interface DBNewOrderVC ()
 @property (strong, nonatomic) DBNOOrderModuleView *orderModule;
 @end
 
@@ -52,6 +52,8 @@
     [self db_setTitle:NSLocalizedString(@"Заказ", nil)];
     
     self.analyticsCategory = ORDER_SCREEN;
+    
+    [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewVenue selector:@selector(reload)];
     
     [self setupModules];
     
@@ -85,6 +87,10 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [OrderCoordinator sharedInstance].automaticUpdate = NO;
+}
+
+- (void)dealloc {
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (void)setupModules {
@@ -134,6 +140,10 @@
     [self addModule:[DBNOTotalModuleView create] topOffset:0];
     
     [self layoutModules];
+}
+
+- (void)reload {
+    [self reloadModules:NO];
 }
 
 

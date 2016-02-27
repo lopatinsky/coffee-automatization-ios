@@ -141,10 +141,6 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
             case DBSettingsItemNavigationPush:
                 [self.navigationController pushViewController:[item viewController] animated:YES];
                 break;
-            case DBSettingsItemNavigationShowView:
-                // TODO: protocol
-                [(DBPersonalWalletView *)[item view] showOnView:self.navigationController.view];
-                break;
             default:
                 break;
         }

@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIView *buttonSeparatorView;
 
 @property (strong, nonatomic) UIImageView *overlayView;
 
@@ -21,10 +20,10 @@
 
 @implementation DBPersonalWalletView
 
-- (instancetype)init{
-    self = [[[NSBundle mainBundle] loadNibNamed:@"DBPersonalWalletView" owner:self options:nil] firstObject];
++ (DBPersonalWalletView *)create{
+    DBPersonalWalletView *view = [[[NSBundle mainBundle] loadNibNamed:@"DBPersonalWalletView" owner:self options:nil] firstObject];
     
-    return self;
+    return view;
 }
 
 - (void)awakeFromNib{
@@ -34,8 +33,6 @@
     
     self.balanceLabel.textColor = [UIColor db_defaultColor];
     
-    self.buttonSeparatorView.backgroundColor = [UIColor db_separatorColor];
-    
     self.activityIndicator.hidesWhenStopped = YES;
     
     [self reloadAppearance];
@@ -43,9 +40,11 @@
 
 - (void)reload{
     [self.activityIndicator startAnimating];
+    self.balanceLabel.hidden = YES;
     
     [[OrderCoordinator sharedInstance].promoManager updatePersonalWalletBalance:^(double balance) {
         [self.activityIndicator stopAnimating];
+        self.balanceLabel.hidden = NO;
         
         [self reloadAppearance];
         
@@ -65,66 +64,36 @@
     }
 }
 
-- (void)showOnView:(UIView *)view{
-    self.overlayView = [[UIImageView alloc] initWithFrame:view.bounds];
-    self.overlayView.image = [[view snapshotImage] applyBlurWithRadius:5 tintColor:[UIColor colorWithWhite:0.3 alpha:0.6] saturationDeltaFactor:1.5 maskImage:nil];
-    self.overlayView.alpha = 0;
-    self.overlayView.userInteractionEnabled = YES;
-    [self.overlayView addGestureRecognizer:[[UITapGestureRecognizer alloc]
-                                            initWithTarget:self action:@selector(handleOverlayTap:)]];
-    [view addSubview:self.overlayView];
-    
-    CGRect rect = self.frame;
-    rect.origin.x = (view.frame.size.width - rect.size.width) / 2;
-    rect.origin.y = (view.frame.size.height - rect.size.height) / 2;
-    self.frame = rect;
-    
-    UIImageView *selfSnapshot = [[UIImageView alloc] initWithFrame:self.frame];
-    selfSnapshot.image = [self snapshotImage];
-    
-    [view addSubview:selfSnapshot];
-    selfSnapshot.alpha = 0;
-    
-    [UIView animateWithDuration:0.08
-                     animations:^{
-                         selfSnapshot.transform = CGAffineTransformMakeScale(1.05, 1.05);
-                         selfSnapshot.alpha = 0.8;
-                         self.overlayView.alpha = 0.8;
-                     }
-                     completion:^(BOOL finished){
-                         [UIView animateWithDuration:0.12
-                                          animations:^{
-                                              selfSnapshot.transform = CGAffineTransformIdentity;
-                                              selfSnapshot.alpha = 1.0;
-                                              self.overlayView.alpha = 1.0;
-                                          } completion:^(BOOL finished) {
-                                              [view addSubview:self];
-                                              [selfSnapshot removeFromSuperview];
-                                          }];
-                     }];
-    
+- (void)db_popupContentReload {
     [self reload];
 }
 
-- (void)hide{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.overlayView.alpha = 0;
-        self.alpha = 0;
-    } completion:^(BOOL f){
-        [self.overlayView removeFromSuperview];
-        [self removeFromSuperview];
-    }];
+- (CGFloat)db_popupContentContentHeight {
+    return self.frame.size.height;
 }
 
-- (void)handleOverlayTap:(UIGestureRecognizer *)recognizer{
-    CGPoint touch = [recognizer locationInView:nil];
-    if(!CGRectContainsPoint(self.frame, touch)){
-        [self hide];
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    settingsItem.name = @"personalWalletVC";
+    settingsItem.iconName = @"wallet_icon_active";
+    
+    NSString *profileText = @"";
+    if ([[[OrderCoordinator sharedInstance] promoManager] walletBalance] > 0) {
+        profileText = [NSString stringWithFormat:@"%@: %.1f", NSLocalizedString(@"Личный счет", nil), [OrderCoordinator sharedInstance].promoManager.walletBalance];
+    } else {
+        profileText = NSLocalizedString(@"Личный счет", nil);
     }
-}
-
-- (IBAction)doneButtonClick:(id)sender {
-    [self hide];
+    settingsItem.title = profileText;
+    
+    settingsItem.eventLabel = @"personal_wallet_click";
+    
+    settingsItem.block = ^(UIViewController *vc){
+        [DBPopupViewController presentView:[DBPersonalWalletView create] inContainer:vc mode:DBPopupVCAppearanceModeHeader];
+    };
+    
+    return settingsItem;
 }
 
 @end

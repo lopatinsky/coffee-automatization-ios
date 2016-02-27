@@ -10,7 +10,7 @@
 #import "CoreDataHelper.h"
 #import "DBAPIClient.h"
 
-#import "NSDate+Difference.h"
+#import "NSDate+Extension.h"
 
 static NSMutableArray *storedVenues;
 static NSMutableArray *unifiedStoredVenues;

@@ -11,8 +11,8 @@
 
 typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
     DBUniversalModuleItemTypeString = 0,
-    DBUniversalModuleItemTypeInteger,
-    DBUniversalModuleItemTypeDate
+    DBUniversalModuleItemTypeInteger = 1,
+    DBUniversalModuleItemTypeDate = 3
 };
 
 @interface DBUniversalModuleItem : NSObject<NSCoding>
@@ -31,6 +31,8 @@ typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
 
 - (instancetype)initWithResponseDict:(NSDictionary *)dict;
 - (void)syncWithResponseDict:(NSDictionary *)dict;
+
+- (NSDictionary *)jsonRepresentation;
 
 - (void)save;
 

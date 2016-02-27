@@ -10,7 +10,7 @@
 #import "AppIndexingManager.h"
 #import "ApplicationManager.h"
 #import "UIDevice+OSVersion.h"
-#import "NSDate+Difference.h"
+#import "NSDate+Extension.h"
 #import "NSOperation+UniqueOperation.h"
 
 #import "UserActivityOperation.h"

@@ -11,6 +11,7 @@
 #import "CompanyNewsManager.h"
 #import "NewsHistoryTableViewCell.h"
 #import "NewsImageHistoryTableViewCell.h"
+#import "DBPopupViewController.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -106,7 +107,8 @@
     [newsViewController setData:@{@"title": [selectedNews title] ?: @"",
                                   @"text": [selectedNews text] ?: @"",
                                   @"image_url": [selectedNews imageURL] ?: @""}];
-    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+    
+    [DBPopupViewController presentController:newsViewController inContainer:self.navigationController mode:DBPopupVCAppearanceModeFooter];
     
 }
 

@@ -12,6 +12,25 @@
 
 @implementation DBTextResourcesHelper
 
++ (NSString *)venueRusTitle:(NSString *)key count:(int)count case:(int)wordCase {
+    NSDictionary *dict = @{@"Заведение": @[@[@"Заведение", @"Заведения", @"Заведению", @"Заведение", @"Заведением", @"Заведении"],@[@"Заведения", @"Заведений", @"Заведениям", @"Заведения", @"Заведениями", @"Заведениях"]],
+                           @"Кофейня": @[@[@"Кофейня", @"Кофейни", @"Кофейне", @"Кофейню", @"Кофейней", @"Кофейне"], @[@"Кофейни", @"Кофейен", @"Кофейням", @"Кофейни", @"Кофейнями", @"Кофейнях"]],
+                           @"Магазин": @[@[@"Магазин", @"Магазина", @"Магазину", @"Магазин", @"Магазином", @"Магазине"], @[@"Магазины", @"Магазинов", @"Магазинам", @"Магазины", @"Магазинами", @"Магазинах"]],
+                           @"Пастерия": @[@[@"Пастерия", @"Пастерии", @"Пастерии", @"Пастерию", @"Пастерией", @"Пастерии"], @[@"Пастерии", @"Пастерий", @"Пастериям", @"Пастерии", @"Пастериями", @"Пастериях"]]};
+    NSArray *titles = [dict getValueForKey:key] ?: dict[@"Заведение"];
+    count = count <=1 ? 1 : count;
+    wordCase = wordCase < 1 ? 1 : wordCase;
+    wordCase = wordCase > 6 ? 6 : wordCase;
+    
+    return titles[count - 1][wordCase - 1];
+}
+
++ (NSString *)currentLocale {
+    NSString * language = [[NSLocale preferredLanguages] objectAtIndex:0];
+    
+    return [language substringToIndex:2];
+}
+
 + (NSString *)db_venuesTitleString {
     NSString *title = NSLocalizedString(@"Заведения", nil);
     if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
@@ -32,6 +51,27 @@
     }
     
     return title;
+}
+
++ (NSString *)db_venueTitleString:(int)wordCase {
+    NSString *key = @"Заведение";
+    if([DBCompanyInfo sharedInstance].type == DBCompanyTypeCafe){
+        key = @"Кофейня";
+    }
+    
+    if([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"sushimarket"]){
+        key = @"Магазин";
+    }
+    
+    if([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"pastadeli"]){
+        key = @"Пастерия";
+    }
+    
+    if ([[self currentLocale] isEqualToString:@"en"]) {
+        return NSLocalizedString(key, nil);
+    } else {
+        return [self venueRusTitle:key count:1 case:wordCase];
+    }
 }
 
 + (NSString *)db_venueBalanceString {

@@ -12,6 +12,7 @@
 #import "DBMenuCategory.h"
 #import "DBMenuPosition.h"
 #import "OrderCoordinator.h"
+#import "DBUserDefaultsManager.h"
 #import "Venue.h"
 
 #import "DBCompanySettingsTableViewController.h"
@@ -92,6 +93,18 @@
     for (DBModuleView *moduleView in self.topModulesHolder.submodules) {
         [moduleView viewDidAppearOnVC];
     }
+    
+    if (_type == DBMenuViewControllerTypeInitial) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            if ([DBCompanyInfo sharedInstance].chooseVenueAtStart && [DBUserDefaultsManager sharedInstance].showVenuesPopupOnStart) {
+                DBVenuesPopupContentController *venueVC = [DBVenuesPopupContentController new];
+                [DBPopupViewController presentController:venueVC inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
+            }
+        });
+        
+        [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationNewVenue selector:@selector(updateMenu)];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -104,6 +117,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[OrderCoordinator sharedInstance] removeObserver:self];
 }
 
 - (void)setupTopModuleHolder {
@@ -193,8 +207,6 @@
     if (self.type == DBMenuViewControllerTypeInitial) {
         return [DBBarButtonItem item:DBBarButtonTypeProfile handler:^{
             [self moveToSettings];
-//            DBVenuesPopupContentController *venueVC = [DBVenuesPopupContentController new];
-//            [DBPopupViewController presentController:venueVC inContainer:self.navigationController mode:DBPopupVCAppearanceModeHeader];
         }];
     }
     

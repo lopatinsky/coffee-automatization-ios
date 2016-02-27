@@ -11,13 +11,14 @@
 #import "DBPopupTextFieldView.h"
 #import "DBPickerView.h"
 
+#import "NSDate+Extension.h"
+
 @interface DBUniversalModuleTextItemView ()<UITextFieldDelegate, DBPopupComponentDelegate, DBPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 @property (strong, nonatomic) DBPopupTextFieldView *popupView;
 
-@property (strong, nonatomic) NSDateFormatter *formatter;
 @property (strong, nonatomic) DBPickerView *pickerView;
 
 @end
@@ -56,13 +57,14 @@
         self.pickerView = [DBPickerView create:DBPickerViewModeDate];
         self.pickerView.pickerDelegate = self;
         self.pickerView.title = _item.placeholder;
-        self.pickerView.minDate = _item.minDate;
-        self.pickerView.maxDate = _item.maxDate;
         
-        self.formatter = [NSDateFormatter new];
-        self.formatter.dateFormat = @"dd.MM.yyyy";
+        if (_item.minDate)
+            self.pickerView.minDate = _item.minDate;
+        if (_item.maxDate)
+            self.pickerView.maxDate = _item.maxDate;
+        
         if (_item.selectedDate)
-            self.textField.text = [self.formatter stringFromDate:_item.selectedDate];
+            self.textField.text = [NSDate stringFromDate:_item.selectedDate format:@"dd.MM.yyyy"];
     }
     
 //    [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
@@ -76,6 +78,9 @@
         }
         
         if (_item.type == DBUniversalModuleItemTypeDate) {
+            if ([self.delegate respondsToSelector:@selector(db_moduleViewStartEditing:)]) {
+                [self.delegate db_moduleViewStartEditing:self];
+            }
             self.pickerView.selectedDate = _item.selectedDate;
             [self.pickerView showOnView:[self.delegate db_moduleViewModalComponentContainer:self] appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
         }
@@ -107,7 +112,7 @@
         _item.selectedDate = self.pickerView.selectedDate;
         
         if (_item.selectedDate)
-            self.textField.text = [self.formatter stringFromDate:_item.selectedDate];
+            self.textField.text = [NSDate stringFromDate:_item.selectedDate format:@"dd.MM.yyyy"];
     }
     
     [_item save];

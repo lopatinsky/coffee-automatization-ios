@@ -116,7 +116,7 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
             reason = NSLocalizedString(@"Пожалуйста, введите адрес доставки", nil);
     } else {
         if (!reason && !_orderManager.venue)
-            reason = NSLocalizedString(@"Пожалуйста, выберите заведение", nil);
+            reason = [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Пожалуйста, выберите", nil), [DBTextResourcesHelper db_venueTitleString:4]];
     }
     
     if (!reason && _orderManager.paymentType == PaymentTypeNotSet) {
@@ -394,27 +394,5 @@ NSString * __nonnull const CoordinatorNotificationPersonalWalletBalanceUpdated =
     [_promoManager flushStoredCache];
 }
 
-#pragma mark - DBSettingsProtocol
-
-+ (id<DBSettingsItemProtocol>)settingsItem {
-    DBSettingsItem *settingsItem = [DBSettingsItem new];
-    NSString *profileText = [DBClientInfo sharedInstance].clientName.value;
-    
-    settingsItem.name = @"personalWalletVC";
-    settingsItem.iconName = @"wallet_icon_active";
-    
-    if ([[[OrderCoordinator sharedInstance] promoManager] walletBalance] > 0) {
-        profileText = [NSString stringWithFormat:@"%@: %.1f", NSLocalizedString(@"Личный счет", nil), [OrderCoordinator sharedInstance].promoManager.walletBalance];
-    } else {
-        profileText = NSLocalizedString(@"Личный счет", nil);
-    }
-    
-    settingsItem.title = profileText;
-    settingsItem.eventLabel = @"profile_click";
-    settingsItem.view = [DBPersonalWalletView new];
-    settingsItem.navigationType = DBSettingsItemNavigationShowView;
-    
-    return settingsItem;
-}
 
 @end

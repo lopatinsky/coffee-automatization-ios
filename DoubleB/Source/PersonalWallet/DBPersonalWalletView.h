@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DBBaseSettingsTableViewController.h"
+#import "DBPopupViewController.h"
 
 @class DBPersonalWalletView;
 @protocol DBPersonalWalletViewDelegate <NSObject>
 - (void)db_personalWalletView:(DBPersonalWalletView *)view didUpdateBalance:(double)balance;
 @end
 
-@interface DBPersonalWalletView : UIView
+@interface DBPersonalWalletView : UIView<DBSettingsProtocol, DBPopupViewControllerContent>
 @property(weak, nonatomic) id<DBPersonalWalletViewDelegate> delegate;
 
-- (void)showOnView:(UIView *)view;
-- (void)hide;
-
++ (DBPersonalWalletView *)create;
 @end

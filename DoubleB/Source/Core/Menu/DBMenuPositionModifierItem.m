@@ -68,11 +68,11 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.itemId forKey:@"itemId"];
-    [aCoder encodeObject:self.itemName forKey:@"itemName"];
-    [aCoder encodeObject:@(self.itemPrice) forKey:@"itemPrice"];
-    [aCoder encodeObject:@(self.order) forKey:@"order"];
-    [aCoder encodeObject:self.itemDictionary forKey:@"itemDictionary"];
+    [aCoder encodeObject:_itemId forKey:@"itemId"];
+    [aCoder encodeObject:_itemName forKey:@"itemName"];
+    [aCoder encodeObject:@(_itemPrice) forKey:@"itemPrice"];
+    [aCoder encodeObject:@(_order) forKey:@"order"];
+    [aCoder encodeObject:_itemDictionary forKey:@"itemDictionary"];
 }
 
 - (BOOL)isEqual:(DBMenuPositionModifierItem *)object{
@@ -91,10 +91,10 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     DBMenuPositionModifierItem *copyItem = [[[self class] allocWithZone:zone] init];
-    copyItem.itemId = [self.itemId copy];
-    copyItem.itemName = [self.itemName copy];
-    copyItem.itemPrice = self.itemPrice;
-    copyItem.itemDictionary = [self.itemDictionary copy];
+    copyItem.itemId = [_itemId copy];
+    copyItem.itemName = [_itemName copy];
+    copyItem.itemPrice = _itemPrice;
+    copyItem.itemDictionary = [_itemDictionary copy];
     
     return copyItem;
 }
@@ -105,9 +105,9 @@
 - (NSDictionary *)plistRepresentation {
     NSMutableDictionary *plist = [NSMutableDictionary new];
     
-    plist[@"itemId"] = self.itemId ?: @"";
-    plist[@"itemName"] = self.itemName ?: @"";
-    plist[@"itemsPrice"] = @(self.itemPrice);
+    plist[@"itemId"] = _itemId ?: @"";
+    plist[@"itemName"] = _itemName ?: @"";
+    plist[@"itemsPrice"] = @(_itemPrice);
     
     return plist;
 }

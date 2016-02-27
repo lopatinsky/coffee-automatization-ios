@@ -8,7 +8,7 @@
 
 #import "DBGeoPush.h"
 
-#import "NSDate+Difference.h"
+#import "NSDate+Extension.h"
 
 @implementation DBGeoPush
 

@@ -16,13 +16,17 @@
 #import "DBCompaniesManager.h"
 #import "DBProfileViewController.h"
 #import "DBOrdersTableViewController.h"
-#import "DBVenuesViewController.h"
 #import "DBCompanyInfoViewController.h"
 #import "DBDocumentsViewController.h"
+
+#import "DBVenuesViewController.h"
+#import "DBVenuesPopupContentController.h"
 
 #import "DBShareHelper.h"
 #import "DBFriendGiftHelper.h"
 #import "DBFriendGiftViewController.h"
+
+#import "DBPersonalWalletView.h"
 
 #import "IHPaymentManager.h"
 #import "DBPaymentViewController.h"
@@ -96,6 +100,10 @@
         [userSection.items addObject:[DBVenuesViewController settingsItem]];
     }
     
+    if ([DBCompanyInfo sharedInstance].chooseVenueAtStart) {
+        [userSection.items addObject:[DBVenuesPopupContentController settingsItem]];
+    }
+    
     if (userSection.items.count > 0) {
         [settingsSections addObject:userSection];
     }
@@ -118,7 +126,7 @@
     
     // Personal wallet
     if ([[[OrderCoordinator sharedInstance] promoManager] walletEnabled]) {
-        [loyaltySection.items addObject:[OrderCoordinator settingsItem]];
+        [loyaltySection.items addObject:[DBPersonalWalletView settingsItem]];
         [[OrderCoordinator sharedInstance] addObserver:self withKeyPath:CoordinatorNotificationPersonalWalletBalanceUpdated selector:@selector(reload)];
     }
     

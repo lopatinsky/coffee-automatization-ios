@@ -18,7 +18,7 @@
 #import "OrderWatch.h"
 
 #import <SDWebImage/SDWebImageManager.h>
-#import "NSDate+Difference.h"
+#import "NSDate+Extension.h"
 
 @implementation Order {
     NSArray *_items;

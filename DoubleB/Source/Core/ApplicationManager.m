@@ -510,7 +510,7 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 
 @end
 
-@implementation ApplicationManager (Start)
+@implementation ApplicationManager (Controllers)
 
 - (UIViewController *)rootViewController {
     if (self.state == RootStateStart) {
@@ -540,10 +540,6 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     [self changeRoot];
 }
 
-@end
-
-@implementation ApplicationManager (Controllers)
-
 - (UIViewController *)mainViewController {
     if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"coffeetogo"]) {
         [[DBUnifiedAppManager sharedInstance] fetchMenu:nil];
@@ -555,6 +551,13 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     } else {
         return [[UINavigationController alloc] initWithRootViewController:[DBMenuViewController new]];
     }
+}
+
+- (UIViewController *)presentanceContainer {
+    UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+    UIViewController *rootVC = window.rootViewController;
+    
+    return rootVC.presentedViewController ? nil : rootVC;
 }
 
 @end

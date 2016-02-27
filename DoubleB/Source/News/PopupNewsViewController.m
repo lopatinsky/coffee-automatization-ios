@@ -44,24 +44,7 @@
     if ([self.data objectForKey:@"image_url"]) {
         [self.popupImageView sd_setImageWithURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         }];
-//        [self.popupImageView setPin_updateWithProgress:YES];
-//        [self.popupImageView pin_setImageFromURL:[NSURL URLWithString:[self.data objectForKey:@"image_url"]]];
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)prefersStatusBarHidden{
-    return YES;
-}
-
-- (IBAction)closeView:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
 }
 
 #pragma mark - PopupNewsViewControllerProtocol

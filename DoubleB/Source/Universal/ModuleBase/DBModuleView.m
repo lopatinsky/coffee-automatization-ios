@@ -232,4 +232,10 @@
     }
 }
 
+- (void)db_moduleViewStartEditing:(DBModuleView *)view {
+    if ([self.delegate respondsToSelector:@selector(db_moduleViewModalComponentContainer:)]) {
+        [self.delegate db_moduleViewStartEditing:self];
+    }
+}
+
 @end

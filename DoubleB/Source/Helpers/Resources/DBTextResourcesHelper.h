@@ -11,6 +11,7 @@
 @interface DBTextResourcesHelper : NSObject
 
 + (NSString *)db_venuesTitleString;
++ (NSString *)db_venueTitleString:(int)wordCase;
 + (NSString *)db_venueBalanceString;
 
 + (NSString *)db_preparationOrderCellString;

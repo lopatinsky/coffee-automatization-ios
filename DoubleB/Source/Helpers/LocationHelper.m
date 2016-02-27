@@ -69,13 +69,6 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
 }
 
 -(void)startUpdatingLocation {
-    /*if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]
-     && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
-     [self.locationManager requestWhenInUseAuthorization];
-     } else {
-     [self.locationManager startUpdatingLocation];
-     }*/
-    
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]
         && [CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
         [self.locationManager requestAlwaysAuthorization];
@@ -149,13 +142,12 @@ NSString *const kLocationManagerStatusAuthorized = @"kLocationManagerStatusAutho
             break;
         default:
             [[NSNotificationCenter defaultCenter] postNotificationName:kLocationManagerStatusAuthorized object:nil];
-            //            [self.locationManager startUpdatingLocation];
+            [self.locationManager startUpdatingLocation];
             break;
     }
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    
     if (self.callback) {
         self.callback(nil);
         self.callback = nil;

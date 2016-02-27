@@ -144,17 +144,21 @@
 #pragma mark - Dynamic properties
 
 - (double)price{
-    NSString *venueId = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
-    NSArray *prices = [self.productDictionary getValueForKey:@"prices"] ?: @[];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
-    NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
-    
-    double price = _price;
-    if (priceDict) {
-        price = [[priceDict getValueForKey:@"price"] doubleValue];
+    if (self.mode == DBMenuPositionModeRegular) {
+        NSString *venueId = [OrderCoordinator sharedInstance].orderManager.venue.venueId;
+        NSArray *prices = [self.productDictionary getValueForKey:@"prices"] ?: @[];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"venue == %@", venueId];
+        NSDictionary *priceDict = [[prices filteredArrayUsingPredicate:predicate] firstObject];
+        
+        double price = _price;
+        if (priceDict) {
+            price = [[priceDict getValueForKey:@"price"] doubleValue];
+        }
+        
+        return price;
+    } else {
+        return _price;
     }
-    
-    return price;
 }
 
 - (double)actualPrice {
@@ -252,43 +256,43 @@
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder{
-    [aCoder encodeObject:self.positionId forKey:@"positionId"];
-    [aCoder encodeObject:self.name forKey:@"name"];
-    [aCoder encodeObject:@(self.order) forKey:@"order"];
-    [aCoder encodeObject:@(self.price) forKey:@"price"];
-    [aCoder encodeObject:self.imageUrl forKey:@"imageUrl"];
-    [aCoder encodeObject:self.positionDescription forKey:@"positionDescription"];
-    [aCoder encodeObject:@(self.energyAmount) forKey:@"energyAmount"];
-    [aCoder encodeObject:@(self.weight) forKey:@"weight"];
-    [aCoder encodeObject:@(self.volume) forKey:@"volume"];
-    [aCoder encodeObject:self.groupModifiers forKey:@"groupModifiers"];
-    [aCoder encodeObject:self.singleModifiers forKey:@"singleModifiers"];
-    [aCoder encodeObject:self.venuesRestrictions forKey:@"venuesRestrictions"];
-    [aCoder encodeObject:self.productDictionary forKey:@"productDictionary"];
+    [aCoder encodeObject:_positionId forKey:@"positionId"];
+    [aCoder encodeObject:_name forKey:@"name"];
+    [aCoder encodeObject:@(_order) forKey:@"order"];
+    [aCoder encodeObject:@(_price) forKey:@"price"];
+    [aCoder encodeObject:_imageUrl forKey:@"imageUrl"];
+    [aCoder encodeObject:_positionDescription forKey:@"positionDescription"];
+    [aCoder encodeObject:@(_energyAmount) forKey:@"energyAmount"];
+    [aCoder encodeObject:@(_weight) forKey:@"weight"];
+    [aCoder encodeObject:@(_volume) forKey:@"volume"];
+    [aCoder encodeObject:_groupModifiers forKey:@"groupModifiers"];
+    [aCoder encodeObject:_singleModifiers forKey:@"singleModifiers"];
+    [aCoder encodeObject:_venuesRestrictions forKey:@"venuesRestrictions"];
+    [aCoder encodeObject:_productDictionary forKey:@"productDictionary"];
     
-    [aCoder encodeObject:@(self.mode) forKey:@"positionMode"];
+    [aCoder encodeObject:@(_mode) forKey:@"positionMode"];
 }
 
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(NSZone *)zone{
     DBMenuPosition *copyPosition = [[[self class] allocWithZone:zone] init];
-    copyPosition.positionId = [self.positionId copy];
-    copyPosition.name = [self.name copy];
-    copyPosition.order = self.order;
-    copyPosition.price = self.price;
-    copyPosition.imageUrl = [self.imageUrl copy];
-    copyPosition.positionDescription = [self.positionDescription copy];
-    copyPosition.energyAmount = self.energyAmount;
-    copyPosition.weight = self.weight;
-    copyPosition.volume = self.volume;
+    copyPosition.positionId = [_positionId copy];
+    copyPosition.name = [_name copy];
+    copyPosition.order = _order;
+    copyPosition.price = _price;
+    copyPosition.imageUrl = [_imageUrl copy];
+    copyPosition.positionDescription = [_positionDescription copy];
+    copyPosition.energyAmount = _energyAmount;
+    copyPosition.weight = _weight;
+    copyPosition.volume = _volume;
     
     copyPosition.groupModifiers = [NSMutableArray new];
-    for(DBMenuPositionModifier *modifier in self.groupModifiers)
+    for(DBMenuPositionModifier *modifier in _groupModifiers)
         [copyPosition.groupModifiers addObject:[modifier copyWithZone:zone]];
     
     copyPosition.singleModifiers = [NSMutableArray new];
-    for(DBMenuPositionModifier *modifier in self.singleModifiers)
+    for(DBMenuPositionModifier *modifier in _singleModifiers)
         [copyPosition.singleModifiers addObject:[modifier copyWithZone:zone]];
     
     copyPosition.productDictionary = [self.productDictionary copy];
@@ -306,7 +310,7 @@
     
     plist[@"positionId"] = self.positionId ?: @"";
     plist[@"name"] = self.name ?: @"";
-    plist[@"price"] = @(self.price);
+    plist[@"price"] = @(_price);
     
     NSMutableArray *groupModifiers = [NSMutableArray new];
     for (DBMenuPositionModifier *groupModifier in self.groupModifiers){

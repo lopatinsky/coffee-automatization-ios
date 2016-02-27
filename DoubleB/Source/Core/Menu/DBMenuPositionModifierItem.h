@@ -22,6 +22,4 @@
 @property (strong, nonatomic) NSDictionary *itemDictionary;
 
 + (DBMenuPositionModifierItem *)itemFromDictionary:(NSDictionary *)itemDictionary;
-
-- (double)itemPrice:(NSString *)venueId;
 @end

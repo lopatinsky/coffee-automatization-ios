@@ -120,4 +120,5 @@
 
 - (void(^)())db_additonalAnimationFroModuleAnimation:(DBModuleView *)view;
 
+- (void)db_moduleViewStartEditing:(DBModuleView *)view;
 @end

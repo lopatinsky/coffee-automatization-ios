@@ -71,7 +71,7 @@
     NSMutableDictionary *json = [NSMutableDictionary new];
     
     for (DBUniversalModuleItem *item in _items) {
-        json[item.jsonField] = item.text ?: @"";
+        [json addEntriesFromDictionary:[item jsonRepresentation]];
     }
     
     return json;

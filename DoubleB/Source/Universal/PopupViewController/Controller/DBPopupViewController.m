@@ -119,6 +119,9 @@
     if ([content respondsToSelector:@selector(db_popupContentContentHeight)]) {
         height = [content db_popupContentContentHeight];
     }
+    if ([content respondsToSelector:@selector(db_popupContentReload)]) {
+        [content db_popupContentReload];
+    }
     
     [self.view addSubview:self.contentView];
     self.contentView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -134,7 +137,7 @@
         self.minBottomOffset = 10.f;
         
         maxHeight = rect.size.height - self.headerFooterView.frame.size.height - self.minTopOffset - self.minBottomOffset;
-        if (height == 0)
+        if (height == 0 || height > maxHeight)
             height = maxHeight;
         
         
@@ -149,8 +152,8 @@
     }
     
     if (self.appearanceMode == DBPopupVCAppearanceModeFooter) {
-        maxHeight = rect.size.height - self.headerFooterView.frame.size.height - self.minTopOffset - self.minBottomOffset;
-        if (height == 0)
+        maxHeight = rect.size.height - self.headerFooterView.frame.size.height - self.headerFooterView.frame.size.height - 10 - 10;
+        if (height == 0 || height > maxHeight)
             height = maxHeight;
         
         self.constraintCenterYAlignment = [[self.contentView alignCenterYWithView:self.view predicate:@"0"] firstObject];

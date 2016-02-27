@@ -26,7 +26,6 @@ typedef void (^DBSettingsItemBlock)(UIViewController *);
 typedef enum : NSUInteger {
     DBSettingsItemNavigationPresent,
     DBSettingsItemNavigationPush,
-    DBSettingsItemNavigationShowView,
     DBSettingsItemNavigationBlock,
 } DBSettingsItemNavigation;
 

@@ -4,17 +4,10 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Light</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DBVenuesPopupContentController">
             <connections>
-                <outlet property="confirmationLabel" destination="6uu-tR-IbG" id="f1c-cN-1gB"/>
-                <outlet property="confirmationSwitch" destination="mgz-kh-uZ2" id="5pN-bn-Rz7"/>
-                <outlet property="confirmationView" destination="yuy-xh-fj2" id="zMG-OQ-u3L"/>
+                <outlet property="confirmationViewHolder" destination="yuy-xh-fj2" id="FaL-mD-oyI"/>
                 <outlet property="contentView" destination="0fm-17-3Xt" id="aqp-Ck-KXk"/>
                 <outlet property="titleLabel" destination="XPw-rf-Gjg" id="NFS-Io-fpv"/>
                 <outlet property="titleView" destination="0AP-04-gpx" id="KoP-Bd-u5w"/>
@@ -32,39 +25,8 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuy-xh-fj2">
                     <rect key="frame" x="0.0" y="528" width="320" height="40"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6uu-tR-IbG">
-                            <rect key="frame" x="8" y="0.0" width="247" height="40"/>
-                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mgz-kh-uZ2">
-                            <rect key="frame" x="263" y="4" width="51" height="31"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="49" id="DTd-vH-KVw"/>
-                                <constraint firstAttribute="height" constant="31" id="PHj-4D-67o"/>
-                            </constraints>
-                        </switch>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ock-wm-EWT" customClass="DBDefaultSeparatorView">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="0.5"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="0.69999999999999996" id="5Zy-5r-kZu"/>
-                            </constraints>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="6uu-tR-IbG" firstAttribute="top" secondItem="yuy-xh-fj2" secondAttribute="top" id="J7D-w0-dll"/>
-                        <constraint firstItem="Ock-wm-EWT" firstAttribute="top" secondItem="yuy-xh-fj2" secondAttribute="top" id="Lr6-kP-be6"/>
-                        <constraint firstItem="mgz-kh-uZ2" firstAttribute="leading" secondItem="6uu-tR-IbG" secondAttribute="trailing" constant="8" id="aCv-FJ-V8I"/>
-                        <constraint firstItem="Ock-wm-EWT" firstAttribute="leading" secondItem="yuy-xh-fj2" secondAttribute="leading" id="bOh-SH-DJ9"/>
-                        <constraint firstAttribute="trailing" secondItem="Ock-wm-EWT" secondAttribute="trailing" id="d8l-3D-gnS"/>
-                        <constraint firstAttribute="bottom" secondItem="6uu-tR-IbG" secondAttribute="bottom" id="is4-Fc-fzc"/>
-                        <constraint firstItem="mgz-kh-uZ2" firstAttribute="centerY" secondItem="yuy-xh-fj2" secondAttribute="centerY" id="qPy-tY-tAC"/>
-                        <constraint firstItem="6uu-tR-IbG" firstAttribute="leading" secondItem="yuy-xh-fj2" secondAttribute="leading" constant="8" id="sdy-M9-6XQ"/>
-                        <constraint firstAttribute="trailing" secondItem="mgz-kh-uZ2" secondAttribute="trailing" constant="8" id="x7W-SH-sm5"/>
                         <constraint firstAttribute="height" constant="40" id="yO1-cJ-pwT"/>
                     </constraints>
                 </view>
@@ -85,7 +47,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="F4T-NO-D7t" secondAttribute="trailing" id="8Rq-1Z-qgr"/>
                         <constraint firstAttribute="bottom" secondItem="XPw-rf-Gjg" secondAttribute="bottom" constant="3" id="MQN-4e-u5L"/>

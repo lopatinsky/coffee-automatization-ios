@@ -93,12 +93,16 @@ extern NSString *const kDBApplicationConfigDidLoadNotification;
 + (UIColor *)applicationColor;
 @end
 
-@interface ApplicationManager(Start) <DBStartNavControllerDelegate>
+@interface ApplicationManager(Controllers) <DBStartNavControllerDelegate>
 - (UIViewController *)rootViewController;
-@end
 
-@interface ApplicationManager(Controllers)
 - (UIViewController *)mainViewController;
+
+/**
+ * Returns controller for presentation another controller
+ * Returns nil if currently presented controller
+ */
+- (UIViewController *)presentanceContainer;
 @end
 
 @interface ApplicationManager(ScreenState)

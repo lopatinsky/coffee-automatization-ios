@@ -8,6 +8,7 @@
 
 #import "DBUniversalModuleItem.h"
 #import "OrderCoordinator.h"
+#import "NSDate+Extension.h"
 
 @implementation DBUniversalModuleItem
 
@@ -15,7 +16,6 @@
     self = [super init];
     
     _type = [[dict getValueForKey:@"type"] integerValue];
-//    _type = DBUniversalModuleItemTypeDate;
     _itemId = [dict getValueForKey:@"field"] ?: @"";
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
@@ -23,8 +23,9 @@
     _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
     
     if (_type == DBUniversalModuleItemTypeDate) {
-        _minDate = [NSDate dateWithTimeIntervalSince1970:0];
-        _maxDate = [NSDate dateWithTimeIntervalSinceNow:100000];
+        NSDictionary *options = [dict getValueForKey:@"options"];
+        _minDate = [NSDate dateFromString:[options getValueForKey:@"min_date"] format:@"yyyy-MM-dd"];
+        _maxDate = [NSDate dateFromString:[options getValueForKey:@"max_date"] format:@"yyyy-MM-dd"];
     }
     
     return self;
@@ -32,25 +33,39 @@
 
 - (void)syncWithResponseDict:(NSDictionary *)dict{
     _type = [[dict getValueForKey:@"type"] integerValue];
-//    _type = DBUniversalModuleItemTypeDate;
     _placeholder = [dict getValueForKey:@"title"] ?: @"";
     _order = [[dict getValueForKey:@"order"] integerValue];
     _jsonField = [dict getValueForKey:@"field"] ?: @"";
     _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
     
     if (_type == DBUniversalModuleItemTypeDate) {
-        _minDate = [NSDate dateWithTimeIntervalSince1970:0];
-        _maxDate = [NSDate dateWithTimeIntervalSinceNow:100000];
+        NSDictionary *options = [dict getValueForKey:@"options"];
+        _minDate = [NSDate dateFromString:[options getValueForKey:@"min_date"] format:@"yyyy-MM-dd"];
+        _maxDate = [NSDate dateFromString:[options getValueForKey:@"max_date"] format:@"yyyy-MM-dd"];
         
         if (_selectedDate) {
-            if ([_selectedDate earlierDate:_minDate]) {
+            if ([_selectedDate earlierDate:_minDate] == _selectedDate) {
                 _selectedDate = _minDate;
             }
-            if ([_selectedDate laterDate:_maxDate]) {
+            if ([_selectedDate laterDate:_maxDate] == _selectedDate) {
                 _selectedDate = _maxDate;
             }
         }
     }
+}
+
+- (NSDictionary *)jsonRepresentation {
+    NSDictionary *json;
+    
+    if (_type == DBUniversalModuleItemTypeString || _type == DBUniversalModuleItemTypeInteger) {
+        json = @{_jsonField: _text ?: @""};
+    }
+    
+    if (_type == DBUniversalModuleItemTypeDate) {
+        json = @{_jsonField: [NSDate stringFromDate:_selectedDate format:@"yyyy-MM-dd"] ?: @""};
+    }
+    
+    return json;
 }
 
 - (void)save {
@@ -114,8 +129,12 @@
     if (_selectedDate) {
         [aCoder encodeObject:_selectedDate forKey:@"_selectedDate"];
     }
-    [aCoder encodeObject:_minDate forKey:@"_minDate"];
-    [aCoder encodeObject:_maxDate forKey:@"_maxDate"];
+    if (_minDate) {
+        [aCoder encodeObject:_minDate forKey:@"_minDate"];
+    }
+    if (_maxDate) {
+        [aCoder encodeObject:_maxDate forKey:@"_maxDate"];
+    }
 }
 
 @end

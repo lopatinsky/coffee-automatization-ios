@@ -11,6 +11,8 @@
 #import "DBVenuesMapViewController.h"
 
 #import "DBVenuesViewController.h"
+#import "DBVenueStartSelectionSettingsView.h"
+#import "DBPopupViewController.h"
 
 #import "OrderCoordinator.h"
 #import "OrderManager.h"
@@ -21,12 +23,12 @@
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *confirmationView;
-@property (weak, nonatomic) IBOutlet UILabel *confirmationLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *confirmationSwitch;
+@property (weak, nonatomic) IBOutlet UIView *confirmationViewHolder;
 
 @property (strong, nonatomic) DBVenuesTableViewController *venuesTableVC;
 @property (strong, nonatomic) DBVenuesMapViewController *venuesMapVC;
+
+@property (strong, nonatomic) DBVenueStartSelectionSettingsView *confirmationView;
 
 @property (strong, nonatomic) UIButton *rightNavButton;
 
@@ -37,9 +39,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.titleLabel.text = NSLocalizedString(@"Выберите ресторан для заказа", nil);
+    self.view.backgroundColor = [UIColor db_backgroundColor];
+
+    self.titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Выберите %@ для заказа", nil), [DBTextResourcesHelper db_venueTitleString:4].lowercaseString];
     
     self.venuesTableVC = [DBVenuesTableViewController new];
     self.venuesTableVC.eventsCategory = self.eventsCategory;
@@ -57,6 +59,20 @@
     self.venuesMapVC.view.translatesAutoresizingMaskIntoConstraints = NO;
     [self.venuesMapVC.view alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.contentView];
     self.venuesMapVC.view.hidden = YES;
+    
+    self.confirmationView = [DBVenueStartSelectionSettingsView create];
+    self.confirmationView.backgroundColor = [UIColor db_backgroundColor];
+    self.confirmationView.title = NSLocalizedString(@"Запомнить мой выбор", nil);
+    [self.confirmationViewHolder addSubview:self.confirmationView];
+    self.confirmationView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.confirmationView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.confirmationViewHolder];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.venuesTableVC beginAppearanceTransition:YES animated:YES];
+    [self.venuesMapVC beginAppearanceTransition:YES animated:YES];
 }
 
 - (UIView *)db_popupContentRightNavigationItem {
@@ -109,24 +125,23 @@
 - (void)db_venuesControllerContentDidSelectVenueInfo:(Venue *)venue {
 }
 
-//#pragma mark - DBSettingsProtocol
-//
-//+ (DBSettingsItem *)settingsItemForViewController:(UIViewController *)viewController {
-//    DBSettingsItem *settingsItem = [DBSettingsItem new];
-//    settingsItem.name = @"venuesVC";
-//    settingsItem.title = [DBTextResourcesHelper db_venuesTitleString];
-//    settingsItem.iconName = @"map_icon_active";
-//    settingsItem.viewController = viewController;
-//    settingsItem.eventLabel = @"venues_click";
-//    settingsItem.navigationType = DBSettingsItemNavigationPush;
-//    return settingsItem;
-//}
-//
-//+ (id<DBSettingsItemProtocol>)settingsItem {
-//    DBVenuesViewController *venuesVC = [DBVenuesViewController new];
-//    venuesVC.mode = DBVenuesViewControllerModeList;
-//    return [DBVenuesViewController settingsItemForViewController:venuesVC];
-//}
+#pragma mark - DBSettingsProtocol
+
++ (id<DBSettingsItemProtocol>)settingsItem {
+    DBSettingsItem *settingsItem = [DBSettingsItem new];
+    settingsItem.name = @"venuesPopupSettingsVC";
+    settingsItem.title = [NSString stringWithFormat:NSLocalizedString(@"Запоминать выбор %@", nil), [DBTextResourcesHelper db_venueTitleString:2].lowercaseString];
+    settingsItem.iconName = @"map_icon_active";
+    settingsItem.eventLabel = @"venues_popup_settings_click";
+    
+    DBVenueStartSelectionSettingsView *view = [DBVenueStartSelectionSettingsView create];
+    view.title = [NSString stringWithFormat:NSLocalizedString(@"Запоминать %@ и не показывать всплывающее окно при запуске приложения", nil), [DBTextResourcesHelper db_venueTitleString:4].lowercaseString];
+    settingsItem.block = ^(UIViewController *vc){
+        [DBPopupViewController presentView:view inContainer:vc mode:DBPopupVCAppearanceModeHeader];
+    };
+    
+    return settingsItem;
+}
 
 
 @end

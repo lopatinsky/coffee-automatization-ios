@@ -9,6 +9,7 @@
 #import "CompanyNewsManager.h"
 #import "UIViewController+DBAppearance.h"
 #import "DBServerAPI.h"
+#import "DBPopupViewController.h"
 
 NSString *const CompanyNewsManagerDidFetchActualNews = @"CompanyNewsManagerDidFetchActualNews";
 NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidReceiveNewsPush";
@@ -76,11 +77,7 @@ NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidRe
         }];
         
         CompanyNews *actualNews = [_newNews firstObject];
-        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-        [newsViewController setData:@{@"title": [actualNews title] ?: @"",
-                                      @"text": [actualNews text] ?: @"",
-                                      @"image_url": [actualNews imageURL] ?: @""}];
-        [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+        [self showNews:actualNews count:0];
     }
     
     self.allNews = news;
@@ -103,13 +100,21 @@ NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidRe
     }];
 }
 
-- (void)showNews {
-    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-    CompanyNews *actualNews = [[CompanyNewsManager sharedManager] actualNews];
-    [newsViewController setData:@{@"text": [actualNews text], @"image_url": [actualNews imageURL]}];
-    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:^{
-        
-    }];
+
+
+- (void)showNews:(CompanyNews*)news count:(int)count{
+    UIViewController *container = [[ApplicationManager sharedInstance] presentanceContainer];
+    if (container) {
+        UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+        [newsViewController setData:@{@"text": [news text], @"image_url": [news imageURL]}];
+        [DBPopupViewController presentController:newsViewController inContainer:container mode:DBPopupVCAppearanceModeFooter];
+    } else {
+        if (count < 5) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(7 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [self showNews:news count:count+1];
+            });
+        }
+    }
 }
 
 @end

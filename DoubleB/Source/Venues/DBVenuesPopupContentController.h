@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DBPopupViewController.h"
+#import "DBBaseSettingsTableViewController.h"
 
-@interface DBVenuesPopupContentController : UIViewController<DBPopupViewControllerContent>
+@interface DBVenuesPopupContentController : UIViewController<DBPopupViewControllerContent, DBSettingsProtocol>
 @property (nonatomic, strong) NSString *eventsCategory;
 @end
