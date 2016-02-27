@@ -72,14 +72,14 @@
 }
 
 - (void)enableMonitoring {
-    NSSet *regions = [self.locationManager monitoredRegions];
-    for (CLRegion *region in regions) {
-        if ([region isKindOfClass:[CLCircularRegion class]]) {
-            [self.locationManager stopMonitoringForRegion:region];
-        }
-    }
-    
     if ([self.geoPush pushIsAvailable]) {
+        NSSet *regions = [self.locationManager monitoredRegions];
+        for (CLRegion *region in regions) {
+            if ([region isKindOfClass:[CLCircularRegion class]]) {
+                [self.locationManager stopMonitoringForRegion:region];
+            }
+        }
+    
         for (NSDictionary *point in [self.geoPush points]) {
             CLCircularRegion *region = [self regionPointFromData:point];
             [self.locationManager startMonitoringForRegion:region];
