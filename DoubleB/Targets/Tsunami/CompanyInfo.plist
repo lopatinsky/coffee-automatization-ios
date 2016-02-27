@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://tsunami.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#170f42</string>
+		<key>CompanyGAKey</key>
+		<string>UA-73114524-20</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>Z5vSibo68v3M6GqUPsLx83QH4BeyN0AO3s2HCaLq</string>
+			<key>clientKey</key>
+			<string>zOkSeVR4nRIKop71gdLIZ90ic51pOKTUPXLHDFjs</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>
