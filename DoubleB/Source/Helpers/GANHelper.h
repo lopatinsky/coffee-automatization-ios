@@ -12,6 +12,8 @@
 */
 @interface GANHelper : NSObject
 
++ (void)initSDK;
+
 + (void)analyzeScreen:(NSString *)screen;
 
 + (void)analyzeEvent:(NSString *)eventName category:(NSString *)category;

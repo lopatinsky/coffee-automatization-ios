@@ -51,12 +51,15 @@ extern NSString *const kDBApplicationConfigDidLoadNotification;
 + (NSString *)db_AppBaseUrl;
 + (id)db_AppDefaultColor;
 + (NSString *)db_AppGoogleAnalyticsKey;
++ (NSString *)db_ParseAppKey;
++ (NSString *)db_ParseClientKey;
 
 // REMOTE
 @property (strong, nonatomic) NSString *parseAppKey;
 @property (strong, nonatomic) NSString *parseClientKey;
 
 @property (strong, nonatomic) NSString *branchKey;
+@property (strong, nonatomic) NSString *gaeKey;
 
 @property (nonatomic) BOOL hasCities;
 @property (nonatomic) BOOL hasCompanies;
