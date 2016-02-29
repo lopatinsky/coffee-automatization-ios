@@ -4,6 +4,10 @@
 <dict>
 	<key>AppConfiguration</key>
 	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
 	</dict>
 	<key>Preferences</key>
 	<dict>
@@ -12,14 +16,7 @@
 		<key>CompanyColor</key>
 		<string>#0E0EFF</string>
 		<key>CompanyGAKey</key>
-		<string>UA-65821587-48</string>
-		<key>Parse</key>
-		<dict>
-			<key>applicationId</key>
-			<string>OaXWbTHbsAVICMw6juzVS4T5GdhtgKD8i6MMPcX5</string>
-			<key>clientKey</key>
-			<string>zI6XvcbA4apxFlhzkE9z06EKrmGYw1bqzA8PM0KB</string>
-		</dict>
+		<string>UA-73114524-22</string>
 	</dict>
 	<key>ViewControllers</key>
 	<dict>
