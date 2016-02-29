@@ -137,6 +137,23 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     return GAKeyString ?: @"";
 }
 
++ (NSArray *)db_excludedOrderModules {
+    NSDictionary *dict = [self objectFromPropertyListByName:@"AppConfiguration"];
+    NSArray *modulesArray = [dict getValueForKey:@"ExcludedOrderModules"];
+    
+    NSMutableArray *result = [NSMutableArray new];
+    for (NSString *moduleString in modulesArray) {
+        if ([moduleString isEqualToString:@"DeliveryType"])
+            [result addObject:@(DBNOModulesDeliveryType)];
+        if ([moduleString isEqualToString:@"Time"])
+            [result addObject:@(DBNOModulesTime)];
+        if ([moduleString isEqualToString:@"Comment"])
+            [result addObject:@(DBNOModulesComment)];
+    }
+    
+    return result;
+}
+
 + (id)db_AppDefaultColor {
     return nil;
 }
@@ -172,6 +189,8 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     
     return color;
 }
+
+#pragma mark - remote
 
 - (NSString *)parseAppKey {
     NSDictionary *config = [ApplicationConfig remoteConfig];

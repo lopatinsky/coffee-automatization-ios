@@ -32,6 +32,12 @@ typedef NS_ENUM(NSInteger, ApplicationScreen) {
     ApplicationScreenUnified
 };
 
+typedef NS_ENUM(NSInteger, DBNOModules) {
+    DBNOModulesDeliveryType = 0,
+    DBNOModulesTime,
+    DBNOModulesComment
+};
+
 extern NSString *const kDBApplicationConfigDidLoadNotification;
 
 /**
@@ -52,6 +58,8 @@ extern NSString *const kDBApplicationConfigDidLoadNotification;
 + (NSString *)db_AppBaseUrl;
 + (id)db_AppDefaultColor;
 + (NSString *)db_AppGoogleAnalyticsKey;
+
++ (NSArray *)db_excludedOrderModules;
 
 // REMOTE
 @property (strong, nonatomic) NSString *parseAppKey;
