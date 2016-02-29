@@ -89,6 +89,7 @@ typedef NS_ENUM(NSInteger, DBAggregatorStartState) {
 
 #pragma mark - DBCitiesViewControllerDelegate
 - (void)db_citiesViewControllerDidSelectCity:(DBUnifiedCity *)city {
+    [[ApplicationManager sharedInstance] flushStoredCache];
     [DBCitiesManager selectCity:city];
     [self moveToMain];
 }

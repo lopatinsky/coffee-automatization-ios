@@ -55,7 +55,7 @@
         }
             break;
         case DBAddressAttributeApartment:{
-            title = NSLocalizedString(@"Квартира", nil);
+            title = NSLocalizedString(@"Кв./Офис", nil);
             self.textField.text = _shippingManager.selectedAddress.apartment;
         }
             break;
