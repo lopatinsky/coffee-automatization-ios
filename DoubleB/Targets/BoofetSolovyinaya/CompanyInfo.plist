@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict/>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://solovinaya.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#0E0EFF</string>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>

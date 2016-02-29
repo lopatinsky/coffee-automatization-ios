@@ -137,6 +137,18 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     return GAKeyString ?: @"";
 }
 
++ (NSString *)db_ParseAppKey {
+    NSDictionary *parse = [self objectFromApplicationPreferencesByName:@"Parse"];
+    
+    return [parse getValueForKey:@"applicationId"] ?: @"";
+}
+
++ (NSString *)db_ParseClientKey {
+    NSDictionary *parse = [self objectFromApplicationPreferencesByName:@"Parse"];
+    
+    return [parse getValueForKey:@"clientKey"] ?: @"";
+}
+
 + (NSArray *)db_excludedOrderModules {
     NSDictionary *dict = [self objectFromPropertyListByName:@"AppConfiguration"];
     NSArray *modulesArray = [dict getValueForKey:@"ExcludedOrderModules"];
@@ -213,6 +225,13 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     return key;
 }
 
+- (NSString *)gaeKey {
+    NSDictionary *config = [ApplicationConfig remoteConfig];
+    
+    NSString *key = [[[config getValueForKey:@"keys"] getValueForKey:@"ga"] getValueForKey:@"ios"];
+    return key;
+}
+
 - (BOOL)hasCities {
     NSDictionary *config = [ApplicationConfig remoteConfig];
     
@@ -255,6 +274,79 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     dispatch_once(&once, ^{ instance = [[self alloc] init]; });
     return instance;
 }
+
+- (instancetype)init {
+    self = [super init];
+    
+    self.state = RootStateStart;
+    
+    return self;
+}
+
+
+#pragma mark - Frameworks initialization
+- (void)initializeConfigurableFrameworks {
+    [GANHelper initSDK];
+}
+
+- (void)initializeVendorFrameworks {
+    [Fabric with:@[CrashlyticsKit]];
+    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
+    
+    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
+    
+    [self initializeConfigurableFrameworks];
+}
+
+- (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
+    if ([ApplicationConfig remoteConfig] != nil) {
+        [self initializeVendorFrameworks];
+    }
+    
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"rollandwok"]) {
+        [Appsee start:@"963a618f5fa94189bda0ad521d23f2dd"];
+    }
+    
+    [DBVersionDependencyManager performAll];
+    [GANHelper trackClientInfo];
+    
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
+        NSDictionary *push = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+        NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
+        NSString *pushLabel = [NSString stringWithFormat:@"%@|%ld", [IHSecureStore sharedInstance].clientId ?: @"", (long)pushType];
+        [GANHelper analyzeEvent:@"return_push_opened" label:pushLabel category:@"Return_Push_Screen"];
+        
+        [ApplicationManager handlePush:push];
+    }
+    
+    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
+    
+    [IHPaymentManager sharedInstance];
+    [DBShareHelper sharedInstance];
+    [OrderCoordinator sharedInstance];
+    
+#ifdef DEBUG
+    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
+        [DBSnapshotSDKHelper sharedInstance];
+    }
+#endif
+    
+}
+
+- (void)awakeFromNotification:(NSDictionary *)userInfo {
+    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
+    [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
+    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
+}
+
+- (void)recieveNotification:(NSDictionary *)userInfo {
+    if([UIApplication sharedApplication].applicationState != 0){
+        [self awakeFromNotification:userInfo];
+    }
+}
+
+
+#pragma mark - Pushes
 
 + (void)handlePush:(NSDictionary *)push {
     NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
@@ -333,69 +425,6 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     
 }
 
-- (instancetype)init {
-    self = [super init];
-    
-    self.state = RootStateStart;
-    
-    return self;
-}
-
-
-#pragma mark - Frameworks initialization
-- (void)initializeVendorFrameworks {
-    [Fabric with:@[CrashlyticsKit]];
-    [GMSServices provideAPIKey:@"AIzaSyCvIyDXuVsBnXDkJuni9va0sCCHuaD0QRo"];
-    
-    [PayPalMobile initializeWithClientIdsForEnvironments:@{PayPalEnvironmentProduction: @"AQ7ORgGNVgz2NNmmwuwPauWbocWczSyYaQ8nOe-eCEGrGD1PNPu6eZOdOovtwSFbkTCKBjVyOPWLnYiL"}];
-}
-
-- (void)startApplicationWithOptions:(NSDictionary *)launchOptions {
-    if ([ApplicationConfig remoteConfig] != nil) {
-        [self initializeVendorFrameworks];
-    }
-    
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"rollandwok"]) {
-        [Appsee start:@"963a618f5fa94189bda0ad521d23f2dd"];
-    }
-    
-    [DBVersionDependencyManager performAll];
-    [GANHelper trackClientInfo];
-    
-    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]) {
-        NSDictionary *push = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
-        NSUInteger pushType = [([push objectForKey:@"type"] ?: @(RemotePushInvalidType)) unsignedIntegerValue];
-        NSString *pushLabel = [NSString stringWithFormat:@"%@|%ld", [IHSecureStore sharedInstance].clientId ?: @"", (long)pushType];
-        [GANHelper analyzeEvent:@"return_push_opened" label:pushLabel category:@"Return_Push_Screen"];
-        
-        [ApplicationManager handlePush:push];
-    }
-    
-    [[NetworkManager sharedManager] addPendingUniqueOperation:NetworkOperationRegister withUserInfo:@{@"launch_options": launchOptions ?: @{}}];
-    
-    [IHPaymentManager sharedInstance];
-    [DBShareHelper sharedInstance];
-    [OrderCoordinator sharedInstance];
-    
-#ifdef DEBUG
-    if ([[NSProcessInfo processInfo].environment objectForKey:@"UITest"]) {
-        [DBSnapshotSDKHelper sharedInstance];
-    }
-#endif
-    
-}
-
-- (void)awakeFromNotification:(NSDictionary *)userInfo {
-    UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-    [newsViewController setData:@{@"text": [userInfo[@"aps"] getValueForKey:@"alert"] ?: @"", @"image_url": @""}];
-    [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-}
-
-- (void)recieveNotification:(NSDictionary *)userInfo {
-    if([UIApplication sharedApplication].applicationState != 0){
-        [self awakeFromNotification:userInfo];
-    }
-}
 
 #pragma mark - API Notification handlers
 - (void)companiesLoadedSuccess {
