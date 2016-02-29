@@ -4,6 +4,12 @@
 <dict>
 	<key>AppConfiguration</key>
 	<dict>
+		<key>ExcludedOrderModules</key>
+		<array>
+			<string>Time</string>
+			<string>Comment</string>
+			<string>DeliveryType</string>
+		</array>
 		<key>MenuType</key>
 		<string>Skeleton</string>
 	</dict>

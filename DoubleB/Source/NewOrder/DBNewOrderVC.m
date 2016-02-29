@@ -105,17 +105,21 @@
         [self addModule:[DBNOProfileModuleView create] topOffset:0 bottomOffset:5];
     }
     
-    if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1) {
+    if ([DBCompanyInfo sharedInstance].deliveryTypes.count > 1 && ![[ApplicationConfig db_excludedOrderModules] containsObject:@(DBNOModulesDeliveryType)]) {
         [self addModule:[DBNODeliveryTypeModuleView create] topOffset:0];
     }
     
     [self addModule:[DBNOVenueModuleView create] topOffset:1];
     
-    [self addModule:[DBNOTimeModuleView create] topOffset:1];
+    if (![[ApplicationConfig db_excludedOrderModules] containsObject:@(DBNOModulesTime)]) {
+        [self addModule:[DBNOTimeModuleView create] topOffset:1];
+    }
     
     [self addModule:[DBNOPaymentModuleView create]topOffset:5];
     
-    [self addModule:[DBNOCommentModuleView create]topOffset:5];
+    if (![[ApplicationConfig db_excludedOrderModules] containsObject:@(DBNOModulesComment)]) {
+        [self addModule:[DBNOCommentModuleView create]topOffset:5];
+    }
     
     if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeOddSum]) {
         [self addModule:[DBNOOddModuleView create]topOffset:1];

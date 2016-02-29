@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 
 @interface DBPushManager ()
+@property (nonatomic) BOOL sdkInitialized;
 @end
 
 @implementation DBPushManager
@@ -62,14 +63,19 @@
 }
 
 - (void)initSdk {
-    if ([ApplicationConfig sharedInstance].parseAppKey && [ApplicationConfig sharedInstance].parseClientKey) {
+    if ([ApplicationConfig sharedInstance].parseAppKey.length > 0 && [ApplicationConfig sharedInstance].parseClientKey.length > 0) {
         [Parse setApplicationId:[ApplicationConfig sharedInstance].parseAppKey
                       clientKey:[ApplicationConfig sharedInstance].parseClientKey];
+        
+        self.sdkInitialized = YES;
+    } else {
+        if ([ApplicationConfig db_ParseAppKey].length > 0 && [ApplicationConfig db_ParseClientKey].length > 0) {
+            [Parse setApplicationId:[ApplicationConfig db_ParseAppKey]
+                          clientKey:[ApplicationConfig db_ParseClientKey]];
+            
+            self.sdkInitialized = YES;
+        }
     }
-}
-
-- (BOOL)sdkInitialized {
-    return [ApplicationConfig sharedInstance].parseAppKey.length > 0 && [ApplicationConfig sharedInstance].parseClientKey.length > 0;
 }
 
 - (void)applicationDidFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
