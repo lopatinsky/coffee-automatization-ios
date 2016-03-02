@@ -74,3 +74,8 @@ MaxxiCoffee com.empatika.maxiicoffee 1063718709
 Grilnica com.empatika.grilnica 1063717530
 ChaychonaTlt com.empatika.chaychonatlt 1064122943
 Buono com.empatika.buono 1063718471
+SushinSon com.empatika.sushinson 1089221548
+BoofetSolovyinaya com.empatika.boofetsolovyinaya 1088821117
+SchastyeZdes com.empatika.schastyezdes 1089221888
+MrSushkin com.empatika.mrsushkin 1089225913
+SmileCity com.empatika.smilecity 1089273719
