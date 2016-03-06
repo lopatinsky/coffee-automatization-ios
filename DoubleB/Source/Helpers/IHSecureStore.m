@@ -32,7 +32,10 @@
     self = [super init];
     
     self.secureStore = [UICKeyChainStore keyChainStore];
+    
+#ifdef DEBUG
 //    [self.secureStore removeAllItems];
+#endif
     
     return self;
 }
