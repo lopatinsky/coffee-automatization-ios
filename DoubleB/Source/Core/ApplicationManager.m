@@ -16,7 +16,6 @@
 #import "Venue.h"
 #import "DBCardsManager.h"
 #import "IHSecureStore.h"
-#import "UICKeyChainStore.h"
 
 #import "IHPaymentManager.h"
 #import "DBCompaniesManager.h"

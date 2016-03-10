@@ -153,6 +153,27 @@
                              }];
 }
 
++ (void)recoverClientId:(NSString *)clientId
+                 fromId:(NSString *)oldClientId
+               callback:(void(^)(BOOL success))callback {
+    if (clientId.length > 0 && oldClientId.length > 0) {
+        [[DBAPIClient sharedClient] POST:@"client/recovery_from_other"
+                              parameters:@{@"client_id": clientId,
+                                           @"old_client_id": oldClientId}
+                                 success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                                     BOOL success = [[responseObject getValueForKey:@"success"] boolValue];
+                                     
+                                     if (callback)
+                                         callback(success);
+                                 } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                                     NSLog(@"%@", error);
+                                     
+                                     if (callback)
+                                         callback(NO);
+                                 }];
+    }
+}
+
 + (void)sendUserInfo:(void(^)(BOOL success))callback {
     NSString *clientId = [[IHSecureStore sharedInstance] clientId];
     

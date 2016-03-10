@@ -21,7 +21,13 @@
 @implementation DBVersionDependencyManager
 
 + (void)performAll {
-    [self checkCompatibilityOfStoredData];
+    if ([self appFromIIko]) {
+        [[IHSecureStore sharedInstance] migrateIIkoFlagAutomationRelease112];
+        [self checkCompatibilityOfStoredData];
+        [[IHSecureStore sharedInstance] migrateDataAutomationRelease112];
+    } else {
+        [[IHSecureStore sharedInstance] migrateDataAutomationRelease112];
+    }
 }
 
 #pragma mark - Analyze user history
@@ -58,19 +64,12 @@
     [[DBMenu sharedInstance] saveMenuToDeviceMemory];
 }
 
+
 #pragma mark - check compatibility of stored data
 + (void)checkCompatibilityOfStoredData {
     if ([self needsToFlush]) {
         
-        // Fetch payment client Id from iiko app
-        NSData *clientIdData = [[IHSecureStore sharedInstance] dataForKey:@"clientId"];
-        // Save it as new payment Id
-        [[IHSecureStore sharedInstance] setData:clientIdData forKey:@"paymentClientId"];
-        
-        // Remove iiko payment client Id
-        [[IHSecureStore sharedInstance] removeForKey:@"clientId"];
-        // Remove iiko client id (server return new)
-        [[IHSecureStore sharedInstance] removeForKey:@"restoClientId"];
+        [[IHSecureStore sharedInstance] migrateIIkoData];
         
         // Clear UserDefaults
         NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
@@ -91,39 +90,7 @@
 + (BOOL)needsToFlush {
     BOOL needsToFlush = NO;
     
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"tukano"]){
-        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
-        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
-        if (!removed) {
-            needsToFlush = YES;
-        }
-    }
-    
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"sushilar"]){
-        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
-        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
-        if (!removed) {
-            needsToFlush = YES;
-        }
-    }
-
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"iikohack"]){
-        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
-        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
-        if (!removed) {
-            needsToFlush = YES;
-        }
-    }
-    
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"mivako"]){
-        NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
-        BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
-        if (!removed) {
-            needsToFlush = YES;
-        }
-    }
-    
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"omnomnom"]){
+    if ([self appFromIIko]){
         NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
         BOOL removed = [((NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:data]) boolValue];
         if (!removed) {
@@ -132,6 +99,12 @@
     }
     
     return needsToFlush;
+}
+
++ (BOOL)appFromIIko {
+    NSArray *appsToClearCache = @[@"tukano", @"sushilar", @"iikohack", @"mivako", @"omnomnom", @"orangeexpress", @"dimash", @"panda", @"burgerclub", @"sushitime"];
+    
+    return [appsToClearCache containsObject:[ApplicationConfig db_bundleName].lowercaseString];
 }
 
 #pragma mark - DBDataManager

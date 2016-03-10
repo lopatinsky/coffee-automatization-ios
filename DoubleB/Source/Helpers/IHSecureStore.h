@@ -22,3 +22,21 @@
 - (void)removeAll;
 
 @end
+
+@interface IHSecureStore (Migration)
+/**
+ * Migrate data from doubleb secure store (stored up to 1.12 release)
+ */
+- (void)migrateDataAutomationRelease112;
+
+/**
+ * Migrate iiko flag kDBVersionDependencyManagerRemovedIIkoCache stored in double secure store
+ */
+- (void)migrateIIkoFlagAutomationRelease112;
+
+/**
+ * Migrate data of iiko apps released from IIkoHack project
+ */
+- (void)migrateIIkoData;
+
+@end
