@@ -21,12 +21,24 @@
 @implementation DBVersionDependencyManager
 
 + (void)performAll {
+    [self syncVersionsHistory];
+    
     if ([self appFromIIko]) {
         [[IHSecureStore sharedInstance] migrateIIkoFlagAutomationRelease112];
         [self checkCompatibilityOfStoredData];
         [[IHSecureStore sharedInstance] migrateDataAutomationRelease112];
     } else {
         [[IHSecureStore sharedInstance] migrateDataAutomationRelease112];
+    }
+}
+
++ (void)syncVersionsHistory {
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    NSMutableArray *versions = [DBVersionDependencyManager valueForKey:@"dbVersionHistory"] ?: [NSMutableArray new];
+    if (![versions containsObject:version]) {
+        [versions addObject:version];
+        [DBVersionDependencyManager setValue:versions forKey:@"dbVersionHistory"];
     }
 }
 
