@@ -13,6 +13,7 @@
 #import "OrderCoordinator.h"
 #import "DBModulesManager.h"
 #import "DBMenu.h"
+#import "Venue.h"
 
 #import "DBPopupViewController.h"
 #import "UIView+RoundedCorners.h"
@@ -34,16 +35,12 @@
 
 @implementation DBMPOrderModuleView
 
-+ (DBMPOrderModuleView *)create {
-    DBMPOrderModuleView *view;
-    
++ (NSString *)xibName {
     if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances]) {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderBalanceModuleView" owner:self options:nil] firstObject];
+        return @"DBMPOrderBalanceModuleView";
     } else {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderModuleView" owner:self options:nil] firstObject];
+        return @"DBMPOrderModuleView";
     }
-    
-    return view;
 }
 
 - (void)awakeFromNib {
@@ -169,7 +166,7 @@
 - (BOOL)positionAvailable {
     BOOL available = NO;
     for (DBMenuPositionBalance *balance in self.balance) {
-        if (balance.venue == [OrderCoordinator sharedInstance].orderManager.venue) {
+        if ([balance.venue.venueId isEqualToString:[OrderCoordinator sharedInstance].orderManager.venue.venueId]) {
             available = YES;
         }
     }

@@ -79,3 +79,4 @@ BoofetSolovyinaya com.empatika.boofetsolovyinaya 1088821117
 SchastyeZdes com.empatika.schastyezdes 1089221888
 MrSushkin com.empatika.mrsushkin 1089225913
 SmileCity com.empatika.smilecity 1089273719
+HouseMafia com.empatika.housemafia 1085545998
