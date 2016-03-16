@@ -26,6 +26,8 @@
 
 + (void)registerUserWithBranchParams:(NSDictionary *)branchParams callback:(void(^)(BOOL success))callback;
 
++ (void)recoverClientId:(NSString *)clientId fromId:(NSString *)oldClientId callback:(void(^)(BOOL success))callback;
+
 + (void)sendUserInfo:(void(^)(BOOL success))callback;
 
 + (void)updateCompanyInfo:(void(^)(BOOL success, NSDictionary *response))callback;

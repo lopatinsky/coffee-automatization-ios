@@ -333,7 +333,7 @@
     
     NSDictionary *personalWalletPromo = promoInfo[@"personalWalletPromo"];
     _walletEnabled = [personalWalletPromo[@"walletEnabled"] boolValue];
-    _walletBalance = [personalWalletPromo[@"walletBalance"] boolValue];
+    _walletBalance = [personalWalletPromo[@"walletBalance"] doubleValue];
     _walletTextDescription = personalWalletPromo[@"walletTextDescription"] ?: @"";
 }
 

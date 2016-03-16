@@ -14,6 +14,7 @@
 #import "DBModulesManager.h"
 #import "DBMenu.h"
 #import "OrderItem.h"
+#import "Venue.h"
 
 #import "DBPopupViewController.h"
 #import "UIView+RoundedCorners.h"
@@ -35,16 +36,12 @@
 
 @implementation DBMPOrderModuleView
 
-+ (DBMPOrderModuleView *)create {
-    DBMPOrderModuleView *view;
-    
++ (NSString *)xibName {
     if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances]) {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderBalanceModuleView" owner:self options:nil] firstObject];
+        return @"DBMPOrderBalanceModuleView";
     } else {
-        view = [[[NSBundle mainBundle] loadNibNamed:@"DBMPOrderModuleView" owner:self options:nil] firstObject];
+        return @"DBMPOrderModuleView";
     }
-    
-    return view;
 }
 
 - (void)awakeFromNib {
@@ -148,15 +145,19 @@
                          }];
     };
     
-    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances] && ![self positionAvailable]) {
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypePositionBalances] && ![self positionAvailable:[OrderCoordinator sharedInstance].orderManager.venue]) {
         self.balanceView = [DBPositionBalanceView new];
         self.balanceView.mode = DBPositionBalanceViewModeChooseVenue;
         self.balanceView.position = self.position;
         self.balanceView.balance = self.balance;
         
+        @weakify(self)
         self.balanceView.venueSelectedBlock = ^void(Venue *venue) {
-            [OrderCoordinator sharedInstance].orderManager.venue = venue;
-            addBlock();
+            @strongify(self)
+            if ([self positionAvailable:venue]) {
+                [OrderCoordinator sharedInstance].orderManager.venue = venue;
+                addBlock();
+            }
         };
         
         [self.balanceView reload];
@@ -167,7 +168,7 @@
     }
 }
 
-- (BOOL)positionAvailable {
+- (BOOL)positionAvailable:(Venue *)venue {
     BOOL available = NO;
     
     NSInteger positionsInOrder = 0;
@@ -176,8 +177,8 @@
     }
     
     for (DBMenuPositionBalance *balance in self.balance) {
-        if (balance.venue == [OrderCoordinator sharedInstance].orderManager.venue && positionsInOrder < balance.balance) {
-            available = YES;
+        if ([balance.venue.venueId isEqualToString:venue.venueId]) {
+            available = balance.balance > positionsInOrder;
         }
     }
     

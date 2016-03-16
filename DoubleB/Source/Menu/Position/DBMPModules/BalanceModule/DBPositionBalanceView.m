@@ -127,6 +127,8 @@
         if (_venueSelectedBlock) {
             _venueSelectedBlock(balance.venue);
         }
+        
+        [self.popupViewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

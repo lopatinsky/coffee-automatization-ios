@@ -8,7 +8,6 @@
 
 #import "DBCardsManager.h"
 #import "IHSecureStore.h"
-#import "UICKeyChainStore.h"
 
 NSString *const kDBCardTypeMasterCard = @"MasterCard";
 NSString *const kDBCardTypeVisa = @"Visa";
@@ -85,7 +84,6 @@ NSString *const kDBCardTypeDinersClub = @"Diners Club";
 NSString * const DBCardsManagerNotificationCardsChanged = @"DBCardsManagerNotificationCardsChanged";
 
 @interface DBCardsManager ()
-@property (strong, nonatomic) UICKeyChainStore *secureStore;
 @end
 
 @implementation DBCardsManager
@@ -100,7 +98,6 @@ NSString * const DBCardsManagerNotificationCardsChanged = @"DBCardsManagerNotifi
 - (instancetype)init{
     self = [super init];
     
-    self.secureStore = [UICKeyChainStore keyChainStore];
     [self fetch];
     
     return self;
@@ -108,7 +105,7 @@ NSString * const DBCardsManagerNotificationCardsChanged = @"DBCardsManagerNotifi
 
 // TODO: write data migration
 - (void)fetch {
-    NSData *data = [self.secureStore dataForKey:@"payment_cards"];
+    NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"payment_cards"];
     _cards = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     if(!_cards)
@@ -120,7 +117,7 @@ NSString * const DBCardsManagerNotificationCardsChanged = @"DBCardsManagerNotifi
 
 // Data migration from old format
 - (void)fetchWithOldFormat {
-    NSData *data = [self.secureStore dataForKey:@"cards"];
+    NSData *data = [[IHSecureStore sharedInstance] dataForKey:@"cards"];
     NSArray *cards = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     _cards = [NSMutableArray new];
@@ -138,8 +135,7 @@ NSString * const DBCardsManagerNotificationCardsChanged = @"DBCardsManagerNotifi
 
 - (void)syncronize {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:_cards];
-    [self.secureStore setData:data forKey:@"payment_cards"];
-    [self.secureStore synchronize];
+    [[IHSecureStore sharedInstance] setData:data forKey:@"payment_cards"];
 }
 
 - (NSUInteger)cardsCount {
