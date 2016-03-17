@@ -46,6 +46,8 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
     
+    [self enableModule];
+    
     return self;
 }
 
@@ -106,10 +108,10 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     [DBSubscriptionManager setValue:@(_enable) forKey:@"__available"];
     
     if (self.enable) {
-        self.subscriptionScreenText = module.info[@"info"][@"screen"][@"description"];
-        self.subscriptionScreenTitle = module.info[@"info"][@"screen"][@"title"];
-        self.subscriptionMenuText = module.info[@"info"][@"menu"][@"description"];
-        self.subscriptionMenuTitle = module.info[@"info"][@"menu"][@"title"];
+        self.subscriptionScreenText = module.info[@"screen"][@"description"];
+        self.subscriptionScreenTitle = module.info[@"screen"][@"title"];
+        self.subscriptionMenuText = module.info[@"menu"][@"description"];
+        self.subscriptionMenuTitle = module.info[@"menu"][@"title"];
         
         [DBSubscriptionManager setValue:self.subscriptionScreenTitle forKey:@"__subscriptionScreenTitle"];
         [DBSubscriptionManager setValue:self.subscriptionScreenText forKey:@"__subscriptionScreenText"];

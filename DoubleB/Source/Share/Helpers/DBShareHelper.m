@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger, ShareType) {
     self = [super init];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    [self enableModule];
     
     return self;
 }

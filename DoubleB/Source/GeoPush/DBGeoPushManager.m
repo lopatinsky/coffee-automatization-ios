@@ -34,6 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableMonitoring) name:kLocationManagerStatusAuthorized object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    [self enableModule];
     
     return self;
 }
