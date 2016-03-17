@@ -39,7 +39,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.rowHeight = 45;
     
-    _items = [self settingsItems];
+    self.sections = [self settingsSections];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
