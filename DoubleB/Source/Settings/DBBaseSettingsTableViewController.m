@@ -40,7 +40,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
     self.tableView.separatorInset = UIEdgeInsetsZero;
     self.tableView.rowHeight = 50;
     
-    self.items = [self settingsItems];
+    _items = [self settingsItems];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -77,7 +77,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.settingsItems count];
+    return [_items count];
 }
 
 
@@ -90,7 +90,7 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
         cell.hasIcon = YES;
     }
     
-    id<DBSettingsItemProtocol> settingsItemInfo = self.settingsItems[indexPath.row];
+    id<DBSettingsItemProtocol> settingsItemInfo = _items[indexPath.row];
     [cell.settingsImageView templateImageWithName:[settingsItemInfo iconName]];
     [cell.titleLabel setText:[settingsItemInfo title]];
     cell.hasSwitch = NO;
@@ -116,14 +116,14 @@ NSString *const kDBSettingsNotificationsEnabled2 = @"kDBSettingsNotificationsEna
         DBSettingsItemNavigation navigationType = [item navigationType];
         switch (navigationType) {
             case DBSettingsItemNavigationPresent:
-                [self presentViewController:[self.settingsItems[indexPath.row] viewController] animated:YES completion:nil];
+                [self presentViewController:[_items[indexPath.row] viewController] animated:YES completion:nil];
                 break;
             case DBSettingsItemNavigationPush:
-                [self.navigationController pushViewController:[self.settingsItems[indexPath.row] viewController] animated:YES];
+                [self.navigationController pushViewController:[_items[indexPath.row] viewController] animated:YES];
                 break;
             case DBSettingsItemNavigationShowView:
                 // TODO: protocol
-                [(DBPersonalWalletView *)[self.settingsItems[indexPath.row] view] showOnView:self.navigationController.view];
+                [(DBPersonalWalletView *)[_items[indexPath.row] view] showOnView:self.navigationController.view];
                 break;
             default:
                 break;

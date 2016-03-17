@@ -33,6 +33,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableMonitoring) name:kLocationManagerStatusAuthorized object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    [self enableModule];
+    
     return self;
 }
 
@@ -100,12 +103,13 @@
 }
 
 #pragma mark - DBModuleManagerProtocol
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    self.enabled = enabled;
-    [DBGeoPushManager setValue:@(enabled) forKey:@"__enabled"];
+- (void)enableModule {
+    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypeGeoPush];
+    self.enabled = module != nil;
+    [DBGeoPushManager setValue:@(_enabled) forKey:@"__enabled"];
     
-    if (enabled) {
-        self.geoPush = [[DBGeoPush alloc] initWithResponseDict:moduleDict[@"info"]];
+    if (_enabled) {
+        self.geoPush = [[DBGeoPush alloc] initWithResponseDict:module.info[@"info"]];
         [self saveCurrentGeoPush];
         
         if ([[LocationHelper sharedInstance] isAuthorized]) {

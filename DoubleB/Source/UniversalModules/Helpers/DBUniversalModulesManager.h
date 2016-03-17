@@ -7,9 +7,8 @@
 //
 
 #import "DBPrimaryManager.h"
-#import "DBModuleManagerProtocol.h"
 
-@interface DBUniversalModulesManager : DBPrimaryManager<DBModuleManagerProtocol>
+@interface DBUniversalModulesManager : DBPrimaryManager
 /**
  * All universal modules
  */

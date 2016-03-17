@@ -22,8 +22,15 @@
     if (self = [super init]) {
         [self loadItems];
         self.enabled = [[DBCustomViewManager valueForKey:@"__enabled"] boolValue];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+        [self enableModule];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)loadItems {
@@ -36,13 +43,14 @@
     [DBCustomViewManager setValue:data forKey:@"__customViewItems"];
 }
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    self.enabled = enabled;
-    [DBCustomViewManager setValue:@(enabled) forKey:@"__enabled"];
+- (void)enableModule {
+    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypeCustomView];
+    self.enabled = module != nil;
+    [DBCustomViewManager setValue:@(_enabled) forKey:@"__enabled"];
     
     _items = [NSMutableArray new];
     if (self.enabled) {
-        for (NSDictionary *item in [moduleDict objectForKey:@"sections"]) {
+        for (NSDictionary *item in [module.info objectForKey:@"sections"]) {
             DBCustomItem *newItem = [[DBCustomItem alloc] initWithTitle:[item objectForKey:@"title"] andURLString:[item objectForKey:@"url"]];
             [_items addObject:newItem];
         }

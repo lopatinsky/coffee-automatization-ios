@@ -13,7 +13,7 @@
 #import "DBUniversalModuleDelegate.h"
 
 @interface DBUniversalModulesManager ()<DBUniversalModuleDelegate>
-
+- (DBModuleType)moduleType;
 @end
 
 @implementation DBUniversalModulesManager
@@ -27,13 +27,22 @@
         module.delegate = self;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    [self enableModule];
+    
     return self;
 }
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    if(enabled) {
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)enableModule {
+    DBModule *module = [[DBModulesManager sharedInstance] module:[self moduleType]];
+    
+    if(module) {
         NSMutableArray *availableModules = [NSMutableArray new];
-        for (NSDictionary *groupDict in moduleDict[@"groups"]) {
+        for (NSDictionary *groupDict in module.info[@"groups"]) {
             NSString *groupId = groupDict[@"group_field"];
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moduleId == %@", groupId];
             DBUniversalModule *module = [[_modules filteredArrayUsingPredicate:predicate] firstObject];
@@ -53,6 +62,10 @@
     }
     
     [self save];
+}
+
+- (DBModuleType)moduleType {
+    return DBModuleTypeOrderScreenUniversal;
 }
 
 - (void)save {
@@ -76,6 +89,10 @@
 
 @implementation DBUniversalProfileModulesManager
 
+- (DBModuleType)moduleType {
+    return DBModuleTypeProfileScreenUniversal;
+}
+
 + (NSString *)db_managerStorageKey {
     return @"DBDefaultsProfleUniversalModulesManager";
 }
@@ -83,6 +100,10 @@
 @end
 
 @implementation DBUniversalOrderModulesManager
+
+- (DBModuleType)moduleType {
+    return DBModuleTypeOrderScreenUniversal;
+}
 
 + (NSString *)db_managerStorageKey {
     return @"DBDefaultsOrderUniversalModulesManager";

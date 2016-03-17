@@ -43,7 +43,14 @@ typedef NS_ENUM(NSUInteger, ShareType) {
 - (instancetype)init {
     self = [super init];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    [self enableModule];
+    
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (BOOL)enabled {
@@ -54,14 +61,15 @@ typedef NS_ENUM(NSUInteger, ShareType) {
     return [[DBShareHelper valueForKey:@"infoLoaded"] boolValue];
 }
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    [DBShareHelper setValue:@(enabled) forKey:@"enabled"];
-    
-    NSDictionary *info = [moduleDict getValueForKey:@"info"];
-    [DBShareHelper setValue:[[info getValueForKey:@"about"] getValueForKey:@"title"] ?: @"" forKey:@"titleShareScreen"];
-    [DBShareHelper setValue:[[info getValueForKey:@"about"] getValueForKey:@"description"] ?: @"" forKey:@"textShareScreen"];
+- (void)enableModule {
+    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypeFriendInvitation];
+    [DBShareHelper setValue:@(module != nil) forKey:@"enabled"];
     
     if (self.enabled) {
+        NSDictionary *info = [module.info getValueForKey:@"info"];
+        [DBShareHelper setValue:[[info getValueForKey:@"about"] getValueForKey:@"title"] ?: @"" forKey:@"titleShareScreen"];
+        [DBShareHelper setValue:[[info getValueForKey:@"about"] getValueForKey:@"description"] ?: @"" forKey:@"textShareScreen"];
+
         [self fetchShareInfo:nil];
     }
 }

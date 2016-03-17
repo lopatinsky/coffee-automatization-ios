@@ -41,7 +41,12 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
     self.subscriptionScreenText = [DBSubscriptionManager valueForKey:@"__subscriptionScreenText"];
     self.subscriptionMenuTitle = [DBSubscriptionManager valueForKey:@"__subscriptionMenuTitle"];
     self.subscriptionMenuText = [DBSubscriptionManager valueForKey:@"__subscriptionMenuText"];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderCreated) name:kDBNewOrderCreatedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    
+    [self enableModule];
     
     return self;
 }
@@ -97,14 +102,16 @@ NSString *const kDBSubscriptionManagerCategoryIsAvailable = @"kDBSubscriptionMan
 
 #pragma mark - Auxiliary
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    self.enable = enabled;
-    [DBSubscriptionManager setValue:@(enabled) forKey:@"__available"];
+- (void)enableModule{
+    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypeSubscription];
+    self.enable = module != nil;
+    [DBSubscriptionManager setValue:@(_enable) forKey:@"__available"];
+    
     if (self.enable) {
-        self.subscriptionScreenText = moduleDict[@"info"][@"screen"][@"description"];
-        self.subscriptionScreenTitle = moduleDict[@"info"][@"screen"][@"title"];
-        self.subscriptionMenuText = moduleDict[@"info"][@"menu"][@"description"];
-        self.subscriptionMenuTitle = moduleDict[@"info"][@"menu"][@"title"];
+        self.subscriptionScreenText = module.info[@"screen"][@"description"];
+        self.subscriptionScreenTitle = module.info[@"screen"][@"title"];
+        self.subscriptionMenuText = module.info[@"menu"][@"description"];
+        self.subscriptionMenuTitle = module.info[@"menu"][@"title"];
         
         [DBSubscriptionManager setValue:self.subscriptionScreenTitle forKey:@"__subscriptionScreenTitle"];
         [DBSubscriptionManager setValue:self.subscriptionScreenText forKey:@"__subscriptionScreenText"];
