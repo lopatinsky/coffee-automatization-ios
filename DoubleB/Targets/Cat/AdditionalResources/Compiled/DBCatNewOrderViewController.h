@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Empatika. All rights reserved.
 //
 
-#import "DBNewOrderViewController.h"
+//#import "DBNewOrderViewController.h"
 
-@interface DBCatNewOrderViewController : DBNewOrderViewController
+//@interface DBCatNewOrderViewController : DBNewOrderViewController
 
-@end
+//@end

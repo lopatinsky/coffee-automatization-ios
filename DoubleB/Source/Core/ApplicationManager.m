@@ -350,8 +350,8 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
                                               @"text": [push getValueForKey:@"full_text"] ?: @"",
                                               @"image_url": [push getValueForKey:@"image_url"] ?: @""}];
                 [[UIViewController currentViewController] presentViewController:newsViewController animated:YES completion:nil];
-                break;
             }
+            break;
         }
         case RemotePushReviewType: {
             [self showPushAlert:push buttons:@[NSLocalizedString(@"Отмена", nil), NSLocalizedString(@"Оценить", nil)] callback:^(NSUInteger buttonIndex) {
