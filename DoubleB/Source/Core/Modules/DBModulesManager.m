@@ -16,21 +16,23 @@
 #import "DBCustomViewManager.h"
 #import "DBShareHelper.h"
 
+
+NSString *kDBModulesManagerModulesLoaded = @"kDBModulesManagerModulesLoaded";
+
 @interface DBModulesManager ()
 @property (strong, nonatomic) NSMutableArray *availableModules;
 @end
 
 @implementation DBModulesManager
 
-+ (instancetype)sharedInstance {
-    static dispatch_once_t once;
-    static DBModulesManager *instance = nil;
-    dispatch_once(&once, ^{ instance = [DBModulesManager new]; });
-    return instance;
-}
-
 - (instancetype)init {
     self = [super init];
+    
+    NSData *companiesData = [DBModulesManager valueForKey:@"availableModules"];
+    if (![companiesData isKindOfClass:[NSData class]])
+        companiesData = nil;
+    
+    self.availableModules = [NSKeyedUnarchiver unarchiveObjectWithData:companiesData] ?: [NSMutableArray new];
     
     return self;
 }
@@ -40,6 +42,9 @@
                          parameters:nil
                             success:^(AFHTTPRequestOperation *operation, NSDictionary *response) {
                                 [self processResponse:response];
+                                
+                                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:kDBModulesManagerModulesLoaded object:nil]];
+                                
                                 if (callback) callback(YES);
                             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                                 NSLog(@"%@", error);
@@ -49,88 +54,56 @@
 }
 
 - (void)processResponse:(NSDictionary *)response {
-    NSMutableArray *appModules = [NSMutableArray new];
-    for (int i = 0; i < DBModuleTypeLast; i++){
-        [appModules addObject:@(i)];
-    }
-    
-    self.availableModules = [NSMutableArray new];
-
-    // Switch on all necessary modules
     NSArray *modules = response[@"modules"];
-    for (NSDictionary *moduleDict in modules) {
-        NSInteger type = [moduleDict getValueForKey:@"type"] ? [[moduleDict getValueForKey:@"type"] integerValue] : -1;
-        
-        if (type != -1) {
-            [self.availableModules addObject:@(type)];
-        }
-        
-        switch (type) {
-            case DBModuleTypeFriendGift: {
-                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeCommon), @"info":moduleDict}];
-                [appModules removeObject:@(DBModuleTypeFriendGift)];
-                [appModules removeObject:@(DBModuleTypeFriendGiftMivako)];
-            } break;
-            case DBModuleTypeFriendGiftMivako: {
-                [[DBFriendGiftHelper sharedInstance] enableModule:YES withDict:@{@"type": @(DBFriendGiftTypeFree), @"info":moduleDict}];
-                [appModules removeObject:@(DBModuleTypeFriendGift)];
-                [appModules removeObject:@(DBModuleTypeFriendGiftMivako)];
-            } break;
-            case DBModuleTypeFriendInvitation:
-                [[DBShareHelper sharedInstance] enableModule:YES withDict:moduleDict];
-                break;
-            case DBModuleTypeProfileScreenUniversal:
-                [[DBUniversalProfileModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
-                break;
-            case DBModuleTypeOrderScreenUniversal:
-                [[DBUniversalOrderModulesManager sharedInstance] enableModule:YES withDict:moduleDict];
-                break;
-            case DBModuleTypeSubscription:
-                [[DBSubscriptionManager sharedInstance] enableModule:YES withDict:moduleDict];
-                break;
-            case DBModuleTypeGeoPush:
-                [[DBGeoPushManager sharedInstance] enableModule:YES withDict:moduleDict];
-                break;
-            case DBModuleTypeCustomView:
-                [[DBCustomViewManager sharedInstance] enableModule:YES withDict:moduleDict];
-                break;
-        }
-        
-        [appModules removeObject:@(type)];
-    }
     
-    // Switch off all modules that not switched on
-    for (NSNumber *type in appModules) {
-        switch (type.integerValue) {
-            case DBModuleTypeFriendGift:
-            case DBModuleTypeFriendGiftMivako:
-                [[DBFriendGiftHelper sharedInstance] enableModule:NO withDict:nil];
-                break;
-            case DBModuleTypeFriendInvitation:
-                [[DBShareHelper sharedInstance] enableModule:NO withDict:nil];
-                break;
-            case DBModuleTypeProfileScreenUniversal:
-                [[DBUniversalProfileModulesManager sharedInstance] enableModule:NO withDict:nil];
-                break;
-            case DBModuleTypeOrderScreenUniversal:
-                [[DBUniversalOrderModulesManager sharedInstance] enableModule:NO withDict:nil];
-                break;
-            case DBModuleTypeSubscription:
-                [[DBSubscriptionManager sharedInstance] enableModule:NO withDict:nil];
-                break;
-            case DBModuleTypeGeoPush:
-                [[DBGeoPushManager sharedInstance] enableModule:NO withDict:nil];
-                break;
-            case DBModuleTypeCustomView:
-                [[DBCustomViewManager sharedInstance] enableModule:NO withDict:nil];
-            default:
-                break;
-        }
+    for (NSDictionary *moduleDict in modules) {
+        [self.availableModules addObject:[[DBModule alloc] init:moduleDict]];
     }
+    NSData *modulesData = [NSKeyedArchiver archivedDataWithRootObject:self.availableModules];
+    [DBModulesManager setValue:modulesData forKey:@"availableModules"];
 }
 
 - (BOOL)moduleEnabled:(DBModuleType)type {
-    return [self.availableModules containsObject:@(type)];
+    return [self module:type] != nil;
+}
+
+- (DBModule *)module:(DBModuleType)type {
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"type == %@", @(type)];
+    return [[_availableModules filteredArrayUsingPredicate:predicate] firstObject];
+}
+
++ (NSString *)db_managerStorageKey {
+    return @"kDBModulesManagerDefaultsInfo";
+}
+
+@end
+
+@implementation DBModule
+
+- (instancetype)init:(NSDictionary *)dict {
+    self = [super init];
+    
+    self.type = [[dict getValueForKey:@"type"] integerValue];
+    self.info = [dict getValueForKey:@"info"] ?: @{};
+    
+    return self;
+}
+
+#pragma mark - NSCoding methods
+
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [[DBModule alloc] init];
+    if(self != nil){
+        _type = [[aDecoder decodeObjectForKey:@"_type"] integerValue];
+        _info = [aDecoder decodeObjectForKey:@"_info"] ?: @{};
+    }
+    
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeObject:@(_type) forKey:@"_type"];
+    [aCoder encodeObject:_info forKey:@"_info"];
 }
 
 @end

@@ -10,7 +10,6 @@
 #import "DBPrimaryManager.h"
 #import "OrderItemsManager.h"
 #import "DBUserProperty.h"
-#import "DBModuleManagerProtocol.h"
 #import "OrderPartManagerProtocol.h"
 
 // External notification constants
@@ -24,7 +23,7 @@ typedef NS_ENUM(NSInteger, DBFriendGiftType) {
     DBFriendGiftTypeFree
 };
 
-@interface DBFriendGiftHelper : DBPrimaryManager<DBModuleManagerProtocol, OrderParentManagerProtocol>
+@interface DBFriendGiftHelper : DBPrimaryManager<OrderParentManagerProtocol>
 
 @property (nonatomic, readonly) BOOL enabled;
 @property (nonatomic, readonly) DBFriendGiftType type;

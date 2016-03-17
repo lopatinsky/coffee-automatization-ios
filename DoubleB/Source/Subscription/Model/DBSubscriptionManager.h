@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "DBPrimaryManager.h"
-#import "DBModuleManagerProtocol.h"
 
 #import "SubscriptionInfoTableViewCell.h"
 
@@ -25,7 +24,7 @@ extern NSString * __nonnull const kDBSubscriptionManagerCategoryIsAvailable;
 
 @end
 
-@interface DBSubscriptionManager : DBPrimaryManager <DBModuleManagerProtocol>
+@interface DBSubscriptionManager : DBPrimaryManager
 
 @property (strong, nonatomic) NSString * __nonnull title;
 @property (strong, nonatomic) NSString * __nonnull subscriptionScreenTitle;

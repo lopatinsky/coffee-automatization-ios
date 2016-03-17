@@ -23,7 +23,7 @@
 
 + (void)initSDK {
 #ifdef DEBUG
-//    [self createTracker];
+    [self createTracker];
 #else
     [self createTracker];
 #endif
