@@ -24,6 +24,7 @@
         self.enabled = [[DBCustomViewManager valueForKey:@"__enabled"] boolValue];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+        [self enableModule];
     }
     return self;
 }

@@ -13,7 +13,7 @@
 #import "DBUniversalModuleDelegate.h"
 
 @interface DBUniversalModulesManager ()<DBUniversalModuleDelegate>
-
+- (DBModuleType)moduleType;
 @end
 
 @implementation DBUniversalModulesManager
@@ -28,6 +28,7 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    [self enableModule];
     
     return self;
 }
@@ -37,7 +38,7 @@
 }
 
 - (void)enableModule {
-    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypeCustomView];
+    DBModule *module = [[DBModulesManager sharedInstance] module:[self moduleType]];
     
     if(module) {
         NSMutableArray *availableModules = [NSMutableArray new];
@@ -63,6 +64,10 @@
     [self save];
 }
 
+- (DBModuleType)moduleType {
+    return DBModuleTypeOrderScreenUniversal;
+}
+
 - (void)save {
     NSData *modulesData = [NSKeyedArchiver archivedDataWithRootObject:_modules];
     [DBUniversalModulesManager setValue:modulesData forKey:@"modulesData"];
@@ -84,6 +89,10 @@
 
 @implementation DBUniversalProfileModulesManager
 
+- (DBModuleType)moduleType {
+    return DBModuleTypeProfileScreenUniversal;
+}
+
 + (NSString *)db_managerStorageKey {
     return @"DBDefaultsProfleUniversalModulesManager";
 }
@@ -91,6 +100,10 @@
 @end
 
 @implementation DBUniversalOrderModulesManager
+
+- (DBModuleType)moduleType {
+    return DBModuleTypeOrderScreenUniversal;
+}
 
 + (NSString *)db_managerStorageKey {
     return @"DBDefaultsOrderUniversalModulesManager";

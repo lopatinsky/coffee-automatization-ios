@@ -36,6 +36,7 @@ NSString * const DBFriendGiftHelperNotificationItemsPrice = @"DBFriendGiftHelper
         _giftsHistory = @[];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+        [self enableModule];
     }
     return self;
 }

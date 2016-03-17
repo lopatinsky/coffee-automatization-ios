@@ -56,6 +56,7 @@ NSString *kDBModulesManagerModulesLoaded = @"kDBModulesManagerModulesLoaded";
 - (void)processResponse:(NSDictionary *)response {
     NSArray *modules = response[@"modules"];
     
+    self.availableModules = [NSMutableArray new];
     for (NSDictionary *moduleDict in modules) {
         [self.availableModules addObject:[[DBModule alloc] init:moduleDict]];
     }
@@ -84,7 +85,12 @@ NSString *kDBModulesManagerModulesLoaded = @"kDBModulesManagerModulesLoaded";
     self = [super init];
     
     self.type = [[dict getValueForKey:@"type"] integerValue];
-    self.info = [dict getValueForKey:@"info"] ?: @{};
+    
+    if (_type == DBModuleTypeProfileScreenUniversal || _type == DBModuleTypeOrderScreenUniversal) {
+        self.info = dict;
+    } else {
+        self.info = [dict getValueForKey:@"info"] ?: @{};
+    }
     
     return self;
 }
@@ -95,7 +101,7 @@ NSString *kDBModulesManagerModulesLoaded = @"kDBModulesManagerModulesLoaded";
     self = [[DBModule alloc] init];
     if(self != nil){
         _type = [[aDecoder decodeObjectForKey:@"_type"] integerValue];
-        _info = [aDecoder decodeObjectForKey:@"_info"] ?: @{};
+       _info = [aDecoder decodeObjectForKey:@"_info"] ?: @{};
     }
     
     return self;
