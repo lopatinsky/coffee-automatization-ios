@@ -8,9 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "DBModuleManagerProtocol.h"
-
-@interface DBCustomViewManager: DBPrimaryManager <DBModuleManagerProtocol>
+@interface DBCustomViewManager: DBPrimaryManager
 
 - (BOOL)available;
 - (NSArray *)items;

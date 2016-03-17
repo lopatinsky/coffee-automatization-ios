@@ -8,9 +8,8 @@
 
 #import "DBPrimaryManager.h"
 #import "DBUserProperty.h"
-#import "DBModuleManagerProtocol.h"
 
-@interface DBPlatiusManager : DBPrimaryManager<DBModuleManagerProtocol>
+@interface DBPlatiusManager : DBPrimaryManager
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL authorized;
 @property (strong, nonatomic,readonly) DBUserPhone *confirmedPhone;

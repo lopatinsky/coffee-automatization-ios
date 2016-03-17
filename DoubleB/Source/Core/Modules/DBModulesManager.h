@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBPrimaryManager.h"
+
+extern NSString *kDBModulesManagerModulesLoaded;
 
 typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeSubscription = 0,
@@ -22,15 +25,22 @@ typedef NS_ENUM(NSInteger, DBModuleType) {
     DBModuleTypeCustomView = 14,
     DBModuleTypePlatiusBarcode = 15,
     DBModuleTypeOrderApproval = 16,
+    DBModuleTypeProfilePaymentCardInfo = 17,
     
     DBModuleTypeLast // Enum item for iteration, not in use
 };
 
-@interface DBModulesManager : NSObject
+@interface DBModule : NSObject<NSCoding>
+@property (nonatomic) DBModuleType type;
+@property (strong, nonatomic) NSDictionary *info;
 
-+ (instancetype)sharedInstance;
+- (instancetype)init:(NSDictionary *)dict;
+@end
+
+@interface DBModulesManager : DBPrimaryManager
 
 - (void)fetchModules:(void(^)(BOOL success))callback;
 - (BOOL)moduleEnabled:(DBModuleType)type;
+- (DBModule *)module:(DBModuleType)type;
 
 @end

@@ -10,6 +10,7 @@
 #import "DBProfileNameModuleView.h"
 #import "DBProfilePhoneModuleView.h"
 #import "DBProfileMailModuleView.h"
+#import "DBProfileModuleTipInfo.h"
 
 #import "DBModuleHeaderView.h"
 
@@ -42,6 +43,11 @@
     
     // Mail module
     [self addModule:[DBProfileMailModuleView new]];
+    
+    // Client tip module
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeProfilePaymentCardInfo]) {
+        [self addModule:[DBProfileModuleTipInfo create]];
+    }
     
     // Universal modules
     for (DBUniversalModule *module in [DBUniversalProfileModulesManager sharedInstance].modules) {

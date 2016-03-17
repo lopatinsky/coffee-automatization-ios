@@ -12,11 +12,29 @@
 
 @implementation DBPlatiusManager
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    [DBPlatiusManager setValue:@(enabled) forKey:@"enabled"];
+- (instancetype)init {
+    self = [super init];
     
-    NSString *description = [[[moduleDict getValueForKey:@"info"] getValueForKey:@"about"] getValueForKey:@"description"] ?: @"";
-    [DBPlatiusManager setValue:description forKey:@"about_screen_description"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    
+    return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)enableModule {
+    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypePlatiusBarcode];
+    
+    if (module) {
+        [DBPlatiusManager setValue:@(YES) forKey:@"enabled"];
+        
+        NSString *description = [[[module.info getValueForKey:@"info"] getValueForKey:@"about"] getValueForKey:@"description"] ?: @"";
+        [DBPlatiusManager setValue:description forKey:@"about_screen_description"];
+    } else {
+        [DBPlatiusManager setValue:@(NO) forKey:@"enabled"];
+    }
 }
 
 - (BOOL)enabled {

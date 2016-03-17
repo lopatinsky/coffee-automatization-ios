@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DBModuleManagerProtocol.h"
 
-@interface DBShareHelper : DBPrimaryManager<DBModuleManagerProtocol>
+@interface DBShareHelper : DBPrimaryManager
 @property(nonatomic) BOOL enabled;
 @property(nonatomic) BOOL infoLoaded;
 

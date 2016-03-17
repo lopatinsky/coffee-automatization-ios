@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 
 #import "DBPrimaryManager.h"
-#import "DBModuleManagerProtocol.h"
 
 #import "LocationHelper.h"
 
-@interface DBGeoPushManager : DBPrimaryManager <DBModuleManagerProtocol, LocationHelperProtocol>
+@interface DBGeoPushManager : DBPrimaryManager <LocationHelperProtocol>
 
 + (void)handleLocalPush:(UILocalNotification *)push;
 

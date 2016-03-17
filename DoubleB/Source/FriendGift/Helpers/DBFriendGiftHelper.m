@@ -35,6 +35,8 @@ NSString * const DBFriendGiftHelperNotificationItemsCount = @"DBFriendGiftHelper
         
         _itemsManager = [[OrderItemsManager alloc] initWithParentManager:self];
         _giftsHistory = @[];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
     }
     return self;
 }
@@ -42,6 +44,8 @@ NSString * const DBFriendGiftHelperNotificationItemsCount = @"DBFriendGiftHelper
 - (void)dealloc {
     [self.friendName removeObserver:self forKeyPath:@"value"];
     [self.friendPhone removeObserver:self forKeyPath:@"value"];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -75,18 +79,31 @@ NSString * const DBFriendGiftHelperNotificationItemsCount = @"DBFriendGiftHelper
     }
 }
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    [DBFriendGiftHelper setValue:@(enabled) forKey:@"enabled"];
+- (void)enableModule {
+    DBModule *module;
     
-    DBFriendGiftType type = [moduleDict[@"type"] intValue];
-    [DBFriendGiftHelper setValue:@(type) forKey:@"type"];
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeFriendGiftMivako]) {
+        module = [[DBModulesManager sharedInstance] module:DBModuleTypeFriendGiftMivako];
+        
+        [DBFriendGiftHelper setValue:@(DBFriendGiftTypeFree) forKey:@"type"];
+    }
     
-    NSDictionary *moduleInfo = [[moduleDict getValueForKey:@"info"] getValueForKey:@"info"];
+    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeFriendGift]) {
+        module = [[DBModulesManager sharedInstance] module:DBModuleTypeFriendGift];
+        
+        [DBFriendGiftHelper setValue:@(DBFriendGiftTypeCommon) forKey:@"type"];
+    }
     
-    [DBFriendGiftHelper setValue:([moduleInfo getValueForKey:@"title"] ?: @"") forKey:@"titleFriendGiftScreen"];
-    [DBFriendGiftHelper setValue:([moduleInfo getValueForKey:@"text"] ?: @"") forKey:@"textFriendGiftScreen"];
-    
-    [self fetchItems:nil];
+    if (module) {
+        [DBFriendGiftHelper setValue:@(YES) forKey:@"enabled"];
+        
+        [DBFriendGiftHelper setValue:([module.info getValueForKey:@"title"] ?: @"") forKey:@"titleFriendGiftScreen"];
+        [DBFriendGiftHelper setValue:([module.info getValueForKey:@"text"] ?: @"") forKey:@"textFriendGiftScreen"];
+        
+        [self fetchItems:nil];
+    } else {
+        [DBFriendGiftHelper setValue:@(NO) forKey:@"enabled"];
+    }
 }
 
 - (void)processGift:(void(^)(NSString *smsText))success

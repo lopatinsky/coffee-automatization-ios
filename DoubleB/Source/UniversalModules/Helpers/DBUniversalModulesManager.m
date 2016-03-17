@@ -27,13 +27,21 @@
         module.delegate = self;
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enableModule) name:kDBModulesManagerModulesLoaded object:nil];
+    
     return self;
 }
 
-- (void)enableModule:(BOOL)enabled withDict:(NSDictionary *)moduleDict {
-    if(enabled) {
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)enableModule {
+    DBModule *module = [[DBModulesManager sharedInstance] module:DBModuleTypeCustomView];
+    
+    if(module) {
         NSMutableArray *availableModules = [NSMutableArray new];
-        for (NSDictionary *groupDict in moduleDict[@"groups"]) {
+        for (NSDictionary *groupDict in module.info[@"groups"]) {
             NSString *groupId = groupDict[@"group_field"];
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moduleId == %@", groupId];
             DBUniversalModule *module = [[_modules filteredArrayUsingPredicate:predicate] firstObject];
