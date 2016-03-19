@@ -222,8 +222,11 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
     NSDictionary *config = [ApplicationConfig remoteConfig];
     
     NSString *key = [[config getValueForKey:@"keys"] getValueForKey:@"yandex_metrics"];
-    return key;
+    if (!key) {
+        key = [ApplicationConfig objectFromApplicationPreferencesByName:@"YandexMetrics"];
+    }
     
+    return key;
 }
 
 - (NSString *)branchKey {
@@ -265,9 +268,6 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 
 @end
 
-
-
-
 @interface ApplicationManager()
 
 @property (nonatomic) RootState state;
@@ -295,6 +295,10 @@ NSString *const kDBApplicationConfigDidLoadNotification = @"kDBApplicationConfig
 #pragma mark - Frameworks initialization
 - (void)initializeConfigurableFrameworks {
     [GANHelper initSDK];
+    
+    if ([ApplicationConfig sharedInstance].yandexMetricsKey) {
+        [YMMYandexMetrica activateWithApiKey:[ApplicationConfig sharedInstance].yandexMetricsKey];
+    }
 }
 
 - (void)initializeVendorFrameworks {

@@ -3,13 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>AppConfiguration</key>
-	<dict/>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
+	</dict>
 	<key>Preferences</key>
 	<dict>
+		<key>YandexMetrics</key>
+		<string>e33cc69e-e848-44cf-836d-93e4618791cf</string>
 		<key>BaseUrl</key>
-		<string>http://fudji.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://panda.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<string>#6E99D2</string>
+		<string>#E30613</string>
 	</dict>
 	<key>ViewControllers</key>
 	<dict>
