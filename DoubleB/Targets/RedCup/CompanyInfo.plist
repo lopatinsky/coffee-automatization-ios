@@ -4,6 +4,8 @@
 <dict>
 	<key>Preferences</key>
 	<dict>
+		<key>VKAppId</key>
+		<string>5055279</string>
 		<key>BaseUrl</key>
 		<string>http://redcup.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>

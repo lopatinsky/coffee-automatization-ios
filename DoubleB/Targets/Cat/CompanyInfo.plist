@@ -11,6 +11,8 @@
 	</dict>
 	<key>Preferences</key>
 	<dict>
+		<key>VKAppId</key>
+		<string>4563880</string>
 		<key>BaseUrl</key>
 		<string>http://coffeeandthecity.test.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>

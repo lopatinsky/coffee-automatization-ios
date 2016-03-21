@@ -36,13 +36,13 @@
 - (instancetype)init {
     self = [super init];
 
-    [VKSdk initializeWithDelegate:self andAppId:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"VKAppId"] ?: @""];
+    [VKSdk initializeWithDelegate:self andAppId:[ApplicationConfig objectFromApplicationPreferencesByName:@"VKAppId"] ?: @""];
     
     return self;
 }
 
 - (BOOL)vkIsAvailable {
-    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"VKAppId"] != nil;
+    return [ApplicationConfig objectFromApplicationPreferencesByName:@"VKAppId"] != nil;
 }
 
 - (void)shareDidFail {
