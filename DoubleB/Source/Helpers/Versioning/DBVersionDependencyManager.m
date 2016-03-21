@@ -35,7 +35,8 @@
 + (void)syncVersionsHistory {
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
-    NSMutableArray *versions = [DBVersionDependencyManager valueForKey:@"dbVersionHistory"] ?: [NSMutableArray new];
+    NSArray *versionsArray = [DBVersionDependencyManager valueForKey:@"dbVersionHistory"];
+    NSMutableArray *versions = versionsArray ? [NSMutableArray arrayWithArray:versionsArray] : [NSMutableArray new];
     if (![versions containsObject:version]) {
         [versions addObject:version];
         [DBVersionDependencyManager setValue:versions forKey:@"dbVersionHistory"];
