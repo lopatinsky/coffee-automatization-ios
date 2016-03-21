@@ -731,7 +731,11 @@
     }
     
     if ([OrderCoordinator sharedInstance].orderManager.confirmationType != ConfirmationTypeUndefined) {
-        params[@"confirmation_type"] = @([OrderCoordinator sharedInstance].orderManager.confirmationType);
+        if ([OrderCoordinator sharedInstance].orderManager.confirmationType == ConfirmationTypeSms) {
+            params[@"confirm_by_sms"] = @(YES);
+        } else if ([OrderCoordinator sharedInstance].orderManager.confirmationType == ConfirmationTypePhone) {
+            params[@"confirm_by_sms"] = @(NO);
+        }
     }
     
     NSMutableDictionary *extraInfo = [NSMutableDictionary new];

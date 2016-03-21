@@ -70,6 +70,8 @@ extern NSString *const kDBApplicationConfigDidLoadNotification;
 @property (strong, nonatomic) NSString *branchKey;
 @property (strong, nonatomic) NSString *gaeKey;
 
+@property (strong, nonatomic) NSString *yandexMetricsKey;
+
 @property (nonatomic) BOOL hasCities;
 @property (nonatomic) BOOL hasCompanies;
 
