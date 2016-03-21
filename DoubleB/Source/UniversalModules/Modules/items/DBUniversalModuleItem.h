@@ -12,7 +12,8 @@
 typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
     DBUniversalModuleItemTypeString = 0,
     DBUniversalModuleItemTypeInteger = 1,
-    DBUniversalModuleItemTypeDate = 3
+    DBUniversalModuleItemTypeDate = 3,
+    DBUniversalModuleItemTypeItems = 4
 };
 
 @interface DBUniversalModuleItem : NSObject<NSCoding>
@@ -43,5 +44,10 @@ typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
 @property (strong, nonatomic) NSDate *selectedDate;
 @property (strong, nonatomic) NSDate *minDate;
 @property (strong, nonatomic) NSDate *maxDate;
+
+// Items type
+@property (strong, nonatomic) NSString *selectedItem;
+@property (strong, nonatomic) NSArray *items;
+@property (nonatomic) NSInteger defaultItem;
 
 @end

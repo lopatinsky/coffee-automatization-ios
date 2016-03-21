@@ -28,6 +28,12 @@
         _maxDate = [NSDate dateFromString:[options getValueForKey:@"max_date"] format:@"yyyy-MM-dd"];
     }
     
+    if (_type == DBUniversalModuleItemTypeItems) {
+        NSDictionary *options = [dict getValueForKey:@"options"];
+        _items = [options getValueForKey:@"variants"] ?: @[];
+        _defaultItem = [[options getValueForKey:@"default_variant"] integerValue];
+    }
+    
     return self;
 }
 
@@ -52,6 +58,12 @@
             }
         }
     }
+    
+    if (_type == DBUniversalModuleItemTypeItems) {
+        NSDictionary *options = [dict getValueForKey:@"options"];
+        _items = [options getValueForKey:@"variants"] ?: @[];
+        _defaultItem = [[options getValueForKey:@"default_variant"] integerValue];
+    }
 }
 
 - (NSDictionary *)jsonRepresentation {
@@ -63,6 +75,10 @@
     
     if (_type == DBUniversalModuleItemTypeDate) {
         json = @{_jsonField: [NSDate stringFromDate:_selectedDate format:@"yyyy-MM-dd"] ?: @""};
+    }
+    
+    if (_type == DBUniversalModuleItemTypeItems) {
+        json = @{_jsonField: self.selectedItem ?: @""};
     }
     
     return json;
@@ -111,6 +127,10 @@
         _selectedDate = [aDecoder decodeObjectForKey:@"_selectedDate"];
         _minDate = [aDecoder decodeObjectForKey:@"_minDate"];
         _maxDate = [aDecoder decodeObjectForKey:@"_maxDate"];
+        
+        _items = [aDecoder decodeObjectForKey:@"_items"];
+        _defaultItem = [[aDecoder decodeObjectForKey:@"_defaultItem"] integerValue];
+        _selectedItem = [aDecoder decodeObjectForKey:@"_selectedItem"];
     }
     
     return self;
@@ -134,6 +154,14 @@
     }
     if (_maxDate) {
         [aCoder encodeObject:_maxDate forKey:@"_maxDate"];
+    }
+    
+    [aCoder encodeObject:@(_defaultItem) forKey:@"_defaultItem"];
+    if (_items) {
+        [aCoder encodeObject:_items forKey:@"_items"];
+    }
+    if (_selectedItem) {
+        [aCoder encodeObject:_selectedItem forKey:@"_selectedItem"];
     }
 }
 

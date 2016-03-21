@@ -67,6 +67,17 @@
             self.textField.text = [NSDate stringFromDate:_item.selectedDate format:@"dd.MM.yyyy"];
     }
     
+    if (_item.type == DBUniversalModuleItemTypeItems) {
+        self.pickerView = [DBPickerView create:DBPickerViewModeItems];
+        self.pickerView.pickerDelegate = self;
+        self.pickerView.title = _item.placeholder;
+        
+        [self.pickerView configureWithItems:_item.items];
+        
+        if (_item.selectedItem)
+            self.textField.text = _item.selectedItem;
+    }
+    
 //    [_textField addTarget:self action:@selector(textFieldDidChangeText:) forControlEvents:UIControlEventEditingChanged];
 }
 
@@ -82,6 +93,14 @@
                 [self.delegate db_moduleViewStartEditing:self];
             }
             self.pickerView.selectedDate = _item.selectedDate;
+            [self.pickerView showOnView:[self.delegate db_moduleViewModalComponentContainer:self] appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
+        }
+        
+        if (_item.type == DBUniversalModuleItemTypeItems) {
+            if ([self.delegate respondsToSelector:@selector(db_moduleViewStartEditing:)]) {
+                [self.delegate db_moduleViewStartEditing:self];
+            }
+            self.pickerView.selectedIndex = _item.selectedItem ? [_item.items indexOfObject: _item.selectedItem] : 0;
             [self.pickerView showOnView:[self.delegate db_moduleViewModalComponentContainer:self] appearance:DBPopupAppearanceModal transition:DBPopupTransitionBottom];
         }
     }
@@ -113,6 +132,13 @@
         
         if (_item.selectedDate)
             self.textField.text = [NSDate stringFromDate:_item.selectedDate format:@"dd.MM.yyyy"];
+    }
+    
+    if (_item.type == DBUniversalModuleItemTypeItems) {
+        _item.selectedItem = _item.items[self.pickerView.selectedIndex];
+        
+        if (_item.selectedItem)
+            self.textField.text = _item.selectedItem;
     }
     
     [_item save];
