@@ -21,7 +21,7 @@
 - (instancetype)init {
     self = [super init];
     
-    NSData *modulesData = [DBUniversalModulesManager valueForKey:@"modulesData"];
+    NSData *modulesData = [[self class] valueForKey:@"modulesData"];
     _modules = [NSKeyedUnarchiver unarchiveObjectWithData:modulesData];
     for (DBUniversalModule *module in _modules){
         module.delegate = self;
@@ -70,7 +70,7 @@
 
 - (void)save {
     NSData *modulesData = [NSKeyedArchiver archivedDataWithRootObject:_modules];
-    [DBUniversalModulesManager setValue:modulesData forKey:@"modulesData"];
+    [[self class] setValue:modulesData forKey:@"modulesData"];
 }
 
 #pragma mark - DBPrimaryManager
