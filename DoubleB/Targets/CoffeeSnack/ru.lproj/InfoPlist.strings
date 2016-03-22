@@ -1,6 +1,6 @@
 /* Localized versions of Info.plist keys */
 
-"CFBundleDisplayName" = "Сoffee to go";
+"CFBundleDisplayName" = "BIG BOSS";
 "NSLocationUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
 "NSLocationWhenInUseUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
 "NSLocationAlwaysUsageDescription" = "Мы используем Ваше местоположение для поиска ближайших кофеен";
