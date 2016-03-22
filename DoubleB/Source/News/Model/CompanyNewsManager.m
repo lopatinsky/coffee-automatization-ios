@@ -106,7 +106,9 @@ NSString *const CompanyNewsManagerDidReceiveNewsPush = @"CompanyNewsManagerDidRe
     UIViewController *container = [[ApplicationManager sharedInstance] presentanceContainer];
     if (container) {
         UIViewController<PopupNewsViewControllerProtocol> *newsViewController = [ViewControllerManager newsViewController];
-        [newsViewController setData:@{@"text": [news text], @"image_url": [news imageURL]}];
+        [newsViewController setData:@{@"title": [news title] ?: @"",
+                                      @"text": [news text] ?: @"",
+                                      @"image_url": [news imageURL] ?: @""}];
         [DBPopupViewController presentController:newsViewController inContainer:container mode:DBPopupVCAppearanceModeFooter];
     } else {
         if (count < 5) {
