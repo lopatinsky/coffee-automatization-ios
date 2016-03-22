@@ -12,37 +12,34 @@
 
 @implementation DBUniversalModuleItem
 
-- (instancetype)initWithResponseDict:(NSDictionary *)dict{
-    self = [super init];
++ (DBUniversalModuleItem *)itemFromDict:(NSDictionary *)dict{
+    DBUniversalModuleItemType type = [[dict getValueForKey:@"type"] integerValue];
     
-    _type = [[dict getValueForKey:@"type"] integerValue];
-    _itemId = [dict getValueForKey:@"field"] ?: @"";
-    _placeholder = [dict getValueForKey:@"title"] ?: @"";
-    _order = [[dict getValueForKey:@"order"] integerValue];
-    _jsonField = [dict getValueForKey:@"field"] ?: @"";
-    _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
-    
-    if (_type == DBUniversalModuleItemTypeDate) {
-        NSDictionary *options = [dict getValueForKey:@"options"];
-        _minDate = [NSDate dateFromString:[options getValueForKey:@"min_date"] format:@"yyyy-MM-dd"];
-        _maxDate = [NSDate dateFromString:[options getValueForKey:@"max_date"] format:@"yyyy-MM-dd"];
+    if (type >= DBUniversalModuleItemTypeString && type < DBUniversalModuleItemTypeLast) {
+        DBUniversalModuleItem *item = [DBUniversalModuleItem new];
+        
+        [item applyDict:dict];
+        
+        if (item.type == DBUniversalModuleItemTypeDate) {
+            NSDictionary *options = [dict getValueForKey:@"options"];
+            item.minDate = [NSDate dateFromString:[options getValueForKey:@"min_date"] format:@"yyyy-MM-dd"];
+            item.maxDate = [NSDate dateFromString:[options getValueForKey:@"max_date"] format:@"yyyy-MM-dd"];
+        }
+        
+        if (item.type == DBUniversalModuleItemTypeItems) {
+            NSDictionary *options = [dict getValueForKey:@"options"];
+            item.items = [options getValueForKey:@"variants"] ?: @[];
+            item.defaultItem = [[options getValueForKey:@"default_variant"] integerValue];
+        }
+        
+        return item;
+    } else {
+        return nil;
     }
-    
-    if (_type == DBUniversalModuleItemTypeItems) {
-        NSDictionary *options = [dict getValueForKey:@"options"];
-        _items = [options getValueForKey:@"variants"] ?: @[];
-        _defaultItem = [[options getValueForKey:@"default_variant"] integerValue];
-    }
-    
-    return self;
 }
 
 - (void)syncWithResponseDict:(NSDictionary *)dict{
-    _type = [[dict getValueForKey:@"type"] integerValue];
-    _placeholder = [dict getValueForKey:@"title"] ?: @"";
-    _order = [[dict getValueForKey:@"order"] integerValue];
-    _jsonField = [dict getValueForKey:@"field"] ?: @"";
-    _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
+    [self applyDict:dict];
     
     if (_type == DBUniversalModuleItemTypeDate) {
         NSDictionary *options = [dict getValueForKey:@"options"];
@@ -64,6 +61,15 @@
         _items = [options getValueForKey:@"variants"] ?: @[];
         _defaultItem = [[options getValueForKey:@"default_variant"] integerValue];
     }
+}
+
+- (void)applyDict:(NSDictionary *)dict {
+    _type = [[dict getValueForKey:@"type"] integerValue];
+    _itemId = [dict getValueForKey:@"field"] ?: @"";
+    _placeholder = [dict getValueForKey:@"title"] ?: @"";
+    _order = [[dict getValueForKey:@"order"] integerValue];
+    _jsonField = [dict getValueForKey:@"field"] ?: @"";
+    _restrictions = [dict getValueForKey:@"restrictions"] ?: @[];
 }
 
 - (NSDictionary *)jsonRepresentation {

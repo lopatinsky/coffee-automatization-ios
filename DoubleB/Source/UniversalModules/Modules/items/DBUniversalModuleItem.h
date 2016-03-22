@@ -13,7 +13,9 @@ typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
     DBUniversalModuleItemTypeString = 0,
     DBUniversalModuleItemTypeInteger = 1,
     DBUniversalModuleItemTypeDate = 3,
-    DBUniversalModuleItemTypeItems = 4
+    DBUniversalModuleItemTypeItems = 4,
+    
+    DBUniversalModuleItemTypeLast
 };
 
 @interface DBUniversalModuleItem : NSObject<NSCoding>
@@ -30,7 +32,7 @@ typedef NS_ENUM(NSInteger, DBUniversalModuleItemType) {
 
 @property (weak, nonatomic) id<DBUniversalModuleDelegate> delegate;
 
-- (instancetype)initWithResponseDict:(NSDictionary *)dict;
++ (DBUniversalModuleItem *)itemFromDict:(NSDictionary *)dict;
 - (void)syncWithResponseDict:(NSDictionary *)dict;
 
 - (NSDictionary *)jsonRepresentation;

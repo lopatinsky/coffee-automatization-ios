@@ -26,10 +26,11 @@
     
     NSMutableArray *mutItems = [NSMutableArray new];
     for (NSDictionary *itemDict in dict[@"fields"]) {
-        DBUniversalModuleItem *item = [[DBUniversalModuleItem alloc] initWithResponseDict:itemDict];
+        DBUniversalModuleItem *item = [DBUniversalModuleItem itemFromDict:itemDict];
         item.delegate = self;
         
-        [mutItems addObject:item];
+        if (item)
+            [mutItems addObject:item];
     }
     
     [mutItems sortedArrayUsingComparator:^NSComparisonResult(DBUniversalModuleItem *obj1, DBUniversalModuleItem *obj2) {
@@ -55,7 +56,7 @@
             [item syncWithResponseDict:responseItem];
             [mutItems addObject:item];
         } else {
-            DBUniversalModuleItem *newItem = [[DBUniversalModuleItem alloc] initWithResponseDict:responseItem];
+            DBUniversalModuleItem *newItem = [DBUniversalModuleItem itemFromDict:responseItem];
             newItem.delegate = self;
             if(newItem)
                 [mutItems addObject:newItem];

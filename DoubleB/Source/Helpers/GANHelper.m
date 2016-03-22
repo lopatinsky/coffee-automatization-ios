@@ -23,7 +23,7 @@
 
 + (void)initSDK {
 #ifdef DEBUG
-//    [self createTracker];
+    [self createTracker];
 #else
     [self createTracker];
 #endif
@@ -80,7 +80,7 @@
              interval:(NSNumber *)interval
                  name:(NSString *)name
                 label:(NSString *)label{
-    double intervalMillis = [interval doubleValue] * 1000;
+    NSUInteger intervalMillis = [interval doubleValue] * 1000;
     [[[GAI sharedInstance] defaultTracker] send:[[GAIDictionaryBuilder createTimingWithCategory:category
                                                                                        interval:@(intervalMillis)
                                                                                            name:name
