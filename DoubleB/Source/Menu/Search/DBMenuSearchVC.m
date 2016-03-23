@@ -59,12 +59,17 @@
     [super viewWillAppear:animated];
     
     self.searchView.searchBar.text = [[DBSearchManager sharedInstance] searchText];
-    [self.searchView.searchBar becomeFirstResponder];
     
     self.searchResults = [[DBSearchManager sharedInstance] filterPositions:self.searchView.searchBar.text];
     [self.tableView reloadData];
     
     [self showSearchView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.searchView.searchBar becomeFirstResponder];
 }
 
 
