@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
@@ -24,6 +26,8 @@
     self.webView.scrollView.delegate = self;
     
     [self.view addSubview:self.webView];
+    self.webView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.webView alignTop:@"0" leading:@"0" bottom:@"0" trailing:@"0" toView:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

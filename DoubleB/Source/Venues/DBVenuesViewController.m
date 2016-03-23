@@ -80,12 +80,20 @@
 
 #pragma mark - DBVenuesControllerContentDelegate
 
-- (BOOL)db_venuesControllerContentSelectEnabled {
-    return YES;
+- (BOOL)db_venuesControllerContentSelectEnabled:(NSObject *)sender {
+    if ([sender isKindOfClass:[DBVenuesTableViewController class]]) {
+        return YES;
+    } else {
+        return _mode == DBVenuesViewControllerModeChooseVenue;
+    }
 }
 
-- (BOOL)db_venuesControllerContentSelectInfoEnabled {
-    return _mode == DBVenuesViewControllerModeChooseVenue;
+- (BOOL)db_venuesControllerContentSelectInfoEnabled:(NSObject *)sender {
+    if ([sender isKindOfClass:[DBVenuesMapViewController class]]) {
+        return YES;
+    } else {
+        return _mode == DBVenuesViewControllerModeChooseVenue;
+    }
 }
 
 - (void)db_venuesControllerContentDidSelectVenue:(Venue *)venue {

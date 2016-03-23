@@ -16,8 +16,8 @@ typedef NS_ENUM(NSUInteger, DBVenuesViewControllerMode) {
 
 @protocol DBVenuesControllerContainerDelegate <NSObject>
 @required
-- (BOOL)db_venuesControllerContentSelectEnabled;
-- (BOOL)db_venuesControllerContentSelectInfoEnabled;
+- (BOOL)db_venuesControllerContentSelectEnabled:(NSObject *)sender;
+- (BOOL)db_venuesControllerContentSelectInfoEnabled:(NSObject *)sender;
 
 - (void)db_venuesControllerContentDidSelectVenue:(Venue *)venue;
 - (void)db_venuesControllerContentDidSelectVenueInfo:(Venue *)venue;

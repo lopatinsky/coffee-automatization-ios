@@ -101,7 +101,7 @@
     Venue *venue = [self.venues objectAtIndex:indexPath.row];
     [cell configure:venue];
     
-    cell.infoButtonEnabled = [self.delegate db_venuesControllerContentSelectInfoEnabled];
+    cell.infoButtonEnabled = [self.delegate db_venuesControllerContentSelectInfoEnabled:self];
     
     return cell;
 }
@@ -111,7 +111,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Venue *venue = _venues[indexPath.row];
     
-    if ([self.delegate db_venuesControllerContentSelectEnabled]) {
+    if ([self.delegate db_venuesControllerContentSelectEnabled:self]) {
         [self.delegate db_venuesControllerContentDidSelectVenue:venue];
     }
     

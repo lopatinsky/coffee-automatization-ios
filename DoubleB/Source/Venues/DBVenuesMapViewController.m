@@ -155,15 +155,15 @@
 #pragma mark - DBVenueInfoViewDelegate
 
 - (BOOL)db_venueViewInfoSelectionInfoEnabled:(DBVenueInfoView *)view {
-    return [self.delegate db_venuesControllerContentSelectInfoEnabled];
+    return [self.delegate db_venuesControllerContentSelectInfoEnabled:self];
 }
 
 - (BOOL)db_venueViewInfoSelectionEnabled:(DBVenueInfoView *)view {
-    return [self.delegate db_venuesControllerContentSelectEnabled];
+    return [self.delegate db_venuesControllerContentSelectEnabled:self];
 }
 
 - (void)db_venueViewInfo:(DBVenueInfoView *)view clickedVenue:(Venue *)venue {
-    if ([self.delegate db_venuesControllerContentSelectInfoEnabled]){
+    if ([self.delegate db_venuesControllerContentSelectInfoEnabled:self]){
         [self.delegate db_venuesControllerContentDidSelectVenueInfo:venue];
     }
     
@@ -171,7 +171,7 @@
 }
 
 - (void)db_venueViewInfo:(DBVenueInfoView *)view didSelectVenue:(Venue *)venue {
-    if ([self.delegate db_venuesControllerContentSelectEnabled]) {
+    if ([self.delegate db_venuesControllerContentSelectEnabled:self]) {
         [self.delegate db_venuesControllerContentDidSelectVenue:venue];
     }
     

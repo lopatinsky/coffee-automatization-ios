@@ -106,11 +106,11 @@
 
 #pragma mark - DBVenuesControllerContentDelegate
 
-- (BOOL)db_venuesControllerContentSelectEnabled {
+- (BOOL)db_venuesControllerContentSelectEnabled:(NSObject *)sender {
     return YES;
 }
 
-- (BOOL)db_venuesControllerContentSelectInfoEnabled {
+- (BOOL)db_venuesControllerContentSelectInfoEnabled:(NSObject *)sender {
     return NO;
 }
 

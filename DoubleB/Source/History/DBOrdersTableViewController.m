@@ -194,6 +194,9 @@
             case PaymentTypePayPal:
                 [imageViewPayment templateImageWithName:@"card"];
                 break;
+            case PaymentTypeCourierCard:
+                [imageViewPayment templateImageWithName:@"card"];
+                break;
             case PaymentTypeExtraType:
                 [imageViewPayment templateImageWithName:@"mug_orders"];
                 break;
@@ -235,6 +238,9 @@
             case PaymentTypePayPal:
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
+            case PaymentTypeCourierCard:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
             case PaymentTypeExtraType:
                 [imageViewPayment templateImageWithName:@"mug_orders" tintColor:[UIColor db_grayColor]];
                 break;
@@ -258,6 +264,9 @@
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
             case PaymentTypePayPal:
+                [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
+                break;
+            case PaymentTypeCourierCard:
                 [imageViewPayment templateImageWithName:@"card" tintColor:[UIColor db_grayColor]];
                 break;
             case PaymentTypeExtraType:
