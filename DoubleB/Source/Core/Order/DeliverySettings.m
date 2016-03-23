@@ -103,8 +103,7 @@
 }
 
 - (void)updateTimeAccordingToDeliveryType {
-    if ((_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots)) ||
-        (_deliveryType.timeMode == TimeModeDual && (_deliveryType.dualCurrentMode & (TimeModeTime | TimeModeDateTime)))) {
+    if ((_deliveryType.timeMode & (TimeModeTime | TimeModeDateTime | TimeModeDateSlots | TimeModeDual))) {
         if(!self.selectedTime || [self.selectedTime compare:_deliveryType.minDate] == NSOrderedAscending){
             self.selectedTime = _deliveryType.minDate;
         }
@@ -114,8 +113,7 @@
         }
     }
     
-    if ((self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots)) ||
-        (_deliveryType.timeMode == TimeModeDual && _deliveryType.dualCurrentMode == TimeModeSlots)) {
+    if ((self.deliveryType.timeMode & (TimeModeSlots | TimeModeDateSlots | TimeModeDual))) {
         DBTimeSlot *timeSlot = [_deliveryType timeSlotWithName:self.selectedTimeSlot.slotTitle];
         if (!timeSlot) {
             timeSlot = _deliveryType.timeSlots.firstObject;

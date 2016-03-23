@@ -79,6 +79,7 @@
             self.pickerView.minDate = _orderCoordinator.deliverySettings.deliveryType.minDate;
             self.pickerView.maxDate = _orderCoordinator.deliverySettings.deliveryType.maxDate;
             self.pickerView.selectedItem = [_orderCoordinator.deliverySettings.deliveryType.timeSlots indexOfObject:_orderCoordinator.deliverySettings.selectedTimeSlot];
+            self.pickerView.selectedDate = _orderCoordinator.deliverySettings.selectedTime;
             break;
         }
         default:
