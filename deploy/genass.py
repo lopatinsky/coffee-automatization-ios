@@ -236,8 +236,9 @@ def generate_splashes(project_name, path, splash_name):
         try:
             im = Image.open(splash_name)
             im.thumbnail(size_class[0], Image.ANTIALIAS)
+            im = im.resize(size_class[0], Image.ANTIALIAS)
             im.save(os.path.join(path, outfile + '.png'), "PNG")
-            im.save(os.path.join(additional_path2, outfile + '.jpg'), "JPEG", quality=100, optimize=True, progressive=True)
+            im.save(os.path.join(additional_path2, outfile + '.png'), "PNG")
         except IOError as e:
             print(e)
 
