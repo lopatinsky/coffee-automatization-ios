@@ -7,7 +7,7 @@
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://resto.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://orangeexpress.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<string>#F37332</string>
 	</dict>

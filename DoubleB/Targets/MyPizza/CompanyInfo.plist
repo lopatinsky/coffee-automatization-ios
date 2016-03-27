@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://mypizza.1.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#72380b</string>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Default</string>
+	</dict>
+</dict>
+</plist>

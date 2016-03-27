@@ -3,7 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>AppConfiguration</key>
-	<dict/>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
+	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
