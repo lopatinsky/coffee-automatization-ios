@@ -70,6 +70,8 @@ static DBAPIClient *_sharedClient = nil;
     // 4 - Review
     // 4 - Unified application
     // 5 - New order screen design
+    // 6
+    // 7 - Bug with bonus positions (was on 6 version)
     
     return @"7";
 }
