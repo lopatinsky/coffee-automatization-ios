@@ -42,9 +42,11 @@
     [self db_setTitle:self.position.name];
     
     if(self.mode == PositionViewControllerModeMenuPosition){
-        self.navigationItem.rightBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
-            [self moveToOrder];
-        }];
+        if (self.position.mode == DBMenuPositionModeRegular) {
+            self.navigationItem.rightBarButtonItem = [DBBarButtonItem item:DBBarButtonTypeOrder handler:^{
+                [self moveToOrder];
+            }];
+        }
     }
     
     self.analyticsCategory = PRODUCT_SCREEN;

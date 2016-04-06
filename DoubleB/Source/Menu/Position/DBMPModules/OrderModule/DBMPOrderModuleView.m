@@ -130,7 +130,16 @@
                          completion:^(BOOL finished) {
                              [view removeFromSuperview];
                              
-                             [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
+                             if (self.position.mode == DBMenuPositionModeRegular) {
+                                 [[OrderCoordinator sharedInstance].itemsManager addPosition:self.position];
+                             }
+                             
+                             if (self.position.mode == DBMenuPositionModeBonus) {
+                                 double totalPoints =  [OrderCoordinator sharedInstance].promoManager.bonusPointsBalance - [OrderCoordinator sharedInstance].bonusItemsManager.totalPrice;
+                                 if([self.position.productDictionary[@"points"] floatValue] <= totalPoints) {
+                                     [[OrderCoordinator sharedInstance].bonusItemsManager addPosition:self.position];
+                                 }
+                             }
                          }];
         
         [UIView animateWithDuration:0.2
