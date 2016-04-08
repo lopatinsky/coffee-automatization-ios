@@ -55,7 +55,7 @@
 
 - (NSString *)clientId {
     NSString *clientId;
-
+    
     clientId = self.secureStore[@"clientId"];
 
     
