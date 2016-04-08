@@ -33,7 +33,7 @@
 {
     self = [super init];
     
-    self.secureStore = [UICKeyChainStore keyChainStoreWithService:[[NSBundle mainBundle] bundleIdentifier] accessGroup:[NSString stringWithFormat:@"WDRAVGQ9R2.%@", [[NSBundle mainBundle] bundleIdentifier]]];
+    self.secureStore = [UICKeyChainStore keyChainStoreWithService:[[NSBundle mainBundle] bundleIdentifier] accessGroup:[NSString stringWithFormat:@"%@.%@", [IHSecureStore bundleSeedID], [[NSBundle mainBundle] bundleIdentifier]]];
     
 #ifdef DEBUG
 //    [self.secureStore removeAllItems];
@@ -55,7 +55,7 @@
 
 - (NSString *)clientId {
     NSString *clientId;
-
+    
     clientId = self.secureStore[@"clientId"];
 
     
@@ -100,6 +100,27 @@
 - (void)removeAll {
     [self.secureStore removeAllItems];
     [self.secureStore synchronize];
+}
+
+
++ (NSString *)bundleSeedID {
+    NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
+                           kSecClassGenericPassword, kSecClass,
+                           @"bundleSeedID", kSecAttrAccount,
+                           @"", kSecAttrService,
+                           (id)kCFBooleanTrue, kSecReturnAttributes,
+                           nil];
+    CFDictionaryRef result = nil;
+    OSStatus status = SecItemCopyMatching((CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status == errSecItemNotFound)
+        status = SecItemAdd((CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status != errSecSuccess)
+        return nil;
+    NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:kSecAttrAccessGroup];
+    NSArray *components = [accessGroup componentsSeparatedByString:@"."];
+    NSString *bundleSeedID = [[components objectEnumerator] nextObject];
+    CFRelease(result);
+    return bundleSeedID;
 }
 
 @end
