@@ -33,7 +33,7 @@
 {
     self = [super init];
     
-    self.secureStore = [UICKeyChainStore keyChainStoreWithService:[[NSBundle mainBundle] bundleIdentifier] accessGroup:[NSString stringWithFormat:@"WDRAVGQ9R2.%@", [[NSBundle mainBundle] bundleIdentifier]]];
+    self.secureStore = [UICKeyChainStore keyChainStoreWithService:[[NSBundle mainBundle] bundleIdentifier] accessGroup:[NSString stringWithFormat:@"%@.%@", [IHSecureStore bundleSeedID], [[NSBundle mainBundle] bundleIdentifier]]];
     
 #ifdef DEBUG
 //    [self.secureStore removeAllItems];
@@ -102,6 +102,26 @@
     [self.secureStore synchronize];
 }
 
++ (NSString *)bundleSeedID {
+    NSDictionary *query = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (__bridge NSString *)kSecClassGenericPassword, (__bridge NSString *)kSecClass,
+                           @"bundleSeedID", kSecAttrAccount,
+                           @"", kSecAttrService,
+                           (id)kCFBooleanTrue, kSecReturnAttributes,
+                           nil];
+    CFDictionaryRef result = nil;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status == errSecItemNotFound)
+        status = SecItemAdd((__bridge CFDictionaryRef)query, (CFTypeRef *)&result);
+    if (status != errSecSuccess)
+        return nil;
+    NSString *accessGroup = [(__bridge NSDictionary *)result objectForKey:(__bridge NSString *)kSecAttrAccessGroup];
+    NSArray *components = [accessGroup componentsSeparatedByString:@"."];
+    NSString *bundleSeedID = [[components objectEnumerator] nextObject];
+    CFRelease(result);
+    return bundleSeedID;
+}
+
 @end
 
 @implementation IHSecureStore (Migration)
@@ -154,7 +174,7 @@
 }
 
 - (void)migrateIIkoFlagAutomationRelease112 {
-    UICKeyChainStore *oldStore = [UICKeyChainStore keyChainStoreWithService:[[NSBundle mainBundle] bundleIdentifier] accessGroup:@"WDRAVGQ9R2.com.empatka.doubleb"];
+    UICKeyChainStore *oldStore = [UICKeyChainStore keyChainStoreWithService:[[NSBundle mainBundle] bundleIdentifier] accessGroup:[NSString stringWithFormat:@"%@.com.empatka.doubleb", [IHSecureStore bundleSeedID]]];
     
     // Save flag if iiko cache was cleared
     NSData *flagData = [oldStore dataForKey:@"kDBVersionDependencyManagerRemovedIIkoCache"];
