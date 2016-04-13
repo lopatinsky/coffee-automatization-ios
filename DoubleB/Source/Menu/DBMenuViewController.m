@@ -76,6 +76,10 @@
     } else {
         [self setupMenuModule];
     }
+    
+    if (self.type == DBMenuViewControllerTypeInitial) {
+        [self updateMenu];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,8 +88,11 @@
     [GANHelper analyzeScreen:self.analyticsCategory];
     [self.topModulesHolder reload:YES];
     
+    
     if (self.type == DBMenuViewControllerTypeInitial) {
-        [self updateMenu];
+        if (DBMenu.type != DBMenuTypeSkeleton) {
+            [self updateMenu];
+        }
     }
 }
 

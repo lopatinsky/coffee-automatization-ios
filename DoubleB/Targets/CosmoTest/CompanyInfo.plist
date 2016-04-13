@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>ExcludedOrderModules</key>
+		<array>
+			<string>Time</string>
+			<string>Comment</string>
+			<string>DeliveryType</string>
+		</array>
+		<key>MenuType</key>
+		<string>Simple</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://cosmothecaremainders.remainders.doubleb-automation-production.appspot.com/</string>
+		<key>CompanyColor</key>
+		<string>#231f20</string>
+		<key>CompanyGAKey</key>
+		<string>UA-73114524-16</string>
+		<key>Parse</key>
+		<dict>
+			<key>applicationId</key>
+			<string>mYoF3zh3Hcn5EJlUY66RK4DqUbg0nC7NbPSVrUNv</string>
+			<key>clientKey</key>
+			<string>Gb7hIuewI6P5SeN63ssuyMrTj5qsI4FRbil55r0x</string>
+		</dict>
+	</dict>
+	<key>ViewControllers</key>
+	<dict>
+		<key>MenuViewControllers</key>
+		<string>Nested</string>
+	</dict>
+</dict>
+</plist>
