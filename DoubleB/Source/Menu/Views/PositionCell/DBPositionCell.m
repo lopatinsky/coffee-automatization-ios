@@ -79,7 +79,7 @@
     self.positionImageView.contentMode = [ViewManager defaultMenuPositionIconsContentMode];
     self.positionImageView.noImageType = [DBCompanyInfo sharedInstance].type == DBCompanyTypeMobileShop ? DBImageViewNoImageTypeText : DBImageViewNoImageTypeImage;
     
-    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"cosmotheca"]) {
+    if ([[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"cosmotheca"] || [[ApplicationConfig db_bundleName].lowercaseString isEqualToString:@"cosmotest"]) {
         self.priceView.mode = DBPositionPriceViewModeStatic;
     } else {
         self.priceView.mode = DBPositionPriceViewModeInteracted;

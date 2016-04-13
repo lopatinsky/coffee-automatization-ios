@@ -59,7 +59,7 @@
     
     [self addModule:[DBNOPaymentModuleView create]topOffset:5];
     
-    [self addModule:[DBNOCommentModuleView create]topOffset:5];
+//    [self addModule:[DBNOCommentModuleView create]topOffset:5];
     
 //    if ([[DBModulesManager sharedInstance] moduleEnabled:DBModuleTypeOddSum]) {
 //        [self addModule:[DBNOOddModuleView create]topOffset:1];
@@ -69,9 +69,9 @@
 //    }
     
     // Universal modules
-    for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
-        [self addModule:[module getModuleView] topOffset:0];
-    }
+//    for (DBUniversalModule *module in [DBUniversalOrderModulesManager sharedInstance].modules) {
+//        [self addModule:[module getModuleView] topOffset:0];
+//    }
     
     [self addModule:[DBNOndaModuleView create]topOffset:5];
     
