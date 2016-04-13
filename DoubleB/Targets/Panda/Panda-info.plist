@@ -9,13 +9,11 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIcons~ipad</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.empatika.panda</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -31,7 +29,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb349173695244280</string>
+				<string>fb349173695244280panda</string>
 			</array>
 		</dict>
 	</array>
@@ -45,8 +43,7 @@
 		<array>
 			<dict>
 				<key>KitInfo</key>
-				<dict>
-				</dict>
+				<dict/>
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
@@ -57,7 +54,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
 	<key>FacebookUrlSchemeSuffix</key>
-	<string></string>
+	<string>panda</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

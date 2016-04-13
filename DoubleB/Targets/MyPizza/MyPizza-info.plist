@@ -13,7 +13,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.empatika.mypizza</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -29,7 +29,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb349173695244280</string>
+				<string>fb349173695244280mypizza</string>
 			</array>
 		</dict>
 	</array>
@@ -54,7 +54,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
 	<key>FacebookUrlSchemeSuffix</key>
-	<string></string>
+	<string>mypizza</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

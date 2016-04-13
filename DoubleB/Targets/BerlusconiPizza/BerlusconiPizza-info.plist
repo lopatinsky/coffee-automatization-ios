@@ -29,7 +29,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb349173695244280</string>
+				<string>fb349173695244280berlusconi</string>
 			</array>
 		</dict>
 	</array>
@@ -54,7 +54,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
 	<key>FacebookUrlSchemeSuffix</key>
-	<string></string>
+	<string>berlusconi</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

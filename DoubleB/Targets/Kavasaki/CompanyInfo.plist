@@ -4,22 +4,18 @@
 <dict>
 	<key>AppConfiguration</key>
 	<dict>
-		<key>MenuPositionIconsContentMode</key>
-		<string>Fit</string>
-		<key>MenuCategoryIconsContentMode</key>
-		<string>Fit</string>
 	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
 		<string>http://kavasaki.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
-		<string>#201014</string>
+		<string>#E30016</string>
 	</dict>
 	<key>ViewControllers</key>
 	<dict>
 		<key>MenuViewControllers</key>
-		<string>Default</string>
+		<string>Nested</string>
 	</dict>
 </dict>
 </plist>
