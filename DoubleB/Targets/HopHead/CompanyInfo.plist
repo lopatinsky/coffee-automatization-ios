@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AppConfiguration</key>
+	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Default</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Default</string>
+	</dict>
+	<key>Preferences</key>
+	<dict>
+		<key>BaseUrl</key>
+		<string>http://cashbackapptest.cashback.doubleb-automation-production.appspot.com/</string>
+	</dict>
+	<key>ViewControllers</key>
+	<dict/>
+</dict>
+</plist>
