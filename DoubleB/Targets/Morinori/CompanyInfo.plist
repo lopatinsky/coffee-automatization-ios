@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AppConfiguration</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
@@ -15,7 +14,7 @@
 	<key>ViewControllers</key>
 	<dict>
 		<key>MenuViewControllers</key>
-		<string>Nested</string>
+		<string>Default</string>
 	</dict>
 </dict>
 </plist>
