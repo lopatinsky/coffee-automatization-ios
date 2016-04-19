@@ -48,6 +48,7 @@
 "Улица" = "Street";
 "Дом" = "House";
 "Квартира" = "Apartment";
+"Кв./Офис" = "Apartment";
 
 "Комментарий" = "Comment";
 "Нужна сдача с" = "Needs change from";
