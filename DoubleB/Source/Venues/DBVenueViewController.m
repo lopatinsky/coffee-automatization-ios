@@ -119,7 +119,8 @@
     [UIAlertView bk_showAlertViewWithTitle:self.venue.title message:phoneString cancelButtonTitle:NSLocalizedString(@"Отменить", nil) otherButtonTitles:@[NSLocalizedString(@"Позвонить", nil)]
                                    handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                        if (buttonIndex == 1) {
-                                           NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneString];
+                                           NSString *phoneNumber = [[phoneString componentsSeparatedByCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] componentsJoinedByString:@""];
+                                           NSString *phoneURLString = [NSString stringWithFormat:@"tel:%@", phoneNumber];
                                            NSURL *phoneURL = [NSURL URLWithString:phoneURLString];
                                            [[UIApplication sharedApplication] openURL:phoneURL];
                                        }
