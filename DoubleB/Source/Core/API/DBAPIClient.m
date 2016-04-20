@@ -72,8 +72,9 @@ static DBAPIClient *_sharedClient = nil;
     // 5 - New order screen design
     // 6
     // 7 - Bug with bonus positions (was on 6 version)
+    // 8 - Multiple Parse Keys on server
     
-    return @"7";
+    return @"8";
 }
 
 - (void)disableHeader:(nonnull NSString *)header {
