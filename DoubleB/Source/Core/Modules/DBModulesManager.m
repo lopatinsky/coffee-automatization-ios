@@ -87,7 +87,7 @@ NSString *kDBModulesManagerModulesLoaded = @"kDBModulesManagerModulesLoaded";
     
     self.type = [[dict getValueForKey:@"type"] integerValue];
     
-    if (_type == DBModuleTypeProfileScreenUniversal || _type == DBModuleTypeOrderScreenUniversal) {
+    if (_type == DBModuleTypeProfileScreenUniversal || _type == DBModuleTypeOrderScreenUniversal || _type == DBModuleTypeCustomView) {
         self.info = dict;
     } else {
         self.info = [dict getValueForKey:@"info"] ?: @{};
