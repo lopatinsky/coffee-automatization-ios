@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AppConfiguration</key>
-	<dict>
-	</dict>
+	<dict/>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>

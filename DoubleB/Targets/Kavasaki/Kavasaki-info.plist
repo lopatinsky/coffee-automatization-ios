@@ -9,11 +9,13 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
-	<dict/>
+	<dict>
+	</dict>
 	<key>CFBundleIcons~ipad</key>
-	<dict/>
+	<dict>
+	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.empatika.kavasaki</string>
+	<string>com.rubeacon.kavasaki</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -34,7 +36,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.14.2.1</string>
+	<string>1.14.2.2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -43,7 +45,8 @@
 		<array>
 			<dict>
 				<key>KitInfo</key>
-				<dict/>
+				<dict>
+				</dict>
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
