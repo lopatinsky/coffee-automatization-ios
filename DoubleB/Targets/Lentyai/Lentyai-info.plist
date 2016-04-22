@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ru</string>
 	<key>CFBundleDisplayName</key>
-	<string>LazyService</string>
+	<string>Lazy Service</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIcons</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleIcons~ipad</key>
 	<dict/>
 	<key>CFBundleIdentifier</key>
-	<string>com.rubeacon.lentyai</string>
+	<string>com.rubeacon.lazyservice</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -29,12 +29,12 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb349173695244280lentyai</string>
+				<string>fb349173695244280lazyservice</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.14.2.1</string>
+	<string>1.14.2.3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -54,7 +54,7 @@
 	<key>FacebookDisplayName</key>
 	<string>Ru-Beacon</string>
 	<key>FacebookUrlSchemeSuffix</key>
-	<string>lentyai</string>
+	<string>lazyservice</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

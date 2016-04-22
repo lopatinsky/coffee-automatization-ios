@@ -4,11 +4,15 @@
 <dict>
 	<key>AppConfiguration</key>
 	<dict>
+		<key>MenuPositionIconsContentMode</key>
+		<string>Fit</string>
+		<key>MenuCategoryIconsContentMode</key>
+		<string>Fit</string>
 	</dict>
 	<key>Preferences</key>
 	<dict>
 		<key>BaseUrl</key>
-		<string>http://kavasaki.1.doubleb-automation-production.appspot.com/</string>
+		<string>http://kawasaki.1.doubleb-automation-production.appspot.com/</string>
 		<key>CompanyColor</key>
 		<string>#E30016</string>
 	</dict>
